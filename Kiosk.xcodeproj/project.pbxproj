@@ -12,6 +12,7 @@
 		5E59DD3B19913DD800A48370 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E59DD3919913DD800A48370 /* Main.storyboard */; };
 		5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E59DD3C19913DD800A48370 /* Images.xcassets */; };
 		5E59DD4919913DD900A48370 /* KioskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD4819913DD900A48370 /* KioskTests.swift */; };
+		814796B15356494EBF1648E3 /* libPods-Kiosk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D351E329DD544C1D8ADEB6D9 /* libPods-Kiosk.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiosk.xcconfig"; path = "Pods/Pods-Kiosk.xcconfig"; sourceTree = "<group>"; };
 		5E59DD3019913DD800A48370 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD3419913DD800A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD3519913DD800A48370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +36,7 @@
 		5E59DD4219913DD800A48370 /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD4719913DD900A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD4819913DD900A48370 /* KioskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KioskTests.swift; sourceTree = "<group>"; };
+		D351E329DD544C1D8ADEB6D9 /* libPods-Kiosk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kiosk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				814796B15356494EBF1648E3 /* libPods-Kiosk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,12 +58,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16F3A19F9AD1486CACC915F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D351E329DD544C1D8ADEB6D9 /* libPods-Kiosk.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5E59DD2719913DD800A48370 = {
 			isa = PBXGroup;
 			children = (
 				5E59DD3219913DD800A48370 /* Kiosk */,
 				5E59DD4519913DD800A48370 /* KioskTests */,
 				5E59DD3119913DD800A48370 /* Products */,
+				5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */,
+				16F3A19F9AD1486CACC915F0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,9 +130,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5E59DD4C19913DD900A48370 /* Build configuration list for PBXNativeTarget "Kiosk" */;
 			buildPhases = (
+				274A1FC39D654A86A9F5D578 /* Check Pods Manifest.lock */,
 				5E59DD2C19913DD800A48370 /* Sources */,
 				5E59DD2D19913DD800A48370 /* Frameworks */,
 				5E59DD2E19913DD800A48370 /* Resources */,
+				9AFA421DD5E649B89E128C8F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -202,6 +218,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		274A1FC39D654A86A9F5D578 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9AFA421DD5E649B89E128C8F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-Kiosk-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5E59DD2C19913DD800A48370 /* Sources */ = {
@@ -324,6 +373,7 @@
 		};
 		5E59DD4D19913DD900A48370 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -335,6 +385,7 @@
 		};
 		5E59DD4E19913DD900A48370 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -397,6 +448,7 @@
 				5E59DD4E19913DD900A48370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5E59DD4F19913DD900A48370 /* Build configuration list for PBXNativeTarget "KioskTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +457,7 @@
 				5E59DD5119913DD900A48370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
