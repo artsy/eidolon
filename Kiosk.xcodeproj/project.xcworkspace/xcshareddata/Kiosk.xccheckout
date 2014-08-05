@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B64E4799-2D7C-4307-B180-2FC6CEA79A98</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Kiosk</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>362140352D1F3E008D207F94C7725A404E39F65C</key>
+		<string>github.com:AshFurrow/eidolon.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Kiosk/Kiosk.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>362140352D1F3E008D207F94C7725A404E39F65C</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:AshFurrow/eidolon.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>362140352D1F3E008D207F94C7725A404E39F65C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>362140352D1F3E008D207F94C7725A404E39F65C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>eidolon</string>
+		</dict>
+	</array>
+</dict>
+</plist>

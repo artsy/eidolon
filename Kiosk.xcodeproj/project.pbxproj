@@ -1,0 +1,454 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3519913DD800A48370 /* AppDelegate.swift */; };
+		5E59DD3819913DD800A48370 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3719913DD800A48370 /* ViewController.swift */; };
+		5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E59DD3C19913DD800A48370 /* Images.xcassets */; };
+		5E59DD4919913DD900A48370 /* KioskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD4819913DD900A48370 /* KioskTests.swift */; };
+		814796B15356494EBF1648E3 /* libPods-Kiosk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D351E329DD544C1D8ADEB6D9 /* libPods-Kiosk.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5E59DD4319913DD800A48370 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E59DD2819913DD800A48370 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E59DD2F19913DD800A48370;
+			remoteInfo = Kiosk;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiosk.xcconfig"; path = "Pods/Pods-Kiosk.xcconfig"; sourceTree = "<group>"; };
+		5E59DD3019913DD800A48370 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E59DD3419913DD800A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E59DD3519913DD800A48370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5E59DD3719913DD800A48370 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5E59DD3C19913DD800A48370 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5E59DD4219913DD800A48370 /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E59DD4719913DD900A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E59DD4819913DD900A48370 /* KioskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KioskTests.swift; sourceTree = "<group>"; };
+		5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PodsBridgingHeader.h; sourceTree = "<group>"; };
+		D351E329DD544C1D8ADEB6D9 /* libPods-Kiosk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kiosk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5E59DD2D19913DD800A48370 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				814796B15356494EBF1648E3 /* libPods-Kiosk.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E59DD3F19913DD800A48370 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		16F3A19F9AD1486CACC915F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D351E329DD544C1D8ADEB6D9 /* libPods-Kiosk.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E59DD2719913DD800A48370 = {
+			isa = PBXGroup;
+			children = (
+				5E59DD3219913DD800A48370 /* Kiosk */,
+				5E59DD4519913DD800A48370 /* KioskTests */,
+				5E59DD3119913DD800A48370 /* Products */,
+				5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */,
+				16F3A19F9AD1486CACC915F0 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5E59DD3119913DD800A48370 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E59DD3019913DD800A48370 /* Kiosk.app */,
+				5E59DD4219913DD800A48370 /* KioskTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E59DD3219913DD800A48370 /* Kiosk */ = {
+			isa = PBXGroup;
+			children = (
+				5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */,
+				5E59DD3519913DD800A48370 /* AppDelegate.swift */,
+				5E59DD3719913DD800A48370 /* ViewController.swift */,
+				5E59DD3C19913DD800A48370 /* Images.xcassets */,
+				5E59DD3319913DD800A48370 /* Supporting Files */,
+			);
+			path = Kiosk;
+			sourceTree = "<group>";
+		};
+		5E59DD3319913DD800A48370 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5E59DD3419913DD800A48370 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5E59DD4519913DD800A48370 /* KioskTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E59DD4819913DD900A48370 /* KioskTests.swift */,
+				5E59DD4619913DD900A48370 /* Supporting Files */,
+			);
+			path = KioskTests;
+			sourceTree = "<group>";
+		};
+		5E59DD4619913DD900A48370 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5E59DD4719913DD900A48370 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5E59DD2F19913DD800A48370 /* Kiosk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E59DD4C19913DD900A48370 /* Build configuration list for PBXNativeTarget "Kiosk" */;
+			buildPhases = (
+				274A1FC39D654A86A9F5D578 /* Check Pods Manifest.lock */,
+				5E59DD2C19913DD800A48370 /* Sources */,
+				5E59DD2D19913DD800A48370 /* Frameworks */,
+				5E59DD2E19913DD800A48370 /* Resources */,
+				9AFA421DD5E649B89E128C8F /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kiosk;
+			productName = Kiosk;
+			productReference = 5E59DD3019913DD800A48370 /* Kiosk.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5E59DD4119913DD800A48370 /* KioskTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E59DD4F19913DD900A48370 /* Build configuration list for PBXNativeTarget "KioskTests" */;
+			buildPhases = (
+				5E59DD3E19913DD800A48370 /* Sources */,
+				5E59DD3F19913DD800A48370 /* Frameworks */,
+				5E59DD4019913DD800A48370 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5E59DD4419913DD800A48370 /* PBXTargetDependency */,
+			);
+			name = KioskTests;
+			productName = KioskTests;
+			productReference = 5E59DD4219913DD800A48370 /* KioskTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5E59DD2819913DD800A48370 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = Artsy;
+				TargetAttributes = {
+					5E59DD2F19913DD800A48370 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					5E59DD4119913DD800A48370 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 5E59DD2F19913DD800A48370;
+					};
+				};
+			};
+			buildConfigurationList = 5E59DD2B19913DD800A48370 /* Build configuration list for PBXProject "Kiosk" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5E59DD2719913DD800A48370;
+			productRefGroup = 5E59DD3119913DD800A48370 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5E59DD2F19913DD800A48370 /* Kiosk */,
+				5E59DD4119913DD800A48370 /* KioskTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5E59DD2E19913DD800A48370 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E59DD4019913DD800A48370 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		274A1FC39D654A86A9F5D578 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9AFA421DD5E649B89E128C8F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-Kiosk-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5E59DD2C19913DD800A48370 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E59DD3819913DD800A48370 /* ViewController.swift in Sources */,
+				5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E59DD3E19913DD800A48370 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E59DD4919913DD900A48370 /* KioskTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5E59DD4419913DD800A48370 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5E59DD2F19913DD800A48370 /* Kiosk */;
+			targetProxy = 5E59DD4319913DD800A48370 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5E59DD4A19913DD900A48370 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		5E59DD4B19913DD900A48370 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5E59DD4D19913DD900A48370 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = Kiosk/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Kiosk/PodsBridgingHeader.h;
+			};
+			name = Debug;
+		};
+		5E59DD4E19913DD900A48370 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = Kiosk/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Kiosk/PodsBridgingHeader.h;
+			};
+			name = Release;
+		};
+		5E59DD5019913DD900A48370 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KioskTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kiosk.app/Kiosk";
+			};
+			name = Debug;
+		};
+		5E59DD5119913DD900A48370 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KioskTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kiosk.app/Kiosk";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5E59DD2B19913DD800A48370 /* Build configuration list for PBXProject "Kiosk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E59DD4A19913DD900A48370 /* Debug */,
+				5E59DD4B19913DD900A48370 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E59DD4C19913DD900A48370 /* Build configuration list for PBXNativeTarget "Kiosk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E59DD4D19913DD900A48370 /* Debug */,
+				5E59DD4E19913DD900A48370 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E59DD4F19913DD900A48370 /* Build configuration list for PBXNativeTarget "KioskTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E59DD5019913DD900A48370 /* Debug */,
+				5E59DD5119913DD900A48370 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5E59DD2819913DD800A48370 /* Project object */;
+}

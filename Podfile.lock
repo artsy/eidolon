@@ -1,0 +1,13 @@
+PODS:
+  - Artsy+UIColors (1.0.0):
+    - EDColor (~> 0.4)
+  - EDColor (0.4.0)
+
+DEPENDENCIES:
+  - Artsy+UIColors
+
+SPEC CHECKSUMS:
+  Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
+  EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
+
+COCOAPODS: 0.33.1
