@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3519913DD800A48370 /* AppDelegate.swift */; };
 		5E59DD3819913DD800A48370 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3719913DD800A48370 /* ViewController.swift */; };
-		5E59DD3B19913DD800A48370 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E59DD3919913DD800A48370 /* Main.storyboard */; };
 		5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E59DD3C19913DD800A48370 /* Images.xcassets */; };
 		5E59DD4919913DD900A48370 /* KioskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD4819913DD900A48370 /* KioskTests.swift */; };
 		814796B15356494EBF1648E3 /* libPods-Kiosk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D351E329DD544C1D8ADEB6D9 /* libPods-Kiosk.a */; };
@@ -31,11 +30,11 @@
 		5E59DD3419913DD800A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD3519913DD800A48370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E59DD3719913DD800A48370 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5E59DD3A19913DD800A48370 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5E59DD3C19913DD800A48370 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5E59DD4219913DD800A48370 /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD4719913DD900A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD4819913DD900A48370 /* KioskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KioskTests.swift; sourceTree = "<group>"; };
+		5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PodsBridgingHeader.h; sourceTree = "<group>"; };
 		D351E329DD544C1D8ADEB6D9 /* libPods-Kiosk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kiosk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -89,9 +88,9 @@
 		5E59DD3219913DD800A48370 /* Kiosk */ = {
 			isa = PBXGroup;
 			children = (
+				5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */,
 				5E59DD3519913DD800A48370 /* AppDelegate.swift */,
 				5E59DD3719913DD800A48370 /* ViewController.swift */,
-				5E59DD3919913DD800A48370 /* Main.storyboard */,
 				5E59DD3C19913DD800A48370 /* Images.xcassets */,
 				5E59DD3319913DD800A48370 /* Supporting Files */,
 			);
@@ -205,7 +204,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E59DD3B19913DD800A48370 /* Main.storyboard in Resources */,
 				5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,17 +277,6 @@
 			targetProxy = 5E59DD4319913DD800A48370 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		5E59DD3919913DD800A48370 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5E59DD3A19913DD800A48370 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5E59DD4A19913DD900A48370 /* Debug */ = {
@@ -380,6 +367,7 @@
 				INFOPLIST_FILE = Kiosk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Kiosk/PodsBridgingHeader.h;
 			};
 			name = Debug;
 		};
@@ -392,6 +380,7 @@
 				INFOPLIST_FILE = Kiosk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Kiosk/PodsBridgingHeader.h;
 			};
 			name = Release;
 		};
