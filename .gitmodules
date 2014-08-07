@@ -1,0 +1,12 @@
+[submodule "submodules/Quick"]
+	path = submodules/Quick
+	url = git@github.com:tokorom/Quick.git
+[submodule "submodules/Nimble"]
+	path = submodules/Nimble
+	url = git@github.com:AshFurrow/Nimble.git
+[submodule "submodules/FBSnapshotTestCase"]
+	path = submodules/FBSnapshotTestCase
+	url = git@github.com:facebook/ios-snapshot-test-case.git
+[submodule "submodules/Nimble-Snapshots"]
+	path = submodules/Nimble-Snapshots
+	url = git@github.com:AshFurrow/Nimble-Snapshots.git
