@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Artsy. All rights reserved.
 //
 
+//import Quick
+//import Nimble
+
 import UIKit
 import XCTest
 
