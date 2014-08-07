@@ -55,7 +55,7 @@ the app. Once we integrate networking support, we'll figure out a way to stub
 network requests so that the app can run with sample data. 
 
 Artsy has licensed fonts for use in this app, but due to the terms of that 
-license, they are not available for open source distribution. This has required
+license, they are not available for open source distribution. This has [required](http://artsy.github.io/blog/2014/06/20/artsys-first-closed-source-pod/)
 us to use [private pods](http://guides.cocoapods.org/making/private-cocoapods.html). 
 Once we integrate these pods in, we'll provide substitutes for the open-source
 distribution. You shouldn't notice a difference. 
