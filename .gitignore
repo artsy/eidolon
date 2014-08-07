@@ -24,6 +24,7 @@ tmtags
 tmtagsHistory
 config/releasenotes.txt
 .bundle
+*.xcuserstate
 Kiosk.xcodeproj/xcshareddata/xcschemes/Artsy.xcscheme
 Kiosk.xcworkspace/xcuserdata/*
 Podfile.local
