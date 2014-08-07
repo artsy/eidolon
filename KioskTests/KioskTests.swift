@@ -15,6 +15,12 @@ class KioskSpec: QuickSpec {
             it("passes a basic assertion") {
                 expect(1).to(equal(1))
             }
+            
+            it("does snapshot tests") { () -> () in
+                let view = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+                view.backgroundColor = UIColor.orangeColor()
+                expect(view).to(haveValidSnapshot())
+            }
         });
     }
 }
