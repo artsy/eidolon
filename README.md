@@ -23,20 +23,25 @@ of the code you'll need to run the app. Instead, [clone](http://git-scm.com/book
 the repository from GitHub by typing the following command.
 
 ```sh
-git clone git@github.com:artsy/eidolon.git --recursive
+git clone git@github.com:artsy/eidolon.git
+cd eidolon
+git submodule init
+git submodule update
 ```
 
-Notice the `--recursive` option at the end. That will fetch all of the 
-submodules we use. Nice work! But we're not done yet. 
+Notice that we're doing a `git submodule update` and `init`, and *not* using the 
+`--recursive` option of the `clone` command. If we were to clone recursively, 
+some of the submodules we use would fetch their own submodules, which would lead
+to incorrect behaviour. 
+
+Nice work! But we're not done yet. 
 
 A lot of iOS code still exists as Objective-C, and we use a lot of it as 
-CocoaPods. So after cloning the repo, shown above, you'll need to change 
-directories to the `eidolon` folder and do a `pod install`. You'll need to have
-[CocoaPods](http://guides.cocoapods.org/using/getting-started.html) already
-installed.
+CocoaPods. So after cloning the repo, shown above, you'll need to do a `pod 
+install`. You'll need to have [CocoaPods](http://guides.cocoapods.org/using/getting-started.html) 
+already installed.
 
 ```sh
-cd eidolon
 pod install
 ```
 
