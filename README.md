@@ -12,7 +12,7 @@ experience for browsing and bidding on artworks in an auction.
 Downloading the Code
 ----------------
 
-Git repositories can fickle things. Since CocoaPods' support of Swift-based pods
+Git repositories can be fickle things. Since CocoaPods' support of Swift-based pods
 is still [under construction](https://github.com/CocoaPods/CocoaPods/pull/2222),
 we are choosing to – well, forced, really – to use git submodules. 
 
