@@ -1,9 +1,9 @@
 [submodule "submodules/Quick"]
 	path = submodules/Quick
-	url = git@github.com:tokorom/Quick.git
+	url = git@github.com:Quick/Quick.git
 [submodule "submodules/Nimble"]
 	path = submodules/Nimble
-	url = git@github.com:AshFurrow/Nimble.git
+	url = git@github.com:Quick/Nimble.git
 [submodule "submodules/FBSnapshotTestCase"]
 	path = submodules/FBSnapshotTestCase
 	url = git@github.com:facebook/ios-snapshot-test-case.git
