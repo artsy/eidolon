@@ -12,8 +12,8 @@
 		5E2765F719940F3F0003BAFA /* UIImage+Compare.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2765F219940F3F0003BAFA /* UIImage+Compare.m */; };
 		5E2765F819940F3F0003BAFA /* UIImage+Diff.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2765F419940F3F0003BAFA /* UIImage+Diff.m */; };
 		5E2765FB19940F760003BAFA /* HaveValidSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2765FA19940F760003BAFA /* HaveValidSnapshot.swift */; };
-		5E28C2121993B9FB0066DB4D /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E28C1FC1993B9D10066DB4D /* Quick.framework */; };
-		5E28C2131993BA000066DB4D /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E28C20B1993B9E60066DB4D /* Nimble.framework */; };
+		5E276616199509BC0003BAFA /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E28C20B1993B9E60066DB4D /* Nimble.framework */; };
+		5E276617199509C00003BAFA /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E28C1FC1993B9D10066DB4D /* Quick.framework */; };
 		5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3519913DD800A48370 /* AppDelegate.swift */; };
 		5E59DD3819913DD800A48370 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3719913DD800A48370 /* ViewController.swift */; };
 		5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E59DD3C19913DD800A48370 /* Images.xcassets */; };
@@ -22,6 +22,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5E27661819950ABC0003BAFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E28C2031993B9E50066DB4D /* Nimble.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F1A74281940169200FFFC47;
+			remoteInfo = "Nimble-iOS";
+		};
+		5E27661A19950ABC0003BAFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E28C1F31993B9D10066DB4D /* Quick.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A5D117B19473F2100F6D13D;
+			remoteInfo = "Quick-iOS";
+		};
 		5E28C1FB1993B9D10066DB4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E28C1F31993B9D10066DB4D /* Quick.xcodeproj */;
@@ -126,8 +140,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E28C2131993BA000066DB4D /* Nimble.framework in Frameworks */,
-				5E28C2121993B9FB0066DB4D /* Quick.framework in Frameworks */,
+				5E276617199509C00003BAFA /* Quick.framework in Frameworks */,
+				5E276616199509BC0003BAFA /* Nimble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +306,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				5E27661919950ABC0003BAFA /* PBXTargetDependency */,
+				5E27661B19950ABC0003BAFA /* PBXTargetDependency */,
 				5E59DD4419913DD800A48370 /* PBXTargetDependency */,
 			);
 			name = KioskTests;
@@ -482,6 +498,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5E27661919950ABC0003BAFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Nimble-iOS";
+			targetProxy = 5E27661819950ABC0003BAFA /* PBXContainerItemProxy */;
+		};
+		5E27661B19950ABC0003BAFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Quick-iOS";
+			targetProxy = 5E27661A19950ABC0003BAFA /* PBXContainerItemProxy */;
+		};
 		5E59DD4419913DD800A48370 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5E59DD2F19913DD800A48370 /* Kiosk */;
