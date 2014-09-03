@@ -559,7 +559,7 @@
 			};
 			name = Debug;
 		};
-		5E59DD4B19913DD900A48370 /* Release */ = {
+		5E59DD4B19913DD900A48370 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -593,12 +593,13 @@
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Beta;
 		};
 		5E59DD4D19913DD900A48370 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */;
 			buildSettings = {
+				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Kiosk/Info.plist;
@@ -608,10 +609,11 @@
 			};
 			name = Debug;
 		};
-		5E59DD4E19913DD900A48370 /* Release */ = {
+		5E59DD4E19913DD900A48370 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */;
 			buildSettings = {
+				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Kiosk/Info.plist;
@@ -619,7 +621,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Kiosk/PodsBridgingHeader.h;
 			};
-			name = Release;
+			name = Beta;
 		};
 		5E59DD5019913DD900A48370 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -643,7 +645,7 @@
 			};
 			name = Debug;
 		};
-		5E59DD5119913DD900A48370 /* Release */ = {
+		5E59DD5119913DD900A48370 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -658,7 +660,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "KioskTests/KioskTests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kiosk.app/Kiosk";
 			};
-			name = Release;
+			name = Beta;
 		};
 /* End XCBuildConfiguration section */
 
@@ -667,28 +669,28 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E59DD4A19913DD900A48370 /* Debug */,
-				5E59DD4B19913DD900A48370 /* Release */,
+				5E59DD4B19913DD900A48370 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Beta;
 		};
 		5E59DD4C19913DD900A48370 /* Build configuration list for PBXNativeTarget "Kiosk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E59DD4D19913DD900A48370 /* Debug */,
-				5E59DD4E19913DD900A48370 /* Release */,
+				5E59DD4E19913DD900A48370 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Beta;
 		};
 		5E59DD4F19913DD900A48370 /* Build configuration list for PBXNativeTarget "KioskTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E59DD5019913DD900A48370 /* Debug */,
-				5E59DD5119913DD900A48370 /* Release */,
+				5E59DD5119913DD900A48370 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Beta;
 		};
 /* End XCConfigurationList section */
 	};

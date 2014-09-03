@@ -1,13 +1,35 @@
 PODS:
+  - ARAnalytics/CoreIOS (2.8.0)
+  - ARAnalytics/HockeyApp (2.8.0):
+    - ARAnalytics/CoreIOS
+    - HockeySDK (= 3.5.4)
+  - ARAnalytics/Mixpanel (2.8.0):
+    - ARAnalytics/CoreIOS
+    - Mixpanel
   - Artsy+UIColors (1.0.0):
     - EDColor (~> 0.4)
   - EDColor (0.4.0)
+  - FLKAutoLayout (0.1.1)
+  - HockeySDK (3.5.4)
+  - Mixpanel (2.5.0)
+  - ORStackView (1.2.0):
+    - FLKAutoLayout (~> 0.1)
 
 DEPENDENCIES:
+  - ARAnalytics/HockeyApp
+  - ARAnalytics/Mixpanel
   - Artsy+UIColors
+  - FLKAutoLayout
+  - HockeySDK (= 3.5.4)
+  - ORStackView
 
 SPEC CHECKSUMS:
+  ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
+  FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
+  HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
+  Mixpanel: e2cbef6022acff6e0182c994ed69b18613209611
+  ORStackView: f1ccef4a0c40dd7907a638232f78a873cc03ab6c
 
 COCOAPODS: 0.33.1
