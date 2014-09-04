@@ -28,3 +28,4 @@ config/releasenotes.txt
 Kiosk.xcodeproj/xcshareddata/xcschemes/Artsy.xcscheme
 Kiosk.xcworkspace/xcuserdata/*
 Podfile.local
+*.ipa
