@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ListingsViewController.swift
 //  Kiosk
 //
 //  Created by Ash Furrow on 2014-08-05.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ListingsViewController: UIViewController {
                             
     override func viewDidLoad() {
         super.viewDidLoad()
