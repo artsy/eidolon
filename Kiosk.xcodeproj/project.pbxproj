@@ -15,9 +15,11 @@
 		5E276616199509BC0003BAFA /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E28C20B1993B9E60066DB4D /* Nimble.framework */; };
 		5E276617199509C00003BAFA /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E28C1FC1993B9D10066DB4D /* Quick.framework */; };
 		5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3519913DD800A48370 /* AppDelegate.swift */; };
-		5E59DD3819913DD800A48370 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3719913DD800A48370 /* ViewController.swift */; };
+		5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3719913DD800A48370 /* ListingsViewController.swift */; };
 		5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E59DD3C19913DD800A48370 /* Images.xcassets */; };
 		5E59DD4919913DD900A48370 /* KioskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD4819913DD900A48370 /* KioskTests.swift */; };
+		5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */; };
+		5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */; };
 		814796B15356494EBF1648E3 /* libPods-Kiosk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D351E329DD544C1D8ADEB6D9 /* libPods-Kiosk.a */; };
 /* End PBXBuildFile section */
 
@@ -118,12 +120,14 @@
 		5E59DD3019913DD800A48370 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD3419913DD800A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD3519913DD800A48370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5E59DD3719913DD800A48370 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5E59DD3719913DD800A48370 /* ListingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingsViewController.swift; sourceTree = "<group>"; };
 		5E59DD3C19913DD800A48370 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5E59DD4219913DD800A48370 /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD4719913DD900A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD4819913DD900A48370 /* KioskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KioskTests.swift; sourceTree = "<group>"; };
 		5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PodsBridgingHeader.h; sourceTree = "<group>"; };
+		5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auction.storyboard; sourceTree = "<group>"; };
+		5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Fulfillment.storyboard; sourceTree = "<group>"; };
 		D351E329DD544C1D8ADEB6D9 /* libPods-Kiosk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kiosk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -239,7 +243,9 @@
 			children = (
 				5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */,
 				5E59DD3519913DD800A48370 /* AppDelegate.swift */,
-				5E59DD3719913DD800A48370 /* ViewController.swift */,
+				5E59DD3719913DD800A48370 /* ListingsViewController.swift */,
+				5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */,
+				5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */,
 				5E59DD3C19913DD800A48370 /* Images.xcassets */,
 				5E59DD3319913DD800A48370 /* Supporting Files */,
 			);
@@ -426,7 +432,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */,
 				5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */,
+				5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E59DD3819913DD800A48370 /* ViewController.swift in Sources */,
+				5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */,
 				5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
