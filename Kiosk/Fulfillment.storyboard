@@ -22,10 +22,10 @@
             </objects>
             <point key="canvasLocation" x="675" y="1080"/>
         </scene>
-        <!--View Controller-->
+        <!--Place Bid View Controller-->
         <scene sceneID="zYP-eY-rqW">
             <objects>
-                <viewController id="ljx-1e-Xv5" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlaceBidViewController" id="ljx-1e-Xv5" customClass="PlaceBidViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8rn-bF-UEg"/>
                         <viewControllerLayoutGuide type="bottom" id="d88-y7-TWI"/>

@@ -13,16 +13,12 @@ public class ListingsViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        view.backgroundColor = UIColor.orangeColor()
     }
 
     @IBAction public func showModal(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Fulfillment", bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as UIViewController
-        self.presentViewController(controller, animated: true, completion: nil)
+        self.presentViewController(controller, animated: allowAnimations, completion: nil)
     }
 
 }
