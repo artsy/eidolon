@@ -11,6 +11,7 @@ PODS:
   - EDColor (0.4.0)
   - FLKAutoLayout (0.1.1)
   - HockeySDK (3.5.4)
+  - isUnitTesting (1.0.0)
   - Mixpanel (2.5.0)
   - ORStackView (1.2.0):
     - FLKAutoLayout (~> 0.1)
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - Artsy+UIColors
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
+  - isUnitTesting
   - ORStackView
 
 SPEC CHECKSUMS:
@@ -29,6 +31,7 @@ SPEC CHECKSUMS:
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
   HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
+  isUnitTesting: de740933c920c0d06c528c63dd25de001d4af831
   Mixpanel: e2cbef6022acff6e0182c994ed69b18613209611
   ORStackView: f1ccef4a0c40dd7907a638232f78a873cc03ab6c
 
