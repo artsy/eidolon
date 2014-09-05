@@ -1,6 +1,0 @@
-FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/HockeySDK/Vendor"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1 $(inherited) BITHOCKEY_VERSION="@\"3.5.4\"" BITHOCKEY_BUILD="@\"27\""
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/ARAnalytics" "${PODS_ROOT}/Headers/Artsy+UIColors" "${PODS_ROOT}/Headers/EDColor" "${PODS_ROOT}/Headers/FLKAutoLayout" "${PODS_ROOT}/Headers/HockeySDK" "${PODS_ROOT}/Headers/Mixpanel" "${PODS_ROOT}/Headers/ORStackView"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers" -isystem "${PODS_ROOT}/Headers/ARAnalytics" -isystem "${PODS_ROOT}/Headers/Artsy+UIColors" -isystem "${PODS_ROOT}/Headers/EDColor" -isystem "${PODS_ROOT}/Headers/FLKAutoLayout" -isystem "${PODS_ROOT}/Headers/HockeySDK" -isystem "${PODS_ROOT}/Headers/Mixpanel" -isystem "${PODS_ROOT}/Headers/ORStackView"
-OTHER_LDFLAGS = -ObjC -l "Pods-ARAnalytics" -l "Pods-Artsy+UIColors" -l "Pods-EDColor" -l "Pods-FLKAutoLayout" -l "Pods-HockeySDK" -l "Pods-Mixpanel" -l "Pods-ORStackView" -l "icucore" -framework "Accelerate" -framework "CoreGraphics" -framework "CoreTelephony" -framework "CoreText" -framework "CrashReporter" -framework "Foundation" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
-PODS_ROOT = ${SRCROOT}/Pods

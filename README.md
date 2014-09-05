@@ -22,6 +22,8 @@ That means that clicking the "Download ZIP" button isn't going to download all
 of the code you'll need to run the app. Instead, [clone](http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository#Cloning-an-Existing-Repository)
 the repository from GitHub by typing the following command.
 
+You'll need to use [Rainforest CococaPods](https://github.com/CocoaPods/Rainforest) to run `pod install` correctly. `0.34` will fix this.
+
 ```sh
 git clone https://github.com/artsy/eidolon.git
 cd eidolon

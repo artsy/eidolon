@@ -5,6 +5,16 @@ inhibit_all_warnings!
 
 # Artsy stuff
 pod 'Artsy+UIColors'
+pod 'Artsy+UILabels'
+
+# We'll need to include travis some time.
+if ENV['USER'] == "orta" || ENV['USER'] == "ash" || ENV['USER'] == "artsy"
+    pod 'Artsy+UIFonts'
+else
+    pod 'Artsy+OSSUIFonts'
+end
+
+pod 'Artsy+UILabels'
 pod 'ORStackView'
 pod 'FLKAutoLayout'
 
