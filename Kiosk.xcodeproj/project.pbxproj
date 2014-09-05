@@ -104,7 +104,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiosk.xcconfig"; path = "Pods/Pods-Kiosk.xcconfig"; sourceTree = "<group>"; };
+		5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiosk.xcconfig"; path = "../Pods/Pods-Kiosk.xcconfig"; sourceTree = "<group>"; };
 		5E2765EC19940F3F0003BAFA /* KioskTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KioskTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		5E2765ED19940F3F0003BAFA /* FBSnapshotTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestCase.h; path = submodules/FBSnapshotTestCase/FBSnapshotTestCase.h; sourceTree = SOURCE_ROOT; };
 		5E2765EE19940F3F0003BAFA /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCase.m; path = submodules/FBSnapshotTestCase/FBSnapshotTestCase.m; sourceTree = SOURCE_ROOT; };
@@ -224,7 +224,6 @@
 				5E59DD3219913DD800A48370 /* Kiosk */,
 				5E59DD4519913DD800A48370 /* KioskTests */,
 				5E59DD3119913DD800A48370 /* Products */,
-				5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */,
 				16F3A19F9AD1486CACC915F0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -274,6 +273,7 @@
 		5E59DD4619913DD900A48370 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B05DC82704B4B1BB66E6CC4 /* Pods-Kiosk.xcconfig */,
 				5E59DD4719913DD900A48370 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -332,6 +332,7 @@
 				TargetAttributes = {
 					5E59DD2F19913DD800A48370 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = ZH8TGFYKDK;
 					};
 					5E59DD4119913DD800A48370 = {
 						CreatedOnToolsVersion = 6.0;
@@ -610,10 +611,14 @@
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Kiosk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "513564c8-7a9d-4960-a3d2-e7a3f48b3c44";
 				SWIFT_OBJC_BRIDGING_HEADER = Kiosk/PodsBridgingHeader.h;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -624,10 +629,13 @@
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Kiosk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Kiosk/PodsBridgingHeader.h;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Beta;
 		};
