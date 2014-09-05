@@ -19,6 +19,7 @@
 		5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E59DD3C19913DD800A48370 /* Images.xcassets */; };
 		5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */; };
 		5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */; };
+		6086143F19BA34E500699FBC /* ARLabelSubclasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6086143E19BA34E500699FBC /* ARLabelSubclasses.swift */; };
 		60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */; };
 		60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */; };
 		60A3BC3019BA054200EF3907 /* PlaceBidViewControlleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2F19BA054200EF3907 /* PlaceBidViewControlleTests.swift */; };
@@ -109,19 +110,19 @@
 
 /* Begin PBXFileReference section */
 		21A6ABDCBFE147D99BAEBD31 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4105205BE90BE03A9BC420D3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = Pods/Pods.debug.xcconfig; sourceTree = "<group>"; };
+		4105205BE90BE03A9BC420D3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
 		5E2765EC19940F3F0003BAFA /* KioskTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KioskTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		5E2765ED19940F3F0003BAFA /* FBSnapshotTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestCase.h; path = submodules/FBSnapshotTestCase/FBSnapshotTestCase.h; sourceTree = SOURCE_ROOT; };
-		5E2765EE19940F3F0003BAFA /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestCase.m; path = submodules/FBSnapshotTestCase/FBSnapshotTestCase.m; sourceTree = SOURCE_ROOT; };
-		5E2765EF19940F3F0003BAFA /* FBSnapshotTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestController.h; path = submodules/FBSnapshotTestCase/FBSnapshotTestController.h; sourceTree = SOURCE_ROOT; };
-		5E2765F019940F3F0003BAFA /* FBSnapshotTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBSnapshotTestController.m; path = submodules/FBSnapshotTestCase/FBSnapshotTestController.m; sourceTree = SOURCE_ROOT; };
-		5E2765F119940F3F0003BAFA /* UIImage+Compare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Compare.h"; path = "submodules/FBSnapshotTestCase/UIImage+Compare.h"; sourceTree = SOURCE_ROOT; };
-		5E2765F219940F3F0003BAFA /* UIImage+Compare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Compare.m"; path = "submodules/FBSnapshotTestCase/UIImage+Compare.m"; sourceTree = SOURCE_ROOT; };
-		5E2765F319940F3F0003BAFA /* UIImage+Diff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Diff.h"; path = "submodules/FBSnapshotTestCase/UIImage+Diff.h"; sourceTree = SOURCE_ROOT; };
-		5E2765F419940F3F0003BAFA /* UIImage+Diff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Diff.m"; path = "submodules/FBSnapshotTestCase/UIImage+Diff.m"; sourceTree = SOURCE_ROOT; };
-		5E2765FA19940F760003BAFA /* HaveValidSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HaveValidSnapshot.swift; path = "submodules/Nimble-Snapshots/HaveValidSnapshot.swift"; sourceTree = "<group>"; };
-		5E28C1F31993B9D10066DB4D /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = submodules/Quick/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
-		5E28C2031993B9E50066DB4D /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = submodules/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
+		5E2765ED19940F3F0003BAFA /* FBSnapshotTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSnapshotTestCase.h; sourceTree = "<group>"; };
+		5E2765EE19940F3F0003BAFA /* FBSnapshotTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestCase.m; sourceTree = "<group>"; };
+		5E2765EF19940F3F0003BAFA /* FBSnapshotTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSnapshotTestController.h; sourceTree = "<group>"; };
+		5E2765F019940F3F0003BAFA /* FBSnapshotTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSnapshotTestController.m; sourceTree = "<group>"; };
+		5E2765F119940F3F0003BAFA /* UIImage+Compare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Compare.h"; sourceTree = "<group>"; };
+		5E2765F219940F3F0003BAFA /* UIImage+Compare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Compare.m"; sourceTree = "<group>"; };
+		5E2765F319940F3F0003BAFA /* UIImage+Diff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Diff.h"; sourceTree = "<group>"; };
+		5E2765F419940F3F0003BAFA /* UIImage+Diff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Diff.m"; sourceTree = "<group>"; };
+		5E2765FA19940F760003BAFA /* HaveValidSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveValidSnapshot.swift; sourceTree = "<group>"; };
+		5E28C1F31993B9D10066DB4D /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = ../../submodules/Quick/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
+		5E28C2031993B9E50066DB4D /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = ../../submodules/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		5E59DD3019913DD800A48370 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD3419913DD800A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD3519913DD800A48370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,12 +133,13 @@
 		5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PodsBridgingHeader.h; sourceTree = "<group>"; };
 		5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auction.storyboard; sourceTree = "<group>"; };
 		5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Fulfillment.storyboard; sourceTree = "<group>"; };
+		6086143E19BA34E500699FBC /* ARLabelSubclasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARLabelSubclasses.swift; sourceTree = "<group>"; };
 		60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 		60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewController.swift; sourceTree = "<group>"; };
 		60A3BC2F19BA054200EF3907 /* PlaceBidViewControlleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControlleTests.swift; sourceTree = "<group>"; };
-		6621C12A9B5A3B8E0B98F103 /* Pods.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.beta.xcconfig; path = Pods/Pods.beta.xcconfig; sourceTree = "<group>"; };
-		88F8BCABCD21FB181078AEC0 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E3C811EAC44ACDB0A466C2C0 /* Pods-KioskTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.beta.xcconfig"; path = "Pods/Pods-KioskTests.beta.xcconfig"; sourceTree = "<group>"; };
+		6621C12A9B5A3B8E0B98F103 /* Pods.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.beta.xcconfig; sourceTree = "<group>"; };
+		88F8BCABCD21FB181078AEC0 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E3C811EAC44ACDB0A466C2C0 /* Pods-KioskTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KioskTests.beta.xcconfig"; sourceTree = "<group>"; };
 		F02362ED531B4468B9C73044 /* libPods-KioskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KioskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -185,8 +187,7 @@
 				5E2765F319940F3F0003BAFA /* UIImage+Diff.h */,
 				5E2765F419940F3F0003BAFA /* UIImage+Diff.m */,
 			);
-			name = FBSnapshotTestCase;
-			path = KioskTests;
+			path = FBSnapshotTestCase;
 			sourceTree = "<group>";
 		};
 		5E2765FC19940F780003BAFA /* Nimble-Snapshots */ = {
@@ -194,7 +195,7 @@
 			children = (
 				5E2765FA19940F760003BAFA /* HaveValidSnapshot.swift */,
 			);
-			name = "Nimble-Snapshots";
+			path = "Nimble-Snapshots";
 			sourceTree = "<group>";
 		};
 		5E28C1F21993B99A0066DB4D /* Submodules */ = {
@@ -205,8 +206,7 @@
 				5E28C2031993B9E50066DB4D /* Nimble.xcodeproj */,
 				5E28C1F31993B9D10066DB4D /* Quick.xcodeproj */,
 			);
-			name = Submodules;
-			path = ..;
+			path = Submodules;
 			sourceTree = "<group>";
 		};
 		5E28C1F41993B9D10066DB4D /* Products */ = {
@@ -254,12 +254,10 @@
 		5E59DD3219913DD800A48370 /* Kiosk */ = {
 			isa = PBXGroup;
 			children = (
-				5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */,
-				5E59DD3519913DD800A48370 /* AppDelegate.swift */,
+				6086143C19BA306800699FBC /* App */,
+				6086143B19BA304F00699FBC /* Storyboards */,
+				6086143D19BA307300699FBC /* Bid Fulfillment */,
 				5E59DD3719913DD800A48370 /* ListingsViewController.swift */,
-				60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */,
-				5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */,
-				5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */,
 				5E59DD3C19913DD800A48370 /* Images.xcassets */,
 				5E59DD3319913DD800A48370 /* Supporting Files */,
 			);
@@ -269,9 +267,10 @@
 		5E59DD3319913DD800A48370 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */,
 				5E59DD3419913DD800A48370 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		5E59DD4519913DD800A48370 /* KioskTests */ = {
@@ -291,7 +290,49 @@
 			children = (
 				5E59DD4719913DD900A48370 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6086143919BA303700699FBC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6086143A19BA304100699FBC /* Label Subclasses */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6086143A19BA304100699FBC /* Label Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				6086143E19BA34E500699FBC /* ARLabelSubclasses.swift */,
+			);
+			path = "Label Subclasses";
+			sourceTree = "<group>";
+		};
+		6086143B19BA304F00699FBC /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */,
+				5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		6086143C19BA306800699FBC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6086143919BA303700699FBC /* Views */,
+				5E59DD3519913DD800A48370 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		6086143D19BA307300699FBC /* Bid Fulfillment */ = {
+			isa = PBXGroup;
+			children = (
+				60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */,
+			);
+			path = "Bid Fulfillment";
 			sourceTree = "<group>";
 		};
 		60A3BC2619B9FCC800EF3907 /* Pod Settings */ = {
@@ -302,7 +343,7 @@
 				88F8BCABCD21FB181078AEC0 /* Pods-KioskTests.debug.xcconfig */,
 				E3C811EAC44ACDB0A466C2C0 /* Pods-KioskTests.beta.xcconfig */,
 			);
-			name = "Pod Settings";
+			path = "Pod Settings";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -544,6 +585,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */,
+				6086143F19BA34E500699FBC /* ARLabelSubclasses.swift in Sources */,
 				5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */,
 				60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */,
 			);
@@ -670,10 +712,11 @@
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				INFOPLIST_FILE = Kiosk/Info.plist;
+				INFOPLIST_FILE = "Kiosk/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = Kiosk/PodsBridgingHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/PodsBridgingHeader.h";
 			};
 			name = Debug;
 		};
@@ -684,10 +727,11 @@
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				INFOPLIST_FILE = Kiosk/Info.plist;
+				INFOPLIST_FILE = "Kiosk/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = Kiosk/PodsBridgingHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/PodsBridgingHeader.h";
 			};
 			name = Beta;
 		};
@@ -705,7 +749,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = KioskTests/Info.plist;
+				INFOPLIST_FILE = "KioskTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KioskTests/KioskTests-Bridging-Header.h";
@@ -724,7 +768,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = KioskTests/Info.plist;
+				INFOPLIST_FILE = "KioskTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "KioskTests/KioskTests-Bridging-Header.h";
