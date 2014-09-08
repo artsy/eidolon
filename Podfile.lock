@@ -13,9 +13,10 @@ PODS:
     - Artsy+UIColors
     - Artsy+UIFonts
   - EDColor (0.4.0)
+  - FBSnapshotTestCase (1.1)
   - FLKAutoLayout (0.1.1)
   - HockeySDK (3.5.4)
-  - Mixpanel (2.5.0)
+  - Mixpanel (2.5.1)
   - ORStackView (1.2.0):
     - FLKAutoLayout (~> 0.1)
 
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - Artsy+UIColors
   - Artsy+UIFonts
   - Artsy+UILabels
+  - FBSnapshotTestCase
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
   - ORStackView
@@ -35,9 +37,10 @@ SPEC CHECKSUMS:
   Artsy+UIFonts: fb0a70f93ca888d45a3af751707701fe8cbeae2a
   Artsy+UILabels: 83b261e0a9ee1f113ad9443f80bafe3a870bcfa9
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
+  FBSnapshotTestCase: 9053afee1d66b4c7c313fcb0ae582a5e47bea9d0
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
   HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
-  Mixpanel: e2cbef6022acff6e0182c994ed69b18613209611
+  Mixpanel: 713ac75a74e92aebb1335ff2468ecb4d20cdddfe
   ORStackView: f1ccef4a0c40dd7907a638232f78a873cc03ab6c
 
 COCOAPODS: 0.33.1

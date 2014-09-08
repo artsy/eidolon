@@ -7,7 +7,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
         it("looks right by default") {
             let sut  = PlaceBidViewController.instantiateFromStoryboard()
-            expect(sut).to( haveSnapshot() )
+            expect(sut).to(haveValidSnapshot())
         }
 
     }

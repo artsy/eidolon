@@ -23,4 +23,5 @@ pod 'ARAnalytics/Mixpanel'
 pod 'ARAnalytics/HockeyApp'
 
 target "KioskTests", :exclusive => true do
+   pod 'FBSnapshotTestCase'
 end

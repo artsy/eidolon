@@ -1,5 +1,0 @@
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/ARAnalytics" "${PODS_ROOT}/Headers/Artsy+UIColors" "${PODS_ROOT}/Headers/EDColor" "${PODS_ROOT}/Headers/FLKAutoLayout" "${PODS_ROOT}/Headers/HockeySDK" "${PODS_ROOT}/Headers/Mixpanel" "${PODS_ROOT}/Headers/ORStackView" "${PODS_ROOT}/Headers/isUnitTesting"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers" -isystem "${PODS_ROOT}/Headers/ARAnalytics" -isystem "${PODS_ROOT}/Headers/Artsy+UIColors" -isystem "${PODS_ROOT}/Headers/EDColor" -isystem "${PODS_ROOT}/Headers/FLKAutoLayout" -isystem "${PODS_ROOT}/Headers/HockeySDK" -isystem "${PODS_ROOT}/Headers/Mixpanel" -isystem "${PODS_ROOT}/Headers/ORStackView" -isystem "${PODS_ROOT}/Headers/isUnitTesting"
-OTHER_LDFLAGS = -ObjC -l "Pods-KioskTests-isUnitTesting"
-PODS_ROOT = ${SRCROOT}/Pods
