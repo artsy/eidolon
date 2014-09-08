@@ -35,7 +35,7 @@ public class Button: UIButton {
         layer.cornerRadius = 0;
         layer.borderWidth = 2;
         
-        self.backgroundColor = UIColor.artsyLightGrey();
+        self.backgroundColor = UIColor.artsyLightGrey()
         self.titleLabel!.font = UIFont.sansSerifFontWithSize(self.titleLabel!.font.pointSize)
         
         // Ideally I would add a RAC signal thingy for state here

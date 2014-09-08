@@ -17,6 +17,8 @@
 		60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */; };
 		60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */; };
 		60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */; };
+		60A8E7C519BE50640088ACEC /* FulfillmentContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */; };
+		60A8E7CF19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A8E7CE19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift */; };
 		60C07A1719BE02A800868951 /* HaveValidSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2765FA19940F760003BAFA /* HaveValidSnapshot.swift */; };
 		60C07A2119BE05E500868951 /* ARButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C07A2019BE05E500868951 /* ARButtonTests.swift */; };
 		60F444EC19BDE0320030409F /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F444EB19BDE0320030409F /* Button.swift */; };
@@ -112,6 +114,8 @@
 		60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 		60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewController.swift; sourceTree = "<group>"; };
 		60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; };
+		60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentContainerViewController.swift; sourceTree = "<group>"; };
+		60A8E7CE19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		60C07A2019BE05E500868951 /* ARButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARButtonTests.swift; sourceTree = "<group>"; };
 		60F444EB19BDE0320030409F /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = "Button Subclasses/Button.swift"; sourceTree = "<group>"; };
 		E1FEC9501E9B83C82DA0E7D5 /* Pods-KioskTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.beta.xcconfig"; path = "Pods/Pods-KioskTests.beta.xcconfig"; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 				5E2765EC19940F3F0003BAFA /* KioskTests-Bridging-Header.h */,
 				60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */,
 				60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */,
+				60A8E7CE19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift */,
 				60C07A2019BE05E500868951 /* ARButtonTests.swift */,
 				5E28C1F21993B99A0066DB4D /* Submodules */,
 				5E59DD4619913DD900A48370 /* Supporting Files */,
@@ -298,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */,
+				60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */,
 			);
 			path = "Bid Fulfillment";
 			sourceTree = "<group>";
@@ -549,6 +555,7 @@
 				5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */,
 				5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */,
 				60F444EC19BDE0320030409F /* Button.swift in Sources */,
+				60A8E7C519BE50640088ACEC /* FulfillmentContainerViewController.swift in Sources */,
 				60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -560,6 +567,7 @@
 				60C07A2119BE05E500868951 /* ARButtonTests.swift in Sources */,
 				60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */,
 				60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */,
+				60A8E7CF19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift in Sources */,
 				60C07A1719BE02A800868951 /* HaveValidSnapshot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
