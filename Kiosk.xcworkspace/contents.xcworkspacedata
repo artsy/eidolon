@@ -1,1 +1,19 @@
-<?xml version='1.0' encoding='UTF-8'?><Workspace version='1.0'><FileRef location='group:Kiosk.xcodeproj'/><FileRef location='group:Pods/Pods.xcodeproj'/></Workspace>
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Kiosk.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:submodules/ReactiveCocoa/ReactiveCocoa.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:submodules/swiftz/swiftz.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:submodules/swiftz/swiftz_core/swiftz_core.xcodeproj">
+   </FileRef>
+</Workspace>
