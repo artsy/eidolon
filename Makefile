@@ -18,6 +18,9 @@ bootstrap:
 	./submodules/ReactiveCocoa/script/bootstrap
 	pod install
 
+storyboard_ids:
+	bundle exec sbconstants Kiosk/Storyboards/StoryboardIdentifiers.swift --source-dir Kiosk/Storyboards --swift
+
 build:
 	set -o pipefail && xcodebuild -workspace '$(WORKSPACE)' -scheme '$(SCHEME)' -configuration '$(CONFIGURATION)' -sdk iphonesimulator -destination 'name=iPad Retina' build | xcpretty -c
 

@@ -27,6 +27,7 @@
 		60A8E7CF19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A8E7CE19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift */; };
 		60C07A1719BE02A800868951 /* HaveValidSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2765FA19940F760003BAFA /* HaveValidSnapshot.swift */; };
 		60C07A2119BE05E500868951 /* ARButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C07A2019BE05E500868951 /* ARButtonTests.swift */; };
+		60F104E419C0FB94002FF30C /* StoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F104E319C0FB93002FF30C /* StoryboardIdentifiers.swift */; };
 		60F444EC19BDE0320030409F /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F444EB19BDE0320030409F /* Button.swift */; };
 		7D151931B70C40DA1918308E /* libPods-KioskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F02362ED531B4468B9C73044 /* libPods-KioskTests.a */; };
 		961918F1D3EF491EA0AF220C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A6ABDCBFE147D99BAEBD31 /* libPods.a */; };
@@ -150,6 +151,7 @@
 		60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentContainerViewController.swift; sourceTree = "<group>"; };
 		60A8E7CE19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		60C07A2019BE05E500868951 /* ARButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARButtonTests.swift; sourceTree = "<group>"; };
+		60F104E319C0FB93002FF30C /* StoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiers.swift; sourceTree = "<group>"; };
 		60F444EB19BDE0320030409F /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = "Button Subclasses/Button.swift"; sourceTree = "<group>"; };
 		E1FEC9501E9B83C82DA0E7D5 /* Pods-KioskTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.beta.xcconfig"; path = "Pods/Pods-KioskTests.beta.xcconfig"; sourceTree = "<group>"; };
 		F02362ED531B4468B9C73044 /* libPods-KioskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KioskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,6 +248,7 @@
 		5E59DD3219913DD800A48370 /* Kiosk */ = {
 			isa = PBXGroup;
 			children = (
+				608E917F19C0B88200AF4E83 /* Card Handling */,
 				5E4B56DC19C079C0002E6FCB /* Submodules */,
 				6086143C19BA306800699FBC /* App */,
 				6086143B19BA304F00699FBC /* Storyboards */,
@@ -352,6 +355,7 @@
 			children = (
 				5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */,
 				5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */,
+				60F104E319C0FB93002FF30C /* StoryboardIdentifiers.swift */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -372,6 +376,13 @@
 				60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */,
 			);
 			path = "Bid Fulfillment";
+			sourceTree = "<group>";
+		};
+		608E917F19C0B88200AF4E83 /* Card Handling */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Card Handling";
 			sourceTree = "<group>";
 		};
 		60F444EA19BDE0110030409F /* buttons */ = {
@@ -640,6 +651,7 @@
 				5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */,
 				5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */,
 				5E6ED5FF19C07A4300CF3398 /* Moya.swift in Sources */,
+				60F104E419C0FB94002FF30C /* StoryboardIdentifiers.swift in Sources */,
 				60F444EC19BDE0320030409F /* Button.swift in Sources */,
 				5E6ED60119C07A4300CF3398 /* RACSignal+Moya.swift in Sources */,
 				5E6ED60019C07A4300CF3398 /* Moya+ReactiveCocoa.swift in Sources */,
