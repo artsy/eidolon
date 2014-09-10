@@ -15,6 +15,7 @@ all: ci
 bootstrap:
 	git submodule init
 	git submodule update
+	./submodules/ReactiveCocoa/script/bootstrap
 	pod install
 
 build:

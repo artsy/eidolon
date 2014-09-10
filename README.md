@@ -30,10 +30,9 @@ cd eidolon
 make bootstrap
 ```
 
-Notice that we're doing a `git submodule update` and `init`, and *not* using the
-`--recursive` option of the `clone` command. If we were to clone recursively,
-some of the submodules we use would fetch their own submodules, which would lead
-to incorrect behaviour.
+Due to an [issue](https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1480) 
+with ReactiveCocoa, you need to manually open the ReactiveCocoa project in the
+workspace and change the iOS target's deployment target to 8.0.
 
 A lot of iOS code still exists as Objective-C, and we use a lot of it as
 CocoaPods. So after cloning the repo, shown above, you'll need to do a `pod

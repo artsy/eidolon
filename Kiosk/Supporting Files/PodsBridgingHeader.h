@@ -18,6 +18,8 @@
 // Happy for this to be a swift one instead, https://github.com/robb/Cartography ?
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
 // Fonts can come from one of two Pods
 #if __has_include(<Artsy+UIFonts/UIFont+ArtsyFonts.h>)
 #import <Artsy+UIFonts/UIFont+ArtsyFonts.h>
