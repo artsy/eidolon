@@ -8,6 +8,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
+
+        ArtsyProvider.XAppRequest(.FeaturedWorks).filterSuccessfulStatusCodes().subscribeNext({ (object) -> Void in
+            if let response = object as? MoyaResponse {
+                println("\(NSString(data: response.data, encoding: NSUTF8StringEncoding))")
+            }
+        }, error: { (error) -> Void in
+            println("\(error.localizedDescription)")
+        })
+
         return true
     }
 
