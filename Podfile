@@ -1,3 +1,6 @@
+source 'artsy'
+source 'master'
+
 platform :ios, '7.0'
 
 # Yep.
