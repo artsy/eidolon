@@ -19,7 +19,7 @@ PODS:
   - FBSnapshotTestCase (1.1)
   - FLKAutoLayout (0.1.1)
   - HockeySDK (3.5.4)
-  - Mixpanel (2.5.1)
+  - Mixpanel (2.5.2)
   - ORStackView (1.2.0):
     - FLKAutoLayout (~> 0.1)
 
@@ -45,7 +45,7 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: 9053afee1d66b4c7c313fcb0ae582a5e47bea9d0
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
   HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
-  Mixpanel: 713ac75a74e92aebb1335ff2468ecb4d20cdddfe
+  Mixpanel: 0115466ba70fd12e67ac4d3d071408dd1d489657
   ORStackView: f1ccef4a0c40dd7907a638232f78a873cc03ab6c
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.34.0.rc1
