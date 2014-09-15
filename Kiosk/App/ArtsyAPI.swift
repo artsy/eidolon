@@ -1,17 +1,17 @@
 import Foundation
 
 struct APIKeys {
-    let key: String?
-    let secret: String?
+    let key: String
+    let secret: String
     
     var stubResponses: Bool {
-        return key == nil && secret == nil
+        return countElements(key) > 0 && countElements(secret) > 0
     }
     
     init() {
         let keys = EidolonKeys()
-        key = keys.artsy_api_client()
-        secret = keys.artsy_api_client_secret()
+        key = keys.artsy_api_client() ?? ""
+        secret = keys.artsy_api_client_secret() ?? ""
     }
 }
 
