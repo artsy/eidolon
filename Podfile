@@ -29,5 +29,5 @@ pod 'ARAnalytics/HockeyApp'
 pod 'CardFlight'
 
 target "KioskTests", :exclusive => true do
-   pod 'FBSnapshotTestCase'
+    pod 'FBSnapshotTestCase', :git => "https://github.com/facebook/ios-snapshot-test-case"
 end

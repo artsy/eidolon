@@ -22,8 +22,23 @@
 		5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0997D19C31D8F00E5DD59 /* XApp.json */; };
 		5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */; };
 		5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */; };
+		602EFE4F19C6D09C002715C2 /* KeypadContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */; };
 		603F8CC719BDF80C00B162C7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603F8CB119BDF77700B162C7 /* Nimble.framework */; };
 		603F8CC819BDF80C00B162C7 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603F8CC419BDF78A00B162C7 /* Quick.framework */; };
+		605B855B19C6E4CF0009B16B /* ConfirmYourBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B855A19C6E4CF0009B16B /* ConfirmYourBidViewController.swift */; };
+		605B855D19C6E50D0009B16B /* GetYourBidderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B855C19C6E50D0009B16B /* GetYourBidderDetailsViewController.swift */; };
+		605B855F19C6E5520009B16B /* EnterYourBidderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B855E19C6E5520009B16B /* EnterYourBidderDetailsViewController.swift */; };
+		605B856119C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856019C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift */; };
+		605B856319C6E5C30009B16B /* YouAreTheHighestBidderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856219C6E5C30009B16B /* YouAreTheHighestBidderViewController.swift */; };
+		605B856819C6EA380009B16B /* UIStoryboardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856719C6EA380009B16B /* UIStoryboardExtensions.swift */; };
+		605B856A19C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856919C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift */; };
+		605B856C19C6F3FB0009B16B /* GetYourBidderDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856B19C6F3FB0009B16B /* GetYourBidderDetailsViewControllerTests.swift */; };
+		605B856E19C6F4200009B16B /* EnterYourBidderDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856D19C6F4200009B16B /* EnterYourBidderDetailsViewControllerTests.swift */; };
+		605B857019C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */; };
+		605B857219C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B857119C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift */; };
+		60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60968DCD19C5B2AF001AB802 /* KeypadView.xib */; };
+		60968DD019C5B427001AB802 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60968DCF19C5B427001AB802 /* KeypadView.swift */; };
+		60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */ = {isa = PBXBuildFile; fileRef = 60968DD219C5B80F001AB802 /* KeypadViewPreviewIB.png */; };
 		60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */; };
 		60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */; };
 		60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */; };
@@ -126,9 +141,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E53E93794856AAFC479A5D3 /* Pods.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.beta.xcconfig; path = "Pods/Target Support Files/Pods/Pods.beta.xcconfig"; sourceTree = "<group>"; };
 		21A6ABDCBFE147D99BAEBD31 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5BB6C7AC01D226AB94CA6E87 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		29AC0C40EA1BBED255C77D7F /* Pods.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.beta.xcconfig; path = "Pods/Target Support Files/Pods/Pods.beta.xcconfig"; sourceTree = "<group>"; };
+		46ACE072A30FD791981A83FC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5E2765EC19940F3F0003BAFA /* KioskTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KioskTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		5E2765FA19940F760003BAFA /* HaveValidSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveValidSnapshot.swift; sourceTree = "<group>"; };
 		5E28C1F31993B9D10066DB4D /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = submodules/Quick/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
@@ -153,6 +168,21 @@
 		5ED0997D19C31D8F00E5DD59 /* XApp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = XApp.json; path = "Stubbed Responses/XApp.json"; sourceTree = "<group>"; };
 		5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auction.storyboard; sourceTree = "<group>"; };
 		5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Fulfillment.storyboard; sourceTree = "<group>"; };
+		602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadContainerView.swift; sourceTree = "<group>"; };
+		605B855A19C6E4CF0009B16B /* ConfirmYourBidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidViewController.swift; sourceTree = "<group>"; };
+		605B855C19C6E50D0009B16B /* GetYourBidderDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetYourBidderDetailsViewController.swift; sourceTree = "<group>"; };
+		605B855E19C6E5520009B16B /* EnterYourBidderDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterYourBidderDetailsViewController.swift; sourceTree = "<group>"; };
+		605B856019C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidArtsyLoginViewController.swift; sourceTree = "<group>"; };
+		605B856219C6E5C30009B16B /* YouAreTheHighestBidderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouAreTheHighestBidderViewController.swift; sourceTree = "<group>"; };
+		605B856719C6EA380009B16B /* UIStoryboardExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtensions.swift; sourceTree = "<group>"; };
+		605B856919C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidViewControllerTests.swift; sourceTree = "<group>"; };
+		605B856B19C6F3FB0009B16B /* GetYourBidderDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetYourBidderDetailsViewControllerTests.swift; sourceTree = "<group>"; };
+		605B856D19C6F4200009B16B /* EnterYourBidderDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterYourBidderDetailsViewControllerTests.swift; sourceTree = "<group>"; };
+		605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidArtsyLoginViewControllerTests.swift; sourceTree = "<group>"; };
+		605B857119C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouAreTheHighestBidderViewControllerTests.swift; sourceTree = "<group>"; };
+		60968DCD19C5B2AF001AB802 /* KeypadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeypadView.xib; path = ../Storyboards/KeypadView.xib; sourceTree = "<group>"; };
+		60968DCF19C5B427001AB802 /* KeypadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
+		60968DD219C5B80F001AB802 /* KeypadViewPreviewIB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KeypadViewPreviewIB.png; sourceTree = "<group>"; };
 		60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 		60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewController.swift; sourceTree = "<group>"; };
 		60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; };
@@ -161,8 +191,8 @@
 		60C07A2019BE05E500868951 /* ARButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARButtonTests.swift; sourceTree = "<group>"; };
 		60F104E319C0FB93002FF30C /* StoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiers.swift; sourceTree = "<group>"; };
 		60F444EB19BDE0320030409F /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = "Button Subclasses/Button.swift"; sourceTree = "<group>"; };
-		BCC67151F7666EDFDF63D3A7 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E0AF629BE597B472D2C3D0AB /* Pods-KioskTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.beta.xcconfig"; sourceTree = "<group>"; };
+		C055E487A3D1AED461990000 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EE4CAC9FE3857F7DF1A07AE1 /* Pods-KioskTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.beta.xcconfig"; sourceTree = "<group>"; };
 		F02362ED531B4468B9C73044 /* libPods-KioskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KioskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -248,7 +278,7 @@
 				5E59DD4519913DD800A48370 /* KioskTests */,
 				5E59DD3119913DD800A48370 /* Products */,
 				16F3A19F9AD1486CACC915F0 /* Frameworks */,
-				30E8D5DF876564BBAE983B10 /* Pods */,
+				EE21C3BFE2A5C084779CFFBF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -267,7 +297,7 @@
 				608E917F19C0B88200AF4E83 /* Card Handling */,
 				5E4B56DC19C079C0002E6FCB /* Submodules */,
 				6086143C19BA306800699FBC /* App */,
-				6086143B19BA304F00699FBC /* Storyboards */,
+				6086143B19BA304F00699FBC /* Storyboards + Nibs */,
 				6086143D19BA307300699FBC /* Bid Fulfillment */,
 				5E59DD3719913DD800A48370 /* ListingsViewController.swift */,
 				5E59DD3C19913DD800A48370 /* Images.xcassets */,
@@ -289,10 +319,9 @@
 		5E59DD4519913DD800A48370 /* KioskTests */ = {
 			isa = PBXGroup;
 			children = (
+				605B856419C6E9080009B16B /* Fulfillment */,
 				5E2765EC19940F3F0003BAFA /* KioskTests-Bridging-Header.h */,
 				60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */,
-				60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */,
-				60A8E7CE19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift */,
 				60C07A2019BE05E500868951 /* ARButtonTests.swift */,
 				5E28C1F21993B99A0066DB4D /* Submodules */,
 				5E59DD4619913DD900A48370 /* Supporting Files */,
@@ -359,6 +388,35 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		605B855919C6E41C0009B16B /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */,
+				60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */,
+				605B855A19C6E4CF0009B16B /* ConfirmYourBidViewController.swift */,
+				605B855C19C6E50D0009B16B /* GetYourBidderDetailsViewController.swift */,
+				605B855E19C6E5520009B16B /* EnterYourBidderDetailsViewController.swift */,
+				605B856019C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift */,
+				605B856219C6E5C30009B16B /* YouAreTheHighestBidderViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		605B856419C6E9080009B16B /* Fulfillment */ = {
+			isa = PBXGroup;
+			children = (
+				60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */,
+				60A8E7CE19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift */,
+				605B856919C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift */,
+				605B856B19C6F3FB0009B16B /* GetYourBidderDetailsViewControllerTests.swift */,
+				605B856D19C6F4200009B16B /* EnterYourBidderDetailsViewControllerTests.swift */,
+				605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */,
+				605B857119C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift */,
+			);
+			name = Fulfillment;
+			path = "Bid Fulfillment";
+			sourceTree = "<group>";
+		};
 		6086143919BA303700699FBC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,13 +434,15 @@
 			path = "Label Subclasses";
 			sourceTree = "<group>";
 		};
-		6086143B19BA304F00699FBC /* Storyboards */ = {
+		6086143B19BA304F00699FBC /* Storyboards + Nibs */ = {
 			isa = PBXGroup;
 			children = (
 				5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */,
 				5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */,
 				60F104E319C0FB93002FF30C /* StoryboardIdentifiers.swift */,
+				605B856719C6EA380009B16B /* UIStoryboardExtensions.swift */,
 			);
+			name = "Storyboards + Nibs";
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
@@ -400,8 +460,8 @@
 		6086143D19BA307300699FBC /* Bid Fulfillment */ = {
 			isa = PBXGroup;
 			children = (
-				60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */,
-				60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */,
+				605B855919C6E41C0009B16B /* View Controllers */,
+				60968DD119C5B803001AB802 /* Keypad */,
 			);
 			path = "Bid Fulfillment";
 			sourceTree = "<group>";
@@ -413,12 +473,34 @@
 			path = "Card Handling";
 			sourceTree = "<group>";
 		};
+		60968DD119C5B803001AB802 /* Keypad */ = {
+			isa = PBXGroup;
+			children = (
+				60968DCD19C5B2AF001AB802 /* KeypadView.xib */,
+				60968DCF19C5B427001AB802 /* KeypadView.swift */,
+				60968DD219C5B80F001AB802 /* KeypadViewPreviewIB.png */,
+				602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */,
+			);
+			name = Keypad;
+			sourceTree = "<group>";
+		};
 		60F444EA19BDE0110030409F /* buttons */ = {
 			isa = PBXGroup;
 			children = (
 				60F444EB19BDE0320030409F /* Button.swift */,
 			);
 			name = buttons;
+			sourceTree = "<group>";
+		};
+		EE21C3BFE2A5C084779CFFBF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				46ACE072A30FD791981A83FC /* Pods.debug.xcconfig */,
+				29AC0C40EA1BBED255C77D7F /* Pods.beta.xcconfig */,
+				C055E487A3D1AED461990000 /* Pods-KioskTests.debug.xcconfig */,
+				EE4CAC9FE3857F7DF1A07AE1 /* Pods-KioskTests.beta.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -593,6 +675,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */,
+				60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */,
 				5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */,
 				5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */,
 				5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */,
@@ -678,18 +762,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				605B855F19C6E5520009B16B /* EnterYourBidderDetailsViewController.swift in Sources */,
+				602EFE4F19C6D09C002715C2 /* KeypadContainerView.swift in Sources */,
 				5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */,
 				5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */,
 				5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */,
+				60968DD019C5B427001AB802 /* KeypadView.swift in Sources */,
 				5E6ED5FF19C07A4300CF3398 /* Moya.swift in Sources */,
+				605B855B19C6E4CF0009B16B /* ConfirmYourBidViewController.swift in Sources */,
 				60F104E419C0FB94002FF30C /* StoryboardIdentifiers.swift in Sources */,
 				60F444EC19BDE0320030409F /* Button.swift in Sources */,
+				605B856319C6E5C30009B16B /* YouAreTheHighestBidderViewController.swift in Sources */,
 				5E6ED60119C07A4300CF3398 /* RACSignal+Moya.swift in Sources */,
 				5E6ED60019C07A4300CF3398 /* Moya+ReactiveCocoa.swift in Sources */,
 				5E3E53E619C3AA13002D8B9D /* XAppToken.swift in Sources */,
+				605B856119C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift in Sources */,
 				60A8E7C519BE50640088ACEC /* FulfillmentContainerViewController.swift in Sources */,
+				605B856819C6EA380009B16B /* UIStoryboardExtensions.swift in Sources */,
 				5E6ED5FE19C07A4300CF3398 /* Endpoint.swift in Sources */,
 				60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */,
+				605B855D19C6E50D0009B16B /* GetYourBidderDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,11 +789,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				605B857219C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift in Sources */,
+				605B856A19C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift in Sources */,
+				605B856E19C6F4200009B16B /* EnterYourBidderDetailsViewControllerTests.swift in Sources */,
 				60C07A2119BE05E500868951 /* ARButtonTests.swift in Sources */,
 				60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */,
 				60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */,
 				60A8E7CF19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift in Sources */,
+				605B857019C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */,
 				60C07A1719BE02A800868951 /* HaveValidSnapshot.swift in Sources */,
+				605B856C19C6F3FB0009B16B /* GetYourBidderDetailsViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -800,7 +897,7 @@
 		};
 		5E59DD4D19913DD900A48370 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BB6C7AC01D226AB94CA6E87 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 46ACE072A30FD791981A83FC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -819,7 +916,7 @@
 		};
 		5E59DD4E19913DD900A48370 /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E53E93794856AAFC479A5D3 /* Pods.beta.xcconfig */;
+			baseConfigurationReference = 29AC0C40EA1BBED255C77D7F /* Pods.beta.xcconfig */;
 			buildSettings = {
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -838,7 +935,7 @@
 		};
 		5E59DD5019913DD900A48370 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BCC67151F7666EDFDF63D3A7 /* Pods-KioskTests.debug.xcconfig */;
+			baseConfigurationReference = C055E487A3D1AED461990000 /* Pods-KioskTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -861,7 +958,7 @@
 		};
 		5E59DD5119913DD900A48370 /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0AF629BE597B472D2C3D0AB /* Pods-KioskTests.beta.xcconfig */;
+			baseConfigurationReference = EE4CAC9FE3857F7DF1A07AE1 /* Pods-KioskTests.beta.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
