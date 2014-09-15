@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/orta/SBConstants.git
-  revision: d19990c70ed62ce2a1a9fd9983c32a8c09acaf82
+  revision: 322704f2f138dff461cf7f284d085f02af955adb
   branch: swift
   specs:
     sbconstants (0.0.6)
@@ -12,9 +12,9 @@ GEM
     activesupport (3.2.19)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
-    aws-sdk (1.52.0)
-      aws-sdk-v1 (= 1.52.0)
-    aws-sdk-v1 (1.52.0)
+    aws-sdk (1.53.0)
+      aws-sdk-v1 (= 1.53.0)
+    aws-sdk-v1 (1.53.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     claide (0.7.0)
