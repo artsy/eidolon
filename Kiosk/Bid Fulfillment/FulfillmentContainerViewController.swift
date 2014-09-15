@@ -13,7 +13,7 @@ public class FulfillmentContainerViewController: UIViewController {
 
     public class func instantiateFromStoryboard() -> FulfillmentContainerViewController {
         return  UIStoryboard(name: "Fulfillment", bundle: nil)
-            .instantiateViewControllerWithIdentifier("FulfillmentContainerViewController") as FulfillmentContainerViewController
+            .instantiateViewControllerWithIdentifier(ViewControllerStoryboardIdentifier.FulfillmentContainer.toRaw()) as FulfillmentContainerViewController
     }
     
     @IBAction public func closeModalTapped(sender: AnyObject) {
