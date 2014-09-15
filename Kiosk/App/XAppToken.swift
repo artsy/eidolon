@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NSDate {
+private extension NSDate {
     var isInPast: Bool {
         let now = NSDate.date()
             return self.compare(now) == NSComparisonResult.OrderedAscending
