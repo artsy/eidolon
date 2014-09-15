@@ -46,7 +46,7 @@ class ArtsyAPISpec: QuickSpec {
                     called = true
                 })
                 
-                expect{called}.toEventually(beTruthy(), timeout: 1.0, pollInterval: 0.1)
+                expect(called).to(beTruthy())
             }
             
             it("gets XApp token if it doesn't exist yet") {
@@ -57,9 +57,9 @@ class ArtsyAPISpec: QuickSpec {
                 })
                 
                 let past = NSDate(timeIntervalSinceNow: -1000)
-                expect{getDefaultsKeys().key}.toEventually(equal("some token that never expires"), timeout: 1.0, pollInterval: 0.1)
-                expect{getDefaultsKeys().expiry}.toEventuallyNot(beNil(), timeout: 1.0, pollInterval: 0.1)
-                expect{getDefaultsKeys().expiry ?? past}.toEventually(beInTheFuture(), timeout: 1.0, pollInterval: 0.1)
+                expect(getDefaultsKeys().key).to(equal("some token that never expires"))
+                expect(getDefaultsKeys().expiry).toNot(beNil())
+                expect(getDefaultsKeys().expiry ?? past).to(beInTheFuture())
             }
             
             it("gets XApp token if it has expired") {
@@ -70,9 +70,9 @@ class ArtsyAPISpec: QuickSpec {
                     // nop
                 })
                 
-                expect{getDefaultsKeys().key}.toEventually(equal("some token that never expires"), timeout: 1.0, pollInterval: 0.1)
-                expect{getDefaultsKeys().expiry}.toEventuallyNot(beNil(), timeout: 1.0, pollInterval: 0.1)
-                expect{getDefaultsKeys().expiry ?? past}.toEventually(beInTheFuture(), timeout: 1.0, pollInterval: 0.1)
+                expect(getDefaultsKeys().key).to(equal("some token that never expires"))
+                expect(getDefaultsKeys().expiry).toNot(beNil())
+                expect(getDefaultsKeys().expiry ?? past).to(beInTheFuture())
             }
         }
     }
