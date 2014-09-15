@@ -13,10 +13,37 @@ DATE_VERSION = $(shell date "+%Y.%m.%d")
 all: ci
 
 bootstrap:
+	echo "Setting up submodules, grumble."
+
 	git submodule init
 	git submodule update
 	./submodules/ReactiveCocoa/script/bootstrap
-	pod install
+	bundle install
+
+	echo "Setting up API Keys, leave blank if you don't know."
+
+	@printf 'What is your Artsy API Client Secret? '; \
+		read ARTSY_CLIENT_SECRET; \
+		bundle exec pod keys set ArtsyAPIClientSecret "$$ARTSY_CLIENT_SECRET" Eidolon
+
+	@printf 'What is your Artsy API Client Key? '; \
+		read ARTSY_CLIENT_KEY; \
+		bundle exec pod keys set ArtsyAPIClientKey "$$ARTSY_CLIENT_KEY"
+
+	@printf 'What is your Mixpanel API Key? '; \
+		read MIXPANEL_KEY; \
+		bundle exec pod keys set MixpanelAPIClientKey "$$MIXPANEL_KEY"
+
+	@printf 'What is your Cardflight API Key? '; \
+		read CARDFLIGHT_KEY; \
+		bundle exec pod keys set CardflightAPIClientKey "$$CARDFLIGHT_KEY"
+
+	@printf 'What is your Cardflight API Secret? '; \
+		read CARDFLIGHT_SECRET; \
+		bundle exec pod keys set CardflightAPIClientSecret "$$CARDFLIGHT_SECRET"
+
+	bundle exec pod install
+
 
 storyboard_ids:
 	bundle exec sbconstants Kiosk/Storyboards/StoryboardIdentifiers.swift --source-dir Kiosk/Storyboards --swift
