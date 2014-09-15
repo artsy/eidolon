@@ -19,6 +19,7 @@ PODS:
   - FBSnapshotTestCase (1.1)
   - FLKAutoLayout (0.1.1)
   - HockeySDK (3.5.4)
+  - ISO8601DateFormatter (0.7)
   - Mixpanel (2.5.2)
   - ORStackView (1.2.0):
     - FLKAutoLayout (~> 0.1)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - FBSnapshotTestCase (from `https://github.com/facebook/ios-snapshot-test-case`)
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
+  - ISO8601DateFormatter (= 0.7)
   - ORStackView
 
 EXTERNAL SOURCES:
@@ -49,6 +51,7 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: 188c80bfcb72e744eb0b99d45989d12687c40cf8
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
   HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
+  ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
   Mixpanel: 0115466ba70fd12e67ac4d3d071408dd1d489657
   ORStackView: f1ccef4a0c40dd7907a638232f78a873cc03ab6c
 
