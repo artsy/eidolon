@@ -1,44 +1,94 @@
 import Foundation
 
-struct APIKeys {
+// Mark: - API Keys
+
+public struct APIKeys {
     let key: String
     let secret: String
     
-    var stubResponses: Bool {
+    // MARK: Shared Keys
+    
+    private struct SharedKeys {
+        static var instance = APIKeys()
+    }
+
+    public static var sharedKeys: APIKeys {
+        get {
+            return SharedKeys.instance
+        }
+        
+        set (newSharedKeys) {
+            SharedKeys.instance = newSharedKeys
+        }
+    }
+    
+    // MARK: Methods
+    
+    public var stubResponses: Bool {
         return countElements(key) == 0 || countElements(secret) == 0
     }
     
-    init() {
+    // MARK: Initializers
+    
+    public init(key: String, secret: String) {
+        self.key = key
+        self.secret = secret
+    }
+    
+    public init(keys: EidolonKeys) {
+        self.init(key: keys.artsyAPIClientKey() ?? "", secret: keys.artsyAPIClientSecret() ?? "")
+    }
+    
+    public init() {
         let keys = EidolonKeys()
-        key = keys.artsyAPIClientKey() ?? ""
-        secret = keys.artsyAPIClientSecret() ?? ""
+        self.init(keys: keys)
     }
 }
-
-private let keys = APIKeys()
-private var appToken = XAppToken()
 
 // MARK: - Provider setup
 
-let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-    let endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
-    // Sign all non-XApp token requests
-    switch target {
-    case .XApp:
-        return endpoint
-    default:
-        return endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": appToken.token ?? ""])
+public struct Provider {
+    private static var endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+        let endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+        // Sign all non-XApp token requests
+        switch target {
+        case .XApp:
+            return endpoint
+        default:
+            return endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
+        }
+    }
+    
+    public static func DefaultProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
+        return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
+    }
+    
+    public static func StubbingProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
+        return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, stubResponses: true)
+    }
+
+    private struct SharedProvider {
+        static var instance = Provider.DefaultProvider()
+    }
+    
+    public static var sharedProvider: ReactiveMoyaProvider<ArtsyAPI> {
+        get {
+            return SharedProvider.instance
+        }
+        
+        set (newSharedProvider) {
+            SharedProvider.instance = newSharedProvider
+        }
     }
 }
-
-let ArtsyProvider = ReactiveMoyaProvider(endpointsClosure: endpointsClosure, stubResponses: keys.stubResponses)
 
 // MARK: - XApp authentication
 
 /// Request to fetch and store new XApp token if the current token is missing or expired.
 private func XAppTokenRequest() -> RACSignal {
     // I don't like an extension of a class referencing what is essentially a singleton of that class.
-    let newTokenSignal = ArtsyProvider.request(ArtsyAPI.XApp, parameters: ArtsyAPI.XApp.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext({ (response) -> Void in
+    var appToken = XAppToken()
+    let newTokenSignal = Provider.sharedProvider.request(ArtsyAPI.XApp, parameters: ArtsyAPI.XApp.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext({ (response) -> Void in
         if let dictionary = response as? NSDictionary {
             let formatter = ISO8601DateFormatter()
             appToken.token = dictionary["xapp_token"] as String?
@@ -57,7 +107,7 @@ private func XAppTokenRequest() -> RACSignal {
 public func XAppRequest(token: ArtsyAPI, method: Moya.Method = Moya.DefaultMethod(), parameters: [String: AnyObject] = Moya.DefaultParameters()) -> RACSignal {
     // First perform XAppTokenRequest(). When it completes, then the signal returned from the closure will be subscribed to.
     return XAppTokenRequest().then({ () -> RACSignal! in
-        return ArtsyProvider.request(token, method: method, parameters: parameters)
+        return Provider.sharedProvider.request(token, method: method, parameters: parameters)
     })
 }
 
@@ -84,8 +134,8 @@ public enum ArtsyAPI {
     public var defaultParameters: [String: AnyObject] {
         switch self {
         case .XApp:
-            return ["client_id": keys.key ?? "",
-                    "client_secret": keys.secret ?? ""]
+            return ["client_id": APIKeys.sharedKeys.key ?? "",
+                    "client_secret": APIKeys.sharedKeys.secret ?? ""]
         case .FeaturedWorks:
             return ["key": "homepage:featured-artworks",
                     "sort": "key",

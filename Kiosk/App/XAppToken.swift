@@ -1,17 +1,9 @@
-//
-//  XAppToken.swift
-//  Kiosk
-//
-//  Created by Ash Furrow on 2014-09-13.
-//  Copyright (c) 2014 Artsy. All rights reserved.
-//
-
 import Foundation
 
 private extension NSDate {
     var isInPast: Bool {
         let now = NSDate.date()
-            return self.compare(now) == NSComparisonResult.OrderedAscending
+        return self.compare(now) == NSComparisonResult.OrderedAscending
     }
 }
 
@@ -21,9 +13,17 @@ public struct XAppToken {
         case TokenExpiry = "TokenExpiry"
     }
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+    private let defaults = NSUserDefaults.standardUserDefaults()
+        
+    // MARK: - Initializers
+
+    public init() {
+        // Empty, but necessary to invoke from tests
+    }
     
-    var token: NSString? {
+    // MARK: - Properties
+    
+    public var token: String? {
         get {
             return defaults.stringForKey(DefaultsKeys.TokenKey.toRaw())
         }
@@ -32,7 +32,7 @@ public struct XAppToken {
         }
     }
     
-    var expiry: NSDate? {
+    public var expiry: NSDate? {
         get {
             return defaults.objectForKey(DefaultsKeys.TokenExpiry.toRaw()) as? NSDate
         }
@@ -41,14 +41,14 @@ public struct XAppToken {
         }
     }
     
-    var expired: Bool {
+    public var expired: Bool {
         if let expiry = expiry {
             return expiry.isInPast
         }
         return true
     }
     
-    var isValid: Bool {
+    public var isValid: Bool {
         if let token = token {
             return !expired
         }

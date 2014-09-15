@@ -19,6 +19,9 @@
 		5E6ED60019C07A4300CF3398 /* Moya+ReactiveCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6ED5FC19C07A4300CF3398 /* Moya+ReactiveCocoa.swift */; };
 		5E6ED60119C07A4300CF3398 /* RACSignal+Moya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6ED5FD19C07A4300CF3398 /* RACSignal+Moya.swift */; };
 		5E6ED61419C07ADF00CF3398 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E6ED61119C07AC300CF3398 /* Alamofire.framework */; };
+		5EA137C019C72BD200D0B743 /* ArtsyAPISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */; };
+		5EA137CB19C72BE100D0B743 /* XAppTokenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA137CA19C72BE100D0B743 /* XAppTokenSpec.swift */; };
+		5EA137CD19C733DE00D0B743 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA137CC19C733DE00D0B743 /* TestHelpers.swift */; };
 		5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0997D19C31D8F00E5DD59 /* XApp.json */; };
 		5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */; };
 		5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */; };
@@ -165,6 +168,9 @@
 		5E6ED5FC19C07A4300CF3398 /* Moya+ReactiveCocoa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Moya+ReactiveCocoa.swift"; path = "submodules/Moya/Moya+ReactiveCocoa.swift"; sourceTree = SOURCE_ROOT; };
 		5E6ED5FD19C07A4300CF3398 /* RACSignal+Moya.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "RACSignal+Moya.swift"; path = "submodules/Moya/RACSignal+Moya.swift"; sourceTree = SOURCE_ROOT; };
 		5E6ED60B19C07AC300CF3398 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = submodules/Moya/submodules/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
+		5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPISpec.swift; sourceTree = "<group>"; };
+		5EA137CA19C72BE100D0B743 /* XAppTokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppTokenSpec.swift; sourceTree = "<group>"; };
+		5EA137CC19C733DE00D0B743 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		5ED0997D19C31D8F00E5DD59 /* XApp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = XApp.json; path = "Stubbed Responses/XApp.json"; sourceTree = "<group>"; };
 		5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auction.storyboard; sourceTree = "<group>"; };
 		5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Fulfillment.storyboard; sourceTree = "<group>"; };
@@ -229,17 +235,6 @@
 				F02362ED531B4468B9C73044 /* libPods-KioskTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		30E8D5DF876564BBAE983B10 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5BB6C7AC01D226AB94CA6E87 /* Pods.debug.xcconfig */,
-				0E53E93794856AAFC479A5D3 /* Pods.beta.xcconfig */,
-				BCC67151F7666EDFDF63D3A7 /* Pods-KioskTests.debug.xcconfig */,
-				E0AF629BE597B472D2C3D0AB /* Pods-KioskTests.beta.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		5E2765FC19940F780003BAFA /* Nimble-Snapshots */ = {
@@ -319,10 +314,13 @@
 		5E59DD4519913DD800A48370 /* KioskTests */ = {
 			isa = PBXGroup;
 			children = (
+				5EA137CC19C733DE00D0B743 /* TestHelpers.swift */,
 				605B856419C6E9080009B16B /* Fulfillment */,
 				5E2765EC19940F3F0003BAFA /* KioskTests-Bridging-Header.h */,
 				60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */,
 				60C07A2019BE05E500868951 /* ARButtonTests.swift */,
+				5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */,
+				5EA137CA19C72BE100D0B743 /* XAppTokenSpec.swift */,
 				5E28C1F21993B99A0066DB4D /* Submodules */,
 				5E59DD4619913DD900A48370 /* Supporting Files */,
 			);
@@ -797,8 +795,11 @@
 				60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */,
 				60A8E7CF19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift in Sources */,
 				605B857019C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */,
+				5EA137CD19C733DE00D0B743 /* TestHelpers.swift in Sources */,
 				60C07A1719BE02A800868951 /* HaveValidSnapshot.swift in Sources */,
+				5EA137C019C72BD200D0B743 /* ArtsyAPISpec.swift in Sources */,
 				605B856C19C6F3FB0009B16B /* GetYourBidderDetailsViewControllerTests.swift in Sources */,
+				5EA137CB19C72BE100D0B743 /* XAppTokenSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
