@@ -22,7 +22,8 @@ That means that clicking the "Download ZIP" button isn't going to download all
 of the code you'll need to run the app. Instead, [clone](http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository#Cloning-an-Existing-Repository)
 the repository from GitHub by typing the following command.
 
-You'll need to use [Rainforest CococaPods](https://github.com/CocoaPods/Rainforest) to run `pod install` correctly. `0.34` will fix this.
+We'll aslso ask for keys to get the app set up, you can just put gibberish in there if you
+don't work for artsy.
 
 ```sh
 git clone https://github.com/artsy/eidolon.git
@@ -47,7 +48,7 @@ Getting Started
 Now that we have the code [downloaded](#downloading-the-code), we can run the
 app using [Xcode 6](https://developer.apple.com/xcode/downloads/). Make sure to
 open the `Kiosk.xcworkspace` workspace, and not the `Kiosk.xcodeproj` project.
-Currently, the project is compatible with Xcode 6 beta 5.
+Currently, the project is compatible with Xcode 6 only, as it's swift.
 
 The Artsy API is private, making it difficult for open source developers to run
 the app. Once we integrate networking support, we'll figure out a way to stub
@@ -56,8 +57,7 @@ network requests so that the app can run with sample data.
 Artsy has licensed fonts for use in this app, but due to the terms of that
 license, they are not available for open source distribution. This has [required](http://artsy.github.io/blog/2014/06/20/artsys-first-closed-source-pod/)
 us to use [private pods](http://guides.cocoapods.org/making/private-cocoapods.html).
-Once we integrate these pods in, we'll provide substitutes for the open-source
-distribution. You shouldn't notice a difference.
+The Podfile has the differences dealt with. 
 
 Contributing
 ----------------
