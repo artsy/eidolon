@@ -2,12 +2,14 @@ import Quick
 import Nimble
 import Kiosk
 
-class EnterYourBidderDetailsViewControllerTests: QuickSpec {
+class SwipeCreditCardViewControllerTests: QuickSpec {
     override func spec() {
+
         it("looks right by default") {
-            let sut = EnterYourBidderDetailsViewController.instantiateFromStoryboard()
+            let sut = SwipeCreditCardViewController.instantiateFromStoryboard()
             expect(sut).to(haveValidSnapshot())
         }
+
 
     }
 }
