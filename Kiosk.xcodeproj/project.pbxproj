@@ -56,6 +56,7 @@
 		60C07A2119BE05E500868951 /* ARButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C07A2019BE05E500868951 /* ARButtonTests.swift */; };
 		60D48B9019C8981500A3CA88 /* YourBidderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D48B8F19C8981500A3CA88 /* YourBidderDetailsViewController.swift */; };
 		60D48B9219C8987500A3CA88 /* YourBidderDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D48B9119C8987500A3CA88 /* YourBidderDetailsViewControllerTests.swift */; };
+		60D48B9519C89DE300A3CA88 /* edit_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D48B9419C89DE300A3CA88 /* edit_button@2x.png */; };
 		60F104E419C0FB94002FF30C /* StoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F104E319C0FB93002FF30C /* StoryboardIdentifiers.swift */; };
 		60F444EC19BDE0320030409F /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F444EB19BDE0320030409F /* Button.swift */; };
 		7D151931B70C40DA1918308E /* libPods-KioskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F02362ED531B4468B9C73044 /* libPods-KioskTests.a */; };
@@ -198,6 +199,7 @@
 		605B856D19C6F4200009B16B /* EnterYourBidderDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterYourBidderDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidArtsyLoginViewControllerTests.swift; sourceTree = "<group>"; };
 		605B857119C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouAreTheHighestBidderViewControllerTests.swift; sourceTree = "<group>"; };
+		6092C49F19C9FD3F003BE8EC /* swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = swiftz.framework; path = "../../../Library/Developer/Xcode/DerivedData/Kiosk-bloyweplbpswpuciojhksfgbspud/Build/Products/Debug/swiftz.framework"; sourceTree = "<group>"; };
 		60968DCD19C5B2AF001AB802 /* KeypadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeypadView.xib; path = ../Storyboards/KeypadView.xib; sourceTree = "<group>"; };
 		60968DCF19C5B427001AB802 /* KeypadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
 		60968DD219C5B80F001AB802 /* KeypadViewPreviewIB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KeypadViewPreviewIB.png; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 		60C07A2019BE05E500868951 /* ARButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARButtonTests.swift; sourceTree = "<group>"; };
 		60D48B8F19C8981500A3CA88 /* YourBidderDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourBidderDetailsViewController.swift; sourceTree = "<group>"; };
 		60D48B9119C8987500A3CA88 /* YourBidderDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourBidderDetailsViewControllerTests.swift; sourceTree = "<group>"; };
+		60D48B9419C89DE300A3CA88 /* edit_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit_button@2x.png"; sourceTree = "<group>"; };
 		60F104E319C0FB93002FF30C /* StoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiers.swift; sourceTree = "<group>"; };
 		60F444EB19BDE0320030409F /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = "Button Subclasses/Button.swift"; sourceTree = "<group>"; };
 		C055E487A3D1AED461990000 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -244,6 +247,7 @@
 		16F3A19F9AD1486CACC915F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6092C49F19C9FD3F003BE8EC /* swiftz.framework */,
 				5E37FF6E19C0A02E00CA348E /* ReactiveCocoa.framework */,
 				21A6ABDCBFE147D99BAEBD31 /* libPods.a */,
 				F02362ED531B4468B9C73044 /* libPods-KioskTests.a */,
@@ -479,6 +483,7 @@
 		6086143D19BA307300699FBC /* Bid Fulfillment */ = {
 			isa = PBXGroup;
 			children = (
+				60D48B9319C89DD900A3CA88 /* Resources */,
 				605B855919C6E41C0009B16B /* View Controllers */,
 				60968DD119C5B803001AB802 /* Keypad */,
 			);
@@ -501,6 +506,14 @@
 				602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */,
 			);
 			name = Keypad;
+			sourceTree = "<group>";
+		};
+		60D48B9319C89DD900A3CA88 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				60D48B9419C89DE300A3CA88 /* edit_button@2x.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		60F444EA19BDE0110030409F /* buttons */ = {
@@ -697,6 +710,7 @@
 				60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */,
 				60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */,
 				5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */,
+				60D48B9519C89DE300A3CA88 /* edit_button@2x.png in Resources */,
 				5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */,
 				5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */,
 				5E3E53F519C3AC3B002D8B9D /* FeaturedWorks.json in Resources */,
@@ -932,7 +946,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Kiosk-bloyweplbpswpuciojhksfgbspud/Build/Products/Debug",
+				);
 				INFOPLIST_FILE = "Kiosk/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -951,7 +968,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Kiosk-bloyweplbpswpuciojhksfgbspud/Build/Products/Debug",
+				);
 				INFOPLIST_FILE = "Kiosk/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
