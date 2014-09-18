@@ -1,6 +1,6 @@
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 public class KeypadContainerView: UIView {
 
     var keypad:KeypadView?;

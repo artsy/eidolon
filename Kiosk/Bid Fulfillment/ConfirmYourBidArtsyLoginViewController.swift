@@ -6,5 +6,4 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBidArtsyLogin) as ConfirmYourBidArtsyLoginViewController
     }
 
-
 }

@@ -19,12 +19,12 @@ public class PlaceBidViewController: UIViewController {
             let inputFloat = Float(input as? Int ?? 0)
             self.bid = (Float(10) * self.bid) + inputFloat
 
+            self.bidButton.enabled = (self.bid != 0)
             self.bidAmountTextField.text = NSNumberFormatter.currencyStringForCents(self.bid * Float(100))
         })
     }
 
-    @IBOutlet var bidButton: Button!
-
+    @IBOutlet public var bidButton: UIButton!
     @IBAction func bidButtonTapped(sender: AnyObject) {
         self.performSegueWithIdentifier(SegueIdentifier.ConfirmBid.toRaw(), sender: self)
     }

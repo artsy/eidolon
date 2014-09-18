@@ -44,6 +44,7 @@
 		605B856E19C6F4200009B16B /* EnterYourBidderDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856D19C6F4200009B16B /* EnterYourBidderDetailsViewControllerTests.swift */; };
 		605B857019C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */; };
 		605B857219C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B857119C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift */; };
+		6092C4AF19CAEF9A003BE8EC /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6092C4AE19CAEF9A003BE8EC /* UIViewControllerExtensions.swift */; };
 		60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60968DCD19C5B2AF001AB802 /* KeypadView.xib */; };
 		60968DD019C5B427001AB802 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60968DCF19C5B427001AB802 /* KeypadView.swift */; };
 		60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */ = {isa = PBXBuildFile; fileRef = 60968DD219C5B80F001AB802 /* KeypadViewPreviewIB.png */; };
@@ -200,6 +201,7 @@
 		605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidArtsyLoginViewControllerTests.swift; sourceTree = "<group>"; };
 		605B857119C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouAreTheHighestBidderViewControllerTests.swift; sourceTree = "<group>"; };
 		6092C49F19C9FD3F003BE8EC /* swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = swiftz.framework; path = "../../../Library/Developer/Xcode/DerivedData/Kiosk-bloyweplbpswpuciojhksfgbspud/Build/Products/Debug/swiftz.framework"; sourceTree = "<group>"; };
+		6092C4AE19CAEF9A003BE8EC /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		60968DCD19C5B2AF001AB802 /* KeypadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeypadView.xib; path = ../Storyboards/KeypadView.xib; sourceTree = "<group>"; };
 		60968DCF19C5B427001AB802 /* KeypadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
 		60968DD219C5B80F001AB802 /* KeypadViewPreviewIB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KeypadViewPreviewIB.png; sourceTree = "<group>"; };
@@ -307,7 +309,6 @@
 		5E59DD3219913DD800A48370 /* Kiosk */ = {
 			isa = PBXGroup;
 			children = (
-				608E917F19C0B88200AF4E83 /* Card Handling */,
 				5E4B56DC19C079C0002E6FCB /* Submodules */,
 				6086143C19BA306800699FBC /* App */,
 				6086143B19BA304F00699FBC /* Storyboards + Nibs */,
@@ -472,6 +473,7 @@
 		6086143C19BA306800699FBC /* App */ = {
 			isa = PBXGroup;
 			children = (
+				6092C4AD19CAEF75003BE8EC /* Extensions */,
 				6086143919BA303700699FBC /* Views */,
 				5E59DD3519913DD800A48370 /* AppDelegate.swift */,
 				5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */,
@@ -490,11 +492,12 @@
 			path = "Bid Fulfillment";
 			sourceTree = "<group>";
 		};
-		608E917F19C0B88200AF4E83 /* Card Handling */ = {
+		6092C4AD19CAEF75003BE8EC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6092C4AE19CAEF9A003BE8EC /* UIViewControllerExtensions.swift */,
 			);
-			path = "Card Handling";
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		60968DD119C5B803001AB802 /* Keypad */ = {
@@ -812,6 +815,7 @@
 				60D48B9019C8981500A3CA88 /* YourBidderDetailsViewController.swift in Sources */,
 				5E3E53E619C3AA13002D8B9D /* XAppToken.swift in Sources */,
 				605B856119C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift in Sources */,
+				6092C4AF19CAEF9A003BE8EC /* UIViewControllerExtensions.swift in Sources */,
 				600F5F0B19C882210027F587 /* ConfirmUserCreationViewController.swift in Sources */,
 				60A8E7C519BE50640088ACEC /* FulfillmentContainerViewController.swift in Sources */,
 				600F5EFA19C879670027F587 /* SwipeCreditCardViewController.swift in Sources */,

@@ -14,9 +14,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             let customKeySubject = RACSubject()
             let sut = PlaceBidViewController.instantiateFromStoryboard()
             sut.keypadSignal = customKeySubject;
-
-            sut.beginAppearanceTransition(true, animated: false)
-            sut.endAppearanceTransition()
+            sut.loadViewProgrammatically()
 
             customKeySubject.sendNext(2);
             expect(sut.bidAmountTextField.text) == "$2"
@@ -27,6 +25,18 @@ class PlaceBidViewControllerTests: QuickSpec {
             customKeySubject.sendNext(4);
             customKeySubject.sendNext(4);
             expect(sut.bidAmountTextField.text) == "$2,344"
+        }
+
+        it("bid button is only enabled when there's an input") {
+            let customKeySubject = RACSubject()
+            let sut = PlaceBidViewController.instantiateFromStoryboard()
+            sut.keypadSignal = customKeySubject;
+            sut.loadViewProgrammatically()
+
+            expect(sut.bidButton.enabled) == false
+
+            customKeySubject.sendNext(2);
+            expect(sut.bidButton.enabled) == true
         }
 
     }
