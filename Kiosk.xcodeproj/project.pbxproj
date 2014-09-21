@@ -30,6 +30,9 @@
 		600F5F0719C87DA80027F587 /* UserCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0619C87DA80027F587 /* UserCreationViewController.swift */; };
 		600F5F0919C880980027F587 /* UserCreationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0819C880980027F587 /* UserCreationViewControllerTests.swift */; };
 		600F5F0B19C882210027F587 /* ConfirmUserCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0A19C882210027F587 /* ConfirmUserCreationViewController.swift */; };
+		6017320D19CF24ED00A58B63 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017320C19CF24ED00A58B63 /* User.swift */; };
+		6017320F19CF259400A58B63 /* CardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017320E19CF259400A58B63 /* CardHandler.swift */; };
+		6017321519CF27B900A58B63 /* CardHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017321419CF27B900A58B63 /* CardHandlerTests.swift */; };
 		602EFE4F19C6D09C002715C2 /* KeypadContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */; };
 		603F8CC719BDF80C00B162C7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603F8CB119BDF77700B162C7 /* Nimble.framework */; };
 		603F8CC819BDF80C00B162C7 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603F8CC419BDF78A00B162C7 /* Quick.framework */; };
@@ -188,6 +191,9 @@
 		600F5F0619C87DA80027F587 /* UserCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCreationViewController.swift; sourceTree = "<group>"; };
 		600F5F0819C880980027F587 /* UserCreationViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCreationViewControllerTests.swift; sourceTree = "<group>"; };
 		600F5F0A19C882210027F587 /* ConfirmUserCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmUserCreationViewController.swift; sourceTree = "<group>"; };
+		6017320C19CF24ED00A58B63 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6017320E19CF259400A58B63 /* CardHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHandler.swift; sourceTree = "<group>"; };
+		6017321419CF27B900A58B63 /* CardHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHandlerTests.swift; sourceTree = "<group>"; };
 		602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadContainerView.swift; sourceTree = "<group>"; };
 		605B855A19C6E4CF0009B16B /* ConfirmYourBidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidViewController.swift; sourceTree = "<group>"; };
 		605B855C19C6E50D0009B16B /* GetYourBidderDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetYourBidderDetailsViewController.swift; sourceTree = "<group>"; };
@@ -290,7 +296,6 @@
 			isa = PBXGroup;
 			children = (
 				5E59DD3219913DD800A48370 /* Kiosk */,
-				5E59DD4519913DD800A48370 /* KioskTests */,
 				5E59DD3119913DD800A48370 /* Products */,
 				16F3A19F9AD1486CACC915F0 /* Frameworks */,
 				EE21C3BFE2A5C084779CFFBF /* Pods */,
@@ -317,6 +322,7 @@
 				5E59DD3C19913DD800A48370 /* Images.xcassets */,
 				5ED0997319C31D6200E5DD59 /* Stubbed Responses */,
 				5E59DD3319913DD800A48370 /* Supporting Files */,
+				5E59DD4519913DD800A48370 /* KioskTests */,
 			);
 			path = Kiosk;
 			sourceTree = "<group>";
@@ -333,6 +339,7 @@
 		5E59DD4519913DD800A48370 /* KioskTests */ = {
 			isa = PBXGroup;
 			children = (
+				6017321319CF279000A58B63 /* Cards */,
 				5EA137CC19C733DE00D0B743 /* TestHelpers.swift */,
 				605B856419C6E9080009B16B /* Fulfillment */,
 				5E2765EC19940F3F0003BAFA /* KioskTests-Bridging-Header.h */,
@@ -344,7 +351,7 @@
 				5E59DD4619913DD900A48370 /* Supporting Files */,
 			);
 			path = KioskTests;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		5E59DD4619913DD900A48370 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -381,6 +388,22 @@
 				5E3E53F319C3AC3B002D8B9D /* FeaturedWorks.json */,
 			);
 			name = "Stubbed Responses";
+			sourceTree = "<group>";
+		};
+		6017320219CF249900A58B63 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6017320C19CF24ED00A58B63 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6017321319CF279000A58B63 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				6017321419CF27B900A58B63 /* CardHandlerTests.swift */,
+			);
+			name = Cards;
 			sourceTree = "<group>";
 		};
 		603F8CAA19BDF77700B162C7 /* Products */ = {
@@ -441,6 +464,14 @@
 			path = "Bid Fulfillment";
 			sourceTree = "<group>";
 		};
+		6083CC2119CAF97000CFBA05 /* Card Handling */ = {
+			isa = PBXGroup;
+			children = (
+				6017320E19CF259400A58B63 /* CardHandler.swift */,
+			);
+			name = "Card Handling";
+			sourceTree = "<group>";
+		};
 		6086143919BA303700699FBC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +504,8 @@
 		6086143C19BA306800699FBC /* App */ = {
 			isa = PBXGroup;
 			children = (
+				6017320219CF249900A58B63 /* Models */,
+				6083CC2119CAF97000CFBA05 /* Card Handling */,
 				6092C4AD19CAEF75003BE8EC /* Extensions */,
 				6086143919BA303700699FBC /* Views */,
 				5E59DD3519913DD800A48370 /* AppDelegate.swift */,
@@ -798,6 +831,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6017320D19CF24ED00A58B63 /* User.swift in Sources */,
 				605B855F19C6E5520009B16B /* EnterYourBidderDetailsViewController.swift in Sources */,
 				602EFE4F19C6D09C002715C2 /* KeypadContainerView.swift in Sources */,
 				5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */,
@@ -815,6 +849,7 @@
 				60D48B9019C8981500A3CA88 /* YourBidderDetailsViewController.swift in Sources */,
 				5E3E53E619C3AA13002D8B9D /* XAppToken.swift in Sources */,
 				605B856119C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift in Sources */,
+				6017320F19CF259400A58B63 /* CardHandler.swift in Sources */,
 				6092C4AF19CAEF9A003BE8EC /* UIViewControllerExtensions.swift in Sources */,
 				600F5F0B19C882210027F587 /* ConfirmUserCreationViewController.swift in Sources */,
 				60A8E7C519BE50640088ACEC /* FulfillmentContainerViewController.swift in Sources */,
@@ -831,6 +866,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				605B857219C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift in Sources */,
+				6017321519CF27B900A58B63 /* CardHandlerTests.swift in Sources */,
 				605B856A19C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift in Sources */,
 				605B856E19C6F4200009B16B /* EnterYourBidderDetailsViewControllerTests.swift in Sources */,
 				60C07A2119BE05E500868951 /* ARButtonTests.swift in Sources */,
