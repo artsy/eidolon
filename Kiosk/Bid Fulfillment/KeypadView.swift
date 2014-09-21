@@ -1,6 +1,5 @@
 import UIKit
 
-
 public class KeypadView: UIView {
     public let keypadSignal = RACSubject()
     public let leftSignal = RACSubject()
@@ -10,16 +9,15 @@ public class KeypadView: UIView {
     @IBOutlet public var leftButton: Button!
     @IBOutlet public var rightButton: Button!
 
-    @IBAction func keypadButtonTapped(sender: AnyObject) {
-        let view = sender as UIButton
+    @IBAction func keypadButtonTapped(sender: UIButton) {
         keypadSignal.sendNext(sender.tag)
     }
 
-    @IBAction func rightButtonTapped(sender: AnyObject) {
+    @IBAction func rightButtonTapped(sender: UIButton) {
         rightSignal.sendNext(nil)
     }
 
-    @IBAction func leftButtonTapped(sender: AnyObject) {
+    @IBAction func leftButtonTapped(sender: UIButton) {
         leftSignal.sendNext(nil)
     }
 
