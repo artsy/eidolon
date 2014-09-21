@@ -1,11 +1,3 @@
-//
-//  FulfillmentContainerViewController.swift
-//  Kiosk
-//
-//  Created by Orta on 9/8/14.
-//  Copyright (c) 2014 Artsy. All rights reserved.
-//
-
 import UIKit
 
 public class FulfillmentContainerViewController: UIViewController {

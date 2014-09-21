@@ -1,23 +1,24 @@
 import UIKit
 
-
 public class KeypadView: UIView {
-    var isInInterfaceBuilder = false
+    public let keypadSignal = RACSubject()
+    public let leftSignal = RACSubject()
+    public let rightSignal = RACSubject()
 
     @IBOutlet var keys: [Button]!
-    @IBOutlet var leftButton: Button!
-    @IBOutlet var rightButton: Button!
+    @IBOutlet public var leftButton: Button!
+    @IBOutlet public var rightButton: Button!
 
-    @IBAction func keypadButtonTapped(sender: AnyObject) {
-        // tag = number
+    @IBAction func keypadButtonTapped(sender: UIButton) {
+        keypadSignal.sendNext(sender.tag)
     }
 
-    @IBAction func rightButtonTapped(sender: AnyObject) {
-
+    @IBAction func rightButtonTapped(sender: UIButton) {
+        rightSignal.sendNext(nil)
     }
 
-    @IBAction func leftButtonTapped(sender: AnyObject) {
-
+    @IBAction func leftButtonTapped(sender: UIButton) {
+        leftSignal.sendNext(nil)
     }
 
 }
