@@ -8,13 +8,27 @@ class BindingsTestClass: NSObject {
 
 class ReactiveCocoaBindingsTests: QuickSpec {
     override func spec() {
-        it("correctly binds") {
+        it("correctly binds left to right") {
             var lhs = BindingsTestClass()
             var rhs = BindingsTestClass()
             
             lhs.value = "Daedalus Demands"
             
             RACObserve(lhs, "value") ~> RAC(rhs, "value")
+            
+            expect(rhs.value).to(equal(lhs.value))
+            
+            lhs.value = "Icarus Abides"
+            expect(rhs.value).to(equal(lhs.value))
+        }
+        
+        it("correctly binds right to left") {
+            var lhs = BindingsTestClass()
+            var rhs = BindingsTestClass()
+            
+            lhs.value = "Daedalus Demands"
+            
+            RAC(rhs, "value") <~ RACObserve(lhs, "value")
             
             expect(rhs.value).to(equal(lhs.value))
             

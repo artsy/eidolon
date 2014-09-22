@@ -21,6 +21,11 @@ public struct RAC  {
     }
 }
 
+infix operator <~ {}
+public func <~ (rac: RAC, signal: RACSignal) {
+    signal ~> rac
+}
+
 public func ~> (signal: RACSignal, rac: RAC) {
     rac.assignSignal(signal)
 }
