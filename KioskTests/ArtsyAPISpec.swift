@@ -38,7 +38,7 @@ class ArtsyAPISpec: QuickSpec {
             }
             
             it("returns some data") {
-                setDefaultsKeys("", nil)
+                setDefaultsKeys(nil, nil)
                 
                 var called = false
                 // Make any XApp request, doesn't matter which, but make sure to subscribe so it actually fires
@@ -50,7 +50,7 @@ class ArtsyAPISpec: QuickSpec {
             }
             
             it("gets XApp token if it doesn't exist yet") {
-                setDefaultsKeys("", nil)
+                setDefaultsKeys(nil, nil)
                 
                 XAppRequest(.FeaturedWorks).subscribeNext({ (object) -> Void in
                     // nop

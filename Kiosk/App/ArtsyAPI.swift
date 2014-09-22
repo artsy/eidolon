@@ -130,6 +130,8 @@ private extension String {
 public enum ArtsyAPI {
     case XApp
     case FeaturedWorks
+    case Auctions
+    case AuctionListings(id: Int)
     
     public var defaultParameters: [String: AnyObject] {
         switch self {
@@ -141,6 +143,8 @@ public enum ArtsyAPI {
                     "sort": "key",
                     "mobile": "true",
                     "published": "true"]
+        case .Auctions:
+            return ["is_auction": "true"]
         default:
             return [:]
         }
@@ -154,6 +158,10 @@ extension ArtsyAPI : MoyaPath {
             return "/api/v1/xapp_token"
         case .FeaturedWorks:
             return "/api/v1/sets"
+        case .Auctions:
+            return "/api/v1/sales"
+        case .AuctionListings(let id):
+            return " /api/v1/sale/\(id)/sale_artworks"
         }
     }
 }
@@ -167,6 +175,12 @@ extension ArtsyAPI : MoyaTarget {
             return stubbedResponse("XApp")
         case .FeaturedWorks:
             return stubbedResponse("FeaturedWorks")
+        case .Auctions:
+            // TODO: stub
+            return NSData()
+        case .AuctionListings(let id):
+            // TODO: stub
+            return NSData()
         }
     }
 }
