@@ -31,6 +31,14 @@ class XAppTokenSpec: QuickSpec {
             expect(token.isValid).to(beTruthy())
         }
         
+        it("correctly calculates validity for empty keys") {
+            let key = ""
+            let future = NSDate(timeIntervalSinceNow: 1000)
+            setDefaultsKeys(key, future)
+            
+            expect(token.isValid).to(beFalsy())
+        }
+        
         it("properly calculates validity for missing tokens") {
             setDefaultsKeys(nil, nil)
             

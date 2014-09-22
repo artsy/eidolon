@@ -42,7 +42,7 @@ class ArtsyAPISpec: QuickSpec {
                 
                 var called = false
                 // Make any XApp request, doesn't matter which, but make sure to subscribe so it actually fires
-                XAppRequest(.FeaturedWorks).subscribeNext({ (object) -> Void in
+                XAppRequest(.Auctions).subscribeNext({ (object) -> Void in
                     called = true
                 })
                 
@@ -52,7 +52,7 @@ class ArtsyAPISpec: QuickSpec {
             it("gets XApp token if it doesn't exist yet") {
                 setDefaultsKeys(nil, nil)
                 
-                XAppRequest(.FeaturedWorks).subscribeNext({ (object) -> Void in
+                XAppRequest(.Auctions).subscribeNext({ (object) -> Void in
                     // nop
                 })
                 
@@ -66,7 +66,7 @@ class ArtsyAPISpec: QuickSpec {
                 let past = NSDate(timeIntervalSinceNow: -1000)
                 setDefaultsKeys("some expired key", past)
                 
-                XAppRequest(.FeaturedWorks).subscribeNext({ (object) -> Void in
+                XAppRequest(.Auctions).subscribeNext({ (object) -> Void in
                     // nop
                 })
                 
