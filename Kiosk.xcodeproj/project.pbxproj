@@ -22,6 +22,8 @@
 		5EA137C019C72BD200D0B743 /* ArtsyAPISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */; };
 		5EA137CB19C72BE100D0B743 /* XAppTokenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA137CA19C72BE100D0B743 /* XAppTokenSpec.swift */; };
 		5EA137CD19C733DE00D0B743 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA137CC19C733DE00D0B743 /* TestHelpers.swift */; };
+		5EAC732519D0149A002F918A /* ReactiveCocoaBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */; };
+		5EAC733019D01617002F918A /* ReactiveCocoaBindingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC732F19D01617002F918A /* ReactiveCocoaBindingsTests.swift */; };
 		5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0997D19C31D8F00E5DD59 /* XApp.json */; };
 		5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */; };
 		5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */; };
@@ -180,6 +182,8 @@
 		5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPISpec.swift; sourceTree = "<group>"; };
 		5EA137CA19C72BE100D0B743 /* XAppTokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppTokenSpec.swift; sourceTree = "<group>"; };
 		5EA137CC19C733DE00D0B743 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCocoaBindings.swift; sourceTree = "<group>"; };
+		5EAC732F19D01617002F918A /* ReactiveCocoaBindingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCocoaBindingsTests.swift; sourceTree = "<group>"; };
 		5ED0997D19C31D8F00E5DD59 /* XApp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = XApp.json; path = "Stubbed Responses/XApp.json"; sourceTree = "<group>"; };
 		5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auction.storyboard; sourceTree = "<group>"; };
 		5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Fulfillment.storyboard; sourceTree = "<group>"; };
@@ -340,6 +344,7 @@
 				60C07A2019BE05E500868951 /* ARButtonTests.swift */,
 				5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */,
 				5EA137CA19C72BE100D0B743 /* XAppTokenSpec.swift */,
+				5EAC732F19D01617002F918A /* ReactiveCocoaBindingsTests.swift */,
 				5E28C1F21993B99A0066DB4D /* Submodules */,
 				5E59DD4619913DD900A48370 /* Supporting Files */,
 			);
@@ -478,6 +483,7 @@
 				5E59DD3519913DD800A48370 /* AppDelegate.swift */,
 				5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */,
 				5E3E53E519C3AA13002D8B9D /* XAppToken.swift */,
+				5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -799,6 +805,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				605B855F19C6E5520009B16B /* EnterYourBidderDetailsViewController.swift in Sources */,
+				5EAC732519D0149A002F918A /* ReactiveCocoaBindings.swift in Sources */,
 				602EFE4F19C6D09C002715C2 /* KeypadContainerView.swift in Sources */,
 				5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */,
 				5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */,
@@ -830,6 +837,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EAC733019D01617002F918A /* ReactiveCocoaBindingsTests.swift in Sources */,
 				605B857219C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift in Sources */,
 				605B856A19C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift in Sources */,
 				605B856E19C6F4200009B16B /* EnterYourBidderDetailsViewControllerTests.swift in Sources */,
