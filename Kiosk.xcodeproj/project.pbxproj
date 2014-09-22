@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E08488E19D06EE60078C571 /* Auctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E08488C19D06EE60078C571 /* Auctions.json */; };
+		5E08489B19D070DC0078C571 /* AuctionListings.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E08489919D070DC0078C571 /* AuctionListings.json */; };
 		5E37FF6F19C0A02E00CA348E /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E37FF6E19C0A02E00CA348E /* ReactiveCocoa.framework */; };
 		5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */; };
 		5E3E53E619C3AA13002D8B9D /* XAppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3E53E519C3AA13002D8B9D /* XAppToken.swift */; };
-		5E3E53F519C3AC3B002D8B9D /* FeaturedWorks.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E3E53F319C3AC3B002D8B9D /* FeaturedWorks.json */; };
 		5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3519913DD800A48370 /* AppDelegate.swift */; };
 		5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3719913DD800A48370 /* ListingsViewController.swift */; };
 		5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E59DD3C19913DD800A48370 /* Images.xcassets */; };
@@ -161,6 +162,8 @@
 		21A6ABDCBFE147D99BAEBD31 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		29AC0C40EA1BBED255C77D7F /* Pods.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.beta.xcconfig; path = "Pods/Target Support Files/Pods/Pods.beta.xcconfig"; sourceTree = "<group>"; };
 		46ACE072A30FD791981A83FC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		5E08488C19D06EE60078C571 /* Auctions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Auctions.json; path = "Stubbed Responses/Auctions.json"; sourceTree = "<group>"; };
+		5E08489919D070DC0078C571 /* AuctionListings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = AuctionListings.json; path = "Stubbed Responses/AuctionListings.json"; sourceTree = "<group>"; };
 		5E2765EC19940F3F0003BAFA /* KioskTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KioskTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		5E2765FA19940F760003BAFA /* HaveValidSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveValidSnapshot.swift; sourceTree = "<group>"; };
 		5E28C1F31993B9D10066DB4D /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = submodules/Quick/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
@@ -168,7 +171,6 @@
 		5E37FF6E19C0A02E00CA348E /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = "../../../Library/Developer/Xcode/DerivedData/Kiosk-ctrnstmycydempdselylmwteqdwf/Build/Products/Debug/ReactiveCocoa.framework"; sourceTree = "<group>"; };
 		5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPI.swift; sourceTree = "<group>"; };
 		5E3E53E519C3AA13002D8B9D /* XAppToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppToken.swift; sourceTree = "<group>"; };
-		5E3E53F319C3AC3B002D8B9D /* FeaturedWorks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = FeaturedWorks.json; path = "Stubbed Responses/FeaturedWorks.json"; sourceTree = "<group>"; };
 		5E59DD3019913DD800A48370 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD3419913DD800A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD3519913DD800A48370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -390,7 +392,8 @@
 			isa = PBXGroup;
 			children = (
 				5ED0997D19C31D8F00E5DD59 /* XApp.json */,
-				5E3E53F319C3AC3B002D8B9D /* FeaturedWorks.json */,
+				5E08488C19D06EE60078C571 /* Auctions.json */,
+				5E08489919D070DC0078C571 /* AuctionListings.json */,
 			);
 			name = "Stubbed Responses";
 			sourceTree = "<group>";
@@ -751,11 +754,12 @@
 			files = (
 				60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */,
 				60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */,
+				5E08489B19D070DC0078C571 /* AuctionListings.json in Resources */,
 				5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */,
 				60D48B9519C89DE300A3CA88 /* edit_button@2x.png in Resources */,
+				5E08488E19D06EE60078C571 /* Auctions.json in Resources */,
 				5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */,
 				5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */,
-				5E3E53F519C3AC3B002D8B9D /* FeaturedWorks.json in Resources */,
 				5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

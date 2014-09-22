@@ -9,7 +9,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
 
-        XAppRequest(.Auctions, parameters: ArtsyAPI.Auctions.defaultParameters).filterSuccessfulStatusCodes().subscribeNext({ (object) -> Void in
+        let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "in-the-studio-with-jr")
+        
+        XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext({ (object) -> Void in
             if let response = object as? MoyaResponse {
                 println("DATA: \(NSString(data: response.data, encoding: NSUTF8StringEncoding))")
             }
