@@ -3,17 +3,18 @@ import UIKit
 public class CardHandler: NSObject, CFTReaderDelegate {
 
     public let cardSwipedSignal = RACSubject()
-    public var card:CFTCard?
+    public var card: CFTCard?
     
-    let APIKey:String
-    let APIToken:String
+    let APIKey: String
+    let APIToken: String
 
     public lazy var reader = CFTReader()
     public lazy var sessionManager = CFTSessionManager.sharedInstance()
 
-    public init(apiKey:String, accountToken:String){
+    public init(apiKey: String, accountToken: String){
         APIKey = apiKey
         APIToken = accountToken
+        super.init()
     }
 
     public func startSearching() {
@@ -45,6 +46,14 @@ public class CardHandler: NSObject, CFTReaderDelegate {
 
     public func readerIsDisconnected() {
         cardSwipedSignal.sendNext("Reader is disconnected");
+    }
+
+    public func readerSwipeDidCancel() {
+        cardSwipedSignal.sendNext("Reader did disconnect");
+    }
+
+    public func readerGenericResponse(cardData: String!) {
+        cardSwipedSignal.sendNext("Reader recived non-card data: \(cardData) ");
     }
 
 }

@@ -47,7 +47,22 @@ class CardHandlerTests: QuickSpec {
 
             self.handler!.startSearching()
             expect(success) == true
+        }
 
+        it("passes messages along the card signal as things are moving") {
+            var messageCount = 0
+
+            self.handler!.cardSwipedSignal.subscribeNext({ (message) -> Void in
+                messageCount = messageCount + 1
+            })
+
+            self.handler!.readerIsAttached()
+            self.handler!.readerIsConnecting()
+            self.handler!.readerIsDisconnected()
+            self.handler!.readerSwipeDidCancel()
+            self.handler!.readerGenericResponse("string")
+
+            expect(messageCount) == 5
         }
 
     }
