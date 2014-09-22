@@ -129,18 +129,16 @@ private extension String {
 
 public enum ArtsyAPI {
     case XApp
-    case FeaturedWorks
+    case Auctions
+    case AuctionListings(id: String)
     
     public var defaultParameters: [String: AnyObject] {
         switch self {
         case .XApp:
             return ["client_id": APIKeys.sharedKeys.key ?? "",
                     "client_secret": APIKeys.sharedKeys.secret ?? ""]
-        case .FeaturedWorks:
-            return ["key": "homepage:featured-artworks",
-                    "sort": "key",
-                    "mobile": "true",
-                    "published": "true"]
+        case .Auctions:
+            return ["is_auction": "true"]
         default:
             return [:]
         }
@@ -152,8 +150,10 @@ extension ArtsyAPI : MoyaPath {
         switch self {
         case .XApp:
             return "/api/v1/xapp_token"
-        case .FeaturedWorks:
-            return "/api/v1/sets"
+        case .Auctions:
+            return "/api/v1/sales"
+        case .AuctionListings(let id):
+            return "/api/v1/sale/\(id)/sale_artworks"
         }
     }
 }
@@ -165,8 +165,10 @@ extension ArtsyAPI : MoyaTarget {
         switch self {
         case .XApp:
             return stubbedResponse("XApp")
-        case .FeaturedWorks:
-            return stubbedResponse("FeaturedWorks")
+        case .Auctions:
+            return stubbedResponse("Auctions")
+        case .AuctionListings(let id):
+            return stubbedResponse("AuctionListings")
         }
     }
 }

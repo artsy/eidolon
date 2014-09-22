@@ -25,7 +25,8 @@ public struct XAppToken {
     
     public var token: String? {
         get {
-            return defaults.stringForKey(DefaultsKeys.TokenKey.toRaw())
+            let key = defaults.stringForKey(DefaultsKeys.TokenKey.toRaw())
+            return key
         }
         set(newToken) {
             defaults.setObject(newToken, forKey: DefaultsKeys.TokenKey.toRaw())
@@ -50,7 +51,7 @@ public struct XAppToken {
     
     public var isValid: Bool {
         if let token = token {
-            return !expired
+            return countElements(token) > 0 && !expired
         }
             
         return false
