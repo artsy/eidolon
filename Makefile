@@ -42,6 +42,11 @@ bootstrap:
 		read CARDFLIGHT_SECRET; \
 		bundle exec pod keys set CardflightAPIClientSecret "$$CARDFLIGHT_SECRET"
 
+	if [ ! -f ~/.cocoapods/artsy ]; then
+		bundle exec pod repo add artsy https://github.com/artsy/Specs.git
+	fi
+
+	bundle exec pod repo add artsy https://github.com/artsy/Specs.git
 	bundle exec pod install
 
 
