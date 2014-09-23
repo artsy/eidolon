@@ -1,6 +1,5 @@
 import Quick
 import Nimble
-import Kiosk
 
 class BindingsTestClass: NSObject {
     dynamic var value = ""

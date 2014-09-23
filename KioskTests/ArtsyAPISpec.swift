@@ -1,6 +1,5 @@
 import Quick
 import Nimble
-import Kiosk
 
 func beInTheFuture() -> MatcherFunc<NSDate> {
     return MatcherFunc { actualExpression, failureMessage in

@@ -1,6 +1,5 @@
 import Quick
 import Nimble
-import Kiosk
 
 class UserCreationViewControllerTests: QuickSpec {
     override func spec() {

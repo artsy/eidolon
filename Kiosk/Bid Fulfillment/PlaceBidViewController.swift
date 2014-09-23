@@ -24,7 +24,7 @@ public class PlaceBidViewController: UIViewController {
         RAC(bidButton, "enabled") <~ bidIsZeroSignal.notEach()
         RAC(bidAmountTextField, "text") <~ RACSignal.`if`(bidIsZeroSignal, then: RACSignal.`return`(""), `else`: formattedBidTextSignal)
 
-        keypadSignal.subscribeNext({ [unowned self] (input) -> Void in
+        keypadSignal.subscribeNext({ (input) -> Void in
             let inputFloat = input as? Float ?? 0.0
             self.bid = (10.0 * self.bid) + inputFloat
         })
