@@ -6,4 +6,12 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBidArtsyLogin) as ConfirmYourBidArtsyLoginViewController
     }
 
+    @IBAction public func dev_hasCardTapped(sender: AnyObject) {
+        self.performSegue(.EmailLoginConfirmedHighestBidder)
+    }
+
+    @IBAction public func dev_noCardFoundTapped(sender: AnyObject) {
+        self.performSegue(.ArtsyUserHasNotRegisteredCard)
+    }
+
 }

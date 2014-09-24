@@ -1,7 +1,10 @@
 import UIKit
 
 class DeveloperOnlyView: UIView {
+
     override func awakeFromNib() {
-        self.hidden = TARGET_IPHONE_SIMULATOR != 0
+        let isSim = TARGET_IPHONE_SIMULATOR == 1
+        let notTests = NSClassFromString("XCTest") != nil
+        self.hidden = isSim && notTests
     }
 }

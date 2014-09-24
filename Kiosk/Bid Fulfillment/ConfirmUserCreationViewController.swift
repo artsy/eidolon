@@ -6,5 +6,8 @@ public class ConfirmUserCreationViewController: UIViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmUserCreation) as ConfirmUserCreationViewController
     }
 
+    @IBAction func confirmButtonTapped(sender: AnyObject) {
+        self.performSegue(.UserCreationorUpdatingFinished)
+    }
 
 }

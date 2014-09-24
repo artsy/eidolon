@@ -7,7 +7,7 @@ public extension UIStoryboard {
         return UIStoryboard(name: "Fulfillment", bundle: nil)
     }
 
-    public func viewControllerWithID(identifier:ViewControllerStoryboardIdentifier) -> AnyObject {
-        return self.instantiateViewControllerWithIdentifier(identifier.toRaw()) as AnyObject
+    public func viewControllerWithID(identifier:ViewControllerStoryboardIdentifier) -> UIViewController {
+        return self.instantiateViewControllerWithIdentifier(identifier.toRaw()) as UIViewController
     }
 }
