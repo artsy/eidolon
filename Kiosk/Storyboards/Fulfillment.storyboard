@@ -582,7 +582,7 @@
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
                         <segue destination="2lt-co-qW2" kind="push" identifier="Email Login Confirmed Highest Bidder" id="6qF-R8-kJy"/>
-                        <segue destination="BKe-0r-2Pc" kind="push" id="A1R-R2-CSF"/>
+                        <segue destination="BKe-0r-2Pc" kind="push" identifier="Artsy User Has Not Registered Card" id="A1R-R2-CSF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4pK-8l-yGY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1103,7 +1103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIG-KZ-hZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2410.5" y="2374"/>
+            <point key="canvasLocation" x="-557.5" y="1402"/>
         </scene>
     </scenes>
     <resources>
@@ -1116,6 +1116,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="6qF-R8-kJy"/>
+        <segue reference="gjD-og-8Iv"/>
     </inferredMetricsTieBreakers>
 </document>

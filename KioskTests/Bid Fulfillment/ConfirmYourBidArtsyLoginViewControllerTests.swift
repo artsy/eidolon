@@ -9,6 +9,5 @@ class ConfirmYourBidArtsyLoginViewControllerTests: QuickSpec {
             expect(sut).to(haveValidSnapshot())
         }
 
-
     }
 }

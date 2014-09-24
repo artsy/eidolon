@@ -1,6 +1,7 @@
 // Auto generated file from SBConstants - any changes may be lost
 
 public enum SegueIdentifier : String {
+    case ArtsyUserHasNotRegisteredCard = "Artsy User Has Not Registered Card"
     case CardRegistered = "Card Registered"
     case ConfirmBid = "Confirm Bid"
     case ConfirmyourBidArtsyLogin = "Confirm your Bid - Artsy Login"
