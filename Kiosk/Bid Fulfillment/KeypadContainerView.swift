@@ -19,9 +19,8 @@ public class KeypadContainerView: UIView {
 
     override public func awakeFromNib() {
 
-        keypad = NSBundle(forClass: self.dynamicType).loadNibNamed("KeypadView", owner: self, options: nil)[0] as? KeypadView
+        keypad = NSBundle(forClass: self.dynamicType).loadNibNamed("KeypadView", owner: self, options: nil).first as? KeypadView
         self.addSubview(keypad!)
     }
-
 
 }
