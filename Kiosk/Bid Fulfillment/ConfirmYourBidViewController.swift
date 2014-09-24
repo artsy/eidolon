@@ -6,4 +6,12 @@ public class ConfirmYourBidViewController: UIViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController
     }
 
+    @IBAction public func dev_noPhoneNumberFoundTapped(sender: AnyObject) {
+        self.performSegue(.ConfirmyourBidBidderNotFound)
+    }
+
+    @IBAction public func dev_phoneNumberFoundTapped(sender: AnyObject) {
+        self.performSegue(.ConfirmyourBidBidderFound)
+    }
+
 }

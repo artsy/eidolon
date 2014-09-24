@@ -5,4 +5,4 @@ gem 'cocoapods-keys'
 
 gem 'xcpretty'
 gem 'shenzhen'
-gem 'sbconstants', :git => "https://github.com/orta/SBConstants.git", :branch => "swift"
+gem 'sbconstants'

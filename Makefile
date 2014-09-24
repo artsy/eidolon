@@ -13,40 +13,43 @@ DATE_VERSION = $(shell date "+%Y.%m.%d")
 all: ci
 
 bootstrap:
-	echo "Setting up submodules, grumble."
+	@echo "Setting up submodules, grumble."
 
 	git submodule init
 	git submodule update
 	./submodules/ReactiveCocoa/script/bootstrap
 	bundle install
 
-	echo "Setting up API Keys, leave blank if you don't know."
+	@echo "\nSetting up API Keys, leave blank if you don't know."
 
-	@printf 'What is your Artsy API Client Secret? '; \
+	@printf '\nWhat is your Artsy API Client Secret? '; \
 		read ARTSY_CLIENT_SECRET; \
 		bundle exec pod keys set ArtsyAPIClientSecret "$$ARTSY_CLIENT_SECRET" Eidolon
 
-	@printf 'What is your Artsy API Client Key? '; \
+	@printf '\nWhat is your Artsy API Client Key? '; \
 		read ARTSY_CLIENT_KEY; \
 		bundle exec pod keys set ArtsyAPIClientKey "$$ARTSY_CLIENT_KEY"
 
-	@printf 'What is your Mixpanel API Key? '; \
+	@printf '\nWhat is your production Mixpanel API Key? '; \
 		read MIXPANEL_KEY; \
-		bundle exec pod keys set MixpanelAPIClientKey "$$MIXPANEL_KEY"
+		bundle exec pod keys set MixpanelProductionAPIClientKey "$$MIXPANEL_KEY"
 
-	@printf 'What is your Cardflight API Key? '; \
+	@printf '\nWhat is your staging Mixpanel API Key? '; \
+		read MIXPANEL_KEY; \
+		bundle exec pod keys set MixpanelStagingAPIClientKey "$$MIXPANEL_KEY"
+
+	@printf '\nWhat is your Cardflight Test API Key? '; \
 		read CARDFLIGHT_KEY; \
-		bundle exec pod keys set CardflightAPIClientKey "$$CARDFLIGHT_KEY"
+		bundle exec pod keys set CardflightTestAPIClientKey "$$CARDFLIGHT_KEY"
 
-	@printf 'What is your Cardflight API Secret? '; \
-		read CARDFLIGHT_SECRET; \
-		bundle exec pod keys set CardflightAPIClientSecret "$$CARDFLIGHT_SECRET"
+	@printf '\nWhat is your Cardflight Merchant Account Token? '; \
+		read CARDFLIGHT_TOKEN; \
+		bundle exec pod keys set CardflightMerchantAccountToken "$$CARDFLIGHT_TOKEN"
 
-	if [ ! -f ~/.cocoapods/artsy ]; then
-		bundle exec pod repo add artsy https://github.com/artsy/Specs.git
+	if [ ! -d ~/.cocoapods/repos/artsy ]; then \
+		bundle exec pod repo add artsy https://github.com/artsy/Specs.git; \
 	fi
 
-	bundle exec pod repo add artsy https://github.com/artsy/Specs.git
 	bundle exec pod install
 
 

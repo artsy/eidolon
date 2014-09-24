@@ -9,4 +9,7 @@ extension UIViewController {
         self.endAppearanceTransition()
     }
 
+    public func performSegue(identifier:SegueIdentifier) {
+        self.performSegueWithIdentifier(identifier.toRaw(), sender: self)
+    }
 }
