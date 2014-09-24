@@ -20,7 +20,7 @@ PODS:
   - FLKAutoLayout (0.1.1)
   - HockeySDK (3.5.4)
   - ISO8601DateFormatter (0.7)
-  - Mixpanel (2.5.2)
+  - Mixpanel (2.5.3)
   - ORStackView (1.2.0):
     - FLKAutoLayout (~> 0.1)
 
@@ -52,7 +52,7 @@ SPEC CHECKSUMS:
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
   HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
   ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
-  Mixpanel: 0115466ba70fd12e67ac4d3d071408dd1d489657
+  Mixpanel: 708ec9a6ee6e741f7db107831e18b2fc2e7531f1
   ORStackView: f1ccef4a0c40dd7907a638232f78a873cc03ab6c
 
 COCOAPODS: 0.34.0.rc1

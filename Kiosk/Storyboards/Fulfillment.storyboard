@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6246" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6239"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="AGaramondPro-Regular.otf">
@@ -32,9 +32,20 @@
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
         </mutableArray>
         <mutableArray key="AGaramondPro-Semibold.otf">
-            <string>AGaramondPro-Semibold</string>
             <string>AGaramondPro-Semibold</string>
             <string>AGaramondPro-Semibold</string>
             <string>AGaramondPro-Semibold</string>
@@ -126,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x1s-jG-1c0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="247" y="-361"/>
+            <point key="canvasLocation" x="1183" y="-1625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wG8-BK-Gy6">
@@ -142,7 +153,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DvF-Ku-gpE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="247.5" y="565"/>
+            <point key="canvasLocation" x="1183.5" y="-699"/>
         </scene>
         <!--Place Bid View Controller-->
         <scene sceneID="zYP-eY-rqW">
@@ -185,9 +196,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j5m-yL-j50">
-                                <rect key="frame" x="65" y="183" width="364" height="182"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Place your bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpc-fW-Rbb" customClass="ARSerifLabel">
                                 <rect key="frame" x="65" y="80" width="315" height="40"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
@@ -240,6 +248,9 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j5m-yL-j50">
+                                <rect key="frame" x="65" y="190" width="364" height="182"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -253,7 +264,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RSG-07-uog" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1269.5" y="565"/>
+            <point key="canvasLocation" x="1542.5" y="639"/>
         </scene>
         <!--Swipe Credit Card View Controller-->
         <scene sceneID="qjX-tW-U7k">
@@ -267,24 +278,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe Credit Card" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9D-qe-OWY" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="80" width="395" height="41"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe your credit card" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9D-qe-OWY" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="171" width="395" height="41"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="33"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="375" translatesAutoresizingMaskIntoConstraints="NO" id="vAr-5M-bVd" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="129" width="375" height="143"/>
-                                <string key="text">By swiping your credit card we will begin the registration process. You will not be charged and you may choose a different form of payment for a winning bid.</string>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Only winning bids will be charged and you may choose a different form of payment at the time." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="375" translatesAutoresizingMaskIntoConstraints="NO" id="vAr-5M-bVd" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="232" width="375" height="57"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="CardSwipe" translatesAutoresizingMaskIntoConstraints="NO" id="Lhr-F4-GXw">
+                                <rect key="frame" x="65" y="313" width="285" height="252"/>
+                            </imageView>
                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ciJ-4f-fQL">
-                                <rect key="frame" x="65" y="292" width="375" height="73"/>
+                                <rect key="frame" x="75" y="579" width="375" height="73"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Card Status:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="375" translatesAutoresizingMaskIntoConstraints="NO" id="Er0-yC-3sc" customClass="ARSerifLabel">
-                                        <rect key="frame" x="8" y="8" width="353" height="45"/>
+                                        <rect key="frame" x="8" y="14" width="353" height="45"/>
                                         <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="18"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -292,6 +305,52 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Register to Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4V-Js-ToI" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="82" width="395" height="41"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wLI-pF-J4Q">
+                                <rect key="frame" x="65" y="141" width="685" height="2"/>
+                                <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crying Girl, 1963" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="tN6-Le-oXt" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="79" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Bid: $10,000" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="qjF-yj-vtd" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="103" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ROY LICHTENSTEIN" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="bh4-9o-0Dz" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="56" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="edit_button.png" translatesAutoresizingMaskIntoConstraints="NO" id="uR2-ZY-41O">
+                                <rect key="frame" x="716" y="76" width="34" height="34"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u8G-2e-eJx">
+                                <rect key="frame" x="426" y="64" width="88" height="59"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mobile: xxxyyyzzz" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="HUk-ts-4Qp" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="174" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email: xxxyyyzzz" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="nEE-8D-S7Q" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="211" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -304,7 +363,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vz7-E3-ZqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-499.5" y="2354"/>
+            <point key="canvasLocation" x="-473.5" y="3174"/>
         </scene>
         <!--Confirm Your Bid View Controller-->
         <scene sceneID="Kfe-hS-Q2z">
@@ -380,7 +439,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z7-af-FHL">
-                                <rect key="frame" x="58" y="524" width="291" height="86"/>
+                                <rect key="frame" x="62" y="538" width="291" height="59"/>
                                 <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="17"/>
                                 <state key="normal" title="USE MY ARTSY LOGIN      &gt;">
@@ -388,7 +447,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="MRb-fW-vfZ" kind="push" id="ccv-le-Cu0"/>
+                                    <segue destination="MRb-fW-vfZ" kind="push" identifier="Confirm your Bid - Artsy Login" id="ccv-le-Cu0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -398,13 +457,12 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
-                        <segue destination="hrW-WV-2L3" kind="push" identifier="Confirm your Bid to Confirm PIN" id="Q28-yu-dXi"/>
-                        <segue destination="BKe-0r-2Pc" kind="push" identifier="NumberNotFound" id="8Sw-nt-LR4"/>
+                        <segue destination="hrW-WV-2L3" kind="push" identifier="Confirm your Bid - Bidder Found" id="Q28-yu-dXi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpk-oa-izH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1278.5" y="1434"/>
+            <point key="canvasLocation" x="1542.5" y="1440"/>
         </scene>
         <!--Confirm Your Bid Artsy Login View Controller-->
         <scene sceneID="mg0-AC-X7S">
@@ -418,63 +476,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-Jh-nkF">
-                                <rect key="frame" x="495" y="115" width="255" height="44"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Confirm Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhx-0g-xsN" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="80" width="395" height="41"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EMAIL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jI9-75-TZH">
-                                <rect key="frame" x="474" y="85" width="296" height="22"/>
-                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sFU-mI-0Wz">
-                                <rect key="frame" x="495" y="204" width="255" height="44"/>
+                                <rect key="frame" x="495" y="249" width="255" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PASSWORD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94a-of-XpR">
-                                <rect key="frame" x="474" y="174" width="296" height="22"/>
-                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your bidder number, or mobile number and PIN to confirm your bid" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-uI-ydX" customClass="ARSerifLabel">
-                                <rect key="frame" x="58" y="138" width="298" height="76"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your Artsy email and password" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-uI-ydX" customClass="ARSerifLabel">
+                                <rect key="frame" x="58" y="170" width="298" height="76"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="25"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Bid:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gg-IV-koF">
-                                <rect key="frame" x="75" y="323" width="70" height="21"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$9,000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gf4-Cm-aph">
-                                <rect key="frame" x="147" y="320" width="82" height="21"/>
-                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="19"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8F-8P-q34">
-                                <rect key="frame" x="243" y="308" width="59" height="43"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="15"/>
-                                <state key="normal" title="EDIT">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSp-ka-p6m">
-                                <rect key="frame" x="495" y="284" width="255" height="43"/>
+                                <rect key="frame" x="495" y="309" width="255" height="43"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="15"/>
                                 <state key="normal" title="CONFIRM">
@@ -482,6 +496,45 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Confirm Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwf-mx-o0D" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="82" width="395" height="41"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UtC-5V-jyw">
+                                <rect key="frame" x="65" y="141" width="685" height="2"/>
+                                <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crying Girl, 1963" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="Zju-p7-eJg" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="79" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Bid: $10,000" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="2FH-3N-8I5" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="103" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ROY LICHTENSTEIN" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="oPY-rF-cnv" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="56" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="edit_button.png" translatesAutoresizingMaskIntoConstraints="NO" id="L6W-T5-vJa">
+                                <rect key="frame" x="716" y="76" width="34" height="34"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tKD-TW-G7c">
+                                <rect key="frame" x="426" y="64" width="88" height="59"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-Jh-nkF">
+                                <rect key="frame" x="495" y="185" width="255" height="44"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -489,12 +542,13 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
-                        <segue destination="2lt-co-qW2" kind="push" identifier="Email Login Confirmed Higest Bidder" id="6qF-R8-kJy"/>
+                        <segue destination="2lt-co-qW2" kind="push" identifier="Email Login Confirmed Highest Bidder" id="6qF-R8-kJy"/>
+                        <segue destination="BKe-0r-2Pc" kind="push" id="A1R-R2-CSF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4pK-8l-yGY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2059.5" y="2329"/>
+            <point key="canvasLocation" x="791.5" y="2360"/>
         </scene>
         <!--You Are The Highest Bidder View Controller-->
         <scene sceneID="k3G-Eq-Mxm">
@@ -508,12 +562,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bid Confirmed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PhR-2v-eZM" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="85" width="346" height="41"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fl9-vr-o9O">
                                 <rect key="frame" x="65" y="144" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -540,7 +588,7 @@
                                 <rect key="frame" x="426" y="67" width="88" height="59"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LL8-8t-kYL">
-                                <rect key="frame" x="532" y="552" width="218" height="43"/>
+                                <rect key="frame" x="535" y="551" width="215" height="43"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="15"/>
                                 <state key="normal" title="BACK TO AUCTION">
@@ -554,6 +602,54 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nlz-q5-2WY">
+                                <rect key="frame" x="535" y="162" width="210" height="217"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BIDDER NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVZ-di-feg">
+                                        <rect key="frame" x="0.0" y="52" width="242" height="21"/>
+                                        <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UH-Kr-1QF">
+                                        <rect key="frame" x="0.0" y="118" width="242" height="21"/>
+                                        <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="****" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYj-ax-i3a">
+                                        <rect key="frame" x="0.0" y="147" width="100" height="21"/>
+                                        <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bS-LE-1F5">
+                                        <rect key="frame" x="113" y="117" width="97" height="51"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="17"/>
+                                        <state key="normal" title="REVEAL">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bidder Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="0A7-Um-nml" customClass="ARSerifLabel">
+                                        <rect key="frame" x="0.0" y="0.0" width="165" height="44"/>
+                                        <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="25"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="09922" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oty-MM-yMp">
+                                        <rect key="frame" x="0.0" y="77" width="203" height="21"/>
+                                        <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bid Confirmed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PhR-2v-eZM" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="85" width="346" height="41"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -563,7 +659,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOk-Pg-yZ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1278.5" y="4082"/>
+            <point key="canvasLocation" x="1334.5" y="3684"/>
         </scene>
         <!--User Creation View Controller-->
         <scene sceneID="AYD-hb-rh2">
@@ -577,60 +673,96 @@
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Postal code/Zip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6I-UV-POY" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="80" width="395" height="41"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lAF-Uk-w06">
-                                <rect key="frame" x="65" y="199" width="255" height="44"/>
+                                <rect key="frame" x="65" y="239" width="283" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UrK-b5-Vef">
-                                <rect key="frame" x="544" y="80" width="1" height="280"/>
-                                <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CREDIT CARD INFORMATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQS-mL-UGz">
-                                <rect key="frame" x="577" y="80" width="242" height="21"/>
+                                <rect key="frame" x="539" y="188" width="242" height="21"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
                                 <color key="textColor" red="0.50588235294117645" green="0.50588235294117645" blue="0.50588235294117645" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Danger McShaner" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2hT-I0-cWe">
-                                <rect key="frame" x="577" y="105" width="203" height="21"/>
+                                <rect key="frame" x="539" y="213" width="203" height="21"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
                                 <color key="textColor" red="0.64313725490196083" green="0.64313725490196083" blue="0.64313725490196083" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="xxxx-xxxx-xxxx-1895" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDn-ax-GOx">
-                                <rect key="frame" x="577" y="125" width="203" height="21"/>
+                                <rect key="frame" x="539" y="233" width="203" height="21"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
                                 <color key="textColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ZIP CODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EwA-rZ-eQC">
-                                <rect key="frame" x="577" y="159" width="242" height="21"/>
+                                <rect key="frame" x="539" y="267" width="242" height="21"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
                                 <color key="textColor" red="0.36862745098039218" green="0.14117647058823529" blue="0.71764705882352942" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MOBILE NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4E-RA-cCa">
-                                <rect key="frame" x="573" y="197" width="242" height="21"/>
+                                <rect key="frame" x="535" y="305" width="242" height="21"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
                                 <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EMAIL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4h-B4-p3K">
-                                <rect key="frame" x="573" y="236" width="242" height="21"/>
+                                <rect key="frame" x="535" y="344" width="242" height="21"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
                                 <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="edit_button.png" translatesAutoresizingMaskIntoConstraints="NO" id="LNc-2q-7na">
-                                <rect key="frame" x="336" y="198" width="44" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Register to Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdi-K1-7VR" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="82" width="395" height="41"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yVk-1g-HL6">
+                                <rect key="frame" x="65" y="141" width="685" height="2"/>
+                                <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crying Girl, 1963" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="FpY-m4-T4o" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="79" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Bid: $10,000" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="auJ-vp-4gg" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="103" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ROY LICHTENSTEIN" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="Kbm-wX-2b6" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="56" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="edit_button.png" translatesAutoresizingMaskIntoConstraints="NO" id="FId-OM-Lfw">
+                                <rect key="frame" x="716" y="76" width="34" height="34"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NcO-Of-xvJ">
+                                <rect key="frame" x="426" y="64" width="88" height="59"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Tb-DW-FGs">
+                                <rect key="frame" x="356" y="240" width="102" height="43"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="15"/>
+                                <state key="normal" title="ENTER">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your Postal / Zip code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lxj-9h-mdV" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="168" width="395" height="41"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="33"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -643,7 +775,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bNk-6W-1TR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-491.5" y="3218"/>
+            <point key="canvasLocation" x="-473.5" y="4080"/>
         </scene>
         <!--Confirm User Creation View Controller-->
         <scene sceneID="b9K-T2-Amz">
@@ -658,62 +790,93 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CREDIT CARD INFORMATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="diq-uu-B5m">
-                                <rect key="frame" x="297" y="179" width="242" height="21"/>
+                                <rect key="frame" x="535" y="187" width="242" height="21"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
                                 <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Danger McShaner" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bz0-VS-oov">
-                                <rect key="frame" x="297" y="204" width="203" height="21"/>
+                                <rect key="frame" x="535" y="212" width="203" height="21"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
                                 <color key="textColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="xxxx-xxxx-xxxx-1895" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHT-3H-Ibp">
-                                <rect key="frame" x="297" y="224" width="203" height="21"/>
+                                <rect key="frame" x="535" y="232" width="203" height="21"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
                                 <color key="textColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please Confirm your info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QV0-fg-eQo" customClass="ARSerifLabel">
-                                <rect key="frame" x="210" y="80" width="395" height="41"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ZIP CODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMk-6f-iPe">
-                                <rect key="frame" x="301" y="267" width="242" height="21"/>
+                                <rect key="frame" x="539" y="275" width="242" height="21"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
                                 <color key="textColor" red="0.47450980392156861" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MOBILE NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ScR-zL-udh">
-                                <rect key="frame" x="297" y="315" width="242" height="21"/>
+                                <rect key="frame" x="535" y="323" width="242" height="21"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
                                 <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EMAIL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWR-IB-FDL">
-                                <rect key="frame" x="297" y="374" width="242" height="21"/>
+                                <rect key="frame" x="535" y="382" width="242" height="21"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
                                 <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vln-68-SmC">
-                                <rect key="frame" x="262" y="491" width="291" height="51"/>
+                                <rect key="frame" x="535" y="544" width="215" height="51"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="17"/>
-                                <state key="normal" title="CREATE MY ACCOUNT">
+                                <state key="normal" title="CONFIRM">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="zk0-al-CUE" kind="push" id="Egb-aq-8RC"/>
-                                </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="edit_button.png" translatesAutoresizingMaskIntoConstraints="NO" id="ccC-Kr-yGe">
-                                <rect key="frame" x="508" y="204" width="44" height="44"/>
+                                <rect key="frame" x="701" y="212" width="44" height="44"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Register to Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9a-es-Qlx" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="82" width="395" height="41"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzU-bF-Pce">
+                                <rect key="frame" x="65" y="141" width="685" height="2"/>
+                                <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crying Girl, 1963" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="XYX-SU-bMp" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="79" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Bid: $10,000" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="cbh-Z1-GRG" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="103" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ROY LICHTENSTEIN" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="9FT-YP-vrm" customClass="ARSerifLabel">
+                                <rect key="frame" x="535" y="56" width="166" height="29"/>
+                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="edit_button.png" translatesAutoresizingMaskIntoConstraints="NO" id="JmP-BC-l0n">
+                                <rect key="frame" x="716" y="76" width="34" height="34"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bKq-45-MAA">
+                                <rect key="frame" x="426" y="64" width="88" height="59"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Confirm that the information you have entered is correct" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okg-Re-ODP" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="180" width="442" height="76"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="33"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -726,87 +889,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bi8-J7-d5t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-511.5" y="4082"/>
-        </scene>
-        <!--Your Bidder Details View Controller-->
-        <scene sceneID="odJ-IV-f55">
-            <objects>
-                <viewController storyboardIdentifier="Your Bidder Details" id="zk0-al-CUE" customClass="YourBidderDetailsViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8W9-qI-UbT"/>
-                        <viewControllerLayoutGuide type="bottom" id="ugl-lo-Qrt"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="umn-1o-coy">
-                        <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Bidder Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5J1-jg-k8E" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="80" width="395" height="41"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HvR-SK-Nqj">
-                                <rect key="frame" x="540" y="80" width="210" height="161"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BIDDER NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoC-UU-gMA">
-                                        <rect key="frame" x="25" y="21" width="242" height="21"/>
-                                        <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="09922" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hed-dz-mdw">
-                                        <rect key="frame" x="25" y="46" width="203" height="21"/>
-                                        <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EfE-sr-CgA">
-                                        <rect key="frame" x="25" y="87" width="242" height="21"/>
-                                        <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="****" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SE0-pr-RvC">
-                                        <rect key="frame" x="25" y="116" width="100" height="21"/>
-                                        <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iNZ-c7-53E">
-                                        <rect key="frame" x="104" y="87" width="97" height="51"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="17"/>
-                                        <state key="normal" title="REVEAL">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zia-eB-vBf">
-                                <rect key="frame" x="262" y="494" width="291" height="51"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="17"/>
-                                <state key="normal" title="BACK TO THE AUCTION">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Next time you bid, use these details to authorize your bid. We have sent an email and text message with these details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="Gcw-iQ-Cl8" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="141" width="352" height="100"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="25"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="uzJ-nU-dVT"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="815" height="660"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2ja-Wb-d7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-511.5" y="4887"/>
+            <point key="canvasLocation" x="-473.5" y="4914"/>
         </scene>
         <!--Confirm Your BidPIN View Controller-->
         <scene sceneID="BzC-RZ-kn9">
@@ -896,10 +979,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbJ-SZ-VMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800.5" y="2341"/>
+            <point key="canvasLocation" x="2124.5" y="2409"/>
         </scene>
     </scenes>
     <resources>
+        <image name="CardSwipe" width="1923" height="1801"/>
         <image name="edit_button.png" width="64" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -908,6 +992,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="LCx-xS-nmd"/>
+        <segue reference="gjD-og-8Iv"/>
     </inferredMetricsTieBreakers>
 </document>
