@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/orta/SBConstants.git
-  revision: 322704f2f138dff461cf7f284d085f02af955adb
-  branch: swift
-  specs:
-    sbconstants (0.0.6)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -81,6 +74,7 @@ GEM
       RubyInline (~> 3)
     plist (3.1.0)
     rubyzip (1.1.6)
+    sbconstants (1.0.0)
     security (0.1.3)
     shenzhen (0.8.2)
       aws-sdk (~> 1.0)
@@ -107,6 +101,6 @@ PLATFORMS
 DEPENDENCIES
   cocoapods (= 0.34.0.rc1)
   cocoapods-keys
-  sbconstants!
+  sbconstants
   shenzhen
   xcpretty
