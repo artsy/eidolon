@@ -1,6 +1,5 @@
 import Quick
 import Nimble
-import Kiosk
 
 class FulfillmentContainerViewControllerTests: QuickSpec {
     override func spec() {

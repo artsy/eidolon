@@ -1,6 +1,5 @@
 import Quick
 import Nimble
-import Kiosk
 
 class CardHandlerTests: QuickSpec {
     var handler:CardHandler?

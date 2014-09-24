@@ -1,6 +1,5 @@
 import Quick
 import Nimble
-import Kiosk
 
 class GetYourBidderDetailsViewControllerTests: QuickSpec {
     override func spec() {

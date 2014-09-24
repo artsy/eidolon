@@ -1,6 +1,5 @@
 import Quick
 import Nimble
-import Kiosk
 
 class ConfirmYourBidArtsyLoginViewControllerTests: QuickSpec {
     override func spec() {

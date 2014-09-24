@@ -8,8 +8,8 @@ public class CardHandler: NSObject, CFTReaderDelegate {
     let APIKey: String
     let APIToken: String
 
-    public lazy var reader = CFTReader()
-    public lazy var sessionManager = CFTSessionManager.sharedInstance()
+    lazy var reader = CFTReader()
+    lazy var sessionManager = CFTSessionManager.sharedInstance()
 
     public init(apiKey: String, accountToken: String){
         APIKey = apiKey
