@@ -34,3 +34,8 @@ func setupProviderForSuite(provider: ReactiveMoyaProvider<ArtsyAPI>) {
         Provider.sharedProvider = Provider.DefaultProvider()
     }
 }
+
+func yearFromDate(date: NSDate) -> Int {
+    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
+    return calendar.components(.CalendarUnitYear, fromDate: date).year
+}

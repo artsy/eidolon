@@ -1,7 +1,7 @@
 import Foundation
 
 class SystemTime {
-    var systemTimeInterval = NSTimeIntervalSince1970
+    var systemTimeInterval:NSTimeInterval = NSTimeIntervalSince1970 as NSTimeInterval
 
     func sync() {
         let endpoint: ArtsyAPI = ArtsyAPI.SystemTime

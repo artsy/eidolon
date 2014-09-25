@@ -55,8 +55,3 @@ class SystemTimeTests: QuickSpec {
 
     }
 }
-
-func yearFromDate(date: NSDate) -> Int {
-    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
-    return calendar.components(.CalendarUnitYear, fromDate: date).year
-}

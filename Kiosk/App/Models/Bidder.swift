@@ -1,13 +1,19 @@
-//
-//  Bidder.swift
-//  Kiosk
-//
-//  Created by Orta on 24/09/2014.
-//  Copyright (c) 2014 Artsy. All rights reserved.
-//
-
 import UIKit
 
-class Bidder: NSObject {
-   
+final class Bidder: NSObject, JSONAble {
+    let id:String
+    let saleID:String
+
+    init(id: String, saleID: String) {
+        self.id = id
+        self.saleID = saleID
+    }
+
+    class func fromJSON(json:[String: AnyObject]) -> Bidder {
+        let json = JSON(object: json)
+
+        let id = json["id"].stringValue
+        let saleID = json["sale"]["id"].stringValue
+        return Bidder(id: id, saleID:saleID)
+    }
 }
