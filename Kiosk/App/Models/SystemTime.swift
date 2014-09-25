@@ -1,13 +1,37 @@
-//
-//  SystemTime.swift
-//  Kiosk
-//
-//  Created by Orta on 24/09/2014.
-//  Copyright (c) 2014 Artsy. All rights reserved.
-//
+import Foundation
 
-import UIKit
+class SystemTime {
+    var systemTimeInterval = NSTimeIntervalSince1970
 
-class SystemTime: NSObject {
-   
+    func sync() {
+        let endpoint: ArtsyAPI = ArtsyAPI.SystemTime
+
+        XAppRequest(endpoint).filterSuccessfulStatusCodes().mapJSON().subscribeNext({ (response) -> Void in
+            if let dictionary = response as? NSDictionary {
+                let formatter = ISO8601DateFormatter()
+
+                let artsyDate = formatter.dateFromString(dictionary["iso8601"] as String?)
+                self.systemTimeInterval = NSDate().timeIntervalSinceDate(artsyDate);
+            }
+
+        }, error: { (error) -> Void in
+            println("Error: \(error.localizedDescription)")
+        })
+    }
+
+    func inSync() -> Bool {
+        return systemTimeInterval != NSTimeIntervalSince1970;
+    }
+
+    func date() -> NSDate {
+        let now = NSDate()
+        return self.inSync() ? now.dateByAddingTimeInterval(-systemTimeInterval) : now;
+    }
+
+    func reset() {
+        self.systemTimeInterval = NSTimeIntervalSince1970
+    }
+
 }
+
+

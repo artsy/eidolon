@@ -1,12 +1,5 @@
-//
-//  TestHelpers.swift
-//  Kiosk
-//
-//  Created by Ash Furrow on 2014-09-15.
-//  Copyright (c) 2014 Artsy. All rights reserved.
-//
-
 import Foundation
+import Quick
 
 private enum DefaultsKeys: String {
     case TokenKey = "TokenKey"
@@ -30,4 +23,14 @@ func getDefaultsKeys() -> (key: String?, expiry: NSDate?) {
 func setDefaultsKeys(key: String?, expiry: NSDate?) {
     defaults.setObject(key, forKey: DefaultsKeys.TokenKey.toRaw())
     defaults.setObject(expiry, forKey: DefaultsKeys.TokenExpiry.toRaw())
+}
+
+func setupProviderForSuite(provider: ReactiveMoyaProvider<ArtsyAPI>) {
+    beforeSuite { () -> () in
+        Provider.sharedProvider = provider
+    }
+
+    afterSuite { () -> () in
+        Provider.sharedProvider = Provider.DefaultProvider()
+    }
 }
