@@ -26,16 +26,6 @@ class SystemTimeTests: QuickSpec {
                 expect(timeYear) > currentYear
                 expect(timeYear) == 2422
             }
-
-            it("creates a new date each sync") {
-                let time = SystemTime()
-                time.sync()
-
-                let oldDate = time.date()
-                time.sync()
-
-                expect(oldDate.timeIntervalSince1970) < time.date().timeIntervalSince1970
-            }
         }
 
         describe("not in sync") {
@@ -52,7 +42,6 @@ class SystemTimeTests: QuickSpec {
                 expect(timeYear) == currentYear
             }
         }
-
     }
 }
 
