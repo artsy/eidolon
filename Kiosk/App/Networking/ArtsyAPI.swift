@@ -153,10 +153,10 @@ extension ArtsyAPI : MoyaPath {
         case .XApp:
             return "/api/v1/xapp_token"
 
-        case .Auctions:
+        case Auctions:
             return "/api/v1/sales"
 
-        case .AuctionListings(let id):
+        case AuctionListings(let id):
             return "/api/v1/sale/\(id)/sale_artworks"
 
         case SystemTime:
