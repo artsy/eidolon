@@ -8,16 +8,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
 
-//        let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "in-the-studio-with-jr")
+        let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "in-the-studio-with-jr")
 
-//        XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext({ (object) -> Void in
-//            if let response = object as? MoyaResponse {
-//                println("DATA: \(NSString(data: response.data, encoding: NSUTF8StringEncoding))")
-//            }
-//        }, error: { (error) -> Void in
-//            println("Error: \(error.localizedDescription)")
-//        })
-
+        XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext({ (object) -> Void in
+            if let response = object as? MoyaResponse {
+                println("DATA: \(NSString(data: response.data, encoding: NSUTF8StringEncoding))")
+            }
+        }, error: { (error) -> Void in
+            println("Error: \(error.localizedDescription)")
+        })
 
         return true
     }

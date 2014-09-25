@@ -131,6 +131,7 @@ public enum ArtsyAPI {
     case XApp
     case Auctions
     case AuctionListings(id: String)
+    case SystemTime
     
     public var defaultParameters: [String: AnyObject] {
         switch self {
@@ -148,12 +149,19 @@ public enum ArtsyAPI {
 extension ArtsyAPI : MoyaPath {
     public var path: String {
         switch self {
+
         case .XApp:
             return "/api/v1/xapp_token"
+
         case .Auctions:
             return "/api/v1/sales"
+
         case .AuctionListings(let id):
             return "/api/v1/sale/\(id)/sale_artworks"
+
+        case SystemTime:
+            return "api/v1/system/time"
+
         }
     }
 }
@@ -163,12 +171,19 @@ extension ArtsyAPI : MoyaTarget {
     public var baseURL: NSURL { return NSURL(string: "https://stagingapi.artsy.net") }
     public var sampleData: NSData {
         switch self {
+
         case .XApp:
             return stubbedResponse("XApp")
+
         case .Auctions:
             return stubbedResponse("Auctions")
+
         case .AuctionListings(let id):
             return stubbedResponse("AuctionListings")
+
+        case SystemTime:
+            return stubbedResponse("SystemTime")
+
         }
     }
 }
