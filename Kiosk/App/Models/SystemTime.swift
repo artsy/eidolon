@@ -1,6 +1,6 @@
-import UIKit
+import Foundation
 
-class SystemTime: NSObject {
+class SystemTime {
     var systemTimeInterval = NSTimeIntervalSince1970
 
     func sync() {
