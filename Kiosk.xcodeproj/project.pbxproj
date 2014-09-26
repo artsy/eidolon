@@ -36,6 +36,12 @@
 		6017320D19CF24ED00A58B63 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017320C19CF24ED00A58B63 /* User.swift */; };
 		6017320F19CF259400A58B63 /* CardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017320E19CF259400A58B63 /* CardHandler.swift */; };
 		6017321519CF27B900A58B63 /* CardHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017321419CF27B900A58B63 /* CardHandlerTests.swift */; };
+		60212C9119D5CA04001921E1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60212C9019D5CA04001921E1 /* Image.swift */; };
+		60212C9219D5CA04001921E1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60212C9019D5CA04001921E1 /* Image.swift */; };
+		60212C9D19D5EAF9001921E1 /* ArtworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60212C9C19D5EAF9001921E1 /* ArtworkTests.swift */; };
+		60212C9E19D5ECCE001921E1 /* SaleArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E719D3123B00DE9F3D /* SaleArtwork.swift */; };
+		60212CA019D5F20C001921E1 /* ArtistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60212C9F19D5F20C001921E1 /* ArtistTests.swift */; };
+		60212CA219D5F468001921E1 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60212CA119D5F468001921E1 /* ImageTests.swift */; };
 		602EFE4F19C6D09C002715C2 /* KeypadContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */; };
 		6030A0F319D18F5200B934CA /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A0F219D18F5200B934CA /* Artwork.swift */; };
 		6030A10019D192D000B934CA /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A0FF19D192D000B934CA /* Artist.swift */; };
@@ -111,8 +117,8 @@
 		60C37DD819D45151002E7A44 /* Bidder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E319D30F9F00DE9F3D /* Bidder.swift */; };
 		60C37DD919D45234002E7A44 /* Sale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E919D3135200DE9F3D /* Sale.swift */; };
 		60C37DDB19D45353002E7A44 /* SaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C37DDA19D45353002E7A44 /* SaleTests.swift */; };
-		60C37DDC19D460DC002E7A44 /* BidPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E519D30FF700DE9F3D /* BidPosition.swift */; };
-		60C37DDE19D4655D002E7A44 /* BidPositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C37DDD19D4655D002E7A44 /* BidPositionTests.swift */; };
+		60C37DDC19D460DC002E7A44 /* BidderPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E519D30FF700DE9F3D /* BidderPosition.swift */; };
+		60C37DDE19D4655D002E7A44 /* BidderPositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C37DDD19D4655D002E7A44 /* BidderPositionTests.swift */; };
 		60C37DE119D468A7002E7A44 /* RAC+JSONAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C37DE019D468A7002E7A44 /* RAC+JSONAble.swift */; };
 		60C37DE219D468A7002E7A44 /* RAC+JSONAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C37DE019D468A7002E7A44 /* RAC+JSONAble.swift */; };
 		60C620DA19D180A20024D493 /* ConfirmYourBidPINViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C620D919D180A20024D493 /* ConfirmYourBidPINViewController.swift */; };
@@ -122,7 +128,7 @@
 		60D976E019D2F81200DE9F3D /* ConfirmYourBidPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976DE19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift */; };
 		60D976E219D30F8B00DE9F3D /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E119D30F8B00DE9F3D /* Bid.swift */; };
 		60D976E419D30F9F00DE9F3D /* Bidder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E319D30F9F00DE9F3D /* Bidder.swift */; };
-		60D976E619D30FF700DE9F3D /* BidPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E519D30FF700DE9F3D /* BidPosition.swift */; };
+		60D976E619D30FF700DE9F3D /* BidderPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E519D30FF700DE9F3D /* BidderPosition.swift */; };
 		60D976E819D3123B00DE9F3D /* SaleArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E719D3123B00DE9F3D /* SaleArtwork.swift */; };
 		60D976EA19D3135200DE9F3D /* Sale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E919D3135200DE9F3D /* Sale.swift */; };
 		60D976EC19D3172D00DE9F3D /* SystemTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976EB19D3172D00DE9F3D /* SystemTime.swift */; };
@@ -263,6 +269,10 @@
 		6017320C19CF24ED00A58B63 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6017320E19CF259400A58B63 /* CardHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHandler.swift; sourceTree = "<group>"; };
 		6017321419CF27B900A58B63 /* CardHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHandlerTests.swift; sourceTree = "<group>"; };
+		60212C9019D5CA04001921E1 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		60212C9C19D5EAF9001921E1 /* ArtworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtworkTests.swift; sourceTree = "<group>"; };
+		60212C9F19D5F20C001921E1 /* ArtistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTests.swift; sourceTree = "<group>"; };
+		60212CA119D5F468001921E1 /* ImageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
 		602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadContainerView.swift; sourceTree = "<group>"; };
 		6030A0F219D18F5200B934CA /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		6030A0FF19D192D000B934CA /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
@@ -295,7 +305,7 @@
 		60C37DD319D44DCD002E7A44 /* BidTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidTests.swift; sourceTree = "<group>"; };
 		60C37DD619D45103002E7A44 /* BidderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderTests.swift; sourceTree = "<group>"; };
 		60C37DDA19D45353002E7A44 /* SaleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleTests.swift; sourceTree = "<group>"; };
-		60C37DDD19D4655D002E7A44 /* BidPositionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidPositionTests.swift; sourceTree = "<group>"; };
+		60C37DDD19D4655D002E7A44 /* BidderPositionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderPositionTests.swift; sourceTree = "<group>"; };
 		60C37DE019D468A7002E7A44 /* RAC+JSONAble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RAC+JSONAble.swift"; sourceTree = "<group>"; };
 		60C620D919D180A20024D493 /* ConfirmYourBidPINViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidPINViewController.swift; sourceTree = "<group>"; };
 		60C620E519D1835E0024D493 /* CI.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CI.md; sourceTree = "<group>"; };
@@ -305,7 +315,7 @@
 		60D976DE19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidPasswordViewController.swift; sourceTree = "<group>"; };
 		60D976E119D30F8B00DE9F3D /* Bid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
 		60D976E319D30F9F00DE9F3D /* Bidder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bidder.swift; sourceTree = "<group>"; };
-		60D976E519D30FF700DE9F3D /* BidPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidPosition.swift; sourceTree = "<group>"; };
+		60D976E519D30FF700DE9F3D /* BidderPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderPosition.swift; sourceTree = "<group>"; };
 		60D976E719D3123B00DE9F3D /* SaleArtwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtwork.swift; sourceTree = "<group>"; };
 		60D976E919D3135200DE9F3D /* Sale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sale.swift; sourceTree = "<group>"; };
 		60D976EB19D3172D00DE9F3D /* SystemTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemTime.swift; sourceTree = "<group>"; };
@@ -496,11 +506,12 @@
 				6030A0FF19D192D000B934CA /* Artist.swift */,
 				60D976E119D30F8B00DE9F3D /* Bid.swift */,
 				60D976E319D30F9F00DE9F3D /* Bidder.swift */,
-				60D976E519D30FF700DE9F3D /* BidPosition.swift */,
+				60D976E519D30FF700DE9F3D /* BidderPosition.swift */,
 				60D976E719D3123B00DE9F3D /* SaleArtwork.swift */,
 				60D976E919D3135200DE9F3D /* Sale.swift */,
 				60D976EB19D3172D00DE9F3D /* SystemTime.swift */,
 				60C37DC219D4359E002E7A44 /* JSONAble.swift */,
+				60212C9019D5CA04001921E1 /* Image.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -542,7 +553,10 @@
 				60C37DD319D44DCD002E7A44 /* BidTests.swift */,
 				60C37DD619D45103002E7A44 /* BidderTests.swift */,
 				60C37DDA19D45353002E7A44 /* SaleTests.swift */,
-				60C37DDD19D4655D002E7A44 /* BidPositionTests.swift */,
+				60C37DDD19D4655D002E7A44 /* BidderPositionTests.swift */,
+				60212C9C19D5EAF9001921E1 /* ArtworkTests.swift */,
+				60212C9F19D5F20C001921E1 /* ArtistTests.swift */,
+				60212CA119D5F468001921E1 /* ImageTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -994,12 +1008,13 @@
 				60C620DA19D180A20024D493 /* ConfirmYourBidPINViewController.swift in Sources */,
 				5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */,
 				5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */,
-				60D976E619D30FF700DE9F3D /* BidPosition.swift in Sources */,
+				60D976E619D30FF700DE9F3D /* BidderPosition.swift in Sources */,
 				5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */,
 				60968DD019C5B427001AB802 /* KeypadView.swift in Sources */,
 				5E6ED5FF19C07A4300CF3398 /* Moya.swift in Sources */,
 				60C37DD119D44056002E7A44 /* SwiftyJSON.swift in Sources */,
 				60D976EA19D3135200DE9F3D /* Sale.swift in Sources */,
+				60212C9119D5CA04001921E1 /* Image.swift in Sources */,
 				60C37DC319D4359E002E7A44 /* JSONAble.swift in Sources */,
 				60D976DF19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift in Sources */,
 				60D976E419D30F9F00DE9F3D /* Bidder.swift in Sources */,
@@ -1051,15 +1066,17 @@
 				605B857219C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift in Sources */,
 				6030A11C19D1A23100B934CA /* Endpoint.swift in Sources */,
 				6030A11619D1A04300B934CA /* KeypadView.swift in Sources */,
-				60C37DDE19D4655D002E7A44 /* BidPositionTests.swift in Sources */,
+				60C37DDE19D4655D002E7A44 /* BidderPositionTests.swift in Sources */,
 				60D976E019D2F81200DE9F3D /* ConfirmYourBidPasswordViewController.swift in Sources */,
 				6017321519CF27B900A58B63 /* CardHandlerTests.swift in Sources */,
+				60212CA219D5F468001921E1 /* ImageTests.swift in Sources */,
 				605610DC19D2DE2B00A2850A /* ConfirmYourBidEnterYourEmailViewController.swift in Sources */,
 				60C37DD919D45234002E7A44 /* Sale.swift in Sources */,
 				605B856A19C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift in Sources */,
 				605610D019D2D87100A2850A /* SimulatorOnlyView.swift in Sources */,
 				60C37DDB19D45353002E7A44 /* SaleTests.swift in Sources */,
 				6030A11519D19F9E00B934CA /* StoryboardIdentifiers.swift in Sources */,
+				60212C9219D5CA04001921E1 /* Image.swift in Sources */,
 				6030A11319D19F1300B934CA /* ConfirmYourBidPINTests.swift in Sources */,
 				60C07A2119BE05E500868951 /* ARButtonTests.swift in Sources */,
 				60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */,
@@ -1069,6 +1086,7 @@
 				6030A10419D1931400B934CA /* ConfirmYourBidPINViewController.swift in Sources */,
 				60A8E7CF19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift in Sources */,
 				60C37DD419D44DCD002E7A44 /* BidTests.swift in Sources */,
+				60212C9E19D5ECCE001921E1 /* SaleArtwork.swift in Sources */,
 				6030A11B19D1A1F600B934CA /* ReactiveCocoaBindings.swift in Sources */,
 				6030A11119D1931C00B934CA /* CardHandler.swift in Sources */,
 				6030A10F19D1931900B934CA /* Artwork.swift in Sources */,
@@ -1082,10 +1100,12 @@
 				6030A12119D1A30D00B934CA /* ListingsViewController.swift in Sources */,
 				5EA137C019C72BD200D0B743 /* ArtsyAPISpec.swift in Sources */,
 				6030A11919D1A1EF00B934CA /* ArtsyAPI.swift in Sources */,
+				60212C9D19D5EAF9001921E1 /* ArtworkTests.swift in Sources */,
 				600F5F0919C880980027F587 /* UserCreationViewControllerTests.swift in Sources */,
-				60C37DDC19D460DC002E7A44 /* BidPosition.swift in Sources */,
+				60C37DDC19D460DC002E7A44 /* BidderPosition.swift in Sources */,
 				604B225219D359C3008D86C7 /* SystemTimeTests.swift in Sources */,
 				6030A10119D1931400B934CA /* PlaceBidViewController.swift in Sources */,
+				60212CA019D5F20C001921E1 /* ArtistTests.swift in Sources */,
 				600F5F0519C879DC0027F587 /* SwipeCreditCardViewControllerTests.swift in Sources */,
 				5EA137CB19C72BE100D0B743 /* XAppTokenSpec.swift in Sources */,
 				6030A10319D1931400B934CA /* ConfirmYourBidViewController.swift in Sources */,
