@@ -2,8 +2,8 @@ import Foundation
 
 final class Artist:NSObject, JSONAble {
 
-    let id:String
-    var name:String
+    let id: String
+    var name: String
 
     init(id: String, name: String) {
         self.id = id

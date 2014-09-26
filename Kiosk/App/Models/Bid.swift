@@ -1,8 +1,8 @@
 import Foundation
 
 final class Bid: NSObject, JSONAble {
-    let id:String
-    let amountCents:Int
+    let id: String
+    let amountCents: Int
 
     init(id: String, amountCents: Int) {
         self.id = id

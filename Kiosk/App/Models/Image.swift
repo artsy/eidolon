@@ -1,8 +1,8 @@
 import Foundation
 
 final class Image: NSObject, JSONAble {
-    let id:String
-    let imageURL:String
+    let id: String
+    let imageURL: String
     let imageVersions:[String]
 
     init(id: String, imageURL: String, imageVersions: [String]) {

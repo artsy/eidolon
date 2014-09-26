@@ -12,32 +12,32 @@ struct SaleNumberFormatter {
 
 class SaleArtwork: NSObject {
 
-    let id:String
-    let artwork:Artwork
+    let id: String
+    let artwork: Artwork
 
-    var auction:Sale?
+    var auction: Sale?
 
     // The bidder is given from JSON if user is registered
-    let bidder:Bidder?
+    let bidder: Bidder?
 
-    var saleHighestBid:Bid?
-    var bidCount:Int?
+    var saleHighestBid: Bid?
+    var bidCount: Int?
 
-    var userBidderPosition:BidderPosition?
-    var positions:[String]?
+    var userBidderPosition: BidderPosition?
+    var positions: [String]?
 
-    var openingBidCents:Int?
-    var minimumNextBidCents:Int?
+    var openingBidCents: Int?
+    var minimumNextBidCents: Int?
     
-    var lowEstimateCents:Int?
-    var highEstimateCents:Int?
+    var lowEstimateCents: Int?
+    var highEstimateCents: Int?
 
-    init(id:String, artwork:Artwork) {
+    init(id: String, artwork: Artwork) {
         self.id = id
         self.artwork = artwork
     }
 
-    class func fromJSON(json:[String: AnyObject]) -> SaleArtwork {
+    class func fromJSON(json: [String: AnyObject]) -> SaleArtwork {
         let json = JSON(object: json)
 
         let id = json["id"].stringValue

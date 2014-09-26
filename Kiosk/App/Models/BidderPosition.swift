@@ -1,11 +1,11 @@
 import Foundation
 
 final class BidderPosition: NSObject, JSONAble {
-    let id:String
+    let id: String
     let highestBid:Bid
-    let maxBidAmountCents:Int
+    let maxBidAmountCents: Int
 
-    init(id: String, highestBid:Bid, maxBidAmountCents:Int) {
+    init(id: String, highestBid:Bid, maxBidAmountCents: Int) {
         self.id = id
         self.highestBid = highestBid
         self.maxBidAmountCents = maxBidAmountCents

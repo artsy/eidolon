@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
 
-        let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "in-the-studio-with-jr")
+        let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "ici-live-auction")
 
         XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().subscribeNext({ (object) -> Void in
 

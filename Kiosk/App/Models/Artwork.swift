@@ -1,16 +1,16 @@
 import Foundation
 
 final public class Artwork: NSObject, JSONAble {
-    let id:String
+    let id: String
 
-    let dateString:String
-    let title:String
-    let name:String
-    let blurb:String
+    let dateString: String
+    let title: String
+    let name: String
+    let blurb: String
 
     var artists:[Artist]?
 
-    init(id: String, dateString:String, title:String, name:String, blurb:String) {
+    init(id: String, dateString: String, title: String, name: String, blurb: String) {
         self.id = id
         self.dateString = dateString
         self.title = title
@@ -18,7 +18,7 @@ final public class Artwork: NSObject, JSONAble {
         self.blurb = blurb
     }
 
-    class func fromJSON(json:[String: AnyObject]) -> Artwork {
+    class func fromJSON(json: [String: AnyObject]) -> Artwork {
         let json = JSON(object: json)
 
         let id = json["id"].stringValue

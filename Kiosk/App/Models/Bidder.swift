@@ -1,8 +1,8 @@
 import UIKit
 
 final class Bidder: NSObject, JSONAble {
-    let id:String
-    let saleID:String
+    let id: String
+    let saleID: String
 
     init(id: String, saleID: String) {
         self.id = id
