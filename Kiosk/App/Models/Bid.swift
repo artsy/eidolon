@@ -14,6 +14,7 @@ final class Bid: NSObject, JSONAble {
 
         let id = json["id"].stringValue
         let amount = json["amount_cents"].integerValue
+        
         return Bid(id: id, amountCents: amount)
     }
 }
