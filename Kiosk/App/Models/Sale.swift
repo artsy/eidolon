@@ -1,7 +1,7 @@
 import UIKit
 
 final class Sale: NSObject, JSONAble {
-    let id: String
+    let id:String
     let isAuction:Bool
     let startDate:NSDate
     let endDate:NSDate

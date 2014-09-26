@@ -1,39 +1,15 @@
 import Foundation
 
-final public class Artwork: NSObject, JSONAble {
-    let id: String
+// This is just  stub to do popover stuff with
 
-    let dateString: String
-    let title: String
-    let name: String
-    let blurb: String
+public class Artwork: NSObject {
+    let id:String
+    var dateString:String?
+    var title:String?
+    var name:String?
 
-    var artists:[Artist]?
-
-    init(id: String, dateString: String, title: String, name: String, blurb: String) {
+    init(id: String) {
         self.id = id
-        self.dateString = dateString
-        self.title = title
-        self.name = name
-        self.blurb = blurb
+        super.init()
     }
-
-    class func fromJSON(json: [String: AnyObject]) -> Artwork {
-        let json = JSON(object: json)
-
-        let id = json["id"].stringValue
-        let name = json["name"].stringValue
-        let title = json["title"].stringValue
-        let dateString = json["date"].stringValue
-        let blurb = json["blurb"].stringValue
-
-        let artwork = Artwork(id: id, dateString: dateString, title: title, name: name, blurb: blurb)
-
-        if let artistDictionary = json["artist"].object as? [String: AnyObject] {
-            artwork.artists = [Artist.fromJSON(artistDictionary)]
-        }
-
-        return artwork
-    }
-
 }

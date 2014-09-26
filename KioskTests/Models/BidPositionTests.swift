@@ -1,7 +1,7 @@
 import Quick
 import Nimble
 
-class BidderPositionTests: QuickSpec {
+class BidPositionTests: QuickSpec {
     override func spec() {
 
         it("converts from JSON") {
@@ -14,7 +14,7 @@ class BidderPositionTests: QuickSpec {
 
             let data:[String: AnyObject] =  ["id":id , "max_bid_amount_cents" : maxBidAmountCents, "highest_bid":bidData]
 
-            let position = BidderPosition.fromJSON(data)
+            let position = BidPosition.fromJSON(data)
 
             expect(position.id) == id
             expect(position.maxBidAmountCents) == maxBidAmountCents
