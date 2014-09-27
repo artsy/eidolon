@@ -10,7 +10,7 @@ class ArtistTests: QuickSpec {
             let name = "Artist 1"
             let data = ["id" : id, "name": name]
 
-            let artist = Artist.fromJSON(data)
+            let artist = Artist.fromJSON(data) as Artist
 
             expect(artist.id) == id
             expect(artist.name) == name

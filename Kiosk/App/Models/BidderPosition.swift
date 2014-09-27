@@ -1,6 +1,6 @@
 import Foundation
 
-final class BidderPosition: NSObject, JSONAble {
+class BidderPosition:JSONAble {
     let id: String
     let highestBid:Bid
     let maxBidAmountCents: Int
@@ -11,14 +11,14 @@ final class BidderPosition: NSObject, JSONAble {
         self.maxBidAmountCents = maxBidAmountCents
     }
 
-    class func fromJSON(source:[String: AnyObject]) -> BidderPosition {
+    override class func fromJSON(source:[String: AnyObject]) -> JSONAble {
         let json = JSON(object: source)
 
         let id = json["id"].stringValue
         let maxBidAmount = json["max_bid_amount_cents"].integerValue
 
         let bidDictionary = json["highest_bid"].object as [String: AnyObject]
-        let bid = Bid.fromJSON(bidDictionary)
+        let bid = Bid.fromJSON(bidDictionary) as Bid
 
         return BidderPosition(id: id, highestBid: bid, maxBidAmountCents: maxBidAmount)
     }

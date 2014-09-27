@@ -1,6 +1,6 @@
 import UIKit
 
-final class Bidder: NSObject, JSONAble {
+class Bidder:JSONAble {
     let id: String
     let saleID: String
 
@@ -9,7 +9,7 @@ final class Bidder: NSObject, JSONAble {
         self.saleID = saleID
     }
 
-    class func fromJSON(json:[String: AnyObject]) -> Bidder {
+    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
         let json = JSON(object: json)
 
         let id = json["id"].stringValue

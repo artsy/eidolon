@@ -279,13 +279,15 @@
                     <connections>
                         <outlet property="bidAmountTextField" destination="GJN-vx-0ge" id="Wpe-9v-QCg"/>
                         <outlet property="bidButton" destination="dT1-U2-hie" id="b1u-df-a4J"/>
+                        <outlet property="currentBidLabel" destination="GS2-EK-4Nx" id="Wi1-Uq-gkb"/>
                         <outlet property="keypadContainer" destination="A3C-Vo-Qhd" id="Kee-zX-lv9"/>
+                        <outlet property="nextBidAmountLabel" destination="uVu-PR-0oJ" id="x1I-M4-sxi"/>
                         <segue destination="Yzb-AU-icr" kind="push" identifier="Confirm Bid" id="J1L-DG-oRQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RSG-07-uog" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1542.5" y="639"/>
+            <point key="canvasLocation" x="1510.5" y="591"/>
         </scene>
         <!--Swipe Credit Card View Controller-->
         <scene sceneID="qjX-tW-U7k">
