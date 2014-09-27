@@ -1,6 +1,6 @@
 import UIKit
 
-class Sale:JSONAble {
+class Sale: JSONAble {
     let id: String
     let isAuction:Bool
     let startDate:NSDate

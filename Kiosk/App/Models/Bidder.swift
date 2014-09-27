@@ -1,6 +1,6 @@
 import UIKit
 
-class Bidder:JSONAble {
+class Bidder: JSONAble {
     let id: String
     let saleID: String
 

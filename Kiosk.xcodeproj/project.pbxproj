@@ -122,6 +122,7 @@
 		60C37DE119D468A7002E7A44 /* RAC+JSONAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C37DE019D468A7002E7A44 /* RAC+JSONAble.swift */; };
 		60C37DE219D468A7002E7A44 /* RAC+JSONAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C37DE019D468A7002E7A44 /* RAC+JSONAble.swift */; };
 		60C620DA19D180A20024D493 /* ConfirmYourBidPINViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C620D919D180A20024D493 /* ConfirmYourBidPINViewController.swift */; };
+		60C6914119D6CBDA001F58FD /* RAC+JSONAbleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C6914019D6CBDA001F58FD /* RAC+JSONAbleTests.swift */; };
 		60D48B9519C89DE300A3CA88 /* edit_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D48B9419C89DE300A3CA88 /* edit_button@2x.png */; };
 		60D976DD19D2F6DD00DE9F3D /* ConfirmYourBidEnterYourEmailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976DC19D2F6DD00DE9F3D /* ConfirmYourBidEnterYourEmailViewControllerTests.swift */; };
 		60D976DF19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976DE19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift */; };
@@ -310,6 +311,7 @@
 		60C620D919D180A20024D493 /* ConfirmYourBidPINViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidPINViewController.swift; sourceTree = "<group>"; };
 		60C620E519D1835E0024D493 /* CI.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CI.md; sourceTree = "<group>"; };
 		60C620E619D183890024D493 /* overview.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = overview.md; sourceTree = "<group>"; };
+		60C6914019D6CBDA001F58FD /* RAC+JSONAbleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RAC+JSONAbleTests.swift"; sourceTree = "<group>"; };
 		60D48B9419C89DE300A3CA88 /* edit_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit_button@2x.png"; sourceTree = "<group>"; };
 		60D976DC19D2F6DD00DE9F3D /* ConfirmYourBidEnterYourEmailViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidEnterYourEmailViewControllerTests.swift; sourceTree = "<group>"; };
 		60D976DE19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidPasswordViewController.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 		5E59DD4519913DD800A48370 /* KioskTests */ = {
 			isa = PBXGroup;
 			children = (
+				60C6913519D6CB99001F58FD /* App */,
 				604B225019D359A0008D86C7 /* Models */,
 				6030A12A19D1AA0F00B934CA /* KioskTests.swift */,
 				6017321319CF279000A58B63 /* Cards */,
@@ -703,6 +706,22 @@
 			);
 			name = Docs;
 			path = ../docs;
+			sourceTree = "<group>";
+		};
+		60C6913519D6CB99001F58FD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				60C6913619D6CB99001F58FD /* RAC */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		60C6913619D6CB99001F58FD /* RAC */ = {
+			isa = PBXGroup;
+			children = (
+				60C6914019D6CBDA001F58FD /* RAC+JSONAbleTests.swift */,
+			);
+			path = RAC;
 			sourceTree = "<group>";
 		};
 		60D48B9319C89DD900A3CA88 /* Resources */ = {
@@ -1108,6 +1127,7 @@
 				60212CA019D5F20C001921E1 /* ArtistTests.swift in Sources */,
 				600F5F0519C879DC0027F587 /* SwipeCreditCardViewControllerTests.swift in Sources */,
 				5EA137CB19C72BE100D0B743 /* XAppTokenSpec.swift in Sources */,
+				60C6914119D6CBDA001F58FD /* RAC+JSONAbleTests.swift in Sources */,
 				6030A10319D1931400B934CA /* ConfirmYourBidViewController.swift in Sources */,
 				6030A11719D1A05800B934CA /* KeypadContainerView.swift in Sources */,
 				6030A12B19D1AA0F00B934CA /* KioskTests.swift in Sources */,

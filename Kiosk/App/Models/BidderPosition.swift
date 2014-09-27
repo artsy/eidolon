@@ -1,6 +1,6 @@
 import Foundation
 
-class BidderPosition:JSONAble {
+class BidderPosition: JSONAble {
     let id: String
     let highestBid:Bid
     let maxBidAmountCents: Int

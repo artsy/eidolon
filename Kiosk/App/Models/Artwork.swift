@@ -1,6 +1,6 @@
 import Foundation
 
-class Artwork:JSONAble {
+class Artwork: JSONAble {
     let id: String
 
     let dateString: String

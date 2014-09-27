@@ -1,6 +1,6 @@
 import Foundation
 
-class Artist:JSONAble {
+class Artist: JSONAble {
 
     let id: String
     var name: String
