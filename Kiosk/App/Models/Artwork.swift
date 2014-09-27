@@ -8,7 +8,10 @@ class Artwork: JSONAble {
     let name: String
     let blurb: String
 
-    var artists:[Artist]?
+    var artists: [Artist]?
+    var culturalMarker: String?
+
+    var images: [Image]?
 
     init(id: String, dateString: String, title: String, name: String, blurb: String) {
         self.id = id
@@ -31,6 +34,10 @@ class Artwork: JSONAble {
 
         if let artistDictionary = json["artist"].object as? [String: AnyObject] {
             artwork.artists = [Artist.fromJSON(artistDictionary) as Artist]
+        }
+
+        if let imageDicts = json["images"].object as? Array<Dictionary<String, AnyObject>> {
+            artwork.images = imageDicts.map({ return Image.fromJSON($0) as Image })
         }
 
         return artwork

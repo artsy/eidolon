@@ -2,7 +2,12 @@ import UIKit
 
 class ListingsViewController: UIViewController {
     var allowAnimations:Bool = true;
-    
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.showModal(self)
+    }
+
     @IBAction func showModal(sender: AnyObject) {
 
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "ici-live-auction")
@@ -13,12 +18,9 @@ class ListingsViewController: UIViewController {
             let storyboard = UIStoryboard.fulfillment()
             let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
 
-            for saleArtwork in saleArtworks {
-                println("SA: \(saleArtwork.id) - \(saleArtwork.artwork.title)");
-            }
-
             if let placeBidVC = containerController.placeBidViewController() {
-                placeBidVC.saleArtwork = saleArtworks.first
+                let randomIndex = Int(arc4random_uniform(UInt32(saleArtworks.count)))
+                placeBidVC.saleArtwork = saleArtworks[randomIndex]
             }
 
             self?.presentViewController(containerController, animated: self!.allowAnimations, completion: nil)
