@@ -1,1 +1,748 @@
-[{"id":"jr-los-angeles-oeil-number-1","sale_id":"in-the-studio-with-jr","highest_bid":null,"bidder_positions_count":0,"artwork":{"artist":{"_id":"4e4506e3fe48fc0001006d24","id":"jr","sortable_id":"jr","name":"JR","years":"born 1983","public":true,"birthday":"1983","nationality":"French","published_artworks_count":58,"forsale_artworks_count":26,"artworks_count":72,"image_url":"http://stagic0.artsy.net/artist_images/52f6bdde4a04f5d504f69e12/:version.jpg","image_versions":["square","tall","large","four_thirds"],"image_urls":{},"original_height":null,"original_width":null},"partner":{"_id":"4dd15229e0091e000100166b","id":"lazarides","default_profile_id":"lazarides","default_profile_public":true,"sortable_id":"lazarides","type":"Gallery","name":"Lazarides","short_name":null,"website":"http://www.lazinc.com","has_full_profile":true},"images":[{"id":"508ec0b9fc4e2400020002fc","position":1,"aspect_ratio":0.94,"downloadable":false,"original_height":800,"original_width":752,"is_default":true,"image_versions":["small","square","medium","large","larger","normalized","tall"],"image_url":"http://stagic1.artsy.net/additional_images/508ec0b9fc4e2400020002fc/:version.jpg","tile_size":512,"tile_overlap":0,"tile_format":"jpg","tile_base_url":"http://static.artsy.net/additional_images/508ec0b9fc4e2400020002fc/dztiles-512-0","max_tiled_height":800,"max_tiled_width":752}],"artists":[{"_id":"4e4506e3fe48fc0001006d24","id":"jr","sortable_id":"jr","name":"JR","years":"born 1983","public":true,"birthday":"1983","nationality":"French","published_artworks_count":58,"forsale_artworks_count":26,"artworks_count":72,"image_url":"http://stagic0.artsy.net/artist_images/52f6bdde4a04f5d504f69e12/:version.jpg","image_versions":["square","tall","large","four_thirds"],"image_urls":{},"original_height":null,"original_width":null}],"_id":"508ec0b6fc4e2400020002f3","id":"jr-los-angeles-oeil-number-1","title":"Los Angeles Oeil (Number 1) ","display":"JR, Los Angeles Oeil (Number 1)  (2012)","manufacturer":null,"category":"Mixed Media","medium":"Ink on wooden panels","unique":false,"forsale":true,"sold":false,"date":"2012","dimensions":{"in":"37 4/5 × 39 in","cm":"96 × 99 cm"},"price":"","availability":"for sale","ecommerce":false,"collecting_institution":"","blurb":"","edition_sets_count":0,"published":true,"price_currency":"GBP","sale_message":"Contact For Price","inquireable":true,"acquireable":false,"can_share":true,"can_share_image":false,"cultural_maker":null},"highest_bid_amount_cents":null,"minimum_next_bid_cents":5000,"_id":"5180338a479e31fcae000094","user_notes":" ","position":7,"opening_bid_cents":null,"low_estimate_cents":null,"high_estimate_cents":null,"temporary_estimate_cents":null,"reserve_status":"no_reserve"},{"id":"jr-action-in-phnom-penh","sale_id":"in-the-studio-with-jr","highest_bid":null,"bidder_positions_count":0,"artwork":{"artist":{"_id":"4e4506e3fe48fc0001006d24","id":"jr","sortable_id":"jr","name":"JR","years":"born 1983","public":true,"birthday":"1983","nationality":"French","published_artworks_count":58,"forsale_artworks_count":26,"artworks_count":72,"image_url":"http://stagic0.artsy.net/artist_images/52f6bdde4a04f5d504f69e12/:version.jpg","image_versions":["square","tall","large","four_thirds"],"image_urls":{},"original_height":null,"original_width":null},"partner":{"_id":"4dd15229e0091e000100166b","id":"lazarides","default_profile_id":"lazarides","default_profile_public":true,"sortable_id":"lazarides","type":"Gallery","name":"Lazarides","short_name":null,"website":"http://www.lazinc.com","has_full_profile":true},"images":[{"id":"4e7f1edaf15cc800010087d2","position":1,"aspect_ratio":1.5,"downloadable":false,"original_height":237,"original_width":355,"is_default":true,"image_versions":["small","square","medium","large","larger","normalized","tall"],"image_url":"http://stagic2.artsy.net/additional_images/4e7f1edaf15cc800010087d2/1/:version.jpg","tile_size":512,"tile_overlap":0,"tile_format":"jpg","tile_base_url":"http://static.artsy.net/additional_images/4e7f1edaf15cc800010087d2/1/dztiles-512-0","max_tiled_height":237,"max_tiled_width":355}],"artists":[{"_id":"4e4506e3fe48fc0001006d24","id":"jr","sortable_id":"jr","name":"JR","years":"born 1983","public":true,"birthday":"1983","nationality":"French","published_artworks_count":58,"forsale_artworks_count":26,"artworks_count":72,"image_url":"http://stagic0.artsy.net/artist_images/52f6bdde4a04f5d504f69e12/:version.jpg","image_versions":["square","tall","large","four_thirds"],"image_urls":{},"original_height":null,"original_width":null}],"_id":"4dd2640d1707bc0001003bdd","id":"jr-action-in-phnom-penh","title":"Action in Phnom Penh","display":"JR, Action in Phnom Penh (2009)","manufacturer":null,"category":"Photography","medium":"Cibachrome print mounted on aluminium under Perspex, framed.","unique":false,"forsale":true,"sold":false,"date":"2009","dimensions":{"in":"48 9/10 × 73 7/10 in","cm":"124.2 × 187.2 cm"},"price":"","availability":"for sale","ecommerce":false,"collecting_institution":"","blurb":"","edition_sets_count":0,"published":true,"price_currency":"GBP","sale_message":"Contact For Price","inquireable":true,"acquireable":false,"can_share":true,"can_share_image":true,"cultural_maker":null},"highest_bid_amount_cents":null,"minimum_next_bid_cents":5000,"_id":"518033a00b41dfa99e000082","user_notes":"","position":8,"opening_bid_cents":null,"low_estimate_cents":null,"high_estimate_cents":null,"temporary_estimate_cents":null,"reserve_status":"no_reserve"}]
+ [
+  {
+  "_id": "527d00a8275b24027f0004ac",
+  "artwork": {
+  "_id": "527c19f7cd530ecabe00020e",
+  "acquireable": false,
+  "artist": {
+  "_id": "4de9a1057ae5cf0001001862",
+  "artworks_count": 163,
+  "birthday": "1931",
+  "forsale_artworks_count": 69,
+  "id": "john-baldessari",
+  "image_url": "https://d32dm0rphc51dk.cloudfront.net/QU67jr7AiDbV_WA0I2t6kw/:version.jpg",
+  "image_urls": {
+  "four_thirds": "https://d32dm0rphc51dk.cloudfront.net/QU67jr7AiDbV_WA0I2t6kw/four_thirds.jpg",
+  "large": "https://d32dm0rphc51dk.cloudfront.net/QU67jr7AiDbV_WA0I2t6kw/large.jpg",
+  "square": "https://d32dm0rphc51dk.cloudfront.net/QU67jr7AiDbV_WA0I2t6kw/square.jpg",
+  "tall": "https://d32dm0rphc51dk.cloudfront.net/QU67jr7AiDbV_WA0I2t6kw/tall.jpg"
+  },
+  "image_versions": [
+                     "four_thirds",
+                     "large",
+                     "square",
+                     "tall"
+                     ],
+  "name": "John Baldessari",
+  "nationality": "American",
+  "original_height": null,
+  "original_width": null,
+  "public": true,
+  "published_artworks_count": 80,
+  "sortable_id": "baldessari-john",
+  "years": "born 1931"
+  },
+  "artists": [
+              {
+              "_id": "4de9a1057ae5cf0001001862",
+              "artworks_count": 163,
+              "birthday": "1931",
+              "forsale_artworks_count": 69,
+              "id": "john-baldessari",
+              "image_url": "https://d32dm0rphc51dk.cloudfront.net/QU67jr7AiDbV_WA0I2t6kw/:version.jpg",
+              "image_urls": {
+              "four_thirds": "https://d32dm0rphc51dk.cloudfront.net/QU67jr7AiDbV_WA0I2t6kw/four_thirds.jpg",
+              "large": "https://d32dm0rphc51dk.cloudfront.net/QU67jr7AiDbV_WA0I2t6kw/large.jpg",
+              "square": "https://d32dm0rphc51dk.cloudfront.net/QU67jr7AiDbV_WA0I2t6kw/square.jpg",
+              "tall": "https://d32dm0rphc51dk.cloudfront.net/QU67jr7AiDbV_WA0I2t6kw/tall.jpg"
+              },
+              "image_versions": [
+                                 "four_thirds",
+                                 "large",
+                                 "square",
+                                 "tall"
+                                 ],
+              "name": "John Baldessari",
+              "nationality": "American",
+              "original_height": null,
+              "original_width": null,
+              "public": true,
+              "published_artworks_count": 80,
+              "sortable_id": "baldessari-john",
+              "years": "born 1931"
+              }
+              ],
+  "availability": "not for sale",
+  "blurb": "One of the most influential (and wittiest) artists of the past half-century, Conceptual artist Baldessari complements verbal reductions with even more absurd visual juxtapositions. \u201cI want to produce images that startle one into recollection,\u201d he has said.",
+  "can_share": true,
+  "can_share_image": true,
+  "category": "Work on Paper",
+  "collecting_institution": "",
+  "cultural_maker": null,
+  "date": "2013",
+  "dimensions": {
+  "cm": "80 \u00d7 61 cm",
+  "in": "31 1/2 \u00d7 24 in"
+  },
+  "display": "John Baldessari, Sediment: Hair and Goose (2013)",
+  "ecommerce": false,
+  "edition_sets_count": 0,
+  "forsale": false,
+  "id": "john-baldessari-sediment-hair-and-goose",
+  "images": [
+             {
+             "aspect_ratio": 0.76,
+             "downloadable": false,
+             "id": "527c19f7a09a677dea000374",
+             "image_url": "http://stagic3.artsy.net/additional_images/527c19f7a09a677dea000374/:version.jpg",
+             "image_versions": [
+                                "small",
+                                "square",
+                                "medium",
+                                "medium_rectangle",
+                                "large_rectangle",
+                                "tall",
+                                "large",
+                                "larger",
+                                "normalized"
+                                ],
+             "is_default": true,
+             "max_tiled_height": 1584,
+             "max_tiled_width": 1202,
+             "original_height": 1584,
+             "original_width": 1202,
+             "position": 1,
+             "tile_base_url": "http://static.artsy.net/additional_images/527c19f7a09a677dea000374/dztiles-512-0",
+             "tile_format": "jpg",
+             "tile_overlap": 0,
+             "tile_size": 512
+             }
+             ],
+  "inquireable": true,
+  "manufacturer": null,
+  "medium": "Unique archival inkjet print",
+  "partner": {
+  "_id": "52531cd89c18dbf32f0000de",
+  "default_profile_id": "partner-52531cd89c18dbf32f0000de",
+  "default_profile_public": false,
+  "has_full_profile": false,
+  "id": "ici-annual-benefit-and-auction-2013",
+  "name": "ICI Annual Benefit & Auction 2013",
+  "short_name": null,
+  "sortable_id": "ici-annual-benefit-and-auction-2013",
+  "type": "Non Profit",
+  "website": "http://curatorsintl.org/events/ici-2013-annual-benefit-auction"
+  },
+  "price": "",
+  "price_currency": "USD",
+  "published": true,
+  "sale_message": null,
+  "sold": false,
+  "title": "Sediment: Hair and Goose",
+  "unique": false
+  },
+  "bidder_positions_count": 0,
+  "high_estimate_cents": null,
+  "highest_bid": null,
+  "highest_bid_amount_cents": null,
+  "id": "john-baldessari-sediment-hair-and-goose",
+  "low_estimate_cents": null,
+  "minimum_next_bid_cents": 3500000,
+  "opening_bid_cents": 3500000,
+  "position": 1,
+  "reserve_status": "no_reserve",
+  "sale_id": "ici-live-auction",
+  "temporary_estimate_cents": null,
+  "user_notes": "Estimate $45,000. One of the most influential (and wittiest) artists of the past half-century, Conceptual artist Baldessari complements verbal reductions with even more absurd visual juxtapositions. \u201cI want to produce images that startle one into recollection,\u201d he has said."
+  },
+  {
+  "_id": "527d00b37622ddbfde00004a",
+  "artwork": {
+  "_id": "52570f7ba09a67291f00043c",
+  "acquireable": false,
+  "artist": {
+  "_id": "4f0648328501fa10ca000245",
+  "artworks_count": 16,
+  "birthday": "1979",
+  "forsale_artworks_count": 2,
+  "id": "nate-lowman",
+  "image_url": "http://stagic3.artsy.net/artist_images/52f6be0e4a04f5d504f6d98e/2/:version.jpg",
+  "image_urls": {
+  "four_thirds": "http://stagic3.artsy.net/artist_images/52f6be0e4a04f5d504f6d98e/2/four_thirds.jpg",
+  "large": "http://stagic3.artsy.net/artist_images/52f6be0e4a04f5d504f6d98e/2/large.jpg",
+  "square": "http://stagic3.artsy.net/artist_images/52f6be0e4a04f5d504f6d98e/2/square.jpg",
+  "tall": "http://stagic3.artsy.net/artist_images/52f6be0e4a04f5d504f6d98e/2/tall.jpg"
+  },
+  "image_versions": [
+                     "square",
+                     "tall",
+                     "large",
+                     "four_thirds"
+                     ],
+  "name": "Nate Lowman",
+  "nationality": "American",
+  "original_height": null,
+  "original_width": null,
+  "public": true,
+  "published_artworks_count": 7,
+  "sortable_id": "lowman-nate",
+  "years": "born 1979"
+  },
+  "artists": [
+              {
+              "_id": "4f0648328501fa10ca000245",
+              "artworks_count": 16,
+              "birthday": "1979",
+              "forsale_artworks_count": 2,
+              "id": "nate-lowman",
+              "image_url": "http://stagic3.artsy.net/artist_images/52f6be0e4a04f5d504f6d98e/2/:version.jpg",
+              "image_urls": {
+              "four_thirds": "http://stagic3.artsy.net/artist_images/52f6be0e4a04f5d504f6d98e/2/four_thirds.jpg",
+              "large": "http://stagic3.artsy.net/artist_images/52f6be0e4a04f5d504f6d98e/2/large.jpg",
+              "square": "http://stagic3.artsy.net/artist_images/52f6be0e4a04f5d504f6d98e/2/square.jpg",
+              "tall": "http://stagic3.artsy.net/artist_images/52f6be0e4a04f5d504f6d98e/2/tall.jpg"
+              },
+              "image_versions": [
+                                 "square",
+                                 "tall",
+                                 "large",
+                                 "four_thirds"
+                                 ],
+              "name": "Nate Lowman",
+              "nationality": "American",
+              "original_height": null,
+              "original_width": null,
+              "public": true,
+              "published_artworks_count": 7,
+              "sortable_id": "lowman-nate",
+              "years": "born 1979"
+              }
+              ],
+  "availability": "not for sale",
+  "blurb": "Lowman mines the detritus of pop culture in mixed-media works that critique celebrity culture, consumerism, and the saturation of sex and violence in mass media. His first job out of undergraduate studies at NYU was as a security guard at this auction's very locale, the former home of The Dia Center for the Arts.",
+  "can_share": true,
+  "can_share_image": true,
+  "category": "Painting",
+  "collecting_institution": "",
+  "cultural_maker": null,
+  "date": "2013",
+  "dimensions": {
+  "cm": "50.8 \u00d7 40.6 \u00d7 1.9 cm",
+  "in": "20 \u00d7 16 \u00d7 3/4 in"
+  },
+  "display": "Nate Lowman, January Tree (2013)",
+  "ecommerce": false,
+  "edition_sets_count": 0,
+  "forsale": false,
+  "id": "nate-lowman-january-tree",
+  "images": [
+             {
+             "aspect_ratio": 0.81,
+             "downloadable": false,
+             "id": "52570f80275b24468c000506",
+             "image_url": "http://stagic1.artsy.net/additional_images/52570f80275b24468c000506/:version.jpg",
+             "image_versions": [
+                                "small",
+                                "square",
+                                "medium",
+                                "medium_rectangle",
+                                "large_rectangle",
+                                "tall",
+                                "large",
+                                "larger",
+                                "normalized"
+                                ],
+             "is_default": true,
+             "max_tiled_height": 6784,
+             "max_tiled_width": 5481,
+             "original_height": 6784,
+             "original_width": 5481,
+             "position": 1,
+             "tile_base_url": "http://static.artsy.net/additional_images/52570f80275b24468c000506/dztiles-512-0",
+             "tile_format": "jpg",
+             "tile_overlap": 0,
+             "tile_size": 512
+             }
+             ],
+  "inquireable": true,
+  "manufacturer": null,
+  "medium": "Mixed media on canvas",
+  "partner": {
+  "_id": "52531cd89c18dbf32f0000de",
+  "default_profile_id": "partner-52531cd89c18dbf32f0000de",
+  "default_profile_public": false,
+  "has_full_profile": false,
+  "id": "ici-annual-benefit-and-auction-2013",
+  "name": "ICI Annual Benefit & Auction 2013",
+  "short_name": null,
+  "sortable_id": "ici-annual-benefit-and-auction-2013",
+  "type": "Non Profit",
+  "website": "http://curatorsintl.org/events/ici-2013-annual-benefit-auction"
+  },
+  "price": "",
+  "price_currency": "USD",
+  "published": true,
+  "sale_message": null,
+  "sold": false,
+  "title": "January Tree",
+  "unique": false
+  },
+  "bidder_positions_count": 0,
+  "high_estimate_cents": null,
+  "highest_bid": {
+  "amount_cents": 1900000,
+  "created_at": "2013-11-19T16:54:42+00:00",
+  "id": "528b97d2ebad649d39000012"
+  },
+  "highest_bid_amount_cents": 1900000,
+  "id": "nate-lowman-january-tree",
+  "low_estimate_cents": null,
+  "minimum_next_bid_cents": 2000000,
+  "opening_bid_cents": 1400000,
+  "position": 2,
+  "reserve_status": "no_reserve",
+  "sale_id": "ici-live-auction",
+  "temporary_estimate_cents": null,
+  "user_notes": "Estimate $35,000. Lowman mines the detritus of pop culture in mixed-media works that critique celebrity culture, consumerism, and the saturation of sex and violence in mass media. His first job out of undergraduate studies at NYU was as a security guard at this auction's very locale, the former home of The Dia Center for the Arts."
+  },
+  {
+  "_id": "527d00c0275b24183d00045a",
+  "artwork": {
+  "_id": "526ac540cd530e10f9000166",
+  "acquireable": false,
+  "artist": {
+  "_id": "4df44138c75005000100331c",
+  "artworks_count": 31,
+  "birthday": "1970",
+  "forsale_artworks_count": 9,
+  "id": "julie-mehretu",
+  "image_url": "http://stagic0.artsy.net/artist_images/52f6bde14a04f5d504f6a21c/2/:version.jpg",
+  "image_urls": {
+  "four_thirds": "http://stagic0.artsy.net/artist_images/52f6bde14a04f5d504f6a21c/2/four_thirds.jpg",
+  "large": "http://stagic0.artsy.net/artist_images/52f6bde14a04f5d504f6a21c/2/large.jpg",
+  "square": "http://stagic0.artsy.net/artist_images/52f6bde14a04f5d504f6a21c/2/square.jpg",
+  "tall": "http://stagic0.artsy.net/artist_images/52f6bde14a04f5d504f6a21c/2/tall.jpg"
+  },
+  "image_versions": [
+                     "square",
+                     "tall",
+                     "large",
+                     "four_thirds"
+                     ],
+  "name": "Julie Mehretu",
+  "nationality": "Ethiopian-American",
+  "original_height": null,
+  "original_width": null,
+  "public": true,
+  "published_artworks_count": 13,
+  "sortable_id": "mehretu-julie",
+  "years": "born 1970"
+  },
+  "artists": [
+              {
+              "_id": "4df44138c75005000100331c",
+              "artworks_count": 31,
+              "birthday": "1970",
+              "forsale_artworks_count": 9,
+              "id": "julie-mehretu",
+              "image_url": "http://stagic0.artsy.net/artist_images/52f6bde14a04f5d504f6a21c/2/:version.jpg",
+              "image_urls": {
+              "four_thirds": "http://stagic0.artsy.net/artist_images/52f6bde14a04f5d504f6a21c/2/four_thirds.jpg",
+              "large": "http://stagic0.artsy.net/artist_images/52f6bde14a04f5d504f6a21c/2/large.jpg",
+              "square": "http://stagic0.artsy.net/artist_images/52f6bde14a04f5d504f6a21c/2/square.jpg",
+              "tall": "http://stagic0.artsy.net/artist_images/52f6bde14a04f5d504f6a21c/2/tall.jpg"
+              },
+              "image_versions": [
+                                 "square",
+                                 "tall",
+                                 "large",
+                                 "four_thirds"
+                                 ],
+              "name": "Julie Mehretu",
+              "nationality": "Ethiopian-American",
+              "original_height": null,
+              "original_width": null,
+              "public": true,
+              "published_artworks_count": 13,
+              "sortable_id": "mehretu-julie",
+              "years": "born 1970"
+              }
+              ],
+  "availability": "not for sale",
+  "blurb": "Working normally in large scale, Mehretu draws on the 21st-century city for inspiration, transferring its energy into her gestural sweeps of paint and built-up marks in ink and pencil\u2014often transposed from projections\u2014and condensing seemingly infinite urban narratives, architectural views, and street plans into single unified compositions. \u201cThe narratives come together to create this overall picture that you see from the distance,\u201d she says.",
+  "can_share": true,
+  "can_share_image": true,
+  "category": "Work on Paper",
+  "collecting_institution": "",
+  "cultural_maker": null,
+  "date": "2013",
+  "dimensions": {
+  "cm": "71.6 \u00d7 56.5 cm",
+  "in": "28 1/5 \u00d7 22 1/4 in"
+  },
+  "display": "Julie Mehretu, Untitled (2013)",
+  "ecommerce": false,
+  "edition_sets_count": 0,
+  "forsale": false,
+  "id": "julie-mehretu-untitled-1",
+  "images": [
+             {
+             "aspect_ratio": 1.29,
+             "downloadable": false,
+             "id": "5277e3e4cd530eb866000260",
+             "image_url": "http://stagic1.artsy.net/additional_images/5277e3e4cd530eb866000260/1/:version.jpg",
+             "image_versions": [
+                                "small",
+                                "square",
+                                "medium",
+                                "medium_rectangle",
+                                "large_rectangle",
+                                "tall",
+                                "large",
+                                "larger",
+                                "normalized"
+                                ],
+             "is_default": true,
+             "max_tiled_height": 3133,
+             "max_tiled_width": 4031,
+             "original_height": 3133,
+             "original_width": 4031,
+             "position": 1,
+             "tile_base_url": "http://static.artsy.net/additional_images/5277e3e4cd530eb866000260/1/dztiles-512-0",
+             "tile_format": "jpg",
+             "tile_overlap": 0,
+             "tile_size": 512
+             }
+             ],
+  "inquireable": true,
+  "manufacturer": null,
+  "medium": "Ink, watercolor, graphite, spitbite, drypoint, etching on paper",
+  "partner": {
+  "_id": "52531cd89c18dbf32f0000de",
+  "default_profile_id": "partner-52531cd89c18dbf32f0000de",
+  "default_profile_public": false,
+  "has_full_profile": false,
+  "id": "ici-annual-benefit-and-auction-2013",
+  "name": "ICI Annual Benefit & Auction 2013",
+  "short_name": null,
+  "sortable_id": "ici-annual-benefit-and-auction-2013",
+  "type": "Non Profit",
+  "website": "http://curatorsintl.org/events/ici-2013-annual-benefit-auction"
+  },
+  "price": "",
+  "price_currency": "USD",
+  "published": true,
+  "sale_message": null,
+  "sold": false,
+  "title": "Untitled",
+  "unique": false
+  },
+  "bidder_positions_count": 0,
+  "high_estimate_cents": null,
+  "highest_bid": {
+  "amount_cents": 4800000,
+  "created_at": "2013-11-17T14:46:26+00:00",
+  "id": "5288d6c2ebad640ce3000001"
+  },
+  "highest_bid_amount_cents": 4800000,
+  "id": "julie-mehretu-untitled-1",
+  "low_estimate_cents": null,
+  "minimum_next_bid_cents": 5000000,
+  "opening_bid_cents": 3500000,
+  "position": 3,
+  "reserve_status": "no_reserve",
+  "sale_id": "ici-live-auction",
+  "temporary_estimate_cents": null,
+  "user_notes": "Estimate $45,000. Working normally in large scale, Mehretu draws on the 21st-century city for inspiration, transferring its energy into her gestural sweeps of paint and built-up marks in ink and pencil\u2014often transposed from projections\u2014and condensing seemingly infinite urban narratives, architectural views, and street plans into single unified compositions. \u201cThe narratives come together to create this overall picture that you see from the distance,\u201d she says."
+  },
+  {
+  "_id": "527d83bc9c18dbdbf60003bf",
+  "artwork": {
+  "_id": "5277f9188b3b8196670002e7",
+  "acquireable": false,
+  "artist": {
+  "_id": "4f04b302f8b8f20001000c1c",
+  "artworks_count": 16,
+  "birthday": "1976",
+  "forsale_artworks_count": 4,
+  "id": "walead-beshty",
+  "image_url": "http://stagic0.artsy.net/artist_images/52f6bdfb4a04f5d504f6bfed/1/:version.jpg",
+  "image_urls": {
+  "four_thirds": "http://stagic0.artsy.net/artist_images/52f6bdfb4a04f5d504f6bfed/1/four_thirds.jpg",
+  "large": "http://stagic0.artsy.net/artist_images/52f6bdfb4a04f5d504f6bfed/1/large.jpg",
+  "square": "http://stagic0.artsy.net/artist_images/52f6bdfb4a04f5d504f6bfed/1/square.jpg",
+  "tall": "http://stagic0.artsy.net/artist_images/52f6bdfb4a04f5d504f6bfed/1/tall.jpg"
+  },
+  "image_versions": [
+                     "square",
+                     "tall",
+                     "large",
+                     "four_thirds"
+                     ],
+  "name": "Walead Beshty",
+  "nationality": "",
+  "original_height": null,
+  "original_width": null,
+  "public": true,
+  "published_artworks_count": 9,
+  "sortable_id": "beshty-walead",
+  "years": "born 1976"
+  },
+  "artists": [
+              {
+              "_id": "4f04b302f8b8f20001000c1c",
+              "artworks_count": 16,
+              "birthday": "1976",
+              "forsale_artworks_count": 4,
+              "id": "walead-beshty",
+              "image_url": "http://stagic0.artsy.net/artist_images/52f6bdfb4a04f5d504f6bfed/1/:version.jpg",
+              "image_urls": {
+              "four_thirds": "http://stagic0.artsy.net/artist_images/52f6bdfb4a04f5d504f6bfed/1/four_thirds.jpg",
+              "large": "http://stagic0.artsy.net/artist_images/52f6bdfb4a04f5d504f6bfed/1/large.jpg",
+              "square": "http://stagic0.artsy.net/artist_images/52f6bdfb4a04f5d504f6bfed/1/square.jpg",
+              "tall": "http://stagic0.artsy.net/artist_images/52f6bdfb4a04f5d504f6bfed/1/tall.jpg"
+              },
+              "image_versions": [
+                                 "square",
+                                 "tall",
+                                 "large",
+                                 "four_thirds"
+                                 ],
+              "name": "Walead Beshty",
+              "nationality": "",
+              "original_height": null,
+              "original_width": null,
+              "public": true,
+              "published_artworks_count": 9,
+              "sortable_id": "beshty-walead",
+              "years": "born 1976"
+              }
+              ],
+  "availability": "not for sale",
+  "blurb": "Best known for his large-scale photograms, Beshty uses photography to explore how the medium functions or fails as a documentary form. \u201cPhotographs operate something like ruins,\u201d he says. \u201cDespite their seeming stasis, they are available to a multitude of narratives, slipping effortlessly between them.\u201d",
+  "can_share": true,
+  "can_share_image": true,
+  "category": "Photography",
+  "collecting_institution": "",
+  "cultural_maker": null,
+  "date": "2013",
+  "dimensions": {
+  "cm": "41.9 \u00d7 34.6 cm",
+  "in": "16 1/2 \u00d7 13 5/8 in"
+  },
+  "display": "Walead Beshty, Two Sided Picture (YR), January 12th 2007, Valencia, California, Fujicolor Crystal Archive (2013)",
+  "ecommerce": false,
+  "edition_sets_count": 0,
+  "forsale": false,
+  "id": "walead-beshty-two-sided-picture-yr-january-12th-2007-valencia-california-fujicolor-crystal-archive",
+  "images": [
+             {
+             "aspect_ratio": 0.83,
+             "downloadable": false,
+             "id": "5277f91dc9dc242b0a000156",
+             "image_url": "http://stagic2.artsy.net/additional_images/5277f91dc9dc242b0a000156/1/:version.jpg",
+             "image_versions": [
+                                "small",
+                                "square",
+                                "medium",
+                                "medium_rectangle",
+                                "large_rectangle",
+                                "tall",
+                                "large",
+                                "larger",
+                                "normalized"
+                                ],
+             "is_default": true,
+             "max_tiled_height": 5470,
+             "max_tiled_width": 4519,
+             "original_height": 5470,
+             "original_width": 4519,
+             "position": 1,
+             "tile_base_url": "http://static.artsy.net/additional_images/5277f91dc9dc242b0a000156/1/dztiles-512-0",
+             "tile_format": "jpg",
+             "tile_overlap": 0,
+             "tile_size": 512
+             }
+             ],
+  "inquireable": true,
+  "manufacturer": null,
+  "medium": "Unique color photographic print",
+  "partner": {
+  "_id": "52531cd89c18dbf32f0000de",
+  "default_profile_id": "partner-52531cd89c18dbf32f0000de",
+  "default_profile_public": false,
+  "has_full_profile": false,
+  "id": "ici-annual-benefit-and-auction-2013",
+  "name": "ICI Annual Benefit & Auction 2013",
+  "short_name": null,
+  "sortable_id": "ici-annual-benefit-and-auction-2013",
+  "type": "Non Profit",
+  "website": "http://curatorsintl.org/events/ici-2013-annual-benefit-auction"
+  },
+  "price": "",
+  "price_currency": "USD",
+  "published": true,
+  "sale_message": null,
+  "sold": false,
+  "title": "Two Sided Picture (YR), January 12th 2007, Valencia, California, Fujicolor Crystal Archive",
+  "unique": false
+  },
+  "bidder_positions_count": 0,
+  "high_estimate_cents": null,
+  "highest_bid": {
+  "amount_cents": 850000,
+  "created_at": "2013-11-19T03:10:29+00:00",
+  "id": "528ad6a5ebad649d39000001"
+  },
+  "highest_bid_amount_cents": 850000,
+  "id": "walead-beshty-two-sided-picture-yr-january-12th-2007-valencia-california-fujicolor-crystal-archive",
+  "low_estimate_cents": null,
+  "minimum_next_bid_cents": 900000,
+  "opening_bid_cents": 800000,
+  "position": 4,
+  "reserve_status": "no_reserve",
+  "sale_id": "ici-live-auction",
+  "temporary_estimate_cents": null,
+  "user_notes": "Estimate $10,000. Best known for his large-scale photograms, Beshty uses photography to explore how the medium functions or fails as a documentary form. \u201cPhotographs operate something like ruins,\u201d he says. \u201cDespite their seeming stasis, they are available to a multitude of narratives, slipping effortlessly between them.\u201d"
+  },
+  {
+  "_id": "527d83cf139b2129410003d3",
+  "artwork": {
+  "_id": "526ab6fd7622ddf56900012e",
+  "acquireable": false,
+  "artist": {
+  "_id": "4f66024abcc2660001000b42",
+  "artworks_count": 29,
+  "birthday": "1975",
+  "forsale_artworks_count": 3,
+  "id": "dustin-yellin",
+  "image_url": "http://stagic2.artsy.net/artist_images/52f6bdf44a04f5d504f6b7c5/:version.jpg",
+  "image_urls": {
+  "four_thirds": "http://stagic2.artsy.net/artist_images/52f6bdf44a04f5d504f6b7c5/four_thirds.jpg",
+  "large": "http://stagic2.artsy.net/artist_images/52f6bdf44a04f5d504f6b7c5/large.jpg",
+  "square": "http://stagic2.artsy.net/artist_images/52f6bdf44a04f5d504f6b7c5/square.jpg",
+  "tall": "http://stagic2.artsy.net/artist_images/52f6bdf44a04f5d504f6b7c5/tall.jpg"
+  },
+  "image_versions": [
+                     "square",
+                     "tall",
+                     "large",
+                     "four_thirds"
+                     ],
+  "name": "Dustin Yellin",
+  "nationality": "American",
+  "original_height": null,
+  "original_width": null,
+  "public": true,
+  "published_artworks_count": 6,
+  "sortable_id": "yellin-dustin",
+  "years": "born 1975"
+  },
+  "artists": [
+              {
+              "_id": "4f66024abcc2660001000b42",
+              "artworks_count": 29,
+              "birthday": "1975",
+              "forsale_artworks_count": 3,
+              "id": "dustin-yellin",
+              "image_url": "http://stagic2.artsy.net/artist_images/52f6bdf44a04f5d504f6b7c5/:version.jpg",
+              "image_urls": {
+              "four_thirds": "http://stagic2.artsy.net/artist_images/52f6bdf44a04f5d504f6b7c5/four_thirds.jpg",
+              "large": "http://stagic2.artsy.net/artist_images/52f6bdf44a04f5d504f6b7c5/large.jpg",
+              "square": "http://stagic2.artsy.net/artist_images/52f6bdf44a04f5d504f6b7c5/square.jpg",
+              "tall": "http://stagic2.artsy.net/artist_images/52f6bdf44a04f5d504f6b7c5/tall.jpg"
+              },
+              "image_versions": [
+                                 "square",
+                                 "tall",
+                                 "large",
+                                 "four_thirds"
+                                 ],
+              "name": "Dustin Yellin",
+              "nationality": "American",
+              "original_height": null,
+              "original_width": null,
+              "public": true,
+              "published_artworks_count": 6,
+              "sortable_id": "yellin-dustin",
+              "years": "born 1975"
+              }
+              ],
+  "availability": "not for sale",
+  "blurb": "Yellin is best known for his multi-layered glass sculptures, which form a three-dimensional collage of various artifacts. He describes his work as having a taxonomic impulse, preserving under glass objects he has collected over time (as well as drawings he has created).",
+  "can_share": true,
+  "can_share_image": true,
+  "category": "Mixed Media",
+  "collecting_institution": "",
+  "cultural_maker": null,
+  "date": "2013",
+  "dimensions": {
+  "cm": "43.2 \u00d7 43.8 \u00d7 7 cm",
+  "in": "17 \u00d7 17 1/4 \u00d7 2 3/4 in"
+  },
+  "display": "Dustin Yellin, Flatland (2013)",
+  "ecommerce": false,
+  "edition_sets_count": 0,
+  "forsale": false,
+  "id": "dustin-yellin-flatland",
+  "images": [
+             {
+             "aspect_ratio": 1.5,
+             "downloadable": false,
+             "id": "526ab701c9dc24668f00011e",
+             "image_url": "http://stagic3.artsy.net/additional_images/526ab701c9dc24668f00011e/:version.jpg",
+             "image_versions": [
+                                "small",
+                                "square",
+                                "medium",
+                                "medium_rectangle",
+                                "large_rectangle",
+                                "tall",
+                                "large",
+                                "larger",
+                                "normalized"
+                                ],
+             "is_default": true,
+             "max_tiled_height": 2000,
+             "max_tiled_width": 3000,
+             "original_height": 2000,
+             "original_width": 3000,
+             "position": 1,
+             "tile_base_url": "http://static.artsy.net/additional_images/526ab701c9dc24668f00011e/dztiles-512-0",
+             "tile_format": "jpg",
+             "tile_overlap": 0,
+             "tile_size": 512
+             }
+             ],
+  "inquireable": true,
+  "manufacturer": null,
+  "medium": "Glass, Collage",
+  "partner": {
+  "_id": "52531cd89c18dbf32f0000de",
+  "default_profile_id": "partner-52531cd89c18dbf32f0000de",
+  "default_profile_public": false,
+  "has_full_profile": false,
+  "id": "ici-annual-benefit-and-auction-2013",
+  "name": "ICI Annual Benefit & Auction 2013",
+  "short_name": null,
+  "sortable_id": "ici-annual-benefit-and-auction-2013",
+  "type": "Non Profit",
+  "website": "http://curatorsintl.org/events/ici-2013-annual-benefit-auction"
+  },
+  "price": "",
+  "price_currency": "USD",
+  "published": true,
+  "sale_message": null,
+  "sold": false,
+  "title": "Flatland",
+  "unique": false
+  },
+  "bidder_positions_count": 0,
+  "high_estimate_cents": null,
+  "highest_bid": {
+  "amount_cents": 450000,
+  "created_at": "2013-11-14T23:05:01+00:00",
+  "id": "5285571debad64c8b900000f"
+  },
+  "highest_bid_amount_cents": 450000,
+  "id": "dustin-yellin-flatland",
+  "low_estimate_cents": null,
+  "minimum_next_bid_cents": 475000,
+  "opening_bid_cents": 450000,
+  "position": 5,
+  "reserve_status": "no_reserve",
+  "sale_id": "ici-live-auction",
+  "temporary_estimate_cents": null,
+  "user_notes": "Estimate $8,000. Yellin is best known for his multi-layered glass sculptures, which form a three-dimensional collage of various artifacts. He describes his work as having a taxonomic impulse, preserving under glass objects he has collected over time (as well as drawings he has created)."
+  }
+  ]

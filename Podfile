@@ -1,5 +1,5 @@
-source 'artsy'
-source 'master'
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/artsy/Specs.git'
 
 platform :ios, '7.0'
 
@@ -27,6 +27,7 @@ pod 'ARAnalytics/Mixpanel'
 pod 'ARAnalytics/HockeyApp'
 
 pod 'CardFlight'
+pod 'ECPhoneNumberFormatter'
 
 target "KioskTests", :exclusive => true do
     pod 'FBSnapshotTestCase', :git => "https://github.com/facebook/ios-snapshot-test-case"

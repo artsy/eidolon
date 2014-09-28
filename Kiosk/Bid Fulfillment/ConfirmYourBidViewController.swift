@@ -3,6 +3,8 @@ import UIKit
 public class ConfirmYourBidViewController: UIViewController {
 
     dynamic var number: String = ""
+    var bid:Bid?
+    let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet public var numberAmountTextField: UITextField!
     @IBOutlet var keypadContainer: KeypadContainerView!
@@ -28,7 +30,9 @@ public class ConfirmYourBidViewController: UIViewController {
         })
 
         RAC(enterButton, "enabled") <~ numberIsZeroLengthSignal.notEach()
-        RAC(numberAmountTextField, "text") <~ RACObserve(self, "number")
+        RAC(numberAmountTextField, "text") <~ RACObserve(self, "number").map({ [weak self](number) -> AnyObject! in
+            return self?.phoneNumberFormatter.stringForObjectValue(number)
+        })
 
         keypadSignal.subscribeNext({ [weak self] (input) -> Void in
             let input = String(input as Int)

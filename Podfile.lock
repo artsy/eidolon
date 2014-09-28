@@ -15,6 +15,7 @@ PODS:
   - CardFlight (1.6.3):
     - CardFlight/AudioJack
   - CardFlight/AudioJack (1.6.3)
+  - ECPhoneNumberFormatter (0.1.1)
   - EDColor (0.4.0)
   - FBSnapshotTestCase (1.1)
   - FLKAutoLayout (0.1.1)
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - Artsy+UIFonts
   - Artsy+UILabels
   - CardFlight
+  - ECPhoneNumberFormatter
   - FBSnapshotTestCase (from `https://github.com/facebook/ios-snapshot-test-case`)
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
@@ -47,6 +49,7 @@ SPEC CHECKSUMS:
   Artsy+UIFonts: fb0a70f93ca888d45a3af751707701fe8cbeae2a
   Artsy+UILabels: 83b261e0a9ee1f113ad9443f80bafe3a870bcfa9
   CardFlight: 949261a10123152112e920d87e9163e27c445205
+  ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
   FBSnapshotTestCase: 188c80bfcb72e744eb0b99d45989d12687c40cf8
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
@@ -55,4 +58,4 @@ SPEC CHECKSUMS:
   Mixpanel: 708ec9a6ee6e741f7db107831e18b2fc2e7531f1
   ORStackView: f1ccef4a0c40dd7907a638232f78a873cc03ab6c
 
-COCOAPODS: 0.34.0.rc1
+COCOAPODS: 0.34.1

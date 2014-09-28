@@ -1,10 +1,10 @@
 import UIKit
 
-public class PlaceBidViewController: UIViewController {
+class PlaceBidViewController: UIViewController {
 
     dynamic var bid: Float = 0.0
 
-    @IBOutlet public var bidAmountTextField: UITextField!
+    @IBOutlet var bidAmountTextField: UITextField!
     @IBOutlet var keypadContainer: KeypadContainerView!
 
     @IBOutlet var currentBidLabel: UILabel!
@@ -12,38 +12,75 @@ public class PlaceBidViewController: UIViewController {
 
     var saleArtwork: SaleArtwork?
 
-    public class func instantiateFromStoryboard() -> PlaceBidViewController {
+    class func instantiateFromStoryboard() -> PlaceBidViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
     }
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let bidIsZeroSignal = RACObserve(self, "bid").map({ (bid) -> AnyObject! in
-            return (bid as Float == 0)
-        })
+
+        let keypad = self.keypadContainer!.keypad!
+        let bidIsZeroSignal = RACObserve(self, "bid").map { return ($0 as Float == 0) }
+
+        for button in [bidButton, keypad.rightButton, keypad.leftButton] {
+            RAC(button, "enabled") <~ bidIsZeroSignal.notEach()
+        }
+
         let formattedBidTextSignal = RACObserve(self, "bid").map({ (bid) -> AnyObject! in
             return NSNumberFormatter.currencyStringForCents(bid as Float * 100.0)
         })
-        
-        RAC(bidButton, "enabled") <~ bidIsZeroSignal.notEach()
+
         RAC(bidAmountTextField, "text") <~ RACSignal.`if`(bidIsZeroSignal, then: RACSignal.`return`(""), `else`: formattedBidTextSignal)
 
-        keypadSignal.subscribeNext({ [weak self] (input) -> Void in
+        keypadSignal.subscribeNext { [weak self] (input) -> Void in
             let inputFloat = input as? Float ?? 0.0
             self?.bid = (10.0 * self!.bid) + inputFloat
-        })
+        }
+
+        deleteSignal.subscribeNext(deleteBid)
+        clearSignal.subscribeNext(clearBid)
 
         if let saleArtwork:SaleArtwork = self.saleArtwork {
-            RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map({ "$\($0)" })
-            RAC(nextBidAmountLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map({ "Enter \($0) or more" })
+            RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(currentBidString)
+            RAC(nextBidAmountLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(openingBidString)
         }
     }
 
-    @IBOutlet public var bidButton: UIButton!
-    @IBAction func bidButtonTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier(SegueIdentifier.ConfirmBid.toRaw(), sender: self)
+    func deleteBid(cents:AnyObject!) -> Void {
+        self.bid /= 10
     }
 
-    lazy public var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
+    func clearBid(cents:AnyObject!) -> Void {
+        self.bid = 10
+    }
+
+    func currentBidString(cents:AnyObject!) -> AnyObject! {
+        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
+            return dollars
+        }
+        return ""
+    }
+
+    func openingBidString(cents:AnyObject!) -> AnyObject! {
+        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
+            return "Enter \(dollars) or more"
+        }
+        return ""
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == SegueIdentifier.ConfirmBid {
+            let confirmVC = segue.destinationViewController as ConfirmYourBidViewController
+            confirmVC.bid = Bid(id: "FAKE BID", amountCents: Int(self.bid * 100))
+        }
+    }
+
+    @IBOutlet var bidButton: UIButton!
+    @IBAction func bidButtonTapped(sender: AnyObject) {
+        self.performSegue(SegueIdentifier.ConfirmBid)
+    }
+
+    lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
+    lazy var clearSignal:RACSignal!  = self.keypadContainer.keypad?.rightSignal
+    lazy var deleteSignal:RACSignal! = self.keypadContainer.keypad?.leftSignal
 }
