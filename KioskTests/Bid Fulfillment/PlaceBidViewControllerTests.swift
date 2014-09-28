@@ -38,5 +38,18 @@ class PlaceBidViewControllerTests: QuickSpec {
             expect(sut.bidButton.enabled) == true
         }
 
+
+
+        it("passes a bid object to the ConfirmYour Bid VC, during segue") {
+
+            let sut = PlaceBidViewController.instantiateFromStoryboard()
+            let confirmVC = ConfirmYourBidViewController.instantiateFromStoryboard()
+            let segue = UIStoryboardSegue(identifier: SegueIdentifier.ConfirmBid.toRaw(), source: sut, destination: confirmVC, performHandler: { () -> Void in })
+
+            sut.prepareForSegue(segue, sender: sut)
+            expect(confirmVC.bid?).to(beAnInstanceOf(Bid.self))
+
+        }
+
     }
 }

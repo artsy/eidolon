@@ -42,6 +42,8 @@
 		60212C9E19D5ECCE001921E1 /* SaleArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E719D3123B00DE9F3D /* SaleArtwork.swift */; };
 		60212CA019D5F20C001921E1 /* ArtistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60212C9F19D5F20C001921E1 /* ArtistTests.swift */; };
 		60212CA219D5F468001921E1 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60212CA119D5F468001921E1 /* ImageTests.swift */; };
+		6024DD5E19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */; };
+		6024DD5F19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */; };
 		602EFE4F19C6D09C002715C2 /* KeypadContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */; };
 		6030A0F319D18F5200B934CA /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A0F219D18F5200B934CA /* Artwork.swift */; };
 		6030A10019D192D000B934CA /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A0FF19D192D000B934CA /* Artist.swift */; };
@@ -274,6 +276,7 @@
 		60212C9C19D5EAF9001921E1 /* ArtworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtworkTests.swift; sourceTree = "<group>"; };
 		60212C9F19D5F20C001921E1 /* ArtistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTests.swift; sourceTree = "<group>"; };
 		60212CA119D5F468001921E1 /* ImageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
+		6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegueExtensions.swift; sourceTree = "<group>"; };
 		602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadContainerView.swift; sourceTree = "<group>"; };
 		6030A0F219D18F5200B934CA /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		6030A0FF19D192D000B934CA /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
@@ -567,17 +570,17 @@
 		605B855919C6E41C0009B16B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */,
-				60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */,
-				605B855A19C6E4CF0009B16B /* ConfirmYourBidViewController.swift */,
-				60C620D919D180A20024D493 /* ConfirmYourBidPINViewController.swift */,
-				605B856019C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift */,
-				605B856219C6E5C30009B16B /* YouAreTheHighestBidderViewController.swift */,
-				600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */,
-				600F5F0619C87DA80027F587 /* UserCreationViewController.swift */,
 				600F5F0A19C882210027F587 /* ConfirmUserCreationViewController.swift */,
+				605B856019C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift */,
 				605610DA19D2DE2B00A2850A /* ConfirmYourBidEnterYourEmailViewController.swift */,
 				60D976DE19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift */,
+				60C620D919D180A20024D493 /* ConfirmYourBidPINViewController.swift */,
+				605B855A19C6E4CF0009B16B /* ConfirmYourBidViewController.swift */,
+				60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */,
+				60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */,
+				600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */,
+				600F5F0619C87DA80027F587 /* UserCreationViewController.swift */,
+				605B856219C6E5C30009B16B /* YouAreTheHighestBidderViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 			isa = PBXGroup;
 			children = (
 				6092C4AE19CAEF9A003BE8EC /* UIViewControllerExtensions.swift */,
+				6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1053,6 +1057,7 @@
 				5E3E53E619C3AA13002D8B9D /* XAppToken.swift in Sources */,
 				605B856119C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift in Sources */,
 				6017320F19CF259400A58B63 /* CardHandler.swift in Sources */,
+				6024DD5E19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */,
 				6092C4AF19CAEF9A003BE8EC /* UIViewControllerExtensions.swift in Sources */,
 				600F5F0B19C882210027F587 /* ConfirmUserCreationViewController.swift in Sources */,
 				60D976E819D3123B00DE9F3D /* SaleArtwork.swift in Sources */,
@@ -1121,6 +1126,7 @@
 				6030A11919D1A1EF00B934CA /* ArtsyAPI.swift in Sources */,
 				60212C9D19D5EAF9001921E1 /* ArtworkTests.swift in Sources */,
 				600F5F0919C880980027F587 /* UserCreationViewControllerTests.swift in Sources */,
+				6024DD5F19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */,
 				60C37DDC19D460DC002E7A44 /* BidderPosition.swift in Sources */,
 				604B225219D359C3008D86C7 /* SystemTimeTests.swift in Sources */,
 				6030A10119D1931400B934CA /* PlaceBidViewController.swift in Sources */,
