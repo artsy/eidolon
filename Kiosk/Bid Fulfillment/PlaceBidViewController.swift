@@ -32,40 +32,14 @@ class PlaceBidViewController: UIViewController {
 
         RAC(bidAmountTextField, "text") <~ RACSignal.`if`(bidIsZeroSignal, then: RACSignal.`return`(""), `else`: formattedBidTextSignal)
 
-        keypadSignal.subscribeNext { [weak self] (input) -> Void in
-            let inputFloat = input as? Float ?? 0.0
-            self?.bid = (10.0 * self!.bid) + inputFloat
-        }
-
+        keypadSignal.subscribeNext(addDigitToBid)
         deleteSignal.subscribeNext(deleteBid)
         clearSignal.subscribeNext(clearBid)
 
         if let saleArtwork:SaleArtwork = self.saleArtwork {
-            RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(currentBidString)
-            RAC(nextBidAmountLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(openingBidString)
+            RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toCurrentBidString)
+            RAC(nextBidAmountLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toOpeningBidString)
         }
-    }
-
-    func deleteBid(cents:AnyObject!) -> Void {
-        self.bid /= 10
-    }
-
-    func clearBid(cents:AnyObject!) -> Void {
-        self.bid = 10
-    }
-
-    func currentBidString(cents:AnyObject!) -> AnyObject! {
-        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
-            return dollars
-        }
-        return ""
-    }
-
-    func openingBidString(cents:AnyObject!) -> AnyObject! {
-        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
-            return "Enter \(dollars) or more"
-        }
-        return ""
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -83,4 +57,36 @@ class PlaceBidViewController: UIViewController {
     lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
     lazy var clearSignal:RACSignal!  = self.keypadContainer.keypad?.rightSignal
     lazy var deleteSignal:RACSignal! = self.keypadContainer.keypad?.leftSignal
+}
+
+/// These are for RAC only
+
+private extension PlaceBidViewController {
+
+    func addDigitToBid(input:AnyObject!) -> Void {
+        let inputFloat = input as? Float ?? 0.0
+        self.bid = (10.0 * self.bid) + inputFloat
+    }
+
+    func deleteBid(cents:AnyObject!) -> Void {
+        self.bid /= 10
+    }
+
+    func clearBid(cents:AnyObject!) -> Void {
+        self.bid = 10
+    }
+
+    func toCurrentBidString(cents:AnyObject!) -> AnyObject! {
+        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
+            return dollars
+        }
+        return ""
+    }
+
+    func toOpeningBidString(cents:AnyObject!) -> AnyObject! {
+        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
+            return "Enter \(dollars) or more"
+        }
+        return ""
+    }
 }
