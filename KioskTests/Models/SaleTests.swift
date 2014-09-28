@@ -12,7 +12,7 @@ class SaleTests: QuickSpec {
 
             let data:[String: AnyObject] =  ["id":id , "is_auction" : isAuction, "start_at":startDate, "end_at":endDate]
 
-            let sale = Sale.fromJSON(data)
+            let sale = Sale.fromJSON(data) as Sale
 
             expect(sale.id) == id
             expect(sale.isAuction) == isAuction

@@ -17,7 +17,7 @@ class ArtworkTests: QuickSpec {
             let data:[String: AnyObject] =  ["id":id , "title" : title, "date":date, "blurb":blurb, "artist":artistDict]
 
 
-            let artwork = Artwork.fromJSON(data)
+            let artwork = Artwork.fromJSON(data) as Artwork
 
             expect(artwork.id) == id
             expect(artwork.artists?.count) == 1

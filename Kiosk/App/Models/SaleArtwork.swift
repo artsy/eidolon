@@ -10,7 +10,7 @@ struct SaleNumberFormatter {
     static let dollarFormatter = createDollarFormatter()
 }
 
-class SaleArtwork: NSObject {
+class SaleArtwork: JSONAble {
 
     let id: String
     let artwork: Artwork
@@ -26,7 +26,7 @@ class SaleArtwork: NSObject {
     var userBidderPosition: BidderPosition?
     var positions: [String]?
 
-    var openingBidCents: Int?
+    dynamic var openingBidCents: NSNumber?
     var minimumNextBidCents: Int?
     
     var lowEstimateCents: Int?
@@ -37,17 +37,17 @@ class SaleArtwork: NSObject {
         self.artwork = artwork
     }
 
-    class func fromJSON(json: [String: AnyObject]) -> SaleArtwork {
+    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
         let json = JSON(object: json)
 
         let id = json["id"].stringValue
         let artworkDict = json["artwork"].object as [String: AnyObject]
-        let artwork = Artwork.fromJSON(artworkDict)
+        let artwork = Artwork.fromJSON(artworkDict) as Artwork
 
-        let sale = SaleArtwork(id: id, artwork: artwork)
+        let sale = SaleArtwork(id: id, artwork: artwork) as SaleArtwork
 
         if let highestBidDict = json["highest_bid"].object as? [String: AnyObject] {
-            sale.saleHighestBid = Bid.fromJSON(highestBidDict)
+            sale.saleHighestBid = Bid.fromJSON(highestBidDict) as? Bid
         }
 
         sale.openingBidCents = json["opening_bid_cents"].integer
@@ -59,8 +59,6 @@ class SaleArtwork: NSObject {
 
         return sale;
     }
-
-
 }
 
 func createDollarFormatter() -> NSNumberFormatter {

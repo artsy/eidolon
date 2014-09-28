@@ -1,6 +1,6 @@
 import Foundation
 
-final class Bid: NSObject, JSONAble {
+class Bid: JSONAble {
     let id: String
     let amountCents: Int
 
@@ -9,12 +9,11 @@ final class Bid: NSObject, JSONAble {
         self.amountCents = amountCents
     }
 
-    class func fromJSON(json:[String: AnyObject]) -> Bid {
+    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
         let json = JSON(object: json)
 
         let id = json["id"].stringValue
         let amount = json["amount_cents"].integerValue
-        
         return Bid(id: id, amountCents: amount)
     }
 }

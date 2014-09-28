@@ -7,6 +7,11 @@ public class PlaceBidViewController: UIViewController {
     @IBOutlet public var bidAmountTextField: UITextField!
     @IBOutlet var keypadContainer: KeypadContainerView!
 
+    @IBOutlet var currentBidLabel: UILabel!
+    @IBOutlet var nextBidAmountLabel: UILabel!
+
+    var saleArtwork: SaleArtwork?
+
     public class func instantiateFromStoryboard() -> PlaceBidViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
     }
@@ -28,6 +33,11 @@ public class PlaceBidViewController: UIViewController {
             let inputFloat = input as? Float ?? 0.0
             self?.bid = (10.0 * self!.bid) + inputFloat
         })
+
+        if let saleArtwork:SaleArtwork = self.saleArtwork {
+            RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map({ "$\($0)" })
+            RAC(nextBidAmountLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map({ "Enter \($0) or more" })
+        }
     }
 
     @IBOutlet public var bidButton: UIButton!

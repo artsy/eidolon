@@ -1,6 +1,6 @@
 import Foundation
 
-final class Artist:NSObject, JSONAble {
+class Artist: JSONAble {
 
     let id: String
     var name: String
@@ -10,12 +10,11 @@ final class Artist:NSObject, JSONAble {
         self.name = name
     }
 
-    class func fromJSON(json:[String: AnyObject]) -> Artist {
+    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
         let json = JSON(object: json)
 
         let id = json["id"].stringValue
         let name = json["name"].stringValue
-
         return Artist(id: id, name:name)
     }
 

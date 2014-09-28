@@ -11,7 +11,7 @@ class ImageTests: QuickSpec {
             let imageFormats = ["big", "small", "patch"]
             let data:[String: AnyObject] = [ "id": id, "image_url": url, "image_versions": imageFormats]
 
-            let image = Image.fromJSON(data)
+            let image = Image.fromJSON(data) as Image
 
             expect(image.id) == id
             expect(image.imageURL) == url

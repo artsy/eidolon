@@ -1,6 +1,6 @@
 import Foundation
 
-final class Image: NSObject, JSONAble {
+class Image: JSONAble {
     let id: String
     let imageURL: String
     let imageVersions:[String]
@@ -11,7 +11,7 @@ final class Image: NSObject, JSONAble {
         self.imageVersions = imageVersions
     }
 
-    class func fromJSON(json:[String: AnyObject]) -> Image {
+    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
         let json = JSON(object: json)
 
         let id = json["id"].stringValue

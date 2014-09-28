@@ -1,6 +1,6 @@
 import Foundation
 
-final public class Artwork: NSObject, JSONAble {
+class Artwork: JSONAble {
     let id: String
 
     let dateString: String
@@ -8,7 +8,10 @@ final public class Artwork: NSObject, JSONAble {
     let name: String
     let blurb: String
 
-    var artists:[Artist]?
+    var artists: [Artist]?
+    var culturalMarker: String?
+
+    var images: [Image]?
 
     init(id: String, dateString: String, title: String, name: String, blurb: String) {
         self.id = id
@@ -18,7 +21,7 @@ final public class Artwork: NSObject, JSONAble {
         self.blurb = blurb
     }
 
-    class func fromJSON(json: [String: AnyObject]) -> Artwork {
+    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
         let json = JSON(object: json)
 
         let id = json["id"].stringValue
@@ -30,7 +33,11 @@ final public class Artwork: NSObject, JSONAble {
         let artwork = Artwork(id: id, dateString: dateString, title: title, name: name, blurb: blurb)
 
         if let artistDictionary = json["artist"].object as? [String: AnyObject] {
-            artwork.artists = [Artist.fromJSON(artistDictionary)]
+            artwork.artists = [Artist.fromJSON(artistDictionary) as Artist]
+        }
+
+        if let imageDicts = json["images"].object as? Array<Dictionary<String, AnyObject>> {
+            artwork.images = imageDicts.map({ return Image.fromJSON($0) as Image })
         }
 
         return artwork
