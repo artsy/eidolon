@@ -14,13 +14,11 @@
 #import <Artsy+UILabels/NSNumberFormatter+ARCurrency.h>
 
 #import <ISO8601DateFormatter/ISO8601DateFormatter.h>
-#import <CocoaPods-Keys/EidolonKeys.h>
+#import <ECPhoneNumberFormatter/ECPhoneNumberFormatter.h>
 
+#import <CocoaPods-Keys/EidolonKeys.h>
 #import <ARAnalytics/ARAnalytics.h>
 #import <ORStackView/ORStackView.h>
-
-// Happy for this to be a swift one instead, https://github.com/robb/Cartography ?
-// But ORStackView includes this anyway
 
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 

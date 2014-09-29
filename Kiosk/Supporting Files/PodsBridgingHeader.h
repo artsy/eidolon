@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Artsy. All rights reserved.
 //
 
+// Changes in here need to be reflected in KioskTests-BridgingHeader.h
+
 #import <UIKit/UIKit.h>
 
 #import <Artsy+UIColors/UIColor+ArtsyColors.h>
@@ -15,14 +17,12 @@
 #import <Artsy+UILabels/NSNumberFormatter+ARCurrency.h>
 
 #import <ISO8601DateFormatter/ISO8601DateFormatter.h>
+#import <ECPhoneNumberFormatter/ECPhoneNumberFormatter.h>
+
 #import <CocoaPods-Keys/EidolonKeys.h>
 
 #import <ARAnalytics/ARAnalytics.h>
 #import <ORStackView/ORStackView.h>
-
-// Happy for this to be a swift one instead, https://github.com/robb/Cartography ?
-// But ORStackView includes this anyway
-
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 
 #import <ReactiveCocoa/ReactiveCocoa.h>

@@ -1,14 +1,21 @@
 import Foundation
 
-// This is just a stub to do popover stuff with
+class Artist: JSONAble {
 
-class Artist: NSObject {
+    let id: String
+    var name: String
 
-    let id:String
-    var name:String?
-
-    init(id: String) {
+    init(id: String, name: String) {
         self.id = id
-        super.init()
+        self.name = name
     }
+
+    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+        let json = JSON(object: json)
+
+        let id = json["id"].stringValue
+        let name = json["name"].stringValue
+        return Artist(id: id, name:name)
+    }
+
 }

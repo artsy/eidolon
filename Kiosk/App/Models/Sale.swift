@@ -1,7 +1,7 @@
 import UIKit
 
-final class Sale: NSObject, JSONAble {
-    let id:String
+class Sale: JSONAble {
+    let id: String
     let isAuction:Bool
     let startDate:NSDate
     let endDate:NSDate
@@ -13,7 +13,7 @@ final class Sale: NSObject, JSONAble {
         self.endDate = endDate
     }
 
-    class func fromJSON(json:[String: AnyObject]) -> Sale {
+    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
         let json = JSON(object: json)
         let formatter = ISO8601DateFormatter()
 
