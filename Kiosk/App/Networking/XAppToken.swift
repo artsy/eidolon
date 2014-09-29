@@ -2,7 +2,7 @@ import Foundation
 
 private extension NSDate {
     var isInPast: Bool {
-        let now = NSDate.date()
+        let now = NSDate()
         return self.compare(now) == NSComparisonResult.OrderedAscending
     }
 }
@@ -25,20 +25,20 @@ struct XAppToken {
     
     var token: String? {
         get {
-            let key = defaults.stringForKey(DefaultsKeys.TokenKey.toRaw())
+            let key = defaults.stringForKey(DefaultsKeys.TokenKey.rawValue)
             return key
         }
         set(newToken) {
-            defaults.setObject(newToken, forKey: DefaultsKeys.TokenKey.toRaw())
+            defaults.setObject(newToken, forKey: DefaultsKeys.TokenKey.rawValue)
         }
     }
     
     var expiry: NSDate? {
         get {
-            return defaults.objectForKey(DefaultsKeys.TokenExpiry.toRaw()) as? NSDate
+            return defaults.objectForKey(DefaultsKeys.TokenExpiry.rawValue) as? NSDate
         }
         set(newExpiry) {
-            defaults.setObject(newExpiry, forKey: DefaultsKeys.TokenExpiry.toRaw())
+            defaults.setObject(newExpiry, forKey: DefaultsKeys.TokenExpiry.rawValue)
         }
     }
     

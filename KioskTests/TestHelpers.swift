@@ -9,20 +9,20 @@ private enum DefaultsKeys: String {
 let defaults = NSUserDefaults.standardUserDefaults()
 
 func clearDefaultsKeys() {
-    defaults.removeObjectForKey(DefaultsKeys.TokenKey.toRaw())
-    defaults.removeObjectForKey(DefaultsKeys.TokenExpiry.toRaw())
+    defaults.removeObjectForKey(DefaultsKeys.TokenKey.rawValue)
+    defaults.removeObjectForKey(DefaultsKeys.TokenExpiry.rawValue)
 }
 
 func getDefaultsKeys() -> (key: String?, expiry: NSDate?) {
-    let key = defaults.objectForKey(DefaultsKeys.TokenKey.toRaw()) as String?
-    let expiry = defaults.objectForKey(DefaultsKeys.TokenExpiry.toRaw()) as NSDate?
+    let key = defaults.objectForKey(DefaultsKeys.TokenKey.rawValue) as String?
+    let expiry = defaults.objectForKey(DefaultsKeys.TokenExpiry.rawValue) as NSDate?
     
     return (key: key, expiry: expiry)
 }
 
 func setDefaultsKeys(key: String?, expiry: NSDate?) {
-    defaults.setObject(key, forKey: DefaultsKeys.TokenKey.toRaw())
-    defaults.setObject(expiry, forKey: DefaultsKeys.TokenExpiry.toRaw())
+    defaults.setObject(key, forKey: DefaultsKeys.TokenKey.rawValue)
+    defaults.setObject(expiry, forKey: DefaultsKeys.TokenExpiry.rawValue)
 }
 
 func setupProviderForSuite(provider: ReactiveMoyaProvider<ArtsyAPI>) {

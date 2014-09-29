@@ -57,7 +57,7 @@ extension ArtsyAPI : MoyaPath {
 
 extension ArtsyAPI : MoyaTarget {
     // TODO: - parameterize base URL based on debug, release, etc.
-     var baseURL: NSURL { return NSURL(string: "https://stagingapi.artsy.net") }
+     var baseURL: NSURL { return NSURL(string: "https://stagingapi.artsy.net")! }
      var sampleData: NSData {
         switch self {
 
