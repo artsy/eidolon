@@ -32,3 +32,5 @@ pod 'ECPhoneNumberFormatter'
 target "KioskTests", :exclusive => true do
     pod 'FBSnapshotTestCase', :git => "https://github.com/facebook/ios-snapshot-test-case"
 end
+
+pod 'Reveal-iOS-SDK', :configurations => ['Debug']

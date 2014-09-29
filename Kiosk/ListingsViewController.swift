@@ -1,5 +1,7 @@
 import UIKit
 
+let horizontalMargins = 65
+let verticalMargins = 26
 let CellIdentifier = "Cell"
 
 class ListingsViewController: UIViewController {
@@ -11,6 +13,7 @@ class ListingsViewController: UIViewController {
         collectionView.backgroundColor = UIColor.clearColor()
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.alwaysBounceVertical = true
         collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifier)
         return collectionView
     }()
@@ -28,7 +31,7 @@ class ListingsViewController: UIViewController {
         // Set up reactive bindings
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "ici-live-auction")
 
-        RAC(self, "salesArtworks") <~ XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).doNext { [unowned self] (objects) -> Void in
+        RAC(self, "salesArtworks") <~ XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).doNext { [unowned self] (_) -> Void in
             self.collectionView.reloadData()
         }
     }
@@ -37,9 +40,9 @@ class ListingsViewController: UIViewController {
         let switchHeightPredicate = "\(switchView.intrinsicContentSize().height)"
         
         switchView.constrainHeight(switchHeightPredicate)
-        switchView.alignTop("64", leading: "0", bottom: nil, trailing: "0", toView: view)
-        collectionView.constrainTopSpaceToView(switchView, predicate: "0")
-        collectionView.alignTop(nil, leading: "0", bottom: "0", trailing: "0", toView: view)
+        switchView.alignTop("\(64+verticalMargins)", leading: "\(horizontalMargins)", bottom: nil, trailing: "-\(horizontalMargins)", toView: view)
+        collectionView.constrainTopSpaceToView(switchView, predicate: "\(verticalMargins)")
+        collectionView.alignTop(nil, leading: "\(horizontalMargins)", bottom: "0", trailing: "-\(horizontalMargins)", toView: view)
     }
 }
 
