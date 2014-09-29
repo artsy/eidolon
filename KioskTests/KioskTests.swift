@@ -14,7 +14,7 @@ public extension UIStoryboard {
     }
 
     public func viewControllerWithID(identifier:ViewControllerStoryboardIdentifier) -> UIViewController {
-        let id = identifier.toRaw()
+        let id = identifier.rawValue
 
         // Uncomment for experimental caching.
 //

@@ -9,9 +9,10 @@ PODS:
   - Artsy+UIColors (1.0.0):
     - EDColor (~> 0.4)
   - Artsy+UIFonts (1.0.0)
-  - Artsy+UILabels (1.1.0):
+  - Artsy+UILabels (1.2.0):
     - Artsy+UIColors
-    - Artsy+UIFonts
+  - Artsy-UIButtons (1.0.0):
+    - Artsy+UIColors
   - CardFlight (1.6.3):
     - CardFlight/AudioJack
   - CardFlight/AudioJack (1.6.3)
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - Artsy+UIColors
   - Artsy+UIFonts
   - Artsy+UILabels
+  - Artsy-UIButtons
   - CardFlight
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase (from `https://github.com/facebook/ios-snapshot-test-case`)
@@ -49,7 +51,8 @@ SPEC CHECKSUMS:
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
   Artsy+UIFonts: fb0a70f93ca888d45a3af751707701fe8cbeae2a
-  Artsy+UILabels: 83b261e0a9ee1f113ad9443f80bafe3a870bcfa9
+  Artsy+UILabels: f327cdd339e99fb1a1ff26b9e5caf89545917b8c
+  Artsy-UIButtons: d1b5b71137c09278dbb50f036285e371d7a433f6
   CardFlight: 949261a10123152112e920d87e9163e27c445205
   ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254

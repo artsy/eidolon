@@ -9,6 +9,7 @@ inhibit_all_warnings!
 # Artsy stuff
 pod 'Artsy+UIColors'
 pod 'Artsy+UILabels'
+pod 'Artsy-UIButtons'
 
 # We'll need to include travis some time.
 if ENV['USER'] == "orta" || ENV['USER'] == "ash" || ENV['USER'] == "artsy"
