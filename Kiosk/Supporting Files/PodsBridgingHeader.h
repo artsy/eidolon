@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Artsy. All rights reserved.
 //
 
+// Changes in here need to be reflected in KioskTests-BridgingHeader.h
+
 #import <UIKit/UIKit.h>
 
 #import <Artsy+UIColors/UIColor+ArtsyColors.h>

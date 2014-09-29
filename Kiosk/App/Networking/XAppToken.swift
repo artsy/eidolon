@@ -7,7 +7,7 @@ private extension NSDate {
     }
 }
 
-public struct XAppToken {
+struct XAppToken {
     private enum DefaultsKeys: String {
         case TokenKey = "TokenKey"
         case TokenExpiry = "TokenExpiry"
@@ -17,13 +17,13 @@ public struct XAppToken {
         
     // MARK: - Initializers
 
-    public init() {
+    init() {
         // Empty, but necessary to invoke from tests
     }
     
     // MARK: - Properties
     
-    public var token: String? {
+    var token: String? {
         get {
             let key = defaults.stringForKey(DefaultsKeys.TokenKey.toRaw())
             return key
@@ -33,7 +33,7 @@ public struct XAppToken {
         }
     }
     
-    public var expiry: NSDate? {
+    var expiry: NSDate? {
         get {
             return defaults.objectForKey(DefaultsKeys.TokenExpiry.toRaw()) as? NSDate
         }
@@ -42,14 +42,14 @@ public struct XAppToken {
         }
     }
     
-    public var expired: Bool {
+    var expired: Bool {
         if let expiry = expiry {
             return expiry.isInPast
         }
         return true
     }
     
-    public var isValid: Bool {
+    var isValid: Bool {
         if let token = token {
             return countElements(token) > 0 && !expired
         }
