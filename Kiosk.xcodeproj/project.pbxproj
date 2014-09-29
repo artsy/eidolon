@@ -530,8 +530,8 @@
 				5EA65C0B19D5C4EF005EA4B4 /* Categories */,
 				6086143C19BA306800699FBC /* App */,
 				6086143B19BA304F00699FBC /* Storyboards + Nibs */,
+				5E95FCCA19D9B2A9004D0C8F /* Auction Listings */,
 				6086143D19BA307300699FBC /* Bid Fulfillment */,
-				5E59DD3719913DD800A48370 /* ListingsViewController.swift */,
 				5E59DD3C19913DD800A48370 /* Images.xcassets */,
 				5ED0997319C31D6200E5DD59 /* Stubbed Responses */,
 				5E59DD3319913DD800A48370 /* Supporting Files */,
@@ -596,6 +596,14 @@
 				5E6ED61319C07AC300CF3398 /* AlamofireTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5E95FCCA19D9B2A9004D0C8F /* Auction Listings */ = {
+			isa = PBXGroup;
+			children = (
+				5E59DD3719913DD800A48370 /* ListingsViewController.swift */,
+			);
+			name = "Auction Listings";
 			sourceTree = "<group>";
 		};
 		5EA65C0B19D5C4EF005EA4B4 /* Categories */ = {

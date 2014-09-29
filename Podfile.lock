@@ -25,6 +25,7 @@ PODS:
   - Mixpanel (2.5.3)
   - ORStackView (1.2.0):
     - FLKAutoLayout (~> 0.1)
+  - Reveal-iOS-SDK (1.0.5)
 
 DEPENDENCIES:
   - ARAnalytics/HockeyApp
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
   - ORStackView
+  - Reveal-iOS-SDK
 
 EXTERNAL SOURCES:
   FBSnapshotTestCase:
@@ -60,5 +62,6 @@ SPEC CHECKSUMS:
   ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
   Mixpanel: 708ec9a6ee6e741f7db107831e18b2fc2e7531f1
   ORStackView: f1ccef4a0c40dd7907a638232f78a873cc03ab6c
+  Reveal-iOS-SDK: d4b2f4c20d5b823b7f8b88250fe1b71cecd424a7
 
 COCOAPODS: 0.34.1

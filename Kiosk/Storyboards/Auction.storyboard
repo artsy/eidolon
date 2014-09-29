@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="iBN-n0-ymU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2lC-Vc-1XS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Listings View Controller-->
-        <scene sceneID="mR4-ba-fhp">
+        <!--Navigation Controller-->
+        <scene sceneID="gwf-cv-uMQ">
             <objects>
-                <viewController id="iBN-n0-ymU" customClass="ListingsViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="2lC-Vc-1XS" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="I8d-rj-Xv9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="anX-QX-ldh" kind="relationship" relationship="rootViewController" id="Gt6-2K-KPK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jf2-OQ-MFU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="22" y="271"/>
+        </scene>
+        <!--Listings View Controller-->
+        <scene sceneID="rIz-bx-XAe">
+            <objects>
+                <viewController id="anX-QX-ldh" customClass="ListingsViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fnt-h1-wI7"/>
-                        <viewControllerLayoutGuide type="bottom" id="AAR-ki-Tpk"/>
+                        <viewControllerLayoutGuide type="top" id="OV1-Ns-Xor"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Js-OQ-BFj"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bHB-mz-23z">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                    <view key="view" contentMode="scaleToFill" id="gf1-MR-Qcf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pr7-zY-8zE">
-                                <rect key="frame" x="363" y="294" width="241" height="141"/>
-                                <state key="normal" title="MODAL">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="showModal:" destination="iBN-n0-ymU" eventType="touchUpInside" id="whh-97-1ta"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <navigationItem key="navigationItem" id="FwK-Gc-fEW"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="A8J-Ia-Ps6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xon-LV-uZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="379" y="344"/>
+            <point key="canvasLocation" x="758" y="271"/>
         </scene>
     </scenes>
 </document>

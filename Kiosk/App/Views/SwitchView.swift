@@ -56,6 +56,11 @@ public class SwitchView: UIView {
     override public func intrinsicContentSize() -> CGSize {
         return CGSize(width: UIViewNoIntrinsicMetric, height: 46)
     }
+    
+    public func selectedButton(button: UIButton!) {
+        let index = find(buttons, button)!
+        setSelectedIndex(index, animated: shouldAnimate)
+    }
 }
 
 private extension SwitchView {
@@ -76,7 +81,7 @@ private extension SwitchView {
             button.constrainWidthToView(self, predicate: widthPredicateMultiplier)
             
             if (i == 0) {
-                button.constrainWidthToView(self, predicate: nil)
+                button.alignLeadingEdgeWithView(self, predicate: nil)
             } else {
                 button.constrainLeadingSpaceToView(buttons[i-1], predicate: nil)
             }
@@ -91,7 +96,7 @@ private extension SwitchView {
         bottomSelectionIndicator.backgroundColor = UIColor.blackColor()
         
         topSelectionIndicator.alignTop("0", leading: "0", bottom: nil, trailing: "0", toView: selectionIndicator)
-        bottomSelectionIndicator.alignTop("0", leading: "0", bottom: nil, trailing: "0", toView: selectionIndicator)
+        bottomSelectionIndicator.alignTop(nil, leading: "0", bottom: "0", trailing: "0", toView: selectionIndicator)
         
         topSelectionIndicator.constrainHeight("2")
         bottomSelectionIndicator.constrainHeight("2")
@@ -105,11 +110,6 @@ private extension SwitchView {
     
     func widthMultiplier() -> Float {
         return 1.0 / Float(buttons.count)
-    }
-    
-    func selectedButton(button: UIButton) {
-        let index = find(buttons, button)!
-        setSelectedIndex(index, animated: shouldAnimate)
     }
     
     func setSelectedIndex(index: Int) {
@@ -128,8 +128,10 @@ private extension SwitchView {
             
             // Set the x-position of the selection indicator as a fraction of the total width of the switch view according to which button was pressed.
             let multiplier = CGFloat(index) / CGFloat(countElements(self.buttons))
+            
             self.removeConstraint(self.selectionConstraint)
             self.selectionConstraint = NSLayoutConstraint(item: self.selectionIndicator, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Right, multiplier: multiplier, constant: 0)
+            self.addConstraint(self.selectionConstraint)
             self.layoutIfNeeded()
             
             (self.selectedIndexSignal as RACSubject).sendNext(index)
