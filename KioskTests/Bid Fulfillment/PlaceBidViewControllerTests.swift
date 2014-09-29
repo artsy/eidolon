@@ -44,7 +44,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             let sut = PlaceBidViewController.instantiateFromStoryboard()
             let confirmVC = ConfirmYourBidViewController.instantiateFromStoryboard()
-            let segue = UIStoryboardSegue(identifier: SegueIdentifier.ConfirmBid.toRaw(), source: sut, destination: confirmVC, performHandler: { () -> Void in })
+            let segue = UIStoryboardSegue(identifier: SegueIdentifier.ConfirmBid.rawValue, source: sut, destination: confirmVC, performHandler: { () -> Void in })
 
             sut.prepareForSegue(segue, sender: sut)
             expect(confirmVC.bid?).to(beAnInstanceOf(Bid.self))

@@ -12,6 +12,6 @@ extension UIViewController {
     /// Short hand syntax for performing a segue with a known hardcoded identity
 
     public func performSegue(identifier:SegueIdentifier) {
-        self.performSegueWithIdentifier(identifier.toRaw(), sender: self)
+        self.performSegueWithIdentifier(identifier.rawValue, sender: self)
     }
 }

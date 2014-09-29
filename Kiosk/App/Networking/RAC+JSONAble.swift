@@ -15,7 +15,7 @@ extension RACSignal {
             }
 
             if error != nil {
-                error.memory = NSError(domain: MoyaErrorDomain, code: MoyaErrorCode.Data.toRaw(), userInfo: ["data": object])
+                error.memory = NSError(domain: MoyaErrorDomain, code: MoyaErrorCode.Data.rawValue, userInfo: ["data": object])
             }
 
             return nil
@@ -38,7 +38,7 @@ extension RACSignal {
             }
 
             if error != nil {
-                error.memory = NSError(domain: MoyaErrorDomain, code: MoyaErrorCode.Data.toRaw(), userInfo: ["data": object])
+                error.memory = NSError(domain: MoyaErrorDomain, code: MoyaErrorCode.Data.rawValue, userInfo: ["data": object])
             }
 
             return nil

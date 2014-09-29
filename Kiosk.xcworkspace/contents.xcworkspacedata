@@ -7,13 +7,4 @@
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:submodules/ReactiveCocoa/ReactiveCocoa.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:submodules/swiftz/swiftz.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:submodules/swiftz/swiftz_core/swiftz_core.xcodeproj">
-   </FileRef>
 </Workspace>
