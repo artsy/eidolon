@@ -5,6 +5,7 @@ import ReactiveCocoa
 // Currently, I don't see one there, so we'll use this solution until an official one exists.
 
 // Pulled from http://www.scottlogic.com/blog/2014/07/24/mvvm-reactivecocoa-swift.html
+
 public struct RAC  {
     var target: NSObject
     var keyPath: String
