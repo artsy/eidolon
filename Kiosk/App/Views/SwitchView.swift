@@ -10,7 +10,7 @@ import Foundation
 
 public class SwitchView: UIView {
     public var shouldAnimate = true
-    public var animationDuration = 0.15
+    public var animationDuration: NSTimeInterval = AnimationDuration.Short.toRaw()
     public let selectedIndexSignal: RACSignal = RACSubject()
     
     private let buttons: Array<UIButton>
@@ -59,10 +59,7 @@ public class SwitchView: UIView {
 }
 
 private extension SwitchView {
-    
-    func setup() {
-        backgroundColor = UIColor.artsyMediumGrey()
-        
+    func setup() {       
         if let firstButton = buttons.first {
             firstButton.enabled = false
             (selectedIndexSignal as RACSubject).sendNext(0)
