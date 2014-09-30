@@ -123,8 +123,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZf-KS-kZn">
-                                <rect key="frame" x="105" y="54" width="815" height="660"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="og9-1P-tuu">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NZf-KS-kZn">
+                                <rect key="frame" x="105" y="55" width="815" height="660"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="660" id="Ey5-Lm-Uyg"/>
                                     <constraint firstAttribute="width" constant="815" id="IrV-lP-H6f"/>
@@ -145,7 +149,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="NZf-KS-kZn" secondAttribute="centerX" id="6Nd-w7-6Yg"/>
                             <constraint firstAttribute="centerY" secondItem="NZf-KS-kZn" secondAttribute="centerY" id="J6j-lB-8Vk"/>
@@ -155,6 +159,11 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="backgroundView" destination="og9-1P-tuu" id="Fa8-3p-4Al"/>
+                        <outlet property="cancelButton" destination="2zy-ga-dxf" id="Q41-fA-5oi"/>
+                        <outlet property="contentView" destination="NZf-KS-kZn" id="EhS-Ez-mJm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x1s-jG-1c0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
