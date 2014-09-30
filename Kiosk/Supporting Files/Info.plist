@@ -21,21 +21,8 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2014.09.04</string>
+	<string>2014.09.29</string>
 	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>UIMainStoryboardFile~ipad</key>
-	<string>Auction</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
@@ -49,7 +36,20 @@
 		<string>AGaramondPro-Italic.otf</string>
 		<string>AGaramondPro-Regular.otf</string>
 		<string>ITC_Avant_Garde_Gothic__Demi.ttf</string>
-		<string>AGaramondPro-Semibold.otf</string>    
+		<string>AGaramondPro-Semibold.otf</string>
+	</array>
+	<key>UIMainStoryboardFile~ipad</key>
+	<string>Auction</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>

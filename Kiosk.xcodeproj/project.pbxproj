@@ -1398,14 +1398,15 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
-		5E59DD4B19913DD900A48370 /* Beta */ = {
+		5E59DD4B19913DD900A48370 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1437,8 +1438,9 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s";
 			};
-			name = Beta;
+			name = Release;
 		};
 		5E59DD4D19913DD900A48370 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1448,18 +1450,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/submodules/",
+				);
 				INFOPLIST_FILE = "Kiosk/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @rpath/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "513564c8-7a9d-4960-a3d2-e7a3f48b3c44";
+				PROVISIONING_PROFILE = "9A3C3617-C06E-4341-BB05-0551D3E7A42F";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/PodsBridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
-		5E59DD4E19913DD900A48370 /* Beta */ = {
+		5E59DD4E19913DD900A48370 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 29AC0C40EA1BBED255C77D7F /* Pods.beta.xcconfig */;
 			buildSettings = {
@@ -1467,16 +1473,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/submodules/",
+				);
 				INFOPLIST_FILE = "Kiosk/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @rpath/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "513564c8-7a9d-4960-a3d2-e7a3f48b3c44";
+				PROVISIONING_PROFILE = "9A3C3617-C06E-4341-BB05-0551D3E7A42F";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/PodsBridgingHeader.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
-			name = Beta;
+			name = Release;
 		};
 		5E59DD5019913DD900A48370 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1501,7 +1512,7 @@
 			};
 			name = Debug;
 		};
-		5E59DD5119913DD900A48370 /* Beta */ = {
+		5E59DD5119913DD900A48370 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EE4CAC9FE3857F7DF1A07AE1 /* Pods-KioskTests.beta.xcconfig */;
 			buildSettings = {
@@ -1517,7 +1528,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "KioskTests/KioskTests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kiosk.app/Kiosk";
 			};
-			name = Beta;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1526,28 +1537,28 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E59DD4A19913DD900A48370 /* Debug */,
-				5E59DD4B19913DD900A48370 /* Beta */,
+				5E59DD4B19913DD900A48370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Beta;
+			defaultConfigurationName = Release;
 		};
 		5E59DD4C19913DD900A48370 /* Build configuration list for PBXNativeTarget "Kiosk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E59DD4D19913DD900A48370 /* Debug */,
-				5E59DD4E19913DD900A48370 /* Beta */,
+				5E59DD4E19913DD900A48370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Beta;
+			defaultConfigurationName = Release;
 		};
 		5E59DD4F19913DD900A48370 /* Build configuration list for PBXNativeTarget "KioskTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E59DD5019913DD900A48370 /* Debug */,
-				5E59DD5119913DD900A48370 /* Beta */,
+				5E59DD5119913DD900A48370 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Beta;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
