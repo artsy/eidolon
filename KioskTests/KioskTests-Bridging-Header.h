@@ -11,6 +11,7 @@
 #import <Artsy+UIColors/UIColor+DebugColours.h>
 
 #import <Artsy+UILabels/ARLabelSubclasses.h>
+#import <Artsy-UIButtons/ARButtonSubclasses.h>
 #import <Artsy+UILabels/NSNumberFormatter+ARCurrency.h>
 
 #import <ARCollectionVIewMasonryLayout/ARCollectionViewMasonryLayout.h>

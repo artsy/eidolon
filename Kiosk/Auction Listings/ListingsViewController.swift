@@ -7,7 +7,7 @@ let TableCellIdentifier = "TableCell"
 
 class ListingsViewController: UIViewController {
     var allowAnimations = true
-    dynamic var salesArtworks = [SaleArtwork]()
+    dynamic var saleArtworks = [SaleArtwork]()
     dynamic var cellIdentifier = MasonryCellIdentifier
     
     lazy var collectionView: UICollectionView = {
@@ -34,7 +34,7 @@ class ListingsViewController: UIViewController {
         // Set up reactive bindings
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "ici-live-auction")
 
-        RAC(self, "salesArtworks") <~ XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).doNext({ [unowned self] (_) -> Void in
+        RAC(self, "saleArtworks") <~ XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).doNext({ [unowned self] (_) -> Void in
             self.collectionView.reloadData()
         }).catch({ (error) -> RACSignal! in
             println("Error handling thing: \(error.localizedDescription)")
@@ -71,7 +71,7 @@ class ListingsViewController: UIViewController {
             self.collectionView.setCollectionViewLayout(layout as UICollectionViewLayout, animated: false)
             self.collectionView.reloadData()
             
-            if countElements(self.salesArtworks) > 0 {
+            if countElements(self.saleArtworks) > 0 {
                 self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
             }
         }
@@ -91,20 +91,18 @@ class ListingsViewController: UIViewController {
 
 extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, ARCollectionViewMasonryLayoutDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return countElements(salesArtworks)
+        return countElements(saleArtworks)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
-        
-        cell.backgroundColor = UIColor.blackColor()
         
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
-        self.presentModalForSaleArtwork(salesArtworks[indexPath.row])
+        self.presentModalForSaleArtwork(saleArtworkAtIndexPath(indexPath))
     }
 
     func presentModalForSaleArtwork(saleArtwork:SaleArtwork) {
@@ -124,17 +122,20 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return 400
+        return MasonryCollectionViewCell.heightForSaleArtwork(saleArtworkAtIndexPath(indexPath))
     }
 }
 
 // Mark: Private Methods
 
 private extension ListingsViewController {
+    
+    // MARK: Class methods
+    
     class func masonryLayout() -> ARCollectionViewMasonryLayout {
         var layout = ARCollectionViewMasonryLayout(direction: .Vertical)
         layout.itemMargins = CGSizeMake(65, 65)
-        layout.dimensionLength = 254
+        layout.dimensionLength = MasonryCollectionViewCellWidth
         layout.rank = 3
         layout.contentInset = UIEdgeInsetsMake(CGFloat(0), -CGFloat(0), CGFloat(VerticalMargins), CGFloat(0))
         
@@ -144,6 +145,13 @@ private extension ListingsViewController {
     class func tableLayout() -> UICollectionViewFlowLayout {
         return UICollectionViewFlowLayout()
     }
+    
+    // MARK: Instance methods
+    
+    func saleArtworkAtIndexPath(indexPath: NSIndexPath) -> SaleArtwork {
+        return self.saleArtworks[indexPath.item];
+    }
+    
 }
 
 // MARK: - Switch Values
