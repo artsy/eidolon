@@ -1,6 +1,6 @@
 import Foundation
 
-enum AnimationDuration: NSTimeInterval {
-    case Normal = 0.3
-    case Short = 0.15
+struct AnimationDuration {
+    static let Normal: NSTimeInterval = 0.30
+    static let Short: NSTimeInterval = 0.15
 }
