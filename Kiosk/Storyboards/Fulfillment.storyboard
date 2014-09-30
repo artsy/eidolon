@@ -260,20 +260,20 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Bid: $10,000" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="v7X-dR-pia" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="448" width="166" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Estimate: $10,000" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="v7X-dR-pia" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="447" width="364" height="29"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ROY LICHTENSTEIN" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="h2j-OF-Phh" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="388" width="166" height="29"/>
+                                <rect key="frame" x="65" y="388" width="364" height="29"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crying Girl, 1963" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="Aj2-T3-pNw" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="416" width="166" height="29"/>
+                                <rect key="frame" x="65" y="416" width="364" height="29"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -286,6 +286,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="AXh-zM-wkr"/>
                     <connections>
+                        <outlet property="artistNameLabel" destination="h2j-OF-Phh" id="uix-5k-rFx"/>
+                        <outlet property="artworkPriceLabel" destination="v7X-dR-pia" id="ddn-gN-BWR"/>
+                        <outlet property="artworkTitleLabel" destination="Aj2-T3-pNw" id="3FZ-B6-AkR"/>
                         <outlet property="bidAmountTextField" destination="GJN-vx-0ge" id="Wpe-9v-QCg"/>
                         <outlet property="bidButton" destination="dT1-U2-hie" id="b1u-df-a4J"/>
                         <outlet property="currentBidLabel" destination="GS2-EK-4Nx" id="Wi1-Uq-gkb"/>

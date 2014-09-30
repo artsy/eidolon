@@ -3,7 +3,7 @@ import Foundation
 class Artist: JSONAble {
 
     let id: String
-    var name: String
+    dynamic var name: String
 
     init(id: String, name: String) {
         self.id = id

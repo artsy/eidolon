@@ -12,15 +12,20 @@ struct XAppToken {
         case TokenKey = "TokenKey"
         case TokenExpiry = "TokenExpiry"
     }
-    
-    private let defaults = NSUserDefaults.standardUserDefaults()
-        
+
     // MARK: - Initializers
 
-    init() {
-        // Empty, but necessary to invoke from tests
+    let defaults:NSUserDefaults
+
+    init(defaults:NSUserDefaults) {
+        self.defaults = defaults
     }
-    
+
+    init() {
+        self.defaults = NSUserDefaults.standardUserDefaults()
+    }
+
+
     // MARK: - Properties
     
     var token: String? {

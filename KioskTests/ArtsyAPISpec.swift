@@ -9,8 +9,16 @@ func beInTheFuture() -> MatcherFunc<NSDate> {
     }
 }
 
+var defaults = NSUserDefaults()
+
 class ArtsyAPISpec: QuickSpec {
+
     override func spec() {
+
+        func newXAppRequest() -> RACSignal {
+            return XAppRequest(ArtsyAPI.Auctions, method: Moya.DefaultMethod(), parameters: Moya.DefaultParameters(), defaults: defaults)
+        }
+
         describe("keys", { () -> () in
             it("stubs responses for invalid keys") {
                 let invalidKeys = APIKeys(key: "", secret: "")
@@ -37,11 +45,12 @@ class ArtsyAPISpec: QuickSpec {
             }
             
             it("returns some data") {
-                setDefaultsKeys(nil, nil)
+                setDefaultsKeys(defaults, nil, nil)
                 
                 var called = false
+
                 // Make any XApp request, doesn't matter which, but make sure to subscribe so it actually fires
-                XAppRequest(.Auctions).subscribeNext({ (object) -> Void in
+                newXAppRequest().subscribeNext({ (object) -> Void in
                     called = true
                 })
                 
@@ -49,29 +58,29 @@ class ArtsyAPISpec: QuickSpec {
             }
             
             it("gets XApp token if it doesn't exist yet") {
-                setDefaultsKeys(nil, nil)
+                setDefaultsKeys(defaults, nil, nil)
                 
-                XAppRequest(.Auctions).subscribeNext({ (object) -> Void in
+                newXAppRequest().subscribeNext({ (object) -> Void in
                     // nop
                 })
                 
                 let past = NSDate(timeIntervalSinceNow: -1000)
-                expect(getDefaultsKeys().key).to(equal("some token that never expires"))
-                expect(getDefaultsKeys().expiry).toNot(beNil())
-                expect(getDefaultsKeys().expiry ?? past).to(beInTheFuture())
+                expect(getDefaultsKeys(defaults).key).to(equal("STUBBED TOKEN!"))
+                expect(getDefaultsKeys(defaults).expiry).toNot(beNil())
+                expect(getDefaultsKeys(defaults).expiry ?? past).to(beInTheFuture())
             }
             
             it("gets XApp token if it has expired") {
                 let past = NSDate(timeIntervalSinceNow: -1000)
-                setDefaultsKeys("some expired key", past)
+                setDefaultsKeys(defaults, "some expired key", past)
                 
-                XAppRequest(.Auctions).subscribeNext({ (object) -> Void in
+                newXAppRequest().subscribeNext({ (object) -> Void in
                     // nop
                 })
                 
-                expect(getDefaultsKeys().key).to(equal("some token that never expires"))
-                expect(getDefaultsKeys().expiry).toNot(beNil())
-                expect(getDefaultsKeys().expiry ?? past).to(beInTheFuture())
+                expect(getDefaultsKeys(defaults).key).to(equal("STUBBED TOKEN!"))
+                expect(getDefaultsKeys(defaults).expiry).toNot(beNil())
+                expect(getDefaultsKeys(defaults).expiry ?? past).to(beInTheFuture())
             }
         }
     }
