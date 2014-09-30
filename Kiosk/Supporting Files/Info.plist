@@ -38,8 +38,6 @@
 		<string>ITC_Avant_Garde_Gothic__Demi.ttf</string>
 		<string>AGaramondPro-Semibold.otf</string>
 	</array>
-	<key>UIMainStoryboardFile~ipad</key>
-	<string>Auction</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

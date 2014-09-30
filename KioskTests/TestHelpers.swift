@@ -6,21 +6,19 @@ private enum DefaultsKeys: String {
     case TokenExpiry = "TokenExpiry"
 }
 
-var defaults = NSUserDefaults()
-
-func clearDefaultsKeys() {
+func clearDefaultsKeys(defaults: NSUserDefaults) {
     defaults.removeObjectForKey(DefaultsKeys.TokenKey.rawValue)
     defaults.removeObjectForKey(DefaultsKeys.TokenExpiry.rawValue)
 }
 
-func getDefaultsKeys() -> (key: String?, expiry: NSDate?) {
+func getDefaultsKeys(defaults: NSUserDefaults) -> (key: String?, expiry: NSDate?) {
     let key = defaults.objectForKey(DefaultsKeys.TokenKey.rawValue) as String?
     let expiry = defaults.objectForKey(DefaultsKeys.TokenExpiry.rawValue) as NSDate?
     
     return (key: key, expiry: expiry)
 }
 
-func setDefaultsKeys(key: String?, expiry: NSDate?) {
+func setDefaultsKeys(defaults: NSUserDefaults, key: String?, expiry: NSDate?) {
     defaults.setObject(key, forKey: DefaultsKeys.TokenKey.rawValue)
     defaults.setObject(expiry, forKey: DefaultsKeys.TokenExpiry.rawValue)
 }
