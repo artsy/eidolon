@@ -34,3 +34,4 @@
 #endif
 
 #import <CardFlight/CardFlight.h>
+#import "UIView+BooleanDependentAnimation.h"
