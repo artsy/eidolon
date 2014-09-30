@@ -10,7 +10,7 @@ import Foundation
 
 public class SwitchView: UIView {
     public var shouldAnimate = true
-    public var animationDuration: NSTimeInterval = AnimationDuration.Short.toRaw()
+    public var animationDuration: NSTimeInterval = AnimationDuration.Short.rawValue
     public let selectedIndexSignal: RACSignal = RACSubject()
     
     private let buttons: Array<UIButton>

@@ -9,7 +9,7 @@ class ListingsViewController: UIViewController {
     var salesArtworks = [SaleArtwork]()
     
     lazy var collectionView: UICollectionView = {
-        var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
+        var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())!
         collectionView.backgroundColor = UIColor.clearColor()
         collectionView.dataSource = self
         collectionView.delegate = self
