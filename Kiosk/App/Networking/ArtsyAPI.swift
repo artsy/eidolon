@@ -88,7 +88,7 @@ extension ArtsyAPI : MoyaTarget {
         // Sign all non-XApp token requests
         switch target {
         case .XApp:
-            return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": ""])
+            return endpoint
         case .XAuth:
             return endpoint
         default:

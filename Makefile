@@ -1,6 +1,6 @@
 WORKSPACE = Kiosk.xcworkspace
 SCHEME = Kiosk
-CONFIGURATION = Release
+CONFIGURATION = Debug
 APP_NAME = Kiosk
 
 APP_PLIST = Kiosk/Info.plist
@@ -19,7 +19,7 @@ bootstrap:
 	git submodule update
 	./submodules/ReactiveCocoa/script/bootstrap
 	bundle install
-
+	
 	@echo "\nSetting up API Keys, leave blank if you don't know."
 
 	@printf '\nWhat is your Artsy API Client Secret? '; \
