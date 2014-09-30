@@ -6,7 +6,7 @@ private enum DefaultsKeys: String {
     case TokenExpiry = "TokenExpiry"
 }
 
-let defaults = NSUserDefaults.standardUserDefaults()
+var defaults = NSUserDefaults()
 
 func clearDefaultsKeys() {
     defaults.removeObjectForKey(DefaultsKeys.TokenKey.rawValue)
