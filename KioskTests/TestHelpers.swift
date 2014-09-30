@@ -36,6 +36,6 @@ func setupProviderForSuite(provider: ReactiveMoyaProvider<ArtsyAPI>) {
 }
 
 func yearFromDate(date: NSDate) -> Int {
-    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)
+    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
     return calendar.components(.CalendarUnitYear, fromDate: date).year
 }

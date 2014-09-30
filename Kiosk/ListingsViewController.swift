@@ -63,15 +63,23 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
-        
+        self.presentModalForSaleArtwork(salesArtworks[indexPath.row])
+    }
+
+    func presentModalForSaleArtwork(saleArtwork:SaleArtwork) {
         let storyboard = UIStoryboard.fulfillment()
         let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
-        
+        containerController.allowAnimations = allowAnimations
+
         if let placeBidViewController = containerController.placeBidViewController() {
-            placeBidViewController.saleArtwork = salesArtworks[indexPath.row]
+            placeBidViewController.saleArtwork = saleArtwork
         }
-        
-        self.presentViewController(containerController, animated: self.allowAnimations, completion: nil)
+
+        // Present the VC, then once it's ready trigger it's own showing animations
+        self.presentViewController(containerController, animated: false) {
+            containerController.viewDidAppearAnimation(containerController.allowAnimations)
+        }
+
     }
 }
 
