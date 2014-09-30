@@ -66,12 +66,16 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         
         let storyboard = UIStoryboard.fulfillment()
         let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
-        
+        containerController.allowAnimations = allowAnimations
+
         if let placeBidViewController = containerController.placeBidViewController() {
             placeBidViewController.saleArtwork = salesArtworks[indexPath.row]
         }
-        
-        self.presentViewController(containerController, animated: self.allowAnimations, completion: nil)
+
+        // Present the VC, then once it's ready trigger it's own showing animations
+        self.presentViewController(containerController, animated: false) {
+            containerController.viewDidAppearAnimation(containerController.allowAnimations)
+        }
     }
 }
 
