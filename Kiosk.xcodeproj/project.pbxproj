@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5E08488E19D06EE60078C571 /* Auctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E08488C19D06EE60078C571 /* Auctions.json */; };
 		5E08489B19D070DC0078C571 /* AuctionListings.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E08489919D070DC0078C571 /* AuctionListings.json */; };
+		5E0D702C19DADD8E0005AF46 /* TableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2C0C519DAC18000263137 /* TableCollectionViewCell.swift */; };
+		5E0D703E19DADD900005AF46 /* MasonryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2C0C719DAC3F400263137 /* MasonryCollectionViewCell.swift */; };
 		5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */; };
 		5E3E53E619C3AA13002D8B9D /* XAppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3E53E519C3AA13002D8B9D /* XAppToken.swift */; };
 		5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3519913DD800A48370 /* AppDelegate.swift */; };
@@ -1350,6 +1352,7 @@
 				6030A12319D1A3F100B934CA /* UIViewControllerExtensions.swift in Sources */,
 				5EAC733019D01617002F918A /* ReactiveCocoaBindingsTests.swift in Sources */,
 				60C37DC419D4359E002E7A44 /* JSONAble.swift in Sources */,
+				5E0D703E19DADD900005AF46 /* MasonryCollectionViewCell.swift in Sources */,
 				60C37DD519D44DD9002E7A44 /* Bid.swift in Sources */,
 				6030A10219D1931400B934CA /* FulfillmentContainerViewController.swift in Sources */,
 				6030A11D19D1A23100B934CA /* Moya.swift in Sources */,
@@ -1393,6 +1396,7 @@
 				604B225319D359C5008D86C7 /* SystemTime.swift in Sources */,
 				605B857019C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */,
 				5EA137CD19C733DE00D0B743 /* TestHelpers.swift in Sources */,
+				5E0D702C19DADD8E0005AF46 /* TableCollectionViewCell.swift in Sources */,
 				60C07A1719BE02A800868951 /* HaveValidSnapshot.swift in Sources */,
 				6030A12119D1A30D00B934CA /* ListingsViewController.swift in Sources */,
 				5EA137C019C72BD200D0B743 /* ArtsyAPISpec.swift in Sources */,

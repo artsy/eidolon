@@ -7,8 +7,8 @@ let TableCellIdentifier = "TableCell"
 
 class ListingsViewController: UIViewController {
     var allowAnimations = true
-    var salesArtworks = [SaleArtwork]()
-    var cellIdentifier = MasonryCellIdentifier
+    dynamic var salesArtworks = [SaleArtwork]()
+    dynamic var cellIdentifier = MasonryCellIdentifier
     
     lazy var collectionView: UICollectionView = {
         var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())!
@@ -34,9 +34,12 @@ class ListingsViewController: UIViewController {
         // Set up reactive bindings
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "ici-live-auction")
 
-        RAC(self, "salesArtworks") <~ XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).doNext { [unowned self] (_) -> Void in
+        RAC(self, "salesArtworks") <~ XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).doNext({ [unowned self] (_) -> Void in
             self.collectionView.reloadData()
-        }
+        }).catch({ (error) -> RACSignal! in
+            println("Error handling thing: \(error.localizedDescription)")
+            return RACSignal.empty()
+        })
         
         let gridSelectedSignal = switchView.selectedIndexSignal.map { (index) -> AnyObject! in
             switch index as Int {
