@@ -1,7 +1,7 @@
 import UIKit
 
-let horizontalMargins = 65
-let verticalMargins = 26
+let HorizontalMargins = 65
+let VerticalMargins = 26
 let MasonryCellIdentifier = "MasonryCell"
 let TableCellIdentifier = "TableCell"
 
@@ -81,9 +81,9 @@ class ListingsViewController: UIViewController {
         let switchHeightPredicate = "\(switchView.intrinsicContentSize().height)"
         
         switchView.constrainHeight(switchHeightPredicate)
-        switchView.alignTop("\(64+verticalMargins)", leading: "\(horizontalMargins)", bottom: nil, trailing: "-\(horizontalMargins)", toView: view)
-        collectionView.constrainTopSpaceToView(switchView, predicate: "\(verticalMargins)")
-        collectionView.alignTop(nil, leading: "\(horizontalMargins)", bottom: "0", trailing: "-\(horizontalMargins)", toView: view)
+        switchView.alignTop("\(64+VerticalMargins)", leading: "\(HorizontalMargins)", bottom: nil, trailing: "-\(HorizontalMargins)", toView: view)
+        collectionView.constrainTopSpaceToView(switchView, predicate: "\(VerticalMargins)")
+        collectionView.alignTop(nil, leading: "0", bottom: "0", trailing: "0", toView: view)
     }
 }
 
@@ -124,7 +124,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return 500
+        return 400
     }
 }
 
@@ -132,7 +132,13 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
 
 private extension ListingsViewController {
     class func masonryLayout() -> ARCollectionViewMasonryLayout {
-        return ARCollectionViewMasonryLayout(direction: .Vertical)
+        var layout = ARCollectionViewMasonryLayout(direction: .Vertical)
+        layout.itemMargins = CGSizeMake(65, 65)
+        layout.dimensionLength = 254
+        layout.rank = 3
+        layout.contentInset = UIEdgeInsetsMake(CGFloat(0), -CGFloat(0), CGFloat(VerticalMargins), CGFloat(0))
+        
+        return layout
     }
     
     class func tableLayout() -> UICollectionViewFlowLayout {
