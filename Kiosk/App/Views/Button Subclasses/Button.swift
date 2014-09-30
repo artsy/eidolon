@@ -92,7 +92,7 @@ public class Button: UIButton {
                 let fade = CABasicAnimation()
                 fade.fromValue = self.layer.backgroundColor
                 fade.toValue = newBackgroundColor.CGColor
-                fade.duration = AnimationDuration.Short.rawValue
+                fade.duration = AnimationDuration.Short
                 layer.addAnimation(fade, forKey: "backgroundColor")
                 
             } else {
@@ -105,7 +105,7 @@ public class Button: UIButton {
                 let fade = CABasicAnimation()
                 fade.fromValue = self.layer.backgroundColor
                 fade.toValue = newBorderColor.CGColor
-                fade.duration = AnimationDuration.Short.rawValue
+                fade.duration = AnimationDuration.Short
                 layer.addAnimation(fade, forKey: "borderColor")
                 
             } else {
