@@ -6,6 +6,7 @@ PODS:
   - ARAnalytics/Mixpanel (2.8.0):
     - ARAnalytics/CoreIOS
     - Mixpanel
+  - ARCollectionViewMasonryLayout (1.0.0)
   - Artsy+UIColors (1.0.0):
     - EDColor (~> 0.4)
   - Artsy+UIFonts (1.0.0)
@@ -30,6 +31,7 @@ PODS:
 DEPENDENCIES:
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
+  - ARCollectionViewMasonryLayout (~> 1.0.0)
   - Artsy+UIColors
   - Artsy+UIFonts
   - Artsy+UILabels
@@ -49,6 +51,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
+  ARCollectionViewMasonryLayout: df68d78a4ec885d2ee224b558daf35c6ae46f9be
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
   Artsy+UIFonts: fb0a70f93ca888d45a3af751707701fe8cbeae2a
   Artsy+UILabels: f327cdd339e99fb1a1ff26b9e5caf89545917b8c

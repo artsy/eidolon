@@ -13,6 +13,8 @@
 #import <Artsy+UILabels/ARLabelSubclasses.h>
 #import <Artsy+UILabels/NSNumberFormatter+ARCurrency.h>
 
+#import <ARCollectionVIewMasonryLayout/ARCollectionViewMasonryLayout.h>
+
 #import <ISO8601DateFormatter/ISO8601DateFormatter.h>
 #import <ECPhoneNumberFormatter/ECPhoneNumberFormatter.h>
 
