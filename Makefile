@@ -1,6 +1,6 @@
 WORKSPACE = Kiosk.xcworkspace
 SCHEME = Kiosk
-CONFIGURATION = Debug
+CONFIGURATION = Release
 APP_NAME = Kiosk
 
 APP_PLIST = Kiosk/Info.plist
