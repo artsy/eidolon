@@ -132,7 +132,9 @@ private extension MasonryCollectionViewCell {
     
     class func _dividerView() -> UIView {
         let dividerView = UIView()
-        dividerView.backgroundColor = UIColor.artsyMediumGrey()
+        // Need an explicit frame so that drawTopDottedBorder() is reliable
+        dividerView.frame = CGRect(origin: CGPointZero, size: CGSize(width: MasonryCollectionViewCellWidth, height: 1))
+        dividerView.drawTopDottedBorder()
         return dividerView
     }
     

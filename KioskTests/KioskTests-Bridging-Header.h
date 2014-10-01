@@ -13,6 +13,7 @@
 #import <Artsy+UILabels/ARLabelSubclasses.h>
 #import <Artsy-UIButtons/ARButtonSubclasses.h>
 #import <Artsy+UILabels/NSNumberFormatter+ARCurrency.h>
+#import <Artsy+UILabels/UIView+ARDrawing.h>
 
 #import <ARCollectionVIewMasonryLayout/ARCollectionViewMasonryLayout.h>
 
