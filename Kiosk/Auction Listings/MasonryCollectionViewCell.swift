@@ -12,8 +12,17 @@ class MasonryCollectionViewCell: UICollectionViewCell, ListingsCollectionViewCel
     private dynamic let numberOfBidsLabel = MasonryCollectionViewCell._rightAlignedNormalLabel()
     private dynamic let bidButton = MasonryCollectionViewCell._bidButton()
     
-    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.dividerView, self.currentBidLabel, self.numberOfBidsLabel, self.bidButton]
-    private lazy var cellWidthSubviews: [UIView] = [self.artworkImageView, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.dividerView, self.bidButton]
+    private lazy var bidView: UIView = {
+        let view = UIView()
+        view.addSubview(self.currentBidLabel)
+        view.addSubview(self.numberOfBidsLabel)
+        self.currentBidLabel.alignTop("0", leading: "0", bottom: "0", trailing: nil, toView: view)
+        self.numberOfBidsLabel.alignTop("0", leading: nil, bottom: "0", trailing: "0", toView: view)
+        return view
+    }()
+    
+    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.dividerView, self.bidView, self.bidButton]
+    private lazy var cellWidthSubviews: [UIView] = [self.artworkImageView, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.bidView, self.dividerView, self.bidButton]
     
     private var artworkImageViewHeightConstraint: NSLayoutConstraint?
     
@@ -86,8 +95,8 @@ private extension MasonryCollectionViewCell {
         estimateLabel.constrainHeight("16")
         dividerView.alignAttribute(.Top, toAttribute: .Bottom, ofView: estimateLabel, predicate: "13")
         dividerView.constrainHeight("1")
-        currentBidLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: dividerView, predicate: "13")
-        currentBidLabel.constrainHeight("16")
+        bidView.alignAttribute(.Top, toAttribute: .Bottom, ofView: dividerView, predicate: "13")
+        bidView.constrainHeight("16")
         bidButton.alignAttribute(.Top, toAttribute: .Bottom, ofView: currentBidLabel, predicate: "13")
         
         // Bind subviews
@@ -111,12 +120,18 @@ private extension MasonryCollectionViewCell {
         RAC(self, "estimateLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             return (saleArtwork as? SaleArtwork)?.estimateString
         }).mapNilToEmptyString()
-        // TODO: number of bids
         RAC(self, "currentBidLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             if let currentBidCents = (saleArtwork as? SaleArtwork)?.highestBidCents {
                 return "Current bid: \(NSNumberFormatter.currencyStringForCents(currentBidCents))"
             } else {
                 return "No bids"
+            }
+        }).mapNilToEmptyString()
+        RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
+            if let bidCount = (saleArtwork as? SaleArtwork)?.bidCount {
+                return "\(bidCount)"
+            } else {
+                return nil
             }
         }).mapNilToEmptyString()
         bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [unowned self] (_) -> Void in
