@@ -104,10 +104,10 @@ extension ArtsyAPI : MoyaTarget {
         return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, stubResponses: true)
     }
 
-     static func AuthenticatedProvider(credentials:UserCredentials) -> AuthenticatedMoyaProvider<ArtsyAPI> {
-        // DI the stub?!
-        return AuthenticatedMoyaProvider(credentials:credentials, stubResponses: false)
-    }
+//     static func AuthenticatedProvider(credentials:UserCredentials) -> AuthenticatedMoyaProvider<ArtsyAPI> {
+//        // DI the stub?!
+//        return AuthenticatedMoyaProvider(credentials:credentials, stubResponses: false)
+//    }
 
     private struct SharedProvider {
         static var instance = Provider.DefaultProvider()
