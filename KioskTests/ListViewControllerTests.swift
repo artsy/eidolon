@@ -21,5 +21,11 @@ class ListingsViewControllerTests: QuickSpec {
             expect(sut.presentedViewController!) != nil
         }
         
+        it("looks correct when displaying stubbed contents.") {
+            Provider.sharedProvider = Provider.StubbingProvider()
+            let sut = ListingsViewController()
+            
+            expect(sut).to(recordSnapshot(named: "default"))
+        }
     }
 }
