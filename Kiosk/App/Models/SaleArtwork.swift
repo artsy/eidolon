@@ -57,6 +57,7 @@ class SaleArtwork: JSONAble {
         sale.highestBidCents = json["highest_bid_amount_cents"].integer
         sale.lowEstimateCents = json["low_estimate_cents"].integer
         sale.highEstimateCents = json["high_estimate_cents"].integer
+        sale.bidCount = json["bidder_positions_count"].integer
 //        let reserveStatus = json["reserve_status"].integer
 
         return sale;
