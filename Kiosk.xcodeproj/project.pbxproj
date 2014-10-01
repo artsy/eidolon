@@ -35,6 +35,7 @@
 		5EAC732519D0149A002F918A /* ReactiveCocoaBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */; };
 		5EAC733019D01617002F918A /* ReactiveCocoaBindingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC732F19D01617002F918A /* ReactiveCocoaBindingsTests.swift */; };
 		5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0997D19C31D8F00E5DD59 /* XApp.json */; };
+		5EE221DA19DC52EA002EB3C7 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */; };
 		5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */; };
 		5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */; };
 		5EF2C0C619DAC18000263137 /* TableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2C0C519DAC18000263137 /* TableCollectionViewCell.swift */; };
@@ -1373,6 +1374,7 @@
 				605B856A19C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift in Sources */,
 				605610D019D2D87100A2850A /* SimulatorOnlyView.swift in Sources */,
 				60C37DDB19D45353002E7A44 /* SaleTests.swift in Sources */,
+				5EE221DA19DC52EA002EB3C7 /* ListingsCollectionViewCell.swift in Sources */,
 				6030A11519D19F9E00B934CA /* StoryboardIdentifiers.swift in Sources */,
 				60212C9219D5CA04001921E1 /* Image.swift in Sources */,
 				6030A11319D19F1300B934CA /* ConfirmYourBidPINTests.swift in Sources */,
