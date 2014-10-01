@@ -97,6 +97,10 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
+        if let cell = cell as? ListingsCollectionViewCell {
+            cell.saleArtwork = saleArtworkAtIndexPath(indexPath)
+        }
+        
         return cell
     }
     
