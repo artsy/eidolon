@@ -6,7 +6,7 @@ class ConfirmYourBidViewControllerTests: QuickSpec {
 
         it("looks right by default") {
             let sut = ConfirmYourBidViewController.instantiateFromStoryboard()
-            expect(sut).to(haveValidSnapshot())
+            expect(sut).to(haveValidSnapshot(named:"default"))
         }
 
         it("shows keypad buttons") {

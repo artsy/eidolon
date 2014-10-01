@@ -44,7 +44,7 @@ class ARButtonTests: QuickSpec {
                 view.addSubview(button);
             }
             
-            expect(view).to(haveValidSnapshot())
+            expect(view).to(haveValidSnapshot(named:"default"))
             
         }
     }

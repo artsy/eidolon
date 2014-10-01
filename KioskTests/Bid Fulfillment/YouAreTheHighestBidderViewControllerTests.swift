@@ -6,7 +6,7 @@ class YouAreTheHighestBidderViewControllerTests: QuickSpec {
 
         it("looks right by default") {
             let sut = YouAreTheHighestBidderViewController.instantiateFromStoryboard()
-            expect(sut).to(haveValidSnapshot())
+            expect(sut).to(haveValidSnapshot(named: "default"))
         }
 
     }

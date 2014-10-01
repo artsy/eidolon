@@ -6,7 +6,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
         it("looks right by default") {
             let sut = PlaceBidViewController.instantiateFromStoryboard()
-            expect(sut).to(haveValidSnapshot())
+            expect(sut).to(haveValidSnapshot(named:"default"))
         }
 
         it("reacts to keypad inputs with currency") {

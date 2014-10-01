@@ -6,7 +6,7 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
 
         it("looks right by default") {
             let sut = ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard()
-            expect(sut).to(haveValidSnapshot())
+            expect(sut).to(haveValidSnapshot(named:"default"))
         }
 
     }
