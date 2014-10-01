@@ -14,8 +14,24 @@ class ImageTests: QuickSpec {
             let image = Image.fromJSON(data) as Image
 
             expect(image.id) == id
-            expect(image.imageURL) == url
+            expect(image.imageFormatString) == url
             expect(image.imageVersions.count) == imageFormats.count
+        }
+
+        it("generates a thumbnail url") {
+            var image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["large"])
+            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
+
+            image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["medium"])
+            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
+
+            image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["larger"])
+            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
+        }
+
+        it("handles unknown image formats"){
+            let image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["unknown"])
+            expect(image.thumbnailURL()).toNot(beAnInstanceOf(NSURL))
         }
 
     }
