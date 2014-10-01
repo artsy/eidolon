@@ -29,6 +29,7 @@ class SaleArtwork: JSONAble {
     dynamic var openingBidCents: NSNumber?
     var minimumNextBidCents: Int?
     
+    var highestBidCents: Int?
     var lowEstimateCents: Int?
     var highEstimateCents: Int?
 
@@ -49,15 +50,20 @@ class SaleArtwork: JSONAble {
         if let highestBidDict = json["highest_bid"].object as? [String: AnyObject] {
             sale.saleHighestBid = Bid.fromJSON(highestBidDict) as? Bid
         }
-
+        
         sale.openingBidCents = json["opening_bid_cents"].integer
         sale.minimumNextBidCents = json["minimum_next_bid_cents"].integer
 
-//        let lowEstimateCents = json["low_estimate_cents"].integer
-//        let highEstimateCents = json["high_estimate_cents"].integer
+        sale.highestBidCents = json["highest_bid_amount_cents"].integer
+        sale.lowEstimateCents = json["low_estimate_cents"].integer
+        sale.highEstimateCents = json["high_estimate_cents"].integer
 //        let reserveStatus = json["reserve_status"].integer
 
         return sale;
+    }
+    
+    var estimateString: String {
+        return "Hello"
     }
 }
 

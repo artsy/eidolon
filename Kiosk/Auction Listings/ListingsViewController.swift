@@ -18,6 +18,7 @@ class ListingsViewController: UIViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.registerClass(MasonryCollectionViewCell.self, forCellWithReuseIdentifier: MasonryCellIdentifier)
         collectionView.registerClass(TableCollectionViewCell.self, forCellWithReuseIdentifier: TableCellIdentifier)
+        collectionView.allowsSelection = false
         return collectionView
     }()
     lazy var switchView: SwitchView = {
@@ -97,16 +98,17 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
-        if let cell = cell as? ListingsCollectionViewCell {
-            cell.saleArtwork = saleArtworkAtIndexPath(indexPath)
+        if let listingsCell = cell as? ListingsCollectionViewCell {
+            listingsCell.saleArtwork = saleArtworkAtIndexPath(indexPath)
+            let bidSignal: RACSignal = listingsCell.bidWasPressedSignal.takeUntil(cell.rac_prepareForReuseSignal)
+            bidSignal.subscribeNext({ [weak self] (_) -> Void in
+                if let saleArtwork = self?.saleArtworkAtIndexPath(indexPath) {
+                    self?.presentModalForSaleArtwork(saleArtwork)
+                }
+            })
         }
         
         return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
-        self.presentModalForSaleArtwork(saleArtworkAtIndexPath(indexPath))
     }
 
     func presentModalForSaleArtwork(saleArtwork:SaleArtwork) {
@@ -122,7 +124,6 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         self.presentViewController(containerController, animated: false) {
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         }
-
     }
 
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
@@ -138,7 +139,7 @@ private extension ListingsViewController {
     
     class func masonryLayout() -> ARCollectionViewMasonryLayout {
         var layout = ARCollectionViewMasonryLayout(direction: .Vertical)
-        layout.itemMargins = CGSizeMake(65, 65)
+        layout.itemMargins = CGSizeMake(65, 0)
         layout.dimensionLength = MasonryCollectionViewCellWidth
         layout.rank = 3
         layout.contentInset = UIEdgeInsetsMake(0.0, 0.0, CGFloat(VerticalMargins), 0.0)

@@ -27,6 +27,7 @@
 #import <ARAnalytics/ARAnalytics.h>
 #import <ORStackView/ORStackView.h>
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
