@@ -35,8 +35,9 @@ class ListingsViewController: UIViewController {
         // Set up reactive bindings
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "ici-live-auction")
 
-        RAC(self, "saleArtworks") <~ XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).doNext({ [unowned self] (_) -> Void in
-            self.collectionView.reloadData()
+        RAC(self, "saleArtworks") <~ XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).doNext({ [weak self] (_) -> Void in
+            let collectionView = self?.collectionView
+            collectionView?.reloadData()
         }).catch({ (error) -> RACSignal! in
             println("Error handling thing: \(error.localizedDescription)")
             return RACSignal.empty()
@@ -67,13 +68,13 @@ class ListingsViewController: UIViewController {
             default:
                 return ListingsViewController.tableLayout()
             }
-        }).subscribeNext { [unowned self] (layout) -> Void in
+        }).subscribeNext { [weak self] (layout) -> Void in
             // Need to explicitly call animated: fase and reload to avoid animation
-            self.collectionView.setCollectionViewLayout(layout as UICollectionViewLayout, animated: false)
-            self.collectionView.reloadData()
+            self?.collectionView.setCollectionViewLayout(layout as UICollectionViewLayout, animated: false)
+            self?.collectionView.reloadData()
             
-            if countElements(self.saleArtworks) > 0 {
-                self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
+            if countElements(self?.saleArtworks ?? []) > 0 {
+                self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
             }
         }
     }

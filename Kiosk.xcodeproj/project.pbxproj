@@ -27,6 +27,8 @@
 		5EA137C019C72BD200D0B743 /* ArtsyAPISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */; };
 		5EA137CB19C72BE100D0B743 /* XAppTokenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA137CA19C72BE100D0B743 /* XAppTokenSpec.swift */; };
 		5EA137CD19C733DE00D0B743 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA137CC19C733DE00D0B743 /* TestHelpers.swift */; };
+		5EA33A8519DC7F2A007CF667 /* artwork.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EA33A8419DC7F2A007CF667 /* artwork.jpg */; };
+		5EA33A8619DC81CC007CF667 /* artwork.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EA33A8419DC7F2A007CF667 /* artwork.jpg */; };
 		5EA65C0119D5819C005EA4B4 /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA65C0019D5819C005EA4B4 /* SwitchView.swift */; };
 		5EA65C0E19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA65C0D19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m */; };
 		5EA65C0F19D5FC98005EA4B4 /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA65C0019D5819C005EA4B4 /* SwitchView.swift */; };
@@ -360,6 +362,7 @@
 		5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPISpec.swift; sourceTree = "<group>"; };
 		5EA137CA19C72BE100D0B743 /* XAppTokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppTokenSpec.swift; sourceTree = "<group>"; };
 		5EA137CC19C733DE00D0B743 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		5EA33A8419DC7F2A007CF667 /* artwork.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = artwork.jpg; sourceTree = "<group>"; };
 		5EA65C0019D5819C005EA4B4 /* SwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
 		5EA65C0C19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+BooleanDependentAnimation.h"; path = "Categories/UIView+BooleanDependentAnimation.h"; sourceTree = "<group>"; };
 		5EA65C0D19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+BooleanDependentAnimation.m"; path = "Categories/UIView+BooleanDependentAnimation.m"; sourceTree = "<group>"; };
@@ -564,6 +567,7 @@
 		5E59DD4519913DD800A48370 /* KioskTests */ = {
 			isa = PBXGroup;
 			children = (
+				5EA33A7219DC7EF9007CF667 /* Test Data */,
 				5EA65C1119D5FCAA005EA4B4 /* Views */,
 				60C6913519D6CB99001F58FD /* App */,
 				604B225019D359A0008D86C7 /* Models */,
@@ -616,6 +620,14 @@
 				5EF2C0B119DAC13A00263137 /* View Controllers */,
 			);
 			name = "Auction Listings";
+			sourceTree = "<group>";
+		};
+		5EA33A7219DC7EF9007CF667 /* Test Data */ = {
+			isa = PBXGroup;
+			children = (
+				5EA33A8419DC7F2A007CF667 /* artwork.jpg */,
+			);
+			name = "Test Data";
 			sourceTree = "<group>";
 		};
 		5EA65C0B19D5C4EF005EA4B4 /* Categories */ = {
@@ -1188,6 +1200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */,
+				5EA33A8519DC7F2A007CF667 /* artwork.jpg in Resources */,
 				604B224319D3518F008D86C7 /* SystemTime.json in Resources */,
 				60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */,
 				5E08489B19D070DC0078C571 /* AuctionListings.json in Resources */,
@@ -1212,6 +1225,7 @@
 				60FFC2B119D945BD00284B9F /* XAuth.json in Resources */,
 				6030A12219D1A31600B934CA /* KeypadView.xib in Resources */,
 				6030A12819D1A63400B934CA /* Auction.storyboard in Resources */,
+				5EA33A8619DC81CC007CF667 /* artwork.jpg in Resources */,
 				6030A12719D1A55600B934CA /* edit_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

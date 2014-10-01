@@ -100,11 +100,11 @@ private extension MasonryCollectionViewCell {
         bidButton.alignAttribute(.Top, toAttribute: .Bottom, ofView: currentBidLabel, predicate: "13")
         
         // Bind subviews
-        RACObserve(self, "saleArtwork.artwork").subscribeNext { [unowned self] (artwork) -> Void in
+        RACObserve(self, "saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
             if let url = (artwork as? Artwork)?.images?.first?.thumbnailURL() {
-                self.artworkImageView.sd_setImageWithURL(url)
+                self?.artworkImageView.sd_setImageWithURL(url)
             } else {
-                self.artworkImageView.image = nil
+                self?.artworkImageView.image = nil
             }
         }
         RAC(self, "artistNameLabel.text") <~ RACObserve(self, "saleArtwork.artwork").map({ (artwork) -> AnyObject! in
@@ -128,14 +128,18 @@ private extension MasonryCollectionViewCell {
             }
         }).mapNilToEmptyString()
         RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
-            if let bidCount = (saleArtwork as? SaleArtwork)?.bidCount {
-                return "\(bidCount)"
-            } else {
+            return (saleArtwork as? SaleArtwork)?.bidCount
+        }).map({ (bidCount) -> AnyObject! in
+            switch bidCount as? Int? {
+            case .Some(let bidCount) where bidCount > 0:
+                return "\(bidCount) bids placed"
+            default:
                 return nil
+                
             }
         }).mapNilToEmptyString()
-        bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [unowned self] (_) -> Void in
-            (self.bidWasPressedSignal as RACSubject).sendNext(nil)
+        bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self] (_) -> Void in
+            (self?.bidWasPressedSignal as RACSubject).sendNext(nil)
         }
     }
     

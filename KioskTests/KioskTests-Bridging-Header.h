@@ -26,6 +26,7 @@
 
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/SDImageCache.h>
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
