@@ -102,12 +102,15 @@ private extension MasonryCollectionViewCell {
         RAC(self, "artistNameLabel.text") <~ RACObserve(self, "saleArtwork.artwork").map({ (artwork) -> AnyObject! in
             return (artwork as? Artwork)?.artists?.first?.name
         }).mapNilToEmptyString()
+        // TODO: Include year
+        // TODO: Make italics
         RAC(self, "artworkTitleLabel.text") <~ RACObserve(self, "saleArtwork.artwork").map({ (artwork) -> AnyObject! in
             return (artwork as? Artwork)?.title
         }).mapNilToEmptyString()
         RAC(self, "estimateLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             return (saleArtwork as? SaleArtwork)?.estimateString
         }).mapNilToEmptyString()
+        // TODO: number of bids
         RAC(self, "currentBidLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             if let currentBidCents = (saleArtwork as? SaleArtwork)?.highestBidCents {
                 return "Current bid: $\(currentBidCents)"

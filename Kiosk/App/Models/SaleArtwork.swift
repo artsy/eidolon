@@ -62,6 +62,7 @@ class SaleArtwork: JSONAble {
         return sale;
     }
     
+    // TODO:
     var estimateString: String {
         return "Hello"
     }
