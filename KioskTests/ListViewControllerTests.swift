@@ -7,13 +7,14 @@ class ListingsViewControllerTests: QuickSpec {
         it("presents a view controller when showModal is called") {
             // As it's a UINav it needs to be in the real view herarchy 
             
-            let window = UIApplication.sharedApplication().delegate!.window!
+            let window = UIWindow(frame:UIScreen.mainScreen().bounds)
             let sut = ListingsViewController()
-            window!.rootViewController = sut
+            window.rootViewController = sut
+            window.makeKeyAndVisible()
 
             sut.allowAnimations = false;
 
-            let artwork = Artwork(id: "", dateString: "", title: "", name: "", blurb: "")
+            let artwork = Artwork(id: "", dateString: "", title: "", name: "", blurb: "", price: "")
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             sut.presentModalForSaleArtwork(saleArtwork)
             

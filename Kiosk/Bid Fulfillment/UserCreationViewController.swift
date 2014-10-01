@@ -10,5 +10,4 @@ public class UserCreationViewController: UIViewController {
         self.performSegue(.ToConfirmUserCreation)
     }
 
-
 }

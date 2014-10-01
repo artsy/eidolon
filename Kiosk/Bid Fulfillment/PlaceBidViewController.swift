@@ -10,6 +10,10 @@ class PlaceBidViewController: UIViewController {
     @IBOutlet var currentBidLabel: UILabel!
     @IBOutlet var nextBidAmountLabel: UILabel!
 
+    @IBOutlet var artistNameLabel: ARSerifLabel!
+    @IBOutlet var artworkTitleLabel: ARSerifLabel!
+    @IBOutlet var artworkPriceLabel: ARSerifLabel!
+
     var saleArtwork: SaleArtwork?
 
     class func instantiateFromStoryboard() -> PlaceBidViewController {
@@ -39,6 +43,10 @@ class PlaceBidViewController: UIViewController {
         if let saleArtwork:SaleArtwork = self.saleArtwork {
             RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toCurrentBidString)
             RAC(nextBidAmountLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toOpeningBidString)
+
+            RAC(artistNameLabel, "text") <~ RACObserve(saleArtwork.artwork.artists?.first, "name")
+            RAC(artworkTitleLabel, "text") <~ RACObserve(saleArtwork.artwork, "title")
+            RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price")
         }
     }
 

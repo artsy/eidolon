@@ -1,27 +1,27 @@
 import UIKit
 
-public class ConfirmYourBidViewController: UIViewController {
+class ConfirmYourBidViewController: UIViewController {
 
     dynamic var number: String = ""
     var bid:Bid?
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
-    @IBOutlet public var numberAmountTextField: UITextField!
+    @IBOutlet var numberAmountTextField: UITextField!
     @IBOutlet var keypadContainer: KeypadContainerView!
 
-    public class func instantiateFromStoryboard() -> ConfirmYourBidViewController {
+    class func instantiateFromStoryboard() -> ConfirmYourBidViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController
     }
 
-    @IBAction public func dev_noPhoneNumberFoundTapped(sender: AnyObject) {
+    @IBAction func dev_noPhoneNumberFoundTapped(sender: AnyObject) {
         self.performSegue(.ConfirmyourBidBidderNotFound)
     }
 
-    @IBAction public func dev_phoneNumberFoundTapped(sender: AnyObject) {
+    @IBAction func dev_phoneNumberFoundTapped(sender: AnyObject) {
         self.performSegue(.ConfirmyourBidBidderFound)
     }
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         let numberIsZeroLengthSignal = RACObserve(self, "number").map({ (number) -> AnyObject! in
@@ -30,9 +30,7 @@ public class ConfirmYourBidViewController: UIViewController {
         })
 
         RAC(enterButton, "enabled") <~ numberIsZeroLengthSignal.notEach()
-        RAC(numberAmountTextField, "text") <~ RACObserve(self, "number").map({ [weak self](number) -> AnyObject! in
-            return self?.phoneNumberFormatter.stringForObjectValue(number)
-        })
+        RAC(numberAmountTextField, "text") <~ RACObserve(self, "number").map(toPhoneNumberString)
 
         keypadSignal.subscribeNext({ [weak self] (input) -> Void in
             let input = String(input as Int)
@@ -41,10 +39,30 @@ public class ConfirmYourBidViewController: UIViewController {
         })
     }
 
-    @IBOutlet public var enterButton: UIButton!
+    @IBOutlet var enterButton: UIButton!
     @IBAction func enterButtonTapped(sender: AnyObject) {
-
+        
     }
 
-    lazy public var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // TODO
+    }
+
+    lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
+}
+
+
+private extension ConfirmYourBidViewController {
+
+    func toOpeningBidString(cents:AnyObject!) -> AnyObject! {
+        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
+            return "Enter \(dollars) or more"
+        }
+        return ""
+    }
+
+    func toPhoneNumberString(number:AnyObject!) -> AnyObject! {
+        return self.phoneNumberFormatter.stringForObjectValue(number as String)
+    }
+
 }

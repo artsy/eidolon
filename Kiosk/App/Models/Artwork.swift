@@ -4,21 +4,23 @@ class Artwork: JSONAble {
     let id: String
 
     let dateString: String
-    let title: String
-    let name: String
-    let blurb: String
+    dynamic let title: String
+    dynamic let name: String
+    dynamic let blurb: String
+    dynamic let price: String
 
-    var artists: [Artist]?
-    var culturalMarker: String?
+    dynamic var artists: [Artist]?
+    dynamic var culturalMarker: String?
 
-    var images: [Image]?
+    dynamic var images: [Image]?
 
-    init(id: String, dateString: String, title: String, name: String, blurb: String) {
+    init(id: String, dateString: String, title: String, name: String, blurb: String, price: String) {
         self.id = id
         self.dateString = dateString
         self.title = title
         self.name = name
         self.blurb = blurb
+        self.price = price
     }
 
     override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
@@ -29,8 +31,9 @@ class Artwork: JSONAble {
         let title = json["title"].stringValue
         let dateString = json["date"].stringValue
         let blurb = json["blurb"].stringValue
+        let price = json["price"].stringValue
 
-        let artwork = Artwork(id: id, dateString: dateString, title: title, name: name, blurb: blurb)
+        let artwork = Artwork(id: id, dateString: dateString, title: title, name: name, blurb: blurb, price: price)
 
         if let artistDictionary = json["artist"].object as? [String: AnyObject] {
             artwork.artists = [Artist.fromJSON(artistDictionary) as Artist]
