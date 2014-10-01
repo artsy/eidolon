@@ -141,7 +141,7 @@ private extension ListingsViewController {
         layout.itemMargins = CGSizeMake(65, 65)
         layout.dimensionLength = MasonryCollectionViewCellWidth
         layout.rank = 3
-        layout.contentInset = UIEdgeInsetsMake(CGFloat(0), -CGFloat(0), CGFloat(VerticalMargins), CGFloat(0))
+        layout.contentInset = UIEdgeInsetsMake(0.0, 0.0, CGFloat(VerticalMargins), 0.0)
         
         return layout
     }
