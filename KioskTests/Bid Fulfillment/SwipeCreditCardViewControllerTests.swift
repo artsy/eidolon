@@ -6,7 +6,7 @@ class SwipeCreditCardViewControllerTests: QuickSpec {
 
         it("looks right by default") {
             let sut = SwipeCreditCardViewController.instantiateFromStoryboard()
-            expect(sut).to(haveValidSnapshot())
+            expect(sut).to(haveValidSnapshot(named:"default"))
         }
 
 
