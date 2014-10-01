@@ -44,7 +44,9 @@ class PlaceBidViewController: UIViewController {
             RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toCurrentBidString)
             RAC(nextBidAmountLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toOpeningBidString)
 
-            RAC(artistNameLabel, "text") <~ RACObserve(saleArtwork.artwork.artists?.first, "name")
+            if let artist = saleArtwork.artwork.artists?.first {
+                RAC(artistNameLabel, "text") <~ RACObserve(artist, "name")
+            }
             RAC(artworkTitleLabel, "text") <~ RACObserve(saleArtwork.artwork, "title")
             RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price")
         }
