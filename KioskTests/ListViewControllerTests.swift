@@ -44,7 +44,7 @@ class ListingsViewControllerTests: QuickSpec {
         it("looks correct when displaying stubbed contents.") {
             let sut = ListingsViewController()
             
-            expect(sut).to(haveValidSnapshot(named: "default"))
+            expect(sut).to(haveValidSnapshot(named: "default with stubbed data"))
             
             println(sut)
         }
