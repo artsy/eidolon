@@ -14,7 +14,7 @@ class ListingsViewControllerTests: QuickSpec {
 
             sut.allowAnimations = false;
 
-            let artwork = Artwork(id: "", dateString: "", title: "", name: "", blurb: "", price: "")
+            let artwork = Artwork(id: "", dateString: "", title: "", name: "", blurb: "", price: "", date: "")
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             sut.presentModalForSaleArtwork(saleArtwork)
             

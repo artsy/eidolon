@@ -62,9 +62,15 @@ class SaleArtwork: JSONAble {
         return sale;
     }
     
-    // TODO:
     var estimateString: String {
-        return "Hello"
+        switch (lowEstimateCents, highEstimateCents) {
+        case (.Some(let lowCents), .Some(let highCents)):
+            let lowDollars = NSNumberFormatter.currencyStringForCents(lowCents)
+            let highDollars = NSNumberFormatter.currencyStringForCents(highCents)
+            return "Estimate: \(lowDollars)–\(highDollars)"
+        default:
+            return "No Estimate"
+        }
     }
 }
 

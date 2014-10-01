@@ -6,7 +6,7 @@ class MasonryCollectionViewCell: UICollectionViewCell, ListingsCollectionViewCel
     private dynamic let artworkImageView = MasonryCollectionViewCell._artworkImageView()
     private dynamic let artistNameLabel = MasonryCollectionViewCell._largeLabel()
     private dynamic let artworkTitleLabel = MasonryCollectionViewCell._italicsLabel()
-    private dynamic let estimateLabel = MasonryCollectionViewCell._italicsLabel()
+    private dynamic let estimateLabel = MasonryCollectionViewCell._normalLabel()
     private dynamic let dividerView: UIView = MasonryCollectionViewCell._dividerView()
     private dynamic let currentBidLabel = MasonryCollectionViewCell._bidLabel()
     private dynamic let numberOfBidsLabel = MasonryCollectionViewCell._rightAlignedNormalLabel()
@@ -84,7 +84,6 @@ private extension MasonryCollectionViewCell {
         artworkTitleLabel.constrainHeight("16")
         estimateLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkTitleLabel, predicate: "10")
         estimateLabel.constrainHeight("16")
-        // TODO: Divider should be dotted
         dividerView.alignAttribute(.Top, toAttribute: .Bottom, ofView: estimateLabel, predicate: "13")
         dividerView.constrainHeight("1")
         currentBidLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: dividerView, predicate: "13")
@@ -102,10 +101,12 @@ private extension MasonryCollectionViewCell {
         RAC(self, "artistNameLabel.text") <~ RACObserve(self, "saleArtwork.artwork").map({ (artwork) -> AnyObject! in
             return (artwork as? Artwork)?.artists?.first?.name
         }).mapNilToEmptyString()
-        // TODO: Include year
-        // TODO: Make italics
         RAC(self, "artworkTitleLabel.text") <~ RACObserve(self, "saleArtwork.artwork").map({ (artwork) -> AnyObject! in
-            return (artwork as? Artwork)?.title
+            if let artwork = artwork as? Artwork {
+                return "\(artwork.title), \(artwork.date)"
+            } else {
+                return nil
+            }
         }).mapNilToEmptyString()
         RAC(self, "estimateLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             return (saleArtwork as? SaleArtwork)?.estimateString
@@ -113,7 +114,7 @@ private extension MasonryCollectionViewCell {
         // TODO: number of bids
         RAC(self, "currentBidLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             if let currentBidCents = (saleArtwork as? SaleArtwork)?.highestBidCents {
-                return "Current bid: $\(currentBidCents)"
+                return "Current bid: \(NSNumberFormatter.currencyStringForCents(currentBidCents))"
             } else {
                 return "No bids"
             }
@@ -138,17 +139,9 @@ private extension MasonryCollectionViewCell {
         return dividerView
     }
     
-    class func _font() -> UIFont {
-        return UIFont.serifFontWithSize(16)
-    }
-    
-    class func _boldFont() -> UIFont {
-        return UIFont.serifBoldFontWithSize(16)
-    }
-    
     class func _bidLabel() -> UILabel {
         let label = _normalLabel()
-        label.font = _boldFont()
+        label.font = UIFont.serifBoldFontWithSize(16)
         return label
     }
     
@@ -160,13 +153,13 @@ private extension MasonryCollectionViewCell {
     
     class func _normalLabel() -> UILabel {
         let label = ARSerifLabel()
-        label.font = _font()
+        label.font = label.font.fontWithSize(16)
         return label
     }
     
     class func _italicsLabel() -> UILabel {
         let label = ARItalicsSerifLabel()
-        label.font = _font()
+        label.font = label.font.fontWithSize(16)
         return label
     }
     
