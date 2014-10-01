@@ -6,7 +6,7 @@ class ConfirmYourBidPINTests: QuickSpec {
 
         it("looks right by default") {
             let sut = ConfirmYourBidPINViewController.instantiateFromStoryboard()
-            expect(sut).to(haveValidSnapshot())
+            expect(sut).to(haveValidSnapshot(named:"default"))
         }
 
     }

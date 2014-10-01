@@ -6,7 +6,7 @@ class UserCreationViewControllerTests: QuickSpec {
 
         it("looks right by default") {
             let sut = UserCreationViewController.instantiateFromStoryboard()
-            expect(sut).to(haveValidSnapshot())
+            expect(sut).to(haveValidSnapshot(named:"default"))
         }
 
     }

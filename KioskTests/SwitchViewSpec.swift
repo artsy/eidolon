@@ -8,7 +8,7 @@ class SwitchViewSpec: QuickSpec {
             let switchView = SwitchView(buttonTitles: titles)
             switchView.frame = CGRect(origin: CGPointZero, size: CGSize(width: 400, height: switchView.intrinsicContentSize().height))
             
-            expect(switchView).to(haveValidSnapshot())
+            expect(switchView).to(haveValidSnapshot(named:"default"))
         }
     }
 }
