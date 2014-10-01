@@ -21,7 +21,7 @@ enum ArtsyAPI {
 
         case .XApp:
             return ["client_id": APIKeys.sharedKeys.key ?? "",
-                "client_secret": APIKeys.sharedKeys.secret ?? ""]
+                    "client_secret": APIKeys.sharedKeys.secret ?? ""]
 
         case .Auctions:
             return ["is_auction": "true"]
