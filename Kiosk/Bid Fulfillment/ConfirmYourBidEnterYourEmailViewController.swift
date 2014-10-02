@@ -1,22 +1,40 @@
 import UIKit
 
-public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
+class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
-    public class func instantiateFromStoryboard() -> ConfirmYourBidEnterYourEmailViewController {
+    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var confirmButton: UIButton!
+
+    class func instantiateFromStoryboard() -> ConfirmYourBidEnterYourEmailViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBidEnterEmail) as ConfirmYourBidEnterYourEmailViewController
     }
 
-    @IBAction public func dev_noPhoneNumberFoundTapped(sender: AnyObject) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if let nav = self.navigationController as? FulfillmentNavigationController {
+
+            let newUserCredentials = nav.bidDetails.newUser
+            RAC(newUserCredentials, "email") <~ emailTextField.rac_textSignal()
+
+        }
+
+        let inputIsEmail = emailTextField.rac_textSignal().map(isEmailAddress)
+        RAC(confirmButton, "enabled") <~ inputIsEmail.notEach()
+    }
+
+    @IBAction func dev_emailAdded(sender: AnyObject) {
         self.performSegue(.SubmittedanEmailforUserDetails)
     }
+}
 
+private extension ConfirmYourBidEnterYourEmailViewController {
 
-    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue == SegueIdentifier.SubmittedanEmailforUserDetails {
-//            let confirmVC = segue.destinationViewController as ConfirmYourBidPasswordViewController
-//            confirmVC.bid = Bid(id: "FAKE BID", amountCents: Int(self.bid * 100))
-        }
+    func isEmailAddress(text:AnyObject!) -> AnyObject! {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+        let testPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+
+        return testPredicate?.evaluateWithObject(text) == false
     }
-
 
 }

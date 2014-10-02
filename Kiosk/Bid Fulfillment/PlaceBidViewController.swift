@@ -14,8 +14,6 @@ class PlaceBidViewController: UIViewController {
     @IBOutlet var artworkTitleLabel: ARSerifLabel!
     @IBOutlet var artworkPriceLabel: ARSerifLabel!
 
-    var saleArtwork: SaleArtwork?
-
     class func instantiateFromStoryboard() -> PlaceBidViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
     }
@@ -42,18 +40,19 @@ class PlaceBidViewController: UIViewController {
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
             RAC(nav.bidDetails, "bidAmountCents") <~ RACObserve(self, "bid").map { return ($0 as Float * 100) }
-        }
 
-        if let saleArtwork:SaleArtwork = self.saleArtwork {
-            RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toCurrentBidString)
-            RAC(nextBidAmountLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toOpeningBidString)
+            if let saleArtwork:SaleArtwork = nav.bidDetails.saleArtwork {
 
-            if let artist = saleArtwork.artwork.artists?.first {
-                RAC(artistNameLabel, "text") <~ RACObserve(artist, "name")
+                RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toCurrentBidString)
+                RAC(nextBidAmountLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toOpeningBidString)
+
+                if let artist = saleArtwork.artwork.artists?.first {
+                    RAC(artistNameLabel, "text") <~ RACObserve(artist, "name")
+                }
+
+                RAC(artworkTitleLabel, "text") <~ RACObserve(saleArtwork.artwork, "title")
+                RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price")
             }
-
-            RAC(artworkTitleLabel, "text") <~ RACObserve(saleArtwork.artwork, "title")
-            RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price")
         }
     }
 

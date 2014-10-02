@@ -355,7 +355,7 @@
 		5E59DD3419913DD800A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD3519913DD800A48370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E59DD3719913DD800A48370 /* ListingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListingsViewController.swift; path = "Auction Listings/ListingsViewController.swift"; sourceTree = "<group>"; };
-		5E59DD3C19913DD800A48370 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5E59DD3C19913DD800A48370 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
 		5E59DD4219913DD800A48370 /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD4719913DD900A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PodsBridgingHeader.h; sourceTree = "<group>"; };
@@ -556,7 +556,6 @@
 				6086143B19BA304F00699FBC /* Storyboards + Nibs */,
 				5E95FCCA19D9B2A9004D0C8F /* Auction Listings */,
 				6086143D19BA307300699FBC /* Bid Fulfillment */,
-				5E59DD3C19913DD800A48370 /* Images.xcassets */,
 				5ED0997319C31D6200E5DD59 /* Stubbed Responses */,
 				5E59DD3319913DD800A48370 /* Supporting Files */,
 				5E59DD4519913DD800A48370 /* KioskTests */,
@@ -567,6 +566,7 @@
 		5E59DD3319913DD800A48370 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5E59DD3C19913DD800A48370 /* Images.xcassets */,
 				5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */,
 				5E59DD3419913DD800A48370 /* Info.plist */,
 			);
@@ -1040,7 +1040,7 @@
 		5E59DD2819913DD800A48370 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Artsy;
 				TargetAttributes = {
 					5E59DD2F19913DD800A48370 = {
@@ -1526,7 +1526,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;

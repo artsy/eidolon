@@ -48,11 +48,10 @@ class FulfillmentContainerViewController: UIViewController {
         }
     }
 
-    func placeBidViewController() -> PlaceBidViewController? {
+    func internalNavigationController() -> FulfillmentNavigationController? {
 
         self.loadViewProgrammatically()
-        let internalNavigationController = self.childViewControllers.first as UINavigationController
-        return internalNavigationController.childViewControllers.first as? PlaceBidViewController
+        return self.childViewControllers.first as? FulfillmentNavigationController
     }
 
     class func instantiateFromStoryboard() -> FulfillmentContainerViewController {

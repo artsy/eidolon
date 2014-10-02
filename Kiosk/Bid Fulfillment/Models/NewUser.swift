@@ -1,10 +1,10 @@
 @objc class NewUser: NSObject {
-    dynamic var username:String?
+    dynamic var email:String?
     dynamic var password:String?
     dynamic var phoneNumber:String?
 
-    init(username: String?, password: String?, phoneNumber:String?) {
-        self.username = username
+    init(email: String?, password: String?, phoneNumber:String?) {
+        self.email = email
         self.password = password
         self.phoneNumber = phoneNumber
     }
