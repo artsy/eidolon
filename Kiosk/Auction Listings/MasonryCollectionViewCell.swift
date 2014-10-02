@@ -107,9 +107,11 @@ private extension MasonryCollectionViewCell {
                 self?.artworkImageView.image = nil
             }
         }
+        
         RAC(self, "artistNameLabel.text") <~ RACObserve(self, "saleArtwork.artwork").map({ (artwork) -> AnyObject! in
             return (artwork as? Artwork)?.artists?.first?.name
         }).mapNilToEmptyString()
+        
         RAC(self, "artworkTitleLabel.text") <~ RACObserve(self, "saleArtwork.artwork").map({ (artwork) -> AnyObject! in
             if let artwork = artwork as? Artwork {
                 return "\(artwork.title), \(artwork.date)"
@@ -117,9 +119,11 @@ private extension MasonryCollectionViewCell {
                 return nil
             }
         }).mapNilToEmptyString()
+        
         RAC(self, "estimateLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             return (saleArtwork as? SaleArtwork)?.estimateString
         }).mapNilToEmptyString()
+        
         RAC(self, "currentBidLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             if let currentBidCents = (saleArtwork as? SaleArtwork)?.highestBidCents {
                 return "Current bid: \(NSNumberFormatter.currencyStringForCents(currentBidCents))"
@@ -127,6 +131,7 @@ private extension MasonryCollectionViewCell {
                 return "No bids"
             }
         }).mapNilToEmptyString()
+        
         RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             return (saleArtwork as? SaleArtwork)?.bidCount
         }).map({ (bidCount) -> AnyObject! in
@@ -138,6 +143,7 @@ private extension MasonryCollectionViewCell {
                 
             }
         }).mapNilToEmptyString()
+        
         bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self] (_) -> Void in
             (self?.bidWasPressedSignal as RACSubject).sendNext(nil)
         }
