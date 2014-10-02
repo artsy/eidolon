@@ -32,7 +32,7 @@ class PlaceBidViewController: UIViewController {
             return NSNumberFormatter.currencyStringForCents(bid as Float * 100.0)
         })
 
-        RAC(bidAmountTextField, "text") <~ RACSignal.`if`(bidIsZeroSignal, then: RACSignal.`return`(""), `else`: formattedBidTextSignal)
+        RAC(bidAmountTextField, "text") <~ RACSignal.`if`(bidIsZeroSignal, then: RACSignal.defer{ RACSignal.`return`("") }, `else`: formattedBidTextSignal)
 
         keypadSignal.subscribeNext(addDigitToBid)
         deleteSignal.subscribeNext(deleteBid)
