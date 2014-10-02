@@ -6,7 +6,7 @@ PODS:
   - ARAnalytics/Mixpanel (2.8.0):
     - ARAnalytics/CoreIOS
     - Mixpanel
-  - ARCollectionViewMasonryLayout (1.0.0)
+  - ARCollectionViewMasonryLayout (2.0.0)
   - Artsy+UIColors (1.0.0):
     - EDColor (~> 0.4)
   - Artsy+UIFonts (1.0.0)
@@ -27,11 +27,14 @@ PODS:
   - ORStackView (1.2.0):
     - FLKAutoLayout (~> 0.1)
   - Reveal-iOS-SDK (1.0.5)
+  - SDWebImage (3.7.1):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.7.1)
 
 DEPENDENCIES:
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
-  - ARCollectionViewMasonryLayout (~> 1.0.0)
+  - ARCollectionViewMasonryLayout (~> 2.0.0)
   - Artsy+UIColors
   - Artsy+UIFonts
   - Artsy+UILabels
@@ -44,6 +47,7 @@ DEPENDENCIES:
   - ISO8601DateFormatter (= 0.7)
   - ORStackView
   - Reveal-iOS-SDK
+  - SDWebImage (~> 3.7)
 
 EXTERNAL SOURCES:
   FBSnapshotTestCase:
@@ -51,7 +55,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
-  ARCollectionViewMasonryLayout: df68d78a4ec885d2ee224b558daf35c6ae46f9be
+  ARCollectionViewMasonryLayout: 40993cb65522139cb2cd6ed255c91a6caee5c4dd
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
   Artsy+UIFonts: fb0a70f93ca888d45a3af751707701fe8cbeae2a
   Artsy+UILabels: f327cdd339e99fb1a1ff26b9e5caf89545917b8c
@@ -66,5 +70,6 @@ SPEC CHECKSUMS:
   Mixpanel: 708ec9a6ee6e741f7db107831e18b2fc2e7531f1
   ORStackView: f1ccef4a0c40dd7907a638232f78a873cc03ab6c
   Reveal-iOS-SDK: d4b2f4c20d5b823b7f8b88250fe1b71cecd424a7
+  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
 
 COCOAPODS: 0.34.1

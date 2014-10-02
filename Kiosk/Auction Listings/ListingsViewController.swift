@@ -1,13 +1,13 @@
 import UIKit
 
-let horizontalMargins = 65
-let verticalMargins = 26
+let HorizontalMargins = 65
+let VerticalMargins = 26
 let MasonryCellIdentifier = "MasonryCell"
 let TableCellIdentifier = "TableCell"
 
 class ListingsViewController: UIViewController {
     var allowAnimations = true
-    dynamic var salesArtworks = [SaleArtwork]()
+    dynamic var saleArtworks = [SaleArtwork]()
     dynamic var cellIdentifier = MasonryCellIdentifier
     
     lazy var collectionView: UICollectionView = {
@@ -18,6 +18,7 @@ class ListingsViewController: UIViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.registerClass(MasonryCollectionViewCell.self, forCellWithReuseIdentifier: MasonryCellIdentifier)
         collectionView.registerClass(TableCollectionViewCell.self, forCellWithReuseIdentifier: TableCellIdentifier)
+        collectionView.allowsSelection = false
         return collectionView
     }()
     lazy var switchView: SwitchView = {
@@ -34,8 +35,9 @@ class ListingsViewController: UIViewController {
         // Set up reactive bindings
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "ici-live-auction")
 
-        RAC(self, "salesArtworks") <~ XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).doNext({ [unowned self] (_) -> Void in
-            self.collectionView.reloadData()
+        RAC(self, "saleArtworks") <~ XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).doNext({ [weak self] (_) -> Void in
+            let collectionView = self?.collectionView
+            collectionView?.reloadData()
         }).catch({ (error) -> RACSignal! in
             println("Error handling thing: \(error.localizedDescription)")
             return RACSignal.empty()
@@ -66,13 +68,13 @@ class ListingsViewController: UIViewController {
             default:
                 return ListingsViewController.tableLayout()
             }
-        }).subscribeNext { [unowned self] (layout) -> Void in
+        }).subscribeNext { [weak self] (layout) -> Void in
             // Need to explicitly call animated: fase and reload to avoid animation
-            self.collectionView.setCollectionViewLayout(layout as UICollectionViewLayout, animated: false)
-            self.collectionView.reloadData()
+            self?.collectionView.setCollectionViewLayout(layout as UICollectionViewLayout, animated: false)
+            self?.collectionView.reloadData()
             
-            if countElements(self.salesArtworks) > 0 {
-                self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
+            if countElements(self?.saleArtworks ?? []) > 0 {
+                self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
             }
         }
     }
@@ -81,9 +83,9 @@ class ListingsViewController: UIViewController {
         let switchHeightPredicate = "\(switchView.intrinsicContentSize().height)"
         
         switchView.constrainHeight(switchHeightPredicate)
-        switchView.alignTop("\(64+verticalMargins)", leading: "\(horizontalMargins)", bottom: nil, trailing: "-\(horizontalMargins)", toView: view)
-        collectionView.constrainTopSpaceToView(switchView, predicate: "\(verticalMargins)")
-        collectionView.alignTop(nil, leading: "\(horizontalMargins)", bottom: "0", trailing: "-\(horizontalMargins)", toView: view)
+        switchView.alignTop("\(64+VerticalMargins)", leading: "\(HorizontalMargins)", bottom: nil, trailing: "-\(HorizontalMargins)", toView: view)
+        collectionView.constrainTopSpaceToView(switchView, predicate: "\(VerticalMargins)")
+        collectionView.alignTop(nil, leading: "0", bottom: "0", trailing: "0", toView: view)
     }
 }
 
@@ -91,20 +93,23 @@ class ListingsViewController: UIViewController {
 
 extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, ARCollectionViewMasonryLayoutDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return countElements(salesArtworks)
+        return countElements(saleArtworks)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
-        cell.backgroundColor = UIColor.blackColor()
+        if let listingsCell = cell as? ListingsCollectionViewCell {
+            listingsCell.saleArtwork = saleArtworkAtIndexPath(indexPath)
+            let bidSignal: RACSignal = listingsCell.bidWasPressedSignal.takeUntil(cell.rac_prepareForReuseSignal)
+            bidSignal.subscribeNext({ [weak self] (_) -> Void in
+                if let saleArtwork = self?.saleArtworkAtIndexPath(indexPath) {
+                    self?.presentModalForSaleArtwork(saleArtwork)
+                }
+            })
+        }
         
         return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
-        self.presentModalForSaleArtwork(salesArtworks[indexPath.row])
     }
 
     func presentModalForSaleArtwork(saleArtwork:SaleArtwork) {
@@ -120,24 +125,39 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         self.presentViewController(containerController, animated: false) {
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         }
-
     }
 
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return 500
+        return MasonryCollectionViewCell.heightForSaleArtwork(saleArtworkAtIndexPath(indexPath))
     }
 }
 
 // Mark: Private Methods
 
 private extension ListingsViewController {
+    
+    // MARK: Class methods
+    
     class func masonryLayout() -> ARCollectionViewMasonryLayout {
-        return ARCollectionViewMasonryLayout(direction: .Vertical)
+        var layout = ARCollectionViewMasonryLayout(direction: .Vertical)
+        layout.itemMargins = CGSizeMake(65, 0)
+        layout.dimensionLength = MasonryCollectionViewCellWidth
+        layout.rank = 3
+        layout.contentInset = UIEdgeInsetsMake(0.0, 0.0, CGFloat(VerticalMargins), 0.0)
+        
+        return layout
     }
     
     class func tableLayout() -> UICollectionViewFlowLayout {
         return UICollectionViewFlowLayout()
     }
+    
+    // MARK: Instance methods
+    
+    func saleArtworkAtIndexPath(indexPath: NSIndexPath) -> SaleArtwork {
+        return self.saleArtworks[indexPath.item];
+    }
+    
 }
 
 // MARK: - Switch Values

@@ -37,3 +37,14 @@ func yearFromDate(date: NSDate) -> Int {
     let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
     return calendar.components(.CalendarUnitYear, fromDate: date).year
 }
+
+@objc class TestClass { }
+
+// Necessary since UIImage(named:) doesn't work correctly in the test bundle
+extension UIImage {
+    class func testImage(named name: String, ofType type: String) -> UIImage! {
+        let bundle = NSBundle(forClass: TestClass().dynamicType)
+        let path = bundle.pathForResource(name, ofType: type)
+        return UIImage(contentsOfFile: path!)
+    }
+}
