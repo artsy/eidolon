@@ -41,7 +41,7 @@ DEPENDENCIES:
   - Artsy-UIButtons
   - CardFlight
   - ECPhoneNumberFormatter
-  - FBSnapshotTestCase (from `https://github.com/facebook/ios-snapshot-test-case`)
+  - FBSnapshotTestCase (from `https://github.com/AshFurrow/ios-snapshot-test-case.git`, branch `renderAsLayer`)
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
@@ -51,7 +51,8 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   FBSnapshotTestCase:
-    :git: https://github.com/facebook/ios-snapshot-test-case
+    :branch: renderAsLayer
+    :git: https://github.com/AshFurrow/ios-snapshot-test-case.git
 
 SPEC CHECKSUMS:
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219

@@ -57,12 +57,6 @@ class PlaceBidViewController: UIViewController {
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let nav = self.navigationController as? FulfillmentNavigationController {
-            println(" \(nav.bidDetails.bidAmountCents) ")
-        }
-    }
-
     @IBOutlet var bidButton: UIButton!
     @IBAction func bidButtonTapped(sender: AnyObject) {
         self.performSegue(SegueIdentifier.ConfirmBid)
