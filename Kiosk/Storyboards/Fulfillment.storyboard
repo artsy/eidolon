@@ -127,8 +127,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NZf-KS-kZn">
-                                <rect key="frame" x="105" y="55" width="815" height="660"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZf-KS-kZn">
+                                <rect key="frame" x="105" y="54" width="815" height="660"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="660" id="Ey5-Lm-Uyg"/>
                                     <constraint firstAttribute="width" constant="815" id="IrV-lP-H6f"/>
@@ -239,6 +239,9 @@
                                 <state key="normal" title="BID">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="bidButtonTapped:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="3JS-oA-Iuv"/>
@@ -431,7 +434,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mmj-T7-HAB">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mmj-T7-HAB">
                                 <rect key="frame" x="495" y="169" width="255" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -459,6 +462,9 @@
                                 <state key="normal" title="ENTER">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="enterButtonTapped:" destination="Yzb-AU-icr" eventType="touchUpInside" id="IxN-Gj-bDf"/>
@@ -553,7 +559,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpk-oa-izH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1510.5" y="1402"/>
+            <point key="canvasLocation" x="1510.5" y="1476"/>
         </scene>
         <!--Confirm Your Bid Artsy Login View Controller-->
         <scene sceneID="mg0-AC-X7S">
@@ -663,6 +669,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
+                        <outlet property="confirmCredentialsButton" destination="zSp-ka-p6m" id="hDg-Z7-4IL"/>
+                        <outlet property="emailTextField" destination="bMc-Jh-nkF" id="KQ9-Qf-3xe"/>
+                        <outlet property="passwordTextField" destination="sFU-mI-0Wz" id="jo4-Mm-FxB"/>
                         <segue destination="2lt-co-qW2" kind="push" identifier="Email Login Confirmed Highest Bidder" id="6qF-R8-kJy"/>
                         <segue destination="BKe-0r-2Pc" kind="push" identifier="Artsy User Has Not Registered Card" id="A1R-R2-CSF"/>
                     </connections>
@@ -1111,6 +1120,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mrk-wa-iTP" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="495" y="603" width="255" height="60"/>
@@ -1209,8 +1221,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="dev_noCardFoundTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="epD-0L-cUy"/>
-                                            <action selector="dev_noPhoneNumberFoundTapped:" destination="Djc-do-o8V" eventType="touchUpInside" id="NAs-29-R7x"/>
+                                            <action selector="dev_emailAdded:" destination="Djc-do-o8V" eventType="touchUpInside" id="LBF-rt-pLL"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1221,13 +1232,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AiP-vh-j1o">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AiP-vh-j1o">
                                 <rect key="frame" x="399" y="237" width="156" height="43"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="15"/>
                                 <state key="normal" title="CONFIRM">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                         </subviews>
@@ -1237,6 +1251,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
+                        <outlet property="confirmButton" destination="AiP-vh-j1o" id="dGh-Go-X2N"/>
+                        <outlet property="emailTextField" destination="y4z-UB-ZdO" id="rzh-fP-FyD"/>
                         <segue destination="b5H-c8-Ctw" kind="push" identifier="Submitted an Email for User Details" id="mgc-AC-8Is"/>
                     </connections>
                 </viewController>
@@ -1311,7 +1327,6 @@
                                 <connections>
                                     <action selector="dev_noCardFoundTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="zr1-cf-J74"/>
                                     <action selector="dev_noPhoneNumberFoundTapped:" destination="b5H-c8-Ctw" eventType="touchUpInside" id="9ah-3B-ebN"/>
-                                    <action selector="dev_noPhoneNumberFoundTapped:" destination="Djc-do-o8V" eventType="touchUpInside" id="S0y-0c-AFp"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FKB-tQ-sYO">
@@ -1319,13 +1334,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SW5-jm-Uxo">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SW5-jm-Uxo">
                                 <rect key="frame" x="399" y="237" width="156" height="43"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="15"/>
                                 <state key="normal" title="CONFIRM">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                         </subviews>

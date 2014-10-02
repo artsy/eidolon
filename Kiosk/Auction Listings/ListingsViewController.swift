@@ -117,8 +117,8 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
         containerController.allowAnimations = allowAnimations
 
-        if let placeBidViewController = containerController.placeBidViewController() {
-            placeBidViewController.saleArtwork = saleArtwork
+        if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
+            internalNav.bidDetails.saleArtwork = saleArtwork
         }
 
         // Present the VC, then once it's ready trigger it's own showing animations

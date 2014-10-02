@@ -2,6 +2,11 @@ import UIKit
 
 public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
+    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+
+    @IBOutlet var confirmCredentialsButton: UIButton!
+
     public class func instantiateFromStoryboard() -> ConfirmYourBidArtsyLoginViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBidArtsyLogin) as ConfirmYourBidArtsyLoginViewController
     }
@@ -13,5 +18,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBAction public func dev_noCardFoundTapped(sender: AnyObject) {
         self.performSegue(.ArtsyUserHasNotRegisteredCard)
     }
+
+
 
 }
