@@ -16,6 +16,8 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
             sut.loadViewProgrammatically()
 
             sut.emailTextField.text = "email"
+            sut.emailTextField.sendActionsForControlEvents(.EditingChanged)
+
             expect(nav!.bidDetails.newUser.email) == "email"
         }
 
@@ -33,7 +35,9 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
             let nav = FulfillmentNavigationController(rootViewController:sut)
             nav!.loadViewProgrammatically()
             sut.loadViewProgrammatically()
+
             sut.emailTextField.text = "email@address.com"
+            sut.emailTextField.sendActionsForControlEvents(.EditingChanged)
 
             expect(sut.confirmButton.enabled) == true
 
