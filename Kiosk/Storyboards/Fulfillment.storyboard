@@ -169,10 +169,10 @@
             </objects>
             <point key="canvasLocation" x="1183" y="-1625"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Fulfillment Navigation Controller-->
         <scene sceneID="wG8-BK-Gy6">
             <objects>
-                <navigationController modalPresentationStyle="formSheet" navigationBarHidden="YES" id="w8O-U4-lhE" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="formSheet" navigationBarHidden="YES" id="w8O-U4-lhE" customClass="FulfillmentNavigationController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PvK-mZ-4Jp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -548,6 +548,7 @@
                         <outlet property="keypadContainer" destination="wUI-V6-mkQ" id="Bs3-qq-4Sc"/>
                         <outlet property="numberAmountTextField" destination="Mmj-T7-HAB" id="4UA-Gw-yJk"/>
                         <segue destination="hrW-WV-2L3" kind="push" identifier="Confirm your Bid - Bidder Found" id="Q28-yu-dXi"/>
+                        <segue destination="Djc-do-o8V" kind="push" identifier="Confirm your Bid - Bidder Not Found" id="6LA-9C-uNF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpk-oa-izH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1138,7 +1139,6 @@
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
                         <segue destination="2lt-co-qW2" kind="push" identifier="PIN Confirmed" id="gjD-og-8Iv"/>
-                        <segue destination="Djc-do-o8V" kind="push" identifier="Confirm your Bid - Bidder Not Found" id="PDI-Z7-TXJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbJ-SZ-VMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1354,6 +1354,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="gjD-og-8Iv"/>
-        <segue reference="A1R-R2-CSF"/>
+        <segue reference="qUf-dy-7C9"/>
     </inferredMetricsTieBreakers>
 </document>
