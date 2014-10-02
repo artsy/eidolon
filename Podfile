@@ -33,7 +33,7 @@ pod 'CardFlight'
 pod 'ECPhoneNumberFormatter'
 
 target "KioskTests", :exclusive => true do
-    pod 'FBSnapshotTestCase', :git => "https://github.com/facebook/ios-snapshot-test-case"
+    pod 'FBSnapshotTestCase', :git => 'https://github.com/AshFurrow/ios-snapshot-test-case.git', :branch => 'renderAsLayer'
 end
 
 pod 'Reveal-iOS-SDK', :configurations => ['Debug']
