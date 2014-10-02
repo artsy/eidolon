@@ -2,9 +2,9 @@ import UIKit
 
 class PlaceBidViewController: UIViewController {
 
-    dynamic var bidDollars: UInt = 0
+    dynamic var bidDollars: Int = 0
 
-    @IBOutlet var bidAmountTextField: UITextField!
+    @IBOutlet var bidAmountTextField: TextField!
     @IBOutlet var keypadContainer: KeypadContainerView!
 
     @IBOutlet var currentBidLabel: UILabel!
@@ -22,16 +22,14 @@ class PlaceBidViewController: UIViewController {
         super.viewDidLoad()
 
         let keypad = self.keypadContainer!.keypad!
-        let bidIsZeroSignal = RACObserve(self, "bidDollars").map {
-            return ($0 as UInt == 0)
-        }
+        let bidIsZeroSignal = RACObserve(self, "bidDollars").map { return ($0 as Int == 0) }
 
         for button in [bidButton, keypad.rightButton, keypad.leftButton] {
             RAC(button, "enabled") <~ bidIsZeroSignal.notEach()
         }
 
         let formattedBidTextSignal = RACObserve(self, "bidDollars").map({ (bid) -> AnyObject! in
-            return NSNumberFormatter.currencyStringForDollars(bid as UInt)
+            return NSNumberFormatter.localizedStringFromNumber(bid as Int, numberStyle:.DecimalStyle)
         })
 
         RAC(bidAmountTextField, "text") <~ RACSignal.`if`(bidIsZeroSignal, then: RACSignal.defer{ RACSignal.`return`("") }, `else`: formattedBidTextSignal)
@@ -80,9 +78,9 @@ class PlaceBidViewController: UIViewController {
 private extension PlaceBidViewController {
 
     func addDigitToBid(input:AnyObject!) -> Void {
-        let inputInt = input as? UInt ?? 0
+        let inputInt = input as? Int ?? 0
         let newBidDollars = (10 * self.bidDollars) + inputInt
-        if newBidDollars <= 10000000 {
+        if newBidDollars < 10000000 {
             self.bidDollars = newBidDollars
         } else {
             // TODO: handle too big number
@@ -90,7 +88,7 @@ private extension PlaceBidViewController {
     }
 
     func deleteBid(input:AnyObject!) -> Void {
-        self.bidDollars = UInt(min(floor(Double(self.bidDollars)/10), 0))
+        self.bidDollars = self.bidDollars/10
     }
 
     func clearBid(input:AnyObject!) -> Void {
@@ -98,14 +96,14 @@ private extension PlaceBidViewController {
     }
 
     func toCurrentBidString(cents:AnyObject!) -> AnyObject! {
-        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? UInt) {
+        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
             return dollars
         }
         return ""
     }
 
     func toOpeningBidString(cents:AnyObject!) -> AnyObject! {
-        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? UInt) {
+        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
             return "Enter \(dollars) or more"
         }
         return ""

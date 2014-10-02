@@ -10,7 +10,7 @@
 #import <Artsy+UIColors/UIColor+ArtsyColors.h>
 #import <Artsy+UIColors/UIColor+DebugColours.h>
 
-#import <Artsy-UIButtons/ARButotnSubclasses.h>
+#import <Artsy-UIButtons/ARButtonSubclasses.h>
 
 #import <Artsy+UILabels/ARLabelSubclasses.h>
 #import <Artsy-UIButtons/ARButtonSubclasses.h>

@@ -1,33 +1,19 @@
+//
+//  Button.swift
+//  Kiosk
+//
+//  Created by Laura Brown on 10/1/14.
+//  Copyright (c) 2014 Artsy. All rights reserved.
+//
+
 import UIKit
 
-@IBDesignable
 public class Button: ARFlatButton {
 
-    public override var enabled: Bool {
-        set {
-            setEnabled(newValue, animated: false)
-        }
-        get {
-            return super.enabled
-        }
-    }
-
-    public override var selected: Bool {
-        set {
-            setSelected(newValue, animated: false)
-        }
-        get {
-            return super.selected
-        }
-    }
-    
-    public override var highlighted: Bool {
-        set {
-            setHighlighted(newValue, animated: false)
-        }
-        get {
-            return super.highlighted
-        }
+    override public func setup() {
+        super.setup()
+        shouldAnimateStateChange = false;
+        shouldDimWhenDisabled = false;
     }
 }
 
@@ -35,8 +21,11 @@ public class ActionButton: Button {
 
     override public func setup() {
         super.setup()
+
+        setTitleShadowColor(UIColor.clearColor(), forState: .Normal)
+
         setBorderColor(UIColor.blackColor(), forState: .Normal, animated:false)
-        setBorderColor(UIColor.artsyHeavyGrey(), forState: .Disabled, animated:false)
+        setBorderColor(UIColor.artsyMediumGrey(), forState: .Disabled, animated:false)
 
         setBackgroundColor(UIColor.blackColor(), forState: .Normal, animated:false)
         setBackgroundColor(UIColor.whiteColor(), forState: .Disabled, animated:false)
@@ -53,6 +42,12 @@ public class KeypadButton: Button {
         layer.borderWidth = 0
         setBackgroundColor(UIColor.blackColor(), forState: .Highlighted, animated:false)
         setBackgroundColor(UIColor.whiteColor(), forState: .Normal, animated:false)
+    }
+}
+
+public class LargeKeypadButton: KeypadButton {
+    override public func setup() {
+        super.setup()
         self.titleLabel!.font = UIFont.sansSerifFontWithSize(20)
     }
 }
