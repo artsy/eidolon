@@ -7,7 +7,9 @@
         <!--Navigation Controller-->
         <scene sceneID="gwf-cv-uMQ">
             <objects>
-                <navigationController id="2lC-Vc-1XS" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="2lC-Vc-1XS" sceneMemberID="viewController">
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="I8d-rj-Xv9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
