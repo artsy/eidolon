@@ -9,6 +9,5 @@ class SwipeCreditCardViewControllerTests: QuickSpec {
             expect(sut).to(haveValidSnapshot(named:"default"))
         }
 
-
     }
 }
