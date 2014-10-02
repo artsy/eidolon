@@ -41,7 +41,7 @@ class PlaceBidViewController: UIViewController {
         clearSignal.subscribeNext(clearBid)
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
-            RAC(nav.bidDetails, "bidAmountCents") <~ RACObserve(saleArtwork, "openingBidCents")
+            RAC(nav.bidDetails, "bidAmountCents") <~ RACObserve(self, "bid").map { return ($0 as Float * 100) }
         }
 
         if let saleArtwork:SaleArtwork = self.saleArtwork {
