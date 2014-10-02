@@ -40,15 +40,20 @@ class PlaceBidViewControllerTests: QuickSpec {
 
 
 
-        it("passes a bid object to the ConfirmYour Bid VC, during segue") {
+        it("passes the bid amount to the nav controller") {
 
             let sut = PlaceBidViewController.instantiateFromStoryboard()
-            let confirmVC = ConfirmYourBidViewController.instantiateFromStoryboard()
-            let segue = UIStoryboardSegue(identifier: SegueIdentifier.ConfirmBid.rawValue, source: sut, destination: confirmVC, performHandler: { () -> Void in })
+            let nav = FulfillmentNavigationController(rootViewController:sut)
 
-            sut.prepareForSegue(segue, sender: sut)
-            expect(confirmVC.bid?).to(beAnInstanceOf(Bid.self))
+            let customKeySubject = RACSubject()
+            sut.keypadSignal = customKeySubject;
+            nav!.loadViewProgrammatically()
+            sut.loadViewProgrammatically()
 
+            customKeySubject.sendNext(3);
+            customKeySubject.sendNext(3);
+
+            expect(nav!.bidDetails.bidAmountCents) == 3300
         }
 
     }

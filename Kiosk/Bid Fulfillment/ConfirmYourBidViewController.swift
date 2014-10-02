@@ -3,7 +3,6 @@ import UIKit
 class ConfirmYourBidViewController: UIViewController {
 
     dynamic var number: String = ""
-    var bid:Bid?
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet var numberAmountTextField: UITextField!
@@ -11,14 +10,6 @@ class ConfirmYourBidViewController: UIViewController {
 
     class func instantiateFromStoryboard() -> ConfirmYourBidViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController
-    }
-
-    @IBAction func dev_noPhoneNumberFoundTapped(sender: AnyObject) {
-        self.performSegue(.ConfirmyourBidBidderNotFound)
-    }
-
-    @IBAction func dev_phoneNumberFoundTapped(sender: AnyObject) {
-        self.performSegue(.ConfirmyourBidBidderFound)
     }
 
     override func viewDidLoad() {
@@ -41,11 +32,10 @@ class ConfirmYourBidViewController: UIViewController {
 
     @IBOutlet var enterButton: UIButton!
     @IBAction func enterButtonTapped(sender: AnyObject) {
-        
+
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // TODO
     }
 
     lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
@@ -63,6 +53,14 @@ private extension ConfirmYourBidViewController {
 
     func toPhoneNumberString(number:AnyObject!) -> AnyObject! {
         return self.phoneNumberFormatter.stringForObjectValue(number as String)
+    }
+
+    @IBAction func dev_noPhoneNumberFoundTapped(sender: AnyObject) {
+        self.performSegue(.ConfirmyourBidBidderNotFound)
+    }
+
+    @IBAction func dev_phoneNumberFoundTapped(sender: AnyObject) {
+        self.performSegue(.ConfirmyourBidBidderFound)
     }
 
 }

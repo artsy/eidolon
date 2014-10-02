@@ -10,4 +10,13 @@ public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
         self.performSegue(.SubmittedanEmailforUserDetails)
     }
 
+
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == SegueIdentifier.SubmittedanEmailforUserDetails {
+//            let confirmVC = segue.destinationViewController as ConfirmYourBidPasswordViewController
+//            confirmVC.bid = Bid(id: "FAKE BID", amountCents: Int(self.bid * 100))
+        }
+    }
+
+
 }
