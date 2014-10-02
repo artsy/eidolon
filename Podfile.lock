@@ -6,7 +6,7 @@ PODS:
   - ARAnalytics/Mixpanel (2.8.0):
     - ARAnalytics/CoreIOS
     - Mixpanel
-  - ARCollectionViewMasonryLayout (1.0.1)
+  - ARCollectionViewMasonryLayout (2.0.0)
   - Artsy+UIColors (1.0.0):
     - EDColor (~> 0.4)
   - Artsy+UIFonts (1.0.0)
@@ -27,34 +27,39 @@ PODS:
   - ORStackView (1.2.0):
     - FLKAutoLayout (~> 0.1)
   - Reveal-iOS-SDK (1.0.5)
+  - SDWebImage (3.7.1):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.7.1)
 
 DEPENDENCIES:
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
-  - ARCollectionViewMasonryLayout (~> 1.0.0)
+  - ARCollectionViewMasonryLayout (~> 2.0.0)
   - Artsy+UIColors
   - Artsy+UIFonts
   - Artsy+UILabels
   - Artsy-UIButtons (from `https://github.com/artsy/Artsy-UIButtons.git`, commit `037d08fc756036c5cf8765b408f3d227b487f5cd`)
   - CardFlight
   - ECPhoneNumberFormatter
-  - FBSnapshotTestCase (from `https://github.com/facebook/ios-snapshot-test-case`)
+  - FBSnapshotTestCase (from `https://github.com/AshFurrow/ios-snapshot-test-case.git`, branch `renderAsLayer`)
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
   - ORStackView
   - Reveal-iOS-SDK
+  - SDWebImage (~> 3.7)
 
 EXTERNAL SOURCES:
   Artsy-UIButtons:
     :commit: 037d08fc756036c5cf8765b408f3d227b487f5cd
     :git: https://github.com/artsy/Artsy-UIButtons.git
   FBSnapshotTestCase:
-    :git: https://github.com/facebook/ios-snapshot-test-case
+    :branch: renderAsLayer
+    :git: https://github.com/AshFurrow/ios-snapshot-test-case.git
 
 SPEC CHECKSUMS:
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
-  ARCollectionViewMasonryLayout: 909d6cdb0541acfbdaef523fa4a216013de7aa7e
+  ARCollectionViewMasonryLayout: 40993cb65522139cb2cd6ed255c91a6caee5c4dd
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
   Artsy+UIFonts: fb0a70f93ca888d45a3af751707701fe8cbeae2a
   Artsy+UILabels: 1dfc53c1e79727664c6081e305aeefa557ac5de5
@@ -69,5 +74,6 @@ SPEC CHECKSUMS:
   Mixpanel: 708ec9a6ee6e741f7db107831e18b2fc2e7531f1
   ORStackView: f1ccef4a0c40dd7907a638232f78a873cc03ab6c
   Reveal-iOS-SDK: d4b2f4c20d5b823b7f8b88250fe1b71cecd424a7
+  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
 
 COCOAPODS: 0.34.1
