@@ -444,6 +444,7 @@
 		60D976E719D3123B00DE9F3D /* SaleArtwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtwork.swift; sourceTree = "<group>"; };
 		60D976E919D3135200DE9F3D /* Sale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sale.swift; sourceTree = "<group>"; };
 		60D976EB19D3172D00DE9F3D /* SystemTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemTime.swift; sourceTree = "<group>"; };
+		60E0332819DDAFF80096C86C /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = docs/CHANGELOG.md; sourceTree = SOURCE_ROOT; };
 		60E5553A19DAB75000F664CE /* deployment.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = deployment.md; sourceTree = "<group>"; };
 		60F0C89A19D2CA4D002B0F10 /* SimulatorOnlyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulatorOnlyView.swift; sourceTree = "<group>"; };
 		60F104E319C0FB93002FF30C /* StoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiers.swift; sourceTree = "<group>"; };
@@ -551,6 +552,7 @@
 		5E59DD3219913DD800A48370 /* Kiosk */ = {
 			isa = PBXGroup;
 			children = (
+				60E0332819DDAFF80096C86C /* CHANGELOG.md */,
 				60C37DCE19D43E49002E7A44 /* Kiosk.playground */,
 				60C620E419D1831D0024D493 /* Docs */,
 				5E4B56DC19C079C0002E6FCB /* Submodules */,

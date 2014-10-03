@@ -18,6 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = rootVC
         window.makeKeyAndVisible()
 
+        let keys = EidolonKeys()
+        ARAnalytics.setupWithAnalytics([
+            ARHockeyAppBetaID: keys.hockeyBetaSecret(),
+            ARHockeyAppLiveID: keys.hockeyProductionSecret(),
+            ARMixpanelToken: keys.mixpanelProductionAPIClientKey()
+        ])
+
         return true
     }
 

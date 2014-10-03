@@ -19,7 +19,7 @@ bootstrap:
 	git submodule update
 	./submodules/ReactiveCocoa/script/bootstrap
 	bundle install
-	
+
 	@echo "\nSetting up API Keys, leave blank if you don't know."
 
 	@printf '\nWhat is your Artsy API Client Secret? '; \
@@ -29,6 +29,14 @@ bootstrap:
 	@printf '\nWhat is your Artsy API Client Key? '; \
 		read ARTSY_CLIENT_KEY; \
 		bundle exec pod keys set ArtsyAPIClientKey "$$ARTSY_CLIENT_KEY"
+
+	@printf '\nWhat is your Hockey Production Secret? '; \
+		read HOCKEYPRODUCTIONSECRET; \
+		bundle exec pod keys set HockeyProductionSecret "$$HOCKEYPRODUCTIONSECRET"
+
+	@printf '\nWhat is your Hockey Beta Secret? '; \
+		read HOCKEYBETASECRET; \
+		bundle exec pod keys set HockeyBetaSecret "$$HOCKEYBETASECRET"
 
 	@printf '\nWhat is your production Mixpanel API Key? '; \
 		read MIXPANEL_KEY; \
