@@ -38,8 +38,6 @@ class PlaceBidViewControllerTests: QuickSpec {
             expect(sut.bidButton.enabled) == true
         }
 
-
-
         it("passes the bid amount to the nav controller") {
 
             let sut = PlaceBidViewController.instantiateFromStoryboard()
