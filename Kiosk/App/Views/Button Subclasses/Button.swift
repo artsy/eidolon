@@ -17,7 +17,7 @@ public class ActionButton: Button {
         return CGSizeMake(UIViewNoIntrinsicMetric, 50)
     }
 
-    public override func  setup() {
+    public override func setup() {
         super.setup()
 
         setBorderColor(UIColor.blackColor(), forState: .Normal, animated:false)
