@@ -23,6 +23,7 @@ public class TextField: UITextField {
     }
 
     func setup() {
+        borderStyle = .None
         layer.cornerRadius = 0
         layer.masksToBounds = true
         layer.borderWidth = 1
@@ -35,11 +36,5 @@ public class TextField: UITextField {
 
    override public func editingRectForBounds(bounds: CGRect) -> CGRect {
         return CGRectInset( bounds ,10 , 10 )
-    }
-}
-
-public class SerifTextField: TextField {
-    override func setup() {
-        font = UIFont.serifFontWithSize(16)
     }
 }
