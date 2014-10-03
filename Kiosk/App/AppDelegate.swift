@@ -7,7 +7,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
 
-//        Provider.sharedProvider = Provider.StubbingProvider()
+        Provider.sharedProvider = Provider.StubbingProvider()
         // I couldn't figure how to swizzle this out like we do in objc.
 
         if let inTests: AnyClass = NSClassFromString("XCTest") { return true}
