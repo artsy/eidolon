@@ -2,9 +2,9 @@ import UIKit
 
 class PlaceBidViewController: UIViewController {
 
-    dynamic var bid: Float = 0.0
+    dynamic var bidDollars: Int = 0
 
-    @IBOutlet var bidAmountTextField: UITextField!
+    @IBOutlet var bidAmountTextField: TextField!
     @IBOutlet var keypadContainer: KeypadContainerView!
 
     @IBOutlet var currentBidLabel: UILabel!
@@ -22,14 +22,14 @@ class PlaceBidViewController: UIViewController {
         super.viewDidLoad()
 
         let keypad = self.keypadContainer!.keypad!
-        let bidIsZeroSignal = RACObserve(self, "bid").map { return ($0 as Float == 0) }
+        let bidIsZeroSignal = RACObserve(self, "bidDollars").map { return ($0 as Int == 0) }
 
         for button in [bidButton, keypad.rightButton, keypad.leftButton] {
             RAC(button, "enabled") <~ bidIsZeroSignal.notEach()
         }
 
-        let formattedBidTextSignal = RACObserve(self, "bid").map({ (bid) -> AnyObject! in
-            return NSNumberFormatter.currencyStringForCents(bid as Float * 100.0)
+        let formattedBidTextSignal = RACObserve(self, "bidDollars").map({ (bid) -> AnyObject! in
+            return NSNumberFormatter.localizedStringFromNumber(bid as Int, numberStyle:.DecimalStyle)
         })
 
         RAC(bidAmountTextField, "text") <~ RACSignal.`if`(bidIsZeroSignal, then: RACSignal.defer{ RACSignal.`return`("") }, `else`: formattedBidTextSignal)
@@ -39,7 +39,7 @@ class PlaceBidViewController: UIViewController {
         clearSignal.subscribeNext(clearBid)
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
-            RAC(nav.bidDetails, "bidAmountCents") <~ RACObserve(self, "bid").map { return ($0 as Float * 100) }
+            RAC(nav.bidDetails, "bidAmountCents") <~ RACObserve(self, "bidDollars").map { return ($0 as Float * 100) }
 
             if let saleArtwork:SaleArtwork = nav.bidDetails.saleArtwork {
 
@@ -56,7 +56,7 @@ class PlaceBidViewController: UIViewController {
         }
     }
 
-    @IBOutlet var bidButton: UIButton!
+    @IBOutlet var bidButton: Button!
     @IBAction func bidButtonTapped(sender: AnyObject) {
         self.performSegue(SegueIdentifier.ConfirmBid)
     }
@@ -71,16 +71,21 @@ class PlaceBidViewController: UIViewController {
 private extension PlaceBidViewController {
 
     func addDigitToBid(input:AnyObject!) -> Void {
-        let inputFloat = input as? Float ?? 0.0
-        self.bid = (10.0 * self.bid) + inputFloat
+        let inputInt = input as? Int ?? 0
+        let newBidDollars = (10 * self.bidDollars) + inputInt
+        if newBidDollars < 10000000 {
+            self.bidDollars = newBidDollars
+        } else {
+            // TODO: handle too big number
+        }
     }
 
-    func deleteBid(cents:AnyObject!) -> Void {
-        self.bid /= 10
+    func deleteBid(input:AnyObject!) -> Void {
+        self.bidDollars = self.bidDollars/10
     }
 
-    func clearBid(cents:AnyObject!) -> Void {
-        self.bid = 10
+    func clearBid(input:AnyObject!) -> Void {
+        self.bidDollars = 0
     }
 
     func toCurrentBidString(cents:AnyObject!) -> AnyObject! {

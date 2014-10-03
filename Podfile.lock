@@ -10,9 +10,9 @@ PODS:
   - Artsy+UIColors (1.0.0):
     - EDColor (~> 0.4)
   - Artsy+UIFonts (1.0.0)
-  - Artsy+UILabels (1.2.0):
+  - Artsy+UILabels (1.3.0):
     - Artsy+UIColors
-  - Artsy-UIButtons (1.0.0):
+  - Artsy-UIButtons (1.1.0):
     - Artsy+UIColors
   - CardFlight (1.6.3):
     - CardFlight/AudioJack
@@ -38,7 +38,7 @@ DEPENDENCIES:
   - Artsy+UIColors
   - Artsy+UIFonts
   - Artsy+UILabels
-  - Artsy-UIButtons
+  - Artsy-UIButtons (from `https://github.com/artsy/Artsy-UIButtons.git`, commit `037d08fc756036c5cf8765b408f3d227b487f5cd`)
   - CardFlight
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase (from `https://github.com/AshFurrow/ios-snapshot-test-case.git`, branch `renderAsLayer`)
@@ -50,6 +50,9 @@ DEPENDENCIES:
   - SDWebImage (~> 3.7)
 
 EXTERNAL SOURCES:
+  Artsy-UIButtons:
+    :commit: 037d08fc756036c5cf8765b408f3d227b487f5cd
+    :git: https://github.com/artsy/Artsy-UIButtons.git
   FBSnapshotTestCase:
     :branch: renderAsLayer
     :git: https://github.com/AshFurrow/ios-snapshot-test-case.git
@@ -59,8 +62,8 @@ SPEC CHECKSUMS:
   ARCollectionViewMasonryLayout: 40993cb65522139cb2cd6ed255c91a6caee5c4dd
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
   Artsy+UIFonts: fb0a70f93ca888d45a3af751707701fe8cbeae2a
-  Artsy+UILabels: f327cdd339e99fb1a1ff26b9e5caf89545917b8c
-  Artsy-UIButtons: d1b5b71137c09278dbb50f036285e371d7a433f6
+  Artsy+UILabels: 1dfc53c1e79727664c6081e305aeefa557ac5de5
+  Artsy-UIButtons: af5cf4179dc7022d630c768d17c42eb5c1688319
   CardFlight: 949261a10123152112e920d87e9163e27c445205
   ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254

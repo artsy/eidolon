@@ -16,14 +16,14 @@ class PlaceBidViewControllerTests: QuickSpec {
             sut.loadViewProgrammatically()
 
             customKeySubject.sendNext(2);
-            expect(sut.bidAmountTextField.text) == "$2"
+            expect(sut.bidAmountTextField.text) == "2"
 
             customKeySubject.sendNext(3);
-            expect(sut.bidAmountTextField.text) == "$23"
+            expect(sut.bidAmountTextField.text) == "23"
 
             customKeySubject.sendNext(4);
             customKeySubject.sendNext(4);
-            expect(sut.bidAmountTextField.text) == "$2,344"
+            expect(sut.bidAmountTextField.text) == "2,344"
         }
 
         it("bid button is only enabled when there's an input") {
