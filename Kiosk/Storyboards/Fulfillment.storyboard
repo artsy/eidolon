@@ -225,15 +225,11 @@
                                 <rect key="frame" x="507" y="554" width="255" height="50"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="17"/>
                                 <state key="normal" title="BID">
-<<<<<<< HEAD
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="disabled">
-                                    <color key="titleColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
-=======
                                     <color key="titleColor" white="0.53000000000000003" alpha="1" colorSpace="calibratedWhite"/>
->>>>>>> work on some subclasses & keypad
                                 </state>
                                 <connections>
                                     <action selector="bidButtonTapped:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="3JS-oA-Iuv"/>
@@ -292,14 +288,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="AXh-zM-wkr"/>
                     <connections>
-<<<<<<< HEAD
                         <outlet property="artistNameLabel" destination="h2j-OF-Phh" id="uix-5k-rFx"/>
                         <outlet property="artworkPriceLabel" destination="v7X-dR-pia" id="ddn-gN-BWR"/>
                         <outlet property="artworkTitleLabel" destination="Aj2-T3-pNw" id="3FZ-B6-AkR"/>
-                        <outlet property="bidAmountTextField" destination="GJN-vx-0ge" id="Wpe-9v-QCg"/>
-=======
                         <outlet property="bidAmountTextField" destination="UKQ-z8-PIR" id="mV3-4R-CLm"/>
->>>>>>> work on some subclasses & keypad
                         <outlet property="bidButton" destination="dT1-U2-hie" id="b1u-df-a4J"/>
                         <outlet property="currentBidLabel" destination="GS2-EK-4Nx" id="Wi1-Uq-gkb"/>
                         <outlet property="keypadContainer" destination="A3C-Vo-Qhd" id="Kee-zX-lv9"/>

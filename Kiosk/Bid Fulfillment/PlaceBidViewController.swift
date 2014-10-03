@@ -39,7 +39,7 @@ class PlaceBidViewController: UIViewController {
         clearSignal.subscribeNext(clearBid)
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
-            RAC(nav.bidDetails, "bidAmountCents") <~ RACObserve(self, "bid").map { return ($0 as Float * 100) }
+            RAC(nav.bidDetails, "bidAmountCents") <~ RACObserve(self, "bidDollars").map { return ($0 as Float * 100) }
 
             if let saleArtwork:SaleArtwork = nav.bidDetails.saleArtwork {
 
@@ -50,16 +50,9 @@ class PlaceBidViewController: UIViewController {
                     RAC(artistNameLabel, "text") <~ RACObserve(artist, "name")
                 }
 
-<<<<<<< HEAD
                 RAC(artworkTitleLabel, "text") <~ RACObserve(saleArtwork.artwork, "title")
                 RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price")
             }
-=======
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue == SegueIdentifier.ConfirmBid {
-            let confirmVC = segue.destinationViewController as ConfirmYourBidViewController
-            confirmVC.bid = Bid(id: "FAKE BID", amountCents: Int(self.bidDollars * 100))
->>>>>>> wip
         }
     }
 

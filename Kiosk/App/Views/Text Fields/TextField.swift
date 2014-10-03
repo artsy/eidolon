@@ -1,11 +1,3 @@
-//
-//  TextField.swift
-//  Kiosk
-//
-//  Created by Laura Brown on 10/2/14.
-//  Copyright (c) 2014 Artsy. All rights reserved.
-//
-
 import UIKit
 
 public class TextField: UITextField {
@@ -38,11 +30,11 @@ public class TextField: UITextField {
     }
 
     override public func textRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectInset( bounds , 10 , 10 )
+        return CGRectInset( bounds ,10 ,10 )
     }
 
    override public func editingRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectInset( bounds , 10 , 10 )
+        return CGRectInset( bounds ,10 , 10 )
     }
 }
 

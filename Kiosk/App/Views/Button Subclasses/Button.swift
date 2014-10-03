@@ -1,11 +1,3 @@
-//
-//  Button.swift
-//  Kiosk
-//
-//  Created by Laura Brown on 10/1/14.
-//  Copyright (c) 2014 Artsy. All rights reserved.
-//
-
 import UIKit
 
 public class Button: ARFlatButton {
