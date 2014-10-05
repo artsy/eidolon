@@ -73,11 +73,8 @@ private extension PlaceBidViewController {
     func addDigitToBid(input:AnyObject!) -> Void {
         let inputInt = input as? Int ?? 0
         let newBidDollars = (10 * self.bidDollars) + inputInt
-        if newBidDollars < 10000000 {
-            self.bidDollars = newBidDollars
-        } else {
-            // TODO: handle too big number
-        }
+        if (newBidDollars >= 10000000) { return }
+        self.bidDollars = newBidDollars
     }
 
     func deleteBid(input:AnyObject!) -> Void {
