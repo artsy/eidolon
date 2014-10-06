@@ -6,11 +6,12 @@ enum ArtsyAPI {
     case Auctions
     case AuctionListings(id: String)
     case SystemTime
+    case FindBidderRegistration(auctionID: String, phone: String)
     case RegisterToBid(auctionID: String)
     case MyCreditCards
     case CreatePINForBidder(bidderID: String)
     case ActiveAuctions
-    case MeViaNumberAndPIN(number: String, pin: String)
+    case Me
     case MyBiddersForAuction(auctionID: String)
 
     var defaultParameters: [String: AnyObject] {
@@ -75,11 +76,14 @@ extension ArtsyAPI : MoyaPath {
         case ActiveAuctions:
             return "￼/api/v1/sales?is_auction=true&live=true"
 
-        case MeViaNumberAndPIN(let number, let pin):
-            return "￼￼/api/v1/me?auction_pin=￼\(pin)&number=\(number)"
+        case Me:
+            return "￼￼/api/v1/me"
 
         case MyBiddersForAuction:
             return "￼￼￼/api/v1/me/bidders"
+
+        case FindBidderRegistration(let auctionID, let phone):
+            return "￼￼￼/api/v1/me/bidders?sale_id=\(auctionID)&phone=\(phone)"
         }
     }
 }
@@ -120,8 +124,9 @@ extension ArtsyAPI : MoyaTarget {
         case MyBiddersForAuction:
             return stubbedResponse("MyBiddersForAuction")
 
-        case MeViaNumberAndPIN:
-            return stubbedResponse("MeViaNumberAndPIN")
+        case Me:
+            return stubbedResponse("Me")
+
         }
     }
 }

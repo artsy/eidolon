@@ -70,10 +70,12 @@
 		602FF2A819E2F5CE004C7AB3 /* CreatePINForBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A619E2F5CE004C7AB3 /* CreatePINForBidder.json */; };
 		602FF2AA19E2F6C0004C7AB3 /* MyCreditCards.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */; };
 		602FF2AB19E2F6C0004C7AB3 /* MyCreditCards.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */; };
-		602FF2AD19E2FC14004C7AB3 /* MeViaNumberAndPIN.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AC19E2FC14004C7AB3 /* MeViaNumberAndPIN.json */; };
-		602FF2AE19E2FC14004C7AB3 /* MeViaNumberAndPIN.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AC19E2FC14004C7AB3 /* MeViaNumberAndPIN.json */; };
+		602FF2AD19E2FC14004C7AB3 /* Me.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AC19E2FC14004C7AB3 /* Me.json */; };
+		602FF2AE19E2FC14004C7AB3 /* Me.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AC19E2FC14004C7AB3 /* Me.json */; };
 		602FF2B019E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */; };
 		602FF2B119E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */; };
+		602FF2CA19E30FE9004C7AB3 /* FindBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2C919E30FE9004C7AB3 /* FindBidder.json */; };
+		602FF2CB19E30FE9004C7AB3 /* FindBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2C919E30FE9004C7AB3 /* FindBidder.json */; };
 		6030A0F319D18F5200B934CA /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A0F219D18F5200B934CA /* Artwork.swift */; };
 		6030A10019D192D000B934CA /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A0FF19D192D000B934CA /* Artist.swift */; };
 		6030A10119D1931400B934CA /* PlaceBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */; };
@@ -413,8 +415,9 @@
 		602FF2A319E2F5BF004C7AB3 /* ActiveAuctions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ActiveAuctions.json; sourceTree = "<group>"; };
 		602FF2A619E2F5CE004C7AB3 /* CreatePINForBidder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreatePINForBidder.json; sourceTree = "<group>"; };
 		602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyCreditCards.json; sourceTree = "<group>"; };
-		602FF2AC19E2FC14004C7AB3 /* MeViaNumberAndPIN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MeViaNumberAndPIN.json; sourceTree = "<group>"; };
+		602FF2AC19E2FC14004C7AB3 /* Me.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Me.json; sourceTree = "<group>"; };
 		602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyBiddersForAuction.json; sourceTree = "<group>"; };
+		602FF2C919E30FE9004C7AB3 /* FindBidder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FindBidder.json; sourceTree = "<group>"; };
 		6030A0F219D18F5200B934CA /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		6030A0FF19D192D000B934CA /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		6030A12A19D1AA0F00B934CA /* KioskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KioskTests.swift; sourceTree = "<group>"; };
@@ -682,8 +685,9 @@
 		5ED0997319C31D6200E5DD59 /* Stubbed Responses */ = {
 			isa = PBXGroup;
 			children = (
+				602FF2C919E30FE9004C7AB3 /* FindBidder.json */,
 				602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */,
-				602FF2AC19E2FC14004C7AB3 /* MeViaNumberAndPIN.json */,
+				602FF2AC19E2FC14004C7AB3 /* Me.json */,
 				602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */,
 				602FF2A619E2F5CE004C7AB3 /* CreatePINForBidder.json */,
 				602FF2A319E2F5BF004C7AB3 /* ActiveAuctions.json */,
@@ -1278,7 +1282,7 @@
 				604B224319D3518F008D86C7 /* SystemTime.json in Resources */,
 				602FF2AA19E2F6C0004C7AB3 /* MyCreditCards.json in Resources */,
 				60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */,
-				602FF2AD19E2FC14004C7AB3 /* MeViaNumberAndPIN.json in Resources */,
+				602FF2AD19E2FC14004C7AB3 /* Me.json in Resources */,
 				5E08489B19D070DC0078C571 /* AuctionListings.json in Resources */,
 				5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */,
 				60D48B9519C89DE300A3CA88 /* edit_button@2x.png in Resources */,
@@ -1286,6 +1290,7 @@
 				5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */,
 				5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */,
 				602FF2B019E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */,
+				602FF2CA19E30FE9004C7AB3 /* FindBidder.json in Resources */,
 				602FF2A419E2F5BF004C7AB3 /* ActiveAuctions.json in Resources */,
 				5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */,
 			);
@@ -1297,10 +1302,11 @@
 			files = (
 				6030A12619D1A55000B934CA /* AuctionListings.json in Resources */,
 				6030A12419D1A55000B934CA /* XApp.json in Resources */,
+				602FF2CB19E30FE9004C7AB3 /* FindBidder.json in Resources */,
 				6030A12519D1A55000B934CA /* Auctions.json in Resources */,
 				604B224419D3518F008D86C7 /* SystemTime.json in Resources */,
 				602FF2A519E2F5BF004C7AB3 /* ActiveAuctions.json in Resources */,
-				602FF2AE19E2FC14004C7AB3 /* MeViaNumberAndPIN.json in Resources */,
+				602FF2AE19E2FC14004C7AB3 /* Me.json in Resources */,
 				6030A12919D1A63700B934CA /* Fulfillment.storyboard in Resources */,
 				60FFC2B119D945BD00284B9F /* XAuth.json in Resources */,
 				602FF2A819E2F5CE004C7AB3 /* CreatePINForBidder.json in Resources */,
