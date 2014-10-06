@@ -136,7 +136,6 @@
                 <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8N7-IZ-yaX" customClass="LargeKeypadButton" customModule="Kiosk" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="144" width="85" height="71"/>
                     <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="20"/>
-                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="7">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -210,20 +209,6 @@
                         <action selector="keypadButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="TVX-yU-fb5"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qe-Hi-SFi" customClass="KeypadButton" customModule="Kiosk" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="216" width="85" height="72"/>
-                    <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="16"/>
-                    <state key="normal" title="DELETE">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="leftButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="V39-np-Rv2"/>
-                    </connections>
-                </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nu7-fo-8tc" customClass="LargeKeypadButton" customModule="Kiosk" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="85" height="71"/>
                     <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="20"/>
@@ -243,18 +228,44 @@
                         <action selector="keypadButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="s2F-jF-xcD"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KgA-hG-4RF" customClass="KeypadButton" customModule="Kiosk" customModuleProvider="target">
-                    <rect key="frame" x="170" y="216" width="85" height="72"/>
-                    <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="16"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNn-FB-knP" customClass="KeypadButton" customModule="Kiosk" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="216" width="85" height="71"/>
+                    <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="20"/>
+                    <state key="normal" title="DELETE">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="keypadButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="g0W-2X-JUR"/>
+                        <action selector="leftButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="dDS-W8-Kjy"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yZ-GY-qH7" customClass="KeypadButton" customModule="Kiosk" customModuleProvider="target">
+                    <rect key="frame" x="170" y="216" width="85" height="71"/>
+                    <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="20"/>
                     <state key="normal" title="CLEAR">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="rightButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="p8E-tK-pCN"/>
+                        <action selector="keypadButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="Yda-ez-gUb"/>
+                        <action selector="rightButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="axD-iH-PWe"/>
                     </connections>
                 </button>
             </subviews>
@@ -262,8 +273,8 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="leftButton" destination="0qe-Hi-SFi" id="yx9-pu-nY3"/>
-                <outlet property="rightButton" destination="KgA-hG-4RF" id="LNE-gH-KXv"/>
+                <outlet property="leftButton" destination="KNn-FB-knP" id="kq0-mk-1by"/>
+                <outlet property="rightButton" destination="1yZ-GY-qH7" id="ABh-Wy-Iqv"/>
                 <outletCollection property="keys" destination="T5K-Qf-2Ia" collectionClass="NSMutableArray" id="pTw-bQ-FO2"/>
             </connections>
             <point key="canvasLocation" x="325.5" y="257"/>

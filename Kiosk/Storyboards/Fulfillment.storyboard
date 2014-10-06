@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6246" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6239"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="AGaramondPro-Regular.otf">
-            <string>AGaramondPro-Regular</string>
-            <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
@@ -108,13 +106,15 @@
             <string>AvantGardeGothicITCW01Dm</string>
             <string>AvantGardeGothicITCW01Dm</string>
             <string>AvantGardeGothicITCW01Dm</string>
+            <string>AvantGardeGothicITCW01Dm</string>
+            <string>AvantGardeGothicITCW01Dm</string>
         </mutableArray>
     </customFonts>
     <scenes>
         <!--Fulfillment Container View Controller-->
         <scene sceneID="I6k-Xf-WMg">
             <objects>
-                <viewController storyboardIdentifier="Fulfillment Container" id="O1R-5R-23t" customClass="FulfillmentContainerViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Fulfillment Container" automaticallyAdjustsScrollViewInsets="NO" id="O1R-5R-23t" customClass="FulfillmentContainerViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ELS-qP-Uqz"/>
                         <viewControllerLayoutGuide type="bottom" id="gPg-8G-5YG"/>
@@ -157,8 +157,12 @@
                             <constraint firstAttribute="centerX" secondItem="NZf-KS-kZn" secondAttribute="centerX" id="lxM-kG-C0J"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="1024" height="768"/>
                     <connections>
                         <outlet property="backgroundView" destination="og9-1P-tuu" id="Fa8-3p-4Al"/>
                         <outlet property="cancelButton" destination="2zy-ga-dxf" id="Q41-fA-5oi"/>
@@ -364,18 +368,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u8G-2e-eJx">
                                 <rect key="frame" x="426" y="64" width="88" height="59"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mobile: xxxyyyzzz" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="HUk-ts-4Qp" customClass="ARSerifLabel">
-                                <rect key="frame" x="535" y="174" width="166" height="29"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email: xxxyyyzzz" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="nEE-8D-S7Q" customClass="ARSerifLabel">
-                                <rect key="frame" x="535" y="211" width="166" height="29"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ciJ-4f-fQL" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="65" y="587" width="265" height="73"/>
                                 <subviews>
@@ -399,12 +391,13 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="dev_CardRegisteredTapped:" destination="BKe-0r-2Pc" eventType="touchUpInside" id="fE5-4P-JuG"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mSI-YI-8GU" customClass="RegisterFlowView" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="535" y="191" width="215" height="280"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -413,7 +406,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
-                        <outlet property="cardStatusLabel" destination="Er0-yC-3sc" id="Xz2-d4-aSZ"/>
+                        <outlet property="cardStatusLabel" destination="Er0-yC-3sc" id="Pie-O1-9EQ"/>
+                        <outlet property="registerFlowView" destination="mSI-YI-8GU" id="Ssm-zP-B59"/>
                         <segue destination="N4h-ra-458" kind="push" identifier="Card Registered" id="wCU-dB-4Iv"/>
                     </connections>
                 </viewController>
@@ -433,11 +427,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mmj-T7-HAB">
-                                <rect key="frame" x="495" y="169" width="255" height="44"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Confirm Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2W-8h-N8L" customClass="ARSerifLabel">
                                 <rect key="frame" x="65" y="80" width="395" height="41"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
@@ -454,7 +443,7 @@
                                 <rect key="frame" x="495" y="243" width="255" height="282"/>
                                 <color key="backgroundColor" red="0.80967282460000001" green="0.80967282460000001" blue="0.80967282460000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5y-rZ-EtN">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5y-rZ-EtN" customClass="Button" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="495" y="538" width="255" height="57"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="17"/>
@@ -504,7 +493,7 @@
                                 <rect key="frame" x="62" y="538" width="291" height="59"/>
                                 <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="17"/>
-                                <state key="normal" title="USE MY ARTSY LOGIN      >">
+                                <state key="normal" title="USE MY ARTSY LOGIN      &gt;">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -542,6 +531,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fop-9s-JEM" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="495" y="178" width="255" height="45"/>
+                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="26"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -551,7 +545,7 @@
                     <connections>
                         <outlet property="enterButton" destination="j5y-rZ-EtN" id="Jn9-Rb-zeT"/>
                         <outlet property="keypadContainer" destination="wUI-V6-mkQ" id="Bs3-qq-4Sc"/>
-                        <outlet property="numberAmountTextField" destination="Mmj-T7-HAB" id="4UA-Gw-yJk"/>
+                        <outlet property="numberAmountTextField" destination="Fop-9s-JEM" id="Tsh-Cx-0lQ"/>
                         <segue destination="hrW-WV-2L3" kind="push" identifier="Confirm your Bid - Bidder Found" id="Q28-yu-dXi"/>
                         <segue destination="Djc-do-o8V" kind="push" identifier="Confirm your Bid - Bidder Not Found" id="6LA-9C-uNF"/>
                     </connections>
@@ -939,12 +933,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CREDIT CARD INFORMATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="diq-uu-B5m">
-                                <rect key="frame" x="535" y="187" width="242" height="21"/>
-                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
-                                <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Danger McShaner" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bz0-VS-oov">
                                 <rect key="frame" x="535" y="212" width="203" height="21"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
@@ -988,7 +976,7 @@
                                 </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="edit_button.png" translatesAutoresizingMaskIntoConstraints="NO" id="ccC-Kr-yGe">
-                                <rect key="frame" x="701" y="212" width="44" height="44"/>
+                                <rect key="frame" x="734" y="212" width="44" height="44"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Register to Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9a-es-Qlx" customClass="ARSerifLabel">
                                 <rect key="frame" x="65" y="82" width="395" height="41"/>
@@ -1030,6 +1018,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CREDIT CARD INFORMATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="diq-uu-B5m">
+                                <rect key="frame" x="535" y="191" width="242" height="21"/>
+                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="13"/>
+                                <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.50588235290000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1056,11 +1050,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TAW-ae-RhH">
-                                <rect key="frame" x="495" y="172" width="255" height="44"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Confirm Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqS-c0-RGC" customClass="ARSerifLabel">
                                 <rect key="frame" x="65" y="80" width="395" height="41"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
@@ -1111,7 +1100,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6q-Ds-JXn">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6q-Ds-JXn" customClass="Button">
                                 <rect key="frame" x="495" y="538" width="255" height="57"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="17"/>
@@ -1142,6 +1131,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s7h-hd-xd3" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="495" y="176" width="255" height="45"/>
+                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="26"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1149,6 +1143,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
+                        <outlet property="confirmButton" destination="R6q-Ds-JXn" id="uCE-AA-amJ"/>
+                        <outlet property="keypadContainer" destination="Qfw-xp-Fto" id="cH1-tR-WbA"/>
+                        <outlet property="pinTextField" destination="s7h-hd-xd3" id="jTh-AJ-52D"/>
                         <segue destination="2lt-co-qW2" kind="push" identifier="PIN Confirmed" id="gjD-og-8Iv"/>
                     </connections>
                 </viewController>
@@ -1370,7 +1367,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gjD-og-8Iv"/>
         <segue reference="qUf-dy-7C9"/>
+        <segue reference="LCx-xS-nmd"/>
     </inferredMetricsTieBreakers>
 </document>

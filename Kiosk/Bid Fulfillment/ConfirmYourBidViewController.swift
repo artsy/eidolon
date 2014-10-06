@@ -1,5 +1,6 @@
 import UIKit
 
+
 class ConfirmYourBidViewController: UIViewController {
 
     dynamic var number: String = ""

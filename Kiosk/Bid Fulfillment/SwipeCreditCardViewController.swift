@@ -3,6 +3,7 @@ import UIKit
 public class SwipeCreditCardViewController: UIViewController {
 
     @IBOutlet var cardStatusLabel: ARSerifLabel!
+    @IBOutlet var registerFlowView: RegisterFlowView!
 
     public class func instantiateFromStoryboard() -> SwipeCreditCardViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.SwipeCreditCard) as SwipeCreditCardViewController
@@ -14,6 +15,7 @@ public class SwipeCreditCardViewController: UIViewController {
 
     lazy var keys = EidolonKeys()
     lazy var cardHandler:CardHandler = CardHandler(apiKey: self.keys.cardflightTestAPIClientKey(), accountToken: self.keys.cardflightMerchantAccountToken())
+    
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,5 +31,9 @@ public class SwipeCreditCardViewController: UIViewController {
         })
         
         cardHandler.startSearching()
+
+        if let nav = self.navigationController as? FulfillmentNavigationController {
+            registerFlowView.details = nav.bidDetails
+        }
     }
 }

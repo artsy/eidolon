@@ -8,16 +8,21 @@ class MasonryCollectionViewCell: UICollectionViewCell, ListingsCollectionViewCel
     private dynamic let artworkTitleLabel = MasonryCollectionViewCell._italicsLabel()
     private dynamic let estimateLabel = MasonryCollectionViewCell._normalLabel()
     private dynamic let dividerView: UIView = MasonryCollectionViewCell._dividerView()
-    private dynamic let currentBidLabel = MasonryCollectionViewCell._bidLabel()
+    private dynamic let currentBidLabel = MasonryCollectionViewCell._normalLabel()
+    private dynamic let currentBidPriceLabel = MasonryCollectionViewCell._sansSerifLabel()
     private dynamic let numberOfBidsLabel = MasonryCollectionViewCell._rightAlignedNormalLabel()
     private dynamic let bidButton = MasonryCollectionViewCell._bidButton()
     
     private lazy var bidView: UIView = {
         let view = UIView()
         view.addSubview(self.currentBidLabel)
+        view.addSubview(self.currentBidPriceLabel)
         view.addSubview(self.numberOfBidsLabel)
-        self.currentBidLabel.alignTop("0", leading: "0", bottom: "0", trailing: nil, toView: view)
-        self.numberOfBidsLabel.alignTop("0", leading: nil, bottom: "0", trailing: "0", toView: view)
+
+        self.currentBidLabel.alignLeadingEdgeWithView(view, predicate: "0")
+        self.currentBidPriceLabel.constrainLeadingSpaceToView(self.currentBidLabel, predicate: nil)
+        self.numberOfBidsLabel.alignTrailingEdgeWithView(view, predicate: "0")
+        UIView.alignBottomEdgesOfViews([view, self.currentBidLabel, self.currentBidPriceLabel, self.numberOfBidsLabel])
         return view
     }()
     
@@ -96,7 +101,7 @@ private extension MasonryCollectionViewCell {
         dividerView.alignAttribute(.Top, toAttribute: .Bottom, ofView: estimateLabel, predicate: "13")
         dividerView.constrainHeight("1")
         bidView.alignAttribute(.Top, toAttribute: .Bottom, ofView: dividerView, predicate: "13")
-        bidView.constrainHeight("16")
+        bidView.constrainHeight("18")
         bidButton.alignAttribute(.Top, toAttribute: .Bottom, ofView: currentBidLabel, predicate: "13")
         
         // Bind subviews
@@ -126,9 +131,17 @@ private extension MasonryCollectionViewCell {
         
         RAC(self, "currentBidLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             if let currentBidCents = (saleArtwork as? SaleArtwork)?.highestBidCents {
-                return "Current bid: \(NSNumberFormatter.currencyStringForCents(currentBidCents))"
+                return "Current bid: "
             } else {
                 return "No bids"
+            }
+        }).mapNilToEmptyString()
+
+        RAC(self, "currentBidPriceLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
+            if let currentBidCents = (saleArtwork as? SaleArtwork)?.highestBidCents {
+                return "\(NSNumberFormatter.currencyStringForCents(currentBidCents))"
+            } else {
+                return nil
             }
         }).mapNilToEmptyString()
         
@@ -163,13 +176,7 @@ private extension MasonryCollectionViewCell {
         dividerView.drawTopDottedBorder()
         return dividerView
     }
-    
-    class func _bidLabel() -> UILabel {
-        let label = _normalLabel()
-        label.font = UIFont.serifBoldFontWithSize(16)
-        return label
-    }
-    
+
     class func _rightAlignedNormalLabel() -> UILabel {
         let label = _normalLabel()
         label.textAlignment = .Right
@@ -179,6 +186,12 @@ private extension MasonryCollectionViewCell {
     class func _normalLabel() -> UILabel {
         let label = ARSerifLabel()
         label.font = label.font.fontWithSize(16)
+        return label
+    }
+
+    class func _sansSerifLabel() -> UILabel {
+        let label = ARSansSerifLabel()
+        label.font = label.font.fontWithSize(14)
         return label
     }
     
@@ -194,8 +207,8 @@ private extension MasonryCollectionViewCell {
         return label
     }
     
-    class func _bidButton() -> ARBlackFlatButton {
-        let button = ARBlackFlatButton()
+    class func _bidButton() -> ActionButton {
+        let button = ActionButton()
         button.setTitle("BID", forState: .Normal)
         return button
     }
