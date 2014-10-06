@@ -15,9 +15,9 @@ GEM
     activesupport (3.2.19)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
-    aws-sdk (1.53.0)
-      aws-sdk-v1 (= 1.53.0)
-    aws-sdk-v1 (1.53.0)
+    aws-sdk (1.54.0)
+      aws-sdk-v1 (= 1.54.0)
+    aws-sdk-v1 (1.54.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     claide (0.7.0)
@@ -49,7 +49,7 @@ GEM
       netrc
     cocoapods-try (0.4.1)
     colored (1.2)
-    commander (4.2.0)
+    commander (4.2.1)
       highline (~> 1.6.11)
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
@@ -98,7 +98,7 @@ GEM
       CFPropertyList (~> 2.2)
       activesupport (~> 3.0)
       colored (~> 1.2)
-    xcpretty (0.1.6)
+    xcpretty (0.1.7)
 
 PLATFORMS
   ruby

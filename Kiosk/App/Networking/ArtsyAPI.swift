@@ -6,11 +6,17 @@ enum ArtsyAPI {
     case Auctions
     case AuctionListings(id: String)
     case SystemTime
+    case RegisterToBid(auctionID: String)
+    case MyCreditCards
+    case CreatePINForBidder(bidderID: String)
+    case ActiveAuctions
+    case MeViaNumberAndPIN(number: String, pin: String)
+    case MyBiddersForAuction(auctionID: String)
 
     var defaultParameters: [String: AnyObject] {
         switch self {
 
-        case .XAuth(let email, let password):
+        case XAuth(let email, let password):
             return [
                 "client_id": APIKeys.sharedKeys.key ?? "",
                 "client_secret": APIKeys.sharedKeys.secret ?? "",
@@ -19,12 +25,18 @@ enum ArtsyAPI {
                 "grant_type": "credentials"
             ]
 
-        case .XApp:
+        case XApp:
             return ["client_id": APIKeys.sharedKeys.key ?? "",
                     "client_secret": APIKeys.sharedKeys.secret ?? ""]
 
-        case .Auctions:
+        case Auctions:
             return ["is_auction": "true"]
+
+        case RegisterToBid(let auctionID):
+            return ["sale_id": auctionID]
+
+        case MyBiddersForAuction(let auctionID):
+            return ["sale_id": auctionID]
 
         default:
             return [:]
@@ -51,6 +63,23 @@ extension ArtsyAPI : MoyaPath {
         case SystemTime:
             return "api/v1/system/time"
 
+        case RegisterToBid:
+            return "api/v1/bidder"
+
+        case MyCreditCards:
+            return "api/v1/me/credit_cards"
+
+        case CreatePINForBidder(let bidderID):
+            return "￼/api/v1/bidder/\(bidderID)/auction_pin"
+
+        case ActiveAuctions:
+            return "￼/api/v1/sales?is_auction=true&live=true"
+
+        case MeViaNumberAndPIN(let number, let pin):
+            return "￼￼/api/v1/me?auction_pin=￼\(pin)&number=\(number)"
+
+        case MyBiddersForAuction:
+            return "￼￼￼/api/v1/me/bidders"
         }
     }
 }
@@ -61,21 +90,38 @@ extension ArtsyAPI : MoyaTarget {
      var sampleData: NSData {
         switch self {
 
-        case .XApp:
+        case XApp:
             return stubbedResponse("XApp")
 
-        case .XAuth:
-            return stubbedResponse("XApp")
+        case XAuth:
+            return stubbedResponse("XAuth")
 
-        case .Auctions:
+        case Auctions:
             return stubbedResponse("Auctions")
 
-        case .AuctionListings(let id):
+        case AuctionListings:
             return stubbedResponse("AuctionListings")
             
         case SystemTime:
             return stubbedResponse("SystemTime")
-            
+
+        case CreatePINForBidder:
+            return stubbedResponse("CreatePINForBidder")
+
+        case ActiveAuctions:
+            return stubbedResponse("ActiveAuctions")
+
+        case MyCreditCards:
+            return stubbedResponse("MyCreditCards")
+
+        case RegisterToBid:
+            return stubbedResponse("RegisterToBid")
+
+        case MyBiddersForAuction:
+            return stubbedResponse("MyBiddersForAuction")
+
+        case MeViaNumberAndPIN:
+            return stubbedResponse("MeViaNumberAndPIN")
         }
     }
 }
@@ -103,11 +149,6 @@ extension ArtsyAPI : MoyaTarget {
      static func StubbingProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
         return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, stubResponses: true)
     }
-
-//     static func AuthenticatedProvider(credentials:UserCredentials) -> AuthenticatedMoyaProvider<ArtsyAPI> {
-//        // DI the stub?!
-//        return AuthenticatedMoyaProvider(credentials:credentials, stubResponses: false)
-//    }
 
     private struct SharedProvider {
         static var instance = Provider.DefaultProvider()

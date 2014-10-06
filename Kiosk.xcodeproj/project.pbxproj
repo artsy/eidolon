@@ -64,6 +64,16 @@
 		6024DD5E19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */; };
 		6024DD5F19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */; };
 		602EFE4F19C6D09C002715C2 /* KeypadContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */; };
+		602FF2A419E2F5BF004C7AB3 /* ActiveAuctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A319E2F5BF004C7AB3 /* ActiveAuctions.json */; };
+		602FF2A519E2F5BF004C7AB3 /* ActiveAuctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A319E2F5BF004C7AB3 /* ActiveAuctions.json */; };
+		602FF2A719E2F5CE004C7AB3 /* CreatePINForBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A619E2F5CE004C7AB3 /* CreatePINForBidder.json */; };
+		602FF2A819E2F5CE004C7AB3 /* CreatePINForBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A619E2F5CE004C7AB3 /* CreatePINForBidder.json */; };
+		602FF2AA19E2F6C0004C7AB3 /* MyCreditCards.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */; };
+		602FF2AB19E2F6C0004C7AB3 /* MyCreditCards.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */; };
+		602FF2AD19E2FC14004C7AB3 /* MeViaNumberAndPIN.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AC19E2FC14004C7AB3 /* MeViaNumberAndPIN.json */; };
+		602FF2AE19E2FC14004C7AB3 /* MeViaNumberAndPIN.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AC19E2FC14004C7AB3 /* MeViaNumberAndPIN.json */; };
+		602FF2B019E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */; };
+		602FF2B119E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */; };
 		6030A0F319D18F5200B934CA /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A0F219D18F5200B934CA /* Artwork.swift */; };
 		6030A10019D192D000B934CA /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A0FF19D192D000B934CA /* Artist.swift */; };
 		6030A10119D1931400B934CA /* PlaceBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */; };
@@ -174,9 +184,6 @@
 		60FFC2B519D9493000284B9F /* XAppAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2B319D9493000284B9F /* XAppAuthentication.swift */; };
 		60FFC2B719D9496A00284B9F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2B619D9496A00284B9F /* APIKeys.swift */; };
 		60FFC2B819D9496A00284B9F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2B619D9496A00284B9F /* APIKeys.swift */; };
-		60FFC2BB19D95DA500284B9F /* AuthenticatedMoyaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2BA19D95DA500284B9F /* AuthenticatedMoyaProvider.swift */; };
-		60FFC2BC19D95DA500284B9F /* AuthenticatedMoyaProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2BA19D95DA500284B9F /* AuthenticatedMoyaProvider.swift */; };
-		60FFC2BE19D97D8C00284B9F /* AuthenticatedMoyaProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2BD19D97D8C00284B9F /* AuthenticatedMoyaProviderTests.swift */; };
 		60FFC2EF19D9A94200284B9F /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FFC2D919D9A92100284B9F /* ReactiveCocoa.framework */; };
 		7D151931B70C40DA1918308E /* libPods-KioskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F02362ED531B4468B9C73044 /* libPods-KioskTests.a */; };
 		961918F1D3EF491EA0AF220C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A6ABDCBFE147D99BAEBD31 /* libPods.a */; };
@@ -403,6 +410,11 @@
 		60212CA119D5F468001921E1 /* ImageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
 		6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegueExtensions.swift; sourceTree = "<group>"; };
 		602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadContainerView.swift; sourceTree = "<group>"; };
+		602FF2A319E2F5BF004C7AB3 /* ActiveAuctions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ActiveAuctions.json; sourceTree = "<group>"; };
+		602FF2A619E2F5CE004C7AB3 /* CreatePINForBidder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreatePINForBidder.json; sourceTree = "<group>"; };
+		602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyCreditCards.json; sourceTree = "<group>"; };
+		602FF2AC19E2FC14004C7AB3 /* MeViaNumberAndPIN.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MeViaNumberAndPIN.json; sourceTree = "<group>"; };
+		602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyBiddersForAuction.json; sourceTree = "<group>"; };
 		6030A0F219D18F5200B934CA /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		6030A0FF19D192D000B934CA /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		6030A12A19D1AA0F00B934CA /* KioskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KioskTests.swift; sourceTree = "<group>"; };
@@ -460,8 +472,6 @@
 		60FFC2AF19D945BD00284B9F /* XAuth.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = XAuth.json; path = "Stubbed Responses/XAuth.json"; sourceTree = "<group>"; };
 		60FFC2B319D9493000284B9F /* XAppAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppAuthentication.swift; sourceTree = "<group>"; };
 		60FFC2B619D9496A00284B9F /* APIKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
-		60FFC2BA19D95DA500284B9F /* AuthenticatedMoyaProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatedMoyaProvider.swift; sourceTree = "<group>"; };
-		60FFC2BD19D97D8C00284B9F /* AuthenticatedMoyaProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticatedMoyaProviderTests.swift; path = Networking/AuthenticatedMoyaProviderTests.swift; sourceTree = "<group>"; };
 		60FFC2D119D9A92100284B9F /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = submodules/ReactiveCocoa/ReactiveCocoa.xcodeproj; sourceTree = SOURCE_ROOT; };
 		60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LlamaKit.xcodeproj; path = submodules/ReactiveCocoa/External/LlamaKit/LlamaKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		C055E487A3D1AED461990000 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -672,6 +682,11 @@
 		5ED0997319C31D6200E5DD59 /* Stubbed Responses */ = {
 			isa = PBXGroup;
 			children = (
+				602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */,
+				602FF2AC19E2FC14004C7AB3 /* MeViaNumberAndPIN.json */,
+				602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */,
+				602FF2A619E2F5CE004C7AB3 /* CreatePINForBidder.json */,
+				602FF2A319E2F5BF004C7AB3 /* ActiveAuctions.json */,
 				5ED0997D19C31D8F00E5DD59 /* XApp.json */,
 				5E08488C19D06EE60078C571 /* Auctions.json */,
 				5E08489919D070DC0078C571 /* AuctionListings.json */,
@@ -921,7 +936,6 @@
 				60FFC2A319D9442F00284B9F /* UserCredentials.swift */,
 				60FFC2B319D9493000284B9F /* XAppAuthentication.swift */,
 				60FFC2B619D9496A00284B9F /* APIKeys.swift */,
-				60FFC2BA19D95DA500284B9F /* AuthenticatedMoyaProvider.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -974,7 +988,6 @@
 			children = (
 				5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */,
 				5EA137CA19C72BE100D0B743 /* XAppTokenSpec.swift */,
-				60FFC2BD19D97D8C00284B9F /* AuthenticatedMoyaProviderTests.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -1261,14 +1274,19 @@
 			files = (
 				60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */,
 				5EA33A8519DC7F2A007CF667 /* artwork.jpg in Resources */,
+				602FF2A719E2F5CE004C7AB3 /* CreatePINForBidder.json in Resources */,
 				604B224319D3518F008D86C7 /* SystemTime.json in Resources */,
+				602FF2AA19E2F6C0004C7AB3 /* MyCreditCards.json in Resources */,
 				60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */,
+				602FF2AD19E2FC14004C7AB3 /* MeViaNumberAndPIN.json in Resources */,
 				5E08489B19D070DC0078C571 /* AuctionListings.json in Resources */,
 				5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */,
 				60D48B9519C89DE300A3CA88 /* edit_button@2x.png in Resources */,
 				5E08488E19D06EE60078C571 /* Auctions.json in Resources */,
 				5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */,
 				5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */,
+				602FF2B019E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */,
+				602FF2A419E2F5BF004C7AB3 /* ActiveAuctions.json in Resources */,
 				5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1281,11 +1299,16 @@
 				6030A12419D1A55000B934CA /* XApp.json in Resources */,
 				6030A12519D1A55000B934CA /* Auctions.json in Resources */,
 				604B224419D3518F008D86C7 /* SystemTime.json in Resources */,
+				602FF2A519E2F5BF004C7AB3 /* ActiveAuctions.json in Resources */,
+				602FF2AE19E2FC14004C7AB3 /* MeViaNumberAndPIN.json in Resources */,
 				6030A12919D1A63700B934CA /* Fulfillment.storyboard in Resources */,
 				60FFC2B119D945BD00284B9F /* XAuth.json in Resources */,
+				602FF2A819E2F5CE004C7AB3 /* CreatePINForBidder.json in Resources */,
 				6030A12219D1A31600B934CA /* KeypadView.xib in Resources */,
 				6030A12819D1A63400B934CA /* Auction.storyboard in Resources */,
+				602FF2B119E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */,
 				5EA33A8619DC81CC007CF667 /* artwork.jpg in Resources */,
+				602FF2AB19E2F6C0004C7AB3 /* MyCreditCards.json in Resources */,
 				6030A12719D1A55600B934CA /* edit_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1405,7 +1428,6 @@
 				605B856119C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift in Sources */,
 				6017320F19CF259400A58B63 /* CardHandler.swift in Sources */,
 				6024DD5E19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */,
-				60FFC2BB19D95DA500284B9F /* AuthenticatedMoyaProvider.swift in Sources */,
 				6092C4AF19CAEF9A003BE8EC /* UIViewControllerExtensions.swift in Sources */,
 				600F5F0B19C882210027F587 /* ConfirmUserCreationViewController.swift in Sources */,
 				60D976E819D3123B00DE9F3D /* SaleArtwork.swift in Sources */,
@@ -1428,7 +1450,6 @@
 				6030A10819D1931400B934CA /* YouAreTheHighestBidderViewController.swift in Sources */,
 				6030A11F19D1A23100B934CA /* RACSignal+Moya.swift in Sources */,
 				601D01C319DEABFE0037568C /* TextField.swift in Sources */,
-				60FFC2BC19D95DA500284B9F /* AuthenticatedMoyaProvider.swift in Sources */,
 				6030A10719D1931400B934CA /* ConfirmYourBidArtsyLoginViewController.swift in Sources */,
 				60C37DE219D468A7002E7A44 /* RAC+JSONAble.swift in Sources */,
 				6030A10E19D1931900B934CA /* User.swift in Sources */,
@@ -1495,7 +1516,6 @@
 				6030A10119D1931400B934CA /* PlaceBidViewController.swift in Sources */,
 				60212CA019D5F20C001921E1 /* ArtistTests.swift in Sources */,
 				600F5F0519C879DC0027F587 /* SwipeCreditCardViewControllerTests.swift in Sources */,
-				60FFC2BE19D97D8C00284B9F /* AuthenticatedMoyaProviderTests.swift in Sources */,
 				601A6E3119DC58E700EBA5A5 /* NewUser.swift in Sources */,
 				6051290519E19524004B05BF /* RegisterFlowViewTests.swift in Sources */,
 				5EA137CB19C72BE100D0B743 /* XAppTokenSpec.swift in Sources */,
