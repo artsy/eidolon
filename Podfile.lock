@@ -14,9 +14,9 @@ PODS:
     - Artsy+UIColors
   - Artsy-UIButtons (1.1.0):
     - Artsy+UIColors
-  - CardFlight (1.6.3):
+  - CardFlight (1.8):
     - CardFlight/AudioJack
-  - CardFlight/AudioJack (1.6.3)
+  - CardFlight/AudioJack (1.8)
   - ECPhoneNumberFormatter (0.1.1)
   - EDColor (0.4.0)
   - FBSnapshotTestCase (1.1)
@@ -64,7 +64,7 @@ SPEC CHECKSUMS:
   Artsy+UIFonts: fb0a70f93ca888d45a3af751707701fe8cbeae2a
   Artsy+UILabels: 1dfc53c1e79727664c6081e305aeefa557ac5de5
   Artsy-UIButtons: af5cf4179dc7022d630c768d17c42eb5c1688319
-  CardFlight: 949261a10123152112e920d87e9163e27c445205
+  CardFlight: 22298dc11252ce13160073c416506c869abea9a1
   ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
   FBSnapshotTestCase: 188c80bfcb72e744eb0b99d45989d12687c40cf8
