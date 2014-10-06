@@ -1,20 +1,22 @@
 //    import Foundation
 //
-//    let authEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-//       return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
-//    }
-//
 //    class AuthenticatedMoyaProvider<T where T: MoyaTarget>: ReactiveMoyaProvider<T> {
-//        let credentials:UserCredentials
+//        var credentials:UserCredentials?
 //
-//        init(credentials:UserCredentials, stubResponses:Bool) {
-//            self.credentials = credentials
-//            let closure = authEndpointsClosure
-//            super.init(closure, stubResponses: stubResponses)
+//        init(credentials:UserCredentials, endpointsClosure: MoyaEndpointsClosure, endpointResolver: MoyaEndpointResolution = MoyaProvider.DefaultEnpointResolution(), stubResponses: Bool = false) {
+//
+//            let authEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+//               return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+//            }
+//
+//            super.init(endpointsClosure: authEndpointsClosure, endpointResolver: endpointResolver, stubResponses: stubResponses)
+//
+//    //        self.credentials = credentials
+//
 //        }
 //
 //        override func endpoint(token: T, method: Moya.Method, parameters: [String : AnyObject]) -> Endpoint<T> {
 //            let endPoint = super.endpoint(token, method: method, parameters: parameters)
-//            return endPoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": self.credentials.accessToken])
+//            return endPoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": self.credentials?.accessToken])
 //        }
 //    }

@@ -9,19 +9,20 @@ class MasonryCollectionViewCell: UICollectionViewCell, ListingsCollectionViewCel
     private dynamic let estimateLabel = MasonryCollectionViewCell._normalLabel()
     private dynamic let dividerView: UIView = MasonryCollectionViewCell._dividerView()
     private dynamic let currentBidLabel = MasonryCollectionViewCell._normalLabel()
-    private dynamic let currentBidPrice = MasonryCollectionViewCell._sansSerifLabel()
+    private dynamic let currentBidPriceLabel = MasonryCollectionViewCell._sansSerifLabel()
     private dynamic let numberOfBidsLabel = MasonryCollectionViewCell._rightAlignedNormalLabel()
     private dynamic let bidButton = MasonryCollectionViewCell._bidButton()
     
     private lazy var bidView: UIView = {
         let view = UIView()
         view.addSubview(self.currentBidLabel)
-        view.addSubview(self.currentBidPrice)
+        view.addSubview(self.currentBidPriceLabel)
         view.addSubview(self.numberOfBidsLabel)
+
         self.currentBidLabel.alignLeadingEdgeWithView(view, predicate: "0")
-        self.currentBidPrice.constrainLeadingSpaceToView(self.currentBidLabel, predicate: nil)
+        self.currentBidPriceLabel.constrainLeadingSpaceToView(self.currentBidLabel, predicate: nil)
         self.numberOfBidsLabel.alignTrailingEdgeWithView(view, predicate: "0")
-        UIView.alignBottomEdgesOfViews([view, self.currentBidLabel, self.currentBidPrice, self.numberOfBidsLabel])
+        UIView.alignBottomEdgesOfViews([view, self.currentBidLabel, self.currentBidPriceLabel, self.numberOfBidsLabel])
         return view
     }()
     
@@ -136,7 +137,7 @@ private extension MasonryCollectionViewCell {
             }
         }).mapNilToEmptyString()
 
-        RAC(self, "currentBidPrice.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
+        RAC(self, "currentBidPriceLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             if let currentBidCents = (saleArtwork as? SaleArtwork)?.highestBidCents {
                 return "\(NSNumberFormatter.currencyStringForCents(currentBidCents))"
             } else {

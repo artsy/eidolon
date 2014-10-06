@@ -1,11 +1,3 @@
-//
-//  SwitchView.swift
-//  Kiosk
-//
-//  Created by Ash Furrow on 2014-09-26.
-//  Copyright (c) 2014 Artsy. All rights reserved.
-//
-
 import Foundation
 
 public class SwitchView: UIView {

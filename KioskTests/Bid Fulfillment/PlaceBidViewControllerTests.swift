@@ -9,6 +9,20 @@ class PlaceBidViewControllerTests: QuickSpec {
             expect(sut).to(haveValidSnapshot(named:"default"))
         }
 
+        it("looks right with a custom saleArtwork") {
+            let sut = ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard()
+            let nav = FulfillmentNavigationController(rootViewController:sut)
+
+            let artwork = Artwork(id: "", dateString: "23rd Nov", title: "The Artwork Title", name: "Name of Artwork", blurb: "Something about the artwork", price: "$33,990", date: "Some date?")
+            let saleArtwork = SaleArtwork(id: "", artwork: artwork)
+            nav!.bidDetails = BidDetails(saleArtwork: saleArtwork, bidderID: nil, bidderPIN: nil, bidAmountCents: nil)
+
+            nav!.loadViewProgrammatically()
+            sut.loadViewProgrammatically()
+
+            expect(nav!).to(haveValidSnapshot(named:"with artwork"))
+        }
+
         it("reacts to keypad inputs with currency") {
             let customKeySubject = RACSubject()
             let sut = PlaceBidViewController.instantiateFromStoryboard()

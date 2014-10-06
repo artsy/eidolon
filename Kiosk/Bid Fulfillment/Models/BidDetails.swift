@@ -1,5 +1,5 @@
 @objc class BidDetails: NSObject {
-    dynamic var newUser: NewUser = NewUser(email: nil, password: nil, phoneNumber: nil)
+    dynamic var newUser: NewUser = NewUser()
     dynamic var saleArtwork: SaleArtwork?
 
     dynamic var bidderID: String?

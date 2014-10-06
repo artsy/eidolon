@@ -10,4 +10,6 @@ class ConfirmYourBidPasswordViewController: UIViewController {
         self.performSegue(.LoggedinWithNewUser)
     }
 
+
+
 }

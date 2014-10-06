@@ -2,11 +2,7 @@
     dynamic var email:String?
     dynamic var password:String?
     dynamic var phoneNumber:String?
-
-    init(email: String?, password: String?, phoneNumber:String?) {
-        self.email = email
-        self.password = password
-        self.phoneNumber = phoneNumber
-    }
-
+    dynamic var creditCardToken:String?
+    dynamic var creditCardName:String?
+    dynamic var zipCode:String?
 }
