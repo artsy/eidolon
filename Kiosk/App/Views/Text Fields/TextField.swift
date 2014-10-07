@@ -2,6 +2,8 @@ import UIKit
 
 public class TextField: UITextField {
 
+    public var shouldAnimateStateChange: Bool = true
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -27,6 +29,7 @@ public class TextField: UITextField {
         layer.cornerRadius = 0
         layer.masksToBounds = true
         layer.borderWidth = 1
+        tintColor = UIColor.artsyPurple()
         stateChangedAnimated(false)
         setupEvents()
     }
@@ -37,11 +40,11 @@ public class TextField: UITextField {
     }
 
     func editingDidBegin (sender: AnyObject) {
-        stateChangedAnimated(true)
+        stateChangedAnimated(shouldAnimateStateChange)
     }
 
     func editingDidFinish(sender: AnyObject) {
-        stateChangedAnimated(true)
+        stateChangedAnimated(shouldAnimateStateChange)
     }
 
     func stateChangedAnimated(animated:Bool) {
@@ -76,10 +79,6 @@ public class TextField: UITextField {
 
 public class SecureTextField: TextField {
 
-    required public init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
     var actualText: String = NSString()
 
     override public var text: String! {
@@ -96,6 +95,11 @@ public class SecureTextField: TextField {
         }
     }
 
+    override func setup() {
+        super.setup()
+        clearsOnBeginEditing = true
+    }
+
     override func setupEvents () {
         super.setupEvents()
         addTarget(self, action: "editingDidChange:", forControlEvents: .EditingChanged)
@@ -103,9 +107,8 @@ public class SecureTextField: TextField {
 
     override func editingDidBegin (sender: AnyObject) {
         super.editingDidBegin(sender)
-        text = ""
-        actualText = ""
         secureTextEntry = true
+        actualText = text
     }
 
     func editingDidChange(sender: AnyObject) {
