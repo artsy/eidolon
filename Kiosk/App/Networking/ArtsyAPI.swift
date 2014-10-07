@@ -68,22 +68,22 @@ extension ArtsyAPI : MoyaPath {
             return "api/v1/bidder"
 
         case MyCreditCards:
-            return "api/v1/me/credit_cards"
+            return "/api/v1/me/credit_cards"
 
         case CreatePINForBidder(let bidderID):
-            return "￼/api/v1/bidder/\(bidderID)/auction_pin"
+            return "/api/v1/bidder/\(bidderID)/auction_pin"
 
         case ActiveAuctions:
-            return "￼/api/v1/sales?is_auction=true&live=true"
+            return "/api/v1/sales?is_auction=true&live=true"
 
         case Me:
-            return "￼￼/api/v1/me"
+            return "/api/v1/me"
 
         case MyBiddersForAuction:
-            return "￼￼￼/api/v1/me/bidders"
+            return "/api/v1/me/bidders"
 
         case FindBidderRegistration(let auctionID, let phone):
-            return "￼￼￼/api/v1/me/bidders?sale_id=\(auctionID)&phone=\(phone)".URLEscapedString
+            return "/api/v1/me/bidders?sale_id=\(auctionID)&phone=\(phone)"
         }
     }
 }
