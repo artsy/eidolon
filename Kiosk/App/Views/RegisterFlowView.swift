@@ -22,17 +22,17 @@ class RegisterFlowView: ORStackView {
             let title = titleLabels[i]
             let info = createInfoLabel()
 
-            self.addSubview(title, withTopMargin: "10", sideMargin: "0")
+            self.addSubview(title, topMargin: "10", sideMargin: "0")
 
             if user.valueForKey(keypaths[i]) != nil {
-                self.addSubview(info, withTopMargin: "10", sideMargin: "0")
+                self.addSubview(info, topMargin: "10", sideMargin: "0")
                 RAC(info, "text") <~ RACObserve(user, keypaths[i])
             }
         }
 
         let spacer = UIView(frame: bounds)
         spacer.setContentHuggingPriority(12, forAxis: UILayoutConstraintAxis.Horizontal)
-        self.addSubview(spacer, withTopMargin: "0", sideMargin: "0")
+        self.addSubview(spacer, topMargin: "0", sideMargin: "0")
     }
 
     func createTitleViewWithTitle(title: String) -> UILabel {

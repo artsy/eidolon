@@ -7,7 +7,12 @@ class ConfirmYourBidViewController: UIViewController {
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet var numberAmountTextField: UITextField!
+
     @IBOutlet var keypadContainer: KeypadContainerView!
+    lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
+    lazy var clearSignal:RACSignal!  = self.keypadContainer.keypad?.rightSignal
+    lazy var deleteSignal:RACSignal! = self.keypadContainer.keypad?.leftSignal
+    lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class func instantiateFromStoryboard() -> ConfirmYourBidViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController
@@ -16,34 +21,66 @@ class ConfirmYourBidViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let numberIsZeroLengthSignal = RACObserve(self, "number").map({ (number) -> AnyObject! in
-            let number = number as String
-            return (number.utf16Count == 0)
-        })
+        let numberIsZeroLengthSignal = RACObserve(self, "number").map({ countElements($0 as String) == 0 })
 
         RAC(enterButton, "enabled") <~ numberIsZeroLengthSignal.notEach()
         RAC(numberAmountTextField, "text") <~ RACObserve(self, "number").map(toPhoneNumberString)
 
-        keypadSignal.subscribeNext({ [weak self] (input) -> Void in
-            let input = String(input as Int)
-            let newNumber = self?.number.stringByAppendingString(input)
-            self?.number = newNumber!
-        })
+        keypadSignal.subscribeNext(addDigitToNumber)
+        deleteSignal.subscribeNext(deleteDigitFromNumber)
+        clearSignal.subscribeNext(clearNumber)
+
+        if let nav = self.navigationController as? FulfillmentNavigationController {
+            RAC(nav.bidDetails.newUser, "phoneNumber") <~ RACObserve(self, "number")
+        }
     }
 
     @IBOutlet var enterButton: UIButton!
     @IBAction func enterButtonTapped(sender: AnyObject) {
 
+        // Does a bidder exist for this phone number?
+        //   if so forward to PIN input VC
+        //   else send to enter email
+
+        if let nav = self.navigationController as? FulfillmentNavigationController {
+
+            let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: nav.auctionID!, phone: number)
+            let bidderRequest = XAppRequest(endpoint, provider:provider).filterStatusCode(400).subscribeNext({ [weak self] (_) -> Void in
+            }, error: { [weak self] (error) -> Void in
+
+                // Due to AlamoFire restrictions we can't stop HTTP redirects
+                // so to figure out if we got 302'd we have to introspect the
+                // error to see if it's the original URL to know if the
+                // request suceedded
+
+                let moyaResponse = error.userInfo?["data"] as? MoyaResponse
+                let responseURL = moyaResponse?.response?.URL?.absoluteString?
+
+                if let responseURL = responseURL {
+                    if (responseURL as NSString).containsString("v1/bidder/") {
+                        self?.performSegue(.ConfirmyourBidBidderFound)
+                        return
+                    }
+                }
+
+                self?.performSegue(.ConfirmyourBidBidderNotFound)
+                return
+            })
+
+        }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func addDigitToNumber(input:AnyObject!) -> Void {
+        self.number = "\(self.number)\(input)"
     }
 
-    lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
-}
+    func deleteDigitFromNumber(input:AnyObject!) -> Void {
+        self.number = dropLast(self.number)
+    }
 
-
-private extension ConfirmYourBidViewController {
+    func clearNumber(input:AnyObject!) -> Void {
+        self.number = ""
+    }
 
     func toOpeningBidString(cents:AnyObject!) -> AnyObject! {
         if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
@@ -55,6 +92,11 @@ private extension ConfirmYourBidViewController {
     func toPhoneNumberString(number:AnyObject!) -> AnyObject! {
         return self.phoneNumberFormatter.stringForObjectValue(number as String)
     }
+
+}
+
+private extension ConfirmYourBidViewController {
+
 
     @IBAction func dev_noPhoneNumberFoundTapped(sender: AnyObject) {
         self.performSegue(.ConfirmyourBidBidderNotFound)

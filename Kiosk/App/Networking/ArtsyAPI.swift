@@ -68,22 +68,22 @@ extension ArtsyAPI : MoyaPath {
             return "api/v1/bidder"
 
         case MyCreditCards:
-            return "api/v1/me/credit_cards"
+            return "/api/v1/me/credit_cards"
 
         case CreatePINForBidder(let bidderID):
-            return "￼/api/v1/bidder/\(bidderID)/auction_pin"
+            return "/api/v1/bidder/\(bidderID)/auction_pin"
 
         case ActiveAuctions:
-            return "￼/api/v1/sales?is_auction=true&live=true"
+            return "/api/v1/sales?is_auction=true&live=true"
 
         case Me:
-            return "￼￼/api/v1/me"
+            return "/api/v1/me"
 
         case MyBiddersForAuction:
-            return "￼￼￼/api/v1/me/bidders"
+            return "/api/v1/me/bidders"
 
-        case FindBidderRegistration(let auctionID, let phone):
-            return "￼￼￼/api/v1/me/bidders?sale_id=\(auctionID)&phone=\(phone)"
+        case FindBidderRegistration:
+            return "/api/v1/bidder"
         }
     }
 }
@@ -127,6 +127,10 @@ extension ArtsyAPI : MoyaTarget {
         case Me:
             return stubbedResponse("Me")
 
+        // This API returns a 302, so stubbed response isn't valid
+        case FindBidderRegistration:
+            return stubbedResponse("Me")
+
         }
     }
 }
@@ -135,7 +139,8 @@ extension ArtsyAPI : MoyaTarget {
 
  struct Provider {
     private static var endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-        let endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+        
+        var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
         // Sign all non-XApp token requests
         switch target {
         case .XApp:
@@ -143,8 +148,19 @@ extension ArtsyAPI : MoyaTarget {
         case .XAuth:
             return endpoint
         default:
-            return endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
+            endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
         }
+        
+        // target-specific parameters
+        switch target {
+        case .FindBidderRegistration(let auctionID, let phone):
+            endpoint = endpoint.endpointByAddingParameters(["sale_id": auctionID, "phone": phone])
+        default:
+            // Need at least one statement to appease the compiler
+            _ = endpoint
+        }
+        
+        return endpoint
     }
     
      static func DefaultProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
