@@ -47,7 +47,7 @@ public class TextField: UITextField {
         stateChangedAnimated(shouldAnimateStateChange)
     }
 
-    func stateChangedAnimated(animated:Bool) {
+    func stateChangedAnimated(animated: Bool) {
         let newBorderColor = borderColorForState()
         if animated {
             let fade = CABasicAnimation()
@@ -69,11 +69,11 @@ public class TextField: UITextField {
     }
 
     override public func textRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectInset( bounds ,10 ,10 )
+        return CGRectInset( bounds, 5, 0 )
     }
 
-   override public func editingRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectInset( bounds ,10 , 10 )
+    override public func editingRectForBounds(bounds: CGRect) -> CGRect {
+        return CGRectInset( bounds, 5 , 0 )
     }
 }
 
