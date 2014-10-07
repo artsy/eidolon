@@ -15,7 +15,7 @@ class SaleArtwork: JSONAble {
     let id: String
     let artwork: Artwork
 
-    var auction: Sale?
+    var auctionID: String?
 
     // The bidder is given from JSON if user is registered
     let bidder: Bidder?
@@ -45,22 +45,23 @@ class SaleArtwork: JSONAble {
         let artworkDict = json["artwork"].object as [String: AnyObject]
         let artwork = Artwork.fromJSON(artworkDict) as Artwork
 
-        let sale = SaleArtwork(id: id, artwork: artwork) as SaleArtwork
+        let saleArtwork = SaleArtwork(id: id, artwork: artwork) as SaleArtwork
 
         if let highestBidDict = json["highest_bid"].object as? [String: AnyObject] {
-            sale.saleHighestBid = Bid.fromJSON(highestBidDict) as? Bid
+            saleArtwork.saleHighestBid = Bid.fromJSON(highestBidDict) as? Bid
         }
-        
-        sale.openingBidCents = json["opening_bid_cents"].integer
-        sale.minimumNextBidCents = json["minimum_next_bid_cents"].integer
 
-        sale.highestBidCents = json["highest_bid_amount_cents"].integer
-        sale.lowEstimateCents = json["low_estimate_cents"].integer
-        sale.highEstimateCents = json["high_estimate_cents"].integer
-        sale.bidCount = json["bidder_positions_count"].integer
+        saleArtwork.auctionID = json["sale_id"].string
+        saleArtwork.openingBidCents = json["opening_bid_cents"].integer
+        saleArtwork.minimumNextBidCents = json["minimum_next_bid_cents"].integer
+
+        saleArtwork.highestBidCents = json["highest_bid_amount_cents"].integer
+        saleArtwork.lowEstimateCents = json["low_estimate_cents"].integer
+        saleArtwork.highEstimateCents = json["high_estimate_cents"].integer
+        saleArtwork.bidCount = json["bidder_positions_count"].integer
 //        let reserveStatus = json["reserve_status"].integer
 
-        return sale;
+        return saleArtwork;
     }
     
     var estimateString: String {

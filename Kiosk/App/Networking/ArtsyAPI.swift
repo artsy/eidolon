@@ -83,7 +83,7 @@ extension ArtsyAPI : MoyaPath {
             return "￼￼￼/api/v1/me/bidders"
 
         case FindBidderRegistration(let auctionID, let phone):
-            return "￼￼￼/api/v1/me/bidders?sale_id=\(auctionID)&phone=\(phone)"
+            return "￼￼￼/api/v1/me/bidders?sale_id=\(auctionID)&phone=\(phone)".URLEscapedString
         }
     }
 }
@@ -125,6 +125,10 @@ extension ArtsyAPI : MoyaTarget {
             return stubbedResponse("MyBiddersForAuction")
 
         case Me:
+            return stubbedResponse("Me")
+
+        // This API returns a 302, so stubbed response isn't valid
+        case FindBidderRegistration:
             return stubbedResponse("Me")
 
         }

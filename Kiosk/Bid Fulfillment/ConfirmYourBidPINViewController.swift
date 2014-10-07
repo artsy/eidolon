@@ -32,6 +32,11 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         RAC(pinTextField, "text") <~ RACObserve(self, "pin")
     }
+
+    @IBAction func enterTapped(sender: AnyObject) {
+
+    }
+
 }
 
 private extension ConfirmYourBidPINViewController {
@@ -41,13 +46,12 @@ private extension ConfirmYourBidPINViewController {
     }
 
     func deleteDigitFromPIN(input:AnyObject!) -> Void {
-//
+        self.pin = dropLast(self.pin)
     }
 
     func clearPIN(input:AnyObject!) -> Void {
         self.pin = ""
     }
-
 
     @IBAction func dev_loggedInTapped(sender: AnyObject) {
         self.performSegue(.PINConfirmed)

@@ -52,6 +52,9 @@ class PlaceBidViewController: UIViewController {
 
                 RAC(artworkTitleLabel, "text") <~ RACObserve(saleArtwork.artwork, "title")
                 RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price")
+
+                let userbidIsLessThanCurrentSignal = RACObserve(self, "bidDollars").map { return ($0 as Int * 100) > saleArtwork.minimumNextBidCents }
+
             }
         }
     }
