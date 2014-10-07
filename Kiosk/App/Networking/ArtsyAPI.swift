@@ -139,7 +139,8 @@ extension ArtsyAPI : MoyaTarget {
 
  struct Provider {
     private static var endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-        let endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+        
+        var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
         // Sign all non-XApp token requests
         switch target {
         case .XApp:
@@ -147,8 +148,19 @@ extension ArtsyAPI : MoyaTarget {
         case .XAuth:
             return endpoint
         default:
-            return endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
+            endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
         }
+        
+        // target-specific parameters
+        switch target {
+        case .FindBidderRegistration(let auctionID, let phone):
+            endpoint = endpoint.endpointByAddingParameters(["sale_id": auctionID, "phone": phone])
+        default:
+            // Need at least one statement to appese the compiler
+            _ = endpoint
+        }
+        
+        return endpoint
     }
     
      static func DefaultProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
