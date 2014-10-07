@@ -82,8 +82,8 @@ extension ArtsyAPI : MoyaPath {
         case MyBiddersForAuction:
             return "/api/v1/me/bidders"
 
-        case FindBidderRegistration(let auctionID, let phone):
-            return "/api/v1/me/bidders?sale_id=\(auctionID)&phone=\(phone)"
+        case FindBidderRegistration:
+            return "/api/v1/bidder"
         }
     }
 }
@@ -156,7 +156,7 @@ extension ArtsyAPI : MoyaTarget {
         case .FindBidderRegistration(let auctionID, let phone):
             endpoint = endpoint.endpointByAddingParameters(["sale_id": auctionID, "phone": phone])
         default:
-            // Need at least one statement to appese the compiler
+            // Need at least one statement to appease the compiler
             _ = endpoint
         }
         

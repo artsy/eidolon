@@ -40,13 +40,24 @@ class ConfirmYourBidViewController: UIViewController {
         if let nav = self.navigationController as? FulfillmentNavigationController {
 
             let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: nav.auctionID!, phone: number)
-            let bidderRequest = XAppRequest(endpoint).filterStatusCode(302).subscribeNext({ [weak self] (_) -> Void in
-
-                self?.performSegue(.ConfirmyourBidBidderFound)
-                return
-
+            let bidderRequest = XAppRequest(endpoint).filterStatusCode(400).subscribeNext({ [weak self] (_) -> Void in
             }, error: { [weak self] (error) -> Void in
-                // a 404 indicates that the bidder wasn't found
+
+                // Due to AlamoFire restrictions we can't stop HTTP redirects
+                // so to figure out if we got 302'd we have to introspect the
+                // error to see if it's the original URL to know if the
+                // request suceedded
+
+                let moyaResponse = error.userInfo?["data"] as? MoyaResponse
+                let responseURL = moyaResponse?.response?.URL?.absoluteString?
+
+                if let responseURL = responseURL {
+                    if (responseURL as NSString).containsString("v1/bidder/") {
+                        self?.performSegue(.ConfirmyourBidBidderFound)
+                        return
+                    }
+                }
+
                 self?.performSegue(.ConfirmyourBidBidderNotFound)
                 return
             })
