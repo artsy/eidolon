@@ -1076,6 +1076,9 @@
                                 <state key="disabled">
                                     <color key="titleColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="enterTapped:" destination="hrW-WV-2L3" eventType="touchUpInside" id="0kk-B4-Meo"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mrk-wa-iTP" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="495" y="603" width="255" height="60"/>
@@ -1328,6 +1331,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="qUf-dy-7C9"/>
-        <segue reference="6qF-R8-kJy"/>
+        <segue reference="gjD-og-8Iv"/>
     </inferredMetricsTieBreakers>
 </document>

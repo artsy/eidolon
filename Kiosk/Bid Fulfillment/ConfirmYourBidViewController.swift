@@ -12,6 +12,7 @@ class ConfirmYourBidViewController: UIViewController {
     lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
     lazy var clearSignal:RACSignal!  = self.keypadContainer.keypad?.rightSignal
     lazy var deleteSignal:RACSignal! = self.keypadContainer.keypad?.leftSignal
+    lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class func instantiateFromStoryboard() -> ConfirmYourBidViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController
@@ -28,6 +29,10 @@ class ConfirmYourBidViewController: UIViewController {
         keypadSignal.subscribeNext(addDigitToNumber)
         deleteSignal.subscribeNext(deleteDigitFromNumber)
         clearSignal.subscribeNext(clearNumber)
+
+        if let nav = self.navigationController as? FulfillmentNavigationController {
+            RAC(nav.bidDetails.newUser, "phoneNumber") <~ RACObserve(self, "number")
+        }
     }
 
     @IBOutlet var enterButton: UIButton!
@@ -40,7 +45,7 @@ class ConfirmYourBidViewController: UIViewController {
         if let nav = self.navigationController as? FulfillmentNavigationController {
 
             let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: nav.auctionID!, phone: number)
-            let bidderRequest = XAppRequest(endpoint).filterStatusCode(400).subscribeNext({ [weak self] (_) -> Void in
+            let bidderRequest = XAppRequest(endpoint, provider:provider).filterStatusCode(400).subscribeNext({ [weak self] (_) -> Void in
             }, error: { [weak self] (error) -> Void in
 
                 // Due to AlamoFire restrictions we can't stop HTTP redirects
