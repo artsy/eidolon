@@ -62,12 +62,12 @@ class ListingsViewController: UIViewController {
             }
         })
         
-        gridSelectedSignal.map({ (gridSelected) -> AnyObject! in
+        gridSelectedSignal.map({ [weak self] (gridSelected) -> AnyObject! in
             switch gridSelected as Bool {
             case true:
                 return ListingsViewController.masonryLayout()
             default:
-                return ListingsViewController.tableLayout()
+                return ListingsViewController.tableLayout(CGRectGetWidth(self?.switchView.frame ?? CGRectZero))
             }
         }).subscribeNext { [weak self] (layout) -> Void in
             // Need to explicitly call animated: fase and reload to avoid animation
@@ -166,8 +166,12 @@ private extension ListingsViewController {
         return layout
     }
     
-    class func tableLayout() -> UICollectionViewFlowLayout {
-        return UICollectionViewFlowLayout()
+    class func tableLayout(width: CGFloat) -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSizeMake(width, 84)
+        layout.minimumLineSpacing = 0.0
+        
+        return layout
     }
     
     // MARK: Instance methods
@@ -202,7 +206,7 @@ enum SwitchValues: Int {
             return "Lowest Current Bid"
         case .Alphabetical:
             return "A—Z"
-            }
+        }
     }
     
     static func allSwitchValues() -> [SwitchValues] {

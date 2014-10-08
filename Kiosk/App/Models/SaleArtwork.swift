@@ -80,6 +80,14 @@ class SaleArtwork: JSONAble {
             return "No Estimate"
         }
     }
+    
+    override class func keyPathsForValuesAffectingValueForKey(key: String) -> NSSet {
+        if key == "estimateString" {
+            return NSSet(array: ["lowEstimateCents", "highEstimateCents"])
+        } else {
+            return super.keyPathsForValuesAffectingValueForKey(key)
+        }
+    }
 }
 
 func createDollarFormatter() -> NSNumberFormatter {

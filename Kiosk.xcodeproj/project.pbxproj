@@ -14,10 +14,12 @@
 		5E0D703E19DADD900005AF46 /* MasonryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2C0C719DAC3F400263137 /* MasonryCollectionViewCell.swift */; };
 		5E2B3D4B19DC063C00906A26 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */; };
 		5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */; };
+		5E3DF3B419E5CF8A0098F3B0 /* RACSignal+Kiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DA8E019E57E49000E5855 /* RACSignal+Kiosk.swift */; };
 		5E3E53E619C3AA13002D8B9D /* XAppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3E53E519C3AA13002D8B9D /* XAppToken.swift */; };
 		5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3519913DD800A48370 /* AppDelegate.swift */; };
 		5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3719913DD800A48370 /* ListingsViewController.swift */; };
 		5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E59DD3C19913DD800A48370 /* Images.xcassets */; };
+		5E5DA8E119E57E49000E5855 /* RACSignal+Kiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DA8E019E57E49000E5855 /* RACSignal+Kiosk.swift */; };
 		5E6ED5FE19C07A4300CF3398 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6ED5FA19C07A4300CF3398 /* Endpoint.swift */; };
 		5E6ED5FF19C07A4300CF3398 /* Moya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6ED5FB19C07A4300CF3398 /* Moya.swift */; };
 		5E6ED60019C07A4300CF3398 /* Moya+ReactiveCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6ED5FC19C07A4300CF3398 /* Moya+ReactiveCocoa.swift */; };
@@ -386,6 +388,7 @@
 		5E59DD4219913DD800A48370 /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD4719913DD900A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PodsBridgingHeader.h; sourceTree = "<group>"; };
+		5E5DA8E019E57E49000E5855 /* RACSignal+Kiosk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RACSignal+Kiosk.swift"; sourceTree = "<group>"; };
 		5E6ED5FA19C07A4300CF3398 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Endpoint.swift; path = submodules/Moya/Endpoint.swift; sourceTree = SOURCE_ROOT; };
 		5E6ED5FB19C07A4300CF3398 /* Moya.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Moya.swift; path = submodules/Moya/Moya.swift; sourceTree = SOURCE_ROOT; };
 		5E6ED5FC19C07A4300CF3398 /* Moya+ReactiveCocoa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Moya+ReactiveCocoa.swift"; path = "submodules/Moya/Moya+ReactiveCocoa.swift"; sourceTree = SOURCE_ROOT; };
@@ -686,6 +689,7 @@
 			children = (
 				5EA65C0C19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.h */,
 				5EA65C0D19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m */,
+				5E5DA8E019E57E49000E5855 /* RACSignal+Kiosk.swift */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1481,6 +1485,7 @@
 				5E6ED5FE19C07A4300CF3398 /* Endpoint.swift in Sources */,
 				5EF2C0C819DAC3F400263137 /* MasonryCollectionViewCell.swift in Sources */,
 				60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */,
+				5E5DA8E119E57E49000E5855 /* RACSignal+Kiosk.swift in Sources */,
 				609A848C19E52E7700476A94 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1503,6 +1508,7 @@
 				5E0D703E19DADD900005AF46 /* MasonryCollectionViewCell.swift in Sources */,
 				60C37DD519D44DD9002E7A44 /* Bid.swift in Sources */,
 				604AF5C119E14A020019884E /* RegisterFlowView.swift in Sources */,
+				5E3DF3B419E5CF8A0098F3B0 /* RACSignal+Kiosk.swift in Sources */,
 				6030A10219D1931400B934CA /* FulfillmentContainerViewController.swift in Sources */,
 				6030A11D19D1A23100B934CA /* Moya.swift in Sources */,
 				60C37DD719D45103002E7A44 /* BidderTests.swift in Sources */,
