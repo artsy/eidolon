@@ -1,16 +1,8 @@
 import UIKit
 
-// This view has an intrinsic content height that is the sum of its subviews' intrinsic content height
-private class StackingView: UIView {
-    override func intrinsicContentSize() -> CGSize {
-        let height = subviews.map{ $0.intrinsicContentSize().height }.reduce(0, combine: +)
-        return CGSize(width: UIViewNoIntrinsicMetric, height: height)
-    }
-}
-
 class TableCollectionViewCell: ListingsCollectionViewCell {
     private lazy var infoView: UIView = {
-        let view = StackingView()
+        let view = UIView()
         view.addSubview(self.artistNameLabel)
         view.addSubview(self.artworkTitleLabel)
         
@@ -18,6 +10,7 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         self.artistNameLabel.alignLeading("0", trailing: "0", toView: view)
         self.artworkTitleLabel.alignLeading("0", trailing: "0", toView: view)
         self.artworkTitleLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: self.artistNameLabel, predicate: "0")
+        self.artworkTitleLabel.alignTop(nil, bottom: "", toView: view)
         return view
     }()
     
