@@ -21,6 +21,7 @@ class ListingsViewController: UIViewController {
         collectionView.allowsSelection = false
         return collectionView
     }()
+
     lazy var switchView: SwitchView = {
         return SwitchView(buttonTitles: SwitchValues.allSwitchValues().map{$0.name.uppercaseString})
     }()
@@ -77,6 +78,23 @@ class ListingsViewController: UIViewController {
                 self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
             }
         }
+    }
+
+    @IBAction func registerTapped(sender: AnyObject) {
+
+        let storyboard = UIStoryboard.fulfillment()
+        let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
+        containerController.allowAnimations = allowAnimations
+
+        if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
+            let registerVC = RegisterViewController.instantiateFromStoryboard()
+            internalNav.viewControllers = [registerVC]
+        }
+
+        self.presentViewController(containerController, animated: false) {
+            containerController.viewDidAppearAnimation(containerController.allowAnimations)
+        }
+
     }
     
     override func viewWillAppear(animated: Bool) {

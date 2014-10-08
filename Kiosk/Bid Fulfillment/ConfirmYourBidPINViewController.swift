@@ -37,8 +37,7 @@ class ConfirmYourBidPINViewController: UIViewController {
     @IBAction func enterTapped(sender: AnyObject) {
         /// verify if we can connect with number & pin
 
-        let phone = (self.navigationController as? FulfillmentNavigationController)?.bidDetails.newUser.phoneNumber! as String!
-
+        let phone = self.fulfilmentNav()?.bidDetails.newUser.phoneNumber! as String!
 
         let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
             var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
@@ -50,7 +49,7 @@ class ConfirmYourBidPINViewController: UIViewController {
         let bidderRequest = XAppRequest(endpoint, provider: numberProvider).filterSuccessfulStatusCodes().subscribeNext({ [weak self] (_) -> Void in
 
             self?.performSegue(.PINConfirmed)
-            (self?.navigationController as? FulfillmentNavigationController)?.loggedInProvider = numberProvider
+            self?.fulfilmentNav()?.loggedInProvider = numberProvider
 
         }, error: { [weak self] (error) -> Void in
             println("error, the pin is likely wrong")

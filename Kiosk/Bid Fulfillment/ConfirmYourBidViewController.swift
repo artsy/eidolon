@@ -21,7 +21,7 @@ class ConfirmYourBidViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let numberIsZeroLengthSignal = RACObserve(self, "number").map({ countElements($0 as String) == 0 })
+        let numberIsZeroLengthSignal = RACObserve(self, "number").map(isZeroLengthString)
 
         RAC(enterButton, "enabled") <~ numberIsZeroLengthSignal.notEach()
         RAC(numberAmountTextField, "text") <~ RACObserve(self, "number").map(toPhoneNumberString)
