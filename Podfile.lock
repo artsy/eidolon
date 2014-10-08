@@ -38,7 +38,7 @@ DEPENDENCIES:
   - Artsy+UIColors
   - Artsy+UIFonts
   - Artsy+UILabels
-  - Artsy-UIButtons (from `https://github.com/artsy/Artsy-UIButtons.git`, commit `19681d0fa08dd0748c4825c867c2cf72fbe53544`)
+  - Artsy-UIButtons (from `https://github.com/artsy/Artsy-UIButtons.git`, commit `e32ee7eca98514c9ade3cd569d43a2c5a73fea29`)
   - CardFlight
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase (from `https://github.com/AshFurrow/ios-snapshot-test-case.git`, branch `renderAsLayer`)
@@ -51,7 +51,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Artsy-UIButtons:
-    :commit: 19681d0fa08dd0748c4825c867c2cf72fbe53544
+    :commit: e32ee7eca98514c9ade3cd569d43a2c5a73fea29
     :git: https://github.com/artsy/Artsy-UIButtons.git
   FBSnapshotTestCase:
     :branch: renderAsLayer
