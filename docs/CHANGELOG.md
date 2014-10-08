@@ -1,8 +1,9 @@
 # End User Changes
 
-### 0.0.3 -
+### 0.0.3 - 7th Oct 2014
 
 * Changed buttons & fonts on place bid view - @1aura
+* Added support for logging via PIN & bidder / number - @orta
 
 ### 0.0.2 - 2 Oct 2014
 

@@ -551,14 +551,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSp-ka-p6m" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="309" width="255" height="43"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="CONFIRM">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Confirm Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwf-mx-o0D" customClass="ARSerifLabel">
                                 <rect key="frame" x="65" y="82" width="395" height="41"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
@@ -626,6 +618,17 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSp-ka-p6m" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="495" y="308" width="255" height="43"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="CONFIRM">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="XaK-mX-ets"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -634,6 +637,7 @@
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
                         <outlet property="confirmCredentialsButton" destination="zSp-ka-p6m" id="hDg-Z7-4IL"/>
+                        <outlet property="confirmTapped" destination="zSp-ka-p6m" id="ZEZ-Ao-Y4Y"/>
                         <outlet property="emailTextField" destination="bMc-Jh-nkF" id="KQ9-Qf-3xe"/>
                         <outlet property="passwordTextField" destination="sFU-mI-0Wz" id="jo4-Mm-FxB"/>
                         <segue destination="2lt-co-qW2" kind="push" identifier="Email Login Confirmed Highest Bidder" id="6qF-R8-kJy"/>
@@ -1330,7 +1334,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qUf-dy-7C9"/>
-        <segue reference="gjD-og-8Iv"/>
+        <segue reference="6qF-R8-kJy"/>
+        <segue reference="A1R-R2-CSF"/>
     </inferredMetricsTieBreakers>
 </document>

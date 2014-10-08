@@ -144,6 +144,8 @@
 		60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60968DCD19C5B2AF001AB802 /* KeypadView.xib */; };
 		60968DD019C5B427001AB802 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60968DCF19C5B427001AB802 /* KeypadView.swift */; };
 		60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */ = {isa = PBXBuildFile; fileRef = 60968DD219C5B80F001AB802 /* KeypadViewPreviewIB.png */; };
+		609A848919E50B7F00476A94 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A848819E50B7F00476A94 /* Card.swift */; };
+		609A848A19E50B7F00476A94 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A848819E50B7F00476A94 /* Card.swift */; };
 		60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */; };
 		60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */; };
 		60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */; };
@@ -440,6 +442,7 @@
 		60968DCD19C5B2AF001AB802 /* KeypadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeypadView.xib; path = ../Storyboards/KeypadView.xib; sourceTree = "<group>"; };
 		60968DCF19C5B427001AB802 /* KeypadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
 		60968DD219C5B80F001AB802 /* KeypadViewPreviewIB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KeypadViewPreviewIB.png; sourceTree = "<group>"; };
+		609A848819E50B7F00476A94 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 		60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewController.swift; sourceTree = "<group>"; };
 		60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; };
@@ -725,6 +728,7 @@
 				60D976EB19D3172D00DE9F3D /* SystemTime.swift */,
 				60C37DC219D4359E002E7A44 /* JSONAble.swift */,
 				60212C9019D5CA04001921E1 /* Image.swift */,
+				609A848819E50B7F00476A94 /* Card.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1429,6 +1433,7 @@
 				5E6ED60019C07A4300CF3398 /* Moya+ReactiveCocoa.swift in Sources */,
 				60D976E219D30F8B00DE9F3D /* Bid.swift in Sources */,
 				60F0C89B19D2CA4D002B0F10 /* SimulatorOnlyView.swift in Sources */,
+				609A848919E50B7F00476A94 /* Card.swift in Sources */,
 				5EF2C0C619DAC18000263137 /* TableCollectionViewCell.swift in Sources */,
 				5E3E53E619C3AA13002D8B9D /* XAppToken.swift in Sources */,
 				605B856119C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift in Sources */,
@@ -1509,6 +1514,7 @@
 				605B857019C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */,
 				5EA137CD19C733DE00D0B743 /* TestHelpers.swift in Sources */,
 				5E0D702C19DADD8E0005AF46 /* TableCollectionViewCell.swift in Sources */,
+				609A848A19E50B7F00476A94 /* Card.swift in Sources */,
 				60C07A1719BE02A800868951 /* HaveValidSnapshot.swift in Sources */,
 				6030A12119D1A30D00B934CA /* ListingsViewController.swift in Sources */,
 				5EA137C019C72BD200D0B743 /* ArtsyAPISpec.swift in Sources */,

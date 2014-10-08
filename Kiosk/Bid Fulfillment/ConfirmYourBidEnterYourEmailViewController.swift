@@ -16,7 +16,6 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
             let newUserCredentials = nav.bidDetails.newUser
             RAC(newUserCredentials, "email") <~ emailTextField.rac_textSignal()
-
         }
 
         let inputIsEmail = emailTextField.rac_textSignal().map(isEmailAddress)
