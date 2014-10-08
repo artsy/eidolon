@@ -15,7 +15,7 @@ class RegisterFlowView: ORStackView {
 
     func setup() {
         let user = details!.newUser
-        let titleLabels = titles.map({ self.createTitleViewWithTitle($0) })
+        let titleLabels = titles.map(createTitleViewWithTitle)
         titleLabels[highlightedIndex].textColor = UIColor.artsyPurple()
 
         for i in 0 ..< countElements(titles) {
