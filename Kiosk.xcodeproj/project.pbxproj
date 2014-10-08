@@ -1125,6 +1125,7 @@
 				TargetAttributes = {
 					5E59DD2F19913DD800A48370 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = ZH8TGFYKDK;
 					};
 					5E59DD4119913DD800A48370 = {
 						CreatedOnToolsVersion = 6.0;
@@ -1683,6 +1684,7 @@
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1706,6 +1708,7 @@
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (

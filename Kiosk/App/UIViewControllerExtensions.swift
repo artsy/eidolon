@@ -16,7 +16,6 @@ extension UIViewController {
     }
 
     func fulfilmentNav() -> FulfillmentNavigationController? {
-
         return (self.navigationController as? FulfillmentNavigationController)?
     }
 }
