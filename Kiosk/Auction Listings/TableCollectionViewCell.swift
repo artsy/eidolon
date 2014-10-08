@@ -10,7 +10,7 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         self.artistNameLabel.alignLeading("0", trailing: "0", toView: view)
         self.artworkTitleLabel.alignLeading("0", trailing: "0", toView: view)
         self.artworkTitleLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: self.artistNameLabel, predicate: "0")
-        self.artworkTitleLabel.alignTop(nil, bottom: "", toView: view)
+        self.artworkTitleLabel.alignTop(nil, bottom: "0", toView: view)
         return view
     }()
     

@@ -27,9 +27,11 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
 
         }, completed: { [unowned self] () -> Void in
             self.cardStatusLabel.text = "Card Status: completed"
-            self.cardName = cardHandler.card?.name
-            self.cardLastDigits = cardHandler.card?.last4
-            self.cardToken = cardHandler.card?.cardToken
+            if let card = self.cardHandler.card {
+                self.cardName = card.name
+                self.cardLastDigits = card.last4
+                self.cardToken = card.cardToken
+            }
 
             self.finishedSignal.sendCompleted()
         })
