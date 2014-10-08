@@ -69,7 +69,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
             // So we need to unwrap it as an optional optional. Yo dawg.
             let bidCount = optionalBidCount as Int?
 
-            if let bidCount = bidCount{
+            if let bidCount = bidCount {
                 let suffix = bidCount == 1 ? "" : "s"
                 return "\(bidCount) bid\(suffix) placed"
             } else {
