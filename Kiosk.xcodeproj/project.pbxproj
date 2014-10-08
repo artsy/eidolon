@@ -193,6 +193,7 @@
 		961918F1D3EF491EA0AF220C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A6ABDCBFE147D99BAEBD31 /* libPods.a */; };
 		A165BB63FB9541B4A59991F6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A6ABDCBFE147D99BAEBD31 /* libPods.a */; };
 		E68E94A219DDCB70001405A5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68E94A119DDCB70001405A5 /* TextField.swift */; };
+		E6FA920D19E43FD90064480A /* TextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FA920B19E43FD90064480A /* TextFieldTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -482,6 +483,7 @@
 		60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LlamaKit.xcodeproj; path = submodules/ReactiveCocoa/External/LlamaKit/LlamaKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		C055E487A3D1AED461990000 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E68E94A119DDCB70001405A5 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = "Text Fields/TextField.swift"; sourceTree = "<group>"; };
+		E6FA920B19E43FD90064480A /* TextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTests.swift; sourceTree = "<group>"; };
 		EE4CAC9FE3857F7DF1A07AE1 /* Pods-KioskTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.beta.xcconfig"; sourceTree = "<group>"; };
 		F02362ED531B4468B9C73044 /* libPods-KioskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KioskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -680,6 +682,7 @@
 		5EA65C1119D5FCAA005EA4B4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E6FA920B19E43FD90064480A /* TextFieldTests.swift */,
 				5EA65C1219D5FCC4005EA4B4 /* SwitchViewSpec.swift */,
 				6051290419E19524004B05BF /* RegisterFlowViewTests.swift */,
 			);
@@ -1467,6 +1470,7 @@
 				6030A12319D1A3F100B934CA /* UIViewControllerExtensions.swift in Sources */,
 				5EAC733019D01617002F918A /* ReactiveCocoaBindingsTests.swift in Sources */,
 				60C37DC419D4359E002E7A44 /* JSONAble.swift in Sources */,
+				E6FA920D19E43FD90064480A /* TextFieldTests.swift in Sources */,
 				5E0D703E19DADD900005AF46 /* MasonryCollectionViewCell.swift in Sources */,
 				60C37DD519D44DD9002E7A44 /* Bid.swift in Sources */,
 				604AF5C119E14A020019884E /* RegisterFlowView.swift in Sources */,
