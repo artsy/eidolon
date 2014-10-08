@@ -18,7 +18,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
             RAC(newUserCredentials, "email") <~ emailTextField.rac_textSignal()
         }
 
-        let inputIsEmail = emailTextField.rac_textSignal().map(isEmailAddress)
+        let inputIsEmail = emailTextField.rac_textSignal().map(stringIsEmailAddress)
         RAC(confirmButton, "enabled") <~ inputIsEmail.notEach()
     }
 
@@ -29,11 +29,5 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
 private extension ConfirmYourBidEnterYourEmailViewController {
 
-    func isEmailAddress(text:AnyObject!) -> AnyObject! {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-        let testPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
-
-        return testPredicate?.evaluateWithObject(text) == false
-    }
 
 }

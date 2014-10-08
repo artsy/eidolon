@@ -46,7 +46,6 @@
 		6007B42519DEFAA000EDF43E /* ConfirmYourBidPINViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6007B42419DEFAA000EDF43E /* ConfirmYourBidPINViewControllerTests.swift */; };
 		600F5EFA19C879670027F587 /* SwipeCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */; };
 		600F5F0519C879DC0027F587 /* SwipeCreditCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0419C879DC0027F587 /* SwipeCreditCardViewControllerTests.swift */; };
-		600F5F0719C87DA80027F587 /* UserCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0619C87DA80027F587 /* UserCreationViewController.swift */; };
 		600F5F0919C880980027F587 /* UserCreationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0819C880980027F587 /* UserCreationViewControllerTests.swift */; };
 		600F5F0B19C882210027F587 /* ConfirmUserCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0A19C882210027F587 /* ConfirmUserCreationViewController.swift */; };
 		6017320D19CF24ED00A58B63 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017320C19CF24ED00A58B63 /* User.swift */; };
@@ -85,7 +84,6 @@
 		6030A10719D1931400B934CA /* ConfirmYourBidArtsyLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856019C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift */; };
 		6030A10819D1931400B934CA /* YouAreTheHighestBidderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856219C6E5C30009B16B /* YouAreTheHighestBidderViewController.swift */; };
 		6030A10919D1931400B934CA /* SwipeCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */; };
-		6030A10A19D1931400B934CA /* UserCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0619C87DA80027F587 /* UserCreationViewController.swift */; };
 		6030A10B19D1931400B934CA /* ConfirmUserCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0A19C882210027F587 /* ConfirmUserCreationViewController.swift */; };
 		6030A10E19D1931900B934CA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017320C19CF24ED00A58B63 /* User.swift */; };
 		6030A10F19D1931900B934CA /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A0F219D18F5200B934CA /* Artwork.swift */; };
@@ -146,6 +144,16 @@
 		60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */ = {isa = PBXBuildFile; fileRef = 60968DD219C5B80F001AB802 /* KeypadViewPreviewIB.png */; };
 		609A848919E50B7F00476A94 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A848819E50B7F00476A94 /* Card.swift */; };
 		609A848A19E50B7F00476A94 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A848819E50B7F00476A94 /* Card.swift */; };
+		609A848C19E52E7700476A94 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A848B19E52E7700476A94 /* RegisterViewController.swift */; };
+		609A848D19E52E7700476A94 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A848B19E52E7700476A94 /* RegisterViewController.swift */; };
+		609A848F19E537AA00476A94 /* RegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A848E19E537AA00476A94 /* RegistrationCoordinator.swift */; };
+		609A849019E537AA00476A94 /* RegistrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A848E19E537AA00476A94 /* RegistrationCoordinator.swift */; };
+		609A849319E53B1F00476A94 /* RegistrationEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A849219E53B1F00476A94 /* RegistrationEmailViewController.swift */; };
+		609A849419E53B1F00476A94 /* RegistrationEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A849219E53B1F00476A94 /* RegistrationEmailViewController.swift */; };
+		609A849719E53ED200476A94 /* RACFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A849619E53ED200476A94 /* RACFunctions.swift */; };
+		609A849819E53ED200476A94 /* RACFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A849619E53ED200476A94 /* RACFunctions.swift */; };
+		609A849A19E5416000476A94 /* RegistrationPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A849919E5416000476A94 /* RegistrationPasswordViewController.swift */; };
+		609A849B19E5416000476A94 /* RegistrationPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A849919E5416000476A94 /* RegistrationPasswordViewController.swift */; };
 		60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */; };
 		60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */; };
 		60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */; };
@@ -401,7 +409,6 @@
 		6007B42419DEFAA000EDF43E /* ConfirmYourBidPINViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidPINViewControllerTests.swift; sourceTree = "<group>"; };
 		600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeCreditCardViewController.swift; sourceTree = "<group>"; };
 		600F5F0419C879DC0027F587 /* SwipeCreditCardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeCreditCardViewControllerTests.swift; sourceTree = "<group>"; };
-		600F5F0619C87DA80027F587 /* UserCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCreationViewController.swift; sourceTree = "<group>"; };
 		600F5F0819C880980027F587 /* UserCreationViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCreationViewControllerTests.swift; sourceTree = "<group>"; };
 		600F5F0A19C882210027F587 /* ConfirmUserCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmUserCreationViewController.swift; sourceTree = "<group>"; };
 		6017320C19CF24ED00A58B63 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -443,6 +450,11 @@
 		60968DCF19C5B427001AB802 /* KeypadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
 		60968DD219C5B80F001AB802 /* KeypadViewPreviewIB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KeypadViewPreviewIB.png; sourceTree = "<group>"; };
 		609A848819E50B7F00476A94 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		609A848B19E52E7700476A94 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		609A848E19E537AA00476A94 /* RegistrationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinator.swift; sourceTree = "<group>"; };
+		609A849219E53B1F00476A94 /* RegistrationEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationEmailViewController.swift; sourceTree = "<group>"; };
+		609A849619E53ED200476A94 /* RACFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACFunctions.swift; sourceTree = "<group>"; };
+		609A849919E5416000476A94 /* RegistrationPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewController.swift; sourceTree = "<group>"; };
 		60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 		60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewController.swift; sourceTree = "<group>"; };
 		60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; };
@@ -746,6 +758,7 @@
 			children = (
 				601A6E2F19DC58E700EBA5A5 /* NewUser.swift */,
 				6071320419DD3AE600CA46F4 /* BidDetails.swift */,
+				609A848E19E537AA00476A94 /* RegistrationCoordinator.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -800,6 +813,7 @@
 		605B855919C6E41C0009B16B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				609A849119E53B0300476A94 /* Registration */,
 				6071321B19DD520B00CA46F4 /* Containers */,
 				600F5F0A19C882210027F587 /* ConfirmUserCreationViewController.swift */,
 				605B856019C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift */,
@@ -809,7 +823,6 @@
 				605B855A19C6E4CF0009B16B /* ConfirmYourBidViewController.swift */,
 				60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */,
 				600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */,
-				600F5F0619C87DA80027F587 /* UserCreationViewController.swift */,
 				605B856219C6E5C30009B16B /* YouAreTheHighestBidderViewController.swift */,
 			);
 			name = "View Controllers";
@@ -903,6 +916,7 @@
 				601A6E1D19DC58C200EBA5A5 /* Models */,
 				60D48B9319C89DD900A3CA88 /* Resources */,
 				605B855919C6E41C0009B16B /* View Controllers */,
+				609A849619E53ED200476A94 /* RACFunctions.swift */,
 			);
 			path = "Bid Fulfillment";
 			sourceTree = "<group>";
@@ -925,6 +939,16 @@
 				602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */,
 			);
 			name = Keypad;
+			sourceTree = "<group>";
+		};
+		609A849119E53B0300476A94 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				609A848B19E52E7700476A94 /* RegisterViewController.swift */,
+				609A849219E53B1F00476A94 /* RegistrationEmailViewController.swift */,
+				609A849919E5416000476A94 /* RegistrationPasswordViewController.swift */,
+			);
+			name = Registration;
 			sourceTree = "<group>";
 		};
 		60C37DCF19D44034002E7A44 /* SwiftyJSON */ = {
@@ -1399,6 +1423,7 @@
 				60C620DA19D180A20024D493 /* ConfirmYourBidPINViewController.swift in Sources */,
 				60FFC2B419D9493000284B9F /* XAppAuthentication.swift in Sources */,
 				5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */,
+				609A849319E53B1F00476A94 /* RegistrationEmailViewController.swift in Sources */,
 				5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */,
 				60FFC2A419D9442F00284B9F /* UserCredentials.swift in Sources */,
 				6071320519DD3AE600CA46F4 /* BidDetails.swift in Sources */,
@@ -1406,6 +1431,7 @@
 				5E2B3D4B19DC063C00906A26 /* ListingsCollectionViewCell.swift in Sources */,
 				5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */,
 				60968DD019C5B427001AB802 /* KeypadView.swift in Sources */,
+				609A848F19E537AA00476A94 /* RegistrationCoordinator.swift in Sources */,
 				5E6ED5FF19C07A4300CF3398 /* Moya.swift in Sources */,
 				60C37DD119D44056002E7A44 /* SwiftyJSON.swift in Sources */,
 				60D976EA19D3135200DE9F3D /* Sale.swift in Sources */,
@@ -1419,9 +1445,9 @@
 				605B855B19C6E4CF0009B16B /* ConfirmYourBidViewController.swift in Sources */,
 				605610DB19D2DE2B00A2850A /* ConfirmYourBidEnterYourEmailViewController.swift in Sources */,
 				5EA65C0E19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m in Sources */,
+				609A849A19E5416000476A94 /* RegistrationPasswordViewController.swift in Sources */,
 				60FFC2B719D9496A00284B9F /* APIKeys.swift in Sources */,
 				60D976EC19D3172D00DE9F3D /* SystemTime.swift in Sources */,
-				600F5F0719C87DA80027F587 /* UserCreationViewController.swift in Sources */,
 				5EA65C0119D5819C005EA4B4 /* SwitchView.swift in Sources */,
 				60F104E419C0FB94002FF30C /* StoryboardIdentifiers.swift in Sources */,
 				6071321919DD4EC400CA46F4 /* FulfilmentNavigationController.swift in Sources */,
@@ -1440,6 +1466,7 @@
 				6017320F19CF259400A58B63 /* CardHandler.swift in Sources */,
 				6024DD5E19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */,
 				6092C4AF19CAEF9A003BE8EC /* UIViewControllerExtensions.swift in Sources */,
+				609A849719E53ED200476A94 /* RACFunctions.swift in Sources */,
 				600F5F0B19C882210027F587 /* ConfirmUserCreationViewController.swift in Sources */,
 				60D976E819D3123B00DE9F3D /* SaleArtwork.swift in Sources */,
 				6030A10019D192D000B934CA /* Artist.swift in Sources */,
@@ -1450,6 +1477,7 @@
 				5E6ED5FE19C07A4300CF3398 /* Endpoint.swift in Sources */,
 				5EF2C0C819DAC3F400263137 /* MasonryCollectionViewCell.swift in Sources */,
 				60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */,
+				609A848C19E52E7700476A94 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1457,7 +1485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6030A10A19D1931400B934CA /* UserCreationViewController.swift in Sources */,
+				609A848D19E52E7700476A94 /* RegisterViewController.swift in Sources */,
 				6030A10819D1931400B934CA /* YouAreTheHighestBidderViewController.swift in Sources */,
 				6030A11F19D1A23100B934CA /* RACSignal+Moya.swift in Sources */,
 				601D01C319DEABFE0037568C /* TextField.swift in Sources */,
@@ -1474,8 +1502,10 @@
 				6030A11D19D1A23100B934CA /* Moya.swift in Sources */,
 				60C37DD719D45103002E7A44 /* BidderTests.swift in Sources */,
 				605B857219C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift in Sources */,
+				609A849419E53B1F00476A94 /* RegistrationEmailViewController.swift in Sources */,
 				6030A11C19D1A23100B934CA /* Endpoint.swift in Sources */,
 				5EA65C1319D5FCC4005EA4B4 /* SwitchViewSpec.swift in Sources */,
+				609A849819E53ED200476A94 /* RACFunctions.swift in Sources */,
 				6030A11619D1A04300B934CA /* KeypadView.swift in Sources */,
 				60FFC2B819D9496A00284B9F /* APIKeys.swift in Sources */,
 				60C37DDE19D4655D002E7A44 /* BidderPositionTests.swift in Sources */,
@@ -1500,6 +1530,7 @@
 				5E04BF3519DD98B000687199 /* SaleArtworkTests.swift in Sources */,
 				5EA65C1019D5FC9B005EA4B4 /* UIView+BooleanDependentAnimation.m in Sources */,
 				5E95FCC019D99DB5004D0C8F /* Constants.swift in Sources */,
+				609A849B19E5416000476A94 /* RegistrationPasswordViewController.swift in Sources */,
 				60A8E7CF19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift in Sources */,
 				60C37DD419D44DCD002E7A44 /* BidTests.swift in Sources */,
 				60212C9E19D5ECCE001921E1 /* SaleArtwork.swift in Sources */,
@@ -1526,6 +1557,7 @@
 				60C37DDC19D460DC002E7A44 /* BidderPosition.swift in Sources */,
 				604B225219D359C3008D86C7 /* SystemTimeTests.swift in Sources */,
 				6030A10119D1931400B934CA /* PlaceBidViewController.swift in Sources */,
+				609A849019E537AA00476A94 /* RegistrationCoordinator.swift in Sources */,
 				60212CA019D5F20C001921E1 /* ArtistTests.swift in Sources */,
 				600F5F0519C879DC0027F587 /* SwipeCreditCardViewControllerTests.swift in Sources */,
 				601A6E3119DC58E700EBA5A5 /* NewUser.swift in Sources */,

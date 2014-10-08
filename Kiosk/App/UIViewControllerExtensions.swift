@@ -4,14 +4,19 @@ extension UIViewController {
 
     /// Short hand syntax for loading the view controller 
 
-    public func loadViewProgrammatically(){
+    func loadViewProgrammatically(){
         self.beginAppearanceTransition(true, animated: false)
         self.endAppearanceTransition()
     }
 
     /// Short hand syntax for performing a segue with a known hardcoded identity
 
-    public func performSegue(identifier:SegueIdentifier) {
+    func performSegue(identifier:SegueIdentifier) {
         self.performSegueWithIdentifier(identifier.rawValue, sender: self)
+    }
+
+    func fulfilmentNav() -> FulfillmentNavigationController? {
+
+        return (self.navigationController as? FulfillmentNavigationController)?
     }
 }

@@ -43,7 +43,7 @@ class PlaceBidViewController: UIViewController {
 
             if let saleArtwork:SaleArtwork = nav.bidDetails.saleArtwork {
 
-                RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toCurrentBidString)
+                RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(centsToPresentableDollarsString)
                 RAC(nextBidAmountLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toOpeningBidString)
 
                 if let artist = saleArtwork.artwork.artists?.first {
@@ -86,13 +86,6 @@ private extension PlaceBidViewController {
 
     func clearBid(input:AnyObject!) -> Void {
         self.bidDollars = 0
-    }
-
-    func toCurrentBidString(cents:AnyObject!) -> AnyObject! {
-        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
-            return dollars
-        }
-        return ""
     }
 
     func toOpeningBidString(cents:AnyObject!) -> AnyObject! {
