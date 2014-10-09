@@ -21,15 +21,15 @@ class SaleArtwork: JSONAble {
     let bidder: Bidder?
 
     var saleHighestBid: Bid?
-    var bidCount: Int?
+    dynamic var bidCount:  NSNumber?
 
     var userBidderPosition: BidderPosition?
     var positions: [String]?
 
     dynamic var openingBidCents: NSNumber?
-    var minimumNextBidCents: Int?
+    dynamic var minimumNextBidCents: NSNumber?
     
-    var highestBidCents: Int?
+    dynamic var highestBidCents: NSNumber?
     var lowEstimateCents: Int?
     var highEstimateCents: Int?
 

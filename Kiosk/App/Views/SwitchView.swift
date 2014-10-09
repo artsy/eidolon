@@ -3,7 +3,10 @@ import Foundation
 public class SwitchView: UIView {
     public var shouldAnimate = true
     public var animationDuration: NSTimeInterval = AnimationDuration.Short
-    public let selectedIndexSignal: RACSignal = RACSubject()
+    private var _selectedIndexSubject = RACSubject()
+    lazy public var selectedIndexSignal: RACSignal = {
+        self._selectedIndexSubject.startWith(0)
+    }()
     
     private let buttons: Array<UIButton>
     private let selectionIndicator: UIView
@@ -53,13 +56,21 @@ public class SwitchView: UIView {
         let index = find(buttons, button)!
         setSelectedIndex(index, animated: shouldAnimate)
     }
+    
+    public subscript(index: Int) -> UIButton? {
+        get {
+            if index >= 0 && index < countElements(buttons) {
+                return buttons[index]
+            }
+            return nil
+        }
+    }
 }
 
 private extension SwitchView {
     func setup() {       
         if let firstButton = buttons.first {
             firstButton.enabled = false
-            (selectedIndexSignal as RACSubject).sendNext(0)
         }
         
         let widthPredicateMultiplier = "*\(widthMultiplier())"
@@ -126,7 +137,7 @@ private extension SwitchView {
             self.addConstraint(self.selectionConstraint)
             self.layoutIfNeeded()
             
-            (self.selectedIndexSignal as RACSubject).sendNext(index)
+            self._selectedIndexSubject.sendNext(index)
         }
     }
 }

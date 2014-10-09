@@ -12,11 +12,9 @@ public enum SegueIdentifier : String {
     case RegisterCreditCardToPostal = "RegisterCreditCardToPostal"
     case RegisterPostalToConfirm = "RegisterPostalToConfirm"
     case SubmittedanEmailforUserDetails = "Submitted an Email for User Details"
-    case UserCreationorUpdatingFinished = "User Creation or Updating Finished"
 }
 
 public enum ViewControllerStoryboardIdentifier : String {
-    case ConfirmUserCreation = "Confirm User Creation"
     case ConfirmYourBid = "Confirm Your Bid"
     case ConfirmYourBidArtsyLogin = "Confirm Your Bid Artsy Login"
     case ConfirmYourBidEnterEmail = "Confirm Your Bid Enter Email"

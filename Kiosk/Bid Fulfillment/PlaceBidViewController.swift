@@ -7,7 +7,8 @@ class PlaceBidViewController: UIViewController {
     @IBOutlet var bidAmountTextField: TextField!
     @IBOutlet var keypadContainer: KeypadContainerView!
 
-    @IBOutlet var currentBidLabel: UILabel!
+    @IBOutlet var currentBidTitleLabel: UILabel!
+    @IBOutlet var currentBidAmountLabel: UILabel!
     @IBOutlet var nextBidAmountLabel: UILabel!
 
     @IBOutlet var artistNameLabel: ARSerifLabel!
@@ -18,13 +19,20 @@ class PlaceBidViewController: UIViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+//        bidAmountTextField.becomeFirstResponder()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bidAmountTextField.shouldChangeColorWhenEditing = false
         let keypad = self.keypadContainer!.keypad!
-        let bidIsZeroSignal = RACObserve(self, "bidDollars").map { return ($0 as Int == 0) }
+        let bidDollarsSignal = RACObserve(self, "bidDollars")
+        let bidIsZeroSignal = bidDollarsSignal.map { return ($0 as Int == 0) }
 
-        for button in [bidButton, keypad.rightButton, keypad.leftButton] {
+        for button in [keypad.rightButton, keypad.leftButton] {
             RAC(button, "enabled") <~ bidIsZeroSignal.notEach()
         }
 
@@ -39,12 +47,27 @@ class PlaceBidViewController: UIViewController {
         clearSignal.subscribeNext(clearBid)
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
-            RAC(nav.bidDetails, "bidAmountCents") <~ RACObserve(self, "bidDollars").map { return ($0 as Float * 100) }
+            RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { return ($0 as Float * 100) }
 
             if let saleArtwork:SaleArtwork = nav.bidDetails.saleArtwork {
+                let minimumNextBidSignal = RACObserve(saleArtwork, "minimumNextBidCents")
+                let bidCountSignal = RACObserve(saleArtwork, "bidCount")
+                let openingBidSignal = RACObserve(saleArtwork, "openingBidCents")
+                let highestBidSignal = RACObserve(saleArtwork, "highestBidCents")
 
-                RAC(currentBidLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(centsToPresentableDollarsString)
-                RAC(nextBidAmountLabel, "text") <~ RACObserve(saleArtwork, "openingBidCents").map(toOpeningBidString)
+                RAC(currentBidTitleLabel, "text") <~ bidCountSignal.map(toCurrentBidTitleString)
+                RAC(nextBidAmountLabel, "text") <~ minimumNextBidSignal.map(toNextBidString)
+
+                RAC(currentBidAmountLabel, "text") <~ RACSignal.combineLatest([bidCountSignal, highestBidSignal, openingBidSignal]).map({
+                    let tuple = $0 as RACTuple
+                    let bidCount = tuple.first as? Int ?? 0
+                    return (bidCount > 0 ? tuple.second : tuple.third) ?? 0
+                }).map(centsToPresentableDollarsString)
+
+                RAC(bidButton, "enabled") <~ RACSignal.combineLatest([bidDollarsSignal, minimumNextBidSignal]).map({
+                    let tuple = $0 as RACTuple
+                    return (tuple.first as? Int ?? 0) * 100 >= (tuple.second as? Int ?? 0)
+                })
 
                 if let artist = saleArtwork.artwork.artists?.first {
                     RAC(artistNameLabel, "text") <~ RACObserve(artist, "name")
@@ -52,9 +75,6 @@ class PlaceBidViewController: UIViewController {
 
                 RAC(artworkTitleLabel, "text") <~ RACObserve(saleArtwork.artwork, "title")
                 RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price")
-
-                let userbidIsLessThanCurrentSignal = RACObserve(self, "bidDollars").map { return ($0 as Int * 100) > saleArtwork.minimumNextBidCents }
-
             }
         }
     }
@@ -73,22 +93,30 @@ class PlaceBidViewController: UIViewController {
 
 private extension PlaceBidViewController {
 
-    func addDigitToBid(input:AnyObject!) -> Void {
+    func addDigitToBid(input: AnyObject!) -> Void {
         let inputInt = input as? Int ?? 0
         let newBidDollars = (10 * self.bidDollars) + inputInt
         if (newBidDollars >= 10000000) { return }
         self.bidDollars = newBidDollars
     }
 
-    func deleteBid(input:AnyObject!) -> Void {
+    func deleteBid(input: AnyObject!) -> Void {
         self.bidDollars = self.bidDollars/10
     }
 
-    func clearBid(input:AnyObject!) -> Void {
+    func clearBid(input: AnyObject!) -> Void {
         self.bidDollars = 0
     }
 
-    func toOpeningBidString(cents:AnyObject!) -> AnyObject! {
+    func toCurrentBidTitleString(input: AnyObject!) -> AnyObject! {
+        if let count = input as? Int {
+            return count > 0 ? "Current Bid:" : "Opening Bid:"
+        } else {
+            return ""
+        }
+    }
+
+    func toNextBidString(cents: AnyObject!) -> AnyObject! {
         if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
             return "Enter \(dollars) or more"
         }

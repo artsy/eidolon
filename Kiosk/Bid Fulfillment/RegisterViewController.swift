@@ -10,7 +10,7 @@ import UIKit
 class RegisterViewController: UIViewController {
 
     @IBOutlet var flowView: RegisterFlowView!
-    @IBOutlet var coordinator: RegistrationCoordinator!
+    let coordinator = RegistrationCoordinator()
 
     class func instantiateFromStoryboard() -> RegisterViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.RegisterAnAccount) as RegisterViewController
