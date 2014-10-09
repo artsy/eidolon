@@ -40,7 +40,6 @@ class SaleArtwork: JSONAble {
 
     override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
         let json = JSON(object: json)
-
         let id = json["id"].stringValue
         let artworkDict = json["artwork"].object as [String: AnyObject]
         let artwork = Artwork.fromJSON(artworkDict) as Artwork
