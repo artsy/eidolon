@@ -44,7 +44,29 @@ class ListingsViewControllerTests: QuickSpec {
         it("looks correct when displaying stubbed contents.") {
             let sut = ListingsViewController()
             
-            expect(sut).to(haveValidSnapshot(named: "default with stubbed data"))
+            let selectedIndexSignal = RACSubject()
+            sut.switchView.selectedIndexSignal = selectedIndexSignal
+            
+            sut.beginAppearanceTransition(true, animated: false)
+            sut.endAppearanceTransition()
+            
+            selectedIndexSignal.sendNext(0)
+            expect(sut).to(haveValidSnapshot(named: "grid"))
+            
+            selectedIndexSignal.sendNext(1)
+            expect(sut).to(haveValidSnapshot(named: "least bids"))
+            
+            selectedIndexSignal.sendNext(2)
+            expect(sut).to(haveValidSnapshot(named: "most bids"))
+            
+            selectedIndexSignal.sendNext(3)
+            expect(sut).to(haveValidSnapshot(named: "highest bid"))
+            
+            selectedIndexSignal.sendNext(4)
+            expect(sut).to(haveValidSnapshot(named: "lowest bid"))
+            
+            selectedIndexSignal.sendNext(5)
+            expect(sut).to(haveValidSnapshot(named: "alphabetical"))
         }
     }
 }
