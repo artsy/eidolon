@@ -3,6 +3,7 @@ import UIKit
 public class TextField: UITextField {
 
     public var shouldAnimateStateChange: Bool = true
+    public var shouldChangeColorWhenEditing: Bool = true
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +30,7 @@ public class TextField: UITextField {
         layer.cornerRadius = 0
         layer.masksToBounds = true
         layer.borderWidth = 1
-        tintColor = UIColor.artsyPurple()
+        tintColor = UIColor.blackColor()
         stateChangedAnimated(false)
         setupEvents()
     }
@@ -48,20 +49,23 @@ public class TextField: UITextField {
     }
 
     func stateChangedAnimated(animated: Bool) {
-        let newBorderColor = borderColorForState()
+        let newBorderColor = borderColorForState().CGColor
+        if CGColorEqualToColor(newBorderColor, layer.borderColor) {
+            return
+        }
         if animated {
             let fade = CABasicAnimation()
-            if (layer.borderColor == nil) { layer.borderColor = UIColor.clearColor().CGColor }
-            fade.fromValue = self.layer.borderColor
-            fade.toValue = newBorderColor.CGColor
+            if layer.borderColor == nil { layer.borderColor = UIColor.clearColor().CGColor }
+            fade.fromValue = self.layer.borderColor ?? UIColor.clearColor().CGColor
+            fade.toValue = newBorderColor
             fade.duration = AnimationDuration.Short
             layer.addAnimation(fade, forKey: "borderColor")
         }
-        layer.borderColor = newBorderColor.CGColor
+        layer.borderColor = newBorderColor
     }
 
     func borderColorForState() -> UIColor {
-        if (editing) {
+        if editing && shouldChangeColorWhenEditing {
             return UIColor.artsyPurple()
         } else {
             return UIColor.artsyMediumGrey()
@@ -69,11 +73,11 @@ public class TextField: UITextField {
     }
 
     override public func textRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectInset( bounds, 5, 0 )
+        return CGRectInset( bounds, 10, 0 )
     }
 
     override public func editingRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectInset( bounds, 5 , 0 )
+        return CGRectInset( bounds, 10 , 0 )
     }
 }
 
@@ -83,7 +87,7 @@ public class SecureTextField: TextField {
 
     override public var text: String! {
         get {
-            if (editing) {
+            if editing {
                 return super.text
             } else {
                 return actualText;
