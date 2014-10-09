@@ -21,7 +21,7 @@ class PlaceBidViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        bidAmountTextField.becomeFirstResponder()
+//        bidAmountTextField.becomeFirstResponder()
     }
 
     override func viewDidLoad() {
