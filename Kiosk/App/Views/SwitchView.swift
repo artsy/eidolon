@@ -56,6 +56,15 @@ public class SwitchView: UIView {
         let index = find(buttons, button)!
         setSelectedIndex(index, animated: shouldAnimate)
     }
+    
+    public subscript(index: Int) -> UIButton? {
+        get {
+            if index >= 0 && index < countElements(buttons) {
+                return buttons[index]
+            }
+            return nil
+        }
+    }
 }
 
 private extension SwitchView {
