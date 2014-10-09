@@ -13,7 +13,6 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
             RAC(bidDetails.newUser, "password") <~ passwordTextField.rac_textSignal()
 
             let longerThan4CharSignal = RACObserve(bidDetails.newUser, "password").map(longerThan4CharString)
-            
             RAC(confirmButton, "enabled") <~ longerThan4CharSignal
         }
     }

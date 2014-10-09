@@ -36,13 +36,20 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
             self.finishedSignal.sendCompleted()
         })
         cardHandler.startSearching()
-
+        
         if let bidDetails = self.navigationController?.fulfilmentNav()?.bidDetails {
-            RAC(bidDetails, "bidAmountCents") <~ RACObserve(self, "bidDollars").map { return ($0 as Float * 100) }
+            RAC(bidDetails.newUser, "creditCardName") <~ RACObserve(self, "cardName")
+            RAC(bidDetails.newUser, "creditCardDigit") <~ RACObserve(self, "cardLastDigits")
+            RAC(bidDetails.newUser, "creditCardToken") <~ RACObserve(self, "cardToken")
         }
     }
+}
 
+private extension SwipeCreditCardViewController {
     @IBAction func dev_creditCradOKTapped(sender: AnyObject) {
+        self.cardName = "MRS DEV"
+        self.cardLastDigits = "2323"
+        self.cardToken = "3223423423423"
 
         self.finishedSignal.sendCompleted()
     }

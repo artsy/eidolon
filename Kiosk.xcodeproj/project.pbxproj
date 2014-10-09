@@ -48,7 +48,6 @@
 		6007B42519DEFAA000EDF43E /* ConfirmYourBidPINViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6007B42419DEFAA000EDF43E /* ConfirmYourBidPINViewControllerTests.swift */; };
 		600F5EFA19C879670027F587 /* SwipeCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */; };
 		600F5F0519C879DC0027F587 /* SwipeCreditCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0419C879DC0027F587 /* SwipeCreditCardViewControllerTests.swift */; };
-		600F5F0919C880980027F587 /* UserCreationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0819C880980027F587 /* UserCreationViewControllerTests.swift */; };
 		600F5F0B19C882210027F587 /* ConfirmUserCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5F0A19C882210027F587 /* ConfirmUserCreationViewController.swift */; };
 		6017320D19CF24ED00A58B63 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017320C19CF24ED00A58B63 /* User.swift */; };
 		6017320F19CF259400A58B63 /* CardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017320E19CF259400A58B63 /* CardHandler.swift */; };
@@ -159,6 +158,9 @@
 		60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */; };
 		60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */; };
 		60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */; };
+		60A4FD2E19E6C3E80091FCC6 /* XAuth.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FFC2AF19D945BD00284B9F /* XAuth.json */; };
+		60A4FD3019E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A4FD2F19E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift */; };
+		60A4FD3119E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A4FD2F19E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift */; };
 		60A8E7C519BE50640088ACEC /* FulfillmentContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */; };
 		60A8E7CF19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A8E7CE19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift */; };
 		60C07A1719BE02A800868951 /* HaveValidSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2765FA19940F760003BAFA /* HaveValidSnapshot.swift */; };
@@ -413,7 +415,6 @@
 		6007B42419DEFAA000EDF43E /* ConfirmYourBidPINViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidPINViewControllerTests.swift; sourceTree = "<group>"; };
 		600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeCreditCardViewController.swift; sourceTree = "<group>"; };
 		600F5F0419C879DC0027F587 /* SwipeCreditCardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeCreditCardViewControllerTests.swift; sourceTree = "<group>"; };
-		600F5F0819C880980027F587 /* UserCreationViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCreationViewControllerTests.swift; sourceTree = "<group>"; };
 		600F5F0A19C882210027F587 /* ConfirmUserCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmUserCreationViewController.swift; sourceTree = "<group>"; };
 		6017320C19CF24ED00A58B63 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6017320E19CF259400A58B63 /* CardHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHandler.swift; sourceTree = "<group>"; };
@@ -462,6 +463,7 @@
 		60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 		60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewController.swift; sourceTree = "<group>"; };
 		60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; };
+		60A4FD2F19E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPostalZipViewController.swift; sourceTree = "<group>"; };
 		60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentContainerViewController.swift; sourceTree = "<group>"; };
 		60A8E7CE19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		60C37DC219D4359E002E7A44 /* JSONAble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAble.swift; sourceTree = "<group>"; };
@@ -845,7 +847,6 @@
 				60A8E7CE19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift */,
 				60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */,
 				600F5F0419C879DC0027F587 /* SwipeCreditCardViewControllerTests.swift */,
-				600F5F0819C880980027F587 /* UserCreationViewControllerTests.swift */,
 				605B857119C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift */,
 			);
 			name = Fulfillment;
@@ -954,6 +955,7 @@
 				609A848B19E52E7700476A94 /* RegisterViewController.swift */,
 				609A849219E53B1F00476A94 /* RegistrationEmailViewController.swift */,
 				609A849919E5416000476A94 /* RegistrationPasswordViewController.swift */,
+				60A4FD2F19E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift */,
 			);
 			name = Registration;
 			sourceTree = "<group>";
@@ -1326,6 +1328,7 @@
 				5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */,
 				5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */,
 				602FF2B019E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */,
+				60A4FD2E19E6C3E80091FCC6 /* XAuth.json in Resources */,
 				602FF2CA19E30FE9004C7AB3 /* FindBidder.json in Resources */,
 				602FF2A419E2F5BF004C7AB3 /* ActiveAuctions.json in Resources */,
 				5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */,
@@ -1447,6 +1450,7 @@
 				60212C9119D5CA04001921E1 /* Image.swift in Sources */,
 				60C37DC319D4359E002E7A44 /* JSONAble.swift in Sources */,
 				60D976DF19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift in Sources */,
+				60A4FD3019E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */,
 				60D976E419D30F9F00DE9F3D /* Bidder.swift in Sources */,
 				6030A0F319D18F5200B934CA /* Artwork.swift in Sources */,
 				E68E94A219DDCB70001405A5 /* TextField.swift in Sources */,
@@ -1526,6 +1530,7 @@
 				605610DC19D2DE2B00A2850A /* ConfirmYourBidEnterYourEmailViewController.swift in Sources */,
 				60C37DD919D45234002E7A44 /* Sale.swift in Sources */,
 				605B856A19C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift in Sources */,
+				60A4FD3119E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */,
 				605610D019D2D87100A2850A /* SimulatorOnlyView.swift in Sources */,
 				60C37DDB19D45353002E7A44 /* SaleTests.swift in Sources */,
 				5EE221DA19DC52EA002EB3C7 /* ListingsCollectionViewCell.swift in Sources */,
@@ -1563,7 +1568,6 @@
 				6030A11919D1A1EF00B934CA /* ArtsyAPI.swift in Sources */,
 				60212C9D19D5EAF9001921E1 /* ArtworkTests.swift in Sources */,
 				6051290319E15F63004B05BF /* SnapshotExtension.swift in Sources */,
-				600F5F0919C880980027F587 /* UserCreationViewControllerTests.swift in Sources */,
 				6024DD5F19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */,
 				60C37DDC19D460DC002E7A44 /* BidderPosition.swift in Sources */,
 				604B225219D359C3008D86C7 /* SystemTimeTests.swift in Sources */,
@@ -1643,7 +1647,6 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
-				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1679,7 +1682,6 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -1691,7 +1693,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1715,7 +1717,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

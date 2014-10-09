@@ -319,7 +319,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eS-5T-1qw" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eS-5T-1qw" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                         <rect key="frame" x="270" y="17" width="102" height="43"/>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="CC OK">
@@ -327,7 +327,6 @@
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="confirmTapped:" destination="awQ-xt-Guo" eventType="touchUpInside" id="UKi-Iw-K0c"/>
                                             <action selector="dev_creditCradOKTapped:" destination="HtL-zn-13v" eventType="touchUpInside" id="V1i-dw-gwB"/>
                                         </connections>
                                     </button>
@@ -684,7 +683,6 @@
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
                         <outlet property="confirmCredentialsButton" destination="zSp-ka-p6m" id="hDg-Z7-4IL"/>
-                        <outlet property="confirmTapped" destination="zSp-ka-p6m" id="ZEZ-Ao-Y4Y"/>
                         <outlet property="emailTextField" destination="bMc-Jh-nkF" id="KQ9-Qf-3xe"/>
                         <outlet property="passwordTextField" destination="sFU-mI-0Wz" id="jo4-Mm-FxB"/>
                         <segue destination="2lt-co-qW2" kind="push" identifier="Email Login Confirmed Highest Bidder" id="6qF-R8-kJy"/>
@@ -817,12 +815,48 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="awQ-xt-Guo" kind="relationship" relationship="rootViewController" id="xCs-dR-pX1"/>
+                        <segue destination="Kgy-7a-hLy" kind="relationship" relationship="rootViewController" id="XmH-7Q-Qn4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBI-Zz-1BI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1761.5" y="962.5"/>
+            <point key="canvasLocation" x="-1797.5" y="983.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="R6C-f2-mQV">
+            <objects>
+                <viewController id="Kgy-7a-hLy" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hbU-Uw-Pf8"/>
+                        <viewControllerLayoutGuide type="bottom" id="Iay-ep-Ofe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qfr-Eg-jfo">
+                        <rect key="frame" x="0.0" y="0.0" width="449" height="485"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This is a blank root VC, which will never get shown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMd-jo-rFh">
+                                <rect key="frame" x="16" y="20" width="388" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="It is here to ensure we do no extra binding in the nav" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HsY-Nt-4Df">
+                                <rect key="frame" x="16" y="43" width="402" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Q76-ac-o1Z"/>
+                    <connections>
+                        <segue destination="awQ-xt-Guo" kind="push" id="tMO-3q-SLU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s1Q-9H-s59" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1251.5" y="983.5"/>
         </scene>
         <!--Confirm User Creation View Controller-->
         <scene sceneID="b9K-T2-Amz">
@@ -1252,10 +1286,10 @@
             </objects>
             <point key="canvasLocation" x="-369.5" y="920"/>
         </scene>
-        <!--View Controller-->
+        <!--Registration Postal Zip View Controller-->
         <scene sceneID="u7R-BG-jEy">
             <objects>
-                <viewController storyboardIdentifier="Register Postal or Zip" id="b7X-gR-AEL" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Register Postal or Zip" id="b7X-gR-AEL" customClass="RegistrationPostalZipViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nYZ-rW-ypd"/>
                         <viewControllerLayoutGuide type="bottom" id="y06-5G-iPL"/>
@@ -1288,6 +1322,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="C50-0o-dPZ"/>
                     <connections>
+                        <outlet property="confirmButton" destination="Mnm-f5-Xww" id="PNM-nK-Zwb"/>
+                        <outlet property="zipCodeTextField" destination="OKU-CQ-874" id="Qm0-Z4-miF"/>
                         <segue destination="q7z-ij-DNu" kind="push" identifier="RegisterPostalToConfirm" id="dfE-FH-Cio"/>
                     </connections>
                 </viewController>
@@ -1429,7 +1465,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qUf-dy-7C9"/>
-        <segue reference="gjD-og-8Iv"/>
+        <segue reference="A1R-R2-CSF"/>
+        <segue reference="6qF-R8-kJy"/>
     </inferredMetricsTieBreakers>
 </document>
