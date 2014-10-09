@@ -20,9 +20,11 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
             RAC(nav.bidDetails.newUser, "email") <~ emailTextField.rac_textSignal()
             RAC(nav.bidDetails.newUser, "password") <~ passwordTextField.rac_textSignal()
         }
-        
-        emailTextField.text = "jlhdfbjsdfsdf@sdfjbsdjhfbs.com"
-        passwordTextField.text = "SDFJSDKGNSDJGNDFKG"
+    }
+    
+    public override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        emailTextField.becomeFirstResponder()
     }
 
     @IBAction func confirmTapped(sender: AnyObject) {
