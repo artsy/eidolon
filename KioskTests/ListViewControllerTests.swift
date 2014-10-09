@@ -43,8 +43,28 @@ class ListingsViewControllerTests: QuickSpec {
         
         it("looks correct when displaying stubbed contents.") {
             let sut = ListingsViewController()
+            sut.switchView.shouldAnimate = false
             
-            expect(sut).to(haveValidSnapshot(named: "default with stubbed data"))
+            sut.beginAppearanceTransition(true, animated: false)
+            sut.endAppearanceTransition()
+            
+            sut.switchView[0]?.sendActionsForControlEvents(.TouchUpInside)
+            expect(sut).to(haveValidSnapshot(named: "grid"))
+            
+            sut.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
+            expect(sut).to(haveValidSnapshot(named: "least bids"))
+            
+            sut.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
+            expect(sut).to(haveValidSnapshot(named: "most bids"))
+            
+            sut.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
+            expect(sut).to(haveValidSnapshot(named: "highest bid"))
+            
+            sut.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
+            expect(sut).to(haveValidSnapshot(named: "lowest bid"))
+            
+            sut.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
+            expect(sut).to(haveValidSnapshot(named: "alphabetical"))
         }
     }
 }

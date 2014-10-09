@@ -8,6 +8,7 @@ let TableCellIdentifier = "TableCell"
 class ListingsViewController: UIViewController {
     var allowAnimations = true
     dynamic var saleArtworks = [SaleArtwork]()
+    dynamic var sortedSaleArtworks = [SaleArtwork]()
     dynamic var cellIdentifier = MasonryCellIdentifier
     
     lazy var collectionView: UICollectionView = {
@@ -36,10 +37,7 @@ class ListingsViewController: UIViewController {
         // Set up reactive bindings
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "ici-live-auction")
 
-        RAC(self, "saleArtworks") <~ XAppRequest(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).doNext({ [weak self] (_) -> Void in
-            let collectionView = self?.collectionView
-            collectionView?.reloadData()
-        }).catch({ (error) -> RACSignal! in
+        RAC(self, "saleArtworks") <~ XAppRequest(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
             println("Error handling thing: \(error.localizedDescription)")
             return RACSignal.empty()
         })
@@ -62,22 +60,43 @@ class ListingsViewController: UIViewController {
             }
         })
         
-        gridSelectedSignal.map({ [weak self] (gridSelected) -> AnyObject! in
-            switch gridSelected as Bool {
-            case true:
-                return ListingsViewController.masonryLayout()
-            default:
-                return ListingsViewController.tableLayout(CGRectGetWidth(self?.switchView.frame ?? CGRectZero))
-            }
-        }).subscribeNext { [weak self] (layout) -> Void in
+        RAC(self, "sortedSaleArtworks") <~ RACSignal.combineLatest([RACObserve(self, "saleArtworks"), switchView.selectedIndexSignal, gridSelectedSignal]).doNext({ [weak self] in
+            let tuple = $0 as RACTuple
+            let gridSelected: AnyObject! = tuple.third
+            
+            let layout = { () -> UICollectionViewLayout in
+                switch gridSelected as Bool {
+                case true:
+                    return ListingsViewController.masonryLayout()
+                default:
+                    return ListingsViewController.tableLayout(CGRectGetWidth(self?.switchView.frame ?? CGRectZero))
+                }
+            }()
+            
             // Need to explicitly call animated: fase and reload to avoid animation
-            self?.collectionView.setCollectionViewLayout(layout as UICollectionViewLayout, animated: false)
+            self?.collectionView.setCollectionViewLayout(layout, animated: false)
+        }).map({
+            let tuple = $0 as RACTuple
+            let saleArtworks = tuple.first as [SaleArtwork]
+            let selectedIndex = tuple.second as Int
+            
+            if let switchValue = SwitchValues(rawValue: selectedIndex) {
+                return switchValue.sortSaleArtworks(saleArtworks)
+            } else {
+                // Necessary for compiler – won't execute
+                return saleArtworks
+            }
+        }).doNext({ [weak self] (sortedSaleArtworks) -> Void in
             self?.collectionView.reloadData()
             
-            if countElements(self?.saleArtworks ?? []) > 0 {
-                self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
+            if countElements(sortedSaleArtworks as [SaleArtwork]) > 0 {
+                // Need to dispatch, since the changes in the CV's model aren't imediate
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
+                    return
+                })
             }
-        }
+        })
     }
 
     @IBAction func registerTapped(sender: AnyObject) {
@@ -111,7 +130,7 @@ class ListingsViewController: UIViewController {
 
 extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, ARCollectionViewMasonryLayoutDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return countElements(saleArtworks)
+        return countElements(sortedSaleArtworks)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -177,9 +196,31 @@ private extension ListingsViewController {
     // MARK: Instance methods
     
     func saleArtworkAtIndexPath(indexPath: NSIndexPath) -> SaleArtwork {
-        return self.saleArtworks[indexPath.item];
+        return sortedSaleArtworks[indexPath.item];
     }
     
+}
+
+// MARK: - Sorting Functions
+
+func leastBidsSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+    return (lhs.bidCount ?? 0) < (rhs.bidCount ?? 0)
+}
+
+func mostBidsSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+    return !leastBidsSort(lhs, rhs)
+}
+
+func lowestCurrentBidSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+    return (lhs.highestBidCents ?? 0) < (rhs.highestBidCents ?? 0)
+}
+
+func highestCurrentBidSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+    return !lowestCurrentBidSort(lhs, rhs)
+}
+
+func alphabeticalSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+    return lhs.artwork.title.caseInsensitiveCompare(rhs.artwork.title) == .OrderedAscending
 }
 
 // MARK: - Switch Values
@@ -206,6 +247,23 @@ enum SwitchValues: Int {
             return "Lowest Current Bid"
         case .Alphabetical:
             return "A—Z"
+        }
+    }
+    
+    func sortSaleArtworks(saleArtworks: [SaleArtwork]) -> [SaleArtwork] {
+        switch self {
+        case Grid:
+            return saleArtworks
+        case LeastBids:
+            return saleArtworks.sorted(leastBidsSort)
+        case MostBids:
+            return saleArtworks.sorted(mostBidsSort)
+        case HighestCurrentBid:
+            return saleArtworks.sorted(highestCurrentBidSort)
+        case LowestCurrentBid:
+            return saleArtworks.sorted(lowestCurrentBidSort)
+        case Alphabetical:
+            return saleArtworks.sorted(alphabeticalSort)
         }
     }
     
