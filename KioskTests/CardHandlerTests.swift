@@ -9,7 +9,7 @@ class CardHandlerTests: QuickSpec {
         let apiKey = "jhfbsdhbfsd"
         let accountToken = "dxcvxfvdfgvxcv"
 
-        beforeEach({
+        beforeEach {
             var manager = CFTSessionManager()
             self.reader = LocalCardReader()
 
@@ -17,7 +17,7 @@ class CardHandlerTests: QuickSpec {
 
             self.handler!.reader = self.reader!
             self.handler!.sessionManager = manager
-        })
+        }
 
         it("sets up the Cardflight API + Token") {
             self.handler!.startSearching()

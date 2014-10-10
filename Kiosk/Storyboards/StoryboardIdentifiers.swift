@@ -7,6 +7,7 @@ public enum SegueIdentifier : String {
     case ConfirmyourBidBidderFound = "Confirm your Bid - Bidder Found"
     case ConfirmyourBidBidderNotFound = "Confirm your Bid - Bidder Not Found"
     case EmailLoginConfirmedHighestBidder = "Email Login Confirmed Highest Bidder"
+    case LoadWebView = "Load Web View"
     case LoggedinWithNewUser = "Logged in With New User "
     case PINConfirmed = "PIN Confirmed"
     case RegisterCreditCardToPostal = "RegisterCreditCardToPostal"
@@ -28,5 +29,6 @@ public enum ViewControllerStoryboardIdentifier : String {
     case RegisterEmail = "Register Email"
     case RegisterPassword = "Register Password"
     case RegisterPostalorZip = "Register Postal or Zip"
+    case WebViewController = "Web View Controller"
     case YouAreTheHighestBidder = "You Are The Highest Bidder"
 }

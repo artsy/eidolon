@@ -16,6 +16,9 @@ class PlaceBidViewController: UIViewController {
     @IBOutlet var artworkTitleLabel: ARSerifLabel!
     @IBOutlet var artworkPriceLabel: ARSerifLabel!
 
+    lazy var conditionsOfSaleAddress = "http://artsy.net/conditions-of-sale"
+    lazy var privacyPolicyAddress = "http://artsy.net/privacy"
+
     class func instantiateFromStoryboard() -> PlaceBidViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
     }
@@ -76,7 +79,24 @@ class PlaceBidViewController: UIViewController {
 
     @IBOutlet var bidButton: Button!
     @IBAction func bidButtonTapped(sender: AnyObject) {
-        self.performSegue(SegueIdentifier.ConfirmBid)
+        performSegue(SegueIdentifier.ConfirmBid)
+    }
+
+    @IBOutlet var conditionsOfSaleButton: UIButton!
+    @IBOutlet var privacyPolicyButton: UIButton!
+    @IBAction func webviewButtonTapped(sender: AnyObject) {
+        performSegueWithIdentifier(SegueIdentifier.LoadWebView.rawValue, sender:sender)
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier! == (SegueIdentifier.LoadWebView.rawValue) {
+            let webVC = segue.destinationViewController as WebViewController
+            if sender as UIButton == conditionsOfSaleButton {
+                webVC.url = NSURL(string: conditionsOfSaleAddress)
+            } else if sender as UIButton == privacyPolicyButton {
+                webVC.url = NSURL(string: privacyPolicyAddress)
+            }
+        }
     }
 
     lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
