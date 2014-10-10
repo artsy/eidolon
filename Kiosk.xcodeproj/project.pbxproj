@@ -215,8 +215,6 @@
 		E63FA4F519E87ED2000265B6 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB492319E704870054C8AD /* CursorView.swift */; };
 		E68E94A219DDCB70001405A5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68E94A119DDCB70001405A5 /* TextField.swift */; };
 		E69EA8BE19E83E08005EF2C8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EA8BD19E83E08005EF2C8 /* WebViewController.swift */; };
-		E69EA8D519E8750E005EF2C8 /* WebViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EA8D319E8750E005EF2C8 /* WebViewControllerTests.swift */; };
-		E69EA8D719E87B39005EF2C8 /* test_webpage.html in Resources */ = {isa = PBXBuildFile; fileRef = E69EA8D619E87B39005EF2C8 /* test_webpage.html */; };
 		E69EA8D819E87BA8005EF2C8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EA8BD19E83E08005EF2C8 /* WebViewController.swift */; };
 		E6AB492419E704870054C8AD /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB492319E704870054C8AD /* CursorView.swift */; };
 		E6FA920D19E43FD90064480A /* TextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FA920B19E43FD90064480A /* TextFieldTests.swift */; };
@@ -518,8 +516,6 @@
 		C055E487A3D1AED461990000 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E68E94A119DDCB70001405A5 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = "Text Fields/TextField.swift"; sourceTree = "<group>"; };
 		E69EA8BD19E83E08005EF2C8 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = "Auction Listings/WebViewController.swift"; sourceTree = "<group>"; };
-		E69EA8D319E8750E005EF2C8 /* WebViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewControllerTests.swift; sourceTree = "<group>"; };
-		E69EA8D619E87B39005EF2C8 /* test_webpage.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = test_webpage.html; path = ../../../../Desktop/test_webpage.html; sourceTree = "<group>"; };
 		E6AB492319E704870054C8AD /* CursorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CursorView.swift; path = "Text Fields/CursorView.swift"; sourceTree = "<group>"; };
 		E6FA920B19E43FD90064480A /* TextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTests.swift; sourceTree = "<group>"; };
 		EE4CAC9FE3857F7DF1A07AE1 /* Pods-KioskTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.beta.xcconfig"; sourceTree = "<group>"; };
@@ -649,7 +645,6 @@
 				5EAC732F19D01617002F918A /* ReactiveCocoaBindingsTests.swift */,
 				6051290219E15F63004B05BF /* SnapshotExtension.swift */,
 				5EA137CC19C733DE00D0B743 /* TestHelpers.swift */,
-				E69EA8D319E8750E005EF2C8 /* WebViewControllerTests.swift */,
 				60C6913519D6CB99001F58FD /* App */,
 				6017321319CF279000A58B63 /* Cards */,
 				605B856419C6E9080009B16B /* Fulfillment */,
@@ -666,7 +661,6 @@
 		5E59DD4619913DD900A48370 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E69EA8D619E87B39005EF2C8 /* test_webpage.html */,
 				5E2765EC19940F3F0003BAFA /* KioskTests-Bridging-Header.h */,
 				5E59DD4719913DD900A48370 /* Info.plist */,
 			);
@@ -1392,7 +1386,6 @@
 				6030A12819D1A63400B934CA /* Auction.storyboard in Resources */,
 				60C3983819E814FC00CB81F4 /* XApp.json in Resources */,
 				60C3983619E814FC00CB81F4 /* SystemTime.json in Resources */,
-				E69EA8D719E87B39005EF2C8 /* test_webpage.html in Resources */,
 				5EA33A8619DC81CC007CF667 /* artwork.jpg in Resources */,
 				60C3983A19E814FC00CB81F4 /* XAuth.json in Resources */,
 				6030A12719D1A55600B934CA /* edit_button@2x.png in Resources */,
@@ -1584,7 +1577,6 @@
 				5EE221DA19DC52EA002EB3C7 /* ListingsCollectionViewCell.swift in Sources */,
 				6030A11519D19F9E00B934CA /* StoryboardIdentifiers.swift in Sources */,
 				60C3984319E8356D00CB81F4 /* PlacingBidViewController.swift in Sources */,
-				E69EA8D519E8750E005EF2C8 /* WebViewControllerTests.swift in Sources */,
 				60212C9219D5CA04001921E1 /* Image.swift in Sources */,
 				60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */,
 				6071320619DD3AE600CA46F4 /* BidDetails.swift in Sources */,
