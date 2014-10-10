@@ -5,6 +5,7 @@ class PlaceBidViewController: UIViewController {
     dynamic var bidDollars: Int = 0
 
     @IBOutlet var bidAmountTextField: TextField!
+    @IBOutlet weak var cursor: CursorView!
     @IBOutlet var keypadContainer: KeypadContainerView!
 
     @IBOutlet var currentBidTitleLabel: UILabel!
@@ -19,15 +20,9 @@ class PlaceBidViewController: UIViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
     }
 
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-//        bidAmountTextField.becomeFirstResponder()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bidAmountTextField.shouldChangeColorWhenEditing = false
         let keypad = self.keypadContainer!.keypad!
         let bidDollarsSignal = RACObserve(self, "bidDollars")
         let bidIsZeroSignal = bidDollarsSignal.map { return ($0 as Int == 0) }

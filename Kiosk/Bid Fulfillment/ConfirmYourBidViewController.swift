@@ -7,6 +7,7 @@ class ConfirmYourBidViewController: UIViewController {
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet var numberAmountTextField: TextField!
+    @IBOutlet weak var cursor: CursorView!
 
     @IBOutlet var keypadContainer: KeypadContainerView!
     lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
@@ -18,15 +19,9 @@ class ConfirmYourBidViewController: UIViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController
     }
 
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        numberAmountTextField.becomeFirstResponder()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        numberAmountTextField.shouldChangeColorWhenEditing = false
         let numberIsZeroLengthSignal = RACObserve(self, "number").map(isZeroLengthString)
 
         RAC(enterButton, "enabled") <~ numberIsZeroLengthSignal.notEach()

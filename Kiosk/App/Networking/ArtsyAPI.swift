@@ -162,7 +162,6 @@ extension ArtsyAPI : MoyaTarget {
         case .FindBidderRegistration(let auctionID, let phone):
             return endpoint.endpointByAddingParameters(["sale_id": auctionID, "phone": phone])
         default:
-            // Need at least one statement to appease the compiler
             return endpoint
         }
         
