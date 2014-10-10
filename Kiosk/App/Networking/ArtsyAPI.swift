@@ -13,6 +13,7 @@ enum ArtsyAPI {
     case ActiveAuctions
     case Me
     case MyBiddersForAuction(auctionID: String)
+    case PlaceABid(auctionID: String, artworkID: String, maxBidCents: String)
 
     var defaultParameters: [String: AnyObject] {
         switch self {
@@ -84,6 +85,9 @@ extension ArtsyAPI : MoyaPath {
 
         case FindBidderRegistration:
             return "/api/v1/bidder"
+            
+        case PlaceABid:
+            return "/api/v1/me/bidder_position"
         }
     }
 }
@@ -131,6 +135,8 @@ extension ArtsyAPI : MoyaTarget {
         case FindBidderRegistration:
             return stubbedResponse("Me")
 
+        case PlaceABid:
+            return stubbedResponse("PlaceABid")
         }
     }
 }
@@ -154,13 +160,12 @@ extension ArtsyAPI : MoyaTarget {
         // target-specific parameters
         switch target {
         case .FindBidderRegistration(let auctionID, let phone):
-            endpoint = endpoint.endpointByAddingParameters(["sale_id": auctionID, "phone": phone])
+            return endpoint.endpointByAddingParameters(["sale_id": auctionID, "phone": phone])
         default:
-            // Need at least one statement to appease the compiler
-            _ = endpoint
+            return endpoint
         }
         
-        return endpoint
+        
     }
     
      static func DefaultProvider() -> ReactiveMoyaProvider<ArtsyAPI> {

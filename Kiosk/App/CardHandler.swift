@@ -8,7 +8,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
     let APIKey: String
     let APIToken: String
 
-    lazy var reader = CFTReader()
+    lazy var reader = CFTReader(andConnect: ())
     lazy var sessionManager = CFTSessionManager.sharedInstance()
 
     init(apiKey: String, accountToken: String){
@@ -19,7 +19,8 @@ class CardHandler: NSObject, CFTReaderDelegate {
 
     func startSearching() {
         sessionManager.setApiToken(APIKey, accountToken: APIToken)
-
+        sessionManager.setLogging(true)
+        
         reader.delegate = self;
         reader.beginSwipeWithMessage("Please swipe credit card");
     }

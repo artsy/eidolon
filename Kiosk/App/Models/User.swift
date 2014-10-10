@@ -8,7 +8,8 @@ class User: JSONAble {
     dynamic let paddleNumber: String
     dynamic let phoneNumber: String
     dynamic let postalCode: String
-    
+    dynamic var bidder: Bidder?
+
     init(id: String, email: String, name: String, paddleNumber: String, phoneNumber: String, postalCode: String) {
         self.id = id
         self.name = name
@@ -30,6 +31,4 @@ class User: JSONAble {
         
         return User(id: id, email: email, name: name, paddleNumber: paddleNumber, phoneNumber: phoneNumber, postalCode: postalCode)
     }
-
-
 }

@@ -1,4 +1,4 @@
-    import Quick
+import Quick
 import Nimble
 
 class ConfirmYourBidPINViewControllerTests: QuickSpec {

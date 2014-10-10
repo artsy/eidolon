@@ -48,9 +48,13 @@ class ConfirmYourBidPINViewController: UIViewController {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         let bidderRequest = XAppRequest(endpoint, provider: numberProvider).filterSuccessfulStatusCodes().subscribeNext({ [weak self] (_) -> Void in
 
-            self?.performSegue(.PINConfirmed)
             self?.fulfilmentNav()?.loggedInProvider = numberProvider
-
+            
+            self?.fulfilmentNav()?.updateUserCredentials()?.subscribeNext({ [weak self](_) -> Void in
+                self?.performSegue(.PINConfirmed)
+                return
+            })
+            
         }, error: { [weak self] (error) -> Void in
             println("error, the pin is likely wrong")
             return

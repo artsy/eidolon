@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5E04BF3519DD98B000687199 /* SaleArtworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E04BF3419DD98B000687199 /* SaleArtworkTests.swift */; };
-		5E08488E19D06EE60078C571 /* Auctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E08488C19D06EE60078C571 /* Auctions.json */; };
-		5E08489B19D070DC0078C571 /* AuctionListings.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E08489919D070DC0078C571 /* AuctionListings.json */; };
 		5E0D702C19DADD8E0005AF46 /* TableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2C0C519DAC18000263137 /* TableCollectionViewCell.swift */; };
 		5E0D703E19DADD900005AF46 /* MasonryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2C0C719DAC3F400263137 /* MasonryCollectionViewCell.swift */; };
 		5E2B3D4B19DC063C00906A26 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */; };
@@ -39,7 +37,6 @@
 		5EA65C1319D5FCC4005EA4B4 /* SwitchViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA65C1219D5FCC4005EA4B4 /* SwitchViewSpec.swift */; };
 		5EAC732519D0149A002F918A /* ReactiveCocoaBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */; };
 		5EAC733019D01617002F918A /* ReactiveCocoaBindingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC732F19D01617002F918A /* ReactiveCocoaBindingsTests.swift */; };
-		5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0997D19C31D8F00E5DD59 /* XApp.json */; };
 		5EE221DA19DC52EA002EB3C7 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */; };
 		5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */; };
 		5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */; };
@@ -62,18 +59,6 @@
 		6024DD5E19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */; };
 		6024DD5F19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */; };
 		602EFE4F19C6D09C002715C2 /* KeypadContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */; };
-		602FF2A419E2F5BF004C7AB3 /* ActiveAuctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A319E2F5BF004C7AB3 /* ActiveAuctions.json */; };
-		602FF2A519E2F5BF004C7AB3 /* ActiveAuctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A319E2F5BF004C7AB3 /* ActiveAuctions.json */; };
-		602FF2A719E2F5CE004C7AB3 /* CreatePINForBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A619E2F5CE004C7AB3 /* CreatePINForBidder.json */; };
-		602FF2A819E2F5CE004C7AB3 /* CreatePINForBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A619E2F5CE004C7AB3 /* CreatePINForBidder.json */; };
-		602FF2AA19E2F6C0004C7AB3 /* MyCreditCards.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */; };
-		602FF2AB19E2F6C0004C7AB3 /* MyCreditCards.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */; };
-		602FF2AD19E2FC14004C7AB3 /* Me.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AC19E2FC14004C7AB3 /* Me.json */; };
-		602FF2AE19E2FC14004C7AB3 /* Me.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AC19E2FC14004C7AB3 /* Me.json */; };
-		602FF2B019E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */; };
-		602FF2B119E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */; };
-		602FF2CA19E30FE9004C7AB3 /* FindBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2C919E30FE9004C7AB3 /* FindBidder.json */; };
-		602FF2CB19E30FE9004C7AB3 /* FindBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 602FF2C919E30FE9004C7AB3 /* FindBidder.json */; };
 		6030A0F319D18F5200B934CA /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A0F219D18F5200B934CA /* Artwork.swift */; };
 		6030A10019D192D000B934CA /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A0FF19D192D000B934CA /* Artist.swift */; };
 		6030A10119D1931400B934CA /* PlaceBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */; };
@@ -101,9 +86,6 @@
 		6030A12119D1A30D00B934CA /* ListingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3719913DD800A48370 /* ListingsViewController.swift */; };
 		6030A12219D1A31600B934CA /* KeypadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60968DCD19C5B2AF001AB802 /* KeypadView.xib */; };
 		6030A12319D1A3F100B934CA /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6092C4AE19CAEF9A003BE8EC /* UIViewControllerExtensions.swift */; };
-		6030A12419D1A55000B934CA /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0997D19C31D8F00E5DD59 /* XApp.json */; };
-		6030A12519D1A55000B934CA /* Auctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E08488C19D06EE60078C571 /* Auctions.json */; };
-		6030A12619D1A55000B934CA /* AuctionListings.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E08489919D070DC0078C571 /* AuctionListings.json */; };
 		6030A12719D1A55600B934CA /* edit_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D48B9419C89DE300A3CA88 /* edit_button@2x.png */; };
 		6030A12819D1A63400B934CA /* Auction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */; };
 		6030A12919D1A63700B934CA /* Fulfillment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */; };
@@ -112,8 +94,6 @@
 		603F8CC819BDF80C00B162C7 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603F8CC419BDF78A00B162C7 /* Quick.framework */; };
 		604AF5C019E14A020019884E /* RegisterFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604AF5BF19E14A020019884E /* RegisterFlowView.swift */; };
 		604AF5C119E14A020019884E /* RegisterFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604AF5BF19E14A020019884E /* RegisterFlowView.swift */; };
-		604B224319D3518F008D86C7 /* SystemTime.json in Resources */ = {isa = PBXBuildFile; fileRef = 604B224119D3518F008D86C7 /* SystemTime.json */; };
-		604B224419D3518F008D86C7 /* SystemTime.json in Resources */ = {isa = PBXBuildFile; fileRef = 604B224119D3518F008D86C7 /* SystemTime.json */; };
 		604B225219D359C3008D86C7 /* SystemTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604B225119D359C3008D86C7 /* SystemTimeTests.swift */; };
 		604B225319D359C5008D86C7 /* SystemTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976EB19D3172D00DE9F3D /* SystemTime.swift */; };
 		6051290319E15F63004B05BF /* SnapshotExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051290219E15F63004B05BF /* SnapshotExtension.swift */; };
@@ -155,7 +135,6 @@
 		60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */; };
 		60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */; };
 		60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */; };
-		60A4FD2E19E6C3E80091FCC6 /* XAuth.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FFC2AF19D945BD00284B9F /* XAuth.json */; };
 		60A4FD3019E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A4FD2F19E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift */; };
 		60A4FD3119E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A4FD2F19E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift */; };
 		60A8E7C519BE50640088ACEC /* FulfillmentContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A8E7C419BE50640088ACEC /* FulfillmentContainerViewController.swift */; };
@@ -175,6 +154,40 @@
 		60C37DDE19D4655D002E7A44 /* BidderPositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C37DDD19D4655D002E7A44 /* BidderPositionTests.swift */; };
 		60C37DE119D468A7002E7A44 /* RAC+JSONAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C37DE019D468A7002E7A44 /* RAC+JSONAble.swift */; };
 		60C37DE219D468A7002E7A44 /* RAC+JSONAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C37DE019D468A7002E7A44 /* RAC+JSONAble.swift */; };
+		60C3982119E814FC00CB81F4 /* ActiveAuctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981419E814FC00CB81F4 /* ActiveAuctions.json */; };
+		60C3982219E814FC00CB81F4 /* ActiveAuctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981419E814FC00CB81F4 /* ActiveAuctions.json */; };
+		60C3982319E814FC00CB81F4 /* AuctionListings.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981519E814FC00CB81F4 /* AuctionListings.json */; };
+		60C3982419E814FC00CB81F4 /* AuctionListings.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981519E814FC00CB81F4 /* AuctionListings.json */; };
+		60C3982519E814FC00CB81F4 /* Auctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981619E814FC00CB81F4 /* Auctions.json */; };
+		60C3982619E814FC00CB81F4 /* Auctions.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981619E814FC00CB81F4 /* Auctions.json */; };
+		60C3982719E814FC00CB81F4 /* CreateABid.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981719E814FC00CB81F4 /* CreateABid.json */; };
+		60C3982819E814FC00CB81F4 /* CreateABid.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981719E814FC00CB81F4 /* CreateABid.json */; };
+		60C3982919E814FC00CB81F4 /* CreateABidFail.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981819E814FC00CB81F4 /* CreateABidFail.json */; };
+		60C3982A19E814FC00CB81F4 /* CreateABidFail.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981819E814FC00CB81F4 /* CreateABidFail.json */; };
+		60C3982B19E814FC00CB81F4 /* CreatePINForBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981919E814FC00CB81F4 /* CreatePINForBidder.json */; };
+		60C3982C19E814FC00CB81F4 /* CreatePINForBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981919E814FC00CB81F4 /* CreatePINForBidder.json */; };
+		60C3982D19E814FC00CB81F4 /* FindBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981A19E814FC00CB81F4 /* FindBidder.json */; };
+		60C3982E19E814FC00CB81F4 /* FindBidder.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981A19E814FC00CB81F4 /* FindBidder.json */; };
+		60C3982F19E814FC00CB81F4 /* Me.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981B19E814FC00CB81F4 /* Me.json */; };
+		60C3983019E814FC00CB81F4 /* Me.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981B19E814FC00CB81F4 /* Me.json */; };
+		60C3983119E814FC00CB81F4 /* MyBiddersForAuction.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981C19E814FC00CB81F4 /* MyBiddersForAuction.json */; };
+		60C3983219E814FC00CB81F4 /* MyBiddersForAuction.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981C19E814FC00CB81F4 /* MyBiddersForAuction.json */; };
+		60C3983319E814FC00CB81F4 /* MyCreditCards.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981D19E814FC00CB81F4 /* MyCreditCards.json */; };
+		60C3983419E814FC00CB81F4 /* MyCreditCards.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981D19E814FC00CB81F4 /* MyCreditCards.json */; };
+		60C3983519E814FC00CB81F4 /* SystemTime.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981E19E814FC00CB81F4 /* SystemTime.json */; };
+		60C3983619E814FC00CB81F4 /* SystemTime.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981E19E814FC00CB81F4 /* SystemTime.json */; };
+		60C3983719E814FC00CB81F4 /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981F19E814FC00CB81F4 /* XApp.json */; };
+		60C3983819E814FC00CB81F4 /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3981F19E814FC00CB81F4 /* XApp.json */; };
+		60C3983919E814FC00CB81F4 /* XAuth.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3982019E814FC00CB81F4 /* XAuth.json */; };
+		60C3983A19E814FC00CB81F4 /* XAuth.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3982019E814FC00CB81F4 /* XAuth.json */; };
+		60C3983C19E8191F00CB81F4 /* GenericError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C3983B19E8191F00CB81F4 /* GenericError.swift */; };
+		60C3983D19E8191F00CB81F4 /* GenericError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C3983B19E8191F00CB81F4 /* GenericError.swift */; };
+		60C3983F19E81ECF00CB81F4 /* NSErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C3983E19E81ECF00CB81F4 /* NSErrorExtensions.swift */; };
+		60C3984019E81ECF00CB81F4 /* NSErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C3983E19E81ECF00CB81F4 /* NSErrorExtensions.swift */; };
+		60C3984219E8356D00CB81F4 /* PlacingBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C3984119E8356D00CB81F4 /* PlacingBidViewController.swift */; };
+		60C3984319E8356D00CB81F4 /* PlacingBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C3984119E8356D00CB81F4 /* PlacingBidViewController.swift */; };
+		60C3984619E8410300CB81F4 /* RegisterToBid.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3984519E8410300CB81F4 /* RegisterToBid.json */; };
+		60C3984719E8410300CB81F4 /* RegisterToBid.json in Resources */ = {isa = PBXBuildFile; fileRef = 60C3984519E8410300CB81F4 /* RegisterToBid.json */; };
 		60C620DA19D180A20024D493 /* ConfirmYourBidPINViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C620D919D180A20024D493 /* ConfirmYourBidPINViewController.swift */; };
 		60C6914119D6CBDA001F58FD /* RAC+JSONAbleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60C6914019D6CBDA001F58FD /* RAC+JSONAbleTests.swift */; };
 		60D48B9519C89DE300A3CA88 /* edit_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D48B9419C89DE300A3CA88 /* edit_button@2x.png */; };
@@ -192,7 +205,6 @@
 		60F444EC19BDE0320030409F /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60F444EB19BDE0320030409F /* Button.swift */; };
 		60FFC2A419D9442F00284B9F /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2A319D9442F00284B9F /* UserCredentials.swift */; };
 		60FFC2A519D9442F00284B9F /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2A319D9442F00284B9F /* UserCredentials.swift */; };
-		60FFC2B119D945BD00284B9F /* XAuth.json in Resources */ = {isa = PBXBuildFile; fileRef = 60FFC2AF19D945BD00284B9F /* XAuth.json */; };
 		60FFC2B419D9493000284B9F /* XAppAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2B319D9493000284B9F /* XAppAuthentication.swift */; };
 		60FFC2B519D9493000284B9F /* XAppAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2B319D9493000284B9F /* XAppAuthentication.swift */; };
 		60FFC2B719D9496A00284B9F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2B619D9496A00284B9F /* APIKeys.swift */; };
@@ -371,8 +383,6 @@
 		46ACE072A30FD791981A83FC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4A43B593C169F6607C344ABF /* Pods-KioskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.release.xcconfig"; sourceTree = "<group>"; };
 		5E04BF3419DD98B000687199 /* SaleArtworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkTests.swift; sourceTree = "<group>"; };
-		5E08488C19D06EE60078C571 /* Auctions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Auctions.json; path = "Stubbed Responses/Auctions.json"; sourceTree = "<group>"; };
-		5E08489919D070DC0078C571 /* AuctionListings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = AuctionListings.json; path = "Stubbed Responses/AuctionListings.json"; sourceTree = "<group>"; };
 		5E2765EC19940F3F0003BAFA /* KioskTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "KioskTests-Bridging-Header.h"; path = "../KioskTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		5E2765FA19940F760003BAFA /* HaveValidSnapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaveValidSnapshot.swift; sourceTree = "<group>"; };
 		5E28C1F31993B9D10066DB4D /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = submodules/Quick/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
@@ -405,7 +415,6 @@
 		5EA65C1219D5FCC4005EA4B4 /* SwitchViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchViewSpec.swift; sourceTree = "<group>"; };
 		5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCocoaBindings.swift; sourceTree = "<group>"; };
 		5EAC732F19D01617002F918A /* ReactiveCocoaBindingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCocoaBindingsTests.swift; sourceTree = "<group>"; };
-		5ED0997D19C31D8F00E5DD59 /* XApp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = XApp.json; path = "Stubbed Responses/XApp.json"; sourceTree = "<group>"; };
 		5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auction.storyboard; sourceTree = "<group>"; };
 		5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Fulfillment.storyboard; sourceTree = "<group>"; };
 		5EF2C0C519DAC18000263137 /* TableCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableCollectionViewCell.swift; path = "Auction Listings/TableCollectionViewCell.swift"; sourceTree = "<group>"; };
@@ -422,17 +431,10 @@
 		60212CA119D5F468001921E1 /* ImageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
 		6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegueExtensions.swift; sourceTree = "<group>"; };
 		602EFE4E19C6D09C002715C2 /* KeypadContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadContainerView.swift; sourceTree = "<group>"; };
-		602FF2A319E2F5BF004C7AB3 /* ActiveAuctions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ActiveAuctions.json; sourceTree = "<group>"; };
-		602FF2A619E2F5CE004C7AB3 /* CreatePINForBidder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreatePINForBidder.json; sourceTree = "<group>"; };
-		602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyCreditCards.json; sourceTree = "<group>"; };
-		602FF2AC19E2FC14004C7AB3 /* Me.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Me.json; sourceTree = "<group>"; };
-		602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyBiddersForAuction.json; sourceTree = "<group>"; };
-		602FF2C919E30FE9004C7AB3 /* FindBidder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FindBidder.json; sourceTree = "<group>"; };
 		6030A0F219D18F5200B934CA /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		6030A0FF19D192D000B934CA /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		6030A12A19D1AA0F00B934CA /* KioskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KioskTests.swift; sourceTree = "<group>"; };
 		604AF5BF19E14A020019884E /* RegisterFlowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterFlowView.swift; path = ../App/Views/RegisterFlowView.swift; sourceTree = "<group>"; };
-		604B224119D3518F008D86C7 /* SystemTime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SystemTime.json; path = "Stubbed Responses/SystemTime.json"; sourceTree = "<group>"; };
 		604B225119D359C3008D86C7 /* SystemTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemTimeTests.swift; sourceTree = "<group>"; };
 		6051290219E15F63004B05BF /* SnapshotExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotExtension.swift; sourceTree = "<group>"; };
 		6051290419E19524004B05BF /* RegisterFlowViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFlowViewTests.swift; sourceTree = "<group>"; };
@@ -470,6 +472,23 @@
 		60C37DDA19D45353002E7A44 /* SaleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleTests.swift; sourceTree = "<group>"; };
 		60C37DDD19D4655D002E7A44 /* BidderPositionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderPositionTests.swift; sourceTree = "<group>"; };
 		60C37DE019D468A7002E7A44 /* RAC+JSONAble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RAC+JSONAble.swift"; sourceTree = "<group>"; };
+		60C3981419E814FC00CB81F4 /* ActiveAuctions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ActiveAuctions.json; sourceTree = "<group>"; };
+		60C3981519E814FC00CB81F4 /* AuctionListings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AuctionListings.json; sourceTree = "<group>"; };
+		60C3981619E814FC00CB81F4 /* Auctions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Auctions.json; sourceTree = "<group>"; };
+		60C3981719E814FC00CB81F4 /* CreateABid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateABid.json; sourceTree = "<group>"; };
+		60C3981819E814FC00CB81F4 /* CreateABidFail.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreateABidFail.json; sourceTree = "<group>"; };
+		60C3981919E814FC00CB81F4 /* CreatePINForBidder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CreatePINForBidder.json; sourceTree = "<group>"; };
+		60C3981A19E814FC00CB81F4 /* FindBidder.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FindBidder.json; sourceTree = "<group>"; };
+		60C3981B19E814FC00CB81F4 /* Me.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Me.json; sourceTree = "<group>"; };
+		60C3981C19E814FC00CB81F4 /* MyBiddersForAuction.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyBiddersForAuction.json; sourceTree = "<group>"; };
+		60C3981D19E814FC00CB81F4 /* MyCreditCards.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyCreditCards.json; sourceTree = "<group>"; };
+		60C3981E19E814FC00CB81F4 /* SystemTime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SystemTime.json; sourceTree = "<group>"; };
+		60C3981F19E814FC00CB81F4 /* XApp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = XApp.json; sourceTree = "<group>"; };
+		60C3982019E814FC00CB81F4 /* XAuth.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = XAuth.json; sourceTree = "<group>"; };
+		60C3983B19E8191F00CB81F4 /* GenericError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericError.swift; sourceTree = "<group>"; };
+		60C3983E19E81ECF00CB81F4 /* NSErrorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSErrorExtensions.swift; sourceTree = "<group>"; };
+		60C3984119E8356D00CB81F4 /* PlacingBidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacingBidViewController.swift; sourceTree = "<group>"; };
+		60C3984519E8410300CB81F4 /* RegisterToBid.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RegisterToBid.json; sourceTree = "<group>"; };
 		60C620D919D180A20024D493 /* ConfirmYourBidPINViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidPINViewController.swift; sourceTree = "<group>"; };
 		60C620E519D1835E0024D493 /* CI.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CI.md; sourceTree = "<group>"; };
 		60C620E619D183890024D493 /* overview.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = overview.md; sourceTree = "<group>"; };
@@ -489,7 +508,6 @@
 		60F104E319C0FB93002FF30C /* StoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiers.swift; sourceTree = "<group>"; };
 		60F444EB19BDE0320030409F /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = "Button Subclasses/Button.swift"; sourceTree = "<group>"; };
 		60FFC2A319D9442F00284B9F /* UserCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
-		60FFC2AF19D945BD00284B9F /* XAuth.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = XAuth.json; path = "Stubbed Responses/XAuth.json"; sourceTree = "<group>"; };
 		60FFC2B319D9493000284B9F /* XAppAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppAuthentication.swift; sourceTree = "<group>"; };
 		60FFC2B619D9496A00284B9F /* APIKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		60FFC2D119D9A92100284B9F /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = submodules/ReactiveCocoa/ReactiveCocoa.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -706,19 +724,22 @@
 		5ED0997319C31D6200E5DD59 /* Stubbed Responses */ = {
 			isa = PBXGroup;
 			children = (
-				602FF2C919E30FE9004C7AB3 /* FindBidder.json */,
-				602FF2AF19E2FE52004C7AB3 /* MyBiddersForAuction.json */,
-				602FF2AC19E2FC14004C7AB3 /* Me.json */,
-				602FF2A919E2F6C0004C7AB3 /* MyCreditCards.json */,
-				602FF2A619E2F5CE004C7AB3 /* CreatePINForBidder.json */,
-				602FF2A319E2F5BF004C7AB3 /* ActiveAuctions.json */,
-				5ED0997D19C31D8F00E5DD59 /* XApp.json */,
-				5E08488C19D06EE60078C571 /* Auctions.json */,
-				5E08489919D070DC0078C571 /* AuctionListings.json */,
-				604B224119D3518F008D86C7 /* SystemTime.json */,
-				60FFC2AF19D945BD00284B9F /* XAuth.json */,
+				60C3984519E8410300CB81F4 /* RegisterToBid.json */,
+				60C3981419E814FC00CB81F4 /* ActiveAuctions.json */,
+				60C3981519E814FC00CB81F4 /* AuctionListings.json */,
+				60C3981619E814FC00CB81F4 /* Auctions.json */,
+				60C3981719E814FC00CB81F4 /* CreateABid.json */,
+				60C3981819E814FC00CB81F4 /* CreateABidFail.json */,
+				60C3981919E814FC00CB81F4 /* CreatePINForBidder.json */,
+				60C3981A19E814FC00CB81F4 /* FindBidder.json */,
+				60C3981B19E814FC00CB81F4 /* Me.json */,
+				60C3981C19E814FC00CB81F4 /* MyBiddersForAuction.json */,
+				60C3981D19E814FC00CB81F4 /* MyCreditCards.json */,
+				60C3981E19E814FC00CB81F4 /* SystemTime.json */,
+				60C3981F19E814FC00CB81F4 /* XApp.json */,
+				60C3982019E814FC00CB81F4 /* XAuth.json */,
 			);
-			name = "Stubbed Responses";
+			path = "Stubbed Responses";
 			sourceTree = "<group>";
 		};
 		5EF2C0B119DAC13A00263137 /* View Controllers */ = {
@@ -747,6 +768,7 @@
 				60C37DC219D4359E002E7A44 /* JSONAble.swift */,
 				60212C9019D5CA04001921E1 /* Image.swift */,
 				609A848819E50B7F00476A94 /* Card.swift */,
+				60C3983B19E8191F00CB81F4 /* GenericError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -819,6 +841,7 @@
 		605B855919C6E41C0009B16B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				60C3984419E8373300CB81F4 /* Final bid Placing */,
 				609A849119E53B0300476A94 /* Registration */,
 				6071321B19DD520B00CA46F4 /* Containers */,
 				605B856019C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift */,
@@ -827,8 +850,6 @@
 				60C620D919D180A20024D493 /* ConfirmYourBidPINViewController.swift */,
 				605B855A19C6E4CF0009B16B /* ConfirmYourBidViewController.swift */,
 				60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */,
-				600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */,
-				605B856219C6E5C30009B16B /* YouAreTheHighestBidderViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -929,6 +950,7 @@
 			children = (
 				6092C4AE19CAEF9A003BE8EC /* UIViewControllerExtensions.swift */,
 				6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */,
+				60C3983E19E81ECF00CB81F4 /* NSErrorExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -951,6 +973,7 @@
 				609A849219E53B1F00476A94 /* RegistrationEmailViewController.swift */,
 				609A849919E5416000476A94 /* RegistrationPasswordViewController.swift */,
 				60A4FD2F19E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift */,
+				600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */,
 			);
 			name = Registration;
 			sourceTree = "<group>";
@@ -974,6 +997,15 @@
 				60FFC2B619D9496A00284B9F /* APIKeys.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		60C3984419E8373300CB81F4 /* Final bid Placing */ = {
+			isa = PBXGroup;
+			children = (
+				60C3984119E8356D00CB81F4 /* PlacingBidViewController.swift */,
+				605B856219C6E5C30009B16B /* YouAreTheHighestBidderViewController.swift */,
+			);
+			name = "Final bid Placing";
 			sourceTree = "<group>";
 		};
 		60C620E419D1831D0024D493 /* Docs */ = {
@@ -1310,23 +1342,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60C3983919E814FC00CB81F4 /* XAuth.json in Resources */,
+				60C3982D19E814FC00CB81F4 /* FindBidder.json in Resources */,
+				60C3982719E814FC00CB81F4 /* CreateABid.json in Resources */,
 				60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */,
+				60C3982B19E814FC00CB81F4 /* CreatePINForBidder.json in Resources */,
 				5EA33A8519DC7F2A007CF667 /* artwork.jpg in Resources */,
-				602FF2A719E2F5CE004C7AB3 /* CreatePINForBidder.json in Resources */,
-				604B224319D3518F008D86C7 /* SystemTime.json in Resources */,
-				602FF2AA19E2F6C0004C7AB3 /* MyCreditCards.json in Resources */,
+				60C3982319E814FC00CB81F4 /* AuctionListings.json in Resources */,
 				60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */,
-				602FF2AD19E2FC14004C7AB3 /* Me.json in Resources */,
-				5E08489B19D070DC0078C571 /* AuctionListings.json in Resources */,
 				5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */,
+				60C3983319E814FC00CB81F4 /* MyCreditCards.json in Resources */,
+				60C3982519E814FC00CB81F4 /* Auctions.json in Resources */,
+				60C3982F19E814FC00CB81F4 /* Me.json in Resources */,
+				60C3982919E814FC00CB81F4 /* CreateABidFail.json in Resources */,
 				60D48B9519C89DE300A3CA88 /* edit_button@2x.png in Resources */,
-				5E08488E19D06EE60078C571 /* Auctions.json in Resources */,
+				60C3983519E814FC00CB81F4 /* SystemTime.json in Resources */,
+				60C3982119E814FC00CB81F4 /* ActiveAuctions.json in Resources */,
+				60C3983119E814FC00CB81F4 /* MyBiddersForAuction.json in Resources */,
+				60C3983719E814FC00CB81F4 /* XApp.json in Resources */,
+				60C3984619E8410300CB81F4 /* RegisterToBid.json in Resources */,
 				5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */,
-				5ED0997F19C31D8F00E5DD59 /* XApp.json in Resources */,
-				602FF2B019E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */,
-				60A4FD2E19E6C3E80091FCC6 /* XAuth.json in Resources */,
-				602FF2CA19E30FE9004C7AB3 /* FindBidder.json in Resources */,
-				602FF2A419E2F5BF004C7AB3 /* ActiveAuctions.json in Resources */,
 				5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1335,22 +1370,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6030A12619D1A55000B934CA /* AuctionListings.json in Resources */,
-				6030A12419D1A55000B934CA /* XApp.json in Resources */,
-				602FF2CB19E30FE9004C7AB3 /* FindBidder.json in Resources */,
-				6030A12519D1A55000B934CA /* Auctions.json in Resources */,
-				604B224419D3518F008D86C7 /* SystemTime.json in Resources */,
-				602FF2A519E2F5BF004C7AB3 /* ActiveAuctions.json in Resources */,
-				602FF2AE19E2FC14004C7AB3 /* Me.json in Resources */,
 				6030A12919D1A63700B934CA /* Fulfillment.storyboard in Resources */,
-				60FFC2B119D945BD00284B9F /* XAuth.json in Resources */,
-				602FF2A819E2F5CE004C7AB3 /* CreatePINForBidder.json in Resources */,
+				60C3982819E814FC00CB81F4 /* CreateABid.json in Resources */,
+				60C3982419E814FC00CB81F4 /* AuctionListings.json in Resources */,
+				60C3984719E8410300CB81F4 /* RegisterToBid.json in Resources */,
+				60C3982A19E814FC00CB81F4 /* CreateABidFail.json in Resources */,
+				60C3982C19E814FC00CB81F4 /* CreatePINForBidder.json in Resources */,
+				60C3983419E814FC00CB81F4 /* MyCreditCards.json in Resources */,
+				60C3983219E814FC00CB81F4 /* MyBiddersForAuction.json in Resources */,
 				6030A12219D1A31600B934CA /* KeypadView.xib in Resources */,
+				60C3982E19E814FC00CB81F4 /* FindBidder.json in Resources */,
+				60C3982619E814FC00CB81F4 /* Auctions.json in Resources */,
 				6030A12819D1A63400B934CA /* Auction.storyboard in Resources */,
-				602FF2B119E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */,
+				60C3983819E814FC00CB81F4 /* XApp.json in Resources */,
+				60C3983619E814FC00CB81F4 /* SystemTime.json in Resources */,
 				5EA33A8619DC81CC007CF667 /* artwork.jpg in Resources */,
-				602FF2AB19E2F6C0004C7AB3 /* MyCreditCards.json in Resources */,
+				60C3983A19E814FC00CB81F4 /* XAuth.json in Resources */,
 				6030A12719D1A55600B934CA /* edit_button@2x.png in Resources */,
+				60C3983019E814FC00CB81F4 /* Me.json in Resources */,
+				60C3982219E814FC00CB81F4 /* ActiveAuctions.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1430,12 +1468,14 @@
 				60C620DA19D180A20024D493 /* ConfirmYourBidPINViewController.swift in Sources */,
 				60FFC2B419D9493000284B9F /* XAppAuthentication.swift in Sources */,
 				5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */,
+				60C3983C19E8191F00CB81F4 /* GenericError.swift in Sources */,
 				609A849319E53B1F00476A94 /* RegistrationEmailViewController.swift in Sources */,
 				5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */,
 				60FFC2A419D9442F00284B9F /* UserCredentials.swift in Sources */,
 				6071320519DD3AE600CA46F4 /* BidDetails.swift in Sources */,
 				60D976E619D30FF700DE9F3D /* BidderPosition.swift in Sources */,
 				5E2B3D4B19DC063C00906A26 /* ListingsCollectionViewCell.swift in Sources */,
+				60C3983F19E81ECF00CB81F4 /* NSErrorExtensions.swift in Sources */,
 				5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */,
 				60968DD019C5B427001AB802 /* KeypadView.swift in Sources */,
 				609A848F19E537AA00476A94 /* RegistrationCoordinator.swift in Sources */,
@@ -1445,6 +1485,7 @@
 				604AF5C019E14A020019884E /* RegisterFlowView.swift in Sources */,
 				60212C9119D5CA04001921E1 /* Image.swift in Sources */,
 				60C37DC319D4359E002E7A44 /* JSONAble.swift in Sources */,
+				60C3984219E8356D00CB81F4 /* PlacingBidViewController.swift in Sources */,
 				60D976DF19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift in Sources */,
 				60A4FD3019E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */,
 				60D976E419D30F9F00DE9F3D /* Bidder.swift in Sources */,
@@ -1531,6 +1572,7 @@
 				60C37DDB19D45353002E7A44 /* SaleTests.swift in Sources */,
 				5EE221DA19DC52EA002EB3C7 /* ListingsCollectionViewCell.swift in Sources */,
 				6030A11519D19F9E00B934CA /* StoryboardIdentifiers.swift in Sources */,
+				60C3984319E8356D00CB81F4 /* PlacingBidViewController.swift in Sources */,
 				60212C9219D5CA04001921E1 /* Image.swift in Sources */,
 				60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */,
 				6071320619DD3AE600CA46F4 /* BidDetails.swift in Sources */,
@@ -1572,6 +1614,7 @@
 				601A6E3119DC58E700EBA5A5 /* NewUser.swift in Sources */,
 				6051290519E19524004B05BF /* RegisterFlowViewTests.swift in Sources */,
 				5EA137CB19C72BE100D0B743 /* XAppTokenSpec.swift in Sources */,
+				60C3983D19E8191F00CB81F4 /* GenericError.swift in Sources */,
 				5EA65C0F19D5FC98005EA4B4 /* SwitchView.swift in Sources */,
 				60C6914119D6CBDA001F58FD /* RAC+JSONAbleTests.swift in Sources */,
 				6030A10319D1931400B934CA /* ConfirmYourBidViewController.swift in Sources */,
@@ -1580,6 +1623,7 @@
 				6007B42519DEFAA000EDF43E /* ConfirmYourBidPINViewControllerTests.swift in Sources */,
 				6030A11819D1A06200B934CA /* Button.swift in Sources */,
 				60C37DD219D44056002E7A44 /* SwiftyJSON.swift in Sources */,
+				60C3984019E81ECF00CB81F4 /* NSErrorExtensions.swift in Sources */,
 				60D976DD19D2F6DD00DE9F3D /* ConfirmYourBidEnterYourEmailViewControllerTests.swift in Sources */,
 				60C37DD819D45151002E7A44 /* Bidder.swift in Sources */,
 				6071321A19DD4EC400CA46F4 /* FulfilmentNavigationController.swift in Sources */,
@@ -1686,8 +1730,7 @@
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Caroline Lau (AE9AEY2F5Z)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1711,7 +1754,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1721,7 +1763,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @rpath/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "88112051-0c40-437a-b4b5-00043f2264b7";
+				PROVISIONING_PROFILE = "7885d377-493a-4146-9439-22a3069ead6f";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/PodsBridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
