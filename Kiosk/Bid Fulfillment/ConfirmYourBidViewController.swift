@@ -7,7 +7,7 @@ class ConfirmYourBidViewController: UIViewController {
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet var numberAmountTextField: TextField!
-    @IBOutlet weak var cursor: CursorView!
+    @IBOutlet var cursor: CursorView!
 
     @IBOutlet var keypadContainer: KeypadContainerView!
     lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal

@@ -5,7 +5,7 @@ class PlaceBidViewController: UIViewController {
     dynamic var bidDollars: Int = 0
 
     @IBOutlet var bidAmountTextField: TextField!
-    @IBOutlet weak var cursor: CursorView!
+    @IBOutlet var cursor: CursorView!
     @IBOutlet var keypadContainer: KeypadContainerView!
 
     @IBOutlet var currentBidTitleLabel: UILabel!

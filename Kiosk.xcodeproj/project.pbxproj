@@ -107,7 +107,6 @@
 		605B856819C6EA380009B16B /* UIStoryboardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856719C6EA380009B16B /* UIStoryboardExtensions.swift */; };
 		605B856A19C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856919C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift */; };
 		605B857019C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */; };
-		605B857219C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B857119C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift */; };
 		6071320519DD3AE600CA46F4 /* BidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071320419DD3AE600CA46F4 /* BidDetails.swift */; };
 		6071320619DD3AE600CA46F4 /* BidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071320419DD3AE600CA46F4 /* BidDetails.swift */; };
 		6071321919DD4EC400CA46F4 /* FulfilmentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071321819DD4EC400CA46F4 /* FulfilmentNavigationController.swift */; };
@@ -213,6 +212,7 @@
 		7D151931B70C40DA1918308E /* libPods-KioskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F02362ED531B4468B9C73044 /* libPods-KioskTests.a */; };
 		961918F1D3EF491EA0AF220C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A6ABDCBFE147D99BAEBD31 /* libPods.a */; };
 		A165BB63FB9541B4A59991F6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A6ABDCBFE147D99BAEBD31 /* libPods.a */; };
+		E63FA4F519E87ED2000265B6 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB492319E704870054C8AD /* CursorView.swift */; };
 		E68E94A219DDCB70001405A5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68E94A119DDCB70001405A5 /* TextField.swift */; };
 		E69EA8BE19E83E08005EF2C8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EA8BD19E83E08005EF2C8 /* WebViewController.swift */; };
 		E69EA8D519E8750E005EF2C8 /* WebViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EA8D319E8750E005EF2C8 /* WebViewControllerTests.swift */; };
@@ -449,7 +449,6 @@
 		605B856719C6EA380009B16B /* UIStoryboardExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardExtensions.swift; sourceTree = "<group>"; };
 		605B856919C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidViewControllerTests.swift; sourceTree = "<group>"; };
 		605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidArtsyLoginViewControllerTests.swift; sourceTree = "<group>"; };
-		605B857119C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouAreTheHighestBidderViewControllerTests.swift; sourceTree = "<group>"; };
 		6071320419DD3AE600CA46F4 /* BidDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetails.swift; sourceTree = "<group>"; };
 		6071321819DD4EC400CA46F4 /* FulfilmentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfilmentNavigationController.swift; sourceTree = "<group>"; };
 		6092C4AE19CAEF9A003BE8EC /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -873,7 +872,6 @@
 				605B856919C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift */,
 				60A8E7CE19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift */,
 				60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */,
-				605B857119C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift */,
 			);
 			name = Fulfillment;
 			path = "Bid Fulfillment";
@@ -1394,7 +1392,6 @@
 				6030A12819D1A63400B934CA /* Auction.storyboard in Resources */,
 				60C3983819E814FC00CB81F4 /* XApp.json in Resources */,
 				60C3983619E814FC00CB81F4 /* SystemTime.json in Resources */,
-				602FF2B119E2FE52004C7AB3 /* MyBiddersForAuction.json in Resources */,
 				E69EA8D719E87B39005EF2C8 /* test_webpage.html in Resources */,
 				5EA33A8619DC81CC007CF667 /* artwork.jpg in Resources */,
 				60C3983A19E814FC00CB81F4 /* XAuth.json in Resources */,
@@ -1567,8 +1564,8 @@
 				6030A10219D1931400B934CA /* FulfillmentContainerViewController.swift in Sources */,
 				6030A11D19D1A23100B934CA /* Moya.swift in Sources */,
 				60C37DD719D45103002E7A44 /* BidderTests.swift in Sources */,
-				605B857219C6F4A90009B16B /* YouAreTheHighestBidderViewControllerTests.swift in Sources */,
 				609A849419E53B1F00476A94 /* RegistrationEmailViewController.swift in Sources */,
+				E63FA4F519E87ED2000265B6 /* CursorView.swift in Sources */,
 				6030A11C19D1A23100B934CA /* Endpoint.swift in Sources */,
 				5EA65C1319D5FCC4005EA4B4 /* SwitchViewSpec.swift in Sources */,
 				609A849819E53ED200476A94 /* RACFunctions.swift in Sources */,
