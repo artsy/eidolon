@@ -1,5 +1,14 @@
 # End User Changes
 
+### 0.0.4 - 9th Oct 2014
+
+* Textfields use the right fonts - @1aura
+* Bid validations are correct on the place bid view - @1aura
+* Shows artworks in a list format - @ash
+* Support sorting Auction Artworks - @ash
+* Added a button to sign up - @orta
+* Registration flow set up - @orta
+
 ### 0.0.3 - 7th Oct 2014
 
 * Changed buttons & fonts on place bid view - @1aura
