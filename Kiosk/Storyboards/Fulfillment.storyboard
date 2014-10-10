@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="AGaramondPro-Regular.otf">
+            <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
@@ -61,6 +62,7 @@
             <string>AGaramondPro-Semibold</string>
         </mutableArray>
         <mutableArray key="ITC_Avant_Garde_Gothic__Demi.ttf">
+            <string>AvantGardeGothicITCW01Dm</string>
             <string>AvantGardeGothicITCW01Dm</string>
             <string>AvantGardeGothicITCW01Dm</string>
             <string>AvantGardeGothicITCW01Dm</string>
@@ -212,7 +214,13 @@
                                 <color key="backgroundColor" red="0.80967282458563539" green="0.80967282458563539" blue="0.80967282458563539" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="by bidding you accept the" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nc-B4-Sow">
-                                <rect key="frame" x="507" y="625" width="153" height="21"/>
+                                <rect key="frame" x="507" y="618" width="153" height="21"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="13"/>
+                                <color key="textColor" white="0.53000000000000003" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="and" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ic1-FX-iJp">
+                                <rect key="frame" x="507" y="634" width="23" height="21"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="13"/>
                                 <color key="textColor" white="0.53000000000000003" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -244,12 +252,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CONDITIONS OF SALE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NjU-cU-YOS">
-                                <rect key="frame" x="642" y="619" width="120" height="31"/>
-                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="11"/>
-                                <color key="textColor" white="0.53000000000000003" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="$" translatesAutoresizingMaskIntoConstraints="NO" id="jZ6-74-mu9">
                                 <rect key="frame" x="598" y="136" width="27" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -265,6 +267,28 @@
                                 <rect key="frame" x="754" y="146" width="18" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXj-no-bvA">
+                                <rect key="frame" x="636" y="612" width="133" height="32"/>
+                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="12"/>
+                                <state key="normal" title="CONDITIONS OF SALE">
+                                    <color key="titleColor" white="0.52999997138977051" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="webviewButtonTapped:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="c9b-qW-ItT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bld-wj-1c6">
+                                <rect key="frame" x="529" y="627" width="100" height="32"/>
+                                <fontDescription key="fontDescription" name="AvantGardeGothicITCW01Dm" family="Avant Garde Gothic ITCW01Dm" pointSize="12"/>
+                                <state key="normal" title="PRIVACY POLICY">
+                                    <color key="titleColor" white="0.52999997139999999" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="webviewButtonTapped:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="gNI-q4-U7I"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -275,17 +299,20 @@
                         <outlet property="artworkTitleLabel" destination="Aj2-T3-pNw" id="3FZ-B6-AkR"/>
                         <outlet property="bidAmountTextField" destination="UKQ-z8-PIR" id="mV3-4R-CLm"/>
                         <outlet property="bidButton" destination="dT1-U2-hie" id="b1u-df-a4J"/>
+                        <outlet property="conditionsOfSaleButton" destination="XXj-no-bvA" id="3h4-Fc-6fN"/>
                         <outlet property="currentBidAmountLabel" destination="GS2-EK-4Nx" id="DlC-TX-tjz"/>
                         <outlet property="currentBidTitleLabel" destination="Y81-nV-kZl" id="ndR-mW-Tct"/>
                         <outlet property="cursor" destination="ybr-6E-470" id="rlk-8V-1J2"/>
                         <outlet property="keypadContainer" destination="A3C-Vo-Qhd" id="Kee-zX-lv9"/>
                         <outlet property="nextBidAmountLabel" destination="uVu-PR-0oJ" id="x1I-M4-sxi"/>
+                        <outlet property="privacyPolicyButton" destination="Bld-wj-1c6" id="zKT-Sa-5oN"/>
                         <segue destination="Yzb-AU-icr" kind="push" identifier="Confirm Bid" id="J1L-DG-oRQ"/>
+                        <segue destination="ati-U2-SSe" kind="push" identifier="Load Web View" id="pfV-V4-0QL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RSG-07-uog" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-369.5" y="-791"/>
+            <point key="canvasLocation" x="-431.5" y="-791"/>
         </scene>
         <!--Swipe Credit Card View Controller-->
         <scene sceneID="PDr-Ft-ReI">
@@ -347,7 +374,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PvS-Gg-Iup" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1797.5" y="2191.5"/>
+            <point key="canvasLocation" x="-1797.5" y="2155.5"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="qjX-tW-U7k">
@@ -563,7 +590,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z7-af-FHL" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="62" y="538" width="291" height="59"/>
                                 <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="USE MY ARTSY LOGIN      &gt;">
+                                <state key="normal" title="USE MY ARTSY LOGIN      >">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1016,6 +1043,36 @@
             </objects>
             <point key="canvasLocation" x="1422.5" y="116"/>
         </scene>
+        <!--Web View Controller-->
+        <scene sceneID="myK-rF-T8q">
+            <objects>
+                <viewController storyboardIdentifier="Web View Controller" id="ati-U2-SSe" customClass="WebViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="K1I-IM-LdT"/>
+                        <viewControllerLayoutGuide type="bottom" id="14U-hg-0Mt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Y1z-Ef-Bc0">
+                        <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qcE-7K-aIi">
+                                <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uhv-nH-nS4"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="815" height="660"/>
+                    <connections>
+                        <outlet property="webView" destination="qcE-7K-aIi" id="DYc-Iy-a2Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z8Z-tV-qh4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1327.5" y="116"/>
+        </scene>
         <!--Confirm Your Bid Enter Your Email View Controller-->
         <scene sceneID="nwL-Cu-AhL">
             <objects>
@@ -1115,7 +1172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIG-KZ-hZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-369.5" y="116"/>
+            <point key="canvasLocation" x="-431.5" y="116"/>
         </scene>
         <!--Confirm Your Bid Password View Controller-->
         <scene sceneID="dYI-8Q-ptC">
@@ -1213,7 +1270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PaT-df-Hci" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-369.5" y="920"/>
+            <point key="canvasLocation" x="-431.5" y="922"/>
         </scene>
         <!--Registration Postal Zip View Controller-->
         <scene sceneID="u7R-BG-jEy">
@@ -1261,7 +1318,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xfl-ed-lZg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1251.5" y="2191.5"/>
+            <point key="canvasLocation" x="-1272.5" y="2155.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="YLp-8g-M74">
@@ -1288,7 +1345,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUS-C7-HeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1251.5" y="2786.5"/>
+            <point key="canvasLocation" x="-1272.5" y="2744.5"/>
         </scene>
         <!--Registration Email View Controller-->
         <scene sceneID="oF4-bF-KwB">
@@ -1384,7 +1441,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="otW-7h-YjL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1245.5" y="1575.5"/>
+            <point key="canvasLocation" x="-1272.5" y="1567.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="rlf-Ws-Afr">
@@ -1416,7 +1473,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="A1R-R2-CSF"/>
-        <segue reference="ymK-a1-EJ3"/>
+        <segue reference="qUf-dy-7C9"/>
+        <segue reference="gjD-og-8Iv"/>
     </inferredMetricsTieBreakers>
 </document>
