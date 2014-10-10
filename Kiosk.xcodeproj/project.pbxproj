@@ -202,6 +202,7 @@
 		961918F1D3EF491EA0AF220C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A6ABDCBFE147D99BAEBD31 /* libPods.a */; };
 		A165BB63FB9541B4A59991F6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A6ABDCBFE147D99BAEBD31 /* libPods.a */; };
 		E68E94A219DDCB70001405A5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68E94A119DDCB70001405A5 /* TextField.swift */; };
+		E6AB492419E704870054C8AD /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB492319E704870054C8AD /* CursorView.swift */; };
 		E6FA920D19E43FD90064480A /* TextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FA920B19E43FD90064480A /* TextFieldTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -495,6 +496,7 @@
 		60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LlamaKit.xcodeproj; path = submodules/ReactiveCocoa/External/LlamaKit/LlamaKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		C055E487A3D1AED461990000 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E68E94A119DDCB70001405A5 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = "Text Fields/TextField.swift"; sourceTree = "<group>"; };
+		E6AB492319E704870054C8AD /* CursorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CursorView.swift; path = "Text Fields/CursorView.swift"; sourceTree = "<group>"; };
 		E6FA920B19E43FD90064480A /* TextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTests.swift; sourceTree = "<group>"; };
 		EE4CAC9FE3857F7DF1A07AE1 /* Pods-KioskTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.beta.xcconfig"; sourceTree = "<group>"; };
 		F02362ED531B4468B9C73044 /* libPods-KioskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KioskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1052,6 +1054,7 @@
 			isa = PBXGroup;
 			children = (
 				E68E94A119DDCB70001405A5 /* TextField.swift */,
+				E6AB492319E704870054C8AD /* CursorView.swift */,
 			);
 			name = "text fields";
 			sourceTree = "<group>";
@@ -1474,6 +1477,7 @@
 				609A849719E53ED200476A94 /* RACFunctions.swift in Sources */,
 				60D976E819D3123B00DE9F3D /* SaleArtwork.swift in Sources */,
 				6030A10019D192D000B934CA /* Artist.swift in Sources */,
+				E6AB492419E704870054C8AD /* CursorView.swift in Sources */,
 				60A8E7C519BE50640088ACEC /* FulfillmentContainerViewController.swift in Sources */,
 				600F5EFA19C879670027F587 /* SwipeCreditCardViewController.swift in Sources */,
 				605B856819C6EA380009B16B /* UIStoryboardExtensions.swift in Sources */,
