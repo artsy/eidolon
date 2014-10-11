@@ -37,7 +37,7 @@ class ConfirmYourBidPINViewController: UIViewController {
     @IBAction func enterTapped(sender: AnyObject) {
         /// verify if we can connect with number & pin
 
-        let phone = self.fulfilmentNav()?.bidDetails.newUser.phoneNumber! as String!
+        let phone = self.fulfilmentNav().bidDetails.newUser.phoneNumber! as String!
 
         let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
             var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
@@ -48,9 +48,11 @@ class ConfirmYourBidPINViewController: UIViewController {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         let bidderRequest = XAppRequest(endpoint, provider: numberProvider).filterSuccessfulStatusCodes().subscribeNext({ [weak self] (_) -> Void in
 
-            self?.fulfilmentNav()?.loggedInProvider = numberProvider
+            let nav = self?.fulfilmentNav()
+            nav?.loggedInProvider = numberProvider
             
-            self?.fulfilmentNav()?.updateUserCredentials()?.subscribeNext({ [weak self](_) -> Void in
+            nav?.updateUserCredentials().subscribeNext({ [weak self](_) -> Void in
+                println("P:1.5")
                 self?.performSegue(.PINConfirmed)
                 return
             })

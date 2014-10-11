@@ -38,7 +38,10 @@ class ListingsViewController: UIViewController {
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "ici-live-auction")
 
         RAC(self, "saleArtworks") <~ XAppRequest(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
-            println("Error handling thing: \(error.localizedDescription)")
+            
+            if let genericError = error.artsyServerError() {
+                println("Sale Artworks: Error handling thing: \(genericError.message)")
+            }
             return RACSignal.empty()
         })
         
