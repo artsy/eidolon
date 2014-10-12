@@ -42,13 +42,13 @@ class ListingsCollectionViewCell: UICollectionViewCell {
             return (artwork as? Artwork)?.artists?.first?.name
         }).mapNilToEmptyString()
         
-        RAC(self, "artworkTitleLabel.text") <~ RACObserve(self, "saleArtwork.artwork").map({ (artwork) -> AnyObject! in
+        RAC(self, "artworkTitleLabel.attributedText") <~ RACObserve(self, "saleArtwork.artwork").map({ (artwork) -> AnyObject! in
             if let artwork = artwork as? Artwork {
-                return "\(artwork.title), \(artwork.date)"
+                return artwork.titleAndDate
             } else {
                 return nil
             }
-        }).mapNilToEmptyString()
+        }).mapNilToEmptyAttributedString()
         
         RAC(self, "estimateLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             return (saleArtwork as? SaleArtwork)?.estimateString

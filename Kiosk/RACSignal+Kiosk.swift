@@ -9,4 +9,15 @@ extension RACSignal {
             }
         }
     }
+    
+    func mapNilToEmptyAttributedString() -> RACSignal {
+        return map { (string) -> AnyObject! in
+            if let string = string as? NSAttributedString {
+                return string
+            } else {
+                return NSAttributedString()
+            }
+        }
+    }
+
 }

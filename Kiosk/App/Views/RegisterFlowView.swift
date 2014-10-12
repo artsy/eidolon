@@ -6,18 +6,19 @@ class RegisterFlowView: ORStackView {
 
     var details:BidDetails? {
         didSet {
-            self.setup()
+            self.update()
         }
     }
 
     var titles = ["Mobile", "Email", "Credit Card", "Postal/Zip"]
     var keypaths = ["phoneNumber", "email", "creditCardToken", "zipCode"]
 
-    func setup() {
+    func update() {
         let user = details!.newUser
         let titleLabels = titles.map(createTitleViewWithTitle)
         titleLabels[highlightedIndex].textColor = UIColor.artsyPurple()
 
+        self.removeAllSubviews()
         for i in 0 ..< countElements(titles) {
             let title = titleLabels[i]
             let info = createInfoLabel()

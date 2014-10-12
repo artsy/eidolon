@@ -27,8 +27,8 @@ public enum ViewControllerStoryboardIdentifier : String {
     case RegisterConfirm = "Register Confirm "
     case RegisterCreditCard = "Register Credit Card"
     case RegisterEmail = "Register Email"
+    case RegisterMobile = "Register Mobile"
     case RegisterPassword = "Register Password"
     case RegisterPostalorZip = "Register Postal or Zip"
     case WebViewController = "Web View Controller"
-    case YouAreTheHighestBidder = "You Are The Highest Bidder"
 }

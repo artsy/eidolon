@@ -4,7 +4,8 @@ class PlacingBidViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: ARSerifLabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -12,7 +13,8 @@ class PlacingBidViewController: UIViewController {
         
         let auctionID = self.fulfilmentNav().auctionID!
         let bidDetails = self.fulfilmentNav().bidDetails
-           
+        bidDetailsPreviewView.bidDetails = bidDetails
+        
         self.setBidderIfNeeded(auctionID).then({ [weak self] () -> RACSignal! in
 
             return self?.createBidderForAuction(auctionID) ?? RACSignal.empty()
@@ -26,7 +28,6 @@ class PlacingBidViewController: UIViewController {
             println("P:7")
         })
     }
-    
     
     func setBidderIfNeeded(auctionID: String) -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)

@@ -7,6 +7,7 @@ class ConfirmYourBidPINViewController: UIViewController {
     @IBOutlet var keypadContainer: KeypadContainerView!
     @IBOutlet var pinTextField: TextField!
     @IBOutlet var confirmButton: Button!
+    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
     lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
     lazy var clearSignal:RACSignal!  = self.keypadContainer.keypad?.rightSignal
@@ -32,6 +33,7 @@ class ConfirmYourBidPINViewController: UIViewController {
         clearSignal.subscribeNext(clearPIN)
 
         RAC(pinTextField, "text") <~ RACObserve(self, "pin")
+        bidDetailsPreviewView.bidDetails = fulfilmentNav().bidDetails
     }
 
     @IBAction func enterTapped(sender: AnyObject) {

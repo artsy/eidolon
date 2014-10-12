@@ -23,13 +23,14 @@ PODS:
   - FLKAutoLayout (0.1.1)
   - HockeySDK (3.5.4)
   - ISO8601DateFormatter (0.7)
-  - Mixpanel (2.5.3)
-  - ORStackView (1.2.0):
+  - Mixpanel (2.5.4)
+  - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
   - Reveal-iOS-SDK (1.0.5)
   - SDWebImage (3.7.1):
     - SDWebImage/Core
   - SDWebImage/Core (3.7.1)
+  - UIImageViewAligned (0.0.1)
 
 DEPENDENCIES:
   - ARAnalytics/HockeyApp
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - ORStackView
   - Reveal-iOS-SDK
   - SDWebImage (~> 3.7)
+  - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
 
 EXTERNAL SOURCES:
   Artsy-UIButtons:
@@ -56,6 +58,8 @@ EXTERNAL SOURCES:
   FBSnapshotTestCase:
     :branch: renderAsLayer
     :git: https://github.com/AshFurrow/ios-snapshot-test-case.git
+  UIImageViewAligned:
+    :git: https://github.com/orta/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
@@ -71,9 +75,10 @@ SPEC CHECKSUMS:
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
   HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
   ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
-  Mixpanel: 708ec9a6ee6e741f7db107831e18b2fc2e7531f1
-  ORStackView: f1ccef4a0c40dd7907a638232f78a873cc03ab6c
+  Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
+  ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
   Reveal-iOS-SDK: d4b2f4c20d5b823b7f8b88250fe1b71cecd424a7
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
+  UIImageViewAligned: efc1b8b5750dea68b7ee67236f4c64f93e65b674
 
-COCOAPODS: 0.34.1
+COCOAPODS: 0.34.2

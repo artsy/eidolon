@@ -4,6 +4,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
     @IBOutlet var confirmCredentialsButton: UIButton!
     lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
@@ -15,11 +16,11 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        if let nav = self.navigationController as? FulfillmentNavigationController {
+        let nav = self.fulfilmentNav()
+        bidDetailsPreviewView.bidDetails = nav.bidDetails
 
-            RAC(nav.bidDetails.newUser, "email") <~ emailTextField.rac_textSignal()
-            RAC(nav.bidDetails.newUser, "password") <~ passwordTextField.rac_textSignal()
-        }
+        RAC(nav.bidDetails.newUser, "email") <~ emailTextField.rac_textSignal()
+        RAC(nav.bidDetails.newUser, "password") <~ passwordTextField.rac_textSignal()
     }
     
     public override func viewWillAppear(animated: Bool) {

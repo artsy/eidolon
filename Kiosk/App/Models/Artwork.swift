@@ -5,6 +5,7 @@ class Artwork: JSONAble {
 
     let dateString: String
     dynamic let title: String
+    dynamic let titleAndDate: NSAttributedString
     dynamic let name: String
     dynamic let blurb: String
     dynamic let price: String
@@ -15,10 +16,11 @@ class Artwork: JSONAble {
 
     dynamic var images: [Image]?
 
-    init(id: String, dateString: String, title: String, name: String, blurb: String, price: String, date: String) {
+    init(id: String, dateString: String, title: String, titleAndDate: NSAttributedString, name: String, blurb: String, price: String, date: String) {
         self.id = id
         self.dateString = dateString
         self.title = title
+        self.titleAndDate = titleAndDate
         self.name = name
         self.blurb = blurb
         self.price = price
@@ -35,8 +37,9 @@ class Artwork: JSONAble {
         let blurb = json["blurb"].stringValue
         let price = json["price"].stringValue
         let date = json["date"].stringValue
-
-        let artwork = Artwork(id: id, dateString: dateString, title: title, name: name, blurb: blurb, price: price, date: date)
+        let titleAndDate = titleAndDateAttributedString(title, dateString)
+        
+        let artwork = Artwork(id: id, dateString: dateString, title: title, titleAndDate:titleAndDate, name: name, blurb: blurb, price: price, date: date)
 
         if let artistDictionary = json["artist"].object as? [String: AnyObject] {
             artwork.artists = [Artist.fromJSON(artistDictionary) as Artist]
@@ -48,5 +51,18 @@ class Artwork: JSONAble {
 
         return artwork
     }
+}
 
+private func titleAndDateAttributedString(title: String, dateString: String) -> NSAttributedString {
+    let workTitle = countElements(title) > 0 ? title : "Untitled"
+    let workFont = UIFont.serifItalicFontWithSize(16)
+    var attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSFontAttributeName : workFont ])
+    
+    if countElements(dateString) > 0 {
+        let dateFont = UIFont.serifFontWithSize(16)
+        let dateString = NSMutableAttributedString(string: ", " + dateString, attributes: [ NSFontAttributeName : dateFont ])
+        attributedString.appendAttributedString(dateString)
+    }
+    
+    return attributedString.copy() as NSAttributedString
 }
