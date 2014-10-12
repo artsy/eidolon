@@ -4,7 +4,7 @@
 
 * Bid Detail Previews are shown throughout - @orta
 * Use italics for title, and no italics for dates - @orta
-
+* Added a countdown on main page - @orta
 
 ### 0.0.4 - 9th Oct 2014
 

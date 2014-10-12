@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let auctionStoryboard = UIStoryboard(name: "Auction", bundle: nil)
         let rootVC = auctionStoryboard.instantiateInitialViewController() as UINavigationController
 
+        let listingsVC = rootVC.topViewController as ListingsViewController
+        listingsVC.auctionID = "ici-live-auction"
+
         window.rootViewController = rootVC
         window.makeKeyAndVisible()
 

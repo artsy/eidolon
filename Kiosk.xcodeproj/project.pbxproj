@@ -113,6 +113,10 @@
 		6087602319E9A6DF00116611 /* RegistrationMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */; };
 		6087605019E9EDA800116611 /* BidDetailsPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087604F19E9EDA800116611 /* BidDetailsPreviewView.swift */; };
 		6087605119E9EDA800116611 /* BidDetailsPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087604F19E9EDA800116611 /* BidDetailsPreviewView.swift */; };
+		6087605319EA117100116611 /* ListingsCountdownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087605219EA117100116611 /* ListingsCountdownManager.swift */; };
+		6087605419EA117100116611 /* ListingsCountdownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087605219EA117100116611 /* ListingsCountdownManager.swift */; };
+		6087605619EA217F00116611 /* AuctionInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 6087605519EA217F00116611 /* AuctionInfo.json */; };
+		6087605719EA217F00116611 /* AuctionInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 6087605519EA217F00116611 /* AuctionInfo.json */; };
 		60885F7A19D9B19F0065A7AE /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FFC2E819D9A92B00284B9F /* LlamaKit.framework */; };
 		60885F8919D9B28F0065A7AE /* LlamaKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 60FFC2E819D9A92B00284B9F /* LlamaKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		60885F8A19D9B28F0065A7AE /* ReactiveCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 60FFC2D919D9A92100284B9F /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -451,6 +455,8 @@
 		6071321819DD4EC400CA46F4 /* FulfilmentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfilmentNavigationController.swift; sourceTree = "<group>"; };
 		6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationMobileViewController.swift; sourceTree = "<group>"; };
 		6087604F19E9EDA800116611 /* BidDetailsPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetailsPreviewView.swift; sourceTree = "<group>"; };
+		6087605219EA117100116611 /* ListingsCountdownManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingsCountdownManager.swift; path = "Auction Listings/ListingsCountdownManager.swift"; sourceTree = "<group>"; };
+		6087605519EA217F00116611 /* AuctionInfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AuctionInfo.json; sourceTree = "<group>"; };
 		6092C4AE19CAEF9A003BE8EC /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		60968DCD19C5B2AF001AB802 /* KeypadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KeypadView.xib; path = ../Storyboards/KeypadView.xib; sourceTree = "<group>"; };
 		60968DCF19C5B427001AB802 /* KeypadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
@@ -730,6 +736,7 @@
 				60C3984519E8410300CB81F4 /* RegisterToBid.json */,
 				60C3981419E814FC00CB81F4 /* ActiveAuctions.json */,
 				60C3981519E814FC00CB81F4 /* AuctionListings.json */,
+				6087605519EA217F00116611 /* AuctionInfo.json */,
 				60C3981619E814FC00CB81F4 /* Auctions.json */,
 				60C3981719E814FC00CB81F4 /* CreateABid.json */,
 				60C3981819E814FC00CB81F4 /* CreateABidFail.json */,
@@ -753,6 +760,7 @@
 				5EF2C0C719DAC3F400263137 /* MasonryCollectionViewCell.swift */,
 				5EF2C0C519DAC18000263137 /* TableCollectionViewCell.swift */,
 				E69EA8BD19E83E08005EF2C8 /* WebViewController.swift */,
+				6087605219EA117100116611 /* ListingsCountdownManager.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1357,6 +1365,7 @@
 				60C3982519E814FC00CB81F4 /* Auctions.json in Resources */,
 				60C3982F19E814FC00CB81F4 /* Me.json in Resources */,
 				60C3982919E814FC00CB81F4 /* CreateABidFail.json in Resources */,
+				6087605619EA217F00116611 /* AuctionInfo.json in Resources */,
 				60D48B9519C89DE300A3CA88 /* edit_button@2x.png in Resources */,
 				60C3983519E814FC00CB81F4 /* SystemTime.json in Resources */,
 				60C3982119E814FC00CB81F4 /* ActiveAuctions.json in Resources */,
@@ -1383,6 +1392,7 @@
 				6030A12219D1A31600B934CA /* KeypadView.xib in Resources */,
 				60C3982E19E814FC00CB81F4 /* FindBidder.json in Resources */,
 				60C3982619E814FC00CB81F4 /* Auctions.json in Resources */,
+				6087605719EA217F00116611 /* AuctionInfo.json in Resources */,
 				6030A12819D1A63400B934CA /* Auction.storyboard in Resources */,
 				60C3983819E814FC00CB81F4 /* XApp.json in Resources */,
 				60C3983619E814FC00CB81F4 /* SystemTime.json in Resources */,
@@ -1524,6 +1534,7 @@
 				60A8E7C519BE50640088ACEC /* FulfillmentContainerViewController.swift in Sources */,
 				600F5EFA19C879670027F587 /* SwipeCreditCardViewController.swift in Sources */,
 				605B856819C6EA380009B16B /* UIStoryboardExtensions.swift in Sources */,
+				6087605319EA117100116611 /* ListingsCountdownManager.swift in Sources */,
 				5E95FCB219D99871004D0C8F /* Constants.swift in Sources */,
 				5E6ED5FE19C07A4300CF3398 /* Endpoint.swift in Sources */,
 				5EF2C0C819DAC3F400263137 /* MasonryCollectionViewCell.swift in Sources */,
@@ -1619,6 +1630,7 @@
 				60212CA019D5F20C001921E1 /* ArtistTests.swift in Sources */,
 				601A6E3119DC58E700EBA5A5 /* NewUser.swift in Sources */,
 				6051290519E19524004B05BF /* RegisterFlowViewTests.swift in Sources */,
+				6087605419EA117100116611 /* ListingsCountdownManager.swift in Sources */,
 				5EA137CB19C72BE100D0B743 /* XAppTokenSpec.swift in Sources */,
 				60C3983D19E8191F00CB81F4 /* GenericError.swift in Sources */,
 				5EA65C0F19D5FC98005EA4B4 /* SwitchView.swift in Sources */,

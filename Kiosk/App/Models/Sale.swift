@@ -1,10 +1,10 @@
 import UIKit
 
 class Sale: JSONAble {
-    let id: String
-    let isAuction:Bool
-    let startDate:NSDate
-    let endDate:NSDate
+    dynamic let id: String
+    dynamic let isAuction:Bool
+    dynamic let startDate:NSDate
+    dynamic let endDate:NSDate
 
     init(id: String, isAuction: Bool, startDate: NSDate, endDate: NSDate) {
         self.id = id
