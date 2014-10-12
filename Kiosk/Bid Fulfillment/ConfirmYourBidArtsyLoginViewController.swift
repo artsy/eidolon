@@ -4,6 +4,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
     @IBOutlet var confirmCredentialsButton: UIButton!
     lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
@@ -15,11 +16,11 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        if let nav = self.navigationController as? FulfillmentNavigationController {
+        let nav = self.fulfilmentNav()
+        bidDetailsPreviewView.bidDetails = nav.bidDetails
 
-            RAC(nav.bidDetails.newUser, "email") <~ emailTextField.rac_textSignal()
-            RAC(nav.bidDetails.newUser, "password") <~ passwordTextField.rac_textSignal()
-        }
+        RAC(nav.bidDetails.newUser, "email") <~ emailTextField.rac_textSignal()
+        RAC(nav.bidDetails.newUser, "password") <~ passwordTextField.rac_textSignal()
     }
     
     public override func viewWillAppear(animated: Bool) {
@@ -36,7 +37,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
             if let accessToken = accessTokenDict["access_token"] as? String {
                 self?.setupNavProviderWithToken(accessToken)
 
-                self?.fulfilmentNav()?.updateUserCredentials()?.subscribeNext({ [weak self] (accessTokenDict) -> Void in
+                self?.fulfilmentNav().updateUserCredentials().subscribeNext({ [weak self] (accessTokenDict) -> Void in
                     self?.checkForCreditCard()
                     return
                 })
@@ -57,13 +58,13 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
         let numberProvider:ReactiveMoyaProvider<ArtsyAPI> = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
 
-        self.fulfilmentNav()?.loggedInProvider = numberProvider
+        self.fulfilmentNav().loggedInProvider = numberProvider
     }
     
 
     func checkForCreditCard() {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
-        let authProvider = self.fulfilmentNav()?.loggedInProvider
+        let authProvider = self.fulfilmentNav().loggedInProvider
         authProvider?.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self).subscribeNext({ [weak self] (cards) -> Void in
 
             if countElements(cards as [Card]) > 0 {

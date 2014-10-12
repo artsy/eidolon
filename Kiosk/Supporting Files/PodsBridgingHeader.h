@@ -45,3 +45,4 @@
 #import <CardFlight/CardFlight.h>
 
 #import "UIView+BooleanDependentAnimation.h"
+#import <UIImageViewAligned/UIImageViewAligned.h>

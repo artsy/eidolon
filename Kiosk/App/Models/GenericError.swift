@@ -16,8 +16,9 @@ class GenericError: JSONAble {
         
         let type = json["type"].stringValue
         let message = json["message"].stringValue
-        let detailDictionary = json["detail"].object as [String: AnyObject]
-
-        return GenericError(type: type, message: message, detail: detailDictionary)
+        var detailDictionary = json["detail"].object as? [String: AnyObject]
+        
+        detailDictionary = detailDictionary ?? [:]
+        return GenericError(type: type, message: message, detail: detailDictionary!)
     }
 }

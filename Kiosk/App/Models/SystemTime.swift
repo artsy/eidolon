@@ -3,20 +3,21 @@ import Foundation
 class SystemTime {
     var systemTimeInterval: NSTimeInterval? = nil
 
-    func sync() {
+    func syncSignal() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.SystemTime
 
-        XAppRequest(endpoint).filterSuccessfulStatusCodes().mapJSON().subscribeNext({ [weak self] (response) -> Void in
-            if let dictionary = response as? NSDictionary {
-                let formatter = ISO8601DateFormatter()
+        return XAppRequest(endpoint).filterSuccessfulStatusCodes().mapJSON()
+            .doNext { [weak self] (response) -> Void in
+                if let dictionary = response as? NSDictionary {
+                    let formatter = ISO8601DateFormatter()
 
-                let artsyDate = formatter.dateFromString(dictionary["iso8601"] as String?)
-                self?.systemTimeInterval = NSDate().timeIntervalSinceDate(artsyDate)
+                    let artsyDate = formatter.dateFromString(dictionary["iso8601"] as String?)
+                    self?.systemTimeInterval = NSDate().timeIntervalSinceDate(artsyDate)
+                }
+                
+            }.doError { (error) -> Void in
+                println("Error: \(error.localizedDescription)")
             }
-
-        }, error: { (error) -> Void in
-            println("Error: \(error.localizedDescription)")
-        })
     }
 
     func inSync() -> Bool {

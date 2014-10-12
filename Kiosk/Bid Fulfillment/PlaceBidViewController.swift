@@ -12,6 +12,7 @@ class PlaceBidViewController: UIViewController {
     @IBOutlet var currentBidAmountLabel: UILabel!
     @IBOutlet var nextBidAmountLabel: UILabel!
 
+    @IBOutlet var artworkImageView: UIImageView!
     @IBOutlet var artistNameLabel: ARSerifLabel!
     @IBOutlet var artworkTitleLabel: ARSerifLabel!
     @IBOutlet var artworkPriceLabel: ARSerifLabel!
@@ -48,6 +49,7 @@ class PlaceBidViewController: UIViewController {
             RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { return ($0 as Float * 100) }
 
             if let saleArtwork:SaleArtwork = nav.bidDetails.saleArtwork {
+                
                 let minimumNextBidSignal = RACObserve(saleArtwork, "minimumNextBidCents")
                 let bidCountSignal = RACObserve(saleArtwork, "bidCount")
                 let openingBidSignal = RACObserve(saleArtwork, "openingBidCents")
@@ -71,8 +73,16 @@ class PlaceBidViewController: UIViewController {
                     RAC(artistNameLabel, "text") <~ RACObserve(artist, "name")
                 }
 
-                RAC(artworkTitleLabel, "text") <~ RACObserve(saleArtwork.artwork, "title")
+                RAC(artworkTitleLabel, "attributedText") <~ RACObserve(saleArtwork.artwork, "titleAndDate")
                 RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price")
+                
+                RACObserve(saleArtwork, "artwork").subscribeNext { [weak self] (artwork) -> Void in
+                    if let url = (artwork as? Artwork)?.images?.first?.thumbnailURL() {
+                        self?.artworkImageView.sd_setImageWithURL(url)
+                    } else {
+                        self?.artworkImageView.image = nil
+                    }
+                }
             }
         }
     }

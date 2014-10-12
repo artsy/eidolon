@@ -8,7 +8,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let bidDetails = self.navigationController?.fulfilmentNav()?.bidDetails {
+        if let bidDetails = self.navigationController?.fulfilmentNav().bidDetails {
 
             RAC(bidDetails.newUser, "password") <~ passwordTextField.rac_textSignal()
 

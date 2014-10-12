@@ -6,6 +6,8 @@ class ConfirmYourBidViewController: UIViewController {
     dynamic var number: String = ""
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
+    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
+
     @IBOutlet var numberAmountTextField: TextField!
     @IBOutlet var cursor: CursorView!
 
@@ -31,9 +33,10 @@ class ConfirmYourBidViewController: UIViewController {
         deleteSignal.subscribeNext(deleteDigitFromNumber)
         clearSignal.subscribeNext(clearNumber)
 
-        if let nav = self.navigationController as? FulfillmentNavigationController {
-            RAC(nav.bidDetails.newUser, "phoneNumber") <~ RACObserve(self, "number")
-        }
+        let nav = self.fulfilmentNav()
+
+        RAC(nav.bidDetails.newUser, "phoneNumber") <~ RACObserve(self, "number")
+        bidDetailsPreviewView.bidDetails = nav.bidDetails
     }
 
     @IBOutlet var enterButton: UIButton!
@@ -44,7 +47,7 @@ class ConfirmYourBidViewController: UIViewController {
         //   else send to enter email
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
-
+            
             let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: nav.auctionID!, phone: number)
             let bidderRequest = XAppRequest(endpoint, provider:provider).filterStatusCode(400).subscribeNext({ [weak self] (_) -> Void in
                 

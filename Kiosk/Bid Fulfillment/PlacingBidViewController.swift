@@ -4,62 +4,69 @@ class PlacingBidViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: ARSerifLabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let auctionID = self.fulfilmentNav()!.auctionID!
-        let bidDetails = self.fulfilmentNav()!.bidDetails
-           
+        
+        println("P:2")
+        
+        let auctionID = self.fulfilmentNav().auctionID!
+        let bidDetails = self.fulfilmentNav().bidDetails
+        bidDetailsPreviewView.bidDetails = bidDetails
+        
         self.setBidderIfNeeded(auctionID).then({ [weak self] () -> RACSignal! in
 
             return self?.createBidderForAuction(auctionID) ?? RACSignal.empty()
             
         }).then({ [weak self]() -> RACSignal! in
+            
             let saleArtwork = bidDetails.saleArtwork!
             return self?.bidOnSaleArtwork(saleArtwork, bidAmountCents: "\(bidDetails.bidAmountCents)")
 
         }).subscribeNext({ (bidder) -> Void in
-            println("SUCCESSSSSSSS")
+            println("P:7")
         })
     }
     
-    
     func setBidderIfNeeded(auctionID: String) -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)
-        let request = self.fulfilmentNav()!.loggedInProvider!.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Bidder.self)
+        let request = self.fulfilmentNav().loggedInProvider!.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Bidder.self)
         
-        request.doNext({ [weak self] (bidders) -> Void in
-            let newUser = self?.fulfilmentNav()?.bidDetails.newUser
+        request.subscribeNext({ [weak self] (bidders) -> Void in
             let bidders = bidders as [Bidder]
+            println("P:3")
+
             if countElements(bidders) > 0 { return }
-            
-            if let user = self?.fulfilmentNav()?.user? {
+            if let user = self?.fulfilmentNav().user! {
+                println("P:4")
                 user.bidder = bidders.first
             }
         })
         
         request.doError({ [weak self] (error) -> Void in
-                println("error, had issues with getting user bidders ")
-                return
+            println("error, had issues with getting user bidders ")
+            return
         })
         
         return request
     }
     
     func createBidderForAuction(auctionID: String) -> RACSignal? {
-        if self.fulfilmentNav()!.user!.bidder != nil {
+        if self.fulfilmentNav().user!.bidder != nil {
+            println("P:5")
             return nil
         }
         
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: auctionID)
-        let request = self.fulfilmentNav()?.loggedInProvider?.request(endpoint, method: .POST, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(Bidder.self)
+        let request = self.fulfilmentNav().loggedInProvider.request(endpoint, method: .POST, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(Bidder.self)
 
-        request?.doNext({ [weak self] (bidder) -> Void in
-            self?.fulfilmentNav()?.user?.bidder = bidder as? Bidder
+        request.subscribeNext({ [weak self] (bidder) -> Void in
+            self?.fulfilmentNav().user?.bidder = bidder as? Bidder
             return
         })
 
-        request?.doError({ [weak self] (error) -> Void in
+        request.doError({ [weak self] (error) -> Void in
             println("error, had issues with registering a bidder ")
             return
         })
@@ -70,9 +77,10 @@ class PlacingBidViewController: UIViewController {
     func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
         
-        let request = self.fulfilmentNav()!.loggedInProvider!.request(endpoint, method: .POST, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(SaleArtwork.self)
+        let request = self.fulfilmentNav().loggedInProvider.request(endpoint, method: .POST, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(SaleArtwork.self)
         
-        request.doNext({ [weak self] (updatedSaleArtwork) -> Void in
+        request.subscribeNext({ [weak self] (updatedSaleArtwork) -> Void in
+            println("P:6")
             return
         })
         

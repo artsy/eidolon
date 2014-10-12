@@ -10,6 +10,8 @@ import UIKit
 class RegisterViewController: UIViewController {
 
     @IBOutlet var flowView: RegisterFlowView!
+    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
+
     let coordinator = RegistrationCoordinator()
 
     class func instantiateFromStoryboard() -> RegisterViewController {
@@ -23,10 +25,10 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let nav = self.navigationController as? FulfillmentNavigationController {
-            flowView.details = nav.bidDetails
-        }
-
+        let details = self.fulfilmentNav().bidDetails
+        flowView.details = details
+        bidDetailsPreviewView.bidDetails = details
+        
         goToNextVC()
     }
 
@@ -42,6 +44,7 @@ class RegisterViewController: UIViewController {
 
         if let subscribableVC = controller as? RegistrationSubController {
             subscribableVC.finishedSignal.subscribeCompleted({ [weak self] () -> Void in
+                self?.flowView.update()
                 self?.goToNextVC()
                 return
             })

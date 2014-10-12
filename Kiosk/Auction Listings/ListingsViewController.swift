@@ -7,9 +7,14 @@ let TableCellIdentifier = "TableCell"
 
 class ListingsViewController: UIViewController {
     var allowAnimations = true
+    var auctionID: String!
+    
+    dynamic var sale = Sale(id: "", isAuction: true, startDate: NSDate(), endDate: NSDate())
     dynamic var saleArtworks = [SaleArtwork]()
     dynamic var sortedSaleArtworks = [SaleArtwork]()
     dynamic var cellIdentifier = MasonryCellIdentifier
+    
+    @IBOutlet var countdownManager: ListingsCountdownManager!
     
     lazy var collectionView: UICollectionView = {
         var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())!
@@ -35,12 +40,21 @@ class ListingsViewController: UIViewController {
         view.addSubview(collectionView)
         
         // Set up reactive bindings
-        let endpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: "ici-live-auction")
-
-        RAC(self, "saleArtworks") <~ XAppRequest(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
-            println("Error handling thing: \(error.localizedDescription)")
+        let artworksEndpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: auctionID)
+        
+        RAC(self, "saleArtworks") <~ XAppRequest(artworksEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
+            
+            if let genericError = error.artsyServerError() {
+                println("Sale Artworks: Error handling thing: \(genericError.message)")
+            }
             return RACSignal.empty()
         })
+        
+        let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
+        
+        RAC(self, "sale") <~ XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self)
+        RAC(self, "countdownManager.targetDate") <~ RACObserve(self, "sale.endDate")
+
         
         let gridSelectedSignal = switchView.selectedIndexSignal.map { (index) -> AnyObject! in
             switch index as Int {

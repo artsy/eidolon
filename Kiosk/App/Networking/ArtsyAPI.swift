@@ -10,6 +10,7 @@ enum ArtsyAPI {
     case RegisterToBid(auctionID: String)
     case MyCreditCards
     case CreatePINForBidder(bidderID: String)
+    case AuctionInfo(auctionID: String)
     case ActiveAuctions
     case Me
     case MyBiddersForAuction(auctionID: String)
@@ -56,6 +57,9 @@ extension ArtsyAPI : MoyaPath {
         case .XAuth:
             return "/oauth2/access_token"
 
+        case AuctionInfo(let id):
+            return "/api/v1/sale/\(id)"
+            
         case Auctions:
             return "/api/v1/sales"
 
@@ -137,6 +141,10 @@ extension ArtsyAPI : MoyaTarget {
 
         case PlaceABid:
             return stubbedResponse("PlaceABid")
+            
+        case .AuctionInfo:
+            return stubbedResponse("AuctionInfo")
+            
         }
     }
 }

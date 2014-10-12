@@ -1,6 +1,7 @@
 import UIKit
 
 enum RegistrationIndex {
+    case MobileVC
     case EmailVC
     case PasswordVC
     case CreditCardVC
@@ -13,6 +14,9 @@ class RegistrationCoordinator: NSObject {
     func viewControllerForIndex(index: RegistrationIndex) -> UIViewController {
         let storyboard = UIStoryboard.fulfillment()
         switch index {
+
+        case .MobileVC:
+            return storyboard.viewControllerWithID(.RegisterMobile)
 
         case .EmailVC:
             return storyboard.viewControllerWithID(.RegisterEmail)
@@ -32,6 +36,10 @@ class RegistrationCoordinator: NSObject {
     }
 
     func nextViewControllerForBidDetails(details:BidDetails) -> UIViewController {
+        if notSet(details.newUser.phoneNumber) {
+            return viewControllerForIndex(.MobileVC)
+        }
+
         if notSet(details.newUser.email) {
             return viewControllerForIndex(.EmailVC)
         }

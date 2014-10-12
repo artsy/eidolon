@@ -6,33 +6,34 @@ class RegisterFlowView: ORStackView {
 
     var details:BidDetails? {
         didSet {
-            self.setup()
+            self.update()
         }
     }
 
     var titles = ["Mobile", "Email", "Credit Card", "Postal/Zip"]
     var keypaths = ["phoneNumber", "email", "creditCardToken", "zipCode"]
 
-    func setup() {
+    func update() {
         let user = details!.newUser
         let titleLabels = titles.map(createTitleViewWithTitle)
         titleLabels[highlightedIndex].textColor = UIColor.artsyPurple()
 
+        removeAllSubviews()
         for i in 0 ..< countElements(titles) {
             let title = titleLabels[i]
             let info = createInfoLabel()
 
-            self.addSubview(title, withTopMargin: "10", sideMargin: "0")
+            addSubview(title, withTopMargin: "10", sideMargin: "0")
 
             if user.valueForKey(keypaths[i]) != nil {
-                self.addSubview(info, withTopMargin: "10", sideMargin: "0")
+                addSubview(info, withTopMargin: "10", sideMargin: "0")
                 RAC(info, "text") <~ RACObserve(user, keypaths[i])
             }
         }
 
         let spacer = UIView(frame: bounds)
         spacer.setContentHuggingPriority(12, forAxis: UILayoutConstraintAxis.Horizontal)
-        self.addSubview(spacer, withTopMargin: "0", sideMargin: "0")
+        addSubview(spacer, withTopMargin: "0", sideMargin: "0")
     }
 
     func createTitleViewWithTitle(title: String) -> UILabel {

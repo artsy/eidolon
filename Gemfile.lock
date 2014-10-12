@@ -8,7 +8,6 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    CFPropertyList (2.2.8)
     RubyInline (3.12.3)
       ZenTest (~> 4.3)
     ZenTest (4.11.0)
@@ -21,13 +20,13 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     claide (0.7.0)
-    cocoapods (0.34.1)
+    cocoapods (0.34.2)
       activesupport (>= 3.2.15, < 4)
       claide (~> 0.7.0)
-      cocoapods-core (= 0.34.1)
-      cocoapods-downloader (~> 0.7.1)
+      cocoapods-core (= 0.34.2)
+      cocoapods-downloader (~> 0.7.2)
       cocoapods-plugins (~> 0.3.1)
-      cocoapods-trunk (~> 0.2.0)
+      cocoapods-trunk (~> 0.3.0)
       cocoapods-try (~> 0.4.1)
       colored (~> 1.2)
       escape (~> 0.0.4)
@@ -35,7 +34,7 @@ GEM
       nap (~> 0.8)
       open4 (~> 1.3)
       xcodeproj (~> 0.19.2)
-    cocoapods-core (0.34.1)
+    cocoapods-core (0.34.2)
       activesupport (>= 3.2.15)
       fuzzy_match (~> 2.0.4)
       json_pure (~> 1.8)
@@ -43,7 +42,7 @@ GEM
     cocoapods-downloader (0.7.2)
     cocoapods-plugins (0.3.1)
       nap
-    cocoapods-trunk (0.2.0)
+    cocoapods-trunk (0.3.0)
       json_pure (~> 1.8)
       nap (>= 0.8)
       netrc
@@ -94,8 +93,7 @@ GEM
       security (~> 0.1.3)
       terminal-table (~> 1.4.5)
     terminal-table (1.4.5)
-    xcodeproj (0.19.2)
-      CFPropertyList (~> 2.2)
+    xcodeproj (0.19.3)
       activesupport (~> 3.0)
       colored (~> 1.2)
     xcpretty (0.1.7)

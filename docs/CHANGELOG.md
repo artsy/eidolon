@@ -1,5 +1,11 @@
 # End User Changes
 
+### 0.0.5 - 
+
+* Bid Detail Previews are shown throughout - @orta
+* Use italics for title, and no italics for dates - @orta
+* Added a countdown on main page - @orta
+
 ### 0.0.4 - 9th Oct 2014
 
 * Textfields use the right fonts - @1aura

@@ -29,12 +29,13 @@ class ListingsViewControllerTests: QuickSpec {
             
             let window = UIWindow(frame:UIScreen.mainScreen().bounds)
             let sut = ListingsViewController()
+            sut.auctionID = ""
             window.rootViewController = sut
             window.makeKeyAndVisible()
 
             sut.allowAnimations = false;
 
-            let artwork = Artwork(id: "", dateString: "", title: "", name: "", blurb: "", price: "", date: "")
+            let artwork = Artwork.fromJSON([:]) as Artwork
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             sut.presentModalForSaleArtwork(saleArtwork)
             
@@ -43,6 +44,7 @@ class ListingsViewControllerTests: QuickSpec {
         
         it("looks correct when displaying stubbed contents.") {
             let sut = ListingsViewController()
+            sut.auctionID = ""
             sut.switchView.shouldAnimate = false
             
             sut.beginAppearanceTransition(true, animated: false)
