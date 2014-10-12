@@ -3,13 +3,13 @@ import UIKit
 class ListingsCountdownManager: NSObject {
    
     @IBOutlet weak var countdownLabel: UILabel!
-    @IBOutlet var timeDenomenatorViews: [UILabel]!
+    @IBOutlet var countdownContainerView: UIView!
+
     dynamic var targetDate: NSDate?
 
     let time = SystemTime()
     
     override func awakeFromNib() {
-        self.setLabelsHidden(true)
         
         time.syncSignal().subscribeNext { [weak self] (_) -> Void in
             self?.setLabelsHidden(false)
@@ -18,24 +18,31 @@ class ListingsCountdownManager: NSObject {
     }
     
     func setLabelsHidden(hidden: Bool) {
-//        for label in timeDenomenatorViews as [UILabel] {
-//            label.hidden = hidden
-//        }
-//        self.countdownLabel.hidden = hidden
+        countdownContainerView.hidden = hidden
     }
+
+    func hideDenomenatorLabels() {
+        for subview in countdownContainerView.subviews as [UIView] {
+            subview.hidden = subview != countdownLabel
+        }
+    }
+
     
     func startTimer() {
-        let timer = NSTimer(timeInterval: 1, target: self, selector: "tick", userInfo: nil, repeats: true)
+        let timer = NSTimer(timeInterval: 0.49, target: self, selector: "tick:", userInfo: nil, repeats: true)
         NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
-        self.tick()
+        self.tick(timer)
     }
     
-    func tick() {
+    func tick(timer: NSTimer) {
         if let targetDate = targetDate {
 
             let now = time.date()
+            
             if now.laterDate(targetDate) == now {
                 self.countdownLabel.text = "CLOSED"
+                hideDenomenatorLabels()
+                timer.invalidate()
                 
             } else {
                 let flags: NSCalendarUnit = .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond

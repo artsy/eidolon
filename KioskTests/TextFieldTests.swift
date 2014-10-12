@@ -4,7 +4,7 @@ import Nimble
 class TextFieldTests: QuickSpec {
     override func spec() {
 
-        describe("TextField") {
+        pending("TextField") {
             var textField: TextField?
             beforeEach {
                 let window = UIWindow(frame:UIScreen.mainScreen().bounds)
@@ -28,7 +28,7 @@ class TextFieldTests: QuickSpec {
             }
         }
 
-        describe("SecureTextField") {
+        pending("SecureTextField") {
             var textField: SecureTextField?
             beforeEach {
                 let window = UIWindow(frame:UIScreen.mainScreen().bounds)

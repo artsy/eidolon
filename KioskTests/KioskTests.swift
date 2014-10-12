@@ -1,19 +1,20 @@
 class KioskTests {}
 
+import ObjectiveC
 import UIKit
 
 var sharedInstances = Dictionary<String, AnyObject>()
 
-public extension UIStoryboard {
+extension UIStoryboard {
 
-    public class func fulfillment() -> UIStoryboard {
+    class func fulfillment() -> UIStoryboard {
         // This will ensure that a storyboard instance comes out of the testing bundle
         // instead of the MainBundle.
 
         return UIStoryboard(name: "Fulfillment", bundle: NSBundle(forClass: KioskTests.self))
     }
 
-    public func viewControllerWithID(identifier:ViewControllerStoryboardIdentifier) -> UIViewController {
+    func viewControllerWithID(identifier:ViewControllerStoryboardIdentifier) -> UIViewController {
         let id = identifier.rawValue
 
         // Uncomment for experimental caching.
@@ -24,8 +25,19 @@ public extension UIStoryboard {
 //        } else {
             let vc = self.instantiateViewControllerWithIdentifier(id) as UIViewController
 //            sharedInstances[id] = NSKeyedArchiver.archivedDataWithRootObject(vc);
+            vc.wrapInFulfilmentNav()
             return vc;
 //        }
 
+    }
+}
+
+var AssociatedObjectHandle: UInt8 = 0
+
+extension UIViewController {
+    func wrapInFulfilmentNav() {
+        let nav = FulfillmentNavigationController(rootViewController: self)!
+        nav.auctionID = ""
+        objc_setAssociatedObject(self, &AssociatedObjectHandle, nav, UInt(OBJC_ASSOCIATION_RETAIN))
     }
 }

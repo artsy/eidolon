@@ -12,19 +12,22 @@ class SystemTimeTests: QuickSpec {
 
             it("returns true") {
                 let time = SystemTime()
-                time.sync()
-                expect(time.inSync()) == true
+                time.syncSignal().subscribeNext { (_) -> Void in
+                    expect(time.inSync()) == true
+                    return
+                }
             }
 
             it("returns a date in the future") {
                 let time = SystemTime()
-                time.sync()
+                time.syncSignal().subscribeNext { (_) -> Void in
+                    let currentYear = yearFromDate(NSDate())
+                    let timeYear = yearFromDate(time.date())
 
-                let currentYear = yearFromDate(NSDate())
-                let timeYear = yearFromDate(time.date())
+                    expect(timeYear) > currentYear
+                    expect(timeYear) == 2422
 
-                expect(timeYear) > currentYear
-                expect(timeYear) == 2422
+                }
             }
         }
 

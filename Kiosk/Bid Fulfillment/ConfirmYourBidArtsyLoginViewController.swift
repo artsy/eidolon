@@ -37,7 +37,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
             if let accessToken = accessTokenDict["access_token"] as? String {
                 self?.setupNavProviderWithToken(accessToken)
 
-                self?.fulfilmentNav().updateUserCredentials().doCompleted({ [weak self] (accessTokenDict) -> Void in
+                self?.fulfilmentNav().updateUserCredentials().subscribeNext({ [weak self] (accessTokenDict) -> Void in
                     self?.checkForCreditCard()
                     return
                 })

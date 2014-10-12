@@ -11,8 +11,8 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
         if let bidDetails = self.navigationController?.fulfilmentNav().bidDetails {
             RAC(bidDetails.newUser, "phoneNumber") <~ numberTextField.rac_textSignal()
             
-            let numberIsValidSignal = RACObserve(bidDetails.newUser, "phoneNumber").map(isZeroLengthString)
-            RAC(confirmButton, "enabled") <~ numberIsValidSignal.notEach()
+            let numberIsInvalidSignal = RACObserve(bidDetails.newUser, "phoneNumber").map(isZeroLengthString)
+            RAC(confirmButton, "enabled") <~ numberIsInvalidSignal.notEach()
         }
     }
     

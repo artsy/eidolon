@@ -6,7 +6,8 @@ class SaleArtworkTests: QuickSpec {
         describe("estimates") {
             var saleArtwork: SaleArtwork!
             beforeEach {
-                let artwork = Artwork(id: "id", dateString: "Some date", title: "Art", name: "Art", blurb: "Here's some art.", price: "100", date: "2014")
+
+                let artwork = Artwork.fromJSON([:]) as Artwork
                 saleArtwork = SaleArtwork(id: "id", artwork: artwork)
             }
             

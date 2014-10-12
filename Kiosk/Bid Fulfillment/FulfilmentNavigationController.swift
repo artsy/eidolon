@@ -15,7 +15,7 @@ class FulfillmentNavigationController: UINavigationController {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         let request = loggedInProvider.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self)
 
-        request.subscribeNext({ [weak self] (fullUser) -> Void in
+        return request.doNext({ [weak self] (fullUser) -> Void in
             println("P:1")
             
             let newUser = self?.bidDetails.newUser
@@ -25,13 +25,10 @@ class FulfillmentNavigationController: UINavigationController {
             newUser?.password = "----"
             newUser?.phoneNumber = self?.user?.phoneNumber
             newUser?.zipCode = self?.user?.postalCode
-        })
-        
-        request.doError({ [weak self] (error) -> Void in
+
+        }).doError({ [weak self] (error) -> Void in
             println("error, the pin is likely wrong")
             return
         })
-
-        return request
     }
 }

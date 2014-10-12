@@ -6,7 +6,6 @@ class Artwork: JSONAble {
     let dateString: String
     dynamic let title: String
     dynamic let titleAndDate: NSAttributedString
-    dynamic let name: String
     dynamic let blurb: String
     dynamic let price: String
     dynamic let date: String
@@ -16,12 +15,11 @@ class Artwork: JSONAble {
 
     dynamic var images: [Image]?
 
-    init(id: String, dateString: String, title: String, titleAndDate: NSAttributedString, name: String, blurb: String, price: String, date: String) {
+    init(id: String, dateString: String, title: String, titleAndDate: NSAttributedString, blurb: String, price: String, date: String) {
         self.id = id
         self.dateString = dateString
         self.title = title
         self.titleAndDate = titleAndDate
-        self.name = name
         self.blurb = blurb
         self.price = price
         self.date = date
@@ -31,7 +29,6 @@ class Artwork: JSONAble {
         let json = JSON(object: json)
 
         let id = json["id"].stringValue
-        let name = json["name"].stringValue
         let title = json["title"].stringValue
         let dateString = json["date"].stringValue
         let blurb = json["blurb"].stringValue
@@ -39,7 +36,7 @@ class Artwork: JSONAble {
         let date = json["date"].stringValue
         let titleAndDate = titleAndDateAttributedString(title, dateString)
         
-        let artwork = Artwork(id: id, dateString: dateString, title: title, titleAndDate:titleAndDate, name: name, blurb: blurb, price: price, date: date)
+        let artwork = Artwork(id: id, dateString: dateString, title: title, titleAndDate:titleAndDate, blurb: blurb, price: price, date: date)
 
         if let artistDictionary = json["artist"].object as? [String: AnyObject] {
             artwork.artists = [Artist.fromJSON(artistDictionary) as Artist]

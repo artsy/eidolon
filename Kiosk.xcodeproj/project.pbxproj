@@ -137,7 +137,7 @@
 		609A849819E53ED200476A94 /* RACFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A849619E53ED200476A94 /* RACFunctions.swift */; };
 		609A849A19E5416000476A94 /* RegistrationPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A849919E5416000476A94 /* RegistrationPasswordViewController.swift */; };
 		609A849B19E5416000476A94 /* RegistrationPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609A849919E5416000476A94 /* RegistrationPasswordViewController.swift */; };
-		60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */; };
+		60A3BBE519B9F14C00EF3907 /* ListingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BBE419B9F14C00EF3907 /* ListingsViewControllerTests.swift */; };
 		60A3BC2E19BA01DC00EF3907 /* PlaceBidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */; };
 		60A3BC3019BA054200EF3907 /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */; };
 		60A4FD3019E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A4FD2F19E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift */; };
@@ -467,7 +467,7 @@
 		609A849219E53B1F00476A94 /* RegistrationEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationEmailViewController.swift; sourceTree = "<group>"; };
 		609A849619E53ED200476A94 /* RACFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACFunctions.swift; sourceTree = "<group>"; };
 		609A849919E5416000476A94 /* RegistrationPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewController.swift; sourceTree = "<group>"; };
-		60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
+		60A3BBE419B9F14C00EF3907 /* ListingsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsViewControllerTests.swift; sourceTree = "<group>"; };
 		60A3BC2D19BA01DC00EF3907 /* PlaceBidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewController.swift; sourceTree = "<group>"; };
 		60A3BC2F19BA054200EF3907 /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; };
 		60A4FD2F19E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPostalZipViewController.swift; sourceTree = "<group>"; };
@@ -648,7 +648,7 @@
 			isa = PBXGroup;
 			children = (
 				6030A12A19D1AA0F00B934CA /* KioskTests.swift */,
-				60A3BBE419B9F14C00EF3907 /* ListViewControllerTests.swift */,
+				60A3BBE419B9F14C00EF3907 /* ListingsViewControllerTests.swift */,
 				5EAC732F19D01617002F918A /* ReactiveCocoaBindingsTests.swift */,
 				6051290219E15F63004B05BF /* SnapshotExtension.swift */,
 				5EA137CC19C733DE00D0B743 /* TestHelpers.swift */,
@@ -1594,7 +1594,7 @@
 				6071320619DD3AE600CA46F4 /* BidDetails.swift in Sources */,
 				60FFC2B519D9493000284B9F /* XAppAuthentication.swift in Sources */,
 				6030A11A19D1A1F300B934CA /* XAppToken.swift in Sources */,
-				60A3BBE519B9F14C00EF3907 /* ListViewControllerTests.swift in Sources */,
+				60A3BBE519B9F14C00EF3907 /* ListingsViewControllerTests.swift in Sources */,
 				6030A11E19D1A23100B934CA /* Moya+ReactiveCocoa.swift in Sources */,
 				6030A10419D1931400B934CA /* ConfirmYourBidPINViewController.swift in Sources */,
 				6087602319E9A6DF00116611 /* RegistrationMobileViewController.swift in Sources */,
