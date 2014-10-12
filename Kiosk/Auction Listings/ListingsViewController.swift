@@ -121,6 +121,7 @@ class ListingsViewController: UIViewController {
 
         if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
             let registerVC = RegisterViewController.instantiateFromStoryboard()
+            registerVC.closeModalAfterCompletion = true
             internalNav.viewControllers = [registerVC]
         }
 

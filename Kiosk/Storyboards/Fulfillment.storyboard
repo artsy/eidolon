@@ -455,6 +455,7 @@
                                 </state>
                                 <connections>
                                     <action selector="confirmTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="OrA-IY-Yqg"/>
+                                    <action selector="confirmTapped:" destination="BKe-0r-2Pc" eventType="touchUpInside" id="geK-LM-NHB"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dj6-cY-N6o" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
@@ -473,6 +474,7 @@
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
                         <outlet property="bidDetailsPreviewView" destination="dj6-cY-N6o" id="uCm-Ss-nAX"/>
+                        <outlet property="confirmButton" destination="dyr-7D-eW1" id="RA1-BA-kCe"/>
                         <outlet property="flowView" destination="mSI-YI-8GU" id="e9i-l8-VVU"/>
                         <segue destination="2lt-co-qW2" kind="push" identifier="Confirm Registration and Bid" id="ymK-a1-EJ3"/>
                     </connections>
@@ -1432,7 +1434,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qUf-dy-7C9"/>
-        <segue reference="ymK-a1-EJ3"/>
+        <segue reference="A1R-R2-CSF"/>
+        <segue reference="6qF-R8-kJy"/>
     </inferredMetricsTieBreakers>
 </document>

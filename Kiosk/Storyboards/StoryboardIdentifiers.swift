@@ -3,6 +3,7 @@
 public enum SegueIdentifier : String {
     case ArtsyUserHasNotRegisteredCard = "Artsy User Has Not Registered Card"
     case ConfirmBid = "Confirm Bid"
+    case ConfirmRegistrationandBid = "Confirm Registration and Bid"
     case ConfirmyourBidArtsyLogin = "Confirm your Bid - Artsy Login"
     case ConfirmyourBidBidderFound = "Confirm your Bid - Bidder Found"
     case ConfirmyourBidBidderNotFound = "Confirm your Bid - Bidder Not Found"
