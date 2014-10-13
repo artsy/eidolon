@@ -49,6 +49,13 @@ enum ArtsyAPI {
         case MyBiddersForAuction(let auctionID):
             return ["sale_id": auctionID]
 
+        case PlaceABid(let auctionID, let artworkID, let maxBidCents):
+            return [
+                "sale_id": auctionID,
+                "artwork_id":  artworkID,
+                "max_bid_amount_cents": maxBidCents
+            ]
+            
         default:
             return [:]
         }
@@ -75,10 +82,10 @@ extension ArtsyAPI : MoyaPath {
             return "/api/v1/sale/\(id)/sale_artworks"
 
         case SystemTime:
-            return "api/v1/system/time"
+            return "/api/v1/system/time"
 
         case RegisterToBid:
-            return "api/v1/bidder"
+            return "/api/v1/bidder"
 
         case MyCreditCards:
             return "/api/v1/me/credit_cards"
@@ -161,7 +168,7 @@ extension ArtsyAPI : MoyaTarget {
             return stubbedResponse("Me")
 
         case PlaceABid:
-            return stubbedResponse("PlaceABid")
+            return stubbedResponse("CreateABid")
             
         case .AuctionInfo:
             return stubbedResponse("AuctionInfo")
