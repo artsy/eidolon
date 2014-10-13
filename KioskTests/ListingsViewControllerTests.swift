@@ -42,31 +42,45 @@ class ListingsViewControllerTests: QuickSpec {
             expect(sut.presentedViewController!) != nil
         }
         
-        it("looks correct when displaying stubbed contents.") {
-            let sut = ListingsViewController()
-            sut.auctionID = ""
-            sut.switchView.shouldAnimate = false
-            
-            sut.beginAppearanceTransition(true, animated: false)
-            sut.endAppearanceTransition()
-            
-            sut.switchView[0]?.sendActionsForControlEvents(.TouchUpInside)
-            expect(sut).to(haveValidSnapshot(named: "grid"))
-            
-            sut.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
-            expect(sut).to(haveValidSnapshot(named: "least bids"))
-            
-            sut.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
-            expect(sut).to(haveValidSnapshot(named: "most bids"))
-            
-            sut.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
-            expect(sut).to(haveValidSnapshot(named: "highest bid"))
-            
-            sut.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
-            expect(sut).to(haveValidSnapshot(named: "lowest bid"))
-            
-            sut.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
-            expect(sut).to(haveValidSnapshot(named: "alphabetical"))
+        describe("when displaying stubbed contents.") {
+            var sut: ListingsViewController!
+            beforeEach {
+                sut = ListingsViewController()
+                sut.auctionID = ""
+                sut.switchView.shouldAnimate = false
+
+                sut.beginAppearanceTransition(true, animated: false)
+                sut.endAppearanceTransition()
+            }
+
+            it("grid") {
+                sut.switchView[0]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut).to(haveValidSnapshot(named: "grid"))
+            }
+            it("least bids") {
+                sut.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut).to(haveValidSnapshot(named: "least bids"))
+            }
+
+            it("most bids") {
+                sut.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut).to(haveValidSnapshot(named: "most bids"))
+            }
+
+            it("highest bid") {
+                sut.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut).to(haveValidSnapshot(named: "highest bid"))
+            }
+
+            it("lowest bid") {
+                sut.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut).to(haveValidSnapshot(named: "lowest bid"))
+            }
+
+            it("alphabetical") {
+                sut.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut).to(haveValidSnapshot(named: "alphabetical"))
+            }
         }
     }
 }

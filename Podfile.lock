@@ -44,7 +44,7 @@ DEPENDENCIES:
   - ARAnalytics/Mixpanel
   - ARCollectionViewMasonryLayout (~> 2.0.0)
   - Artsy+UIColors
-  - Artsy+UIFonts
+  - Artsy+UIFonts (from `https://github.com/artsy/Artsy-UIFonts.git`, branch `new-tracking`)
   - Artsy+UILabels
   - Artsy-UIButtons (from `https://github.com/artsy/Artsy-UIButtons.git`, commit `e32ee7eca98514c9ade3cd569d43a2c5a73fea29`)
   - CardFlight
@@ -60,6 +60,9 @@ DEPENDENCIES:
   - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
 
 EXTERNAL SOURCES:
+  Artsy+UIFonts:
+    :branch: new-tracking
+    :git: https://github.com/artsy/Artsy-UIFonts.git
   Artsy-UIButtons:
     :commit: e32ee7eca98514c9ade3cd569d43a2c5a73fea29
     :git: https://github.com/artsy/Artsy-UIButtons.git
