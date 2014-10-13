@@ -2,6 +2,8 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var helpViewController: HelpViewController?
+    var helpButton: CircularBlackButton!
                             
     var window: UIWindow! = UIWindow(frame:CGRectMake(0, 0, UIScreen.mainScreen().bounds.height, UIScreen.mainScreen().bounds.width))
 
@@ -27,9 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ARHockeyAppLiveID: keys.hockeyProductionSecret(),
             ARMixpanelToken: keys.mixpanelProductionAPIClientKey()
         ])
+        
+        setupHelpButton()
 
         return true
     }
-
 }
 
