@@ -33,7 +33,7 @@ PODS:
   - NJKWebViewProgress/ProgressView (0.2.3)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
-  - Reveal-iOS-SDK (1.0.5)
+  - Reveal-iOS-SDK (1.0.6)
   - SDWebImage (3.7.1):
     - SDWebImage/Core
   - SDWebImage/Core (3.7.1)
@@ -89,7 +89,7 @@ SPEC CHECKSUMS:
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
-  Reveal-iOS-SDK: d4b2f4c20d5b823b7f8b88250fe1b71cecd424a7
+  Reveal-iOS-SDK: 74a39b426dbc915962704ed24f43ee32ae7797f9
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   UIImageViewAligned: efc1b8b5750dea68b7ee67236f4c64f93e65b674
 

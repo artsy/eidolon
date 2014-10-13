@@ -19,6 +19,8 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
     override func setup() {
         super.setup()
         
+        contentView.constrainWidth("\(TableCollectionViewCell.Width)")
+        
         // Configure subviews
         numberOfBidsLabel.textAlignment = .Center
         artworkImageView.contentMode = .ScaleAspectFill
@@ -28,23 +30,45 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         cellSubviews.map{ self.contentView.addSubview($0) }
         
         // Constrain subviews
-        artworkImageView.constrainHeightToView(contentView, predicate: "-28")
         artworkImageView.alignAttribute(.Width, toAttribute: .Height, ofView: artworkImageView, predicate: nil)
-        artworkImageView.alignTop("14", leading: "0", bottom: nil, trailing: nil, toView: contentView)
+        artworkImageView.alignTop("14", leading: "0", bottom: "-14", trailing: nil, toView: contentView)
+        artworkImageView.constrainHeight("56")
         infoView.alignAttribute(.Left, toAttribute: .Right, ofView: artworkImageView, predicate: "28")
         infoView.alignCenterYWithView(artworkImageView, predicate: "0")
         infoView.constrainWidth("184")
-        currentBidLabel.constrainLeadingSpaceToView(infoView, predicate: "33")
+        currentBidLabel.alignAttribute(.Left, toAttribute: .Right, ofView: infoView, predicate: "33")
         currentBidLabel.alignCenterYWithView(artworkImageView, predicate: "0")
         currentBidLabel.constrainWidth("304")
-        numberOfBidsLabel.constrainLeadingSpaceToView(currentBidLabel, predicate: "33")
+        numberOfBidsLabel.alignAttribute(.Left, toAttribute: .Right, ofView: currentBidLabel, predicate: "33")
         numberOfBidsLabel.alignCenterYWithView(artworkImageView, predicate: "0")
         numberOfBidsLabel.alignAttribute(.Right, toAttribute: .Left, ofView: bidButton, predicate: "-33")
         
         bidButton.alignBottom(nil, trailing: "0", toView: contentView)
-        bidButton.alignCenterYWithView(contentView, predicate: "0")
+        bidButton.alignCenterYWithView(artworkImageView, predicate: "0")
         bidButton.constrainWidth("127")
         dividerView.constrainHeight("1")
         dividerView.alignTop(nil, leading: "0", bottom: "0", trailing: "0", toView: contentView)
+    }
+}
+
+extension TableCollectionViewCell {
+    private struct SharedDimensions {
+        var width: CGFloat = 0
+        var height: CGFloat = 84
+        
+        static var instance = SharedDimensions()
+    }
+    
+    class var Width: CGFloat {
+        get {
+            return SharedDimensions.instance.width
+        }
+        set (newWidth) {
+            SharedDimensions.instance.width = newWidth
+        }
+    }
+    
+    class var Height: CGFloat {
+        return SharedDimensions.instance.height
     }
 }

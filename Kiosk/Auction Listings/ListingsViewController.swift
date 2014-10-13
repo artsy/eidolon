@@ -7,6 +7,7 @@ let TableCellIdentifier = "TableCell"
 
 class ListingsViewController: UIViewController {
     var allowAnimations = true
+    var auctionID = AuctionID
     
     dynamic var sale = Sale(id: "", isAuction: true, startDate: NSDate(), endDate: NSDate())
     dynamic var saleArtworks = [SaleArtwork]()
@@ -39,7 +40,7 @@ class ListingsViewController: UIViewController {
         view.addSubview(collectionView)
         
         // Set up reactive bindings
-        let artworksEndpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: AuctionID)
+        let artworksEndpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: auctionID)
         
         RAC(self, "saleArtworks") <~ XAppRequest(artworksEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
             
@@ -49,7 +50,7 @@ class ListingsViewController: UIViewController {
             return RACSignal.empty()
         })
         
-        let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: AuctionID)
+        let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
         
         RAC(self, "sale") <~ XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self)
         RAC(self, "countdownManager.targetDate") <~ RACObserve(self, "sale.endDate")
@@ -205,7 +206,8 @@ private extension ListingsViewController {
     
     class func tableLayout(width: CGFloat) -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake(width, 84)
+        TableCollectionViewCell.Width = width
+        layout.itemSize = CGSizeMake(width, TableCollectionViewCell.Height)
         layout.minimumLineSpacing = 0.0
         
         return layout
