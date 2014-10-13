@@ -65,8 +65,16 @@ public class CircularBlackButton: ARBlackFlatButton {
             }
         }
         
+        if let titleLabel = titleLabel {
+            titleLabel.font = titleLabel.font.fontWithSize(12)
+        }
+        
         layer.borderWidth = 2
         layer.borderColor = UIColor.whiteColor().CGColor
         layer.masksToBounds = true
+    }
+    
+    public override func intrinsicContentSize() -> CGSize {
+        return CGSize(width: 45, height: 45)
     }
 }

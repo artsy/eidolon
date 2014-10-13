@@ -5,7 +5,7 @@ let AuctionID = "ici-live-auction"
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var helpViewController: HelpViewController?
-    var helpButton: CircularBlackButton!
+    var helpButton: UIButton!
                             
     var window: UIWindow! = UIWindow(frame:CGRectMake(0, 0, UIScreen.mainScreen().bounds.height, UIScreen.mainScreen().bounds.width))
 

@@ -10,12 +10,10 @@ extension AppDelegate {
     
     func setupHelpButton() {
         helpButton = CircularBlackButton()
-        helpButton.setTitle("HELP", forState: .Normal)
+        helpButton.setTitle("Help", forState: .Normal)
         helpButton.addTarget(self, action: "helpButtonPressed", forControlEvents: .TouchUpInside)
-        helpButton.constrainWidth("44")
-        helpButton.constrainHeight("44")
         window.addSubview(helpButton)
-        helpButton.alignTop(nil, leading: nil, bottom: "-44", trailing: "-44", toView: window)
+        helpButton.alignTop(nil, leading: nil, bottom: "-45", trailing: "-45", toView: window)
         window.layoutIfNeeded()
     }
     
