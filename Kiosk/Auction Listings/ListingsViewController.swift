@@ -260,11 +260,11 @@ enum SwitchValues: Int {
         case .LeastBids:
             return "Least Bids"
         case .MostBids:
-            return "MostBids"
+            return "Most Bids"
         case .HighestCurrentBid:
-            return "Highest Current Bid"
+            return "Highest Bid"
         case .LowestCurrentBid:
-            return "Lowest Current Bid"
+            return "Lowest Bid"
         case .Alphabetical:
             return "A—Z"
         }
