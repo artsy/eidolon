@@ -29,8 +29,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ])
         
         setupHelpButton()
+        setupUserAgent()
 
         return true
+    }
+
+    func setupUserAgent() {
+        
+        let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as String?
+        let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as String?
+        
+        let webView = UIWebView(frame: CGRectZero)
+        let oldAgent = webView.stringByEvaluatingJavaScriptFromString("navigator.userAgent")
+        
+        let agentString = "\(oldAgent) Artsy-Mobile/\(version!) Eigen/\(build!) Kiosk Eidolon"
+
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let userAgentDict = ["UserAgent" as NSObject : agentString]
+        defaults.registerDefaults(userAgentDict)
     }
 }
 

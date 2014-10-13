@@ -7,12 +7,27 @@ enum RegistrationIndex {
     case CreditCardVC
     case ZipCodeVC
     case ConfirmVC
+    
+    func toInt() -> Int {
+        switch (self) {
+            case MobileVC: return 0
+            case EmailVC: return 1
+            case PasswordVC: return 1
+            case CreditCardVC: return 2
+            case ZipCodeVC: return 3
+            case ConfirmVC: return 4
+        }
+    }
 }
 
 class RegistrationCoordinator: NSObject {
 
+    dynamic var currentIndex: Int = 0
+    
     func viewControllerForIndex(index: RegistrationIndex) -> UIViewController {
         let storyboard = UIStoryboard.fulfillment()
+        currentIndex = index.toInt()
+        
         switch index {
 
         case .MobileVC:

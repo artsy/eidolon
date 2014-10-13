@@ -2,21 +2,29 @@ import UIKit
 
 class RegisterFlowView: ORStackView {
 
-    var highlightedIndex = 0
-
+    dynamic var highlightedIndex = 0
+    
     var details:BidDetails? {
         didSet {
             self.update()
         }
     }
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.backgroundColor = UIColor.whiteColor()
+
+        self.bottomMarginHeight = CGFloat(NSNotFound)
+        self.updateConstraints()
+    }
+    
     var titles = ["Mobile", "Email", "Credit Card", "Postal/Zip"]
     var keypaths = ["phoneNumber", "email", "creditCardToken", "zipCode"]
 
     func update() {
         let user = details!.newUser
         let titleLabels = titles.map(createTitleViewWithTitle)
-        titleLabels[highlightedIndex].textColor = UIColor.artsyPurple()
 
         removeAllSubviews()
         for i in 0 ..< countElements(titles) {
@@ -29,6 +37,10 @@ class RegisterFlowView: ORStackView {
                 addSubview(info, withTopMargin: "10", sideMargin: "0")
                 RAC(info, "text") <~ RACObserve(user, keypaths[i])
             }
+        }
+        
+        if highlightedIndex < countElements(titleLabels) {
+            titleLabels[highlightedIndex].textColor = UIColor.artsyPurple()
         }
 
         let spacer = UIView(frame: bounds)

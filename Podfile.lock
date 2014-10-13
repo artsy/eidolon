@@ -17,6 +17,8 @@ PODS:
   - CardFlight (1.8):
     - CardFlight/AudioJack
   - CardFlight/AudioJack (1.8)
+  - DZNWebViewController (2.0):
+    - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
   - EDColor (0.4.0)
   - FBSnapshotTestCase (1.1)
@@ -24,6 +26,11 @@ PODS:
   - HockeySDK (3.5.4)
   - ISO8601DateFormatter (0.7)
   - Mixpanel (2.5.4)
+  - NJKWebViewProgress (0.2.3):
+    - NJKWebViewProgress/Core
+    - NJKWebViewProgress/ProgressView
+  - NJKWebViewProgress/Core (0.2.3)
+  - NJKWebViewProgress/ProgressView (0.2.3)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
   - Reveal-iOS-SDK (1.0.5)
@@ -41,6 +48,7 @@ DEPENDENCIES:
   - Artsy+UILabels
   - Artsy-UIButtons (from `https://github.com/artsy/Artsy-UIButtons.git`, commit `e32ee7eca98514c9ade3cd569d43a2c5a73fea29`)
   - CardFlight
+  - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase (from `https://github.com/AshFurrow/ios-snapshot-test-case.git`, branch `renderAsLayer`)
   - FLKAutoLayout
@@ -55,6 +63,8 @@ EXTERNAL SOURCES:
   Artsy-UIButtons:
     :commit: e32ee7eca98514c9ade3cd569d43a2c5a73fea29
     :git: https://github.com/artsy/Artsy-UIButtons.git
+  DZNWebViewController:
+    :git: https://github.com/orta/DZNWebViewController.git
   FBSnapshotTestCase:
     :branch: renderAsLayer
     :git: https://github.com/AshFurrow/ios-snapshot-test-case.git
@@ -69,6 +79,7 @@ SPEC CHECKSUMS:
   Artsy+UILabels: 1dfc53c1e79727664c6081e305aeefa557ac5de5
   Artsy-UIButtons: af5cf4179dc7022d630c768d17c42eb5c1688319
   CardFlight: 22298dc11252ce13160073c416506c869abea9a1
+  DZNWebViewController: 8716115ea00d6abbfb5dc937fff85b222b70fc68
   ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
   FBSnapshotTestCase: 188c80bfcb72e744eb0b99d45989d12687c40cf8
@@ -76,6 +87,7 @@ SPEC CHECKSUMS:
   HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
   ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
+  NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
   Reveal-iOS-SDK: d4b2f4c20d5b823b7f8b88250fe1b71cecd424a7
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d

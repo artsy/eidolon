@@ -1,11 +1,14 @@
 # End User Changes
 
-### 0.0.5 - 
+### 0.0.5 - 13th Oct 2014
 
 * Bid Detail Previews are shown throughout - @orta
 * Use italics for title, and no italics for dates - @orta
 * Added a countdown on main page - @orta
 * Added help menu - @ashfurrow
+* Added a mode for loading an Auction via artsy.net - @orta
+* Added an admin panel to close the app - @orta
+* Turned off the status bar - @orta
 
 ### 0.0.4 - 9th Oct 2014
 
