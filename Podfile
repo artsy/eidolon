@@ -32,6 +32,7 @@ pod 'ARAnalytics/HockeyApp'
 pod 'CardFlight'
 pod 'ECPhoneNumberFormatter'
 pod 'UIImageViewAligned', :git => 'https://github.com/orta/UIImageViewAligned.git'
+pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewController.git"
 
 target "KioskTests", :exclusive => true do
     pod 'FBSnapshotTestCase', :git => 'https://github.com/AshFurrow/ios-snapshot-test-case.git', :branch => 'renderAsLayer'

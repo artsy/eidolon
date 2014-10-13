@@ -3,19 +3,27 @@ import Foundation
 enum ArtsyAPI {
     case XApp
     case XAuth(email: String, password: String)
-    case Auctions
-    case AuctionListings(id: String)
     case SystemTime
-    case FindBidderRegistration(auctionID: String, phone: String)
-    case RegisterToBid(auctionID: String)
+    
+    case Me
+    
     case MyCreditCards
     case CreatePINForBidder(bidderID: String)
+    case FindBidderRegistration(auctionID: String, phone: String)
+    case RegisterToBid(auctionID: String)
+    
+    case Auctions
+    case AuctionListings(id: String)
     case AuctionInfo(auctionID: String)
     case ActiveAuctions
-    case Me
+    
     case MyBiddersForAuction(auctionID: String)
     case PlaceABid(auctionID: String, artworkID: String, maxBidCents: String)
 
+    case UpdateMe(email: String, phone: String, postCode: String)
+    case CreateUser(email: String, password: String, phone: String, postCode: String)
+//    case RegisterCard(balancedToken: String)
+    
     var defaultParameters: [String: AnyObject] {
         switch self {
 
@@ -84,6 +92,12 @@ extension ArtsyAPI : MoyaPath {
         case Me:
             return "/api/v1/me"
 
+        case UpdateMe:
+            return "/api/v1/me"
+
+        case CreateUser:
+            return "/api/v1/user"
+
         case MyBiddersForAuction:
             return "/api/v1/me/bidders"
 
@@ -135,6 +149,13 @@ extension ArtsyAPI : MoyaTarget {
         case Me:
             return stubbedResponse("Me")
 
+        case .UpdateMe:
+            return stubbedResponse("Me")
+            
+        case .CreateUser:
+            return stubbedResponse("Me")
+
+            
         // This API returns a 302, so stubbed response isn't valid
         case FindBidderRegistration:
             return stubbedResponse("Me")

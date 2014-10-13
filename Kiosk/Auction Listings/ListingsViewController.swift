@@ -121,7 +121,7 @@ class ListingsViewController: UIViewController {
 
         if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
             let registerVC = RegisterViewController.instantiateFromStoryboard()
-            registerVC.closeModalAfterCompletion = true
+            registerVC.createNewUser = true
             internalNav.viewControllers = [registerVC]
         }
 
@@ -129,6 +129,10 @@ class ListingsViewController: UIViewController {
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         }
 
+    }
+    
+    @IBAction func longPressForAdmin(sender: AnyObject) {
+        self.performSegue(.ShowAdminOptions)
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -101,10 +101,11 @@ class PlaceBidViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier! == (SegueIdentifier.LoadWebView.rawValue) {
             let webVC = segue.destinationViewController as WebViewController
+            
             if sender as UIButton == conditionsOfSaleButton {
-                webVC.url = NSURL(string: conditionsOfSaleAddress)
+                webVC.URL = NSURL(string: conditionsOfSaleAddress)
             } else if sender as UIButton == privacyPolicyButton {
-                webVC.url = NSURL(string: privacyPolicyAddress)
+                webVC.URL = NSURL(string: privacyPolicyAddress)
             }
         }
     }
