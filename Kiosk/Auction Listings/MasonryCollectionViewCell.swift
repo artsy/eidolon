@@ -22,6 +22,8 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
     override func setup() {
         super.setup()
         
+        contentView.constrainWidth("\(MasonryCollectionViewCellWidth)")
+        
         // Configure subviews
         // Need an explicit frame so that drawTopDottedBorder() is reliable
         dividerView.frame = CGRect(origin: CGPointZero, size: CGSize(width: MasonryCollectionViewCellWidth, height: 1))
