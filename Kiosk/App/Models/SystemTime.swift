@@ -34,6 +34,6 @@ class SystemTime {
     }
 
     func reset() {
-        self.systemTimeInterval = nil
+        systemTimeInterval = nil
     }
 }

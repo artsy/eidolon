@@ -38,9 +38,9 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
         cardHandler.startSearching()
         
         if let bidDetails = self.navigationController?.fulfilmentNav().bidDetails {
-            RAC(bidDetails.newUser, "creditCardName") <~ RACObserve(self, "cardName")
-            RAC(bidDetails.newUser, "creditCardDigit") <~ RACObserve(self, "cardLastDigits")
-            RAC(bidDetails.newUser, "creditCardToken") <~ RACObserve(self, "cardToken")
+            RAC(bidDetails, "newUser.creditCardName") <~ RACObserve(self, "cardName")
+            RAC(bidDetails, "newUser.creditCardDigit") <~ RACObserve(self, "cardLastDigits")
+            RAC(bidDetails, "newUser.creditCardToken") <~ RACObserve(self, "cardToken")
         }
     }
 }

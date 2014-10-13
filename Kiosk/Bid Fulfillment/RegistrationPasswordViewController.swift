@@ -10,7 +10,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
 
         if let bidDetails = self.navigationController?.fulfilmentNav().bidDetails {
 
-            RAC(bidDetails.newUser, "password") <~ passwordTextField.rac_textSignal()
+            RAC(bidDetails, "newUser.password") <~ passwordTextField.rac_textSignal()
 
             let longerThan4CharSignal = RACObserve(bidDetails.newUser, "password").map(longerThan4CharString)
             RAC(confirmButton, "enabled") <~ longerThan4CharSignal

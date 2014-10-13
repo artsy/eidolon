@@ -10,7 +10,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
 
         if let bidDetails = self.navigationController?.fulfilmentNav().bidDetails {
 
-            RAC(bidDetails.newUser, "email") <~ emailTextField.rac_textSignal()
+            RAC(bidDetails, "newUser.email") <~ emailTextField.rac_textSignal()
 
             let emailIsValidSignal = RACObserve(bidDetails.newUser, "email").map(stringIsEmailAddress)
             RAC(confirmButton, "enabled") <~ emailIsValidSignal.notEach()
