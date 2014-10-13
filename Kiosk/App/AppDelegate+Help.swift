@@ -51,7 +51,9 @@ extension AppDelegate {
         let helpViewController = HelpViewController()
         helpViewController.modalPresentationStyle = .Custom
         helpViewController.transitioningDelegate = self
-        window.rootViewController?.presentViewController(helpViewController, animated: true, completion: {
+        
+        let controller = window.rootViewController?.presentedViewController ?? window.rootViewController
+        controller?.presentViewController(helpViewController, animated: true, completion: {
             self.helpViewController = helpViewController
             completion?()
         })

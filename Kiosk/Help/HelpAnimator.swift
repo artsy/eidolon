@@ -15,50 +15,55 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView()
         
+        
+        let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey) ?? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!.view
+        let toView = transitionContext.viewForKey(UITransitionContextToViewKey) ?? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!.view
+        
+        let a = transitionContext.viewForKey(UITransitionContextFromViewKey)
+        let b = transitionContext.viewForKey(UITransitionContextToViewKey)
+
         if presenting {
-            let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
             let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as HelpViewController
             
-            fromViewController.view.userInteractionEnabled = false
+            fromView.userInteractionEnabled = false
             
             containerView.backgroundColor = UIColor.blackColor()
             
-            containerView.addSubview(fromViewController.view)
-            containerView.addSubview(toViewController.view)
+            containerView.addSubview(fromView)
+            containerView.addSubview(toView)
             
-            toViewController.view.alignTop("0", bottom: "0", toView: containerView)
-            toViewController.view.constrainWidth("\(HelpViewController.width)")
-            toViewController.positionConstraints = toViewController.view.alignAttribute(.Left, toAttribute: .Right, ofView: containerView, predicate: "0")
+            toView.alignTop("0", bottom: "0", toView: containerView)
+            toView.constrainWidth("\(HelpViewController.width)")
+            toViewController.positionConstraints = toView.alignAttribute(.Left, toAttribute: .Right, ofView: containerView, predicate: "0")
             containerView.layoutIfNeeded()
             
             UIView.animateWithDuration(transitionDuration(transitionContext), animations: {
                 containerView.removeConstraints(toViewController.positionConstraints ?? [])
-                toViewController.positionConstraints = toViewController.view.alignLeading(nil, trailing: "0", toView: containerView)
+                toViewController.positionConstraints = toView.alignLeading(nil, trailing: "0", toView: containerView)
                 containerView.layoutIfNeeded()
                 
-                fromViewController.view.alpha = 0.5
+                fromView.alpha = 0.5
             }, completion: { (value: Bool) in
                 transitionContext.completeTransition(true)
             })
         } else {
             let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! as HelpViewController
-            let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
             
-            toViewController.view.userInteractionEnabled = true
+            toView.userInteractionEnabled = true
             
-            containerView.addSubview(toViewController.view)
-            containerView.addSubview(fromViewController.view)
+            containerView.addSubview(toView)
+            containerView.addSubview(fromView)
             
             UIView.animateWithDuration(self.transitionDuration(transitionContext), animations: {
                 containerView.removeConstraints(fromViewController.positionConstraints ?? [])
-                fromViewController.positionConstraints = fromViewController.view.alignAttribute(.Left, toAttribute: .Right, ofView: containerView, predicate: "0")
+                fromViewController.positionConstraints = fromView.alignAttribute(.Left, toAttribute: .Right, ofView: containerView, predicate: "0")
                 containerView.layoutIfNeeded()
                 
-                toViewController.view.alpha = 1.0
+                toView.alpha = 1.0
             }, completion: { (value: Bool) in
                 transitionContext.completeTransition(true)
                 // This following line is to work around a bug in iOS 8 💩
-                UIApplication.sharedApplication().keyWindow!.insertSubview(toViewController.view, atIndex: 0)
+                UIApplication.sharedApplication().keyWindow!.insertSubview(transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!.view, atIndex: 0)
             })
         }
     }

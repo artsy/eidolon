@@ -7,7 +7,6 @@ let TableCellIdentifier = "TableCell"
 
 class ListingsViewController: UIViewController {
     var allowAnimations = true
-    var auctionID: String!
     
     dynamic var sale = Sale(id: "", isAuction: true, startDate: NSDate(), endDate: NSDate())
     dynamic var saleArtworks = [SaleArtwork]()
@@ -40,7 +39,7 @@ class ListingsViewController: UIViewController {
         view.addSubview(collectionView)
         
         // Set up reactive bindings
-        let artworksEndpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: auctionID)
+        let artworksEndpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: AuctionID)
         
         RAC(self, "saleArtworks") <~ XAppRequest(artworksEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
             
@@ -50,7 +49,7 @@ class ListingsViewController: UIViewController {
             return RACSignal.empty()
         })
         
-        let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
+        let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: AuctionID)
         
         RAC(self, "sale") <~ XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self)
         RAC(self, "countdownManager.targetDate") <~ RACObserve(self, "sale.endDate")
