@@ -28,7 +28,7 @@ func XAppRequest(token: ArtsyAPI, provider: ReactiveMoyaProvider<ArtsyAPI> = Pro
 
     // First perform XAppTokenRequest(). When it completes, then the signal returned from the closure will be subscribed to.
 
-    return XAppTokenRequest(defaults).then({ () -> RACSignal! in
+    return XAppTokenRequest(defaults).then {
         return provider.request(token, method: method, parameters: parameters)
-    })
+    }
 }

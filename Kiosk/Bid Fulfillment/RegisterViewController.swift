@@ -14,8 +14,12 @@ class RegisterViewController: UIViewController {
     @IBOutlet var confirmButton: UIButton!
 
     let coordinator = RegistrationCoordinator()
-    var closeModalAfterCompletion = false
+    let registrationNetworkModel = RegistrationNetworkModel()
 
+    dynamic var placingBid = false
+    dynamic var createNewUser = false
+    dynamic var details:BidDetails!
+    
     class func instantiateFromStoryboard() -> RegisterViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.RegisterAnAccount) as RegisterViewController
     }
@@ -33,7 +37,10 @@ class RegisterViewController: UIViewController {
         RAC(confirmButton, "hidden") <~ indexIsConfirmSignal.notEach()
         RAC(flowView, "highlightedIndex") <~ registerIndexSignal
 
-        let details = self.fulfilmentNav().bidDetails
+        RAC(registrationNetworkModel, "createNewUser") <~ RACObserve(self, "createNewUser")
+        RAC(registrationNetworkModel, "details") <~ RACObserve(self, "details")
+        
+        details = self.fulfilmentNav().bidDetails
         flowView.details = details
         bidDetailsPreviewView.bidDetails = details
         
@@ -59,9 +66,24 @@ class RegisterViewController: UIViewController {
     }
 
     @IBAction func confirmTapped(sender: AnyObject) {
-        if closeModalAfterCompletion {
-            self.fulfilmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
+        confirmButton.enabled = false
+        
+        registrationNetworkModel.completedSignal.subscribeNext({ [weak self] (_) -> Void in
 
+            self?.moveToNextViewController()
+            return
+            
+        }, error: { [weak self] (error) -> Void in
+            println("Error with registrationNetworkModel create or update")
+        })
+        
+        registrationNetworkModel.start()
+    }
+    
+    func moveToNextViewController() {
+        if createNewUser {
+            self.fulfilmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
+            
         } else {
             self.performSegue(.ConfirmRegistrationandBid)
         }

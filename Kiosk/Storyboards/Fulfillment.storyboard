@@ -1017,20 +1017,11 @@
                     <view key="view" contentMode="scaleToFill" id="Y1z-Ef-Bc0">
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qcE-7K-aIi">
-                                <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="uhv-nH-nS4"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="815" height="660"/>
-                    <connections>
-                        <outlet property="webView" destination="qcE-7K-aIi" id="DYc-Iy-a2Q"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8Z-tV-qh4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

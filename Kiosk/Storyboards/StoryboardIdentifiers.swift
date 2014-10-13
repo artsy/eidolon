@@ -8,11 +8,13 @@ public enum SegueIdentifier : String {
     case ConfirmyourBidBidderFound = "Confirm your Bid - Bidder Found"
     case ConfirmyourBidBidderNotFound = "Confirm your Bid - Bidder Not Found"
     case EmailLoginConfirmedHighestBidder = "Email Login Confirmed Highest Bidder"
+    case LoadAdminWebViewController = "Load Admin Web View Controller"
     case LoadWebView = "Load Web View"
     case LoggedinWithNewUser = "Logged in With New User "
     case PINConfirmed = "PIN Confirmed"
     case RegisterCreditCardToPostal = "RegisterCreditCardToPostal"
     case RegisterPostalToConfirm = "RegisterPostalToConfirm"
+    case ShowAdminOptions = "Show Admin Options"
     case SubmittedanEmailforUserDetails = "Submitted an Email for User Details"
 }
 
