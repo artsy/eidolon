@@ -13,7 +13,7 @@ pod 'Artsy-UIButtons', :git => 'https://github.com/artsy/Artsy-UIButtons.git', :
 
 # We'll need to include travis some time.
 if ENV['USER'] == "orta" || ENV['USER'] == "ash" || ENV['USER'] == "artsy"
-    pod 'Artsy+UIFonts'
+    pod 'Artsy+UIFonts', :git => 'https://github.com/artsy/Artsy-UIFonts.git', :branch => 'new-tracking'
 else
     pod 'Artsy+OSSUIFonts'
 end
