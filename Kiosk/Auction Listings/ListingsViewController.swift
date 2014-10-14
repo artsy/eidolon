@@ -32,6 +32,63 @@ class ListingsViewController: UIViewController {
         return SwitchView(buttonTitles: SwitchValues.allSwitchValues().map{$0.name.uppercaseString})
     }()
 
+    func listingsRequestSignal(auctionID: String) -> RACSignal {
+        let artworksEndpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: auctionID)
+        
+        return XAppRequest(artworksEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
+            
+            if let genericError = error.artsyServerError() {
+                println("Sale Artworks: Error handling thing: \(genericError.message)")
+            }
+            return RACSignal.empty()
+        })
+    }
+    
+    func auctionRequestSignal(auctionID: String) -> RACSignal {
+        let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
+        
+        return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self)
+    }
+    
+    func recurringListingsRequestSigal(auctionID: String) -> RACSignal {
+        let recurringSignal = RACSignal.interval(SyncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate())
+        return recurringSignal.map ({ (_) -> AnyObject! in
+            return self.listingsRequestSignal(auctionID)
+        }).switchToLatest().map({ [weak self] (newSaleArtworks) -> AnyObject! in
+            if self == nil {
+                return nil // Now safe to use self!
+            }
+            let currentSaleArtworks = self!.saleArtworks
+            
+            func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) {
+                assert(countElements(currentSaleArtworks) == countElements(newSaleArtworks), "Arrays' counts must be equal.")
+                // Updating the currentSaleArtworks is easy. First we sort both according to the same criteria
+                // Because we assume that their length is the same, we just do a linear scane through and
+                // copy values from the new to the old.
+                
+                let sortedCurentSaleArtworks = currentSaleArtworks.sorted(sortById)
+                let sortedNewSaleArtworks = newSaleArtworks.sorted(sortById)
+                
+                let count = countElements(sortedCurentSaleArtworks)
+                for var i = 0; i < count; i++ {
+                    currentSaleArtworks[i].updateWithValues(newSaleArtworks[i])
+                }
+            }
+            
+            // So we want to do here is pretty simple – if the existing and new arrays are of the same length,
+            // then update the individual values in the current array and return the existing value.
+            // If the array's length has changed, then we pass through the new array
+            if let newSaleArtworks = newSaleArtworks as? Array<SaleArtwork> {
+                if countElements(newSaleArtworks) == countElements(currentSaleArtworks) {
+                    update(currentSaleArtworks, newSaleArtworks)
+                    return currentSaleArtworks
+                }
+            }
+            
+            return newSaleArtworks
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,19 +97,10 @@ class ListingsViewController: UIViewController {
         view.addSubview(collectionView)
         
         // Set up reactive bindings
-        let artworksEndpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: auctionID)
+        RAC(self, "saleArtworks") <~ recurringListingsRequestSigal(auctionID)
         
-        RAC(self, "saleArtworks") <~ XAppRequest(artworksEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
-            
-            if let genericError = error.artsyServerError() {
-                println("Sale Artworks: Error handling thing: \(genericError.message)")
-            }
-            return RACSignal.empty()
-        })
         
-        let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
-        
-        RAC(self, "sale") <~ XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self)
+        RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.targetDate") <~ RACObserve(self, "sale.endDate")
 
         
@@ -241,6 +289,10 @@ func highestCurrentBidSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
 
 func alphabeticalSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
     return lhs.artwork.title.caseInsensitiveCompare(rhs.artwork.title) == .OrderedAscending
+}
+
+func sortById(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+    return lhs.id.caseInsensitiveCompare(rhs.id) == .OrderedAscending
 }
 
 // MARK: - Switch Values
