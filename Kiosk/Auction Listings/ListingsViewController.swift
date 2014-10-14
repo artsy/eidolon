@@ -56,7 +56,7 @@ class ListingsViewController: UIViewController {
             return self.listingsRequestSignal(auctionID)
         }).switchToLatest().map({ [weak self] (newSaleArtworks) -> AnyObject! in
             if self == nil {
-                return nil // Now safe to use self!
+                return [] // Now safe to use self!
             }
             let currentSaleArtworks = self!.saleArtworks
             
