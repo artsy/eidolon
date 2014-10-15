@@ -14,6 +14,8 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
             let numberIsInvalidSignal = RACObserve(bidDetails.newUser, "phoneNumber").map(isZeroLengthString)
             RAC(confirmButton, "enabled") <~ numberIsInvalidSignal.notEach()
         }
+        
+        numberTextField.becomeFirstResponder()
     }
     
     let finishedSignal = RACSubject()

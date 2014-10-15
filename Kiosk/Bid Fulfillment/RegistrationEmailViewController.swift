@@ -15,6 +15,8 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
             let emailIsValidSignal = RACObserve(bidDetails.newUser, "email").map(stringIsEmailAddress)
             RAC(confirmButton, "enabled") <~ emailIsValidSignal.notEach()
         }
+        
+        emailTextField.becomeFirstResponder()
     }
 
     let finishedSignal = RACSubject()

@@ -20,7 +20,7 @@ class RegisterFlowView: ORStackView {
     }
     
     var titles = ["Mobile", "Email", "Credit Card", "Postal/Zip"]
-    var keypaths = ["phoneNumber", "email", "creditCardToken", "zipCode"]
+    var keypaths = ["phoneNumber", "email", "creditCardName", "zipCode"]
 
     func update() {
         let user = details!.newUser
@@ -50,14 +50,14 @@ class RegisterFlowView: ORStackView {
 
     func createTitleViewWithTitle(title: String) -> UILabel {
         let label = UILabel(frame:self.bounds)
-        label.font = UIFont.sansSerifFontWithSize(12)
+        label.font = UIFont.sansSerifFontWithSize(16)
         label.text = title.uppercaseString
         return label
     }
 
     func createInfoLabel() -> UILabel {
         let label = UILabel(frame:self.bounds)
-        label.font = UIFont.serifFontWithSize(12)
+        label.font = UIFont.serifFontWithSize(16)
         return label
     }
 
