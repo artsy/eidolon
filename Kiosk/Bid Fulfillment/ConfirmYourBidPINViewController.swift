@@ -45,19 +45,21 @@ class ConfirmYourBidPINViewController: UIViewController {
             var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
             return endpoint.endpointByAddingParameters(["auction_pin": self.pin, "number": phone])
         }
+        
         let numberProvider:ReactiveMoyaProvider<ArtsyAPI> = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
 
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         let bidderRequest = XAppRequest(endpoint, provider: numberProvider).filterSuccessfulStatusCodes().subscribeNext({ [weak self] (_) -> Void in
 
-            let nav = self?.fulfilmentNav()
-            nav?.loggedInProvider = numberProvider
-            
-            nav?.updateUserCredentials().subscribeNext({ [weak self](_) -> Void in
-                println("P:1.5")
-                self?.performSegue(.PINConfirmed)
-                return
-            })
+            if let nav = self?.fulfilmentNav() {
+                nav.providerEndpointResolver = newEndpointsClosure
+                
+                nav.updateUserCredentials().subscribeNext({ [weak self](_) -> Void in
+                    println("P:1.5")
+                    self?.performSegue(.PINConfirmed)
+                    return
+                })
+            }
             
         }, error: { [weak self] (error) -> Void in
             println("error, the pin is likely wrong")

@@ -57,15 +57,16 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         }
 
         let numberProvider:ReactiveMoyaProvider<ArtsyAPI> = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
-
+        
+        self.fulfilmentNav().providerEndpointResolver = newEndpointsClosure
         self.fulfilmentNav().loggedInProvider = numberProvider
     }
     
 
     func checkForCreditCard() {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
-        let authProvider = self.fulfilmentNav().loggedInProvider
-        authProvider?.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self).subscribeNext({ [weak self] (cards) -> Void in
+        let authProvider = self.fulfilmentNav().loggedInProvider!
+        authProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self).subscribeNext({ [weak self] (cards) -> Void in
 
             if countElements(cards as [Card]) > 0 {
                 self?.performSegue(.EmailLoginConfirmedHighestBidder)

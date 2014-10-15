@@ -9,15 +9,19 @@ class FulfillmentNavigationController: UINavigationController {
 
     var user:User!
     
-    var loggedInProvider:ReactiveMoyaProvider<ArtsyAPI>!
-
+    var loggedInProvider:ReactiveMoyaProvider<ArtsyAPI>?
+    var providerEndpointResolver:MoyaProvider<ArtsyAPI>.MoyaEndpointsClosure! {
+        didSet(oldResolver) {
+            loggedInProvider = ReactiveMoyaProvider(endpointsClosure: providerEndpointResolver, stubResponses: APIKeys.sharedKeys.stubResponses)
+        }
+        
+    }
+    
     func updateUserCredentials() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
-        let request = loggedInProvider.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self)
+        let request = loggedInProvider!.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self)
 
         return request.doNext({ [weak self] (fullUser) -> Void in
-            println("P:1")
-            
             let newUser = self?.bidDetails.newUser
             self?.user = fullUser as? User
             

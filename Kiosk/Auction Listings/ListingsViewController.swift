@@ -53,7 +53,7 @@ class ListingsViewController: UIViewController {
         let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
         
         RAC(self, "sale") <~ XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self)
-        RAC(self, "countdownManager.targetDate") <~ RACObserve(self, "sale.endDate")
+        RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
 
         
         let gridSelectedSignal = switchView.selectedIndexSignal.map { (index) -> AnyObject! in

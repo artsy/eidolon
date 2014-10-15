@@ -5,15 +5,15 @@ class ListingsCountdownManager: NSObject {
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet var countdownContainerView: UIView!
 
-    dynamic var targetDate: NSDate?
+    dynamic var sale: Sale?
 
     let time = SystemTime()
     
     override func awakeFromNib() {
         
-        time.syncSignal().subscribeNext { [weak self] (_) -> Void in
-            self?.setLabelsHidden(false)
+        time.syncSignal().subscribeNext { [weak self] (_) in
             self?.startTimer()
+            return
         }
     }
     
@@ -35,20 +35,24 @@ class ListingsCountdownManager: NSObject {
     }
     
     func tick(timer: NSTimer) {
-        if let targetDate = targetDate {
-
+        if let sale = sale {
+            if time.inSync() == false { return }
+            if sale.id == "" { return }
+            
             let now = time.date()
             
-            if now.laterDate(targetDate) == now {
+            if sale.isActive(time) {
+                self.setLabelsHidden(false)
+                
+                let flags: NSCalendarUnit = .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond
+                let components = NSCalendar.currentCalendar().components(flags, fromDate: now, toDate: sale.endDate, options: nil)
+                
+                self.countdownLabel.text = "\(components.hour) : \(components.minute) : \(components.second)"
+
+            } else {
                 self.countdownLabel.text = "CLOSED"
                 hideDenomenatorLabels()
                 timer.invalidate()
-                
-            } else {
-                let flags: NSCalendarUnit = .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond
-                let components = NSCalendar.currentCalendar().components(flags, fromDate: now, toDate: targetDate, options: nil)
-                
-                self.countdownLabel.text = "\(components.day) \(components.hour) \(components.second)"
             }
 
         }
