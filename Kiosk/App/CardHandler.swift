@@ -36,7 +36,6 @@ class CardHandler: NSObject, CFTReaderDelegate {
                 self.cardSwipedSignal.sendError(error)
             })
             
-            
         } else if let error = error {
             cardSwipedSignal.sendError(error)
         }

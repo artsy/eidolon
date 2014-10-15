@@ -46,13 +46,21 @@ bootstrap:
 		read MIXPANEL_KEY; \
 		bundle exec pod keys set MixpanelStagingAPIClientKey "$$MIXPANEL_KEY"
 
+	@printf '\nWhat is your Cardflight Production API Key? '; \
+		read CARDFLIGHT_KEY; \
+		bundle exec pod keys set CardflightAPIClientKey "$$CARDFLIGHT_KEY"
+
 	@printf '\nWhat is your Cardflight Test API Key? '; \
 		read CARDFLIGHT_KEY; \
-		bundle exec pod keys set CardflightTestAPIClientKey "$$CARDFLIGHT_KEY"
+		bundle exec pod keys set CardflightAPIStagingClientKey "$$CARDFLIGHT_KEY"
 
-	@printf '\nWhat is your Cardflight Merchant Account Token? '; \
+	@printf '\nWhat is your Cardflight Merchant Account Production Token? '; \
 		read CARDFLIGHT_TOKEN; \
 		bundle exec pod keys set CardflightMerchantAccountToken "$$CARDFLIGHT_TOKEN"
+
+	@printf '\nWhat is your Cardflight Merchant Account Test Token? '; \
+		read CARDFLIGHT_TOKEN; \
+		bundle exec pod keys set CardflightMerchantAccountStagingToken "$$CARDFLIGHT_TOKEN"
 
 	if [ ! -d ~/.cocoapods/repos/artsy ]; then \
 		bundle exec pod repo add artsy https://github.com/artsy/Specs.git; \

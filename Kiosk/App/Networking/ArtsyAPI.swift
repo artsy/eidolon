@@ -22,7 +22,7 @@ enum ArtsyAPI {
 
     case UpdateMe(email: String, phone: String, postCode: String)
     case CreateUser(email: String, password: String, phone: String, postCode: String)
-//    case RegisterCard(balancedToken: String)
+    case RegisterCard(balancedToken: String)
     
     var defaultParameters: [String: AnyObject] {
         switch self {
@@ -113,6 +113,9 @@ extension ArtsyAPI : MoyaPath {
             
         case PlaceABid:
             return "/api/v1/me/bidder_position"
+
+        case RegisterCard:
+            return "/api/v1/me/credit_cards"
         }
     }
 }
@@ -172,7 +175,9 @@ extension ArtsyAPI : MoyaTarget {
             
         case .AuctionInfo:
             return stubbedResponse("AuctionInfo")
-            
+
+        case .RegisterCard:
+            return stubbedResponse("RegisterCard")
         }
     }
 }
@@ -197,6 +202,12 @@ extension ArtsyAPI : MoyaTarget {
         switch target {
         case .FindBidderRegistration(let auctionID, let phone):
             return endpoint.endpointByAddingParameters(["sale_id": auctionID, "phone": phone])
+
+        case .RegisterCard(let token):
+            return endpoint.endpointByAddingParameters([
+                "provider": "balanced", "token": token
+            ])
+
         default:
             return endpoint
         }
