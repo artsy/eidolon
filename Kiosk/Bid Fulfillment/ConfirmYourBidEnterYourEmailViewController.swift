@@ -21,7 +21,13 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
         RAC(newUserCredentials, "email") <~ emailTextField.rac_textSignal()
 
         let inputIsEmail = emailTextField.rac_textSignal().map(stringIsEmailAddress)
-        RAC(confirmButton, "enabled") <~ inputIsEmail.notEach()
+
+        confirmButton.rac_command = RACCommand(enabled: inputIsEmail) { [weak self] _ in
+            if (self == nil) {
+                return RACSignal.empty()
+            }
+            return RACSignal.empty() // TODO: replace with actual API signal
+        }
     }
 
     @IBAction func dev_emailAdded(sender: AnyObject) {

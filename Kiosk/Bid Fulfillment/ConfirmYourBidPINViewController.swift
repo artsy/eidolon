@@ -24,7 +24,7 @@ class ConfirmYourBidPINViewController: UIViewController {
         let keypad = self.keypadContainer!.keypad!
         let pinIsZeroSignal = RACObserve(self, "pin").map { (countElements($0 as String) == 0) }
 
-        for button in [confirmButton, keypad.rightButton, keypad.leftButton] {
+        for button in [keypad.rightButton, keypad.leftButton] {
             RAC(button, "enabled") <~ pinIsZeroSignal.notEach()
         }
 
@@ -36,32 +36,31 @@ class ConfirmYourBidPINViewController: UIViewController {
         RAC(fulfilmentNav().bidDetails, "bidderPIN") <~ RACObserve(self, "pin")
 
         bidDetailsPreviewView.bidDetails = fulfilmentNav().bidDetails
-    }
 
-    @IBAction func enterTapped(sender: AnyObject) {
         /// verify if we can connect with number & pin
+        confirmButton.rac_command = RACCommand(enabled: pinIsZeroSignal.notEach()) { [weak self] _ in
+            if (self == nil) {
+                return RACSignal.empty()
+            }
+            let phone = self.fulfilmentNav().bidDetails.newUser.phoneNumber! as String!
+            let endpoint: ArtsyAPI = ArtsyAPI.Me
+            let testProvider = providerForPIN(pin, number:phone)
+            let signal = testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().filterSuccessfulStatusCodes()
+            return signal.doNext { _ in
+                self?.fulfilmentNav().loggedInProvider = testProvider
+                return
+            }.then {
+                self?.fulfilmentNav().updateUserCredentials() ?? RACSignal.empty()
+            }.then {
+                self?.checkForCreditCard() ?? RACSignal.empty()
+            }.doNext { (cards) in
+                if (self == nil) { return }
+                if countElements(cards as [Card]) > 0 {
+                    self?.performSegue(.EmailLoginConfirmedHighestBidder)
 
-        let phone = self.fulfilmentNav().bidDetails.newUser.phoneNumber! as String!
-
-        let endpoint: ArtsyAPI = ArtsyAPI.Me
-        let testProvider = providerForPIN(pin, number:phone)
-        let bidderRequest = testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().filterSuccessfulStatusCodes().doNext({ [weak self] (_) -> Void in
-            self?.fulfilmentNav().loggedInProvider = testProvider
-            return
-
-        }).then { [weak self] () -> RACSignal! in
-            self?.fulfilmentNav().updateUserCredentials()
-
-        }.then { () -> RACSignal! in
-            self.checkForCreditCard()
-
-        }.subscribeNext { [weak self] (cards) -> Void in
-
-            if countElements(cards as [Card]) > 0 {
-                self?.performSegue(.EmailLoginConfirmedHighestBidder)
-
-            } else {
-                self?.performSegue(.ArtsyUserHasNotRegisteredCard)
+                } else {
+                    self?.performSegue(.ArtsyUserHasNotRegisteredCard)
+                }
             }
         }
     }
@@ -81,7 +80,6 @@ class ConfirmYourBidPINViewController: UIViewController {
         let authProvider = self.fulfilmentNav().loggedInProvider!
         return authProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
     }
-
 }
 
 private extension ConfirmYourBidPINViewController {
@@ -101,5 +99,4 @@ private extension ConfirmYourBidPINViewController {
     @IBAction func dev_loggedInTapped(sender: AnyObject) {
         self.performSegue(.PINConfirmed)
     }
-
 }
