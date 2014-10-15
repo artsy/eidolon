@@ -9,10 +9,10 @@ inhibit_all_warnings!
 # Artsy stuff
 pod 'Artsy+UIColors'
 pod 'Artsy+UILabels'
-pod 'Artsy-UIButtons', :git => 'https://github.com/artsy/Artsy-UIButtons.git', :commit => 'e32ee7eca98514c9ade3cd569d43a2c5a73fea29'
+pod 'Artsy-UIButtons', :git => 'https://github.com/artsy/Artsy-UIButtons.git', :commit => '351e49a4caa38bdcbd9f5adeeef74fb0070e5389'
 
 # We'll need to include travis some time.
-if ENV['USER'] == "orta" || ENV['USER'] == "ash" || ENV['USER'] == "artsy"
+if ENV['USER'] == "orta" || ENV['USER'] == "ash" || ENV['USER'] == "artsy" || ENV['USER'] == "Laura"
     pod 'Artsy+UIFonts', :git => 'https://github.com/artsy/Artsy-UIFonts.git', :branch => 'new-tracking'
 else
     pod 'Artsy+OSSUIFonts'

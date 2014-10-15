@@ -21,13 +21,13 @@ public class ActionButton: Button {
     public override func setup() {
         super.setup()
 
-        setBorderColor(UIColor.blackColor(), forState: .Normal, animated:false)
-        setBorderColor(UIColor.artsyPurple(), forState: .Highlighted, animated:false)
-        setBorderColor(UIColor.artsyMediumGrey(), forState: .Disabled, animated:false)
+        setBorderColor(UIColor.blackColor(), forState: .Normal, animated: false)
+        setBorderColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
+        setBorderColor(UIColor.artsyMediumGrey(), forState: .Disabled, animated: false)
 
-        setBackgroundColor(UIColor.blackColor(), forState: .Normal, animated:false)
-        setBackgroundColor(UIColor.artsyPurple(), forState: .Highlighted, animated:false)
-        setBackgroundColor(UIColor.whiteColor(), forState: .Disabled, animated:false)
+        setBackgroundColor(UIColor.blackColor(), forState: .Normal, animated: false)
+        setBackgroundColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
+        setBackgroundColor(UIColor.whiteColor(), forState: .Disabled, animated: false)
 
         setTitleColor(UIColor.whiteColor(), forState:.Normal)
         setTitleColor(UIColor.whiteColor(), forState:.Highlighted)
@@ -41,8 +41,8 @@ public class KeypadButton: Button {
         super.setup()
         shouldAnimateStateChange = false;
         layer.borderWidth = 0
-        setBackgroundColor(UIColor.blackColor(), forState: .Highlighted, animated:false)
-        setBackgroundColor(UIColor.whiteColor(), forState: .Normal, animated:false)
+        setBackgroundColor(UIColor.blackColor(), forState: .Highlighted, animated: false)
+        setBackgroundColor(UIColor.whiteColor(), forState: .Normal, animated: false)
     }
 }
 
@@ -53,25 +53,17 @@ public class LargeKeypadButton: KeypadButton {
     }
 }
 
-public class CircularBlackButton: ARBlackFlatButton {
+public class MenuButton: ARMenuButton {
     public override func setup() {
         super.setup()
-        RACObserve(self, "bounds").subscribeNext{ [weak self] (bounds) -> Void in
-            if let layer = self?.layer {
-                let width = CGRectGetWidth(layer.bounds)
-                let height = CGRectGetHeight(layer.bounds)
-                let smallestDimension = min(width, height)
-                layer.cornerRadius = smallestDimension / 2.0
-            }
-        }
-        
-        if let titleLabel = titleLabel {
-            titleLabel.font = titleLabel.font.fontWithSize(12)
-        }
-        
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.whiteColor().CGColor
-        layer.masksToBounds = true
+        setTitle("HELP", forState: .Normal)
+        setBackgroundColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        if let titleLabel = titleLabel { self.bringSubviewToFront(titleLabel) }
+        if let imageView = imageView { self.bringSubviewToFront(imageView) }
     }
     
     public override func intrinsicContentSize() -> CGSize {

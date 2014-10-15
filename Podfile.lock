@@ -46,7 +46,7 @@ DEPENDENCIES:
   - Artsy+UIColors
   - Artsy+UIFonts (from `https://github.com/artsy/Artsy-UIFonts.git`, branch `new-tracking`)
   - Artsy+UILabels
-  - Artsy-UIButtons (from `https://github.com/artsy/Artsy-UIButtons.git`, commit `e32ee7eca98514c9ade3cd569d43a2c5a73fea29`)
+  - Artsy-UIButtons (from `https://github.com/artsy/Artsy-UIButtons.git`, commit `351e49a4caa38bdcbd9f5adeeef74fb0070e5389`)
   - CardFlight
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
@@ -64,7 +64,7 @@ EXTERNAL SOURCES:
     :branch: new-tracking
     :git: https://github.com/artsy/Artsy-UIFonts.git
   Artsy-UIButtons:
-    :commit: e32ee7eca98514c9ade3cd569d43a2c5a73fea29
+    :commit: 351e49a4caa38bdcbd9f5adeeef74fb0070e5389
     :git: https://github.com/artsy/Artsy-UIButtons.git
   DZNWebViewController:
     :git: https://github.com/orta/DZNWebViewController.git
