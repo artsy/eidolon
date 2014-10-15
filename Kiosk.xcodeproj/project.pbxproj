@@ -1812,7 +1812,7 @@
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Caroline Lau (AE9AEY2F5Z)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ben Maslen (8J42DH9F96)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1822,7 +1822,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @rpath/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "88112051-0c40-437a-b4b5-00043f2264b7";
+				PROVISIONING_PROFILE = "c1818180-549a-4ee6-a1cf-2b6c08e0a1d1";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/PodsBridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -1835,7 +1835,7 @@
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ART SY INC";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
