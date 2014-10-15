@@ -56,7 +56,6 @@ public class LargeKeypadButton: KeypadButton {
 public class MenuButton: ARMenuButton {
     public override func setup() {
         super.setup()
-        setTitle("HELP", forState: .Normal)
         setBackgroundColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
     }
 
