@@ -24,7 +24,7 @@ class ConfirmYourBidPINViewController: UIViewController {
         let keypad = self.keypadContainer!.keypad!
         let pinIsZeroSignal = RACObserve(self, "pin").map { (countElements($0 as String) == 0) }
 
-        for button in [confirmButton, keypad.rightButton, keypad.leftButton] {
+        for button in [keypad.rightButton, keypad.leftButton] {
             RAC(button, "enabled") <~ pinIsZeroSignal.notEach()
         }
 
@@ -34,38 +34,34 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         RAC(pinTextField, "text") <~ RACObserve(self, "pin")
         bidDetailsPreviewView.bidDetails = fulfilmentNav().bidDetails
-    }
 
-    @IBAction func enterTapped(sender: AnyObject) {
         /// verify if we can connect with number & pin
-
-        let phone = self.fulfilmentNav().bidDetails.newUser.phoneNumber! as String!
-
-        let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-            var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
-            return endpoint.endpointByAddingParameters(["auction_pin": self.pin, "number": phone])
-        }
-        
-        let numberProvider:ReactiveMoyaProvider<ArtsyAPI> = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
-
-        let endpoint: ArtsyAPI = ArtsyAPI.Me
-        let bidderRequest = XAppRequest(endpoint, provider: numberProvider).filterSuccessfulStatusCodes().subscribeNext({ [weak self] (_) -> Void in
-
-            if let nav = self?.fulfilmentNav() {
-                nav.providerEndpointResolver = newEndpointsClosure
-                
-                nav.updateUserCredentials().subscribeNext({ [weak self](_) -> Void in
-                    println("P:1.5")
-                    self?.performSegue(.PINConfirmed)
-                    return
-                })
+        confirmButton.rac_command = RACCommand(enabled: pinIsZeroSignal.notEach()) { [weak self] _ in
+            if (self == nil) {
+                return RACSignal.empty()
             }
-            
-        }, error: { [weak self] (error) -> Void in
-            println("error, the pin is likely wrong")
-            return
-        })
+            let phone = self!.fulfilmentNav().bidDetails.newUser.phoneNumber! as String!
+            let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+                var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+                return endpoint.endpointByAddingParameters(["auction_pin": self!.pin, "number": phone])
+            }
+            let numberProvider:ReactiveMoyaProvider<ArtsyAPI> = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
+            let endpoint: ArtsyAPI = ArtsyAPI.Me
 
+            return XAppRequest(endpoint, provider: numberProvider).filterSuccessfulStatusCodes().doNext({ _ in
+                if let nav = self?.fulfilmentNav() {
+                    nav.providerEndpointResolver = newEndpointsClosure
+                    nav.updateUserCredentials().subscribeNext({ _ in
+                        println("P:1.5")
+                        self?.performSegue(.PINConfirmed)
+                        return
+                    })
+                }
+            }).doError({ error in
+                println("error, the pin is likely wrong")
+                return
+            })
+        }
     }
 }
 
@@ -86,5 +82,4 @@ private extension ConfirmYourBidPINViewController {
     @IBAction func dev_loggedInTapped(sender: AnyObject) {
         self.performSegue(.PINConfirmed)
     }
-
 }
