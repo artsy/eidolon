@@ -29,6 +29,9 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     }
     
     func setup() {
+        // Necessary to use Autolayout
+        contentView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
         // Bind subviews
         RACObserve(self, "saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
             if let url = (artwork as? Artwork)?.images?.first?.thumbnailURL() {
