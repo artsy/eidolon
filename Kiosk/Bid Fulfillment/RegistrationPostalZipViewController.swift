@@ -16,6 +16,7 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
             RAC(confirmButton, "enabled") <~ emailIsValidSignal.notEach()
         }
 
+        zipCodeTextField.becomeFirstResponder()
     }
     
     let finishedSignal = RACSubject()

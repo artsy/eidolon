@@ -15,6 +15,8 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
             let longerThan4CharSignal = RACObserve(bidDetails.newUser, "password").map(longerThan4CharString)
             RAC(confirmButton, "enabled") <~ longerThan4CharSignal
         }
+        
+        passwordTextField.becomeFirstResponder()
     }
 
     let finishedSignal = RACSubject()

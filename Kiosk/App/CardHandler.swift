@@ -22,14 +22,21 @@ class CardHandler: NSObject, CFTReaderDelegate {
         sessionManager.setLogging(true)
         
         reader.delegate = self;
-        reader.beginSwipeWithMessage("Please swipe credit card");
     }
-
+    
     func readerCardResponse(card: CFTCard?, withError error: NSError?) {
         if let card = card {
             self.card = card;
-            cardSwipedSignal.sendCompleted()
-
+            cardSwipedSignal.sendNext("Got Card")
+            
+            card.tokenizeCardWithSuccess({ [unowned self] () -> Void in
+                self.cardSwipedSignal.sendCompleted()
+                
+            }, failure: { [unowned self]  (error) -> Void in
+                self.cardSwipedSignal.sendError(error)
+            })
+            
+            
         } else if let error = error {
             cardSwipedSignal.sendError(error)
         }
@@ -60,7 +67,8 @@ class CardHandler: NSObject, CFTReaderDelegate {
 
     func readerIsConnected(isConnected: Bool, withError error: NSError!) {
         if isConnected {
-            cardSwipedSignal.sendNext("Reader is connecting");
+            cardSwipedSignal.sendNext("Reader is connected");
+            reader.beginSwipeWithMessage(nil);
 
         } else {
             if (error != nil) {
