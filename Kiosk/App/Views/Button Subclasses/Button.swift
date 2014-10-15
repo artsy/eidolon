@@ -56,6 +56,9 @@ public class LargeKeypadButton: KeypadButton {
 public class MenuButton: ARMenuButton {
     public override func setup() {
         super.setup()
+        if let titleLabel = titleLabel {
+            titleLabel.font = titleLabel.font.fontWithSize(12)
+        }
         setBackgroundColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
     }
 
@@ -64,7 +67,7 @@ public class MenuButton: ARMenuButton {
         if let titleLabel = titleLabel { self.bringSubviewToFront(titleLabel) }
         if let imageView = imageView { self.bringSubviewToFront(imageView) }
     }
-    
+
     public override func intrinsicContentSize() -> CGSize {
         return CGSize(width: 45, height: 45)
     }
