@@ -39,7 +39,7 @@ class RegisterViewController: UIViewController {
 
         RAC(registrationNetworkModel, "createNewUser") <~ RACObserve(self, "createNewUser")
         RAC(registrationNetworkModel, "details") <~ RACObserve(self, "details")
-        registrationNetworkModel.fulfilmentNav = self.fulfilmentNav()
+        registrationNetworkModel.fulfillmentNav = self.fulfillmentNav()
 
         details = self.fulfillmentNav().bidDetails
         flowView.details = details

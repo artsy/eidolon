@@ -42,15 +42,14 @@ class ConfirmYourBidPINViewController: UIViewController {
             if (self == nil) {
                 return RACSignal.empty()
             }
-            let phone = self.fulfilmentNav().bidDetails.newUser.phoneNumber! as String!
+            let phone = self.fulfillmentNav().bidDetails.newUser.phoneNumber! as String!
             let endpoint: ArtsyAPI = ArtsyAPI.Me
             let testProvider = providerForPIN(pin, number:phone)
-            let signal = testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().filterSuccessfulStatusCodes()
-            return signal.doNext { _ in
-                self?.fulfilmentNav().loggedInProvider = testProvider
+            return testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().filterSuccessfulStatusCodes().doNext { _ in
+                self?.fulfillmentNav().loggedInProvider = testProvider
                 return
             }.then {
-                self?.fulfilmentNav().updateUserCredentials() ?? RACSignal.empty()
+                self?.fulfillmentNav().updateUserCredentials() ?? RACSignal.empty()
             }.then {
                 self?.checkForCreditCard() ?? RACSignal.empty()
             }.doNext { (cards) in
@@ -77,7 +76,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 
     func checkForCreditCard() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
-        let authProvider = self.fulfilmentNav().loggedInProvider!
+        let authProvider = self.fulfillmentNav().loggedInProvider!
         return authProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
     }
 }

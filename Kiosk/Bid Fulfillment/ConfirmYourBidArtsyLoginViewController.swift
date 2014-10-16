@@ -34,7 +34,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
             }
             return self!.xAuthSignal().try { (accessTokenDict, errorPointer) -> Bool in
                 if let accessToken = accessTokenDict["access_token"] as? String {
-                    self?.fulfilmentNav().xAccessToken = accessToken
+                    self?.fulfillmentNav().xAccessToken = accessToken
                     return true
                 } else {
                     errorPointer.memory = NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])

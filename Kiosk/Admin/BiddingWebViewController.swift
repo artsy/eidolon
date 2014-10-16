@@ -11,7 +11,7 @@ class BiddingWebViewController: DZNWebViewController {
 
         self.webView.scalesPageToFit = true
 
-        let nav = self.fulfilmentNav()
+        let nav = self.fulfillmentNav()
         let saleArtwork = nav.bidDetails.saleArtwork
         let auctionID = nav.auctionID
         let authToken = nav.xAccessToken
