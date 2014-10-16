@@ -21,12 +21,12 @@ class YourBiddingDetailsViewController: UIViewController {
 
     @IBAction func revealAppTapped(sender: AnyObject) {
 
-        pinNumberLabel.text = self.fulfilmentNav().bidDetails.bidderPIN
+        pinNumberLabel.text = self.fulfillmentNav().bidDetails.bidderPIN
     }
 
     @IBAction func confirmButtonTapped(sender: AnyObject) {
         if finishAfterViewController {
-            self.fulfilmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
+            self.fulfillmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
 
         } else {
 

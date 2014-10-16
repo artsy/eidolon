@@ -16,11 +16,45 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let nav = self.fulfilmentNav()
+        let nav = self.fulfillmentNav()
         bidDetailsPreviewView.bidDetails = nav.bidDetails
 
-        RAC(nav.bidDetails.newUser, "email") <~ emailTextField.rac_textSignal()
-        RAC(nav.bidDetails.newUser, "password") <~ passwordTextField.rac_textSignal()
+        let emailTextSignal = emailTextField.rac_textSignal()
+        let passwordTextSignal = passwordTextField.rac_textSignal()
+        RAC(nav.bidDetails.newUser, "email") <~ emailTextSignal
+        RAC(nav.bidDetails.newUser, "password") <~ passwordTextSignal
+
+        let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
+        let passwordIsLongEnough = passwordTextSignal.map(longerThan4CharString)
+        let formIsValid = RACSignal.combineLatest([inputIsEmail, passwordIsLongEnough]).reduceAnd()
+
+        confirmCredentialsButton.rac_command = RACCommand(enabled: formIsValid) { [weak self] _ in
+            if (self == nil) {
+                return RACSignal.empty()
+            }
+            return self!.xAuthSignal().try { (accessTokenDict, errorPointer) -> Bool in
+                if let accessToken = accessTokenDict["access_token"] as? String {
+                    self?.fulfilmentNav().xAccessToken = accessToken
+                    return true
+                } else {
+                    errorPointer.memory = NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
+                    return false
+                }
+            }.then {
+                return self?.fulfillmentNav().updateUserCredentials() ?? RACSignal.empty()
+            }.then {
+                return self?.creditCardSignal().doNext { (cards) -> Void in
+                    if (self == nil) { return }
+                    if countElements(cards as [Card]) > 0 {
+                        self!.performSegue(.EmailLoginConfirmedHighestBidder)
+                    } else {
+                        self!.performSegue(.ArtsyUserHasNotRegisteredCard)
+                    }
+                } ?? RACSignal.empty()
+            }.doError { (error) -> Void in
+                println("Error logging in: \(error.localizedDescription)")
+            }
+        }
     }
     
     public override func viewWillAppear(animated: Bool) {
@@ -28,42 +62,16 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         emailTextField.becomeFirstResponder()
     }
 
-    @IBAction func confirmTapped(sender: AnyObject) {
-
+    func xAuthSignal() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: emailTextField.text, password: passwordTextField.text)
-
-        provider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().subscribeNext({ [weak self] (accessTokenDict) -> Void in
-
-            if let accessToken = accessTokenDict["access_token"] as? String {
-                self?.fulfilmentNav().xAccessToken = accessToken
-
-                self?.fulfilmentNav().updateUserCredentials().subscribeNext({ [weak self] (accessTokenDict) -> Void in
-                    self?.checkForCreditCard()
-                    return
-                })
-                
-            }
-        }, error: { (error) -> Void in
-                println("Error logging in: \(error.localizedDescription)")
-        })
+        return provider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
     }
+    
 
-    func checkForCreditCard() {
+    func creditCardSignal() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
-        let authProvider = self.fulfilmentNav().loggedInProvider!
-        authProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self).subscribeNext({ [weak self] (cards) -> Void in
-
-            if countElements(cards as [Card]) > 0 {
-                self?.performSegue(.EmailLoginConfirmedHighestBidder)
-
-            } else {
-                self?.performSegue(.ArtsyUserHasNotRegisteredCard)
-            }
-            
-        }, error: { [weak self] (error) -> Void in
-                println("error, the pin is likely wrong")
-                return
-        })
+        let authProvider = self.fulfillmentNav().loggedInProvider!
+        return authProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
     }
 }
 

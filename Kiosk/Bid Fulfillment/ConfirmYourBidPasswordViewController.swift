@@ -11,7 +11,7 @@ class ConfirmYourBidPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bidDetailsPreviewView.bidDetails = fulfilmentNav().bidDetails
+        bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
     }
     
     @IBAction func dev_noPhoneNumberFoundTapped(sender: AnyObject) {

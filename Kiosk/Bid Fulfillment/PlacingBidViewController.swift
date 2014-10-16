@@ -11,8 +11,8 @@ class PlacingBidViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        let auctionID = self.fulfilmentNav().auctionID!
-        let bidDetails = self.fulfilmentNav().bidDetails
+        let auctionID = self.fulfillmentNav().auctionID!
+        let bidDetails = self.fulfillmentNav().bidDetails
         bidDetailsPreviewView.bidDetails = bidDetails
         
         var signal = RACSignal.empty()
@@ -39,14 +39,14 @@ class PlacingBidViewController: UIViewController {
     
     func setBidderIfNeeded(auctionID: String) -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)
-        let request = self.fulfilmentNav().loggedInProvider!.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Bidder.self)
+        let request = self.fulfillmentNav().loggedInProvider!.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Bidder.self)
         
         return request.doNext { [weak self] (bidders) -> Void in
             let bidders = bidders as [Bidder]
             println("P:3")
 
             if countElements(bidders) == 0 { return }
-            if let user = self?.fulfilmentNav().user! {
+            if let user = self?.fulfillmentNav().user! {
                 println("P:4")
                 user.bidder = bidders.first
             }
@@ -58,16 +58,16 @@ class PlacingBidViewController: UIViewController {
     }
     
     func createBidderForAuction(auctionID: String) -> RACSignal? {
-        if self.fulfilmentNav().user!.bidder != nil {
+        if self.fulfillmentNav().user!.bidder != nil {
             println("P:5")
             return nil
         }
         
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: auctionID)
-        let request = self.fulfilmentNav().loggedInProvider!.request(endpoint, method: .POST, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(Bidder.self)
+        let request = self.fulfillmentNav().loggedInProvider!.request(endpoint, method: .POST, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(Bidder.self)
 
         return request.doNext({ [weak self] (bidder) -> Void in
-            self!.fulfilmentNav().user!.bidder = bidder as Bidder!
+            self!.fulfillmentNav().user!.bidder = bidder as Bidder!
             return
             
         }).doError({ [weak self] (error) -> Void in
@@ -79,7 +79,7 @@ class PlacingBidViewController: UIViewController {
     func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> RACSignal {
         let bidEndpoint: ArtsyAPI = ArtsyAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
         
-        let request = self.fulfilmentNav().loggedInProvider!.request(bidEndpoint, method: .POST, parameters:bidEndpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)
+        let request = self.fulfillmentNav().loggedInProvider!.request(bidEndpoint, method: .POST, parameters:bidEndpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)
         
         return request.doNext({ [weak self] (bidderPosition) -> Void in
             println("P:6")

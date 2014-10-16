@@ -13,14 +13,15 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let nav = self.fulfilmentNav()
+        let nav = self.fulfillmentNav()
 
         bidDetailsPreviewView.bidDetails = nav.bidDetails
         
         let newUserCredentials = nav.bidDetails.newUser
-        RAC(newUserCredentials, "email") <~ emailTextField.rac_textSignal()
+        let emailTextSignal = emailTextField.rac_textSignal()
+        RAC(newUserCredentials, "email") <~ emailTextSignal
 
-        let inputIsEmail = emailTextField.rac_textSignal().map(stringIsEmailAddress)
+        let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
 
         confirmButton.rac_command = RACCommand(enabled: inputIsEmail) { [weak self] _ in
             if (self == nil) {

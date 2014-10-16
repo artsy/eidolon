@@ -15,7 +15,7 @@ extension UIViewController {
         self.performSegueWithIdentifier(identifier.rawValue, sender: self)
     }
 
-    func fulfilmentNav() -> FulfillmentNavigationController {
+    func fulfillmentNav() -> FulfillmentNavigationController {
         return (self.navigationController! as FulfillmentNavigationController)
     }
 }

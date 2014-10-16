@@ -33,9 +33,9 @@ class ConfirmYourBidPINViewController: UIViewController {
         clearSignal.subscribeNext(clearPIN)
 
         RAC(pinTextField, "text") <~ RACObserve(self, "pin")
-        RAC(fulfilmentNav().bidDetails, "bidderPIN") <~ RACObserve(self, "pin")
+        RAC(fulfillmentNav().bidDetails, "bidderPIN") <~ RACObserve(self, "pin")
 
-        bidDetailsPreviewView.bidDetails = fulfilmentNav().bidDetails
+        bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
 
         /// verify if we can connect with number & pin
         confirmButton.rac_command = RACCommand(enabled: pinIsZeroSignal.notEach()) { [weak self] _ in

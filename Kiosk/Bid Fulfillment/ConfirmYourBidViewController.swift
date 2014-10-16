@@ -32,7 +32,7 @@ class ConfirmYourBidViewController: UIViewController {
         deleteSignal.subscribeNext(deleteDigitFromNumber)
         clearSignal.subscribeNext(clearNumber)
 
-        let nav = self.fulfilmentNav()
+        let nav = self.fulfillmentNav()
 
         RAC(nav.bidDetails.newUser, "phoneNumber") <~ RACObserve(self, "number")
         RAC(nav.bidDetails, "bidderNumber") <~ RACObserve(self, "number")

@@ -41,7 +41,7 @@ class RegisterViewController: UIViewController {
         RAC(registrationNetworkModel, "details") <~ RACObserve(self, "details")
         registrationNetworkModel.fulfilmentNav = self.fulfilmentNav()
 
-        details = self.fulfilmentNav().bidDetails
+        details = self.fulfillmentNav().bidDetails
         flowView.details = details
         bidDetailsPreviewView.bidDetails = details
         
@@ -85,7 +85,6 @@ class RegisterViewController: UIViewController {
         if segue == .RegistrationFinishedShowBidDetails {
             let nextViewController = segue.destinationViewController as YourBiddingDetailsViewController
             nextViewController.finishAfterViewController = createNewUser
-
         }
     }
 }
