@@ -33,6 +33,8 @@ class ConfirmYourBidPINViewController: UIViewController {
         clearSignal.subscribeNext(clearPIN)
 
         RAC(pinTextField, "text") <~ RACObserve(self, "pin")
+        RAC(fulfilmentNav().bidDetails, "bidderPIN") <~ RACObserve(self, "pin")
+
         bidDetailsPreviewView.bidDetails = fulfilmentNav().bidDetails
     }
 
@@ -41,24 +43,19 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         let phone = self.fulfilmentNav().bidDetails.newUser.phoneNumber! as String!
 
-        let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-            var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
-            return endpoint.endpointByAddingParameters(["auction_pin": self.pin, "number": phone])
-        }
-        
-        let numberProvider:ReactiveMoyaProvider<ArtsyAPI> = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
-
-        let endpoint: ArtsyAPI = ArtsyAPI.Me
-        let bidderRequest = XAppRequest(endpoint, provider: numberProvider).filterSuccessfulStatusCodes().subscribeNext({ [weak self] (_) -> Void in
+        let endpoint: ArtsyAPI = ArtsyAPI.TrustToken(number:phone, auctionPIN:pin)
+        XAppRequest(endpoint, method: .POST).filterSuccessfulStatusCodes().mapJSON().subscribeNext({ [weak self] (json) -> Void in
 
             if let nav = self?.fulfilmentNav() {
-                nav.providerEndpointResolver = newEndpointsClosure
-                
-                nav.updateUserCredentials().subscribeNext({ [weak self](_) -> Void in
-                    println("P:1.5")
-                    self?.performSegue(.PINConfirmed)
-                    return
-                })
+                if let token = json["trust_token"] as? String {
+                    nav.trustToken = token
+                    nav.xAccessToken = token
+
+                    nav.updateUserCredentials().subscribeNext({ [weak self](_) -> Void in
+                        self?.performSegue(.PINConfirmed)
+                        return
+                    })
+                }
             }
             
         }, error: { [weak self] (error) -> Void in

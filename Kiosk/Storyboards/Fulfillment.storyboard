@@ -42,14 +42,20 @@
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
         </mutableArray>
         <mutableArray key="AGaramondPro-Semibold.otf">
             <string>AGaramondPro-Semibold</string>
             <string>AGaramondPro-Semibold</string>
             <string>AGaramondPro-Semibold</string>
             <string>AGaramondPro-Semibold</string>
+            <string>AGaramondPro-Semibold</string>
+            <string>AGaramondPro-Semibold</string>
         </mutableArray>
         <mutableArray key="ITCAvantGardeDemi_Track03.ttf">
+            <string>ITCAvantGardeDemiTrack03</string>
+            <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
@@ -148,6 +154,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DvF-Ku-gpE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="993.5" y="-1653"/>
+        </scene>
+        <!--Bidding Web View Controller-->
+        <scene sceneID="rHX-hQ-oRy">
+            <objects>
+                <viewController storyboardIdentifier="Artsy Web Bidding" id="4OL-mV-iaZ" customClass="BiddingWebViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="v4A-oy-Ldz"/>
+                        <viewControllerLayoutGuide type="bottom" id="sRK-3p-4IN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yU0-gp-g9Y">
+                        <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="QBH-6C-CYx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wda-z3-2Cz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1338.5" y="-791"/>
         </scene>
         <!--Place Bid View Controller-->
         <scene sceneID="zYP-eY-rqW">
@@ -305,6 +330,7 @@
                         <outlet property="privacyPolicyButton" destination="Bld-wj-1c6" id="zKT-Sa-5oN"/>
                         <segue destination="Yzb-AU-icr" kind="push" identifier="Confirm Bid" id="J1L-DG-oRQ"/>
                         <segue destination="ati-U2-SSe" kind="push" identifier="Load Web View" id="pfV-V4-0QL"/>
+                        <segue destination="4OL-mV-iaZ" kind="push" id="Y0U-x9-TEu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RSG-07-uog" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -372,7 +398,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PvS-Gg-Iup" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-205.5" y="4287.5"/>
+            <point key="canvasLocation" x="-340.5" y="3909.5"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="qjX-tW-U7k">
@@ -414,21 +440,16 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="soj-Ua-Mah" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="535" y="600" width="255" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwe-oQ-Mnf" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                        <rect key="frame" x="140" y="8" width="107" height="57"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="DONE">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSY-52-iWB" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="8" width="107" height="57"/>
+                                        <rect key="frame" x="111" y="8" width="107" height="57"/>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="NEXT">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="N1l-90-SiW" kind="push" identifier="Registration Finished Show Bid Details" id="Czi-WV-KZW"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
@@ -476,7 +497,6 @@
                         <outlet property="bidDetailsPreviewView" destination="dj6-cY-N6o" id="uCm-Ss-nAX"/>
                         <outlet property="confirmButton" destination="dyr-7D-eW1" id="RA1-BA-kCe"/>
                         <outlet property="flowView" destination="mSI-YI-8GU" id="e9i-l8-VVU"/>
-                        <segue destination="2lt-co-qW2" kind="push" identifier="Confirm Registration and Bid" id="ymK-a1-EJ3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vz7-E3-ZqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -710,10 +730,10 @@
             </objects>
             <point key="canvasLocation" x="525.5" y="116"/>
         </scene>
-        <!--Placing Bid View Controller-->
+        <!--Bidding Web View Controller-->
         <scene sceneID="k3G-Eq-Mxm">
             <objects>
-                <viewController id="2lt-co-qW2" customClass="PlacingBidViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2lt-co-qW2" customClass="BiddingWebViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Nb-wA-gsX"/>
                         <viewControllerLayoutGuide type="bottom" id="6LY-4E-fIY"/>
@@ -721,62 +741,107 @@
                     <view key="view" contentMode="scaleToFill" id="5i6-CZ-9za">
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placing bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PhR-2v-eZM" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="309" width="346" height="41"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z2S-Tk-M7q" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="141" y="600" width="535" height="60"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Rn-25-iQd" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                        <rect key="frame" x="140" y="8" width="107" height="57"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="DONE">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xzr-Kl-2Bq" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="8" width="107" height="57"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="NEXT">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i56-Lg-Igc" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                        <rect key="frame" x="420" y="8" width="107" height="57"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="DONE">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="91j-4b-9wV" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="401" y="300" width="250" height="60"/>
-                                <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="adB-Dl-Xcj"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="815" height="660"/>
-                    <connections>
-                        <outlet property="bidDetailsPreviewView" destination="91j-4b-9wV" id="4O8-er-Spx"/>
-                        <outlet property="titleLabel" destination="PhR-2v-eZM" id="nkI-Wz-o5d"/>
-                        <segue destination="igv-xv-sfe" kind="push" id="Vh7-Ye-Hrc"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOk-Pg-yZ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1296.5" y="1796"/>
+            <point key="canvasLocation" x="1758.5" y="1450"/>
+        </scene>
+        <!--Your Bidding Details View Controller-->
+        <scene sceneID="jch-Ac-cDe">
+            <objects>
+                <viewController id="N1l-90-SiW" customClass="YourBiddingDetailsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ko2-CO-bcN"/>
+                        <viewControllerLayoutGuide type="bottom" id="1lm-JB-1Nm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="r9W-qp-3Ns">
+                        <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Bid Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofc-dC-fQj" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="79" width="345" height="41"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A1e-dO-fHW">
+                                <rect key="frame" x="65" y="138" width="685" height="2"/>
+                                <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i4q-AT-jKJ">
+                                <rect key="frame" x="65" y="174" width="509" height="217"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BIDDER NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MtT-eY-tum">
+                                        <rect key="frame" x="0.0" y="52" width="242" height="21"/>
+                                        <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="13"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CxS-TA-vKZ">
+                                        <rect key="frame" x="0.0" y="118" width="242" height="21"/>
+                                        <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="13"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="****" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sK5-ZW-ycH">
+                                        <rect key="frame" x="0.0" y="147" width="100" height="21"/>
+                                        <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsL-mV-Klx" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                        <rect key="frame" x="113" y="117" width="97" height="51"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="REVEAL">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="revealAppTapped:" destination="N1l-90-SiW" eventType="touchUpInside" id="yjS-vE-MG1"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quick Login Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-AU-Wuo" customClass="ARSerifLabel">
+                                        <rect key="frame" x="0.0" y="0.0" width="198" height="44"/>
+                                        <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="25"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="09922" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgB-Zc-b2J">
+                                        <rect key="frame" x="0.0" y="77" width="203" height="21"/>
+                                        <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nti-wZ-91X" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="536" y="555" width="214" height="43"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="PLACE BID">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmTapped:" destination="BKe-0r-2Pc" eventType="touchUpInside" id="vDO-RE-3Ba"/>
+                                    <action selector="confirmTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="w2s-T0-038"/>
+                                    <segue destination="2lt-co-qW2" kind="push" id="umA-gD-rtQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0jN-0L-5Tx"/>
+                    <connections>
+                        <outlet property="bidderNumberLabel" destination="FgB-Zc-b2J" id="dON-Yd-9f1"/>
+                        <outlet property="pinNumberLabel" destination="sK5-ZW-ycH" id="hb5-zi-GqM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aFe-IW-rLA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="762.5" y="1450"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="yEo-PL-Kq3">
@@ -865,7 +930,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7J-sI-ZIT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1296.5" y="2662"/>
+            <point key="canvasLocation" x="2064.5" y="3760"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AYD-hb-rh2">
@@ -882,7 +947,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBI-Zz-1BI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-205.5" y="2507.5"/>
+            <point key="canvasLocation" x="-340.5" y="2129.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="JYN-FL-HlW">
@@ -904,7 +969,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Vn-wU-8Ne" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-205.5" y="3106.5"/>
+            <point key="canvasLocation" x="-340.5" y="2728.5"/>
         </scene>
         <!--Confirm Your BidPIN View Controller-->
         <scene sceneID="BzC-RZ-kn9">
@@ -1025,7 +1090,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8Z-tV-qh4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1419.5" y="116"/>
+            <point key="canvasLocation" x="-1345.5" y="116"/>
         </scene>
         <!--Confirm Your Bid Enter Your Email View Controller-->
         <scene sceneID="nwL-Cu-AhL">
@@ -1241,7 +1306,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xfl-ed-lZg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="319.5" y="4287.5"/>
+            <point key="canvasLocation" x="184.5" y="3909.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="YLp-8g-M74">
@@ -1268,7 +1333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUS-C7-HeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="319.5" y="4876.5"/>
+            <point key="canvasLocation" x="184.5" y="4498.5"/>
         </scene>
         <!--Registration Email View Controller-->
         <scene sceneID="oF4-bF-KwB">
@@ -1316,7 +1381,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XuT-69-lah" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-205.5" y="3699.5"/>
+            <point key="canvasLocation" x="-340.5" y="3321.5"/>
         </scene>
         <!--Registration Password View Controller-->
         <scene sceneID="Av6-9Y-Wx1">
@@ -1364,7 +1429,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="otW-7h-YjL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="319.5" y="3699.5"/>
+            <point key="canvasLocation" x="184.5" y="3321.5"/>
         </scene>
         <!--Registration Mobile View Controller-->
         <scene sceneID="Zt6-9q-iNh">
@@ -1412,7 +1477,75 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J1J-UN-yt7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="319.5" y="3106.5"/>
+            <point key="canvasLocation" x="184.5" y="2728.5"/>
+        </scene>
+        <!--Placing Bid View Controller-->
+        <scene sceneID="RkK-GF-wTS">
+            <objects>
+                <viewController storyboardIdentifier="Placing Bid View" id="wNi-9k-ezu" customClass="PlacingBidViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2Im-sV-arp"/>
+                        <viewControllerLayoutGuide type="bottom" id="gBs-di-DeL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ww8-Rc-qXf">
+                        <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placing bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk7-D5-UhS" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="309" width="346" height="41"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3z6-ag-bvG" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="141" y="600" width="535" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QbQ-HR-tbL" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                        <rect key="frame" x="140" y="8" width="107" height="57"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="DONE">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiq-mY-Z9W" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="8" width="107" height="57"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="NEXT">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2TG-5B-o1W" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                        <rect key="frame" x="420" y="8" width="107" height="57"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="DONE">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5C-0c-vlq" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="401" y="300" width="250" height="60"/>
+                                <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3hv-CK-eOq"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="815" height="660"/>
+                    <connections>
+                        <outlet property="bidDetailsPreviewView" destination="S5C-0c-vlq" id="6EL-hp-NHK"/>
+                        <outlet property="titleLabel" destination="dk7-D5-UhS" id="iZo-IK-oWR"/>
+                        <segue destination="igv-xv-sfe" kind="push" id="pBT-7T-k5e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7pB-iC-HXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2064.5" y="2924"/>
         </scene>
     </scenes>
     <resources>
@@ -1425,7 +1558,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="KZ3-yC-Zuc"/>
-        <segue reference="ymK-a1-EJ3"/>
+        <segue reference="A1R-R2-CSF"/>
+        <segue reference="6qF-R8-kJy"/>
     </inferredMetricsTieBreakers>
 </document>

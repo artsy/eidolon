@@ -86,7 +86,7 @@ class RegisterViewController: UIViewController {
             self.fulfilmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
             
         } else {
-            self.performSegue(.ConfirmRegistrationandBid)
+            self.performSegue(.RegistrationFinishedShowBidDetails)
         }
     }
 }

@@ -10,29 +10,48 @@ class RegistrationNetworkModel: NSObject {
     let completedSignal = RACSubject()
     
     func start() {
-        var signal = RACSignal.empty()
-        signal = signal.then { [weak self] (_) in
-            
-            self?.createOrUpdateUser()
-            
-        }.then { [weak self] (_) in
-            self?.updateProviderIfNewUser()
 
-        }.then{ [weak self] (_) in
-            self?.addCardToUser()
 
-        }.then{ [weak self] (_) in
-            self?.registerToAuction()
-        }
+//        var signal = RACSignal.empty()
+//        signal.then { [weak self] (_) in
+//            
+//            self?.createOrUpdateUser()
+//            
+//        }.then { [weak self] (_) in
+//            self?.updateProviderIfNewUser()
+//
+//        }.then{ [weak self] (_) in
+//            self?.addCardToUser()
+//
+//        }.then{ [weak self] (_) in
+//            self?.registerToAuction()
+//
+//        }.finally {
+//            println("ok?")
+//
+//        }
+////        signal.catchTo(RACSignal.empty()).subscribeCompleted { [weak self] (_) in
+////
+////        }
+////
+////        signal.subscribeNext { [weak self] (_) in
+////            println("next")
+////        }
+////
+//        signal.subscribeCompleted { [weak self] (_) in
+//            self?.completedSignal.sendNext(nil)
+//            self?.completedSignal.sendCompleted()
+//        }
+//        let sequence = ([createOrUpdateUser(), updateProviderIfNewUser(), addCardToUser(), registerToAuction()] as NSArray).rac_sequence
+//        sequence.eagerSequence
+//
 
-        signal.catchTo(RACSignal.empty()).subscribeCompleted { [weak self] (_) in
+//        RACSignal.merge([createOrUpdateUser(), updateProviderIfNewUser(), addCardToUser(), registerToAuction()]).then { (_) -> RACSignal! in
+//            self.completedSignal
+//        }.subscribeCompleted { () -> Void in
+//            println("hello?");
+//        }
 
-        }
-
-        signal.subscribeCompleted { [weak self] (_) in
-            self?.completedSignal.sendNext(nil)
-            self?.completedSignal.sendCompleted()
-        }
     }
 
     func provider() -> ReactiveMoyaProvider<ArtsyAPI>  {
@@ -47,7 +66,7 @@ class RegistrationNetworkModel: NSObject {
         if createNewUser {
             
             let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email!, password: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!)
-            return XAppRequest(endpoint, provider: provider(), method: .POST, parameters: Moya.DefaultParameters(), defaults: NSUserDefaults.standardUserDefaults()).doError() { (error) -> Void in
+            return Provider.DefaultProvider().request(endpoint, method: .POST, parameters: Moya.DefaultParameters()).filterSuccessfulStatusCodes().mapJSON().doError() { (error) -> Void in
                 println("Error creating user: \(error.localizedDescription)")
             }
             
@@ -55,7 +74,7 @@ class RegistrationNetworkModel: NSObject {
 
             let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.email!, postCode: newUser.zipCode!)
 
-            return provider().request(endpoint, method: .PUT).doError() { (error) -> Void in
+            return provider().request(endpoint, method: .PUT).filterSuccessfulStatusCodes().mapJSON().doError() { (error) -> Void in
                 println("Error logging in: \(error.localizedDescription)")
             }
         }
@@ -65,13 +84,13 @@ class RegistrationNetworkModel: NSObject {
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(balancedToken: details.newUser.creditCardToken!)
 
         return provider().request(endpoint, method: .POST).doError() { (error) -> Void in
-            println("Error ading card: \(error.localizedDescription)")
+            println("Error adding card: \(error.localizedDescription)")
         }
     }
 
     func registerToAuction() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: fulfilmentNav.auctionID)
-        return provider().request(endpoint, method: .POST).doError() { (error) -> Void in
+        return provider().request(endpoint, method: .POST).filterSuccessfulStatusCodes().mapJSON().mapToObject(Bidder.self).doError() { (error) -> Void in
             println("Error registring for auction: \(error.localizedDescription)")
         }
     }
@@ -84,7 +103,7 @@ class RegistrationNetworkModel: NSObject {
             return provider().request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext({ [weak self] (accessTokenDict) -> Void in
 
                 if let accessToken = accessTokenDict["access_token"] as? String {
-                    self?.fulfilmentNav.loggedInProvider = self?.createEndpointWithAccessToken(accessToken)
+                    self?.fulfilmentNav.xAccessToken = accessToken
                 }
 
             }).doError() { (error) -> Void in
@@ -95,16 +114,4 @@ class RegistrationNetworkModel: NSObject {
             return RACSignal.empty()
         }
     }
-
-    func createEndpointWithAccessToken(token: NSString) -> ReactiveMoyaProvider<ArtsyAPI> {
-
-        let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-            var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
-
-            return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": token])
-        }
-
-        return ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
-    }
-
 }

@@ -1,9 +1,10 @@
 import UIKit
 
-let AuctionID = "ici-live-auction"
+let AuctionID = "aperture-foundation-benefit-auction-2014"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
     var helpViewController: HelpViewController?
     var helpButton: UIButton!
                             

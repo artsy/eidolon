@@ -3,12 +3,14 @@ import Foundation
 enum ArtsyAPI {
     case XApp
     case XAuth(email: String, password: String)
+    case TrustToken(number: String, auctionPIN: String)
+
     case SystemTime
     
     case Me
     
     case MyCreditCards
-    case CreatePINForBidder(bidderID: String)
+    case CreatePINForBidder(bidderNumber: String)
     case FindBidderRegistration(auctionID: String, phone: String)
     case RegisterToBid(auctionID: String)
     
@@ -55,7 +57,7 @@ enum ArtsyAPI {
                 "artwork_id":  artworkID,
                 "max_bid_amount_cents": maxBidCents
             ]
-            
+
         default:
             return [:]
         }
@@ -90,8 +92,8 @@ extension ArtsyAPI : MoyaPath {
         case MyCreditCards:
             return "/api/v1/me/credit_cards"
 
-        case CreatePINForBidder(let bidderID):
-            return "/api/v1/bidder/\(bidderID)/auction_pin"
+        case CreatePINForBidder(let bidderNumber):
+            return "/api/v1/bidder/\(bidderNumber)/auction_pin"
 
         case ActiveAuctions:
             return "/api/v1/sales?is_auction=true&live=true"
@@ -116,13 +118,17 @@ extension ArtsyAPI : MoyaPath {
 
         case RegisterCard:
             return "/api/v1/me/credit_cards"
+
+        case TrustToken:
+            return "/api/v1/me/trust_token"
+
         }
     }
 }
 
 extension ArtsyAPI : MoyaTarget {
     // TODO: - parameterize base URL based on debug, release, etc.
-     var baseURL: NSURL { return NSURL(string: "https://stagingapi.artsy.net")! }
+     var baseURL: NSURL { return NSURL(string: "https://api.artsy.net")! }
      var sampleData: NSData {
         switch self {
 
@@ -130,6 +136,9 @@ extension ArtsyAPI : MoyaTarget {
             return stubbedResponse("XApp")
 
         case XAuth:
+            return stubbedResponse("XAuth")
+
+        case TrustToken:
             return stubbedResponse("XAuth")
 
         case Auctions:
@@ -159,10 +168,10 @@ extension ArtsyAPI : MoyaTarget {
         case Me:
             return stubbedResponse("Me")
 
-        case .UpdateMe:
+        case UpdateMe:
             return stubbedResponse("Me")
-            
-        case .CreateUser:
+
+        case CreateUser:
             return stubbedResponse("Me")
 
             
@@ -173,10 +182,10 @@ extension ArtsyAPI : MoyaTarget {
         case PlaceABid:
             return stubbedResponse("CreateABid")
             
-        case .AuctionInfo:
+        case AuctionInfo:
             return stubbedResponse("AuctionInfo")
 
-        case .RegisterCard:
+        case RegisterCard:
             return stubbedResponse("RegisterCard")
         }
     }
@@ -194,19 +203,40 @@ extension ArtsyAPI : MoyaTarget {
             return endpoint
         case .XAuth:
             return endpoint
+            
+        case .TrustToken(let number, let auctionID):
+            return endpoint.endpointByAddingParameters([
+                "number": number, "auction_pin": auctionID
+            ])
+
+        case .CreateUser(let email,let password,let phone,let postCode):
+
+            endpoint = endpoint.endpointByAddingParameters([
+                "email": email, "password": password,
+                "phone": phone
+            ])
+            endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
+
+        case .UpdateMe(let email,let phone,let postCode):
+            endpoint = endpoint.endpointByAddingParameters([
+                "email": email, "phone": phone
+            ])
+
+        case .RegisterCard(let token):
+            endpoint = endpoint.endpointByAddingParameters([
+                "provider": "balanced", "token": token
+            ])
+
+
         default:
             endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
         }
         
         // target-specific parameters
         switch target {
+
         case .FindBidderRegistration(let auctionID, let phone):
             return endpoint.endpointByAddingParameters(["sale_id": auctionID, "phone": phone])
-
-        case .RegisterCard(let token):
-            return endpoint.endpointByAddingParameters([
-                "provider": "balanced", "token": token
-            ])
 
         default:
             return endpoint

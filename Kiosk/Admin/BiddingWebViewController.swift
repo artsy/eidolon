@@ -1,35 +1,37 @@
-//
-//  BiddingWebViewController.swift
-//  Kiosk
-//
-//  Created by Orta on 10/15/14.
-//  Copyright (c) 2014 Artsy. All rights reserved.
-//
-
 import UIKit
 
-class BiddingWebViewController: UIViewController {
+class BiddingWebViewController: DZNWebViewController {
+
+    class func instantiateFromStoryboard() -> BiddingWebViewController {
+        return UIStoryboard.fulfillment().viewControllerWithID(.ArtsyWebBidding) as BiddingWebViewController
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.webView.scalesPageToFit = true
+
+        let nav = self.fulfilmentNav()
+        let saleArtwork = nav.bidDetails.saleArtwork
+        let auctionID = nav.auctionID
+        let authToken = nav.xAccessToken
+        let actualSite = "https://artsy.net/feature/\(auctionID)/bid/\(saleArtwork!.artwork.id)"
+
+        let number = nav.bidDetails.bidderNumber!
+        let pin = nav.bidDetails.bidderPIN!
+
+        let endpoint: ArtsyAPI = ArtsyAPI.TrustToken(number:number, auctionPIN:pin)
+        XAppRequest(endpoint, method: .POST).filterSuccessfulStatusCodes().mapJSON().subscribeNext({ [weak self] (json) -> Void in
+
+            if let token = json["trust_token"] as? String {
+                let escapedSite = actualSite.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!
+
+                let address = "https://artsy.net/users/sign_in?trust_token=\(token)&redirect_uri=\(escapedSite)"
+                println(address)
+                let request = NSURLRequest(URL: NSURL(string: address)!)
+                self?.webView.loadRequest(request)
+            }
+
+        })
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
