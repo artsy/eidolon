@@ -121,6 +121,7 @@ class ListingsViewController: UIViewController {
 
         if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
             let registerVC = RegisterViewController.instantiateFromStoryboard()
+            internalNav.auctionID = self.auctionID
             registerVC.createNewUser = true
             internalNav.viewControllers = [registerVC]
         }
@@ -174,6 +175,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         containerController.allowAnimations = allowAnimations
 
         if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
+            internalNav.auctionID = self.auctionID
             internalNav.bidDetails.saleArtwork = saleArtwork
         }
 

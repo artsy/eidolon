@@ -39,7 +39,8 @@ class RegisterViewController: UIViewController {
 
         RAC(registrationNetworkModel, "createNewUser") <~ RACObserve(self, "createNewUser")
         RAC(registrationNetworkModel, "details") <~ RACObserve(self, "details")
-        
+        registrationNetworkModel.fulfilmentNav = self.fulfilmentNav()
+
         details = self.fulfilmentNav().bidDetails
         flowView.details = details
         bidDetailsPreviewView.bidDetails = details
@@ -70,7 +71,7 @@ class RegisterViewController: UIViewController {
         
         registrationNetworkModel.completedSignal.subscribeNext({ [weak self] (_) -> Void in
 
-            self?.moveToNextViewController()
+            self?.performSegue(.RegistrationFinishedShowBidDetails)
             return
             
         }, error: { [weak self] (error) -> Void in
@@ -79,13 +80,12 @@ class RegisterViewController: UIViewController {
         
         registrationNetworkModel.start()
     }
-    
-    func moveToNextViewController() {
-        if createNewUser {
-            self.fulfilmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
-            
-        } else {
-            self.performSegue(.ConfirmRegistrationandBid)
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == .RegistrationFinishedShowBidDetails {
+            let nextViewController = segue.destinationViewController as YourBiddingDetailsViewController
+            nextViewController.finishAfterViewController = createNewUser
+
         }
     }
 }

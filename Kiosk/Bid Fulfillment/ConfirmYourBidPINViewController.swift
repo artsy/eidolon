@@ -33,6 +33,8 @@ class ConfirmYourBidPINViewController: UIViewController {
         clearSignal.subscribeNext(clearPIN)
 
         RAC(pinTextField, "text") <~ RACObserve(self, "pin")
+        RAC(fulfilmentNav().bidDetails, "bidderPIN") <~ RACObserve(self, "pin")
+
         bidDetailsPreviewView.bidDetails = fulfilmentNav().bidDetails
     }
 
@@ -41,32 +43,45 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         let phone = self.fulfilmentNav().bidDetails.newUser.phoneNumber! as String!
 
+        let endpoint: ArtsyAPI = ArtsyAPI.Me
+        let testProvider = providerForPIN(pin, number:phone)
+        let bidderRequest = testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().filterSuccessfulStatusCodes().doNext({ [weak self] (_) -> Void in
+            self?.fulfilmentNav().loggedInProvider = testProvider
+            return
+
+        }).then { [weak self] () -> RACSignal! in
+            self?.fulfilmentNav().updateUserCredentials()
+
+        }.then { () -> RACSignal! in
+            self.checkForCreditCard()
+
+        }.subscribeNext { [weak self] (cards) -> Void in
+
+            if countElements(cards as [Card]) > 0 {
+                self?.performSegue(.EmailLoginConfirmedHighestBidder)
+
+            } else {
+                self?.performSegue(.ArtsyUserHasNotRegisteredCard)
+            }
+        }
+    }
+
+    func providerForPIN(pin:String, number:String) -> ReactiveMoyaProvider<ArtsyAPI> {
         let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
             var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
-            return endpoint.endpointByAddingParameters(["auction_pin": self.pin, "number": phone])
+            return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number])
         }
-        
-        let numberProvider:ReactiveMoyaProvider<ArtsyAPI> = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
 
-        let endpoint: ArtsyAPI = ArtsyAPI.Me
-        let bidderRequest = XAppRequest(endpoint, provider: numberProvider).filterSuccessfulStatusCodes().subscribeNext({ [weak self] (_) -> Void in
-
-            if let nav = self?.fulfilmentNav() {
-                nav.providerEndpointResolver = newEndpointsClosure
-                
-                nav.updateUserCredentials().subscribeNext({ [weak self](_) -> Void in
-                    println("P:1.5")
-                    self?.performSegue(.PINConfirmed)
-                    return
-                })
-            }
-            
-        }, error: { [weak self] (error) -> Void in
-            println("error, the pin is likely wrong")
-            return
-        })
+        return ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
 
     }
+
+    func checkForCreditCard() -> RACSignal {
+        let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
+        let authProvider = self.fulfilmentNav().loggedInProvider!
+        return authProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
+    }
+
 }
 
 private extension ConfirmYourBidPINViewController {

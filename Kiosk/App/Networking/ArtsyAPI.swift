@@ -3,12 +3,14 @@ import Foundation
 enum ArtsyAPI {
     case XApp
     case XAuth(email: String, password: String)
+    case TrustToken(number: String, auctionPIN: String)
+
     case SystemTime
     
     case Me
     
     case MyCreditCards
-    case CreatePINForBidder(bidderID: String)
+    case CreatePINForBidder(bidderNumber: String)
     case FindBidderRegistration(auctionID: String, phone: String)
     case RegisterToBid(auctionID: String)
     
@@ -22,7 +24,7 @@ enum ArtsyAPI {
 
     case UpdateMe(email: String, phone: String, postCode: String)
     case CreateUser(email: String, password: String, phone: String, postCode: String)
-//    case RegisterCard(balancedToken: String)
+    case RegisterCard(balancedToken: String)
     
     var defaultParameters: [String: AnyObject] {
         switch self {
@@ -55,7 +57,32 @@ enum ArtsyAPI {
                 "artwork_id":  artworkID,
                 "max_bid_amount_cents": maxBidCents
             ]
-            
+
+        case .TrustToken(let number, let auctionID):
+            return [
+                "number": number, "auction_pin": auctionID
+            ]
+
+        case .CreateUser(let email,let password,let phone,let postCode):
+
+            return [
+                "email": email, "password": password,
+                "phone": phone
+            ]
+
+        case .UpdateMe(let email,let phone,let postCode):
+            return [
+                "email": email, "phone": phone
+            ]
+
+        case .RegisterCard(let token):
+            return [
+                "provider": "balanced", "token": token
+            ]
+
+        case .FindBidderRegistration(let auctionID, let phone):
+            return ["sale_id": auctionID, "phone": phone]
+
         default:
             return [:]
         }
@@ -90,8 +117,8 @@ extension ArtsyAPI : MoyaPath {
         case MyCreditCards:
             return "/api/v1/me/credit_cards"
 
-        case CreatePINForBidder(let bidderID):
-            return "/api/v1/bidder/\(bidderID)/auction_pin"
+        case CreatePINForBidder(let bidderNumber):
+            return "/api/v1/bidder/\(bidderNumber)/pin"
 
         case ActiveAuctions:
             return "/api/v1/sales?is_auction=true&live=true"
@@ -113,6 +140,13 @@ extension ArtsyAPI : MoyaPath {
             
         case PlaceABid:
             return "/api/v1/me/bidder_position"
+
+        case RegisterCard:
+            return "/api/v1/me/credit_cards"
+
+        case TrustToken:
+            return "/api/v1/me/trust_token"
+
         }
     }
 }
@@ -127,6 +161,9 @@ extension ArtsyAPI : MoyaTarget {
             return stubbedResponse("XApp")
 
         case XAuth:
+            return stubbedResponse("XAuth")
+
+        case TrustToken:
             return stubbedResponse("XAuth")
 
         case Auctions:
@@ -156,10 +193,10 @@ extension ArtsyAPI : MoyaTarget {
         case Me:
             return stubbedResponse("Me")
 
-        case .UpdateMe:
+        case UpdateMe:
             return stubbedResponse("Me")
-            
-        case .CreateUser:
+
+        case CreateUser:
             return stubbedResponse("Me")
 
             
@@ -170,9 +207,11 @@ extension ArtsyAPI : MoyaTarget {
         case PlaceABid:
             return stubbedResponse("CreateABid")
             
-        case .AuctionInfo:
+        case AuctionInfo:
             return stubbedResponse("AuctionInfo")
-            
+
+        case RegisterCard:
+            return stubbedResponse("RegisterCard")
         }
     }
 }
@@ -189,19 +228,10 @@ extension ArtsyAPI : MoyaTarget {
             return endpoint
         case .XAuth:
             return endpoint
+
         default:
-            endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
+            return endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
         }
-        
-        // target-specific parameters
-        switch target {
-        case .FindBidderRegistration(let auctionID, let phone):
-            return endpoint.endpointByAddingParameters(["sale_id": auctionID, "phone": phone])
-        default:
-            return endpoint
-        }
-        
-        
     }
     
      static func DefaultProvider() -> ReactiveMoyaProvider<ArtsyAPI> {

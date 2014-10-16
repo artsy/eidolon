@@ -4,6 +4,7 @@ let AuctionID = "ici-live-auction"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
     var helpViewController: HelpViewController?
     var helpButton: UIButton!
                             

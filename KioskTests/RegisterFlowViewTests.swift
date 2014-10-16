@@ -11,7 +11,7 @@ class RegisterFlowViewTests: QuickSpec {
         xit("looks right by default") {
 
             let frame = CGRect(x: 0, y: 0, width: 180, height: 320)
-            var bidDetails  = BidDetails(saleArtwork: nil, bidderID: nil, bidderPIN: nil, bidAmountCents: nil)
+            var bidDetails  = BidDetails(saleArtwork: nil, bidderNumber: nil, bidderPIN: nil, bidAmountCents: nil)
             bidDetails.newUser = NewUser()
 
             let sut = RegisterFlowView(frame: frame)
@@ -21,7 +21,7 @@ class RegisterFlowViewTests: QuickSpec {
 
         xit("handles partial data") {
             let frame = CGRect(x: 0, y: 0, width: 180, height: 320)
-            var bidDetails  = BidDetails(saleArtwork: nil, bidderID: nil, bidderPIN: nil, bidAmountCents: nil)
+            var bidDetails  = BidDetails(saleArtwork: nil, bidderNumber: nil, bidderPIN: nil, bidAmountCents: nil)
             bidDetails.newUser = NewUser()
 
             bidDetails.newUser.phoneNumber = "132131231"
@@ -34,7 +34,7 @@ class RegisterFlowViewTests: QuickSpec {
 
         xit("handles different ") {
             let frame = CGRect(x: 0, y: 0, width: 180, height: 320)
-            var bidDetails  = BidDetails(saleArtwork: nil, bidderID: nil, bidderPIN: nil, bidAmountCents: nil)
+            var bidDetails  = BidDetails(saleArtwork: nil, bidderNumber: nil, bidderPIN: nil, bidAmountCents: nil)
             bidDetails.newUser = NewUser()
 
             bidDetails.newUser.phoneNumber = "132131231"
@@ -49,7 +49,7 @@ class RegisterFlowViewTests: QuickSpec {
 
         xit("handles full data") {
             let frame = CGRect(x: 0, y: 0, width: 180, height: 320)
-            var bidDetails  = BidDetails(saleArtwork: nil, bidderID: nil, bidderPIN: nil, bidAmountCents: nil)
+            var bidDetails  = BidDetails(saleArtwork: nil, bidderNumber: nil, bidderPIN: nil, bidAmountCents: nil)
             bidDetails.newUser = NewUser()
 
             bidDetails.newUser.phoneNumber = "132131231"

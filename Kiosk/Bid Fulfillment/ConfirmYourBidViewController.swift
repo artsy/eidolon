@@ -36,6 +36,8 @@ class ConfirmYourBidViewController: UIViewController {
         let nav = self.fulfilmentNav()
 
         RAC(nav.bidDetails.newUser, "phoneNumber") <~ RACObserve(self, "number")
+        RAC(nav.bidDetails, "bidderNumber") <~ RACObserve(self, "number")
+        
         bidDetailsPreviewView.bidDetails = nav.bidDetails
     }
 
@@ -49,7 +51,7 @@ class ConfirmYourBidViewController: UIViewController {
         if let nav = self.navigationController as? FulfillmentNavigationController {
             
             let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: nav.auctionID!, phone: number)
-            let bidderRequest = XAppRequest(endpoint, provider:provider).filterStatusCode(400).subscribeNext({ [weak self] (_) -> Void in
+            let bidderRequest = XAppRequest(endpoint, provider:provider, parameters:endpoint.defaultParameters).filterStatusCode(400).subscribeNext({ [weak self] (_) -> Void in
                 
             }, error: { [weak self] (error) -> Void in
 

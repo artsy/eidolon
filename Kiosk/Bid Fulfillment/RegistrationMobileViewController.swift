@@ -1,6 +1,6 @@
 import UIKit
 
-class RegistrationMobileViewController: UIViewController, RegistrationSubController {
+class RegistrationMobileViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
     
     @IBOutlet var numberTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
@@ -17,7 +17,17 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
         
         numberTextField.becomeFirstResponder()
     }
-    
+
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+
+        // Allow delete
+        if (countElements(string) == 0) { return true }
+
+        // the API doesn't accept chars
+        let notNumberChars = NSCharacterSet.decimalDigitCharacterSet().invertedSet;
+        return countElements(string.stringByTrimmingCharactersInSet(notNumberChars)) != 0
+    }
+
     let finishedSignal = RACSubject()
     @IBAction func confirmTapped(sender: AnyObject) {
         finishedSignal.sendCompleted()

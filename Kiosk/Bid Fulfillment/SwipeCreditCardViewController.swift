@@ -14,7 +14,7 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
     dynamic var cardToken = ""
 
     lazy var keys = EidolonKeys()
-    lazy var cardHandler:CardHandler = CardHandler(apiKey: self.keys.cardflightTestAPIClientKey(), accountToken: self.keys.cardflightMerchantAccountToken())
+    lazy var cardHandler:CardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken: self.keys.cardflightMerchantAccountToken())
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
 
             if let card = self.cardHandler.card {
                 self.cardName = card.name
-                self.cardLastDigits = card.last4
+                self.cardLastDigits = card.encryptedSwipedCardNumber
                 self.cardToken = card.cardToken
             }
 

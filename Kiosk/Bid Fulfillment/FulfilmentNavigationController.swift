@@ -3,20 +3,26 @@ import UIKit
 class FulfillmentNavigationController: UINavigationController {
 
     /// The the collection of details necessary to eventually create a bid
-    var bidDetails = BidDetails(saleArtwork:nil, bidderID: nil, bidderPIN: nil, bidAmountCents:nil)
-
-    lazy var auctionID:String! = self.bidDetails.saleArtwork?.auctionID
-
+    var bidDetails = BidDetails(saleArtwork:nil, bidderNumber: nil, bidderPIN: nil, bidAmountCents:nil)
+    var auctionID:String!
     var user:User!
-    
-    var loggedInProvider:ReactiveMoyaProvider<ArtsyAPI>?
-    var providerEndpointResolver:MoyaProvider<ArtsyAPI>.MoyaEndpointsClosure! {
-        didSet(oldResolver) {
-            loggedInProvider = ReactiveMoyaProvider(endpointsClosure: providerEndpointResolver, stubResponses: APIKeys.sharedKeys.stubResponses)
+
+    /// Otherwise we're fine with a legit auth token
+    var xAccessToken: String? {
+        didSet(oldToken) {
+
+            let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+                var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+
+                return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": self.xAccessToken!])
+            }
+            loggedInProvider = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
         }
-        
     }
-    
+
+    var loggedInProvider:ReactiveMoyaProvider<ArtsyAPI>?
+
+
     func updateUserCredentials() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         let request = loggedInProvider!.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self)

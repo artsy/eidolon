@@ -35,7 +35,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         provider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().subscribeNext({ [weak self] (accessTokenDict) -> Void in
 
             if let accessToken = accessTokenDict["access_token"] as? String {
-                self?.setupNavProviderWithToken(accessToken)
+                self?.fulfilmentNav().xAccessToken = accessToken
 
                 self?.fulfilmentNav().updateUserCredentials().subscribeNext({ [weak self] (accessTokenDict) -> Void in
                     self?.checkForCreditCard()
@@ -48,21 +48,6 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         })
     }
 
-    func setupNavProviderWithToken(token: String) {
-
-        let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-            var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
-
-            return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": token])
-        }
-
-        let numberProvider:ReactiveMoyaProvider<ArtsyAPI> = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
-        
-        self.fulfilmentNav().providerEndpointResolver = newEndpointsClosure
-        self.fulfilmentNav().loggedInProvider = numberProvider
-    }
-    
-
     func checkForCreditCard() {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
         let authProvider = self.fulfilmentNav().loggedInProvider!
@@ -70,6 +55,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
             if countElements(cards as [Card]) > 0 {
                 self?.performSegue(.EmailLoginConfirmedHighestBidder)
+
             } else {
                 self?.performSegue(.ArtsyUserHasNotRegisteredCard)
             }

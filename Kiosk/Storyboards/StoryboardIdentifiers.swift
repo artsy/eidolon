@@ -3,7 +3,6 @@
 public enum SegueIdentifier : String {
     case ArtsyUserHasNotRegisteredCard = "Artsy User Has Not Registered Card"
     case ConfirmBid = "Confirm Bid"
-    case ConfirmRegistrationandBid = "Confirm Registration and Bid"
     case ConfirmyourBidArtsyLogin = "Confirm your Bid - Artsy Login"
     case ConfirmyourBidBidderFound = "Confirm your Bid - Bidder Found"
     case ConfirmyourBidBidderNotFound = "Confirm your Bid - Bidder Not Found"
@@ -14,11 +13,14 @@ public enum SegueIdentifier : String {
     case PINConfirmed = "PIN Confirmed"
     case RegisterCreditCardToPostal = "RegisterCreditCardToPostal"
     case RegisterPostalToConfirm = "RegisterPostalToConfirm"
+    case RegistrationFinishedShowBidDetails = "Registration Finished Show Bid Details"
     case ShowAdminOptions = "Show Admin Options"
+    case StartPlacingBidFromRegistration = "Start Placing Bid From Registration"
     case SubmittedanEmailforUserDetails = "Submitted an Email for User Details"
 }
 
 public enum ViewControllerStoryboardIdentifier : String {
+    case ArtsyWebBidding = "Artsy Web Bidding"
     case ConfirmYourBid = "Confirm Your Bid"
     case ConfirmYourBidArtsyLogin = "Confirm Your Bid Artsy Login"
     case ConfirmYourBidEnterEmail = "Confirm Your Bid Enter Email"
