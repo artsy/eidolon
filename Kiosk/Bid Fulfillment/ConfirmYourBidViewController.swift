@@ -95,9 +95,13 @@ class ConfirmYourBidViewController: UIViewController {
     }
 
     func toPhoneNumberString(number:AnyObject!) -> AnyObject! {
-        return self.phoneNumberFormatter.stringForObjectValue(number as String)
+        let numberString = number as String
+        if countElements(numberString) >= 7 {
+            return numberString
+        } else {
+            return self.phoneNumberFormatter.stringForObjectValue(numberString)
+        }
     }
-
 }
 
 private extension ConfirmYourBidViewController {
