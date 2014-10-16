@@ -640,7 +640,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sFU-mI-0Wz" customClass="SecureTextField" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="249" width="255" height="44"/>
+                                <rect key="frame" x="495" y="244" width="255" height="44"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -651,7 +651,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSp-ka-p6m" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="309" width="255" height="43"/>
+                                <rect key="frame" x="495" y="304" width="255" height="43"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="CONFIRM">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -730,10 +730,10 @@
             </objects>
             <point key="canvasLocation" x="525.5" y="116"/>
         </scene>
-        <!--Bidding Web View Controller-->
+        <!--Placing Bid View Controller-->
         <scene sceneID="k3G-Eq-Mxm">
             <objects>
-                <viewController id="2lt-co-qW2" customClass="BiddingWebViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2lt-co-qW2" customClass="PlacingBidViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Nb-wA-gsX"/>
                         <viewControllerLayoutGuide type="bottom" id="6LY-4E-fIY"/>
@@ -741,11 +741,28 @@
                     <view key="view" contentMode="scaleToFill" id="5i6-CZ-9za">
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placing bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ThI-e6-Ovh" customClass="ARSerifLabel">
+                                <rect key="frame" x="121" y="283" width="346" height="41"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XzW-dO-Dol" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="457" y="274" width="250" height="60"/>
+                                <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="adB-Dl-Xcj"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="815" height="660"/>
+                    <connections>
+                        <outlet property="bidDetailsPreviewView" destination="XzW-dO-Dol" id="Lor-Ob-fud"/>
+                        <outlet property="titleLabel" destination="ThI-e6-Ovh" id="Qsq-E7-3CR"/>
+                        <segue destination="igv-xv-sfe" kind="push" id="DsB-Gb-cEw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOk-Pg-yZ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -803,7 +820,7 @@
                                             <action selector="revealAppTapped:" destination="N1l-90-SiW" eventType="touchUpInside" id="yjS-vE-MG1"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quick Login Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-AU-Wuo" customClass="ARSerifLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kiosk Login Details" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-AU-Wuo" customClass="ARSerifLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="198" height="44"/>
                                         <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="25"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -825,9 +842,10 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="confirmButtonTapped:" destination="N1l-90-SiW" eventType="touchUpInside" id="ZV0-b8-KJQ"/>
                                     <action selector="confirmTapped:" destination="BKe-0r-2Pc" eventType="touchUpInside" id="vDO-RE-3Ba"/>
                                     <action selector="confirmTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="w2s-T0-038"/>
-                                    <segue destination="2lt-co-qW2" kind="push" id="umA-gD-rtQ"/>
+                                    <segue destination="2lt-co-qW2" kind="push" identifier="Start Placing Bid From Registration" id="umA-gD-rtQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -836,6 +854,7 @@
                     <navigationItem key="navigationItem" id="0jN-0L-5Tx"/>
                     <connections>
                         <outlet property="bidderNumberLabel" destination="FgB-Zc-b2J" id="dON-Yd-9f1"/>
+                        <outlet property="confirmButton" destination="nti-wZ-91X" id="JVG-tK-j4y"/>
                         <outlet property="pinNumberLabel" destination="sK5-ZW-ycH" id="hb5-zi-GqM"/>
                     </connections>
                 </viewController>
@@ -930,7 +949,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7J-sI-ZIT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2064.5" y="3760"/>
+            <point key="canvasLocation" x="1758.5" y="2217"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AYD-hb-rh2">
@@ -1481,74 +1500,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J1J-UN-yt7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="184.5" y="2728.5"/>
-        </scene>
-        <!--Placing Bid View Controller-->
-        <scene sceneID="RkK-GF-wTS">
-            <objects>
-                <viewController storyboardIdentifier="Placing Bid View" id="wNi-9k-ezu" customClass="PlacingBidViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2Im-sV-arp"/>
-                        <viewControllerLayoutGuide type="bottom" id="gBs-di-DeL"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ww8-Rc-qXf">
-                        <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placing bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk7-D5-UhS" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="309" width="346" height="41"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3z6-ag-bvG" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="141" y="600" width="535" height="60"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QbQ-HR-tbL" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                        <rect key="frame" x="140" y="8" width="107" height="57"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="DONE">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiq-mY-Z9W" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="8" width="107" height="57"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="NEXT">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2TG-5B-o1W" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                        <rect key="frame" x="420" y="8" width="107" height="57"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="DONE">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5C-0c-vlq" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="401" y="300" width="250" height="60"/>
-                                <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="3hv-CK-eOq"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="815" height="660"/>
-                    <connections>
-                        <outlet property="bidDetailsPreviewView" destination="S5C-0c-vlq" id="6EL-hp-NHK"/>
-                        <outlet property="titleLabel" destination="dk7-D5-UhS" id="iZo-IK-oWR"/>
-                        <segue destination="igv-xv-sfe" kind="push" id="pBT-7T-k5e"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7pB-iC-HXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2064.5" y="2924"/>
         </scene>
     </scenes>
     <resources>

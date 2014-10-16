@@ -4,14 +4,8 @@ class FulfillmentNavigationController: UINavigationController {
 
     /// The the collection of details necessary to eventually create a bid
     var bidDetails = BidDetails(saleArtwork:nil, bidderNumber: nil, bidderPIN: nil, bidAmountCents:nil)
-
     var auctionID:String!
-
     var user:User!
-
-
-    /// When logging in via Bidder + PIN. we use a TT to get redirected in for web viewsd
-    var trustToken: String?
 
     /// Otherwise we're fine with a legit auth token
     var xAccessToken: String? {

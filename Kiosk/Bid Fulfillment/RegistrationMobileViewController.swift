@@ -19,11 +19,14 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+
+        // Allow delete
+        if (countElements(string) == 0) { return true }
+
         // the API doesn't accept chars
         let notNumberChars = NSCharacterSet.decimalDigitCharacterSet().invertedSet;
         return countElements(string.stringByTrimmingCharactersInSet(notNumberChars)) != 0
     }
-
 
     let finishedSignal = RACSubject()
     @IBAction func confirmTapped(sender: AnyObject) {

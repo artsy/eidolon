@@ -8,9 +8,6 @@ class PlacingBidViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        println("P:2")
-        
     }
     
     override func viewDidAppear(animated: Bool) {

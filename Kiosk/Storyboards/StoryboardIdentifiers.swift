@@ -15,6 +15,7 @@ public enum SegueIdentifier : String {
     case RegisterPostalToConfirm = "RegisterPostalToConfirm"
     case RegistrationFinishedShowBidDetails = "Registration Finished Show Bid Details"
     case ShowAdminOptions = "Show Admin Options"
+    case StartPlacingBidFromRegistration = "Start Placing Bid From Registration"
     case SubmittedanEmailforUserDetails = "Submitted an Email for User Details"
 }
 

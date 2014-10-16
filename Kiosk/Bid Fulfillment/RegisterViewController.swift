@@ -84,7 +84,7 @@ class RegisterViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .RegistrationFinishedShowBidDetails {
             let nextViewController = segue.destinationViewController as YourBiddingDetailsViewController
-            nextViewController.hidePlaceBidButton = createNewUser
+            nextViewController.finishAfterViewController = createNewUser
 
         }
     }
