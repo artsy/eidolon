@@ -45,7 +45,8 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         let testProvider = providerForPIN(pin, number:phone)
-        let bidderRequest = testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().filterSuccessfulStatusCodes().doNext({ [weak self] (_) -> Void in
+        let bidderRequest = testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doNext({ [weak self] (_) -> Void in
+
             self?.fulfilmentNav().loggedInProvider = testProvider
             return
 
@@ -58,10 +59,10 @@ class ConfirmYourBidPINViewController: UIViewController {
         }.subscribeNext { [weak self] (cards) -> Void in
 
             if countElements(cards as [Card]) > 0 {
-                self?.performSegue(.EmailLoginConfirmedHighestBidder)
-
+                self?.performSegue(.PINConfirmedhasCard)
+                
             } else {
-                self?.performSegue(.ArtsyUserHasNotRegisteredCard)
+                self?.performSegue(.ArtsyUserviaPINHasNotRegisteredCard)
             }
         }
     }
@@ -99,7 +100,7 @@ private extension ConfirmYourBidPINViewController {
     }
 
     @IBAction func dev_loggedInTapped(sender: AnyObject) {
-        self.performSegue(.PINConfirmed)
+        self.performSegue(.PINConfirmedhasCard)
     }
 
 }

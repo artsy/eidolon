@@ -107,7 +107,6 @@
 		6030A12B19D1AA0F00B934CA /* KioskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A12A19D1AA0F00B934CA /* KioskTests.swift */; };
 		603F8CC719BDF80C00B162C7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603F8CB119BDF77700B162C7 /* Nimble.framework */; };
 		603F8CC819BDF80C00B162C7 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603F8CC419BDF78A00B162C7 /* Quick.framework */; };
-		6047050519EF249600EEF286 /* BiddingWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6047050419EF249600EEF286 /* BiddingWebViewController.swift */; };
 		604AF5C019E14A020019884E /* RegisterFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604AF5BF19E14A020019884E /* RegisterFlowView.swift */; };
 		604AF5C119E14A020019884E /* RegisterFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604AF5BF19E14A020019884E /* RegisterFlowView.swift */; };
 		604B225219D359C3008D86C7 /* SystemTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604B225119D359C3008D86C7 /* SystemTimeTests.swift */; };
@@ -467,7 +466,6 @@
 		6030A0F219D18F5200B934CA /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		6030A0FF19D192D000B934CA /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		6030A12A19D1AA0F00B934CA /* KioskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KioskTests.swift; sourceTree = "<group>"; };
-		6047050419EF249600EEF286 /* BiddingWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiddingWebViewController.swift; sourceTree = "<group>"; };
 		604AF5BF19E14A020019884E /* RegisterFlowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterFlowView.swift; path = ../App/Views/RegisterFlowView.swift; sourceTree = "<group>"; };
 		604B225119D359C3008D86C7 /* SystemTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemTimeTests.swift; sourceTree = "<group>"; };
 		6051290219E15F63004B05BF /* SnapshotExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotExtension.swift; sourceTree = "<group>"; };
@@ -820,7 +818,6 @@
 			children = (
 				600DABED19EB657100278378 /* AdminPanelViewController.swift */,
 				600DABF019EB7C3700278378 /* AuctionWebViewController.swift */,
-				6047050419EF249600EEF286 /* BiddingWebViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1555,7 +1552,6 @@
 				60D976E619D30FF700DE9F3D /* BidderPosition.swift in Sources */,
 				5EC60BCB19EB140F008A04B0 /* HelpViewController.swift in Sources */,
 				5E2B3D4B19DC063C00906A26 /* ListingsCollectionViewCell.swift in Sources */,
-				6047050519EF249600EEF286 /* BiddingWebViewController.swift in Sources */,
 				60C3983F19E81ECF00CB81F4 /* NSErrorExtensions.swift in Sources */,
 				5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */,
 				60968DD019C5B427001AB802 /* KeypadView.swift in Sources */,

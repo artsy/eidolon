@@ -11,30 +11,29 @@ class RegistrationNetworkModel: NSObject {
     
     func start() {
 
-        var signal = self.createOrUpdateUser().then { [weak self] (_) in
-            self?.updateProviderIfNewUser()
+        let needsToRegisterBidder = fulfilmentNav.bidDetails.bidderPIN == nil
 
-        }.then{ [weak self] (_) in
-            self?.addCardToUser()
+        var signal = self.createOrUpdateUser().then {
+            self.updateProviderIfNewUser()
 
-        }.then{ [weak self] (_) in
-            self?.registerToAuction()
+        }.then {
+            self.addCardToUser()
 
-        }.then{ [weak self] (_) in
-            self?.generateAPIN()
+        }.then {
+            needsToRegisterBidder ? self.registerToAuction() : RACSignal.empty()
 
-        }.then{ [weak self] (_) in
-            self?.getMyPaddleNumber()
+        }.then {
+            self.generateAPIN()
+
+        }.then {
+            self.getMyPaddleNumber()
 
         }.catchTo(RACSignal.empty()).doError { [weak self] (error) -> Void in
             self?.completedSignal.sendError(error)
             return
         }
 
-        signal.finally {
-            println("ok?")
-            
-        }.subscribeNext { [weak self] (_) in
+       signal.subscribeNext { [weak self] (_) in
             self?.completedSignal.sendNext(nil)
             self?.completedSignal.sendCompleted()
         }

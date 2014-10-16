@@ -5,6 +5,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
+    var createNewAccount = false
 
     @IBOutlet var confirmCredentialsButton: UIButton!
     lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
@@ -46,6 +47,18 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         }, error: { (error) -> Void in
                 println("Error logging in: \(error.localizedDescription)")
         })
+    }
+
+    @IBAction func createNewAccountTapped(sender: AnyObject) {
+        createNewAccount = true
+        self.performSegue(.ArtsyUserHasNotRegisteredCard)
+    }
+
+    public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == .ArtsyUserHasNotRegisteredCard {
+            let registrationVC = segue.destinationViewController as RegisterViewController
+            registrationVC.createNewUser = createNewAccount
+        }
     }
 
     func checkForCreditCard() {
