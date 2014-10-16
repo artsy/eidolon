@@ -12,40 +12,25 @@ class RegistrationNetworkModel: NSObject {
     func start() {
 
 
-//        var signal = RACSignal.empty()
-//        signal.then { [weak self] (_) in
-//            
-//            self?.createOrUpdateUser()
-//            
-//        }.then { [weak self] (_) in
-//            self?.updateProviderIfNewUser()
-//
-//        }.then{ [weak self] (_) in
-//            self?.addCardToUser()
-//
-//        }.then{ [weak self] (_) in
-//            self?.registerToAuction()
-//
-//        }.finally {
-//            println("ok?")
-//
-//        }
-////        signal.catchTo(RACSignal.empty()).subscribeCompleted { [weak self] (_) in
-////
-////        }
-////
-////        signal.subscribeNext { [weak self] (_) in
-////            println("next")
-////        }
-////
-//        signal.subscribeCompleted { [weak self] (_) in
-//            self?.completedSignal.sendNext(nil)
-//            self?.completedSignal.sendCompleted()
-//        }
+        var signal = self.createOrUpdateUser().then { [weak self] (_) in
+            self?.updateProviderIfNewUser()
+        }.then{ [weak self] (_) in
+            self?.addCardToUser()
+        }.then{ [weak self] (_) in
+            self?.registerToAuction()
+        }.catchTo(RACSignal.empty())
+        
+        
+        signal.finally {
+            println("ok?")
+        }.subscribeCompleted { [weak self] (_) in
+            self?.completedSignal.sendNext(nil)
+            self?.completedSignal.sendCompleted()
+        }
 //        let sequence = ([createOrUpdateUser(), updateProviderIfNewUser(), addCardToUser(), registerToAuction()] as NSArray).rac_sequence
 //        sequence.eagerSequence
-//
-
+        
+        
 //        RACSignal.merge([createOrUpdateUser(), updateProviderIfNewUser(), addCardToUser(), registerToAuction()]).then { (_) -> RACSignal! in
 //            self.completedSignal
 //        }.subscribeCompleted { () -> Void in
@@ -58,7 +43,7 @@ class RegistrationNetworkModel: NSObject {
         if let provider = fulfilmentNav.loggedInProvider {
             return provider
         }
-        return Provider.DefaultProvider()
+        return Provider.sharedProvider
     }
 
     func createOrUpdateUser() -> RACSignal {
@@ -66,7 +51,7 @@ class RegistrationNetworkModel: NSObject {
         if createNewUser {
             
             let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email!, password: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!)
-            return Provider.DefaultProvider().request(endpoint, method: .POST, parameters: Moya.DefaultParameters()).filterSuccessfulStatusCodes().mapJSON().doError() { (error) -> Void in
+            return Provider.sharedProvider.request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doError() { (error) -> Void in
                 println("Error creating user: \(error.localizedDescription)")
             }
             
@@ -96,7 +81,7 @@ class RegistrationNetworkModel: NSObject {
     }
 
     func updateProviderIfNewUser() -> RACSignal {
-        if self.createNewUser == true {
+        if self.createNewUser {
 
             let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: details.newUser.email!, password: details.newUser.password!)
 
