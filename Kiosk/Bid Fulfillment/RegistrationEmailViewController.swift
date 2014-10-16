@@ -8,7 +8,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let bidDetails = self.navigationController?.fulfilmentNav().bidDetails {
+        if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
 
             RAC(bidDetails, "newUser.email") <~ emailTextField.rac_textSignal()
 

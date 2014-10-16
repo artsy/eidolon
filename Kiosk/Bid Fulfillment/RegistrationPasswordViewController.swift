@@ -8,12 +8,12 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let bidDetails = self.navigationController?.fulfilmentNav().bidDetails {
+        if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
 
-            RAC(bidDetails, "newUser.password") <~ passwordTextField.rac_textSignal()
+            let passwordTextSignal = passwordTextField.rac_textSignal()
+            RAC(bidDetails, "newUser.password") <~ passwordTextSignal
 
-            let longerThan4CharSignal = RACObserve(bidDetails.newUser, "password").map(longerThan4CharString)
-            RAC(confirmButton, "enabled") <~ longerThan4CharSignal
+            RAC(confirmButton, "enabled") <~ passwordTextSignal.map(longerThan4CharString)
         }
         
         passwordTextField.becomeFirstResponder()

@@ -5,13 +5,13 @@ class RegistrationNetworkModel: NSObject {
     dynamic var createNewUser = false
     dynamic var details:BidDetails!
 
-    var fulfilmentNav:FulfillmentNavigationController!
+    var fulfillmentNav:FulfillmentNavigationController!
 
     let completedSignal = RACSubject()
     
     func start() {
 
-        let needsToRegisterBidder = fulfilmentNav.bidDetails.bidderPIN == nil
+        let needsToRegisterBidder = fulfillmentNav.bidDetails.bidderPIN == nil
 
         var signal = self.createOrUpdateUser().then {
             self.updateProviderIfNewUser()
@@ -40,7 +40,7 @@ class RegistrationNetworkModel: NSObject {
     }
 
     func provider() -> ReactiveMoyaProvider<ArtsyAPI>  {
-        if let provider = fulfilmentNav.loggedInProvider {
+        if let provider = fulfillmentNav.loggedInProvider {
             return provider
         }
         return Provider.sharedProvider
@@ -74,10 +74,10 @@ class RegistrationNetworkModel: NSObject {
     }
 
     func registerToAuction() -> RACSignal {
-        let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: fulfilmentNav.auctionID)
+        let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: fulfillmentNav.auctionID)
         return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(Bidder.self).doNext({ [weak self](bidder) -> Void in
 
-            self?.fulfilmentNav.bidDetails.bidderID = (bidder as Bidder).id
+            self?.fulfillmentNav.bidDetails.bidderID = (bidder as Bidder).id
             return
 
         }).doError() { (error) -> Void in
@@ -86,12 +86,12 @@ class RegistrationNetworkModel: NSObject {
     }
 
     func generateAPIN() -> RACSignal {
-        let endpoint: ArtsyAPI = ArtsyAPI.CreatePINForBidder(bidderNumber: fulfilmentNav.bidDetails.bidderID!)
+        let endpoint: ArtsyAPI = ArtsyAPI.CreatePINForBidder(bidderNumber: fulfillmentNav.bidDetails.bidderID!)
 
         return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext({ [weak self](json) -> Void in
             
             if let pin = json["pin"] as? String {
-                self?.fulfilmentNav.bidDetails.bidderPIN =  pin
+                self?.fulfillmentNav.bidDetails.bidderPIN =  pin
             }
                 
         }).doError() { (error) -> Void in
@@ -103,7 +103,7 @@ class RegistrationNetworkModel: NSObject {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         return provider().request(endpoint, method: .GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self).doNext({ [weak self](user) -> Void in
 
-            self?.fulfilmentNav.bidDetails.bidderNumber =  (user as User).paddleNumber
+            self?.fulfillmentNav.bidDetails.bidderNumber =  (user as User).paddleNumber
             return
 
         }).doError() { (error) -> Void in
@@ -120,7 +120,7 @@ class RegistrationNetworkModel: NSObject {
             return provider().request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext({ [weak self] (accessTokenDict) -> Void in
 
                 if let accessToken = accessTokenDict["access_token"] as? String {
-                    self?.fulfilmentNav.xAccessToken = accessToken
+                    self?.fulfillmentNav.xAccessToken = accessToken
                 }
 
             }).doError() { (error) -> Void in

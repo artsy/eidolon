@@ -58,16 +58,16 @@ class PlaceBidViewController: UIViewController {
                 RAC(currentBidTitleLabel, "text") <~ bidCountSignal.map(toCurrentBidTitleString)
                 RAC(nextBidAmountLabel, "text") <~ minimumNextBidSignal.map(toNextBidString)
 
-                RAC(currentBidAmountLabel, "text") <~ RACSignal.combineLatest([bidCountSignal, highestBidSignal, openingBidSignal]).map({
+                RAC(currentBidAmountLabel, "text") <~ RACSignal.combineLatest([bidCountSignal, highestBidSignal, openingBidSignal]).map {
                     let tuple = $0 as RACTuple
                     let bidCount = tuple.first as? Int ?? 0
                     return (bidCount > 0 ? tuple.second : tuple.third) ?? 0
-                }).map(centsToPresentableDollarsString)
+                }.map(centsToPresentableDollarsString)
 
-                RAC(bidButton, "enabled") <~ RACSignal.combineLatest([bidDollarsSignal, minimumNextBidSignal]).map({
+                RAC(bidButton, "enabled") <~ RACSignal.combineLatest([bidDollarsSignal, minimumNextBidSignal]).map {
                     let tuple = $0 as RACTuple
                     return (tuple.first as? Int ?? 0) * 100 >= (tuple.second as? Int ?? 0)
-                })
+                }
 
                 if let artist = saleArtwork.artwork.artists?.first {
                     RAC(artistNameLabel, "text") <~ RACObserve(artist, "name")

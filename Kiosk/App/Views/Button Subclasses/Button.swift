@@ -59,7 +59,6 @@ public class MenuButton: ARMenuButton {
         if let titleLabel = titleLabel {
             titleLabel.font = titleLabel.font.fontWithSize(12)
         }
-        setBackgroundColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
     }
 
     public override func layoutSubviews() {

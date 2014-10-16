@@ -84,9 +84,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="7MY-ro-bWe" appends="YES" id="atD-mW-eUs"/>
-                                </connections>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZf-KS-kZn">
                                 <rect key="frame" x="105" y="54" width="815" height="660"/>
@@ -131,11 +128,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x1s-jG-1c0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="7MY-ro-bWe">
-                    <connections>
-                        <action selector="closeModalTapped:" destination="O1R-5R-23t" id="PZZ-Kq-xi3"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-103" y="-1653"/>
         </scene>
