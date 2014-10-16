@@ -87,7 +87,7 @@ class ListingsViewController: UIViewController {
                 }
             }()
             
-            // Need to explicitly call animated: fase and reload to avoid animation
+            // Need to explicitly call animated: false and reload to avoid animation
             self?.collectionView.setCollectionViewLayout(layout, animated: false)
         }).map({
             let tuple = $0 as RACTuple

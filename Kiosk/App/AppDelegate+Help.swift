@@ -9,7 +9,7 @@ extension AppDelegate {
     }
     
     func setupHelpButton() {
-        helpButton = CircularBlackButton()
+        helpButton = MenuButton()
         helpButton.setTitle("Help", forState: .Normal)
         helpButton.addTarget(self, action: "helpButtonPressed", forControlEvents: .TouchUpInside)
         window.addSubview(helpButton)
