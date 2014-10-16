@@ -754,7 +754,7 @@
         <!--Your Bidding Details View Controller-->
         <scene sceneID="jch-Ac-cDe">
             <objects>
-                <viewController id="N1l-90-SiW" customClass="YourBiddingDetailsViewController" sceneMemberID="viewController">
+                <viewController id="N1l-90-SiW" customClass="YourBiddingDetailsViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ko2-CO-bcN"/>
                         <viewControllerLayoutGuide type="bottom" id="1lm-JB-1Nm"/>
@@ -1447,6 +1447,9 @@
                                 <rect key="frame" x="0.0" y="76" width="283" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vkP-Fx-jvL" id="T5G-XU-Zye"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your mobile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHS-JT-Daq" customClass="ARSerifLabel">
                                 <rect key="frame" x="-2" y="5" width="395" height="41"/>
@@ -1559,6 +1562,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="A1R-R2-CSF"/>
-        <segue reference="6qF-R8-kJy"/>
+        <segue reference="umA-gD-rtQ"/>
     </inferredMetricsTieBreakers>
 </document>

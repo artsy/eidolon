@@ -4,6 +4,7 @@ class YourBiddingDetailsViewController: UIViewController {
 
     @IBOutlet dynamic var bidderNumberLabel: UILabel!
     @IBOutlet dynamic var pinNumberLabel: UILabel!
+    dynamic var hidePlaceBidButton = false
 
     override func viewDidLoad() {
         super.viewDidLoad()

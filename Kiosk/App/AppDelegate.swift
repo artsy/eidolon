@@ -1,6 +1,6 @@
 import UIKit
 
-let AuctionID = "aperture-foundation-benefit-auction-2014"
+let AuctionID = "ici-live-auction"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -71,7 +71,7 @@ class RegisterViewController: UIViewController {
         
         registrationNetworkModel.completedSignal.subscribeNext({ [weak self] (_) -> Void in
 
-            self?.moveToNextViewController()
+            self?.performSegue(.RegistrationFinishedShowBidDetails)
             return
             
         }, error: { [weak self] (error) -> Void in
@@ -80,13 +80,12 @@ class RegisterViewController: UIViewController {
         
         registrationNetworkModel.start()
     }
-    
-    func moveToNextViewController() {
-        if createNewUser {
-            self.fulfilmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
-            
-        } else {
-            self.performSegue(.RegistrationFinishedShowBidDetails)
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == .RegistrationFinishedShowBidDetails {
+            let nextViewController = segue.destinationViewController as YourBiddingDetailsViewController
+            nextViewController.hidePlaceBidButton = createNewUser
+
         }
     }
 }

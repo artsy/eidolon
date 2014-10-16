@@ -58,6 +58,31 @@ enum ArtsyAPI {
                 "max_bid_amount_cents": maxBidCents
             ]
 
+        case .TrustToken(let number, let auctionID):
+            return [
+                "number": number, "auction_pin": auctionID
+            ]
+
+        case .CreateUser(let email,let password,let phone,let postCode):
+
+            return [
+                "email": email, "password": password,
+                "phone": phone
+            ]
+
+        case .UpdateMe(let email,let phone,let postCode):
+            return [
+                "email": email, "phone": phone
+            ]
+
+        case .RegisterCard(let token):
+            return [
+                "provider": "balanced", "token": token
+            ]
+
+        case .FindBidderRegistration(let auctionID, let phone):
+            return ["sale_id": auctionID, "phone": phone]
+
         default:
             return [:]
         }
@@ -93,7 +118,7 @@ extension ArtsyAPI : MoyaPath {
             return "/api/v1/me/credit_cards"
 
         case CreatePINForBidder(let bidderNumber):
-            return "/api/v1/bidder/\(bidderNumber)/auction_pin"
+            return "/api/v1/bidder/\(bidderNumber)/pin"
 
         case ActiveAuctions:
             return "/api/v1/sales?is_auction=true&live=true"
@@ -128,7 +153,7 @@ extension ArtsyAPI : MoyaPath {
 
 extension ArtsyAPI : MoyaTarget {
     // TODO: - parameterize base URL based on debug, release, etc.
-     var baseURL: NSURL { return NSURL(string: "https://api.artsy.net")! }
+     var baseURL: NSURL { return NSURL(string: "https://stagingapi.artsy.net")! }
      var sampleData: NSData {
         switch self {
 
@@ -203,46 +228,10 @@ extension ArtsyAPI : MoyaTarget {
             return endpoint
         case .XAuth:
             return endpoint
-            
-        case .TrustToken(let number, let auctionID):
-            return endpoint.endpointByAddingParameters([
-                "number": number, "auction_pin": auctionID
-            ])
-
-        case .CreateUser(let email,let password,let phone,let postCode):
-
-            endpoint = endpoint.endpointByAddingParameters([
-                "email": email, "password": password,
-                "phone": phone
-            ])
-            endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
-
-        case .UpdateMe(let email,let phone,let postCode):
-            endpoint = endpoint.endpointByAddingParameters([
-                "email": email, "phone": phone
-            ])
-
-        case .RegisterCard(let token):
-            endpoint = endpoint.endpointByAddingParameters([
-                "provider": "balanced", "token": token
-            ])
-
 
         default:
-            endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
+            return endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
         }
-        
-        // target-specific parameters
-        switch target {
-
-        case .FindBidderRegistration(let auctionID, let phone):
-            return endpoint.endpointByAddingParameters(["sale_id": auctionID, "phone": phone])
-
-        default:
-            return endpoint
-        }
-        
-        
     }
     
      static func DefaultProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
