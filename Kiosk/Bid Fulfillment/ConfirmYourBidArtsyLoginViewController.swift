@@ -28,7 +28,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         RAC(nav.bidDetails.newUser, "password") <~ passwordTextSignal
 
         let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
-        let passwordIsLongEnough = passwordTextSignal.map(longerThan4CharString)
+        let passwordIsLongEnough = passwordTextSignal.map(minimum6CharString)
         let formIsValid = RACSignal.combineLatest([inputIsEmail, passwordIsLongEnough]).reduceAnd()
 
         confirmCredentialsButton.rac_command = RACCommand(enabled: formIsValid) { [weak self] _ in

@@ -13,7 +13,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
             let passwordTextSignal = passwordTextField.rac_textSignal()
             RAC(bidDetails, "newUser.password") <~ passwordTextSignal
 
-            RAC(confirmButton, "enabled") <~ passwordTextSignal.map(longerThan4CharString)
+            RAC(confirmButton, "enabled") <~ passwordTextSignal.map(minimum6CharString)
         }
         
         passwordTextField.becomeFirstResponder()
