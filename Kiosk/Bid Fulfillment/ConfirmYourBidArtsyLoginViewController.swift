@@ -77,7 +77,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
         let submitAction = UIAlertAction(title: "Send", style: .Default) { (_) in
             let emailTextField = alertController.textFields![0] as UITextField
-            self.sendForgotEmailRequest(emailTextField.text)
+            self.sendForgotPasswordRequest(emailTextField.text)
             return
         }
 
@@ -101,7 +101,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         self.presentViewController(alertController, animated: true) {}
     }
 
-    func sendForgotEmailRequest(email: String) {
+    func sendForgotPasswordRequest(email: String) {
         let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
         XAppRequest(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { [weak self] (json) -> Void in
             println("sent request")
