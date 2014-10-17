@@ -13,7 +13,7 @@ extension AppDelegate {
         helpButton.setTitle("Help", forState: .Normal)
         helpButton.addTarget(self, action: "helpButtonPressed", forControlEvents: .TouchUpInside)
         window.addSubview(helpButton)
-        helpButton.alignTop(nil, leading: nil, bottom: "-45", trailing: "-45", toView: window)
+        helpButton.alignTop(nil, leading: nil, bottom: "-24", trailing: "-24", toView: window)
         window.layoutIfNeeded()
     }
     
