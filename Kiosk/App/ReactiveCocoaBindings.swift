@@ -23,14 +23,14 @@ public struct RAC  {
 }
 
 infix operator <~ {}
-public func <~ (rac: RAC, signal: RACSignal) {
-    signal ~> rac
+public func <~ (rac: RAC, signal: RACSignal) -> RACDisposable {
+    return signal ~> rac
 }
 
-public func ~> (signal: RACSignal, rac: RAC) {
-    rac.assignSignal(signal)
+public func ~> (signal: RACSignal, rac: RAC) -> RACDisposable {
+    return rac.assignSignal(signal)
 }
 
-public func RACObserve(target: NSObject!, keyPath: String) -> RACSignal  {
+public func RACObserve(target: NSObject!, keyPath: String) -> RACSignal {
     return target.rac_valuesForKeyPath(keyPath, observer: target)
 }
