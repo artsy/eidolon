@@ -21,7 +21,8 @@ class PlacingBidViewController: UIViewController {
             self.registerNetworkModel == nil ? RACSignal.empty() : self.registerNetworkModel?.registerSignal()
 
         } .then {
-            self.placeBidNetworkModel.bidSignal(auctionID, bidDetails:bidDetails)
+            self.placeBidNetworkModel.fulfillmentNav = self.fulfillmentNav()
+            return self.placeBidNetworkModel.bidSignal(auctionID, bidDetails:bidDetails)
 
         } .subscribeNext { [weak self] (_) in
             self?.performSegue(.PushtoBidConfirmed)
