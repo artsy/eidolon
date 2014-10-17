@@ -1,5 +1,7 @@
 import Foundation
 
+let SwitchViewBorderWidth: CGFloat = 2
+
 public class SwitchView: UIView {
     public var shouldAnimate = true
     public var animationDuration: NSTimeInterval = AnimationDuration.Short
@@ -12,7 +14,10 @@ public class SwitchView: UIView {
     private let selectionIndicator: UIView
     private let topSelectionIndicator: UIView
     private let bottomSelectionIndicator: UIView
-    
+
+    private let topBar = CALayer()
+    private let bottomBar = CALayer()
+
     var selectionConstraint: NSLayoutConstraint!
     
     public init(buttonTitles: Array<String>) {
@@ -23,7 +28,7 @@ public class SwitchView: UIView {
             button.setTitle(buttonTitle, forState: .Disabled)
             
             if let titleLabel = button.titleLabel {
-                titleLabel.font = UIFont.sansSerifFontWithSize(14)
+                titleLabel.font = UIFont.sansSerifFontWithSize(13)
                 titleLabel.backgroundColor = UIColor.whiteColor()
                 titleLabel.opaque = true
             }
@@ -31,7 +36,7 @@ public class SwitchView: UIView {
             button.backgroundColor = UIColor.whiteColor()
             button.setTitleColor(UIColor.blackColor(), forState: .Disabled)
             button.setTitleColor(UIColor.blackColor(), forState: .Selected)
-            button.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
+            button.setTitleColor(UIColor.artsyMediumGrey(), forState: .Normal)
             
             return button
         }
@@ -42,6 +47,14 @@ public class SwitchView: UIView {
         super.init(frame: CGRectZero)
         
         setup()
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        var rect = CGRectMake(0, 0, CGRectGetWidth(layer.bounds), SwitchViewBorderWidth)
+        topBar.frame = rect
+        rect.origin.y = CGRectGetHeight(layer.bounds) - SwitchViewBorderWidth
+        bottomBar.frame = rect
     }
 
     required convenience public init(coder aDecoder: NSCoder) {
@@ -68,7 +81,7 @@ public class SwitchView: UIView {
 }
 
 private extension SwitchView {
-    func setup() {       
+    func setup() {
         if let firstButton = buttons.first {
             firstButton.enabled = false
         }
@@ -89,9 +102,14 @@ private extension SwitchView {
                 button.constrainLeadingSpaceToView(buttons[i-1], predicate: nil)
             }
             
-            button.alignTop("2", bottom: "-2", toView: self)
+            button.alignTop("\(SwitchViewBorderWidth)", bottom: "\(-SwitchViewBorderWidth)", toView: self)
         }
-        
+
+        topBar.backgroundColor = UIColor.artsyMediumGrey().CGColor
+        bottomBar.backgroundColor = UIColor.artsyMediumGrey().CGColor
+        layer.addSublayer(topBar)
+        layer.addSublayer(bottomBar)
+
         selectionIndicator.addSubview(topSelectionIndicator)
         selectionIndicator.addSubview(bottomSelectionIndicator)
         
@@ -101,10 +119,10 @@ private extension SwitchView {
         topSelectionIndicator.alignTop("0", leading: "0", bottom: nil, trailing: "0", toView: selectionIndicator)
         bottomSelectionIndicator.alignTop(nil, leading: "0", bottom: "0", trailing: "0", toView: selectionIndicator)
         
-        topSelectionIndicator.constrainHeight("2")
-        bottomSelectionIndicator.constrainHeight("2")
-        
-        insertSubview(selectionIndicator, atIndex: 0)
+        topSelectionIndicator.constrainHeight("\(SwitchViewBorderWidth)")
+        bottomSelectionIndicator.constrainHeight("\(SwitchViewBorderWidth)")
+
+        addSubview(selectionIndicator)
         selectionIndicator.constrainWidthToView(self, predicate: widthPredicateMultiplier)
         selectionIndicator.alignTop("0", bottom: "0", toView: self)
         

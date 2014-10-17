@@ -269,7 +269,7 @@ enum SwitchValues: Int {
         case .LowestCurrentBid:
             return "Lowest Bid"
         case .Alphabetical:
-            return "A—Z"
+            return "A–Z"
         }
     }
     

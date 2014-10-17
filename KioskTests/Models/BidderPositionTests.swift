@@ -18,8 +18,8 @@ class BidderPositionTests: QuickSpec {
 
             expect(position.id) == id
             expect(position.maxBidAmountCents) == maxBidAmountCents
-            expect(position.highestBid.id) == bidID
-            expect(position.highestBid.amountCents) == bidAmount
+            expect(position.highestBid!.id) == bidID
+            expect(position.highestBid!.amountCents) == bidAmount
         }
 
     }
