@@ -70,6 +70,15 @@ class ConfirmYourBidPINViewController: UIViewController {
         }
     }
 
+    @IBAction func forgotPINTapped(sender: AnyObject) {
+        let auctionID = self.fulfillmentNav().auctionID
+        let endpoint: ArtsyAPI = ArtsyAPI.LostPINNotification(auctionID: auctionID, number: self.pin)
+
+        XAppRequest(endpoint, provider: Provider.sharedProvider, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { (_) -> Void in
+            println("sent")
+        }
+    }
+
     func providerForPIN(pin:String, number:String) -> ReactiveMoyaProvider<ArtsyAPI> {
         let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
             var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)

@@ -1062,7 +1062,7 @@
                                 <rect key="frame" x="716" y="75" width="34" height="34"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Forgot PIN?" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="mFk-Rf-rJ0" customClass="ARSerifLabel">
-                                <rect key="frame" x="612" y="216" width="138" height="29"/>
+                                <rect key="frame" x="268" y="275" width="138" height="29"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -1108,6 +1108,17 @@
                                 <rect key="frame" x="426" y="64" width="250" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVe-25-8Zu">
+                                <rect key="frame" x="685" y="212" width="70" height="28"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="15"/>
+                                <state key="normal" title="Forgot PIN?">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="forgotPINTapped:" destination="hrW-WV-2L3" eventType="touchUpInside" id="LOK-I3-BaX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1548,6 +1559,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="eZu-3X-lXX"/>
-        <segue reference="qDL-1J-LmL"/>
+        <segue reference="gjD-og-8Iv"/>
     </inferredMetricsTieBreakers>
 </document>
