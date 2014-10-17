@@ -62,11 +62,10 @@ class RegistrationNetworkModel: NSObject {
             }
             
         } else {
-
             let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!)
 
             return provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doError() { (error) -> Void in
-                println("Error logging in: \(error.localizedDescription)")
+                println("Error updating user in: \(error.localizedDescription)")
             }
         }
     }

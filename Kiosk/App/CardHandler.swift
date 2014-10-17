@@ -33,7 +33,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
                 self.cardSwipedSignal.sendCompleted()
                 
             }, failure: { [unowned self]  (error) -> Void in
-                println("Error: \(error)")
+                println("Error: \(error) ")
                 self.cardSwipedSignal.sendNext("Card Flight Error");
 
                 return

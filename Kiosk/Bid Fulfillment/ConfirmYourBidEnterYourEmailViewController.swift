@@ -30,7 +30,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
             }
 
             let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: self!.emailTextField.text)
-            return XAppRequest(endpoint, provider:Provider.sharedProvider, parameters:endpoint.defaultParameters).filterStatusCode(400).doNext({ (__) -> Void in
+            return XAppRequest(endpoint, provider:Provider.sharedProvider, method: .HEAD, parameters:endpoint.defaultParameters).filterStatusCode(200).doNext({ (__) -> Void in
                 self?.emailSubscription.dispose()
                 self?.performSegue(.ExistingArtsyUserFound)
 
