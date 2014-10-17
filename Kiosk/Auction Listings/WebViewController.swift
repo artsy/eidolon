@@ -12,4 +12,10 @@ class WebViewController: DZNWebViewController {
         let webView = view as UIWebView
         webView.scalesPageToFit = true
     }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.navigationController?.toolbarHidden = true
+    }
 }

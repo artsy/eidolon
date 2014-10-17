@@ -10,12 +10,12 @@ class PlaceBidNetworkModel: NSObject {
         let saleArtwork = bidDetails.saleArtwork
         let cents = String(bidDetails.bidAmountCents! as Int)
 
-        var signal:RACSignal = RACSignal.empty().then {
+        var signal = RACSignal.empty().then {
 
-            bidder == nil ? self.setBidderIfNeeded(auctionID) : RACSignal.empty()
+            self.bidder == nil ? self.setBidderIfNeeded(auctionID) : RACSignal.empty()
 
         } .then {
-            bidder == nil ? self.createBidderForAuction(auctionID) : RACSignal.empty()
+            self.bidder == nil ? self.createBidderForAuction(auctionID) : RACSignal.empty()
 
         } .then {
             self.bidOnSaleArtwork(saleArtwork!, bidAmountCents: cents)
@@ -28,14 +28,12 @@ class PlaceBidNetworkModel: NSObject {
         return signal
     }
 
-
     func setBidderIfNeeded(auctionID: String) -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)
         let request = loggedInProvider.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Bidder.self)
 
         return request.doNext { [weak self] (bidders) -> Void in
             let bidders = bidders as [Bidder]
-
             self?.bidder = bidders.first
 
         }.doError({ [weak self] (error) -> Void in
@@ -64,7 +62,7 @@ class PlaceBidNetworkModel: NSObject {
         let request = loggedInProvider.request(bidEndpoint, method: .POST, parameters:bidEndpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)
 
         return request.doNext({ [weak self] (bidderPosition) -> Void in
-            println("P:6")
+
             return
 
         }).doError({ [weak self] (error) -> Void in
