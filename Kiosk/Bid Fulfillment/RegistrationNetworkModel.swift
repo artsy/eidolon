@@ -11,9 +11,6 @@ class RegistrationNetworkModel: NSObject {
     func registerSignal() -> RACSignal {
 
         return self.createOrUpdateUser().then {
-            self.updateProviderIfNewUser()
-
-        }.then {
             self.addCardToUser()
 
         }.then {
@@ -59,7 +56,7 @@ class RegistrationNetworkModel: NSObject {
             let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email!, password: newUser.password!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!)
             return Provider.sharedProvider.request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doError() { (error) -> Void in
                 println("Error creating user: \(error.localizedDescription)")
-            }
+            }.then { self.updateProvider() }
             
         } else {
             let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!)
@@ -117,23 +114,17 @@ class RegistrationNetworkModel: NSObject {
     }
 
 
-    func updateProviderIfNewUser() -> RACSignal {
-        if self.createNewUser {
+    func updateProvider() -> RACSignal {
+        let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: details.newUser.email!, password: details.newUser.password!)
 
-            let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: details.newUser.email!, password: details.newUser.password!)
+        return provider().request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext({ [weak self] (accessTokenDict) -> Void in
 
-            return provider().request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext({ [weak self] (accessTokenDict) -> Void in
-
-                if let accessToken = accessTokenDict["access_token"] as? String {
-                    self?.fulfillmentNav.xAccessToken = accessToken
-                }
-
-            }).doError() { (error) -> Void in
-                println("Error logging in: \(error.localizedDescription)")
+            if let accessToken = accessTokenDict["access_token"] as? String {
+                self?.fulfillmentNav.xAccessToken = accessToken
             }
 
-        } else {
-            return RACSignal.empty()
+        }).doError() { (error) -> Void in
+            println("Error logging in: \(error.localizedDescription)")
         }
     }
 }

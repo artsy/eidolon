@@ -21,6 +21,6 @@ func isZeroLengthString(string:AnyObject!) -> AnyObject! {
 }
 
 
-func longerThan4CharString(string:AnyObject!) -> AnyObject! {
-    return countElements(string as String) > 4
+func minimum6CharString(string:AnyObject!) -> AnyObject! {
+    return countElements(string as String) >= 6
 }
