@@ -10,6 +10,8 @@
 * Only apply phone# formatting once bidder number is bigger than 6 digits - @1aurabrown
 * Use new Avante Garde font - @1aurabrown
 * Layout fixes in the artwork listings - @ash
+* Requesting lost password works - @orta
+* Requesting lost PIN works - @orta
 
 ### 0.0.5 - 13th Oct 2014
 

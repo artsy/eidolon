@@ -72,6 +72,41 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         return provider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
     }
     
+    @IBAction func forgotPasswordTapped(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .Alert)
+
+        let submitAction = UIAlertAction(title: "Send", style: .Default) { (_) in
+            let emailTextField = alertController.textFields![0] as UITextField
+            self.sendForgotEmailRequest(emailTextField.text)
+            return
+        }
+
+        submitAction.enabled = false
+        submitAction.enabled = stringIsEmailAddress(emailTextField.text).boolValue
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "email@domain.com"
+            textField.text = self.emailTextField.text
+
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                submitAction.enabled = stringIsEmailAddress(textField.text).boolValue
+            }
+        }
+
+        alertController.addAction(submitAction)
+        alertController.addAction(cancelAction)
+
+        self.presentViewController(alertController, animated: true) {}
+    }
+
+    func sendForgotEmailRequest(email: String) {
+        let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
+        XAppRequest(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { [weak self] (json) -> Void in
+            println("sent request")
+        }
+    }
 
     @IBAction func createNewAccountTapped(sender: AnyObject) {
         createNewAccount = true

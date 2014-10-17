@@ -74,6 +74,14 @@ class ConfirmYourBidPINViewController: UIViewController {
         let auctionID = self.fulfillmentNav().auctionID
         let endpoint: ArtsyAPI = ArtsyAPI.LostPINNotification(auctionID: auctionID, number: self.pin)
 
+        let alertController = UIAlertController(title: "Forgot Password", message: "We have sent your bidder details to your device.", preferredStyle: .Alert)
+
+        let cancelAction = UIAlertAction(title: "Back", style: .Cancel) { (_) in }
+        alertController.addAction(cancelAction)
+
+        self.presentViewController(alertController, animated: true) {}
+
+
         XAppRequest(endpoint, provider: Provider.sharedProvider, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { (_) -> Void in
             println("sent")
         }

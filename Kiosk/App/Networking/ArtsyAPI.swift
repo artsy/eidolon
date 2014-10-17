@@ -24,8 +24,11 @@ enum ArtsyAPI {
 
     case UpdateMe(email: String, phone: String, postCode: String)
     case CreateUser(email: String, password: String, phone: String, postCode: String)
-    case LostPINNotification(auctionID: String, number: String)
+
     case RegisterCard(balancedToken: String)
+
+    case LostPINNotification(auctionID: String, number: String)
+    case LostPasswordNotification(email: String)
     
     var defaultParameters: [String: AnyObject] {
         switch self {
@@ -86,6 +89,9 @@ enum ArtsyAPI {
 
         case LostPINNotification(let auctionID, let number):
             return ["sale_id": auctionID, "number": number]
+
+        case LostPasswordNotification(let email):
+            return ["email": email]
 
         default:
             return [:]
@@ -151,9 +157,11 @@ extension ArtsyAPI : MoyaPath {
         case TrustToken:
             return "/api/v1/me/trust_token"
 
-        case .LostPINNotification:
+        case LostPINNotification:
             return "/api/v1/bidder/pin_notification"
 
+        case LostPasswordNotification:
+            return "/api/v1/users/send_reset_password_instructions"
         }
     }
 }
@@ -220,8 +228,11 @@ extension ArtsyAPI : MoyaTarget {
         case RegisterCard:
             return stubbedResponse("RegisterCard")
 
-        case .LostPINNotification:
+        case LostPINNotification:
             return stubbedResponse("RegisterToBid")
+
+        case LostPasswordNotification:
+            return stubbedResponse("ForgotPassword")
         }
     }
 }
