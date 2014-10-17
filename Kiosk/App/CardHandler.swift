@@ -33,10 +33,14 @@ class CardHandler: NSObject, CFTReaderDelegate {
                 self.cardSwipedSignal.sendCompleted()
                 
             }, failure: { [unowned self]  (error) -> Void in
+                println("Error: \(error)")
+                self.cardSwipedSignal.sendNext("Card Flight Error");
 
+                return
             })
             
         } else if let error = error {
+            self.cardSwipedSignal.sendNext("response Error");
 
         }
     }
@@ -62,7 +66,6 @@ class CardHandler: NSObject, CFTReaderDelegate {
     func readerGenericResponse(cardData: String!) {
         cardSwipedSignal.sendNext("Reader received non-card data: \(cardData) ");
     }
-
 
     func readerIsConnected(isConnected: Bool, withError error: NSError!) {
         if isConnected {

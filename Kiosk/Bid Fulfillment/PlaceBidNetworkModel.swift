@@ -12,7 +12,7 @@ class PlaceBidNetworkModel: NSObject {
 
         var signal = RACSignal.empty().then {
 
-            self.bidder == nil ? self.setBidderIfNeeded(auctionID) : RACSignal.empty()
+            self.bidder == nil ? self.checkForBidderOnAuction(auctionID) : RACSignal.empty()
 
         } .then {
             self.bidder == nil ? self.createBidderForAuction(auctionID) : RACSignal.empty()
@@ -28,7 +28,7 @@ class PlaceBidNetworkModel: NSObject {
         return signal
     }
 
-    func setBidderIfNeeded(auctionID: String) -> RACSignal {
+    func checkForBidderOnAuction(auctionID: String) -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)
         let request = loggedInProvider.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Bidder.self)
 

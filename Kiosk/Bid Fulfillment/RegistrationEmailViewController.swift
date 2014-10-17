@@ -13,7 +13,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
             RAC(bidDetails, "newUser.email") <~ emailTextField.rac_textSignal()
 
             let emailIsValidSignal = RACObserve(bidDetails.newUser, "email").map(stringIsEmailAddress)
-            RAC(confirmButton, "enabled") <~ emailIsValidSignal.notEach()
+            RAC(confirmButton, "enabled") <~ emailIsValidSignal
         }
         
         emailTextField.becomeFirstResponder()
