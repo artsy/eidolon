@@ -4,12 +4,11 @@ class RegistrationNetworkModel: NSObject {
     
     dynamic var createNewUser = false
     dynamic var details:BidDetails!
+    var bidder:Bidder?
 
     var fulfillmentNav:FulfillmentNavigationController!
 
     func registerSignal() -> RACSignal {
-
-        let needsToRegisterBidder = fulfillmentNav.bidDetails.bidderPIN == nil
 
         return self.createOrUpdateUser().then {
             self.updateProviderIfNewUser()
@@ -18,14 +17,16 @@ class RegistrationNetworkModel: NSObject {
             self.addCardToUser()
 
         }.then {
-            needsToRegisterBidder ? self.registerToAuction() : RACSignal.empty()
+            self.checkForBidderOnAuction(self.fulfillmentNav.auctionID)
+
+        }.then {
+            self.bidder == nil ? self.registerToAuction() : RACSignal.empty()
 
         }.then {
             self.generateAPIN()
 
         }.then {
             self.getMyPaddleNumber()
-
         }
     }
 
@@ -35,6 +36,21 @@ class RegistrationNetworkModel: NSObject {
         }
         return Provider.sharedProvider
     }
+
+    func checkForBidderOnAuction(auctionID: String) -> RACSignal {
+        let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)
+        let request = provider().request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Bidder.self)
+
+        return request.doNext { [weak self] (bidders) -> Void in
+            let bidders = bidders as [Bidder]
+            self?.bidder = bidders.first
+
+            }.doError({ [weak self] (error) -> Void in
+                println("error, had issues with getting user bidders ")
+                return
+            })
+    }
+
 
     func createOrUpdateUser() -> RACSignal {
         let newUser = details.newUser
@@ -47,9 +63,9 @@ class RegistrationNetworkModel: NSObject {
             
         } else {
 
-            let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.email!, postCode: newUser.zipCode!)
+            let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!)
 
-            return provider().request(endpoint, method: .PUT).filterSuccessfulStatusCodes().mapJSON().doError() { (error) -> Void in
+            return provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doError() { (error) -> Void in
                 println("Error logging in: \(error.localizedDescription)")
             }
         }
@@ -58,7 +74,7 @@ class RegistrationNetworkModel: NSObject {
     func addCardToUser() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(balancedToken: details.newUser.creditCardToken!)
 
-        return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).doError() { (error) -> Void in
+        return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doError() { (error) -> Void in
             println("Error adding card: \(error.localizedDescription)")
         }
     }

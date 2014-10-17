@@ -13,10 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Provider.sharedProvider = Provider.StubbingProvider()
 
         // I couldn't figure how to swizzle this out like we do in objc.
-        if let inTests: AnyClass = NSClassFromString("XCTest") { return true}
+        if let inTests: AnyClass = NSClassFromString("XCTest") { return true }
+
+        // Mainly to be sure that we don't end up with expired tokens
+        removeXAppToken()
 
         let auctionStoryboard = UIStoryboard(name: "Auction", bundle: nil)
-
         window.rootViewController = auctionStoryboard.instantiateInitialViewController() as? UIViewController
         window.makeKeyAndVisible()
 
@@ -27,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ARMixpanelToken: keys.mixpanelProductionAPIClientKey()
         ])
 
-        removeXAppToken()
         setupHelpButton()
         setupUserAgent()
 
