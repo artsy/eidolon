@@ -162,7 +162,7 @@ extension ArtsyAPI : MoyaPath {
             return "/api/v1/users/send_reset_password_instructions"
 
         case FindExistingEmailRegistration:
-            return "/api/v1/users/unknown_yet"
+            return "/api/v1/user"
 
         }
     }
