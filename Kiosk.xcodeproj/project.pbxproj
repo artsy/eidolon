@@ -126,6 +126,8 @@
 		6071320619DD3AE600CA46F4 /* BidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071320419DD3AE600CA46F4 /* BidDetails.swift */; };
 		6071321919DD4EC400CA46F4 /* FulfillmentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071321819DD4EC400CA46F4 /* FulfillmentNavigationController.swift */; };
 		6071321A19DD4EC400CA46F4 /* FulfillmentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071321819DD4EC400CA46F4 /* FulfillmentNavigationController.swift */; };
+		607A17E019F097A700326482 /* PlaceBidNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */; };
+		607A17E119F097A700326482 /* PlaceBidNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */; };
 		6087602219E9A6DF00116611 /* RegistrationMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */; };
 		6087602319E9A6DF00116611 /* RegistrationMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */; };
 		6087605019E9EDA800116611 /* BidDetailsPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087604F19E9EDA800116611 /* BidDetailsPreviewView.swift */; };
@@ -479,6 +481,7 @@
 		6069A0A719EF3E1600B70405 /* YourBiddingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourBiddingDetailsViewController.swift; sourceTree = "<group>"; };
 		6071320419DD3AE600CA46F4 /* BidDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetails.swift; sourceTree = "<group>"; };
 		6071321819DD4EC400CA46F4 /* FulfillmentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentNavigationController.swift; sourceTree = "<group>"; };
+		607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidNetworkModel.swift; sourceTree = "<group>"; };
 		6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationMobileViewController.swift; sourceTree = "<group>"; };
 		6087604F19E9EDA800116611 /* BidDetailsPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetailsPreviewView.swift; sourceTree = "<group>"; };
 		6087605219EA117100116611 /* ListingsCountdownManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingsCountdownManager.swift; path = "Auction Listings/ListingsCountdownManager.swift"; sourceTree = "<group>"; };
@@ -1076,6 +1079,7 @@
 			isa = PBXGroup;
 			children = (
 				60C3984119E8356D00CB81F4 /* PlacingBidViewController.swift */,
+				607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */,
 			);
 			name = "Final bid Placing";
 			sourceTree = "<group>";
@@ -1565,6 +1569,7 @@
 				604AF5C019E14A020019884E /* RegisterFlowView.swift in Sources */,
 				60212C9119D5CA04001921E1 /* Image.swift in Sources */,
 				60C37DC319D4359E002E7A44 /* JSONAble.swift in Sources */,
+				607A17E019F097A700326482 /* PlaceBidNetworkModel.swift in Sources */,
 				60C3984219E8356D00CB81F4 /* PlacingBidViewController.swift in Sources */,
 				60D976DF19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift in Sources */,
 				60A4FD3019E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */,
@@ -1687,6 +1692,7 @@
 				6030A11019D1931900B934CA /* Artist.swift in Sources */,
 				604B225319D359C5008D86C7 /* SystemTime.swift in Sources */,
 				605B857019C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */,
+				607A17E119F097A700326482 /* PlaceBidNetworkModel.swift in Sources */,
 				5EA137CD19C733DE00D0B743 /* TestHelpers.swift in Sources */,
 				5E0D702C19DADD8E0005AF46 /* TableCollectionViewCell.swift in Sources */,
 				609A848A19E50B7F00476A94 /* Card.swift in Sources */,
