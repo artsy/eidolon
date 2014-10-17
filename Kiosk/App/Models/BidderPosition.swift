@@ -17,10 +17,11 @@ class BidderPosition: JSONAble {
         let id = json["id"].stringValue
         let maxBidAmount = json["max_bid_amount_cents"].integerValue
 
+        var bid: Bid?
         if let bidDictionary = json["highest_bid"].object as? [String: AnyObject] {
-            let bid = Bid.fromJSON(bidDictionary) as Bid
+            bid = Bid.fromJSON(bidDictionary) as? Bid
         }
 
-        return BidderPosition(id: id, highestBid: nil, maxBidAmountCents: maxBidAmount)
+        return BidderPosition(id: id, highestBid: bid, maxBidAmountCents: maxBidAmount)
     }
 }
