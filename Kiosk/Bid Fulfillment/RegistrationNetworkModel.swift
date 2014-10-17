@@ -7,13 +7,11 @@ class RegistrationNetworkModel: NSObject {
 
     var fulfillmentNav:FulfillmentNavigationController!
 
-    let completedSignal = RACSubject()
-    
-    func start() {
+    func registerSignal() -> RACSignal {
 
         let needsToRegisterBidder = fulfillmentNav.bidDetails.bidderPIN == nil
 
-        var signal = self.createOrUpdateUser().then {
+        return self.createOrUpdateUser().then {
             self.updateProviderIfNewUser()
 
         }.then {
@@ -28,14 +26,6 @@ class RegistrationNetworkModel: NSObject {
         }.then {
             self.getMyPaddleNumber()
 
-        }.catchTo(RACSignal.empty()).doError { [weak self] (error) -> Void in
-            self?.completedSignal.sendError(error)
-            return
-        }
-
-       signal.subscribeNext { [weak self] (_) in
-            self?.completedSignal.sendNext(nil)
-            self?.completedSignal.sendCompleted()
         }
     }
 

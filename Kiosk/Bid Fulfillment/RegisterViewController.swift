@@ -67,24 +67,37 @@ class RegisterViewController: UIViewController {
     }
 
     @IBAction func confirmTapped(sender: AnyObject) {
+        if createNewUser {
+            registerNewUser()
+
+        } else {
+            passThroughToBiddingVCToCreateUser()
+        }
+    }
+
+    func registerNewUser() {
         confirmButton.enabled = false
-        
-        registrationNetworkModel.completedSignal.subscribeNext({ [weak self] (_) -> Void in
+
+        registrationNetworkModel.registerSignal().subscribeNext({ [weak self] (_) -> Void in
 
             self?.performSegue(.RegistrationFinishedShowBidDetails)
             return
-            
-        }, error: { [weak self] (error) -> Void in
-            println("Error with registrationNetworkModel create or update")
+
+            }, error: { [weak self] (error) -> Void in
+                println("Error with registrationNetworkModel create or update")
         })
-        
-        registrationNetworkModel.start()
     }
 
+    func passThroughToBiddingVCToCreateUser() {
+        self.performSegue(.RegistrationFinishedPlaceBid)
+    }
+
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue == .RegistrationFinishedShowBidDetails {
-            let nextViewController = segue.destinationViewController as YourBiddingDetailsViewController
-            nextViewController.finishAfterViewController = createNewUser
+
+        if segue == .RegistrationFinishedPlaceBid {
+            let nextViewController = segue.destinationViewController as PlacingBidViewController
+            nextViewController.registerNetworkModel = registrationNetworkModel
         }
     }
 }

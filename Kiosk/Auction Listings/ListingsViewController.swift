@@ -105,10 +105,10 @@ class ListingsViewController: UIViewController {
             
             if countElements(sortedSaleArtworks as [SaleArtwork]) > 0 {
                 // Need to dispatch, since the changes in the CV's model aren't imediate
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
                     self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
                     return
-                })
+                }
             }
         })
     }
@@ -129,8 +129,9 @@ class ListingsViewController: UIViewController {
         self.presentViewController(containerController, animated: false) {
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         }
-
     }
+
+
     
     @IBAction func longPressForAdmin(sender: AnyObject) {
         self.performSegue(.ShowAdminOptions)
