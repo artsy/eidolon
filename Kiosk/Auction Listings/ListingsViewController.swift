@@ -7,7 +7,7 @@ let TableCellIdentifier = "TableCell"
 
 class ListingsViewController: UIViewController {
     var allowAnimations = true
-    var auctionID = AuctionID
+    var auctionID = AppSetup.sharedState.auctionID
     
     dynamic var sale = Sale(id: "", isAuction: true, startDate: NSDate(), endDate: NSDate())
     dynamic var saleArtworks = [SaleArtwork]()

@@ -66,7 +66,12 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        emailTextField.becomeFirstResponder()
+        if countElements(emailTextField.text) == 0 {
+            emailTextField.becomeFirstResponder()
+        } else {
+            passwordTextField.becomeFirstResponder()
+        }
+
     }
 
     func xAuthSignal() -> RACSignal {

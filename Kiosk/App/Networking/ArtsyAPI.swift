@@ -170,8 +170,11 @@ extension ArtsyAPI : MoyaPath {
 
 extension ArtsyAPI : MoyaTarget {
     // TODO: - parameterize base URL based on debug, release, etc.
-     var baseURL: NSURL { return NSURL(string: "https://stagingapi.artsy.net")! }
-     var sampleData: NSData {
+
+    var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
+    var baseURL: NSURL { return NSURL(string: base)! }
+
+    var sampleData: NSData {
         switch self {
 
         case XApp:
@@ -250,6 +253,7 @@ extension ArtsyAPI : MoyaTarget {
         
         var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
         // Sign all non-XApp token requests
+
         switch target {
         case .XApp:
             return endpoint

@@ -14,10 +14,12 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
     dynamic var cardToken = ""
 
     lazy var keys = EidolonKeys()
-    lazy var cardHandler:CardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken: self.keys.cardflightMerchantAccountToken())
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+
+        let merchantToken = AppSetup.sharedState.useStaging ? self.keys.cardflightMerchantAccountStagingToken() : self.keys.cardflightMerchantAccountToken()
+        let cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken:merchantToken)
 
         cardHandler.cardSwipedSignal.subscribeNext({ [unowned self] (message) -> Void in
             self.cardStatusLabel.text = "Card Status: \(message)"
@@ -28,7 +30,7 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
         }, completed: { [unowned self] () -> Void in
             self.cardStatusLabel.text = "Card Status: completed"
 
-            if let card = self.cardHandler.card {
+            if let card = cardHandler.card {
                 self.cardName = card.name
                 self.cardLastDigits = card.encryptedSwipedCardNumber
                 self.cardToken = card.cardToken
