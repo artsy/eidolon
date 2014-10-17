@@ -3,7 +3,8 @@ import UIKit
 class RegisterFlowView: ORStackView {
 
     dynamic var highlightedIndex = 0
-    
+    let jumpToIndexSignal = RACSubject()
+
     var details:BidDetails? {
         didSet {
             self.update()
@@ -36,6 +37,11 @@ class RegisterFlowView: ORStackView {
             if user.valueForKey(keypaths[i]) != nil {
                 addSubview(info, withTopMargin: "10", sideMargin: "0")
                 RAC(info, "text") <~ RACObserve(user, keypaths[i])
+
+                let jumpToButton = createJumpToButtonAtIndex(i)
+                title.addSubview(jumpToButton)
+                jumpToButton.alignTopEdgeWithView(title, predicate: "0")
+                jumpToButton.alignTrailingEdgeWithView(title, predicate: "0")
             }
         }
         
@@ -46,6 +52,10 @@ class RegisterFlowView: ORStackView {
         let spacer = UIView(frame: bounds)
         spacer.setContentHuggingPriority(12, forAxis: UILayoutConstraintAxis.Horizontal)
         addSubview(spacer, withTopMargin: "0", sideMargin: "0")
+    }
+
+    func tappedAJumpToButton(button:UIButton) {
+        jumpToIndexSignal.sendNext(button.tag)
     }
 
     func createTitleViewWithTitle(title: String) -> UILabel {
@@ -60,5 +70,14 @@ class RegisterFlowView: ORStackView {
         label.font = UIFont.serifFontWithSize(16)
         return label
     }
+
+    func createJumpToButtonAtIndex(index: NSInteger) -> UIButton {
+        let button = UIButton(frame: CGRectZero)
+        button.tag = index
+        button.setImage(UIImage(named: "edit_button"), forState: .Normal)
+
+        return button
+    }
+
 
 }
