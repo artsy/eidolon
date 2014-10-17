@@ -33,9 +33,9 @@ class HelpViewController: UIViewController {
         bidExplainLabel.text = "Enter the amount you would like to bid. You will confirm this bid in the next step.\n\nEnter your mobile number or bidder number and PIN that you received when you registered."
         
         let bidDetailsButton = ARBlackFlatButton()
-        bidDetailsButton.setTitle("Get My Bidder Details", forState: .Normal)
+        bidDetailsButton.setTitle("Register", forState: .Normal)
         bidDetailsButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (_) -> Void in
-            (UIApplication.sharedApplication().delegate as? AppDelegate)?.showBidderDetails()
+            (UIApplication.sharedApplication().delegate as? AppDelegate)?.showRegistration()
             return
         }
         
