@@ -130,6 +130,8 @@
 		607A17E119F097A700326482 /* PlaceBidNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */; };
 		607A17F419F0B32300326482 /* manual flows.md in Sources */ = {isa = PBXBuildFile; fileRef = 607A17F319F0B32300326482 /* manual flows.md */; };
 		607A17F519F0B32300326482 /* manual flows.md in Sources */ = {isa = PBXBuildFile; fileRef = 607A17F319F0B32300326482 /* manual flows.md */; };
+		607A17F719F16BD100326482 /* ForgotPassword.json in Resources */ = {isa = PBXBuildFile; fileRef = 607A17F619F16BD100326482 /* ForgotPassword.json */; };
+		607A17F819F16BD100326482 /* ForgotPassword.json in Resources */ = {isa = PBXBuildFile; fileRef = 607A17F619F16BD100326482 /* ForgotPassword.json */; };
 		6087602219E9A6DF00116611 /* RegistrationMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */; };
 		6087602319E9A6DF00116611 /* RegistrationMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */; };
 		6087605019E9EDA800116611 /* BidDetailsPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087604F19E9EDA800116611 /* BidDetailsPreviewView.swift */; };
@@ -485,6 +487,7 @@
 		6071321819DD4EC400CA46F4 /* FulfillmentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentNavigationController.swift; sourceTree = "<group>"; };
 		607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidNetworkModel.swift; sourceTree = "<group>"; };
 		607A17F319F0B32300326482 /* manual flows.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "manual flows.md"; sourceTree = "<group>"; };
+		607A17F619F16BD100326482 /* ForgotPassword.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ForgotPassword.json; sourceTree = "<group>"; };
 		6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationMobileViewController.swift; sourceTree = "<group>"; };
 		6087604F19E9EDA800116611 /* BidDetailsPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetailsPreviewView.swift; sourceTree = "<group>"; };
 		6087605219EA117100116611 /* ListingsCountdownManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingsCountdownManager.swift; path = "Auction Listings/ListingsCountdownManager.swift"; sourceTree = "<group>"; };
@@ -778,6 +781,7 @@
 		5ED0997319C31D6200E5DD59 /* Stubbed Responses */ = {
 			isa = PBXGroup;
 			children = (
+				607A17F619F16BD100326482 /* ForgotPassword.json */,
 				60C3984519E8410300CB81F4 /* RegisterToBid.json */,
 				60C3981419E814FC00CB81F4 /* ActiveAuctions.json */,
 				60C3981519E814FC00CB81F4 /* AuctionListings.json */,
@@ -1429,6 +1433,7 @@
 				60C3982319E814FC00CB81F4 /* AuctionListings.json in Resources */,
 				60968DD319C5B80F001AB802 /* KeypadViewPreviewIB.png in Resources */,
 				5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */,
+				607A17F719F16BD100326482 /* ForgotPassword.json in Resources */,
 				60C3983319E814FC00CB81F4 /* MyCreditCards.json in Resources */,
 				60C3982519E814FC00CB81F4 /* Auctions.json in Resources */,
 				60C3982F19E814FC00CB81F4 /* Me.json in Resources */,
@@ -1457,6 +1462,7 @@
 				60C3982A19E814FC00CB81F4 /* CreateABidFail.json in Resources */,
 				60C3982C19E814FC00CB81F4 /* CreatePINForBidder.json in Resources */,
 				60C3983419E814FC00CB81F4 /* MyCreditCards.json in Resources */,
+				607A17F819F16BD100326482 /* ForgotPassword.json in Resources */,
 				60C3983219E814FC00CB81F4 /* MyBiddersForAuction.json in Resources */,
 				6030A12219D1A31600B934CA /* KeypadView.xib in Resources */,
 				60C3982E19E814FC00CB81F4 /* FindBidder.json in Resources */,
