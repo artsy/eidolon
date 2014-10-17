@@ -27,7 +27,7 @@ class User: JSONAble {
         let email = json["email"].stringValue
         let paddleNumber = json["paddle_number"].stringValue
         let phoneNumber = json["phone"].stringValue
-        let postalCode = json["postal_code"].stringValue
+        let postalCode = json["location"]["postal_code"].stringValue
         
         return User(id: id, email: email, name: name, paddleNumber: paddleNumber, phoneNumber: phoneNumber, postalCode: postalCode)
     }

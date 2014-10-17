@@ -1,6 +1,5 @@
 import UIKit
 
-
 class ConfirmYourBidViewController: UIViewController {
 
     dynamic var number: String = ""
@@ -68,7 +67,7 @@ class ConfirmYourBidViewController: UIViewController {
                         }
                     }
 
-                    self?.performSegue(.ConfirmyourBidBidderNotFound)
+                    self?.performSegue(.ConfirmyourBidArtsyLogin)
                     return
                 }
             }
@@ -108,7 +107,7 @@ private extension ConfirmYourBidViewController {
 
 
     @IBAction func dev_noPhoneNumberFoundTapped(sender: AnyObject) {
-        self.performSegue(.ConfirmyourBidBidderNotFound)
+        self.performSegue(.ConfirmyourBidArtsyLogin )
     }
 
     @IBAction func dev_phoneNumberFoundTapped(sender: AnyObject) {

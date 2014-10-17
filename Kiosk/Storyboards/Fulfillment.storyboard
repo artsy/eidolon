@@ -84,9 +84,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="7MY-ro-bWe" appends="YES" id="atD-mW-eUs"/>
-                                </connections>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZf-KS-kZn">
                                 <rect key="frame" x="105" y="54" width="815" height="660"/>
@@ -131,11 +128,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x1s-jG-1c0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="7MY-ro-bWe">
-                    <connections>
-                        <action selector="closeModalTapped:" destination="O1R-5R-23t" id="PZZ-Kq-xi3"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-103" y="-1653"/>
         </scene>
@@ -620,7 +612,6 @@
                         <outlet property="keypadContainer" destination="wUI-V6-mkQ" id="Bs3-qq-4Sc"/>
                         <outlet property="numberAmountTextField" destination="Fop-9s-JEM" id="3eD-C7-5ad"/>
                         <segue destination="hrW-WV-2L3" kind="push" identifier="Confirm your Bid - Bidder Found" id="Q28-yu-dXi"/>
-                        <segue destination="Djc-do-o8V" kind="push" identifier="Confirm your Bid - Bidder Not Found" id="6LA-9C-uNF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpk-oa-izH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -640,9 +631,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sFU-mI-0Wz" customClass="SecureTextField" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="244" width="255" height="44"/>
+                                <rect key="frame" x="495" y="234" width="255" height="44"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your Artsy email and password" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-uI-ydX" customClass="ARSerifLabel">
                                 <rect key="frame" x="58" y="170" width="298" height="76"/>
@@ -651,7 +642,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSp-ka-p6m" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="304" width="255" height="43"/>
+                                <rect key="frame" x="495" y="294" width="255" height="43"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="CONFIRM">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -677,7 +668,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-Jh-nkF" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="495" y="185" width="255" height="44"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                             </textField>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRB-GQ-mXf" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="495" y="600" width="255" height="60"/>
@@ -711,6 +702,18 @@
                                 <rect key="frame" x="434" y="73" width="250" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BpO-EK-Kpg" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="58" y="294" width="255" height="43"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="CREATE ACCOUNT">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="85q-hM-CSB"/>
+                                    <action selector="createNewAccountTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="MQP-lO-coJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -728,7 +731,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4pK-8l-yGY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="525.5" y="116"/>
+            <point key="canvasLocation" x="419.5" y="116"/>
         </scene>
         <!--Placing Bid View Controller-->
         <scene sceneID="k3G-Eq-Mxm">
@@ -761,7 +764,7 @@
                     <connections>
                         <outlet property="bidDetailsPreviewView" destination="XzW-dO-Dol" id="Lor-Ob-fud"/>
                         <outlet property="titleLabel" destination="ThI-e6-Ovh" id="Qsq-E7-3CR"/>
-                        <segue destination="igv-xv-sfe" kind="push" id="DsB-Gb-cEw"/>
+                        <segue destination="igv-xv-sfe" kind="push" identifier="Push to Bid Confirmed" id="DsB-Gb-cEw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOk-Pg-yZ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1063,7 +1066,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="PIN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s7h-hd-xd3" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="PIN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s7h-hd-xd3" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="495" y="176" width="255" height="45"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -1083,12 +1086,13 @@
                         <outlet property="confirmButton" destination="R6q-Ds-JXn" id="uCE-AA-amJ"/>
                         <outlet property="keypadContainer" destination="Qfw-xp-Fto" id="cH1-tR-WbA"/>
                         <outlet property="pinTextField" destination="s7h-hd-xd3" id="jTh-AJ-52D"/>
-                        <segue destination="2lt-co-qW2" kind="push" identifier="PIN Confirmed" id="gjD-og-8Iv"/>
+                        <segue destination="2lt-co-qW2" kind="push" identifier="PIN Confirmed has Card" id="gjD-og-8Iv"/>
+                        <segue destination="BKe-0r-2Pc" kind="push" identifier="Artsy User via PIN Has Not Registered Card" id="eZu-3X-lXX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbJ-SZ-VMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1422.5" y="116"/>
+            <point key="canvasLocation" x="1461.5" y="116"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="myK-rF-T8q">
@@ -1190,12 +1194,11 @@
                         <outlet property="confirmButton" destination="AiP-vh-j1o" id="dGh-Go-X2N"/>
                         <outlet property="emailTextField" destination="y4z-UB-ZdO" id="rzh-fP-FyD"/>
                         <segue destination="b5H-c8-Ctw" kind="push" identifier="Submitted an Email for User Details" id="mgc-AC-8Is"/>
-                        <segue destination="BKe-0r-2Pc" kind="push" id="KZ3-yC-Zuc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIG-KZ-hZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-388.5" y="116"/>
+            <point key="canvasLocation" x="-1973.5" y="1132"/>
         </scene>
         <!--Confirm Your Bid Password View Controller-->
         <scene sceneID="dYI-8Q-ptC">
@@ -1272,12 +1275,11 @@
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
                         <outlet property="bidDetailsPreviewView" destination="Dgt-nb-FZV" id="guy-AQ-MTr"/>
-                        <segue destination="BKe-0r-2Pc" kind="push" identifier="Logged in With New User " id="qUf-dy-7C9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PaT-df-Hci" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1253.5" y="1461"/>
+            <point key="canvasLocation" x="-1973.5" y="1913"/>
         </scene>
         <!--Registration Postal Zip View Controller-->
         <scene sceneID="u7R-BG-jEy">
@@ -1294,7 +1296,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OKU-CQ-874" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="76" width="283" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mnm-f5-Xww" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="291" y="77" width="102" height="43"/>
@@ -1369,7 +1371,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZuQ-9i-7RI" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="76" width="283" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvl-0i-nDH" customClass="ARSerifLabel">
                                 <rect key="frame" x="-2" y="5" width="395" height="41"/>
@@ -1417,7 +1419,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IOI-xI-qX8" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="76" width="283" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIZ-bA-if1" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="291" y="77" width="102" height="43"/>
@@ -1430,7 +1432,7 @@
                                     <action selector="confirmTapped:" destination="rWY-Fx-Onm" eventType="touchUpInside" id="2tz-4K-TmU"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAU-fw-FVK" customClass="ARSerifLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter a password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAU-fw-FVK" customClass="ARSerifLabel">
                                 <rect key="frame" x="-2" y="5" width="395" height="41"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="33"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1465,7 +1467,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0kr-VJ-i2m" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="76" width="283" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
                                 <connections>
                                     <outlet property="delegate" destination="vkP-Fx-jvL" id="T5G-XU-Zye"/>
                                 </connections>
@@ -1512,7 +1514,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="A1R-R2-CSF"/>
-        <segue reference="umA-gD-rtQ"/>
+        <segue reference="eZu-3X-lXX"/>
+        <segue reference="gjD-og-8Iv"/>
     </inferredMetricsTieBreakers>
 </document>

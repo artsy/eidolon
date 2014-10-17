@@ -38,27 +38,33 @@ class ConfirmYourBidPINViewController: UIViewController {
         bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
 
         /// verify if we can connect with number & pin
+
         confirmButton.rac_command = RACCommand(enabled: pinIsZeroSignal.notEach()) { [weak self] _ in
-            if (self == nil) {
-                return RACSignal.empty()
-            }
-            let phone = self.fulfillmentNav().bidDetails.newUser.phoneNumber! as String!
+            if (self == nil) { return RACSignal.empty() }
+
+            let phone = self!.fulfillmentNav().bidDetails.newUser.phoneNumber
             let endpoint: ArtsyAPI = ArtsyAPI.Me
-            let testProvider = providerForPIN(pin, number:phone)
+
+            let testProvider = self!.providerForPIN(self!.pin, number:phone!)
+
             return testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().filterSuccessfulStatusCodes().doNext { _ in
+
                 self?.fulfillmentNav().loggedInProvider = testProvider
                 return
+
             }.then {
                 self?.fulfillmentNav().updateUserCredentials() ?? RACSignal.empty()
+
             }.then {
                 self?.checkForCreditCard() ?? RACSignal.empty()
+
             }.doNext { (cards) in
                 if (self == nil) { return }
                 if countElements(cards as [Card]) > 0 {
-                    self?.performSegue(.EmailLoginConfirmedHighestBidder)
+                    self?.performSegue(.PINConfirmedhasCard)
 
                 } else {
-                    self?.performSegue(.ArtsyUserHasNotRegisteredCard)
+                    self?.performSegue(.ArtsyUserviaPINHasNotRegisteredCard)
                 }
             }
         }
@@ -96,6 +102,6 @@ private extension ConfirmYourBidPINViewController {
     }
 
     @IBAction func dev_loggedInTapped(sender: AnyObject) {
-        self.performSegue(.PINConfirmed)
+        self.performSegue(.PINConfirmedhasCard)
     }
 }

@@ -5,6 +5,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
+    var createNewAccount = false
 
     @IBOutlet var confirmCredentialsButton: UIButton!
     lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
@@ -40,17 +41,21 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
                     errorPointer.memory = NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
                     return false
                 }
+
             }.then {
                 return self?.fulfillmentNav().updateUserCredentials() ?? RACSignal.empty()
+
             }.then {
                 return self?.creditCardSignal().doNext { (cards) -> Void in
                     if (self == nil) { return }
+
                     if countElements(cards as [Card]) > 0 {
                         self!.performSegue(.EmailLoginConfirmedHighestBidder)
                     } else {
                         self!.performSegue(.ArtsyUserHasNotRegisteredCard)
                     }
                 } ?? RACSignal.empty()
+
             }.doError { (error) -> Void in
                 println("Error logging in: \(error.localizedDescription)")
             }
@@ -67,6 +72,18 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         return provider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
     }
     
+
+    @IBAction func createNewAccountTapped(sender: AnyObject) {
+        createNewAccount = true
+        self.performSegue(.ArtsyUserHasNotRegisteredCard)
+    }
+
+    public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == .ArtsyUserHasNotRegisteredCard {
+            let registrationVC = segue.destinationViewController as RegisterViewController
+            registrationVC.createNewUser = createNewAccount
+        }
+    }
 
     func creditCardSignal() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
