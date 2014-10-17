@@ -67,7 +67,7 @@ class ConfirmYourBidViewController: UIViewController {
                         }
                     }
 
-                    self?.performSegue(.ConfirmyourBidArtsyLogin)
+                    self?.performSegue(.ConfirmyourBidBidderNotFound)
                     return
                 }
             }

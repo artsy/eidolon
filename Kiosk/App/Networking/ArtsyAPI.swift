@@ -29,7 +29,8 @@ enum ArtsyAPI {
 
     case LostPINNotification(auctionID: String, number: String)
     case LostPasswordNotification(email: String)
-    
+    case FindExistingEmailRegistration(email: String)
+
     var defaultParameters: [String: AnyObject] {
         switch self {
 
@@ -63,9 +64,7 @@ enum ArtsyAPI {
             ]
 
         case .TrustToken(let number, let auctionID):
-            return [
-                "number": number, "auction_pin": auctionID
-            ]
+            return ["number": number, "auction_pin": auctionID]
 
         case .CreateUser(let email,let password,let phone,let postCode):
 
@@ -75,14 +74,10 @@ enum ArtsyAPI {
             ]
 
         case .UpdateMe(let email,let phone,let postCode):
-            return [
-                "email": email, "phone": phone
-            ]
+            return ["email": email, "phone": phone]
 
         case .RegisterCard(let token):
-            return [
-                "provider": "balanced", "token": token
-            ]
+            return ["provider": "balanced", "token": token]
 
         case .FindBidderRegistration(let auctionID, let phone):
             return ["sale_id": auctionID, "number": phone]
@@ -91,6 +86,9 @@ enum ArtsyAPI {
             return ["sale_id": auctionID, "number": number]
 
         case LostPasswordNotification(let email):
+            return ["email": email]
+
+        case FindExistingEmailRegistration(let email):
             return ["email": email]
 
         default:
@@ -162,6 +160,10 @@ extension ArtsyAPI : MoyaPath {
 
         case LostPasswordNotification:
             return "/api/v1/users/send_reset_password_instructions"
+
+        case FindExistingEmailRegistration:
+            return "/api/v1/users/unknown_yet"
+
         }
     }
 }
@@ -233,6 +235,10 @@ extension ArtsyAPI : MoyaTarget {
 
         case LostPasswordNotification:
             return stubbedResponse("ForgotPassword")
+
+        case FindExistingEmailRegistration:
+            return stubbedResponse("ForgotPassword")
+
         }
     }
 }
