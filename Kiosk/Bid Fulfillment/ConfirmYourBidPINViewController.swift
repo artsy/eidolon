@@ -81,7 +81,6 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         self.presentViewController(alertController, animated: true) {}
 
-
         XAppRequest(endpoint, provider: Provider.sharedProvider, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { (_) -> Void in
             println("sent")
         }

@@ -473,7 +473,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vz7-E3-ZqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-231.5" y="1450"/>
+            <point key="canvasLocation" x="-491.5" y="1226"/>
         </scene>
         <!--Confirm Your Bid View Controller-->
         <scene sceneID="Kfe-hS-Q2z">
@@ -589,7 +589,7 @@
                         <outlet property="keypadContainer" destination="wUI-V6-mkQ" id="Bs3-qq-4Sc"/>
                         <outlet property="numberAmountTextField" destination="Fop-9s-JEM" id="3eD-C7-5ad"/>
                         <segue destination="hrW-WV-2L3" kind="push" identifier="Confirm your Bid - Bidder Found" id="Q28-yu-dXi"/>
-                        <segue destination="Djc-do-o8V" kind="push" id="cWX-yP-uMY"/>
+                        <segue destination="Djc-do-o8V" kind="push" identifier="Confirm your Bid - Bidder Not Found" id="cWX-yP-uMY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpk-oa-izH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -626,9 +626,6 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="confirmTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="mPa-xg-kHZ"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Confirm Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwf-mx-o0D" customClass="ARSerifLabel">
                                 <rect key="frame" x="65" y="82" width="277" height="41"/>
@@ -759,7 +756,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOk-Pg-yZ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1758.5" y="1450"/>
+            <point key="canvasLocation" x="1746.5" y="1274"/>
         </scene>
         <!--Your Bidding Details View Controller-->
         <scene sceneID="jch-Ac-cDe">
@@ -886,7 +883,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aFe-IW-rLA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="754.5" y="1906"/>
+            <point key="canvasLocation" x="602.5" y="1274"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="yEo-PL-Kq3">
@@ -975,7 +972,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7J-sI-ZIT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1758.5" y="2217"/>
+            <point key="canvasLocation" x="1746.5" y="2085"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AYD-hb-rh2">
@@ -1191,7 +1188,7 @@
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="dev_emailAdded:" destination="Djc-do-o8V" eventType="touchUpInside" id="kUF-OZ-C38"/>
+                                            <action selector="dev_emailNotFound:" destination="Djc-do-o8V" eventType="touchUpInside" id="Jmn-58-tNv"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zky-hQ-dKc" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
@@ -1202,7 +1199,7 @@
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="dev_emailAdded:" destination="Djc-do-o8V" eventType="touchUpInside" id="LBF-rt-pLL"/>
+                                            <action selector="dev_emailFound:" destination="Djc-do-o8V" eventType="touchUpInside" id="Px9-S1-VYu"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1238,11 +1235,13 @@
                         <outlet property="bidDetailsPreviewView" destination="qef-T4-al0" id="GFb-Cq-zuL"/>
                         <outlet property="confirmButton" destination="AiP-vh-j1o" id="dGh-Go-X2N"/>
                         <outlet property="emailTextField" destination="y4z-UB-ZdO" id="rzh-fP-FyD"/>
+                        <segue destination="BKe-0r-2Pc" kind="push" identifier="Email Not Found on Artsy" id="TrF-tJ-vaM"/>
+                        <segue destination="MRb-fW-vfZ" kind="push" identifier="Existing Artsy User Found" id="NOJ-G3-crU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIG-KZ-hZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-497.5" y="116"/>
+            <point key="canvasLocation" x="-523.5" y="116"/>
         </scene>
         <!--Confirm Your Bid Password View Controller-->
         <scene sceneID="dYI-8Q-ptC">
@@ -1558,7 +1557,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eZu-3X-lXX"/>
+        <segue reference="TrF-tJ-vaM"/>
+        <segue reference="NOJ-G3-crU"/>
         <segue reference="qDL-1J-LmL"/>
     </inferredMetricsTieBreakers>
 </document>

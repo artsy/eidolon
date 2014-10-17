@@ -20,6 +20,8 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         let nav = self.fulfillmentNav()
         bidDetailsPreviewView.bidDetails = nav.bidDetails
 
+        emailTextField.text = nav.bidDetails.newUser.email ?? ""
+
         let emailTextSignal = emailTextField.rac_textSignal()
         let passwordTextSignal = passwordTextField.rac_textSignal()
         RAC(nav.bidDetails.newUser, "email") <~ emailTextSignal
