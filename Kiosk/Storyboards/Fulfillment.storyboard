@@ -446,7 +446,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="confirmTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="OrA-IY-Yqg"/>
                                     <action selector="confirmTapped:" destination="BKe-0r-2Pc" eventType="touchUpInside" id="geK-LM-NHB"/>
                                 </connections>
                             </button>
@@ -685,7 +684,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="confirmTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="85q-hM-CSB"/>
                                     <action selector="createNewAccountTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="MQP-lO-coJ"/>
                                 </connections>
                             </button>
@@ -868,7 +866,6 @@
                                 <connections>
                                     <action selector="confirmButtonTapped:" destination="N1l-90-SiW" eventType="touchUpInside" id="ZV0-b8-KJQ"/>
                                     <action selector="confirmTapped:" destination="BKe-0r-2Pc" eventType="touchUpInside" id="vDO-RE-3Ba"/>
-                                    <action selector="confirmTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="w2s-T0-038"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -883,7 +880,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aFe-IW-rLA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="602.5" y="1274"/>
+            <point key="canvasLocation" x="616.5" y="1698"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="yEo-PL-Kq3">
@@ -1219,7 +1216,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y4z-UB-ZdO" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="65" y="237" width="319" height="44"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                             </textField>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qef-T4-al0" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="399" y="62" width="250" height="60"/>
@@ -1559,6 +1556,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="TrF-tJ-vaM"/>
         <segue reference="NOJ-G3-crU"/>
-        <segue reference="qDL-1J-LmL"/>
+        <segue reference="6qF-R8-kJy"/>
     </inferredMetricsTieBreakers>
 </document>

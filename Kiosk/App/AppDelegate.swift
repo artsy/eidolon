@@ -1,7 +1,5 @@
 import UIKit
 
-let AuctionID = "ici-live-auction"
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -28,11 +26,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ARHockeyAppLiveID: keys.hockeyProductionSecret(),
             ARMixpanelToken: keys.mixpanelProductionAPIClientKey()
         ])
-        
+
+        removeXAppToken()
         setupHelpButton()
         setupUserAgent()
 
         return true
+    }
+
+    func removeXAppToken() {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("TokenKey")
     }
 
     func setupUserAgent() {
