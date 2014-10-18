@@ -79,9 +79,14 @@ class ListingsViewController: UIViewController {
     }
     
     func recurringListingsRequestSigal(auctionID: String) -> RACSignal {
-        let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate())
-        return recurringSignal.map ({ (_) -> AnyObject! in
-            return self.allListingsRequestSignal(auctionID)
+        let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate()).takeUntil(rac_willDeallocSignal())
+        
+        return recurringSignal.filter({ [weak self] (_) -> Bool in
+            self?.shouldSync() ?? false
+        }).doNext({ (date) -> Void in
+            println("Syncing on \(date)")
+        }).map ({ [weak self] (_) -> AnyObject! in
+            return self?.allListingsRequestSignal(auctionID) ?? RACSignal.empty()
         }).switchToLatest().map({ [weak self] (newSaleArtworks) -> AnyObject! in
             if self == nil {
                 return [] // Now safe to use self!
@@ -125,6 +130,10 @@ class ListingsViewController: UIViewController {
         })
     }
     
+    func shouldSync() -> Bool {
+        return self.presentedViewController == nil && self.navigationController?.topViewController == self
+    }
+    
     func auctionRequestSignal(auctionID: String) -> RACSignal {
         let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
         
@@ -142,7 +151,6 @@ class ListingsViewController: UIViewController {
         
         // Set up reactive bindings
         RAC(self, "saleArtworks") <~ recurringListingsRequestSigal(auctionID)
-        
         
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
