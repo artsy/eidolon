@@ -8,6 +8,7 @@ let TableCellIdentifier = "TableCell"
 class ListingsViewController: UIViewController {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
+    var pageSize = 100
     
     dynamic var sale = Sale(id: "", isAuction: true, startDate: NSDate(), endDate: NSDate())
     dynamic var saleArtworks = [SaleArtwork]()
@@ -33,11 +34,41 @@ class ListingsViewController: UIViewController {
     lazy var switchView: SwitchView = {
         return SwitchView(buttonTitles: SwitchValues.allSwitchValues().map{$0.name.uppercaseString})
     }()
-
-    func listingsRequestSignal(auctionID: String) -> RACSignal {
+    
+    // Recursively calls itself with page+1 until the count of the returned array is < pageSize
+    // Sends new response objects to the subject.
+    func recursiveListingsRequestSignal(auctionID: String, page: Int, subject: RACSubject) -> RACSignal {
         let artworksEndpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: auctionID)
         
-        return XAppRequest(artworksEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
+        return XAppRequest(artworksEndpoint, parameters: ["size": self.pageSize, "page": page]).filterSuccessfulStatusCodes().mapJSON().flattenMap({ (object) -> RACStream! in
+            if let array = object as? Array<AnyObject> {
+                let count = countElements(array)
+                
+                subject.sendNext(object)
+                if count < self.pageSize {
+                    subject.sendCompleted()
+                    return nil
+                } else {
+                    return self.recursiveListingsRequestSignal(auctionID, page: page+1, subject: subject)
+                }
+            }
+            
+            // Should never happen
+            subject.sendCompleted()
+            return nil
+        })
+    }
+    
+    // Fetches all pages of the auction
+    func allListingsRequestSignal(auctionID: String) -> RACSignal {
+        let initialSubject = RACReplaySubject()
+        
+        return recursiveListingsRequestSignal(auctionID, page: 1, subject: initialSubject).ignoreValues().then { initialSubject }.collect().map({ (object) -> AnyObject! in
+            // object is an array of arrays (thanks to collect()). We need to flatten it.
+            
+            let array = object as? Array<Array<AnyObject>>
+            return reduce(array ?? [], Array<AnyObject>(), +)
+        }).mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
             
             if let genericError = error.artsyServerError() {
                 println("Sale Artworks: Error handling thing: \(genericError.message)")
@@ -55,7 +86,7 @@ class ListingsViewController: UIViewController {
     func recurringListingsRequestSigal(auctionID: String) -> RACSignal {
         let recurringSignal = RACSignal.interval(SyncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate())
         return recurringSignal.map ({ (_) -> AnyObject! in
-            return self.listingsRequestSignal(auctionID)
+            return self.allListingsRequestSignal(auctionID)
         }).switchToLatest().map({ [weak self] (newSaleArtworks) -> AnyObject! in
             if self == nil {
                 return [] // Now safe to use self!
@@ -125,8 +156,6 @@ class ListingsViewController: UIViewController {
                 return TableCellIdentifier
             }
         })
-
-        RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
 
         RAC(self, "sortedSaleArtworks") <~ RACSignal.combineLatest([RACObserve(self, "saleArtworks"), switchView.selectedIndexSignal, gridSelectedSignal]).doNext({ [weak self] in
             let tuple = $0 as RACTuple
