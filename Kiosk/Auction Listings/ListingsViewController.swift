@@ -8,6 +8,7 @@ let TableCellIdentifier = "TableCell"
 class ListingsViewController: UIViewController {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
+    var syncInterval = SyncInterval
     var pageSize = 100
     
     dynamic var sale = Sale(id: "", isAuction: true, startDate: NSDate(), endDate: NSDate())
@@ -77,14 +78,8 @@ class ListingsViewController: UIViewController {
         })
     }
     
-    func auctionRequestSignal(auctionID: String) -> RACSignal {
-        let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
-        
-        return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self)
-    }
-    
     func recurringListingsRequestSigal(auctionID: String) -> RACSignal {
-        let recurringSignal = RACSignal.interval(SyncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate())
+        let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate())
         return recurringSignal.map ({ (_) -> AnyObject! in
             return self.allListingsRequestSignal(auctionID)
         }).switchToLatest().map({ [weak self] (newSaleArtworks) -> AnyObject! in
@@ -93,7 +88,7 @@ class ListingsViewController: UIViewController {
             }
             let currentSaleArtworks = self!.saleArtworks
             
-            func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) {
+            func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) -> Bool {
                 assert(countElements(currentSaleArtworks) == countElements(newSaleArtworks), "Arrays' counts must be equal.")
                 // Updating the currentSaleArtworks is easy. First we sort both according to the same criteria
                 // Because we assume that their length is the same, we just do a linear scane through and
@@ -104,8 +99,15 @@ class ListingsViewController: UIViewController {
                 
                 let count = countElements(sortedCurentSaleArtworks)
                 for var i = 0; i < count; i++ {
-                    currentSaleArtworks[i].updateWithValues(newSaleArtworks[i])
+                    if currentSaleArtworks[i].id == newSaleArtworks[i].id {
+                        currentSaleArtworks[i].updateWithValues(newSaleArtworks[i])
+                    } else {
+                        // Failure: the list was the same size but had different artworks
+                        return false
+                    }
                 }
+
+                return true
             }
             
             // So we want to do here is pretty simple – if the existing and new arrays are of the same length,
@@ -113,13 +115,20 @@ class ListingsViewController: UIViewController {
             // If the array's length has changed, then we pass through the new array
             if let newSaleArtworks = newSaleArtworks as? Array<SaleArtwork> {
                 if countElements(newSaleArtworks) == countElements(currentSaleArtworks) {
-                    update(currentSaleArtworks, newSaleArtworks)
-                    return currentSaleArtworks
+                    if update(currentSaleArtworks, newSaleArtworks) {
+                        return currentSaleArtworks
+                    }
                 }
             }
             
             return newSaleArtworks
         })
+    }
+    
+    func auctionRequestSignal(auctionID: String) -> RACSignal {
+        let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
+        
+        return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self)
     }
     
     override func viewDidLoad() {
