@@ -13,7 +13,9 @@ class ListingsViewController: UIViewController {
     dynamic var saleArtworks = [SaleArtwork]()
     dynamic var sortedSaleArtworks = [SaleArtwork]()
     dynamic var cellIdentifier = MasonryCellIdentifier
-    
+
+    @IBOutlet var stagingFlag: UIImageView!
+    @IBOutlet var loadingSpinner: Spinner!
     @IBOutlet var countdownManager: ListingsCountdownManager!
     
     lazy var collectionView: UICollectionView = {
@@ -92,9 +94,11 @@ class ListingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.stagingFlag.hidden = AppSetup.sharedState.useStaging == false
+
         // Add subviews
         view.addSubview(switchView)
-        view.addSubview(collectionView)
+        view.insertSubview(collectionView, belowSubview: loadingSpinner)
         
         // Set up reactive bindings
         RAC(self, "saleArtworks") <~ recurringListingsRequestSigal(auctionID)
@@ -102,6 +106,7 @@ class ListingsViewController: UIViewController {
         
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
+        RAC(self, "loadingSpinner.hidden") <~ RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool()
         
         let gridSelectedSignal = switchView.selectedIndexSignal.map { (index) -> AnyObject! in
             switch index as Int {
@@ -120,7 +125,9 @@ class ListingsViewController: UIViewController {
                 return TableCellIdentifier
             }
         })
-        
+
+        RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
+
         RAC(self, "sortedSaleArtworks") <~ RACSignal.combineLatest([RACObserve(self, "saleArtworks"), switchView.selectedIndexSignal, gridSelectedSignal]).doNext({ [weak self] in
             let tuple = $0 as RACTuple
             let gridSelected: AnyObject! = tuple.third
@@ -178,8 +185,6 @@ class ListingsViewController: UIViewController {
         }
     }
 
-
-    
     @IBAction func longPressForAdmin(sender: AnyObject) {
         self.performSegue(.ShowAdminOptions)
     }

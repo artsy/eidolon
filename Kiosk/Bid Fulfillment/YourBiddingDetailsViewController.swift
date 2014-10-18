@@ -17,6 +17,8 @@ class YourBiddingDetailsViewController: UIViewController {
     @IBAction func revealAppTapped(sender: AnyObject) {
 
         pinNumberLabel.text = self.fulfillmentNav().bidDetails.bidderPIN
+        let button = sender as Button
+        button.hidden = true
     }
 
     @IBAction func confirmButtonTapped(sender: AnyObject) {

@@ -37,5 +37,3 @@ pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewControlle
 target "KioskTests", :exclusive => true do
     pod 'FBSnapshotTestCase', :git => 'https://github.com/AshFurrow/ios-snapshot-test-case.git', :branch => 'renderAsLayer'
 end
-
-pod 'Reveal-iOS-SDK', :configurations => ['Debug']
