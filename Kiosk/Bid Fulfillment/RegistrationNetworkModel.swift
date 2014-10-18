@@ -70,7 +70,9 @@ class RegistrationNetworkModel: NSObject {
     func addCardToUser() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(balancedToken: details.newUser.creditCardToken!)
 
-        return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doError() { (error) -> Void in
+        // on Staging the card tokenization fails
+
+        return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).doError() { (error) -> Void in
             println("Error adding card: \(error.localizedDescription)")
         }
     }

@@ -91,6 +91,9 @@ enum ArtsyAPI {
         case FindExistingEmailRegistration(let email):
             return ["email": email]
 
+        case AuctionListings:
+            return ["size": 100]
+
         default:
             return [:]
         }

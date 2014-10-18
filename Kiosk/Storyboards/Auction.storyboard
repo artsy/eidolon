@@ -133,6 +133,10 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="StagingFlag" translatesAutoresizingMaskIntoConstraints="NO" id="kTY-2b-qfu">
                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                             </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wlF-zV-70o" customClass="Spinner" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="497" y="369" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.61744341488538246" green="0.84611775919469612" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -140,6 +144,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="countdownManager" destination="nNP-QM-m8k" id="92H-P8-G2R"/>
+                        <outlet property="loadingSpinner" destination="wlF-zV-70o" id="dcE-xD-9b1"/>
                         <outlet property="stagingFlag" destination="kTY-2b-qfu" id="Hci-gl-lEv"/>
                         <segue destination="WE8-fs-xzH" kind="modal" identifier="Show Admin Options" id="TDR-gU-MeV"/>
                     </connections>

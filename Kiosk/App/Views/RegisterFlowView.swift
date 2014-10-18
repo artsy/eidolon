@@ -41,7 +41,9 @@ class RegisterFlowView: ORStackView {
                 let jumpToButton = createJumpToButtonAtIndex(i)
                 title.addSubview(jumpToButton)
                 jumpToButton.alignTopEdgeWithView(title, predicate: "0")
-                jumpToButton.alignTrailingEdgeWithView(title, predicate: "0")
+                jumpToButton.constrainLeadingSpaceToView(title, predicate: "-20")
+                jumpToButton.constrainWidth("20")
+                jumpToButton.constrainHeight("20")
             }
         }
         
@@ -72,7 +74,7 @@ class RegisterFlowView: ORStackView {
     }
 
     func createJumpToButtonAtIndex(index: NSInteger) -> UIButton {
-        let button = UIButton(frame: CGRectZero)
+        let button = UIButton(frame: CGRectMake(0, 0, 20, 20))
         button.tag = index
         button.setImage(UIImage(named: "edit_button"), forState: .Normal)
 
