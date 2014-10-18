@@ -9,11 +9,11 @@ extension AppDelegate {
     }
     
     func setupHelpButton() {
-        helpButton = CircularBlackButton()
+        helpButton = MenuButton()
         helpButton.setTitle("Help", forState: .Normal)
         helpButton.addTarget(self, action: "helpButtonPressed", forControlEvents: .TouchUpInside)
         window.addSubview(helpButton)
-        helpButton.alignTop(nil, leading: nil, bottom: "-45", trailing: "-45", toView: window)
+        helpButton.alignTop(nil, leading: nil, bottom: "-24", trailing: "-24", toView: window)
         window.layoutIfNeeded()
     }
     
@@ -60,10 +60,10 @@ extension AppDelegate {
     func hideHelp(completion: HelpCompletion? = nil) {
         setHelpButtonState(.Help)
         
-        helpViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: { () -> Void in
+        helpViewController?.presentingViewController?.dismissViewControllerAnimated(true) {
             self.helpViewController = nil
             completion?()
-        })
+        }
     }
     
     func helpButtonPressed() {
@@ -74,15 +74,20 @@ extension AppDelegate {
         }
     }
     
-    func showBidderDetails() {
-        hideHelp { () -> () in
-            //TODO: Show bidder details
+    func showRegistration() {
+        hideHelp {
+            // Need to give it a second to ensure view heirarchy is good.
+            dispatch_async(dispatch_get_main_queue()) {
+                let listingsVCNav = self.window.rootViewController?.childViewControllers.first! as UINavigationController
+                let listingVC = listingsVCNav.topViewController as ListingsViewController
+                listingVC.registerTapped(self)
+            }
         }
     }
     
     func showConditionsOfSale() {
-        hideHelp { () -> () in
-            //TODO: Show conditions of sale
+        hideHelp {
+            
         }
     }
 }

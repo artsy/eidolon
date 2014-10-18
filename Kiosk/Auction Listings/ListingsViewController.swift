@@ -7,7 +7,7 @@ let TableCellIdentifier = "TableCell"
 
 class ListingsViewController: UIViewController {
     var allowAnimations = true
-    var auctionID = AuctionID
+    var auctionID = AppSetup.sharedState.auctionID
     
     dynamic var sale = Sale(id: "", isAuction: true, startDate: NSDate(), endDate: NSDate())
     dynamic var saleArtworks = [SaleArtwork]()
@@ -101,8 +101,7 @@ class ListingsViewController: UIViewController {
         
         
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
-        RAC(self, "countdownManager.targetDate") <~ RACObserve(self, "sale.endDate")
-
+        RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
         
         let gridSelectedSignal = switchView.selectedIndexSignal.map { (index) -> AnyObject! in
             switch index as Int {
@@ -135,7 +134,7 @@ class ListingsViewController: UIViewController {
                 }
             }()
             
-            // Need to explicitly call animated: fase and reload to avoid animation
+            // Need to explicitly call animated: false and reload to avoid animation
             self?.collectionView.setCollectionViewLayout(layout, animated: false)
         }).map({
             let tuple = $0 as RACTuple
@@ -153,10 +152,10 @@ class ListingsViewController: UIViewController {
             
             if countElements(sortedSaleArtworks as [SaleArtwork]) > 0 {
                 // Need to dispatch, since the changes in the CV's model aren't imediate
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
                     self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
                     return
-                })
+                }
             }
         })
     }
@@ -169,6 +168,7 @@ class ListingsViewController: UIViewController {
 
         if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
             let registerVC = RegisterViewController.instantiateFromStoryboard()
+            internalNav.auctionID = self.auctionID
             registerVC.createNewUser = true
             internalNav.viewControllers = [registerVC]
         }
@@ -176,8 +176,9 @@ class ListingsViewController: UIViewController {
         self.presentViewController(containerController, animated: false) {
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         }
-
     }
+
+
     
     @IBAction func longPressForAdmin(sender: AnyObject) {
         self.performSegue(.ShowAdminOptions)
@@ -222,6 +223,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         containerController.allowAnimations = allowAnimations
 
         if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
+            internalNav.auctionID = self.auctionID
             internalNav.bidDetails.saleArtwork = saleArtwork
         }
 
@@ -318,7 +320,7 @@ enum SwitchValues: Int {
         case .LowestCurrentBid:
             return "Lowest Bid"
         case .Alphabetical:
-            return "A—Z"
+            return "A–Z"
         }
     }
     

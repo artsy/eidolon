@@ -22,16 +22,26 @@ class CardHandler: NSObject, CFTReaderDelegate {
         sessionManager.setLogging(true)
         
         reader.delegate = self;
-        reader.beginSwipeWithMessage("Please swipe credit card");
     }
-
+    
     func readerCardResponse(card: CFTCard?, withError error: NSError?) {
         if let card = card {
             self.card = card;
-            cardSwipedSignal.sendCompleted()
+            cardSwipedSignal.sendNext("Got Card")
+            
+            card.tokenizeCardWithSuccess({ [unowned self] () -> Void in
+                self.cardSwipedSignal.sendCompleted()
+                
+            }, failure: { [unowned self]  (error) -> Void in
+                println("Error: \(error) ")
+                self.cardSwipedSignal.sendNext("Card Flight Error");
 
+                return
+            })
+            
         } else if let error = error {
-            cardSwipedSignal.sendError(error)
+            self.cardSwipedSignal.sendNext("response Error");
+
         }
     }
 
@@ -54,13 +64,13 @@ class CardHandler: NSObject, CFTReaderDelegate {
     }
 
     func readerGenericResponse(cardData: String!) {
-        cardSwipedSignal.sendNext("Reader recived non-card data: \(cardData) ");
+        cardSwipedSignal.sendNext("Reader received non-card data: \(cardData) ");
     }
-
 
     func readerIsConnected(isConnected: Bool, withError error: NSError!) {
         if isConnected {
-            cardSwipedSignal.sendNext("Reader is connecting");
+            cardSwipedSignal.sendNext("Reader is connected");
+            reader.beginSwipeWithMessage(nil);
 
         } else {
             if (error != nil) {

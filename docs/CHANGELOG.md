@@ -1,5 +1,18 @@
 # End User Changes
 
+### 0.0.7 - 17th Oct 2014
+
+* User Registration - @orta + @ash
+* User Bidding - @orta
+* Use Real Card details from Reader in the Signup Flow - @orta
+* Signing up without bidding flows to a page showing only Bidder Number + PIN - @orta
+* Disable confirm buttons when running network requests - @1aurabrown
+* Only apply phone# formatting once bidder number is bigger than 6 digits - @1aurabrown
+* Use new Avante Garde font - @1aurabrown
+* Layout fixes in the artwork listings - @ash
+* Requesting lost password works - @orta
+* Requesting lost PIN works - @orta
+
 ### 0.0.5 - 13th Oct 2014
 
 * Bid Detail Previews are shown throughout - @orta

@@ -5,6 +5,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
+    var createNewAccount = false
 
     @IBOutlet var confirmCredentialsButton: UIButton!
     lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
@@ -16,67 +17,120 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let nav = self.fulfilmentNav()
+        let nav = self.fulfillmentNav()
         bidDetailsPreviewView.bidDetails = nav.bidDetails
 
-        RAC(nav.bidDetails.newUser, "email") <~ emailTextField.rac_textSignal()
-        RAC(nav.bidDetails.newUser, "password") <~ passwordTextField.rac_textSignal()
+        emailTextField.text = nav.bidDetails.newUser.email ?? ""
+
+        let emailTextSignal = emailTextField.rac_textSignal()
+        let passwordTextSignal = passwordTextField.rac_textSignal()
+        RAC(nav.bidDetails.newUser, "email") <~ emailTextSignal
+        RAC(nav.bidDetails.newUser, "password") <~ passwordTextSignal
+
+        let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
+        let passwordIsLongEnough = passwordTextSignal.map(minimum6CharString)
+        let formIsValid = RACSignal.combineLatest([inputIsEmail, passwordIsLongEnough]).reduceAnd()
+
+        confirmCredentialsButton.rac_command = RACCommand(enabled: formIsValid) { [weak self] _ in
+            if (self == nil) {
+                return RACSignal.empty()
+            }
+            return self!.xAuthSignal().try { (accessTokenDict, errorPointer) -> Bool in
+                if let accessToken = accessTokenDict["access_token"] as? String {
+                    self?.fulfillmentNav().xAccessToken = accessToken
+                    return true
+                } else {
+                    errorPointer.memory = NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
+                    return false
+                }
+
+            }.then {
+                return self?.fulfillmentNav().updateUserCredentials() ?? RACSignal.empty()
+
+            }.then {
+                return self?.creditCardSignal().doNext { (cards) -> Void in
+                    if (self == nil) { return }
+
+                    if countElements(cards as [Card]) > 0 {
+                        self!.performSegue(.EmailLoginConfirmedHighestBidder)
+                    } else {
+                        self!.performSegue(.ArtsyUserHasNotRegisteredCard)
+                    }
+                } ?? RACSignal.empty()
+
+            }.doError { (error) -> Void in
+                println("Error logging in: \(error.localizedDescription)")
+            }
+        }
     }
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        emailTextField.becomeFirstResponder()
-    }
-
-    @IBAction func confirmTapped(sender: AnyObject) {
-
-        let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: emailTextField.text, password: passwordTextField.text)
-
-        provider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().subscribeNext({ [weak self] (accessTokenDict) -> Void in
-
-            if let accessToken = accessTokenDict["access_token"] as? String {
-                self?.setupNavProviderWithToken(accessToken)
-
-                self?.fulfilmentNav().updateUserCredentials().subscribeNext({ [weak self] (accessTokenDict) -> Void in
-                    self?.checkForCreditCard()
-                    return
-                })
-                
-            }
-        }, error: { (error) -> Void in
-                println("Error logging in: \(error.localizedDescription)")
-        })
-    }
-
-    func setupNavProviderWithToken(token: String) {
-
-        let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-            var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
-
-            return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": token])
+        if countElements(emailTextField.text) == 0 {
+            emailTextField.becomeFirstResponder()
+        } else {
+            passwordTextField.becomeFirstResponder()
         }
 
-        let numberProvider:ReactiveMoyaProvider<ArtsyAPI> = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
+    }
 
-        self.fulfilmentNav().loggedInProvider = numberProvider
+    func xAuthSignal() -> RACSignal {
+        let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: emailTextField.text, password: passwordTextField.text)
+        return provider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
     }
     
+    @IBAction func forgotPasswordTapped(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .Alert)
 
-    func checkForCreditCard() {
-        let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
-        let authProvider = self.fulfilmentNav().loggedInProvider
-        authProvider?.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self).subscribeNext({ [weak self] (cards) -> Void in
+        let submitAction = UIAlertAction(title: "Send", style: .Default) { (_) in
+            let emailTextField = alertController.textFields![0] as UITextField
+            self.sendForgotPasswordRequest(emailTextField.text)
+            return
+        }
 
-            if countElements(cards as [Card]) > 0 {
-                self?.performSegue(.EmailLoginConfirmedHighestBidder)
-            } else {
-                self?.performSegue(.ArtsyUserHasNotRegisteredCard)
+        submitAction.enabled = false
+        submitAction.enabled = stringIsEmailAddress(emailTextField.text).boolValue
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "email@domain.com"
+            textField.text = self.emailTextField.text
+
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                submitAction.enabled = stringIsEmailAddress(textField.text).boolValue
             }
-            
-        }, error: { [weak self] (error) -> Void in
-                println("error, the pin is likely wrong")
-                return
-        })
+        }
+
+        alertController.addAction(submitAction)
+        alertController.addAction(cancelAction)
+
+        self.presentViewController(alertController, animated: true) {}
+    }
+
+    func sendForgotPasswordRequest(email: String) {
+        let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
+        XAppRequest(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { [weak self] (json) -> Void in
+            println("sent request")
+        }
+    }
+
+    @IBAction func createNewAccountTapped(sender: AnyObject) {
+        createNewAccount = true
+        self.performSegue(.ArtsyUserHasNotRegisteredCard)
+    }
+
+    public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == .ArtsyUserHasNotRegisteredCard {
+            let registrationVC = segue.destinationViewController as RegisterViewController
+            registrationVC.createNewUser = createNewAccount
+        }
+    }
+
+    func creditCardSignal() -> RACSignal {
+        let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
+        let authProvider = self.fulfillmentNav().loggedInProvider!
+        return authProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
     }
 }
 

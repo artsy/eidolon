@@ -13,7 +13,9 @@ class AdminPanelViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .LoadAdminWebViewController {
             let webVC = segue.destinationViewController as WebViewController
-            webVC.URL = NSURL(string: "https://staging.artsy.net/feature/ici-live-auction")!
+            let auctionID = AppSetup.sharedState.auctionID
+            let base = AppSetup.sharedState.useStaging ? "staging.artsy.net" : "artsy.net"
+            webVC.URL = NSURL(string: "https://\(base)/feature/\(auctionID)")!
         }
     }
 }

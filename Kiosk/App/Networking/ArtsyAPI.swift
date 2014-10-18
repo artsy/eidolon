@@ -3,12 +3,14 @@ import Foundation
 enum ArtsyAPI {
     case XApp
     case XAuth(email: String, password: String)
+    case TrustToken(number: String, auctionPIN: String)
+
     case SystemTime
     
     case Me
     
     case MyCreditCards
-    case CreatePINForBidder(bidderID: String)
+    case CreatePINForBidder(bidderNumber: String)
     case FindBidderRegistration(auctionID: String, phone: String)
     case RegisterToBid(auctionID: String)
     
@@ -22,8 +24,13 @@ enum ArtsyAPI {
 
     case UpdateMe(email: String, phone: String, postCode: String)
     case CreateUser(email: String, password: String, phone: String, postCode: String)
-//    case RegisterCard(balancedToken: String)
-    
+
+    case RegisterCard(balancedToken: String)
+
+    case LostPINNotification(auctionID: String, number: String)
+    case LostPasswordNotification(email: String)
+    case FindExistingEmailRegistration(email: String)
+
     var defaultParameters: [String: AnyObject] {
         switch self {
 
@@ -48,6 +55,41 @@ enum ArtsyAPI {
 
         case MyBiddersForAuction(let auctionID):
             return ["sale_id": auctionID]
+
+        case PlaceABid(let auctionID, let artworkID, let maxBidCents):
+            return [
+                "sale_id": auctionID,
+                "artwork_id":  artworkID,
+                "max_bid_amount_cents": maxBidCents
+            ]
+
+        case .TrustToken(let number, let auctionID):
+            return ["number": number, "auction_pin": auctionID]
+
+        case .CreateUser(let email,let password,let phone,let postCode):
+
+            return [
+                "email": email, "password": password,
+                "phone": phone
+            ]
+
+        case .UpdateMe(let email,let phone,let postCode):
+            return ["email": email, "phone": phone]
+
+        case .RegisterCard(let token):
+            return ["provider": "balanced", "token": token]
+
+        case .FindBidderRegistration(let auctionID, let phone):
+            return ["sale_id": auctionID, "number": phone]
+
+        case LostPINNotification(let auctionID, let number):
+            return ["sale_id": auctionID, "number": number]
+
+        case LostPasswordNotification(let email):
+            return ["email": email]
+
+        case FindExistingEmailRegistration(let email):
+            return ["email": email]
 
         default:
             return [:]
@@ -75,16 +117,16 @@ extension ArtsyAPI : MoyaPath {
             return "/api/v1/sale/\(id)/sale_artworks"
 
         case SystemTime:
-            return "api/v1/system/time"
+            return "/api/v1/system/time"
 
         case RegisterToBid:
-            return "api/v1/bidder"
+            return "/api/v1/bidder"
 
         case MyCreditCards:
             return "/api/v1/me/credit_cards"
 
-        case CreatePINForBidder(let bidderID):
-            return "/api/v1/bidder/\(bidderID)/auction_pin"
+        case CreatePINForBidder(let bidderNumber):
+            return "/api/v1/bidder/\(bidderNumber)/pin"
 
         case ActiveAuctions:
             return "/api/v1/sales?is_auction=true&live=true"
@@ -106,20 +148,42 @@ extension ArtsyAPI : MoyaPath {
             
         case PlaceABid:
             return "/api/v1/me/bidder_position"
+
+        case RegisterCard:
+            return "/api/v1/me/credit_cards"
+
+        case TrustToken:
+            return "/api/v1/me/trust_token"
+
+        case LostPINNotification:
+            return "/api/v1/bidder/pin_notification"
+
+        case LostPasswordNotification:
+            return "/api/v1/users/send_reset_password_instructions"
+
+        case FindExistingEmailRegistration:
+            return "/api/v1/user"
+
         }
     }
 }
 
 extension ArtsyAPI : MoyaTarget {
     // TODO: - parameterize base URL based on debug, release, etc.
-     var baseURL: NSURL { return NSURL(string: "https://stagingapi.artsy.net")! }
-     var sampleData: NSData {
+
+    var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
+    var baseURL: NSURL { return NSURL(string: base)! }
+
+    var sampleData: NSData {
         switch self {
 
         case XApp:
             return stubbedResponse("XApp")
 
         case XAuth:
+            return stubbedResponse("XAuth")
+
+        case TrustToken:
             return stubbedResponse("XAuth")
 
         case Auctions:
@@ -149,10 +213,10 @@ extension ArtsyAPI : MoyaTarget {
         case Me:
             return stubbedResponse("Me")
 
-        case .UpdateMe:
+        case UpdateMe:
             return stubbedResponse("Me")
-            
-        case .CreateUser:
+
+        case CreateUser:
             return stubbedResponse("Me")
 
             
@@ -161,11 +225,23 @@ extension ArtsyAPI : MoyaTarget {
             return stubbedResponse("Me")
 
         case PlaceABid:
-            return stubbedResponse("PlaceABid")
+            return stubbedResponse("CreateABid")
             
-        case .AuctionInfo:
+        case AuctionInfo:
             return stubbedResponse("AuctionInfo")
-            
+
+        case RegisterCard:
+            return stubbedResponse("RegisterCard")
+
+        case LostPINNotification:
+            return stubbedResponse("RegisterToBid")
+
+        case LostPasswordNotification:
+            return stubbedResponse("ForgotPassword")
+
+        case FindExistingEmailRegistration:
+            return stubbedResponse("ForgotPassword")
+
         }
     }
 }
@@ -177,24 +253,16 @@ extension ArtsyAPI : MoyaTarget {
         
         var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
         // Sign all non-XApp token requests
+
         switch target {
         case .XApp:
             return endpoint
         case .XAuth:
             return endpoint
+
         default:
-            endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
+            return endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
         }
-        
-        // target-specific parameters
-        switch target {
-        case .FindBidderRegistration(let auctionID, let phone):
-            return endpoint.endpointByAddingParameters(["sale_id": auctionID, "phone": phone])
-        default:
-            return endpoint
-        }
-        
-        
     }
     
      static func DefaultProvider() -> ReactiveMoyaProvider<ArtsyAPI> {

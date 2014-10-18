@@ -39,8 +39,9 @@ class RegisterViewController: UIViewController {
 
         RAC(registrationNetworkModel, "createNewUser") <~ RACObserve(self, "createNewUser")
         RAC(registrationNetworkModel, "details") <~ RACObserve(self, "details")
-        
-        details = self.fulfilmentNav().bidDetails
+        registrationNetworkModel.fulfillmentNav = self.fulfillmentNav()
+
+        details = self.fulfillmentNav().bidDetails
         flowView.details = details
         bidDetailsPreviewView.bidDetails = details
         
@@ -66,26 +67,37 @@ class RegisterViewController: UIViewController {
     }
 
     @IBAction func confirmTapped(sender: AnyObject) {
-        confirmButton.enabled = false
-        
-        registrationNetworkModel.completedSignal.subscribeNext({ [weak self] (_) -> Void in
-
-            self?.moveToNextViewController()
-            return
-            
-        }, error: { [weak self] (error) -> Void in
-            println("Error with registrationNetworkModel create or update")
-        })
-        
-        registrationNetworkModel.start()
-    }
-    
-    func moveToNextViewController() {
         if createNewUser {
-            self.fulfilmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
-            
+            registerNewUser()
+
         } else {
-            self.performSegue(.ConfirmRegistrationandBid)
+            passThroughToBiddingVCToCreateUser()
+        }
+    }
+
+    func registerNewUser() {
+        confirmButton.enabled = false
+
+        registrationNetworkModel.registerSignal().subscribeNext({ [weak self] (_) -> Void in
+
+            self?.performSegue(.RegistrationFinishedShowBidDetails)
+            return
+
+            }, error: { [weak self] (error) -> Void in
+                println("Error with registrationNetworkModel create or update")
+        })
+    }
+
+    func passThroughToBiddingVCToCreateUser() {
+        self.performSegue(.RegistrationFinishedPlaceBid)
+    }
+
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if segue == .RegistrationFinishedPlaceBid {
+            let nextViewController = segue.destinationViewController as PlacingBidViewController
+            nextViewController.registerNetworkModel = registrationNetworkModel
         }
     }
 }

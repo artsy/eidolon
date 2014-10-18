@@ -8,14 +8,15 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let bidDetails = self.navigationController?.fulfilmentNav().bidDetails {
+        if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
             
-            RAC(bidDetails.newUser, "zipCode") <~ zipCodeTextField.rac_textSignal()
+            RAC(bidDetails, "newUser.zipCode") <~ zipCodeTextField.rac_textSignal()
             
             let emailIsValidSignal = RACObserve(bidDetails.newUser, "zipCode").map(isZeroLengthString)
             RAC(confirmButton, "enabled") <~ emailIsValidSignal.notEach()
         }
 
+        zipCodeTextField.becomeFirstResponder()
     }
     
     let finishedSignal = RACSubject()

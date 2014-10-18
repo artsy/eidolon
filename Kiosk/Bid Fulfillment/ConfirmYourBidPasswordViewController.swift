@@ -1,5 +1,7 @@
 import UIKit
 
+// Unused ATM
+
 class ConfirmYourBidPasswordViewController: UIViewController {
 
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
@@ -11,13 +13,11 @@ class ConfirmYourBidPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bidDetailsPreviewView.bidDetails = fulfilmentNav().bidDetails
+        bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
     }
     
     @IBAction func dev_noPhoneNumberFoundTapped(sender: AnyObject) {
-        self.performSegue(.LoggedinWithNewUser)
+
     }
-
-
 
 }

@@ -25,7 +25,7 @@ extension UIStoryboard {
 //        } else {
             let vc = self.instantiateViewControllerWithIdentifier(id) as UIViewController
 //            sharedInstances[id] = NSKeyedArchiver.archivedDataWithRootObject(vc);
-            vc.wrapInFulfilmentNav()
+            vc.wrapInFulfillmentNav()
             return vc;
 //        }
 
@@ -35,7 +35,7 @@ extension UIStoryboard {
 var AssociatedObjectHandle: UInt8 = 0
 
 extension UIViewController {
-    func wrapInFulfilmentNav() {
+    func wrapInFulfillmentNav() {
         let nav = FulfillmentNavigationController(rootViewController: self)!
         nav.auctionID = ""
         objc_setAssociatedObject(self, &AssociatedObjectHandle, nav, UInt(OBJC_ASSOCIATION_RETAIN))

@@ -2,13 +2,14 @@
     dynamic var newUser: NewUser = NewUser()
     dynamic var saleArtwork: SaleArtwork?
 
-    dynamic var bidderID: String?
+    dynamic var bidderNumber: String?
     dynamic var bidderPIN: String?
-    dynamic  var bidAmountCents: NSNumber?
+    dynamic var bidAmountCents: NSNumber?
+    dynamic var bidderID: String?
 
-    init(saleArtwork: SaleArtwork?, bidderID: String?, bidderPIN: String?, bidAmountCents:Int?) {
+    init(saleArtwork: SaleArtwork?, bidderNumber: String?, bidderPIN: String?, bidAmountCents:Int?) {
         self.saleArtwork = saleArtwork
-        self.bidderID = bidderID
+        self.bidderNumber = bidderNumber
         self.bidderPIN = bidderPIN
         self.bidAmountCents = bidAmountCents
     }

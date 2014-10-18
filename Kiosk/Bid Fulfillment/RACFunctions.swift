@@ -6,7 +6,7 @@ func stringIsEmailAddress(text:AnyObject!) -> AnyObject! {
     let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
     let testPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
 
-    return testPredicate?.evaluateWithObject(text) == false
+    return testPredicate?.evaluateWithObject(text)
 }
 
 func centsToPresentableDollarsString(cents:AnyObject!) -> AnyObject! {
@@ -21,6 +21,6 @@ func isZeroLengthString(string:AnyObject!) -> AnyObject! {
 }
 
 
-func longerThan4CharString(string:AnyObject!) -> AnyObject! {
-    return countElements(string as String) > 4
+func minimum6CharString(string:AnyObject!) -> AnyObject! {
+    return countElements(string as String) >= 6
 }

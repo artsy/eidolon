@@ -14,22 +14,27 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
     dynamic var cardToken = ""
 
     lazy var keys = EidolonKeys()
-    lazy var cardHandler:CardHandler = CardHandler(apiKey: self.keys.cardflightTestAPIClientKey(), accountToken: self.keys.cardflightMerchantAccountToken())
 
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        cardHandler.cardSwipedSignal.subscribeNext({ [unowned self] (message) -> Void in
+        let merchantToken = AppSetup.sharedState.useStaging ? self.keys.cardflightMerchantAccountStagingToken() : self.keys.cardflightMerchantAccountToken()
+        let cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken:merchantToken)
+
+        // This will cause memory leaks I if signals are not completed.
+        
+        cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
             self.cardStatusLabel.text = "Card Status: \(message)"
 
-        }, error: { [unowned self] (error) -> Void in
+        }, error: { (error) -> Void in
             self.cardStatusLabel.text = "Card Status: Errored"
 
-        }, completed: { [unowned self] () -> Void in
+        }, completed: { () -> Void in
             self.cardStatusLabel.text = "Card Status: completed"
-            if let card = self.cardHandler.card {
+
+            if let card = cardHandler.card {
                 self.cardName = card.name
-                self.cardLastDigits = card.last4
+                self.cardLastDigits = card.encryptedSwipedCardNumber
                 self.cardToken = card.cardToken
             }
 
@@ -37,10 +42,10 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
         })
         cardHandler.startSearching()
         
-        if let bidDetails = self.navigationController?.fulfilmentNav().bidDetails {
-            RAC(bidDetails.newUser, "creditCardName") <~ RACObserve(self, "cardName")
-            RAC(bidDetails.newUser, "creditCardDigit") <~ RACObserve(self, "cardLastDigits")
-            RAC(bidDetails.newUser, "creditCardToken") <~ RACObserve(self, "cardToken")
+        if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
+            RAC(bidDetails, "newUser.creditCardName") <~ RACObserve(self, "cardName")
+            RAC(bidDetails, "newUser.creditCardDigit") <~ RACObserve(self, "cardLastDigits")
+            RAC(bidDetails, "newUser.creditCardToken") <~ RACObserve(self, "cardToken")
         }
     }
 }

@@ -11,10 +11,16 @@ class BidDetailsPreviewView: UIView {
 
     override func awakeFromNib() {
         self.backgroundColor = UIColor.whiteColor()
-        
+
+        artistNameLabel.numberOfLines = 1
+        artworkTitleLabel.numberOfLines = 1
+        currentBidPriceLabel.numberOfLines = 1
+
         artworkImageView.alignRight = true
         artworkImageView.alignBottom = true
         artworkImageView.contentMode = .ScaleAspectFit
+
+        artistNameLabel.font = UIFont.sansSerifFontWithSize(14)
         currentBidPriceLabel.font = UIFont.serifBoldFontWithSize(14)
         
         RACObserve(self, "bidDetails.saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
