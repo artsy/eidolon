@@ -47,6 +47,7 @@
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
         </mutableArray>
         <mutableArray key="AGaramondPro-Semibold.otf">
             <string>AGaramondPro-Semibold</string>
@@ -398,9 +399,6 @@
                                 <rect key="frame" x="65" y="141" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="edit_button.png" translatesAutoresizingMaskIntoConstraints="NO" id="uR2-ZY-41O">
-                                <rect key="frame" x="716" y="76" width="34" height="34"/>
-                            </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ciJ-4f-fQL" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="65" y="587" width="265" height="73"/>
                                 <subviews>
@@ -455,7 +453,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dj6-cY-N6o" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="426" y="64" width="250" height="60"/>
+                                <rect key="frame" x="426" y="64" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
@@ -522,12 +520,6 @@
                                 <rect key="frame" x="65" y="139" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRg-oc-5hI">
-                                <rect key="frame" x="715" y="74" width="35" height="35"/>
-                                <state key="normal" image="edit_button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bbd-XN-mf0" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="495" y="600" width="255" height="60"/>
                                 <subviews>
@@ -577,7 +569,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lt9-iY-FNp" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="457" y="62" width="250" height="60"/>
+                                <rect key="frame" x="426" y="61" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616893485347" blue="0.72024004409018083" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
@@ -641,9 +633,6 @@
                                 <rect key="frame" x="65" y="141" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="edit_button.png" translatesAutoresizingMaskIntoConstraints="NO" id="L6W-T5-vJa">
-                                <rect key="frame" x="716" y="76" width="34" height="34"/>
-                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-Jh-nkF" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="495" y="165" width="255" height="44"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
@@ -677,10 +666,6 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uPB-WM-yNR" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="434" y="73" width="250" height="60"/>
-                                <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BpO-EK-Kpg" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="58" y="294" width="255" height="43"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -694,7 +679,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9hG-yj-way">
                                 <rect key="frame" x="625" y="259" width="125" height="37"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="15"/>
                                 <state key="normal" title="Forgot Password?">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -704,6 +689,10 @@
                                     <action selector="forgotPasswordTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="h97-j5-Qta"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uPB-WM-yNR" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="426" y="73" width="324" height="60"/>
+                                <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -742,7 +731,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XzW-dO-Dol" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="457" y="274" width="250" height="60"/>
+                                <rect key="frame" x="426" y="269" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
@@ -807,12 +796,11 @@
                                             <action selector="revealAppTapped:" destination="N1l-90-SiW" eventType="touchUpInside" id="yjS-vE-MG1"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-AU-Wuo" customClass="ARSerifLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-AU-Wuo" customClass="ARSerifLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="563" height="44"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Use your ">
                                                 <attributes>
-                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <font key="NSFont" size="25" name="AGaramondPro-Regular"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                 </attributes>
@@ -825,21 +813,18 @@
                                             </fragment>
                                             <fragment content=" and ">
                                                 <attributes>
-                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <font key="NSFont" size="25" name="AGaramondPro-Regular"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                 </attributes>
                                             </fragment>
                                             <fragment content="PIN">
                                                 <attributes>
-                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <font key="NSFont" size="25" name="AGaramondPro-Semibold"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                 </attributes>
                                             </fragment>
                                             <fragment content=" next time you bid">
                                                 <attributes>
-                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <font key="NSFont" size="25" name="AGaramondPro-Regular"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                 </attributes>
@@ -1047,15 +1032,6 @@
                                 <rect key="frame" x="65" y="139" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="edit_button.png" translatesAutoresizingMaskIntoConstraints="NO" id="mWa-Hj-5hb">
-                                <rect key="frame" x="716" y="75" width="34" height="34"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Forgot PIN?" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="mFk-Rf-rJ0" customClass="ARSerifLabel">
-                                <rect key="frame" x="268" y="275" width="138" height="29"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6q-Ds-JXn" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="495" y="538" width="255" height="57"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1094,12 +1070,12 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-c1-dRf" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="426" y="64" width="250" height="60"/>
+                                <rect key="frame" x="426" y="64" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVe-25-8Zu">
-                                <rect key="frame" x="685" y="212" width="70" height="28"/>
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="15"/>
+                                <rect key="frame" x="667" y="212" width="94" height="28"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="15"/>
                                 <state key="normal" title="Forgot PIN?">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1176,9 +1152,6 @@
                                 <rect key="frame" x="65" y="139" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="edit_button.png" translatesAutoresizingMaskIntoConstraints="NO" id="K31-Rx-UhZ">
-                                <rect key="frame" x="716" y="75" width="34" height="34"/>
-                            </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="co3-ck-sKp" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="406" y="603" width="349" height="60"/>
                                 <subviews>
@@ -1224,7 +1197,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                             </textField>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qef-T4-al0" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="399" y="62" width="250" height="60"/>
+                                <rect key="frame" x="426" y="61" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
@@ -1559,8 +1532,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="TrF-tJ-vaM"/>
-        <segue reference="NOJ-G3-crU"/>
-        <segue reference="6qF-R8-kJy"/>
+        <segue reference="eZu-3X-lXX"/>
+        <segue reference="ccv-le-Cu0"/>
+        <segue reference="gjD-og-8Iv"/>
     </inferredMetricsTieBreakers>
 </document>

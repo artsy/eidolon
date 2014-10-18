@@ -29,10 +29,10 @@ class CardHandler: NSObject, CFTReaderDelegate {
             self.card = card;
             cardSwipedSignal.sendNext("Got Card")
             
-            card.tokenizeCardWithSuccess({ [unowned self] () -> Void in
+            card.tokenizeCardWithSuccess({ () -> Void in
                 self.cardSwipedSignal.sendCompleted()
                 
-            }, failure: { [unowned self]  (error) -> Void in
+            }, failure: { (error) -> Void in
                 println("Error: \(error) ")
                 self.cardSwipedSignal.sendNext("Card Flight Error");
 
@@ -41,7 +41,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
             
         } else if let error = error {
             self.cardSwipedSignal.sendNext("response Error");
-
+            reader.beginSwipeWithMessage(nil);
         }
     }
 
@@ -65,6 +65,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
 
     func readerGenericResponse(cardData: String!) {
         cardSwipedSignal.sendNext("Reader received non-card data: \(cardData) ");
+        reader.beginSwipeWithMessage(nil);
     }
 
     func readerIsConnected(isConnected: Bool, withError error: NSError!) {

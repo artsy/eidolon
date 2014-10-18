@@ -35,7 +35,13 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
             if let card = cardHandler.card {
                 self.cardName = card.name
                 self.cardLastDigits = card.encryptedSwipedCardNumber
-                self.cardToken = card.cardToken
+
+                if AppSetup.sharedState.useStaging {
+                    self.cardToken = "/v1/marketplaces/TEST-MP7Fs9XluC54HnVAvBKSI3jQ/cards/CC1AF3Ood4u5GdLz4krD8upG"
+                } else {
+                    self.cardToken = card.cardToken
+                }
+
             }
 
             self.finishedSignal.sendCompleted()
