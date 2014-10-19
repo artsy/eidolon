@@ -124,6 +124,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         if segue == .ArtsyUserHasNotRegisteredCard {
             let registrationVC = segue.destinationViewController as RegisterViewController
             registrationVC.createNewUser = createNewAccount
+            registrationVC.placingBid = true
         }
     }
 

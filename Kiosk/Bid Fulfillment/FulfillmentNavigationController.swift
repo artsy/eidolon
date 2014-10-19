@@ -22,6 +22,9 @@ class FulfillmentNavigationController: UINavigationController {
 
     var loggedInProvider:ReactiveMoyaProvider<ArtsyAPI>?
 
+    func reset() {
+        loggedInProvider = nil
+    }
 
     func updateUserCredentials() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.Me

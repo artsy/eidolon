@@ -27,6 +27,8 @@ class PlaceBidViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.fulfillmentNav().reset()
+
         let keypad = self.keypadContainer!.keypad!
         let bidDollarsSignal = RACObserve(self, "bidDollars")
         let bidIsZeroSignal = bidDollarsSignal.map { return ($0 as Int == 0) }

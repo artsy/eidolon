@@ -2,7 +2,7 @@ import UIKit
 
 class AppSetup {
 
-    var auctionID = "ici-live-auction"
+    var auctionID = "two-x-two-2014"
     var useStaging = true
 
 //    var auctionID = "two-x-two-2014"

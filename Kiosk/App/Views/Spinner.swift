@@ -14,7 +14,7 @@ class Spinner: UIView {
         spinner = createSpinner()
         addSubview(spinner)
         backgroundColor = UIColor.clearColor()
-        animate(10000000)
+        animate(Float.infinity)
     }
 
     override func layoutSubviews() {
@@ -22,7 +22,7 @@ class Spinner: UIView {
         spinner.center = CGPointMake( CGRectGetWidth(bounds) / 2, CGRectGetHeight(bounds) / 2)
     }
 
-    func animate(times: NSInteger) {
+    func animate(times: Float) {
         let transformOffset = -1.01 * M_PI
         let transform = CATransform3DMakeRotation( CGFloat(transformOffset), 0, 0, 1);
         let rotationAnimation = CABasicAnimation(keyPath:"transform");

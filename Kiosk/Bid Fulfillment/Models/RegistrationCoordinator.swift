@@ -23,9 +23,9 @@ enum RegistrationIndex {
 class RegistrationCoordinator: NSObject {
 
     dynamic var currentIndex: Int = 0
+    var storyboard:UIStoryboard!
     
     func viewControllerForIndex(index: RegistrationIndex) -> UIViewController {
-        let storyboard = UIStoryboard.fulfillment()
         currentIndex = index.toInt()
         
         switch index {

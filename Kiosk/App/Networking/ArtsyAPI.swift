@@ -17,9 +17,11 @@ enum ArtsyAPI {
     case Auctions
     case AuctionListings(id: String)
     case AuctionInfo(auctionID: String)
+    case AuctionInfoForArtwork(auctionID: String, artworkID: String)
     case ActiveAuctions
     
     case MyBiddersForAuction(auctionID: String)
+    case MyBidPositionsForAuctionArtwork(auctionID: String, artworkID: String)
     case PlaceABid(auctionID: String, artworkID: String, maxBidCents: String)
 
     case UpdateMe(email: String, phone: String, postCode: String)
@@ -63,23 +65,23 @@ enum ArtsyAPI {
                 "max_bid_amount_cents": maxBidCents
             ]
 
-        case .TrustToken(let number, let auctionID):
+        case TrustToken(let number, let auctionID):
             return ["number": number, "auction_pin": auctionID]
 
-        case .CreateUser(let email,let password,let phone,let postCode):
+        case CreateUser(let email,let password,let phone,let postCode):
 
             return [
                 "email": email, "password": password,
                 "phone": phone
             ]
 
-        case .UpdateMe(let email,let phone,let postCode):
+        case UpdateMe(let email,let phone,let postCode):
             return ["email": email, "phone": phone]
 
-        case .RegisterCard(let token):
+        case RegisterCard(let token):
             return ["provider": "balanced", "token": token]
 
-        case .FindBidderRegistration(let auctionID, let phone):
+        case FindBidderRegistration(let auctionID, let phone):
             return ["sale_id": auctionID, "number": phone]
 
         case LostPINNotification(let auctionID, let number):
@@ -93,6 +95,10 @@ enum ArtsyAPI {
 
         case AuctionListings:
             return ["size": 100]
+
+        case MyBidPositionsForAuctionArtwork(let auctionID, let artworkID):
+            return ["sale_id": auctionID, "artwork_id": artworkID]
+
 
         default:
             return [:]
@@ -118,6 +124,9 @@ extension ArtsyAPI : MoyaPath {
 
         case AuctionListings(let id):
             return "/api/v1/sale/\(id)/sale_artworks"
+
+        case AuctionInfoForArtwork(let auctionID, let artworkID):
+            return "/api/v1/sale/\(auctionID)/sale_artwork/\(artworkID)"
 
         case SystemTime:
             return "/api/v1/system/time"
@@ -145,6 +154,9 @@ extension ArtsyAPI : MoyaPath {
 
         case MyBiddersForAuction:
             return "/api/v1/me/bidders"
+
+        case MyBidPositionsForAuctionArtwork:
+            return "/api/v1/me/bidder_positions"
 
         case FindBidderRegistration:
             return "/api/v1/bidder"
@@ -245,6 +257,11 @@ extension ArtsyAPI : MoyaTarget {
         case FindExistingEmailRegistration:
             return stubbedResponse("ForgotPassword")
 
+        case AuctionInfoForArtwork:
+            return stubbedResponse("AuctionInfoForArtwork")
+
+        case MyBidPositionsForAuctionArtwork:
+            return stubbedResponse("MyBidPositionsForAuctionArtwork")
         }
     }
 }

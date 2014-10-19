@@ -4,6 +4,7 @@ class PlaceBidNetworkModel: NSObject {
 
     var bidder:Bidder?
     var fulfillmentNav:FulfillmentNavigationController!
+    var bidderPosition:BidderPosition?
 
     func bidSignal(auctionID: String, bidDetails: BidDetails) -> RACSignal {
 
@@ -68,8 +69,8 @@ class PlaceBidNetworkModel: NSObject {
 
         let request = provider().request(bidEndpoint, method: .POST, parameters:bidEndpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)
 
-        return request.doNext({ [weak self] (bidderPosition) -> Void in
-
+        return request.doNext({ [weak self] (position) -> Void in
+            self?.bidderPosition = position as BidderPosition
             return
 
         }).doError({ [weak self] (error) -> Void in

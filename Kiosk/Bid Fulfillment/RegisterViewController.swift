@@ -30,7 +30,8 @@ class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        coordinator.storyboard = self.storyboard!
         let registerIndexSignal = RACObserve(coordinator, "currentIndex")
         let indexIsConfirmSignal = registerIndexSignal.map { return ($0 as Int == RegistrationIndex.ConfirmVC.toInt()) }
         
@@ -67,11 +68,11 @@ class RegisterViewController: UIViewController {
     }
 
     @IBAction func confirmTapped(sender: AnyObject) {
-        if createNewUser {
-            registerNewUser()
+        if placingBid {
+            passThroughToBiddingVCToCreateUser()
 
         } else {
-            passThroughToBiddingVCToCreateUser()
+            registerNewUser()
         }
     }
 
