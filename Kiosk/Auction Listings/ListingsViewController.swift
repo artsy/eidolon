@@ -36,6 +36,10 @@ class ListingsViewController: UIViewController {
         return SwitchView(buttonTitles: SwitchValues.allSwitchValues().map{$0.name.uppercaseString})
     }()
     
+    class func instantiateFromStoryboard() -> ListingsViewController {
+        return UIStoryboard.auction().viewControllerWithID(.AuctionListings) as ListingsViewController
+    }
+    
     // Recursively calls itself with page+1 until the count of the returned array is < pageSize
     // Sends new response objects to the subject.
     func recursiveListingsRequestSignal(auctionID: String, page: Int, subject: RACSubject) -> RACSignal {

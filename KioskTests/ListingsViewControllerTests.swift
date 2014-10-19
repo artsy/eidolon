@@ -28,7 +28,7 @@ class ListingsViewControllerTests: QuickSpec {
             // As it's a UINav it needs to be in the real view herarchy 
             
             let window = UIWindow(frame:UIScreen.mainScreen().bounds)
-            let sut = ListingsViewController()
+            let sut = ListingsViewController.instantiateFromStoryboard()
             sut.auctionID = ""
             window.rootViewController = sut
             window.makeKeyAndVisible()
@@ -39,13 +39,13 @@ class ListingsViewControllerTests: QuickSpec {
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             sut.presentModalForSaleArtwork(saleArtwork)
             
-            expect(sut.presentedViewController!) != nil
+            expect(sut.presentedViewController) != nil
         }
         
         describe("when displaying stubbed contents.") {
             var sut: ListingsViewController!
             beforeEach {
-                sut = ListingsViewController()
+                sut = ListingsViewController.instantiateFromStoryboard()
                 sut.auctionID = ""
                 sut.switchView.shouldAnimate = false
 
@@ -81,6 +81,10 @@ class ListingsViewControllerTests: QuickSpec {
                 sut.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
                 expect(sut).to(haveValidSnapshot(named: "alphabetical"))
             }
+        }
+        
+        describe("when paginating") {
+            
         }
     }
 }

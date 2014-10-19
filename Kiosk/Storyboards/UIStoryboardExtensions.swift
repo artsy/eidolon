@@ -1,6 +1,10 @@
 import UIKit
 
 public extension UIStoryboard {
+    
+    class func auction() -> UIStoryboard {
+        return UIStoryboard(name: "Auction", bundle:nil)
+    }
 
     public class func fulfillment() -> UIStoryboard {
         // TODO: Store as though lazy loading.

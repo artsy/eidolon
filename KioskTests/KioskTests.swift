@@ -6,7 +6,14 @@ import UIKit
 var sharedInstances = Dictionary<String, AnyObject>()
 
 extension UIStoryboard {
+    
+    class func auction() -> UIStoryboard {
+        // This will ensure that a storyboard instance comes out of the testing bundle
+        // instead of the MainBundle.
 
+        return UIStoryboard(name: "Auction", bundle: NSBundle(forClass: KioskTests.self))
+    }
+    
     class func fulfillment() -> UIStoryboard {
         // This will ensure that a storyboard instance comes out of the testing bundle
         // instead of the MainBundle.
