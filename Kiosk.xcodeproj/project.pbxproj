@@ -45,6 +45,7 @@
 		5EC60BB519EB0552008A04B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC60BB419EB0552008A04B0 /* QuartzCore.framework */; };
 		5EC60BCB19EB140F008A04B0 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC60BCA19EB140F008A04B0 /* HelpViewController.swift */; };
 		5EC60BCD19EB1433008A04B0 /* HelpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC60BCC19EB1433008A04B0 /* HelpAnimator.swift */; };
+		5ECD4EA619F3C76100B1A263 /* AppSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600AAEB719F18C3300506283 /* AppSetup.swift */; };
 		5EE221DA19DC52EA002EB3C7 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */; };
 		5EEE582E19B8AF4E007B01D0 /* Auction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */; };
 		5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */; };
@@ -1714,6 +1715,7 @@
 				5EA65C1019D5FC9B005EA4B4 /* UIView+BooleanDependentAnimation.m in Sources */,
 				5E95FCC019D99DB5004D0C8F /* Constants.swift in Sources */,
 				609A849B19E5416000476A94 /* RegistrationPasswordViewController.swift in Sources */,
+				5ECD4EA619F3C76100B1A263 /* AppSetup.swift in Sources */,
 				60A8E7CF19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift in Sources */,
 				60C37DD419D44DCD002E7A44 /* BidTests.swift in Sources */,
 				60212C9E19D5ECCE001921E1 /* SaleArtwork.swift in Sources */,

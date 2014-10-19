@@ -63,6 +63,17 @@ class SaleArtwork: JSONAble {
         return saleArtwork;
     }
     
+    func updateWithValues(newSaleArtwork: SaleArtwork) {
+        saleHighestBid = newSaleArtwork.saleHighestBid
+        auctionID = newSaleArtwork.auctionID
+        openingBidCents = newSaleArtwork.openingBidCents
+        minimumNextBidCents = newSaleArtwork.minimumNextBidCents
+        highestBidCents = newSaleArtwork.highestBidCents
+        lowEstimateCents = newSaleArtwork.lowEstimateCents
+        highEstimateCents = newSaleArtwork.highEstimateCents
+        bidCount = newSaleArtwork.bidCount
+    }
+    
     var estimateString: String {
         switch (lowEstimateCents, highEstimateCents) {
         case let (.Some(lowCents), .Some(highCents)):
