@@ -68,8 +68,8 @@ class PlacingBidViewController: UIViewController {
             let sale = saleObject as? SaleArtwork
             self?.mostRecentSaleArtwork = sale
 
-        }.doError { (error) -> Void in
-            self.outbidNoticeLabel.text = "There was a problem placing your bid, please talk to your nearest Artsy rep."
+        }.doError { [weak self] (error) -> Void in
+            self?.outbidNoticeLabel.text = "There was a problem placing your bid, please talk to your nearest Artsy rep."
             return
 
         }.subscribeNext { [weak self] (_) -> Void in
