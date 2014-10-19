@@ -15,12 +15,12 @@ class Image: JSONAble {
     }
 
     override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
-        let json = JSON(object: json)
+        let json = JSON(json)
 
         let id = json["id"].stringValue
         let imageFormatString = json["image_url"].stringValue
         let imageVersions = json["image_versions"].object as [String]
-        let imageSize = CGSize(width: json["original_width"].integer!, height: json["original_height"].integer!)
+        let imageSize = CGSize(width: json["original_width"].int!, height: json["original_height"].int!)
 
         return Image(id: id, imageFormatString: imageFormatString, imageVersions: imageVersions, imageSize: imageSize)
     }

@@ -12,7 +12,7 @@ class GenericError: JSONAble {
     }
     
     override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
-        let json = JSON(object: json)
+        let json = JSON(json)
         
         let type = json["type"].stringValue
         let message = json["message"].stringValue

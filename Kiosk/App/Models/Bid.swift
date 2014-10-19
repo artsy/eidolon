@@ -10,10 +10,10 @@ class Bid: JSONAble {
     }
 
     override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
-        let json = JSON(object: json)
+        let json = JSON(json)
 
         let id = json["id"].stringValue
-        let amount = json["amount_cents"].integerValue
-        return Bid(id: id, amountCents: amount)
+        let amount = json["amount_cents"].int
+        return Bid(id: id, amountCents: amount!)
     }
 }

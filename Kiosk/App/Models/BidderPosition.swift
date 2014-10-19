@@ -12,10 +12,10 @@ class BidderPosition: JSONAble {
     }
 
     override class func fromJSON(source:[String: AnyObject]) -> JSONAble {
-        let json = JSON(object: source)
+        let json = JSON(source)
 
         let id = json["id"].stringValue
-        let maxBidAmount = json["max_bid_amount_cents"].integerValue
+        let maxBidAmount = json["max_bid_amount_cents"].intValue
 
         var bid: Bid?
         if let bidDictionary = json["highest_bid"].object as? [String: AnyObject] {
