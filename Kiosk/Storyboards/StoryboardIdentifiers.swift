@@ -22,6 +22,7 @@ public enum SegueIdentifier : String {
 }
 
 public enum ViewControllerStoryboardIdentifier : String {
+    case AuctionListings = "AuctionListings"
     case ConfirmYourBid = "Confirm Your Bid"
     case ConfirmYourBidArtsyLogin = "Confirm Your Bid Artsy Login"
     case ConfirmYourBidEnterEmail = "Confirm Your Bid Enter Email"
