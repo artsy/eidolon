@@ -14,7 +14,7 @@ class Sale: JSONAble {
     }
 
     override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
-        let json = JSON(object: json)
+        let json = JSON(json)
         let formatter = ISO8601DateFormatter()
 
         let id = json["id"].stringValue

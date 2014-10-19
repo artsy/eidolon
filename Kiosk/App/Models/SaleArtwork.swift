@@ -39,7 +39,7 @@ class SaleArtwork: JSONAble {
     }
 
     override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
-        let json = JSON(object: json)
+        let json = JSON(json)
         let id = json["id"].stringValue
         let artworkDict = json["artwork"].object as [String: AnyObject]
         let artwork = Artwork.fromJSON(artworkDict) as Artwork
@@ -51,13 +51,13 @@ class SaleArtwork: JSONAble {
         }
 
         saleArtwork.auctionID = json["sale_id"].string
-        saleArtwork.openingBidCents = json["opening_bid_cents"].integer
-        saleArtwork.minimumNextBidCents = json["minimum_next_bid_cents"].integer
+        saleArtwork.openingBidCents = json["opening_bid_cents"].int
+        saleArtwork.minimumNextBidCents = json["minimum_next_bid_cents"].int
 
-        saleArtwork.highestBidCents = json["highest_bid_amount_cents"].integer
-        saleArtwork.lowEstimateCents = json["low_estimate_cents"].integer
-        saleArtwork.highEstimateCents = json["high_estimate_cents"].integer
-        saleArtwork.bidCount = json["bidder_positions_count"].integer
+        saleArtwork.highestBidCents = json["highest_bid_amount_cents"].int
+        saleArtwork.lowEstimateCents = json["low_estimate_cents"].int
+        saleArtwork.highEstimateCents = json["high_estimate_cents"].int
+        saleArtwork.bidCount = json["bidder_positions_count"].int
 //        let reserveStatus = json["reserve_status"].integer
 
         return saleArtwork;

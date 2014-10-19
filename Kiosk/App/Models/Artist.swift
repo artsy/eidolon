@@ -11,7 +11,7 @@ class Artist: JSONAble {
     }
 
     override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
-        let json = JSON(object: json)
+        let json = JSON(json)
 
         let id = json["id"].stringValue
         let name = json["name"].stringValue

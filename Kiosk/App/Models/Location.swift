@@ -18,7 +18,7 @@ class Location: JSONAble {
     }
 
     override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
-        let json = JSON(object: json)
+        let json = JSON(json)
 
         let address =  json["address"].stringValue
         let address2 =  json["address_2"].stringValue
