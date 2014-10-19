@@ -48,7 +48,7 @@ class PlaceBidViewController: UIViewController {
         clearSignal.subscribeNext(clearBid)
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
-            RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { return ($0 as Float * 100) }
+            RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { $0 as Float * 100 }
 
             if let saleArtwork:SaleArtwork = nav.bidDetails.saleArtwork {
                 
@@ -124,8 +124,7 @@ private extension PlaceBidViewController {
     func addDigitToBid(input: AnyObject!) -> Void {
         let inputInt = input as? Int ?? 0
         let newBidDollars = (10 * self.bidDollars) + inputInt
-        if (newBidDollars >= 10000000) { return }
-        self.bidDollars = newBidDollars
+        self.bidDollars = min(1_000_000, newBidDollars)
     }
 
     func deleteBid(input: AnyObject!) -> Void {
