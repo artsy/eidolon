@@ -1,5 +1,9 @@
 # End User Changes
 
+### Next 
+
+* Sync – @ash
+
 ### 0.0.7 - 17th Oct 2014
 
 * User Registration - @orta + @ash
