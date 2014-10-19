@@ -83,8 +83,101 @@ class ListingsViewControllerTests: QuickSpec {
             }
         }
         
-        describe("when paginating") {
+        describe("syncing") {
+            let initialBidCount = 3
+            let finalBidCount = 5
             
+            var bidCount = initialBidCount
+            var count: Int?
+            
+            beforeEach({ () -> () in
+                bidCount = initialBidCount
+                count = nil
+                
+                let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+                    
+                    switch target {
+                    case ArtsyAPI.AuctionListings:
+                        if let page = parameters["page"] as? Int {
+                            return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, listingsDataForPage(page, bidCount, count)), method: method, parameters: parameters)
+                        } else {
+                            return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+                        }
+                    default:
+                        return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+                    }
+                }
+                
+                Provider.sharedProvider = ReactiveMoyaProvider(endpointsClosure: endpointsClosure, stubResponses: true)
+            })
+            
+            it("paginates to the second page to retrieve all three sale artworks") {
+                let sut = ListingsViewController.instantiateFromStoryboard()
+                sut.auctionID = ""
+                sut.switchView.shouldAnimate = false
+                sut.pageSize = 2
+                
+                sut.beginAppearanceTransition(true, animated: false)
+                sut.endAppearanceTransition()
+                
+                let numberOfSaleArtworks = countElements(sut.saleArtworks)
+                expect(numberOfSaleArtworks) == 3
+            }
+            
+            it("updates with new values in existing sale artworks") {
+                let sut = ListingsViewController.instantiateFromStoryboard()
+                sut.auctionID = ""
+                sut.switchView.shouldAnimate = false
+                sut.syncInterval = 1
+                
+                sut.beginAppearanceTransition(true, animated: false)
+                sut.endAppearanceTransition()
+                
+                expect(sut.saleArtworks[0].bidCount) == initialBidCount
+                
+                bidCount = finalBidCount
+                expect(sut.saleArtworks[0].bidCount).toEventually(equal(finalBidCount), timeout: 3, pollInterval: 0.6)
+            }
+            
+            it("updates with new sale artworks when lengths differ") {
+                let sut = ListingsViewController.instantiateFromStoryboard()
+                sut.auctionID = ""
+                sut.switchView.shouldAnimate = false
+                sut.syncInterval = 1
+                
+                sut.beginAppearanceTransition(true, animated: false)
+                sut.endAppearanceTransition()
+                
+                count = 2
+                expect(countElements(sut.saleArtworks)) == 2
+                
+                count = 5
+                expect(countElements(sut.saleArtworks)).toEventually(equal(5), timeout: 3, pollInterval: 0.6)
+            }
         }
     }
+}
+
+func listingsDataForPage(page: Int, bidCount: Int, _count: Int?) -> NSData {
+    var count = page == 1 ? 2 : 1
+    if _count != nil {
+        count = _count!
+    }
+    
+    let models = Array<Int>(1...count).reduce(NSArray(), combine: { (memo: NSArray, page: Int) -> NSArray in
+        let model = [
+            "id": "\(count+page*10)",
+            "artwork": [
+                "id": "artwork-id",
+                "title": "artwork title",
+                "date": "late 2014",
+                "blurb": "Some description",
+                "price": "1200"
+            ],
+            "bidder_positions_count": "\(bidCount)"
+        ]
+        return memo.arrayByAddingObject(model)
+    })
+    
+    return NSJSONSerialization.dataWithJSONObject(models, options: nil, error: nil)!
 }
