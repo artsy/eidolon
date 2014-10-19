@@ -141,7 +141,13 @@ class ListingsViewController: UIViewController {
     func auctionRequestSignal(auctionID: String) -> RACSignal {
         let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
         
-        return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self)
+        return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self).catch({ (error) -> RACSignal! in
+            
+            if let genericError = error.artsyServerError() {
+                println("Sale Artworks: Error handling thing: \(genericError.message)")
+            }
+            return RACSignal.empty()
+        })
     }
     
     override func viewDidLoad() {
