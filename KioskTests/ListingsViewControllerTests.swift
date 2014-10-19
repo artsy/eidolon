@@ -28,8 +28,7 @@ class ListingsViewControllerTests: QuickSpec {
             // As it's a UINav it needs to be in the real view herarchy 
             
             let window = UIWindow(frame:UIScreen.mainScreen().bounds)
-            let sut = ListingsViewController.instantiateFromStoryboard()
-            sut.auctionID = ""
+            let sut = testListingsViewController()
             window.rootViewController = sut
             window.makeKeyAndVisible()
 
@@ -45,9 +44,7 @@ class ListingsViewControllerTests: QuickSpec {
         describe("when displaying stubbed contents.") {
             var sut: ListingsViewController!
             beforeEach {
-                sut = ListingsViewController.instantiateFromStoryboard()
-                sut.auctionID = ""
-                sut.switchView.shouldAnimate = false
+                sut = testListingsViewController()
 
                 sut.beginAppearanceTransition(true, animated: false)
                 sut.endAppearanceTransition()
@@ -112,9 +109,7 @@ class ListingsViewControllerTests: QuickSpec {
             })
             
             it("paginates to the second page to retrieve all three sale artworks") {
-                let sut = ListingsViewController.instantiateFromStoryboard()
-                sut.auctionID = ""
-                sut.switchView.shouldAnimate = false
+                let sut = testListingsViewController()
                 sut.pageSize = 2
                 
                 sut.beginAppearanceTransition(true, animated: false)
@@ -125,14 +120,14 @@ class ListingsViewControllerTests: QuickSpec {
             }
             
             it("updates with new values in existing sale artworks") {
-                let sut = ListingsViewController.instantiateFromStoryboard()
-                sut.auctionID = ""
-                sut.switchView.shouldAnimate = false
+                let sut = testListingsViewController()
                 sut.syncInterval = 1
                 
                 sut.beginAppearanceTransition(true, animated: false)
                 sut.endAppearanceTransition()
                 
+                let firstSale = sut.saleArtworks[0]
+                println("ASD: \(firstSale.bidCount)")
                 expect(sut.saleArtworks[0].bidCount) == initialBidCount
                 
                 bidCount = finalBidCount
@@ -140,9 +135,7 @@ class ListingsViewControllerTests: QuickSpec {
             }
             
             it("updates with new sale artworks when lengths differ") {
-                let sut = ListingsViewController.instantiateFromStoryboard()
-                sut.auctionID = ""
-                sut.switchView.shouldAnimate = false
+                let sut = testListingsViewController()
                 sut.syncInterval = 1
                 
                 sut.beginAppearanceTransition(true, animated: false)
@@ -156,6 +149,20 @@ class ListingsViewControllerTests: QuickSpec {
             }
         }
     }
+}
+
+let testSchedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
+    // Tricks the sut to thinking it's been scheduled on another queue
+    return signal
+}
+
+func testListingsViewController() -> ListingsViewController {
+    let sut = ListingsViewController.instantiateFromStoryboard()
+    sut.schedule = testSchedule
+    sut.auctionID = ""
+    sut.switchView.shouldAnimate = false
+    
+    return sut
 }
 
 func listingsDataForPage(page: Int, bidCount: Int, _count: Int?) -> NSData {
@@ -174,7 +181,7 @@ func listingsDataForPage(page: Int, bidCount: Int, _count: Int?) -> NSData {
                 "blurb": "Some description",
                 "price": "1200"
             ],
-            "bidder_positions_count": "\(bidCount)"
+            "bidder_positions_count": bidCount
         ]
         return memo.arrayByAddingObject(model)
     })
