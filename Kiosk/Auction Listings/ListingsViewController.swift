@@ -68,7 +68,7 @@ class ListingsViewController: UIViewController {
     func allListingsRequestSignal(auctionID: String) -> RACSignal {
         let initialSubject = RACReplaySubject()
         
-        return recursiveListingsRequestSignal(auctionID, page: 1, subject: initialSubject).ignoreValues().then { initialSubject }.collect().map({ (object) -> AnyObject! in
+        return recursiveListingsRequestSignal(auctionID, page: 1, subject: initialSubject).ignoreValues().deliverOn(RACScheduler(priority: RACSchedulerPriorityDefault)).then { initialSubject }.collect().map({ (object) -> AnyObject! in
             // object is an array of arrays (thanks to collect()). We need to flatten it.
             
             let array = object as? Array<Array<AnyObject>>
@@ -79,7 +79,7 @@ class ListingsViewController: UIViewController {
                 println("Sale Artworks: Error handling thing: \(genericError.message)")
             }
             return RACSignal.empty()
-        })
+        }).deliverOn(RACScheduler.mainThreadScheduler())
     }
     
     func recurringListingsRequestSigal(auctionID: String) -> RACSignal {
@@ -184,7 +184,7 @@ class ListingsViewController: UIViewController {
             }
         })
 
-        RAC(self, "sortedSaleArtworks") <~ RACSignal.combineLatest([RACObserve(self, "saleArtworks"), switchView.selectedIndexSignal, gridSelectedSignal]).doNext({ [weak self] in
+        RAC(self, "sortedSaleArtworks") <~ RACSignal.combineLatest([RACObserve(self, "saleArtworks").distinctUntilChanged(), switchView.selectedIndexSignal, gridSelectedSignal]).doNext({ [weak self] in
             let tuple = $0 as RACTuple
             let gridSelected: AnyObject! = tuple.third
             
@@ -210,7 +210,7 @@ class ListingsViewController: UIViewController {
                 // Necessary for compiler – won't execute
                 return saleArtworks
             }
-        }).doNext({ [weak self] (sortedSaleArtworks) -> Void in
+        }).distinctUntilChanged().doNext({ [weak self] (sortedSaleArtworks) -> Void in
             self?.collectionView.reloadData()
             
             if countElements(sortedSaleArtworks as [SaleArtwork]) > 0 {

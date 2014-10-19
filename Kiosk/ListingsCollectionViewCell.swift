@@ -53,21 +53,17 @@ class ListingsCollectionViewCell: UICollectionViewCell {
             }
         }).mapNilToEmptyAttributedString()
         
-        RAC(self, "estimateLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
-            return (saleArtwork as? SaleArtwork)?.estimateString
-        }).mapNilToEmptyString()
+        RAC(self, "estimateLabel.text") <~ RACObserve(self, "saleArtwork.estimateString").mapNilToEmptyString()
         
-        RAC(self, "currentBidLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
-            if let currentBidCents = (saleArtwork as? SaleArtwork)?.highestBidCents {
+        RAC(self, "currentBidLabel.text") <~ RACObserve(self, "saleArtwork.highestBidCents").map({ (highestBidCents) -> AnyObject! in
+            if let currentBidCents = highestBidCents as? Int {
                 return "Current bid: \(NSNumberFormatter.currencyStringForCents(currentBidCents))"
             } else {
                 return "No bids"
             }
         }).mapNilToEmptyString()
         
-        RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
-            return (saleArtwork as? SaleArtwork)?.bidCount
-        }).map({ (optionalBidCount) -> AnyObject! in
+        RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork.bidCount").map({ (optionalBidCount) -> AnyObject! in
             // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
             // So we need to unwrap it as an optional optional. Yo dawg.
             let bidCount = optionalBidCount as Int?
