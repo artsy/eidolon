@@ -50,7 +50,7 @@ class ListingsViewController: UIViewController {
                 let count = countElements(array)
                 
                 subject.sendNext(object)
-                if count <= self.pageSize {
+                if count < self.pageSize {
                     subject.sendCompleted()
                     return nil
                 } else {
