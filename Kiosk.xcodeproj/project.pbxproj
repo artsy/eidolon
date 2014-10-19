@@ -51,6 +51,7 @@
 		5EEE583619B8AFD4007B01D0 /* Fulfillment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */; };
 		5EF2C0C619DAC18000263137 /* TableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2C0C519DAC18000263137 /* TableCollectionViewCell.swift */; };
 		5EF2C0C819DAC3F400263137 /* MasonryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2C0C719DAC3F400263137 /* MasonryCollectionViewCell.swift */; };
+		5EF2C45E19F43E9B0060F3FC /* YourBiddingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6069A0A719EF3E1600B70405 /* YourBiddingDetailsViewController.swift */; };
 		6007B42519DEFAA000EDF43E /* ConfirmYourBidPINViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6007B42419DEFAA000EDF43E /* ConfirmYourBidPINViewControllerTests.swift */; };
 		600AAEB819F18C3300506283 /* AppSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600AAEB719F18C3300506283 /* AppSetup.swift */; };
 		600DABE619EB41D800278378 /* RegistrationNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600DABE519EB41D800278378 /* RegistrationNetworkModel.swift */; };
@@ -1705,6 +1706,7 @@
 				600DABEF19EB657100278378 /* AdminPanelViewController.swift in Sources */,
 				6071320619DD3AE600CA46F4 /* BidDetails.swift in Sources */,
 				60FFC2B519D9493000284B9F /* XAppAuthentication.swift in Sources */,
+				5EF2C45E19F43E9B0060F3FC /* YourBiddingDetailsViewController.swift in Sources */,
 				6030A11A19D1A1F300B934CA /* XAppToken.swift in Sources */,
 				60A3BBE519B9F14C00EF3907 /* ListingsViewControllerTests.swift in Sources */,
 				6030A11E19D1A23100B934CA /* Moya+ReactiveCocoa.swift in Sources */,
