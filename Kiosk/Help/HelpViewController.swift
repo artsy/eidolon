@@ -20,13 +20,13 @@ class HelpViewController: UIViewController {
         assistanceLabel.font = assistanceLabel.font.fontWithSize(40)
         assistanceLabel.text = "Assistance"
         
-        let stuckLabel = ARSansSerifLabel()
+        let stuckLabel = titleLabel()
         stuckLabel.text = "Stuck in the process?"
         
         let stuckExplainLabel = wrappingSerifLabel()
         stuckExplainLabel.text = "Find the nearest Artsy representative and they will assist you with anything you may need help with."
         
-        let bidLabel = ARSansSerifLabel()
+        let bidLabel = titleLabel()
         bidLabel.text = "How do I place a bid?"
         
         let bidExplainLabel = wrappingSerifLabel()
@@ -42,7 +42,7 @@ class HelpViewController: UIViewController {
         let txtLabel = wrappingSerifLabel()
         txtLabel.text = "We will send you a text message and email to update you on the status of your bid."
         
-        let questionsLabel = ARSansSerifLabel()
+        let questionsLabel = titleLabel()
         questionsLabel.text = "Questions About Artsy Auctions?"
         
         let questionsExplainView: UIView = {
@@ -90,6 +90,12 @@ class HelpViewController: UIViewController {
         let label = ARSerifLabel()
         label.lineBreakMode = .ByWordWrapping
         label.preferredMaxLayoutWidth = CGFloat(HelpViewController.width - sideMargin)
+        return label
+    }
+
+    private func titleLabel() -> ARSansSerifLabel {
+        let label = ARSansSerifLabel()
+        label.font = UIFont.sansSerifFontWithSize(14)
         return label
     }
 }
