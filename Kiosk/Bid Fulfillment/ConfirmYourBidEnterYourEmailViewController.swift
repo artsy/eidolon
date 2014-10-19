@@ -52,6 +52,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
         if segue == .EmailNotFoundonArtsy {
             let registrationVC = segue.destinationViewController as RegisterViewController
             registrationVC.createNewUser = true
+            registrationVC.placingBid = true
         }
     }
 

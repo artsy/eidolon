@@ -124,7 +124,7 @@ class ListingsViewController: UIViewController {
         containerController.allowAnimations = allowAnimations
 
         if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
-            let registerVC = RegisterViewController.instantiateFromStoryboard()
+            let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as RegisterViewController
             internalNav.auctionID = self.auctionID
             registerVC.createNewUser = true
             internalNav.viewControllers = [registerVC]

@@ -133,6 +133,10 @@
 		607A17F819F16BD100326482 /* ForgotPassword.json in Resources */ = {isa = PBXBuildFile; fileRef = 607A17F619F16BD100326482 /* ForgotPassword.json */; };
 		607F0ABD19F2C3AE00C2F4A6 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607F0ABC19F2C3AE00C2F4A6 /* Spinner.swift */; };
 		607F0ABE19F2C3AE00C2F4A6 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607F0ABC19F2C3AE00C2F4A6 /* Spinner.swift */; };
+		607F0ADD19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 607F0ADC19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json */; };
+		607F0ADE19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 607F0ADC19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json */; };
+		607F0AF119F3128900C2F4A6 /* AuctionInfoForArtwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 607F0AF019F3128900C2F4A6 /* AuctionInfoForArtwork.json */; };
+		607F0AF219F3128900C2F4A6 /* AuctionInfoForArtwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 607F0AF019F3128900C2F4A6 /* AuctionInfoForArtwork.json */; };
 		6087602219E9A6DF00116611 /* RegistrationMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */; };
 		6087602319E9A6DF00116611 /* RegistrationMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */; };
 		6087605019E9EDA800116611 /* BidDetailsPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087604F19E9EDA800116611 /* BidDetailsPreviewView.swift */; };
@@ -491,6 +495,8 @@
 		607A17F319F0B32300326482 /* manual flows.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "manual flows.md"; sourceTree = "<group>"; };
 		607A17F619F16BD100326482 /* ForgotPassword.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ForgotPassword.json; sourceTree = "<group>"; };
 		607F0ABC19F2C3AE00C2F4A6 /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
+		607F0ADC19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyBidPositionsForAuctionArtwork.json; sourceTree = "<group>"; };
+		607F0AF019F3128900C2F4A6 /* AuctionInfoForArtwork.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AuctionInfoForArtwork.json; sourceTree = "<group>"; };
 		6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationMobileViewController.swift; sourceTree = "<group>"; };
 		6087604F19E9EDA800116611 /* BidDetailsPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetailsPreviewView.swift; sourceTree = "<group>"; };
 		6087605219EA117100116611 /* ListingsCountdownManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingsCountdownManager.swift; path = "Auction Listings/ListingsCountdownManager.swift"; sourceTree = "<group>"; };
@@ -797,6 +803,8 @@
 				600DABE819EB4A5000278378 /* RegisterCard.json */,
 				60C3981B19E814FC00CB81F4 /* Me.json */,
 				60C3981C19E814FC00CB81F4 /* MyBiddersForAuction.json */,
+				607F0ADC19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json */,
+				607F0AF019F3128900C2F4A6 /* AuctionInfoForArtwork.json */,
 				60C3981D19E814FC00CB81F4 /* MyCreditCards.json */,
 				60C3981E19E814FC00CB81F4 /* SystemTime.json */,
 				60C3981F19E814FC00CB81F4 /* XApp.json */,
@@ -1432,6 +1440,7 @@
 				60C3983919E814FC00CB81F4 /* XAuth.json in Resources */,
 				60C3982D19E814FC00CB81F4 /* FindBidder.json in Resources */,
 				60C3982719E814FC00CB81F4 /* CreateABid.json in Resources */,
+				607F0ADD19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json in Resources */,
 				60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */,
 				60C3982B19E814FC00CB81F4 /* CreatePINForBidder.json in Resources */,
 				5EA33A8519DC7F2A007CF667 /* artwork.jpg in Resources */,
@@ -1444,6 +1453,7 @@
 				60C3982F19E814FC00CB81F4 /* Me.json in Resources */,
 				60C3982919E814FC00CB81F4 /* CreateABidFail.json in Resources */,
 				6087605619EA217F00116611 /* AuctionInfo.json in Resources */,
+				607F0AF119F3128900C2F4A6 /* AuctionInfoForArtwork.json in Resources */,
 				60D48B9519C89DE300A3CA88 /* edit_button@2x.png in Resources */,
 				60C3983519E814FC00CB81F4 /* SystemTime.json in Resources */,
 				60C3982119E814FC00CB81F4 /* ActiveAuctions.json in Resources */,
@@ -1470,9 +1480,11 @@
 				607A17F819F16BD100326482 /* ForgotPassword.json in Resources */,
 				60C3983219E814FC00CB81F4 /* MyBiddersForAuction.json in Resources */,
 				6030A12219D1A31600B934CA /* KeypadView.xib in Resources */,
+				607F0AF219F3128900C2F4A6 /* AuctionInfoForArtwork.json in Resources */,
 				60C3982E19E814FC00CB81F4 /* FindBidder.json in Resources */,
 				60C3982619E814FC00CB81F4 /* Auctions.json in Resources */,
 				6087605719EA217F00116611 /* AuctionInfo.json in Resources */,
+				607F0ADE19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json in Resources */,
 				6030A12819D1A63400B934CA /* Auction.storyboard in Resources */,
 				60C3983819E814FC00CB81F4 /* XApp.json in Resources */,
 				60C3983619E814FC00CB81F4 /* SystemTime.json in Resources */,

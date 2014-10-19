@@ -1,4 +1,5 @@
 class WebViewController: DZNWebViewController {
+    var showToolbar = false
 
     class func instantiateFromStoryboard(url: NSURL) -> WebViewController {
         let webViewController = UIStoryboard.fulfillment().viewControllerWithID(.WebViewController) as WebViewController
@@ -13,9 +14,15 @@ class WebViewController: DZNWebViewController {
         webView.scalesPageToFit = true
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+       self.navigationController?.setToolbarHidden(!showToolbar, animated: false)
+    }
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.navigationController?.toolbarHidden = true
+        self.navigationController?.setToolbarHidden(!showToolbar, animated: false)
     }
 }
