@@ -72,11 +72,11 @@ enum ArtsyAPI {
 
             return [
                 "email": email, "password": password,
-                "phone": phone
+                "phone": phone, "location": [ "postal_code": postCode ]
             ]
 
         case UpdateMe(let email,let phone,let postCode):
-            return ["email": email, "phone": phone]
+            return ["email": email, "phone": phone, "location": [ "postal_code": postCode ]]
 
         case RegisterCard(let token):
             return ["provider": "balanced", "token": token]

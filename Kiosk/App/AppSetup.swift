@@ -4,10 +4,10 @@ class AppSetup {
 
     var auctionID = "two-x-two-2014"
     var useStaging = true
+    var showDebugButtons = false
 
 //    var auctionID = "two-x-two-2014"
 //    var useStaging = false
-
 
     class var sharedState : AppSetup {
         struct Static {

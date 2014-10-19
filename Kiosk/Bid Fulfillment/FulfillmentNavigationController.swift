@@ -37,7 +37,7 @@ class FulfillmentNavigationController: UINavigationController {
             newUser?.email = self?.user?.email
             newUser?.password = "----"
             newUser?.phoneNumber = self?.user?.phoneNumber
-            newUser?.zipCode = self?.user?.postalCode
+            newUser?.zipCode = self?.user?.location?.postalCode
 
         }).doError({ [weak self] (error) -> Void in
             println("error, the pin is likely wrong")

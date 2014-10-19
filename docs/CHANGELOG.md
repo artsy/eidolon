@@ -1,5 +1,12 @@
 # End User Changes
 
+### 0.0.8 - 19th Oct 2014
+
+* Syncing updates to bids - @ash
+* Show confirmation at the end of the bid / registration flow - @orta
+* Changed some missing fonts - @1aura
+* Postal Codes are saved - @orta
+
 ### 0.0.7 - 17th Oct 2014
 
 * User Registration - @orta + @ash

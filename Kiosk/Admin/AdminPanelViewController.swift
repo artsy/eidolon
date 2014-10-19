@@ -12,9 +12,9 @@ class AdminPanelViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        // TODO: Show help button
     }
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .LoadAdminWebViewController {
             let webVC = segue.destinationViewController as WebViewController
@@ -23,6 +23,8 @@ class AdminPanelViewController: UIViewController {
 
             webVC.URL = NSURL(string: "https://\(base)/feature/\(auctionID)")!
             webVC.showToolbar = true
+
+            // TODO: Hide help button
         }
     }
 
