@@ -1,7 +1,7 @@
 import UIKit
 import QuartzCore
 
-extension AppDelegate {
+public extension AppDelegate {
     typealias HelpCompletion = () -> ()
     
     var helpIsVisisble: Bool {
@@ -101,7 +101,7 @@ extension AppDelegate {
             dispatch_async(dispatch_get_main_queue()) {
                 
                 let webController = WebViewController.instantiateFromStoryboard(NSURL(string: "https://artsy.net/conditions-of-sale")!)
-                webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "hideConditionsOfSale")
+                webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelConditionsViewController")
                 
                 self.conditionsOfSaleViewController = UINavigationController(rootViewController: webController)
                 self.conditionsOfSaleViewController!.modalPresentationStyle = .PageSheet
@@ -109,6 +109,10 @@ extension AppDelegate {
                 self.window.rootViewController?.presentViewController(self.conditionsOfSaleViewController!, animated: true, completion: nil)
             }
         }
+    }
+    
+    public func cancelConditionsViewController() {
+        hideConditionsOfSale()
     }
     
     func hideConditionsOfSale(completion: (() -> ())? = nil) {
