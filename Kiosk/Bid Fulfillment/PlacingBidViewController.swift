@@ -49,14 +49,18 @@ class PlacingBidViewController: UIViewController {
 
     func startCheckingForMaxBid() {
         // We delay to give the server some time to do the auction
-        // 0.3 may be a tad excessive, but on the whole the networking for 
-        // register / bidding is probably about 2-3 seconds, so another 0.3
+        // 0.5 may be a tad excessive, but on the whole the networking for
+        // register / bidding is probably about 2-3 seconds, so another 0.5
         // isn't gonna hurt so much.
 
-        RACSignal.empty().delay(0.3).then { [weak self] () -> RACSignal! in
+        NSLog("start");
+
+        RACSignal.empty().delay(1.5).then { [weak self] () -> RACSignal! in
             self?.getMyBidderPositions()
 
         }.doNext { [weak self] (newBidderPositions) -> Void in
+
+            NSLog("got positions");
             let newBidderPositions = newBidderPositions as? [BidderPosition]
             self?.bidderPositions = newBidderPositions
 

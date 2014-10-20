@@ -22,14 +22,14 @@ class FulfillmentContainerViewController: UIViewController {
     // This is mostly a placeholder for a more complex animation in the future
 
     func viewDidAppearAnimation(animated: Bool) {
-
+        self.contentView.frame = CGRectOffset(self.contentView.frame, 0, 100)
         UIView.animateTwoStepIf(animated, withDuration: 0.3, { () -> Void in
             self.backgroundView.alpha = 1
 
         }, midway: { () -> Void in
             self.contentView.alpha = 1
             self.cancelButton.alpha = 1
-
+            self.contentView.frame = CGRectOffset(self.contentView.frame, 0, -100)
         }) { (complete) -> Void in
 
         }
@@ -37,7 +37,7 @@ class FulfillmentContainerViewController: UIViewController {
 
     @IBAction func closeModalTapped(sender: AnyObject) {
 
-        UIView.animateIf(allowAnimations, withDuration: 0.3, { () -> Void in
+        UIView.animateIf(allowAnimations, withDuration: 0.4, { () -> Void in
             self.contentView.alpha = 0
             self.backgroundView.alpha = 0
             self.cancelButton.alpha = 0
