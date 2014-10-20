@@ -48,6 +48,8 @@
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
         </mutableArray>
         <mutableArray key="AGaramondPro-Semibold.otf">
             <string>AGaramondPro-Semibold</string>
@@ -562,19 +564,12 @@
                                 <rect key="frame" x="426" y="61" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616893485347" blue="0.72024004409018083" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Z7-af-FHL" customClass="ARUnderlineButton">
-                                <rect key="frame" x="136" y="545" width="188" height="32"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Use Artsy Login Details">
-                                            <attributes>
-                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <font key="NSFont" size="20" name="AGaramondPro-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z7-af-FHL">
+                                <rect key="frame" x="65" y="557" width="184" height="19"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
+                                <state key="normal" title="Use Artsy Login Details">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="MRb-fW-vfZ" kind="push" identifier="Confirm your Bid - Artsy Login" id="ccv-le-Cu0"/>
@@ -592,6 +587,7 @@
                         <outlet property="enterButton" destination="j5y-rZ-EtN" id="Jn9-Rb-zeT"/>
                         <outlet property="keypadContainer" destination="wUI-V6-mkQ" id="Bs3-qq-4Sc"/>
                         <outlet property="numberAmountTextField" destination="Fop-9s-JEM" id="3eD-C7-5ad"/>
+                        <outlet property="useArtsyLoginButton" destination="3Z7-af-FHL" id="lT9-uB-Vel"/>
                         <segue destination="hrW-WV-2L3" kind="push" identifier="Confirm your Bid - Bidder Found" id="Q28-yu-dXi"/>
                         <segue destination="Djc-do-o8V" kind="push" identifier="Confirm your Bid - Bidder Not Found" id="cWX-yP-uMY"/>
                     </connections>
@@ -701,6 +697,17 @@
                                 <rect key="frame" x="426" y="73" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TID-cZ-Oja">
+                                <rect key="frame" x="65" y="557" width="192" height="19"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
+                                <state key="normal" title="Use Artsy Bidder Details">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="useBidderTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="M0q-SJ-4gD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -712,6 +719,7 @@
                         <outlet property="confirmCredentialsButton" destination="zSp-ka-p6m" id="hDg-Z7-4IL"/>
                         <outlet property="emailTextField" destination="bMc-Jh-nkF" id="KQ9-Qf-3xe"/>
                         <outlet property="passwordTextField" destination="sFU-mI-0Wz" id="jo4-Mm-FxB"/>
+                        <outlet property="useArtsyBidderButton" destination="TID-cZ-Oja" id="hhW-Rl-ICP"/>
                         <segue destination="2lt-co-qW2" kind="push" identifier="Email Login Confirmed Highest Bidder" id="6qF-R8-kJy"/>
                         <segue destination="BKe-0r-2Pc" kind="push" identifier="Artsy User Has Not Registered Card" id="A1R-R2-CSF"/>
                     </connections>

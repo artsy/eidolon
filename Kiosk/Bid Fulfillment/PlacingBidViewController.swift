@@ -12,6 +12,11 @@ class PlacingBidViewController: UIViewController {
     let placeBidNetworkModel = PlaceBidNetworkModel()
     var registerNetworkModel: RegistrationNetworkModel?
     var foundHighestBidder = false
+    
+    var pollInterval = NSTimeInterval(1)
+    var maxPollRequests = 6
+    
+    var pollRequests = 0
 
     @IBOutlet weak var backToAuctionButton: ActionButton!
 
@@ -39,6 +44,7 @@ class PlacingBidViewController: UIViewController {
 
         } .doError { (error) -> Void in
             self.outbidNoticeLabel.text = "There was a problem placing your bid, please talk to your nearest Artsy rep."
+            self.outbidNoticeLabel.hidden = false
 
         }.subscribeNext { [weak self] (_) in
             self?.startCheckingForMaxBid()
@@ -53,25 +59,16 @@ class PlacingBidViewController: UIViewController {
         // register / bidding is probably about 2-3 seconds, so another 0.5
         // isn't gonna hurt so much.
 
-        RACSignal.empty().delay(2.5).then { [weak self] () -> RACSignal! in
-            self?.getMyBidderPositions()
-
-        }.doNext { [weak self] (newBidderPositions) -> Void in
-
-            let newBidderPositions = newBidderPositions as? [BidderPosition]
-            self?.bidderPositions = newBidderPositions
-
-        } .then { [weak self] () -> RACSignal! in
-
-            self?.getUpdatedSaleArtwork()
-
-        }.doNext { [weak self] (saleObject) -> Void in
-            let sale = saleObject as? SaleArtwork
-            self?.mostRecentSaleArtwork = sale
-
+        self.pollForUpdatedSaleArtwork().then { [weak self] () -> RACSignal! in
+            self?.getMyBidderPositions().doNext { [weak self] (newBidderPositions) -> Void in
+                
+                let newBidderPositions = newBidderPositions as? [BidderPosition]
+                self?.bidderPositions = newBidderPositions
+                
+            } ?? RACSignal.empty()
         }.doError { [weak self] (error) -> Void in
             self?.outbidNoticeLabel.text = "There was a problem placing your bid, please talk to your nearest Artsy rep."
-            return
+            self?.outbidNoticeLabel.hidden = false
 
         }.subscribeNext { [weak self] (_) -> Void in
             self?.finishUp()
@@ -139,14 +136,45 @@ class PlacingBidViewController: UIViewController {
             registrationConfirmationVC.bodyCopy = foundHighestBidder ? highestBidCopy : notHighestBidderCopy
         }
     }
-
-    func getUpdatedSaleArtwork() -> RACSignal {
-
-        let nav = self.fulfillmentNav()
-        let artworkID = nav.bidDetails.saleArtwork!.artwork.id;
-
-        let endpoint: ArtsyAPI = ArtsyAPI.AuctionInfoForArtwork(auctionID: nav.auctionID, artworkID: artworkID)
-        return nav.loggedInProvider!.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(SaleArtwork.self)
+    
+    func pollForUpdatedSaleArtwork() -> RACSignal {
+        
+        func getUpdatedSaleArtwork() -> RACSignal {
+            
+            let nav = self.fulfillmentNav()
+            let artworkID = nav.bidDetails.saleArtwork!.artwork.id;
+            
+            let endpoint: ArtsyAPI = ArtsyAPI.AuctionInfoForArtwork(auctionID: nav.auctionID, artworkID: artworkID)
+            return nav.loggedInProvider!.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(SaleArtwork.self)
+        }
+        
+        let beginningBidCents = self.fulfillmentNav().bidDetails.saleArtwork?.saleHighestBid?.amountCents ?? 0
+        
+        let updatedSaleArtworkSignal = getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
+            println("Polling \(self?.pollRequests) of \(self?.maxPollRequests) for updated sale artwork")
+            
+            self?.pollRequests++
+            let sale = saleObject as? SaleArtwork
+            
+            let updatedBidCents = sale?.saleHighestBid?.amountCents ?? 0
+            if  updatedBidCents != beginningBidCents {
+                // This is an updated model – hooray!
+                self?.mostRecentSaleArtwork = sale
+                return RACSignal.empty()
+            } else {
+                if (self?.pollRequests ?? 0) >= (self?.maxPollRequests ?? 0) {
+                    // We have exceeded our max number of polls, fail.
+                    return RACSignal.error(nil)
+                } else {
+                    // We didn't get an updated value, so let's try again.
+                    return RACSignal.empty().delay(self?.pollInterval ?? 1).then({ () -> RACSignal! in
+                        return self?.pollForUpdatedSaleArtwork()
+                    })
+                }
+            }
+        }
+        
+        return RACSignal.empty().delay(pollInterval).then { updatedSaleArtworkSignal }
     }
 
     func getMyBidderPositions() -> RACSignal {
