@@ -10,7 +10,10 @@ class RegistrationNetworkModel: NSObject {
 
     func registerSignal() -> RACSignal {
 
-        return self.createOrUpdateUser().then {
+        return self.checkForEmailExistence(details.newUser.email!).then {
+            self.createOrUpdateUser()
+
+        }.then {
             self.addCardToUser()
 
         }.then {
@@ -34,6 +37,17 @@ class RegistrationNetworkModel: NSObject {
         return Provider.sharedProvider
     }
 
+    func checkForEmailExistence(email: String) -> RACSignal {
+
+        let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: email)
+        let request = Provider.sharedProvider.request(endpoint, method: .HEAD, parameters:endpoint.defaultParameters)
+
+        return request.doNext { [weak self] (response) -> Void in
+            let moyaResponse = response as MoyaResponse
+            self?.createNewUser = moyaResponse.statusCode == 404
+        }
+    }
+
     func checkForBidderOnAuction(auctionID: String) -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)
         let request = provider().request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Bidder.self)
@@ -54,6 +68,7 @@ class RegistrationNetworkModel: NSObject {
         if createNewUser {
             
             let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email!, password: newUser.password!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!)
+
             return Provider.sharedProvider.request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doError() { (error) -> Void in
                 println("Error creating user: \(error.localizedDescription)")
             }.then { self.updateProvider() }

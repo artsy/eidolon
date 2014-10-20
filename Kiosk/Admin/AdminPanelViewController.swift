@@ -2,6 +2,10 @@ import UIKit
 
 class AdminPanelViewController: UIViewController {
 
+    @IBOutlet weak var serverSwitch: UISwitch!
+    @IBOutlet weak var auctionIDLabel: UILabel!
+
+
     @IBAction func backTapped(sender: AnyObject) {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -26,6 +30,22 @@ class AdminPanelViewController: UIViewController {
 
             // TODO: Hide help button
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        auctionIDLabel.text = AppSetup.sharedState.auctionID
+        let environment = AppSetup.sharedState.useStaging ? "PRODUCTION" : "STAGING"
+        environmentChangeButton.setTitle("USE \(environment)", forState: .Normal)
+    }
+
+    @IBOutlet weak var environmentChangeButton: ActionButton!
+    @IBAction func switchStagingProductionTapped(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(!AppSetup.sharedState.useStaging, forKey: "KioskUseStaging")
+        defaults.synchronize()
+        exit(1)
     }
 
 }

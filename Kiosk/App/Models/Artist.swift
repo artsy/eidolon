@@ -4,10 +4,12 @@ class Artist: JSONAble {
 
     let id: String
     dynamic var name: String
+    let sortableID: String
 
-    init(id: String, name: String) {
+    init(id: String, name: String, sortableID: String) {
         self.id = id
         self.name = name
+        self.sortableID = sortableID
     }
 
     override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
@@ -15,7 +17,8 @@ class Artist: JSONAble {
 
         let id = json["id"].stringValue
         let name = json["name"].stringValue
-        return Artist(id: id, name:name)
+        let sortableID = json["sortableID"].stringValue
+        return Artist(id: id, name:name, sortableID:sortableID)
     }
 
 }

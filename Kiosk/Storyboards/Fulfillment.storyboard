@@ -1507,6 +1507,7 @@
                     <connections>
                         <outlet property="confirmButton" destination="lIZ-bA-if1" id="IR7-DC-fkG"/>
                         <outlet property="passwordTextField" destination="IOI-xI-qX8" id="HV5-gm-r02"/>
+                        <outlet property="subtitleLabel" destination="ZAU-fw-FVK" id="BDj-YO-CPk"/>
                         <segue destination="HtL-zn-13v" kind="push" id="fEp-SB-tlp"/>
                     </connections>
                 </viewController>
@@ -1576,8 +1577,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eZu-3X-lXX"/>
-        <segue reference="ccv-le-Cu0"/>
+        <segue reference="TrF-tJ-vaM"/>
         <segue reference="gjD-og-8Iv"/>
+        <segue reference="NOJ-G3-crU"/>
     </inferredMetricsTieBreakers>
 </document>

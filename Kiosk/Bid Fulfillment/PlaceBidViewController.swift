@@ -124,7 +124,8 @@ private extension PlaceBidViewController {
     func addDigitToBid(input: AnyObject!) -> Void {
         let inputInt = input as? Int ?? 0
         let newBidDollars = (10 * self.bidDollars) + inputInt
-        self.bidDollars = min(1_000_000, newBidDollars)
+        if (newBidDollars >= 1_000_000) { return }
+        self.bidDollars = newBidDollars
     }
 
     func deleteBid(input: AnyObject!) -> Void {
