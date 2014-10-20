@@ -1,6 +1,6 @@
 # End User Changes
 
-### 0.0.9 
+### 0.0.9 20th Oct 2014
 
 * Buttons are 50px - @1aura
 * Admin section can turn off dev buttons - @orta
@@ -10,6 +10,9 @@
 * After placing a bid, the listings UI is immediately updated - @ash
 * UI fixes for tabular view – @ash
 * Fixes problem when attaining the max bid but being told you didn't - @ash
+* Jump between bidder log in and email log in - @laura
+* Show conditions of Sale - @ash
+* Show Credit Card processing information - @orta
 
 ### 0.0.8 - 20th Oct 2014
 
