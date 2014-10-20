@@ -53,14 +53,11 @@ class PlacingBidViewController: UIViewController {
         // register / bidding is probably about 2-3 seconds, so another 0.5
         // isn't gonna hurt so much.
 
-        NSLog("start");
-
-        RACSignal.empty().delay(1.5).then { [weak self] () -> RACSignal! in
+        RACSignal.empty().delay(2.5).then { [weak self] () -> RACSignal! in
             self?.getMyBidderPositions()
 
         }.doNext { [weak self] (newBidderPositions) -> Void in
 
-            NSLog("got positions");
             let newBidderPositions = newBidderPositions as? [BidderPosition]
             self?.bidderPositions = newBidderPositions
 
