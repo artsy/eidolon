@@ -3,7 +3,7 @@ import UIKit
 let log = XCGLogger.defaultInstance()
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+public class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var helpViewController: HelpViewController?
     var conditionsOfSaleViewController: UIViewController?
