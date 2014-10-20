@@ -64,9 +64,8 @@ class HelpViewController: UIViewController {
             view.addSubview(prefixLabel)
             view.addSubview(button)
             
-            prefixLabel.alignTop("0", leading: "0", toView: view)
+            prefixLabel.alignTop("0", leading: "0", bottom: "-20", trailing: nil, toView: view)
             prefixLabel.alignBaselineWithView(button, predicate: nil)
-            prefixLabel.alignLeading("0", trailing: nil, toView: view)
             button.alignAttribute(.Left, toAttribute: .Right, ofView: prefixLabel, predicate: "0")
             
             return view
