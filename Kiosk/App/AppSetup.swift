@@ -20,5 +20,6 @@ class AppSetup {
         }
 
         useStaging = defaults.boolForKey("KioskUseStaging")
+        showDebugButtons = defaults.boolForKey("KioskShowDebugButtons")
     }
 }

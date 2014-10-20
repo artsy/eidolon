@@ -245,7 +245,11 @@ class ListingsViewController: UIViewController {
     }
 
     @IBAction func longPressForAdmin(sender: AnyObject) {
-        self.performSegue(.ShowAdminOptions)
+        let passwordVC = PasswordAlertViewController.alertView { [weak self] () -> () in
+            self?.performSegue(.ShowAdminOptions)
+            return
+        }
+        self.presentViewController(passwordVC, animated: true) {}
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -2,7 +2,6 @@ import UIKit
 
 class AdminPanelViewController: UIViewController {
 
-    @IBOutlet weak var serverSwitch: UISwitch!
     @IBOutlet weak var auctionIDLabel: UILabel!
 
 
@@ -34,10 +33,15 @@ class AdminPanelViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let state = AppSetup.sharedState
 
-        auctionIDLabel.text = AppSetup.sharedState.auctionID
-        let environment = AppSetup.sharedState.useStaging ? "PRODUCTION" : "STAGING"
+        auctionIDLabel.text = state.auctionID
+
+        let environment = state.useStaging ? "PRODUCTION" : "STAGING"
         environmentChangeButton.setTitle("USE \(environment)", forState: .Normal)
+
+        let buttonsTitle = state.showDebugButtons ? "HIDE" : "SHOW"
+        showAdminButtonsButton.setTitle(buttonsTitle, forState: .Normal)
     }
 
     @IBOutlet weak var environmentChangeButton: ActionButton!
@@ -48,4 +52,11 @@ class AdminPanelViewController: UIViewController {
         exit(1)
     }
 
+    @IBOutlet weak var showAdminButtonsButton: ActionButton!
+    @IBAction func toggleAdminButtons(sender: ActionButton) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(!AppSetup.sharedState.showDebugButtons, forKey: "KioskShowDebugButtons")
+        defaults.synchronize()
+        exit(1)
+    }
 }

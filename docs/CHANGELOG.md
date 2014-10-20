@@ -1,12 +1,16 @@
 # End User Changes
 
-### Next
+### 0.0.9 
+
+* Buttons are 50px - @1aura
+* Admin section can turn off dev buttons - @orta
+* Admin section has a password - @orta
+* Fixed text overflow in table layout - @ash
+
+### 0.0.8 - 20th Oct 2014
 
 * After placing a bid, the listings UI is immediately updated - @ash
 * UI fixes for tabular view – @ash
-
-### 0.0.8 - 19th Oct 2014
-
 * Syncing updates to bids - @ash
 * Show confirmation at the end of the bid / registration flow - @orta
 * Changed some missing fonts - @1aura

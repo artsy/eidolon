@@ -47,7 +47,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 
             let testProvider = self!.providerForPIN(self!.pin, number:phone!)
 
-            return testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().filterSuccessfulStatusCodes().doNext { _ in
+            return testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doNext { _ in
 
                 self?.fulfillmentNav().loggedInProvider = testProvider
                 return
@@ -66,7 +66,10 @@ class ConfirmYourBidPINViewController: UIViewController {
                 } else {
                     self?.performSegue(.ArtsyUserviaPINHasNotRegisteredCard)
                 }
-            }
+
+            }.doError({ (error) -> Void in
+                
+            })
         }
     }
 
