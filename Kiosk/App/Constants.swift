@@ -6,3 +6,4 @@ struct AnimationDuration {
 }
 
 let SyncInterval: NSTimeInterval = 60
+let ButtonHeight: CGFloat = 50
