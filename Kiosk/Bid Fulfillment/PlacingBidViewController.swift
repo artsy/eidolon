@@ -95,6 +95,12 @@ class PlacingBidViewController: UIViewController {
         } else {
             isLowestBidder()
         }
+        
+        // Update the bid details sale artwork to our mostRecentSaleArtwork
+        if let mostRecentSaleArtwork = self.mostRecentSaleArtwork {
+            let bidDetails = self.fulfillmentNav().bidDetails
+            bidDetails.saleArtwork?.updateWithValues(mostRecentSaleArtwork)
+        }
 
         let showBidderDetails = hasCreatedAUser() || !foundHighestBidder
         if showBidderDetails {
