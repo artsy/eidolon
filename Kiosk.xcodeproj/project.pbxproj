@@ -235,6 +235,8 @@
 		60D976E819D3123B00DE9F3D /* SaleArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E719D3123B00DE9F3D /* SaleArtwork.swift */; };
 		60D976EA19D3135200DE9F3D /* Sale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976E919D3135200DE9F3D /* Sale.swift */; };
 		60D976EC19D3172D00DE9F3D /* SystemTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D976EB19D3172D00DE9F3D /* SystemTime.swift */; };
+		60E0949019F597A20035F0DD /* PasswordAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E0948F19F597A20035F0DD /* PasswordAlertViewController.swift */; };
+		60E0949119F597A20035F0DD /* PasswordAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E0948F19F597A20035F0DD /* PasswordAlertViewController.swift */; };
 		60E8941C19F4047F006CC4D8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E8941B19F4047F006CC4D8 /* Location.swift */; };
 		60E8941D19F4047F006CC4D8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E8941B19F4047F006CC4D8 /* Location.swift */; };
 		60E8945419F43B44006CC4D8 /* ChooseAuctionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E8945319F43B44006CC4D8 /* ChooseAuctionViewController.swift */; };
@@ -562,6 +564,7 @@
 		60D976E919D3135200DE9F3D /* Sale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sale.swift; sourceTree = "<group>"; };
 		60D976EB19D3172D00DE9F3D /* SystemTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemTime.swift; sourceTree = "<group>"; };
 		60E0332819DDAFF80096C86C /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = docs/CHANGELOG.md; sourceTree = SOURCE_ROOT; };
+		60E0948F19F597A20035F0DD /* PasswordAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordAlertViewController.swift; sourceTree = "<group>"; };
 		60E5553A19DAB75000F664CE /* deployment.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = deployment.md; sourceTree = "<group>"; };
 		60E8941B19F4047F006CC4D8 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		60E8945319F43B44006CC4D8 /* ChooseAuctionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAuctionViewController.swift; sourceTree = "<group>"; };
@@ -837,6 +840,7 @@
 		600DABEB19EB654800278378 /* Admin */ = {
 			isa = PBXGroup;
 			children = (
+				60E0947D19F5976F0035F0DD /* Models */,
 				600DABEC19EB655D00278378 /* View Controllers */,
 			);
 			path = Admin;
@@ -848,6 +852,7 @@
 				600DABED19EB657100278378 /* AdminPanelViewController.swift */,
 				600DABF019EB7C3700278378 /* AuctionWebViewController.swift */,
 				60E8945319F43B44006CC4D8 /* ChooseAuctionViewController.swift */,
+				60E0948F19F597A20035F0DD /* PasswordAlertViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1148,6 +1153,13 @@
 				60D48B9419C89DE300A3CA88 /* edit_button@2x.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		60E0947D19F5976F0035F0DD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		60F444EA19BDE0110030409F /* buttons */ = {
@@ -1647,6 +1659,7 @@
 				6030A10019D192D000B934CA /* Artist.swift in Sources */,
 				E6AB492419E704870054C8AD /* CursorView.swift in Sources */,
 				60A8E7C519BE50640088ACEC /* FulfillmentContainerViewController.swift in Sources */,
+				60E0949019F597A20035F0DD /* PasswordAlertViewController.swift in Sources */,
 				600F5EFA19C879670027F587 /* SwipeCreditCardViewController.swift in Sources */,
 				605B856819C6EA380009B16B /* UIStoryboardExtensions.swift in Sources */,
 				6087605319EA117100116611 /* ListingsCountdownManager.swift in Sources */,
@@ -1746,6 +1759,7 @@
 				6030A11919D1A1EF00B934CA /* ArtsyAPI.swift in Sources */,
 				60212C9D19D5EAF9001921E1 /* ArtworkTests.swift in Sources */,
 				6051290319E15F63004B05BF /* SnapshotExtension.swift in Sources */,
+				60E0949119F597A20035F0DD /* PasswordAlertViewController.swift in Sources */,
 				6024DD5F19D8286B008E600A /* UIStoryboardSegueExtensions.swift in Sources */,
 				60C37DDC19D460DC002E7A44 /* BidderPosition.swift in Sources */,
 				604B225219D359C3008D86C7 /* SystemTimeTests.swift in Sources */,
