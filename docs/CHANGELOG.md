@@ -4,6 +4,7 @@
 
 * After placing a bid, the listings UI is immediately updated - @ash
 * UI fixes for tabular view – @ash
+* Fixes problem when attaining the max bid but being told you didn't - @ash
 
 ### 0.0.8 - 19th Oct 2014
 
