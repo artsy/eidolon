@@ -5,9 +5,9 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
-    var createNewAccount = false
-
+    @IBOutlet var useArtsyBidderButton: UIButton!
     @IBOutlet var confirmCredentialsButton: UIButton!
+    var createNewAccount = false
     lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     public class func instantiateFromStoryboard() -> ConfirmYourBidArtsyLoginViewController {
@@ -16,6 +16,12 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
+
+        let titleString = useArtsyBidderButton.titleForState(useArtsyBidderButton.state)! ?? ""
+        var attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
+            NSFontAttributeName: useArtsyBidderButton.titleLabel!.font];
+        let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
+        useArtsyBidderButton.setAttributedTitle(attrTitle, forState:useArtsyBidderButton.state)
 
         let nav = self.fulfillmentNav()
         bidDetailsPreviewView.bidDetails = nav.bidDetails
@@ -132,6 +138,15 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
         let authProvider = self.fulfillmentNav().loggedInProvider!
         return authProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
+    }
+
+    @IBAction func useBidderTapped(sender: AnyObject) {
+        for controller in navigationController!.viewControllers {
+            if controller.isKindOfClass(ConfirmYourBidViewController.self) {
+                navigationController!.popToViewController(controller as UIViewController, animated:true);
+                break;
+            }
+        }
     }
 }
 
