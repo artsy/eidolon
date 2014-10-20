@@ -22,6 +22,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
         sessionManager.setLogging(true)
         
         reader.delegate = self;
+        reader.swipeTimeoutDuration(0)
     }
     
     func readerCardResponse(card: CFTCard?, withError error: NSError?) {
