@@ -10,6 +10,9 @@ class ListingsViewController: UIViewController {
     var auctionID = AppSetup.sharedState.auctionID
     var syncInterval = SyncInterval
     var pageSize = 10
+    var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
+        return signal.deliverOn(scheduler)
+    }
     
     dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0)
     dynamic var saleArtworks = [SaleArtwork]()
@@ -68,7 +71,7 @@ class ListingsViewController: UIViewController {
     func allListingsRequestSignal(auctionID: String) -> RACSignal {
         let initialSubject = RACReplaySubject()
         
-        return recursiveListingsRequestSignal(auctionID, page: 1, subject: initialSubject).ignoreValues().deliverOn(RACScheduler(priority: RACSchedulerPriorityDefault)).then { initialSubject }.collect().map({ (object) -> AnyObject! in
+        return schedule(schedule(recursiveListingsRequestSignal(auctionID, page: 1, subject: initialSubject).ignoreValues(), RACScheduler(priority: RACSchedulerPriorityDefault)).then { initialSubject }.collect().map({ (object) -> AnyObject! in
             // object is an array of arrays (thanks to collect()). We need to flatten it.
             
             let array = object as? Array<Array<AnyObject>>
@@ -79,7 +82,7 @@ class ListingsViewController: UIViewController {
                 println("Sale Artworks: Error handling thing: \(genericError.message)")
             }
             return RACSignal.empty()
-        }).deliverOn(RACScheduler.mainThreadScheduler())
+        }), RACScheduler.mainThreadScheduler())
     }
     
     func recurringListingsRequestSigal(auctionID: String) -> RACSignal {

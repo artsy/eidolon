@@ -6,6 +6,12 @@
 * Show confirmation at the end of the bid / registration flow - @orta
 * Changed some missing fonts - @1aura
 * Postal Codes are saved - @orta
+* Admin Panel can toggle between stagin / production - @orta
+* Admin Panel can choose between _active_ Auctions - @orta
+* Image Aspect Ratio fixes in Grid view - @orta
+* Can jump between different Registration stages - @orta
+* Popover animates into place - @orta
+
 
 ### 0.0.7 - 17th Oct 2014
 
