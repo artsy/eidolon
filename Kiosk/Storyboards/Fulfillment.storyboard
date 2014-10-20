@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="AGaramondPro-Regular.otf">
+            <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
@@ -60,6 +61,7 @@
             <string>AGaramondPro-Semibold</string>
         </mutableArray>
         <mutableArray key="ITCAvantGardeDemi_Track03.ttf">
+            <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
@@ -330,7 +332,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="449" height="485"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe your credit card" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ3-lq-NnT" customClass="ARSerifLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe your Credit Card" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ3-lq-NnT" customClass="ARSerifLabel">
                                 <rect key="frame" x="0.0" y="5" width="395" height="41"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="33"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -368,12 +370,25 @@
                                 <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PROCESSING CREDIT CARD..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxS-TX-lPW">
+                                <rect key="frame" x="37" y="252" width="243" height="21"/>
+                                <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="15"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3kx-gQ-2K5" customClass="Spinner" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="129" y="281" width="40" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="NGp-0a-cZe"/>
                     <connections>
                         <outlet property="cardStatusLabel" destination="aHb-WU-8Ia" id="TBG-FV-OYK"/>
+                        <outlet property="illustrationImageView" destination="RjO-Er-UMG" id="k2j-ud-N64"/>
+                        <outlet property="processingLabel" destination="mxS-TX-lPW" id="f7o-RI-Gbx"/>
+                        <outlet property="spinner" destination="3kx-gQ-2K5" id="qNd-VG-O2Y"/>
+                        <outlet property="titleLabel" destination="ZJ3-lq-NnT" id="6uz-yX-WYe"/>
                         <segue destination="b7X-gR-AEL" kind="push" identifier="RegisterCreditCardToPostal" id="lC0-vU-FuX"/>
                     </connections>
                 </viewController>
@@ -816,6 +831,18 @@
                                 <rect key="frame" x="65" y="138" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nti-wZ-91X" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="535" y="552" width="215" height="50"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="BACK TO AUCTION">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButtonTapped:" destination="N1l-90-SiW" eventType="touchUpInside" id="ZV0-b8-KJQ"/>
+                                    <action selector="confirmTapped:" destination="BKe-0r-2Pc" eventType="touchUpInside" id="vDO-RE-3Ba"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i4q-AT-jKJ">
                                 <rect key="frame" x="65" y="174" width="667" height="217"/>
                                 <subviews>
@@ -841,42 +868,6 @@
                                             <action selector="revealAppTapped:" destination="N1l-90-SiW" eventType="touchUpInside" id="yjS-vE-MG1"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-AU-Wuo" customClass="ARSerifLabel">
-                                        <rect key="frame" x="0.0" y="0.0" width="563" height="44"/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="Use your ">
-                                                <attributes>
-                                                    <font key="NSFont" size="25" name="AGaramondPro-Regular"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="Bidder Number">
-                                                <attributes>
-                                                    <font key="NSFont" size="25" name="AGaramondPro-Semibold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" and ">
-                                                <attributes>
-                                                    <font key="NSFont" size="25" name="AGaramondPro-Regular"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content="PIN">
-                                                <attributes>
-                                                    <font key="NSFont" size="25" name="AGaramondPro-Semibold"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                            <fragment content=" next time you bid">
-                                                <attributes>
-                                                    <font key="NSFont" size="25" name="AGaramondPro-Regular"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BIDDER NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MtT-eY-tum">
                                         <rect key="frame" x="0.0" y="118" width="154" height="21"/>
                                         <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="15"/>
@@ -888,21 +879,14 @@
                                         <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use your Bidder Number and PIN next time you bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-AU-Wuo" customClass="ARSerifLabel">
+                                        <rect key="frame" x="0.0" y="0.0" width="563" height="44"/>
+                                        <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="25"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nti-wZ-91X" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="535" y="552" width="215" height="50"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="BACK TO AUCTION">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="confirmButtonTapped:" destination="N1l-90-SiW" eventType="touchUpInside" id="ZV0-b8-KJQ"/>
-                                    <action selector="confirmTapped:" destination="BKe-0r-2Pc" eventType="touchUpInside" id="vDO-RE-3Ba"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1443,7 +1427,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="449" height="485"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvl-0i-nDH" customClass="ARSerifLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvl-0i-nDH" customClass="ARSerifLabel">
                                 <rect key="frame" x="-2" y="5" width="395" height="41"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="33"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1502,7 +1486,7 @@
                                     <action selector="confirmTapped:" destination="rWY-Fx-Onm" eventType="touchUpInside" id="2tz-4K-TmU"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter a password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAU-fw-FVK" customClass="ARSerifLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter a Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAU-fw-FVK" customClass="ARSerifLabel">
                                 <rect key="frame" x="-2" y="5" width="395" height="41"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="33"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1548,7 +1532,7 @@
                                     <outlet property="delegate" destination="vkP-Fx-jvL" id="T5G-XU-Zye"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your mobile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHS-JT-Daq" customClass="ARSerifLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your Mobile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHS-JT-Daq" customClass="ARSerifLabel">
                                 <rect key="frame" x="-2" y="5" width="395" height="41"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="33"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

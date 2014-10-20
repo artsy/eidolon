@@ -5,6 +5,12 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
     @IBOutlet var cardStatusLabel: ARSerifLabel!
     let finishedSignal = RACSubject()
 
+    @IBOutlet weak var spinner: Spinner!
+    @IBOutlet weak var processingLabel: UILabel!
+    @IBOutlet weak var illustrationImageView: UIImageView!
+
+    @IBOutlet weak var titleLabel: ARSerifLabel!
+
     public class func instantiateFromStoryboard() -> SwipeCreditCardViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.RegisterCreditCard) as SwipeCreditCardViewController
     }
@@ -17,20 +23,28 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+        self.setInProgress(false)
 
         let merchantToken = AppSetup.sharedState.useStaging ? self.keys.cardflightMerchantAccountStagingToken() : self.keys.cardflightMerchantAccountToken()
         let cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken:merchantToken)
 
         // This will cause memory leaks if signals are not completed.
-        
+
         cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
             self.cardStatusLabel.text = "Card Status: \(message)"
+            if message as String == "Got Card" {
+                self.setInProgress(true)
+            }
 
         }, error: { (error) -> Void in
             self.cardStatusLabel.text = "Card Status: Errored"
+            self.setInProgress(false)
+            self.titleLabel.text = "Please Swipe a Valid Credit Card"
+            self.titleLabel.textColor = UIColor.artsyRed()
 
         }, completed: { () -> Void in
             self.cardStatusLabel.text = "Card Status: completed"
+
 
             if let card = cardHandler.card {
                 self.cardName = card.name
@@ -41,9 +55,9 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
                 } else {
                     self.cardToken = card.cardToken
                 }
-
             }
 
+            cardHandler.end()
             self.finishedSignal.sendCompleted()
         })
         cardHandler.startSearching()
@@ -54,6 +68,12 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
             RAC(bidDetails, "newUser.creditCardToken") <~ RACObserve(self, "cardToken")
         }
     }
+
+    func setInProgress(show: Bool) {
+        illustrationImageView.alpha = show ? 0.1 : 1
+        processingLabel.hidden = !show
+        spinner.hidden = !show
+    }
 }
 
 private extension SwipeCreditCardViewController {
@@ -61,6 +81,7 @@ private extension SwipeCreditCardViewController {
         self.cardName = "MRS DEV"
         self.cardLastDigits = "2323"
         self.cardToken = "3223423423423"
+
 
         self.finishedSignal.sendCompleted()
     }
