@@ -18,13 +18,24 @@ enum RegistrationIndex {
             case ConfirmVC: return 4
         }
     }
+
+    static func fromInt(index:Int) -> RegistrationIndex {
+        switch (index) {
+            case 0: return .MobileVC
+            case 1: return .EmailVC
+            case 1: return .PasswordVC
+            case 2: return .CreditCardVC
+            case 3: return .ZipCodeVC
+            default : return .ConfirmVC
+        }
+    }
 }
 
 class RegistrationCoordinator: NSObject {
 
     dynamic var currentIndex: Int = 0
     var storyboard:UIStoryboard!
-    
+
     func viewControllerForIndex(index: RegistrationIndex) -> UIViewController {
         currentIndex = index.toInt()
         
@@ -50,7 +61,7 @@ class RegistrationCoordinator: NSObject {
         }
     }
 
-    func nextViewControllerForBidDetails(details:BidDetails) -> UIViewController {
+    func nextViewControllerForBidDetails(details: BidDetails) -> UIViewController {
         if notSet(details.newUser.phoneNumber) {
             return viewControllerForIndex(.MobileVC)
         }

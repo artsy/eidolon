@@ -37,9 +37,7 @@ class PlaceBidViewController: UIViewController {
             RAC(button, "enabled") <~ bidIsZeroSignal.notEach()
         }
 
-        let formattedBidTextSignal = RACObserve(self, "bidDollars").map({ (bid) -> AnyObject! in
-            return NSNumberFormatter.localizedStringFromNumber(bid as Int, numberStyle:.DecimalStyle)
-        })
+        let formattedBidTextSignal = RACObserve(self, "bidDollars").map(dollarsToCurrencyString)
 
         RAC(bidAmountTextField, "text") <~ RACSignal.`if`(bidIsZeroSignal, then: RACSignal.defer{ RACSignal.`return`("") }, `else`: formattedBidTextSignal)
 
@@ -120,6 +118,13 @@ class PlaceBidViewController: UIViewController {
 /// These are for RAC only
 
 private extension PlaceBidViewController {
+
+    func dollarsToCurrencyString(input: AnyObject!) -> AnyObject! {
+        let formatter = NSNumberFormatter()
+        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        formatter.numberStyle = .DecimalStyle
+        return formatter.stringFromNumber(input as Int)
+    }
 
     func addDigitToBid(input: AnyObject!) -> Void {
         let inputInt = input as? Int ?? 0
