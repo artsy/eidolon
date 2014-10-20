@@ -22,8 +22,7 @@ class PlaceBidNetworkModel: NSObject {
             self.bidOnSaleArtwork(saleArtwork!, bidAmountCents: cents)
 
         }.catchTo(RACSignal.empty()).doError { [weak self] (error) -> Void in
-            println("\(error)");
-
+            println("\(error)")
             return
         }
 
@@ -45,24 +44,24 @@ class PlaceBidNetworkModel: NSObject {
             let bidders = bidders as [Bidder]
             self?.bidder = bidders.first
 
-        }.doError({ [weak self] (error) -> Void in
-            println("error, had issues with getting user bidders ")
-            return
-        })
+        }.doError { (error) in
+            log.error("Checking for Bidder failed.")
+            log.error("Error: \(error.localizedDescription).")
+        }
     }
 
     func createBidderForAuction(auctionID: String) -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: auctionID)
         let request = provider().request(endpoint, method: .POST, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(Bidder.self)
 
-        return request.doNext({ [weak self] (bidder) -> Void in
+        return request.doNext { [weak self] (bidder) -> Void in
             self?.bidder = bidder as Bidder!
             return
 
-        }).doError({ [weak self] (error) -> Void in
-            println("error, had issues with registering a bidder ")
-            return
-        })
+        }.doError { (error) in
+            log.error("Registering for Auction failed.")
+            log.error("Error: \(error.localizedDescription).")
+        }
     }
 
     func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> RACSignal {
@@ -70,17 +69,14 @@ class PlaceBidNetworkModel: NSObject {
 
         let request = provider().request(bidEndpoint, method: .POST, parameters:bidEndpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)
 
-        return request.doNext({ [weak self] (position) -> Void in
+        return request.doNext { [weak self] (position) -> Void in
             self?.bidderPosition = position as? BidderPosition
             return
 
-        }).doError({ [weak self] (error) -> Void in
-            if let genericError = error.artsyServerError() {
-                println("error, got: '\(genericError.message)' from API' ")
-            }
-
-            println("error, had issues with bidding ")
-        })
+        }.doError { (error) in
+            log.error("Bidding on Sale Artwork failed.")
+            log.error("Error: \(error.localizedDescription).")
+        }
     }
 
 }

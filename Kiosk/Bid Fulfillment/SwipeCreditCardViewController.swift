@@ -21,7 +21,7 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
         let merchantToken = AppSetup.sharedState.useStaging ? self.keys.cardflightMerchantAccountStagingToken() : self.keys.cardflightMerchantAccountToken()
         let cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken:merchantToken)
 
-        // This will cause memory leaks I if signals are not completed.
+        // This will cause memory leaks if signals are not completed.
         
         cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
             self.cardStatusLabel.text = "Card Status: \(message)"

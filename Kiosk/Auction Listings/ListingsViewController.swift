@@ -315,7 +315,7 @@ private extension ListingsViewController {
     
     class func masonryLayout() -> ARCollectionViewMasonryLayout {
         var layout = ARCollectionViewMasonryLayout(direction: .Vertical)
-        layout.itemMargins = CGSizeMake(65, 0)
+        layout.itemMargins = CGSizeMake(65, 20)
         layout.dimensionLength = CGFloat(MasonryCollectionViewCellWidth)
         layout.rank = 3
         layout.contentInset = UIEdgeInsetsMake(0.0, 0.0, CGFloat(VerticalMargins), 0.0)
