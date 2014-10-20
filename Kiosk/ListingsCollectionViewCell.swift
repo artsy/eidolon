@@ -100,24 +100,28 @@ private extension MasonryCollectionViewCell {
     class func _rightAlignedNormalLabel() -> UILabel {
         let label = _normalLabel()
         label.textAlignment = .Right
+        label.numberOfLines = 1
         return label
     }
     
     class func _normalLabel() -> UILabel {
         let label = ARSerifLabel()
         label.font = label.font.fontWithSize(16)
+        label.numberOfLines = 1
         return label
     }
     
     class func _sansSerifLabel() -> UILabel {
         let label = ARSansSerifLabel()
         label.font = label.font.fontWithSize(14)
+        label.numberOfLines = 1
         return label
     }
     
     class func _italicsLabel() -> UILabel {
         let label = ARItalicsSerifLabel()
         label.font = label.font.fontWithSize(16)
+        label.numberOfLines = 1
         return label
     }
     
@@ -136,6 +140,7 @@ private extension MasonryCollectionViewCell {
     class func _boldLabel() -> UILabel {
         let label = _normalLabel()
         label.font = UIFont.serifBoldFontWithSize(label.font.pointSize)
+        label.numberOfLines = 1
         return label
     }
 }
