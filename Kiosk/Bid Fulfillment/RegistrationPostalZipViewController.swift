@@ -9,7 +9,7 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
         super.viewDidLoad()
         
         if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
-            
+            zipCodeTextField.text = bidDetails.newUser.zipCode
             RAC(bidDetails, "newUser.zipCode") <~ zipCodeTextField.rac_textSignal()
             
             let emailIsValidSignal = RACObserve(bidDetails.newUser, "zipCode").map(isZeroLengthString)

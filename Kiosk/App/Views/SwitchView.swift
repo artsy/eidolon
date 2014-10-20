@@ -154,8 +154,8 @@ private extension SwitchView {
             self.selectionConstraint = NSLayoutConstraint(item: self.selectionIndicator, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Right, multiplier: multiplier, constant: 0)
             self.addConstraint(self.selectionConstraint)
             self.layoutIfNeeded()
-            
-            self._selectedIndexSubject.sendNext(index)
         }
+
+        self._selectedIndexSubject.sendNext(index)
     }
 }

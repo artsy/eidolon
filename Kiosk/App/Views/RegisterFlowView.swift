@@ -15,7 +15,6 @@ class RegisterFlowView: ORStackView {
         super.awakeFromNib()
         
         self.backgroundColor = UIColor.whiteColor()
-
         self.bottomMarginHeight = CGFloat(NSNotFound)
         self.updateConstraints()
     }
@@ -23,62 +22,93 @@ class RegisterFlowView: ORStackView {
     var titles = ["Mobile", "Email", "Credit Card", "Postal/Zip"]
     var keypaths = ["phoneNumber", "email", "creditCardName", "zipCode"]
 
+
     func update() {
         let user = details!.newUser
-        let titleLabels = titles.map(createTitleViewWithTitle)
 
         removeAllSubviews()
         for i in 0 ..< countElements(titles) {
-            let title = titleLabels[i]
-            let info = createInfoLabel()
+            let itemView = ItemView(frame: self.bounds)
+            itemView.createTitleViewWithTitle(titles[i])
 
-            addSubview(title, withTopMargin: "10", sideMargin: "0")
+            addSubview(itemView, withTopMargin: "10", sideMargin: "0")
 
             if user.valueForKey(keypaths[i]) != nil {
-                addSubview(info, withTopMargin: "10", sideMargin: "0")
-                RAC(info, "text") <~ RACObserve(user, keypaths[i])
 
-                let jumpToButton = createJumpToButtonAtIndex(i)
-                title.addSubview(jumpToButton)
-                jumpToButton.alignTopEdgeWithView(title, predicate: "0")
-                jumpToButton.constrainLeadingSpaceToView(title, predicate: "-20")
-                jumpToButton.constrainWidth("20")
-                jumpToButton.constrainHeight("20")
+                itemView.createInfoLabel(user.valueForKey(keypaths[i]) as String)
+
+                let button = itemView.createJumpToButtonAtIndex(i)
+                button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+
+                itemView.constrainHeight("44")
+            } else {
+                itemView.constrainHeight("20")
             }
-        }
-        
-        if highlightedIndex < countElements(titleLabels) {
-            titleLabels[highlightedIndex].textColor = UIColor.artsyPurple()
+
+            if i == highlightedIndex {
+                itemView.highlight()
+            }
         }
 
         let spacer = UIView(frame: bounds)
-        spacer.setContentHuggingPriority(12, forAxis: UILayoutConstraintAxis.Horizontal)
+        spacer.setContentHuggingPriority(12, forAxis: .Horizontal)
         addSubview(spacer, withTopMargin: "0", sideMargin: "0")
+
+        self.bottomMarginHeight = 0
     }
 
-    func tappedAJumpToButton(button:UIButton) {
-        jumpToIndexSignal.sendNext(button.tag)
+    func pressed(sender: UIButton!) {
+        jumpToIndexSignal.sendNext(sender.tag)
     }
 
-    func createTitleViewWithTitle(title: String) -> UILabel {
-        let label = UILabel(frame:self.bounds)
-        label.font = UIFont.sansSerifFontWithSize(16)
-        label.text = title.uppercaseString
-        return label
-    }
+    class ItemView : UIView {
 
-    func createInfoLabel() -> UILabel {
-        let label = UILabel(frame:self.bounds)
-        label.font = UIFont.serifFontWithSize(16)
-        return label
-    }
+        var titleLabel: UILabel?
 
-    func createJumpToButtonAtIndex(index: NSInteger) -> UIButton {
-        let button = UIButton(frame: CGRectMake(0, 0, 20, 20))
-        button.tag = index
-        button.setImage(UIImage(named: "edit_button"), forState: .Normal)
+        func highlight() {
+            titleLabel?.textColor = UIColor.artsyPurple()
+        }
 
-        return button
+        func createTitleViewWithTitle(title: String)  {
+            let label = UILabel(frame:self.bounds)
+            label.font = UIFont.sansSerifFontWithSize(16)
+            label.text = title.uppercaseString
+            titleLabel = label
+
+            self.addSubview(label)
+            label.constrainWidthToView(self, predicate: "0")
+            label.alignLeadingEdgeWithView(self, predicate: "0")
+            label.alignTopEdgeWithView(self, predicate: "0")
+        }
+
+        func createInfoLabel(info: String) {
+            let label = UILabel(frame:self.bounds)
+            label.font = UIFont.serifFontWithSize(16)
+            label.text = info
+
+            self.addSubview(label)
+            label.constrainWidthToView(self, predicate: "-52")
+            label.alignLeadingEdgeWithView(self, predicate: "0")
+            label.constrainTopSpaceToView(titleLabel!, predicate: "8")
+        }
+
+        func createJumpToButtonAtIndex(index: NSInteger) -> UIButton {
+            let button = UIButton.buttonWithType(.Custom) as UIButton
+            button.tag = index
+            button.setImage(UIImage(named: "edit_button"), forState: .Normal)
+            button.userInteractionEnabled = true
+            button.enabled = true
+
+            self.addSubview(button)
+            button.alignTopEdgeWithView(self, predicate: "0")
+            button.alignTrailingEdgeWithView(self, predicate: "0")
+            button.constrainWidth("36")
+            button.constrainHeight("36")
+            
+            return button
+
+        }
+
     }
 
 

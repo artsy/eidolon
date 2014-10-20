@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KCM-cT-BEX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KCM-cT-BEX">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="AGaramondPro-Italic.otf">
+            <string>AGaramondPro-Italic</string>
+            <string>AGaramondPro-Italic</string>
+            <string>AGaramondPro-Italic</string>
+            <string>AGaramondPro-Italic</string>
+        </mutableArray>
         <mutableArray key="AGaramondPro-Regular.otf">
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
@@ -204,7 +212,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csZ-iE-Non" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="65" y="229" width="164" height="43"/>
+                                <rect key="frame" x="65" y="229" width="164" height="50"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="CLOSE APP">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -221,7 +229,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nx7-vm-pEo" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="312" y="229" width="164" height="43"/>
+                                <rect key="frame" x="312" y="229" width="164" height="50"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="WEBSITE">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -242,9 +250,55 @@
                                     <action selector="backTapped:" destination="MKI-if-fbr" eventType="touchUpInside" id="qFV-jh-Qbk"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Change  Auction" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="03x-ZK-6Vh" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="324" width="187" height="35"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="25"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pN3-Y5-Sw8" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="65" y="367" width="164" height="50"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="CHANGE">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="xVq-Ix-pQs" kind="push" id="awg-oY-DNC"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Admin Panel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9K-AG-n81" customClass="ARSerifLabel">
                                 <rect key="frame" x="164" y="49" width="277" height="41"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="auction-id" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="BNh-5l-i6d" customClass="ARSerifLabel">
+                                <rect key="frame" x="505" y="55" width="467" height="40"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Italic" family="Adobe Garamond Pro" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Server" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="jZ4-1p-KIf" customClass="ARSerifLabel">
+                                <rect key="frame" x="312" y="324" width="213" height="35"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="25"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDF-GF-0TU" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="312" y="367" width="240" height="50"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="SWITCH TO PROD">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="switchStagingProductionTapped:" destination="MKI-if-fbr" eventType="touchUpInside" id="hhn-s5-vg9"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Note: changing this will restart the app" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="qAM-xm-dnO" customClass="ARSerifLabel">
+                                <rect key="frame" x="312" y="445" width="240" height="40"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Italic" family="Adobe Garamond Pro" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -252,10 +306,65 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="4ID-hS-aUx"/>
+                    <connections>
+                        <outlet property="auctionIDLabel" destination="BNh-5l-i6d" id="bAa-Qc-KWz"/>
+                        <outlet property="environmentChangeButton" destination="XDF-GF-0TU" id="J4T-9h-Lix"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0RU-yz-eYz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2862" y="1425"/>
+        </scene>
+        <!--Choose Auction View Controller-->
+        <scene sceneID="lHe-EK-cKn">
+            <objects>
+                <viewController id="xVq-Ix-pQs" customClass="ChooseAuctionViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2Ir-RB-zzo"/>
+                        <viewControllerLayoutGuide type="bottom" id="GyA-Bn-ZFV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fiB-0O-nhZ">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dEl-EN-uRx" customClass="ORStackView">
+                                <rect key="frame" x="252" y="65" width="521" height="563"/>
+                                <color key="backgroundColor" red="1" green="0.94264843532343234" blue="0.52602781247862018" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qV0-WR-DnW" customClass="ARFlatButton">
+                                <rect key="frame" x="325" y="660" width="152" height="43"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="BACK">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="xVq-Ix-pQs" eventType="touchUpInside" id="ael-6I-UJB"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Note: selecting an Auction will restart the app" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="SoG-T5-yIm" customClass="ARSerifLabel">
+                                <rect key="frame" x="502" y="663" width="232" height="40"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Italic" family="Adobe Garamond Pro" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Switch to Auction" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="cRF-MU-LZB" customClass="ARSerifLabel">
+                                <rect key="frame" x="252" y="20" width="232" height="40"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Italic" family="Adobe Garamond Pro" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="heC-yA-osv"/>
+                    <connections>
+                        <outlet property="stackScrollView" destination="dEl-EN-uRx" id="erB-SR-fFr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fgp-u0-Jbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4069" y="1425"/>
         </scene>
         <!--Auction Web View Controller-->
         <scene sceneID="Ghd-pU-aPw">

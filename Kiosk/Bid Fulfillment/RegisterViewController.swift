@@ -45,7 +45,18 @@ class RegisterViewController: UIViewController {
         details = self.fulfillmentNav().bidDetails
         flowView.details = details
         bidDetailsPreviewView.bidDetails = details
-        
+
+        flowView.jumpToIndexSignal.subscribeNext { [weak self] (index) -> Void in
+            if let nav = self?.navigationController as? FulfillmentNavigationController {
+                if index as? Int == self?.coordinator.currentIndex { return }
+
+                let registrationIndex = RegistrationIndex.fromInt(index as Int)
+
+                let nextVC = self?.coordinator.viewControllerForIndex(registrationIndex)
+                self?.goToViewController(nextVC!)
+            }
+        }
+
         goToNextVC()
     }
 
@@ -92,7 +103,6 @@ class RegisterViewController: UIViewController {
     func passThroughToBiddingVCToCreateUser() {
         self.performSegue(.RegistrationFinishedPlaceBid)
     }
-
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 

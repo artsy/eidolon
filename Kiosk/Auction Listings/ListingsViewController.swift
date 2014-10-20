@@ -9,12 +9,12 @@ class ListingsViewController: UIViewController {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
     var syncInterval = SyncInterval
-    var pageSize = 100
+    var pageSize = 10
     var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
         return signal.deliverOn(scheduler)
     }
     
-    dynamic var sale = Sale(id: "", isAuction: true, startDate: NSDate(), endDate: NSDate())
+    dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0)
     dynamic var saleArtworks = [SaleArtwork]()
     dynamic var sortedSaleArtworks = [SaleArtwork]()
     dynamic var cellIdentifier = MasonryCellIdentifier
@@ -253,8 +253,9 @@ class ListingsViewController: UIViewController {
         
         switchView.constrainHeight(switchHeightPredicate)
         switchView.alignTop("\(64+VerticalMargins)", leading: "\(HorizontalMargins)", bottom: nil, trailing: "-\(HorizontalMargins)", toView: view)
-        collectionView.constrainTopSpaceToView(switchView, predicate: "\(VerticalMargins)")
+        collectionView.constrainTopSpaceToView(switchView, predicate: "0")
         collectionView.alignTop(nil, leading: "0", bottom: "0", trailing: "0", toView: view)
+        collectionView.contentInset = UIEdgeInsetsMake(40, 0, 80, 0)
     }
 }
 
@@ -311,7 +312,7 @@ private extension ListingsViewController {
     class func masonryLayout() -> ARCollectionViewMasonryLayout {
         var layout = ARCollectionViewMasonryLayout(direction: .Vertical)
         layout.itemMargins = CGSizeMake(65, 0)
-        layout.dimensionLength = MasonryCollectionViewCellWidth
+        layout.dimensionLength = CGFloat(MasonryCollectionViewCellWidth)
         layout.rank = 3
         layout.contentInset = UIEdgeInsetsMake(0.0, 0.0, CGFloat(VerticalMargins), 0.0)
         
@@ -354,7 +355,7 @@ func highestCurrentBidSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
 }
 
 func alphabeticalSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
-    return lhs.artwork.title.caseInsensitiveCompare(rhs.artwork.title) == .OrderedAscending
+    return lhs.artwork.artists!.first!.sortableID.caseInsensitiveCompare(rhs.artwork.artists!.first!.sortableID) == .OrderedAscending
 }
 
 func sortById(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {

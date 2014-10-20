@@ -94,7 +94,10 @@ enum ArtsyAPI {
             return ["email": email]
 
         case AuctionListings:
-            return ["size": 100]
+            return ["size": 10]
+
+        case ActiveAuctions:
+            return ["is_auction": true, "live": true]
 
         case MyBidPositionsForAuctionArtwork(let auctionID, let artworkID):
             return ["sale_id": auctionID, "artwork_id": artworkID]
@@ -141,7 +144,7 @@ extension ArtsyAPI : MoyaPath {
             return "/api/v1/bidder/\(bidderNumber)/pin"
 
         case ActiveAuctions:
-            return "/api/v1/sales?is_auction=true&live=true"
+            return "/api/v1/sales"
 
         case Me:
             return "/api/v1/me"

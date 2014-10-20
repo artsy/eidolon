@@ -9,6 +9,8 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
         super.viewDidLoad()
         
         if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
+            numberTextField.text = bidDetails.newUser.phoneNumber
+
             RAC(bidDetails, "newUser.phoneNumber") <~ numberTextField.rac_textSignal()
             
             let numberIsInvalidSignal = RACObserve(bidDetails.newUser, "phoneNumber").map(isZeroLengthString)
