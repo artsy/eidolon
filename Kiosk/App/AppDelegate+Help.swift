@@ -1,7 +1,7 @@
 import UIKit
 import QuartzCore
 
-extension AppDelegate {
+public extension AppDelegate {
     typealias HelpCompletion = () -> ()
     
     var helpIsVisisble: Bool {
@@ -101,7 +101,7 @@ extension AppDelegate {
             dispatch_async(dispatch_get_main_queue()) {
                 
                 let webController = WebViewController.instantiateFromStoryboard(NSURL(string: "https://artsy.net/conditions-of-sale")!)
-                webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "hideConditionsOfSale")
+                webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelConditionsViewController")
                 
                 self.conditionsOfSaleViewController = UINavigationController(rootViewController: webController)
                 self.conditionsOfSaleViewController!.modalPresentationStyle = .PageSheet
@@ -111,6 +111,10 @@ extension AppDelegate {
         }
     }
     
+    public func cancelConditionsViewController() {
+        hideConditionsOfSale()
+    }
+    
     func hideConditionsOfSale(completion: (() -> ())? = nil) {
         conditionsOfSaleViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: completion)
         conditionsOfSaleViewController = nil
@@ -118,11 +122,11 @@ extension AppDelegate {
 }
 
 extension AppDelegate: UIViewControllerTransitioningDelegate {
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return HelpAnimator(presenting: true)
     }
     
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return HelpAnimator()
     }
 }
