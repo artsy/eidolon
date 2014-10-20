@@ -1,5 +1,10 @@
 # End User Changes
 
+### Next
+
+* After placing a bid, the listings UI is immediately updated - @ash
+* UI fixes for tabular view – @ash
+
 ### 0.0.8 - 19th Oct 2014
 
 * Syncing updates to bids - @ash
