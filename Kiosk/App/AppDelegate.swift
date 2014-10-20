@@ -1,5 +1,7 @@
 import UIKit
 
+let log = XCGLogger.defaultInstance()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -33,6 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupHelpButton()
         setupUserAgent()
 
+        let destination = XCGFileLogDestination(owner: log, writeToFile: logPath(), identifier: "main")
+        log.addLogDestination(destination)
+
+        log.debug("App Started")
+
         return true
     }
 
@@ -53,6 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = NSUserDefaults.standardUserDefaults()
         let userAgentDict = ["UserAgent" as NSObject : agentString]
         defaults.registerDefaults(userAgentDict)
+    }
+
+    func logPath() -> NSURL {
+        let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as NSURL
+        return docs.URLByAppendingPathComponent("log.txt")
     }
 }
 

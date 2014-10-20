@@ -66,6 +66,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
             }.doError { (error) -> Void in
                 println("Error logging in: \(error.localizedDescription)")
+                log.error("Error Logging in")
             }
         }
     }

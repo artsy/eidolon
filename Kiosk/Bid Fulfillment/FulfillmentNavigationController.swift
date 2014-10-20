@@ -28,6 +28,8 @@ class FulfillmentNavigationController: UINavigationController {
         for cookie in storage.cookies! {
             storage.deleteCookie(cookie as NSHTTPCookie)
         }
+
+        println("reset")
     }
 
     func updateUserCredentials() -> RACSignal {
