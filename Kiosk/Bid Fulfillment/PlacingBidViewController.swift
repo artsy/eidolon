@@ -149,7 +149,7 @@ class PlacingBidViewController: UIViewController {
         
         let beginningBidCents = self.fulfillmentNav().bidDetails.saleArtwork?.saleHighestBid?.amountCents ?? 0
         
-        return getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
+        let updatedSaleArtworkSignal = getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
             println("Polling \(self?.pollRequests) of \(self?.maxPollRequests) for updated sale artwork")
             
             self?.pollRequests++
@@ -172,6 +172,8 @@ class PlacingBidViewController: UIViewController {
                 }
             }
         }
+        
+        return RACSignal.empty().delay(pollInterval).then { updatedSaleArtworkSignal }
     }
 
     func getMyBidderPositions() -> RACSignal {
