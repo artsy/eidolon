@@ -46,6 +46,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         bidView.alignAttribute(.Top, toAttribute: .Bottom, ofView: dividerView, predicate: "13")
         bidView.constrainHeight("18")
         bidButton.alignAttribute(.Top, toAttribute: .Bottom, ofView: currentBidLabel, predicate: "13")
+        bidButton.alignAttribute(.Bottom, toAttribute: .Bottom, ofView: contentView, predicate: "40")
         
         // Bind subviews
         
