@@ -78,10 +78,9 @@ extension MasonryCollectionViewCell {
             13 + // padding
             16 + // bid
             13 + // padding
-            46 + // bid button
             40   // bottom padding
         
-        return imageHeight + CGFloat(remainingHeight)
+        return imageHeight + ButtonHeight + CGFloat(remainingHeight)
     }
 }
 

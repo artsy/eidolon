@@ -15,7 +15,7 @@ public class Button: ARFlatButton {
 public class ActionButton: Button {
 
     public override func intrinsicContentSize() -> CGSize {
-        return CGSizeMake(UIViewNoIntrinsicMetric, 50)
+        return CGSizeMake(UIViewNoIntrinsicMetric, ButtonHeight)
     }
 
     public override func setup() {
