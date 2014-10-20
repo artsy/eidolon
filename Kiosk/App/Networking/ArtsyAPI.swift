@@ -94,7 +94,7 @@ enum ArtsyAPI {
             return ["email": email]
 
         case AuctionListings:
-            return ["size": 100]
+            return ["size": 10]
 
         case ActiveAuctions:
             return ["is_auction": true, "live": true]

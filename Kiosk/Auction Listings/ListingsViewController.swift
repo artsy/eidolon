@@ -9,7 +9,7 @@ class ListingsViewController: UIViewController {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
     var syncInterval = SyncInterval
-    var pageSize = 100
+    var pageSize = 10
     
     dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0)
     dynamic var saleArtworks = [SaleArtwork]()
@@ -309,7 +309,7 @@ private extension ListingsViewController {
     class func masonryLayout() -> ARCollectionViewMasonryLayout {
         var layout = ARCollectionViewMasonryLayout(direction: .Vertical)
         layout.itemMargins = CGSizeMake(65, 0)
-        layout.dimensionLength = MasonryCollectionViewCellWidth
+        layout.dimensionLength = CGFloat(MasonryCollectionViewCellWidth)
         layout.rank = 3
         layout.contentInset = UIEdgeInsetsMake(0.0, 0.0, CGFloat(VerticalMargins), 0.0)
         
