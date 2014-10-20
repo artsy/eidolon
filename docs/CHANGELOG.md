@@ -6,6 +6,9 @@
 * Admin section can turn off dev buttons - @orta
 * Admin section has a password - @orta
 * Fixed text overflow in table layout - @ash
+* After placing a bid, the listings UI is immediately updated - @ash
+* UI fixes for tabular view – @ash
+* Fixes problem when attaining the max bid but being told you didn't - @ash
 
 ### 0.0.8 - 20th Oct 2014
 
