@@ -23,6 +23,7 @@ class PlaceBidNetworkModel: NSObject {
 
         }.catchTo(RACSignal.empty()).doError { [weak self] (error) -> Void in
             println("\(error)");
+
             return
         }
 

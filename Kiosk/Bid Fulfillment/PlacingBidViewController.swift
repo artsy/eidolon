@@ -39,6 +39,7 @@ class PlacingBidViewController: UIViewController {
 
         } .doError { (error) -> Void in
             self.outbidNoticeLabel.text = "There was a problem placing your bid, please talk to your nearest Artsy rep."
+            self.outbidNoticeLabel.hidden = false
 
         }.subscribeNext { [weak self] (_) in
             self?.startCheckingForMaxBid()
@@ -71,7 +72,7 @@ class PlacingBidViewController: UIViewController {
 
         }.doError { [weak self] (error) -> Void in
             self?.outbidNoticeLabel.text = "There was a problem placing your bid, please talk to your nearest Artsy rep."
-            return
+            self?.outbidNoticeLabel.hidden = false
 
         }.subscribeNext { [weak self] (_) -> Void in
             self?.finishUp()
