@@ -10,6 +10,7 @@ class ConfirmYourBidViewController: UIViewController {
     @IBOutlet var cursor: CursorView!
     @IBOutlet var keypadContainer: KeypadContainerView!
     @IBOutlet var enterButton: UIButton!
+    @IBOutlet var useArtsyLoginButton: UIButton!
 
     lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
     lazy var clearSignal:RACSignal!  = self.keypadContainer.keypad?.rightSignal
@@ -22,6 +23,12 @@ class ConfirmYourBidViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let titleString = useArtsyLoginButton.titleForState(useArtsyLoginButton.state)! ?? ""
+        var attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
+            NSFontAttributeName: useArtsyLoginButton.titleLabel!.font];
+        let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
+        useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
 
         let numberIsZeroLengthSignal = RACObserve(self, "number").map(isZeroLengthString)
 
