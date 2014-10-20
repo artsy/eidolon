@@ -167,7 +167,7 @@ class PlacingBidViewController: UIViewController {
                 } else {
                     // We didn't get an updated value, so let's try again.
                     return RACSignal.empty().delay(self?.pollInterval ?? 1).then({ () -> RACSignal! in
-                        return self?.pollForUpdatedSaleArtwork() ?? RACSignal.empty()
+                        return self?.pollForUpdatedSaleArtwork()
                     })
                 }
             }
