@@ -8,6 +8,10 @@ extension AppDelegate {
         return helpViewController != nil
     }
     
+    var conditionsOfSaleIsVisible: Bool {
+        return conditionsOfSaleViewController != nil
+    }
+    
     func setupHelpButton() {
         helpButton = MenuButton()
         helpButton.setTitle("Help", forState: .Normal)
@@ -70,7 +74,13 @@ extension AppDelegate {
         if helpIsVisisble {
             hideHelp()
         } else {
-            showHelp()
+            if conditionsOfSaleIsVisible {
+                hideConditionsOfSale({
+                    self.showHelp()
+                })
+            } else {
+                showHelp()
+            }
         }
     }
     
@@ -87,8 +97,23 @@ extension AppDelegate {
     
     func showConditionsOfSale() {
         hideHelp {
-            
+            // Need to give it a second to ensure view heirarchy is good.
+            dispatch_async(dispatch_get_main_queue()) {
+                
+                let webController = WebViewController.instantiateFromStoryboard(NSURL(string: "https://artsy.net/conditions-of-sale")!)
+                webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "hideConditionsOfSale")
+                
+                self.conditionsOfSaleViewController = UINavigationController(rootViewController: webController)
+                self.conditionsOfSaleViewController!.modalPresentationStyle = .PageSheet
+                
+                self.window.rootViewController?.presentViewController(self.conditionsOfSaleViewController!, animated: true, completion: nil)
+            }
         }
+    }
+    
+    func hideConditionsOfSale(completion: (() -> ())? = nil) {
+        conditionsOfSaleViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: completion)
+        conditionsOfSaleViewController = nil
     }
 }
 

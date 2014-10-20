@@ -4,6 +4,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var helpViewController: HelpViewController?
+    var conditionsOfSaleViewController: UIViewController?
     var helpButton: UIButton!
                             
     var window: UIWindow! = UIWindow(frame:CGRectMake(0, 0, UIScreen.mainScreen().bounds.height, UIScreen.mainScreen().bounds.width))
