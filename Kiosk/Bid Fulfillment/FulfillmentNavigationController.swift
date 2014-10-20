@@ -44,7 +44,7 @@ class FulfillmentNavigationController: UINavigationController {
             newUser?.zipCode = self?.user?.location?.postalCode
 
         }).doError({ [weak self] (error) -> Void in
-            println("error, the pin is likely wrong")
+            println("error, the authentication for admin is likely wrong")
             return
         })
     }
