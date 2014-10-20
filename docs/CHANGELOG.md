@@ -6,6 +6,7 @@
 * Admin section can turn off dev buttons - @orta
 * Admin section has a password - @orta
 * Fixed text overflow in table layout - @ash
+* Admin Section has a log viewer with all networking errors - @orta
 
 ### 0.0.8 - 20th Oct 2014
 

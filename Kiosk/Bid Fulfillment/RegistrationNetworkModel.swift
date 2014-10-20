@@ -56,10 +56,10 @@ class RegistrationNetworkModel: NSObject {
             let bidders = bidders as [Bidder]
             self?.bidder = bidders.first
 
-            }.doError({ [weak self] (error) -> Void in
-                println("error, had issues with getting user bidders ")
-                return
-            })
+        }.doError { (error) in
+            log.error("Getting user bidders failed.")
+            log.error("Error: \(error.localizedDescription).")
+        }
     }
 
 
@@ -69,15 +69,18 @@ class RegistrationNetworkModel: NSObject {
             
             let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email!, password: newUser.password!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!)
 
-            return Provider.sharedProvider.request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doError() { (error) -> Void in
-                println("Error creating user: \(error.localizedDescription)")
+            return Provider.sharedProvider.request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doError { (error) in
+                log.error("Creating user failed.")
+                log.error("Error: \(error.localizedDescription).")
+
             }.then { self.updateProvider() }
             
         } else {
             let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!)
 
-            return provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doError() { (error) -> Void in
-                println("Error updating user in: \(error.localizedDescription)")
+            return provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doError { (error) in
+                log.error("Updating user bidders failed.")
+                log.error("Error: \(error.localizedDescription).")
             }
         }
     }
@@ -87,8 +90,9 @@ class RegistrationNetworkModel: NSObject {
 
         // on Staging the card tokenization fails
 
-        return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).doError() { (error) -> Void in
-            println("Error adding card: \(error.localizedDescription)")
+        return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).doError { (error) in
+            log.error("Adding Card to User failed.")
+            log.error("Error: \(error.localizedDescription).")
         }
     }
 
@@ -99,8 +103,9 @@ class RegistrationNetworkModel: NSObject {
             self?.fulfillmentNav.bidDetails.bidderID = (bidder as Bidder).id
             return
 
-        }).doError() { (error) -> Void in
-            println("Error registering for auction: \(error.localizedDescription)")
+        }).doError { (error) in
+            log.error("Registering for Auction Failed.")
+            log.error("Error: \(error.localizedDescription).")
         }
     }
 
@@ -113,20 +118,22 @@ class RegistrationNetworkModel: NSObject {
                 self?.fulfillmentNav.bidDetails.bidderPIN =  pin
             }
                 
-        }).doError() { (error) -> Void in
-            println("Error registering PIN for auction: \(error.localizedDescription)")
+        }).doError { (error) in
+            log.error("Generating a PIN for bidder has failed.")
+            log.error("Error: \(error.localizedDescription).")
         }
     }
 
     func getMyPaddleNumber() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
-        return provider().request(endpoint, method: .GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self).doNext({ [weak self](user) -> Void in
+        return provider().request(endpoint, method: .GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self).doNext { [weak self](user) -> Void in
 
             self?.fulfillmentNav.bidDetails.bidderNumber =  (user as User).paddleNumber
             return
 
-        }).doError() { (error) -> Void in
-            println("Error grabbing paddle number for auction: \(error.localizedDescription)")
+        }.doError { (error) in
+            log.error("Getting Bidder ID failed.")
+            log.error("Error: \(error.localizedDescription).")
         }
     }
 
@@ -134,14 +141,15 @@ class RegistrationNetworkModel: NSObject {
     func updateProvider() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: details.newUser.email!, password: details.newUser.password!)
 
-        return provider().request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext({ [weak self] (accessTokenDict) -> Void in
+        return provider().request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext { [weak self] (accessTokenDict) -> Void in
 
             if let accessToken = accessTokenDict["access_token"] as? String {
                 self?.fulfillmentNav.xAccessToken = accessToken
             }
 
-        }).doError() { (error) -> Void in
-            println("Error logging in: \(error.localizedDescription)")
+        }.doError { (error) in
+            log.error("Getting Access Token failed.")
+            log.error("Error: \(error.localizedDescription).")
         }
     }
 }
