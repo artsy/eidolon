@@ -72,6 +72,10 @@ public class TextField: UITextField {
         }
     }
 
+    func setBorderColor(color: UIColor){
+        self.layer.borderColor = color.CGColor
+    }
+
     override public func textRectForBounds(bounds: CGRect) -> CGRect {
         return CGRectInset( bounds, 10, 0 )
     }

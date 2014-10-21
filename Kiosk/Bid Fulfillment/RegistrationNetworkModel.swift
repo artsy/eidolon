@@ -58,7 +58,7 @@ class RegistrationNetworkModel: NSObject {
 
         }.doError { (error) in
             log.error("Getting user bidders failed.")
-            log.error("Error: \(error.localizedDescription).")
+            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -71,7 +71,7 @@ class RegistrationNetworkModel: NSObject {
 
             return Provider.sharedProvider.request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doError { (error) in
                 log.error("Creating user failed.")
-                log.error("Error: \(error.localizedDescription).")
+                log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
 
             }.then { self.updateProvider() }
             
@@ -80,7 +80,7 @@ class RegistrationNetworkModel: NSObject {
 
             return provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doError { (error) in
                 log.error("Updating user bidders failed.")
-                log.error("Error: \(error.localizedDescription).")
+                log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
             }
         }
     }
@@ -92,7 +92,7 @@ class RegistrationNetworkModel: NSObject {
 
         return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).doError { (error) in
             log.error("Adding Card to User failed.")
-            log.error("Error: \(error.localizedDescription).")
+            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -105,7 +105,7 @@ class RegistrationNetworkModel: NSObject {
 
         }).doError { (error) in
             log.error("Registering for Auction Failed.")
-            log.error("Error: \(error.localizedDescription).")
+            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -120,7 +120,7 @@ class RegistrationNetworkModel: NSObject {
                 
         }).doError { (error) in
             log.error("Generating a PIN for bidder has failed.")
-            log.error("Error: \(error.localizedDescription).")
+            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -133,7 +133,7 @@ class RegistrationNetworkModel: NSObject {
 
         }.doError { (error) in
             log.error("Getting Bidder ID failed.")
-            log.error("Error: \(error.localizedDescription).")
+            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -149,7 +149,7 @@ class RegistrationNetworkModel: NSObject {
 
         }.doError { (error) in
             log.error("Getting Access Token failed.")
-            log.error("Error: \(error.localizedDescription).")
+            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 }

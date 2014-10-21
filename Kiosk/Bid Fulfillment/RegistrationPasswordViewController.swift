@@ -5,6 +5,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
     @IBOutlet var passwordTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
     @IBOutlet var subtitleLabel: UILabel!
+    var isLoggingIn = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
                 // Account exists
                 if moyaResponse.statusCode == 200 {
                     self.subtitleLabel.text = "Enter your Artsy password"
+                    self.isLoggingIn = true
                 }
             }
         }
@@ -32,8 +34,24 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
 
     let finishedSignal = RACSubject()
     @IBAction func confirmTapped(sender: AnyObject) {
-        finishedSignal.sendCompleted()
+        if !isLoggingIn {
+            finishedSignal.sendCompleted()
+
+        } else {
+
+            let newUser = self.navigationController!.fulfillmentNav().bidDetails.newUser
+            authCheckSignal(newUser.email!, password: newUser.password!).subscribeNext({ (_) -> Void in
+                self.finishedSignal.sendCompleted()
+                return
+
+            }, error: { (_) -> Void in
+                self.showAuthenticationError()
+                return
+            })
+        }
     }
+
+    
 
     func checkForEmailExistence(email: String) -> RACSignal {
 
@@ -41,4 +59,16 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         return Provider.sharedProvider.request(endpoint, method: .GET, parameters:endpoint.defaultParameters)
     }
 
+    func authCheckSignal(email: String, password: String) -> RACSignal {
+        let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: email, password: password)
+        return Provider.sharedProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
+    }
+
+    func showAuthenticationError() {
+        confirmButton.flashError("Incorrect")
+        passwordTextField.flashForError()
+        confirmButton.setEnabled(false, animated: false)
+        navigationController!.fulfillmentNav().bidDetails.newUser.password = ""
+        passwordTextField.text = ""
+    }
 }

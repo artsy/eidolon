@@ -1,9 +1,10 @@
 import UIKit
+import Alamofire
 
 let log = XCGLogger.defaultInstance()
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+public class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var helpViewController: HelpViewController?
     var conditionsOfSaleViewController: UIViewController?
@@ -39,7 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.addLogDestination(destination)
 
         log.debug("App Started")
-
         return true
     }
 

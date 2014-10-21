@@ -67,8 +67,9 @@ class ConfirmYourBidPINViewController: UIViewController {
                     self?.performSegue(.ArtsyUserviaPINHasNotRegisteredCard)
                 }
 
-            }.doError({ (error) -> Void in
-                
+            }.doError({ [weak self] (error) -> Void in
+                self?.showAuthenticationError()
+                return
             })
         }
     }
@@ -97,6 +98,13 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         return ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
 
+    }
+
+    func showAuthenticationError() {
+        confirmButton.flashError("Wrong PIN")
+        pinTextField.flashForError()
+        pinTextField.text = ""
+        pin = ""
     }
 
     func checkForCreditCard() -> RACSignal {

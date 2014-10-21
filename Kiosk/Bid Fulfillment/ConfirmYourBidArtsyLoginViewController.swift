@@ -3,10 +3,11 @@ import UIKit
 public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var passwordTextField: TextField!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
     @IBOutlet var useArtsyBidderButton: UIButton!
-    @IBOutlet var confirmCredentialsButton: UIButton!
+    @IBOutlet var confirmCredentialsButton: Button!
+    
     var createNewAccount = false
     lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
@@ -64,9 +65,10 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
                     }
                 } ?? RACSignal.empty()
 
-            }.doError { (error) -> Void in
+            }.doError { [weak self] (error) -> Void in
                 println("Error logging in: \(error.localizedDescription)")
-                log.error("Error Logging in")
+                log.error("Error Logging in, likely bad auth creds, email = \(self?.emailTextField.text)")
+                self?.showAuthenticationError()
             }
         }
     }
@@ -78,7 +80,14 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         } else {
             passwordTextField.becomeFirstResponder()
         }
+    }
 
+
+    func showAuthenticationError() {
+        confirmCredentialsButton.flashError("Wrong login info")
+        passwordTextField.flashForError()
+        fulfillmentNav().bidDetails.newUser.password = ""
+        passwordTextField.text = ""
     }
 
     func xAuthSignal() -> RACSignal {

@@ -2,10 +2,11 @@ import Foundation
 
 extension NSError {
 
-    func artsyServerError() -> GenericError? {
+    func artsyServerError() -> NSString {
         if let errorJSON = self.userInfo?["data"] as? [String: AnyObject] {
-            return GenericError.fromJSON(errorJSON) as? GenericError
+            let error =  GenericError.fromJSON(errorJSON) as GenericError
+            return "\(error.message) - \(error.detail) + \(error.detail)"
         }
-        return nil
+        return ""
     }
 }
