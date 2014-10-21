@@ -225,6 +225,8 @@ class ListingsViewController: UIViewController {
 
     @IBAction func registerTapped(sender: AnyObject) {
 
+        ARAnalytics.event("Register To Bid Tapped")
+
         let storyboard = UIStoryboard.fulfillment()
         let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
         containerController.allowAnimations = allowAnimations
@@ -284,6 +286,9 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func presentModalForSaleArtwork(saleArtwork:SaleArtwork) {
+
+        ARAnalytics.event("Bid Button Tapped")
+
         let storyboard = UIStoryboard.fulfillment()
         let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
         containerController.allowAnimations = allowAnimations

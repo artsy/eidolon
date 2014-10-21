@@ -37,6 +37,8 @@ public extension AppDelegate {
             
             self.window.rootViewController?.presentViewController(webVC!, animated: true, completion: nil)
             self.webViewController = webVC
+
+            ARAnalytics.event("Show Web View", withProperties: ["url" : address])
         }
 
         if helpIsVisisble {
