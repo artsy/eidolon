@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
     </dependencies>
@@ -207,10 +207,6 @@
                                     <action selector="bidButtonTapped:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="3JS-oA-Iuv"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A3C-Vo-Qhd" customClass="KeypadContainerView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="252" width="255" height="282"/>
-                                <color key="backgroundColor" red="0.80967282458563539" green="0.80967282458563539" blue="0.80967282458563539" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Estimate: $10,000" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="v7X-dR-pia" customClass="ARSerifLabel">
                                 <rect key="frame" x="65" y="447" width="364" height="29"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
@@ -280,7 +276,7 @@
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="webviewButtonTapped:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="c9b-qW-ItT"/>
+                                    <action selector="conditionsTapped:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="vTI-iw-WpZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bld-wj-1c6">
@@ -291,9 +287,13 @@
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="webviewButtonTapped:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="gNI-q4-U7I"/>
+                                    <action selector="privacyTapped:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="5vl-6p-PQS"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A3C-Vo-Qhd" customClass="KeypadContainerView" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="495" y="252" width="255" height="282"/>
+                                <color key="backgroundColor" red="0.80967282458563539" green="0.80967282458563539" blue="0.80967282458563539" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -305,13 +305,11 @@
                         <outlet property="artworkTitleLabel" destination="Aj2-T3-pNw" id="3FZ-B6-AkR"/>
                         <outlet property="bidAmountTextField" destination="UKQ-z8-PIR" id="mV3-4R-CLm"/>
                         <outlet property="bidButton" destination="dT1-U2-hie" id="b1u-df-a4J"/>
-                        <outlet property="conditionsOfSaleButton" destination="XXj-no-bvA" id="3h4-Fc-6fN"/>
                         <outlet property="currentBidAmountLabel" destination="GS2-EK-4Nx" id="DlC-TX-tjz"/>
                         <outlet property="currentBidTitleLabel" destination="Y81-nV-kZl" id="ndR-mW-Tct"/>
                         <outlet property="cursor" destination="ybr-6E-470" id="rlk-8V-1J2"/>
                         <outlet property="keypadContainer" destination="A3C-Vo-Qhd" id="Kee-zX-lv9"/>
                         <outlet property="nextBidAmountLabel" destination="uVu-PR-0oJ" id="x1I-M4-sxi"/>
-                        <outlet property="privacyPolicyButton" destination="Bld-wj-1c6" id="zKT-Sa-5oN"/>
                         <segue destination="Yzb-AU-icr" kind="push" identifier="Confirm Bid" id="J1L-DG-oRQ"/>
                         <segue destination="ati-U2-SSe" kind="push" identifier="Load Web View" id="pfV-V4-0QL"/>
                     </connections>
