@@ -8,8 +8,8 @@ public extension AppDelegate {
         return helpViewController != nil
     }
     
-    var conditionsOfSaleIsVisible: Bool {
-        return conditionsOfSaleViewController != nil
+    var helpPresentedViewControllerIsVisible: Bool {
+        return helpPresentedViewController != nil
     }
     
     func setupHelpButton() {
@@ -74,8 +74,8 @@ public extension AppDelegate {
         if helpIsVisisble {
             hideHelp()
         } else {
-            if conditionsOfSaleIsVisible {
-                hideConditionsOfSale({
+            if helpPresentedViewControllerIsVisible {
+                hidePresentedViewController({
                     self.showHelp()
                 })
             } else {
@@ -99,25 +99,37 @@ public extension AppDelegate {
         hideHelp {
             // Need to give it a second to ensure view heirarchy is good.
             dispatch_async(dispatch_get_main_queue()) {
-                
-                let webController = WebViewController.instantiateFromStoryboard(NSURL(string: "https://artsy.net/conditions-of-sale")!)
-                webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelConditionsViewController")
-                
-                self.conditionsOfSaleViewController = UINavigationController(rootViewController: webController)
-                self.conditionsOfSaleViewController!.modalPresentationStyle = .PageSheet
-                
-                self.window.rootViewController?.presentViewController(self.conditionsOfSaleViewController!, animated: true, completion: nil)
+                self.showWebControllerWithAddress("https://artsy.net/conditions-of-sale")
             }
         }
     }
     
-    public func cancelConditionsViewController() {
-        hideConditionsOfSale()
+    func showPrivacyPolicy() {
+        hideHelp {
+            // Need to give it a second to ensure view heirarchy is good.
+            dispatch_async(dispatch_get_main_queue()) {
+                self.showWebControllerWithAddress("https://artsy.net/privacy")
+            }
+        }
     }
     
-    func hideConditionsOfSale(completion: (() -> ())? = nil) {
-        conditionsOfSaleViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: completion)
-        conditionsOfSaleViewController = nil
+    public func cancelPresentedViewController() {
+        hidePresentedViewController()
+    }
+    
+    func hidePresentedViewController(completion: (() -> ())? = nil) {
+        helpPresentedViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: completion)
+        helpPresentedViewController = nil
+    }
+    
+    func showWebControllerWithAddress(address: String) {
+        let webController = WebViewController.instantiateFromStoryboard(NSURL(string: address)!)
+        webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelPresentedViewController")
+        
+        helpPresentedViewController = UINavigationController(rootViewController: webController)
+        helpPresentedViewController!.modalPresentationStyle = .PageSheet
+        
+        window.rootViewController?.presentViewController(self.helpPresentedViewController!, animated: true, completion: nil)
     }
 }
 
