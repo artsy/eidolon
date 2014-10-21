@@ -96,7 +96,7 @@ class ConfirmYourBidPINViewController: UIViewController {
             return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number])
         }
 
-        return ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
+        return ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, endpointResolver: endpointResolver(), stubResponses: APIKeys.sharedKeys.stubResponses)
 
     }
 
