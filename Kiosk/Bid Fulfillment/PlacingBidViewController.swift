@@ -190,13 +190,4 @@ class PlacingBidViewController: UIViewController {
     @IBAction func backToAuctionTapped(sender: AnyObject) {
         self.fulfillmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    func delayToMainThread(delay:Double, closure:()->()) {
-        dispatch_after (
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
-    }
 }

@@ -4,7 +4,8 @@
 
 * You can create mutliple users in one session - @orta
 * Only Registering has a spinner - @orta
-
+* Error states on PIN / Artsy Login / Password View  - @orta
+* Improved networking error logging - @orta
 
 ### 0.0.9 20th Oct 2014
 
