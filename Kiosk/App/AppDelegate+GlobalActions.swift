@@ -11,7 +11,13 @@ public extension AppDelegate {
             dispatch_async(dispatch_get_main_queue()) {
                 let listingsVCNav = self.window.rootViewController?.childViewControllers.first! as UINavigationController
                 let listingVC = listingsVCNav.topViewController as ListingsViewController
-                listingVC.registerTapped(self)
+                if let fulfillment = listingVC.presentedViewController as? FulfillmentContainerViewController {
+                    fulfillment.closeFulfillmentModal() {
+                        listingVC.registerTapped(self)
+                    }
+                } else {
+                    listingVC.registerTapped(self)
+                }
             }
         }
     }
@@ -41,7 +47,7 @@ public extension AppDelegate {
 
         if helpIsVisisble {
             hideHelp {
-                //             Need to give it a second to ensure view heirarchy is good.
+                // Need to give it a second to ensure view heirarchy is good.
                 dispatch_async(dispatch_get_main_queue()) {
                     block()
                 }
@@ -131,7 +137,7 @@ public extension AppDelegate {
 
         if webViewControllerIsVisible {
             hidewebViewController {
-                //             Need to give it a second to ensure view heirarchy is good.
+                // Need to give it a second to ensure view heirarchy is good.
                 dispatch_async(dispatch_get_main_queue()) {
                     block()
                 }
