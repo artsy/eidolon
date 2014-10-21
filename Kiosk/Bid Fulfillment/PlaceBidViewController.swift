@@ -92,22 +92,12 @@ class PlaceBidViewController: UIViewController {
         performSegue(SegueIdentifier.ConfirmBid)
     }
 
-    @IBOutlet var conditionsOfSaleButton: UIButton!
-    @IBOutlet var privacyPolicyButton: UIButton!
-    @IBAction func webviewButtonTapped(sender: AnyObject) {
-        performSegueWithIdentifier(SegueIdentifier.LoadWebView.rawValue, sender:sender)
+    @IBAction func conditionsTapped(sender: AnyObject) {
+        (UIApplication.sharedApplication().delegate as? AppDelegate)?.showConditionsOfSale()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier! == (SegueIdentifier.LoadWebView.rawValue) {
-            let webVC = segue.destinationViewController as WebViewController
-            
-            if sender as UIButton == conditionsOfSaleButton {
-                webVC.URL = NSURL(string: conditionsOfSaleAddress)
-            } else if sender as UIButton == privacyPolicyButton {
-                webVC.URL = NSURL(string: privacyPolicyAddress)
-            }
-        }
+    @IBAction func privacyTapped(sender: AnyObject) {
+        (UIApplication.sharedApplication().delegate as? AppDelegate)?.showPrivacyPolicy()
     }
 
     lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal

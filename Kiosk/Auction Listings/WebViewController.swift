@@ -1,15 +1,16 @@
 class WebViewController: DZNWebViewController {
     var showToolbar = false
 
-    class func instantiateFromStoryboard(url: NSURL) -> WebViewController {
-        let webViewController = UIStoryboard.fulfillment().viewControllerWithID(.WebViewController) as WebViewController
-        webViewController.URL = url
-        return webViewController
+    convenience init(url: NSURL) {
+        self.init()
+        self.URL = url
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        preferredContentSize = CGSizeMake(815, 660)
+        navigationController?.view.layer.cornerRadius = 0;
+
         let webView = view as UIWebView
         webView.scalesPageToFit = true
         
