@@ -78,9 +78,8 @@ class ListingsViewController: UIViewController {
             return reduce(array ?? [], Array<AnyObject>(), +)
         }).mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
             
-            if let genericError = error.artsyServerError() {
-                println("Sale Artworks: Error handling thing: \(genericError.message)")
-            }
+            log.error("Sale Artworks: Error handling thing: \(error.artsyServerError())")
+
             return RACSignal.empty()
         }), RACScheduler.mainThreadScheduler())
     }
@@ -146,9 +145,7 @@ class ListingsViewController: UIViewController {
         
         return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self).catch({ (error) -> RACSignal! in
             
-            if let genericError = error.artsyServerError() {
-                println("Sale Artworks: Error handling thing: \(genericError.message)")
-            }
+            log.error("Sale Artworks: Error handling thing: \(error.artsyServerError())")
             return RACSignal.empty()
         })
     }

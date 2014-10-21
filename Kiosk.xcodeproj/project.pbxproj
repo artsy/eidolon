@@ -241,6 +241,10 @@
 		60E0949419F5A9620035F0DD /* AdminLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E0949219F5A9620035F0DD /* AdminLogViewController.swift */; };
 		60E0949719F5AB770035F0DD /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E0949619F5AB770035F0DD /* XCGLogger.swift */; };
 		60E0949819F5AB770035F0DD /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E0949619F5AB770035F0DD /* XCGLogger.swift */; };
+		60E094C019F5FF0E0035F0DD /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E094BF19F5FF0E0035F0DD /* GlobalFunctions.swift */; };
+		60E094C119F5FF0E0035F0DD /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E094BF19F5FF0E0035F0DD /* GlobalFunctions.swift */; };
+		60E094C319F601970035F0DD /* UIViewSubclassesErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E094C219F601970035F0DD /* UIViewSubclassesErrorExtensions.swift */; };
+		60E094C419F601970035F0DD /* UIViewSubclassesErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E094C219F601970035F0DD /* UIViewSubclassesErrorExtensions.swift */; };
 		60E8941C19F4047F006CC4D8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E8941B19F4047F006CC4D8 /* Location.swift */; };
 		60E8941D19F4047F006CC4D8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E8941B19F4047F006CC4D8 /* Location.swift */; };
 		60E8945419F43B44006CC4D8 /* ChooseAuctionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E8945319F43B44006CC4D8 /* ChooseAuctionViewController.swift */; };
@@ -571,6 +575,8 @@
 		60E0948F19F597A20035F0DD /* PasswordAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordAlertViewController.swift; sourceTree = "<group>"; };
 		60E0949219F5A9620035F0DD /* AdminLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminLogViewController.swift; sourceTree = "<group>"; };
 		60E0949619F5AB770035F0DD /* XCGLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCGLogger.swift; path = submodules/XCGLogger.swift; sourceTree = "<group>"; };
+		60E094BF19F5FF0E0035F0DD /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		60E094C219F601970035F0DD /* UIViewSubclassesErrorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewSubclassesErrorExtensions.swift; sourceTree = "<group>"; };
 		60E5553A19DAB75000F664CE /* deployment.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = deployment.md; sourceTree = "<group>"; };
 		60E8941B19F4047F006CC4D8 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		60E8945319F43B44006CC4D8 /* ChooseAuctionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAuctionViewController.swift; sourceTree = "<group>"; };
@@ -1046,6 +1052,7 @@
 				6092C4AD19CAEF75003BE8EC /* Extensions */,
 				6086143919BA303700699FBC /* Views */,
 				600AAEB719F18C3300506283 /* AppSetup.swift */,
+				60E094BF19F5FF0E0035F0DD /* GlobalFunctions.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1068,6 +1075,7 @@
 				6092C4AE19CAEF9A003BE8EC /* UIViewControllerExtensions.swift */,
 				6024DD5D19D8286B008E600A /* UIStoryboardSegueExtensions.swift */,
 				60C3983E19E81ECF00CB81F4 /* NSErrorExtensions.swift */,
+				60E094C219F601970035F0DD /* UIViewSubclassesErrorExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1607,6 +1615,7 @@
 			files = (
 				6069A0A819EF3E1600B70405 /* YourBiddingDetailsViewController.swift in Sources */,
 				6017320D19CF24ED00A58B63 /* User.swift in Sources */,
+				60E094C019F5FF0E0035F0DD /* GlobalFunctions.swift in Sources */,
 				60E8941C19F4047F006CC4D8 /* Location.swift in Sources */,
 				600DABEE19EB657100278378 /* AdminPanelViewController.swift in Sources */,
 				5EAC732519D0149A002F918A /* ReactiveCocoaBindings.swift in Sources */,
@@ -1644,6 +1653,7 @@
 				60A4FD3019E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */,
 				60D976E419D30F9F00DE9F3D /* Bidder.swift in Sources */,
 				6030A0F319D18F5200B934CA /* Artwork.swift in Sources */,
+				60E094C319F601970035F0DD /* UIViewSubclassesErrorExtensions.swift in Sources */,
 				E68E94A219DDCB70001405A5 /* TextField.swift in Sources */,
 				605B855B19C6E4CF0009B16B /* ConfirmYourBidViewController.swift in Sources */,
 				605610DB19D2DE2B00A2850A /* ConfirmYourBidEnterYourEmailViewController.swift in Sources */,
@@ -1713,6 +1723,7 @@
 				5E3DF3B419E5CF8A0098F3B0 /* RACSignal+Kiosk.swift in Sources */,
 				6030A10219D1931400B934CA /* FulfillmentContainerViewController.swift in Sources */,
 				6030A11D19D1A23100B934CA /* Moya.swift in Sources */,
+				60E094C419F601970035F0DD /* UIViewSubclassesErrorExtensions.swift in Sources */,
 				6087605119E9EDA800116611 /* BidDetailsPreviewView.swift in Sources */,
 				5E64136F19EC5CE4005AC5BC /* AppDelegate.swift in Sources */,
 				60C37DD719D45103002E7A44 /* BidderTests.swift in Sources */,
@@ -1797,6 +1808,7 @@
 				6030A10319D1931400B934CA /* ConfirmYourBidViewController.swift in Sources */,
 				6030A11719D1A05800B934CA /* KeypadContainerView.swift in Sources */,
 				6030A12B19D1AA0F00B934CA /* KioskTests.swift in Sources */,
+				60E094C119F5FF0E0035F0DD /* GlobalFunctions.swift in Sources */,
 				607F0ABE19F2C3AE00C2F4A6 /* Spinner.swift in Sources */,
 				6007B42519DEFAA000EDF43E /* ConfirmYourBidPINViewControllerTests.swift in Sources */,
 				60E8941D19F4047F006CC4D8 /* Location.swift in Sources */,

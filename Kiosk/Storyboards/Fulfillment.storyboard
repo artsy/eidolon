@@ -475,6 +475,10 @@
                                     <action selector="confirmTapped:" destination="BKe-0r-2Pc" eventType="touchUpInside" id="geK-LM-NHB"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cpv-vX-eD7" customClass="Spinner" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="622" y="562" width="40" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -485,6 +489,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
+                        <outlet property="actionSpinner" destination="cpv-vX-eD7" id="jcP-eb-BTC"/>
                         <outlet property="bidDetailsPreviewView" destination="dj6-cY-N6o" id="uCm-Ss-nAX"/>
                         <outlet property="confirmButton" destination="dyr-7D-eW1" id="RA1-BA-kCe"/>
                         <outlet property="flowView" destination="mSI-YI-8GU" id="e9i-l8-VVU"/>
@@ -1115,7 +1120,7 @@
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVe-25-8Zu">
-                                <rect key="frame" x="667" y="212" width="94" height="28"/>
+                                <rect key="frame" x="667" y="222" width="94" height="28"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="15"/>
                                 <state key="normal" title="Forgot PIN?">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

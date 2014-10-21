@@ -46,7 +46,7 @@ class PlaceBidNetworkModel: NSObject {
 
         }.doError { (error) in
             log.error("Checking for Bidder failed.")
-            log.error("Error: \(error.localizedDescription).")
+            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -60,7 +60,7 @@ class PlaceBidNetworkModel: NSObject {
 
         }.doError { (error) in
             log.error("Registering for Auction failed.")
-            log.error("Error: \(error.localizedDescription).")
+            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -75,7 +75,7 @@ class PlaceBidNetworkModel: NSObject {
 
         }.doError { (error) in
             log.error("Bidding on Sale Artwork failed.")
-            log.error("Error: \(error.localizedDescription).")
+            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 

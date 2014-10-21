@@ -18,7 +18,14 @@ class PasswordAlertViewController: UIAlertController {
 
             NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
                 // compiler crashes when using weak
-                exitAction.enabled = textField.text == "Genome401"
+
+                #if (arch(i386) || arch(x86_64)) && os(iOS)
+                    exitAction.enabled = true
+                #else
+                    exitAction.enabled = textField.text == "Genome401"
+                #endif
+
+
             }
         }
 

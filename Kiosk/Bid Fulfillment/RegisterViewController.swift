@@ -30,6 +30,7 @@ class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        actionSpinner.hidden = true
 
         coordinator.storyboard = self.storyboard!
         let registerIndexSignal = RACObserve(coordinator, "currentIndex")
@@ -78,12 +79,16 @@ class RegisterViewController: UIViewController {
         }
     }
 
-    @IBAction func confirmTapped(sender: AnyObject) {
+    @IBOutlet weak var actionSpinner: Spinner!
+    @IBAction func confirmTapped(sender: ActionButton) {
         if placingBid {
             passThroughToBiddingVCToCreateUser()
 
         } else {
             registerNewUser()
+            sender.setTitle("", forState: .Normal)
+            sender.enabled = false
+            actionSpinner.hidden = false
         }
     }
 

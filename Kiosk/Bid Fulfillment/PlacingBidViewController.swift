@@ -102,7 +102,9 @@ class PlacingBidViewController: UIViewController {
         let showBidderDetails = hasCreatedAUser() || !foundHighestBidder
         if showBidderDetails {
             backToAuctionButton.hidden = true
-            delayToMainThread(10) {
+
+            let delayTime = foundHighestBidder ? 3.0 : 7.0
+            delayToMainThread(delayTime) {
                 self.performSegue(.PushtoBidConfirmed)
             }
         }
@@ -187,14 +189,5 @@ class PlacingBidViewController: UIViewController {
 
     @IBAction func backToAuctionTapped(sender: AnyObject) {
         self.fulfillmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
-    }
-
-    func delayToMainThread(delay:Double, closure:()->()) {
-        dispatch_after (
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
     }
 }

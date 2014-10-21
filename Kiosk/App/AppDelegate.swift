@@ -1,4 +1,5 @@
 import UIKit
+import Alamofire
 
 let log = XCGLogger.defaultInstance()
 
@@ -39,7 +40,6 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         log.addLogDestination(destination)
 
         log.debug("App Started")
-
         return true
     }
 
