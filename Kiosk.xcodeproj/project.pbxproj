@@ -12,7 +12,7 @@
 		5E0D703E19DADD900005AF46 /* MasonryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2C0C719DAC3F400263137 /* MasonryCollectionViewCell.swift */; };
 		5E2B3D4B19DC063C00906A26 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */; };
 		5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */; };
-		5E3D9D3219EBFCA8001C72C4 /* AppDelegate+Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D9D3119EBFCA8001C72C4 /* AppDelegate+Help.swift */; };
+		5E3D9D3219EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D9D3119EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift */; };
 		5E3DF3B419E5CF8A0098F3B0 /* RACSignal+Kiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DA8E019E57E49000E5855 /* RACSignal+Kiosk.swift */; };
 		5E3E53E619C3AA13002D8B9D /* XAppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3E53E519C3AA13002D8B9D /* XAppToken.swift */; };
 		5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3519913DD800A48370 /* AppDelegate.swift */; };
@@ -22,7 +22,7 @@
 		5E64135C19EC5C1F005AC5BC /* HelpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC60BCC19EB1433008A04B0 /* HelpAnimator.swift */; };
 		5E64136E19EC5C22005AC5BC /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC60BCA19EB140F008A04B0 /* HelpViewController.swift */; };
 		5E64136F19EC5CE4005AC5BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3519913DD800A48370 /* AppDelegate.swift */; };
-		5E64137019EC5D10005AC5BC /* AppDelegate+Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D9D3119EBFCA8001C72C4 /* AppDelegate+Help.swift */; };
+		5E64137019EC5D10005AC5BC /* AppDelegate+GlobalActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D9D3119EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift */; };
 		5E6ED5FE19C07A4300CF3398 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6ED5FA19C07A4300CF3398 /* Endpoint.swift */; };
 		5E6ED5FF19C07A4300CF3398 /* Moya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6ED5FB19C07A4300CF3398 /* Moya.swift */; };
 		5E6ED60019C07A4300CF3398 /* Moya+ReactiveCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6ED5FC19C07A4300CF3398 /* Moya+ReactiveCocoa.swift */; };
@@ -441,7 +441,7 @@
 		5E28C2031993B9E50066DB4D /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = submodules/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPI.swift; sourceTree = "<group>"; };
-		5E3D9D3119EBFCA8001C72C4 /* AppDelegate+Help.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Help.swift"; sourceTree = "<group>"; };
+		5E3D9D3119EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+GlobalActions.swift"; sourceTree = "<group>"; };
 		5E3E53E519C3AA13002D8B9D /* XAppToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppToken.swift; sourceTree = "<group>"; };
 		5E59DD3019913DD800A48370 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD3419913DD800A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1045,7 +1045,7 @@
 			isa = PBXGroup;
 			children = (
 				5E59DD3519913DD800A48370 /* AppDelegate.swift */,
-				5E3D9D3119EBFCA8001C72C4 /* AppDelegate+Help.swift */,
+				5E3D9D3119EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift */,
 				5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */,
 				5E95FCB119D99871004D0C8F /* Constants.swift */,
 				60C37DDF19D4686A002E7A44 /* Networking */,
@@ -1687,7 +1687,7 @@
 				600AAEB819F18C3300506283 /* AppSetup.swift in Sources */,
 				609A849719E53ED200476A94 /* RACFunctions.swift in Sources */,
 				60D976E819D3123B00DE9F3D /* SaleArtwork.swift in Sources */,
-				5E3D9D3219EBFCA8001C72C4 /* AppDelegate+Help.swift in Sources */,
+				5E3D9D3219EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift in Sources */,
 				6030A10019D192D000B934CA /* Artist.swift in Sources */,
 				E6AB492419E704870054C8AD /* CursorView.swift in Sources */,
 				60A8E7C519BE50640088ACEC /* FulfillmentContainerViewController.swift in Sources */,
@@ -1777,7 +1777,7 @@
 				6030A11B19D1A1F600B934CA /* ReactiveCocoaBindings.swift in Sources */,
 				6030A11119D1931C00B934CA /* CardHandler.swift in Sources */,
 				6030A10F19D1931900B934CA /* Artwork.swift in Sources */,
-				5E64137019EC5D10005AC5BC /* AppDelegate+Help.swift in Sources */,
+				5E64137019EC5D10005AC5BC /* AppDelegate+GlobalActions.swift in Sources */,
 				6030A10919D1931400B934CA /* SwipeCreditCardViewController.swift in Sources */,
 				6030A11019D1931900B934CA /* Artist.swift in Sources */,
 				604B225319D359C5008D86C7 /* SystemTime.swift in Sources */,
