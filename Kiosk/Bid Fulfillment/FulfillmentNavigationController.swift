@@ -16,7 +16,7 @@ class FulfillmentNavigationController: UINavigationController {
 
                 return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": self.xAccessToken!])
             }
-            loggedInProvider = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
+            loggedInProvider = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, endpointResolver: endpointResolver(), stubResponses: APIKeys.sharedKeys.stubResponses)
         }
     }
 

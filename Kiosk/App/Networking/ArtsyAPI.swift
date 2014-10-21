@@ -271,7 +271,15 @@ extension ArtsyAPI : MoyaTarget {
 
 // MARK: - Provider setup
 
- struct Provider {
+func endpointResolver () -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest)) {
+    return { (endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest) in
+        let request: NSMutableURLRequest = endpoint.urlRequest.mutableCopy() as NSMutableURLRequest
+        request.HTTPShouldHandleCookies = false
+        return request
+    }
+}
+
+public struct Provider {
     private static var endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
         
         var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
@@ -289,11 +297,11 @@ extension ArtsyAPI : MoyaTarget {
     }
     
      static func DefaultProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
-        return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, stubResponses: APIKeys.sharedKeys.stubResponses)
+        return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: APIKeys.sharedKeys.stubResponses)
     }
     
      static func StubbingProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
-        return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, stubResponses: true)
+        return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true)
     }
 
     private struct SharedProvider {
