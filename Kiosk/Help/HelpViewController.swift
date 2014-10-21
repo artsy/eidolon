@@ -32,6 +32,7 @@ class HelpViewController: UIViewController {
         
         let bidExplainLabel = wrappingSerifLabel()
         bidExplainLabel.text = "Enter the amount you would like to bid. You will confirm this bid in the next step.\n\nEnter your mobile number or bidder number and PIN that you received when you registered."
+        bidExplainLabel.makeSubstringsBold(["mobile number", "bidder number", "PIN"])
         
         let registerView: UIView = {
             let view = UIView()
@@ -58,6 +59,7 @@ class HelpViewController: UIViewController {
         
         let bidderDetailsExplainLabel = wrappingSerifLabel()
         bidderDetailsExplainLabel.text = "The bidder number is how you can identify yourself to bid and see your place in bid history. The PIN is a four digit number that authenticates your bid."
+        bidderDetailsExplainLabel.makeSubstringsBold(["bidder number", "PIN"])
         
         let questionsLabel = titleLabel()
         questionsLabel.text = "Questions About Artsy Auctions?"
@@ -139,6 +141,25 @@ class HelpViewController: UIViewController {
         let label = ARSansSerifLabel()
         label.font = UIFont.sansSerifFontWithSize(14)
         return label
+    }
+}
+
+extension UILabel {
+    func makeSubstringsBold(text: [String]) {
+        text.map {
+            self.makeSubstringBold($0)
+        }
+    }
+    
+    func makeSubstringBold(text: String) {
+        let attributedText = self.attributedText.mutableCopy() as NSMutableAttributedString
+        
+        let range: NSRange! = (self.text ?? NSString()).rangeOfString(text)
+        if range.location != NSNotFound {
+            attributedText.setAttributes([NSFontAttributeName: UIFont.serifSemiBoldFontWithSize(self.font.pointSize)], range: range)
+        }
+        
+        self.attributedText = attributedText
     }
 }
 
