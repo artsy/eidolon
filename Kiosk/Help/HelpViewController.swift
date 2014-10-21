@@ -53,6 +53,12 @@ class HelpViewController: UIViewController {
         let txtLabel = wrappingSerifLabel()
         txtLabel.text = "We will send you a text message and email to update you on the status of your bid."
         
+        let bidderDetailsLabel = titleLabel()
+        bidderDetailsLabel.text = "What Are Bidder Details?"
+        
+        let bidderDetailsExplainLabel = wrappingSerifLabel()
+        bidderDetailsExplainLabel.text = "The bidder number is how you can identify yourself to bid and see your place in bid history. The PIN is a four digit number that authenticates your bid."
+        
         let questionsLabel = titleLabel()
         questionsLabel.text = "Questions About Artsy Auctions?"
         
@@ -108,15 +114,17 @@ class HelpViewController: UIViewController {
         // Add subviews
         view.addSubview(stackView)
         stackView.alignTop("0", leading: "0", bottom: nil, trailing: "0", toView: view)
-        self.stackView.addSubview(assistanceLabel, withTopMargin: "\(topMargin)", sideMargin: "\(sideMargin)")
-        self.stackView.addSubview(stuckLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
-        self.stackView.addSubview(stuckExplainLabel, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
-        self.stackView.addSubview(bidLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
-        self.stackView.addSubview(bidExplainLabel, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
-        self.stackView.addSubview(registerView, withTopMargin: "20", sideMargin: "\(self.sideMargin)")
-        self.stackView.addSubview(txtLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
-        self.stackView.addSubview(questionsLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
-        self.stackView.addSubview(questionsExplainView, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
+        stackView.addSubview(assistanceLabel, withTopMargin: "\(topMargin)", sideMargin: "\(sideMargin)")
+        stackView.addSubview(stuckLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
+        stackView.addSubview(stuckExplainLabel, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(sideMargin)")
+        stackView.addSubview(bidLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
+        stackView.addSubview(bidExplainLabel, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(sideMargin)")
+        stackView.addSubview(registerView, withTopMargin: "20", sideMargin: "\(sideMargin)")
+        stackView.addSubview(txtLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
+        stackView.addSubview(bidderDetailsLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
+        stackView.addSubview(bidderDetailsExplainLabel, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(sideMargin)")
+        stackView.addSubview(questionsLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
+        stackView.addSubview(questionsExplainView, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
     }
 
     private func wrappingSerifLabel() -> UILabel {
