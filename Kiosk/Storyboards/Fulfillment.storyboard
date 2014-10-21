@@ -107,7 +107,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2zy-ga-dxf">
-                                <rect key="frame" x="105" y="54" width="107" height="52"/>
+                                <rect key="frame" x="105" y="54" width="140" height="72"/>
                                 <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="14"/>
                                 <state key="normal" title="CANCEL">
                                     <color key="titleColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>

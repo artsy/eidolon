@@ -20,12 +20,11 @@ class AdminPanelViewController: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .LoadAdminWebViewController {
-            let webVC = segue.destinationViewController as WebViewController
+            let webVC = segue.destinationViewController as AuctionWebViewController
             let auctionID = AppSetup.sharedState.auctionID
             let base = AppSetup.sharedState.useStaging ? "staging.artsy.net" : "artsy.net"
 
             webVC.URL = NSURL(string: "https://\(base)/feature/\(auctionID)")!
-            webVC.showToolbar = true
 
             // TODO: Hide help button
         }
