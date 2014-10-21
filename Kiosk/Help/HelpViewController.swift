@@ -33,12 +33,22 @@ class HelpViewController: UIViewController {
         let bidExplainLabel = wrappingSerifLabel()
         bidExplainLabel.text = "Enter the amount you would like to bid. You will confirm this bid in the next step.\n\nEnter your mobile number or bidder number and PIN that you received when you registered."
         
-        let bidDetailsButton = ARBlackFlatButton()
-        bidDetailsButton.setTitle("Register", forState: .Normal)
-        bidDetailsButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (_) -> Void in
-            (UIApplication.sharedApplication().delegate as? AppDelegate)?.showRegistration()
-            return
-        }
+        let registerView: UIView = {
+            let view = UIView()
+            
+            let button = ARBlackFlatButton()
+            button.setTitle("Register", forState: .Normal)
+            button.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (_) -> Void in
+                (UIApplication.sharedApplication().delegate as? AppDelegate)?.showRegistration()
+                return
+            }
+            
+            view.addSubview(button)
+            button.alignTop("0", leading: "0", bottom: "0", trailing: nil, toView: view)
+            button.alignAttribute(.Right, toAttribute: .Right, ofView: view, predicate: "-50")
+            
+            return view
+        }()
         
         let txtLabel = wrappingSerifLabel()
         txtLabel.text = "We will send you a text message and email to update you on the status of your bid."
@@ -103,7 +113,7 @@ class HelpViewController: UIViewController {
         self.stackView.addSubview(stuckExplainLabel, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
         self.stackView.addSubview(bidLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         self.stackView.addSubview(bidExplainLabel, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
-        self.stackView.addSubview(bidDetailsButton, withTopMargin: "20", sideMargin: "\(self.sideMargin)")
+        self.stackView.addSubview(registerView, withTopMargin: "20", sideMargin: "\(self.sideMargin)")
         self.stackView.addSubview(txtLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         self.stackView.addSubview(questionsLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         self.stackView.addSubview(questionsExplainView, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
