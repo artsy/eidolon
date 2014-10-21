@@ -37,5 +37,4 @@ public enum ViewControllerStoryboardIdentifier : String {
     case RegisterMobile = "Register Mobile"
     case RegisterPassword = "Register Password"
     case RegisterPostalorZip = "Register Postal or Zip"
-    case WebViewController = "Web View Controller"
 }

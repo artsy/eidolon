@@ -36,15 +36,19 @@ class FulfillmentContainerViewController: UIViewController {
     }
 
     @IBAction func closeModalTapped(sender: AnyObject) {
+        closeFulfillmentModal()
+    }
 
+    func closeFulfillmentModal(completion: (() -> ())? = nil) -> Void {
         UIView.animateIf(allowAnimations, withDuration: 0.4, { () -> Void in
             self.contentView.alpha = 0
             self.backgroundView.alpha = 0
             self.cancelButton.alpha = 0
 
-        }) { (completed:Bool) -> Void in
-            let presentingVC = self.presentingViewController!
-            presentingVC.dismissViewControllerAnimated(false, completion: nil)
+            }) { (completed:Bool) -> Void in
+                let presentingVC = self.presentingViewController!
+                presentingVC.dismissViewControllerAnimated(false, completion: nil)
+                completion?()
         }
     }
 
