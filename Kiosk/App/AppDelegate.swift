@@ -4,9 +4,10 @@ import Alamofire
 let log = XCGLogger.defaultInstance()
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+public class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var helpViewController: HelpViewController?
+    var helpPresentedViewController: UIViewController?
     var helpButton: UIButton!
                             
     var window: UIWindow! = UIWindow(frame:CGRectMake(0, 0, UIScreen.mainScreen().bounds.height, UIScreen.mainScreen().bounds.width))

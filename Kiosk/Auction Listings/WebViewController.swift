@@ -12,6 +12,8 @@ class WebViewController: DZNWebViewController {
         
         let webView = view as UIWebView
         webView.scalesPageToFit = true
+        
+        self.navigationItem.rightBarButtonItem = nil
     }
 
     override func viewWillAppear(animated: Bool) {

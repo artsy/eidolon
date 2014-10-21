@@ -6,7 +6,7 @@
 * Only Registering has a spinner - @orta
 * Error states on PIN / Artsy Login / Password View  - @orta
 * Improved networking error logging - @orta
-* Improved the Help layout - @ash
+* Spruced up Help menu - @ash
 
 ### 0.0.9 20th Oct 2014
 

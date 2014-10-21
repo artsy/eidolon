@@ -1,11 +1,15 @@
 import UIKit
 import QuartzCore
 
-extension AppDelegate {
+public extension AppDelegate {
     typealias HelpCompletion = () -> ()
     
     var helpIsVisisble: Bool {
         return helpViewController != nil
+    }
+    
+    var helpPresentedViewControllerIsVisible: Bool {
+        return helpPresentedViewController != nil
     }
     
     func setupHelpButton() {
@@ -70,7 +74,13 @@ extension AppDelegate {
         if helpIsVisisble {
             hideHelp()
         } else {
-            showHelp()
+            if helpPresentedViewControllerIsVisible {
+                hidePresentedViewController({
+                    self.showHelp()
+                })
+            } else {
+                showHelp()
+            }
         }
     }
     
@@ -87,17 +97,48 @@ extension AppDelegate {
     
     func showConditionsOfSale() {
         hideHelp {
-            
+            // Need to give it a second to ensure view heirarchy is good.
+            dispatch_async(dispatch_get_main_queue()) {
+                self.showWebControllerWithAddress("https://artsy.net/conditions-of-sale")
+            }
         }
+    }
+    
+    func showPrivacyPolicy() {
+        hideHelp {
+            // Need to give it a second to ensure view heirarchy is good.
+            dispatch_async(dispatch_get_main_queue()) {
+                self.showWebControllerWithAddress("https://artsy.net/privacy")
+            }
+        }
+    }
+    
+    public func cancelPresentedViewController() {
+        hidePresentedViewController()
+    }
+    
+    func hidePresentedViewController(completion: (() -> ())? = nil) {
+        helpPresentedViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: completion)
+        helpPresentedViewController = nil
+    }
+    
+    func showWebControllerWithAddress(address: String) {
+        let webController = WebViewController.instantiateFromStoryboard(NSURL(string: address)!)
+        webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelPresentedViewController")
+        
+        helpPresentedViewController = UINavigationController(rootViewController: webController)
+        helpPresentedViewController!.modalPresentationStyle = .PageSheet
+        
+        window.rootViewController?.presentViewController(self.helpPresentedViewController!, animated: true, completion: nil)
     }
 }
 
 extension AppDelegate: UIViewControllerTransitioningDelegate {
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return HelpAnimator(presenting: true)
     }
     
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return HelpAnimator()
     }
 }

@@ -105,7 +105,7 @@ class ListingsViewControllerTests: QuickSpec {
                     }
                 }
                 
-                Provider.sharedProvider = ReactiveMoyaProvider(endpointsClosure: endpointsClosure, stubResponses: true)
+                Provider.sharedProvider = ReactiveMoyaProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true)
             })
             
             it("paginates to the second page to retrieve all three sale artworks") {
