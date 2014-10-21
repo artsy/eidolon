@@ -18,7 +18,7 @@ class HelpViewController: UIViewController {
         
         // Configure subviews
         let assistanceLabel = ARSerifLabel()
-        assistanceLabel.font = assistanceLabel.font.fontWithSize(40)
+        assistanceLabel.font = assistanceLabel.font.fontWithSize(35)
         assistanceLabel.text = "Assistance"
         
         let stuckLabel = titleLabel()
@@ -49,25 +49,48 @@ class HelpViewController: UIViewController {
         let questionsExplainView: UIView = {
             let view = UIView()
             
-            let prefixLabel = ARSerifLabel()
-            prefixLabel.text = "View our "
+            let conditionsLabel = ARSerifLabel()
+            conditionsLabel.font = conditionsLabel.font.fontWithSize(18)
+            conditionsLabel.text = "View our "
             
-            let button = ARUnderlineButton()
-            button.setTitle("Conditions of Sale".uppercaseString, forState: .Normal)
-            button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-            button.titleLabel?.font = UIFont.sansSerifFontWithSize(15)
+            let conditionsButton = ARUnderlineButton()
+            conditionsButton.setTitle("Conditions of Sale".uppercaseString, forState: .Normal)
+            conditionsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+            conditionsButton.titleLabel?.font = UIFont.sansSerifFontWithSize(15)
             
-            button.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
+            conditionsButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
                 (UIApplication.sharedApplication().delegate as? AppDelegate)?.showConditionsOfSale()
                 return
             })
             
-            view.addSubview(prefixLabel)
-            view.addSubview(button)
+            let privacyLabel = ARSerifLabel()
+            privacyLabel.font = conditionsLabel.font.fontWithSize(18)
+            privacyLabel.text = "View our "
             
-            prefixLabel.alignTop("0", leading: "0", bottom: "-20", trailing: nil, toView: view)
-            prefixLabel.alignBaselineWithView(button, predicate: nil)
-            button.alignAttribute(.Left, toAttribute: .Right, ofView: prefixLabel, predicate: "0")
+            let privacyButton = ARUnderlineButton()
+            privacyButton.setTitle("Privacy Policy".uppercaseString, forState: .Normal)
+            privacyButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+            privacyButton.titleLabel?.font = UIFont.sansSerifFontWithSize(15)
+            
+            privacyButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
+                (UIApplication.sharedApplication().delegate as? AppDelegate)?.showPrivacyPolicy()
+                return
+            })
+            
+            view.addSubview(conditionsLabel)
+            view.addSubview(conditionsButton)
+            view.addSubview(privacyLabel)
+            view.addSubview(privacyButton)
+            
+            conditionsLabel.alignTop("0", leading: "0", toView: view)
+            conditionsLabel.alignBaselineWithView(conditionsButton, predicate: nil)
+            conditionsButton.alignAttribute(.Left, toAttribute: .Right, ofView: conditionsLabel, predicate: "0")
+            
+            privacyLabel.alignAttribute(.Left, toAttribute: .Left, ofView: conditionsLabel, predicate: "0")
+            privacyLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: conditionsLabel, predicate: "10")
+            privacyLabel.alignAttribute(.Bottom, toAttribute: .Bottom, ofView: view, predicate: "-20")
+            privacyLabel.alignBaselineWithView(privacyButton, predicate: nil)
+            privacyButton.alignAttribute(.Left, toAttribute: .Right, ofView: privacyLabel, predicate: "0")
             
             return view
         }()
@@ -80,7 +103,7 @@ class HelpViewController: UIViewController {
         self.stackView.addSubview(stuckExplainLabel, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
         self.stackView.addSubview(bidLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         self.stackView.addSubview(bidExplainLabel, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
-        self.stackView.addSubview(bidDetailsButton, withTopMargin: "45", sideMargin: "\(self.sideMargin)")
+        self.stackView.addSubview(bidDetailsButton, withTopMargin: "20", sideMargin: "\(self.sideMargin)")
         self.stackView.addSubview(txtLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         self.stackView.addSubview(questionsLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         self.stackView.addSubview(questionsExplainView, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
@@ -88,6 +111,7 @@ class HelpViewController: UIViewController {
 
     private func wrappingSerifLabel() -> UILabel {
         let label = ARSerifLabel()
+        label.font = label.font.fontWithSize(18)
         label.lineBreakMode = .ByWordWrapping
         label.preferredMaxLayoutWidth = CGFloat(HelpViewController.width - sideMargin)
         return label
@@ -103,7 +127,7 @@ class HelpViewController: UIViewController {
 extension HelpViewController {
     class var width: Float {
         get {
-            return 400.0
+            return 415.0
         }
     }
 }
