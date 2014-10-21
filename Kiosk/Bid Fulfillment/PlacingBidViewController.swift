@@ -102,7 +102,7 @@ class PlacingBidViewController: UIViewController {
         let showBidderDetails = hasCreatedAUser() || !foundHighestBidder
         if showBidderDetails {
             backToAuctionButton.hidden = true
-            delayToMainThread(10) {
+            delayToMainThread(6) {
                 self.performSegue(.PushtoBidConfirmed)
             }
         }
