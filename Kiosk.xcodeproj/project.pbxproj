@@ -63,6 +63,7 @@
 		600DABF119EB7C3700278378 /* AuctionWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600DABF019EB7C3700278378 /* AuctionWebViewController.swift */; };
 		600DABF219EB7C3700278378 /* AuctionWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600DABF019EB7C3700278378 /* AuctionWebViewController.swift */; };
 		600F5EFA19C879670027F587 /* SwipeCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */; };
+		601465B519F6D5DE00607614 /* toolbar_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 601465B419F6D5DE00607614 /* toolbar_close@2x.png */; };
 		6017320D19CF24ED00A58B63 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017320C19CF24ED00A58B63 /* User.swift */; };
 		6017320F19CF259400A58B63 /* CardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017320E19CF259400A58B63 /* CardHandler.swift */; };
 		6017321519CF27B900A58B63 /* CardHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6017321419CF27B900A58B63 /* CardHandlerTests.swift */; };
@@ -481,6 +482,7 @@
 		600DABED19EB657100278378 /* AdminPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminPanelViewController.swift; sourceTree = "<group>"; };
 		600DABF019EB7C3700278378 /* AuctionWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuctionWebViewController.swift; sourceTree = "<group>"; };
 		600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeCreditCardViewController.swift; sourceTree = "<group>"; };
+		601465B419F6D5DE00607614 /* toolbar_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar_close@2x.png"; sourceTree = "<group>"; };
 		6017320C19CF24ED00A58B63 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6017320E19CF259400A58B63 /* CardHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHandler.swift; sourceTree = "<group>"; };
 		6017321419CF27B900A58B63 /* CardHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHandlerTests.swift; sourceTree = "<group>"; };
@@ -1166,6 +1168,7 @@
 		60D48B9319C89DD900A3CA88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				601465B419F6D5DE00607614 /* toolbar_close@2x.png */,
 				60D48B9419C89DE300A3CA88 /* edit_button@2x.png */,
 			);
 			name = Resources;
@@ -1500,6 +1503,7 @@
 				60C3982919E814FC00CB81F4 /* CreateABidFail.json in Resources */,
 				6087605619EA217F00116611 /* AuctionInfo.json in Resources */,
 				607F0AF119F3128900C2F4A6 /* AuctionInfoForArtwork.json in Resources */,
+				601465B519F6D5DE00607614 /* toolbar_close@2x.png in Resources */,
 				60D48B9519C89DE300A3CA88 /* edit_button@2x.png in Resources */,
 				60C3983519E814FC00CB81F4 /* SystemTime.json in Resources */,
 				60C3982119E814FC00CB81F4 /* ActiveAuctions.json in Resources */,

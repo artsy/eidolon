@@ -46,7 +46,11 @@ public extension AppDelegate {
         transition.type = kCATransitionFade
         helpButton.layer.addAnimation(transition, forKey: "fade")
     }
-    
+
+    func setHelpButtonHidden(hidden: Bool) {
+        helpButton.hidden = hidden
+    }
+
     func showHelp(completion: HelpCompletion? = nil) {
         setHelpButtonState(.Close)
         
