@@ -1,14 +1,13 @@
 import Foundation
 
 class ListingsCollectionViewCell: UICollectionViewCell {
-    dynamic let artworkImageView = MasonryCollectionViewCell._artworkImageView()
-    dynamic let artistNameLabel = MasonryCollectionViewCell._largeLabel()
-    dynamic let artworkTitleLabel = MasonryCollectionViewCell._italicsLabel()
-    dynamic let estimateLabel = MasonryCollectionViewCell._normalLabel()
-    dynamic let dividerView: UIView = MasonryCollectionViewCell._dividerView()
-    dynamic let currentBidLabel = MasonryCollectionViewCell._boldLabel()
-    dynamic let numberOfBidsLabel = MasonryCollectionViewCell._rightAlignedNormalLabel()
-    dynamic let bidButton = MasonryCollectionViewCell._bidButton()
+    dynamic let artworkImageView = ListingsCollectionViewCell._artworkImageView()
+    dynamic let artistNameLabel = ListingsCollectionViewCell._largeLabel()
+    dynamic let artworkTitleLabel = ListingsCollectionViewCell._italicsLabel()
+    dynamic let estimateLabel = ListingsCollectionViewCell._normalLabel()
+    dynamic let currentBidLabel = ListingsCollectionViewCell._boldLabel()
+    dynamic let numberOfBidsLabel = ListingsCollectionViewCell._rightAlignedNormalLabel()
+    dynamic let bidButton = ListingsCollectionViewCell._bidButton()
     
     dynamic var saleArtwork: SaleArtwork?
     dynamic var bidWasPressedSignal: RACSignal = RACSubject()
@@ -82,7 +81,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     }
 }
 
-private extension MasonryCollectionViewCell {
+private extension ListingsCollectionViewCell {
     
     // Mark: UIView-property-methods – need an _ prefix to appease the compiler ¯\_(ツ)_/¯
     class func _artworkImageView() -> UIImageView {
@@ -90,13 +89,7 @@ private extension MasonryCollectionViewCell {
         imageView.backgroundColor = UIColor.artsyLightGrey()
         return imageView
     }
-    
-    class func _dividerView() -> UIView {
-        let dividerView = UIView()
-        dividerView.backgroundColor = UIColor.artsyMediumGrey()
-        return dividerView
-    }
-    
+
     class func _rightAlignedNormalLabel() -> UILabel {
         let label = _normalLabel()
         label.textAlignment = .Right
