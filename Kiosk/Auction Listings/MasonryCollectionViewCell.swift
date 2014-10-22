@@ -5,18 +5,19 @@ let MasonryCollectionViewCellWidth: CGFloat = 254
 class MasonryCollectionViewCell: ListingsCollectionViewCell {
     private lazy var bidView: UIView = {
         let view = UIView()
-        view.addSubview(self.currentBidLabel)
-        view.addSubview(self.numberOfBidsLabel)
-
+        for subview in [self.currentBidLabel, self.numberOfBidsLabel] {
+            view.addSubview(subview)
+            subview.alignTopEdgeWithView(view, predicate:"13")
+            subview.alignBottomEdgeWithView(view, predicate:"0")
+            subview.constrainHeight("18")
+        }
         self.currentBidLabel.alignLeadingEdgeWithView(view, predicate: "0")
         self.numberOfBidsLabel.alignTrailingEdgeWithView(view, predicate: "0")
-        UIView.alignBottomEdgesOfViews([view, self.currentBidLabel, self.numberOfBidsLabel])
         return view
     }()
     
-    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.dividerView, self.bidView, self.bidButton]
-    private lazy var cellWidthSubviews: [UIView] = [self.artworkImageView, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.bidView, self.dividerView, self.bidButton]
-    
+    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.bidView, self.bidButton]
+
     private var artworkImageViewHeightConstraint: NSLayoutConstraint?
     
     override func setup() {
@@ -24,16 +25,13 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         
         contentView.constrainWidth("\(MasonryCollectionViewCellWidth)")
         
-        // Configure subviews
-        // Need an explicit frame so that drawTopDottedBorder() is reliable
-        dividerView.frame = CGRect(origin: CGPointZero, size: CGSize(width: MasonryCollectionViewCellWidth, height: 1))
-        dividerView.drawTopDottedBorder()
-        
         // Add subviews
-        cellSubviews.map{ self.contentView.addSubview($0) }
+        for subview in cellSubviews {
+            self.contentView.addSubview(subview)
+            subview.alignLeading("0", trailing: "0", toView: self.contentView)
+        }
         
         // Constrain subviews
-        cellWidthSubviews.map { $0.alignLeading("0", trailing: "0", toView: self.contentView) }
         artworkImageView.alignTop("0", bottom: nil, toView: contentView)
         artistNameLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkImageView, predicate: "20")
         artistNameLabel.constrainHeight("20")
@@ -41,10 +39,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         artworkTitleLabel.constrainHeight("16")
         estimateLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkTitleLabel, predicate: "10")
         estimateLabel.constrainHeight("16")
-        dividerView.alignAttribute(.Top, toAttribute: .Bottom, ofView: estimateLabel, predicate: "13")
-        dividerView.constrainHeight("1")
-        bidView.alignAttribute(.Top, toAttribute: .Bottom, ofView: dividerView, predicate: "13")
-        bidView.constrainHeight("18")
+        bidView.alignAttribute(.Top, toAttribute: .Bottom, ofView: estimateLabel, predicate: "13")
         bidButton.alignAttribute(.Top, toAttribute: .Bottom, ofView: currentBidLabel, predicate: "13")
         bidButton.alignAttribute(.Bottom, toAttribute: .Bottom, ofView: contentView, predicate: "40")
         
@@ -61,6 +56,11 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
             }
         }
     }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        bidView.drawTopDottedBorderWithColor(UIColor.artsyMediumGrey())
+    }
 }
 
 extension MasonryCollectionViewCell {
@@ -74,7 +74,6 @@ extension MasonryCollectionViewCell {
             10 + // padding
             16 + // estimate
             13 + // padding
-            1 +  // divider
             13 + // padding
             16 + // bid
             13 + // padding

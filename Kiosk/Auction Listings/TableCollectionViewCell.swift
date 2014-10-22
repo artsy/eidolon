@@ -13,8 +13,8 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         self.artworkTitleLabel.alignTop(nil, bottom: "0", toView: view)
         return view
     }()
-    
-    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.infoView, self.dividerView, self.currentBidLabel, self.numberOfBidsLabel, self.bidButton]
+
+    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.infoView, self.currentBidLabel, self.numberOfBidsLabel, self.bidButton]
     
     override func setup() {
         super.setup()
@@ -46,8 +46,11 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         bidButton.alignBottom(nil, trailing: "0", toView: contentView)
         bidButton.alignCenterYWithView(artworkImageView, predicate: "0")
         bidButton.constrainWidth("127")
-        dividerView.constrainHeight("1")
-        dividerView.alignTop(nil, leading: "0", bottom: "0", trailing: "0", toView: contentView)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.drawBottomSolidBorderWithColor(UIColor.artsyMediumGrey())
     }
 }
 

@@ -181,7 +181,6 @@
         <scene sceneID="GeE-xH-04T">
             <objects>
                 <navigationController navigationBarHidden="YES" id="WE8-fs-xzH" sceneMemberID="viewController">
-                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Rz-le-5kW">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
