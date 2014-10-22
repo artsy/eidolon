@@ -1,12 +1,12 @@
 # End User Changes
 
-### 0.1.1 21st Oct 2014
+### 1.0.0 21st Oct 2014
 
 * Help Changes around laying popovers - @laura
 * Removed the ability to have a + in an email - @orta
 * Admin section hides the Help button - @orta
 * Panic web mode shows a correct X to close button - @orta
-
+* Analyics - @orta
 
 ### 0.1.0 21st Oct 2014
 
