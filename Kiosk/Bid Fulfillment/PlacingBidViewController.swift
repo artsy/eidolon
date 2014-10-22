@@ -42,13 +42,12 @@ class PlacingBidViewController: UIViewController {
             self.placeBidNetworkModel.fulfillmentNav = self.fulfillmentNav()
             return self.placeBidNetworkModel.bidSignal(auctionID, bidDetails:bidDetails)
 
-        } .doError { (error) -> Void in
+        }.then { [weak self] (_) in
+            self?.startCheckingForMaxBid() ?? RACSignal.empty()
+        }.doError { (error) -> Void in
+            self.spinner.hidden = true
             self.outbidNoticeLabel.text = "There was a problem placing your bid, please talk to your nearest Artsy rep."
             self.outbidNoticeLabel.hidden = false
-
-        }.subscribeNext { [weak self] (_) in
-            self?.startCheckingForMaxBid()
-            return
         }
 
     }
@@ -66,11 +65,7 @@ class PlacingBidViewController: UIViewController {
                 self?.bidderPositions = newBidderPositions
                 
             } ?? RACSignal.empty()
-        }.doError { [weak self] (error) -> Void in
-            self?.outbidNoticeLabel.text = "There was a problem placing your bid, please talk to your nearest Artsy rep."
-            self?.outbidNoticeLabel.hidden = false
-
-        }.subscribeNext { [weak self] (_) -> Void in
+        }.doNext { [weak self] (_) -> Void in
             self?.finishUp()
             return
         }
@@ -99,14 +94,13 @@ class PlacingBidViewController: UIViewController {
             bidDetails.saleArtwork?.updateWithValues(mostRecentSaleArtwork)
         }
 
-        let showBidderDetails = hasCreatedAUser() || !foundHighestBidder
+        let showBidderDetails = hasCreatedAUser()
         if showBidderDetails {
-            backToAuctionButton.hidden = true
-
-            let delayTime = foundHighestBidder ? 3.0 : 7.0
-            delayToMainThread(delayTime) {
+            delayToMainThread(3.0) {
                 self.performSegue(.PushtoBidConfirmed)
             }
+        } else {
+            backToAuctionButton.hidden = false
         }
     }
 
@@ -188,6 +182,6 @@ class PlacingBidViewController: UIViewController {
     }
 
     @IBAction func backToAuctionTapped(sender: AnyObject) {
-        self.fulfillmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
+        fulfillmentContainer()?.closeFulfillmentModal()
     }
 }
