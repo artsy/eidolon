@@ -97,6 +97,7 @@ class RegisterViewController: UIViewController {
 
         registrationNetworkModel.registerSignal().subscribeNext({ [weak self] (_) -> Void in
 
+            ARAnalytics.event("Registered New User Only")
             self?.performSegue(.RegistrationFinishedShowBidDetails)
             return
 

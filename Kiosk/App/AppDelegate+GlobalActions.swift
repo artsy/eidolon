@@ -40,8 +40,9 @@ public extension AppDelegate {
             let nav = UINavigationController(rootViewController: webController)
             nav!.modalPresentationStyle = .FormSheet
             
+            ARAnalytics.event("Show Web View", withProperties: ["url" : address])
             self.window.rootViewController?.presentViewController(nav!, animated: true, completion: nil)
-            self.webViewController = nav
+            self.webViewController = webVC
         }
 
         if helpIsVisisble {
@@ -113,6 +114,10 @@ public extension AppDelegate {
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         transition.type = kCATransitionFade
         helpButton.layer.addAnimation(transition, forKey: "fade")
+    }
+
+    func setHelpButtonHidden(hidden: Bool) {
+        helpButton.hidden = hidden
     }
 
     func showHelp(completion: HelpCompletion? = nil) {

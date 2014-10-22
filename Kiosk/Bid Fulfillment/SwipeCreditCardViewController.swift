@@ -36,6 +36,10 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
                 self.setInProgress(true)
             }
 
+            if message as String == "Card Flight Error" {
+                self.processingLabel.text = "ERROR PROCESSING CARD - SEE ADMIN"
+            }
+
         }, error: { (error) -> Void in
             self.cardStatusLabel.text = "Card Status: Errored"
             self.setInProgress(false)

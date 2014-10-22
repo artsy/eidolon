@@ -36,7 +36,6 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
     @IBAction func confirmTapped(sender: AnyObject) {
         if !isLoggingIn {
             finishedSignal.sendCompleted()
-
         } else {
 
             let newUser = self.navigationController!.fulfillmentNav().bidDetails.newUser

@@ -7,15 +7,17 @@ class AdminPanelViewController: UIViewController {
 
     @IBAction func backTapped(sender: AnyObject) {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        (UIApplication.sharedApplication().delegate as? AppDelegate)?.setHelpButtonHidden(false)
     }
-    
+
     @IBAction func closeAppTapped(sender: AnyObject) {
         exit(1)
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        // TODO: Show help button
+
+        (UIApplication.sharedApplication().delegate as? AppDelegate)?.setHelpButtonHidden(true)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

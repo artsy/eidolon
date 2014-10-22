@@ -28,10 +28,13 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
 
         let keys = EidolonKeys()
+
+        let mixpanelToken = AppSetup.sharedState.useStaging ? keys.mixpanelStagingAPIClientKey() : keys.mixpanelProductionAPIClientKey()
+
         ARAnalytics.setupWithAnalytics([
             ARHockeyAppBetaID: keys.hockeyBetaSecret(),
             ARHockeyAppLiveID: keys.hockeyProductionSecret(),
-            ARMixpanelToken: keys.mixpanelProductionAPIClientKey()
+            ARMixpanelToken: mixpanelToken
         ])
 
         setupHelpButton()
@@ -41,6 +44,7 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         log.addLogDestination(destination)
 
         log.debug("App Started")
+        ARAnalytics.event("Session Started")
         return true
     }
 

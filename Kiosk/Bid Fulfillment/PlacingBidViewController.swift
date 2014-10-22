@@ -27,6 +27,8 @@ class PlacingBidViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ARAnalytics.event("Started Placing Bid")
+
         outbidNoticeLabel.hidden = true
         backToAuctionButton.hidden = true
 
@@ -92,7 +94,9 @@ class PlacingBidViewController: UIViewController {
         } else {
             isLowestBidder()
         }
-        
+
+        ARAnalytics.event("Placed a bid", withProperties: ["top_bidder" : foundHighestBidder])
+
         // Update the bid details sale artwork to our mostRecentSaleArtwork
         if let mostRecentSaleArtwork = self.mostRecentSaleArtwork {
             let bidDetails = self.fulfillmentNav().bidDetails

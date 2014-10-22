@@ -22,7 +22,7 @@ class ConfirmYourBidPINViewController: UIViewController {
         super.viewDidLoad()
 
         let keypad = self.keypadContainer!.keypad!
-        let pinIsZeroSignal = RACObserve(self, "pin").map { (countElements($0 as String) == 0) }
+        let pinIsZeroSignal = RACObserve(self, "pin").map { (countElements($0 as String) != 4) }
 
         for button in [keypad.rightButton, keypad.leftButton] {
             RAC(button, "enabled") <~ pinIsZeroSignal.notEach()
