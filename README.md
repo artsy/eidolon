@@ -1,13 +1,12 @@
 Eidolon
 ================
 
-The upcoming [Artsy](https://artsy.net) Auction Kiosk App.
+The [Artsy](https://artsy.net) Auction Kiosk App.
 
 Project Status
 ----------------
 
-This project is in the *very* early stages. Its goal is to provide a seamless
-experience for browsing and bidding on artworks in an auction.
+<img src ="https://raw.githubusercontent.com/artsy/eidolon/docs/eidolon_preview.md">
 
 Downloading the Code
 ----------------
@@ -46,18 +45,17 @@ Getting Started
 ----------------
 
 Now that we have the code [downloaded](#downloading-the-code), we can run the
-app using [Xcode 6](https://developer.apple.com/xcode/downloads/). Make sure to
+app using [Xcode 6.1+](https://developer.apple.com/xcode/downloads/). Make sure to
 open the `Kiosk.xcworkspace` workspace, and not the `Kiosk.xcodeproj` project.
 Currently, the project is compatible with Xcode 6 only, as it's swift.
 
 The Artsy API is private, making it difficult for open source developers to run
-the app. Once we integrate networking support, we'll figure out a way to stub
-network requests so that the app can run with sample data.
+the app. We have a toggle in the `AppDelegate` that flips the app to use only stubbbed networking.
 
 Artsy has licensed fonts for use in this app, but due to the terms of that
 license, they are not available for open source distribution. This has [required](http://artsy.github.io/blog/2014/06/20/artsys-first-closed-source-pod/)
 us to use [private pods](http://guides.cocoapods.org/making/private-cocoapods.html).
-The Podfile has the differences dealt with. 
+The `Podfile` deals with the differences.
 
 Contributing
 ----------------
