@@ -15,7 +15,7 @@ class AuctionWebViewController: WebViewController {
         let allItems = self.toolbarItems! + [flexibleSpace, backwardBarItem] as [AnyObject]
         toolbarItems = allItems
     }
-    
+
     func exit() {
         let passwordVC = PasswordAlertViewController.alertView { [weak self] () -> () in
             self?.navigationController?.popViewControllerAnimated(true)

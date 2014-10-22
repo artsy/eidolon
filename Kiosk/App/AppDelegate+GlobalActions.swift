@@ -35,14 +35,13 @@ public extension AppDelegate {
     
     func showWebControllerWithAddress(address: String) {
         let block = { () -> Void in
-            let webController = WebViewController(url: NSURL(string: address)!)
-            webController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelPresentedViewController")
+            let webController = ModalWebViewController(url: NSURL(string: address)!)
+
+            let nav = UINavigationController(rootViewController: webController)
+            nav!.modalPresentationStyle = .FormSheet
             
-            let webVC = UINavigationController(rootViewController: webController)
-            webVC!.modalPresentationStyle = .FormSheet
-            
-            self.window.rootViewController?.presentViewController(webVC!, animated: true, completion: nil)
-            self.webViewController = webVC
+            self.window.rootViewController?.presentViewController(nav!, animated: true, completion: nil)
+            self.webViewController = nav
         }
 
         if helpIsVisisble {
@@ -77,13 +76,8 @@ public extension AppDelegate {
         }
     }
 
-    public func cancelPresentedViewController() {
-        hidewebViewController()
-    }
-
     func hidewebViewController(completion: (() -> ())? = nil) {
         webViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: completion)
-        webViewController = nil
     }
 
     func setupHelpButton() {
@@ -151,8 +145,8 @@ public extension AppDelegate {
         setHelpButtonState(.Help)
 
         helpViewController?.presentingViewController?.dismissViewControllerAnimated(true) {
-            self.helpViewController = nil
             completion?()
+            return
         }
     }
 }

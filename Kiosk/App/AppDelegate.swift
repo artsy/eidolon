@@ -6,10 +6,10 @@ let log = XCGLogger.defaultInstance()
 @UIApplicationMain
 public class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var helpViewController: HelpViewController?
+    weak var helpViewController: HelpViewController?
     var helpButton: UIButton!
 
-    var webViewController: UIViewController?
+    weak var webViewController: UIViewController?
 
     var window: UIWindow! = UIWindow(frame:CGRectMake(0, 0, UIScreen.mainScreen().bounds.height, UIScreen.mainScreen().bounds.width))
 
