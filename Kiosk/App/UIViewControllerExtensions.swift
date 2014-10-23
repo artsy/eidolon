@@ -18,4 +18,8 @@ extension UIViewController {
     func fulfillmentNav() -> FulfillmentNavigationController {
         return (self.navigationController! as FulfillmentNavigationController)
     }
+
+    func fulfillmentContainer() -> FulfillmentContainerViewController? {
+        return fulfillmentNav().parentViewController as? FulfillmentContainerViewController
+    }
 }

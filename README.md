@@ -6,7 +6,7 @@ The [Artsy](https://artsy.net) Auction Kiosk App.
 Project Status
 ----------------
 
-<img src ="https://raw.githubusercontent.com/artsy/eidolon/docs/eidolon_preview.md">
+<img src ="https://raw.githubusercontent.com/artsy/eidolon/master/docs/eidolon_preview.jpg">
 
 Downloading the Code
 ----------------

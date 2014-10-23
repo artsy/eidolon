@@ -13,6 +13,8 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     dynamic var bidWasPressedSignal: RACSignal = RACSubject()
 
     var enableBidButtonSignal: RACSignal? {
+        // Creates a write-once property as RAC doesnt not allow having two binded 
+        // observers to the same place
         didSet(oldSignal) {
             if (oldSignal == nil) {
                 RAC(self.bidButton, "enabled") <~ enableBidButtonSignal!

@@ -42,6 +42,6 @@ class YourBiddingDetailsViewController: UIViewController {
     }
 
     @IBAction func confirmButtonTapped(sender: AnyObject) {
-        self.fulfillmentNav().parentViewController?.dismissViewControllerAnimated(true, completion: nil)
+        fulfillmentContainer()?.closeFulfillmentModal()
     }
 }
