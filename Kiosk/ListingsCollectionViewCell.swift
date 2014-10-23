@@ -11,7 +11,15 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     
     dynamic var saleArtwork: SaleArtwork?
     dynamic var bidWasPressedSignal: RACSignal = RACSubject()
-    
+
+    var enableBidButtonSignal: RACSignal? {
+        didSet(oldSignal) {
+            if (oldSignal == nil) {
+                RAC(self.bidButton, "enabled") <~ enableBidButtonSignal!
+            }
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()

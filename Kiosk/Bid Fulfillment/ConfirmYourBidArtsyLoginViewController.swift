@@ -7,7 +7,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
     @IBOutlet var useArtsyBidderButton: UIButton!
     @IBOutlet var confirmCredentialsButton: Button!
-    
+
     var createNewAccount = false
     lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 

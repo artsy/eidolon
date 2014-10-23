@@ -47,3 +47,4 @@
 #import "UIView+BooleanDependentAnimation.h"
 #import <UIImageViewAligned/UIImageViewAligned.h>
 #import <DZNWebViewController/DZNWebViewController.h>
+#import <Reachability/Reachability.h>
