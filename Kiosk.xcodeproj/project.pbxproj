@@ -126,6 +126,8 @@
 		605B856A19C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856919C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift */; };
 		605B857019C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */; };
 		6069A0A819EF3E1600B70405 /* YourBiddingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6069A0A719EF3E1600B70405 /* YourBiddingDetailsViewController.swift */; };
+		606EEADC19F99B32008CA1D9 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */; };
+		606EEADD19F99B32008CA1D9 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */; };
 		6071320519DD3AE600CA46F4 /* BidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071320419DD3AE600CA46F4 /* BidDetails.swift */; };
 		6071320619DD3AE600CA46F4 /* BidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071320419DD3AE600CA46F4 /* BidDetails.swift */; };
 		6071321919DD4EC400CA46F4 /* FulfillmentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071321819DD4EC400CA46F4 /* FulfillmentNavigationController.swift */; };
@@ -507,6 +509,7 @@
 		605B856919C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidViewControllerTests.swift; sourceTree = "<group>"; };
 		605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidArtsyLoginViewControllerTests.swift; sourceTree = "<group>"; };
 		6069A0A719EF3E1600B70405 /* YourBiddingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourBiddingDetailsViewController.swift; sourceTree = "<group>"; };
+		606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		6071320419DD3AE600CA46F4 /* BidDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetails.swift; sourceTree = "<group>"; };
 		6071321819DD4EC400CA46F4 /* FulfillmentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentNavigationController.swift; sourceTree = "<group>"; };
 		607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidNetworkModel.swift; sourceTree = "<group>"; };
@@ -1055,6 +1058,7 @@
 				6086143919BA303700699FBC /* Views */,
 				600AAEB719F18C3300506283 /* AppSetup.swift */,
 				60E094BF19F5FF0E0035F0DD /* GlobalFunctions.swift */,
+				606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1660,6 +1664,7 @@
 				60E094C319F601970035F0DD /* UIViewSubclassesErrorExtensions.swift in Sources */,
 				E68E94A219DDCB70001405A5 /* TextField.swift in Sources */,
 				605B855B19C6E4CF0009B16B /* ConfirmYourBidViewController.swift in Sources */,
+				606EEADC19F99B32008CA1D9 /* ReachabilityManager.swift in Sources */,
 				605610DB19D2DE2B00A2850A /* ConfirmYourBidEnterYourEmailViewController.swift in Sources */,
 				5EA65C0E19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m in Sources */,
 				609A849A19E5416000476A94 /* RegistrationPasswordViewController.swift in Sources */,
@@ -1768,6 +1773,7 @@
 				5E04BF3519DD98B000687199 /* SaleArtworkTests.swift in Sources */,
 				5EA65C1019D5FC9B005EA4B4 /* UIView+BooleanDependentAnimation.m in Sources */,
 				5E95FCC019D99DB5004D0C8F /* Constants.swift in Sources */,
+				606EEADD19F99B32008CA1D9 /* ReachabilityManager.swift in Sources */,
 				609A849B19E5416000476A94 /* RegistrationPasswordViewController.swift in Sources */,
 				5ECD4EA619F3C76100B1A263 /* AppSetup.swift in Sources */,
 				60A8E7CF19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift in Sources */,
@@ -1926,7 +1932,7 @@
 				APPLICATION_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ben Maslen (8J42DH9F96)";
+				CODE_SIGN_IDENTITY = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

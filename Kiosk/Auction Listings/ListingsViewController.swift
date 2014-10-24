@@ -18,6 +18,7 @@ class ListingsViewController: UIViewController {
     dynamic var saleArtworks = [SaleArtwork]()
     dynamic var sortedSaleArtworks = [SaleArtwork]()
     dynamic var cellIdentifier = MasonryCellIdentifier
+    var reachability = ReachabilityManager()
 
     @IBOutlet var stagingFlag: UIImageView!
     @IBOutlet var loadingSpinner: Spinner!
@@ -165,7 +166,8 @@ class ListingsViewController: UIViewController {
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
         RAC(self, "loadingSpinner.hidden") <~ RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool()
-        
+        RAC(self, "registerToBidButton.enabled") <~ self.reachability.reachSignal
+
         let gridSelectedSignal = switchView.selectedIndexSignal.map { (index) -> AnyObject! in
             switch index as Int {
             case SwitchValues.Grid.rawValue:
@@ -223,6 +225,7 @@ class ListingsViewController: UIViewController {
         })
     }
 
+    @IBOutlet weak var registerToBidButton: ActionButton!
     @IBAction func registerTapped(sender: AnyObject) {
 
         ARAnalytics.event("Register To Bid Tapped")
@@ -273,7 +276,11 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
         if let listingsCell = cell as? ListingsCollectionViewCell {
+            listingsCell.enableBidButtonSignal = self.reachability.reachSignal
+            listingsCell.bidButton.enabled = reachability.isReachable()
+
             listingsCell.saleArtwork = saleArtworkAtIndexPath(indexPath)
+
             let bidSignal: RACSignal = listingsCell.bidWasPressedSignal.takeUntil(cell.rac_prepareForReuseSignal)
             bidSignal.subscribeNext({ [weak self] (_) -> Void in
                 if let saleArtwork = self?.saleArtworkAtIndexPath(indexPath) {
