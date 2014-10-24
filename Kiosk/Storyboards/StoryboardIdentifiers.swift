@@ -11,14 +11,12 @@ public enum SegueIdentifier : String {
     case EmailNotFoundonArtsy = "Email Not Found on Artsy"
     case ExistingArtsyUserFound = "Existing Artsy User Found"
     case LoadAdminWebViewController = "Load Admin Web View Controller"
-    case LoadWebView = "Load Web View"
     case PINConfirmedhasCard = "PIN Confirmed has Card"
     case PushtoBidConfirmed = "Push to Bid Confirmed"
     case RegisterCreditCardToPostal = "RegisterCreditCardToPostal"
     case RegisterPostalToConfirm = "RegisterPostalToConfirm"
-    case RegistrationFinishedPlaceBid = "Registration Finished Place Bid"
-    case RegistrationFinishedShowBidDetails = "Registration Finished Show Bid Details"
     case ShowAdminOptions = "Show Admin Options"
+    case ShowLoadingView = "Show Loading View"
 }
 
 public enum ViewControllerStoryboardIdentifier : String {

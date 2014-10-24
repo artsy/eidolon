@@ -47,15 +47,6 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     
         self.emailTextField.becomeFirstResponder()
     }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue == .EmailNotFoundonArtsy {
-            let registrationVC = segue.destinationViewController as RegisterViewController
-            registrationVC.createNewUser = true
-            registrationVC.placingBid = true
-        }
-    }
-
 }
 
 private extension ConfirmYourBidEnterYourEmailViewController {
