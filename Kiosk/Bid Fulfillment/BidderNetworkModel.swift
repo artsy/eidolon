@@ -1,7 +1,7 @@
 import UIKit
 
 class BidderNetworkModel: NSObject {
-    
+
     var bidder:Bidder?
     var createdNewBidder = false
     var fulfillmentNav:FulfillmentNavigationController!
@@ -120,10 +120,10 @@ class BidderNetworkModel: NSObject {
         let endpoint: ArtsyAPI = ArtsyAPI.CreatePINForBidder(bidderID: self.details().bidderID!)
 
         return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext { [weak self](json) -> Void in
-            
+
             let pin = json["pin"] as String?
             self?.details().bidderPIN =  pin
-                
+
         } .doError { (error) in
             log.error("Generating a PIN for bidder has failed.")
             log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")

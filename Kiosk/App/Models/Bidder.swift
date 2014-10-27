@@ -13,7 +13,7 @@ class Bidder: JSONAble {
 
     override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
         let json = JSON(json)
-        println(json.description)
+
         let id = json["id"].stringValue
         let saleID = json["sale"]["id"].stringValue
         let pin = json["pin"].stringValue

@@ -17,7 +17,7 @@ class LoadingViewController: UIViewController {
 
     var pollInterval = NSTimeInterval(1)
     var maxPollRequests = 6
-    
+
     var pollRequests = 0
 
     @IBOutlet weak var backToAuctionButton: ActionButton!
@@ -49,14 +49,11 @@ class LoadingViewController: UIViewController {
             self.bidderNetworkModel.fulfillmentNav = self.fulfillmentNav()
         }
 
-        let signal = self.bidderNetworkModel.createOrGetBidder().doNext { _ in
-            if !self.placingBid { ARAnalytics.event("Registered New User Only") }
-            return
-        } .doError { (error) -> Void in
-            self.registrationFailed()
-        }
-        signal.then {
+        self.bidderNetworkModel.createOrGetBidder().doError { (error) -> Void in
+            self.bidderError()
+        } .then {
             if !self.placingBid {
+                ARAnalytics.event("Registered New User Only")
                 return RACSignal.empty()
             }
 
@@ -68,7 +65,7 @@ class LoadingViewController: UIViewController {
                 return self!.waitForBidResolution().doNext { _ in
                     self?.bidIsResolved = true
                     return
-                } .catchTo( RACSignal.empty() )
+                } .catchTo( RACSignal.empty() ) // If polling fails, we can still show you a bid confirmation. Do not error.
             }
 
         } .subscribeCompleted { [weak self] (_) -> Void in
@@ -79,10 +76,12 @@ class LoadingViewController: UIViewController {
 
     // Error Handling
 
-    func registrationFailed() {
+    func bidderError() {
         if placingBid {
+            // If you are bidding, we show a bidding error regardless of whether or not you're also registering.
             bidPlacementFailed()
         } else {
+            // If you're not placing a bid, you're here because you're just registering.
             presentError("Registration Failed", message: "There was a problem registering for the auction. Please speak to an Artsy representative.")
         }
     }
@@ -199,26 +198,26 @@ class LoadingViewController: UIViewController {
             detailsVC.registered = bidderNetworkModel.createdNewBidder
         }
     }
-    
+
     func pollForUpdatedSaleArtwork() -> RACSignal {
-        
+
         func getUpdatedSaleArtwork() -> RACSignal {
-            
+
             let nav = self.fulfillmentNav()
             let artworkID = bidDetails().saleArtwork!.artwork.id;
-            
+
             let endpoint: ArtsyAPI = ArtsyAPI.AuctionInfoForArtwork(auctionID: nav.auctionID, artworkID: artworkID)
             return nav.loggedInProvider!.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(SaleArtwork.self)
         }
-        
+
         let beginningBidCents = bidDetails().saleArtwork?.saleHighestBid?.amountCents ?? 0
-        
+
         let updatedSaleArtworkSignal = getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
             self?.pollRequests++
             println("Polling \(self?.pollRequests) of \(self?.maxPollRequests) for updated sale artwork")
-            
+
             let saleArtwork = saleObject as? SaleArtwork
-            
+
             let updatedBidCents = saleArtwork?.saleHighestBid?.amountCents ?? 0
 
             // TODO: handle the case where the user was already the highest bidder
@@ -241,7 +240,7 @@ class LoadingViewController: UIViewController {
                 }
             }
         }
-        
+
         return RACSignal.empty().delay(pollInterval).then { updatedSaleArtworkSignal }
     }
 
