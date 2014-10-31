@@ -49,21 +49,14 @@
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
-            <string>AGaramondPro-Regular</string>
-            <string>AGaramondPro-Regular</string>
         </mutableArray>
         <mutableArray key="AGaramondPro-Semibold.otf">
             <string>AGaramondPro-Semibold</string>
             <string>AGaramondPro-Semibold</string>
             <string>AGaramondPro-Semibold</string>
             <string>AGaramondPro-Semibold</string>
-            <string>AGaramondPro-Semibold</string>
-            <string>AGaramondPro-Semibold</string>
         </mutableArray>
         <mutableArray key="ITCAvantGardeDemi_Track03.ttf">
-            <string>ITCAvantGardeDemiTrack03</string>
-            <string>ITCAvantGardeDemiTrack03</string>
-            <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
@@ -437,9 +430,6 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="N1l-90-SiW" kind="push" identifier="Registration Finished Show Bid Details" id="Czi-WV-KZW"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
@@ -469,13 +459,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="confirmTapped:" destination="BKe-0r-2Pc" eventType="touchUpInside" id="geK-LM-NHB"/>
+                                    <segue destination="2lt-co-qW2" kind="push" identifier="Show Loading View" id="PK6-h9-FCm"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cpv-vX-eD7" customClass="Spinner" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="622" y="562" width="40" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -486,11 +472,9 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="815" height="660"/>
                     <connections>
-                        <outlet property="actionSpinner" destination="cpv-vX-eD7" id="jcP-eb-BTC"/>
                         <outlet property="bidDetailsPreviewView" destination="dj6-cY-N6o" id="uCm-Ss-nAX"/>
                         <outlet property="confirmButton" destination="dyr-7D-eW1" id="RA1-BA-kCe"/>
                         <outlet property="flowView" destination="mSI-YI-8GU" id="e9i-l8-VVU"/>
-                        <segue destination="2lt-co-qW2" kind="push" identifier="Registration Finished Place Bid" id="qDL-1J-LmL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vz7-E3-ZqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -687,17 +671,6 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BpO-EK-Kpg" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="65" y="294" width="255" height="50"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="CREATE ACCOUNT">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="createNewAccountTapped:" destination="MRb-fW-vfZ" eventType="touchUpInside" id="MQP-lO-coJ"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9hG-yj-way">
                                 <rect key="frame" x="625" y="259" width="125" height="37"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="15"/>
@@ -745,10 +718,10 @@
             </objects>
             <point key="canvasLocation" x="419.5" y="116"/>
         </scene>
-        <!--Placing Bid View Controller-->
+        <!--Loading View Controller-->
         <scene sceneID="k3G-Eq-Mxm">
             <objects>
-                <viewController id="2lt-co-qW2" customClass="PlacingBidViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2lt-co-qW2" customClass="LoadingViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Nb-wA-gsX"/>
                         <viewControllerLayoutGuide type="bottom" id="6LY-4E-fIY"/>
@@ -757,8 +730,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placing your bid..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ThI-e6-Ovh" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="283" width="346" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placeholder..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ThI-e6-Ovh" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="283" width="459" height="41"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -767,7 +740,7 @@
                                 <rect key="frame" x="357" y="273" width="331" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="There is a higher max bid in the system from another bidder. Place a higher bid to secure the lot." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="Hxa-pm-Msp" customClass="ARSerifLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status message goes here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="Hxa-pm-Msp" customClass="ARSerifLabel">
                                 <rect key="frame" x="173" y="402" width="468" height="100"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="29"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -801,8 +774,8 @@
                         <outlet property="backToAuctionButton" destination="YtU-mx-Y9t" id="AmW-eF-KSv"/>
                         <outlet property="bidConfirmationImageView" destination="5Bd-va-Xyb" id="7Eg-it-es5"/>
                         <outlet property="bidDetailsPreviewView" destination="XzW-dO-Dol" id="Lor-Ob-fud"/>
-                        <outlet property="outbidNoticeLabel" destination="Hxa-pm-Msp" id="SDM-2o-TxO"/>
                         <outlet property="spinner" destination="Pio-Vk-2mc" id="piT-U7-NXv"/>
+                        <outlet property="statusMessage" destination="Hxa-pm-Msp" id="QqH-w5-RRC"/>
                         <outlet property="titleLabel" destination="ThI-e6-Ovh" id="Qsq-E7-3CR"/>
                         <segue destination="igv-xv-sfe" kind="push" identifier="Push to Bid Confirmed" id="DsB-Gb-cEw"/>
                     </connections>
@@ -810,97 +783,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOk-Pg-yZ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1746.5" y="1274"/>
-        </scene>
-        <!--Your Bidding Details View Controller-->
-        <scene sceneID="jch-Ac-cDe">
-            <objects>
-                <viewController id="N1l-90-SiW" customClass="YourBiddingDetailsViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ko2-CO-bcN"/>
-                        <viewControllerLayoutGuide type="bottom" id="1lm-JB-1Nm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="r9W-qp-3Ns">
-                        <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You are now registered" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofc-dC-fQj" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="80" width="345" height="41"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A1e-dO-fHW">
-                                <rect key="frame" x="65" y="138" width="685" height="2"/>
-                                <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nti-wZ-91X" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="535" y="552" width="215" height="50"/>
-                                <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="BACK TO AUCTION">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="confirmButtonTapped:" destination="N1l-90-SiW" eventType="touchUpInside" id="ZV0-b8-KJQ"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i4q-AT-jKJ">
-                                <rect key="frame" x="65" y="174" width="667" height="217"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PIN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CxS-TA-vKZ">
-                                        <rect key="frame" x="190" y="118" width="108" height="21"/>
-                                        <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="15"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="⋆ ⋆ ⋆ ⋆" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sK5-ZW-ycH">
-                                        <rect key="frame" x="190" y="143" width="112" height="21"/>
-                                        <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsL-mV-Klx" customClass="ARFlatButton">
-                                        <rect key="frame" x="300" y="118" width="97" height="50"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="18"/>
-                                        <state key="normal" title="REVEAL">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="revealAppTapped:" destination="N1l-90-SiW" eventType="touchUpInside" id="yjS-vE-MG1"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BIDDER NUMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MtT-eY-tum">
-                                        <rect key="frame" x="0.0" y="118" width="154" height="21"/>
-                                        <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="15"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="09922" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgB-Zc-b2J">
-                                        <rect key="frame" x="0.0" y="143" width="110" height="21"/>
-                                        <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use your Bidder Number and PIN next time you bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="lUC-AU-Wuo" customClass="ARSerifLabel">
-                                        <rect key="frame" x="0.0" y="0.0" width="563" height="44"/>
-                                        <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="25"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="0jN-0L-5Tx"/>
-                    <connections>
-                        <outlet property="bidderNumberLabel" destination="FgB-Zc-b2J" id="dON-Yd-9f1"/>
-                        <outlet property="confirmButton" destination="nti-wZ-91X" id="JVG-tK-j4y"/>
-                        <outlet property="pinNumberLabel" destination="sK5-ZW-ycH" id="hb5-zi-GqM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aFe-IW-rLA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="616.5" y="1698"/>
         </scene>
         <!--Your Bidding Details View Controller-->
         <scene sceneID="yEo-PL-Kq3">
@@ -935,12 +817,6 @@
                                 <rect key="frame" x="65" y="128" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placeholder Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygz-2L-FaN" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="79" width="346" height="41"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IS8-40-WWB" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="355" y="60" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -964,7 +840,6 @@
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="revealAppTapped:" destination="N1l-90-SiW" eventType="touchUpInside" id="ZiB-rj-RVW"/>
                                     <action selector="revealAppTapped:" destination="igv-xv-sfe" eventType="touchUpInside" id="fxq-fR-pZf"/>
                                 </connections>
                             </button>
@@ -982,8 +857,14 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YR3-uG-qty">
                                 <rect key="frame" x="704" y="70" width="46" height="46"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placeholder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hw9-HI-g6e" customClass="ARSerifLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You are now registered" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hw9-HI-g6e" customClass="ARSerifLabel">
                                 <rect key="frame" x="65" y="167" width="346" height="41"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placeholder Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygz-2L-FaN" customClass="ARSerifLabel">
+                                <rect key="frame" x="65" y="79" width="459" height="41"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -995,10 +876,11 @@
                     <connections>
                         <outlet property="bidDetailsView" destination="IS8-40-WWB" id="2B7-BO-ld7"/>
                         <outlet property="bidderNumberLabel" destination="gAG-Nf-2pr" id="4ef-iQ-Rys"/>
+                        <outlet property="bodyLabel" destination="1qc-2g-FaX" id="bT5-B5-APx"/>
                         <outlet property="confirmButton" destination="TQ1-Lh-eIW" id="bGd-dq-3Yk"/>
                         <outlet property="confirmationImageView" destination="YR3-uG-qty" id="Qqj-Bn-LHZ"/>
                         <outlet property="pinNumberLabel" destination="5dw-2A-bnK" id="Vmy-hS-02T"/>
-                        <outlet property="subtitleLabel" destination="1qc-2g-FaX" id="m91-Vf-x5v"/>
+                        <outlet property="subtitleLabel" destination="hw9-HI-g6e" id="3P0-a8-Vx6"/>
                         <outlet property="titleLabel" destination="ygz-2L-FaN" id="2II-xo-1rQ"/>
                     </connections>
                 </viewController>
@@ -1554,8 +1436,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="A1R-R2-CSF"/>
         <segue reference="ccv-le-Cu0"/>
-        <segue reference="qDL-1J-LmL"/>
+        <segue reference="A1R-R2-CSF"/>
+        <segue reference="6qF-R8-kJy"/>
     </inferredMetricsTieBreakers>
 </document>

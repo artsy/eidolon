@@ -10,7 +10,7 @@ enum ArtsyAPI {
     case Me
     
     case MyCreditCards
-    case CreatePINForBidder(bidderNumber: String)
+    case CreatePINForBidder(bidderID: String)
     case FindBidderRegistration(auctionID: String, phone: String)
     case RegisterToBid(auctionID: String)
     
@@ -140,8 +140,8 @@ extension ArtsyAPI : MoyaPath {
         case MyCreditCards:
             return "/api/v1/me/credit_cards"
 
-        case CreatePINForBidder(let bidderNumber):
-            return "/api/v1/bidder/\(bidderNumber)/pin"
+        case CreatePINForBidder(let bidderID):
+            return "/api/v1/bidder/\(bidderID)/pin"
 
         case ActiveAuctions:
             return "/api/v1/sales"
