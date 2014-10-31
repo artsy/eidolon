@@ -62,5 +62,24 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             expect(sut.pinTextField.text) == ""
         }
 
+        it("adds the correct auth params to a PIN'd request") {
+            let auctionID = "AUCTION"
+            let pin = "PIN"
+            let number = "NUMBER"
+            let sut = ConfirmYourBidPINViewController()
+            let nav = FulfillmentNavigationController(rootViewController:sut)
+            nav?.auctionID = auctionID
+
+            let provider: ReactiveMoyaProvider<ArtsyAPI> = sut.providerForPIN(pin, number: number)
+            let endpoint = provider.endpointsClosure(ArtsyAPI.Me, method: Moya.Method.GET, parameters:["":""])
+            let request = provider.endpointResolver(endpoint: endpoint)
+
+            let address = request.URL.absoluteString!
+            expect(address).to( contain(auctionID) )
+            expect(address).to( contain(pin) )
+            expect(address).to( contain(number) )
+
+        }
+
     }
 }

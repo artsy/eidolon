@@ -10,7 +10,6 @@ class AppViewControllerTests: QuickSpec {
         }
 
         describe("view") {
-
             var sut: AppViewController!
             var fakeReachabilitySignal: RACSubject!
             var fakeView: UIView!
