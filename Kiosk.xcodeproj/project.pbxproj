@@ -128,6 +128,8 @@
 		605B856A19C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856919C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift */; };
 		605B857019C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */; };
 		6069A0A819EF3E1600B70405 /* YourBiddingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6069A0A719EF3E1600B70405 /* YourBiddingDetailsViewController.swift */; };
+		606CAEF11A03BCAF007834D6 /* BidCheckingNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606CAEF01A03BCAF007834D6 /* BidCheckingNetworkModel.swift */; };
+		606CAEF21A03BCAF007834D6 /* BidCheckingNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606CAEF01A03BCAF007834D6 /* BidCheckingNetworkModel.swift */; };
 		606EEADC19F99B32008CA1D9 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */; };
 		606EEADD19F99B32008CA1D9 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */; };
 		6071320519DD3AE600CA46F4 /* BidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071320419DD3AE600CA46F4 /* BidDetails.swift */; };
@@ -513,6 +515,7 @@
 		605B856919C6F3940009B16B /* ConfirmYourBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidViewControllerTests.swift; sourceTree = "<group>"; };
 		605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidArtsyLoginViewControllerTests.swift; sourceTree = "<group>"; };
 		6069A0A719EF3E1600B70405 /* YourBiddingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourBiddingDetailsViewController.swift; sourceTree = "<group>"; };
+		606CAEF01A03BCAF007834D6 /* BidCheckingNetworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidCheckingNetworkModel.swift; sourceTree = "<group>"; };
 		606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		6071320419DD3AE600CA46F4 /* BidDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetails.swift; sourceTree = "<group>"; };
 		6071321819DD4EC400CA46F4 /* FulfillmentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentNavigationController.swift; sourceTree = "<group>"; };
@@ -1121,7 +1124,6 @@
 				60A4FD2F19E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift */,
 				600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */,
 				6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */,
-				600DABE519EB41D800278378 /* BidderNetworkModel.swift */,
 			);
 			name = Registration;
 			sourceTree = "<group>";
@@ -1152,6 +1154,8 @@
 			children = (
 				60C3984119E8356D00CB81F4 /* LoadingViewController.swift */,
 				607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */,
+				606CAEF01A03BCAF007834D6 /* BidCheckingNetworkModel.swift */,
+				600DABE519EB41D800278378 /* BidderNetworkModel.swift */,
 			);
 			name = "Final bid Placing";
 			sourceTree = "<group>";
@@ -1674,6 +1678,7 @@
 				60C37DC319D4359E002E7A44 /* JSONAble.swift in Sources */,
 				607A17E019F097A700326482 /* PlaceBidNetworkModel.swift in Sources */,
 				60C3984219E8356D00CB81F4 /* LoadingViewController.swift in Sources */,
+				606CAEF11A03BCAF007834D6 /* BidCheckingNetworkModel.swift in Sources */,
 				60D976DF19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift in Sources */,
 				60A4FD3019E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */,
 				60D976E419D30F9F00DE9F3D /* Bidder.swift in Sources */,
@@ -1816,6 +1821,7 @@
 				5EA137C019C72BD200D0B743 /* ArtsyAPISpec.swift in Sources */,
 				6030A11919D1A1EF00B934CA /* ArtsyAPI.swift in Sources */,
 				60212C9D19D5EAF9001921E1 /* ArtworkTests.swift in Sources */,
+				606CAEF21A03BCAF007834D6 /* BidCheckingNetworkModel.swift in Sources */,
 				6051290319E15F63004B05BF /* SnapshotExtension.swift in Sources */,
 				60E0949119F597A20035F0DD /* PasswordAlertViewController.swift in Sources */,
 				60E0949819F5AB770035F0DD /* XCGLogger.swift in Sources */,

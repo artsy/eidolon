@@ -11,9 +11,7 @@ class BidderNetworkModel: NSObject {
     }
 
     func createOrGetBidder() -> RACSignal {
-
         return createOrUpdateUser().then {
-
             self.createOrUpdateBidder()
 
         }.then {
@@ -47,14 +45,16 @@ class BidderNetworkModel: NSObject {
             log.error("Creating user failed.")
             log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
 
-        }.then { self.updateProvider() }
-
+        }.then {
+            self.updateProvider()
+        }
     }
 
     func updateUser() -> RACSignal {
         let newUser = details().newUser
         let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!)
         let signal = provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
+
         return signal.doError { (error) in
             log.error("Updating user failed.")
             log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
@@ -130,8 +130,6 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    // Paddle Number
-
     func getMyPaddleNumber() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         return provider().request(endpoint, method: .GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self).doNext { [weak self](user) -> Void in
@@ -145,7 +143,6 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    // Provider
 
     func provider() -> ReactiveMoyaProvider<ArtsyAPI>  {
         if let provider = fulfillmentNav.loggedInProvider {

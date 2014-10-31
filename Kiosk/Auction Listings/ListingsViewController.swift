@@ -315,7 +315,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 }
 
-// Mark: Private Methods
+// MARK: Private Methods
 
 private extension ListingsViewController {
     
