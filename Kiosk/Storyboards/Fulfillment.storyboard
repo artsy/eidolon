@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
     </dependencies>
@@ -440,12 +440,9 @@
                                     <segue destination="B8h-mi-lOQ" kind="embed" id="jug-Jt-aJZ"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" placeholderIntrinsicWidth="215" placeholderIntrinsicHeight="280" translatesAutoresizingMaskIntoConstraints="NO" id="mSI-YI-8GU" customClass="RegisterFlowView" customModule="Kiosk" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="215" placeholderIntrinsicHeight="280" translatesAutoresizingMaskIntoConstraints="NO" id="mSI-YI-8GU" customClass="RegisterFlowView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="535" y="175" width="215" height="280"/>
                                 <color key="backgroundColor" red="1" green="0.74152541888448142" blue="0.81937699294223965" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="215" id="JPl-4g-hBM"/>
-                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dj6-cY-N6o" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="426" y="64" width="324" height="60"/>
@@ -464,9 +461,6 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="mSI-YI-8GU" firstAttribute="top" secondItem="6qI-0b-7Dq" secondAttribute="bottom" constant="175" id="lmQ-vf-i6A"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4g9-5F-8OF"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -721,7 +715,7 @@
         <!--Loading View Controller-->
         <scene sceneID="k3G-Eq-Mxm">
             <objects>
-                <viewController id="2lt-co-qW2" customClass="LoadingViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Loading Bids or Registering" id="2lt-co-qW2" customClass="LoadingViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Nb-wA-gsX"/>
                         <viewControllerLayoutGuide type="bottom" id="6LY-4E-fIY"/>

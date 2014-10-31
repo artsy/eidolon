@@ -39,8 +39,8 @@ class ListingsViewController: UIViewController {
         return SwitchView(buttonTitles: SwitchValues.allSwitchValues().map{$0.name.uppercaseString})
     }()
     
-    class func instantiateFromStoryboard() -> ListingsViewController {
-        return UIStoryboard.auction().viewControllerWithID(.AuctionListings) as ListingsViewController
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ListingsViewController {
+        return storyboard.viewControllerWithID(.AuctionListings) as ListingsViewController
     }
     
     // Recursively calls itself with page+1 until the count of the returned array is < pageSize
@@ -84,7 +84,7 @@ class ListingsViewController: UIViewController {
         }), RACScheduler.mainThreadScheduler())
     }
     
-    func recurringListingsRequestSigal(auctionID: String) -> RACSignal {
+    func recurringListingsRequestSignal(auctionID: String) -> RACSignal {
         let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate()).takeUntil(rac_willDeallocSignal())
         
         return recurringSignal.filter({ [weak self] (_) -> Bool in
@@ -160,7 +160,7 @@ class ListingsViewController: UIViewController {
         view.insertSubview(collectionView, belowSubview: loadingSpinner)
         
         // Set up reactive bindings
-        RAC(self, "saleArtworks") <~ recurringListingsRequestSigal(auctionID)
+        RAC(self, "saleArtworks") <~ recurringListingsRequestSignal(auctionID)
         
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")

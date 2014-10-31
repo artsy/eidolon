@@ -130,6 +130,7 @@
 		6069A0A819EF3E1600B70405 /* YourBiddingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6069A0A719EF3E1600B70405 /* YourBiddingDetailsViewController.swift */; };
 		606CAEF11A03BCAF007834D6 /* BidCheckingNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606CAEF01A03BCAF007834D6 /* BidCheckingNetworkModel.swift */; };
 		606CAEF21A03BCAF007834D6 /* BidCheckingNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606CAEF01A03BCAF007834D6 /* BidCheckingNetworkModel.swift */; };
+		606CAF061A03F2A2007834D6 /* LoadingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606CAF051A03F2A2007834D6 /* LoadingViewControllerTests.swift */; };
 		606EEADC19F99B32008CA1D9 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */; };
 		606EEADD19F99B32008CA1D9 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */; };
 		6071320519DD3AE600CA46F4 /* BidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071320419DD3AE600CA46F4 /* BidDetails.swift */; };
@@ -516,6 +517,7 @@
 		605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidArtsyLoginViewControllerTests.swift; sourceTree = "<group>"; };
 		6069A0A719EF3E1600B70405 /* YourBiddingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourBiddingDetailsViewController.swift; sourceTree = "<group>"; };
 		606CAEF01A03BCAF007834D6 /* BidCheckingNetworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidCheckingNetworkModel.swift; sourceTree = "<group>"; };
+		606CAF051A03F2A2007834D6 /* LoadingViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewControllerTests.swift; sourceTree = "<group>"; };
 		606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		6071320419DD3AE600CA46F4 /* BidDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetails.swift; sourceTree = "<group>"; };
 		6071321819DD4EC400CA46F4 /* FulfillmentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentNavigationController.swift; sourceTree = "<group>"; };
@@ -991,6 +993,7 @@
 		605B856419C6E9080009B16B /* Fulfillment */ = {
 			isa = PBXGroup;
 			children = (
+				606CAF041A03F290007834D6 /* Bid Placing */,
 				605B856F19C6F4490009B16B /* ConfirmYourBidArtsyLoginViewControllerTests.swift */,
 				60D976DC19D2F6DD00DE9F3D /* ConfirmYourBidEnterYourEmailViewControllerTests.swift */,
 				6007B42419DEFAA000EDF43E /* ConfirmYourBidPINViewControllerTests.swift */,
@@ -1000,6 +1003,14 @@
 			);
 			name = Fulfillment;
 			path = "Bid Fulfillment";
+			sourceTree = "<group>";
+		};
+		606CAF041A03F290007834D6 /* Bid Placing */ = {
+			isa = PBXGroup;
+			children = (
+				606CAF051A03F2A2007834D6 /* LoadingViewControllerTests.swift */,
+			);
+			name = "Bid Placing";
 			sourceTree = "<group>";
 		};
 		6071321B19DD520B00CA46F4 /* Containers */ = {
@@ -1807,6 +1818,7 @@
 				6030A11119D1931C00B934CA /* CardHandler.swift in Sources */,
 				6030A10F19D1931900B934CA /* Artwork.swift in Sources */,
 				5E64137019EC5D10005AC5BC /* AppDelegate+GlobalActions.swift in Sources */,
+				606CAF061A03F2A2007834D6 /* LoadingViewControllerTests.swift in Sources */,
 				6030A10919D1931400B934CA /* SwipeCreditCardViewController.swift in Sources */,
 				6030A11019D1931900B934CA /* Artist.swift in Sources */,
 				604B225319D359C5008D86C7 /* SystemTime.swift in Sources */,

@@ -9,8 +9,7 @@ class PlaceBidNetworkModel: NSObject {
 
         let saleArtwork = bidDetails.saleArtwork
         let cents = String(bidDetails.bidAmountCents! as Int)
-        return self.bidOnSaleArtwork(saleArtwork!, bidAmountCents: cents)
-
+        return bidOnSaleArtwork(saleArtwork!, bidAmountCents: cents)
     }
 
     func provider() -> ReactiveMoyaProvider<ArtsyAPI>  {
@@ -20,7 +19,7 @@ class PlaceBidNetworkModel: NSObject {
         return Provider.sharedProvider
     }
 
-    func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> RACSignal {
+    private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> RACSignal {
         let bidEndpoint: ArtsyAPI = ArtsyAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
 
         let request = provider().request(bidEndpoint, method: .POST, parameters:bidEndpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)

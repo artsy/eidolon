@@ -13,4 +13,9 @@
         self.bidderPIN = bidderPIN
         self.bidAmountCents = bidAmountCents
     }
+
+    /// Not for production use
+    convenience init(string: String) {
+        self.init(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+    }
 }

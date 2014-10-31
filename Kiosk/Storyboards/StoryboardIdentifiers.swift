@@ -27,6 +27,7 @@ public enum ViewControllerStoryboardIdentifier : String {
     case ConfirmYourBidEnterPassword = "Confirm Your Bid Enter Password"
     case ConfirmYourBidPIN = "Confirm Your Bid PIN"
     case FulfillmentContainer = "Fulfillment Container"
+    case LoadingBidsorRegistering = "Loading Bids or Registering"
     case NoInternetConnection = "No Internet Connection"
     case PlaceYourBid = "Place Your Bid"
     case RegisterAnAccount = "Register An Account"

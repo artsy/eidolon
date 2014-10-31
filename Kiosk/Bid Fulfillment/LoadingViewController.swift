@@ -10,8 +10,14 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var bidConfirmationImageView: UIImageView!
 
     var placingBid = true
+
+    var continueToNextViewController = true
+    var performNetworking = true
+    var animate = true
+
     var bidderNetworkModel: BidderNetworkModel!
     var bidCheckingModel: BidCheckingNetworkModel!
+    var placeBidNetworkModel: PlaceBidNetworkModel!
 
     @IBOutlet weak var backToAuctionButton: ActionButton!
 
@@ -30,13 +36,16 @@ class LoadingViewController: UIViewController {
 
         statusMessage.hidden = true
         backToAuctionButton.hidden = true
+        spinner.animate(animate)
 
         titleLabel.text = placingBid ? "Placing bid..." : "Registering..."
 
         bidderNetworkModel = bidderNetworkModel ?? BidderNetworkModel()
         bidderNetworkModel.fulfillmentNav = fulfillmentNav()
 
-        self.bidderNetworkModel.createOrGetBidder().doError { (error) -> Void in
+        if !performNetworking { return }
+
+        bidderNetworkModel.createOrGetBidder().doError { (error) -> Void in
             self.bidderError()
 
         } .then {
@@ -51,7 +60,7 @@ class LoadingViewController: UIViewController {
         } .then { [weak self] (_) in
             if self == nil { return RACSignal.empty() }
 
-            self?.bidCheckingModel = self?.createBidCheckingModel()
+            self?.bidCheckingModel = self?.bidCheckingModel ?? self?.createBidCheckingModel()
             return self!.bidCheckingModel.waitForBidResolution()
 
         } .subscribeCompleted { [weak self] (_) in
@@ -66,7 +75,7 @@ class LoadingViewController: UIViewController {
     }
 
     func placeBid() -> RACSignal {
-        let placeBidNetworkModel = PlaceBidNetworkModel()
+        placeBidNetworkModel = placeBidNetworkModel ?? PlaceBidNetworkModel()
         let auctionID = self.fulfillmentNav().auctionID!
         placeBidNetworkModel.fulfillmentNav = self.fulfillmentNav()
 
@@ -100,9 +109,11 @@ class LoadingViewController: UIViewController {
             handleRegistered()
         }
 
-        let delayTime = bidIsResolved ? 7.0 : 3.0
-        delayToMainThread(delayTime) {
-            self.performSegue(.PushtoBidConfirmed)
+        if continueToNextViewController {
+            let delayTime = bidIsResolved ? 7.0 : 3.0
+            delayToMainThread(delayTime) {
+                self.performSegue(.PushtoBidConfirmed)
+            }
         }
     }
 
@@ -114,6 +125,7 @@ class LoadingViewController: UIViewController {
     func handleUnknownBidder() {
         titleLabel.text = "Bid Confirmed"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
+        backToAuctionButton.hidden = false
     }
 
     func handleHighestBidder() {
@@ -142,10 +154,13 @@ class LoadingViewController: UIViewController {
             // If you're not placing a bid, you're here because you're just registering.
             presentError("Registration Failed", message: "There was a problem registering for the auction. Please speak to an Artsy representative.")
         }
+
+        backToAuctionButton.hidden = true
     }
 
     func bidPlacementFailed() {
         presentError("Bid Failed", message: "There was a problem placing your bid. Please speak to an Artsy representative.")
+        backToAuctionButton.hidden = true
     }
 
     func presentError(title: String, message: String) {
@@ -166,6 +181,8 @@ class LoadingViewController: UIViewController {
             detailsVC.registered = bidderNetworkModel.createdNewBidder
         }
     }
+
+    // Go Back
 
     @IBAction func backToAuctionTapped(sender: AnyObject) {
         fulfillmentContainer()?.closeFulfillmentModal()

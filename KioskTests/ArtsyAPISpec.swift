@@ -19,7 +19,7 @@ class ArtsyAPISpec: QuickSpec {
             return XAppRequest(ArtsyAPI.Auctions, method: Moya.DefaultMethod(), parameters: Moya.DefaultParameters(), defaults: defaults)
         }
 
-        describe("keys", { () -> () in
+        describe("keys", {
             it("stubs responses for invalid keys") {
                 let invalidKeys = APIKeys(key: "", secret: "")
                 expect(invalidKeys.stubResponses).to(beTruthy())
@@ -32,13 +32,13 @@ class ArtsyAPISpec: QuickSpec {
         })
         
         describe("requests") {
-            beforeSuite { () -> () in
+            beforeSuite { 
                 // Force provider to stub responses
                 APIKeys.sharedKeys = APIKeys(key: "", secret: "")
                 Provider.sharedProvider = Provider.StubbingProvider()
             }
             
-            afterSuite { () -> () in
+            afterSuite {
                 // Reset provider
                 APIKeys.sharedKeys = APIKeys()
                 Provider.sharedProvider = Provider.DefaultProvider()

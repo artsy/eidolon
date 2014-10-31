@@ -6,9 +6,20 @@ class BidderNetworkModel: NSObject {
     var createdNewBidder = false
     var fulfillmentNav:FulfillmentNavigationController!
 
-    func details() -> BidDetails {
+    // MARK: - Getters
+
+    private func details() -> BidDetails {
         return fulfillmentNav.bidDetails
     }
+
+    private func provider() -> ReactiveMoyaProvider<ArtsyAPI>  {
+        if let provider = fulfillmentNav.loggedInProvider {
+            return provider
+        }
+        return Provider.sharedProvider
+    }
+
+    // MARK: - Main Signal
 
     func createOrGetBidder() -> RACSignal {
         return createOrUpdateUser().then {
@@ -19,9 +30,9 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    // User
+    // MARK: - Chained Signals
 
-    func checkUserEmailExists(email: String) -> RACSignal {
+    private func checkUserEmailExists(email: String) -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: email)
         let request = Provider.sharedProvider.request(endpoint, method: .HEAD, parameters:endpoint.defaultParameters)
 
@@ -31,13 +42,13 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    func createOrUpdateUser() -> RACSignal {
+    private func createOrUpdateUser() -> RACSignal {
         let boolSignal = self.checkUserEmailExists(details().newUser.email!)
         let signal = RACSignal.`if`(boolSignal, then: self.updateUser(), `else`: self.createNewUser())
         return signal.then { self.addCardToUser() }
     }
 
-    func createNewUser() -> RACSignal {
+    private func createNewUser() -> RACSignal {
         let newUser = details().newUser
         let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email!, password: newUser.password!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!, name: newUser.name!)
 
@@ -50,7 +61,7 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    func updateUser() -> RACSignal {
+    private func updateUser() -> RACSignal {
         let newUser = details().newUser
         let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!, name: newUser.name!)
         let signal = provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
@@ -61,7 +72,7 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    func addCardToUser() -> RACSignal {
+    private func addCardToUser() -> RACSignal {
         if (details().newUser.creditCardToken == nil) { return RACSignal.empty() }
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(balancedToken: details().newUser.creditCardToken!)
 
@@ -73,16 +84,16 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    // Bidder
+    // MARK: - Auction / Bidder Signals
 
-    func createOrUpdateBidder() -> RACSignal {
+    private func createOrUpdateBidder() -> RACSignal {
         let boolSignal = self.checkForBidderOnAuction(self.fulfillmentNav.auctionID)
         let trueSignal = RACSignal.empty()
         let falseSignal = self.registerToAuction().then { self.generateAPIN() }
         return RACSignal.`if`(boolSignal, then: trueSignal, `else`: falseSignal)
     }
 
-    func checkForBidderOnAuction(auctionID: String) -> RACSignal {
+    private func checkForBidderOnAuction(auctionID: String) -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)
         let request = provider().request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Bidder.self)
 
@@ -101,7 +112,7 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    func registerToAuction() -> RACSignal {
+    private func registerToAuction() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: fulfillmentNav.auctionID)
         let signal = provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(Bidder.self)
         return signal.doNext{ [weak self] (bidder) in
@@ -116,7 +127,7 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    func generateAPIN() -> RACSignal {
+    private func generateAPIN() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.CreatePINForBidder(bidderID: self.details().bidderID!)
 
         return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext { [weak self](json) -> Void in
@@ -130,7 +141,7 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    func getMyPaddleNumber() -> RACSignal {
+    private func getMyPaddleNumber() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         return provider().request(endpoint, method: .GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self).doNext { [weak self](user) -> Void in
 
@@ -143,15 +154,7 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-
-    func provider() -> ReactiveMoyaProvider<ArtsyAPI>  {
-        if let provider = fulfillmentNav.loggedInProvider {
-            return provider
-        }
-        return Provider.sharedProvider
-    }
-
-    func updateProvider() -> RACSignal {
+    private func updateProvider() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: details().newUser.email!, password: details().newUser.password!)
 
         return provider().request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext { [weak self] (accessTokenDict) -> Void in
@@ -160,7 +163,7 @@ class BidderNetworkModel: NSObject {
                 self?.fulfillmentNav.xAccessToken = accessToken
             }
 
-        }.doError { (error) in
+        } .doError { (error) in
             log.error("Getting Access Token failed.")
             log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
