@@ -1,27 +1,25 @@
 import UIKit
 
 class ReachabilityManager: NSObject {
-    let reachSignal = RACSubject()
-    let reachability = Reachability.reachabilityForInternetConnection()
+    let reachSignal:RACSignal = RACSubject()
+    private let reachability = Reachability.reachabilityForInternetConnection()
 
     override init() {
         super.init()
 
-        reachability.reachableBlock = { [weak self] (_) in
-            self?.reachSignal.sendNext(true)
-            return
+        reachability.reachableBlock = { (_) in
+            return (self.reachSignal as RACSubject).sendNext(true)
         }
 
-        reachability.unreachableBlock = { [weak self] (_) in
-            self?.reachSignal.sendNext(false)
-            return
+        reachability.unreachableBlock = { (_) in
+            return (self.reachSignal as RACSubject).sendNext(false)
         }
 
         reachability.startNotifier()
-        reachSignal.sendNext(reachability.isReachable())
+        (reachSignal as RACSubject).sendNext(reachability.isReachable())
     }
 
     func isReachable() -> Bool {
-        return reachability.isReachable()
+        return Reachability.reachabilityForInternetConnection().isReachable()
     }
 }

@@ -109,6 +109,8 @@
 		6030A12819D1A63400B934CA /* Auction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE582D19B8AF4E007B01D0 /* Auction.storyboard */; };
 		6030A12919D1A63700B934CA /* Fulfillment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EEE583519B8AFD4007B01D0 /* Fulfillment.storyboard */; };
 		6030A12B19D1AA0F00B934CA /* KioskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030A12A19D1AA0F00B934CA /* KioskTests.swift */; };
+		6036E0891A017CD200F9979D /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6036E0881A017CD200F9979D /* AppViewController.swift */; };
+		6036E08A1A017CD200F9979D /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6036E0881A017CD200F9979D /* AppViewController.swift */; };
 		603F8CC719BDF80C00B162C7 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603F8CB119BDF77700B162C7 /* Nimble.framework */; };
 		603F8CC819BDF80C00B162C7 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 603F8CC419BDF78A00B162C7 /* Quick.framework */; };
 		604AF5C019E14A020019884E /* RegisterFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604AF5BF19E14A020019884E /* RegisterFlowView.swift */; };
@@ -142,6 +144,7 @@
 		607F0ADE19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 607F0ADC19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json */; };
 		607F0AF119F3128900C2F4A6 /* AuctionInfoForArtwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 607F0AF019F3128900C2F4A6 /* AuctionInfoForArtwork.json */; };
 		607F0AF219F3128900C2F4A6 /* AuctionInfoForArtwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 607F0AF019F3128900C2F4A6 /* AuctionInfoForArtwork.json */; };
+		60864AB51A02344D00F47981 /* AppViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60864AB41A02344D00F47981 /* AppViewControllerTests.swift */; };
 		6087602219E9A6DF00116611 /* RegistrationMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */; };
 		6087602319E9A6DF00116611 /* RegistrationMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */; };
 		6087605019E9EDA800116611 /* BidDetailsPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087604F19E9EDA800116611 /* BidDetailsPreviewView.swift */; };
@@ -498,6 +501,7 @@
 		6030A0F219D18F5200B934CA /* Artwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		6030A0FF19D192D000B934CA /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		6030A12A19D1AA0F00B934CA /* KioskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KioskTests.swift; sourceTree = "<group>"; };
+		6036E0881A017CD200F9979D /* AppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
 		604AF5BF19E14A020019884E /* RegisterFlowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterFlowView.swift; path = ../App/Views/RegisterFlowView.swift; sourceTree = "<group>"; };
 		604B225119D359C3008D86C7 /* SystemTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemTimeTests.swift; sourceTree = "<group>"; };
 		6051290219E15F63004B05BF /* SnapshotExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotExtension.swift; sourceTree = "<group>"; };
@@ -518,6 +522,7 @@
 		607F0ABC19F2C3AE00C2F4A6 /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		607F0ADC19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyBidPositionsForAuctionArtwork.json; sourceTree = "<group>"; };
 		607F0AF019F3128900C2F4A6 /* AuctionInfoForArtwork.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AuctionInfoForArtwork.json; sourceTree = "<group>"; };
+		60864AB41A02344D00F47981 /* AppViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewControllerTests.swift; sourceTree = "<group>"; };
 		6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationMobileViewController.swift; sourceTree = "<group>"; };
 		6087604F19E9EDA800116611 /* BidDetailsPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetailsPreviewView.swift; sourceTree = "<group>"; };
 		6087605219EA117100116611 /* ListingsCountdownManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingsCountdownManager.swift; path = "Auction Listings/ListingsCountdownManager.swift"; sourceTree = "<group>"; };
@@ -1059,6 +1064,7 @@
 				600AAEB719F18C3300506283 /* AppSetup.swift */,
 				60E094BF19F5FF0E0035F0DD /* GlobalFunctions.swift */,
 				606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */,
+				6036E0881A017CD200F9979D /* AppViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1073,6 +1079,15 @@
 				609A849619E53ED200476A94 /* RACFunctions.swift */,
 			);
 			path = "Bid Fulfillment";
+			sourceTree = "<group>";
+		};
+		60864AA21A02338B00F47981 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				60864AB41A02344D00F47981 /* AppViewControllerTests.swift */,
+			);
+			name = "View Controllers";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		6092C4AD19CAEF75003BE8EC /* Extensions */ = {
@@ -1156,6 +1171,7 @@
 		60C6913519D6CB99001F58FD /* App */ = {
 			isa = PBXGroup;
 			children = (
+				60864AA21A02338B00F47981 /* View Controllers */,
 				60C6913619D6CB99001F58FD /* RAC */,
 			);
 			path = App;
@@ -1647,6 +1663,7 @@
 				60968DD019C5B427001AB802 /* KeypadView.swift in Sources */,
 				600DABF119EB7C3700278378 /* AuctionWebViewController.swift in Sources */,
 				609A848F19E537AA00476A94 /* RegistrationCoordinator.swift in Sources */,
+				6036E0891A017CD200F9979D /* AppViewController.swift in Sources */,
 				E69EA8BE19E83E08005EF2C8 /* WebViewController.swift in Sources */,
 				5E6ED5FF19C07A4300CF3398 /* Moya.swift in Sources */,
 				600DABE619EB41D800278378 /* RegistrationNetworkModel.swift in Sources */,
@@ -1715,6 +1732,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6036E08A1A017CD200F9979D /* AppViewController.swift in Sources */,
 				609A848D19E52E7700476A94 /* RegisterViewController.swift in Sources */,
 				6030A11F19D1A23100B934CA /* RACSignal+Moya.swift in Sources */,
 				601D01C319DEABFE0037568C /* TextField.swift in Sources */,
@@ -1827,6 +1845,7 @@
 				60C37DD219D44056002E7A44 /* SwiftyJSON.swift in Sources */,
 				60C3984019E81ECF00CB81F4 /* NSErrorExtensions.swift in Sources */,
 				60D976DD19D2F6DD00DE9F3D /* ConfirmYourBidEnterYourEmailViewControllerTests.swift in Sources */,
+				60864AB51A02344D00F47981 /* AppViewControllerTests.swift in Sources */,
 				60C37DD819D45151002E7A44 /* Bidder.swift in Sources */,
 				6071321A19DD4EC400CA46F4 /* FulfillmentNavigationController.swift in Sources */,
 			);

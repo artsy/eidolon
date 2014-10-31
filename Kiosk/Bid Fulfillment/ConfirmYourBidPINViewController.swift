@@ -93,7 +93,9 @@ class ConfirmYourBidPINViewController: UIViewController {
     func providerForPIN(pin:String, number:String) -> ReactiveMoyaProvider<ArtsyAPI> {
         let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
             var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
-            return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number])
+
+            let auctionID = self.fulfillmentNav().auctionID
+            return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number, "sale_id": auctionID])
         }
 
         return ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, endpointResolver: endpointResolver(), stubResponses: APIKeys.sharedKeys.stubResponses)

@@ -2,6 +2,10 @@ import Quick
 import Nimble
 
 class SaleTests: QuickSpec {
+    func stringFromDate(date: NSDate) -> String {
+        return ISO8601DateFormatter().stringFromDate(date)
+    }
+
     override func spec() {
 
         it("converts from JSON") {
@@ -9,8 +13,8 @@ class SaleTests: QuickSpec {
             let isAuction = true
             let startDate = "2014-09-21T19:22:24Z"
             let endDate = "2015-09-24T19:22:24Z"
-
-            let data:[String: AnyObject] =  ["id":id , "is_auction" : isAuction, "start_at":startDate, "end_at":endDate]
+            let name = "name"
+            let data:[String: AnyObject] =  ["id":id , "is_auction" : isAuction, "name": name, "start_at":startDate, "end_at":endDate]
 
             let sale = Sale.fromJSON(data) as Sale
 
@@ -18,6 +22,7 @@ class SaleTests: QuickSpec {
             expect(sale.isAuction) == isAuction
             expect(yearFromDate(sale.startDate)) == 2014
             expect(yearFromDate(sale.endDate)) == 2015
+            expect(sale.name) == name
         }
         
         describe("active state") {
@@ -25,8 +30,12 @@ class SaleTests: QuickSpec {
                 let artsyTime = SystemTime()
                 artsyTime.systemTimeInterval = 0
 
-                let sale = Sale(id: "", isAuction: true, startDate: NSDate.distantPast() as NSDate, endDate: NSDate.distantPast() as NSDate)
+                let date = NSDate.distantPast() as NSDate
+                let dateString = self.stringFromDate(date)
 
+                let data:[String: AnyObject] =  ["start_at": dateString, "end_at" : dateString]
+
+                let sale = Sale.fromJSON(data) as Sale
                 expect(sale.isActive(artsyTime)) == false
             }
 
@@ -34,7 +43,15 @@ class SaleTests: QuickSpec {
                 let artsyTime = SystemTime()
                 artsyTime.systemTimeInterval = 0
 
-                let sale = Sale(id: "", isAuction: true, startDate: NSDate.distantPast() as NSDate, endDate: NSDate.distantFuture() as NSDate)
+                let pastDate = NSDate.distantPast() as NSDate
+                let pastString = self.stringFromDate(pastDate)
+
+                let futureDate = NSDate.distantFuture() as NSDate
+                let futureString = self.stringFromDate(futureDate)
+
+                let data:[String: AnyObject] =  ["start_at": pastString, "end_at" : futureString]
+
+                let sale = Sale.fromJSON(data) as Sale
 
                 expect(sale.isActive(artsyTime)) == true
             }
@@ -43,10 +60,13 @@ class SaleTests: QuickSpec {
                 let artsyTime = SystemTime()
                 artsyTime.systemTimeInterval = 0
 
-                let sale = Sale(id: "", isAuction: true, startDate: NSDate.distantFuture() as NSDate, endDate: NSDate.distantFuture() as NSDate)
+                let date = NSDate.distantFuture() as NSDate
+                let dateString = self.stringFromDate(date)
 
+                let data:[String: AnyObject] =  ["start_at": dateString, "end_at" : dateString]
+
+                let sale = Sale.fromJSON(data) as Sale
                 expect(sale.isActive(artsyTime)) == false
-
             }
         }
     }

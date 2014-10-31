@@ -4,8 +4,11 @@ import Nimble
 class ConfirmYourBidViewControllerTests: QuickSpec {
     override func spec() {
         var sut: ConfirmYourBidViewController!
+        var nav: FulfillmentNavigationController!
+
         beforeEach {
             sut = ConfirmYourBidViewController.instantiateFromStoryboard()
+            nav = FulfillmentNavigationController(rootViewController:sut)
         }
 
         pending("looks right by default") {
@@ -18,12 +21,9 @@ class ConfirmYourBidViewControllerTests: QuickSpec {
             sut.keypadSignal = keypadSubject
 
             sut.loadViewProgrammatically()
-            sut.cursor.stopAnimating()
-
             keypadSubject.sendNext(3)
 
             expect(sut.numberAmountTextField.text) == "3"
-            expect(sut.enterButton.enabled) == true
         }
 
         it("changes enter button to enabled") {
@@ -31,7 +31,6 @@ class ConfirmYourBidViewControllerTests: QuickSpec {
             sut.keypadSignal = keypadSubject
 
             sut.loadViewProgrammatically()
-            sut.cursor.stopAnimating()
 
             expect(sut.enterButton.enabled) == false
             keypadSubject.sendNext(3)

@@ -22,18 +22,18 @@ class ImageTests: QuickSpec {
         }
 
         it("generates a thumbnail url") {
-            var image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["large"], imageSize: size)
+            var image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["large"], imageSize: size, aspectRatio:0)
             expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
 
-            image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["medium"], imageSize: size)
+            image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["medium"], imageSize: size, aspectRatio:0)
             expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
 
-            image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["larger"], imageSize: size)
+            image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["larger"], imageSize: size, aspectRatio:0)
             expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
         }
 
         it("handles unknown image formats"){
-            let image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["unknown"], imageSize: size)
+            let image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["unknown"], imageSize: size, aspectRatio:0)
             expect(image.thumbnailURL()).toNot(beAnInstanceOf(NSURL))
         }
 
