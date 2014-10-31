@@ -44,9 +44,9 @@ class ListingsCountdownManager: NSObject {
             
             let now = time.date()
             
+            self.setLabelsHidden(false)
+            
             if sale.isActive(time) {
-                self.setLabelsHidden(false)
-                
                 let flags: NSCalendarUnit = .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond
                 let components = NSCalendar.currentCalendar().components(flags, fromDate: now, toDate: sale.endDate, options: nil)
                 
