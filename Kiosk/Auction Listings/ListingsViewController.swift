@@ -18,7 +18,6 @@ class ListingsViewController: UIViewController {
     dynamic var saleArtworks = [SaleArtwork]()
     dynamic var sortedSaleArtworks = [SaleArtwork]()
     dynamic var cellIdentifier = MasonryCellIdentifier
-    var reachability = ReachabilityManager()
 
     @IBOutlet var stagingFlag: UIImageView!
     @IBOutlet var loadingSpinner: Spinner!
@@ -166,7 +165,6 @@ class ListingsViewController: UIViewController {
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
         RAC(self, "loadingSpinner.hidden") <~ RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool()
-        RAC(self, "registerToBidButton.enabled") <~ self.reachability.reachSignal
 
         let gridSelectedSignal = switchView.selectedIndexSignal.map { (index) -> AnyObject! in
             switch index as Int {
@@ -276,8 +274,9 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
         if let listingsCell = cell as? ListingsCollectionViewCell {
-            listingsCell.enableBidButtonSignal = self.reachability.reachSignal
-            listingsCell.bidButton.enabled = reachability.isReachable()
+
+            // TODO: Ideally we should disable when auction runs out
+            // listingsCell.bidButton.enabled = countdownManager.auctionFinishedSignal
 
             listingsCell.saleArtwork = saleArtworkAtIndexPath(indexPath)
 

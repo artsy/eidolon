@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KCM-cT-BEX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="KCM-cT-BEX">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="AGaramondPro-Italic.otf">
+            <string>AGaramondPro-Italic</string>
             <string>AGaramondPro-Italic</string>
             <string>AGaramondPro-Italic</string>
             <string>AGaramondPro-Italic</string>
@@ -21,16 +22,17 @@
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
         </mutableArray>
         <mutableArray key="ITCAvantGardeDemi_Track03.ttf">
             <string>ITCAvantGardeDemiTrack03</string>
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--App View Controller-->
         <scene sceneID="JwR-1f-phG">
             <objects>
-                <viewController id="KCM-cT-BEX" sceneMemberID="viewController">
+                <viewController id="KCM-cT-BEX" customClass="AppViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="t8P-M5-wvq"/>
                         <viewControllerLayoutGuide type="bottom" id="GPr-5c-DY0"/>
@@ -39,10 +41,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Jq-GZ-FGh">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Jq-GZ-FGh" userLabel="App Nav">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <connections>
                                     <segue destination="2lC-Vc-1XS" kind="embed" id="HQy-am-Jlh"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Sn-II-uSf" userLabel="Offline Container View">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <connections>
+                                    <segue destination="8YY-cB-YpC" kind="embed" id="92U-lX-TUH"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -55,11 +63,14 @@
                         </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="offlineBlockingView" destination="4Sn-II-uSf" id="Ypw-XK-yiO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PST-th-Drd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1209" y="413"/>
+            <point key="canvasLocation" x="-1547.52" y="704.85333333333335"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gwf-cv-uMQ">
@@ -78,7 +89,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jf2-OQ-MFU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="28.16" y="462.50666666666672"/>
+            <point key="canvasLocation" x="36.044800000000002" y="789.34471111111122"/>
         </scene>
         <!--Listings View Controller-->
         <scene sceneID="rIz-bx-XAe">
@@ -176,7 +187,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1628" y="481"/>
+            <point key="canvasLocation" x="2083.8400000000001" y="820.90666666666675"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GeE-xH-04T">
@@ -192,7 +203,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yN0-rU-TeP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1628" y="1425"/>
+            <point key="canvasLocation" x="2083.8400000000001" y="2432"/>
         </scene>
         <!--Admin Panel View Controller-->
         <scene sceneID="LR3-le-vW3">
@@ -353,7 +364,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0RU-yz-eYz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2862" y="1425"/>
+            <point key="canvasLocation" x="3663.3600000000001" y="2432"/>
         </scene>
         <!--Choose Auction View Controller-->
         <scene sceneID="lHe-EK-cKn">
@@ -404,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgp-u0-Jbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4069" y="1425"/>
+            <point key="canvasLocation" x="5208.3199999999997" y="2432"/>
         </scene>
         <!--Admin Log View Controller-->
         <scene sceneID="BLv-US-QIE">
@@ -447,7 +458,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sj7-kp-utt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4069" y="2374"/>
+            <point key="canvasLocation" x="5208.3199999999997" y="4051.626666666667"/>
         </scene>
         <!--Auction Web View Controller-->
         <scene sceneID="Ghd-pU-aPw">
@@ -470,11 +481,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vEf-Aa-pPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2867" y="2374"/>
+            <point key="canvasLocation" x="3669.7600000000002" y="4051.626666666667"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rEE-fV-srO">
+            <objects>
+                <viewController storyboardIdentifier="No Internet Connection" automaticallyAdjustsScrollViewInsets="NO" id="8YY-cB-YpC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XIs-VM-2lT"/>
+                        <viewControllerLayoutGuide type="bottom" id="qpD-Vb-slh"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="7KS-Qt-fFc">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Internet Connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMt-83-jhR">
+                                <rect key="frame" x="218" y="287" width="588" height="56"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="49"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please notify an Artsy representative" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rkr-Gi-wuZ">
+                                <rect key="frame" x="196" y="361" width="632" height="56"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Italic" family="Adobe Garamond Pro" pointSize="32"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mmz-aB-M8K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1548" y="1821"/>
         </scene>
     </scenes>
     <resources>
         <image name="ArtsyLogo" width="145" height="50"/>
         <image name="StagingFlag" width="80" height="80"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>

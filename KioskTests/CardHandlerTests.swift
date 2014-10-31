@@ -26,7 +26,7 @@ class CardHandlerTests: QuickSpec {
             expect(self.handler!.sessionManager.getAccountToken()) == accountToken
         }
 
-        it("sends a signal with a card if successful") {
+        xit("sends a signal with a card if successful") {
             var success = false
             self.handler!.cardSwipedSignal.subscribeCompleted({ input -> Void in
                 success = true
@@ -36,7 +36,7 @@ class CardHandlerTests: QuickSpec {
             expect(success) == true
         }
 
-        it("sends a signal with a error if failed") {
+        xit("sends a signal with a error if failed") {
             self.reader?.fail = true
 
             var success = false
@@ -48,7 +48,7 @@ class CardHandlerTests: QuickSpec {
             expect(success) == true
         }
 
-        it("passes messages along the card signal as things are moving") {
+        xit("passes messages along the card signal as things are moving") {
             var messageCount = 0
 
             self.handler!.cardSwipedSignal.subscribeNext({ (message) -> Void in

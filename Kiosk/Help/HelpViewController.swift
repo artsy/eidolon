@@ -36,6 +36,8 @@ class HelpViewController: UIViewController {
         
         
         let registerButton = ARBlackFlatButton()
+        registerButton.enabled = ReachabilityManager().isReachable()
+        RAC(registerButton, "enabled") <~ ReachabilityManager().reachSignal
         registerButton.setTitle("Register", forState: .Normal)
         registerButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (_) -> Void in
             (UIApplication.sharedApplication().delegate as? AppDelegate)?.showRegistration()

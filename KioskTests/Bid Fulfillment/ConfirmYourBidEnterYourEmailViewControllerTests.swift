@@ -30,7 +30,7 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
             expect(sut.confirmButton.enabled) == false
         }
 
-        it("enables the enter button when an email is entered") {
+        it("enables the enter button when an email + password is entered") {
             let sut = ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard()
             let nav = FulfillmentNavigationController(rootViewController:sut)
             nav!.loadViewProgrammatically()
@@ -40,7 +40,6 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
             sut.emailTextField.sendActionsForControlEvents(.EditingChanged)
 
             expect(sut.confirmButton.enabled) == true
-
         }
 
     }
