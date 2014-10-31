@@ -24,8 +24,8 @@ enum ArtsyAPI {
     case MyBidPositionsForAuctionArtwork(auctionID: String, artworkID: String)
     case PlaceABid(auctionID: String, artworkID: String, maxBidCents: String)
 
-    case UpdateMe(email: String, phone: String, postCode: String)
-    case CreateUser(email: String, password: String, phone: String, postCode: String)
+    case UpdateMe(email: String, phone: String, postCode: String, name: String)
+    case CreateUser(email: String, password: String, phone: String, postCode: String, name: String)
 
     case RegisterCard(balancedToken: String)
 
@@ -68,15 +68,18 @@ enum ArtsyAPI {
         case TrustToken(let number, let auctionID):
             return ["number": number, "auction_pin": auctionID]
 
-        case CreateUser(let email,let password,let phone,let postCode):
-
+        case CreateUser(let email,let password,let phone,let postCode, let name):
             return [
                 "email": email, "password": password,
-                "phone": phone, "location": [ "postal_code": postCode ]
+                "phone": phone, "name": name,
+                "location": [ "postal_code": postCode ]
             ]
 
-        case UpdateMe(let email,let phone,let postCode):
-            return ["email": email, "phone": phone, "location": [ "postal_code": postCode ]]
+        case UpdateMe(let email,let phone,let postCode, let name):
+            return [
+                "email": email, "phone": phone,
+                "name": name, "location": [ "postal_code": postCode ]
+            ]
 
         case RegisterCard(let token):
             return ["provider": "balanced", "token": token]

@@ -28,15 +28,13 @@ class FulfillmentNavigationController: UINavigationController {
         for cookie in storage.cookies! {
             storage.deleteCookie(cookie as NSHTTPCookie)
         }
-
-        println("reset")
     }
 
     func updateUserCredentials() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         let request = loggedInProvider!.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self)
 
-        return request.doNext({ [weak self] (fullUser) -> Void in
+        return request.doNext { [weak self] (fullUser) -> Void in
             let newUser = self?.bidDetails.newUser
             self?.user = fullUser as? User
             
@@ -44,10 +42,11 @@ class FulfillmentNavigationController: UINavigationController {
             newUser?.password = "----"
             newUser?.phoneNumber = self?.user?.phoneNumber
             newUser?.zipCode = self?.user?.location?.postalCode
+            newUser?.name = self?.user?.name
 
-        }).doError({ [weak self] (error) -> Void in
+        } .doError { [weak self] (error) -> Void in
             println("error, the authentication for admin is likely wrong")
             return
-        })
+        }
     }
 }
