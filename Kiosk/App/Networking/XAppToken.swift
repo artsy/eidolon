@@ -8,7 +8,7 @@ private extension NSDate {
 }
 
 struct XAppToken {
-    private enum DefaultsKeys: String {
+    enum DefaultsKeys: String {
         case TokenKey = "TokenKey"
         case TokenExpiry = "TokenExpiry"
     }
