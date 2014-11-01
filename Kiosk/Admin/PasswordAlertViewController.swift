@@ -24,8 +24,6 @@ class PasswordAlertViewController: UIAlertController {
                 #else
                     exitAction.enabled = textField.text == "Genome401"
                 #endif
-
-
             }
         }
 

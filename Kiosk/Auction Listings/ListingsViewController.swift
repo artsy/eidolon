@@ -14,7 +14,7 @@ class ListingsViewController: UIViewController {
         return signal.deliverOn(scheduler)
     }
     
-    dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0)
+    dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0, state: "")
     dynamic var saleArtworks = [SaleArtwork]()
     dynamic var sortedSaleArtworks = [SaleArtwork]()
     dynamic var cellIdentifier = MasonryCellIdentifier
@@ -152,8 +152,14 @@ class ListingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.stagingFlag.hidden = AppSetup.sharedState.useStaging == false
+
+
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+            let flagImageName = AppSetup.sharedState.useStaging ? "StagingFlag" : "ProductionFlag"
+            stagingFlag.image = UIImage(named: flagImageName)
+        #else
+            stagingFlag.hidden = AppSetup.sharedState.useStaging == false
+        #endif
 
         // Add subviews
         view.addSubview(switchView)

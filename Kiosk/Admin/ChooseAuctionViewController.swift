@@ -18,9 +18,10 @@ class ChooseAuctionViewController: UIViewController {
 
                 for i in 0 ..< countElements(self!.auctions) {
                     let sale = self!.auctions[i]
+                    let title = " \(sale.name) - #\(sale.auctionState) - \(sale.artworkCount)"
 
                     let button = ARFlatButton()
-                    button.setTitle(" \(sale.name) - #\(sale.artworkCount)", forState: .Normal)
+                    button.setTitle(title, forState: .Normal)
                     button.setTitleColor(UIColor.blackColor(), forState: .Normal)
                     button.tag = i
                     button.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (_) in
