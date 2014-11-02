@@ -127,7 +127,6 @@ class ListingsViewControllerTests: QuickSpec {
                 sut.endAppearanceTransition()
                 
                 let firstSale = sut.saleArtworks[0]
-                println("ASD: \(firstSale.bidCount)")
                 expect(sut.saleArtworks[0].bidCount) == initialBidCount
                 
                 bidCount = finalBidCount

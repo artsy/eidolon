@@ -49,6 +49,10 @@ class AdminPanelViewController: UIViewController {
     @IBAction func switchStagingProductionTapped(sender: AnyObject) {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(!AppSetup.sharedState.useStaging, forKey: "KioskUseStaging")
+
+        defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenKey.rawValue)
+        defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenExpiry.rawValue)
+
         defaults.synchronize()
         exit(1)
     }

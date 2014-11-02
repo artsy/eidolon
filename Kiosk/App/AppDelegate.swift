@@ -19,9 +19,6 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         // I couldn't figure how to swizzle this out like we do in objc.
         if let inTests: AnyClass = NSClassFromString("XCTest") { return true }
 
-        // Mainly to be sure that we don't end up with expired tokens
-        removeXAppToken()
-
         let auctionStoryboard = UIStoryboard(name: "Auction", bundle: nil)
         window.rootViewController = auctionStoryboard.instantiateInitialViewController() as? UIViewController
         window.makeKeyAndVisible()
@@ -45,10 +42,6 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         log.debug("App Started")
         ARAnalytics.event("Session Started")
         return true
-    }
-
-    func removeXAppToken() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("TokenKey")
     }
 
     func setupUserAgent() {
