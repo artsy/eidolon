@@ -6,4 +6,5 @@
     dynamic var creditCardToken:String?
     dynamic var creditCardName:String?
     dynamic var zipCode:String?
+    dynamic var name:String?
 }

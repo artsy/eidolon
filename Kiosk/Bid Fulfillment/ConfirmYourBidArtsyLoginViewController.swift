@@ -82,7 +82,6 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         }
     }
 
-
     func showAuthenticationError() {
         confirmCredentialsButton.flashError("Wrong login info")
         passwordTextField.flashForError()
@@ -128,19 +127,6 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
         XAppRequest(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { [weak self] (json) -> Void in
             println("sent request")
-        }
-    }
-
-    @IBAction func createNewAccountTapped(sender: AnyObject) {
-        createNewAccount = true
-        self.performSegue(.ArtsyUserHasNotRegisteredCard)
-    }
-
-    public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue == .ArtsyUserHasNotRegisteredCard {
-            let registrationVC = segue.destinationViewController as RegisterViewController
-            registrationVC.createNewUser = createNewAccount
-            registrationVC.placingBid = true
         }
     }
 

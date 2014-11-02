@@ -31,7 +31,17 @@ class Spinner: UIView {
         rotationAnimation.duration = rotationDuration;
         rotationAnimation.cumulative = true;
         rotationAnimation.repeatCount = Float(times);
-        layer.addAnimation(rotationAnimation, forKey:"transform");
+        layer.addAnimation(rotationAnimation, forKey:"spin");
+    }
+
+    func animate(animate: Bool) {
+        let isAnimating = layer.animationForKey("spin") != nil
+        if (isAnimating && !animate) {
+            layer.removeAllAnimations()
+
+        } else if (!isAnimating && animate) {
+            self.animate(Float.infinity)
+        }
     }
 
     func stopAnimating() {
