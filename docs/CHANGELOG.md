@@ -1,5 +1,15 @@
 # End User Changes
 
+### Next
+
+* Admin section for testing Cards - @orta
+* Initial work on Artwork details view - @ash
+
+### 1.0.1 3rd Nov 
+
+* Admin can be accessed when networking is down - @orta
+* Offline screen - @orta
+
 ### 1.0.0 21st Oct 2014
 
 * Help Changes around laying popovers - @laura
