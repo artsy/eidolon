@@ -8,10 +8,12 @@ class SaleArtworkDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         println("I have a sale artwork: \(saleArtwork.artwork.title)")
     }
+}
 
+extension SaleArtworkDetailsViewController {
     @IBAction func registerToBidButtonWasPressed(sender: AnyObject) {
         registerToBid(auctionID, allowAnimations: allowAnimations)
     }

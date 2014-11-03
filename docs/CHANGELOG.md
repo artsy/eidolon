@@ -1,11 +1,12 @@
 # End User Changes
 
-### Next
+### 1.1 3rd Nov 2014
 
 * Admin section for testing Cards - @orta
 * Initial work on Artwork details view - @ash
+* If you're outbid you can bid again straight away - @orta
 
-### 1.0.1 3rd Nov 
+### 1.0.1 3rd Nov 2014
 
 * Admin can be accessed when networking is down - @orta
 * Offline screen - @orta
