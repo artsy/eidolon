@@ -17,6 +17,7 @@ public enum SegueIdentifier : String {
     case RegisterPostalToConfirm = "RegisterPostalToConfirm"
     case ShowAdminOptions = "Show Admin Options"
     case ShowLoadingView = "Show Loading View"
+    case ShowSaleArtworkDetails = "Show Sale Artwork Details"
 }
 
 public enum ViewControllerStoryboardIdentifier : String {
@@ -37,4 +38,5 @@ public enum ViewControllerStoryboardIdentifier : String {
     case RegisterMobile = "Register Mobile"
     case RegisterPassword = "Register Password"
     case RegisterPostalorZip = "Register Postal or Zip"
+    case SaleArtworkDetail = "SaleArtworkDetail"
 }

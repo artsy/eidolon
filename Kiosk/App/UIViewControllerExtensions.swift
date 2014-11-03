@@ -12,11 +12,11 @@ extension UIViewController {
     /// Short hand syntax for performing a segue with a known hardcoded identity
 
     func performSegue(identifier:SegueIdentifier) {
-        self.performSegueWithIdentifier(identifier.rawValue, sender: self)
+        performSegueWithIdentifier(identifier.rawValue, sender: self)
     }
 
     func fulfillmentNav() -> FulfillmentNavigationController {
-        return (self.navigationController! as FulfillmentNavigationController)
+        return (navigationController! as FulfillmentNavigationController)
     }
 
     func fulfillmentContainer() -> FulfillmentContainerViewController? {

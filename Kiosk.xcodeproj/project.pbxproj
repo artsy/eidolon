@@ -11,6 +11,10 @@
 		5E0D702C19DADD8E0005AF46 /* TableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2C0C519DAC18000263137 /* TableCollectionViewCell.swift */; };
 		5E0D703E19DADD900005AF46 /* MasonryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2C0C719DAC3F400263137 /* MasonryCollectionViewCell.swift */; };
 		5E2B3D4B19DC063C00906A26 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */; };
+		5E3234311A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3234301A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift */; };
+		5E3234321A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3234301A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift */; };
+		5E3234341A079C98009CD3C5 /* UIViewController+RegisterToBid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3234331A079C98009CD3C5 /* UIViewController+RegisterToBid.swift */; };
+		5E3234351A079C98009CD3C5 /* UIViewController+RegisterToBid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3234331A079C98009CD3C5 /* UIViewController+RegisterToBid.swift */; };
 		5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */; };
 		5E3D9D3219EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D9D3119EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift */; };
 		5E3DF3B419E5CF8A0098F3B0 /* RACSignal+Kiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DA8E019E57E49000E5855 /* RACSignal+Kiosk.swift */; };
@@ -449,6 +453,8 @@
 		5E28C1F31993B9D10066DB4D /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = submodules/Quick/Quick/Quick.xcodeproj; sourceTree = "<group>"; };
 		5E28C2031993B9E50066DB4D /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = submodules/Nimble/Nimble.xcodeproj; sourceTree = "<group>"; };
 		5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsCollectionViewCell.swift; sourceTree = "<group>"; };
+		5E3234301A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SaleArtworkDetailsViewController.swift; path = "Sale Artwork Details/SaleArtworkDetailsViewController.swift"; sourceTree = "<group>"; };
+		5E3234331A079C98009CD3C5 /* UIViewController+RegisterToBid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+RegisterToBid.swift"; sourceTree = "<group>"; };
 		5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPI.swift; sourceTree = "<group>"; };
 		5E3D9D3119EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+GlobalActions.swift"; sourceTree = "<group>"; };
 		5E3E53E519C3AA13002D8B9D /* XAppToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppToken.swift; sourceTree = "<group>"; };
@@ -670,6 +676,14 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		5E32342F1A079C0B009CD3C5 /* Sale Artwork Details */ = {
+			isa = PBXGroup;
+			children = (
+				5E3234301A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift */,
+			);
+			name = "Sale Artwork Details";
+			sourceTree = "<group>";
+		};
 		5E4B56DC19C079C0002E6FCB /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
@@ -787,7 +801,9 @@
 			isa = PBXGroup;
 			children = (
 				5EC60BC919EB13CB008A04B0 /* Help */,
-				5EF2C0B119DAC13A00263137 /* View Controllers */,
+				5EF2C0B119DAC13A00263137 /* Auction List */,
+				5E32342F1A079C0B009CD3C5 /* Sale Artwork Details */,
+				5E3234331A079C98009CD3C5 /* UIViewController+RegisterToBid.swift */,
 			);
 			name = "Auction Listings";
 			sourceTree = "<group>";
@@ -855,7 +871,7 @@
 			path = "Stubbed Responses";
 			sourceTree = "<group>";
 		};
-		5EF2C0B119DAC13A00263137 /* View Controllers */ = {
+		5EF2C0B119DAC13A00263137 /* Auction List */ = {
 			isa = PBXGroup;
 			children = (
 				5E59DD3719913DD800A48370 /* ListingsViewController.swift */,
@@ -865,7 +881,7 @@
 				E69EA8BD19E83E08005EF2C8 /* WebViewController.swift */,
 				6087605219EA117100116611 /* ListingsCountdownManager.swift */,
 			);
-			name = "View Controllers";
+			name = "Auction List";
 			sourceTree = "<group>";
 		};
 		600DABEB19EB654800278378 /* Admin */ = {
@@ -1673,6 +1689,7 @@
 				60C620DA19D180A20024D493 /* ConfirmYourBidPINViewController.swift in Sources */,
 				60FFC2B419D9493000284B9F /* XAppAuthentication.swift in Sources */,
 				60E0949719F5AB770035F0DD /* XCGLogger.swift in Sources */,
+				5E3234341A079C98009CD3C5 /* UIViewController+RegisterToBid.swift in Sources */,
 				5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */,
 				60C3983C19E8191F00CB81F4 /* GenericError.swift in Sources */,
 				609A849319E53B1F00476A94 /* RegistrationEmailViewController.swift in Sources */,
@@ -1702,6 +1719,7 @@
 				60C3984219E8356D00CB81F4 /* LoadingViewController.swift in Sources */,
 				606CAEF11A03BCAF007834D6 /* BidCheckingNetworkModel.swift in Sources */,
 				60D976DF19D2F7E700DE9F3D /* ConfirmYourBidPasswordViewController.swift in Sources */,
+				5E3234311A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift in Sources */,
 				60A4FD3019E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift in Sources */,
 				60D976E419D30F9F00DE9F3D /* Bidder.swift in Sources */,
 				6030A0F319D18F5200B934CA /* Artwork.swift in Sources */,
@@ -1828,6 +1846,7 @@
 				60FFC2A519D9442F00284B9F /* UserCredentials.swift in Sources */,
 				6030A11B19D1A1F600B934CA /* ReactiveCocoaBindings.swift in Sources */,
 				6030A11119D1931C00B934CA /* CardHandler.swift in Sources */,
+				5E3234321A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift in Sources */,
 				6030A10F19D1931900B934CA /* Artwork.swift in Sources */,
 				5E64137019EC5D10005AC5BC /* AppDelegate+GlobalActions.swift in Sources */,
 				606CAF061A03F2A2007834D6 /* LoadingViewControllerTests.swift in Sources */,
@@ -1865,6 +1884,7 @@
 				60C6914119D6CBDA001F58FD /* RAC+JSONAbleTests.swift in Sources */,
 				6030A10319D1931400B934CA /* ConfirmYourBidViewController.swift in Sources */,
 				6030A11719D1A05800B934CA /* KeypadContainerView.swift in Sources */,
+				5E3234351A079C98009CD3C5 /* UIViewController+RegisterToBid.swift in Sources */,
 				6030A12B19D1AA0F00B934CA /* KioskTests.swift in Sources */,
 				60E094C119F5FF0E0035F0DD /* GlobalFunctions.swift in Sources */,
 				607F0ABE19F2C3AE00C2F4A6 /* Spinner.swift in Sources */,
