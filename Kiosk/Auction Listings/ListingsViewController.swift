@@ -1,4 +1,5 @@
 import UIKit
+import SystemConfiguration
 
 let HorizontalMargins = 65
 let VerticalMargins = 26
@@ -24,7 +25,7 @@ class ListingsViewController: UIViewController {
     @IBOutlet var countdownManager: ListingsCountdownManager!
     
     lazy var collectionView: UICollectionView = {
-        var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())!
+        var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())
         collectionView.backgroundColor = UIColor.clearColor()
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -150,18 +151,45 @@ class ListingsViewController: UIViewController {
         })
     }
     
+    // Adapted from https://github.com/FUKUZAWA-Tadashi/FHCCommander/blob/67c67757ee418a106e0ce0c0820459299b3d77bb/fhcc/Convenience.swift#L33-L44
+    func getSSID() -> String? {
+        let interfaces: CFArray! = CNCopySupportedInterfaces()?.takeUnretainedValue()
+        if interfaces == nil { return nil }
+        
+        let if0: UnsafePointer<Void>? = CFArrayGetValueAtIndex(interfaces, 0)
+        if if0 == nil { return nil }
+        
+        let interfaceName: CFStringRef = unsafeBitCast(if0!, CFStringRef.self)
+        let dictionary = CNCopyCurrentNetworkInfo(interfaceName)?.takeUnretainedValue() as NSDictionary?
+        if dictionary == nil { return nil }
+        
+        return dictionary?[kCNNetworkInfoKeySSID as String] as? String
+    }
+    
+    func detectDevelopment() -> Bool {
+        var developmentEnvironment = false
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+            developmentEnvironment = true
+        #else
+            if let ssid = getSSID() {
+                let developmentSSIDs = ["Ash's Wi-Fi Network", "Art.sy"] as NSArray
+                developmentEnvironment = developmentSSIDs.containsObject(ssid)
+            }
+        #endif
+        return developmentEnvironment
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
-        #if (arch(i386) || arch(x86_64)) && os(iOS)
+        
+        if detectDevelopment() {
             let flagImageName = AppSetup.sharedState.useStaging ? "StagingFlag" : "ProductionFlag"
             stagingFlag.image = UIImage(named: flagImageName)
             stagingFlag.hidden = AppSetup.sharedState.isTesting
-        #else
+        } else {
             stagingFlag.hidden = AppSetup.sharedState.useStaging == false
-        #endif
-
+        }
+        
         // Add subviews
         view.addSubview(switchView)
         view.insertSubview(collectionView, belowSubview: loadingSpinner)

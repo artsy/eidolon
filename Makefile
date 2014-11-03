@@ -46,7 +46,7 @@ bootstrap:
 		read MIXPANEL_KEY; \
 		bundle exec pod keys set MixpanelStagingAPIClientKey "$$MIXPANEL_KEY"
 
-	@printf '\nWhat is your Cardflight Production API Key? '; \
+	@printf '\nWhat is your Cardflight API Client Key? '; \
 		read CARDFLIGHT_KEY; \
 		bundle exec pod keys set CardflightAPIClientKey "$$CARDFLIGHT_KEY"
 

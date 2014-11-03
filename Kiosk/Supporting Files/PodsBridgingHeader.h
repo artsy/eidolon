@@ -9,6 +9,7 @@
 // Changes in here need to be reflected in KioskTests-BridgingHeader.h
 
 #import <UIKit/UIKit.h>
+#import <SystemConfiguration/CaptiveNetwork.h>
 
 #import <Artsy+UIColors/UIColor+ArtsyColors.h>
 #import <Artsy+UIColors/UIColor+DebugColours.h>

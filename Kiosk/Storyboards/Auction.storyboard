@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="KCM-cT-BEX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="KCM-cT-BEX">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="AGaramondPro-Italic.otf">
@@ -25,6 +26,7 @@
             <string>AGaramondPro-Regular</string>
         </mutableArray>
         <mutableArray key="ITCAvantGardeDemi_Track03.ttf">
+            <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
         </mutableArray>
     </customFonts>
@@ -209,9 +211,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgB-uD-YCA" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgB-uD-YCA" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="783" y="20" width="176" height="50"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="176" id="BKq-0H-DHj"/>
+                                    <constraint firstAttribute="height" constant="50" id="x4x-cD-GjO"/>
+                                </constraints>
                                 <state key="normal" title="REGISTER TO BID">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -223,17 +229,56 @@
                                     <action selector="registerToBidButtonWasPressed:" destination="Jj5-n3-bv0" eventType="touchUpInside" id="0HQ-W5-cMc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNW-S0-kgd">
-                                <rect key="frame" x="65" y="20" width="35" height="30"/>
-                                <state key="normal" title="Back">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNW-S0-kgd">
+                                <rect key="frame" x="20" y="20" width="98" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="98" id="4xX-DI-bdx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="19" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Back" backgroundImage="BackButtonBackground">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="backWasPressed:" destination="Jj5-n3-bv0" eventType="touchUpInside" id="HrC-Hp-x4l"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ciZ-IV-yO1">
+                                <rect key="frame" x="65" y="90" width="538" height="400"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="538" id="NTu-aX-qeW"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="pxc-HY-gDV"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDO-I9-Fbb">
+                                <rect key="frame" x="683" y="90" width="276" height="658"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z5v-SE-pZu">
+                                <rect key="frame" x="65" y="520" width="538" height="199"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="NDO-I9-Fbb" secondAttribute="trailing" constant="65" id="2rj-Vs-QfH"/>
+                            <constraint firstItem="z5v-SE-pZu" firstAttribute="trailing" secondItem="ciZ-IV-yO1" secondAttribute="trailing" id="5eZ-k7-tR9"/>
+                            <constraint firstItem="z5v-SE-pZu" firstAttribute="leading" secondItem="ciZ-IV-yO1" secondAttribute="leading" id="5in-H2-6Zm"/>
+                            <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="NDO-I9-Fbb" secondAttribute="bottom" constant="20" id="7wg-uA-eaR"/>
+                            <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="ZNW-S0-kgd" secondAttribute="bottom" constant="26" id="8fj-dy-9xY"/>
+                            <constraint firstItem="ZNW-S0-kgd" firstAttribute="top" secondItem="bgB-uD-YCA" secondAttribute="top" id="8ue-Ub-9uc"/>
+                            <constraint firstItem="ZNW-S0-kgd" firstAttribute="leading" secondItem="nu4-re-HAA" secondAttribute="leadingMargin" id="H0r-rk-0wl"/>
+                            <constraint firstItem="ZNW-S0-kgd" firstAttribute="top" secondItem="nu4-re-HAA" secondAttribute="top" constant="20" symbolic="YES" id="HMC-OH-Hy1"/>
+                            <constraint firstItem="NDO-I9-Fbb" firstAttribute="leading" secondItem="ciZ-IV-yO1" secondAttribute="trailing" constant="80" id="RBM-og-HNw"/>
+                            <constraint firstItem="z5v-SE-pZu" firstAttribute="top" secondItem="ciZ-IV-yO1" secondAttribute="bottom" constant="30" id="gGh-6E-FBJ"/>
+                            <constraint firstItem="ciZ-IV-yO1" firstAttribute="leading" secondItem="nu4-re-HAA" secondAttribute="leadingMargin" constant="45" id="jHi-Lu-K3Y"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bgB-uD-YCA" secondAttribute="trailing" constant="45" id="mj4-Q5-H1O"/>
+                            <constraint firstItem="NDO-I9-Fbb" firstAttribute="top" secondItem="bgB-uD-YCA" secondAttribute="bottom" constant="20" id="wqB-hF-vdT"/>
+                            <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="z5v-SE-pZu" secondAttribute="bottom" constant="49" id="xgK-6I-6iO"/>
+                            <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="ciZ-IV-yO1" secondAttribute="bottom" constant="278" id="yeO-Eq-hDF"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TTV-yT-d9F"/>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -572,6 +617,7 @@
     </scenes>
     <resources>
         <image name="ArtsyLogo" width="145" height="50"/>
+        <image name="BackButtonBackground" width="26" height="44"/>
         <image name="StagingFlag" width="80" height="80"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
