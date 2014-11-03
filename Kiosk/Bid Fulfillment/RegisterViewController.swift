@@ -14,12 +14,10 @@ class RegisterViewController: UIViewController {
     @IBOutlet var confirmButton: UIButton!
 
     let coordinator = RegistrationCoordinator()
-    let registrationNetworkModel = RegistrationNetworkModel()
+    let bidderNetworkModel = BidderNetworkModel()
 
-    dynamic var placingBid = false
-    dynamic var createNewUser = false
-    dynamic var details:BidDetails!
-    
+    dynamic var placingBid = true
+
     class func instantiateFromStoryboard() -> RegisterViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.RegisterAnAccount) as RegisterViewController
     }
@@ -30,8 +28,8 @@ class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        actionSpinner.hidden = true
 
+        bidderNetworkModel.fulfillmentNav = fulfillmentNav()
         coordinator.storyboard = self.storyboard!
         let registerIndexSignal = RACObserve(coordinator, "currentIndex")
         let indexIsConfirmSignal = registerIndexSignal.map { return ($0 as Int == RegistrationIndex.ConfirmVC.toInt()) }
@@ -39,16 +37,12 @@ class RegisterViewController: UIViewController {
         RAC(confirmButton, "hidden") <~ indexIsConfirmSignal.notEach()
         RAC(flowView, "highlightedIndex") <~ registerIndexSignal
 
-        RAC(registrationNetworkModel, "createNewUser") <~ RACObserve(self, "createNewUser")
-        RAC(registrationNetworkModel, "details") <~ RACObserve(self, "details")
-        registrationNetworkModel.fulfillmentNav = self.fulfillmentNav()
-
-        details = self.fulfillmentNav().bidDetails
+        let details = self.fulfillmentNav().bidDetails
         flowView.details = details
         bidDetailsPreviewView.bidDetails = details
 
         flowView.jumpToIndexSignal.subscribeNext { [weak self] (index) -> Void in
-            if let nav = self?.navigationController as? FulfillmentNavigationController {
+            if let nav = self?.fulfillmentNav() {
                 if index as? Int == self?.coordinator.currentIndex { return }
 
                 let registrationIndex = RegistrationIndex.fromInt(index as Int)
@@ -62,10 +56,9 @@ class RegisterViewController: UIViewController {
     }
 
     func goToNextVC() {
-        if let nav = self.navigationController as? FulfillmentNavigationController {
-            let nextVC = coordinator.nextViewControllerForBidDetails(nav.bidDetails)
-            goToViewController(nextVC)
-        }
+        let nextVC = coordinator.nextViewControllerForBidDetails(fulfillmentNav().bidDetails)
+        goToViewController(nextVC)
+
     }
 
     func goToViewController(controller: UIViewController) {
@@ -79,42 +72,12 @@ class RegisterViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var actionSpinner: Spinner!
-    @IBAction func confirmTapped(sender: ActionButton) {
-        if placingBid {
-            passThroughToBiddingVCToCreateUser()
-
-        } else {
-            registerNewUser()
-            sender.setTitle("", forState: .Normal)
-            sender.enabled = false
-            actionSpinner.hidden = false
-        }
-    }
-
-    func registerNewUser() {
-        confirmButton.enabled = false
-
-        registrationNetworkModel.registerSignal().subscribeNext({ [weak self] (_) -> Void in
-
-            ARAnalytics.event("Registered New User Only")
-            self?.performSegue(.RegistrationFinishedShowBidDetails)
-            return
-
-            }, error: { [weak self] (error) -> Void in
-                println("Error with registrationNetworkModel create or update")
-        })
-    }
-
-    func passThroughToBiddingVCToCreateUser() {
-        self.performSegue(.RegistrationFinishedPlaceBid)
-    }
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
-        if segue == .RegistrationFinishedPlaceBid {
-            let nextViewController = segue.destinationViewController as PlacingBidViewController
-            nextViewController.registerNetworkModel = registrationNetworkModel
+        if segue == .ShowLoadingView {
+            let nextViewController = segue.destinationViewController as LoadingViewController
+            nextViewController.bidderNetworkModel = bidderNetworkModel
+            nextViewController.placingBid = placingBid
         }
     }
 }

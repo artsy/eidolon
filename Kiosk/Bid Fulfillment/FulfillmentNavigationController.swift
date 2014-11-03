@@ -3,7 +3,7 @@ import UIKit
 class FulfillmentNavigationController: UINavigationController {
 
     /// The the collection of details necessary to eventually create a bid
-    var bidDetails = BidDetails(saleArtwork:nil, bidderNumber: nil, bidderPIN: nil, bidAmountCents:nil)
+    var bidDetails = BidDetails(saleArtwork:nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents:nil)
     var auctionID:String!
     var user:User!
 

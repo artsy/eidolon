@@ -15,9 +15,8 @@ public enum SegueIdentifier : String {
     case PushtoBidConfirmed = "Push to Bid Confirmed"
     case RegisterCreditCardToPostal = "RegisterCreditCardToPostal"
     case RegisterPostalToConfirm = "RegisterPostalToConfirm"
-    case RegistrationFinishedPlaceBid = "Registration Finished Place Bid"
-    case RegistrationFinishedShowBidDetails = "Registration Finished Show Bid Details"
     case ShowAdminOptions = "Show Admin Options"
+    case ShowLoadingView = "Show Loading View"
 }
 
 public enum ViewControllerStoryboardIdentifier : String {

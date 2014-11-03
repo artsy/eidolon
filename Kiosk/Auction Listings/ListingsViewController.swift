@@ -240,8 +240,8 @@ class ListingsViewController: UIViewController {
 
         if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
             let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as RegisterViewController
+            registerVC.placingBid = false
             internalNav.auctionID = self.auctionID
-            registerVC.createNewUser = true
             internalNav.viewControllers = [registerVC]
         }
 
