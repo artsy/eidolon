@@ -229,26 +229,17 @@ class ListingsViewController: UIViewController {
             }
         })
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == .ShowSaleArtworkDetails {
+            let detailsViewController = segue.destinationViewController as SaleArtworkDetailsViewController
+            detailsViewController.saleArtwork = sender as SaleArtwork!
+        }
+    }
 
     @IBOutlet weak var registerToBidButton: ActionButton!
     @IBAction func registerTapped(sender: AnyObject) {
-
-        ARAnalytics.event("Register To Bid Tapped")
-
-        let storyboard = UIStoryboard.fulfillment()
-        let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
-        containerController.allowAnimations = allowAnimations
-
-        if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
-            let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as RegisterViewController
-            registerVC.placingBid = false
-            internalNav.auctionID = self.auctionID
-            internalNav.viewControllers = [registerVC]
-        }
-
-        self.presentViewController(containerController, animated: false) {
-            containerController.viewDidAppearAnimation(containerController.allowAnimations)
-        }
+        registerToBid(auctionID, allowAnimations: allowAnimations)
     }
 
     @IBAction func longPressForAdmin(sender: AnyObject) {
@@ -293,12 +284,23 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
                     self?.presentModalForSaleArtwork(saleArtwork)
                 }
             })
+            
+            let moreInfoSignal = listingsCell.moreInfoSignal.takeUntil(cell.rac_prepareForReuseSignal)
+            moreInfoSignal.subscribeNext({ [weak self] (_) -> Void in
+                if let saleArtwork = self?.saleArtworkAtIndexPath(indexPath) {
+                    self?.presentDetailsForSaleArtwork(saleArtwork)
+                }
+            })
         }
         
         return cell
     }
+    
+    func presentDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
+        performSegueWithIdentifier(SegueIdentifier.ShowSaleArtworkDetails.rawValue, sender: saleArtwork)
+    }
 
-    func presentModalForSaleArtwork(saleArtwork:SaleArtwork) {
+    func presentModalForSaleArtwork(saleArtwork: SaleArtwork) {
 
         ARAnalytics.event("Bid Button Tapped")
 
