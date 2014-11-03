@@ -18,11 +18,12 @@ class LoadingViewController: UIViewController {
     var bidderNetworkModel: BidderNetworkModel!
     var bidCheckingModel: BidCheckingNetworkModel!
     var placeBidNetworkModel: PlaceBidNetworkModel!
+    var details: BidDetails?
 
     @IBOutlet weak var backToAuctionButton: ActionButton!
 
     func bidDetails() -> BidDetails {
-        return self.fulfillmentNav().bidDetails
+        return details ?? self.fulfillmentNav().bidDetails
     }
 
     override func viewDidLoad() {

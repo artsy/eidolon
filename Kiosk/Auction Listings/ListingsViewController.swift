@@ -157,6 +157,7 @@ class ListingsViewController: UIViewController {
         #if (arch(i386) || arch(x86_64)) && os(iOS)
             let flagImageName = AppSetup.sharedState.useStaging ? "StagingFlag" : "ProductionFlag"
             stagingFlag.image = UIImage(named: flagImageName)
+            stagingFlag.hidden = AppSetup.sharedState.isTesting
         #else
             stagingFlag.hidden = AppSetup.sharedState.useStaging == false
         #endif

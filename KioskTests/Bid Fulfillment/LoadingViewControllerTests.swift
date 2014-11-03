@@ -12,6 +12,7 @@ class LoadingViewControllerTests: QuickSpec {
                 sut.bidderNetworkModel = ErrorBidderNetworkModel()
                 sut.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
                 sut.placeBidNetworkModel = DummyPlaceBidNetworkModel()
+                sut.details = BidDetails.stubbedBidDetails()
                 sut.performNetworking = false
                 sut.animate = false
             }
@@ -33,6 +34,7 @@ class LoadingViewControllerTests: QuickSpec {
                 sut.bidderNetworkModel = ErrorBidderNetworkModel()
                 sut.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
                 sut.placeBidNetworkModel = DummyPlaceBidNetworkModel()
+                sut.details = BidDetails.stubbedBidDetails()
             }
 
             it("correctly placing a bid") {
@@ -52,6 +54,7 @@ class LoadingViewControllerTests: QuickSpec {
                 sut.bidderNetworkModel = SuccessBidderNetworkModel()
                 sut.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
                 sut.placeBidNetworkModel = DummyPlaceBidNetworkModel()
+                sut.details = BidDetails.stubbedBidDetails()
             }
 
             it("placing bid success highest") {
