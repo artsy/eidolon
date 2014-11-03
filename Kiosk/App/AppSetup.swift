@@ -5,10 +5,11 @@ class AppSetup {
     lazy var auctionID = "two-x-two-2014"
     lazy var useStaging = true
     lazy var showDebugButtons = false
+    var isTesting = false
 
     class var sharedState : AppSetup {
         struct Static {
-            static let instance : AppSetup = AppSetup()
+            static let instance = AppSetup()
         }
         return Static.instance
     }
@@ -21,5 +22,7 @@ class AppSetup {
 
         useStaging = defaults.boolForKey("KioskUseStaging")
         showDebugButtons = defaults.boolForKey("KioskShowDebugButtons")
+
+        if let inTests: AnyClass = NSClassFromString("XCTest") { isTesting = true }
     }
 }

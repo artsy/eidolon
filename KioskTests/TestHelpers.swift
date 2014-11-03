@@ -24,11 +24,11 @@ func setDefaultsKeys(defaults: NSUserDefaults, key: String?, expiry: NSDate?) {
 }
 
 func setupProviderForSuite(provider: ReactiveMoyaProvider<ArtsyAPI>) {
-    beforeSuite { () -> () in
+    beforeSuite {
         Provider.sharedProvider = provider
     }
 
-    afterSuite { () -> () in
+    afterSuite {
         Provider.sharedProvider = Provider.DefaultProvider()
     }
 }

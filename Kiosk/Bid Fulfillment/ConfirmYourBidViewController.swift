@@ -41,7 +41,7 @@ class ConfirmYourBidViewController: UIViewController {
         let nav = self.fulfillmentNav()
 
         RAC(nav.bidDetails.newUser, "phoneNumber") <~ RACObserve(self, "number")
-        RAC(nav.bidDetails, "bidderNumber") <~ RACObserve(self, "number")
+        RAC(nav.bidDetails, "paddleNumber") <~ RACObserve(self, "number")
         
         bidDetailsPreviewView.bidDetails = nav.bidDetails
 

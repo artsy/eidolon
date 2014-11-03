@@ -4,6 +4,8 @@ import Nimble
 class ListingsViewControllerTests: QuickSpec {
     let imageCache = SDImageCache.sharedImageCache()
     override func spec() {
+        let storyboard = UIStoryboard.auction()
+
         beforeEach {
             Provider.sharedProvider = Provider.StubbingProvider()
             
@@ -28,7 +30,7 @@ class ListingsViewControllerTests: QuickSpec {
             // As it's a UINav it needs to be in the real view herarchy 
             
             let window = UIWindow(frame:UIScreen.mainScreen().bounds)
-            let sut = testListingsViewController()
+            let sut = testListingsViewController(storyboard)
             window.rootViewController = sut
             window.makeKeyAndVisible()
 
@@ -44,10 +46,8 @@ class ListingsViewControllerTests: QuickSpec {
         describe("when displaying stubbed contents.") {
             var sut: ListingsViewController!
             beforeEach {
-                sut = testListingsViewController()
-
-                sut.beginAppearanceTransition(true, animated: false)
-                sut.endAppearanceTransition()
+                sut = testListingsViewController(storyboard)
+                sut.loadViewProgrammatically()
             }
 
             it("grid") {
@@ -87,7 +87,7 @@ class ListingsViewControllerTests: QuickSpec {
             var bidCount = initialBidCount
             var count: Int?
             
-            beforeEach({ () -> () in
+            beforeEach {
                 bidCount = initialBidCount
                 count = nil
                 
@@ -106,10 +106,10 @@ class ListingsViewControllerTests: QuickSpec {
                 }
                 
                 Provider.sharedProvider = ReactiveMoyaProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true)
-            })
+            }
             
             it("paginates to the second page to retrieve all three sale artworks") {
-                let sut = testListingsViewController()
+                let sut = testListingsViewController(storyboard)
                 sut.pageSize = 2
                 
                 sut.beginAppearanceTransition(true, animated: false)
@@ -120,7 +120,7 @@ class ListingsViewControllerTests: QuickSpec {
             }
             
             it("updates with new values in existing sale artworks") {
-                let sut = testListingsViewController()
+                let sut = testListingsViewController(storyboard)
                 sut.syncInterval = 1
                 
                 sut.beginAppearanceTransition(true, animated: false)
@@ -134,7 +134,7 @@ class ListingsViewControllerTests: QuickSpec {
             }
             
             it("updates with new sale artworks when lengths differ") {
-                let sut = testListingsViewController()
+                let sut = testListingsViewController(storyboard)
                 sut.syncInterval = 1
                 
                 sut.beginAppearanceTransition(true, animated: false)
@@ -155,8 +155,8 @@ let testSchedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal i
     return signal
 }
 
-func testListingsViewController() -> ListingsViewController {
-    let sut = ListingsViewController.instantiateFromStoryboard()
+func testListingsViewController(storyboard: UIStoryboard) -> ListingsViewController {
+    let sut = ListingsViewController.instantiateFromStoryboard(storyboard)
     sut.schedule = testSchedule
     sut.auctionID = ""
     sut.switchView.shouldAnimate = false

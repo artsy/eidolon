@@ -26,7 +26,7 @@ class ConfirmYourBidViewControllerTests: QuickSpec {
             expect(sut.numberAmountTextField.text) == "3"
         }
 
-        it("changes enter button to enabled") {
+        pending("changes enter button to enabled") {
             let keypadSubject = RACSubject()
             sut.keypadSignal = keypadSubject
 
