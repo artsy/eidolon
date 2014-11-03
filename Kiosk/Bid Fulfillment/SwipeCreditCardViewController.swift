@@ -29,12 +29,13 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
         let cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken:merchantToken)
 
         cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
+            let message = message as String
             self.cardStatusLabel.text = "Card Status: \(message)"
-            if message as String == "Got Card" {
+            if message == "Got Card" {
                 self.setInProgress(true)
             }
 
-            if message as String == "Card Flight Error" {
+            if message.hasPrefix("Card Flight Error") {
                 self.processingLabel.text = "ERROR PROCESSING CARD - SEE ADMIN"
             }
 

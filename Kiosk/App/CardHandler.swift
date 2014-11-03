@@ -40,7 +40,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
                 
             }, failure: { (error) -> Void in
                 println("Error: \(error) ")
-                self.cardSwipedSignal.sendNext("Card Flight Error");
+                self.cardSwipedSignal.sendNext("Card Flight Error: \(error)");
                 self.reader.beginSwipeWithMessage(nil);
                 log.error("Card was not tokenizable")
             })

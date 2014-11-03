@@ -15,7 +15,7 @@ PODS:
   - Artsy-UIButtons (1.2.0):
     - Artsy+UIColors
   - CardFlight (1.8.3):
-    - CardFlight/AudioJack
+    - CardFlight/AudioJack (= 1.8.3)
   - CardFlight/AudioJack (1.8.3)
   - DZNWebViewController (2.0):
     - NJKWebViewProgress (~> 0.2)
@@ -27,15 +27,15 @@ PODS:
   - ISO8601DateFormatter (0.7)
   - Mixpanel (2.5.4)
   - NJKWebViewProgress (0.2.3):
-    - NJKWebViewProgress/Core
-    - NJKWebViewProgress/ProgressView
+    - NJKWebViewProgress/Core (= 0.2.3)
+    - NJKWebViewProgress/ProgressView (= 0.2.3)
   - NJKWebViewProgress/Core (0.2.3)
   - NJKWebViewProgress/ProgressView (0.2.3)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
   - Reachability (3.1.1)
   - SDWebImage (3.7.1):
-    - SDWebImage/Core
+    - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
   - UIImageViewAligned (0.0.1)
 
@@ -93,4 +93,4 @@ SPEC CHECKSUMS:
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   UIImageViewAligned: efc1b8b5750dea68b7ee67236f4c64f93e65b674
 
-COCOAPODS: 0.34.4
+COCOAPODS: 0.35.0.rc1

@@ -146,6 +146,8 @@
 		607A17E119F097A700326482 /* PlaceBidNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */; };
 		607A17F719F16BD100326482 /* ForgotPassword.json in Resources */ = {isa = PBXBuildFile; fileRef = 607A17F619F16BD100326482 /* ForgotPassword.json */; };
 		607A17F819F16BD100326482 /* ForgotPassword.json in Resources */ = {isa = PBXBuildFile; fileRef = 607A17F619F16BD100326482 /* ForgotPassword.json */; };
+		607D3F681A07DBBD00EA1A02 /* AdminCardTestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607D3F671A07DBBD00EA1A02 /* AdminCardTestingViewController.swift */; };
+		607D3F691A07DBBD00EA1A02 /* AdminCardTestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607D3F671A07DBBD00EA1A02 /* AdminCardTestingViewController.swift */; };
 		607F0ABD19F2C3AE00C2F4A6 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607F0ABC19F2C3AE00C2F4A6 /* Spinner.swift */; };
 		607F0ABE19F2C3AE00C2F4A6 /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607F0ABC19F2C3AE00C2F4A6 /* Spinner.swift */; };
 		607F0ADD19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 607F0ADC19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json */; };
@@ -532,6 +534,7 @@
 		607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidNetworkModel.swift; sourceTree = "<group>"; };
 		607A17F319F0B32300326482 /* manual flows.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "manual flows.md"; sourceTree = "<group>"; };
 		607A17F619F16BD100326482 /* ForgotPassword.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ForgotPassword.json; sourceTree = "<group>"; };
+		607D3F671A07DBBD00EA1A02 /* AdminCardTestingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCardTestingViewController.swift; sourceTree = "<group>"; };
 		607F0ABC19F2C3AE00C2F4A6 /* Spinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		607F0ADC19F311B600C2F4A6 /* MyBidPositionsForAuctionArtwork.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyBidPositionsForAuctionArtwork.json; sourceTree = "<group>"; };
 		607F0AF019F3128900C2F4A6 /* AuctionInfoForArtwork.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AuctionInfoForArtwork.json; sourceTree = "<group>"; };
@@ -901,6 +904,7 @@
 				60E8945319F43B44006CC4D8 /* ChooseAuctionViewController.swift */,
 				60E0948F19F597A20035F0DD /* PasswordAlertViewController.swift */,
 				60E0949219F5A9620035F0DD /* AdminLogViewController.swift */,
+				607D3F671A07DBBD00EA1A02 /* AdminCardTestingViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1726,6 +1730,7 @@
 				60E094C319F601970035F0DD /* UIViewSubclassesErrorExtensions.swift in Sources */,
 				E68E94A219DDCB70001405A5 /* TextField.swift in Sources */,
 				605B855B19C6E4CF0009B16B /* ConfirmYourBidViewController.swift in Sources */,
+				607D3F681A07DBBD00EA1A02 /* AdminCardTestingViewController.swift in Sources */,
 				606EEADC19F99B32008CA1D9 /* ReachabilityManager.swift in Sources */,
 				605610DB19D2DE2B00A2850A /* ConfirmYourBidEnterYourEmailViewController.swift in Sources */,
 				5EA65C0E19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m in Sources */,
@@ -1838,6 +1843,7 @@
 				5EA65C1019D5FC9B005EA4B4 /* UIView+BooleanDependentAnimation.m in Sources */,
 				5E95FCC019D99DB5004D0C8F /* Constants.swift in Sources */,
 				606EEADD19F99B32008CA1D9 /* ReachabilityManager.swift in Sources */,
+				607D3F691A07DBBD00EA1A02 /* AdminCardTestingViewController.swift in Sources */,
 				609A849B19E5416000476A94 /* RegistrationPasswordViewController.swift in Sources */,
 				5ECD4EA619F3C76100B1A263 /* AppSetup.swift in Sources */,
 				60A8E7CF19BE5B7F0088ACEC /* FulfillmentContainerViewControllerTests.swift in Sources */,
