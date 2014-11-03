@@ -115,6 +115,7 @@ class BidderNetworkModel: NSObject {
     private func registerToAuction() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: fulfillmentNav.auctionID)
         let signal = provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(Bidder.self)
+
         return signal.doNext{ [weak self] (bidder) in
             if let bidder = bidder as? Bidder {
                 self?.details().bidderID = bidder.id
