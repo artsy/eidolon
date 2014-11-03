@@ -11,7 +11,6 @@ class LoadingViewController: UIViewController {
 
     var placingBid = true
 
-    var continueToNextViewController = true
     var performNetworking = true
     var animate = true
 
@@ -20,7 +19,8 @@ class LoadingViewController: UIViewController {
     var placeBidNetworkModel: PlaceBidNetworkModel!
     var details: BidDetails?
 
-    @IBOutlet weak var backToAuctionButton: ActionButton!
+    @IBOutlet weak var backToAuctionButton: SecondaryActionButton!
+    @IBOutlet weak var placeHigherBidButton: ActionButton!
 
     func bidDetails() -> BidDetails {
         return details ?? self.fulfillmentNav().bidDetails
@@ -37,6 +37,8 @@ class LoadingViewController: UIViewController {
 
         statusMessage.hidden = true
         backToAuctionButton.hidden = true
+        placeHigherBidButton.hidden = true
+
         spinner.animate(animate)
 
         titleLabel.text = placingBid ? "Placing bid..." : "Registering..."
@@ -62,6 +64,8 @@ class LoadingViewController: UIViewController {
             if self == nil { return RACSignal.empty() }
 
             self?.bidCheckingModel = self?.bidCheckingModel ?? self?.createBidCheckingModel()
+            if self?.placingBid == false { return RACSignal.empty() }
+
             return self!.bidCheckingModel.waitForBidResolution()
 
         } .subscribeCompleted { [weak self] (_) in
@@ -110,12 +114,13 @@ class LoadingViewController: UIViewController {
             handleRegistered()
         }
 
-        if continueToNextViewController {
-            let delayTime = bidIsResolved ? 7.0 : 3.0
-            delayToMainThread(delayTime) {
-                self.performSegue(.PushtoBidConfirmed)
-            }
-        }
+        placeHigherBidButton.hidden = isHighestBidder
+
+        let showAuctionButton = !placingBid || bidderNetworkModel.createdNewBidder
+        backToAuctionButton.hidden = !showAuctionButton
+
+        let title = isHighestBidder ? "CONTINUE" : "BACK TO AUCTION"
+        backToAuctionButton.setTitle(title, forState: .Normal)
     }
 
     func handleRegistered() {
@@ -126,7 +131,6 @@ class LoadingViewController: UIViewController {
     func handleUnknownBidder() {
         titleLabel.text = "Bid Confirmed"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
-        backToAuctionButton.hidden = false
     }
 
     func handleHighestBidder() {
@@ -155,13 +159,10 @@ class LoadingViewController: UIViewController {
             // If you're not placing a bid, you're here because you're just registering.
             presentError("Registration Failed", message: "There was a problem registering for the auction. Please speak to an Artsy representative.")
         }
-
-        backToAuctionButton.hidden = true
     }
 
     func bidPlacementFailed() {
         presentError("Bid Failed", message: "There was a problem placing your bid. Please speak to an Artsy representative.")
-        backToAuctionButton.hidden = true
     }
 
     func presentError(title: String, message: String) {
@@ -172,20 +173,32 @@ class LoadingViewController: UIViewController {
         statusMessage.hidden = false
     }
 
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .PushtoBidConfirmed {
             let detailsVC = segue.destinationViewController as YourBiddingDetailsViewController
-            detailsVC.titleText = titleLabel.text
-            detailsVC.titleColor = titleLabel.textColor
             detailsVC.confirmationImage = bidConfirmationImageView.image
             detailsVC.hidePreview = bidDetailsPreviewView.hidden
             detailsVC.registered = bidderNetworkModel.createdNewBidder
+            detailsVC.isHighestBidder = bidCheckingModel.isHighestBidder
+        }
+
+        if segue == .PlaceaHigherBidAfterNotBeingHighestBidder {
+            let placeBidVC = segue.destinationViewController as PlaceBidViewController
+            placeBidVC.hasAlreadyPlacedABid = true
         }
     }
 
-    // Go Back
+    @IBAction func placeHigherBidTapped(sender: AnyObject) {
+        self.fulfillmentNav().bidDetails.bidAmountCents = 0
+        self.performSegue(.PlaceaHigherBidAfterNotBeingHighestBidder)
+    }
 
     @IBAction func backToAuctionTapped(sender: AnyObject) {
-        fulfillmentContainer()?.closeFulfillmentModal()
+        if bidderNetworkModel.createdNewBidder {
+            self.performSegue(.PushtoBidConfirmed)
+        } else {
+            fulfillmentContainer()?.closeFulfillmentModal()
+        }
     }
 }

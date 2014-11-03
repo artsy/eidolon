@@ -25,7 +25,7 @@ class ListingsViewController: UIViewController {
     @IBOutlet var countdownManager: ListingsCountdownManager!
     
     lazy var collectionView: UICollectionView = {
-        var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())
+        var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())!
         collectionView.backgroundColor = UIColor.clearColor()
         collectionView.dataSource = self
         collectionView.delegate = self

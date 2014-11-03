@@ -45,7 +45,7 @@ class AdminPanelViewController: UIViewController {
         showAdminButtonsButton.setTitle(buttonsTitle, forState: .Normal)
     }
 
-    @IBOutlet weak var environmentChangeButton: ActionButton!
+    @IBOutlet weak var environmentChangeButton: UIButton!
     @IBAction func switchStagingProductionTapped(sender: AnyObject) {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(!AppSetup.sharedState.useStaging, forKey: "KioskUseStaging")
@@ -57,8 +57,8 @@ class AdminPanelViewController: UIViewController {
         exit(1)
     }
 
-    @IBOutlet weak var showAdminButtonsButton: ActionButton!
-    @IBAction func toggleAdminButtons(sender: ActionButton) {
+    @IBOutlet weak var showAdminButtonsButton: UIButton!
+    @IBAction func toggleAdminButtons(sender: UIButton) {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(!AppSetup.sharedState.showDebugButtons, forKey: "KioskShowDebugButtons")
         defaults.synchronize()

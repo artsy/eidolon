@@ -12,6 +12,8 @@ public enum SegueIdentifier : String {
     case ExistingArtsyUserFound = "Existing Artsy User Found"
     case LoadAdminWebViewController = "Load Admin Web View Controller"
     case PINConfirmedhasCard = "PIN Confirmed has Card"
+    case PlaceAnotherBid = "Place Another Bid"
+    case PlaceaHigherBidAfterNotBeingHighestBidder = "Place a Higher Bid After Not Being Highest Bidder"
     case PushtoBidConfirmed = "Push to Bid Confirmed"
     case RegisterCreditCardToPostal = "RegisterCreditCardToPostal"
     case RegisterPostalToConfirm = "RegisterPostalToConfirm"
