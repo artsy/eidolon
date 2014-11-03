@@ -293,12 +293,23 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
                     self?.presentModalForSaleArtwork(saleArtwork)
                 }
             })
+            
+            let moreInfoSignal = listingsCell.moreInfoSignal.takeUntil(cell.rac_prepareForReuseSignal)
+            moreInfoSignal.subscribeNext({ [weak self] (_) -> Void in
+                if let saleArtwork = self?.saleArtworkAtIndexPath(indexPath) {
+                    self?.presentDetailsForSaleArtwork(saleArtwork)
+                }
+            })
         }
         
         return cell
     }
+    
+    func presentDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
+        println("YEAH")
+    }
 
-    func presentModalForSaleArtwork(saleArtwork:SaleArtwork) {
+    func presentModalForSaleArtwork(saleArtwork: SaleArtwork) {
 
         ARAnalytics.event("Bid Button Tapped")
 

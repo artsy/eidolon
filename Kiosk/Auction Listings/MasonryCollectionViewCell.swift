@@ -16,7 +16,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         return view
     }()
     
-    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.bidView, self.bidButton]
+    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.bidView, self.bidButton, self.moreInfoButton]
 
     private var artworkImageViewHeightConstraint: NSLayoutConstraint?
     
@@ -41,7 +41,9 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         estimateLabel.constrainHeight("16")
         bidView.alignAttribute(.Top, toAttribute: .Bottom, ofView: estimateLabel, predicate: "13")
         bidButton.alignAttribute(.Top, toAttribute: .Bottom, ofView: currentBidLabel, predicate: "13")
-        bidButton.alignAttribute(.Bottom, toAttribute: .Bottom, ofView: contentView, predicate: "40")
+        moreInfoButton.alignAttribute(.Top, toAttribute: .Bottom, ofView: bidButton, predicate: "0")
+        moreInfoButton.constrainHeight("44")
+        moreInfoButton.alignAttribute(.Bottom, toAttribute: .Bottom, ofView: contentView, predicate: "00")
         
         // Bind subviews
         
@@ -77,7 +79,7 @@ extension MasonryCollectionViewCell {
             13 + // padding
             16 + // bid
             13 + // padding
-            40   // bottom padding
+            44   // more info button
         
         return imageHeight + ButtonHeight + CGFloat(remainingHeight)
     }

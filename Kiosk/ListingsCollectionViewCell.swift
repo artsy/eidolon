@@ -8,6 +8,19 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     dynamic let currentBidLabel = ListingsCollectionViewCell._boldLabel()
     dynamic let numberOfBidsLabel = ListingsCollectionViewCell._rightAlignedNormalLabel()
     dynamic let bidButton = ListingsCollectionViewCell._bidButton()
+    dynamic let moreInfoButton = ListingsCollectionViewCell._infoButton()
+    
+    lazy var moreInfoSignal: RACSignal = {
+        // "Jump start" both the more info button signal and the image gesture signal with nil values,
+        // then skip the first "jump started" value.
+        RACSignal.combineLatest([self.moreInfoButton.rac_signalForControlEvents(.TouchUpInside).startWith(nil), self.imageGestureSigal.startWith(nil)]).mapReplace(nil).skip(1)
+    }()
+    
+    private lazy var imageGestureSigal: RACSignal = {
+        let recognizer = UITapGestureRecognizer()
+        self.artworkImageView.addGestureRecognizer(recognizer)
+        return recognizer.rac_gestureSignal()
+    }()
     
     dynamic var saleArtwork: SaleArtwork?
     dynamic var bidWasPressedSignal: RACSignal = RACSubject()
@@ -96,6 +109,7 @@ private extension ListingsCollectionViewCell {
     // Mark: UIView-property-methods – need an _ prefix to appease the compiler ¯\_(ツ)_/¯
     class func _artworkImageView() -> UIImageView {
         let imageView = UIImageView()
+        imageView.userInteractionEnabled = true
         imageView.backgroundColor = UIColor.artsyLightGrey()
         return imageView
     }
@@ -145,5 +159,14 @@ private extension ListingsCollectionViewCell {
         label.font = UIFont.serifBoldFontWithSize(label.font.pointSize)
         label.numberOfLines = 1
         return label
+    }
+    
+    class func _infoButton() -> UIButton {
+        let button = ARUppercaseButton()
+        button.setTitle("More Info >", forState: .Normal)
+        button.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        button.titleLabel?.font = UIFont.sansSerifFontWithSize(13)
+        button.contentHorizontalAlignment = .Left
+        return button
     }
 }
