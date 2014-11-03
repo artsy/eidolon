@@ -1,5 +1,9 @@
 # End User Changes
 
+### Future 
+
+* Admin visual overhaul - @orta
+
 ### 1.1 3rd Nov 2014
 
 * Admin section for testing Cards - @orta

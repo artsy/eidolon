@@ -37,7 +37,7 @@ public extension AppDelegate {
         let block = { () -> Void in
             let webController = ModalWebViewController(url: NSURL(string: address)!)
 
-            let nav = UINavigationController(rootViewController: webController)
+            let nav = UINavigationController(rootViewController: webController)!
             nav.modalPresentationStyle = .FormSheet
             
             ARAnalytics.event("Show Web View", withProperties: ["url" : address])
