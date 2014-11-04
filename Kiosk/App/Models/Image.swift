@@ -29,13 +29,18 @@ class Image: JSONAble {
     }
 
     func thumbnailURL() -> NSURL? {
-        let formats = ["large", "medium", "larger"]
-        
-        if let format = formats.filter({ contains(self.imageVersions, $0) }).first {
+        return urlFromPreferenceList(["large", "medium", "larger"])
+    }
+
+    func fullsizeURL() -> NSURL? {
+        return urlFromPreferenceList(["larger", "medium", "large"])
+    }
+
+    private func urlFromPreferenceList(prefernceList: Array<String>) -> NSURL? {
+        if let format = prefernceList.filter({ contains(self.imageVersions, $0) }).first {
             let path = NSString(string: self.imageFormatString).stringByReplacingOccurrencesOfString(":version", withString: format)
             return NSURL(string: path)
         }
         return nil
     }
-
 }

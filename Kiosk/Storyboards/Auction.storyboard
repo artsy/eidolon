@@ -107,7 +107,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                     </view>
                                 </subviews>
@@ -217,7 +217,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNW-S0-kgd">
                                 <rect key="frame" x="20" y="20" width="120" height="44"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1en-lq-iXz"/>
                                     <constraint firstAttribute="width" constant="120" id="4xX-DI-bdx"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="d5n-gV-yif"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="19" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -229,12 +231,12 @@
                                     <action selector="backWasPressed:" destination="Jj5-n3-bv0" eventType="touchUpInside" id="HrC-Hp-x4l"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ciZ-IV-yO1">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="100" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ciZ-IV-yO1">
                                 <rect key="frame" x="65" y="90" width="538" height="400"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="538" id="NTu-aX-qeW"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="pxc-HY-gDV"/>
+                                    <constraint firstAttribute="height" constant="400" id="pxc-HY-gDV"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDO-I9-Fbb">
@@ -253,18 +255,24 @@
                             <constraint firstItem="z5v-SE-pZu" firstAttribute="leading" secondItem="ciZ-IV-yO1" secondAttribute="leading" id="5in-H2-6Zm"/>
                             <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="NDO-I9-Fbb" secondAttribute="bottom" constant="20" id="7wg-uA-eaR"/>
                             <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="ZNW-S0-kgd" secondAttribute="bottom" constant="26" id="8fj-dy-9xY"/>
+                            <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="NDO-I9-Fbb" secondAttribute="top" id="8jM-3p-x0P"/>
                             <constraint firstItem="ZNW-S0-kgd" firstAttribute="leading" secondItem="nu4-re-HAA" secondAttribute="leadingMargin" id="H0r-rk-0wl"/>
                             <constraint firstItem="ZNW-S0-kgd" firstAttribute="top" secondItem="nu4-re-HAA" secondAttribute="top" constant="20" symbolic="YES" id="HMC-OH-Hy1"/>
+                            <constraint firstItem="ZNW-S0-kgd" firstAttribute="top" secondItem="MIW-uT-gtC" secondAttribute="bottom" constant="20" id="Nld-Qh-maR"/>
                             <constraint firstItem="NDO-I9-Fbb" firstAttribute="leading" secondItem="ciZ-IV-yO1" secondAttribute="trailing" constant="80" id="RBM-og-HNw"/>
+                            <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="ZNW-S0-kgd" secondAttribute="bottom" constant="26" id="e7Y-N5-gwx"/>
                             <constraint firstItem="z5v-SE-pZu" firstAttribute="top" secondItem="ciZ-IV-yO1" secondAttribute="bottom" constant="30" id="gGh-6E-FBJ"/>
                             <constraint firstItem="ciZ-IV-yO1" firstAttribute="leading" secondItem="nu4-re-HAA" secondAttribute="leadingMargin" constant="45" id="jHi-Lu-K3Y"/>
                             <constraint firstItem="NDO-I9-Fbb" firstAttribute="top" secondItem="ciZ-IV-yO1" secondAttribute="top" id="qkz-d9-ufs"/>
                             <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="z5v-SE-pZu" secondAttribute="bottom" constant="49" id="xgK-6I-6iO"/>
-                            <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="ciZ-IV-yO1" secondAttribute="bottom" constant="278" id="yeO-Eq-hDF"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TTV-yT-d9F"/>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="ciZ-IV-yO1" id="joJ-bD-DX1"/>
+                        <outlet property="imageViewHeightConstraint" destination="pxc-HY-gDV" id="ur3-4a-kfl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Y0-e9-1p2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
