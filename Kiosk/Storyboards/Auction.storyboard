@@ -137,7 +137,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PST-th-Drd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="nNP-QM-m8k" customClass="ListingsCountdownManager" customModule="Kiosk" customModuleProvider="target">
                     <connections>
-                        <outlet property="countdownContainerView" destination="V25-VZ-0aj" id="ec2-JI-2Of"/>
+                        <outlet property="countdownContainerView" destination="QgH-uE-F8q" id="asE-Tn-1vw"/>
                         <outlet property="countdownLabel" destination="D2G-TN-B6K" id="IBv-Th-Uy2"/>
                     </connections>
                 </customObject>
