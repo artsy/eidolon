@@ -246,8 +246,10 @@ class ListingsViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .ShowSaleArtworkDetails {
+            let saleArtwork = sender as SaleArtwork!
             let detailsViewController = segue.destinationViewController as SaleArtworkDetailsViewController
-            detailsViewController.saleArtwork = sender as SaleArtwork!
+            detailsViewController.saleArtwork = saleArtwork
+            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork.artwork])
         }
     }
 

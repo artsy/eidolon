@@ -6,7 +6,8 @@ enum ArtsyAPI {
     case TrustToken(number: String, auctionPIN: String)
 
     case SystemTime
-    
+    case Ping
+
     case Me
     
     case MyCreditCards
@@ -136,6 +137,9 @@ extension ArtsyAPI : MoyaPath {
 
         case SystemTime:
             return "/api/v1/system/time"
+
+        case Ping:
+            return "/api/v1/system/ping"
 
         case RegisterToBid:
             return "/api/v1/bidder"
@@ -268,6 +272,9 @@ extension ArtsyAPI : MoyaTarget {
 
         case MyBidPositionsForAuctionArtwork:
             return stubbedResponse("MyBidPositionsForAuctionArtwork")
+
+        case Ping:
+            return stubbedResponse("Ping")
         }
     }
 }

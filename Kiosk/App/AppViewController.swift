@@ -10,14 +10,19 @@ class AppViewController: UIViewController {
     let reachability = ReachabilityManager()
     var reachabilitySignal: RACSignal?
 
+    let apiPinger = APIPingManager()
+    var apiPingerSignal: RACSignal?
+
+
     dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0, state: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let signal = reachabilitySignal ?? reachability.reachSignal
-        offlineBlockingView.hidden = reachability.isReachable()
-        RAC(offlineBlockingView, "hidden") <~ signal
+        let reachableSignal:RACSignal = reachabilitySignal ?? reachability.reachSignal
+        let pingerSignal:RACSignal = apiPingerSignal ?? apiPinger.letOnlineSignal
+
+        RAC(offlineBlockingView, "hidden") <~ RACSignal.combineLatest([reachableSignal, pingerSignal]).reduceAnd()
 
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
