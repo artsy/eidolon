@@ -9,14 +9,13 @@ public extension AppDelegate {
         hideHelp {
             // Need to give it a second to ensure view heirarchy is good.
             dispatch_async(dispatch_get_main_queue()) {
-                let listingsVCNav = self.window.rootViewController?.childViewControllers.first! as UINavigationController
-                let listingVC = listingsVCNav.topViewController as ListingsViewController
-                if let fulfillment = listingVC.presentedViewController as? FulfillmentContainerViewController {
+                let appViewController = self.window.rootViewController?.childViewControllers.first as AppViewController
+                if let fulfillment = appViewController.presentedViewController as? FulfillmentContainerViewController {
                     fulfillment.closeFulfillmentModal() {
-                        listingVC.registerTapped(self)
+                        appViewController.registerToBidButtonWasPressed(self)
                     }
                 } else {
-                    listingVC.registerTapped(self)
+                    appViewController.registerToBidButtonWasPressed(self)
                 }
             }
         }
@@ -25,11 +24,11 @@ public extension AppDelegate {
     // Condtions of Sale and Privacy Policy
 
     func showConditionsOfSale() {
-        self.showWebControllerWithAddress("https://artsy.net/conditions-of-sale")
+        showWebControllerWithAddress("https://artsy.net/conditions-of-sale")
     }
     
     func showPrivacyPolicy() {
-        self.showWebControllerWithAddress("https://artsy.net/privacy")
+        showWebControllerWithAddress("https://artsy.net/privacy")
     }
 
     

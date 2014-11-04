@@ -14,9 +14,6 @@ class SaleArtworkDetailsViewController: UIViewController {
 }
 
 extension SaleArtworkDetailsViewController {
-    @IBAction func registerToBidButtonWasPressed(sender: AnyObject) {
-        registerToBid(auctionID, allowAnimations: allowAnimations)
-    }
     
     @IBAction func backWasPressed(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
