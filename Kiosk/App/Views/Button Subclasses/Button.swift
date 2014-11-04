@@ -35,6 +35,30 @@ public class ActionButton: Button {
     }
 }
 
+public class SecondaryActionButton: Button {
+
+    public override func intrinsicContentSize() -> CGSize {
+        return CGSizeMake(UIViewNoIntrinsicMetric, ButtonHeight)
+    }
+
+    public override func setup() {
+        super.setup()
+
+        setBorderColor(UIColor.artsyMediumGrey(), forState: .Normal, animated: false)
+        setBorderColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
+        setBorderColor(UIColor.artsyLightGrey(), forState: .Disabled, animated: false)
+
+        setBackgroundColor(UIColor.whiteColor(), forState: .Normal, animated: false)
+        setBackgroundColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
+        setBackgroundColor(UIColor.whiteColor(), forState: .Disabled, animated: false)
+
+        setTitleColor(UIColor.blackColor(), forState:.Normal)
+        setTitleColor(UIColor.whiteColor(), forState:.Highlighted)
+        setTitleColor(UIColor.artsyHeavyGrey(), forState:.Disabled)
+    }
+}
+
+
 public class KeypadButton: Button {
 
     public override func setup() {

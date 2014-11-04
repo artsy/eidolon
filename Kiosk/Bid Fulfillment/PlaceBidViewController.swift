@@ -3,6 +3,7 @@ import UIKit
 class PlaceBidViewController: UIViewController {
 
     dynamic var bidDollars: Int = 0
+    var hasAlreadyPlacedABid: Bool = false
 
     @IBOutlet var bidAmountTextField: TextField!
     @IBOutlet var cursor: CursorView!
@@ -27,7 +28,9 @@ class PlaceBidViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.fulfillmentNav().reset()
+        if !hasAlreadyPlacedABid {
+            self.fulfillmentNav().reset()
+        }
 
         let keypad = self.keypadContainer!.keypad!
         let bidDollarsSignal = RACObserve(self, "bidDollars")
@@ -46,7 +49,7 @@ class PlaceBidViewController: UIViewController {
         clearSignal.subscribeNext(clearBid)
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
-            RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { $0 as Float * 100 }
+            RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { $0 as Float * 100 }.takeUntil(dissapearSignal())
 
             if let saleArtwork:SaleArtwork = nav.bidDetails.saleArtwork {
                 
@@ -62,7 +65,7 @@ class PlaceBidViewController: UIViewController {
                     let tuple = $0 as RACTuple
                     let bidCount = tuple.first as? Int ?? 0
                     return (bidCount > 0 ? tuple.second : tuple.third) ?? 0
-                }.map(centsToPresentableDollarsString)
+                }.map(centsToPresentableDollarsString).takeUntil(dissapearSignal())
 
                 RAC(bidButton, "enabled") <~ RACSignal.combineLatest([bidDollarsSignal, minimumNextBidSignal]).map {
                     let tuple = $0 as RACTuple
@@ -73,8 +76,8 @@ class PlaceBidViewController: UIViewController {
                     RAC(artistNameLabel, "text") <~ RACObserve(artist, "name")
                 }
 
-                RAC(artworkTitleLabel, "attributedText") <~ RACObserve(saleArtwork.artwork, "titleAndDate")
-                RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price")
+                RAC(artworkTitleLabel, "attributedText") <~ RACObserve(saleArtwork.artwork, "titleAndDate").takeUntil(rac_willDeallocSignal())
+                RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price").takeUntil(dissapearSignal())
                 
                 RACObserve(saleArtwork, "artwork").subscribeNext { [weak self] (artwork) -> Void in
                     if let url = (artwork as? Artwork)?.images?.first?.thumbnailURL() {
@@ -87,10 +90,24 @@ class PlaceBidViewController: UIViewController {
         }
     }
 
+    func dissapearSignal() -> RACSignal {
+        return rac_signalForSelector("viewDidDisappear:")
+    }
+
     @IBOutlet var bidButton: Button!
     @IBAction func bidButtonTapped(sender: AnyObject) {
-        performSegue(SegueIdentifier.ConfirmBid)
+        let identifier = hasAlreadyPlacedABid ? SegueIdentifier.PlaceAnotherBid : SegueIdentifier.ConfirmBid
+        performSegue(identifier)
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if segue == .PlaceAnotherBid {
+            let nextViewController = segue.destinationViewController as LoadingViewController
+            nextViewController.placingBid = true
+        }
+    }
+
 
     @IBAction func conditionsTapped(sender: AnyObject) {
         (UIApplication.sharedApplication().delegate as? AppDelegate)?.showConditionsOfSale()
