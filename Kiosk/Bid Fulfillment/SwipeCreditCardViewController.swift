@@ -60,7 +60,7 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
 
                 // TODO: RACify this
                 if let newUser = self.navigationController?.fulfillmentNav().bidDetails.newUser {
-                    newUser.name = (newUser.name == "") ? card.name : newUser.name
+                    newUser.name = (newUser.name == "" || newUser.name == nil) ? card.name : newUser.name
                 }
             }
 

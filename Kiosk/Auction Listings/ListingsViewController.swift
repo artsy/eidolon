@@ -14,15 +14,13 @@ class ListingsViewController: UIViewController {
     var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
         return signal.deliverOn(scheduler)
     }
-    
-    dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0, state: "")
+
     dynamic var saleArtworks = [SaleArtwork]()
     dynamic var sortedSaleArtworks = [SaleArtwork]()
     dynamic var cellIdentifier = MasonryCellIdentifier
 
     @IBOutlet var stagingFlag: UIImageView!
     @IBOutlet var loadingSpinner: Spinner!
-    @IBOutlet var countdownManager: ListingsCountdownManager!
     
     lazy var collectionView: UICollectionView = {
         var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())
@@ -141,16 +139,6 @@ class ListingsViewController: UIViewController {
         return self.presentedViewController == nil && self.navigationController?.topViewController == self
     }
     
-    func auctionRequestSignal(auctionID: String) -> RACSignal {
-        let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
-        
-        return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self).catch({ (error) -> RACSignal! in
-            
-            log.error("Sale Artworks: Error handling thing: \(error.artsyServerError())")
-            return RACSignal.empty()
-        })
-    }
-    
     // Adapted from https://github.com/FUKUZAWA-Tadashi/FHCCommander/blob/67c67757ee418a106e0ce0c0820459299b3d77bb/fhcc/Convenience.swift#L33-L44
     func getSSID() -> String? {
         let interfaces: CFArray! = CNCopySupportedInterfaces()?.takeUnretainedValue()
@@ -196,9 +184,7 @@ class ListingsViewController: UIViewController {
         
         // Set up reactive bindings
         RAC(self, "saleArtworks") <~ recurringListingsRequestSignal(auctionID)
-        
-        RAC(self, "sale") <~ auctionRequestSignal(auctionID)
-        RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
+
         RAC(self, "loadingSpinner.hidden") <~ RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool()
 
         let gridSelectedSignal = switchView.selectedIndexSignal.map { (index) -> AnyObject! in
@@ -265,19 +251,6 @@ class ListingsViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var registerToBidButton: ActionButton!
-    @IBAction func registerTapped(sender: AnyObject) {
-        registerToBid(auctionID, allowAnimations: allowAnimations)
-    }
-
-    @IBAction func longPressForAdmin(sender: AnyObject) {
-        let passwordVC = PasswordAlertViewController.alertView { [weak self] () -> () in
-            self?.performSegue(.ShowAdminOptions)
-            return
-        }
-        self.presentViewController(passwordVC, animated: true) {}
-    }
-    
     override func viewWillAppear(animated: Bool) {
         let switchHeightPredicate = "\(switchView.intrinsicContentSize().height)"
         
@@ -342,7 +315,8 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         }
 
         // Present the VC, then once it's ready trigger it's own showing animations
-        self.presentViewController(containerController, animated: false) {
+        // TODO: This is messy. Clean up somehow – responder chain? 
+        navigationController?.parentViewController?.presentViewController(containerController, animated: false) {
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         }
     }
