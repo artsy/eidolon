@@ -10,6 +10,10 @@ class Artwork: JSONAble {
     dynamic let price: String
     dynamic let date: String
 
+    dynamic var medium: String?
+    dynamic var dimensions = [String]()
+    dynamic var imageRights: String?
+
     dynamic var artists: [Artist]?
     dynamic var culturalMarker: String?
 
@@ -44,6 +48,17 @@ class Artwork: JSONAble {
 
         if let imageDicts = json["images"].object as? Array<Dictionary<String, AnyObject>> {
             artwork.images = imageDicts.map({ return Image.fromJSON($0) as Image })
+        }
+
+        artwork.medium = json["medium"].stringValue
+        if let dimensions = json["dimensions"].dictionary {
+            ["cm", "in"].reduce([String](), combine: { (array, key) -> [String] in
+                if let dimension = dimensions[key]?.stringValue {
+                    return array + [dimension]
+                } else {
+                    return array
+                }
+            })
         }
 
         return artwork

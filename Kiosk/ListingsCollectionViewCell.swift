@@ -8,17 +8,23 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     dynamic let currentBidLabel = ListingsCollectionViewCell._boldLabel()
     dynamic let numberOfBidsLabel = ListingsCollectionViewCell._rightAlignedNormalLabel()
     dynamic let bidButton = ListingsCollectionViewCell._bidButton()
-    dynamic let moreInfoButton = ListingsCollectionViewCell._infoButton()
+    dynamic let moreInfoLabel = ListingsCollectionViewCell._infoLabel()
     
     lazy var moreInfoSignal: RACSignal = {
         // "Jump start" both the more info button signal and the image gesture signal with nil values,
         // then skip the first "jump started" value.
-        RACSignal.combineLatest([self.moreInfoButton.rac_signalForControlEvents(.TouchUpInside).startWith(nil), self.imageGestureSigal.startWith(nil)]).mapReplace(nil).skip(1)
+        RACSignal.combineLatest([self.infoGestureSignal.startWith(nil), self.imageGestureSigal.startWith(nil)]).mapReplace(nil).skip(1)
     }()
     
     private lazy var imageGestureSigal: RACSignal = {
         let recognizer = UITapGestureRecognizer()
         self.artworkImageView.addGestureRecognizer(recognizer)
+        return recognizer.rac_gestureSignal()
+    }()
+
+    private lazy var infoGestureSignal: RACSignal = {
+        let recognizer = UITapGestureRecognizer()
+        self.moreInfoLabel.addGestureRecognizer(recognizer)
         return recognizer.rac_gestureSignal()
     }()
     
@@ -161,12 +167,10 @@ private extension ListingsCollectionViewCell {
         return label
     }
     
-    class func _infoButton() -> UIButton {
-        let button = ARUppercaseButton()
-        button.setTitle("More Info >", forState: .Normal)
-        button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        button.titleLabel?.font = UIFont.sansSerifFontWithSize(13)
-        button.contentHorizontalAlignment = .Left
-        return button
+    class func _infoLabel() -> UILabel {
+        let label = ARSansSerifLabelWithChevron()
+        label.tintColor = UIColor.blackColor()
+        label.text = "More Info"
+        return label
     }
 }

@@ -249,7 +249,7 @@ class ListingsViewController: UIViewController {
             let saleArtwork = sender as SaleArtwork!
             let detailsViewController = segue.destinationViewController as SaleArtworkDetailsViewController
             detailsViewController.saleArtwork = saleArtwork
-            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork.artwork])
+            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork.artwork.id])
         }
     }
 

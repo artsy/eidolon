@@ -9,3 +9,11 @@ for i in 1...1 {
 
 "hello".containsString("el")
 
+
+["cm", "in"].map { (key) -> Void in
+    printl(key)
+    return
+}
+
+
+

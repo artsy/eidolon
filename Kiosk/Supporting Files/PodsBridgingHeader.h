@@ -29,6 +29,7 @@
 
 #import <ARAnalytics/ARAnalytics.h>
 #import <ORStackView/ORStackView.h>
+#import <ORStackView/ORTagBasedAutoStackView.h>
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 

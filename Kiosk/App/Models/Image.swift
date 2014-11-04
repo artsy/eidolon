@@ -36,8 +36,8 @@ class Image: JSONAble {
         return urlFromPreferenceList(["larger", "medium", "large"])
     }
 
-    private func urlFromPreferenceList(prefernceList: Array<String>) -> NSURL? {
-        if let format = prefernceList.filter({ contains(self.imageVersions, $0) }).first {
+    private func urlFromPreferenceList(preferenceList: Array<String>) -> NSURL? {
+        if let format = preferenceList.filter({ contains(self.imageVersions, $0) }).first {
             let path = NSString(string: self.imageFormatString).stringByReplacingOccurrencesOfString(":version", withString: format)
             return NSURL(string: path)
         }

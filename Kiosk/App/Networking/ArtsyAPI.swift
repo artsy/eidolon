@@ -14,7 +14,9 @@ enum ArtsyAPI {
     case CreatePINForBidder(bidderID: String)
     case FindBidderRegistration(auctionID: String, phone: String)
     case RegisterToBid(auctionID: String)
-    
+
+    case Artwork(id: String)
+
     case Auctions
     case AuctionListings(id: String)
     case AuctionInfo(auctionID: String)
@@ -22,6 +24,7 @@ enum ArtsyAPI {
     case ActiveAuctions
     
     case MyBiddersForAuction(auctionID: String)
+    case BidHistory(auctionID: String, artworkID: String)
     case MyBidPositionsForAuctionArtwork(auctionID: String, artworkID: String)
     case PlaceABid(auctionID: String, artworkID: String, maxBidCents: String)
 
@@ -106,6 +109,8 @@ enum ArtsyAPI {
         case MyBidPositionsForAuctionArtwork(let auctionID, let artworkID):
             return ["sale_id": auctionID, "artwork_id": artworkID]
 
+        case BidHistory(let auctionID, let artworkID):
+            return ["sale_id": auctionID, "artwork_id": artworkID]
 
         default:
             return [:]
@@ -168,6 +173,12 @@ extension ArtsyAPI : MoyaPath {
         case MyBidPositionsForAuctionArtwork:
             return "/api/v1/me/bidder_positions"
 
+        case Artwork(let id):
+            return "/api/v1/artwork/\(id)"
+
+        case BidHistory:
+            return "/api/v1/bidder_positions"
+
         case FindBidderRegistration:
             return "/api/v1/bidder"
             
@@ -194,7 +205,6 @@ extension ArtsyAPI : MoyaPath {
 }
 
 extension ArtsyAPI : MoyaTarget {
-    // TODO: - parameterize base URL based on debug, release, etc.
 
     var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
     var baseURL: NSURL { return NSURL(string: base)! }
@@ -243,7 +253,6 @@ extension ArtsyAPI : MoyaTarget {
 
         case CreateUser:
             return stubbedResponse("Me")
-
             
         // This API returns a 302, so stubbed response isn't valid
         case FindBidderRegistration:
@@ -251,7 +260,10 @@ extension ArtsyAPI : MoyaTarget {
 
         case PlaceABid:
             return stubbedResponse("CreateABid")
-            
+
+        case Artwork:
+            return stubbedResponse("Artwork")
+
         case AuctionInfo:
             return stubbedResponse("AuctionInfo")
 
@@ -275,6 +287,10 @@ extension ArtsyAPI : MoyaTarget {
 
         case Ping:
             return stubbedResponse("Ping")
+
+        //TODO: Ummm not this.
+        case BidHistory:
+            return NSData()
         }
     }
 }

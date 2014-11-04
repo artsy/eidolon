@@ -239,7 +239,7 @@
                                     <constraint firstAttribute="height" constant="400" id="pxc-HY-gDV"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDO-I9-Fbb">
+                            <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="NDO-I9-Fbb" customClass="ORTagBasedAutoStackView">
                                 <rect key="frame" x="683" y="90" width="276" height="658"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -253,7 +253,6 @@
                             <constraint firstAttribute="trailing" secondItem="NDO-I9-Fbb" secondAttribute="trailing" constant="65" id="2rj-Vs-QfH"/>
                             <constraint firstItem="z5v-SE-pZu" firstAttribute="trailing" secondItem="ciZ-IV-yO1" secondAttribute="trailing" id="5eZ-k7-tR9"/>
                             <constraint firstItem="z5v-SE-pZu" firstAttribute="leading" secondItem="ciZ-IV-yO1" secondAttribute="leading" id="5in-H2-6Zm"/>
-                            <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="NDO-I9-Fbb" secondAttribute="bottom" constant="20" id="7wg-uA-eaR"/>
                             <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="ZNW-S0-kgd" secondAttribute="bottom" constant="26" id="8fj-dy-9xY"/>
                             <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="NDO-I9-Fbb" secondAttribute="top" id="8jM-3p-x0P"/>
                             <constraint firstItem="ZNW-S0-kgd" firstAttribute="leading" secondItem="nu4-re-HAA" secondAttribute="leadingMargin" id="H0r-rk-0wl"/>
@@ -263,8 +262,8 @@
                             <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="ZNW-S0-kgd" secondAttribute="bottom" constant="26" id="e7Y-N5-gwx"/>
                             <constraint firstItem="z5v-SE-pZu" firstAttribute="top" secondItem="ciZ-IV-yO1" secondAttribute="bottom" constant="30" id="gGh-6E-FBJ"/>
                             <constraint firstItem="ciZ-IV-yO1" firstAttribute="leading" secondItem="nu4-re-HAA" secondAttribute="leadingMargin" constant="45" id="jHi-Lu-K3Y"/>
-                            <constraint firstItem="NDO-I9-Fbb" firstAttribute="top" secondItem="ciZ-IV-yO1" secondAttribute="top" id="qkz-d9-ufs"/>
                             <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="z5v-SE-pZu" secondAttribute="bottom" constant="49" id="xgK-6I-6iO"/>
+                            <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="NDO-I9-Fbb" secondAttribute="bottom" constant="20" id="xvD-zR-ORV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TTV-yT-d9F"/>
@@ -272,6 +271,7 @@
                     <connections>
                         <outlet property="imageView" destination="ciZ-IV-yO1" id="joJ-bD-DX1"/>
                         <outlet property="imageViewHeightConstraint" destination="pxc-HY-gDV" id="ur3-4a-kfl"/>
+                        <outlet property="metadataStackView" destination="NDO-I9-Fbb" id="IGq-Z4-yN9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Y0-e9-1p2" userLabel="First Responder" sceneMemberID="firstResponder"/>
