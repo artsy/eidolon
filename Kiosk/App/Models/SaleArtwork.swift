@@ -106,10 +106,10 @@ class SaleArtwork: JSONAble {
         }
     }
 
-    var currentBidSignal: RACSignal {
+    func currentBidSignal(prefix: String = "") -> RACSignal {
         return RACObserve(self, "highestBidCents").map({ (highestBidCents) -> AnyObject! in
             if let currentBidCents = highestBidCents as? Int {
-                return "Current bid: \(NSNumberFormatter.currencyStringForCents(currentBidCents))"
+                return "\(prefix)\(NSNumberFormatter.currencyStringForCents(currentBidCents))"
             } else {
                 return "No Bids"
             }

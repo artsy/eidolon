@@ -6,6 +6,8 @@ class Artist: JSONAble {
     dynamic var name: String
     let sortableID: String
 
+    var blurb: String?
+
     init(id: String, name: String, sortableID: String) {
         self.id = id
         self.name = name

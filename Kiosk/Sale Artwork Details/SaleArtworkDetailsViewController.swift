@@ -8,12 +8,14 @@ class SaleArtworkDetailsViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!
+    @IBOutlet weak var additionalDetailScrollView: ORStackScrollView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupImageView()
         setupMetadataView()
+        setupAdditionalDetailStackView()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -76,7 +78,7 @@ extension SaleArtworkDetailsViewController {
         }
 
         let artistNameLabel = label(.SansSerif, .ArtistNameLabel)
-        artistNameLabel.text = saleArtwork.artwork.artists?.first?.name
+        artistNameLabel.text = artist().name
         metadataStackView.addSubview(artistNameLabel, withTopMargin: "0", sideMargin: "0")
 
         let artworkNameLabel = label(.ItalicsSerif, .ArtworkNameLabel)
@@ -96,7 +98,7 @@ extension SaleArtworkDetailsViewController {
         }
 
         retrieveImageRights().filter { (imageRights) -> Bool in
-            (countElements(imageRights as? String ?? "") > 0)
+            return (countElements(imageRights as? String ?? "") > 0)
         }.subscribeNext { [weak self] (imageRights) -> Void in
             let rightsLabel = label(.Serif, .ImageRightsLabel)
             rightsLabel.text = imageRights as? String
@@ -120,7 +122,6 @@ extension SaleArtworkDetailsViewController {
         rac_signalForSelector("viewDidLayoutSubviews").subscribeNext { [weak estimateTopBorder, weak estimateBottomBorder] (_) -> Void in
             estimateTopBorder?.drawDottedBorders()
             estimateBottomBorder?.drawDottedBorders()
-            return
         }
 
         let currentBidLabel = label(.Serif, .CurrentBidLabel)
@@ -128,7 +129,7 @@ extension SaleArtworkDetailsViewController {
         metadataStackView.addSubview(currentBidLabel, withTopMargin: "22", sideMargin: "0")
 
         let currentBidValueLabel = label(.Bold, .CurrentBidValueLabel, fontSize: 27)
-        RAC(currentBidValueLabel, "text") <~ saleArtwork.currentBidSignal
+        RAC(currentBidValueLabel, "text") <~ saleArtwork.currentBidSignal()
         metadataStackView.addSubview(currentBidValueLabel, withTopMargin: "10", sideMargin: "0")
 
         let numberOfBidsPlacedLabel = label(.Serif, .NumberOfBidsPlacedLabel)
@@ -161,6 +162,62 @@ extension SaleArtworkDetailsViewController {
         }
     }
 
+    private func setupAdditionalDetailStackView() {
+        enum LabelType {
+            case Header
+            case Body
+        }
+
+        func label(type: LabelType, layoutSignal: RACSignal? = nil) -> UILabel {
+            let (label, fontSize) = { () -> (UILabel, CGFloat) in
+                switch type {
+                case .Header:
+                    return (ARSansSerifLabel(), 14)
+                case .Body:
+                    return (ARSerifLabel(), 16)
+                }
+            }()
+
+            label.font = label.font.fontWithSize(fontSize)
+            label.lineBreakMode = .ByWordWrapping
+
+            layoutSignal?.take(1).subscribeNext { [weak label] (_) -> Void in
+                if let label = label {
+                    label.preferredMaxLayoutWidth = CGRectGetWidth(label.frame)
+                }
+            }
+
+            return label
+        }
+
+        let additionalInfoHeaderLabel = label(.Header)
+        additionalInfoHeaderLabel.text = "Additional Information"
+        additionalDetailScrollView.stackView.addSubview(additionalInfoHeaderLabel, withTopMargin: "0", sideMargin: "0")
+
+        let additionalInfoLabel = label(.Body, layoutSignal: additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
+        additionalInfoLabel.text = saleArtwork.artwork.blurb
+        additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "0")
+
+        retrieveArtistBlurb().filter { (blurb) -> Bool in
+            return (countElements(blurb as? String ?? "") > 0)
+        }.subscribeNext { [weak self] (blurb) -> Void in
+            if self == nil {
+                return
+            }
+            let aboutArtistHeaderLabel = label(.Header)
+            aboutArtistHeaderLabel.text = "About \(self!.artist().name)"
+            self?.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "0")
+
+            let aboutAristLabel = label(.Body, layoutSignal: self?.additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
+            aboutAristLabel.text = blurb as? String
+            self?.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "0")
+        }
+    }
+
+    private func artist() -> Artist! {
+        return saleArtwork.artwork.artists?.first
+    }
+
     private func retrieveImageRights() -> RACSignal {
         let artwork = saleArtwork.artwork
         if let imageRights = artwork.imageRights {
@@ -173,6 +230,23 @@ extension SaleArtworkDetailsViewController {
                 imageRights != nil
             }).doNext{ (imageRights) -> Void in
                 artwork.imageRights = imageRights as? String
+                return
+            }
+        }
+    }
+
+    private func retrieveArtistBlurb() -> RACSignal {
+        let artist = self.artist()
+        if let blurb = artist.blurb {
+            return RACSignal.`return`(blurb)
+        } else {
+            let endpoint: ArtsyAPI = ArtsyAPI.Artist(id: artist.id)
+            return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
+                return json["blurb"]
+            }.filter({ (blurb) -> Bool in
+                blurb != nil
+            }).doNext{ (blurb) -> Void in
+                artist.blurb = blurb as? String
                 return
             }
         }
