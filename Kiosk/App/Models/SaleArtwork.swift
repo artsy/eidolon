@@ -92,7 +92,7 @@ class SaleArtwork: JSONAble {
     }
 
     var numberOfBidsSignal: RACSignal {
-        return RACObserve(self, "bidCount").map({ (optionalBidCount) -> AnyObject! in
+        return RACObserve(self, "bidCount").map { (optionalBidCount) -> AnyObject! in
             // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
             // So we need to unwrap it as an optional optional. Yo dawg.
             let bidCount = optionalBidCount as Int?
@@ -102,6 +102,16 @@ class SaleArtwork: JSONAble {
                 return "\(bidCount) bid\(suffix) placed"
             } else {
                 return "0 bids placed"
+            }
+        }
+    }
+
+    var currentBidSignal: RACSignal {
+        return RACObserve(self, "highestBidCents").map({ (highestBidCents) -> AnyObject! in
+            if let currentBidCents = highestBidCents as? Int {
+                return "Current bid: \(NSNumberFormatter.currencyStringForCents(currentBidCents))"
+            } else {
+                return "No Bids"
             }
         })
     }

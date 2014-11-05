@@ -108,15 +108,11 @@ extension SaleArtworkDetailsViewController {
         metadataStackView.addSubview(currentBidLabel, withTopMargin: "22", sideMargin: "0")
 
         let currentBidValueLabel = label(.Bold, .CurrentBidValueLabel, fontSize: 27)
-        if let currentBidCents = saleArtwork.highestBidCents {
-            currentBidValueLabel.text = NSNumberFormatter.currencyStringForCents(currentBidCents)
-        } else {
-            currentBidValueLabel.text = "No Bids"
-        }
+        RAC(currentBidValueLabel, "text") ~< saleArtwork.currentBidSignal
         metadataStackView.addSubview(currentBidValueLabel, withTopMargin: "10", sideMargin: "0")
 
         let numberOfBidsPlacedLabel = label(.Serif, .NumberOfBidsPlacedLabel)
-        RAC(numberOfBidsPlacedLabel, "text") <~ saleArtwork.numberOfBidsSignal.takeUntil(rac_willDeallocSignal())
+        RAC(numberOfBidsPlacedLabel, "text") <~ saleArtwork.numberOfBidsSignal
         metadataStackView.addSubview(numberOfBidsPlacedLabel, withTopMargin: "10", sideMargin: "0")
 
         let bidButton = ActionButton()
