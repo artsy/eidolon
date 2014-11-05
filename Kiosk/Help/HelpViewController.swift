@@ -34,7 +34,7 @@ class HelpViewController: UIViewController {
         let bidExplainLabel = wrappingSerifLabel()
         bidExplainLabel.text = "Enter the amount you would like to bid. You will confirm this bid in the next step.\n\nEnter your mobile number or bidder number and PIN that you received when you registered."
         bidExplainLabel.makeSubstringsBold(["mobile number", "bidder number", "PIN"])
-        
+
         let registerButton = ARBlackFlatButton()
         registerButton.setTitle("Register", forState: .Normal)
         RAC(registerButton, "enabled") <~ reachabilityManager.reachSignal

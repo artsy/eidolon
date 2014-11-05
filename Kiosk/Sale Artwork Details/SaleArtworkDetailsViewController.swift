@@ -13,6 +13,13 @@ class SaleArtworkDetailsViewController: UIViewController {
 
         setupImageView()
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == .ZoomIntoArtwork {
+            let nextViewController = segue.destinationViewController as SaleArtworkZoomViewController
+            nextViewController.saleArtwork = saleArtwork
+        }
+    }
 }
 
 extension SaleArtworkDetailsViewController {

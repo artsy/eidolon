@@ -53,8 +53,8 @@ class BidderNetworkModel: NSObject {
         let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email!, password: newUser.password!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!, name: newUser.name!)
 
         return Provider.sharedProvider.request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doError { (error) in
-            log.error("Creating user failed.")
-            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.error("Creating user failed.")
+            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
 
         }.then {
             self.updateProvider()
@@ -67,8 +67,8 @@ class BidderNetworkModel: NSObject {
         let signal = provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
 
         return signal.doError { (error) in
-            log.error("Updating user failed.")
-            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.error("Updating user failed.")
+            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -79,8 +79,8 @@ class BidderNetworkModel: NSObject {
         // on Staging the card tokenization fails
 
         return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).doError { (error) in
-            log.error("Adding Card to User failed.")
-            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.error("Adding Card to User failed.")
+            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -107,8 +107,8 @@ class BidderNetworkModel: NSObject {
             return false
 
         }.doError { (error) in
-            log.error("Getting user bidders failed.")
-            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.error("Getting user bidders failed.")
+            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -123,8 +123,8 @@ class BidderNetworkModel: NSObject {
             }
 
         } .doError { (error) in
-            log.error("Registering for Auction Failed.")
-            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.error("Registering for Auction Failed.")
+            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -137,8 +137,8 @@ class BidderNetworkModel: NSObject {
             self?.details().bidderPIN =  pin
 
         } .doError { (error) in
-            log.error("Generating a PIN for bidder has failed.")
-            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.error("Generating a PIN for bidder has failed.")
+            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -150,8 +150,8 @@ class BidderNetworkModel: NSObject {
             return
 
         }.doError { (error) in
-            log.error("Getting Bidder ID failed.")
-            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.error("Getting Bidder ID failed.")
+            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -165,8 +165,8 @@ class BidderNetworkModel: NSObject {
             }
 
         } .doError { (error) in
-            log.error("Getting Access Token failed.")
-            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.error("Getting Access Token failed.")
+            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 }

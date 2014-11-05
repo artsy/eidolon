@@ -26,6 +26,12 @@ class AppViewController: UIViewController {
 
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
+
+        for controller in childViewControllers {
+            if let nav = controller as? UINavigationController {
+                nav.delegate = self
+            }
+        }
     }
 }
 
@@ -66,7 +72,7 @@ extension AppViewController {
 
         return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self).catch({ (error) -> RACSignal! in
 
-            log.error("Sale Artworks: Error handling thing: \(error.artsyServerError())")
+            logger.error("Sale Artworks: Error handling thing: \(error.artsyServerError())")
             return RACSignal.empty()
         })
     }

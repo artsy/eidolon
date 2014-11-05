@@ -26,9 +26,9 @@
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
-            <string>AGaramondPro-Regular</string>
         </mutableArray>
         <mutableArray key="ITCAvantGardeDemi_Track03.ttf">
+            <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
@@ -147,7 +147,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1547.52" y="704.85333333333335"/>
+            <point key="canvasLocation" x="-1540" y="820"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gwf-cv-uMQ">
@@ -234,10 +234,14 @@
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="100" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ciZ-IV-yO1">
                                 <rect key="frame" x="65" y="90" width="538" height="400"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="538" id="NTu-aX-qeW"/>
                                     <constraint firstAttribute="height" constant="400" id="pxc-HY-gDV"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="aeS-ZY-FEf" appends="YES" id="bWi-aj-ysW"/>
+                                </connections>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDO-I9-Fbb">
                                 <rect key="frame" x="683" y="90" width="276" height="658"/>
@@ -275,8 +279,53 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Y0-e9-1p2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="aeS-ZY-FEf">
+                    <connections>
+                        <segue destination="Sb3-CP-VQj" kind="push" identifier="Zoom Into Artwork" id="YOt-UF-Qxc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3326" y="820"/>
+        </scene>
+        <!--Sale Artwork Zoom View Controller-->
+        <scene sceneID="Nb3-h2-chT">
+            <objects>
+                <viewController id="Sb3-CP-VQj" customClass="SaleArtworkZoomViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rBc-NA-SkB"/>
+                        <viewControllerLayoutGuide type="bottom" id="usv-XT-p1E"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eXy-cL-60c">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mW4-AX-GmJ">
+                                <rect key="frame" x="20" y="20" width="120" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="MVc-Cx-uX5"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="jht-Gg-nsy"/>
+                                    <constraint firstAttribute="height" constant="44" id="koV-jS-Ppm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="15"/>
+                                <inset key="contentEdgeInsets" minX="19" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="BACK" backgroundImage="BackButtonBackground">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="Sb3-CP-VQj" eventType="touchUpInside" id="ufm-am-JVv"/>
+                                    <action selector="backWasPressed:" destination="Jj5-n3-bv0" eventType="touchUpInside" id="kzz-Wx-uNZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="TvO-cz-Wad"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5s4-VX-JdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4619" y="820"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GeE-xH-04T">
@@ -435,11 +484,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7X-wm-Z3T">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7X-wm-Z3T">
                                 <rect key="frame" x="20" y="19" width="120" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="mEm-RL-SR5"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="19" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="EXIT" backgroundImage="BackButtonBackground">
@@ -493,11 +539,8 @@
                                 <rect key="frame" x="251" y="98" width="522" height="563"/>
                                 <color key="backgroundColor" red="1" green="0.94264843532343234" blue="0.52602781247862018" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lge-y1-hu2">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lge-y1-hu2">
                                 <rect key="frame" x="16" y="15" width="120" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="FZz-gQ-C55"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="15"/>
                                 <inset key="contentEdgeInsets" minX="19" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="BACK" backgroundImage="BackButtonBackground">
@@ -547,20 +590,7 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KHb-zd-See">
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Card Reader Testing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PsP-JZ-vb0" customClass="ARSerifLabel">
-                                <rect key="frame" x="60" y="48" width="299" height="41"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfd-A9-UBV">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DLU-zk-7Xf">
-                                <rect key="frame" x="65" y="80" width="894" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Card Tester" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgT-Cj-KWb" customClass="ARSerifLabel">
@@ -586,6 +616,17 @@
                                     <action selector="backWasPressed:" destination="Jj5-n3-bv0" eventType="touchUpInside" id="C4e-DG-sHH"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L2g-CW-eQL">
+                                <rect key="frame" x="60" y="87" width="894" height="2"/>
+                                <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfd-A9-UBV">
+                                <rect key="frame" x="64" y="124" width="663" height="340"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

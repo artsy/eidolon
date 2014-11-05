@@ -35,6 +35,8 @@ pod 'UIImageViewAligned', :git => 'https://github.com/orta/UIImageViewAligned.gi
 pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewController.git"
 pod 'Reachability'
 
+pod 'ARTiledImageView', :git => "https://github.com/dblock/ARTiledImageView.git"
+
 target "KioskTests", :exclusive => true do
     pod 'FBSnapshotTestCase', :git => 'https://github.com/AshFurrow/ios-snapshot-test-case.git', :branch => 'renderAsLayer'
 end

@@ -20,6 +20,7 @@ public enum SegueIdentifier : String {
     case ShowAdminOptions = "Show Admin Options"
     case ShowLoadingView = "Show Loading View"
     case ShowSaleArtworkDetails = "Show Sale Artwork Details"
+    case ZoomIntoArtwork = "Zoom Into Artwork"
 }
 
 public enum ViewControllerStoryboardIdentifier : String {
