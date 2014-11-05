@@ -29,8 +29,8 @@ class PlaceBidNetworkModel: NSObject {
             return
 
         }.doError { (error) in
-            log.error("Bidding on Sale Artwork failed.")
-            log.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.error("Bidding on Sale Artwork failed.")
+            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 

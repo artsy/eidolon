@@ -77,7 +77,7 @@ class ListingsViewController: UIViewController {
             return reduce(array ?? [], Array<AnyObject>(), +)
         }).mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
             
-            log.error("Sale Artworks: Error handling thing: \(error.artsyServerError())")
+            logger.error("Sale Artworks: Error handling thing: \(error.artsyServerError())")
 
             return RACSignal.empty()
         }), RACScheduler.mainThreadScheduler())
@@ -249,7 +249,7 @@ class ListingsViewController: UIViewController {
             let saleArtwork = sender as SaleArtwork!
             let detailsViewController = segue.destinationViewController as SaleArtworkDetailsViewController
             detailsViewController.saleArtwork = saleArtwork
-            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork.artwork])
+            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork.artwork.id])
         }
     }
 
