@@ -14,7 +14,7 @@ class AdminCardTestingViewController: UIViewController {
 
         let merchantToken = AppSetup.sharedState.useStaging ? self.keys.cardflightMerchantAccountStagingToken() : self.keys.cardflightMerchantAccountToken()
         let cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken:merchantToken)
-
+        
         cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
                 self.log("\(message)")
                 return

@@ -17,6 +17,7 @@ class ListingsViewController: UIViewController {
 
     dynamic var saleArtworks = [SaleArtwork]()
     dynamic var sortedSaleArtworks = [SaleArtwork]()
+
     dynamic var cellIdentifier = MasonryCellIdentifier
 
     @IBOutlet var stagingFlag: UIImageView!
@@ -205,10 +206,13 @@ class ListingsViewController: UIViewController {
             }
         })
 
-        RAC(self, "sortedSaleArtworks") <~ RACSignal.combineLatest([RACObserve(self, "saleArtworks").distinctUntilChanged(), switchView.selectedIndexSignal, gridSelectedSignal]).doNext({ [weak self] in
+        let artworkAndLayoutSignal = RACSignal.combineLatest([RACObserve(self, "saleArtworks").distinctUntilChanged(), switchView.selectedIndexSignal, gridSelectedSignal]).map({ [weak self] in
             let tuple = $0 as RACTuple
+            let saleArtworks = tuple.first as [SaleArtwork]
+            let selectedIndex = tuple.second as Int
+
             let gridSelected: AnyObject! = tuple.third
-            
+
             let layout = { () -> UICollectionViewLayout in
                 switch gridSelected as Bool {
                 case true:
@@ -216,24 +220,21 @@ class ListingsViewController: UIViewController {
                 default:
                     return ListingsViewController.tableLayout(CGRectGetWidth(self?.switchView.frame ?? CGRectZero))
                 }
-            }()
-            
-            // Need to explicitly call animated: false and reload to avoid animation
-            self?.collectionView.setCollectionViewLayout(layout, animated: false)
-        }).map({
-            let tuple = $0 as RACTuple
-            let saleArtworks = tuple.first as [SaleArtwork]
-            let selectedIndex = tuple.second as Int
-            
+                }()
+
             if let switchValue = SwitchValues(rawValue: selectedIndex) {
-                return switchValue.sortSaleArtworks(saleArtworks)
+                return RACTuple(objectsFromArray: [switchValue.sortSaleArtworks(saleArtworks), layout])
             } else {
                 // Necessary for compiler – won't execute
-                return saleArtworks
+                return RACTuple(objectsFromArray: [saleArtworks, layout])
             }
-        }).distinctUntilChanged().doNext({ [weak self] (sortedSaleArtworks) -> Void in
+        })
+
+        RAC(self, "sortedSaleArtworks") <~ artworkAndLayoutSignal.map { ($0 as RACTuple).first }.doNext({ [weak self] in
+            let sortedSaleArtworks = $0 as [SaleArtwork]
+
             self?.collectionView.reloadData()
-            
+
             if countElements(sortedSaleArtworks as [SaleArtwork]) > 0 {
                 // Need to dispatch, since the changes in the CV's model aren't imediate
                 dispatch_async(dispatch_get_main_queue()) {
@@ -242,6 +243,12 @@ class ListingsViewController: UIViewController {
                 }
             }
         })
+
+        artworkAndLayoutSignal.map { ($0 as RACTuple).second }.subscribeNext { [weak self] (layout) -> Void in
+            // Need to explicitly call animated: false and reload to avoid animation
+            self?.collectionView.setCollectionViewLayout(layout as UICollectionViewLayout, animated: false)
+            return
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
