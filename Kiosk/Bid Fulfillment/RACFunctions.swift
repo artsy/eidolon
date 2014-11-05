@@ -9,6 +9,12 @@ func stringIsEmailAddress(text:AnyObject!) -> AnyObject! {
     return testPredicate.evaluateWithObject(text) && !stringContainsPlus
 }
 
+func stringIsCreditCard(text:AnyObject!) -> AnyObject! {
+    let card = BPCard(number:text as String, expirationMonth:0, expirationYear:2023)
+    return card.numberValid
+}
+
+
 func centsToPresentableDollarsString(cents:AnyObject!) -> AnyObject! {
     if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
         return dollars
@@ -20,7 +26,15 @@ func isZeroLengthString(string:AnyObject!) -> AnyObject! {
     return countElements(string as String) == 0
 }
 
+func is4CharLengthString(string:AnyObject!) -> AnyObject! {
+    return countElements(string as String) == 4
+}
+
+func islessThan3CharLengthString(string:AnyObject!) -> AnyObject! {
+    return countElements(string as String) < 3
+}
 
 func minimum6CharString(string:AnyObject!) -> AnyObject! {
     return countElements(string as String) >= 6
 }
+

@@ -1,6 +1,6 @@
 import UIKit
 
-class RegistrationEmailViewController: UIViewController, RegistrationSubController {
+class RegistrationEmailViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
 
     @IBOutlet var emailTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
@@ -24,4 +24,14 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
     @IBAction func confirmTapped(sender: AnyObject) {
         finishedSignal.sendCompleted()
     }
+
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+
+        // Allow delete
+        if (countElements(string) == 0) { return true }
+
+        // the API doesn't accept spaces
+        return string != " "
+    }
+
 }

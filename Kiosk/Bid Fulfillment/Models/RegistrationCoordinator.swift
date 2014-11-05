@@ -51,7 +51,12 @@ class RegistrationCoordinator: NSObject {
             return storyboard.viewControllerWithID(.RegisterPassword)
 
         case .CreditCardVC:
-            return storyboard.viewControllerWithID(.RegisterCreditCard)
+            if AppSetup.sharedState.disableCardReader {
+                return storyboard.viewControllerWithID(.ManualCardDetailsInput)
+            } else {
+                return storyboard.viewControllerWithID(.RegisterCreditCard)
+            }
+
 
         case .ZipCodeVC:
             return storyboard.viewControllerWithID(.RegisterPostalorZip)
