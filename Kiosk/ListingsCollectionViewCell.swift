@@ -84,7 +84,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         RAC(self, "estimateLabel.text") <~ RACObserve(self, "saleArtwork.estimateString").mapNilToEmptyString()
         
         RAC(self, "currentBidLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
-            return (saleArtwork as? SaleArtwork)?.currentBidSignal(prefix: "Current Bid: ") ?? RACSignal.`return`(nil)
+            return (saleArtwork as? SaleArtwork)?.currentBidSignal(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ") ?? RACSignal.`return`(nil)
         }).switchToLatest().mapNilToEmptyString()
         
         RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
