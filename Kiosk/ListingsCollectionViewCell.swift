@@ -8,17 +8,23 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     dynamic let currentBidLabel = ListingsCollectionViewCell._boldLabel()
     dynamic let numberOfBidsLabel = ListingsCollectionViewCell._rightAlignedNormalLabel()
     dynamic let bidButton = ListingsCollectionViewCell._bidButton()
-    dynamic let moreInfoButton = ListingsCollectionViewCell._infoButton()
+    dynamic let moreInfoLabel = ListingsCollectionViewCell._infoLabel()
     
     lazy var moreInfoSignal: RACSignal = {
         // "Jump start" both the more info button signal and the image gesture signal with nil values,
         // then skip the first "jump started" value.
-        RACSignal.combineLatest([self.moreInfoButton.rac_signalForControlEvents(.TouchUpInside).startWith(nil), self.imageGestureSigal.startWith(nil)]).mapReplace(nil).skip(1)
+        RACSignal.combineLatest([self.infoGestureSignal.startWith(nil), self.imageGestureSigal.startWith(nil)]).mapReplace(nil).skip(1)
     }()
     
     private lazy var imageGestureSigal: RACSignal = {
         let recognizer = UITapGestureRecognizer()
         self.artworkImageView.addGestureRecognizer(recognizer)
+        return recognizer.rac_gestureSignal()
+    }()
+
+    private lazy var infoGestureSignal: RACSignal = {
+        let recognizer = UITapGestureRecognizer()
+        self.moreInfoLabel.addGestureRecognizer(recognizer)
         return recognizer.rac_gestureSignal()
     }()
     
@@ -77,26 +83,13 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         
         RAC(self, "estimateLabel.text") <~ RACObserve(self, "saleArtwork.estimateString").mapNilToEmptyString()
         
-        RAC(self, "currentBidLabel.text") <~ RACObserve(self, "saleArtwork.highestBidCents").map({ (highestBidCents) -> AnyObject! in
-            if let currentBidCents = highestBidCents as? Int {
-                return "Current bid: \(NSNumberFormatter.currencyStringForCents(currentBidCents))"
-            } else {
-                return "No bids"
-            }
-        }).mapNilToEmptyString()
+        RAC(self, "currentBidLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
+            return (saleArtwork as? SaleArtwork)?.currentBidSignal ?? RACSignal.`return`(nil)
+        }).switchToLatest().mapNilToEmptyString()
         
-        RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork.bidCount").map({ (optionalBidCount) -> AnyObject! in
-            // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
-            // So we need to unwrap it as an optional optional. Yo dawg.
-            let bidCount = optionalBidCount as Int?
-
-            if let bidCount = bidCount {
-                let suffix = bidCount == 1 ? "" : "s"
-                return "\(bidCount) bid\(suffix) placed"
-            } else {
-                return "0 bids placed"
-            }
-        })
+        RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
+            return (saleArtwork as? SaleArtwork)?.numberOfBidsSignal ?? RACSignal.`return`(nil)
+        }).switchToLatest().mapNilToEmptyString()
         
         bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self] (_) -> Void in
             (self?.bidWasPressedSignal as RACSubject).sendNext(nil)
@@ -161,12 +154,10 @@ private extension ListingsCollectionViewCell {
         return label
     }
     
-    class func _infoButton() -> UIButton {
-        let button = ARUppercaseButton()
-        button.setTitle("More Info >", forState: .Normal)
-        button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        button.titleLabel?.font = UIFont.sansSerifFontWithSize(13)
-        button.contentHorizontalAlignment = .Left
-        return button
+    class func _infoLabel() -> UILabel {
+        let label = ARSansSerifLabelWithChevron()
+        label.tintColor = UIColor.blackColor()
+        label.text = "More Info"
+        return label
     }
 }

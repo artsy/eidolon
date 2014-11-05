@@ -137,25 +137,6 @@ class HelpViewController: UIViewController {
     }
 }
 
-extension UILabel {
-    func makeSubstringsBold(text: [String]) {
-        text.map {
-            self.makeSubstringBold($0)
-        }
-    }
-    
-    func makeSubstringBold(text: String) {
-        let attributedText = self.attributedText.mutableCopy() as NSMutableAttributedString
-        
-        let range: NSRange! = (self.text ?? NSString()).rangeOfString(text)
-        if range.location != NSNotFound {
-            attributedText.setAttributes([NSFontAttributeName: UIFont.serifSemiBoldFontWithSize(self.font.pointSize)], range: range)
-        }
-        
-        self.attributedText = attributedText
-    }
-}
-
 extension HelpViewController {
     class var width: Float {
         get {

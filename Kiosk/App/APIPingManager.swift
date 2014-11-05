@@ -12,7 +12,7 @@ class APIPingManager: NSObject {
 
         letOnlineSignal = recurringSignal.map { [weak self] (_) -> AnyObject! in
             return self?.pingSignal() ?? RACSignal.empty()
-        }.switchToLatest()
+        }.switchToLatest().startWith(true)
     }
 
     private func pingSignal() -> RACSignal {

@@ -1,8 +1,14 @@
 # End User Changes
 
-### Future 
+### Future
+
+* Further improvements to details view - @ash
+
+### .1. 4th Nov 2014
 
 * Admin visual overhaul - @orta
+* Modified underpinnings necessary for detail view – @ash
+* More work on details view – @ash
 
 ### 1.1 3rd Nov 2014
 
