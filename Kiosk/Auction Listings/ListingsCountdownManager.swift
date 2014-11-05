@@ -15,7 +15,7 @@ class ListingsCountdownManager: NSObject {
 
         time.syncSignal().subscribeNext { [weak self] (_) in
             self?.startTimer()
-            return
+            self?.setLabelsHidden(false)
         }
     }
     
@@ -40,12 +40,9 @@ class ListingsCountdownManager: NSObject {
         if let sale = sale {
             if time.inSync() == false { return }
             if sale.id == "" { return }
-            
-            let now = time.date()
-            
-            self.setLabelsHidden(false)
-            
+
             if sale.isActive(time) {
+                let now = time.date()
                 let flags: NSCalendarUnit = .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond
                 let components = NSCalendar.currentCalendar().components(flags, fromDate: now, toDate: sale.endDate, options: nil)
                 

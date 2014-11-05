@@ -1,6 +1,6 @@
 import UIKit
 
-class AppViewController: UIViewController {
+class AppViewController: UIViewController, UINavigationControllerDelegate {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
 
@@ -33,9 +33,22 @@ class AppViewController: UIViewController {
             }
         }
     }
+
+
+    // sorry for this
+    // TODO: Make better implemntation
+    @IBOutlet weak var registerToBidButton: ActionButton!
+
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        let show = (viewController as? SaleArtworkZoomViewController != nil)
+        countdownManager.countdownContainerView.hidden = show
+        registerToBidButton.hidden = show
+
+    }
 }
 
 extension AppViewController {
+    
     @IBAction func registerToBidButtonWasPressed(sender: AnyObject) {
         ARAnalytics.event("Register To Bid Tapped")
 

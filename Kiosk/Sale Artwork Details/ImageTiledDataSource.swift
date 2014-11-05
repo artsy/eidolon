@@ -15,14 +15,4 @@ class TiledImageDataSourceWithImage: ARWebTiledImageDataSource {
         maxTileLevel = image.maxLevel
         minTileLevel = 11;
     }
-
-    //need to be able to return nil
-
-//    override func tiledImageView(imageView: ARTiledImageView!, imageTileForLevel level: Int, x: Int, y: Int) -> UIImage? {
-//        return image.localImageTileForLevel(level, x:x, y:y) ?? nil
-//    }
-
-//    override func tiledImageView(imageView: ARTiledImageView!, didDownloadTiledImage image: UIImage!, atURL url: NSURL!) {
-//
-//    }
 }
