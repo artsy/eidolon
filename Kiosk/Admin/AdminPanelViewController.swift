@@ -43,6 +43,9 @@ class AdminPanelViewController: UIViewController {
 
         let buttonsTitle = state.showDebugButtons ? "HIDE" : "SHOW"
         showAdminButtonsButton.setTitle(buttonsTitle, forState: .Normal)
+
+        let readStatus = state.disableCardReader ? "ENABLE" : "DISABLE"
+        toggleCardReaderButton.setTitle(readStatus, forState: .Normal)
     }
 
     @IBOutlet weak var environmentChangeButton: UIButton!
@@ -54,7 +57,10 @@ class AdminPanelViewController: UIViewController {
         defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenExpiry.rawValue)
 
         defaults.synchronize()
-        exit(1)
+        delayToMainThread(1){
+            exit(1)
+        }
+
     }
 
     @IBOutlet weak var showAdminButtonsButton: UIButton!
@@ -62,6 +68,20 @@ class AdminPanelViewController: UIViewController {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(!AppSetup.sharedState.showDebugButtons, forKey: "KioskShowDebugButtons")
         defaults.synchronize()
-        exit(1)
+        delayToMainThread(1){
+            exit(1)
+        }
+
+    }
+
+    @IBOutlet weak var cardReaderLabel: ARSerifLabel!
+    @IBOutlet weak var toggleCardReaderButton: SecondaryActionButton!
+    @IBAction func toggleCardReaderTapped(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(!AppSetup.sharedState.disableCardReader, forKey: "KioskDisableCardReader")
+        defaults.synchronize()
+        delayToMainThread(1){
+            exit(1)
+        }
     }
 }

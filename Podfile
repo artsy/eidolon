@@ -36,6 +36,7 @@ pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewControlle
 pod 'Reachability'
 
 pod 'ARTiledImageView', :git => "https://github.com/dblock/ARTiledImageView.git"
+pod 'balanced-ios', :git => "https://github.com/orta/balanced-ios", :branch => "0_5_podspec"
 
 target "KioskTests", :exclusive => true do
     pod 'FBSnapshotTestCase', :git => 'https://github.com/AshFurrow/ios-snapshot-test-case.git', :branch => 'renderAsLayer'

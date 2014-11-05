@@ -44,6 +44,7 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+
     func setupUserAgent() {
         
         let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as String?

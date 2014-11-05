@@ -144,6 +144,7 @@
 		6071320619DD3AE600CA46F4 /* BidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071320419DD3AE600CA46F4 /* BidDetails.swift */; };
 		6071321919DD4EC400CA46F4 /* FulfillmentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071321819DD4EC400CA46F4 /* FulfillmentNavigationController.swift */; };
 		6071321A19DD4EC400CA46F4 /* FulfillmentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6071321819DD4EC400CA46F4 /* FulfillmentNavigationController.swift */; };
+		607996921A0AA14E00058259 /* ManualCreditCardInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607996911A0AA14E00058259 /* ManualCreditCardInputViewController.swift */; };
 		607A17E019F097A700326482 /* PlaceBidNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */; };
 		607A17E119F097A700326482 /* PlaceBidNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */; };
 		607A17F719F16BD100326482 /* ForgotPassword.json in Resources */ = {isa = PBXBuildFile; fileRef = 607A17F619F16BD100326482 /* ForgotPassword.json */; };
@@ -544,6 +545,7 @@
 		606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		6071320419DD3AE600CA46F4 /* BidDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetails.swift; sourceTree = "<group>"; };
 		6071321819DD4EC400CA46F4 /* FulfillmentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentNavigationController.swift; sourceTree = "<group>"; };
+		607996911A0AA14E00058259 /* ManualCreditCardInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCreditCardInputViewController.swift; sourceTree = "<group>"; };
 		607A17DF19F097A700326482 /* PlaceBidNetworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidNetworkModel.swift; sourceTree = "<group>"; };
 		607A17F319F0B32300326482 /* manual flows.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "manual flows.md"; sourceTree = "<group>"; };
 		607A17F619F16BD100326482 /* ForgotPassword.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ForgotPassword.json; sourceTree = "<group>"; };
@@ -1190,6 +1192,7 @@
 				60A4FD2F19E6E5B10091FCC6 /* RegistrationPostalZipViewController.swift */,
 				600F5EF919C879670027F587 /* SwipeCreditCardViewController.swift */,
 				6087602119E9A6DF00116611 /* RegistrationMobileViewController.swift */,
+				607996911A0AA14E00058259 /* ManualCreditCardInputViewController.swift */,
 			);
 			name = Registration;
 			sourceTree = "<group>";
@@ -1743,6 +1746,7 @@
 				60EA74131A093FB4009D0F0A /* SaleArtworkZoomViewController.swift in Sources */,
 				5E6ED5FF19C07A4300CF3398 /* Moya.swift in Sources */,
 				600DABE619EB41D800278378 /* BidderNetworkModel.swift in Sources */,
+				607996921A0AA14E00058259 /* ManualCreditCardInputViewController.swift in Sources */,
 				60EA73F61A092BEC009D0F0A /* APIPingManager.swift in Sources */,
 				60C37DD119D44056002E7A44 /* SwiftyJSON.swift in Sources */,
 				60D976EA19D3135200DE9F3D /* Sale.swift in Sources */,

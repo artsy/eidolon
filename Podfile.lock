@@ -16,6 +16,7 @@ PODS:
     - Artsy+UIColors
   - Artsy-UIButtons (1.2.0):
     - Artsy+UIColors
+  - balanced-ios (0.5)
   - CardFlight (1.8.3):
     - CardFlight/AudioJack (= 1.8.3)
   - CardFlight/AudioJack (1.8.3)
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - Artsy+UIFonts (from `https://github.com/artsy/Artsy-UIFonts.git`, branch `new-tracking`)
   - Artsy+UILabels
   - Artsy-UIButtons
+  - balanced-ios (from `https://github.com/orta/balanced-ios`, branch `0_5_podspec`)
   - CardFlight
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
@@ -68,6 +70,9 @@ EXTERNAL SOURCES:
   Artsy+UIFonts:
     :branch: new-tracking
     :git: https://github.com/artsy/Artsy-UIFonts.git
+  balanced-ios:
+    :branch: 0_5_podspec
+    :git: https://github.com/orta/balanced-ios
   DZNWebViewController:
     :git: https://github.com/orta/DZNWebViewController.git
   FBSnapshotTestCase:
@@ -84,6 +89,7 @@ SPEC CHECKSUMS:
   Artsy+UIFonts: fb0a70f93ca888d45a3af751707701fe8cbeae2a
   Artsy+UILabels: a7c713069e3d10144a3dc8e377bef8b2253cd766
   Artsy-UIButtons: 80a957b9479417c3be1e68d5b830de6cd2ec44cc
+  balanced-ios: b8d238f8c4a3eb673d984106eda9062d334d4789
   CardFlight: 6efbffb69e4ab27629ac0fe18e04790ac6c7d53b
   DZNWebViewController: 8716115ea00d6abbfb5dc937fff85b222b70fc68
   ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
