@@ -25,6 +25,7 @@ public enum SegueIdentifier : String {
 
 public enum ViewControllerStoryboardIdentifier : String {
     case AuctionListings = "AuctionListings"
+    case CardTester = "Card Tester"
     case ConfirmYourBid = "Confirm Your Bid"
     case ConfirmYourBidArtsyLogin = "Confirm Your Bid Artsy Login"
     case ConfirmYourBidEnterEmail = "Confirm Your Bid Enter Email"
@@ -32,6 +33,7 @@ public enum ViewControllerStoryboardIdentifier : String {
     case ConfirmYourBidPIN = "Confirm Your Bid PIN"
     case FulfillmentContainer = "Fulfillment Container"
     case LoadingBidsorRegistering = "Loading Bids or Registering"
+    case ManualCardDetailsInput = "Manual Card Details Input"
     case NoInternetConnection = "No Internet Connection"
     case PlaceYourBid = "Place Your Bid"
     case RegisterAnAccount = "Register An Account"

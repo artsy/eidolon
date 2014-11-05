@@ -62,6 +62,15 @@ bootstrap:
 		read CARDFLIGHT_TOKEN; \
 		bundle exec pod keys set CardflightMerchantAccountStagingToken "$$CARDFLIGHT_TOKEN"
 
+	@printf '\nWhat is your Balanced Marketplace Token? '; \
+		read TOKEN; \
+		bundle exec pod keys set BalancedMarketplaceToken "$$TOKEN"
+
+	@printf '\nWhat is your Balanced Marketplace Staging Token? '; \
+		read TOKEN; \
+		bundle exec pod keys set BalancedMarketplaceStagingToken "$$TOKEN"
+
+
 	if [ ! -d ~/.cocoapods/repos/artsy ]; then \
 		bundle exec pod repo add artsy https://github.com/artsy/Specs.git; \
 	fi
