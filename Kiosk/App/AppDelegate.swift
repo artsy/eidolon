@@ -1,6 +1,6 @@
 import UIKit
 
-let log = XCGLogger.defaultInstance()
+let logger = XCGLogger.defaultInstance()
 
 @UIApplicationMain
 public class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,10 +36,10 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         setupHelpButton()
         setupUserAgent()
 
-        let destination = XCGFileLogDestination(owner: log, writeToFile: logPath(), identifier: "main")
-        log.addLogDestination(destination)
+        let destination = XCGFileLogDestination(owner: logger, writeToFile: logPath(), identifier: "main")
+        logger.addLogDestination(destination)
 
-        log.debug("App Started")
+        logger.debug("App Started")
         ARAnalytics.event("Session Started")
         return true
     }
@@ -61,7 +61,7 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func logPath() -> NSURL {
         let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as NSURL
-        return docs.URLByAppendingPathComponent("log.txt")
+        return docs.URLByAppendingPathComponent("logger.txt")
     }
 }
 

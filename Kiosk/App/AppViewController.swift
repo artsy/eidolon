@@ -1,6 +1,6 @@
 import UIKit
 
-class AppViewController: UIViewController {
+class AppViewController: UIViewController, UINavigationControllerDelegate {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
 
@@ -26,10 +26,29 @@ class AppViewController: UIViewController {
 
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
+
+        for controller in childViewControllers {
+            if let nav = controller as? UINavigationController {
+                nav.delegate = self
+            }
+        }
+    }
+
+
+    // sorry for this
+    // TODO: Make better implemntation
+    @IBOutlet weak var registerToBidButton: ActionButton!
+
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        let show = (viewController as? SaleArtworkZoomViewController != nil)
+        countdownManager.countdownContainerView.hidden = show
+        registerToBidButton.hidden = show
+
     }
 }
 
 extension AppViewController {
+    
     @IBAction func registerToBidButtonWasPressed(sender: AnyObject) {
         ARAnalytics.event("Register To Bid Tapped")
 
@@ -66,7 +85,7 @@ extension AppViewController {
 
         return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self).catch({ (error) -> RACSignal! in
 
-            log.error("Sale Artworks: Error handling thing: \(error.artsyServerError())")
+            logger.error("Sale Artworks: Error handling thing: \(error.artsyServerError())")
             return RACSignal.empty()
         })
     }

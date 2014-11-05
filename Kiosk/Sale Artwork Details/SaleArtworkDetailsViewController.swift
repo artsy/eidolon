@@ -15,6 +15,13 @@ class SaleArtworkDetailsViewController: UIViewController {
         setupImageView()
         setupMetadataView()
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == .ZoomIntoArtwork {
+            let nextViewController = segue.destinationViewController as SaleArtworkZoomViewController
+            nextViewController.saleArtwork = saleArtwork
+        }
+    }
 }
 
 enum MetadataStackViewTag: Int {

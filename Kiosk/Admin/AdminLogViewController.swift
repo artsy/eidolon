@@ -14,7 +14,7 @@ class AdminLogViewController: UIViewController {
 
     func logPath() -> NSURL {
         let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as NSURL
-        return docs.URLByAppendingPathComponent("log.txt")
+        return docs.URLByAppendingPathComponent("logger.txt")
     }
 
 }

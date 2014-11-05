@@ -7,6 +7,8 @@ PODS:
     - ARAnalytics/CoreIOS
     - Mixpanel
   - ARCollectionViewMasonryLayout (2.0.0)
+  - ARTiledImageView (1.2):
+    - SDWebImage/Core
   - Artsy+UIColors (1.0.0):
     - EDColor (~> 0.4)
   - Artsy+UIFonts (1.0.0)
@@ -43,6 +45,7 @@ DEPENDENCIES:
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
   - ARCollectionViewMasonryLayout (~> 2.0.0)
+  - ARTiledImageView (from `https://github.com/dblock/ARTiledImageView.git`)
   - Artsy+UIColors
   - Artsy+UIFonts (from `https://github.com/artsy/Artsy-UIFonts.git`, branch `new-tracking`)
   - Artsy+UILabels
@@ -60,6 +63,8 @@ DEPENDENCIES:
   - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
 
 EXTERNAL SOURCES:
+  ARTiledImageView:
+    :git: https://github.com/dblock/ARTiledImageView.git
   Artsy+UIFonts:
     :branch: new-tracking
     :git: https://github.com/artsy/Artsy-UIFonts.git
@@ -74,6 +79,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
   ARCollectionViewMasonryLayout: 40993cb65522139cb2cd6ed255c91a6caee5c4dd
+  ARTiledImageView: 0de3b09798e5b1ec91a2939c311b69b03e7c9706
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
   Artsy+UIFonts: fb0a70f93ca888d45a3af751707701fe8cbeae2a
   Artsy+UILabels: a7c713069e3d10144a3dc8e377bef8b2253cd766
