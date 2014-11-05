@@ -30,7 +30,9 @@ enum MetadataStackViewTag: Int {
     case ArtworkMediumLabel
     case ArtworkDimensionsLabel
     case ImageRightsLabel
+    case EstimateTopBorder
     case EstimateLabel
+    case EstimateBottomBorder
     case CurrentBidLabel
     case CurrentBidValueLabel
     case NumberOfBidsPlacedLabel
@@ -101,14 +103,25 @@ extension SaleArtworkDetailsViewController {
             self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
         }
 
+        let estimateTopBorder = UIView()
+        estimateTopBorder.constrainHeight("1")
+        estimateTopBorder.tag = MetadataStackViewTag.EstimateTopBorder.rawValue
+        metadataStackView.addSubview(estimateTopBorder, withTopMargin: "22", sideMargin: "0")
+
         let estimateLabel = label(.Serif, .EstimateLabel)
-        estimateLabel.constrainHeight("27")
         estimateLabel.text = saleArtwork.estimateString
-        rac_signalForSelector("viewDidLayoutSubviews").subscribeNext { [weak estimateLabel] (_) -> Void in
-            estimateLabel?.drawDottedBorders()
+        metadataStackView.addSubview(estimateLabel, withTopMargin: "15", sideMargin: "0")
+
+        let estimateBottomBorder = UIView()
+        estimateBottomBorder.constrainHeight("1")
+        estimateBottomBorder.tag = MetadataStackViewTag.EstimateBottomBorder.rawValue
+        metadataStackView.addSubview(estimateBottomBorder, withTopMargin: "10", sideMargin: "0")
+
+        rac_signalForSelector("viewDidLayoutSubviews").subscribeNext { [weak estimateTopBorder, weak estimateBottomBorder] (_) -> Void in
+            estimateTopBorder?.drawDottedBorders()
+            estimateBottomBorder?.drawDottedBorders()
             return
         }
-        metadataStackView.addSubview(estimateLabel, withTopMargin: "22", sideMargin: "0")
 
         let currentBidLabel = label(.Serif, .CurrentBidLabel)
         currentBidLabel.text = "Current Bid:"
