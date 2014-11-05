@@ -9,7 +9,7 @@ public extension AppDelegate {
         hideHelp {
             // Need to give it a second to ensure view heirarchy is good.
             dispatch_async(dispatch_get_main_queue()) {
-                let appViewController = self.window.rootViewController?.childViewControllers.first as AppViewController
+                let appViewController = (self.window.rootViewController?.childViewControllers.first as UINavigationController).viewControllers.first as AppViewController
                 if let fulfillment = appViewController.presentedViewController as? FulfillmentContainerViewController {
                     fulfillment.closeFulfillmentModal() {
                         appViewController.registerToBidButtonWasPressed(self)
