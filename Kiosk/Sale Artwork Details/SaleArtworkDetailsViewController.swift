@@ -124,8 +124,11 @@ extension SaleArtworkDetailsViewController {
             estimateBottomBorder?.drawDottedBorders()
         }
 
+        let hasBidsSignal = RACObserve(saleArtwork, "highestBidCents").map{ (cents) -> AnyObject! in
+            return (cents != nil) && ((cents as? NSNumber ?? 0) > 0)
+        }
         let currentBidLabel = label(.Serif, .CurrentBidLabel)
-        currentBidLabel.text = "Current Bid:"
+        RAC(currentBidLabel, "text") <~ RACSignal.`if`(hasBidsSignal, then: RACSignal.`return`("Current Bid:"), `else`: RACSignal.`return`("Starting Bid:"))
         metadataStackView.addSubview(currentBidLabel, withTopMargin: "22", sideMargin: "0")
 
         let currentBidValueLabel = label(.Bold, .CurrentBidValueLabel, fontSize: 27)
