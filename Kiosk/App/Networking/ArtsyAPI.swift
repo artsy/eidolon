@@ -16,6 +16,7 @@ enum ArtsyAPI {
     case RegisterToBid(auctionID: String)
 
     case Artwork(id: String)
+    case Artist(id: String)
 
     case Auctions
     case AuctionListings(id: String)
@@ -71,14 +72,14 @@ enum ArtsyAPI {
         case TrustToken(let number, let auctionID):
             return ["number": number, "auction_pin": auctionID]
 
-        case CreateUser(let email,let password,let phone,let postCode, let name):
+        case CreateUser(let email, let password,let phone,let postCode, let name):
             return [
                 "email": email, "password": password,
                 "phone": phone, "name": name,
                 "location": [ "postal_code": postCode ]
             ]
 
-        case UpdateMe(let email,let phone,let postCode, let name):
+        case UpdateMe(let email, let phone,let postCode, let name):
             return [
                 "email": email, "phone": phone,
                 "name": name, "location": [ "postal_code": postCode ]
@@ -172,6 +173,9 @@ extension ArtsyAPI : MoyaPath {
         case Artwork(let id):
             return "/api/v1/artwork/\(id)"
 
+        case Artist(let id):
+            return "/api/v1/artist/\(id)"
+
         case FindBidderRegistration:
             return "/api/v1/bidder"
             
@@ -256,6 +260,9 @@ extension ArtsyAPI : MoyaTarget {
 
         case Artwork:
             return stubbedResponse("Artwork")
+
+        case Artist:
+            return stubbedResponse("Artist")
 
         case AuctionInfo:
             return stubbedResponse("AuctionInfo")

@@ -33,6 +33,7 @@
 		5E7C2F0C1A095AA900A92C4D /* Artwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2F0B1A095AA900A92C4D /* Artwork.json */; };
 		5E7C2F1F1A09676300A92C4D /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2F1E1A09676300A92C4D /* UILabel+Fonts.swift */; };
 		5E7C2F501A0A335300A92C4D /* UIViewController+Bidding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2F4F1A0A335300A92C4D /* UIViewController+Bidding.swift */; };
+		5E7C2F751A0A6EA100A92C4D /* Artist.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2F741A0A6EA100A92C4D /* Artist.json */; };
 		5E95FCB219D99871004D0C8F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95FCB119D99871004D0C8F /* Constants.swift */; };
 		5E95FCC019D99DB5004D0C8F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95FCB119D99871004D0C8F /* Constants.swift */; };
 		5EA137C019C72BD200D0B743 /* ArtsyAPISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */; };
@@ -485,6 +486,7 @@
 		5E7C2F0B1A095AA900A92C4D /* Artwork.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Artwork.json; sourceTree = "<group>"; };
 		5E7C2F1E1A09676300A92C4D /* UILabel+Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Fonts.swift"; sourceTree = "<group>"; };
 		5E7C2F4F1A0A335300A92C4D /* UIViewController+Bidding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Bidding.swift"; sourceTree = "<group>"; };
+		5E7C2F741A0A6EA100A92C4D /* Artist.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Artist.json; sourceTree = "<group>"; };
 		5E95FCB119D99871004D0C8F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPISpec.swift; sourceTree = "<group>"; };
 		5EA137CA19C72BE100D0B743 /* XAppTokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppTokenSpec.swift; sourceTree = "<group>"; };
@@ -890,6 +892,7 @@
 				60C3982019E814FC00CB81F4 /* XAuth.json */,
 				60EA74091A092F61009D0F0A /* Ping.json */,
 				5E7C2F0B1A095AA900A92C4D /* Artwork.json */,
+				5E7C2F741A0A6EA100A92C4D /* Artist.json */,
 			);
 			path = "Stubbed Responses";
 			sourceTree = "<group>";
@@ -1573,6 +1576,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E7C2F751A0A6EA100A92C4D /* Artist.json in Resources */,
 				60C3983919E814FC00CB81F4 /* XAuth.json in Resources */,
 				60C3982D19E814FC00CB81F4 /* FindBidder.json in Resources */,
 				60C3982719E814FC00CB81F4 /* CreateABid.json in Resources */,
