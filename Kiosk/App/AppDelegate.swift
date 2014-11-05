@@ -23,8 +23,11 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = auctionStoryboard.instantiateInitialViewController() as? UIViewController
         window.makeKeyAndVisible()
 
-        let keys = EidolonKeys()
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenKey.rawValue)
+        defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenExpiry.rawValue)
 
+        let keys = EidolonKeys()
         let mixpanelToken = AppSetup.sharedState.useStaging ? keys.mixpanelStagingAPIClientKey() : keys.mixpanelProductionAPIClientKey()
 
         ARAnalytics.setupWithAnalytics([

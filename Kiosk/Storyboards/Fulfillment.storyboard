@@ -522,6 +522,7 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pfn-Rj-RYO">
+                                <rect key="frame" x="65" y="139" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bbd-XN-mf0" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
@@ -560,9 +561,6 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XER-jS-BL4" customClass="CursorView" customModule="Kiosk" customModuleProvider="target">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lt9-iY-FNp" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <color key="backgroundColor" red="1" green="0.90311616893485347" blue="0.72024004409018083" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z7-af-FHL">
                                 <rect key="frame" x="65" y="544" width="184" height="43"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
@@ -574,6 +572,10 @@
                                     <segue destination="MRb-fW-vfZ" kind="push" identifier="Confirm your Bid - Artsy Login" id="ccv-le-Cu0"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lt9-iY-FNp" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="426" y="64" width="324" height="60"/>
+                                <color key="backgroundColor" red="1" green="0.90311616893485347" blue="0.72024004409018083" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -593,7 +595,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpk-oa-izH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1493.5" y="-795"/>
+            <point key="canvasLocation" x="1641.5" y="-727"/>
         </scene>
         <!--Confirm Your Bid Artsy Login View Controller-->
         <scene sceneID="mg0-AC-X7S">
@@ -1561,9 +1563,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="gjD-og-8Iv"/>
         <segue reference="Qpe-mM-52j"/>
-        <segue reference="hvW-mC-OYp"/>
         <segue reference="ccv-le-Cu0"/>
-        <segue reference="A1R-R2-CSF"/>
+        <segue reference="eZu-3X-lXX"/>
     </inferredMetricsTieBreakers>
 </document>
