@@ -163,19 +163,12 @@ extension SaleArtworkDetailsViewController {
     }
 
     private func setupAdditionalDetailStackView() {
-        enum AdditionalInfoStackViewTag: Int {
-            case InfoHeaderLabel = 1
-            case InfoLabel
-            case AboutArtistHeaderLabel
-            case AboutArtistLabel
-        }
-
         enum LabelType {
             case Header
             case Body
         }
 
-        func label(type: LabelType, tag: AdditionalInfoStackViewTag, layoutSignal: RACSignal? = nil) -> UILabel {
+        func label(type: LabelType, layoutSignal: RACSignal? = nil) -> UILabel {
             let (label, fontSize) = { () -> (UILabel, CGFloat) in
                 switch type {
                 case .Header:
@@ -187,7 +180,6 @@ extension SaleArtworkDetailsViewController {
 
             label.font = label.font.fontWithSize(fontSize)
             label.lineBreakMode = .ByWordWrapping
-            label.tag = tag.rawValue
 
             layoutSignal?.take(1).subscribeNext { [weak label] (_) -> Void in
                 if let label = label {
@@ -198,11 +190,11 @@ extension SaleArtworkDetailsViewController {
             return label
         }
 
-        let additionalInfoHeaderLabel = label(.Header, .InfoHeaderLabel)
+        let additionalInfoHeaderLabel = label(.Header)
         additionalInfoHeaderLabel.text = "Additional Information"
         additionalDetailScrollView.stackView.addSubview(additionalInfoHeaderLabel, withTopMargin: "0", sideMargin: "0")
 
-        let additionalInfoLabel = label(.Body, .InfoLabel, layoutSignal: additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
+        let additionalInfoLabel = label(.Body, layoutSignal: additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
         additionalInfoLabel.text = saleArtwork.artwork.blurb
         additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "0")
 
@@ -212,11 +204,11 @@ extension SaleArtworkDetailsViewController {
             if self == nil {
                 return
             }
-            let aboutArtistHeaderLabel = label(.Header, .AboutArtistHeaderLabel)
+            let aboutArtistHeaderLabel = label(.Header)
             aboutArtistHeaderLabel.text = "About \(self!.artist().name)"
             self?.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "0")
 
-            let aboutAristLabel = label(.Body, .AboutArtistLabel, layoutSignal: self?.additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
+            let aboutAristLabel = label(.Body, layoutSignal: self?.additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
             aboutAristLabel.text = blurb as? String
             self?.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "0")
         }
