@@ -24,7 +24,6 @@ enum ArtsyAPI {
     case ActiveAuctions
     
     case MyBiddersForAuction(auctionID: String)
-    case BidHistory(auctionID: String, artworkID: String)
     case MyBidPositionsForAuctionArtwork(auctionID: String, artworkID: String)
     case PlaceABid(auctionID: String, artworkID: String, maxBidCents: String)
 
@@ -109,9 +108,6 @@ enum ArtsyAPI {
         case MyBidPositionsForAuctionArtwork(let auctionID, let artworkID):
             return ["sale_id": auctionID, "artwork_id": artworkID]
 
-        case BidHistory(let auctionID, let artworkID):
-            return ["sale_id": auctionID, "artwork_id": artworkID]
-
         default:
             return [:]
         }
@@ -175,9 +171,6 @@ extension ArtsyAPI : MoyaPath {
 
         case Artwork(let id):
             return "/api/v1/artwork/\(id)"
-
-        case BidHistory:
-            return "/api/v1/bidder_positions"
 
         case FindBidderRegistration:
             return "/api/v1/bidder"
@@ -288,9 +281,6 @@ extension ArtsyAPI : MoyaTarget {
         case Ping:
             return stubbedResponse("Ping")
 
-        //TODO: Ummm not this.
-        case BidHistory:
-            return NSData()
         }
     }
 }

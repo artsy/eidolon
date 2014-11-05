@@ -52,8 +52,8 @@ class Artwork: JSONAble {
 
         artwork.medium = json["medium"].stringValue
         if let dimensions = json["dimensions"].dictionary {
-            ["cm", "in"].reduce([String](), combine: { (array, key) -> [String] in
-                if let dimension = dimensions[key]?.stringValue {
+            artwork.dimensions = ["in", "cm"].reduce([String](), combine: { (array, key) -> [String] in
+                if let dimension = dimensions[key]?.string {
                     return array + [dimension]
                 } else {
                     return array

@@ -91,18 +91,9 @@ class ListingsCollectionViewCell: UICollectionViewCell {
             }
         }).mapNilToEmptyString()
         
-        RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork.bidCount").map({ (optionalBidCount) -> AnyObject! in
-            // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
-            // So we need to unwrap it as an optional optional. Yo dawg.
-            let bidCount = optionalBidCount as Int?
-
-            if let bidCount = bidCount {
-                let suffix = bidCount == 1 ? "" : "s"
-                return "\(bidCount) bid\(suffix) placed"
-            } else {
-                return "0 bids placed"
-            }
-        })
+        RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
+            return (saleArtwork as? SaleArtwork)?.numberOfBidsSignal ?? RACSignal.`return`(nil)
+        }).switchToLatest().mapNilToEmptyString()
         
         bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self] (_) -> Void in
             (self?.bidWasPressedSignal as RACSubject).sendNext(nil)

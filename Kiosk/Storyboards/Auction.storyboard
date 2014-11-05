@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="KCM-cT-BEX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="KCM-cT-BEX">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -247,6 +247,13 @@
                                 <rect key="frame" x="65" y="520" width="538" height="199"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecj-6U-eYB">
+                                <rect key="frame" x="643" y="90" width="1" height="678"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1" id="78f-fD-Z5a"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -257,11 +264,14 @@
                             <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="NDO-I9-Fbb" secondAttribute="top" id="8jM-3p-x0P"/>
                             <constraint firstItem="ZNW-S0-kgd" firstAttribute="leading" secondItem="nu4-re-HAA" secondAttribute="leadingMargin" id="H0r-rk-0wl"/>
                             <constraint firstItem="ZNW-S0-kgd" firstAttribute="top" secondItem="nu4-re-HAA" secondAttribute="top" constant="20" symbolic="YES" id="HMC-OH-Hy1"/>
+                            <constraint firstItem="ecj-6U-eYB" firstAttribute="leading" secondItem="z5v-SE-pZu" secondAttribute="trailing" constant="40" id="JKq-zx-clR"/>
                             <constraint firstItem="ZNW-S0-kgd" firstAttribute="top" secondItem="MIW-uT-gtC" secondAttribute="bottom" constant="20" id="Nld-Qh-maR"/>
                             <constraint firstItem="NDO-I9-Fbb" firstAttribute="leading" secondItem="ciZ-IV-yO1" secondAttribute="trailing" constant="80" id="RBM-og-HNw"/>
                             <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="ZNW-S0-kgd" secondAttribute="bottom" constant="26" id="e7Y-N5-gwx"/>
+                            <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="ecj-6U-eYB" secondAttribute="bottom" id="fQC-8n-e04"/>
                             <constraint firstItem="z5v-SE-pZu" firstAttribute="top" secondItem="ciZ-IV-yO1" secondAttribute="bottom" constant="30" id="gGh-6E-FBJ"/>
                             <constraint firstItem="ciZ-IV-yO1" firstAttribute="leading" secondItem="nu4-re-HAA" secondAttribute="leadingMargin" constant="45" id="jHi-Lu-K3Y"/>
+                            <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="ecj-6U-eYB" secondAttribute="top" id="t3o-bV-lgB"/>
                             <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="z5v-SE-pZu" secondAttribute="bottom" constant="49" id="xgK-6I-6iO"/>
                             <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="NDO-I9-Fbb" secondAttribute="bottom" constant="20" id="xvD-zR-ORV"/>
                         </constraints>

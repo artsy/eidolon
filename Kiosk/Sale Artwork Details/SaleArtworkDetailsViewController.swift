@@ -24,7 +24,9 @@ enum MetadataStackViewTag: Int {
     case ArtworkDimensionsLabel
     case ImageRightsLabel
     case EstimateLabel
-    case CurrentBidView
+    case CurrentBidLabel
+    case CurrentBidValueLabel
+    case NumberOfBidsPlacedLabel
     case BidButton
     case Gobbler
 }
@@ -35,36 +37,97 @@ extension SaleArtworkDetailsViewController {
     }
 
     private func setupMetadataView() {
-        let artistNameLabel = ARSansSerifLabel()
-        artistNameLabel.lineBreakMode = .ByWordWrapping
+        enum LabelType {
+            case Serif
+            case SansSerif
+            case ItalicsSerif
+            case Bold
+        }
+
+        func label(type: LabelType, tag: MetadataStackViewTag, fontSize: CGFloat = 16.0) -> UILabel {
+            let label: UILabel = { () -> UILabel in
+                switch type {
+                case .Serif:
+                    return ARSerifLabel()
+                case .SansSerif:
+                    return ARSansSerifLabel()
+                case .ItalicsSerif:
+                    return ARItalicsSerifLabel()
+                case .Bold:
+                    let label = ARSerifLabel()
+                    label.font = UIFont.sansSerifFontWithSize(label.font.pointSize)
+                    return label
+                }
+            }()
+            label.lineBreakMode = .ByWordWrapping
+            label.font = label.font.fontWithSize(fontSize)
+            label.tag = tag.rawValue
+
+            return label
+        }
+
+        let artistNameLabel = label(.SansSerif, .ArtistNameLabel)
         artistNameLabel.text = saleArtwork.artwork.artists?.first?.name
-        artistNameLabel.font = artistNameLabel.font.fontWithSize(16)
-        artistNameLabel.tag = MetadataStackViewTag.ArtistNameLabel.rawValue
         metadataStackView.addSubview(artistNameLabel, withTopMargin: "0", sideMargin: "0")
 
-        let artworkNameLabel = ARItalicsSerifLabel()
-        artworkNameLabel.lineBreakMode = .ByWordWrapping
+        let artworkNameLabel = label(.ItalicsSerif, .ArtworkNameLabel)
         artworkNameLabel.text = "\(saleArtwork.artwork.title), \(saleArtwork.artwork.date)"
-        artworkNameLabel.font = artworkNameLabel.font.fontWithSize(16)
-        artworkNameLabel.tag = MetadataStackViewTag.ArtworkNameLabel.rawValue
         metadataStackView.addSubview(artworkNameLabel, withTopMargin: "10", sideMargin: "0")
 
         if let medium = saleArtwork.artwork.medium {
-            let mediumLabel = ARSerifLabel()
-            mediumLabel.lineBreakMode = .ByWordWrapping
+            let mediumLabel = label(.Serif, .ArtworkMediumLabel)
             mediumLabel.text = medium
-            mediumLabel.font = mediumLabel.font.fontWithSize(16)
-            mediumLabel.tag = MetadataStackViewTag.ArtworkMediumLabel.rawValue
             metadataStackView.addSubview(mediumLabel, withTopMargin: "22", sideMargin: "0")
         }
 
         if countElements(saleArtwork.artwork.dimensions) > 0 {
-            
+            let dimensionsLabel = label(.Serif, .ArtworkDimensionsLabel)
+            dimensionsLabel.text = (saleArtwork.artwork.dimensions as NSArray).componentsJoinedByString("\n")
+            metadataStackView.addSubview(dimensionsLabel, withTopMargin: "5", sideMargin: "0")
         }
 
-        retrieveImageRights().subscribeNext { [weak self] (imageRights) -> Void in
-            // TODO: rights label
+        retrieveImageRights().filter { (imageRights) -> Bool in
+            (countElements(imageRights as? String ?? "") > 0)
+        }.subscribeNext { [weak self] (imageRights) -> Void in
+            let rightsLabel = label(.Serif, .ImageRightsLabel)
+            rightsLabel.text = imageRights as? String
+            self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
         }
+
+        let estimateLabel = label(.Serif, .EstimateLabel)
+        estimateLabel.constrainHeight("27")
+        estimateLabel.text = saleArtwork.estimateString
+        rac_signalForSelector("viewDidLayoutSubviews").subscribeNext { [weak estimateLabel] (_) -> Void in
+            estimateLabel?.drawDottedBorders()
+            return
+        }
+        metadataStackView.addSubview(estimateLabel, withTopMargin: "22", sideMargin: "0")
+
+        let currentBidLabel = label(.Serif, .CurrentBidLabel)
+        currentBidLabel.text = "Current Bid:"
+        metadataStackView.addSubview(currentBidLabel, withTopMargin: "22", sideMargin: "0")
+
+        let currentBidValueLabel = label(.Bold, .CurrentBidValueLabel, fontSize: 27)
+        if let currentBidCents = saleArtwork.highestBidCents {
+            currentBidValueLabel.text = NSNumberFormatter.currencyStringForCents(currentBidCents)
+        } else {
+            currentBidValueLabel.text = "No Bids"
+        }
+        metadataStackView.addSubview(currentBidValueLabel, withTopMargin: "10", sideMargin: "0")
+
+        let numberOfBidsPlacedLabel = label(.Serif, .NumberOfBidsPlacedLabel)
+        RAC(numberOfBidsPlacedLabel, "text") <~ saleArtwork.numberOfBidsSignal.takeUntil(rac_willDeallocSignal())
+        metadataStackView.addSubview(numberOfBidsPlacedLabel, withTopMargin: "10", sideMargin: "0")
+
+        let bidButton = ActionButton()
+        bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self] (_) -> Void in
+            if let strongSelf = self {
+                strongSelf.bid(strongSelf.auctionID, saleArtwork: strongSelf.saleArtwork, allowAnimations: strongSelf.allowAnimations)
+            }
+        }
+        bidButton.setTitle("Bid", forState: .Normal)
+        bidButton.tag = MetadataStackViewTag.BidButton.rawValue
+        metadataStackView.addSubview(bidButton, withTopMargin: "40", sideMargin: "0")
 
         metadataStackView.bottomMarginHeight = CGFloat(NSNotFound)
     }
@@ -82,11 +145,6 @@ extension SaleArtworkDetailsViewController {
         }
     }
 
-    private func retrieveBidHistory() -> RACSignal {
-        let endpoint: ArtsyAPI = ArtsyAPI.BidHistory(auctionID: auctionID, artworkID: saleArtwork.artwork.id)
-        return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
-    }
-
     private func retrieveImageRights() -> RACSignal {
         let artwork = saleArtwork.artwork
         if let imageRights = artwork.imageRights {
@@ -95,7 +153,9 @@ extension SaleArtworkDetailsViewController {
             let endpoint: ArtsyAPI = ArtsyAPI.Artwork(id: artwork.id)
             return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
                 return json["image_rights"]
-            }.doNext{ (imageRights) -> Void in
+            }.filter({ (imageRights) -> Bool in
+                imageRights != nil
+            }).doNext{ (imageRights) -> Void in
                 artwork.imageRights = imageRights as? String
                 return
             }

@@ -90,7 +90,22 @@ class SaleArtwork: JSONAble {
             return "No Estimate"
         }
     }
-    
+
+    var numberOfBidsSignal: RACSignal {
+        return RACObserve(self, "bidCount").map({ (optionalBidCount) -> AnyObject! in
+            // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
+            // So we need to unwrap it as an optional optional. Yo dawg.
+            let bidCount = optionalBidCount as Int?
+
+            if let bidCount = bidCount {
+                let suffix = bidCount == 1 ? "" : "s"
+                return "\(bidCount) bid\(suffix) placed"
+            } else {
+                return "0 bids placed"
+            }
+        })
+    }
+
     override class func keyPathsForValuesAffectingValueForKey(key: String) -> NSSet {
         if key == "estimateString" {
             return NSSet(array: ["lowEstimateCents", "highEstimateCents"])

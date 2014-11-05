@@ -32,6 +32,7 @@
 		5E6ED61419C07ADF00CF3398 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E6ED61119C07AC300CF3398 /* Alamofire.framework */; };
 		5E7C2F0C1A095AA900A92C4D /* Artwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2F0B1A095AA900A92C4D /* Artwork.json */; };
 		5E7C2F1F1A09676300A92C4D /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2F1E1A09676300A92C4D /* UILabel+Fonts.swift */; };
+		5E7C2F501A0A335300A92C4D /* UIViewController+Bidding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2F4F1A0A335300A92C4D /* UIViewController+Bidding.swift */; };
 		5E95FCB219D99871004D0C8F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95FCB119D99871004D0C8F /* Constants.swift */; };
 		5E95FCC019D99DB5004D0C8F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95FCB119D99871004D0C8F /* Constants.swift */; };
 		5EA137C019C72BD200D0B743 /* ArtsyAPISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */; };
@@ -479,6 +480,7 @@
 		5E6ED60B19C07AC300CF3398 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = submodules/Moya/submodules/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5E7C2F0B1A095AA900A92C4D /* Artwork.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Artwork.json; sourceTree = "<group>"; };
 		5E7C2F1E1A09676300A92C4D /* UILabel+Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Fonts.swift"; sourceTree = "<group>"; };
+		5E7C2F4F1A0A335300A92C4D /* UIViewController+Bidding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Bidding.swift"; sourceTree = "<group>"; };
 		5E95FCB119D99871004D0C8F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5EA137BF19C72BD200D0B743 /* ArtsyAPISpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPISpec.swift; sourceTree = "<group>"; };
 		5EA137CA19C72BE100D0B743 /* XAppTokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppTokenSpec.swift; sourceTree = "<group>"; };
@@ -813,6 +815,7 @@
 				5EC60BC919EB13CB008A04B0 /* Help */,
 				5EF2C0B119DAC13A00263137 /* Auction List */,
 				5E32342F1A079C0B009CD3C5 /* Sale Artwork Details */,
+				5E7C2F4F1A0A335300A92C4D /* UIViewController+Bidding.swift */,
 			);
 			name = "Auction Listings";
 			sourceTree = "<group>";
@@ -1772,6 +1775,7 @@
 				6092C4AF19CAEF9A003BE8EC /* UIViewControllerExtensions.swift in Sources */,
 				600AAEB819F18C3300506283 /* AppSetup.swift in Sources */,
 				609A849719E53ED200476A94 /* RACFunctions.swift in Sources */,
+				5E7C2F501A0A335300A92C4D /* UIViewController+Bidding.swift in Sources */,
 				60D976E819D3123B00DE9F3D /* SaleArtwork.swift in Sources */,
 				5E3D9D3219EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift in Sources */,
 				6030A10019D192D000B934CA /* Artist.swift in Sources */,
