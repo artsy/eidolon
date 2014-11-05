@@ -3,6 +3,7 @@
 ### Future
 
 * Further improvements to details view - @ash
+* Completed MVP of details view - @ash
 
 ### .1. 4th Nov 2014
 
