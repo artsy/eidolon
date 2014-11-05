@@ -21,6 +21,8 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
     @IBOutlet weak var cardConfirmButton: ActionButton!
     @IBOutlet weak var dateConfirmButton: ActionButton!
 
+    lazy var keys = EidolonKeys()
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         expirationDateWrapperView.hidden = true
@@ -81,7 +83,10 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         let year = expirationYear.toInt() ?? 0
 
         let card = BPCard(number: cardFullDigits, expirationMonth: UInt(month), expirationYear: UInt(year), optionalFields: nil)
-        let balanced = Balanced(marketplaceURI:"/v1/marketplaces/")
+
+        let marketplace = AppSetup.sharedState.useStaging ? keys.balancedMarketplaceStagingToken() : keys.balancedMarketplaceToken()
+
+        let balanced = Balanced(marketplaceURI:"/v1/marketplaces/\(marketplace)")
 
         balanced.tokenizeCard(card, onSuccess: { (dict) -> Void in
             if let data = dict["data"] as? [String: AnyObject] {

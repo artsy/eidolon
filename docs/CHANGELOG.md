@@ -1,11 +1,13 @@
 # End User Changes
 
-### Future
+### 2.0 5th Nov 2014
 
 * Further improvements to details view - @ash
-* Completed MVP of details view - @ash
+* Artwork details view - @ash
+* Fix for table'd artwork layout - @ash
+* Support typing in credit card details mainually - @orta
 
-### .1. 4th Nov 2014
+### 1.1.1 4th Nov 2014
 
 * Admin visual overhaul - @orta
 * Modified underpinnings necessary for detail view – @ash
