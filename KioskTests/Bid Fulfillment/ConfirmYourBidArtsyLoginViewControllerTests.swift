@@ -6,7 +6,7 @@ class ConfirmYourBidArtsyLoginViewControllerTests: QuickSpec {
 
         it("looks right by default") {
             let sut = ConfirmYourBidArtsyLoginViewController.instantiateFromStoryboard()
-            expect(sut).to(haveValidSnapshot(named:"default"))
+            expect(sut).to(haveValidSnapshot())
         }
 
     }

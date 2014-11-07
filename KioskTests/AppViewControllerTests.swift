@@ -4,9 +4,11 @@ import Nimble
 class AppViewControllerTests: QuickSpec {
     override func spec() {
 
-        it("looks right") {
+        it("looks right offline") {
             let sut = UIStoryboard.auction().viewControllerWithID(.NoInternetConnection) as UIViewController
-            expect(sut).to(haveValidSnapshot(named:"default"))
+            sut.loadViewProgrammatically()
+            sut.view.backgroundColor = UIColor.blackColor()
+            expect(sut).to(haveValidSnapshot())
         }
 
         describe("view") {
@@ -37,6 +39,7 @@ class AppViewControllerTests: QuickSpec {
                 expect(fakeView.hidden) == true
                 
                 sut.loadViewProgrammatically()
+
                 fakeReachabilitySignal.sendNext(false)
                 expect(fakeView.hidden) == false
                 

@@ -22,20 +22,29 @@ class ImageTests: QuickSpec {
         }
 
         it("generates a thumbnail url") {
-            var image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["large"], imageSize: size, aspectRatio:0)
+            var image = self.imageForVersion("large")
             expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
 
-            image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["medium"], imageSize: size, aspectRatio:0)
+            image = self.imageForVersion("medium")
             expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
 
-            image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["larger"], imageSize: size, aspectRatio:0)
+            image = self.imageForVersion("larger")
             expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
         }
 
         it("handles unknown image formats"){
-            let image = Image(id: "", imageFormatString: "http://image.com/:version.jpg", imageVersions: ["unknown"], imageSize: size, aspectRatio:0)
+            let image = self.imageForVersion("unknown")
             expect(image.thumbnailURL()).toNot(beAnInstanceOf(NSURL))
         }
+    }
 
+    func imageForVersion(version:String) -> Image {
+        return Image.fromJSON([
+            "id": "",
+            "image_url":"http://image.com/:version.jpg",
+            "image_versions" : [version],
+            "original_width": size.width,
+            "original_height": size.height
+        ]) as Image
     }
 }

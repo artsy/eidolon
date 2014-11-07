@@ -25,9 +25,9 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             let artwork = Artwork.fromJSON(artworkJSON) as Artwork
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
-            nav!.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+            nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
 
-            nav!.loadViewProgrammatically()
+            nav.loadViewProgrammatically()
             sut.loadViewProgrammatically()
             sut.cursor.stopAnimating()
 
@@ -46,8 +46,8 @@ class PlaceBidViewControllerTests: QuickSpec {
                 saleArtwork.highestBidCents = nil
                 saleArtwork.bidCount = 0
 
-                nav!.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
-                nav!.loadViewProgrammatically()
+                nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                nav.loadViewProgrammatically()
                 sut.loadViewProgrammatically()
             }
 
@@ -76,8 +76,8 @@ class PlaceBidViewControllerTests: QuickSpec {
                 saleArtwork.highestBidCents = 20000
                 saleArtwork.bidCount = 1
 
-                nav!.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
-                nav!.loadViewProgrammatically()
+                nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                nav.loadViewProgrammatically()
                 sut.loadViewProgrammatically()
             }
 
@@ -118,10 +118,10 @@ class PlaceBidViewControllerTests: QuickSpec {
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             saleArtwork.minimumNextBidCents = 100
 
-            nav!.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+            nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
 
             sut.keypadSignal = customKeySubject;
-            nav!.loadViewProgrammatically()
+            nav.loadViewProgrammatically()
             sut.loadViewProgrammatically()
 
             expect(sut.bidButton.enabled) == false
@@ -135,13 +135,13 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             let customKeySubject = RACSubject()
             sut.keypadSignal = customKeySubject;
-            nav!.loadViewProgrammatically()
+            nav.loadViewProgrammatically()
             sut.loadViewProgrammatically()
 
             customKeySubject.sendNext(3);
             customKeySubject.sendNext(3);
 
-            expect(nav!.bidDetails.bidAmountCents) == 3300
+            expect(nav.bidDetails.bidAmountCents) == 3300
         }
     }
 }

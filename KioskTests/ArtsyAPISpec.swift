@@ -3,7 +3,7 @@ import Nimble
 
 func beInTheFuture() -> MatcherFunc<NSDate> {
     return MatcherFunc { actualExpression, failureMessage in
-        let instance = actualExpression.evaluate()
+        let instance = actualExpression.evaluate()!
         let now = NSDate()
         return instance.compare(now) == NSComparisonResult.OrderedDescending
     }
