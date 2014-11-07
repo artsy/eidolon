@@ -1,10 +1,3 @@
-GIT
-  remote: https://github.com/AshFurrow/cocoapods-keys
-  revision: 47aa003c94e74576d8de73af9e6fbe240956d8ae
-  specs:
-    cocoapods-keys (0.6.1)
-      osx_keychain
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -40,6 +33,8 @@ GEM
       json_pure (~> 1.8)
       nap (~> 0.8.0)
     cocoapods-downloader (0.7.2)
+    cocoapods-keys (0.9.0)
+      osx_keychain
     cocoapods-plugins (0.3.2)
       nap
     cocoapods-trunk (0.3.1)
@@ -103,7 +98,7 @@ PLATFORMS
 
 DEPENDENCIES
   cocoapods
-  cocoapods-keys!
+  cocoapods-keys
   sbconstants
   shenzhen
   xcpretty
