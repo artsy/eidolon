@@ -43,7 +43,7 @@ var AssociatedObjectHandle: UInt8 = 0
 
 extension UIViewController {
     func wrapInFulfillmentNav() {
-        let nav = FulfillmentNavigationController(rootViewController: self)!
+        let nav = FulfillmentNavigationController(rootViewController: self)
         nav.auctionID = ""
         objc_setAssociatedObject(self, &AssociatedObjectHandle, nav, UInt(OBJC_ASSOCIATION_RETAIN))
     }

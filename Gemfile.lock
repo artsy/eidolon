@@ -1,48 +1,41 @@
-GIT
-  remote: https://github.com/AshFurrow/cocoapods-keys
-  revision: 47aa003c94e74576d8de73af9e6fbe240956d8ae
-  specs:
-    cocoapods-keys (0.6.1)
-      osx_keychain
-
 GEM
   remote: https://rubygems.org/
   specs:
     RubyInline (3.12.3)
       ZenTest (~> 4.3)
     ZenTest (4.11.0)
-    activesupport (4.1.6)
-      i18n (~> 0.6, >= 0.6.9)
-      json (~> 1.7, >= 1.7.7)
-      minitest (~> 5.1)
-      thread_safe (~> 0.1)
-      tzinfo (~> 1.1)
-    aws-sdk (1.56.0)
-      aws-sdk-v1 (= 1.56.0)
-    aws-sdk-v1 (1.56.0)
+    activesupport (3.2.20)
+      i18n (~> 0.6, >= 0.6.4)
+      multi_json (~> 1.0)
+    aws-sdk (1.58.0)
+      aws-sdk-v1 (= 1.58.0)
+    aws-sdk-v1 (1.58.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     claide (0.7.0)
-    cocoapods (0.35.0.rc1)
-      activesupport (>= 3.2.15)
+    cocoapods (0.34.4)
+      activesupport (>= 3.2.15, < 4)
       claide (~> 0.7.0)
-      cocoapods-core (= 0.35.0.rc1)
+      cocoapods-core (= 0.34.4)
       cocoapods-downloader (~> 0.7.2)
       cocoapods-plugins (~> 0.3.1)
       cocoapods-trunk (~> 0.3.1)
-      cocoapods-try (~> 0.4.2)
+      cocoapods-try (~> 0.4.1)
       colored (~> 1.2)
       escape (~> 0.0.4)
-      molinillo (~> 0.1.0)
+      json_pure (~> 1.8)
       nap (~> 0.8)
       open4 (~> 1.3)
-      xcodeproj (~> 0.20.1)
-    cocoapods-core (0.35.0.rc1)
+      xcodeproj (~> 0.19.4)
+    cocoapods-core (0.34.4)
       activesupport (>= 3.2.15)
       fuzzy_match (~> 2.0.4)
+      json_pure (~> 1.8)
       nap (~> 0.8.0)
     cocoapods-downloader (0.7.2)
-    cocoapods-plugins (0.3.1)
+    cocoapods-keys (0.9.0)
+      osx_keychain
+    cocoapods-plugins (0.3.2)
       nap
     cocoapods-trunk (0.3.1)
       json_pure (~> 1.8)
@@ -65,17 +58,16 @@ GEM
     i18n (0.6.11)
     json (1.8.1)
     json_pure (1.8.1)
-    mini_portile (0.6.0)
-    minitest (5.4.2)
-    molinillo (0.1.0)
+    mini_portile (0.6.1)
+    multi_json (1.10.1)
     multipart-post (1.2.0)
     nap (0.8.0)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
     netrc (0.7.8)
-    nokogiri (1.6.3.1)
-      mini_portile (= 0.6.0)
+    nokogiri (1.6.4.1)
+      mini_portile (~> 0.6.0)
     open4 (1.3.4)
     osx_keychain (1.0.0)
       RubyInline (~> 3)
@@ -96,11 +88,8 @@ GEM
       security (~> 0.1.3)
       terminal-table (~> 1.4.5)
     terminal-table (1.4.5)
-    thread_safe (0.3.4)
-    tzinfo (1.2.2)
-      thread_safe (~> 0.1)
-    xcodeproj (0.20.1)
-      activesupport (>= 3)
+    xcodeproj (0.19.4)
+      activesupport (~> 3.0)
       colored (~> 1.2)
     xcpretty (0.1.7)
 
@@ -109,7 +98,7 @@ PLATFORMS
 
 DEPENDENCIES
   cocoapods
-  cocoapods-keys!
+  cocoapods-keys
   sbconstants
   shenzhen
   xcpretty

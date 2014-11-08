@@ -38,8 +38,8 @@ class Image: JSONAble {
 
         let baseURL = json["tile_base_url"].stringValue
         let tileSize = json["tile_size"].intValue
-        let maxTiledHeight = json["max_tiled_height"].intValue
-        let maxTiledWidth = json["max_tiled_width"].intValue
+        let maxTiledHeight = json["max_tiled_height"].int ?? 1
+        let maxTiledWidth = json["max_tiled_width"].int ?? 1
 
         let dimension = max( maxTiledWidth, maxTiledHeight)
         let logD = logf( Float(dimension) )

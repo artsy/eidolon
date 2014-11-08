@@ -6,7 +6,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
 
         it("looks right by default") {
             let sut = ConfirmYourBidPINViewController.instantiateFromStoryboard()
-            expect(sut).to(haveValidSnapshot(named:"default"))
+            expect(sut).to(haveValidSnapshot())
         }
 
         it("reacts to keypad inputs with the string") {
@@ -68,7 +68,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             let number = "NUMBER"
             let sut = ConfirmYourBidPINViewController()
             let nav = FulfillmentNavigationController(rootViewController:sut)
-            nav?.auctionID = auctionID
+            nav.auctionID = auctionID
 
             let provider: ReactiveMoyaProvider<ArtsyAPI> = sut.providerForPIN(pin, number: number)
             let endpoint = provider.endpointsClosure(ArtsyAPI.Me, method: Moya.Method.GET, parameters:["":""])

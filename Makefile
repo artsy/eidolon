@@ -12,13 +12,8 @@ DATE_VERSION = $(shell date "+%Y.%m.%d")
 # Default for `make`
 all: ci
 
+bootstrap: setup
 bootstrap:
-	@echo "Setting up submodules, grumble."
-
-	git submodule init
-	git submodule update
-	./submodules/ReactiveCocoa/script/bootstrap
-	bundle install
 
 	@echo "\nSetting up API Keys, leave blank if you don't know."
 
@@ -69,12 +64,14 @@ bootstrap:
 	@printf '\nWhat is your Balanced Marketplace Staging Token? '; \
 		read TOKEN; \
 		bundle exec pod keys set BalancedMarketplaceStagingToken "$$TOKEN"
+	bundle
 
 
+bundle: 
 	if [ ! -d ~/.cocoapods/repos/artsy ]; then \
 		bundle exec pod repo add artsy https://github.com/artsy/Specs.git; \
 	fi
-
+	
 	bundle exec pod install
 
 
@@ -99,21 +96,30 @@ ipa:
 distribute:
 	ipa distribute:hockeyapp
 
-before_ci:
-	sudo xcode-select -s /Applications/Xcode6-Beta7.app/Contents/Developer
-	pod repo add artsy https://github.com/artsy/Specs.git
-
-after_ci:
-	sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
-
 setup:
+	git submodule init
+	git submodule update
+	./submodules/ReactiveCocoa/script/bootstrap
 	bundle install
-	pod install
 
 prepare_ci: CONFIGURATION = Debug
-prepare_ci:	before_ci setup build
+prepare_ci:	setup 
+prepare_ci:
+	bundle exec pod keys set ArtsyAPIClientSecret "-" Eidolon
+	bundle exec pod keys set ArtsyAPIClientKey "-"
+	bundle exec pod keys set HockeyProductionSecret "-"
+	bundle exec pod keys set HockeyBetaSecret "-"
+	bundle exec pod keys set MixpanelProductionAPIClientKey "-"
+	bundle exec pod keys set MixpanelStagingAPIClientKey "-"
+	bundle exec pod keys set CardflightAPIClientKey "-"
+	bundle exec pod keys set CardflightAPIStagingClientKey "-"
+	bundle exec pod keys set CardflightMerchantAccountToken "-"
+	bundle exec pod keys set CardflightMerchantAccountStagingToken "-"
+	bundle exec pod keys set BalancedMarketplaceToken "-"
+	bundle exec pod keys set BalancedMarketplaceStagingToken "-"
+	
 
-ci: test after_ci
+ci: test
 
 beta: BUNDLE_NAME = '$(APP_NAME) β'
 beta: clean build ipa distribute

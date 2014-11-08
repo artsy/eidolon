@@ -507,9 +507,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wUI-V6-mkQ" customClass="KeypadContainerView" customModule="Kiosk" customModuleProvider="target">
-                                <color key="backgroundColor" red="0.80967282460000001" green="0.80967282460000001" blue="0.80967282460000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5y-rZ-EtN" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="495" y="554" width="255" height="50"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -559,6 +556,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XER-jS-BL4" customClass="CursorView" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="200" y="189" width="2" height="32"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z7-af-FHL">
@@ -575,6 +573,10 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lt9-iY-FNp" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="426" y="64" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616893485347" blue="0.72024004409018083" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wUI-V6-mkQ" customClass="KeypadContainerView" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="495" y="252" width="255" height="282"/>
+                                <color key="backgroundColor" red="0.80967282460000001" green="0.80967282460000001" blue="0.80967282460000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -595,7 +597,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpk-oa-izH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1641.5" y="-727"/>
+            <point key="canvasLocation" x="1595.5" y="-739"/>
         </scene>
         <!--Confirm Your Bid Artsy Login View Controller-->
         <scene sceneID="mg0-AC-X7S">
@@ -1563,9 +1565,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gjD-og-8Iv"/>
-        <segue reference="Qpe-mM-52j"/>
-        <segue reference="ccv-le-Cu0"/>
         <segue reference="eZu-3X-lXX"/>
+        <segue reference="Qpe-mM-52j"/>
+        <segue reference="gjD-og-8Iv"/>
+        <segue reference="ccv-le-Cu0"/>
     </inferredMetricsTieBreakers>
 </document>
