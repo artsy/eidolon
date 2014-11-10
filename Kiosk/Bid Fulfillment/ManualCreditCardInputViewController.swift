@@ -36,8 +36,12 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
             RAC(bidDetails, "newUser.creditCardDigit") <~ RACObserve(self, "cardLastDigits")
 
             RAC(self, "cardFullDigits") <~ cardNumberTextField.rac_textSignal()
-            RAC(self, "expirationMonth") <~ expirationMonthTextField.rac_textSignal()
             RAC(self, "expirationYear") <~ expirationYearTextField.rac_textSignal()
+            RAC(self, "expirationMonth") <~ expirationMonthTextField.rac_textSignal().doNext() { (value) in
+                if countElements(value as String) == 2 {
+                    self.expirationYearTextField.becomeFirstResponder()
+                }
+            }
 
             let numberIsValidSignal = RACObserve(self, "cardFullDigits").map(stringIsCreditCard)
             RAC(cardConfirmButton, "enabled") <~ numberIsValidSignal
