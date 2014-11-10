@@ -84,12 +84,14 @@ class LoadingViewControllerTests: QuickSpec {
                 sut.placingBid = false
                 sut.bidderNetworkModel.createdNewBidder = true
                 sut.bidCheckingModel.bidIsResolved = true
+
                 expect(sut).to(haveValidSnapshot())
             }
 
             it("registering user not resolved") {
                 sut.placingBid = false
                 sut.bidCheckingModel.bidIsResolved = true
+
                 expect(sut).to(haveValidSnapshot())
             }
         }

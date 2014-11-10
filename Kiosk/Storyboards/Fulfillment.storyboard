@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B17" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="AGaramondPro-Regular.otf">
+            <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
@@ -1529,10 +1530,17 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <connections>
-                                            <action selector="confirmTapped:" destination="MZV-Pg-x2N" eventType="touchUpInside" id="4DJ-94-30d"/>
-                                        </connections>
                                     </button>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We could not register your card, please verify it is correct" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cN6-Or-nel" customClass="ARSerifLabel">
+                                        <rect key="frame" x="189" y="126" width="220" height="57"/>
+                                        <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="17"/>
+                                        <color key="textColor" red="0.5" green="0.1639877614959997" blue="0.15207728362497658" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fb7-NI-IVD">
+                                        <rect key="frame" x="1" y="163" width="157" height="1"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -1545,6 +1553,7 @@
                         <outlet property="cardNumberTextField" destination="Fpf-7i-KGw" id="Nkv-do-5sw"/>
                         <outlet property="cardNumberWrapperView" destination="7pX-W6-hoy" id="JJs-hH-Oat"/>
                         <outlet property="dateConfirmButton" destination="7hl-ab-tGc" id="AcE-R2-nHg"/>
+                        <outlet property="errorLabel" destination="cN6-Or-nel" id="D1S-v4-QBL"/>
                         <outlet property="expirationDateWrapperView" destination="AZ0-nr-rbz" id="M9H-NG-aVt"/>
                         <outlet property="expirationMonthTextField" destination="7RU-Bu-dIn" id="L0J-rn-BXZ"/>
                         <outlet property="expirationYearTextField" destination="Gr7-jc-dxb" id="RC2-SA-IZJ"/>

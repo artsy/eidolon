@@ -93,6 +93,7 @@ class LoadingViewController: UIViewController {
         self.spinner.hidden = true
         let isHighestBidder = bidCheckingModel.isHighestBidder
         let bidIsResolved = bidCheckingModel.bidIsResolved
+        let createdNewBidder = bidderNetworkModel.createdNewBidder
 
         if placingBid {
             ARAnalytics.event("Placed a bid", withProperties: ["top_bidder" : isHighestBidder])
@@ -110,16 +111,17 @@ class LoadingViewController: UIViewController {
                 handleUnknownBidder()
             }
 
-        } else if bidderNetworkModel.createdNewBidder {
+        } else if createdNewBidder {
             handleRegistered()
         }
 
-        placeHigherBidButton.hidden = isHighestBidder
+        let showPlaceHigherButton = placingBid && !isHighestBidder
+        placeHigherBidButton.hidden = !showPlaceHigherButton
 
-        let showAuctionButton = !placingBid || bidderNetworkModel.createdNewBidder
+        let showAuctionButton = !placingBid || createdNewBidder
         backToAuctionButton.hidden = !showAuctionButton
 
-        let title = isHighestBidder ? "CONTINUE" : "BACK TO AUCTION"
+        let title = createdNewBidder ? "CONTINUE" : "BACK TO AUCTION"
         backToAuctionButton.setTitle(title, forState: .Normal)
     }
 
@@ -172,7 +174,6 @@ class LoadingViewController: UIViewController {
         statusMessage.text = message
         statusMessage.hidden = false
     }
-
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .PushtoBidConfirmed {
