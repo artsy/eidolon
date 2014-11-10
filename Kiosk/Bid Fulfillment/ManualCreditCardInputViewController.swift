@@ -3,12 +3,16 @@ import UIKit
 public class ManualCreditCardInputViewController: UIViewController, RegistrationSubController {
     let finishedSignal = RACSubject()
 
+    var balancedHandler: BalancedManager!
+
     @IBOutlet weak var cardNumberTextField: TextField!
     @IBOutlet weak var expirationMonthTextField: TextField!
     @IBOutlet weak var expirationYearTextField: TextField!
 
     @IBOutlet weak var expirationDateWrapperView: UIView!
     @IBOutlet weak var cardNumberWrapperView: UIView!
+    @IBOutlet weak var errorLabel: UILabel!
+
 
     dynamic var cardName = ""
     dynamic var cardLastDigits = ""
@@ -26,6 +30,13 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
     public override func viewDidLoad() {
         super.viewDidLoad()
         expirationDateWrapperView.hidden = true
+
+        let marketplace = AppSetup.sharedState.useStaging ? keys.balancedMarketplaceStagingToken() : keys.balancedMarketplaceToken()
+        balancedHandler = BalancedManager(marketplace: marketplace)
+
+        RAC(self, "cardName") <~ RACObserve(balancedHandler, "cardName")
+        RAC(self, "cardToken") <~ RACObserve(balancedHandler, "cardToken")
+        RAC(self, "cardLastDigits") <~ RACObserve(balancedHandler, "cardLastDigits")
 
         // We show the enter credit card number, then the date switchign the views around
 
@@ -49,10 +60,27 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
             let monthSignal = RACObserve(self, "expirationMonth").map(islessThan3CharLengthString)
             let yearSignal = RACObserve(self, "expirationYear").map(is4CharLengthString)
 
-            RAC(dateConfirmButton, "enabled") <~ RACSignal.combineLatest([yearSignal, monthSignal]).reduceAnd()
+            let formIsValid = RACSignal.combineLatest([yearSignal, monthSignal]).reduceAnd()
+            dateConfirmButton.rac_command = RACCommand(enabled: formIsValid) { [weak self] _ in
+                self?.registerCardSignal() ?? RACSignal.empty()
+            }
         }
 
         cardNumberTextField.becomeFirstResponder()
+    }
+
+    func registerCardSignal() -> RACSignal {
+        let month = expirationMonth.toInt() ?? 0
+        let year = expirationYear.toInt() ?? 0
+
+        return balancedHandler.registerCard(cardFullDigits, month: month, year: year).doNext() { [weak self] (_) in
+            self?.finishedSignal.sendCompleted()
+            return
+
+        }.doError() { [weak self] (_) -> Void in
+            self?.errorLabel.hidden = false
+            return
+        }
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -81,37 +109,5 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         cardNumberTextField.becomeFirstResponder()
     }
 
-    @IBAction func confirmTapped(sender: AnyObject) {
-        
-        let month = expirationMonth.toInt() ?? 0
-        let year = expirationYear.toInt() ?? 0
 
-        let card = BPCard(number: cardFullDigits, expirationMonth: UInt(month), expirationYear: UInt(year), optionalFields: nil)
-
-        let marketplace = AppSetup.sharedState.useStaging ? keys.balancedMarketplaceStagingToken() : keys.balancedMarketplaceToken()
-
-        let balanced = Balanced(marketplaceURI:"/v1/marketplaces/\(marketplace)")
-
-        balanced.tokenizeCard(card, onSuccess: { (dict) -> Void in
-            if let data = dict["data"] as? [String: AnyObject] {
-
-                // TODO: We don't capture names
-
-                if let uri = data["uri"] as? String {
-                    self.cardToken = uri
-                }
-
-                if let last4 = data["last_four"] as? String {
-                    self.cardLastDigits = last4
-                }
-
-                self.cardName = data["name"] as? String ?? ""
-                self.finishedSignal.sendCompleted()
-            }
-
-        }) { (error) -> Void in
-            logger.error("Error tokenizing via balanced: \(error)")
-            return
-        }
-    }
 }
