@@ -1,6 +1,12 @@
 # End User Changes
 
-### 2.0 5th Nov 2014
+### 2.1.0 5th Nov 2014
+
+* Improved manual input handling - @orta
+* Fixed messages at the end of registration flow - @orta
+* Potential credit card handler fix - @orta
+
+### 2.0.0 5th Nov 2014
 
 * Further improvements to details view - @ash
 * Artwork details view - @ash
