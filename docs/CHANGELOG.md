@@ -1,6 +1,6 @@
 # End User Changes
 
-### 2.1.0 5th Nov 2014
+### 2.1.0 10th Nov 2014
 
 * Improved manual input handling - @orta
 * Fixed messages at the end of registration flow - @orta

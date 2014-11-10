@@ -3,6 +3,7 @@ import Foundation
 class AdminCardTestingViewController: UIViewController {
 
     lazy var keys = EidolonKeys()
+    var cardHandler: CardHandler!
 
     @IBOutlet weak var logTextView: UITextView!
 
@@ -13,7 +14,7 @@ class AdminCardTestingViewController: UIViewController {
         self.logTextView.text = ""
 
         let merchantToken = AppSetup.sharedState.useStaging ? self.keys.cardflightMerchantAccountStagingToken() : self.keys.cardflightMerchantAccountToken()
-        let cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken:merchantToken)
+        cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken:merchantToken)
         
         cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
                 self.log("\(message)")
@@ -22,22 +23,27 @@ class AdminCardTestingViewController: UIViewController {
             }, error: { (error) -> Void in
 
                 self.log("\n====Error====\n\(error)\n\n")
-                if cardHandler.card != nil {
-                    self.log("==\n\(cardHandler.card!)\n\n")
+                if self.cardHandler.card != nil {
+                    self.log("==\n\(self.cardHandler.card!)\n\n")
                 }
 
 
             }, completed: {
 
-                if let card = cardHandler.card {
+                if let card = self.cardHandler.card {
                     let cardDetails = "Card: \(card.name) - \(card.encryptedSwipedCardNumber) \n \(card.cardToken)"
                     self.log(cardDetails)
                 }
 
-                cardHandler.startSearching()
+                self.cardHandler.startSearching()
         })
 
         cardHandler.startSearching()
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        cardHandler.end()
     }
 
     func log(string: String) {

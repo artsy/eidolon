@@ -8,19 +8,22 @@ class CardHandler: NSObject, CFTReaderDelegate {
     let APIKey: String
     let APIToken: String
 
-    lazy var reader = CFTReader(andConnect: ())
+    var reader: CFTReader!
     lazy var sessionManager = CFTSessionManager.sharedInstance()
 
     init(apiKey: String, accountToken: String){
         APIKey = apiKey
         APIToken = accountToken
+
         super.init()
+
+        sessionManager.setApiToken(APIKey, accountToken: APIToken)
     }
 
     func startSearching() {
-        sessionManager.setApiToken(APIKey, accountToken: APIToken)
         sessionManager.setLogging(true)
-        
+
+        reader = CFTReader(andConnect: ())
         reader.delegate = self;
         reader.swipeTimeoutDuration(0)
         cardSwipedSignal.sendNext("Started searching");
@@ -28,6 +31,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
 
     func end() {
         reader.cancelSwipeWithMessage(nil)
+        reader = nil
     }
 
     func readerCardResponse(card: CFTCard?, withError error: NSError?) {
@@ -41,7 +45,6 @@ class CardHandler: NSObject, CFTReaderDelegate {
 
 
             }, failure: { (error) -> Void in
-                println("Error: \(error) ")
                 self.cardSwipedSignal.sendNext("Card Flight Error: \(error)");
                 logger.error("Card was not tokenizable")
             })
