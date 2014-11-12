@@ -5,15 +5,12 @@ class SaleArtworkDetailsViewController: UIViewController {
     var auctionID = AppSetup.sharedState.auctionID
     var saleArtwork: SaleArtwork!
     
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!
     @IBOutlet weak var additionalDetailScrollView: ORStackScrollView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupImageView()
         setupMetadataView()
         setupAdditionalDetailStackView()
     }
@@ -101,6 +98,7 @@ extension SaleArtworkDetailsViewController {
 
         retrieveImageRights().filter { (imageRights) -> Bool in
             return (countElements(imageRights as? String ?? "") > 0)
+
         }.subscribeNext { [weak self] (imageRights) -> Void in
             let rightsLabel = label(.Serif, .ImageRightsLabel)
             rightsLabel.text = imageRights as? String
@@ -154,16 +152,19 @@ extension SaleArtworkDetailsViewController {
         metadataStackView.bottomMarginHeight = CGFloat(NSNotFound)
     }
 
-    private func setupImageView() {
+    private func setupImageView(imageView: UIImageView) {
         if let image = saleArtwork.artwork.images?.first? {
             if let url = image.fullsizeURL() {
                 imageView.sd_setImageWithURL(url, completed: { [weak self] image, error, type, url -> () in
-                    self?.imageView.backgroundColor = UIColor.clearColor()
+                    imageView.backgroundColor = UIColor.clearColor()
                     return
                 })
             }
 
-            imageViewHeightConstraint.constant = min(400, CGFloat(538) / image.aspectRatio)
+            let heightConstraintNumber = min(400, CGFloat(538) / image.aspectRatio)
+            imageView.constrainHeight( "\(heightConstraintNumber)" )
+            imageView.constrainWidth("538")
+            imageView.contentMode = .ScaleAspectFit
         }
     }
 
@@ -195,13 +196,24 @@ extension SaleArtworkDetailsViewController {
             return label
         }
 
+        let imageView = UIImageView()
+        additionalDetailScrollView.stackView.addSubview(imageView, withTopMargin: "0", sideMargin: "0")
+        setupImageView(imageView)
+
         let additionalInfoHeaderLabel = label(.Header)
         additionalInfoHeaderLabel.text = "Additional Information"
-        additionalDetailScrollView.stackView.addSubview(additionalInfoHeaderLabel, withTopMargin: "0", sideMargin: "0")
+        additionalDetailScrollView.stackView.addSubview(additionalInfoHeaderLabel, withTopMargin: "20", sideMargin: "0")
 
         let additionalInfoLabel = label(.Body, layoutSignal: additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
-        additionalInfoLabel.attributedText = XNGMarkdownParser().attributedStringFromMarkdownString( saleArtwork.artwork.blurb )
+        additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( saleArtwork.artwork.additionalInfo )
         additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "0")
+
+        retrieveAdditionalInfo().filter { (info) -> Bool in
+            return (countElements(info as? String ?? "") > 0)
+
+            }.subscribeNext { [weak self] (info) -> Void in
+                additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( info as String )
+        }
 
         if let artist = artist() {
             retrieveArtistBlurb().filter { (blurb) -> Bool in
@@ -216,7 +228,7 @@ extension SaleArtworkDetailsViewController {
                     self?.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "0")
 
                     let aboutAristLabel = label(.Body, layoutSignal: self?.additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
-                    aboutAristLabel.attributedText = XNGMarkdownParser().attributedStringFromMarkdownString( blurb as? String )
+                    aboutAristLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( blurb as? String )
                     self?.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "0")
             }
         }
@@ -244,6 +256,27 @@ extension SaleArtworkDetailsViewController {
             }
         }
     }
+
+    // Duped code with ^ could be better?
+    private func retrieveAdditionalInfo() -> RACSignal {
+        let artwork = saleArtwork.artwork
+
+        if let additionalInfo = artwork.additionalInfo {
+            return RACSignal.`return`(additionalInfo)
+
+        } else {
+            let endpoint: ArtsyAPI = ArtsyAPI.Artwork(id: artwork.id)
+            return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
+                return json["additional_information"]
+                }.filter({ (info) -> Bool in
+                    info != nil
+                }).doNext{ (info) -> Void in
+                    artwork.additionalInfo = info as? String
+                    return
+            }
+        }
+    }
+
 
     private func retrieveArtistBlurb() -> RACSignal {
         if let artist = artist() {

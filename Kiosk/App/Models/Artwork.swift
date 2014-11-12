@@ -12,7 +12,9 @@ class Artwork: JSONAble {
 
     dynamic var medium: String?
     dynamic var dimensions = [String]()
+
     dynamic var imageRights: String?
+    dynamic var additionalInfo: String?
 
     dynamic var artists: [Artist]?
     dynamic var culturalMarker: String?
@@ -41,6 +43,8 @@ class Artwork: JSONAble {
         let titleAndDate = titleAndDateAttributedString(title, dateString)
         
         let artwork = Artwork(id: id, dateString: dateString, title: title, titleAndDate:titleAndDate, blurb: blurb, price: price, date: date)
+
+        artwork.additionalInfo = json["additional_information"].string
 
         if let artistDictionary = json["artist"].object as? [String: AnyObject] {
             artwork.artists = [Artist.fromJSON(artistDictionary) as Artist]

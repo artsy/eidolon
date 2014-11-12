@@ -1,5 +1,13 @@
 # End User Changes
 
+### 2.1.1 12th Nov 2014
+
+* Markdown supported in Sale Artwork view - @orta
+* Artwork scrolls correctly in Sale Artwork view - @orta
+* Sale Artwork Detail View handles artworks with no Artists - @orta
+* Sale Artwork Detail View shows the additional info, not blurb - @orta
+
+
 ### 2.1.0 10th Nov 2014
 
 * Improved manual input handling - @orta
