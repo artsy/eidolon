@@ -200,8 +200,7 @@ extension SaleArtworkDetailsViewController {
         additionalDetailScrollView.stackView.addSubview(additionalInfoHeaderLabel, withTopMargin: "0", sideMargin: "0")
 
         let additionalInfoLabel = label(.Body, layoutSignal: additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
-        additionalInfoLabel.text = saleArtwork.artwork.blurb
-        println("--- \(saleArtwork.artwork.blurb) ")
+        additionalInfoLabel.attributedText = XNGMarkdownParser().attributedStringFromMarkdownString( saleArtwork.artwork.blurb )
         additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "0")
 
         if let artist = artist() {
@@ -217,7 +216,7 @@ extension SaleArtworkDetailsViewController {
                     self?.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "0")
 
                     let aboutAristLabel = label(.Body, layoutSignal: self?.additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
-                    aboutAristLabel.text = blurb as? String
+                    aboutAristLabel.attributedText = XNGMarkdownParser().attributedStringFromMarkdownString( blurb as? String )
                     self?.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "0")
             }
         }

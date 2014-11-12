@@ -56,4 +56,6 @@
 #import <ARTiledImageView/ARWebTiledImageDataSource.h>
 #import <ARTiledImageView/ARTiledImageScrollView.h>
 
+#import <XNGMarkdownParser/XNGMarkdownParser.h>
+
 #import <balanced-ios/Balanced.h>

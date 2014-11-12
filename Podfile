@@ -37,6 +37,7 @@ pod 'Reachability'
 
 pod 'ARTiledImageView', :git => "https://github.com/dblock/ARTiledImageView.git"
 pod 'balanced-ios', :git => "https://github.com/orta/balanced-ios", :branch => "0_5_podspec"
+pod 'XNGMarkdownParser'
 
 target "KioskTests", :exclusive => true do
     pod 'FBSnapshotTestCase'
