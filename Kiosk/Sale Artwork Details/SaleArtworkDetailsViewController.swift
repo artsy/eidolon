@@ -77,9 +77,11 @@ extension SaleArtworkDetailsViewController {
             return label
         }
 
-        let artistNameLabel = label(.SansSerif, .ArtistNameLabel)
-        artistNameLabel.text = artist().name
-        metadataStackView.addSubview(artistNameLabel, withTopMargin: "0", sideMargin: "0")
+        if let artist = artist() {
+            let artistNameLabel = label(.SansSerif, .ArtistNameLabel)
+            artistNameLabel.text = artist.name
+            metadataStackView.addSubview(artistNameLabel, withTopMargin: "0", sideMargin: "0")
+        }
 
         let artworkNameLabel = label(.ItalicsSerif, .ArtworkNameLabel)
         artworkNameLabel.text = "\(saleArtwork.artwork.title), \(saleArtwork.artwork.date)"
@@ -199,32 +201,38 @@ extension SaleArtworkDetailsViewController {
 
         let additionalInfoLabel = label(.Body, layoutSignal: additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
         additionalInfoLabel.text = saleArtwork.artwork.blurb
+        println("--- \(saleArtwork.artwork.blurb) ")
         additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "0")
 
-        retrieveArtistBlurb().filter { (blurb) -> Bool in
-            return (countElements(blurb as? String ?? "") > 0)
-        }.subscribeNext { [weak self] (blurb) -> Void in
-            if self == nil {
-                return
-            }
-            let aboutArtistHeaderLabel = label(.Header)
-            aboutArtistHeaderLabel.text = "About \(self!.artist().name)"
-            self?.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "0")
+        if let artist = artist() {
+            retrieveArtistBlurb().filter { (blurb) -> Bool in
+                return (countElements(blurb as? String ?? "") > 0)
 
-            let aboutAristLabel = label(.Body, layoutSignal: self?.additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
-            aboutAristLabel.text = blurb as? String
-            self?.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "0")
+                }.subscribeNext { [weak self] (blurb) -> Void in
+                    if self == nil {
+                        return
+                    }
+                    let aboutArtistHeaderLabel = label(.Header)
+                    aboutArtistHeaderLabel.text = "About \(artist.name)"
+                    self?.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "0")
+
+                    let aboutAristLabel = label(.Body, layoutSignal: self?.additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
+                    aboutAristLabel.text = blurb as? String
+                    self?.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "0")
+            }
         }
     }
 
-    private func artist() -> Artist! {
+    private func artist() -> Artist? {
         return saleArtwork.artwork.artists?.first
     }
 
     private func retrieveImageRights() -> RACSignal {
         let artwork = saleArtwork.artwork
+
         if let imageRights = artwork.imageRights {
             return RACSignal.`return`(imageRights)
+
         } else {
             let endpoint: ArtsyAPI = ArtsyAPI.Artwork(id: artwork.id)
             return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
@@ -239,19 +247,22 @@ extension SaleArtworkDetailsViewController {
     }
 
     private func retrieveArtistBlurb() -> RACSignal {
-        let artist = self.artist()
-        if let blurb = artist.blurb {
-            return RACSignal.`return`(blurb)
-        } else {
-            let endpoint: ArtsyAPI = ArtsyAPI.Artist(id: artist.id)
-            return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
-                return json["blurb"]
-            }.filter({ (blurb) -> Bool in
-                blurb != nil
-            }).doNext{ (blurb) -> Void in
-                artist.blurb = blurb as? String
-                return
+        if let artist = artist() {
+            if let blurb = artist.blurb {
+                return RACSignal.`return`(blurb)
+            } else {
+                let endpoint: ArtsyAPI = ArtsyAPI.Artist(id: artist.id)
+                return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
+                    return json["blurb"]
+                    }.filter({ (blurb) -> Bool in
+                        blurb != nil
+                    }).doNext{ (blurb) -> Void in
+                        artist.blurb = blurb as? String
+                        return
+                }
             }
+        } else {
+            return RACSignal.empty()
         }
     }
 }
