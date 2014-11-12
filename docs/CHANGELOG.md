@@ -6,7 +6,7 @@
 * Artwork scrolls correctly in Sale Artwork view - @orta
 * Sale Artwork Detail View handles artworks with no Artists - @orta
 * Sale Artwork Detail View shows the additional info, not blurb - @orta
-
+* More info buttons work - @orta
 
 ### 2.1.0 10th Nov 2014
 

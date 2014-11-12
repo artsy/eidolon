@@ -87,9 +87,11 @@ extension SaleArtworkDetailsViewController {
         metadataStackView.addSubview(artworkNameLabel, withTopMargin: "10", sideMargin: "0")
 
         if let medium = saleArtwork.artwork.medium {
-            let mediumLabel = label(.Serif, .ArtworkMediumLabel)
-            mediumLabel.text = medium
-            metadataStackView.addSubview(mediumLabel, withTopMargin: "22", sideMargin: "0")
+            if countElements(medium) > 0 {
+                let mediumLabel = label(.Serif, .ArtworkMediumLabel)
+                mediumLabel.text = medium
+                metadataStackView.addSubview(mediumLabel, withTopMargin: "22", sideMargin: "0")
+            }
         }
 
         if countElements(saleArtwork.artwork.dimensions) > 0 {
@@ -102,9 +104,11 @@ extension SaleArtworkDetailsViewController {
             return (countElements(imageRights as? String ?? "") > 0)
 
         }.subscribeNext { [weak self] (imageRights) -> Void in
-            let rightsLabel = label(.Serif, .ImageRightsLabel)
-            rightsLabel.text = imageRights as? String
-            self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
+            if countElements(imageRights as String) > 0 {
+                let rightsLabel = label(.Serif, .ImageRightsLabel)
+                rightsLabel.text = imageRights as? String
+                self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
+            }
         }
 
         let estimateTopBorder = UIView()

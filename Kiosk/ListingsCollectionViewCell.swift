@@ -19,12 +19,14 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     private lazy var imageGestureSigal: RACSignal = {
         let recognizer = UITapGestureRecognizer()
         self.artworkImageView.addGestureRecognizer(recognizer)
+        self.artworkImageView.userInteractionEnabled = true
         return recognizer.rac_gestureSignal()
     }()
 
     private lazy var infoGestureSignal: RACSignal = {
         let recognizer = UITapGestureRecognizer()
         self.moreInfoLabel.addGestureRecognizer(recognizer)
+        self.moreInfoLabel.userInteractionEnabled = true
         return recognizer.rac_gestureSignal()
     }()
     
@@ -102,7 +104,6 @@ private extension ListingsCollectionViewCell {
     // Mark: UIView-property-methods – need an _ prefix to appease the compiler ¯\_(ツ)_/¯
     class func _artworkImageView() -> UIImageView {
         let imageView = UIImageView()
-        imageView.userInteractionEnabled = true
         imageView.backgroundColor = UIColor.artsyLightGrey()
         return imageView
     }
@@ -157,7 +158,7 @@ private extension ListingsCollectionViewCell {
     class func _infoLabel() -> UILabel {
         let label = ARSansSerifLabelWithChevron()
         label.tintColor = UIColor.blackColor()
-        label.text = "More Info"
+        label.text = "MORE INFO"
         return label
     }
 }
