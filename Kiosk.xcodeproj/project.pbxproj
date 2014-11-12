@@ -266,6 +266,7 @@
 		60E094C119F5FF0E0035F0DD /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E094BF19F5FF0E0035F0DD /* GlobalFunctions.swift */; };
 		60E094C319F601970035F0DD /* UIViewSubclassesErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E094C219F601970035F0DD /* UIViewSubclassesErrorExtensions.swift */; };
 		60E094C419F601970035F0DD /* UIViewSubclassesErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E094C219F601970035F0DD /* UIViewSubclassesErrorExtensions.swift */; };
+		60E0E4E41A14184700D0C7F2 /* MarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A272AE1A13F1B3006D26F4 /* MarkdownParser.swift */; };
 		60E4657E1A0D0A5400E5729A /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60E465771A0D088F00E5729A /* Quick.framework */; };
 		60E4657F1A0D0D3E00E5729A /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2F1E1A09676300A92C4D /* UILabel+Fonts.swift */; };
 		60E465801A0D0E5000E5729A /* UIViewController+Bidding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2F4F1A0A335300A92C4D /* UIViewController+Bidding.swift */; };
@@ -1860,6 +1861,7 @@
 				609A849819E53ED200476A94 /* RACFunctions.swift in Sources */,
 				60E0949419F5A9620035F0DD /* AdminLogViewController.swift in Sources */,
 				6067EB811A07371900FCF145 /* BidDetailsTestExtensions.swift in Sources */,
+				60E0E4E41A14184700D0C7F2 /* MarkdownParser.swift in Sources */,
 				6030A11619D1A04300B934CA /* KeypadView.swift in Sources */,
 				60FFC2B819D9496A00284B9F /* APIKeys.swift in Sources */,
 				60C37DDE19D4655D002E7A44 /* BidderPositionTests.swift in Sources */,

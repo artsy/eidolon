@@ -387,7 +387,7 @@ func highestCurrentBidSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
 }
 
 func alphabeticalSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
-    return lhs.artwork.artists!.first!.sortableID.caseInsensitiveCompare(rhs.artwork.artists!.first!.sortableID) == .OrderedAscending
+    return lhs.artwork.sortableArtistID().caseInsensitiveCompare(rhs.artwork.sortableArtistID()) == .OrderedAscending
 }
 
 func sortById(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {

@@ -68,6 +68,10 @@ class Artwork: JSONAble {
 
         return artwork
     }
+
+    func sortableArtistID() -> String {
+        return artists?.first?.sortableID ?? "_"
+    }
 }
 
 private func titleAndDateAttributedString(title: String, dateString: String) -> NSAttributedString {

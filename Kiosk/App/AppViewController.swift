@@ -34,11 +34,7 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
 
-
-    // sorry for this
-    // TODO: Make better implemntation
     @IBOutlet weak var registerToBidButton: ActionButton!
-
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         let show = (viewController as? SaleArtworkZoomViewController != nil)
         countdownManager.countdownContainerView.hidden = show
