@@ -67,9 +67,11 @@ extension SaleArtworkDetailsViewController {
                     return label
                 }
             }()
+
             label.lineBreakMode = .ByWordWrapping
             label.font = label.font.fontWithSize(fontSize)
             label.tag = tag.rawValue
+            label.preferredMaxLayoutWidth = 276
 
             return label
         }
@@ -163,8 +165,16 @@ extension SaleArtworkDetailsViewController {
 
             let heightConstraintNumber = min(400, CGFloat(538) / image.aspectRatio)
             imageView.constrainHeight( "\(heightConstraintNumber)" )
-            imageView.constrainWidth("538")
+
             imageView.contentMode = .ScaleAspectFit
+            imageView.userInteractionEnabled = true
+
+            let recognizer = UITapGestureRecognizer()
+            imageView.addGestureRecognizer(recognizer)
+            recognizer.rac_gestureSignal().subscribeNext() { [weak self] (_) in
+                 self?.performSegue(.ZoomIntoArtwork)
+                 return
+            }
         }
     }
 
@@ -196,17 +206,19 @@ extension SaleArtworkDetailsViewController {
             return label
         }
 
+        additionalDetailScrollView.stackView.bottomMarginHeight = 40
+
         let imageView = UIImageView()
-        additionalDetailScrollView.stackView.addSubview(imageView, withTopMargin: "0", sideMargin: "0")
+        additionalDetailScrollView.stackView.addSubview(imageView, withTopMargin: "0", sideMargin: "40")
         setupImageView(imageView)
 
         let additionalInfoHeaderLabel = label(.Header)
         additionalInfoHeaderLabel.text = "Additional Information"
-        additionalDetailScrollView.stackView.addSubview(additionalInfoHeaderLabel, withTopMargin: "20", sideMargin: "0")
+        additionalDetailScrollView.stackView.addSubview(additionalInfoHeaderLabel, withTopMargin: "20", sideMargin: "40")
 
         let additionalInfoLabel = label(.Body, layoutSignal: additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
         additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( saleArtwork.artwork.additionalInfo )
-        additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "0")
+        additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "40")
 
         retrieveAdditionalInfo().filter { (info) -> Bool in
             return (countElements(info as? String ?? "") > 0)
@@ -225,11 +237,11 @@ extension SaleArtworkDetailsViewController {
                     }
                     let aboutArtistHeaderLabel = label(.Header)
                     aboutArtistHeaderLabel.text = "About \(artist.name)"
-                    self?.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "0")
+                    self?.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "40")
 
                     let aboutAristLabel = label(.Body, layoutSignal: self?.additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
                     aboutAristLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( blurb as? String )
-                    self?.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "0")
+                    self?.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "40")
             }
         }
     }
@@ -276,7 +288,6 @@ extension SaleArtworkDetailsViewController {
             }
         }
     }
-
 
     private func retrieveArtistBlurb() -> RACSignal {
         if let artist = artist() {

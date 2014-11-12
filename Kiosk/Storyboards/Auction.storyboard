@@ -290,14 +290,6 @@
                                     <constraint firstAttribute="height" constant="658" id="8Bg-fK-uEF"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9gg-U8-vQw" customClass="ORStackScrollView">
-                                <rect key="frame" x="65" y="90" width="538" height="678"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="538" id="N3f-Zo-Ppq"/>
-                                    <constraint firstAttribute="height" constant="678" id="ila-iK-bR8"/>
-                                </constraints>
-                            </scrollView>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ecj-6U-eYB" userLabel="Divider">
                                 <rect key="frame" x="643" y="90" width="1" height="678"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -305,6 +297,14 @@
                                     <constraint firstAttribute="width" constant="1" id="78f-fD-Z5a"/>
                                 </constraints>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9gg-U8-vQw" customClass="ORStackScrollView">
+                                <rect key="frame" x="65" y="90" width="579" height="678"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="579" id="N3f-Zo-Ppq"/>
+                                    <constraint firstAttribute="height" constant="678" id="ila-iK-bR8"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -323,14 +323,10 @@
                     <connections>
                         <outlet property="additionalDetailScrollView" destination="9gg-U8-vQw" id="ehK-FT-Nkd"/>
                         <outlet property="metadataStackView" destination="NDO-I9-Fbb" id="IGq-Z4-yN9"/>
+                        <segue destination="Sb3-CP-VQj" kind="push" identifier="Zoom Into Artwork" id="rC8-vG-Rjb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Y0-e9-1p2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="aeS-ZY-FEf">
-                    <connections>
-                        <segue destination="Sb3-CP-VQj" kind="push" identifier="Zoom Into Artwork" id="YOt-UF-Qxc"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2180" y="825"/>
         </scene>
