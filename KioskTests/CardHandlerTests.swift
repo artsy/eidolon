@@ -2,8 +2,8 @@ import Quick
 import Nimble
 
 class CardHandlerTests: QuickSpec {
-    var handler:CardHandler?
-    var reader:LocalCardReader?
+    var handler:CardHandler!
+    var reader:LocalCardReader!
 
     override func spec() {
         let apiKey = "jhfbsdhbfsd"
@@ -15,32 +15,30 @@ class CardHandlerTests: QuickSpec {
 
             self.handler = CardHandler(apiKey: apiKey, accountToken: accountToken)
 
-            self.handler!.reader = self.reader!
-            self.handler!.sessionManager = manager
+            self.handler.reader = self.reader!
+            self.handler.sessionManager = manager
         }
 
         it("sets up the Cardflight API + Token") {
-            self.handler!.startSearching()
-
-            expect(self.handler!.sessionManager.getApiToken()) == apiKey
-            expect(self.handler!.sessionManager.getAccountToken()) == accountToken
+            expect(self.handler.sessionManager.getApiToken()) == apiKey
+            expect(self.handler.sessionManager.getAccountToken()) == accountToken
         }
 
         xit("sends a signal with a card if successful") {
             var success = false
-            self.handler!.cardSwipedSignal.subscribeCompleted({ input -> Void in
+            self.handler.cardSwipedSignal.subscribeCompleted({ input -> Void in
                 success = true
             })
 
-            self.handler!.startSearching()
+            self.handler.startSearching()
             expect(success) == true
         }
 
         xit("sends a signal with a error if failed") {
-            self.reader?.fail = true
+            self.reader.fail = true
 
             var success = false
-            self.handler?.cardSwipedSignal.subscribeError({ input -> Void in
+            self.handler.cardSwipedSignal.subscribeError({ input -> Void in
                 success = true
             })
 

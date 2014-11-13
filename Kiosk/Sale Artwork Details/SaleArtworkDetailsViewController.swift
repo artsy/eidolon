@@ -5,15 +5,12 @@ class SaleArtworkDetailsViewController: UIViewController {
     var auctionID = AppSetup.sharedState.auctionID
     var saleArtwork: SaleArtwork!
     
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!
     @IBOutlet weak var additionalDetailScrollView: ORStackScrollView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupImageView()
         setupMetadataView()
         setupAdditionalDetailStackView()
     }
@@ -70,25 +67,31 @@ extension SaleArtworkDetailsViewController {
                     return label
                 }
             }()
+
             label.lineBreakMode = .ByWordWrapping
             label.font = label.font.fontWithSize(fontSize)
             label.tag = tag.rawValue
+            label.preferredMaxLayoutWidth = 276
 
             return label
         }
 
-        let artistNameLabel = label(.SansSerif, .ArtistNameLabel)
-        artistNameLabel.text = artist().name
-        metadataStackView.addSubview(artistNameLabel, withTopMargin: "0", sideMargin: "0")
+        if let artist = artist() {
+            let artistNameLabel = label(.SansSerif, .ArtistNameLabel)
+            artistNameLabel.text = artist.name
+            metadataStackView.addSubview(artistNameLabel, withTopMargin: "0", sideMargin: "0")
+        }
 
         let artworkNameLabel = label(.ItalicsSerif, .ArtworkNameLabel)
         artworkNameLabel.text = "\(saleArtwork.artwork.title), \(saleArtwork.artwork.date)"
         metadataStackView.addSubview(artworkNameLabel, withTopMargin: "10", sideMargin: "0")
 
         if let medium = saleArtwork.artwork.medium {
-            let mediumLabel = label(.Serif, .ArtworkMediumLabel)
-            mediumLabel.text = medium
-            metadataStackView.addSubview(mediumLabel, withTopMargin: "22", sideMargin: "0")
+            if countElements(medium) > 0 {
+                let mediumLabel = label(.Serif, .ArtworkMediumLabel)
+                mediumLabel.text = medium
+                metadataStackView.addSubview(mediumLabel, withTopMargin: "22", sideMargin: "0")
+            }
         }
 
         if countElements(saleArtwork.artwork.dimensions) > 0 {
@@ -99,10 +102,13 @@ extension SaleArtworkDetailsViewController {
 
         retrieveImageRights().filter { (imageRights) -> Bool in
             return (countElements(imageRights as? String ?? "") > 0)
+
         }.subscribeNext { [weak self] (imageRights) -> Void in
-            let rightsLabel = label(.Serif, .ImageRightsLabel)
-            rightsLabel.text = imageRights as? String
-            self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
+            if countElements(imageRights as String) > 0 {
+                let rightsLabel = label(.Serif, .ImageRightsLabel)
+                rightsLabel.text = imageRights as? String
+                self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
+            }
         }
 
         let estimateTopBorder = UIView()
@@ -152,16 +158,27 @@ extension SaleArtworkDetailsViewController {
         metadataStackView.bottomMarginHeight = CGFloat(NSNotFound)
     }
 
-    private func setupImageView() {
+    private func setupImageView(imageView: UIImageView) {
         if let image = saleArtwork.artwork.images?.first? {
             if let url = image.fullsizeURL() {
                 imageView.sd_setImageWithURL(url, completed: { [weak self] image, error, type, url -> () in
-                    self?.imageView.backgroundColor = UIColor.clearColor()
+                    imageView.backgroundColor = UIColor.clearColor()
                     return
                 })
             }
 
-            imageViewHeightConstraint.constant = min(400, CGFloat(538) / image.aspectRatio)
+            let heightConstraintNumber = min(400, CGFloat(538) / image.aspectRatio)
+            imageView.constrainHeight( "\(heightConstraintNumber)" )
+
+            imageView.contentMode = .ScaleAspectFit
+            imageView.userInteractionEnabled = true
+
+            let recognizer = UITapGestureRecognizer()
+            imageView.addGestureRecognizer(recognizer)
+            recognizer.rac_gestureSignal().subscribeNext() { [weak self] (_) in
+                 self?.performSegue(.ZoomIntoArtwork)
+                 return
+            }
         }
     }
 
@@ -193,38 +210,56 @@ extension SaleArtworkDetailsViewController {
             return label
         }
 
+        additionalDetailScrollView.stackView.bottomMarginHeight = 40
+
+        let imageView = UIImageView()
+        additionalDetailScrollView.stackView.addSubview(imageView, withTopMargin: "0", sideMargin: "40")
+        setupImageView(imageView)
+
         let additionalInfoHeaderLabel = label(.Header)
         additionalInfoHeaderLabel.text = "Additional Information"
-        additionalDetailScrollView.stackView.addSubview(additionalInfoHeaderLabel, withTopMargin: "0", sideMargin: "0")
+        additionalDetailScrollView.stackView.addSubview(additionalInfoHeaderLabel, withTopMargin: "20", sideMargin: "40")
 
         let additionalInfoLabel = label(.Body, layoutSignal: additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
-        additionalInfoLabel.text = saleArtwork.artwork.blurb
-        additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "0")
+        additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( saleArtwork.artwork.additionalInfo )
+        additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "40")
 
-        retrieveArtistBlurb().filter { (blurb) -> Bool in
-            return (countElements(blurb as? String ?? "") > 0)
-        }.subscribeNext { [weak self] (blurb) -> Void in
-            if self == nil {
-                return
+        retrieveAdditionalInfo().filter { (info) -> Bool in
+            return (countElements(info as? String ?? "") > 0)
+
+            }.subscribeNext { [weak self] (info) -> Void in
+                additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( info as String )
+        }
+
+        if let artist = artist() {
+            retrieveArtistBlurb().filter { (blurb) -> Bool in
+                return (countElements(blurb as? String ?? "") > 0)
+
+                }.subscribeNext { [weak self] (blurb) -> Void in
+                    if self == nil {
+                        return
+                    }
+                    let aboutArtistHeaderLabel = label(.Header)
+                    aboutArtistHeaderLabel.text = "About \(artist.name)"
+                    self?.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "40")
+
+                    let aboutAristLabel = label(.Body, layoutSignal: self?.additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
+                    aboutAristLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( blurb as? String )
+                    self?.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "40")
             }
-            let aboutArtistHeaderLabel = label(.Header)
-            aboutArtistHeaderLabel.text = "About \(self!.artist().name)"
-            self?.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "0")
-
-            let aboutAristLabel = label(.Body, layoutSignal: self?.additionalDetailScrollView.stackView.rac_signalForSelector("layoutSubviews"))
-            aboutAristLabel.text = blurb as? String
-            self?.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "0")
         }
     }
 
-    private func artist() -> Artist! {
+    private func artist() -> Artist? {
         return saleArtwork.artwork.artists?.first
     }
 
     private func retrieveImageRights() -> RACSignal {
         let artwork = saleArtwork.artwork
+
         if let imageRights = artwork.imageRights {
             return RACSignal.`return`(imageRights)
+
         } else {
             let endpoint: ArtsyAPI = ArtsyAPI.Artwork(id: artwork.id)
             return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
@@ -238,20 +273,43 @@ extension SaleArtworkDetailsViewController {
         }
     }
 
-    private func retrieveArtistBlurb() -> RACSignal {
-        let artist = self.artist()
-        if let blurb = artist.blurb {
-            return RACSignal.`return`(blurb)
+    // Duped code with ^ could be better?
+    private func retrieveAdditionalInfo() -> RACSignal {
+        let artwork = saleArtwork.artwork
+
+        if let additionalInfo = artwork.additionalInfo {
+            return RACSignal.`return`(additionalInfo)
+
         } else {
-            let endpoint: ArtsyAPI = ArtsyAPI.Artist(id: artist.id)
+            let endpoint: ArtsyAPI = ArtsyAPI.Artwork(id: artwork.id)
             return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
-                return json["blurb"]
-            }.filter({ (blurb) -> Bool in
-                blurb != nil
-            }).doNext{ (blurb) -> Void in
-                artist.blurb = blurb as? String
-                return
+                return json["additional_information"]
+                }.filter({ (info) -> Bool in
+                    info != nil
+                }).doNext{ (info) -> Void in
+                    artwork.additionalInfo = info as? String
+                    return
             }
+        }
+    }
+
+    private func retrieveArtistBlurb() -> RACSignal {
+        if let artist = artist() {
+            if let blurb = artist.blurb {
+                return RACSignal.`return`(blurb)
+            } else {
+                let endpoint: ArtsyAPI = ArtsyAPI.Artist(id: artist.id)
+                return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
+                    return json["blurb"]
+                    }.filter({ (blurb) -> Bool in
+                        blurb != nil
+                    }).doNext{ (blurb) -> Void in
+                        artist.blurb = blurb as? String
+                        return
+                }
+            }
+        } else {
+            return RACSignal.empty()
         }
     }
 }

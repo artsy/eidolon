@@ -24,8 +24,9 @@ PODS:
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
   - EDColor (0.4.0)
-  - FBSnapshotTestCase (1.1)
+  - FBSnapshotTestCase (1.4)
   - FLKAutoLayout (0.1.1)
+  - fmemopen (0.0.1)
   - HockeySDK (3.5.4)
   - ISO8601DateFormatter (0.7)
   - Mixpanel (2.5.4)
@@ -41,6 +42,8 @@ PODS:
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
   - UIImageViewAligned (0.0.1)
+  - XNGMarkdownParser (0.2.0):
+    - fmemopen
 
 DEPENDENCIES:
   - ARAnalytics/HockeyApp
@@ -55,7 +58,7 @@ DEPENDENCIES:
   - CardFlight
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
-  - FBSnapshotTestCase (from `https://github.com/AshFurrow/ios-snapshot-test-case.git`, branch `renderAsLayer`)
+  - FBSnapshotTestCase
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
@@ -63,6 +66,7 @@ DEPENDENCIES:
   - Reachability
   - SDWebImage (~> 3.7)
   - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
+  - XNGMarkdownParser
 
 EXTERNAL SOURCES:
   ARTiledImageView:
@@ -75,9 +79,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/orta/balanced-ios
   DZNWebViewController:
     :git: https://github.com/orta/DZNWebViewController.git
-  FBSnapshotTestCase:
-    :branch: renderAsLayer
-    :git: https://github.com/AshFurrow/ios-snapshot-test-case.git
   UIImageViewAligned:
     :git: https://github.com/orta/UIImageViewAligned.git
 
@@ -94,8 +95,9 @@ SPEC CHECKSUMS:
   DZNWebViewController: 8716115ea00d6abbfb5dc937fff85b222b70fc68
   ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
-  FBSnapshotTestCase: 188c80bfcb72e744eb0b99d45989d12687c40cf8
+  FBSnapshotTestCase: f9f225b5ba11c8d8c09075590490df16314e4d62
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
+  fmemopen: 54fc0cc9d9063de6103b40a24849818a53c8f1e5
   HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
   ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
@@ -104,5 +106,6 @@ SPEC CHECKSUMS:
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   UIImageViewAligned: efc1b8b5750dea68b7ee67236f4c64f93e65b674
+  XNGMarkdownParser: 5d1ed6c1b2bb3d3f3468a9ad591b85498403822c
 
-COCOAPODS: 0.35.0.rc1
+COCOAPODS: 0.35.0.rc2

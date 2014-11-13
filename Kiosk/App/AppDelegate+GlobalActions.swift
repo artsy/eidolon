@@ -9,16 +9,22 @@ public extension AppDelegate {
         hideHelp {
             // Need to give it a second to ensure view heirarchy is good.
             dispatch_async(dispatch_get_main_queue()) {
-                let appViewController = (self.window.rootViewController?.childViewControllers.first as UINavigationController).viewControllers.first as AppViewController
-                if let fulfillment = appViewController.presentedViewController as? FulfillmentContainerViewController {
+
+                let appVC = self.appViewController
+                if let fulfillment = appVC?.presentedViewController as? FulfillmentContainerViewController {
                     fulfillment.closeFulfillmentModal() {
-                        appViewController.registerToBidButtonWasPressed(self)
+                        return appVC!.registerToBidButtonWasPressed(self)
                     }
                 } else {
-                    appViewController.registerToBidButtonWasPressed(self)
+                    appVC?.registerToBidButtonWasPressed(self)
                 }
             }
         }
+    }
+
+    internal var appViewController: AppViewController? {
+        let nav = self.window.rootViewController?.findChildViewControllerOfType(UINavigationController) as? UINavigationController
+        return nav?.delegate as? AppViewController
     }
 
     // Condtions of Sale and Privacy Policy
@@ -68,6 +74,11 @@ public extension AppDelegate {
     var webViewControllerIsVisible: Bool {
         return webViewController != nil
     }
+
+    var fulfilmentPopvoerIsVisible: Bool {
+        return webViewController != nil
+    }
+
 
     func helpButtonPressed() {
         if helpIsVisisble {

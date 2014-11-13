@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="KCM-cT-BEX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="KCM-cT-BEX">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -282,70 +282,51 @@
                                     <action selector="backWasPressed:" destination="Jj5-n3-bv0" eventType="touchUpInside" id="HrC-Hp-x4l"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="100" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ciZ-IV-yO1">
-                                <rect key="frame" x="65" y="90" width="538" height="400"/>
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="538" id="NTu-aX-qeW"/>
-                                    <constraint firstAttribute="height" constant="400" id="pxc-HY-gDV"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="aeS-ZY-FEf" appends="YES" id="bWi-aj-ysW"/>
-                                </connections>
-                            </imageView>
                             <view contentMode="scaleToFill" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="NDO-I9-Fbb" customClass="ORTagBasedAutoStackView">
                                 <rect key="frame" x="683" y="90" width="276" height="658"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="276" id="03a-vM-xA5"/>
+                                    <constraint firstAttribute="height" constant="658" id="8Bg-fK-uEF"/>
+                                </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9gg-U8-vQw" customClass="ORStackScrollView">
-                                <rect key="frame" x="65" y="520" width="538" height="198"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecj-6U-eYB" userLabel="Divider">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ecj-6U-eYB" userLabel="Divider">
                                 <rect key="frame" x="643" y="90" width="1" height="678"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="78f-fD-Z5a"/>
                                 </constraints>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9gg-U8-vQw" customClass="ORStackScrollView">
+                                <rect key="frame" x="65" y="90" width="579" height="678"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="579" id="N3f-Zo-Ppq"/>
+                                    <constraint firstAttribute="height" constant="678" id="ila-iK-bR8"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="NDO-I9-Fbb" secondAttribute="trailing" constant="65" id="2rj-Vs-QfH"/>
-                            <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="ZNW-S0-kgd" secondAttribute="bottom" constant="26" id="8fj-dy-9xY"/>
-                            <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="NDO-I9-Fbb" secondAttribute="top" id="8jM-3p-x0P"/>
                             <constraint firstItem="ZNW-S0-kgd" firstAttribute="leading" secondItem="nu4-re-HAA" secondAttribute="leadingMargin" id="H0r-rk-0wl"/>
                             <constraint firstItem="ZNW-S0-kgd" firstAttribute="top" secondItem="nu4-re-HAA" secondAttribute="top" constant="20" symbolic="YES" id="HMC-OH-Hy1"/>
-                            <constraint firstItem="9gg-U8-vQw" firstAttribute="trailing" secondItem="ciZ-IV-yO1" secondAttribute="trailing" id="Lhd-Hz-KTH"/>
                             <constraint firstItem="ZNW-S0-kgd" firstAttribute="top" secondItem="MIW-uT-gtC" secondAttribute="bottom" constant="20" id="Nld-Qh-maR"/>
-                            <constraint firstItem="NDO-I9-Fbb" firstAttribute="leading" secondItem="ciZ-IV-yO1" secondAttribute="trailing" constant="80" id="RBM-og-HNw"/>
-                            <constraint firstItem="9gg-U8-vQw" firstAttribute="leading" secondItem="ciZ-IV-yO1" secondAttribute="leading" id="dUj-vN-08a"/>
-                            <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="ZNW-S0-kgd" secondAttribute="bottom" constant="26" id="e7Y-N5-gwx"/>
                             <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="ecj-6U-eYB" secondAttribute="bottom" id="fQC-8n-e04"/>
-                            <constraint firstItem="ciZ-IV-yO1" firstAttribute="leading" secondItem="nu4-re-HAA" secondAttribute="leadingMargin" constant="45" id="jHi-Lu-K3Y"/>
-                            <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="9gg-U8-vQw" secondAttribute="bottom" constant="50" id="lAs-Yr-aTM"/>
-                            <constraint firstItem="ciZ-IV-yO1" firstAttribute="top" secondItem="ecj-6U-eYB" secondAttribute="top" id="t3o-bV-lgB"/>
+                            <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="9gg-U8-vQw" secondAttribute="bottom" id="lAs-Yr-aTM"/>
                             <constraint firstItem="ecj-6U-eYB" firstAttribute="leading" secondItem="9gg-U8-vQw" secondAttribute="trailing" constant="40" id="wAe-XU-TUk"/>
                             <constraint firstItem="2rk-ah-JGC" firstAttribute="top" secondItem="NDO-I9-Fbb" secondAttribute="bottom" constant="20" id="xvD-zR-ORV"/>
-                            <constraint firstItem="9gg-U8-vQw" firstAttribute="top" secondItem="ciZ-IV-yO1" secondAttribute="bottom" constant="30" id="zeM-LF-noQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TTV-yT-d9F"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="additionalDetailScrollView" destination="9gg-U8-vQw" id="ehK-FT-Nkd"/>
-                        <outlet property="imageView" destination="ciZ-IV-yO1" id="joJ-bD-DX1"/>
-                        <outlet property="imageViewHeightConstraint" destination="pxc-HY-gDV" id="ur3-4a-kfl"/>
                         <outlet property="metadataStackView" destination="NDO-I9-Fbb" id="IGq-Z4-yN9"/>
+                        <segue destination="Sb3-CP-VQj" kind="push" identifier="Zoom Into Artwork" id="rC8-vG-Rjb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Y0-e9-1p2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="aeS-ZY-FEf">
-                    <connections>
-                        <segue destination="Sb3-CP-VQj" kind="push" identifier="Zoom Into Artwork" id="YOt-UF-Qxc"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2180" y="825"/>
         </scene>

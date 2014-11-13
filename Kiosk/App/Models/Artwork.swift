@@ -12,7 +12,9 @@ class Artwork: JSONAble {
 
     dynamic var medium: String?
     dynamic var dimensions = [String]()
+
     dynamic var imageRights: String?
+    dynamic var additionalInfo: String?
 
     dynamic var artists: [Artist]?
     dynamic var culturalMarker: String?
@@ -42,6 +44,9 @@ class Artwork: JSONAble {
         
         let artwork = Artwork(id: id, dateString: dateString, title: title, titleAndDate:titleAndDate, blurb: blurb, price: price, date: date)
 
+        artwork.additionalInfo = json["additional_information"].string
+        artwork.medium = json["medium"].string
+
         if let artistDictionary = json["artist"].object as? [String: AnyObject] {
             artwork.artists = [Artist.fromJSON(artistDictionary) as Artist]
         }
@@ -50,7 +55,7 @@ class Artwork: JSONAble {
             artwork.images = imageDicts.map({ return Image.fromJSON($0) as Image })
         }
 
-        artwork.medium = json["medium"].stringValue
+
         if let dimensions = json["dimensions"].dictionary {
             artwork.dimensions = ["in", "cm"].reduce([String](), combine: { (array, key) -> [String] in
                 if let dimension = dimensions[key]?.string {
@@ -62,6 +67,10 @@ class Artwork: JSONAble {
         }
 
         return artwork
+    }
+
+    func sortableArtistID() -> String {
+        return artists?.first?.sortableID ?? "_"
     }
 }
 
