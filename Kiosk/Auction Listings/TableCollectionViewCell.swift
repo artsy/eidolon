@@ -26,7 +26,7 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         artworkImageView.contentMode = .ScaleAspectFill
         artworkImageView.clipsToBounds = true
         
-        // Add subivews
+        // Add subviews
         cellSubviews.map{ self.contentView.addSubview($0) }
         
         // Constrain subviews

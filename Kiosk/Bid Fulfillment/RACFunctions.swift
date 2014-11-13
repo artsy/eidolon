@@ -14,7 +14,6 @@ func stringIsCreditCard(text:AnyObject!) -> AnyObject! {
     return card.numberValid
 }
 
-
 func centsToPresentableDollarsString(cents:AnyObject!) -> AnyObject! {
     if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
         return dollars
