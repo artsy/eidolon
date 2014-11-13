@@ -92,8 +92,5 @@ class RegistrationCoordinator: NSObject {
 }
 
 private func notSet(string:String?) -> Bool {
-    if let realString = string {
-        return (countElements(realString as String) == 0)
-    }
-    return true
+    return string?.isEmpty ?? true
 }
