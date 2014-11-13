@@ -30,8 +30,6 @@ class ConfirmYourBidViewController: UIViewController {
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
 
-        let numberIsZeroLengthSignal = RACObserve(self, "number").map(isZeroLengthString)
-
         RAC(numberAmountTextField, "text") <~ RACObserve(self, "number").map(toPhoneNumberString)
 
         keypadSignal.subscribeNext(addDigitToNumber)
@@ -52,6 +50,7 @@ class ConfirmYourBidViewController: UIViewController {
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
             
+            let numberIsZeroLengthSignal = RACObserve(self, "number").map(isZeroLengthString)
             enterButton.rac_command = RACCommand(enabled: numberIsZeroLengthSignal.notEach()) { [weak self] _ in
                 if (self == nil) {
                     return RACSignal.empty()

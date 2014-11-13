@@ -26,19 +26,22 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         artworkImageView.contentMode = .ScaleAspectFill
         artworkImageView.clipsToBounds = true
         
-        // Add subivews
+        // Add subviews
         cellSubviews.map{ self.contentView.addSubview($0) }
         
         // Constrain subviews
         artworkImageView.alignAttribute(.Width, toAttribute: .Height, ofView: artworkImageView, predicate: nil)
         artworkImageView.alignTop("14", leading: "0", bottom: "-14", trailing: nil, toView: contentView)
         artworkImageView.constrainHeight("56")
+
         infoView.alignAttribute(.Left, toAttribute: .Right, ofView: artworkImageView, predicate: "28")
         infoView.alignCenterYWithView(artworkImageView, predicate: "0")
-        infoView.constrainWidth("184")
+        infoView.constrainWidth("300")
+
         currentBidLabel.alignAttribute(.Left, toAttribute: .Right, ofView: infoView, predicate: "33")
         currentBidLabel.alignCenterYWithView(artworkImageView, predicate: "0")
-        currentBidLabel.constrainWidth("304")
+        currentBidLabel.constrainWidth("180")
+
         numberOfBidsLabel.alignAttribute(.Left, toAttribute: .Right, ofView: currentBidLabel, predicate: "33")
         numberOfBidsLabel.alignCenterYWithView(artworkImageView, predicate: "0")
         numberOfBidsLabel.alignAttribute(.Right, toAttribute: .Left, ofView: bidButton, predicate: "-33")
