@@ -75,8 +75,9 @@ class ConfirmYourBidPINViewController: UIViewController {
     }
 
     @IBAction func forgotPINTapped(sender: AnyObject) {
-        let auctionID = self.fulfillmentNav().auctionID
-        let endpoint: ArtsyAPI = ArtsyAPI.LostPINNotification(auctionID: auctionID, number: self.pin)
+        let auctionID = fulfillmentNav().auctionID
+        let number = fulfillmentNav().bidDetails.newUser.phoneNumber ?? ""
+        let endpoint: ArtsyAPI = ArtsyAPI.LostPINNotification(auctionID: auctionID, number: number)
 
         let alertController = UIAlertController(title: "Forgot Password", message: "We have sent your bidder details to your device.", preferredStyle: .Alert)
 
