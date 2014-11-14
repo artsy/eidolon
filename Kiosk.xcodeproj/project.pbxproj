@@ -48,6 +48,7 @@
 		5EA65C1319D5FCC4005EA4B4 /* SwitchViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA65C1219D5FCC4005EA4B4 /* SwitchViewSpec.swift */; };
 		5EAC732519D0149A002F918A /* ReactiveCocoaBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */; };
 		5EAC733019D01617002F918A /* ReactiveCocoaBindingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC732F19D01617002F918A /* ReactiveCocoaBindingsTests.swift */; };
+		5EAE11121A153FF80079CE7B /* UITextField+RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAE11111A153FF80079CE7B /* UITextField+RAC.swift */; };
 		5EC60BB519EB0552008A04B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC60BB419EB0552008A04B0 /* QuartzCore.framework */; };
 		5EC60BCB19EB140F008A04B0 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC60BCA19EB140F008A04B0 /* HelpViewController.swift */; };
 		5EC60BCD19EB1433008A04B0 /* HelpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC60BCC19EB1433008A04B0 /* HelpAnimator.swift */; };
@@ -504,6 +505,7 @@
 		5EA65C1219D5FCC4005EA4B4 /* SwitchViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchViewSpec.swift; sourceTree = "<group>"; };
 		5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCocoaBindings.swift; sourceTree = "<group>"; };
 		5EAC732F19D01617002F918A /* ReactiveCocoaBindingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCocoaBindingsTests.swift; sourceTree = "<group>"; };
+		5EAE11111A153FF80079CE7B /* UITextField+RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+RAC.swift"; sourceTree = "<group>"; };
 		5EC60BB419EB0552008A04B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5EC60BCA19EB140F008A04B0 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HelpViewController.swift; path = Help/HelpViewController.swift; sourceTree = "<group>"; };
 		5EC60BCC19EB1433008A04B0 /* HelpAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HelpAnimator.swift; path = Help/HelpAnimator.swift; sourceTree = "<group>"; };
@@ -855,6 +857,7 @@
 				5EA65C0D19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m */,
 				5E5DA8E019E57E49000E5855 /* RACSignal+Kiosk.swift */,
 				5E7C2F1E1A09676300A92C4D /* UILabel+Fonts.swift */,
+				5EAE11111A153FF80079CE7B /* UITextField+RAC.swift */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1748,6 +1751,7 @@
 				60E0949319F5A9620035F0DD /* AdminLogViewController.swift in Sources */,
 				5E2B3D4B19DC063C00906A26 /* ListingsCollectionViewCell.swift in Sources */,
 				60C3983F19E81ECF00CB81F4 /* NSErrorExtensions.swift in Sources */,
+				5EAE11121A153FF80079CE7B /* UITextField+RAC.swift in Sources */,
 				5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */,
 				60968DD019C5B427001AB802 /* KeypadView.swift in Sources */,
 				600DABF119EB7C3700278378 /* AuctionWebViewController.swift in Sources */,

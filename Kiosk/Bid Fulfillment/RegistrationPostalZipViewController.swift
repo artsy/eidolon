@@ -4,6 +4,7 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
     
     @IBOutlet var zipCodeTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
+    let finishedSignal = RACSubject()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,10 +17,14 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
             RAC(confirmButton, "enabled") <~ emailIsValidSignal.notEach()
         }
 
+
+        zipCodeTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in
+            self?.finishedSignal.sendCompleted()
+            return
+        })
         zipCodeTextField.becomeFirstResponder()
     }
-    
-    let finishedSignal = RACSubject()
+
     @IBAction func confirmTapped(sender: AnyObject) {
         finishedSignal.sendCompleted()
     }
