@@ -1,8 +1,10 @@
 # End User Changes
 
-### Next
+### 2.1.2 14th Nov 2014
 
 * Next buttons function on registration flow - @ash
+* A-Z is ordered correctly - @orta
+* Artwork blurb is now included :D - @orta
 
 ### 2.1.1 12th Nov 2014
 
