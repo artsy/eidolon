@@ -4,6 +4,7 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
     
     @IBOutlet var numberTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
+    let finishedSignal = RACSubject()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +17,12 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
             let numberIsInvalidSignal = RACObserve(bidDetails.newUser, "phoneNumber").map(isZeroLengthString)
             RAC(confirmButton, "enabled") <~ numberIsInvalidSignal.notEach()
         }
-        
+
+        numberTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in
+            self?.finishedSignal.sendCompleted()
+            return
+        })
+
         numberTextField.becomeFirstResponder()
     }
 
@@ -30,7 +36,6 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
         return countElements(string.stringByTrimmingCharactersInSet(notNumberChars)) != 0
     }
 
-    let finishedSignal = RACSubject()
     @IBAction func confirmTapped(sender: AnyObject) {
         finishedSignal.sendCompleted()
     }

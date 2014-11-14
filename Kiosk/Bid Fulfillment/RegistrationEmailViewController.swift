@@ -4,6 +4,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
 
     @IBOutlet var emailTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
+    let finishedSignal = RACSubject()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,11 +17,15 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
             let emailIsValidSignal = RACObserve(bidDetails.newUser, "email").map(stringIsEmailAddress)
             RAC(confirmButton, "enabled") <~ emailIsValidSignal
         }
+
+        emailTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in
+            self?.finishedSignal.sendCompleted()
+            return
+        })
         
         emailTextField.becomeFirstResponder()
     }
 
-    let finishedSignal = RACSubject()
     @IBAction func confirmTapped(sender: AnyObject) {
         finishedSignal.sendCompleted()
     }
