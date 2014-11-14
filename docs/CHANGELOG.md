@@ -1,5 +1,9 @@
 # End User Changes
 
+### Next
+
+* Next buttons function on registration flow - @ash
+
 ### 2.1.1 12th Nov 2014
 
 * Markdown supported in Sale Artwork view - @orta
