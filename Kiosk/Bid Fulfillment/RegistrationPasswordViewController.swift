@@ -5,6 +5,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
     @IBOutlet var passwordTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
     @IBOutlet var subtitleLabel: UILabel!
+    let finishedSignal = RACSubject()
     var isLoggingIn = false
 
     override func viewDidLoad() {
@@ -28,11 +29,14 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
                 }
             }
         }
-        
+
+        passwordTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in
+            self?.finishedSignal.sendCompleted()
+            return
+        })
         passwordTextField.becomeFirstResponder()
     }
 
-    let finishedSignal = RACSubject()
     @IBAction func confirmTapped(sender: AnyObject) {
         if !isLoggingIn {
             finishedSignal.sendCompleted()
