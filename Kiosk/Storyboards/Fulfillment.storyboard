@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -1102,7 +1102,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y4z-UB-ZdO" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="65" y="222" width="430" height="50"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="go"/>
                             </textField>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qef-T4-al0" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="426" y="61" width="324" height="60"/>
@@ -1128,7 +1128,7 @@
                     <connections>
                         <outlet property="bidDetailsPreviewView" destination="qef-T4-al0" id="GFb-Cq-zuL"/>
                         <outlet property="confirmButton" destination="AiP-vh-j1o" id="dGh-Go-X2N"/>
-                        <outlet property="emailTextField" destination="y4z-UB-ZdO" id="rzh-fP-FyD"/>
+                        <outlet property="emailTextField" destination="y4z-UB-ZdO" id="2QU-np-xw6"/>
                         <segue destination="BKe-0r-2Pc" kind="push" identifier="Email Not Found on Artsy" id="TrF-tJ-vaM"/>
                         <segue destination="MRb-fW-vfZ" kind="push" identifier="Existing Artsy User Found" id="NOJ-G3-crU"/>
                     </connections>
@@ -1574,9 +1574,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eZu-3X-lXX"/>
+        <segue reference="TrF-tJ-vaM"/>
         <segue reference="Qpe-mM-52j"/>
         <segue reference="gjD-og-8Iv"/>
-        <segue reference="ccv-le-Cu0"/>
+        <segue reference="NOJ-G3-crU"/>
     </inferredMetricsTieBreakers>
 </document>
