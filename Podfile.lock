@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (1.1.0)
   - ARAnalytics/CoreIOS (2.8.0)
   - ARAnalytics/HockeyApp (2.8.0):
     - ARAnalytics/CoreIOS
@@ -49,6 +50,7 @@ PODS:
     - fmemopen
 
 DEPENDENCIES:
+  - Alamofire (from `https://github.com/mrackwitz/Alamofire.git`, branch `podspec`)
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
   - ARCollectionViewMasonryLayout (~> 2.0.0)
@@ -75,6 +77,9 @@ DEPENDENCIES:
   - XNGMarkdownParser
 
 EXTERNAL SOURCES:
+  Alamofire:
+    :branch: podspec
+    :git: https://github.com/mrackwitz/Alamofire.git
   ARTiledImageView:
     :git: https://github.com/dblock/ARTiledImageView.git
   Artsy+UIFonts:
@@ -101,6 +106,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/orta/XCGLogger.git
 
 SPEC CHECKSUMS:
+  Alamofire: 499ac6dad38952ef230a4ab2c7c472367d4f027e
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
   ARCollectionViewMasonryLayout: 40993cb65522139cb2cd6ed255c91a6caee5c4dd
   ARTiledImageView: 0de3b09798e5b1ec91a2939c311b69b03e7c9706

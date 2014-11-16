@@ -31,7 +31,7 @@ pod 'ARAnalytics/HockeyApp'
 
 pod 'CardFlight'
 pod 'ECPhoneNumberFormatter'
-pod 'UIImageViewAligned', :git => 'https://github.com/orta/UIImageViewAligned.git'
+pod 'UIImageViewAligned', :git => "https://github.com/orta/UIImageViewAligned.git"
 pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewController.git"
 pod 'Reachability', :git => "https://github.com/orta/Reachability.git", :branch => "frameworks"
 
@@ -42,6 +42,7 @@ pod 'XNGMarkdownParser'
 # swift pods
 pod 'XCGLogger', :git => "https://github.com/orta/XCGLogger.git", :branch => "podspec"
 pod 'SwiftyJSON', :git => "https://github.com/orta/SwiftyJSON", :branch => "podspec"
+pod 'Alamofire', :git => "https://github.com/mrackwitz/Alamofire.git", :branch => "podspec"
 
 target "KioskTests", :exclusive => true do
     pod 'FBSnapshotTestCase'

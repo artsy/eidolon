@@ -29,7 +29,6 @@
 		5E6ED5FF19C07A4300CF3398 /* Moya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6ED5FB19C07A4300CF3398 /* Moya.swift */; };
 		5E6ED60019C07A4300CF3398 /* Moya+ReactiveCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6ED5FC19C07A4300CF3398 /* Moya+ReactiveCocoa.swift */; };
 		5E6ED60119C07A4300CF3398 /* RACSignal+Moya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6ED5FD19C07A4300CF3398 /* RACSignal+Moya.swift */; };
-		5E6ED61419C07ADF00CF3398 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E6ED61119C07AC300CF3398 /* Alamofire.framework */; };
 		5E7C2F0C1A095AA900A92C4D /* Artwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2F0B1A095AA900A92C4D /* Artwork.json */; };
 		5E7C2F1F1A09676300A92C4D /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2F1E1A09676300A92C4D /* UILabel+Fonts.swift */; };
 		5E7C2F501A0A335300A92C4D /* UIViewController+Bidding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2F4F1A0A335300A92C4D /* UIViewController+Bidding.swift */; };
@@ -170,7 +169,6 @@
 		60885F7A19D9B19F0065A7AE /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FFC2E819D9A92B00284B9F /* LlamaKit.framework */; };
 		60885F8919D9B28F0065A7AE /* LlamaKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 60FFC2E819D9A92B00284B9F /* LlamaKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		60885F8A19D9B28F0065A7AE /* ReactiveCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 60FFC2D919D9A92100284B9F /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		60885F8C19D9B28F0065A7AE /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5E6ED61119C07AC300CF3398 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6092C4AF19CAEF9A003BE8EC /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6092C4AE19CAEF9A003BE8EC /* UIViewControllerExtensions.swift */; };
 		60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60968DCD19C5B2AF001AB802 /* KeypadView.xib */; };
 		60968DD019C5B427001AB802 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60968DCF19C5B427001AB802 /* KeypadView.swift */; };
@@ -308,27 +306,6 @@
 			remoteGlobalIDString = 5E59DD2F19913DD800A48370;
 			remoteInfo = Kiosk;
 		};
-		5E6ED61019C07AC300CF3398 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E6ED60B19C07AC300CF3398 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
-			remoteInfo = Alamofire;
-		};
-		5E6ED61219C07AC300CF3398 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E6ED60B19C07AC300CF3398 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
-			remoteInfo = AlamofireTests;
-		};
-		5E6ED61519C07AE400CF3398 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5E6ED60B19C07AC300CF3398 /* Alamofire.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
-			remoteInfo = Alamofire;
-		};
 		603F8CB019BDF77700B162C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E28C2031993B9E50066DB4D /* Nimble.xcodeproj */;
@@ -452,7 +429,6 @@
 			files = (
 				60885F8919D9B28F0065A7AE /* LlamaKit.framework in CopyFiles */,
 				60885F8A19D9B28F0065A7AE /* ReactiveCocoa.framework in CopyFiles */,
-				60885F8C19D9B28F0065A7AE /* Alamofire.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,7 +461,6 @@
 		5E6ED5FB19C07A4300CF3398 /* Moya.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Moya.swift; path = submodules/Moya/Moya.swift; sourceTree = SOURCE_ROOT; };
 		5E6ED5FC19C07A4300CF3398 /* Moya+ReactiveCocoa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Moya+ReactiveCocoa.swift"; path = "submodules/Moya/Moya+ReactiveCocoa.swift"; sourceTree = SOURCE_ROOT; };
 		5E6ED5FD19C07A4300CF3398 /* RACSignal+Moya.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "RACSignal+Moya.swift"; path = "submodules/Moya/RACSignal+Moya.swift"; sourceTree = SOURCE_ROOT; };
-		5E6ED60B19C07AC300CF3398 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = submodules/Moya/submodules/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5E7C2F0B1A095AA900A92C4D /* Artwork.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Artwork.json; sourceTree = "<group>"; };
 		5E7C2F1E1A09676300A92C4D /* UILabel+Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Fonts.swift"; sourceTree = "<group>"; };
 		5E7C2F4F1A0A335300A92C4D /* UIViewController+Bidding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Bidding.swift"; sourceTree = "<group>"; };
@@ -657,7 +632,6 @@
 				5EC60BB519EB0552008A04B0 /* QuartzCore.framework in Frameworks */,
 				60885F7A19D9B19F0065A7AE /* LlamaKit.framework in Frameworks */,
 				60FFC2EF19D9A94200284B9F /* ReactiveCocoa.framework in Frameworks */,
-				5E6ED61419C07ADF00CF3398 /* Alamofire.framework in Frameworks */,
 				A16036B5DA5B0BD0CB868C22 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -736,7 +710,6 @@
 			children = (
 				60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */,
 				60FFC2D119D9A92100284B9F /* ReactiveCocoa.xcodeproj */,
-				5E6ED60B19C07AC300CF3398 /* Alamofire.xcodeproj */,
 				5E6ED60A19C07A4A00CF3398 /* Moya */,
 			);
 			name = Submodules;
@@ -785,8 +758,8 @@
 			isa = PBXGroup;
 			children = (
 				5E59DD3C19913DD800A48370 /* Images.xcassets */,
-				5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */,
 				5E59DD3419913DD800A48370 /* Info.plist */,
+				5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -831,15 +804,6 @@
 				5E6ED5FD19C07A4300CF3398 /* RACSignal+Moya.swift */,
 			);
 			name = Moya;
-			sourceTree = "<group>";
-		};
-		5E6ED60C19C07AC300CF3398 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5E6ED61119C07AC300CF3398 /* Alamofire.framework */,
-				5E6ED61319C07AC300CF3398 /* AlamofireTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		5E95FCCA19D9B2A9004D0C8F /* Auction Listings */ = {
@@ -1356,7 +1320,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				5E6ED61619C07AE400CF3398 /* PBXTargetDependency */,
 			);
 			name = Kiosk;
 			productName = Kiosk;
@@ -1416,10 +1379,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 5E6ED60C19C07AC300CF3398 /* Products */;
-					ProjectRef = 5E6ED60B19C07AC300CF3398 /* Alamofire.xcodeproj */;
-				},
-				{
 					ProductGroup = 60FFC2E119D9A92B00284B9F /* Products */;
 					ProjectRef = 60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */;
 				},
@@ -1445,20 +1404,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5E6ED61119C07AC300CF3398 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 5E6ED61019C07AC300CF3398 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5E6ED61319C07AC300CF3398 /* AlamofireTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = AlamofireTests.xctest;
-			remoteRef = 5E6ED61219C07AC300CF3398 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		603F8CB119BDF77700B162C7 /* Nimble.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1984,11 +1929,6 @@
 			isa = PBXTargetDependency;
 			target = 5E59DD2F19913DD800A48370 /* Kiosk */;
 			targetProxy = 5E59DD4319913DD800A48370 /* PBXContainerItemProxy */;
-		};
-		5E6ED61619C07AE400CF3398 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Alamofire;
-			targetProxy = 5E6ED61519C07AE400CF3398 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
