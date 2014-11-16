@@ -1,4 +1,5 @@
 import Foundation
+import SwiftyJSON
 
 class Card: JSONAble {
     let id: String

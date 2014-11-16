@@ -1,4 +1,5 @@
 import Foundation
+import SwiftyJSON
 
 class GenericError: JSONAble {
     let detail: [String:AnyObject]

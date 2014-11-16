@@ -1,5 +1,6 @@
 import UIKit
 import ISO8601DateFormatter
+import SwiftyJSON
 
 class Sale: JSONAble {
     dynamic let id: String

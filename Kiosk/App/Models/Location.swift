@@ -1,4 +1,5 @@
 import UIKit
+import SwiftyJSON
 
 class Location: JSONAble {
     let address: String

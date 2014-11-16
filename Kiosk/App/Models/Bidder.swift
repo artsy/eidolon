@@ -1,4 +1,5 @@
 import UIKit
+import SwiftyJSON
 
 class Bidder: JSONAble {
     let id: String

@@ -1,4 +1,5 @@
 import UIKit
+import SwiftyJSON
 
 enum ReserveStatus {
     case NoReserve

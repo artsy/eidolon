@@ -1,5 +1,6 @@
 import Foundation
 import LlamaKit
+import SwiftyJSON
 
 class Image: JSONAble {
     let id: String

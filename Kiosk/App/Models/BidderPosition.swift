@@ -1,4 +1,5 @@
 import Foundation
+import SwiftyJSON
 
 class BidderPosition: JSONAble {
     let id: String
