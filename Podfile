@@ -39,6 +39,9 @@ pod 'ARTiledImageView', :git => "https://github.com/dblock/ARTiledImageView.git"
 pod 'balanced-ios', :git => "https://github.com/orta/balanced-ios", :branch => "0_5_podspec"
 pod 'XNGMarkdownParser'
 
+pod 'XCGLogger', :git => "https://github.com/orta/XCGLogger.git", :branch => "podspec"
+
 target "KioskTests", :exclusive => true do
     pod 'FBSnapshotTestCase'
+    pod 'Quick', :git => "https://github.com/orta/Quick", :branch => "podspec"
 end

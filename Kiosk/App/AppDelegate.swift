@@ -1,5 +1,6 @@
 import UIKit
 import ARAnalytics
+import XCGLogger
 
 let logger = XCGLogger.defaultInstance()
 

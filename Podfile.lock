@@ -37,11 +37,13 @@ PODS:
   - NJKWebViewProgress/ProgressView (0.2.3)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
+  - Quick (0.1.0-beta)
   - Reachability (3.1.1)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
   - UIImageViewAligned (0.0.1)
+  - XCGLogger (0.0.1)
   - XNGMarkdownParser (0.2.0):
     - fmemopen
 
@@ -63,9 +65,11 @@ DEPENDENCIES:
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
   - ORStackView
-  - Reachability
+  - Quick (from `https://github.com/orta/Quick`, branch `podspec`)
+  - Reachability (from `https://github.com/orta/Reachability.git`, branch `frameworks`)
   - SDWebImage (~> 3.7)
   - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
+  - XCGLogger (from `https://github.com/orta/XCGLogger.git`, branch `podspec`)
   - XNGMarkdownParser
 
 EXTERNAL SOURCES:
@@ -79,8 +83,17 @@ EXTERNAL SOURCES:
     :git: https://github.com/orta/balanced-ios
   DZNWebViewController:
     :git: https://github.com/orta/DZNWebViewController.git
+  Quick:
+    :branch: podspec
+    :git: https://github.com/orta/Quick
+  Reachability:
+    :branch: frameworks
+    :git: https://github.com/orta/Reachability.git
   UIImageViewAligned:
     :git: https://github.com/orta/UIImageViewAligned.git
+  XCGLogger:
+    :branch: podspec
+    :git: https://github.com/orta/XCGLogger.git
 
 SPEC CHECKSUMS:
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
@@ -103,9 +116,11 @@ SPEC CHECKSUMS:
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
-  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
+  Quick: 6039133a6ba07b3f0f4725eb41bb81775c1526b7
+  Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   UIImageViewAligned: efc1b8b5750dea68b7ee67236f4c64f93e65b674
+  XCGLogger: a0a0897a01d58026ffe257f41c613b301ea71ce3
   XNGMarkdownParser: 5d1ed6c1b2bb3d3f3468a9ad591b85498403822c
 
 COCOAPODS: 0.35.0.rc2
