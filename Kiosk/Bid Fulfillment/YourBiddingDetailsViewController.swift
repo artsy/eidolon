@@ -1,4 +1,6 @@
 import UIKit
+import Artsy_UILabels
+import Artsy_UIButtons
 
 class YourBiddingDetailsViewController: UIViewController {
 

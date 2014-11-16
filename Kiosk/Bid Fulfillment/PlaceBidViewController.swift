@@ -1,4 +1,5 @@
 import UIKit
+import Artsy_UILabels
 
 class PlaceBidViewController: UIViewController {
 

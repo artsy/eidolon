@@ -1,4 +1,5 @@
 import UIKit
+import ISO8601DateFormatter
 
 class Sale: JSONAble {
     dynamic let id: String

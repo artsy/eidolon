@@ -1,4 +1,5 @@
 import UIKit
+import CardFlight
 
 class CardHandler: NSObject, CFTReaderDelegate {
 

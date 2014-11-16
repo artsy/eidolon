@@ -1,3 +1,5 @@
+import DZNWebViewController
+
 let modalHeight: CGFloat = 660
 
 class WebViewController: DZNWebViewController {

@@ -1,4 +1,5 @@
 import UIKit
+import ARAnalytics
 
 class AppViewController: UIViewController, UINavigationControllerDelegate {
     var allowAnimations = true

@@ -1,5 +1,6 @@
 import UIKit
 import QuartzCore
+import ARAnalytics
 
 public extension AppDelegate {
 

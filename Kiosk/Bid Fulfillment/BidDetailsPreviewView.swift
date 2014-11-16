@@ -1,4 +1,7 @@
 import UIKit
+import Artsy_UILabels
+import Artsy_UIButtons
+import UIImageViewAligned
 
 class BidDetailsPreviewView: UIView {
     

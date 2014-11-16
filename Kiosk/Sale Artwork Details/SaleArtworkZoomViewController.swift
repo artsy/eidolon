@@ -1,4 +1,5 @@
 import Foundation
+import ARTiledImageView
 
 class SaleArtworkZoomViewController: UIViewController {
     var dataSource: TiledImageDataSourceWithImage!

@@ -1,7 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/artsy/Specs.git'
 
-platform :ios, '7.0'
+platform :ios, '8.0'
 
 # Yep.
 inhibit_all_warnings!
@@ -33,7 +33,7 @@ pod 'CardFlight'
 pod 'ECPhoneNumberFormatter'
 pod 'UIImageViewAligned', :git => 'https://github.com/orta/UIImageViewAligned.git'
 pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewController.git"
-pod 'Reachability'
+pod 'Reachability', :git => "https://github.com/orta/Reachability.git", :branch => "frameworks"
 
 pod 'ARTiledImageView', :git => "https://github.com/dblock/ARTiledImageView.git"
 pod 'balanced-ios', :git => "https://github.com/orta/balanced-ios", :branch => "0_5_podspec"

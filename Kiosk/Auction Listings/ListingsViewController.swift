@@ -1,5 +1,6 @@
 import UIKit
 import SystemConfiguration
+import ARAnalytics
 
 let HorizontalMargins = 65
 let VerticalMargins = 26

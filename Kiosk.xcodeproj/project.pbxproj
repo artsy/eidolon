@@ -293,9 +293,8 @@
 		60FFC2B719D9496A00284B9F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2B619D9496A00284B9F /* APIKeys.swift */; };
 		60FFC2B819D9496A00284B9F /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FFC2B619D9496A00284B9F /* APIKeys.swift */; };
 		60FFC2EF19D9A94200284B9F /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FFC2D919D9A92100284B9F /* ReactiveCocoa.framework */; };
-		7D151931B70C40DA1918308E /* libPods-KioskTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F02362ED531B4468B9C73044 /* libPods-KioskTests.a */; };
-		961918F1D3EF491EA0AF220C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A6ABDCBFE147D99BAEBD31 /* libPods.a */; };
-		A165BB63FB9541B4A59991F6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A6ABDCBFE147D99BAEBD31 /* libPods.a */; };
+		7E4239A5E66CE13636CEC732 /* Pods_KioskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9E9F6134A1036A4A50380A /* Pods_KioskTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A16036B5DA5B0BD0CB868C22 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0A7FA688BE977937651169 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E63FA4F519E87ED2000265B6 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AB492319E704870054C8AD /* CursorView.swift */; };
 		E68E94A219DDCB70001405A5 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68E94A119DDCB70001405A5 /* TextField.swift */; };
 		E69EA8BE19E83E08005EF2C8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EA8BD19E83E08005EF2C8 /* WebViewController.swift */; };
@@ -463,8 +462,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		21A6ABDCBFE147D99BAEBD31 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC32AD043F3010C4064D172 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3E0A7FA688BE977937651169 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		46ACE072A30FD791981A83FC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4A43B593C169F6607C344ABF /* Pods-KioskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.release.xcconfig"; sourceTree = "<group>"; };
 		5E04BF3419DD98B000687199 /* SaleArtworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkTests.swift; sourceTree = "<group>"; };
@@ -644,11 +643,11 @@
 		60FFC2D119D9A92100284B9F /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = submodules/ReactiveCocoa/ReactiveCocoa.xcodeproj; sourceTree = SOURCE_ROOT; };
 		60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LlamaKit.xcodeproj; path = submodules/ReactiveCocoa/External/LlamaKit/LlamaKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		C055E487A3D1AED461990000 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DB9E9F6134A1036A4A50380A /* Pods_KioskTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KioskTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E68E94A119DDCB70001405A5 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextField.swift; path = "Text Fields/TextField.swift"; sourceTree = "<group>"; };
 		E69EA8BD19E83E08005EF2C8 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = "Auction Listings/WebViewController.swift"; sourceTree = "<group>"; };
 		E6AB492319E704870054C8AD /* CursorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CursorView.swift; path = "Text Fields/CursorView.swift"; sourceTree = "<group>"; };
 		E6FA920B19E43FD90064480A /* TextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTests.swift; sourceTree = "<group>"; };
-		F02362ED531B4468B9C73044 /* libPods-KioskTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KioskTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -660,7 +659,7 @@
 				60885F7A19D9B19F0065A7AE /* LlamaKit.framework in Frameworks */,
 				60FFC2EF19D9A94200284B9F /* ReactiveCocoa.framework in Frameworks */,
 				5E6ED61419C07ADF00CF3398 /* Alamofire.framework in Frameworks */,
-				961918F1D3EF491EA0AF220C /* libPods.a in Frameworks */,
+				A16036B5DA5B0BD0CB868C22 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,8 +669,7 @@
 			files = (
 				60E4657E1A0D0A5400E5729A /* Quick.framework in Frameworks */,
 				603F8CC719BDF80C00B162C7 /* Nimble.framework in Frameworks */,
-				A165BB63FB9541B4A59991F6 /* libPods.a in Frameworks */,
-				7D151931B70C40DA1918308E /* libPods-KioskTests.a in Frameworks */,
+				7E4239A5E66CE13636CEC732 /* Pods_KioskTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,8 +680,8 @@
 			isa = PBXGroup;
 			children = (
 				5EC60BB419EB0552008A04B0 /* QuartzCore.framework */,
-				21A6ABDCBFE147D99BAEBD31 /* libPods.a */,
-				F02362ED531B4468B9C73044 /* libPods-KioskTests.a */,
+				3E0A7FA688BE977937651169 /* Pods.framework */,
+				DB9E9F6134A1036A4A50380A /* Pods_KioskTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1367,6 +1365,7 @@
 				5E59DD2E19913DD800A48370 /* Resources */,
 				9AFA421DD5E649B89E128C8F /* Copy Pods Resources */,
 				60885F8819D9B27D0065A7AE /* CopyFiles */,
+				8919FEAEE074AF0453B7041D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1387,6 +1386,7 @@
 				5E59DD3F19913DD800A48370 /* Frameworks */,
 				5E59DD4019913DD800A48370 /* Resources */,
 				0971DC6B37EC4E5D88FEF5E8 /* Copy Pods Resources */,
+				CDBA0F03A575969AC2EE0469 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1705,6 +1705,21 @@
 			shellScript = "# diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\n# if [[ $? != 0 ]] ; then\n#     cat << EOM\n# error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\n# EOM\n#     exit 1\n# fi\n";
 			showEnvVarsInLog = 0;
 		};
+		8919FEAEE074AF0453B7041D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9AFA421DD5E649B89E128C8F /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1718,6 +1733,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDBA0F03A575969AC2EE0469 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

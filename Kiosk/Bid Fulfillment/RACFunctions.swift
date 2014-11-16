@@ -1,4 +1,5 @@
 import Foundation
+import balanced_ios
 
 // Collection of stanardised mapping funtions for RAC work
 

@@ -1,5 +1,6 @@
 import UIKit
 import QuartzCore
+import Artsy_UIButtons
 
 public class Button: ARFlatButton {
 

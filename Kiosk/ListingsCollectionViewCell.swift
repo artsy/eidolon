@@ -1,4 +1,5 @@
 import Foundation
+import Artsy_UILabels
 
 class ListingsCollectionViewCell: UICollectionViewCell {
     dynamic let artworkImageView = ListingsCollectionViewCell._artworkImageView()

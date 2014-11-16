@@ -11,21 +11,21 @@
 #import <UIKit/UIKit.h>
 #import <SystemConfiguration/CaptiveNetwork.h>
 
-#import <Artsy+UIColors/UIColor+ArtsyColors.h>
-#import <Artsy+UIColors/UIColor+DebugColours.h>
+#import <Artsy_UIColors/UIColor+ArtsyColors.h>
+#import <Artsy_UIColors/UIColor+DebugColours.h>
 
-#import <Artsy+UILabels/ARLabelSubclasses.h>
-#import <Artsy+UILabels/NSNumberFormatter+ARCurrency.h>
-#import <Artsy-UIButtons/ARButtonSubclasses.h>
+#import <Artsy_UILabels/ARLabelSubclasses.h>
+#import <Artsy_UILabels/NSNumberFormatter+ARCurrency.h>
+#import <Artsy_UIButtons/ARButtonSubclasses.h>
 
-#import <Artsy+UILabels/UIView+ARDrawing.h>
+#import <Artsy_UILabels/UIView+ARDrawing.h>
 
 #import <ARCollectionVIewMasonryLayout/ARCollectionViewMasonryLayout.h>
 
 #import <ISO8601DateFormatter/ISO8601DateFormatter.h>
 #import <ECPhoneNumberFormatter/ECPhoneNumberFormatter.h>
 
-#import <CocoaPods-Keys/EidolonKeys.h>
+#import <Pods/EidolonKeys.h>
 
 #import <ARAnalytics/ARAnalytics.h>
 #import <ORStackView/ORStackView.h>
@@ -58,4 +58,4 @@
 
 #import <XNGMarkdownParser/XNGMarkdownParser.h>
 
-#import <balanced-ios/Balanced.h>
+#import <balanced_ios/Balanced.h>

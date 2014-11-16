@@ -1,4 +1,5 @@
 import UIKit
+import Reachability
 
 class ReachabilityManager: NSObject {
     let reachSignal:RACSignal = RACReplaySubject(capacity: 1)

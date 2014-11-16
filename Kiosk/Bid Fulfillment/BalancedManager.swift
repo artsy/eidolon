@@ -1,4 +1,5 @@
 import UIKit
+import balanced_ios
 
 class BalancedManager: NSObject {
 

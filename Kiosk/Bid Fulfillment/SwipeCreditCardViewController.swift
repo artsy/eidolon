@@ -1,4 +1,5 @@
 import UIKit
+import Artsy_UILabels
 
 public class SwipeCreditCardViewController: UIViewController, RegistrationSubController {
 

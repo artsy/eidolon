@@ -16,8 +16,8 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let containerView = transitionContext.containerView()
         
         
-        let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey) ?? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!.view
-        let toView = transitionContext.viewForKey(UITransitionContextToViewKey) ?? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!.view
+        let fromView:UIView! = transitionContext.viewForKey(UITransitionContextFromViewKey) ?? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!.view
+        let toView:UIView! = transitionContext.viewForKey(UITransitionContextToViewKey) ?? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!.view
         
         let a = transitionContext.viewForKey(UITransitionContextFromViewKey)
         let b = transitionContext.viewForKey(UITransitionContextToViewKey)
