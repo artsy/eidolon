@@ -166,8 +166,6 @@
 		6087605419EA117100116611 /* ListingsCountdownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6087605219EA117100116611 /* ListingsCountdownManager.swift */; };
 		6087605619EA217F00116611 /* AuctionInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 6087605519EA217F00116611 /* AuctionInfo.json */; };
 		6087605719EA217F00116611 /* AuctionInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 6087605519EA217F00116611 /* AuctionInfo.json */; };
-		60885F7A19D9B19F0065A7AE /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60FFC2E819D9A92B00284B9F /* LlamaKit.framework */; };
-		60885F8919D9B28F0065A7AE /* LlamaKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 60FFC2E819D9A92B00284B9F /* LlamaKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		60885F8A19D9B28F0065A7AE /* ReactiveCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 60FFC2D919D9A92100284B9F /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6092C4AF19CAEF9A003BE8EC /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6092C4AE19CAEF9A003BE8EC /* UIViewControllerExtensions.swift */; };
 		60968DCE19C5B2AF001AB802 /* KeypadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60968DCD19C5B2AF001AB802 /* KeypadView.xib */; };
@@ -390,34 +388,6 @@
 			remoteGlobalIDString = D04796A419666CBF0066B267;
 			remoteInfo = "ReactiveCocoa-iOSTests";
 		};
-		60FFC2E719D9A92B00284B9F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FB2F8D8119BF637B00E4C49E;
-			remoteInfo = "LlamaKit-iOS";
-		};
-		60FFC2E919D9A92B00284B9F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FB2F8D8C19BF637B00E4C49E;
-			remoteInfo = "LlamaKit-iOSTests";
-		};
-		60FFC2EB19D9A92B00284B9F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D0297D1019D67999009986A9;
-			remoteInfo = "LlamaKit-Mac";
-		};
-		60FFC2ED19D9A92B00284B9F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D0297D1A19D67999009986A9;
-			remoteInfo = "LlamaKit-MacTests";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -427,7 +397,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				60885F8919D9B28F0065A7AE /* LlamaKit.framework in CopyFiles */,
 				60885F8A19D9B28F0065A7AE /* ReactiveCocoa.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -613,7 +582,6 @@
 		60FFC2B319D9493000284B9F /* XAppAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppAuthentication.swift; sourceTree = "<group>"; };
 		60FFC2B619D9496A00284B9F /* APIKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		60FFC2D119D9A92100284B9F /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = submodules/ReactiveCocoa/ReactiveCocoa.xcodeproj; sourceTree = SOURCE_ROOT; };
-		60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LlamaKit.xcodeproj; path = submodules/ReactiveCocoa/External/LlamaKit/LlamaKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		819149072547ECA9E3F24D5E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C22736D007E19C5E898419A9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D7A8C3A5D003DA7ADEEA7929 /* Pods-KioskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -630,7 +598,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EC60BB519EB0552008A04B0 /* QuartzCore.framework in Frameworks */,
-				60885F7A19D9B19F0065A7AE /* LlamaKit.framework in Frameworks */,
 				60FFC2EF19D9A94200284B9F /* ReactiveCocoa.framework in Frameworks */,
 				A16036B5DA5B0BD0CB868C22 /* Pods.framework in Frameworks */,
 			);
@@ -708,7 +675,6 @@
 		5E4B56DC19C079C0002E6FCB /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
-				60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */,
 				60FFC2D119D9A92100284B9F /* ReactiveCocoa.xcodeproj */,
 				5E6ED60A19C07A4A00CF3398 /* Moya */,
 			);
@@ -1282,17 +1248,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		60FFC2E119D9A92B00284B9F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				60FFC2E819D9A92B00284B9F /* LlamaKit.framework */,
-				60FFC2EA19D9A92B00284B9F /* LlamaKit-iOSTests.xctest */,
-				60FFC2EC19D9A92B00284B9F /* LlamaKit.framework */,
-				60FFC2EE19D9A92B00284B9F /* LlamaKit-MacTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		E68E948F19DDCB17001405A5 /* text fields */ = {
 			isa = PBXGroup;
 			children = (
@@ -1378,10 +1333,6 @@
 			productRefGroup = 5E59DD3119913DD800A48370 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = 60FFC2E119D9A92B00284B9F /* Products */;
-					ProjectRef = 60FFC2E019D9A92B00284B9F /* LlamaKit.xcodeproj */;
-				},
 				{
 					ProductGroup = 603F8CAA19BDF77700B162C7 /* Products */;
 					ProjectRef = 5E28C2031993B9E50066DB4D /* Nimble.xcodeproj */;
@@ -1486,34 +1437,6 @@
 			fileType = wrapper.cfbundle;
 			path = "ReactiveCocoa-iOSTests.xctest";
 			remoteRef = 60FFC2DE19D9A92100284B9F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		60FFC2E819D9A92B00284B9F /* LlamaKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = LlamaKit.framework;
-			remoteRef = 60FFC2E719D9A92B00284B9F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		60FFC2EA19D9A92B00284B9F /* LlamaKit-iOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "LlamaKit-iOSTests.xctest";
-			remoteRef = 60FFC2E919D9A92B00284B9F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		60FFC2EC19D9A92B00284B9F /* LlamaKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = LlamaKit.framework;
-			remoteRef = 60FFC2EB19D9A92B00284B9F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		60FFC2EE19D9A92B00284B9F /* LlamaKit-MacTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "LlamaKit-MacTests.xctest";
-			remoteRef = 60FFC2ED19D9A92B00284B9F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
