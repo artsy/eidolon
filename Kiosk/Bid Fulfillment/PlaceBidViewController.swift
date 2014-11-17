@@ -38,7 +38,7 @@ class PlaceBidViewController: UIViewController {
         let bidIsZeroSignal = bidDollarsSignal.map { return ($0 as Int == 0) }
 
         for button in [keypad.rightButton, keypad.leftButton] {
-            RAC(button, "enabled") <~ bidIsZeroSignal.notEach()
+            RAC(button, "enabled") <~ bidIsZeroSignal.not()
         }
 
         let formattedBidTextSignal = RACObserve(self, "bidDollars").map(dollarsToCurrencyString)

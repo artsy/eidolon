@@ -32,6 +32,11 @@ PODS:
   - ISO8601DateFormatter (0.7)
   - LlamaKit (0.1.0)
   - Mixpanel (2.5.4)
+  - Moya/Core (0.5):
+    - Alamofire
+  - Moya/Reactive (0.5):
+    - Moya/Core
+    - ReactiveCocoa
   - NJKWebViewProgress (0.2.3):
     - NJKWebViewProgress/Core (= 0.2.3)
     - NJKWebViewProgress/ProgressView (= 0.2.3)
@@ -80,6 +85,7 @@ DEPENDENCIES:
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
   - LlamaKit (from `https://github.com/AshFurrow/LlamaKit`, branch `rac_podspec`)
+  - Moya/Reactive (from `https://github.com/AshFurrow/Moya`, branch `podspec`)
   - ORStackView
   - Quick (from `https://github.com/orta/Quick`, branch `podspec`)
   - Reachability (from `https://github.com/orta/Reachability.git`, branch `frameworks`)
@@ -107,6 +113,9 @@ EXTERNAL SOURCES:
   LlamaKit:
     :branch: rac_podspec
     :git: https://github.com/AshFurrow/LlamaKit
+  Moya:
+    :branch: podspec
+    :git: https://github.com/AshFurrow/Moya
   Quick:
     :branch: podspec
     :git: https://github.com/orta/Quick
@@ -146,6 +155,7 @@ SPEC CHECKSUMS:
   ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
   LlamaKit: 71673af25b2c733160d643e67c1f711d3afa4af2
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
+  Moya: 5c78199dca4481d07aa04e43d04d29e42933915d
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
   Quick: e9bc3892e3a792a58167c154f9d29162c053b227

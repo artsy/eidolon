@@ -15,7 +15,7 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
             RAC(bidDetails, "newUser.phoneNumber") <~ numberTextField.rac_textSignal()
             
             let numberIsInvalidSignal = RACObserve(bidDetails.newUser, "phoneNumber").map(isZeroLengthString)
-            RAC(confirmButton, "enabled") <~ numberIsInvalidSignal.notEach()
+            RAC(confirmButton, "enabled") <~ numberIsInvalidSignal.not()
         }
 
         numberTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in

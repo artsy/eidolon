@@ -60,7 +60,7 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
             let monthSignal = RACObserve(self, "expirationMonth").map(islessThan3CharLengthString)
             let yearSignal = RACObserve(self, "expirationYear").map(is4CharLengthString)
 
-            let formIsValid = RACSignal.combineLatest([yearSignal, monthSignal]).reduceAnd()
+            let formIsValid = RACSignal.combineLatest([yearSignal, monthSignal]).and()
             dateConfirmButton.rac_command = RACCommand(enabled: formIsValid) { [weak self] _ in
                 self?.registerCardSignal() ?? RACSignal.empty()
             }

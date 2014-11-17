@@ -1,4 +1,5 @@
 import UIKit
+import Moya
 
 class RegistrationPasswordViewController: UIViewController, RegistrationSubController {
 

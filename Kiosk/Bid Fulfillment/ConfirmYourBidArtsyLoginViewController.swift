@@ -1,4 +1,5 @@
 import UIKit
+import Moya
 
 public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
@@ -36,7 +37,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
         let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
         let passwordIsLongEnough = passwordTextSignal.map(minimum6CharString)
-        let formIsValid = RACSignal.combineLatest([inputIsEmail, passwordIsLongEnough]).reduceAnd()
+        let formIsValid = RACSignal.combineLatest([inputIsEmail, passwordIsLongEnough]).and()
 
         confirmCredentialsButton.rac_command = RACCommand(enabled: formIsValid) { [weak self] _ in
             if (self == nil) {
