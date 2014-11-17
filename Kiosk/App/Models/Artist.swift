@@ -4,11 +4,11 @@ class Artist: JSONAble {
 
     let id: String
     dynamic var name: String
-    let sortableID: String
+    let sortableID: String?
 
     var blurb: String?
 
-    init(id: String, name: String, sortableID: String) {
+    init(id: String, name: String, sortableID: String?) {
         self.id = id
         self.name = name
         self.sortableID = sortableID
@@ -19,7 +19,7 @@ class Artist: JSONAble {
 
         let id = json["id"].stringValue
         let name = json["name"].stringValue
-        let sortableID = json["sortableID"].stringValue
+        let sortableID = json["sortable_id"].string
         return Artist(id: id, name:name, sortableID:sortableID)
     }
 
