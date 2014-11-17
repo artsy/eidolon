@@ -30,7 +30,13 @@ PODS:
   - fmemopen (0.0.1)
   - HockeySDK (3.5.4)
   - ISO8601DateFormatter (0.7)
+  - LlamaKit (0.1.0)
   - Mixpanel (2.5.4)
+  - Moya/Core (0.5):
+    - Alamofire
+  - Moya/Reactive (0.5):
+    - Moya/Core
+    - ReactiveCocoa
   - NJKWebViewProgress (0.2.3):
     - NJKWebViewProgress/Core (= 0.2.3)
     - NJKWebViewProgress/ProgressView (= 0.2.3)
@@ -40,6 +46,17 @@ PODS:
     - FLKAutoLayout (~> 0.1)
   - Quick (0.1.0-beta)
   - Reachability (3.1.1)
+  - ReactiveCocoa (2.3.1):
+    - LlamaKit
+    - ReactiveCocoa/UI (= 2.3.1)
+  - ReactiveCocoa/Core (2.3.1):
+    - LlamaKit
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.3.1):
+    - LlamaKit
+  - ReactiveCocoa/UI (2.3.1):
+    - LlamaKit
+    - ReactiveCocoa/Core
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
@@ -67,9 +84,12 @@ DEPENDENCIES:
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
+  - LlamaKit (from `https://github.com/AshFurrow/LlamaKit`, branch `rac_podspec`)
+  - Moya/Reactive (from `https://github.com/AshFurrow/Moya`, branch `podspec`)
   - ORStackView
   - Quick (from `https://github.com/orta/Quick`, branch `podspec`)
   - Reachability (from `https://github.com/orta/Reachability.git`, branch `frameworks`)
+  - ReactiveCocoa (from `https://github.com/AshFurrow/ReactiveCocoa`, branch `podspec`)
   - SDWebImage (~> 3.7)
   - SwiftyJSON (from `https://github.com/orta/SwiftyJSON`, branch `podspec`)
   - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
@@ -90,12 +110,21 @@ EXTERNAL SOURCES:
     :git: https://github.com/orta/balanced-ios
   DZNWebViewController:
     :git: https://github.com/orta/DZNWebViewController.git
+  LlamaKit:
+    :branch: rac_podspec
+    :git: https://github.com/AshFurrow/LlamaKit
+  Moya:
+    :branch: podspec
+    :git: https://github.com/AshFurrow/Moya
   Quick:
     :branch: podspec
     :git: https://github.com/orta/Quick
   Reachability:
     :branch: frameworks
     :git: https://github.com/orta/Reachability.git
+  ReactiveCocoa:
+    :branch: podspec
+    :git: https://github.com/AshFurrow/ReactiveCocoa
   SwiftyJSON:
     :branch: podspec
     :git: https://github.com/orta/SwiftyJSON
@@ -106,7 +135,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/orta/XCGLogger.git
 
 SPEC CHECKSUMS:
-  Alamofire: 499ac6dad38952ef230a4ab2c7c472367d4f027e
+  Alamofire: 4cff790102216d69f3b12dd69885c468870d51e9
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
   ARCollectionViewMasonryLayout: 40993cb65522139cb2cd6ed255c91a6caee5c4dd
   ARTiledImageView: 0de3b09798e5b1ec91a2939c311b69b03e7c9706
@@ -124,15 +153,18 @@ SPEC CHECKSUMS:
   fmemopen: 54fc0cc9d9063de6103b40a24849818a53c8f1e5
   HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
   ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
+  LlamaKit: 71673af25b2c733160d643e67c1f711d3afa4af2
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
+  Moya: 5c78199dca4481d07aa04e43d04d29e42933915d
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
-  Quick: 6039133a6ba07b3f0f4725eb41bb81775c1526b7
+  Quick: e9bc3892e3a792a58167c154f9d29162c053b227
   Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
+  ReactiveCocoa: 991a58612852e1f4cc3e0073c664367508856e53
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SwiftyJSON: 85e4853fa377da93059763a3ca68fc5765d9b249
   UIImageViewAligned: efc1b8b5750dea68b7ee67236f4c64f93e65b674
-  XCGLogger: a0a0897a01d58026ffe257f41c613b301ea71ce3
+  XCGLogger: c1fccc5ae3e3666241bf06c8c82e30461cff168c
   XNGMarkdownParser: 5d1ed6c1b2bb3d3f3468a9ad591b85498403822c
 
 COCOAPODS: 0.35.0.rc2

@@ -23,7 +23,7 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
         let reachableSignal:RACSignal = reachabilitySignal ?? reachability.reachSignal
         let pingerSignal:RACSignal = apiPingerSignal ?? apiPinger.letOnlineSignal
 
-        RAC(offlineBlockingView, "hidden") <~ RACSignal.combineLatest([reachableSignal, pingerSignal]).reduceAnd()
+        RAC(offlineBlockingView, "hidden") <~ RACSignal.combineLatest([reachableSignal, pingerSignal]).and()
 
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")

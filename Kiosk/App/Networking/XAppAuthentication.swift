@@ -1,5 +1,6 @@
 import Foundation
 import ISO8601DateFormatter
+import Moya
 
 /// Request to fetch and store new XApp token if the current token is missing or expired.
 

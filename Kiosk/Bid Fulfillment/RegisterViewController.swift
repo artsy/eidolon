@@ -34,7 +34,7 @@ class RegisterViewController: UIViewController {
         let registerIndexSignal = RACObserve(coordinator, "currentIndex")
         let indexIsConfirmSignal = registerIndexSignal.map { return ($0 as Int == RegistrationIndex.ConfirmVC.toInt()) }
         
-        RAC(confirmButton, "hidden") <~ indexIsConfirmSignal.notEach()
+        RAC(confirmButton, "hidden") <~ indexIsConfirmSignal.not()
         RAC(flowView, "highlightedIndex") <~ registerIndexSignal
 
         let details = self.fulfillmentNav().bidDetails

@@ -1,4 +1,5 @@
 import Foundation
+import Moya
 
 class APIPingManager: NSObject {
 

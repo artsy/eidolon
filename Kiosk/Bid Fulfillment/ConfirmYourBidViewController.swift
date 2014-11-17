@@ -1,5 +1,6 @@
 import UIKit
 import ECPhoneNumberFormatter
+import Moya
 
 class ConfirmYourBidViewController: UIViewController {
 
@@ -52,7 +53,7 @@ class ConfirmYourBidViewController: UIViewController {
         if let nav = self.navigationController as? FulfillmentNavigationController {
             
             let numberIsZeroLengthSignal = RACObserve(self, "number").map(isZeroLengthString)
-            enterButton.rac_command = RACCommand(enabled: numberIsZeroLengthSignal.notEach()) { [weak self] _ in
+            enterButton.rac_command = RACCommand(enabled: numberIsZeroLengthSignal.not()) { [weak self] _ in
                 if (self == nil) {
                     return RACSignal.empty()
                 }

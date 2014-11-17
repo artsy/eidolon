@@ -1,4 +1,5 @@
 import Foundation
+import Moya
 
 enum ArtsyAPI {
     case XApp

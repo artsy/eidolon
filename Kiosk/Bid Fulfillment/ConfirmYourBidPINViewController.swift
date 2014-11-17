@@ -1,4 +1,6 @@
 import UIKit
+import Moya
+import ReactiveCocoa
 
 class ConfirmYourBidPINViewController: UIViewController {
 
@@ -25,7 +27,7 @@ class ConfirmYourBidPINViewController: UIViewController {
         let pinIsZeroSignal = RACObserve(self, "pin").map { (countElements($0 as String) != 4) }
 
         for button in [keypad.rightButton, keypad.leftButton] {
-            RAC(button, "enabled") <~ pinIsZeroSignal.notEach()
+            RAC(button, "enabled") <~ pinIsZeroSignal.not()
         }
 
         keypadSignal.subscribeNext(addDigitToPIN)
@@ -39,7 +41,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         /// verify if we can connect with number & pin
 
-        confirmButton.rac_command = RACCommand(enabled: pinIsZeroSignal.notEach()) { [weak self] _ in
+        confirmButton.rac_command = RACCommand(enabled: pinIsZeroSignal.not()) { [weak self] _ in
             if (self == nil) { return RACSignal.empty() }
 
             let phone = self!.fulfillmentNav().bidDetails.newUser.phoneNumber
