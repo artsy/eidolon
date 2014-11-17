@@ -41,6 +41,17 @@ PODS:
     - FLKAutoLayout (~> 0.1)
   - Quick (0.1.0-beta)
   - Reachability (3.1.1)
+  - ReactiveCocoa (2.3.1):
+    - LlamaKit
+    - ReactiveCocoa/UI (= 2.3.1)
+  - ReactiveCocoa/Core (2.3.1):
+    - LlamaKit
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.3.1):
+    - LlamaKit
+  - ReactiveCocoa/UI (2.3.1):
+    - LlamaKit
+    - ReactiveCocoa/Core
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
@@ -68,10 +79,11 @@ DEPENDENCIES:
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
-  - LlamaKit (from `https://github.com/AshFurrow/LlamaKit`, branch `podspec`)
+  - LlamaKit (from `https://github.com/AshFurrow/LlamaKit`, branch `rac_podspec`)
   - ORStackView
   - Quick (from `https://github.com/orta/Quick`, branch `podspec`)
   - Reachability (from `https://github.com/orta/Reachability.git`, branch `frameworks`)
+  - ReactiveCocoa (from `https://github.com/AshFurrow/ReactiveCocoa`, branch `podspec`)
   - SDWebImage (~> 3.7)
   - SwiftyJSON (from `https://github.com/orta/SwiftyJSON`, branch `podspec`)
   - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
@@ -93,7 +105,7 @@ EXTERNAL SOURCES:
   DZNWebViewController:
     :git: https://github.com/orta/DZNWebViewController.git
   LlamaKit:
-    :branch: podspec
+    :branch: rac_podspec
     :git: https://github.com/AshFurrow/LlamaKit
   Quick:
     :branch: podspec
@@ -101,6 +113,9 @@ EXTERNAL SOURCES:
   Reachability:
     :branch: frameworks
     :git: https://github.com/orta/Reachability.git
+  ReactiveCocoa:
+    :branch: podspec
+    :git: https://github.com/AshFurrow/ReactiveCocoa
   SwiftyJSON:
     :branch: podspec
     :git: https://github.com/orta/SwiftyJSON
@@ -135,6 +150,7 @@ SPEC CHECKSUMS:
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
   Quick: e9bc3892e3a792a58167c154f9d29162c053b227
   Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
+  ReactiveCocoa: 991a58612852e1f4cc3e0073c664367508856e53
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SwiftyJSON: 85e4853fa377da93059763a3ca68fc5765d9b249
   UIImageViewAligned: efc1b8b5750dea68b7ee67236f4c64f93e65b674

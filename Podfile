@@ -43,7 +43,8 @@ pod 'XNGMarkdownParser'
 pod 'XCGLogger', :git => "https://github.com/orta/XCGLogger.git", :branch => "podspec"
 pod 'SwiftyJSON', :git => "https://github.com/orta/SwiftyJSON", :branch => "podspec"
 pod 'Alamofire', :git => "https://github.com/mrackwitz/Alamofire.git", :branch => "podspec"
-pod 'LlamaKit', :git => "https://github.com/AshFurrow/LlamaKit", :branch => "podspec"
+pod 'LlamaKit', :git => "https://github.com/AshFurrow/LlamaKit", :branch => "rac_podspec"
+pod 'ReactiveCocoa', :git => "https://github.com/AshFurrow/ReactiveCocoa", :branch => "podspec"
 
 target "KioskTests", :exclusive => true do
     pod 'FBSnapshotTestCase'
