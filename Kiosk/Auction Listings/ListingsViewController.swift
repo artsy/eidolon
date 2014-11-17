@@ -283,8 +283,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         
         if let listingsCell = cell as? ListingsCollectionViewCell {
 
-            // TODO: Ideally we should disable when auction runs out
-            // listingsCell.bidButton.enabled = countdownManager.auctionFinishedSignal
+            listingsCell.enabledSignal = CountdownManager.sharedInstance.auctionIsActiveSignal
 
             listingsCell.saleArtwork = saleArtworkAtIndexPath(indexPath)
 

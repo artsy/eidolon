@@ -13,19 +13,22 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
     let apiPinger = APIPingManager()
     var apiPingerSignal: RACSignal?
 
+    @IBOutlet weak var registerToBidButton: ActionButton!
 
     dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0, state: "")
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let reachableSignal:RACSignal = reachabilitySignal ?? reachability.reachSignal
-        let pingerSignal:RACSignal = apiPingerSignal ?? apiPinger.letOnlineSignal
+        let reachableSignal: RACSignal = reachabilitySignal ?? reachability.reachSignal
+        let pingerSignal: RACSignal = apiPingerSignal ?? apiPinger.letOnlineSignal
 
         RAC(offlineBlockingView, "hidden") <~ RACSignal.combineLatest([reachableSignal, pingerSignal]).reduceAnd()
 
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
-        RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
+        RAC(CountdownManager.sharedInstance, "sale") <~ RACObserve(self, "sale")
+
+        RAC(registerToBidButton, "enabled") <~ CountdownManager.sharedInstance.auctionIsActiveSignal
 
         for controller in childViewControllers {
             if let nav = controller as? UINavigationController {
@@ -34,7 +37,6 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
 
-    @IBOutlet weak var registerToBidButton: ActionButton!
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         let show = (viewController as? SaleArtworkZoomViewController != nil)
         countdownManager.countdownContainerView.hidden = show

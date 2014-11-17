@@ -16,6 +16,7 @@
 		5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */; };
 		5E3D9D3219EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D9D3119EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift */; };
 		5E3DF3B419E5CF8A0098F3B0 /* RACSignal+Kiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DA8E019E57E49000E5855 /* RACSignal+Kiosk.swift */; };
+		5E3E050E1A198ECE00656945 /* CountdownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3E050D1A198ECE00656945 /* CountdownManager.swift */; };
 		5E3E53E619C3AA13002D8B9D /* XAppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3E53E519C3AA13002D8B9D /* XAppToken.swift */; };
 		5E59DD3619913DD800A48370 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3519913DD800A48370 /* AppDelegate.swift */; };
 		5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3719913DD800A48370 /* ListingsViewController.swift */; };
@@ -475,6 +476,7 @@
 		5E3234301A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SaleArtworkDetailsViewController.swift; path = "Sale Artwork Details/SaleArtworkDetailsViewController.swift"; sourceTree = "<group>"; };
 		5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPI.swift; sourceTree = "<group>"; };
 		5E3D9D3119EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+GlobalActions.swift"; sourceTree = "<group>"; };
+		5E3E050D1A198ECE00656945 /* CountdownManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownManager.swift; sourceTree = "<group>"; };
 		5E3E53E519C3AA13002D8B9D /* XAppToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppToken.swift; sourceTree = "<group>"; };
 		5E59DD3019913DD800A48370 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD3419913DD800A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1137,6 +1139,7 @@
 				606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */,
 				5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */,
 				60A272AE1A13F1B3006D26F4 /* MarkdownParser.swift */,
+				5E3E050D1A198ECE00656945 /* CountdownManager.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1802,6 +1805,7 @@
 				5EF2C0C619DAC18000263137 /* TableCollectionViewCell.swift in Sources */,
 				5E3E53E619C3AA13002D8B9D /* XAppToken.swift in Sources */,
 				605B856119C6E5990009B16B /* ConfirmYourBidArtsyLoginViewController.swift in Sources */,
+				5E3E050E1A198ECE00656945 /* CountdownManager.swift in Sources */,
 				60B504C61A10FAE400D7CF06 /* BalancedManager.swift in Sources */,
 				5EC60BCD19EB1433008A04B0 /* HelpAnimator.swift in Sources */,
 				6017320F19CF259400A58B63 /* CardHandler.swift in Sources */,
