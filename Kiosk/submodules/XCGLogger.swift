@@ -14,25 +14,25 @@ private extension NSThread {
 
         let localeToUse = locale ?? NSLocale.currentLocale()
 
-let threadDictionary = NSThread.currentThread().threadDictionary
-            var dataFormatterCache: [String:NSDateFormatter]? = threadDictionary.objectForKey(XCGLogger.constants.nsdataFormatterCacheIdentifier) as? [String:NSDateFormatter]
-            if dataFormatterCache == nil {
-                dataFormatterCache = [String:NSDateFormatter]()
-            }
+        let threadDictionary = NSThread.currentThread().threadDictionary
+        var dataFormatterCache: [String:NSDateFormatter]? = threadDictionary.objectForKey(XCGLogger.constants.nsdataFormatterCacheIdentifier) as? [String:NSDateFormatter]
+        if dataFormatterCache == nil {
+            dataFormatterCache = [String:NSDateFormatter]()
+        }
 
-            let formatterKey = format + "_" + localeToUse.localeIdentifier
-            if let formatter = dataFormatterCache?[formatterKey] {
-                return formatter
-            }
-
-            var formatter = NSDateFormatter()
-            formatter.locale = localeToUse
-            formatter.dateFormat = format
-            dataFormatterCache?[formatterKey] = formatter
-
-            threadDictionary[XCGLogger.constants.nsdataFormatterCacheIdentifier] = dataFormatterCache
-
+        let formatterKey = format + "_" + localeToUse.localeIdentifier
+        if let formatter = dataFormatterCache?[formatterKey] {
             return formatter
+        }
+
+        var formatter = NSDateFormatter()
+        formatter.locale = localeToUse
+        formatter.dateFormat = format
+        dataFormatterCache?[formatterKey] = formatter
+
+        threadDictionary[XCGLogger.constants.nsdataFormatterCacheIdentifier] = dataFormatterCache
+
+        return formatter
     }
 }
 

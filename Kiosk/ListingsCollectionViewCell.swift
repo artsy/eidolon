@@ -33,15 +33,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     dynamic var saleArtwork: SaleArtwork?
     dynamic var bidWasPressedSignal: RACSignal = RACSubject()
 
-    var enableBidButtonSignal: RACSignal? {
-        // Creates a write-once property as RAC doesnt not allow having two binded 
-        // observers to the same place
-        didSet(oldSignal) {
-            if (oldSignal == nil) {
-                RAC(self.bidButton, "enabled") <~ enableBidButtonSignal!
-            }
-        }
-    }
+    dynamic var enabledSignal: RACSignal?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,7 +53,14 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     func setup() {
         // Necessary to use Autolayout
         contentView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
+
+        let enabledSignal = RACObserve(self, "enabledSignal").map { (signal) -> AnyObject! in
+            return signal ?? RACSignal.`return`(true)
+        }.switchToLatest()
+
+        RAC(self.bidButton, "enabled") <~ enabledSignal
+        RAC(self, "userInteractionEnabled") <~ enabledSignal
+
         // Bind subviews
         RACObserve(self, "saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
             if let url = (artwork as? Artwork)?.images?.first?.thumbnailURL() {
