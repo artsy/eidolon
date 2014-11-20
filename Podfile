@@ -33,21 +33,40 @@ pod 'CardFlight'
 pod 'ECPhoneNumberFormatter'
 pod 'UIImageViewAligned', :git => "https://github.com/orta/UIImageViewAligned.git"
 pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewController.git"
-pod 'Reachability', :git => "https://github.com/orta/Reachability.git", :branch => "frameworks"
+pod 'Reachability', :git => "https://github.com/ashfurrow/Reachability.git", :branch => "frameworks"
 
 pod 'ARTiledImageView', :git => "https://github.com/dblock/ARTiledImageView.git"
 pod 'balanced-ios', :git => "https://github.com/orta/balanced-ios", :branch => "0_5_podspec"
 pod 'XNGMarkdownParser'
 
 # swift pods
-pod 'XCGLogger', :git => "https://github.com/orta/XCGLogger.git", :branch => "podspec"
+pod 'XCGLogger', :git => "https://github.com/ashfurrow/XCGLogger.git", :branch => "podspec"
 pod 'SwiftyJSON', :git => "https://github.com/orta/SwiftyJSON", :branch => "podspec"
 pod 'Alamofire', :git => "https://github.com/mrackwitz/Alamofire.git", :branch => "podspec"
 pod 'LlamaKit', :git => "https://github.com/AshFurrow/LlamaKit", :branch => "rac_podspec"
 pod 'ReactiveCocoa', :git => "https://github.com/AshFurrow/ReactiveCocoa", :branch => "podspec"
 pod 'Moya/Reactive', :git => "https://github.com/AshFurrow/Moya", :branch => "podspec"
 
-target "KioskTests", :exclusive => true do
-    pod 'FBSnapshotTestCase'
-    pod 'Quick', :git => "https://github.com/orta/Quick", :branch => "podspec"
+target "KioskTests" do
+
+  pod 'FBSnapshotTestCase', :git => "https://github.com/ashfurrow/ios-snapshot-test-case.git"
+  pod 'Nimble-Snapshots', :git => "https://github.com/ashfurrow/Nimble-Snapshots.git"
+  pod 'Quick', :git => "https://github.com/orta/Quick", :branch => "podspec"
+  pod 'Nimble', :git => "https://github.com/ashfurrow/Nimble", :branch => "podspec"
+
+end
+
+unoptimized_pod_names = ['XCGLogger']
+
+post_install do |installer_representation|
+  targets = installer_representation.project.targets.select { |target| 
+    unoptimized_pod_names.select { |name| 
+      target.display_name.end_with? name
+    }.count > 0
+  }
+  targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Onone'
+    end
+  end
 end

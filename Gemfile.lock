@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/CocoaPods/CocoaPods.git
-  revision: d66af9de9e1a0ee9e4c549911ea5aaebe9f31a89
+  revision: 4dbfacbc09883692624ee16cc148b4063e53ad85
   branch: swift
   specs:
     cocoapods (0.35.0.rc2)
@@ -43,24 +43,24 @@ GEM
     RubyInline (3.12.3)
       ZenTest (~> 4.3)
     ZenTest (4.11.0)
-    activesupport (4.1.7)
+    activesupport (4.1.8)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    aws-sdk (1.58.0)
-      aws-sdk-v1 (= 1.58.0)
-    aws-sdk-v1 (1.58.0)
+    aws-sdk (1.59.0)
+      aws-sdk-v1 (= 1.59.0)
+    aws-sdk-v1 (1.59.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     claide (0.7.0)
     cocoapods-downloader (0.7.2)
-    cocoapods-keys (0.9.0)
+    cocoapods-keys (0.9.5)
       osx_keychain
     cocoapods-plugins (0.3.2)
       nap
-    cocoapods-trunk (0.4.0)
+    cocoapods-trunk (0.4.1)
       nap (>= 0.8)
       netrc (= 0.7.8)
     cocoapods-try (0.4.2)
@@ -81,7 +81,7 @@ GEM
     json (1.8.1)
     mini_portile (0.6.1)
     minitest (5.4.3)
-    molinillo (0.1.1)
+    molinillo (0.1.2)
     multipart-post (1.2.0)
     nap (0.8.0)
     net-sftp (2.1.2)
@@ -97,7 +97,7 @@ GEM
     rubyzip (1.1.6)
     sbconstants (1.0.0)
     security (0.1.3)
-    shenzhen (0.8.2)
+    shenzhen (0.9.0)
       aws-sdk (~> 1.0)
       commander (~> 4.1)
       dotenv (~> 0.7)

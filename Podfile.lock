@@ -37,6 +37,10 @@ PODS:
   - Moya/Reactive (0.5):
     - Moya/Core
     - ReactiveCocoa
+  - Nimble (0.1.0)
+  - Nimble-Snapshots (0.0.1):
+    - FBSnapshotTestCase
+    - Nimble
   - NJKWebViewProgress (0.2.3):
     - NJKWebViewProgress/Core (= 0.2.3)
     - NJKWebViewProgress/ProgressView (= 0.2.3)
@@ -80,20 +84,22 @@ DEPENDENCIES:
   - CardFlight
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
-  - FBSnapshotTestCase
+  - FBSnapshotTestCase (from `https://github.com/ashfurrow/ios-snapshot-test-case.git`)
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
   - LlamaKit (from `https://github.com/AshFurrow/LlamaKit`, branch `rac_podspec`)
   - Moya/Reactive (from `https://github.com/AshFurrow/Moya`, branch `podspec`)
+  - Nimble (from `https://github.com/ashfurrow/Nimble`, branch `podspec`)
+  - Nimble-Snapshots (from `https://github.com/ashfurrow/Nimble-Snapshots.git`)
   - ORStackView
   - Quick (from `https://github.com/orta/Quick`, branch `podspec`)
-  - Reachability (from `https://github.com/orta/Reachability.git`, branch `frameworks`)
+  - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
   - ReactiveCocoa (from `https://github.com/AshFurrow/ReactiveCocoa`, branch `podspec`)
   - SDWebImage (~> 3.7)
   - SwiftyJSON (from `https://github.com/orta/SwiftyJSON`, branch `podspec`)
   - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
-  - XCGLogger (from `https://github.com/orta/XCGLogger.git`, branch `podspec`)
+  - XCGLogger (from `https://github.com/ashfurrow/XCGLogger.git`, branch `podspec`)
   - XNGMarkdownParser
 
 EXTERNAL SOURCES:
@@ -110,18 +116,25 @@ EXTERNAL SOURCES:
     :git: https://github.com/orta/balanced-ios
   DZNWebViewController:
     :git: https://github.com/orta/DZNWebViewController.git
+  FBSnapshotTestCase:
+    :git: https://github.com/ashfurrow/ios-snapshot-test-case.git
   LlamaKit:
     :branch: rac_podspec
     :git: https://github.com/AshFurrow/LlamaKit
   Moya:
     :branch: podspec
     :git: https://github.com/AshFurrow/Moya
+  Nimble:
+    :branch: podspec
+    :git: https://github.com/ashfurrow/Nimble
+  Nimble-Snapshots:
+    :git: https://github.com/ashfurrow/Nimble-Snapshots.git
   Quick:
     :branch: podspec
     :git: https://github.com/orta/Quick
   Reachability:
     :branch: frameworks
-    :git: https://github.com/orta/Reachability.git
+    :git: https://github.com/ashfurrow/Reachability.git
   ReactiveCocoa:
     :branch: podspec
     :git: https://github.com/AshFurrow/ReactiveCocoa
@@ -132,7 +145,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/orta/UIImageViewAligned.git
   XCGLogger:
     :branch: podspec
-    :git: https://github.com/orta/XCGLogger.git
+    :git: https://github.com/ashfurrow/XCGLogger.git
 
 SPEC CHECKSUMS:
   Alamofire: 4cff790102216d69f3b12dd69885c468870d51e9
@@ -148,7 +161,7 @@ SPEC CHECKSUMS:
   DZNWebViewController: 8716115ea00d6abbfb5dc937fff85b222b70fc68
   ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
-  FBSnapshotTestCase: f9f225b5ba11c8d8c09075590490df16314e4d62
+  FBSnapshotTestCase: 2a38813892a1f8786d701bdda4b5c004ee8dde33
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
   fmemopen: 54fc0cc9d9063de6103b40a24849818a53c8f1e5
   HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
@@ -156,9 +169,11 @@ SPEC CHECKSUMS:
   LlamaKit: 71673af25b2c733160d643e67c1f711d3afa4af2
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
   Moya: 5c78199dca4481d07aa04e43d04d29e42933915d
+  Nimble: a758538afa362515139cc23f17a19be9b0d20ae0
+  Nimble-Snapshots: 23e9192543031c8dcc183b8224325820907c0578
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
-  Quick: e9bc3892e3a792a58167c154f9d29162c053b227
+  Quick: 27d7ddac04687bad21840e01bd5e69b29147731b
   Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
   ReactiveCocoa: 991a58612852e1f4cc3e0073c664367508856e53
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
