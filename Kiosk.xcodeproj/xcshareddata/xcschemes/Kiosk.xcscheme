@@ -19,6 +19,34 @@
                ReferencedContainer = "container:Kiosk.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5E4D0AD11A1E3B1200064A8A"
+               BuildableName = "KioskTests.xctest"
+               BlueprintName = "KioskTests"
+               ReferencedContainer = "container:Kiosk.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5E4D0AD11A1E3B1200064A8A"
+               BuildableName = "KioskTests.xctest"
+               BlueprintName = "KioskTests"
+               ReferencedContainer = "container:Kiosk.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -31,7 +59,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5E59DD4119913DD800A48370"
+               BlueprintIdentifier = "5E4D0AD11A1E3B1200064A8A"
                BuildableName = "KioskTests.xctest"
                BlueprintName = "KioskTests"
                ReferencedContainer = "container:Kiosk.xcodeproj">

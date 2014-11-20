@@ -1,5 +1,5 @@
 Eidolon
-================
+=======
 
 The [Artsy](https://artsy.net) Auction Kiosk App.
 
@@ -11,18 +11,8 @@ Project Status
 Downloading the Code
 ----------------
 
-Git repositories can be fickle things. Since CocoaPods' support of Swift-based pods
-is still [under construction](https://github.com/CocoaPods/CocoaPods/pull/2222),
-we are choosing to – well, forced, really – to use git submodules.
-
-![Git Submodules](http://cloud.ashfurrow.com/image/0E1e2G2J1f1P/git-submodules.png)
-
-That means that clicking the "Download ZIP" button isn't going to download all
-of the code you'll need to run the app. Instead, [clone](http://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository#Cloning-an-Existing-Repository)
-the repository from GitHub by typing the following command.
-
-We'll aslso ask for keys to get the app set up, you can just put gibberish in there if you
-don't work for artsy.
+The following commands will ask for keys to get the app set up, you can just put 
+gibberish in there if you don't work for Artsy.
 
 ```sh
 git clone https://github.com/artsy/eidolon.git
@@ -30,19 +20,10 @@ cd eidolon
 make bootstrap
 ```
 
-Due to an [issue](https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1480) 
-with ReactiveCocoa, you need to manually open the ReactiveCocoa project in the
-workspace and change the iOS target's deployment target to 8.0.
-
-A lot of iOS code still exists as Objective-C, and we use a lot of it as
-CocoaPods. So after cloning the repo, shown above, you'll need to do a `pod
-install`. You'll need to have [CocoaPods](http://guides.cocoapods.org/using/getting-started.html)
-already installed.
-
 Alrighty! We're ready to go!
 
 Getting Started
-----------------
+---------------
 
 Now that we have the code [downloaded](#downloading-the-code), we can run the
 app using [Xcode 6.1+](https://developer.apple.com/xcode/downloads/). Make sure to
@@ -58,7 +39,7 @@ us to use [private pods](http://guides.cocoapods.org/making/private-cocoapods.ht
 The `Podfile` deals with the differences.
 
 Contributing
-----------------
+------------
 
 This project is being developed by Artsy primarily for its use as Artsy's
 auction kiosk app, and we are not expecting to have significant community

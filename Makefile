@@ -12,7 +12,6 @@ DATE_VERSION = $(shell date "+%Y.%m.%d")
 # Default for `make`
 all: ci
 
-bootstrap: setup
 bootstrap:
 
 	@echo "\nSetting up API Keys, leave blank if you don't know."
@@ -65,6 +64,7 @@ bootstrap:
 		read TOKEN; \
 		bundle exec pod keys set BalancedMarketplaceStagingToken "$$TOKEN"
 	bundle
+	bundle exec pod install
 
 
 bundle: 
@@ -96,14 +96,7 @@ ipa:
 distribute:
 	ipa distribute:hockeyapp
 
-setup:
-	git submodule init
-	git submodule update
-	./submodules/ReactiveCocoa/script/bootstrap
-	bundle install
-
 prepare_ci: CONFIGURATION = Debug
-prepare_ci:	setup 
 prepare_ci:
 	bundle exec pod keys set ArtsyAPIClientSecret "-" Eidolon
 	bundle exec pod keys set ArtsyAPIClientKey "-"
