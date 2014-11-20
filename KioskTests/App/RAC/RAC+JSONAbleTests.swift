@@ -1,5 +1,7 @@
 import Quick
 import Nimble
+import ReactiveCocoa
+import Kiosk
 
 class RAC_JSONAbleTests: QuickSpec {
     override func spec() {

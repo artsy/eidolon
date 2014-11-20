@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 let SwitchViewBorderWidth: CGFloat = 2
 

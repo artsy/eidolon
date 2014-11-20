@@ -2,7 +2,7 @@ import UIKit
 
 // Unused ATM
 
-class ConfirmYourBidPasswordViewController: UIViewController {
+public class ConfirmYourBidPasswordViewController: UIViewController {
 
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
@@ -10,7 +10,7 @@ class ConfirmYourBidPasswordViewController: UIViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidEnterYourEmailViewController
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails

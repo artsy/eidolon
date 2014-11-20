@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+import Kiosk
 
 let size = CGSize(width: 100, height: 100)
 

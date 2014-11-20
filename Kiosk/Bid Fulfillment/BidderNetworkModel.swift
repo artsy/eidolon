@@ -1,11 +1,11 @@
 import UIKit
 import Moya
 
-class BidderNetworkModel: NSObject {
+public class BidderNetworkModel: NSObject {
 
-    var bidder:Bidder?
-    var createdNewBidder = false
-    var fulfillmentNav:FulfillmentNavigationController!
+    public var bidder:Bidder?
+    public var createdNewBidder = false
+    public var fulfillmentNav:FulfillmentNavigationController!
 
     // MARK: - Getters
 
@@ -22,7 +22,7 @@ class BidderNetworkModel: NSObject {
 
     // MARK: - Main Signal
 
-    func createOrGetBidder() -> RACSignal {
+    public func createOrGetBidder() -> RACSignal {
         return createOrUpdateUser().then {
             self.createOrUpdateBidder()
 

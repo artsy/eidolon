@@ -1,18 +1,18 @@
 import UIKit
 import CardFlight
 
-class CardHandler: NSObject, CFTReaderDelegate {
+public class CardHandler: NSObject, CFTReaderDelegate {
 
-    let cardSwipedSignal = RACSubject()
-    var card: CFTCard?
+    public let cardSwipedSignal = RACSubject()
+    public var card: CFTCard?
     
-    let APIKey: String
-    let APIToken: String
+    public let APIKey: String
+    public let APIToken: String
 
-    var reader: CFTReader!
-    lazy var sessionManager = CFTSessionManager.sharedInstance()
+    public var reader: CFTReader!
+    public lazy var sessionManager = CFTSessionManager.sharedInstance()
 
-    init(apiKey: String, accountToken: String){
+    public init(apiKey: String, accountToken: String){
         APIKey = apiKey
         APIToken = accountToken
 
@@ -21,7 +21,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
         sessionManager.setApiToken(APIKey, accountToken: APIToken)
     }
 
-    func startSearching() {
+    public func startSearching() {
         sessionManager.setLogging(true)
 
         reader = CFTReader(andConnect: ())
@@ -30,12 +30,12 @@ class CardHandler: NSObject, CFTReaderDelegate {
         cardSwipedSignal.sendNext("Started searching");
     }
 
-    func end() {
+    public func end() {
         reader.cancelSwipeWithMessage(nil)
         reader = nil
     }
 
-    func readerCardResponse(card: CFTCard?, withError error: NSError?) {
+    public func readerCardResponse(card: CFTCard?, withError error: NSError?) {
         if let card = card {
             self.card = card;
             cardSwipedSignal.sendNext("Got Card")
@@ -61,30 +61,30 @@ class CardHandler: NSObject, CFTReaderDelegate {
 
     // handle other delegate call backs with the status messages
 
-    func readerIsAttached() {
+    public func readerIsAttached() {
         cardSwipedSignal.sendNext("Reader is attatched");
     }
 
-    func readerIsConnecting() {
+    public func readerIsConnecting() {
         cardSwipedSignal.sendNext("Reader is connecting");
     }
 
-    func readerIsDisconnected() {
+    public func readerIsDisconnected() {
         cardSwipedSignal.sendNext("Reader is disconnected");
         logger.error("Card Reader Disconnected")
     }
 
-    func readerSwipeDidCancel() {
+    public func readerSwipeDidCancel() {
         cardSwipedSignal.sendNext("Reader did cancel");
         logger.error("Card Reader was Cancelled")
     }
 
-    func readerGenericResponse(cardData: String!) {
+    public func readerGenericResponse(cardData: String!) {
         cardSwipedSignal.sendNext("Reader received non-card data: \(cardData) ");
         reader.beginSwipeWithMessage(nil);
     }
 
-    func readerIsConnected(isConnected: Bool, withError error: NSError!) {
+    public func readerIsConnected(isConnected: Bool, withError error: NSError!) {
         if isConnected {
             cardSwipedSignal.sendNext("Reader is connected");
             reader.beginSwipeWithMessage(nil);
@@ -99,10 +99,10 @@ class CardHandler: NSObject, CFTReaderDelegate {
     }
 }
 
- class LocalCardReader: CFTReader {
-     var fail = false
+public class LocalCardReader: CFTReader {
+    public var fail = false
 
-    override func beginSwipeWithMessage(message: String!) {
+    override public func beginSwipeWithMessage(message: String!) {
         if fail {
             let error = NSError(domain: "eidolon", code: 111, userInfo: nil)
             self.delegate.readerCardResponse(nil, withError: error)

@@ -45,7 +45,7 @@ pod 'SwiftyJSON', :git => "https://github.com/orta/SwiftyJSON", :branch => "pods
 pod 'Alamofire', :git => "https://github.com/mrackwitz/Alamofire.git", :branch => "podspec"
 pod 'LlamaKit', :git => "https://github.com/AshFurrow/LlamaKit", :branch => "rac_podspec"
 pod 'ReactiveCocoa', :git => "https://github.com/AshFurrow/ReactiveCocoa", :branch => "podspec"
-pod 'Moya/Reactive', :git => "https://github.com/AshFurrow/Moya", :branch => "podspec"
+pod 'Moya/Reactive', :git => "https://github.com/AshFurrow/Moya"
 
 target "KioskTests" do
 

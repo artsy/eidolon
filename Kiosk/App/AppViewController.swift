@@ -6,10 +6,10 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
     var auctionID = AppSetup.sharedState.auctionID
 
     @IBOutlet var countdownManager: ListingsCountdownManager!
-    @IBOutlet var offlineBlockingView: UIView!
+    @IBOutlet public var offlineBlockingView: UIView!
 
     let reachability = ReachabilityManager()
-    var reachabilitySignal: RACSignal?
+    public var reachabilitySignal: RACSignal?
 
     let apiPinger = APIPingManager()
     var apiPingerSignal: RACSignal?

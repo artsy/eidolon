@@ -1,5 +1,8 @@
 import Quick
 import Nimble
+import Nimble_Snapshots
+import ReactiveCocoa
+import Kiosk
 
 class AppViewControllerTests: QuickSpec {
     override func spec() {

@@ -7,22 +7,22 @@ let VerticalMargins = 26
 let MasonryCellIdentifier = "MasonryCell"
 let TableCellIdentifier = "TableCell"
 
-class ListingsViewController: UIViewController {
-    var allowAnimations = true
-    var auctionID = AppSetup.sharedState.auctionID
-    var syncInterval = SyncInterval
-    var pageSize = 10
-    var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
+public class ListingsViewController: UIViewController {
+    public var allowAnimations = true
+    public var auctionID = AppSetup.sharedState.auctionID
+    public var syncInterval = SyncInterval
+    public var pageSize = 10
+    public var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
         return signal.deliverOn(scheduler)
     }
 
-    dynamic var saleArtworks = [SaleArtwork]()
-    dynamic var sortedSaleArtworks = [SaleArtwork]()
+    public dynamic var saleArtworks = [SaleArtwork]()
+    public dynamic var sortedSaleArtworks = [SaleArtwork]()
 
-    dynamic var cellIdentifier = MasonryCellIdentifier
+    public dynamic var cellIdentifier = MasonryCellIdentifier
 
-    @IBOutlet var stagingFlag: UIImageView!
-    @IBOutlet var loadingSpinner: Spinner!
+    @IBOutlet public var stagingFlag: UIImageView!
+    @IBOutlet public var loadingSpinner: Spinner!
     
     lazy var collectionView: UICollectionView = {
         var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())
@@ -36,11 +36,11 @@ class ListingsViewController: UIViewController {
         return collectionView
     }()
 
-    lazy var switchView: SwitchView = {
+    lazy public var switchView: SwitchView = {
         return SwitchView(buttonTitles: SwitchValues.allSwitchValues().map{$0.name.uppercaseString})
     }()
     
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ListingsViewController {
+    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ListingsViewController {
         return storyboard.viewControllerWithID(.AuctionListings) as ListingsViewController
     }
     
@@ -169,7 +169,7 @@ class ListingsViewController: UIViewController {
         return developmentEnvironment
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         if detectDevelopment() {
@@ -252,7 +252,7 @@ class ListingsViewController: UIViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .ShowSaleArtworkDetails {
             let saleArtwork = sender as SaleArtwork!
             let detailsViewController = segue.destinationViewController as SaleArtworkDetailsViewController
@@ -261,7 +261,7 @@ class ListingsViewController: UIViewController {
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override public func viewWillAppear(animated: Bool) {
         let switchHeightPredicate = "\(switchView.intrinsicContentSize().height)"
         
         switchView.constrainHeight(switchHeightPredicate)
@@ -275,10 +275,10 @@ class ListingsViewController: UIViewController {
 // MARK: - Collection View
 
 extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, ARCollectionViewMasonryLayoutDelegate {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return countElements(sortedSaleArtworks)
     }
-    
+  public   
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
@@ -307,11 +307,11 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         return cell
     }
     
-    func presentDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
+    public func presentDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
         performSegueWithIdentifier(SegueIdentifier.ShowSaleArtworkDetails.rawValue, sender: saleArtwork)
     }
 
-    func presentModalForSaleArtwork(saleArtwork: SaleArtwork) {
+    public func presentModalForSaleArtwork(saleArtwork: SaleArtwork) {
 
         ARAnalytics.event("Bid Button Tapped")
 
@@ -331,7 +331,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         }
     }
 
-    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    public func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
         return MasonryCollectionViewCell.heightForSaleArtwork(saleArtworkAtIndexPath(indexPath))
     }
 }

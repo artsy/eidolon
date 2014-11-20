@@ -1,28 +1,28 @@
 import UIKit
 import Moya
 
-class BidCheckingNetworkModel: NSObject {
+public class BidCheckingNetworkModel: NSObject {
 
     private var pollInterval = NSTimeInterval(1)
     private var maxPollRequests = 6
     private var pollRequests = 0
 
     // inputs
-    let bidDetails:BidDetails
-    let loggedInProvider:ReactiveMoyaProvider<ArtsyAPI>
+    public let bidDetails:BidDetails
+    public let loggedInProvider:ReactiveMoyaProvider<ArtsyAPI>
 
     // outputs
-    var bidIsResolved = false
-    var isHighestBidder = false
+    public var bidIsResolved = false
+    public var isHighestBidder = false
 
     private var mostRecentSaleArtwork:SaleArtwork?
 
-    init(details: BidDetails, provider: ReactiveMoyaProvider<ArtsyAPI>) {
+    public init(details: BidDetails, provider: ReactiveMoyaProvider<ArtsyAPI>) {
         self.bidDetails = details
         self.loggedInProvider = provider
     }
 
-    func waitForBidResolution () -> RACSignal {
+    public func waitForBidResolution () -> RACSignal {
         return self.pollForUpdatedSaleArtwork().then { [weak self] (_) in
             return self == nil ? RACSignal.empty() : self!.checkForMaxBid()
 

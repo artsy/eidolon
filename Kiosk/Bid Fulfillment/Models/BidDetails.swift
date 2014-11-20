@@ -1,13 +1,13 @@
-@objc class BidDetails: NSObject {
-    dynamic var newUser: NewUser = NewUser()
-    dynamic var saleArtwork: SaleArtwork?
+@objc public class BidDetails: NSObject {
+    public dynamic var newUser: NewUser = NewUser()
+    public dynamic var saleArtwork: SaleArtwork?
 
-    dynamic var paddleNumber: String?
-    dynamic var bidderPIN: String?
-    dynamic var bidAmountCents: NSNumber?
-    dynamic var bidderID: String?
+    public dynamic var paddleNumber: String?
+    public dynamic var bidderPIN: String?
+    public dynamic var bidAmountCents: NSNumber?
+    public dynamic var bidderID: String?
 
-    init(saleArtwork: SaleArtwork?, paddleNumber: String?, bidderPIN: String?, bidAmountCents:Int?) {
+    public init(saleArtwork: SaleArtwork?, paddleNumber: String?, bidderPIN: String?, bidAmountCents:Int?) {
         self.saleArtwork = saleArtwork
         self.paddleNumber = paddleNumber
         self.bidderPIN = bidderPIN
@@ -15,7 +15,7 @@
     }
 
     /// Not for production use
-    convenience init(string: String) {
+    public convenience init(string: String) {
         self.init(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
     }
 }

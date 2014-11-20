@@ -1,5 +1,7 @@
 import Quick
 import Nimble
+import Kiosk
+import Nimble_Snapshots
 
 class TextFieldTests: QuickSpec {
     override func spec() {

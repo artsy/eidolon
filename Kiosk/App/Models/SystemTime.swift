@@ -1,10 +1,12 @@
 import Foundation
 import ISO8601DateFormatter
 
-class SystemTime {
-    var systemTimeInterval: NSTimeInterval? = nil
+public class SystemTime {
+    public var systemTimeInterval: NSTimeInterval? = nil
 
-    func syncSignal() -> RACSignal {
+    public init () {}
+
+    public func syncSignal() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.SystemTime
 
         return XAppRequest(endpoint).filterSuccessfulStatusCodes().mapJSON()
@@ -21,11 +23,11 @@ class SystemTime {
             }
     }
 
-    func inSync() -> Bool {
+    public func inSync() -> Bool {
         return systemTimeInterval != nil
     }
 
-    func date() -> NSDate {
+    public func date() -> NSDate {
         let now = NSDate()
         if let systemTimeInterval = systemTimeInterval {
             return now.dateByAddingTimeInterval(-systemTimeInterval)
@@ -34,7 +36,7 @@ class SystemTime {
         }
     }
 
-    func reset() {
+    public func reset() {
         systemTimeInterval = nil
     }
 }

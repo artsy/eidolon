@@ -3,7 +3,7 @@ import Artsy_UILabels
 import Artsy_UIButtons
 import UIImageViewAligned
 
-class BidDetailsPreviewView: UIView {
+public class BidDetailsPreviewView: UIView {
     
     dynamic var bidDetails: BidDetails?
 
@@ -12,7 +12,7 @@ class BidDetailsPreviewView: UIView {
     dynamic let artworkTitleLabel = ARSerifLabel()
     dynamic let currentBidPriceLabel = ARSerifLabel()
 
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         self.backgroundColor = UIColor.whiteColor()
 
         artistNameLabel.numberOfLines = 1

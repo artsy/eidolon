@@ -1,5 +1,7 @@
 import Quick
 import Nimble
+import Nimble_Snapshots
+import Kiosk
 
 class ConfirmYourBidViewControllerTests: QuickSpec {
     override func spec() {

@@ -1,19 +1,19 @@
 import UIKit
 import Moya
 
-class PlaceBidNetworkModel: NSObject {
+public class PlaceBidNetworkModel: NSObject {
 
     var fulfillmentNav:FulfillmentNavigationController!
     var bidderPosition:BidderPosition?
 
-    func bidSignal(bidDetails: BidDetails) -> RACSignal {
+    public func bidSignal(bidDetails: BidDetails) -> RACSignal {
 
         let saleArtwork = bidDetails.saleArtwork
         let cents = String(bidDetails.bidAmountCents! as Int)
         return bidOnSaleArtwork(saleArtwork!, bidAmountCents: cents)
     }
 
-    func provider() -> ReactiveMoyaProvider<ArtsyAPI>  {
+    public func provider() -> ReactiveMoyaProvider<ArtsyAPI>  {
         if let provider = fulfillmentNav.loggedInProvider {
             return provider
         }

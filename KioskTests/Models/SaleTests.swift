@@ -1,5 +1,7 @@
 import Quick
 import Nimble
+import Kiosk
+import ISO8601DateFormatter
 
 class SaleTests: QuickSpec {
     func stringFromDate(date: NSDate) -> String {

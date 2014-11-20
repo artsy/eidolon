@@ -2,7 +2,7 @@ import UIKit
 import Artsy_UILabels
 import ARAnalytics
 
-class LoadingViewController: UIViewController {
+public class LoadingViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: ARSerifLabel!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
@@ -11,24 +11,24 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var spinner: Spinner!
     @IBOutlet weak var bidConfirmationImageView: UIImageView!
 
-    var placingBid = true
+    public var placingBid = true
 
-    var performNetworking = true
-    var animate = true
+    public var performNetworking = true
+    public var animate = true
 
-    var bidderNetworkModel: BidderNetworkModel!
-    var bidCheckingModel: BidCheckingNetworkModel!
-    var placeBidNetworkModel: PlaceBidNetworkModel!
-    var details: BidDetails?
+    public var bidderNetworkModel: BidderNetworkModel!
+    public var bidCheckingModel: BidCheckingNetworkModel!
+    public var placeBidNetworkModel: PlaceBidNetworkModel!
+    public var details: BidDetails?
 
-    @IBOutlet weak var backToAuctionButton: SecondaryActionButton!
-    @IBOutlet weak var placeHigherBidButton: ActionButton!
+    @IBOutlet public weak var backToAuctionButton: SecondaryActionButton!
+    @IBOutlet public weak var placeHigherBidButton: ActionButton!
 
     func bidDetails() -> BidDetails {
         return details ?? self.fulfillmentNav().bidDetails
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         if placingBid  {
@@ -177,7 +177,7 @@ class LoadingViewController: UIViewController {
         statusMessage.hidden = false
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .PushtoBidConfirmed {
             let detailsVC = segue.destinationViewController as YourBiddingDetailsViewController
             detailsVC.confirmationImage = bidConfirmationImageView.image

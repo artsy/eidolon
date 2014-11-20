@@ -1,5 +1,5 @@
-class JSONAble: NSObject {
-    class func fromJSON([String:AnyObject]) -> JSONAble {
+public class JSONAble: NSObject {
+    public class func fromJSON([String:AnyObject]) -> JSONAble {
         return JSONAble()
     }
 }

@@ -1,5 +1,10 @@
 import Quick
 import Nimble
+import Kiosk
+import ReactiveCocoa
+import Nimble_Snapshots
+import SDWebImage
+import Moya
 
 class ListingsViewControllerTests: QuickSpec {
     let imageCache = SDImageCache.sharedImageCache()

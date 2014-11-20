@@ -1,26 +1,26 @@
 import Foundation
 import SwiftyJSON
 
-class Artwork: JSONAble {
-    let id: String
+public class Artwork: JSONAble {
+    public let id: String
 
-    let dateString: String
-    dynamic let title: String
-    dynamic let titleAndDate: NSAttributedString
-    dynamic let price: String
-    dynamic let date: String
+    public let dateString: String
+    public dynamic let title: String
+    public dynamic let titleAndDate: NSAttributedString
+    public dynamic let price: String
+    public dynamic let date: String
 
-    dynamic var medium: String?
-    dynamic var dimensions = [String]()
+    public dynamic var medium: String?
+    public dynamic var dimensions = [String]()
 
-    dynamic var imageRights: String?
-    dynamic var additionalInfo: String?
-    dynamic var blurb: String?
+    public dynamic var imageRights: String?
+    public dynamic var additionalInfo: String?
+    public dynamic var blurb: String?
 
-    dynamic var artists: [Artist]?
-    dynamic var culturalMarker: String?
+    public dynamic var artists: [Artist]?
+    public dynamic var culturalMarker: String?
 
-    dynamic var images: [Image]?
+    public dynamic var images: [Image]?
 
     init(id: String, dateString: String, title: String, titleAndDate: NSAttributedString, price: String, date: String) {
         self.id = id
@@ -31,7 +31,7 @@ class Artwork: JSONAble {
         self.date = date
     }
 
-    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
+    override public class func fromJSON(json: [String: AnyObject]) -> JSONAble {
         let json = JSON(json)
 
         let id = json["id"].stringValue

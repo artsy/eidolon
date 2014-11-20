@@ -7,6 +7,7 @@
 //
 
 import Nimble
+import Nimble_Snapshots
 
 func 📷(snapshottable:Snapshotable) {
     expect(snapshottable).to( recordSnapshot() )

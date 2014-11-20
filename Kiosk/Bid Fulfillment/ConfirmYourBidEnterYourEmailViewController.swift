@@ -1,15 +1,15 @@
 import UIKit
 
-class ConfirmYourBidEnterYourEmailViewController: UIViewController {
+public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
-    @IBOutlet var emailTextField: UITextField!
-    @IBOutlet var confirmButton: UIButton!
-    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
-    class func instantiateFromStoryboard() -> ConfirmYourBidEnterYourEmailViewController {
+    @IBOutlet public var emailTextField: UITextField!
+    @IBOutlet public var confirmButton: UIButton!
+    @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
+    public class func instantiateFromStoryboard() -> ConfirmYourBidEnterYourEmailViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBidEnterEmail) as ConfirmYourBidEnterYourEmailViewController
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         let nav = self.fulfillmentNav()
@@ -45,7 +45,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override public func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     
         self.emailTextField.becomeFirstResponder()

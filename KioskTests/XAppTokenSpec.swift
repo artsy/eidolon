@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+import Kiosk
 
 class XAppTokenSpec: QuickSpec {
     override func spec() {

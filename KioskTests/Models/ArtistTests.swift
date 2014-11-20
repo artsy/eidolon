@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+import Kiosk
 
 class ArtistTests: QuickSpec {
     override func spec() {

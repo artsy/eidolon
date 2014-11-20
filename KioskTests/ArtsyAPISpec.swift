@@ -1,5 +1,9 @@
 import Quick
 import Nimble
+import Kiosk
+import ReactiveCocoa
+import Pods
+import Moya
 
 func beInTheFuture() -> MatcherFunc<NSDate> {
     return MatcherFunc { actualExpression, failureMessage in

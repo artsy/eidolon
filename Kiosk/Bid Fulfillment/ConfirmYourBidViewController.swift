@@ -2,28 +2,28 @@ import UIKit
 import ECPhoneNumberFormatter
 import Moya
 
-class ConfirmYourBidViewController: UIViewController {
+public class ConfirmYourBidViewController: UIViewController {
 
     dynamic var number: String = ""
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
-    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
-    @IBOutlet var numberAmountTextField: TextField!
-    @IBOutlet var cursor: CursorView!
-    @IBOutlet var keypadContainer: KeypadContainerView!
-    @IBOutlet var enterButton: UIButton!
-    @IBOutlet var useArtsyLoginButton: UIButton!
+    @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
+    @IBOutlet public var numberAmountTextField: TextField!
+    @IBOutlet public var cursor: CursorView!
+    @IBOutlet public var keypadContainer: KeypadContainerView!
+    @IBOutlet public var enterButton: UIButton!
+    @IBOutlet public var useArtsyLoginButton: UIButton!
 
-    lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
-    lazy var clearSignal:RACSignal!  = self.keypadContainer.keypad?.rightSignal
-    lazy var deleteSignal:RACSignal! = self.keypadContainer.keypad?.leftSignal
-    lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    public lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
+    public lazy var clearSignal:RACSignal!  = self.keypadContainer.keypad?.rightSignal
+    public lazy var deleteSignal:RACSignal! = self.keypadContainer.keypad?.leftSignal
+    public lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
-    class func instantiateFromStoryboard() -> ConfirmYourBidViewController {
+    public class func instantiateFromStoryboard() -> ConfirmYourBidViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         let titleString = useArtsyLoginButton.titleForState(useArtsyLoginButton.state)! ?? ""

@@ -2,20 +2,20 @@ import Foundation
 import LlamaKit
 import SwiftyJSON
 
-class Image: JSONAble {
-    let id: String
-    let imageFormatString: String
-    let imageVersions: [String]
-    let imageSize: CGSize
-    let aspectRatio: CGFloat
+public class Image: JSONAble {
+    public let id: String
+    public let imageFormatString: String
+    public let imageVersions: [String]
+    public let imageSize: CGSize
+    public let aspectRatio: CGFloat
 
-    let baseURL:String
-    let tileSize: Int
-    let maxTiledHeight: Int
-    let maxTiledWidth: Int
-    let maxLevel: Int
+    public let baseURL:String
+    public let tileSize: Int
+    public let maxTiledHeight: Int
+    public let maxTiledWidth: Int
+    public let maxLevel: Int
 
-    init(id: String, imageFormatString: String, imageVersions: [String], imageSize: CGSize, aspectRatio: CGFloat, baseURL: String, tileSize: Int, maxTiledHeight: Int, maxTiledWidth: Int, maxLevel: Int) {
+    public init(id: String, imageFormatString: String, imageVersions: [String], imageSize: CGSize, aspectRatio: CGFloat, baseURL: String, tileSize: Int, maxTiledHeight: Int, maxTiledWidth: Int, maxLevel: Int) {
         self.id = id
         self.imageFormatString = imageFormatString
         self.imageVersions = imageVersions
@@ -28,7 +28,7 @@ class Image: JSONAble {
         self.maxLevel = maxLevel
     }
 
-    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+    override public class func fromJSON(json:[String: AnyObject]) -> JSONAble {
         let json = JSON(json)
 
         let id = json["id"].stringValue
@@ -51,15 +51,15 @@ class Image: JSONAble {
         return Image(id: id, imageFormatString: imageFormatString, imageVersions: imageVersions, imageSize: imageSize, aspectRatio:aspectRatio, baseURL: baseURL, tileSize: tileSize, maxTiledHeight: maxTiledHeight, maxTiledWidth: maxTiledWidth, maxLevel: maxLevel)
     }
 
-    func thumbnailURL() -> NSURL? {
+    public func thumbnailURL() -> NSURL? {
         return urlFromPreferenceList(["large", "medium", "larger"])
     }
 
-    func fullsizeURL() -> NSURL? {
+    public func fullsizeURL() -> NSURL? {
         return urlFromPreferenceList(["larger", "medium", "large"])
     }
 
-    func localImageTileForLevel(level:Int, x:Int, y:Int) -> UIImage? {
+    public func localImageTileForLevel(level:Int, x:Int, y:Int) -> UIImage? {
         let path = localPathForImageTileAtLevel(level, x:x, y:y)
         return UIImage(contentsOfFile:path)
     }
