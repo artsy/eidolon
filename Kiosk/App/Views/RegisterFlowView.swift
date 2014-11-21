@@ -1,18 +1,18 @@
 import UIKit
 import ORStackView
 
-class RegisterFlowView: ORStackView {
+public class RegisterFlowView: ORStackView {
 
-    dynamic var highlightedIndex = 0
-    let jumpToIndexSignal = RACSubject()
+    public dynamic var highlightedIndex = 0
+    public let jumpToIndexSignal = RACSubject()
 
-    var details:BidDetails? {
+    public var details: BidDetails? {
         didSet {
             self.update()
         }
     }
 
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         
         self.backgroundColor = UIColor.whiteColor()

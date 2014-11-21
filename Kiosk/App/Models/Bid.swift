@@ -1,16 +1,16 @@
 import Foundation
 import SwiftyJSON
 
-class Bid: JSONAble {
-    let id: String
-    let amountCents: Int
+public class Bid: JSONAble {
+    public let id: String
+    public let amountCents: Int
 
     init(id: String, amountCents: Int) {
         self.id = id
         self.amountCents = amountCents
     }
 
-    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+    override public class func fromJSON(json:[String: AnyObject]) -> JSONAble {
         let json = JSON(json)
 
         let id = json["id"].stringValue

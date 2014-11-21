@@ -89,7 +89,7 @@ DEPENDENCIES:
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
   - LlamaKit (from `https://github.com/AshFurrow/LlamaKit`, branch `rac_podspec`)
-  - Moya/Reactive (from `https://github.com/AshFurrow/Moya`, branch `podspec`)
+  - Moya/Reactive (from `https://github.com/AshFurrow/Moya`)
   - Nimble (from `https://github.com/ashfurrow/Nimble`, branch `podspec`)
   - Nimble-Snapshots (from `https://github.com/ashfurrow/Nimble-Snapshots.git`)
   - ORStackView
@@ -122,7 +122,6 @@ EXTERNAL SOURCES:
     :branch: rac_podspec
     :git: https://github.com/AshFurrow/LlamaKit
   Moya:
-    :branch: podspec
     :git: https://github.com/AshFurrow/Moya
   Nimble:
     :branch: podspec

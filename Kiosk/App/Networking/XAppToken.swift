@@ -7,7 +7,7 @@ private extension NSDate {
     }
 }
 
-struct XAppToken {
+public struct XAppToken {
     enum DefaultsKeys: String {
         case TokenKey = "TokenKey"
         case TokenExpiry = "TokenExpiry"
@@ -15,20 +15,20 @@ struct XAppToken {
 
     // MARK: - Initializers
 
-    let defaults:NSUserDefaults
+    public let defaults: NSUserDefaults
 
-    init(defaults:NSUserDefaults) {
+    public init(defaults:NSUserDefaults) {
         self.defaults = defaults
     }
 
-    init() {
+    public init() {
         self.defaults = NSUserDefaults.standardUserDefaults()
     }
 
 
     // MARK: - Properties
     
-    var token: String? {
+    public var token: String? {
         get {
             let key = defaults.stringForKey(DefaultsKeys.TokenKey.rawValue)
             return key
@@ -38,7 +38,7 @@ struct XAppToken {
         }
     }
     
-    var expiry: NSDate? {
+    public var expiry: NSDate? {
         get {
             return defaults.objectForKey(DefaultsKeys.TokenExpiry.rawValue) as? NSDate
         }
@@ -47,14 +47,14 @@ struct XAppToken {
         }
     }
     
-    var expired: Bool {
+    public var expired: Bool {
         if let expiry = expiry {
             return expiry.isInPast
         }
         return true
     }
     
-    var isValid: Bool {
+    public var isValid: Bool {
         if let token = token {
             return countElements(token) > 0 && !expired
         }

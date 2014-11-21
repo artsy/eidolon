@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5E2B3D4B19DC063C00906A26 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */; };
-		5E31531D1A1E3B600065CA08 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E31531C1A1E3B600065CA08 /* Test.swift */; };
 		5E3234311A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3234301A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift */; };
 		5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */; };
 		5E3D9D3219EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D9D3119EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift */; };
@@ -17,6 +16,59 @@
 		5E59DD3819913DD800A48370 /* ListingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59DD3719913DD800A48370 /* ListingsViewController.swift */; };
 		5E59DD3D19913DD800A48370 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E59DD3C19913DD800A48370 /* Images.xcassets */; };
 		5E5DA8E119E57E49000E5855 /* RACSignal+Kiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5DA8E019E57E49000E5855 /* RACSignal+Kiosk.swift */; };
+		5E770B6A1A1E75B400B05A0F /* RAC+JSONAbleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B2A1A1E75B400B05A0F /* RAC+JSONAbleTests.swift */; };
+		5E770B6B1A1E75B400B05A0F /* AppViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B2B1A1E75B400B05A0F /* AppViewControllerTests.swift */; };
+		5E770B6C1A1E75B400B05A0F /* ArtsyAPISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B2C1A1E75B400B05A0F /* ArtsyAPISpec.swift */; };
+		5E770B6D1A1E75B400B05A0F /* artwork.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B2D1A1E75B400B05A0F /* artwork.jpg */; };
+		5E770B6E1A1E75B400B05A0F /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B2F1A1E75B400B05A0F /* ConfirmYourBidArtsyLoginViewControllerTests.swift */; };
+		5E770B6F1A1E75B400B05A0F /* ConfirmYourBidEnterYourEmailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B301A1E75B400B05A0F /* ConfirmYourBidEnterYourEmailViewControllerTests.swift */; };
+		5E770B701A1E75B400B05A0F /* ConfirmYourBidPINViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B311A1E75B400B05A0F /* ConfirmYourBidPINViewControllerTests.swift */; };
+		5E770B711A1E75B400B05A0F /* ConfirmYourBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B321A1E75B400B05A0F /* ConfirmYourBidViewControllerTests.swift */; };
+		5E770B721A1E75B400B05A0F /* FulfillmentContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B331A1E75B400B05A0F /* FulfillmentContainerViewControllerTests.swift */; };
+		5E770B731A1E75B400B05A0F /* LoadingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B341A1E75B400B05A0F /* LoadingViewControllerTests.swift */; };
+		5E770B741A1E75B400B05A0F /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B351A1E75B400B05A0F /* PlaceBidViewControllerTests.swift */; };
+		5E770B751A1E75B400B05A0F /* BidDetailsTestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B361A1E75B400B05A0F /* BidDetailsTestExtensions.swift */; };
+		5E770B761A1E75B400B05A0F /* CardHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B371A1E75B400B05A0F /* CardHandlerTests.swift */; };
+		5E770B771A1E75B400B05A0F /* emojiSnappin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B381A1E75B400B05A0F /* emojiSnappin.swift */; };
+		5E770B781A1E75B400B05A0F /* KioskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B391A1E75B400B05A0F /* KioskTests.swift */; };
+		5E770B791A1E75B400B05A0F /* ListingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B3A1A1E75B400B05A0F /* ListingsViewControllerTests.swift */; };
+		5E770B7A1A1E75B400B05A0F /* ArtistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B3C1A1E75B400B05A0F /* ArtistTests.swift */; };
+		5E770B7B1A1E75B400B05A0F /* ArtworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B3D1A1E75B400B05A0F /* ArtworkTests.swift */; };
+		5E770B7C1A1E75B400B05A0F /* BidderPositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B3E1A1E75B400B05A0F /* BidderPositionTests.swift */; };
+		5E770B7D1A1E75B400B05A0F /* BidderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B3F1A1E75B400B05A0F /* BidderTests.swift */; };
+		5E770B7E1A1E75B400B05A0F /* BidTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B401A1E75B400B05A0F /* BidTests.swift */; };
+		5E770B7F1A1E75B400B05A0F /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B411A1E75B400B05A0F /* ImageTests.swift */; };
+		5E770B801A1E75B400B05A0F /* SaleArtworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B421A1E75B400B05A0F /* SaleArtworkTests.swift */; };
+		5E770B811A1E75B400B05A0F /* SaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B431A1E75B400B05A0F /* SaleTests.swift */; };
+		5E770B821A1E75B400B05A0F /* SystemTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B441A1E75B400B05A0F /* SystemTimeTests.swift */; };
+		5E770B831A1E75B400B05A0F /* ReactiveCocoaBindingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B451A1E75B400B05A0F /* ReactiveCocoaBindingsTests.swift */; };
+		5E770B841A1E75B400B05A0F /* looks_right_offline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B481A1E75B400B05A0F /* looks_right_offline@2x.png */; };
+		5E770B851A1E75B400B05A0F /* looks_right_by_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B4A1A1E75B400B05A0F /* looks_right_by_default@2x.png */; };
+		5E770B861A1E75B400B05A0F /* looks_right_by_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B4C1A1E75B400B05A0F /* looks_right_by_default@2x.png */; };
+		5E770B871A1E75B400B05A0F /* looks_right_by_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B4E1A1E75B400B05A0F /* looks_right_by_default@2x.png */; };
+		5E770B881A1E75B400B05A0F /* when_displaying_stubbed_contents___alphabetical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B501A1E75B400B05A0F /* when_displaying_stubbed_contents___alphabetical@2x.png */; };
+		5E770B891A1E75B400B05A0F /* when_displaying_stubbed_contents___grid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B511A1E75B400B05A0F /* when_displaying_stubbed_contents___grid@2x.png */; };
+		5E770B8A1A1E75B400B05A0F /* when_displaying_stubbed_contents___highest_bid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B521A1E75B400B05A0F /* when_displaying_stubbed_contents___highest_bid@2x.png */; };
+		5E770B8B1A1E75B400B05A0F /* when_displaying_stubbed_contents___least_bids@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B531A1E75B400B05A0F /* when_displaying_stubbed_contents___least_bids@2x.png */; };
+		5E770B8C1A1E75B400B05A0F /* when_displaying_stubbed_contents___lowest_bid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B541A1E75B400B05A0F /* when_displaying_stubbed_contents___lowest_bid@2x.png */; };
+		5E770B8D1A1E75B400B05A0F /* when_displaying_stubbed_contents___most_bids@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B551A1E75B400B05A0F /* when_displaying_stubbed_contents___most_bids@2x.png */; };
+		5E770B8E1A1E75B400B05A0F /* default__placing_a_bid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B571A1E75B400B05A0F /* default__placing_a_bid@2x.png */; };
+		5E770B8F1A1E75B400B05A0F /* default__registering_a_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B581A1E75B400B05A0F /* default__registering_a_user@2x.png */; };
+		5E770B901A1E75B400B05A0F /* ending__placing_bid_not_resolved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B591A1E75B400B05A0F /* ending__placing_bid_not_resolved@2x.png */; };
+		5E770B911A1E75B400B05A0F /* ending__placing_bid_success_highest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B5A1A1E75B400B05A0F /* ending__placing_bid_success_highest@2x.png */; };
+		5E770B921A1E75B400B05A0F /* ending__placing_bid_success_not_highest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B5B1A1E75B400B05A0F /* ending__placing_bid_success_not_highest@2x.png */; };
+		5E770B931A1E75B400B05A0F /* ending__registering_user_not_resolved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B5C1A1E75B400B05A0F /* ending__registering_user_not_resolved@2x.png */; };
+		5E770B941A1E75B400B05A0F /* ending__registering_user_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B5D1A1E75B400B05A0F /* ending__registering_user_success@2x.png */; };
+		5E770B951A1E75B400B05A0F /* errors__correctly_placing_a_bid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B5E1A1E75B400B05A0F /* errors__correctly_placing_a_bid@2x.png */; };
+		5E770B961A1E75B400B05A0F /* errors__correctly_registering_a_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B5F1A1E75B400B05A0F /* errors__correctly_registering_a_user@2x.png */; };
+		5E770B971A1E75B400B05A0F /* with_bids__looks_correct@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B611A1E75B400B05A0F /* with_bids__looks_correct@2x.png */; };
+		5E770B981A1E75B400B05A0F /* with_no_bids__looks_correct@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B621A1E75B400B05A0F /* with_no_bids__looks_correct@2x.png */; };
+		5E770B991A1E75B400B05A0F /* looks_correct_configured_with_two_buttons@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E770B641A1E75B400B05A0F /* looks_correct_configured_with_two_buttons@2x.png */; };
+		5E770B9A1A1E75B400B05A0F /* RegisterFlowViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B651A1E75B400B05A0F /* RegisterFlowViewTests.swift */; };
+		5E770B9B1A1E75B400B05A0F /* SwitchViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B661A1E75B400B05A0F /* SwitchViewSpec.swift */; };
+		5E770B9C1A1E75B400B05A0F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B671A1E75B400B05A0F /* TestHelpers.swift */; };
+		5E770B9D1A1E75B400B05A0F /* TextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B681A1E75B400B05A0F /* TextFieldTests.swift */; };
+		5E770B9E1A1E75B400B05A0F /* XAppTokenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B691A1E75B400B05A0F /* XAppTokenSpec.swift */; };
 		5E7C2F0C1A095AA900A92C4D /* Artwork.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2F0B1A095AA900A92C4D /* Artwork.json */; };
 		5E7C2F1F1A09676300A92C4D /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2F1E1A09676300A92C4D /* UILabel+Fonts.swift */; };
 		5E7C2F501A0A335300A92C4D /* UIViewController+Bidding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C2F4F1A0A335300A92C4D /* UIViewController+Bidding.swift */; };
@@ -165,7 +217,6 @@
 		3E0A7FA688BE977937651169 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E97B41BA3BD1FC46425D54 /* Pods_TestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsCollectionViewCell.swift; sourceTree = "<group>"; };
-		5E31531C1A1E3B600065CA08 /* Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		5E3234301A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SaleArtworkDetailsViewController.swift; path = "Sale Artwork Details/SaleArtworkDetailsViewController.swift"; sourceTree = "<group>"; };
 		5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPI.swift; sourceTree = "<group>"; };
 		5E3D9D3119EBFCA8001C72C4 /* AppDelegate+GlobalActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+GlobalActions.swift"; sourceTree = "<group>"; };
@@ -183,6 +234,59 @@
 		5E59DD3C19913DD800A48370 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
 		5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PodsBridgingHeader.h; sourceTree = "<group>"; };
 		5E5DA8E019E57E49000E5855 /* RACSignal+Kiosk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RACSignal+Kiosk.swift"; sourceTree = "<group>"; };
+		5E770B2A1A1E75B400B05A0F /* RAC+JSONAbleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RAC+JSONAbleTests.swift"; sourceTree = "<group>"; };
+		5E770B2B1A1E75B400B05A0F /* AppViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppViewControllerTests.swift; path = KioskTests/AppViewControllerTests.swift; sourceTree = SOURCE_ROOT; };
+		5E770B2C1A1E75B400B05A0F /* ArtsyAPISpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtsyAPISpec.swift; path = KioskTests/ArtsyAPISpec.swift; sourceTree = SOURCE_ROOT; };
+		5E770B2D1A1E75B400B05A0F /* artwork.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = artwork.jpg; path = KioskTests/artwork.jpg; sourceTree = SOURCE_ROOT; };
+		5E770B2F1A1E75B400B05A0F /* ConfirmYourBidArtsyLoginViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidArtsyLoginViewControllerTests.swift; sourceTree = "<group>"; };
+		5E770B301A1E75B400B05A0F /* ConfirmYourBidEnterYourEmailViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidEnterYourEmailViewControllerTests.swift; sourceTree = "<group>"; };
+		5E770B311A1E75B400B05A0F /* ConfirmYourBidPINViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidPINViewControllerTests.swift; sourceTree = "<group>"; };
+		5E770B321A1E75B400B05A0F /* ConfirmYourBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidViewControllerTests.swift; sourceTree = "<group>"; };
+		5E770B331A1E75B400B05A0F /* FulfillmentContainerViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentContainerViewControllerTests.swift; sourceTree = "<group>"; };
+		5E770B341A1E75B400B05A0F /* LoadingViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewControllerTests.swift; sourceTree = "<group>"; };
+		5E770B351A1E75B400B05A0F /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; };
+		5E770B361A1E75B400B05A0F /* BidDetailsTestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BidDetailsTestExtensions.swift; path = KioskTests/BidDetailsTestExtensions.swift; sourceTree = SOURCE_ROOT; };
+		5E770B371A1E75B400B05A0F /* CardHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardHandlerTests.swift; path = KioskTests/CardHandlerTests.swift; sourceTree = SOURCE_ROOT; };
+		5E770B381A1E75B400B05A0F /* emojiSnappin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = emojiSnappin.swift; path = KioskTests/emojiSnappin.swift; sourceTree = SOURCE_ROOT; };
+		5E770B391A1E75B400B05A0F /* KioskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KioskTests.swift; path = KioskTests/KioskTests.swift; sourceTree = SOURCE_ROOT; };
+		5E770B3A1A1E75B400B05A0F /* ListingsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingsViewControllerTests.swift; path = KioskTests/ListingsViewControllerTests.swift; sourceTree = SOURCE_ROOT; };
+		5E770B3C1A1E75B400B05A0F /* ArtistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTests.swift; sourceTree = "<group>"; };
+		5E770B3D1A1E75B400B05A0F /* ArtworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtworkTests.swift; sourceTree = "<group>"; };
+		5E770B3E1A1E75B400B05A0F /* BidderPositionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderPositionTests.swift; sourceTree = "<group>"; };
+		5E770B3F1A1E75B400B05A0F /* BidderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderTests.swift; sourceTree = "<group>"; };
+		5E770B401A1E75B400B05A0F /* BidTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidTests.swift; sourceTree = "<group>"; };
+		5E770B411A1E75B400B05A0F /* ImageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
+		5E770B421A1E75B400B05A0F /* SaleArtworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkTests.swift; sourceTree = "<group>"; };
+		5E770B431A1E75B400B05A0F /* SaleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleTests.swift; sourceTree = "<group>"; };
+		5E770B441A1E75B400B05A0F /* SystemTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemTimeTests.swift; sourceTree = "<group>"; };
+		5E770B451A1E75B400B05A0F /* ReactiveCocoaBindingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactiveCocoaBindingsTests.swift; path = KioskTests/ReactiveCocoaBindingsTests.swift; sourceTree = SOURCE_ROOT; };
+		5E770B481A1E75B400B05A0F /* looks_right_offline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "looks_right_offline@2x.png"; sourceTree = "<group>"; };
+		5E770B4A1A1E75B400B05A0F /* looks_right_by_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "looks_right_by_default@2x.png"; sourceTree = "<group>"; };
+		5E770B4C1A1E75B400B05A0F /* looks_right_by_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "looks_right_by_default@2x.png"; sourceTree = "<group>"; };
+		5E770B4E1A1E75B400B05A0F /* looks_right_by_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "looks_right_by_default@2x.png"; sourceTree = "<group>"; };
+		5E770B501A1E75B400B05A0F /* when_displaying_stubbed_contents___alphabetical@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "when_displaying_stubbed_contents___alphabetical@2x.png"; sourceTree = "<group>"; };
+		5E770B511A1E75B400B05A0F /* when_displaying_stubbed_contents___grid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "when_displaying_stubbed_contents___grid@2x.png"; sourceTree = "<group>"; };
+		5E770B521A1E75B400B05A0F /* when_displaying_stubbed_contents___highest_bid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "when_displaying_stubbed_contents___highest_bid@2x.png"; sourceTree = "<group>"; };
+		5E770B531A1E75B400B05A0F /* when_displaying_stubbed_contents___least_bids@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "when_displaying_stubbed_contents___least_bids@2x.png"; sourceTree = "<group>"; };
+		5E770B541A1E75B400B05A0F /* when_displaying_stubbed_contents___lowest_bid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "when_displaying_stubbed_contents___lowest_bid@2x.png"; sourceTree = "<group>"; };
+		5E770B551A1E75B400B05A0F /* when_displaying_stubbed_contents___most_bids@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "when_displaying_stubbed_contents___most_bids@2x.png"; sourceTree = "<group>"; };
+		5E770B571A1E75B400B05A0F /* default__placing_a_bid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default__placing_a_bid@2x.png"; sourceTree = "<group>"; };
+		5E770B581A1E75B400B05A0F /* default__registering_a_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default__registering_a_user@2x.png"; sourceTree = "<group>"; };
+		5E770B591A1E75B400B05A0F /* ending__placing_bid_not_resolved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ending__placing_bid_not_resolved@2x.png"; sourceTree = "<group>"; };
+		5E770B5A1A1E75B400B05A0F /* ending__placing_bid_success_highest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ending__placing_bid_success_highest@2x.png"; sourceTree = "<group>"; };
+		5E770B5B1A1E75B400B05A0F /* ending__placing_bid_success_not_highest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ending__placing_bid_success_not_highest@2x.png"; sourceTree = "<group>"; };
+		5E770B5C1A1E75B400B05A0F /* ending__registering_user_not_resolved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ending__registering_user_not_resolved@2x.png"; sourceTree = "<group>"; };
+		5E770B5D1A1E75B400B05A0F /* ending__registering_user_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ending__registering_user_success@2x.png"; sourceTree = "<group>"; };
+		5E770B5E1A1E75B400B05A0F /* errors__correctly_placing_a_bid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "errors__correctly_placing_a_bid@2x.png"; sourceTree = "<group>"; };
+		5E770B5F1A1E75B400B05A0F /* errors__correctly_registering_a_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "errors__correctly_registering_a_user@2x.png"; sourceTree = "<group>"; };
+		5E770B611A1E75B400B05A0F /* with_bids__looks_correct@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "with_bids__looks_correct@2x.png"; sourceTree = "<group>"; };
+		5E770B621A1E75B400B05A0F /* with_no_bids__looks_correct@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "with_no_bids__looks_correct@2x.png"; sourceTree = "<group>"; };
+		5E770B641A1E75B400B05A0F /* looks_correct_configured_with_two_buttons@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "looks_correct_configured_with_two_buttons@2x.png"; sourceTree = "<group>"; };
+		5E770B651A1E75B400B05A0F /* RegisterFlowViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterFlowViewTests.swift; path = KioskTests/RegisterFlowViewTests.swift; sourceTree = SOURCE_ROOT; };
+		5E770B661A1E75B400B05A0F /* SwitchViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchViewSpec.swift; path = KioskTests/SwitchViewSpec.swift; sourceTree = SOURCE_ROOT; };
+		5E770B671A1E75B400B05A0F /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestHelpers.swift; path = KioskTests/TestHelpers.swift; sourceTree = SOURCE_ROOT; };
+		5E770B681A1E75B400B05A0F /* TextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextFieldTests.swift; path = KioskTests/TextFieldTests.swift; sourceTree = SOURCE_ROOT; };
+		5E770B691A1E75B400B05A0F /* XAppTokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XAppTokenSpec.swift; path = KioskTests/XAppTokenSpec.swift; sourceTree = SOURCE_ROOT; };
 		5E7C2F0B1A095AA900A92C4D /* Artwork.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Artwork.json; sourceTree = "<group>"; };
 		5E7C2F1E1A09676300A92C4D /* UILabel+Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Fonts.swift"; sourceTree = "<group>"; };
 		5E7C2F4F1A0A335300A92C4D /* UIViewController+Bidding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Bidding.swift"; sourceTree = "<group>"; };
@@ -379,7 +483,24 @@
 		5E4D0AD31A1E3B1200064A8A /* KioskTests */ = {
 			isa = PBXGroup;
 			children = (
-				5E31531C1A1E3B600065CA08 /* Test.swift */,
+				5E770B281A1E75B400B05A0F /* App */,
+				5E770B2B1A1E75B400B05A0F /* AppViewControllerTests.swift */,
+				5E770B2C1A1E75B400B05A0F /* ArtsyAPISpec.swift */,
+				5E770B2D1A1E75B400B05A0F /* artwork.jpg */,
+				5E770B2E1A1E75B400B05A0F /* Bid Fulfillment */,
+				5E770B361A1E75B400B05A0F /* BidDetailsTestExtensions.swift */,
+				5E770B371A1E75B400B05A0F /* CardHandlerTests.swift */,
+				5E770B381A1E75B400B05A0F /* emojiSnappin.swift */,
+				5E770B391A1E75B400B05A0F /* KioskTests.swift */,
+				5E770B3A1A1E75B400B05A0F /* ListingsViewControllerTests.swift */,
+				5E770B3B1A1E75B400B05A0F /* Models */,
+				5E770B451A1E75B400B05A0F /* ReactiveCocoaBindingsTests.swift */,
+				5E770B461A1E75B400B05A0F /* ReferenceImages */,
+				5E770B651A1E75B400B05A0F /* RegisterFlowViewTests.swift */,
+				5E770B661A1E75B400B05A0F /* SwitchViewSpec.swift */,
+				5E770B671A1E75B400B05A0F /* TestHelpers.swift */,
+				5E770B681A1E75B400B05A0F /* TextFieldTests.swift */,
+				5E770B691A1E75B400B05A0F /* XAppTokenSpec.swift */,
 				5E4D0AD41A1E3B1200064A8A /* Supporting Files */,
 			);
 			name = KioskTests;
@@ -440,6 +561,149 @@
 				5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5E770B281A1E75B400B05A0F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B291A1E75B400B05A0F /* RAC */,
+			);
+			name = App;
+			path = KioskTests/App;
+			sourceTree = SOURCE_ROOT;
+		};
+		5E770B291A1E75B400B05A0F /* RAC */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B2A1A1E75B400B05A0F /* RAC+JSONAbleTests.swift */,
+			);
+			path = RAC;
+			sourceTree = "<group>";
+		};
+		5E770B2E1A1E75B400B05A0F /* Bid Fulfillment */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B2F1A1E75B400B05A0F /* ConfirmYourBidArtsyLoginViewControllerTests.swift */,
+				5E770B301A1E75B400B05A0F /* ConfirmYourBidEnterYourEmailViewControllerTests.swift */,
+				5E770B311A1E75B400B05A0F /* ConfirmYourBidPINViewControllerTests.swift */,
+				5E770B321A1E75B400B05A0F /* ConfirmYourBidViewControllerTests.swift */,
+				5E770B331A1E75B400B05A0F /* FulfillmentContainerViewControllerTests.swift */,
+				5E770B341A1E75B400B05A0F /* LoadingViewControllerTests.swift */,
+				5E770B351A1E75B400B05A0F /* PlaceBidViewControllerTests.swift */,
+			);
+			name = "Bid Fulfillment";
+			path = "KioskTests/Bid Fulfillment";
+			sourceTree = SOURCE_ROOT;
+		};
+		5E770B3B1A1E75B400B05A0F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B3C1A1E75B400B05A0F /* ArtistTests.swift */,
+				5E770B3D1A1E75B400B05A0F /* ArtworkTests.swift */,
+				5E770B3E1A1E75B400B05A0F /* BidderPositionTests.swift */,
+				5E770B3F1A1E75B400B05A0F /* BidderTests.swift */,
+				5E770B401A1E75B400B05A0F /* BidTests.swift */,
+				5E770B411A1E75B400B05A0F /* ImageTests.swift */,
+				5E770B421A1E75B400B05A0F /* SaleArtworkTests.swift */,
+				5E770B431A1E75B400B05A0F /* SaleTests.swift */,
+				5E770B441A1E75B400B05A0F /* SystemTimeTests.swift */,
+			);
+			name = Models;
+			path = KioskTests/Models;
+			sourceTree = SOURCE_ROOT;
+		};
+		5E770B461A1E75B400B05A0F /* ReferenceImages */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B471A1E75B400B05A0F /* KioskTests.AppViewControllerTests */,
+				5E770B491A1E75B400B05A0F /* KioskTests.ConfirmYourBidArtsyLoginViewControllerTests */,
+				5E770B4B1A1E75B400B05A0F /* KioskTests.ConfirmYourBidEnterYourEmailViewControllerTests */,
+				5E770B4D1A1E75B400B05A0F /* KioskTests.ConfirmYourBidPINViewControllerTests */,
+				5E770B4F1A1E75B400B05A0F /* KioskTests.ListingsViewControllerTests */,
+				5E770B561A1E75B400B05A0F /* KioskTests.LoadingViewControllerTests */,
+				5E770B601A1E75B400B05A0F /* KioskTests.PlaceBidViewControllerTests */,
+				5E770B631A1E75B400B05A0F /* KioskTests.SwitchViewSpec */,
+			);
+			name = ReferenceImages;
+			path = KioskTests/ReferenceImages;
+			sourceTree = SOURCE_ROOT;
+		};
+		5E770B471A1E75B400B05A0F /* KioskTests.AppViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B481A1E75B400B05A0F /* looks_right_offline@2x.png */,
+			);
+			path = KioskTests.AppViewControllerTests;
+			sourceTree = "<group>";
+		};
+		5E770B491A1E75B400B05A0F /* KioskTests.ConfirmYourBidArtsyLoginViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B4A1A1E75B400B05A0F /* looks_right_by_default@2x.png */,
+			);
+			path = KioskTests.ConfirmYourBidArtsyLoginViewControllerTests;
+			sourceTree = "<group>";
+		};
+		5E770B4B1A1E75B400B05A0F /* KioskTests.ConfirmYourBidEnterYourEmailViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B4C1A1E75B400B05A0F /* looks_right_by_default@2x.png */,
+			);
+			path = KioskTests.ConfirmYourBidEnterYourEmailViewControllerTests;
+			sourceTree = "<group>";
+		};
+		5E770B4D1A1E75B400B05A0F /* KioskTests.ConfirmYourBidPINViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B4E1A1E75B400B05A0F /* looks_right_by_default@2x.png */,
+			);
+			path = KioskTests.ConfirmYourBidPINViewControllerTests;
+			sourceTree = "<group>";
+		};
+		5E770B4F1A1E75B400B05A0F /* KioskTests.ListingsViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B501A1E75B400B05A0F /* when_displaying_stubbed_contents___alphabetical@2x.png */,
+				5E770B511A1E75B400B05A0F /* when_displaying_stubbed_contents___grid@2x.png */,
+				5E770B521A1E75B400B05A0F /* when_displaying_stubbed_contents___highest_bid@2x.png */,
+				5E770B531A1E75B400B05A0F /* when_displaying_stubbed_contents___least_bids@2x.png */,
+				5E770B541A1E75B400B05A0F /* when_displaying_stubbed_contents___lowest_bid@2x.png */,
+				5E770B551A1E75B400B05A0F /* when_displaying_stubbed_contents___most_bids@2x.png */,
+			);
+			path = KioskTests.ListingsViewControllerTests;
+			sourceTree = "<group>";
+		};
+		5E770B561A1E75B400B05A0F /* KioskTests.LoadingViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B571A1E75B400B05A0F /* default__placing_a_bid@2x.png */,
+				5E770B581A1E75B400B05A0F /* default__registering_a_user@2x.png */,
+				5E770B591A1E75B400B05A0F /* ending__placing_bid_not_resolved@2x.png */,
+				5E770B5A1A1E75B400B05A0F /* ending__placing_bid_success_highest@2x.png */,
+				5E770B5B1A1E75B400B05A0F /* ending__placing_bid_success_not_highest@2x.png */,
+				5E770B5C1A1E75B400B05A0F /* ending__registering_user_not_resolved@2x.png */,
+				5E770B5D1A1E75B400B05A0F /* ending__registering_user_success@2x.png */,
+				5E770B5E1A1E75B400B05A0F /* errors__correctly_placing_a_bid@2x.png */,
+				5E770B5F1A1E75B400B05A0F /* errors__correctly_registering_a_user@2x.png */,
+			);
+			path = KioskTests.LoadingViewControllerTests;
+			sourceTree = "<group>";
+		};
+		5E770B601A1E75B400B05A0F /* KioskTests.PlaceBidViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B611A1E75B400B05A0F /* with_bids__looks_correct@2x.png */,
+				5E770B621A1E75B400B05A0F /* with_no_bids__looks_correct@2x.png */,
+			);
+			path = KioskTests.PlaceBidViewControllerTests;
+			sourceTree = "<group>";
+		};
+		5E770B631A1E75B400B05A0F /* KioskTests.SwitchViewSpec */ = {
+			isa = PBXGroup;
+			children = (
+				5E770B641A1E75B400B05A0F /* looks_correct_configured_with_two_buttons@2x.png */,
+			);
+			path = KioskTests.SwitchViewSpec;
 			sourceTree = "<group>";
 		};
 		5E95FCCA19D9B2A9004D0C8F /* Auction Listings */ = {
@@ -874,6 +1138,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E770B8F1A1E75B400B05A0F /* default__registering_a_user@2x.png in Resources */,
+				5E770B981A1E75B400B05A0F /* with_no_bids__looks_correct@2x.png in Resources */,
+				5E770B931A1E75B400B05A0F /* ending__registering_user_not_resolved@2x.png in Resources */,
+				5E770B941A1E75B400B05A0F /* ending__registering_user_success@2x.png in Resources */,
+				5E770B951A1E75B400B05A0F /* errors__correctly_placing_a_bid@2x.png in Resources */,
+				5E770B8C1A1E75B400B05A0F /* when_displaying_stubbed_contents___lowest_bid@2x.png in Resources */,
+				5E770B911A1E75B400B05A0F /* ending__placing_bid_success_highest@2x.png in Resources */,
+				5E770B8E1A1E75B400B05A0F /* default__placing_a_bid@2x.png in Resources */,
+				5E770B841A1E75B400B05A0F /* looks_right_offline@2x.png in Resources */,
+				5E770B861A1E75B400B05A0F /* looks_right_by_default@2x.png in Resources */,
+				5E770B991A1E75B400B05A0F /* looks_correct_configured_with_two_buttons@2x.png in Resources */,
+				5E770B6D1A1E75B400B05A0F /* artwork.jpg in Resources */,
+				5E770B961A1E75B400B05A0F /* errors__correctly_registering_a_user@2x.png in Resources */,
+				5E770B8A1A1E75B400B05A0F /* when_displaying_stubbed_contents___highest_bid@2x.png in Resources */,
+				5E770B971A1E75B400B05A0F /* with_bids__looks_correct@2x.png in Resources */,
+				5E770B871A1E75B400B05A0F /* looks_right_by_default@2x.png in Resources */,
+				5E770B8B1A1E75B400B05A0F /* when_displaying_stubbed_contents___least_bids@2x.png in Resources */,
+				5E770B891A1E75B400B05A0F /* when_displaying_stubbed_contents___grid@2x.png in Resources */,
+				5E770B881A1E75B400B05A0F /* when_displaying_stubbed_contents___alphabetical@2x.png in Resources */,
+				5E770B8D1A1E75B400B05A0F /* when_displaying_stubbed_contents___most_bids@2x.png in Resources */,
+				5E770B921A1E75B400B05A0F /* ending__placing_bid_success_not_highest@2x.png in Resources */,
+				5E770B901A1E75B400B05A0F /* ending__placing_bid_not_resolved@2x.png in Resources */,
+				5E770B851A1E75B400B05A0F /* looks_right_by_default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1013,7 +1300,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E31531D1A1E3B600065CA08 /* Test.swift in Sources */,
+				5E770B701A1E75B400B05A0F /* ConfirmYourBidPINViewControllerTests.swift in Sources */,
+				5E770B711A1E75B400B05A0F /* ConfirmYourBidViewControllerTests.swift in Sources */,
+				5E770B7C1A1E75B400B05A0F /* BidderPositionTests.swift in Sources */,
+				5E770B831A1E75B400B05A0F /* ReactiveCocoaBindingsTests.swift in Sources */,
+				5E770B7E1A1E75B400B05A0F /* BidTests.swift in Sources */,
+				5E770B751A1E75B400B05A0F /* BidDetailsTestExtensions.swift in Sources */,
+				5E770B801A1E75B400B05A0F /* SaleArtworkTests.swift in Sources */,
+				5E770B731A1E75B400B05A0F /* LoadingViewControllerTests.swift in Sources */,
+				5E770B761A1E75B400B05A0F /* CardHandlerTests.swift in Sources */,
+				5E770B781A1E75B400B05A0F /* KioskTests.swift in Sources */,
+				5E770B7D1A1E75B400B05A0F /* BidderTests.swift in Sources */,
+				5E770B9D1A1E75B400B05A0F /* TextFieldTests.swift in Sources */,
+				5E770B9A1A1E75B400B05A0F /* RegisterFlowViewTests.swift in Sources */,
+				5E770B7A1A1E75B400B05A0F /* ArtistTests.swift in Sources */,
+				5E770B6B1A1E75B400B05A0F /* AppViewControllerTests.swift in Sources */,
+				5E770B741A1E75B400B05A0F /* PlaceBidViewControllerTests.swift in Sources */,
+				5E770B6A1A1E75B400B05A0F /* RAC+JSONAbleTests.swift in Sources */,
+				5E770B7B1A1E75B400B05A0F /* ArtworkTests.swift in Sources */,
+				5E770B821A1E75B400B05A0F /* SystemTimeTests.swift in Sources */,
+				5E770B6F1A1E75B400B05A0F /* ConfirmYourBidEnterYourEmailViewControllerTests.swift in Sources */,
+				5E770B791A1E75B400B05A0F /* ListingsViewControllerTests.swift in Sources */,
+				5E770B6E1A1E75B400B05A0F /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */,
+				5E770B811A1E75B400B05A0F /* SaleTests.swift in Sources */,
+				5E770B771A1E75B400B05A0F /* emojiSnappin.swift in Sources */,
+				5E770B9C1A1E75B400B05A0F /* TestHelpers.swift in Sources */,
+				5E770B6C1A1E75B400B05A0F /* ArtsyAPISpec.swift in Sources */,
+				5E770B9B1A1E75B400B05A0F /* SwitchViewSpec.swift in Sources */,
+				5E770B7F1A1E75B400B05A0F /* ImageTests.swift in Sources */,
+				5E770B721A1E75B400B05A0F /* FulfillmentContainerViewControllerTests.swift in Sources */,
+				5E770B9E1A1E75B400B05A0F /* XAppTokenSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

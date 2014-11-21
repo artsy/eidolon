@@ -1,7 +1,7 @@
 import Foundation
 import Moya
 
-enum ArtsyAPI {
+public enum ArtsyAPI {
     case XApp
     case XAuth(email: String, password: String)
     case TrustToken(number: String, auctionPIN: String)
@@ -117,7 +117,7 @@ enum ArtsyAPI {
 }
 
 extension ArtsyAPI : MoyaPath {
-     var path: String {
+     public var path: String {
         switch self {
 
         case .XApp:
@@ -204,10 +204,10 @@ extension ArtsyAPI : MoyaPath {
 
 extension ArtsyAPI : MoyaTarget {
 
-    var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
-    var baseURL: NSURL { return NSURL(string: base)! }
+    public var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
+    public var baseURL: NSURL { return NSURL(string: base)! }
 
-    var sampleData: NSData {
+    public var sampleData: NSData {
         switch self {
 
         case XApp:
@@ -295,7 +295,7 @@ extension ArtsyAPI : MoyaTarget {
 
 // MARK: - Provider setup
 
-func endpointResolver () -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest)) {
+public func endpointResolver () -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest)) {
     return { (endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest) in
         let request: NSMutableURLRequest = endpoint.urlRequest.mutableCopy() as NSMutableURLRequest
         request.HTTPShouldHandleCookies = false
@@ -320,11 +320,11 @@ public struct Provider {
         }
     }
     
-     static func DefaultProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
+    public static func DefaultProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
         return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: APIKeys.sharedKeys.stubResponses)
     }
     
-     static func StubbingProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
+    public static func StubbingProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
         return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true)
     }
 
@@ -332,7 +332,7 @@ public struct Provider {
         static var instance = Provider.DefaultProvider()
     }
     
-     static var sharedProvider: ReactiveMoyaProvider<ArtsyAPI> {
+    public static var sharedProvider: ReactiveMoyaProvider<ArtsyAPI> {
         get {
             return SharedProvider.instance
         }
@@ -360,6 +360,6 @@ private extension String {
     }
 }
 
- func url(route: MoyaTarget) -> String {
+public func url(route: MoyaTarget) -> String {
     return route.baseURL.URLByAppendingPathComponent(route.path).absoluteString!
 }

@@ -1,5 +1,9 @@
 import Quick
 import Nimble
+import Moya
+import ReactiveCocoa
+import Kiosk
+import Nimble_Snapshots
 
 class ConfirmYourBidPINViewControllerTests: QuickSpec {
     override func spec() {

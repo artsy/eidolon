@@ -1,12 +1,12 @@
 import UIKit
 import Moya
 
-class FulfillmentNavigationController: UINavigationController {
+public class FulfillmentNavigationController: UINavigationController {
 
     /// The the collection of details necessary to eventually create a bid
-    var bidDetails = BidDetails(saleArtwork:nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents:nil)
-    var auctionID:String!
-    var user:User!
+    public var bidDetails = BidDetails(saleArtwork:nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents:nil)
+    public var auctionID:String!
+    public var user:User!
 
     /// Otherwise we're fine with a legit auth token
     var xAccessToken: String? {

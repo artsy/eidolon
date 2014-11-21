@@ -2,7 +2,7 @@ import UIKit
 
 public class CursorView: UIView {
 
-    let cursorLayer: CALayer = CALayer()
+    public let cursorLayer: CALayer = CALayer()
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,11 +35,11 @@ public class CursorView: UIView {
         cursorLayer.opacity = 0.0
     }
 
-    func startAnimating() {
+    public func startAnimating() {
         animate(Float.infinity)
     }
 
-    func animate(times: Float) {
+    private func animate(times: Float) {
         let fade = CABasicAnimation()
         fade.duration = 0.5
         fade.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
@@ -50,7 +50,7 @@ public class CursorView: UIView {
         cursorLayer.addAnimation(fade, forKey: "opacity")
     }
 
-    func stopAnimating() {
+    public func stopAnimating() {
         cursorLayer.removeAllAnimations()
     }
 }

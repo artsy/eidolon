@@ -1,5 +1,7 @@
 import Foundation
 import Quick
+import Kiosk
+import Moya
 
 private enum DefaultsKeys: String {
     case TokenKey = "TokenKey"

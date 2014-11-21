@@ -1,4 +1,5 @@
 import Foundation
+import Kiosk
 
 extension BidDetails {
 

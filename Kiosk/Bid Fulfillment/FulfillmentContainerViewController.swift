@@ -1,13 +1,13 @@
 import UIKit
 
-class FulfillmentContainerViewController: UIViewController {
+public class FulfillmentContainerViewController: UIViewController {
     var allowAnimations:Bool = true;
 
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var contentView: UIView!
     @IBOutlet var backgroundView: UIView!
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
 

@@ -1,6 +1,6 @@
 import UIKit
 
-class Spinner: UIView {
+public class Spinner: UIView {
     var spinner:UIView!
     let rotationDuration = 0.9;
 
@@ -10,14 +10,14 @@ class Spinner: UIView {
         return view
     }
 
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         spinner = createSpinner()
         addSubview(spinner)
         backgroundColor = UIColor.clearColor()
         animate(Float.infinity)
     }
 
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         // .center uses frame
         spinner.center = CGPointMake( CGRectGetWidth(bounds) / 2, CGRectGetHeight(bounds) / 2)
     }

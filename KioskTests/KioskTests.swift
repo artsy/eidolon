@@ -2,6 +2,7 @@ class KioskTests {}
 
 import ObjectiveC
 import UIKit
+import Kiosk
 
 var sharedInstances = Dictionary<String, AnyObject>()
 
@@ -21,7 +22,7 @@ extension UIStoryboard {
         return UIStoryboard(name: "Fulfillment", bundle: NSBundle(forClass: KioskTests.self))
     }
 
-    func viewControllerWithID(identifier:ViewControllerStoryboardIdentifier) -> UIViewController {
+    func viewControllerWithID(identifier: ViewControllerStoryboardIdentifier) -> UIViewController {
         let id = identifier.rawValue
 
         // Uncomment for experimental caching.

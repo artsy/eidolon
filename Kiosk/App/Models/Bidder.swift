@@ -1,10 +1,10 @@
 import UIKit
 import SwiftyJSON
 
-class Bidder: JSONAble {
-    let id: String
-    let saleID: String
-    var pin: String?
+public class Bidder: JSONAble {
+    public let id: String
+    public let saleID: String
+    public var pin: String?
 
     init(id: String, saleID: String, pin: String?) {
         self.id = id
@@ -12,7 +12,7 @@ class Bidder: JSONAble {
         self.pin = pin
     }
 
-    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+    override public class func fromJSON(json:[String: AnyObject]) -> JSONAble {
         let json = JSON(json)
 
         let id = json["id"].stringValue

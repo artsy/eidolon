@@ -1,5 +1,8 @@
 import Quick
 import Nimble
+import Kiosk
+import ReactiveCocoa
+import Nimble_Snapshots
 
 class LoadingViewControllerTests: QuickSpec {
     override func spec() {
@@ -98,26 +101,26 @@ class LoadingViewControllerTests: QuickSpec {
     }
 }
 
-class SuccessBidderNetworkModel: BidderNetworkModel {
-    override func createOrGetBidder() -> RACSignal {
+public class SuccessBidderNetworkModel: BidderNetworkModel {
+    override public func createOrGetBidder() -> RACSignal {
         return RACSignal.empty()
     }
 }
 
-class ErrorBidderNetworkModel: BidderNetworkModel {
-    override func createOrGetBidder() -> RACSignal {
+public class ErrorBidderNetworkModel: BidderNetworkModel {
+    override public func createOrGetBidder() -> RACSignal {
         return RACSignal.error(NSError(domain: "", code: 0, userInfo: nil))
     }
 }
 
-class DummyBidCheckingNetworkModel: BidCheckingNetworkModel {
-    override func waitForBidResolution() -> RACSignal {
+public class DummyBidCheckingNetworkModel: BidCheckingNetworkModel {
+    override public func waitForBidResolution() -> RACSignal {
         return RACSignal.empty()
     }
 }
 
-class DummyPlaceBidNetworkModel: PlaceBidNetworkModel {
-    override func bidSignal(bidDetails: BidDetails) -> RACSignal {
+public class DummyPlaceBidNetworkModel: PlaceBidNetworkModel {
+    override public func bidSignal(bidDetails: BidDetails) -> RACSignal {
         return RACSignal.empty()
     }
 }

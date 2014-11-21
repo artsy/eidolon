@@ -2,25 +2,25 @@ import UIKit
 import Moya
 import ReactiveCocoa
 
-class ConfirmYourBidPINViewController: UIViewController {
+public class ConfirmYourBidPINViewController: UIViewController {
 
     dynamic var pin = ""
 
-    @IBOutlet var keypadContainer: KeypadContainerView!
-    @IBOutlet var pinTextField: TextField!
-    @IBOutlet var confirmButton: Button!
-    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
+    @IBOutlet public var keypadContainer: KeypadContainerView!
+    @IBOutlet public var pinTextField: TextField!
+    @IBOutlet public var confirmButton: Button!
+    @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
 
-    lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
-    lazy var clearSignal:RACSignal!  = self.keypadContainer.keypad?.rightSignal
-    lazy var deleteSignal:RACSignal! = self.keypadContainer.keypad?.leftSignal
-    lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    public lazy var keypadSignal: RACSignal! = self.keypadContainer.keypad?.keypadSignal
+    public lazy var clearSignal: RACSignal!  = self.keypadContainer.keypad?.rightSignal
+    public lazy var deleteSignal: RACSignal! = self.keypadContainer.keypad?.leftSignal
+    public lazy var provider: ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
-    class func instantiateFromStoryboard() -> ConfirmYourBidPINViewController {
+    public class func instantiateFromStoryboard() -> ConfirmYourBidPINViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBidPIN) as ConfirmYourBidPINViewController
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         let keypad = self.keypadContainer!.keypad!
@@ -93,7 +93,7 @@ class ConfirmYourBidPINViewController: UIViewController {
         }
     }
 
-    func providerForPIN(pin:String, number:String) -> ReactiveMoyaProvider<ArtsyAPI> {
+    public func providerForPIN(pin:String, number:String) -> ReactiveMoyaProvider<ArtsyAPI> {
         let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
             var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
 

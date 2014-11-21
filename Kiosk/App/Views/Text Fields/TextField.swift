@@ -87,7 +87,7 @@ public class TextField: UITextField {
 
 public class SecureTextField: TextField {
 
-    var actualText: String = NSString()
+    public var actualText: String = NSString()
 
     override public var text: String! {
         get {

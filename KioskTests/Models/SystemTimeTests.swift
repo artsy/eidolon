@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+import Kiosk
 
 // Note, stubbed json contains a date in 2422
 // If this is an issue ( hello future people! ) then move it along a few centuries.

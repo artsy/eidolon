@@ -1,45 +1,45 @@
 import UIKit
 import SwiftyJSON
 
-enum ReserveStatus {
+public enum ReserveStatus {
     case NoReserve
     case ReserveNotMet(Int)
     case ReserveMet
 }
 
-struct SaleNumberFormatter {
+public struct SaleNumberFormatter {
     static let dollarFormatter = createDollarFormatter()
 }
 
-class SaleArtwork: JSONAble {
+public class SaleArtwork: JSONAble {
 
-    let id: String
-    let artwork: Artwork
+    public let id: String
+    public let artwork: Artwork
 
-    var auctionID: String?
+    public var auctionID: String?
 
     // The bidder is given from JSON if user is registered
-    let bidder: Bidder?
+    public let bidder: Bidder?
 
-    var saleHighestBid: Bid?
-    dynamic var bidCount:  NSNumber?
+    public var saleHighestBid: Bid?
+    public dynamic var bidCount:  NSNumber?
 
-    var userBidderPosition: BidderPosition?
-    var positions: [String]?
+    public var userBidderPosition: BidderPosition?
+    public var positions: [String]?
 
-    dynamic var openingBidCents: NSNumber?
-    dynamic var minimumNextBidCents: NSNumber?
+    public dynamic var openingBidCents: NSNumber?
+    public dynamic var minimumNextBidCents: NSNumber?
     
-    dynamic var highestBidCents: NSNumber?
-    var lowEstimateCents: Int?
-    var highEstimateCents: Int?
+    public dynamic var highestBidCents: NSNumber?
+    public var lowEstimateCents: Int?
+    public var highEstimateCents: Int?
 
-    init(id: String, artwork: Artwork) {
+    public init(id: String, artwork: Artwork) {
         self.id = id
         self.artwork = artwork
     }
 
-    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
+    override public class func fromJSON(json: [String: AnyObject]) -> JSONAble {
         let json = JSON(json)
         let id = json["id"].stringValue
         let artworkDict = json["artwork"].object as [String: AnyObject]
@@ -64,7 +64,7 @@ class SaleArtwork: JSONAble {
         return saleArtwork;
     }
     
-    func updateWithValues(newSaleArtwork: SaleArtwork) {
+    public func updateWithValues(newSaleArtwork: SaleArtwork) {
         saleHighestBid = newSaleArtwork.saleHighestBid
         auctionID = newSaleArtwork.auctionID
         openingBidCents = newSaleArtwork.openingBidCents
@@ -75,7 +75,7 @@ class SaleArtwork: JSONAble {
         bidCount = newSaleArtwork.bidCount
     }
     
-    var estimateString: String {
+    public var estimateString: String {
         switch (lowEstimateCents, highEstimateCents) {
         case let (.Some(lowCents), .Some(highCents)):
             let lowDollars = NSNumberFormatter.currencyStringForCents(lowCents)
@@ -92,7 +92,7 @@ class SaleArtwork: JSONAble {
         }
     }
 
-    var numberOfBidsSignal: RACSignal {
+    public var numberOfBidsSignal: RACSignal {
         return RACObserve(self, "bidCount").map { (optionalBidCount) -> AnyObject! in
             // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
             // So we need to unwrap it as an optional optional. Yo dawg.
@@ -107,7 +107,7 @@ class SaleArtwork: JSONAble {
         }
     }
 
-    func currentBidSignal(prefix: String = "", missingPrefix: String = "") -> RACSignal {
+    public func currentBidSignal(prefix: String = "", missingPrefix: String = "") -> RACSignal {
         return RACObserve(self, "highestBidCents").map({ [weak self] (highestBidCents) -> AnyObject! in
             if let currentBidCents = highestBidCents as? Int {
                 return "\(prefix)\(NSNumberFormatter.currencyStringForCents(currentBidCents))"
@@ -117,7 +117,7 @@ class SaleArtwork: JSONAble {
         })
     }
 
-    override class func keyPathsForValuesAffectingValueForKey(key: String) -> NSSet {
+    override public class func keyPathsForValuesAffectingValueForKey(key: String) -> NSSet {
         if key == "estimateString" {
             return NSSet(array: ["lowEstimateCents", "highEstimateCents"])
         } else {

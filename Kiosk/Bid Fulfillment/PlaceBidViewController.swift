@@ -1,32 +1,38 @@
 import UIKit
 import Artsy_UILabels
 
-class PlaceBidViewController: UIViewController {
+public class PlaceBidViewController: UIViewController {
 
-    dynamic var bidDollars: Int = 0
-    var hasAlreadyPlacedABid: Bool = false
+    public dynamic var bidDollars: Int = 0
+    public var hasAlreadyPlacedABid: Bool = false
 
-    @IBOutlet var bidAmountTextField: TextField!
-    @IBOutlet var cursor: CursorView!
-    @IBOutlet var keypadContainer: KeypadContainerView!
+    @IBOutlet public var bidAmountTextField: TextField!
+    @IBOutlet public var cursor: CursorView!
+    @IBOutlet public var keypadContainer: KeypadContainerView!
 
-    @IBOutlet var currentBidTitleLabel: UILabel!
-    @IBOutlet var currentBidAmountLabel: UILabel!
-    @IBOutlet var nextBidAmountLabel: UILabel!
+    @IBOutlet public var currentBidTitleLabel: UILabel!
+    @IBOutlet public var currentBidAmountLabel: UILabel!
+    @IBOutlet public var nextBidAmountLabel: UILabel!
 
-    @IBOutlet var artworkImageView: UIImageView!
-    @IBOutlet var artistNameLabel: ARSerifLabel!
-    @IBOutlet var artworkTitleLabel: ARSerifLabel!
-    @IBOutlet var artworkPriceLabel: ARSerifLabel!
+    @IBOutlet public var artworkImageView: UIImageView!
+    @IBOutlet public var artistNameLabel: ARSerifLabel!
+    @IBOutlet public var artworkTitleLabel: ARSerifLabel!
+    @IBOutlet public var artworkPriceLabel: ARSerifLabel!
 
-    lazy var conditionsOfSaleAddress = "http://artsy.net/conditions-of-sale"
-    lazy var privacyPolicyAddress = "http://artsy.net/privacy"
+    @IBOutlet public var bidButton: Button!
 
-    class func instantiateFromStoryboard() -> PlaceBidViewController {
+    lazy public var conditionsOfSaleAddress = "http://artsy.net/conditions-of-sale"
+    lazy public var privacyPolicyAddress = "http://artsy.net/privacy"
+    
+    lazy public var keypadSignal: RACSignal! = self.keypadContainer.keypad?.keypadSignal
+    lazy public var clearSignal: RACSignal!  = self.keypadContainer.keypad?.rightSignal
+    lazy public var deleteSignal: RACSignal! = self.keypadContainer.keypad?.leftSignal
+
+    public class func instantiateFromStoryboard() -> PlaceBidViewController {
         return UIStoryboard.fulfillment().viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         if !hasAlreadyPlacedABid {
@@ -95,20 +101,18 @@ class PlaceBidViewController: UIViewController {
         return rac_signalForSelector("viewDidDisappear:")
     }
 
-    @IBOutlet var bidButton: Button!
     @IBAction func bidButtonTapped(sender: AnyObject) {
         let identifier = hasAlreadyPlacedABid ? SegueIdentifier.PlaceAnotherBid : SegueIdentifier.ConfirmBid
         performSegue(identifier)
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         if segue == .PlaceAnotherBid {
             let nextViewController = segue.destinationViewController as LoadingViewController
             nextViewController.placingBid = true
         }
     }
-
 
     @IBAction func conditionsTapped(sender: AnyObject) {
         (UIApplication.sharedApplication().delegate as? AppDelegate)?.showConditionsOfSale()
@@ -117,10 +121,6 @@ class PlaceBidViewController: UIViewController {
     @IBAction func privacyTapped(sender: AnyObject) {
         (UIApplication.sharedApplication().delegate as? AppDelegate)?.showPrivacyPolicy()
     }
-
-    lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
-    lazy var clearSignal:RACSignal!  = self.keypadContainer.keypad?.rightSignal
-    lazy var deleteSignal:RACSignal! = self.keypadContainer.keypad?.leftSignal
 }
 
 /// These are for RAC only

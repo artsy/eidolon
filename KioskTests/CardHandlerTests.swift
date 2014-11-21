@@ -1,9 +1,11 @@
 import Quick
 import Nimble
+import Kiosk
+import CardFlight
 
 class CardHandlerTests: QuickSpec {
-    var handler:CardHandler!
-    var reader:LocalCardReader!
+    var handler: CardHandler!
+    var reader: LocalCardReader!
 
     override func spec() {
         let apiKey = "jhfbsdhbfsd"
