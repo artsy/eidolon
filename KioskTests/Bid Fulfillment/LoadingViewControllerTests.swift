@@ -11,7 +11,7 @@ class LoadingViewControllerTests: QuickSpec {
 
         describe("default") {
             beforeEach {
-                sut = storyboard.viewControllerWithID(.LoadingBidsorRegistering) as LoadingViewController
+                sut = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
                 sut.bidderNetworkModel = ErrorBidderNetworkModel()
                 sut.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
                 sut.placeBidNetworkModel = DummyPlaceBidNetworkModel()
@@ -33,7 +33,7 @@ class LoadingViewControllerTests: QuickSpec {
 
         describe("errors") {
             beforeEach {
-                sut = storyboard.viewControllerWithID(.LoadingBidsorRegistering) as LoadingViewController
+                sut = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
                 sut.bidderNetworkModel = ErrorBidderNetworkModel()
                 sut.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
                 sut.placeBidNetworkModel = DummyPlaceBidNetworkModel()
@@ -53,7 +53,7 @@ class LoadingViewControllerTests: QuickSpec {
 
         describe("ending") {
             beforeEach {
-                sut = storyboard.viewControllerWithID(.LoadingBidsorRegistering) as LoadingViewController
+                sut = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
                 sut.bidderNetworkModel = SuccessBidderNetworkModel()
                 sut.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
                 sut.placeBidNetworkModel = DummyPlaceBidNetworkModel()

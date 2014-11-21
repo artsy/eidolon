@@ -7,14 +7,13 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
     override func spec() {
 
         it("looks right by default") {
-            let sut = ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard()
+            let sut = ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard().wrapInFulfillmentNav()
             expect(sut).to(haveValidSnapshot())
         }
 
         it("passes the email to the nav's bid details object") {
-            let sut = ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard()
-            let nav = FulfillmentNavigationController(rootViewController:sut)
-            nav.loadViewProgrammatically()
+            let sut = ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard().wrapInFulfillmentNav() as ConfirmYourBidEnterYourEmailViewController
+            let nav = sut.navigationController as FulfillmentNavigationController
             sut.loadViewProgrammatically()
 
             sut.emailTextField.text = "email"
@@ -24,7 +23,7 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
         }
 
         it("confirm button is disabled when no email") {
-            let sut = ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard()
+            let sut = ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard().wrapInFulfillmentNav() as ConfirmYourBidEnterYourEmailViewController
             let nav = FulfillmentNavigationController(rootViewController:sut)
             nav.loadViewProgrammatically()
             sut.loadViewProgrammatically()
@@ -33,9 +32,8 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
         }
 
         pending("enables the enter button when an email + password is entered") {
-            let sut = ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard()
-            let nav = FulfillmentNavigationController(rootViewController:sut)
-            nav.loadViewProgrammatically()
+            let sut = ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard().wrapInFulfillmentNav() as ConfirmYourBidEnterYourEmailViewController
+            let nav = sut.navigationController as FulfillmentNavigationController
             sut.loadViewProgrammatically()
 
             sut.emailTextField.text = "email@address.com"
