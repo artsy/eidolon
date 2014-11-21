@@ -1,8 +1,10 @@
 # End User Changes
 
+### 2.3.2 21 Nov 2014
+* Reserve-handling - @ashfurrow
+
 ### 2.3.1 14th Nov 2014
 * Fix for requesting a PIN - @orta
-
 
 ### 2.3.0 14th Nov 2014
 

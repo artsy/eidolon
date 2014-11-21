@@ -1,6 +1,7 @@
 import UIKit
 import ARAnalytics
 import XCGLogger
+import SDWebImage
 
 let logger = XCGLogger.defaultInstance()
 
@@ -20,6 +21,10 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // I couldn't figure how to swizzle this out like we do in objc.
         if let inTests: AnyClass = NSClassFromString("XCTest") { return true }
+
+        // Clear possible old contents from cache and deafults. 
+        let imageCache = SDImageCache.sharedImageCache()
+        imageCache.clearDisk()
 
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenKey.rawValue)

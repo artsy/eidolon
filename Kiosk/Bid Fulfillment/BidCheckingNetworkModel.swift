@@ -14,6 +14,7 @@ public class BidCheckingNetworkModel: NSObject {
     // outputs
     public var bidIsResolved = false
     public var isHighestBidder = false
+    public var reserveNotMet = false
 
     private var mostRecentSaleArtwork:SaleArtwork?
 
@@ -53,6 +54,7 @@ public class BidCheckingNetworkModel: NSObject {
                 if let saleArtwork = saleArtwork {
                     self?.mostRecentSaleArtwork = saleArtwork
                     self?.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
+                    self?.reserveNotMet = saleArtwork.reserveNotMet
                 }
 
                 return RACSignal.empty()

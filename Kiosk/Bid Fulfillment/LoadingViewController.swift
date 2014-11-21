@@ -93,6 +93,7 @@ public class LoadingViewController: UIViewController {
 
     func finishUp() {
         self.spinner.hidden = true
+        let reserveNotMet = bidCheckingModel.reserveNotMet
         let isHighestBidder = bidCheckingModel.isHighestBidder
         let bidIsResolved = bidCheckingModel.bidIsResolved
         let createdNewBidder = bidderNetworkModel.createdNewBidder
@@ -102,9 +103,10 @@ public class LoadingViewController: UIViewController {
 
             if bidIsResolved {
 
-                if (isHighestBidder) {
+                if reserveNotMet {
+                    handleReserveNotMet()
+                } else if isHighestBidder {
                     handleHighestBidder()
-
                 } else {
                     handleLowestBidder()
                 }
@@ -117,7 +119,7 @@ public class LoadingViewController: UIViewController {
             handleRegistered()
         }
 
-        let showPlaceHigherButton = placingBid && !isHighestBidder
+        let showPlaceHigherButton = placingBid && (!isHighestBidder || reserveNotMet)
         placeHigherBidButton.hidden = !showPlaceHigherButton
 
         let showAuctionButton = !placingBid || createdNewBidder
@@ -135,6 +137,14 @@ public class LoadingViewController: UIViewController {
     func handleUnknownBidder() {
         titleLabel.text = "Bid Confirmed"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
+    }
+
+    func handleReserveNotMet() {
+        titleLabel.text = "Reserve Not Met"
+        statusMessage.hidden = false
+        // TODO: improve this message
+        statusMessage.text = "Please place another bid."
+        bidConfirmationImageView.image = UIImage(named: "BidNotHighestBidder")
     }
 
     func handleHighestBidder() {

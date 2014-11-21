@@ -3,8 +3,23 @@ import SwiftyJSON
 
 public enum ReserveStatus {
     case NoReserve
-    case ReserveNotMet(Int)
+    case ReserveNotMet
     case ReserveMet
+
+    static func fromString(input: String?) -> ReserveStatus? {
+        switch input {
+        case .Some("reserve_not_met"):
+            return ReserveNotMet
+        case .Some("no_reserve"):
+            return NoReserve
+        case .Some("reserve_met"):
+            return ReserveMet
+        case .None:
+            fallthrough
+        default:
+            return nil
+        }
+    }
 }
 
 public struct SaleNumberFormatter {
@@ -34,6 +49,12 @@ public class SaleArtwork: JSONAble {
     public var lowEstimateCents: Int?
     public var highEstimateCents: Int?
 
+    public var reserveStatus: ReserveStatus = .NoReserve
+
+    public var reserveNotMet: Bool {
+        return self.reserveStatus == .ReserveNotMet
+    }
+
     public init(id: String, artwork: Artwork) {
         self.id = id
         self.artwork = artwork
@@ -59,7 +80,7 @@ public class SaleArtwork: JSONAble {
         saleArtwork.lowEstimateCents = json["low_estimate_cents"].int
         saleArtwork.highEstimateCents = json["high_estimate_cents"].int
         saleArtwork.bidCount = json["bidder_positions_count"].int
-//        let reserveStatus = json["reserve_status"].integer
+        saleArtwork.reserveStatus = ReserveStatus.fromString(json["reserve_status"].string) ?? .NoReserve
 
         return saleArtwork;
     }
@@ -73,6 +94,7 @@ public class SaleArtwork: JSONAble {
         lowEstimateCents = newSaleArtwork.lowEstimateCents
         highEstimateCents = newSaleArtwork.highEstimateCents
         bidCount = newSaleArtwork.bidCount
+        reserveStatus = newSaleArtwork.reserveStatus
     }
     
     public var estimateString: String {

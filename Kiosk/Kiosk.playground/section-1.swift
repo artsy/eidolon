@@ -9,3 +9,11 @@ for i in 1...1 {
 }
 
 "hello".containsString("el")
+
+let a: String? = "Ash"
+switch a {
+case Optional.Some("Ash"):
+    "hi"
+default:
+    "lo"
+}
