@@ -21,13 +21,13 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         // I couldn't figure how to swizzle this out like we do in objc.
         if let inTests: AnyClass = NSClassFromString("XCTest") { return true }
 
-        let auctionStoryboard = UIStoryboard(name: "Auction", bundle: nil)
-        window.rootViewController = auctionStoryboard.instantiateInitialViewController() as? UIViewController
-        window.makeKeyAndVisible()
-
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenKey.rawValue)
         defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenExpiry.rawValue)
+
+        let auctionStoryboard = UIStoryboard(name: "Auction", bundle: nil)
+        window.rootViewController = auctionStoryboard.instantiateInitialViewController() as? UIViewController
+        window.makeKeyAndVisible()
 
         let keys = EidolonKeys()
         let mixpanelToken = AppSetup.sharedState.useStaging ? keys.mixpanelStagingAPIClientKey() : keys.mixpanelProductionAPIClientKey()

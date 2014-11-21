@@ -162,7 +162,7 @@ public class ListingsViewController: UIViewController {
             developmentEnvironment = true
         #else
             if let ssid = getSSID() {
-                let developmentSSIDs = ["Ash's Wi-Fi Network", "Art.sy"] as NSArray
+                let developmentSSIDs = ["Ash's Wi-Fi Network", "Art.sy", "Artsy2"] as NSArray
                 developmentEnvironment = developmentSSIDs.containsObject(ssid)
             }
         #endif

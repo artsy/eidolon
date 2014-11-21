@@ -13,7 +13,7 @@ class ListingsCountdownManager: NSObject {
     override func awakeFromNib() {
         formatter.minimumIntegerDigits = 2
 
-        time.syncSignal().subscribeNext { [weak self] (_) in
+        time.syncSignal().deliverOn(RACScheduler.mainThreadScheduler()).subscribeNext { [weak self] (_) in
             self?.startTimer()
             self?.setLabelsHidden(false)
         }
