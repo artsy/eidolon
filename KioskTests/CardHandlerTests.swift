@@ -21,7 +21,7 @@ class CardHandlerTests: QuickSpec {
             self.handler.sessionManager = manager
         }
 
-        it("sets up the Cardflight API + Token") {
+        pending("sets up the Cardflight API + Token") {
             expect(self.handler.sessionManager.getApiToken()) == apiKey
             expect(self.handler.sessionManager.getAccountToken()) == accountToken
         }

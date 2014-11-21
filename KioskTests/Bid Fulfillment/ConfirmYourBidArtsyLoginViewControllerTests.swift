@@ -7,7 +7,7 @@ class ConfirmYourBidArtsyLoginViewControllerTests: QuickSpec {
     override func spec() {
 
         it("looks right by default") {
-            let sut = ConfirmYourBidArtsyLoginViewController.instantiateFromStoryboard()
+            let sut = ConfirmYourBidArtsyLoginViewController.instantiateFromStoryboard().wrapInFulfillmentNav()
             expect(sut).to(haveValidSnapshot())
         }
 
