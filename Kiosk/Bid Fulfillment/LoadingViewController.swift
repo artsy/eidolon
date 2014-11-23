@@ -125,7 +125,7 @@ public class LoadingViewController: UIViewController {
         let showAuctionButton = !placingBid || createdNewBidder
         backToAuctionButton.hidden = !showAuctionButton
 
-        let title = createdNewBidder ? "CONTINUE" : "BACK TO AUCTION"
+        let title = reserveNotMet ? "NO, THANKS" : (createdNewBidder ? "CONTINUE" : "BACK TO AUCTION")
         backToAuctionButton.setTitle(title, forState: .Normal)
     }
 
@@ -142,8 +142,7 @@ public class LoadingViewController: UIViewController {
     func handleReserveNotMet() {
         titleLabel.text = "Reserve Not Met"
         statusMessage.hidden = false
-        // TODO: improve this message
-        statusMessage.text = "Please place another bid."
+        statusMessage.text = "Your bid is still below this lot's reserve. Please place a higher bid."
         bidConfirmationImageView.image = UIImage(named: "BidNotHighestBidder")
     }
 

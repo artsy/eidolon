@@ -38,7 +38,6 @@ enum MetadataStackViewTag: Int {
     case CurrentBidLabel
     case CurrentBidValueLabel
     case NumberOfBidsPlacedLabel
-    case ReserveNotMetLabel
     case BidButton
     case Gobbler
 }
@@ -146,14 +145,8 @@ extension SaleArtworkDetailsViewController {
         metadataStackView.addSubview(currentBidValueLabel, withTopMargin: "10", sideMargin: "0")
 
         let numberOfBidsPlacedLabel = label(.Serif, .NumberOfBidsPlacedLabel)
-        RAC(numberOfBidsPlacedLabel, "text") <~ saleArtwork.numberOfBidsSignal
+        RAC(numberOfBidsPlacedLabel, "text") <~ saleArtwork.numberOfBidsWithReserveSignal
         metadataStackView.addSubview(numberOfBidsPlacedLabel, withTopMargin: "10", sideMargin: "0")
-
-        if saleArtwork.reserveNotMet {
-            let reserveLabel = label(.Serif, .ReserveNotMetLabel)
-            reserveLabel.text = "This work has a reserve"
-            metadataStackView.addSubview(reserveLabel, withTopMargin: "5", sideMargin: "0")
-        }
 
         let bidButton = ActionButton()
         bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self] (_) -> Void in

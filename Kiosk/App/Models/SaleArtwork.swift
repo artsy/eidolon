@@ -1,30 +1,25 @@
 import UIKit
 import SwiftyJSON
 
-public enum ReserveStatus {
-    case NoReserve
-    case ReserveNotMet
-    case ReserveMet
+public enum ReserveStatus: String {
+    case ReserveNotMet = "reserve_not_met"
+    case NoReserve = "no_reserve"
+    case ReserveMet = "reserve_met"
 
-    static func fromString(input: String?) -> ReserveStatus? {
-        switch input {
-        case .Some("reserve_not_met"):
-            return ReserveNotMet
-        case .Some("no_reserve"):
-            return NoReserve
-        case .Some("reserve_met"):
-            return ReserveMet
-        case .None:
-            fallthrough
-        default:
-            return nil
-        }
+    public var reserveNotMet: Bool {
+        return self == .ReserveNotMet
+    }
+
+    public static func initOrDefault (rawValue: String?) -> ReserveStatus {
+        return ReserveStatus(rawValue: rawValue ?? "") ?? .NoReserve
     }
 }
 
 public struct SaleNumberFormatter {
     static let dollarFormatter = createDollarFormatter()
 }
+
+private let kNoBidsString = "0 bids placed"
 
 public class SaleArtwork: JSONAble {
 
@@ -49,11 +44,7 @@ public class SaleArtwork: JSONAble {
     public var lowEstimateCents: Int?
     public var highEstimateCents: Int?
 
-    public var reserveStatus: ReserveStatus = .NoReserve
-
-    public var reserveNotMet: Bool {
-        return self.reserveStatus == .ReserveNotMet
-    }
+    public dynamic var reserveStatus: String?
 
     public init(id: String, artwork: Artwork) {
         self.id = id
@@ -80,7 +71,7 @@ public class SaleArtwork: JSONAble {
         saleArtwork.lowEstimateCents = json["low_estimate_cents"].int
         saleArtwork.highEstimateCents = json["high_estimate_cents"].int
         saleArtwork.bidCount = json["bidder_positions_count"].int
-        saleArtwork.reserveStatus = ReserveStatus.fromString(json["reserve_status"].string) ?? .NoReserve
+        saleArtwork.reserveStatus = json["reserve_status"].string
 
         return saleArtwork;
     }
@@ -124,7 +115,30 @@ public class SaleArtwork: JSONAble {
                 let suffix = bidCount == 1 ? "" : "s"
                 return "\(bidCount) bid\(suffix) placed"
             } else {
-                return "0 bids placed"
+                return kNoBidsString
+            }
+        }
+    }
+
+    // The language used here is very specific – see https://github.com/artsy/eidolon/pull/325#issuecomment-64121996 for details
+    public var numberOfBidsWithReserveSignal: RACSignal {
+        return RACSignal.combineLatest([numberOfBidsSignal, RACObserve(self, "reserveStatus")]).map { (object) -> AnyObject! in
+            let tuple = object as RACTuple
+            let numberOfBidsString = tuple.first as String
+            let reserveStatus = ReserveStatus.initOrDefault(tuple.second as? String)
+
+            // if there is no reserve, just return the number of bids string.
+            if reserveStatus == .NoReserve {
+                return numberOfBidsString
+            } else {
+                if numberOfBidsString == kNoBidsString {
+                    // If there are no bids, then return only this string.
+                    return "This lot has a reserve"
+                } else if reserveStatus == .ReserveNotMet {
+                    return "(\(numberOfBidsString), Reserve not met)"
+                } else { // implicitly, reserveStatus is .ReserveMet
+                    return "(\(numberOfBidsString), Reserve met)"
+                }
             }
         }
     }
