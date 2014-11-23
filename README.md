@@ -1,6 +1,8 @@
 Eidolon
 =======
 
+[![Build Status](https://travis-ci.org/artsy/eidolon.svg?branch=master)](https://travis-ci.org/artsy/eidolon)
+
 The [Artsy](https://artsy.net) Auction Kiosk App.
 
 Project Status

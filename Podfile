@@ -49,10 +49,10 @@ pod 'Moya/Reactive', :git => "https://github.com/AshFurrow/Moya"
 
 target "KioskTests" do
 
-  pod 'FBSnapshotTestCase', :git => "https://github.com/ashfurrow/ios-snapshot-test-case.git"
+  pod 'FBSnapshotTestCase', :head
   pod 'Nimble-Snapshots', :git => "https://github.com/ashfurrow/Nimble-Snapshots.git"
-  pod 'Quick', :git => "https://github.com/orta/Quick", :branch => "podspec"
-  pod 'Nimble', :git => "https://github.com/ashfurrow/Nimble", :branch => "podspec"
+  pod 'Quick', :git => "https://github.com/Quick/Quick"
+  pod 'Nimble', :git => "https://github.com/Quick/Nimble"
 
 end
 
