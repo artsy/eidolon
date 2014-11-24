@@ -93,6 +93,7 @@ public class LoadingViewController: UIViewController {
 
     func finishUp() {
         self.spinner.hidden = true
+        let reserveNotMet = bidCheckingModel.reserveNotMet
         let isHighestBidder = bidCheckingModel.isHighestBidder
         let bidIsResolved = bidCheckingModel.bidIsResolved
         let createdNewBidder = bidderNetworkModel.createdNewBidder
@@ -102,9 +103,10 @@ public class LoadingViewController: UIViewController {
 
             if bidIsResolved {
 
-                if (isHighestBidder) {
+                if reserveNotMet {
+                    handleReserveNotMet()
+                } else if isHighestBidder {
                     handleHighestBidder()
-
                 } else {
                     handleLowestBidder()
                 }
@@ -117,13 +119,13 @@ public class LoadingViewController: UIViewController {
             handleRegistered()
         }
 
-        let showPlaceHigherButton = placingBid && !isHighestBidder
+        let showPlaceHigherButton = placingBid && (!isHighestBidder || reserveNotMet)
         placeHigherBidButton.hidden = !showPlaceHigherButton
 
         let showAuctionButton = !placingBid || createdNewBidder
         backToAuctionButton.hidden = !showAuctionButton
 
-        let title = createdNewBidder ? "CONTINUE" : "BACK TO AUCTION"
+        let title = reserveNotMet ? "NO, THANKS" : (createdNewBidder ? "CONTINUE" : "BACK TO AUCTION")
         backToAuctionButton.setTitle(title, forState: .Normal)
     }
 
@@ -135,6 +137,13 @@ public class LoadingViewController: UIViewController {
     func handleUnknownBidder() {
         titleLabel.text = "Bid Confirmed"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
+    }
+
+    func handleReserveNotMet() {
+        titleLabel.text = "Reserve Not Met"
+        statusMessage.hidden = false
+        statusMessage.text = "Your bid is still below this lot's reserve. Please place a higher bid."
+        bidConfirmationImageView.image = UIImage(named: "BidNotHighestBidder")
     }
 
     func handleHighestBidder() {

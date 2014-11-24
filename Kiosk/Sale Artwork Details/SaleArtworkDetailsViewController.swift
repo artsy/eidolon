@@ -145,7 +145,7 @@ extension SaleArtworkDetailsViewController {
         metadataStackView.addSubview(currentBidValueLabel, withTopMargin: "10", sideMargin: "0")
 
         let numberOfBidsPlacedLabel = label(.Serif, .NumberOfBidsPlacedLabel)
-        RAC(numberOfBidsPlacedLabel, "text") <~ saleArtwork.numberOfBidsSignal
+        RAC(numberOfBidsPlacedLabel, "text") <~ saleArtwork.numberOfBidsWithReserveSignal
         metadataStackView.addSubview(numberOfBidsPlacedLabel, withTopMargin: "10", sideMargin: "0")
 
         let bidButton = ActionButton()
