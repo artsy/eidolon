@@ -1,7 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/artsy/Specs.git'
 
-plugin 'cocoapods-keys'
+# This API format doesn't work in cocoapods-keys yet. So don't get too excited.
+
+plugin 'cocoapods-keys', {:keys => ["ArtsyAPIClientSecret", "ArtsyAPIClientKey", "HockeyProductionSecret", "HockeyBetaSecret", "MixpanelProductionAPIClientKey", "MixpanelStagingAPIClientKey", "CardflightAPIClientKey", "CardflightAPIStagingClientKey", "CardflightMerchantAccountToken", "CardflightMerchantAccountStagingToken", "BalancedMarketplaceToken", "BalancedMarketplaceStagingToken"], :project => "Eidolon" }
 
 platform :ios, '8.0'
 
