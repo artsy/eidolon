@@ -1,6 +1,25 @@
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/artsy/Specs.git'
 
+# This API format doesn't work in cocoapods-keys yet. So don't get too excited.
+
+plugin 'cocoapods-keys', {
+  :project => "Eidolon",
+  :keys => [
+    "ArtsyAPIClientSecret",
+    "ArtsyAPIClientKey",
+    "HockeyProductionSecret",
+    "HockeyBetaSecret",
+    "MixpanelProductionAPIClientKey",
+    "MixpanelStagingAPIClientKey",
+    "CardflightAPIClientKey",
+    "CardflightAPIStagingClientKey",
+    "CardflightMerchantAccountToken",
+    "CardflightMerchantAccountStagingToken",
+    "BalancedMarketplaceToken",
+    "BalancedMarketplaceStagingToken"
+  ]}
+
 platform :ios, '8.0'
 
 # Yep.
@@ -18,7 +37,6 @@ else
     pod 'Artsy+OSSUIFonts'
 end
 
-pod 'Artsy+UILabels'
 pod 'ORStackView'
 pod 'FLKAutoLayout'
 pod 'ISO8601DateFormatter', '0.7'
@@ -59,8 +77,8 @@ end
 unoptimized_pod_names = ['XCGLogger']
 
 post_install do |installer_representation|
-  targets = installer_representation.project.targets.select { |target| 
-    unoptimized_pod_names.select { |name| 
+  targets = installer_representation.project.targets.select { |target|
+    unoptimized_pod_names.select { |name|
       target.display_name.end_with? name
     }.count > 0
   }
