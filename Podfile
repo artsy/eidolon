@@ -1,6 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/artsy/Specs.git'
 
+plugin 'cocoapods-keys'
+
 platform :ios, '8.0'
 
 # Yep.
@@ -59,8 +61,8 @@ end
 unoptimized_pod_names = ['XCGLogger']
 
 post_install do |installer_representation|
-  targets = installer_representation.project.targets.select { |target| 
-    unoptimized_pod_names.select { |name| 
+  targets = installer_representation.project.targets.select { |target|
+    unoptimized_pod_names.select { |name|
       target.display_name.end_with? name
     }.count > 0
   }

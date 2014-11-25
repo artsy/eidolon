@@ -142,6 +142,38 @@ EXTERNAL SOURCES:
     :branch: podspec
     :git: https://github.com/ashfurrow/XCGLogger.git
 
+CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: caa66f74e10471e1577d73e16e8c03d0557a54ab
+    :git: https://github.com/mrackwitz/Alamofire.git
+  LlamaKit:
+    :commit: 3e1f3b480213992cbc4f5706e5c27e49f6c18d39
+    :git: https://github.com/AshFurrow/LlamaKit
+  Moya:
+    :commit: 57b84c376a2de5d928a8899db9d46cf49281e6e3
+    :git: https://github.com/AshFurrow/Moya
+  Nimble:
+    :commit: 40d480e12a3f1c09b8217bbccae250a0794aef1d
+    :git: https://github.com/Quick/Nimble
+  Nimble-Snapshots:
+    :commit: 502aab100a3533f1965b84fd087b43e348a00670
+    :git: https://github.com/ashfurrow/Nimble-Snapshots.git
+  Quick:
+    :commit: b9ab5f883d8db1c8fc1cc358a9234a6925ce5301
+    :git: https://github.com/Quick/Quick
+  Reachability:
+    :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
+    :git: https://github.com/ashfurrow/Reachability.git
+  ReactiveCocoa:
+    :commit: 53d7c15eaa4d2a3410a992283a80832d934cf83c
+    :git: https://github.com/AshFurrow/ReactiveCocoa
+  SwiftyJSON:
+    :commit: 252838693668023571c46f56d7ea8347e6948d1b
+    :git: https://github.com/orta/SwiftyJSON
+  XCGLogger:
+    :commit: 24de010d260f08ad16e7cd59e0416c297c771ca1
+    :git: https://github.com/ashfurrow/XCGLogger.git
+
 SPEC CHECKSUMS:
   Alamofire: 4cff790102216d69f3b12dd69885c468870d51e9
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
@@ -177,4 +209,4 @@ SPEC CHECKSUMS:
   XCGLogger: c1fccc5ae3e3666241bf06c8c82e30461cff168c
   XNGMarkdownParser: 5d1ed6c1b2bb3d3f3468a9ad591b85498403822c
 
-COCOAPODS: 0.35.0.rc2
+COCOAPODS: 0.35.0
