@@ -37,7 +37,6 @@ else
     pod 'Artsy+OSSUIFonts'
 end
 
-pod 'Artsy+UILabels'
 pod 'ORStackView'
 pod 'FLKAutoLayout'
 pod 'ISO8601DateFormatter', '0.7'
