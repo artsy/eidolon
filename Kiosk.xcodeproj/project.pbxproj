@@ -53,7 +53,6 @@
 		5E7C2F751A0A6EA100A92C4D /* Artist.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2F741A0A6EA100A92C4D /* Artist.json */; };
 		5E95FCB219D99871004D0C8F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95FCB119D99871004D0C8F /* Constants.swift */; };
 		5EA65C0119D5819C005EA4B4 /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA65C0019D5819C005EA4B4 /* SwitchView.swift */; };
-		5EA65C0E19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA65C0D19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m */; };
 		5EAC732519D0149A002F918A /* ReactiveCocoaBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */; };
 		5EAE11121A153FF80079CE7B /* UITextField+RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAE11111A153FF80079CE7B /* UITextField+RAC.swift */; };
 		5EB179C61A1E539100F0E8EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4D0ACA1A1E3A8300064A8A /* Foundation.framework */; };
@@ -272,8 +271,6 @@
 		5E88523C1A1E36F700F9D4DF /* Pods_KioskTests.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_KioskTests.framework; path = "Pods/build/Debug-iphoneos/Pods_KioskTests.framework"; sourceTree = "<group>"; };
 		5E95FCB119D99871004D0C8F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5EA65C0019D5819C005EA4B4 /* SwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
-		5EA65C0C19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+BooleanDependentAnimation.h"; path = "Categories/UIView+BooleanDependentAnimation.h"; sourceTree = "<group>"; };
-		5EA65C0D19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+BooleanDependentAnimation.m"; path = "Categories/UIView+BooleanDependentAnimation.m"; sourceTree = "<group>"; };
 		5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCocoaBindings.swift; sourceTree = "<group>"; };
 		5EAE11111A153FF80079CE7B /* UITextField+RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+RAC.swift"; sourceTree = "<group>"; };
 		5EC60BB419EB0552008A04B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -698,8 +695,6 @@
 		5EA65C0B19D5C4EF005EA4B4 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				5EA65C0C19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.h */,
-				5EA65C0D19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m */,
 				5E5DA8E019E57E49000E5855 /* RACSignal+Kiosk.swift */,
 				5E7C2F1E1A09676300A92C4D /* UILabel+Fonts.swift */,
 				5EAE11111A153FF80079CE7B /* UITextField+RAC.swift */,
@@ -1346,7 +1341,6 @@
 				607D3F681A07DBBD00EA1A02 /* AdminCardTestingViewController.swift in Sources */,
 				606EEADC19F99B32008CA1D9 /* ReachabilityManager.swift in Sources */,
 				605610DB19D2DE2B00A2850A /* ConfirmYourBidEnterYourEmailViewController.swift in Sources */,
-				5EA65C0E19D5C57D005EA4B4 /* UIView+BooleanDependentAnimation.m in Sources */,
 				609A849A19E5416000476A94 /* RegistrationPasswordViewController.swift in Sources */,
 				60FFC2B719D9496A00284B9F /* APIKeys.swift in Sources */,
 				60D976EC19D3172D00DE9F3D /* SystemTime.swift in Sources */,
@@ -1531,10 +1525,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/submodules/",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Kiosk/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @rpath/Frameworks";
@@ -1553,10 +1544,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/submodules/",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Kiosk/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @rpath/Frameworks";
