@@ -138,7 +138,7 @@ private extension SwitchView {
     }
     
     func setSelectedIndex(index: Int, animated: Bool) {
-        UIView.animateIf(shouldAnimate && animated, withDuration: animationDuration, options: .CurveEaseOut) { () -> Void in
+        UIView.animateIf(shouldAnimate && animated, duration: animationDuration, options: .CurveEaseOut) { () -> Void in
             let button = self.buttons[index]
             
             self.buttons.map { (button: UIButton) -> Void in

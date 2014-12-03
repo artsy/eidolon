@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/CocoaPods/Core.git
-  revision: 49a91acc2b1b9812352fa3605141215fbcc1e466
+  revision: 8c0ae5660c5627163a912eaf93a967e9564b835a
   specs:
     cocoapods-core (0.35.0)
       activesupport (>= 3.2.15)
@@ -43,9 +43,9 @@ GIT
 
 GIT
   remote: https://github.com/orta/cocoapods-keys.git
-  revision: f9e8474d9bfa9f20db0fa7a60d6b646beba728f8
+  revision: bf7785c8e6b8f456ef21d50b2825912bf89d6895
   specs:
-    cocoapods-keys (0.9.5)
+    cocoapods-keys (1.0.0)
       osx_keychain
 
 GEM

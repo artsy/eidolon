@@ -47,11 +47,11 @@
 
 #import <CardFlight/CardFlight.h>
 
-#import "UIView+BooleanDependentAnimation.h"
 #import <UIImageViewAligned/UIImageViewAligned.h>
 #import <DZNWebViewController/DZNWebViewController.h>
 #import <Reachability/Reachability.h>
 
+#import <UIView_BooleanAnimations/UIView+BooleanAnimations.h>
 #import <ARTiledImageView/ARTiledImageView.h>
 #import <ARTiledImageView/ARWebTiledImageDataSource.h>
 #import <ARTiledImageView/ARTiledImageScrollView.h>

@@ -66,6 +66,7 @@ PODS:
   - SDWebImage/Core (3.7.1)
   - SwiftyJSON (2.1.1)
   - UIImageViewAligned (0.0.1)
+  - UIView+BooleanAnimations (1.0.2)
   - XCGLogger (0.0.1)
   - XNGMarkdownParser (0.2.0):
     - fmemopen
@@ -99,6 +100,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.7)
   - SwiftyJSON (from `https://github.com/orta/SwiftyJSON`, branch `podspec`)
   - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
+  - UIView+BooleanAnimations
   - XCGLogger (from `https://github.com/ashfurrow/XCGLogger.git`, branch `podspec`)
   - XNGMarkdownParser
 
@@ -206,6 +208,7 @@ SPEC CHECKSUMS:
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SwiftyJSON: 85e4853fa377da93059763a3ca68fc5765d9b249
   UIImageViewAligned: efc1b8b5750dea68b7ee67236f4c64f93e65b674
+  UIView+BooleanAnimations: 48cc98d5469ced7f7654310bff47c8ddba72c8f4
   XCGLogger: c1fccc5ae3e3666241bf06c8c82e30461cff168c
   XNGMarkdownParser: 5d1ed6c1b2bb3d3f3468a9ad591b85498403822c
 

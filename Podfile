@@ -53,6 +53,7 @@ pod 'UIImageViewAligned', :git => "https://github.com/orta/UIImageViewAligned.gi
 pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewController.git"
 pod 'Reachability', :git => "https://github.com/ashfurrow/Reachability.git", :branch => "frameworks"
 
+pod 'UIView+BooleanAnimations'
 pod 'ARTiledImageView', :git => "https://github.com/dblock/ARTiledImageView.git"
 pod 'balanced-ios', :git => "https://github.com/orta/balanced-ios", :branch => "0_5_podspec"
 pod 'XNGMarkdownParser'

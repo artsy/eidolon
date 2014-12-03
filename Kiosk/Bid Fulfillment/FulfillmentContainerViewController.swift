@@ -23,7 +23,7 @@ public class FulfillmentContainerViewController: UIViewController {
 
     func viewDidAppearAnimation(animated: Bool) {
         self.contentView.frame = CGRectOffset(self.contentView.frame, 0, 100)
-        UIView.animateTwoStepIf(animated, withDuration: 0.3, { () -> Void in
+        UIView.animateTwoStepIf(animated, duration: 0.3, { () -> Void in
             self.backgroundView.alpha = 1
 
         }, midway: { () -> Void in
@@ -40,7 +40,7 @@ public class FulfillmentContainerViewController: UIViewController {
     }
 
     func closeFulfillmentModal(completion: (() -> ())? = nil) -> Void {
-        UIView.animateIf(allowAnimations, withDuration: 0.4, { () -> Void in
+        UIView.animateIf(allowAnimations, duration: 0.4, { () -> Void in
             self.contentView.alpha = 0
             self.backgroundView.alpha = 0
             self.cancelButton.alpha = 0
