@@ -1,13 +1,3 @@
-//
-//  PodsBridgingHeader.h
-//  Kiosk
-//
-//  Created by Ash Furrow on 2014-08-05.
-//  Copyright (c) 2014 Artsy. All rights reserved.
-//
-
-// Changes in here need to be reflected in KioskTests-BridgingHeader.h
-
 #import <UIKit/UIKit.h>
 #import <SystemConfiguration/CaptiveNetwork.h>
 
@@ -38,12 +28,14 @@
 
 // Fonts can come from one of two Pods
 #if __has_include(<Artsy+UIFonts/UIFont+ArtsyFonts.h>)
-#import <Artsy+UIFonts/UIFont+ArtsyFonts.h>
+#import <Artsy_UIFonts/UIFont+ArtsyFonts.h>
 #endif
 
 #if __has_include(<Artsy+OSSUIFonts/UIFont+OSSArtsyFonts.h>)
-#import <Artsy+OSSUIFonts/UIFont+OSSArtsyFonts.h>
+#import <Artsy_OSSUIFonts/UIFont+OSSArtsyFonts.h>
 #endif
+
+#import "StubResponses.h"
 
 #import <CardFlight/CardFlight.h>
 

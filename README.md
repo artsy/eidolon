@@ -13,13 +13,15 @@ Project Status
 Downloading the Code
 ----------------
 
-The following commands will ask for keys to get the app set up, you can just put 
-gibberish in there if you don't work for Artsy.
+The following commands will set up Eidolon with the expectation that you don't 
+have API access and will use blanks for API keys. (Note that you'll need Xcode's
+command line tools installed first.)
 
 ```sh
 git clone https://github.com/artsy/eidolon.git
 cd eidolon
-make bootstrap
+bundle install
+make oss
 ```
 
 Alrighty! We're ready to go!
