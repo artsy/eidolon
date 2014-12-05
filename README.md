@@ -14,11 +14,13 @@ Downloading the Code
 ----------------
 
 The following commands will ask for keys to get the app set up, you can just put 
-gibberish in there if you don't work for Artsy.
+gibberish in there if you don't work for Artsy. (Note that you'll need Xcode's
+command line tools installed first.)
 
 ```sh
 git clone https://github.com/artsy/eidolon.git
 cd eidolon
+bundle install
 make bootstrap
 ```
 
