@@ -1,6 +1,8 @@
 import Foundation
 import Pods
 
+private let minimumKeyLength = 2
+
 // Mark: - API Keys
 
 public struct APIKeys {
@@ -26,7 +28,7 @@ public struct APIKeys {
     // MARK: Methods
 
     public var stubResponses: Bool {
-        return countElements(key) == 0 || countElements(secret) == 0
+        return countElements(key) < minimumKeyLength || countElements(secret) < minimumKeyLength
     }
 
     // MARK: Initializers

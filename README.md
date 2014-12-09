@@ -24,6 +24,13 @@ bundle install
 make oss
 ```
 
+Just one more thing – because the pod used to distribute the fonts we use is 
+private (regrettable, but necessary under the terms of their licenses), we have
+specified an open source pod with an equivalent header for you to use. But, 
+because of a temporary limitation from CocoaPods, you'll need to do a 
+project-wide find-and-replace that substitutes `Artsy_UIFonts` for 
+`Artsy_OSSUIFonts`. 
+
 Alrighty! We're ready to go!
 
 Getting Started

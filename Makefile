@@ -104,18 +104,18 @@ prepare_ci: CONFIGURATION = Debug
 prepare_ci: stub_keys
 
 stub_keys:
-	bundle exec pod keys set ArtsyAPIClientSecret "" Eidolon
-	bundle exec pod keys set ArtsyAPIClientKey ""
-	bundle exec pod keys set HockeyProductionSecret ""
-	bundle exec pod keys set HockeyBetaSecret ""
-	bundle exec pod keys set MixpanelProductionAPIClientKey ""
-	bundle exec pod keys set MixpanelStagingAPIClientKey ""
-	bundle exec pod keys set CardflightAPIClientKey ""
-	bundle exec pod keys set CardflightAPIStagingClientKey ""
-	bundle exec pod keys set CardflightMerchantAccountToken ""
-	bundle exec pod keys set CardflightMerchantAccountStagingToken ""
-	bundle exec pod keys set BalancedMarketplaceToken ""
-	bundle exec pod keys set BalancedMarketplaceStagingToken ""
+	bundle exec pod keys set ArtsyAPIClientSecret "-" Eidolon
+	bundle exec pod keys set ArtsyAPIClientKey "-"
+	bundle exec pod keys set HockeyProductionSecret "-"
+	bundle exec pod keys set HockeyBetaSecret "-"
+	bundle exec pod keys set MixpanelProductionAPIClientKey "-"
+	bundle exec pod keys set MixpanelStagingAPIClientKey "-"
+	bundle exec pod keys set CardflightAPIClientKey "-"
+	bundle exec pod keys set CardflightAPIStagingClientKey "-"
+	bundle exec pod keys set CardflightMerchantAccountToken "-"
+	bundle exec pod keys set CardflightMerchantAccountStagingToken "-"
+	bundle exec pod keys set BalancedMarketplaceToken "-"
+	bundle exec pod keys set BalancedMarketplaceStagingToken "-"
 	
 
 ci: test
