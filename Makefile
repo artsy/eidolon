@@ -74,13 +74,12 @@ bootstrap:
 
 bundle: 
 	bundle install
-	
+
 	if [ ! -d ~/.cocoapods/repos/artsy ]; then \
 		bundle exec pod repo add artsy https://github.com/artsy/Specs.git; \
 	fi
 	
 	bundle exec pod install
-
 
 storyboard_ids:
 	bundle exec sbconstants Kiosk/Storyboards/StoryboardIdentifiers.swift --source-dir Kiosk/Storyboards --swift
