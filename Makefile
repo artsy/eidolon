@@ -73,7 +73,6 @@ bootstrap:
 
 
 bundle: 
-	bundle install
 
 	if [ ! -d ~/.cocoapods/repos/artsy ]; then \
 		bundle exec pod repo add artsy https://github.com/artsy/Specs.git; \
