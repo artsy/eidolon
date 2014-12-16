@@ -31,23 +31,6 @@ class ListingsViewControllerTests: QuickSpec {
             self.imageCache.clearDisk()
         }
         
-        it("presents a view controller when showModal is called") {
-            // As it's a UINav it needs to be in the real view herarchy 
-            
-            let window = UIWindow(frame:UIScreen.mainScreen().bounds)
-            let sut = testListingsViewController(storyboard)
-            window.rootViewController = sut
-            window.makeKeyAndVisible()
-
-            sut.allowAnimations = false;
-
-            let artwork = Artwork.fromJSON([:]) as Artwork
-            let saleArtwork = SaleArtwork(id: "", artwork: artwork)
-            sut.presentModalForSaleArtwork(saleArtwork)
-            
-            expect(sut.presentedViewController) != nil
-        }
-        
         describe("when displaying stubbed contents.") {
             var sut: ListingsViewController!
             beforeEach {
