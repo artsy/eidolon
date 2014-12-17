@@ -176,7 +176,7 @@ CHECKOUT OPTIONS:
     :commit: 252838693668023571c46f56d7ea8347e6948d1b
     :git: https://github.com/orta/SwiftyJSON
   XCGLogger:
-    :commit: 24de010d260f08ad16e7cd59e0416c297c771ca1
+    :commit: 0b7dcdf6cce7cfddb499c1118b4a89c2d5cdfe6f
     :git: https://github.com/ashfurrow/XCGLogger.git
 
 SPEC CHECKSUMS:
