@@ -119,7 +119,7 @@ stub_keys:
 	bundle exec pod keys set BalancedMarketplaceStagingToken "-"
 	
 
-ci: test
+ci: build
 
 beta: BUNDLE_NAME = '$(APP_NAME) β'
 beta: clean build ipa distribute
