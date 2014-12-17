@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E0F93AC1A4060000049D829 /* StubResponses.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EF1B3881A31F2F40028BBE1 /* StubResponses.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5E0F93E01A4062AE0049D829 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E0F93DF1A4062AE0049D829 /* Info.plist */; };
 		5E2B3D4B19DC063C00906A26 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */; };
 		5E3234311A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3234301A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift */; };
 		5E37FF8919C1AD8100CA348E /* ArtsyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */; };
@@ -194,6 +196,8 @@
 		39F6AA1D09AD978AEEA8922A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3E0A7FA688BE977937651169 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E97B41BA3BD1FC46425D54 /* Pods_TestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E0F93A71A405E2D0049D829 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		5E0F93DF1A4062AE0049D829 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = KioskTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5E3234301A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SaleArtworkDetailsViewController.swift; path = "Sale Artwork Details/SaleArtworkDetailsViewController.swift"; sourceTree = "<group>"; };
 		5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPI.swift; sourceTree = "<group>"; };
@@ -204,7 +208,6 @@
 		5E4D0ACA1A1E3A8300064A8A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5E4D0ACC1A1E3A8800064A8A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5E4D0AD21A1E3B1200064A8A /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E4D0AD51A1E3B1200064A8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD3019913DD800A48370 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E59DD3419913DD800A48370 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E59DD3519913DD800A48370 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -488,7 +491,7 @@
 		5E4D0AD41A1E3B1200064A8A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5E4D0AD51A1E3B1200064A8A /* Info.plist */,
+				5E0F93DF1A4062AE0049D829 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				5E59DD3C19913DD800A48370 /* Images.xcassets */,
 				5E59DD3419913DD800A48370 /* Info.plist */,
 				5E59DD53199147EC00A48370 /* PodsBridgingHeader.h */,
+				5E0F93A71A405E2D0049D829 /* BridgingHeader.h */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1030,6 +1034,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		5E0F93AB1A405FE70049D829 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E0F93AC1A4060000049D829 /* StubResponses.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		5E4D0AD11A1E3B1200064A8A /* KioskTests */ = {
 			isa = PBXNativeTarget;
@@ -1063,6 +1078,7 @@
 				9AFA421DD5E649B89E128C8F /* Copy Pods Resources */,
 				60885F8819D9B27D0065A7AE /* CopyFiles */,
 				8919FEAEE074AF0453B7041D /* Embed Pods Frameworks */,
+				5E0F93AB1A405FE70049D829 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -1116,6 +1132,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E0F93E01A4062AE0049D829 /* Info.plist in Resources */,
 				5E770B6D1A1E75B400B05A0F /* artwork.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1417,6 +1434,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				INFOPLIST_FILE = "$(SRCROOT)/KioskTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1437,6 +1455,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/Pods",
 				);
+				INFOPLIST_FILE = "$(SRCROOT)/KioskTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1537,7 +1556,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @rpath/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/PodsBridgingHeader.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/BridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1556,7 +1575,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @rpath/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7885d377-493a-4146-9439-22a3069ead6f";
-				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/PodsBridgingHeader.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
 			};

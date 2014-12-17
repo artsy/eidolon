@@ -35,7 +35,7 @@ class ImageTests: QuickSpec {
 
         it("handles unknown image formats"){
             let image = self.imageForVersion("unknown")
-            expect(image.thumbnailURL()).toNot(beAnInstanceOf(NSURL))
+            expect(image.thumbnailURL()).to(beNil())
         }
     }
 

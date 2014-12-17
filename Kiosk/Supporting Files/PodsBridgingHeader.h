@@ -1,6 +1,3 @@
-#import <UIKit/UIKit.h>
-#import <SystemConfiguration/CaptiveNetwork.h>
-
 #import <Artsy_UIColors/UIColor+ArtsyColors.h>
 #import <Artsy_UIColors/UIColor+DebugColours.h>
 
@@ -34,8 +31,6 @@
 #if __has_include(<Artsy+OSSUIFonts/UIFont+OSSArtsyFonts.h>)
 #import <Artsy_OSSUIFonts/UIFont+OSSArtsyFonts.h>
 #endif
-
-#import "StubResponses.h"
 
 #import <CardFlight/CardFlight.h>
 
