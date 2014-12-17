@@ -41,6 +41,7 @@ PODS:
   - Nimble-Snapshots (0.0.1):
     - FBSnapshotTestCase
     - Nimble
+    - Quick
   - NJKWebViewProgress (0.2.3):
     - NJKWebViewProgress/Core (= 0.2.3)
     - NJKWebViewProgress/ProgressView (= 0.2.3)
@@ -161,7 +162,7 @@ CHECKOUT OPTIONS:
     :commit: 40d480e12a3f1c09b8217bbccae250a0794aef1d
     :git: https://github.com/Quick/Nimble
   Nimble-Snapshots:
-    :commit: 502aab100a3533f1965b84fd087b43e348a00670
+    :commit: 222a9035ad843cd81640bd51679dc327f319f6c1
     :git: https://github.com/ashfurrow/Nimble-Snapshots.git
   Quick:
     :commit: b9ab5f883d8db1c8fc1cc358a9234a6925ce5301
@@ -202,7 +203,7 @@ SPEC CHECKSUMS:
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
   Moya: 5c78199dca4481d07aa04e43d04d29e42933915d
   Nimble: a758538afa362515139cc23f17a19be9b0d20ae0
-  Nimble-Snapshots: 23e9192543031c8dcc183b8224325820907c0578
+  Nimble-Snapshots: 100de8dfba52167cae93ce7cccb33d4f97090774
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
   Quick: 1b2e5892266a111ec2e13f925f8a4103978f13f8
