@@ -1,5 +1,6 @@
 import UIKit
 import ARAnalytics
+import Swift_RAC_Macros
 
 public class AppViewController: UIViewController, UINavigationControllerDelegate {
     var allowAnimations = true

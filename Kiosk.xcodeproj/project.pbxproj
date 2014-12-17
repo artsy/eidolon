@@ -55,7 +55,6 @@
 		5E7C2F751A0A6EA100A92C4D /* Artist.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E7C2F741A0A6EA100A92C4D /* Artist.json */; };
 		5E95FCB219D99871004D0C8F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95FCB119D99871004D0C8F /* Constants.swift */; };
 		5EA65C0119D5819C005EA4B4 /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA65C0019D5819C005EA4B4 /* SwitchView.swift */; };
-		5EAC732519D0149A002F918A /* ReactiveCocoaBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */; };
 		5EAE11121A153FF80079CE7B /* UITextField+RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAE11111A153FF80079CE7B /* UITextField+RAC.swift */; };
 		5EB179C61A1E539100F0E8EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4D0ACA1A1E3A8300064A8A /* Foundation.framework */; };
 		5EB179C71A1E539A00F0E8EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4D0ACC1A1E3A8800064A8A /* UIKit.framework */; };
@@ -275,7 +274,6 @@
 		5E88523C1A1E36F700F9D4DF /* Pods_KioskTests.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_KioskTests.framework; path = "Pods/build/Debug-iphoneos/Pods_KioskTests.framework"; sourceTree = "<group>"; };
 		5E95FCB119D99871004D0C8F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5EA65C0019D5819C005EA4B4 /* SwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
-		5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCocoaBindings.swift; sourceTree = "<group>"; };
 		5EAE11111A153FF80079CE7B /* UITextField+RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+RAC.swift"; sourceTree = "<group>"; };
 		5EC60BB419EB0552008A04B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5EC60BCA19EB140F008A04B0 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HelpViewController.swift; path = Help/HelpViewController.swift; sourceTree = "<group>"; };
@@ -908,7 +906,6 @@
 				5E95FCB119D99871004D0C8F /* Constants.swift */,
 				60E094BF19F5FF0E0035F0DD /* GlobalFunctions.swift */,
 				606EEADB19F99B32008CA1D9 /* ReachabilityManager.swift */,
-				5EAC732419D0149A002F918A /* ReactiveCocoaBindings.swift */,
 				60A272AE1A13F1B3006D26F4 /* MarkdownParser.swift */,
 			);
 			path = App;
@@ -1315,7 +1312,6 @@
 				60E094C019F5FF0E0035F0DD /* GlobalFunctions.swift in Sources */,
 				60E8941C19F4047F006CC4D8 /* Location.swift in Sources */,
 				600DABEE19EB657100278378 /* AdminPanelViewController.swift in Sources */,
-				5EAC732519D0149A002F918A /* ReactiveCocoaBindings.swift in Sources */,
 				602EFE4F19C6D09C002715C2 /* KeypadContainerView.swift in Sources */,
 				60EA74271A093FF6009D0F0A /* ImageTiledDataSource.swift in Sources */,
 				60C620DA19D180A20024D493 /* ConfirmYourBidPINViewController.swift in Sources */,

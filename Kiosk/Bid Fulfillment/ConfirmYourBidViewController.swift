@@ -1,6 +1,7 @@
 import UIKit
 import ECPhoneNumberFormatter
 import Moya
+import Swift_RAC_Macros
 
 public class ConfirmYourBidViewController: UIViewController {
 

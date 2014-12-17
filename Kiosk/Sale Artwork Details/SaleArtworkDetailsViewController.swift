@@ -2,6 +2,7 @@ import UIKit
 import ORStackView
 import Artsy_UILabels
 import Artsy_UIFonts
+import Swift_RAC_Macros
 
 class SaleArtworkDetailsViewController: UIViewController {
     var allowAnimations = true

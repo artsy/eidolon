@@ -1,5 +1,6 @@
 import Foundation
 import Artsy_UILabels
+import Swift_RAC_Macros
 
 class ListingsCollectionViewCell: UICollectionViewCell {
     dynamic let artworkImageView = ListingsCollectionViewCell._artworkImageView()

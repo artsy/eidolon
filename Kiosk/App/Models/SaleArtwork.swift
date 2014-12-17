@@ -1,5 +1,6 @@
 import UIKit
 import SwiftyJSON
+import Swift_RAC_Macros
 
 public enum ReserveStatus: String {
     case ReserveNotMet = "reserve_not_met"
