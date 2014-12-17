@@ -8,6 +8,12 @@ class SaleArtworkDetailsViewController: UIViewController {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
     var saleArtwork: SaleArtwork!
+
+    lazy var artistInfoSignal: RACSignal = {
+        let endpoint: ArtsyAPI = ArtsyAPI.Artwork(id: self.saleArtwork.artwork.id)
+        let signal = XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
+        return signal.replayLast()
+    }()
     
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!
     @IBOutlet weak var additionalDetailScrollView: ORStackScrollView!
@@ -25,25 +31,23 @@ class SaleArtworkDetailsViewController: UIViewController {
             nextViewController.saleArtwork = saleArtwork
         }
     }
-}
 
-enum MetadataStackViewTag: Int {
-    case ArtistNameLabel = 1
-    case ArtworkNameLabel
-    case ArtworkMediumLabel
-    case ArtworkDimensionsLabel
-    case ImageRightsLabel
-    case EstimateTopBorder
-    case EstimateLabel
-    case EstimateBottomBorder
-    case CurrentBidLabel
-    case CurrentBidValueLabel
-    case NumberOfBidsPlacedLabel
-    case BidButton
-    case Gobbler
-}
+    enum MetadataStackViewTag: Int {
+        case ArtistNameLabel = 1
+        case ArtworkNameLabel
+        case ArtworkMediumLabel
+        case ArtworkDimensionsLabel
+        case ImageRightsLabel
+        case EstimateTopBorder
+        case EstimateLabel
+        case EstimateBottomBorder
+        case CurrentBidLabel
+        case CurrentBidValueLabel
+        case NumberOfBidsPlacedLabel
+        case BidButton
+        case Gobbler
+    }
 
-extension SaleArtworkDetailsViewController {
     @IBAction func backWasPressed(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
     }
@@ -271,8 +275,7 @@ extension SaleArtworkDetailsViewController {
             return RACSignal.`return`(imageRights)
 
         } else {
-            let endpoint: ArtsyAPI = ArtsyAPI.Artwork(id: artwork.id)
-            return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
+            return artistInfoSignal.map{ (json) -> AnyObject! in
                 return json["image_rights"]
             }.filter({ (imageRights) -> Bool in
                 imageRights != nil
@@ -283,7 +286,6 @@ extension SaleArtworkDetailsViewController {
         }
     }
 
-    // Duped code with ^ could be better?
     private func retrieveAdditionalInfo() -> RACSignal {
         let artwork = saleArtwork.artwork
 
@@ -291,15 +293,14 @@ extension SaleArtworkDetailsViewController {
             return RACSignal.`return`(additionalInfo)
 
         } else {
-            let endpoint: ArtsyAPI = ArtsyAPI.Artwork(id: artwork.id)
-            return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
-                return json["additional_information"]
+            return artistInfoSignal.map{ (json) -> AnyObject! in
+                    return json["additional_information"]
                 }.filter({ (info) -> Bool in
                     info != nil
                 }).doNext{ (info) -> Void in
                     artwork.additionalInfo = info as? String
                     return
-            }
+                }
         }
     }
 
@@ -309,14 +310,14 @@ extension SaleArtworkDetailsViewController {
                 return RACSignal.`return`(blurb)
             } else {
                 let endpoint: ArtsyAPI = ArtsyAPI.Artist(id: artist.id)
-                return XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().map{ (json) -> AnyObject! in
+                return artistInfoSignal.map{ (json) -> AnyObject! in
                     return json["blurb"]
                     }.filter({ (blurb) -> Bool in
                         blurb != nil
                     }).doNext{ (blurb) -> Void in
                         artist.blurb = blurb as? String
                         return
-                }
+                    }
             }
         } else {
             return RACSignal.empty()
