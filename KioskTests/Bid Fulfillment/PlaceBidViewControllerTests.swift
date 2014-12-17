@@ -55,7 +55,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             it("looks correct") {
                 sut.cursor.stopAnimating()
-                expect(sut).to(haveValidSnapshot(named: "no bids"))
+                expect(sut) == snapshot("no bids")
                 return
             }
 
@@ -85,7 +85,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             it("looks correct") {
                 sut.cursor.stopAnimating()
-                expect(sut).to(haveValidSnapshot(named: "with bids"))
+                expect(sut) == snapshot("with bids")
                 return
             }
 

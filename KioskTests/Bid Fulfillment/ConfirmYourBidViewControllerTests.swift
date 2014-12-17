@@ -15,7 +15,7 @@ class ConfirmYourBidViewControllerTests: QuickSpec {
 
         pending("looks right by default") {
             sut.loadViewProgrammatically()
-            expect(sut).to(haveValidSnapshot(named:"default"))
+            expect(sut) == snapshot("default")
         }
 
         it("shows keypad buttons") {
