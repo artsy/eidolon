@@ -37,7 +37,7 @@ PODS:
   - Moya/Reactive (0.5):
     - Moya/Core
     - ReactiveCocoa
-  - Nimble (0.1.0)
+  - Nimble (0.2.0)
   - Nimble-Snapshots (0.0.1):
     - FBSnapshotTestCase
     - Nimble
@@ -159,13 +159,13 @@ CHECKOUT OPTIONS:
     :commit: 57b84c376a2de5d928a8899db9d46cf49281e6e3
     :git: https://github.com/AshFurrow/Moya
   Nimble:
-    :commit: 40d480e12a3f1c09b8217bbccae250a0794aef1d
+    :commit: a4da3dc14eade2667e3cca39d63e99cc79013b5d
     :git: https://github.com/Quick/Nimble
   Nimble-Snapshots:
     :commit: 222a9035ad843cd81640bd51679dc327f319f6c1
     :git: https://github.com/ashfurrow/Nimble-Snapshots.git
   Quick:
-    :commit: b9ab5f883d8db1c8fc1cc358a9234a6925ce5301
+    :commit: 615c695c8cd9cb02c04122d681fd30dfc2fc8f6d
     :git: https://github.com/Quick/Quick
   Reachability:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
@@ -202,7 +202,7 @@ SPEC CHECKSUMS:
   LlamaKit: 71673af25b2c733160d643e67c1f711d3afa4af2
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
   Moya: 5c78199dca4481d07aa04e43d04d29e42933915d
-  Nimble: a758538afa362515139cc23f17a19be9b0d20ae0
+  Nimble: 7a24fd5e6be10334811078c02ee406a30ea2c89d
   Nimble-Snapshots: 100de8dfba52167cae93ce7cccb33d4f97090774
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
