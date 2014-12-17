@@ -1,4 +1,5 @@
 import UIKit
+import Swift_RAC_Macros
 
 class RegistrationEmailViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
 

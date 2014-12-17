@@ -1,6 +1,7 @@
 import UIKit
 import Moya
 import ReactiveCocoa
+import Swift_RAC_Macros
 
 public class ConfirmYourBidPINViewController: UIViewController {
 

@@ -1,6 +1,7 @@
 import UIKit
 import SystemConfiguration
 import ARAnalytics
+import Swift_RAC_Macros
 
 let HorizontalMargins = 65
 let VerticalMargins = 26

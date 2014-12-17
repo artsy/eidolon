@@ -1,4 +1,5 @@
 import UIKit
+import Swift_RAC_Macros
 
 public class ManualCreditCardInputViewController: UIViewController, RegistrationSubController {
     let finishedSignal = RACSubject()

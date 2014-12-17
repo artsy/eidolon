@@ -2,6 +2,7 @@ import UIKit
 import Artsy_UILabels
 import Artsy_UIButtons
 import UIImageViewAligned
+import Swift_RAC_Macros
 
 public class BidDetailsPreviewView: UIView {
     

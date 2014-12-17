@@ -65,6 +65,8 @@ PODS:
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
+  - Swift-RAC-Macros (0.1):
+    - ReactiveCocoa
   - SwiftyJSON (2.1.1)
   - UIImageViewAligned (0.0.1)
   - UIView+BooleanAnimations (1.0.2)
@@ -90,15 +92,16 @@ DEPENDENCIES:
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
-  - LlamaKit (from `https://github.com/AshFurrow/LlamaKit`, branch `rac_podspec`)
-  - Moya/Reactive (from `https://github.com/AshFurrow/Moya`)
+  - LlamaKit (from `https://github.com/ashfurrow/LlamaKit`, branch `rac_podspec`)
+  - Moya/Reactive (from `https://github.com/ashfurrow/Moya`)
   - Nimble (from `https://github.com/Quick/Nimble`)
   - Nimble-Snapshots (from `https://github.com/ashfurrow/Nimble-Snapshots.git`)
   - ORStackView
   - Quick (from `https://github.com/Quick/Quick`)
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - ReactiveCocoa (from `https://github.com/AshFurrow/ReactiveCocoa`, branch `podspec`)
+  - ReactiveCocoa (from `https://github.com/ashfurrow/ReactiveCocoa`, branch `podspec`)
   - SDWebImage (~> 3.7)
+  - Swift-RAC-Macros (from `https://github.com/ashfurrow/Swift-RAC-Macros`)
   - SwiftyJSON (from `https://github.com/orta/SwiftyJSON`, branch `podspec`)
   - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
   - UIView+BooleanAnimations
@@ -121,9 +124,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/orta/DZNWebViewController.git
   LlamaKit:
     :branch: rac_podspec
-    :git: https://github.com/AshFurrow/LlamaKit
+    :git: https://github.com/ashfurrow/LlamaKit
   Moya:
-    :git: https://github.com/AshFurrow/Moya
+    :git: https://github.com/ashfurrow/Moya
   Nimble:
     :git: https://github.com/Quick/Nimble
   Nimble-Snapshots:
@@ -135,7 +138,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/ashfurrow/Reachability.git
   ReactiveCocoa:
     :branch: podspec
-    :git: https://github.com/AshFurrow/ReactiveCocoa
+    :git: https://github.com/ashfurrow/ReactiveCocoa
+  Swift-RAC-Macros:
+    :git: https://github.com/ashfurrow/Swift-RAC-Macros
   SwiftyJSON:
     :branch: podspec
     :git: https://github.com/orta/SwiftyJSON
@@ -154,10 +159,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/artsy/Artsy-UIFonts.git
   LlamaKit:
     :commit: 3e1f3b480213992cbc4f5706e5c27e49f6c18d39
-    :git: https://github.com/AshFurrow/LlamaKit
+    :git: https://github.com/ashfurrow/LlamaKit
   Moya:
-    :commit: 57b84c376a2de5d928a8899db9d46cf49281e6e3
-    :git: https://github.com/AshFurrow/Moya
+    :commit: 1107efc877fdca15e44f8947f7efb65c72017693
+    :git: https://github.com/ashfurrow/Moya
   Nimble:
     :commit: a4da3dc14eade2667e3cca39d63e99cc79013b5d
     :git: https://github.com/Quick/Nimble
@@ -172,7 +177,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ashfurrow/Reachability.git
   ReactiveCocoa:
     :commit: 53d7c15eaa4d2a3410a992283a80832d934cf83c
-    :git: https://github.com/AshFurrow/ReactiveCocoa
+    :git: https://github.com/ashfurrow/ReactiveCocoa
+  Swift-RAC-Macros:
+    :commit: f01ada8460d42ff49c2e1f478b60d3f68a1188fd
+    :git: https://github.com/ashfurrow/Swift-RAC-Macros
   SwiftyJSON:
     :commit: 252838693668023571c46f56d7ea8347e6948d1b
     :git: https://github.com/orta/SwiftyJSON
@@ -210,6 +218,7 @@ SPEC CHECKSUMS:
   Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
   ReactiveCocoa: 991a58612852e1f4cc3e0073c664367508856e53
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
+  Swift-RAC-Macros: fc20b23de746f7d99c14694389d6ed460d446a44
   SwiftyJSON: 85e4853fa377da93059763a3ca68fc5765d9b249
   UIImageViewAligned: efc1b8b5750dea68b7ee67236f4c64f93e65b674
   UIView+BooleanAnimations: 48cc98d5469ced7f7654310bff47c8ddba72c8f4

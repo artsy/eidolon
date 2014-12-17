@@ -1,5 +1,6 @@
 import UIKit
 import Moya
+import Swift_RAC_Macros
 
 public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
