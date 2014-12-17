@@ -2,6 +2,7 @@ import Quick
 import Nimble
 import ReactiveCocoa
 import Kiosk
+import Swift_RAC_Macros
 
 class BindingsTestClass: NSObject {
     dynamic var value = ""

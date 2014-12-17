@@ -38,7 +38,7 @@ PODS:
     - Moya/Core
     - ReactiveCocoa
   - Nimble (0.2.0)
-  - Nimble-Snapshots (0.0.1):
+  - Nimble-Snapshots (0.1):
     - FBSnapshotTestCase
     - Nimble
     - Quick
@@ -95,7 +95,7 @@ DEPENDENCIES:
   - LlamaKit (from `https://github.com/ashfurrow/LlamaKit`, branch `rac_podspec`)
   - Moya/Reactive (from `https://github.com/ashfurrow/Moya`)
   - Nimble (from `https://github.com/Quick/Nimble`)
-  - Nimble-Snapshots (from `https://github.com/ashfurrow/Nimble-Snapshots.git`)
+  - Nimble-Snapshots (from `https://github.com/ashfurrow/Nimble-Snapshots`)
   - ORStackView
   - Quick (from `https://github.com/Quick/Quick`)
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
@@ -130,7 +130,7 @@ EXTERNAL SOURCES:
   Nimble:
     :git: https://github.com/Quick/Nimble
   Nimble-Snapshots:
-    :git: https://github.com/ashfurrow/Nimble-Snapshots.git
+    :git: https://github.com/ashfurrow/Nimble-Snapshots
   Quick:
     :git: https://github.com/Quick/Quick
   Reachability:
@@ -167,8 +167,8 @@ CHECKOUT OPTIONS:
     :commit: a4da3dc14eade2667e3cca39d63e99cc79013b5d
     :git: https://github.com/Quick/Nimble
   Nimble-Snapshots:
-    :commit: 222a9035ad843cd81640bd51679dc327f319f6c1
-    :git: https://github.com/ashfurrow/Nimble-Snapshots.git
+    :commit: ebbc7058871327cc1eed97bdaa812b34fc844337
+    :git: https://github.com/ashfurrow/Nimble-Snapshots
   Quick:
     :commit: 615c695c8cd9cb02c04122d681fd30dfc2fc8f6d
     :git: https://github.com/Quick/Quick
@@ -211,7 +211,7 @@ SPEC CHECKSUMS:
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
   Moya: 5c78199dca4481d07aa04e43d04d29e42933915d
   Nimble: 7a24fd5e6be10334811078c02ee406a30ea2c89d
-  Nimble-Snapshots: 100de8dfba52167cae93ce7cccb33d4f97090774
+  Nimble-Snapshots: d02e7e3b6ad2e79f8dcb30fba16be2066ca58efb
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
   Quick: 1b2e5892266a111ec2e13f925f8a4103978f13f8

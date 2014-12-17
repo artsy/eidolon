@@ -31,7 +31,6 @@
 		5E770B741A1E75B400B05A0F /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B351A1E75B400B05A0F /* PlaceBidViewControllerTests.swift */; };
 		5E770B751A1E75B400B05A0F /* BidDetailsTestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B361A1E75B400B05A0F /* BidDetailsTestExtensions.swift */; };
 		5E770B761A1E75B400B05A0F /* CardHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B371A1E75B400B05A0F /* CardHandlerTests.swift */; };
-		5E770B771A1E75B400B05A0F /* emojiSnappin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B381A1E75B400B05A0F /* emojiSnappin.swift */; };
 		5E770B781A1E75B400B05A0F /* KioskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B391A1E75B400B05A0F /* KioskTests.swift */; };
 		5E770B791A1E75B400B05A0F /* ListingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B3A1A1E75B400B05A0F /* ListingsViewControllerTests.swift */; };
 		5E770B7A1A1E75B400B05A0F /* ArtistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B3C1A1E75B400B05A0F /* ArtistTests.swift */; };
@@ -227,7 +226,6 @@
 		5E770B351A1E75B400B05A0F /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; };
 		5E770B361A1E75B400B05A0F /* BidDetailsTestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BidDetailsTestExtensions.swift; path = KioskTests/BidDetailsTestExtensions.swift; sourceTree = SOURCE_ROOT; };
 		5E770B371A1E75B400B05A0F /* CardHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardHandlerTests.swift; path = KioskTests/CardHandlerTests.swift; sourceTree = SOURCE_ROOT; };
-		5E770B381A1E75B400B05A0F /* emojiSnappin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = emojiSnappin.swift; path = KioskTests/emojiSnappin.swift; sourceTree = SOURCE_ROOT; };
 		5E770B391A1E75B400B05A0F /* KioskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KioskTests.swift; path = KioskTests/KioskTests.swift; sourceTree = SOURCE_ROOT; };
 		5E770B3A1A1E75B400B05A0F /* ListingsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingsViewControllerTests.swift; path = KioskTests/ListingsViewControllerTests.swift; sourceTree = SOURCE_ROOT; };
 		5E770B3C1A1E75B400B05A0F /* ArtistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTests.swift; sourceTree = "<group>"; };
@@ -469,7 +467,6 @@
 				5E770B2E1A1E75B400B05A0F /* Bid Fulfillment */,
 				5E770B361A1E75B400B05A0F /* BidDetailsTestExtensions.swift */,
 				5E770B371A1E75B400B05A0F /* CardHandlerTests.swift */,
-				5E770B381A1E75B400B05A0F /* emojiSnappin.swift */,
 				5E770B391A1E75B400B05A0F /* KioskTests.swift */,
 				5E770B3A1A1E75B400B05A0F /* ListingsViewControllerTests.swift */,
 				5E770B3B1A1E75B400B05A0F /* Models */,
@@ -1293,7 +1290,6 @@
 				5E770B791A1E75B400B05A0F /* ListingsViewControllerTests.swift in Sources */,
 				5E770B6E1A1E75B400B05A0F /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */,
 				5E770B811A1E75B400B05A0F /* SaleTests.swift in Sources */,
-				5E770B771A1E75B400B05A0F /* emojiSnappin.swift in Sources */,
 				5E770B9C1A1E75B400B05A0F /* TestHelpers.swift in Sources */,
 				5E770B6C1A1E75B400B05A0F /* ArtsyAPISpec.swift in Sources */,
 				5E770B9B1A1E75B400B05A0F /* SwitchViewSpec.swift in Sources */,
