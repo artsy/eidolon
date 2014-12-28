@@ -1,8 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/artsy/Specs.git'
 
-# This API format doesn't work in cocoapods-keys yet. So don't get too excited.
-
 plugin 'cocoapods-keys', {
   :project => "Eidolon",
   :keys => [
