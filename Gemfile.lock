@@ -1,43 +1,43 @@
 GIT
   remote: https://github.com/CocoaPods/CLAide.git
-  revision: b1eccc296b68b1a432e42ecf0c4b799d8551c75c
+  revision: 9e8b9072fd66f69b91999cd3838a4bbba043a7e5
   specs:
-    claide (0.7.0)
+    claide (0.8.0)
 
 GIT
   remote: https://github.com/CocoaPods/CocoaPods.git
-  revision: 99364e6912948874e63fa54a6770aa35038956f0
-  branch: swift
+  revision: 0740ff3a8310e9163dc139c9e60ee947de0752e6
+  tag: 0.36.0.beta.1
   specs:
-    cocoapods (0.35.0)
+    cocoapods (0.36.0.beta.1)
       activesupport (>= 3.2.15)
-      claide (~> 0.7.0)
-      cocoapods-core (= 0.35.0)
-      cocoapods-downloader (~> 0.8.0)
-      cocoapods-plugins (~> 0.3.1)
-      cocoapods-trunk (~> 0.4.1)
-      cocoapods-try (~> 0.4.2)
+      claide (~> 0.8.0)
+      cocoapods-core (= 0.36.0.beta.1)
+      cocoapods-downloader (~> 0.8.1)
+      cocoapods-plugins (~> 0.4.0)
+      cocoapods-trunk (~> 0.5.0)
+      cocoapods-try (~> 0.4.3)
       colored (~> 1.2)
       escape (~> 0.0.4)
-      molinillo (~> 0.1.2)
+      molinillo (~> 0.2.0)
       nap (~> 0.8)
       open4 (~> 1.3)
-      xcodeproj (~> 0.20.2)
+      xcodeproj (~> 0.21.0)
 
 GIT
   remote: https://github.com/CocoaPods/Core.git
-  revision: 1b8e20d89405a726302585db14bea90fabeb052f
+  revision: b379dc4b484a733b0db060f8ed06facc06609fc3
   specs:
-    cocoapods-core (0.35.0)
+    cocoapods-core (0.36.0.beta.1)
       activesupport (>= 3.2.15)
       fuzzy_match (~> 2.0.4)
       nap (~> 0.8.0)
 
 GIT
   remote: https://github.com/CocoaPods/Xcodeproj.git
-  revision: 768a22894fbdb3fc8dd22d8322fd76c612a06f36
+  revision: 2ef226943bf432aef0b610fcbe8b99e9ae9ef1f8
   specs:
-    xcodeproj (0.20.2)
+    xcodeproj (0.21.0)
       activesupport (>= 3)
       colored (~> 1.2)
 
@@ -54,24 +54,24 @@ GEM
     RubyInline (3.12.3)
       ZenTest (~> 4.3)
     ZenTest (4.11.0)
-    activesupport (4.1.8)
-      i18n (~> 0.6, >= 0.6.9)
+    activesupport (4.2.0)
+      i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
-      thread_safe (~> 0.1)
+      thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     aws-sdk (1.59.0)
       aws-sdk-v1 (= 1.59.0)
     aws-sdk-v1 (1.59.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
-    cocoapods-downloader (0.8.0)
-    cocoapods-plugins (0.3.2)
+    cocoapods-downloader (0.8.1)
+    cocoapods-plugins (0.4.0)
       nap
-    cocoapods-trunk (0.4.1)
+    cocoapods-trunk (0.5.0)
       nap (>= 0.8)
       netrc (= 0.7.8)
-    cocoapods-try (0.4.2)
+    cocoapods-try (0.4.3)
     colored (1.2)
     commander (4.2.1)
       highline (~> 1.6.11)
@@ -85,11 +85,11 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     fuzzy_match (2.0.4)
     highline (1.6.21)
-    i18n (0.6.11)
+    i18n (0.7.0)
     json (1.8.1)
     mini_portile (0.6.1)
-    minitest (5.4.3)
-    molinillo (0.1.2)
+    minitest (5.5.0)
+    molinillo (0.2.0)
     multipart-post (1.2.0)
     nap (0.8.0)
     net-sftp (2.1.2)
