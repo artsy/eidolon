@@ -38,7 +38,7 @@ PODS:
     - Moya/Core
     - ReactiveCocoa
   - Nimble (0.2.0)
-  - Nimble-Snapshots (0.0.1):
+  - Nimble-Snapshots (0.1):
     - FBSnapshotTestCase
     - Nimble
     - Quick
@@ -167,7 +167,7 @@ CHECKOUT OPTIONS:
     :commit: a4da3dc14eade2667e3cca39d63e99cc79013b5d
     :git: https://github.com/Quick/Nimble
   Nimble-Snapshots:
-    :commit: 222a9035ad843cd81640bd51679dc327f319f6c1
+    :commit: b90c44357b0f075afb4c3ef7d734487d781d5c5c
     :git: https://github.com/ashfurrow/Nimble-Snapshots.git
   Quick:
     :commit: 615c695c8cd9cb02c04122d681fd30dfc2fc8f6d
@@ -211,7 +211,7 @@ SPEC CHECKSUMS:
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
   Moya: 5c78199dca4481d07aa04e43d04d29e42933915d
   Nimble: 7a24fd5e6be10334811078c02ee406a30ea2c89d
-  Nimble-Snapshots: 100de8dfba52167cae93ce7cccb33d4f97090774
+  Nimble-Snapshots: d02e7e3b6ad2e79f8dcb30fba16be2066ca58efb
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
   Quick: 1b2e5892266a111ec2e13f925f8a4103978f13f8
@@ -225,4 +225,4 @@ SPEC CHECKSUMS:
   XCGLogger: c1fccc5ae3e3666241bf06c8c82e30461cff168c
   XNGMarkdownParser: 5d1ed6c1b2bb3d3f3468a9ad591b85498403822c
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.0.beta.1
