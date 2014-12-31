@@ -65,6 +65,7 @@ GEM
     aws-sdk-v1 (1.59.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
+    cocoapods-chillax-swift (0.2.0)
     cocoapods-downloader (0.8.1)
     cocoapods-plugins (0.4.0)
       nap
@@ -129,6 +130,7 @@ PLATFORMS
 DEPENDENCIES
   claide!
   cocoapods!
+  cocoapods-chillax-swift (~> 0.2.0)
   cocoapods-core!
   cocoapods-keys!
   sbconstants

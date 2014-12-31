@@ -18,6 +18,10 @@ plugin 'cocoapods-keys', {
     "BalancedMarketplaceStagingToken"
   ]}
 
+plugin 'cocoapods-chillax-swift', {
+  :pods => ['XCGLogger']
+}
+
 platform :ios, '8.0'
 
 # Yep.
@@ -71,19 +75,4 @@ target "KioskTests" do
   pod 'Quick', :git => "https://github.com/Quick/Quick"
   pod 'Nimble', :git => "https://github.com/Quick/Nimble"
 
-end
-
-unoptimized_pod_names = ['XCGLogger']
-
-post_install do |installer_representation|
-  targets = installer_representation.project.targets.select { |target|
-    unoptimized_pod_names.select { |name|
-      target.display_name.end_with? name
-    }.count > 0
-  }
-  targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Onone'
-    end
-  end
 end
