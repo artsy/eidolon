@@ -31,7 +31,6 @@
 		5E770B741A1E75B400B05A0F /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B351A1E75B400B05A0F /* PlaceBidViewControllerTests.swift */; };
 		5E770B751A1E75B400B05A0F /* BidDetailsTestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B361A1E75B400B05A0F /* BidDetailsTestExtensions.swift */; };
 		5E770B761A1E75B400B05A0F /* CardHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B371A1E75B400B05A0F /* CardHandlerTests.swift */; };
-		5E770B771A1E75B400B05A0F /* emojiSnappin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B381A1E75B400B05A0F /* emojiSnappin.swift */; };
 		5E770B781A1E75B400B05A0F /* KioskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B391A1E75B400B05A0F /* KioskTests.swift */; };
 		5E770B791A1E75B400B05A0F /* ListingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B3A1A1E75B400B05A0F /* ListingsViewControllerTests.swift */; };
 		5E770B7A1A1E75B400B05A0F /* ArtistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B3C1A1E75B400B05A0F /* ArtistTests.swift */; };
@@ -43,7 +42,6 @@
 		5E770B801A1E75B400B05A0F /* SaleArtworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B421A1E75B400B05A0F /* SaleArtworkTests.swift */; };
 		5E770B811A1E75B400B05A0F /* SaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B431A1E75B400B05A0F /* SaleTests.swift */; };
 		5E770B821A1E75B400B05A0F /* SystemTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B441A1E75B400B05A0F /* SystemTimeTests.swift */; };
-		5E770B831A1E75B400B05A0F /* ReactiveCocoaBindingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B451A1E75B400B05A0F /* ReactiveCocoaBindingsTests.swift */; };
 		5E770B9A1A1E75B400B05A0F /* RegisterFlowViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B651A1E75B400B05A0F /* RegisterFlowViewTests.swift */; };
 		5E770B9B1A1E75B400B05A0F /* SwitchViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B661A1E75B400B05A0F /* SwitchViewSpec.swift */; };
 		5E770B9C1A1E75B400B05A0F /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E770B671A1E75B400B05A0F /* TestHelpers.swift */; };
@@ -224,10 +222,9 @@
 		5E770B321A1E75B400B05A0F /* ConfirmYourBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmYourBidViewControllerTests.swift; sourceTree = "<group>"; };
 		5E770B331A1E75B400B05A0F /* FulfillmentContainerViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		5E770B341A1E75B400B05A0F /* LoadingViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewControllerTests.swift; sourceTree = "<group>"; };
-		5E770B351A1E75B400B05A0F /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; };
+		5E770B351A1E75B400B05A0F /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		5E770B361A1E75B400B05A0F /* BidDetailsTestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BidDetailsTestExtensions.swift; path = KioskTests/BidDetailsTestExtensions.swift; sourceTree = SOURCE_ROOT; };
 		5E770B371A1E75B400B05A0F /* CardHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardHandlerTests.swift; path = KioskTests/CardHandlerTests.swift; sourceTree = SOURCE_ROOT; };
-		5E770B381A1E75B400B05A0F /* emojiSnappin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = emojiSnappin.swift; path = KioskTests/emojiSnappin.swift; sourceTree = SOURCE_ROOT; };
 		5E770B391A1E75B400B05A0F /* KioskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KioskTests.swift; path = KioskTests/KioskTests.swift; sourceTree = SOURCE_ROOT; };
 		5E770B3A1A1E75B400B05A0F /* ListingsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingsViewControllerTests.swift; path = KioskTests/ListingsViewControllerTests.swift; sourceTree = SOURCE_ROOT; };
 		5E770B3C1A1E75B400B05A0F /* ArtistTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTests.swift; sourceTree = "<group>"; };
@@ -239,7 +236,6 @@
 		5E770B421A1E75B400B05A0F /* SaleArtworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkTests.swift; sourceTree = "<group>"; };
 		5E770B431A1E75B400B05A0F /* SaleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleTests.swift; sourceTree = "<group>"; };
 		5E770B441A1E75B400B05A0F /* SystemTimeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemTimeTests.swift; sourceTree = "<group>"; };
-		5E770B451A1E75B400B05A0F /* ReactiveCocoaBindingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactiveCocoaBindingsTests.swift; path = KioskTests/ReactiveCocoaBindingsTests.swift; sourceTree = SOURCE_ROOT; };
 		5E770B481A1E75B400B05A0F /* looks_right_offline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "looks_right_offline@2x.png"; sourceTree = "<group>"; };
 		5E770B4A1A1E75B400B05A0F /* looks_right_by_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "looks_right_by_default@2x.png"; sourceTree = "<group>"; };
 		5E770B4C1A1E75B400B05A0F /* looks_right_by_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "looks_right_by_default@2x.png"; sourceTree = "<group>"; };
@@ -469,11 +465,9 @@
 				5E770B2E1A1E75B400B05A0F /* Bid Fulfillment */,
 				5E770B361A1E75B400B05A0F /* BidDetailsTestExtensions.swift */,
 				5E770B371A1E75B400B05A0F /* CardHandlerTests.swift */,
-				5E770B381A1E75B400B05A0F /* emojiSnappin.swift */,
 				5E770B391A1E75B400B05A0F /* KioskTests.swift */,
 				5E770B3A1A1E75B400B05A0F /* ListingsViewControllerTests.swift */,
 				5E770B3B1A1E75B400B05A0F /* Models */,
-				5E770B451A1E75B400B05A0F /* ReactiveCocoaBindingsTests.swift */,
 				5E770B461A1E75B400B05A0F /* ReferenceImages */,
 				5E770B651A1E75B400B05A0F /* RegisterFlowViewTests.swift */,
 				5E770B661A1E75B400B05A0F /* SwitchViewSpec.swift */,
@@ -1273,7 +1267,6 @@
 				5E770B701A1E75B400B05A0F /* ConfirmYourBidPINViewControllerTests.swift in Sources */,
 				5E770B711A1E75B400B05A0F /* ConfirmYourBidViewControllerTests.swift in Sources */,
 				5E770B7C1A1E75B400B05A0F /* BidderPositionTests.swift in Sources */,
-				5E770B831A1E75B400B05A0F /* ReactiveCocoaBindingsTests.swift in Sources */,
 				5E770B7E1A1E75B400B05A0F /* BidTests.swift in Sources */,
 				5E770B751A1E75B400B05A0F /* BidDetailsTestExtensions.swift in Sources */,
 				5E770B801A1E75B400B05A0F /* SaleArtworkTests.swift in Sources */,
@@ -1293,7 +1286,6 @@
 				5E770B791A1E75B400B05A0F /* ListingsViewControllerTests.swift in Sources */,
 				5E770B6E1A1E75B400B05A0F /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */,
 				5E770B811A1E75B400B05A0F /* SaleTests.swift in Sources */,
-				5E770B771A1E75B400B05A0F /* emojiSnappin.swift in Sources */,
 				5E770B9C1A1E75B400B05A0F /* TestHelpers.swift in Sources */,
 				5E770B6C1A1E75B400B05A0F /* ArtsyAPISpec.swift in Sources */,
 				5E770B9B1A1E75B400B05A0F /* SwitchViewSpec.swift in Sources */,

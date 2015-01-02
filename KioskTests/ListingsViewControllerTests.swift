@@ -40,31 +40,31 @@ class ListingsViewControllerTests: QuickSpec {
 
             it("grid") {
                 sut.switchView[0]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut).to(haveValidSnapshot(named: "grid"))
+                expect(sut) == snapshot("grid")
             }
             it("least bids") {
                 sut.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut).to(haveValidSnapshot(named: "least bids"))
+                expect(sut) == snapshot("least bids")
             }
 
             it("most bids") {
                 sut.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut).to(haveValidSnapshot(named: "most bids"))
+                expect(sut) == snapshot("most bids")
             }
 
             it("highest bid") {
                 sut.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut).to(haveValidSnapshot(named: "highest bid"))
+                expect(sut) == snapshot("highest bid")
             }
 
             it("lowest bid") {
                 sut.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut).to(haveValidSnapshot(named: "lowest bid"))
+                expect(sut) == snapshot("lowest bid")
             }
 
             it("alphabetical") {
                 sut.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut).to(haveValidSnapshot(named: "alphabetical"))
+                expect(sut) == snapshot("alphabetical")
             }
         }
         

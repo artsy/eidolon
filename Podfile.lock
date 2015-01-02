@@ -95,7 +95,7 @@ DEPENDENCIES:
   - LlamaKit (from `https://github.com/ashfurrow/LlamaKit`, branch `rac_podspec`)
   - Moya/Reactive (from `https://github.com/ashfurrow/Moya`)
   - Nimble (from `https://github.com/Quick/Nimble`)
-  - Nimble-Snapshots (from `https://github.com/ashfurrow/Nimble-Snapshots.git`)
+  - Nimble-Snapshots (from `https://github.com/ashfurrow/Nimble-Snapshots`)
   - ORStackView
   - Quick (from `https://github.com/Quick/Quick`)
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
@@ -130,7 +130,7 @@ EXTERNAL SOURCES:
   Nimble:
     :git: https://github.com/Quick/Nimble
   Nimble-Snapshots:
-    :git: https://github.com/ashfurrow/Nimble-Snapshots.git
+    :git: https://github.com/ashfurrow/Nimble-Snapshots
   Quick:
     :git: https://github.com/Quick/Quick
   Reachability:
