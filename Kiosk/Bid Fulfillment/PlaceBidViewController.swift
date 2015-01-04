@@ -12,6 +12,7 @@ public class PlaceBidViewController: UIViewController {
     @IBOutlet public var keypadContainer: KeypadContainerView!
 
     @IBOutlet public var currentBidTitleLabel: UILabel!
+    @IBOutlet public var yourBidTitleLabel: UILabel!
     @IBOutlet public var currentBidAmountLabel: UILabel!
     @IBOutlet public var nextBidAmountLabel: UILabel!
 
@@ -39,6 +40,9 @@ public class PlaceBidViewController: UIViewController {
         if !hasAlreadyPlacedABid {
             self.fulfillmentNav().reset()
         }
+
+        currentBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
+        yourBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
 
         let keypad = self.keypadContainer!.keypad!
         let bidDollarsSignal = RACObserve(self, "bidDollars")

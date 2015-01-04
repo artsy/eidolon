@@ -155,7 +155,7 @@ CHECKOUT OPTIONS:
     :commit: caa66f74e10471e1577d73e16e8c03d0557a54ab
     :git: https://github.com/mrackwitz/Alamofire.git
   Artsy+UIFonts:
-    :commit: 52931249d927704cc9f5f2d3cd3b9725813455c3
+    :commit: 43da82caec13f89ec9fcab1c826258986c93f0cd
     :git: https://github.com/artsy/Artsy-UIFonts.git
   LlamaKit:
     :commit: 3e1f3b480213992cbc4f5706e5c27e49f6c18d39
