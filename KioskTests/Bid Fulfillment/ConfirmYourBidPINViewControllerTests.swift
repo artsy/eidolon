@@ -1,8 +1,8 @@
 import Quick
 import Nimble
+import Kiosk
 import Moya
 import ReactiveCocoa
-import Kiosk
 import Nimble_Snapshots
 
 class ConfirmYourBidPINViewControllerTests: QuickSpec {

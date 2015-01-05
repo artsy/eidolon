@@ -154,9 +154,18 @@ CHECKOUT OPTIONS:
   Alamofire:
     :commit: caa66f74e10471e1577d73e16e8c03d0557a54ab
     :git: https://github.com/mrackwitz/Alamofire.git
+  ARTiledImageView:
+    :commit: 28823e393124ca076b7016f864373025e239db6b
+    :git: https://github.com/dblock/ARTiledImageView.git
   Artsy+UIFonts:
     :git: https://github.com/artsy/Artsy-UIFonts.git
     :tag: 1.1.0
+  balanced-ios:
+    :commit: 49510b3b740be4cd31615af99b096659526a6acc
+    :git: https://github.com/orta/balanced-ios
+  DZNWebViewController:
+    :commit: 9121386901af95072fb19eaa3df7060ca46fc337
+    :git: https://github.com/orta/DZNWebViewController.git
   LlamaKit:
     :commit: 3e1f3b480213992cbc4f5706e5c27e49f6c18d39
     :git: https://github.com/ashfurrow/LlamaKit
@@ -184,22 +193,25 @@ CHECKOUT OPTIONS:
   SwiftyJSON:
     :commit: 252838693668023571c46f56d7ea8347e6948d1b
     :git: https://github.com/orta/SwiftyJSON
+  UIImageViewAligned:
+    :commit: c20e8b0f6da11f032aeb692665004dada75ef0fe
+    :git: https://github.com/orta/UIImageViewAligned.git
   XCGLogger:
     :commit: 0b7dcdf6cce7cfddb499c1118b4a89c2d5cdfe6f
     :git: https://github.com/ashfurrow/XCGLogger.git
 
 SPEC CHECKSUMS:
-  Alamofire: 4cff790102216d69f3b12dd69885c468870d51e9
+  Alamofire: 50d16b63df6f3f68abf40f6be107982503366ab3
   ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
   ARCollectionViewMasonryLayout: 40993cb65522139cb2cd6ed255c91a6caee5c4dd
-  ARTiledImageView: 0de3b09798e5b1ec91a2939c311b69b03e7c9706
+  ARTiledImageView: 000af4093f9bdcd0f754e6ebd964c90641389f90
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
   Artsy+UIFonts: 108bfe625c45008ebb15c4c62003882dd345c4b8
   Artsy+UILabels: a7c713069e3d10144a3dc8e377bef8b2253cd766
   Artsy-UIButtons: 80a957b9479417c3be1e68d5b830de6cd2ec44cc
-  balanced-ios: b8d238f8c4a3eb673d984106eda9062d334d4789
+  balanced-ios: 4081f4464e914b7e26fe9563b1ab2b4837296c3c
   CardFlight: 6efbffb69e4ab27629ac0fe18e04790ac6c7d53b
-  DZNWebViewController: 8716115ea00d6abbfb5dc937fff85b222b70fc68
+  DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
   FBSnapshotTestCase: f9f225b5ba11c8d8c09075590490df16314e4d62
@@ -207,22 +219,22 @@ SPEC CHECKSUMS:
   fmemopen: 54fc0cc9d9063de6103b40a24849818a53c8f1e5
   HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
   ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
-  LlamaKit: 71673af25b2c733160d643e67c1f711d3afa4af2
+  LlamaKit: f9e1b1740818d4d79eaed5a4f5d4db5f13fa720f
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
-  Moya: 5c78199dca4481d07aa04e43d04d29e42933915d
-  Nimble: 7a24fd5e6be10334811078c02ee406a30ea2c89d
-  Nimble-Snapshots: d02e7e3b6ad2e79f8dcb30fba16be2066ca58efb
+  Moya: a2d2041a50ab05ada4ee42ce098cf9424d437dae
+  Nimble: 79679d4cd5a3710db75e1dd9f5479f71842da6a6
+  Nimble-Snapshots: a0a190abd76c1f07618cbc4e271d45cce10e4c5e
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
-  Quick: 1b2e5892266a111ec2e13f925f8a4103978f13f8
-  Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
-  ReactiveCocoa: 991a58612852e1f4cc3e0073c664367508856e53
+  Quick: fdcce541eb5d73f5ac78f95c770ca6d6d69f0b81
+  Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
+  ReactiveCocoa: f32c3dac1a4eddfc37f12af224321ddb8f62b0ef
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
-  Swift-RAC-Macros: fc20b23de746f7d99c14694389d6ed460d446a44
-  SwiftyJSON: 85e4853fa377da93059763a3ca68fc5765d9b249
-  UIImageViewAligned: efc1b8b5750dea68b7ee67236f4c64f93e65b674
+  Swift-RAC-Macros: 674067568c87398d6fc7be57af930c5d0e5cd10e
+  SwiftyJSON: 626bbe0ede796bf69e849b7aa7473778b03fe44c
+  UIImageViewAligned: c188246ca50d21a5ac2a60ae754669525bb9f2f1
   UIView+BooleanAnimations: 48cc98d5469ced7f7654310bff47c8ddba72c8f4
-  XCGLogger: c1fccc5ae3e3666241bf06c8c82e30461cff168c
+  XCGLogger: 6aebc398883eb63fc23ac2eb537ad5a9725862ab
   XNGMarkdownParser: 5d1ed6c1b2bb3d3f3468a9ad591b85498403822c
 
 COCOAPODS: 0.36.0.beta.1
