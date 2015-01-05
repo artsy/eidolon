@@ -1,5 +1,5 @@
 import Foundation
-import Pods
+import Pods_Kiosk
 
 private let minimumKeyLength = 2
 

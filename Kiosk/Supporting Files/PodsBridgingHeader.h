@@ -12,7 +12,7 @@
 #import <ISO8601DateFormatter/ISO8601DateFormatter.h>
 #import <ECPhoneNumberFormatter/ECPhoneNumberFormatter.h>
 
-#import <Pods/EidolonKeys.h>
+#import <Pods_Kiosk/EidolonKeys.h>
 
 #import <ARAnalytics/ARAnalytics.h>
 #import <ORStackView/ORStackView.h>

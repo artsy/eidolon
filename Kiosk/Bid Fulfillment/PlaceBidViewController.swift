@@ -147,7 +147,7 @@ private extension PlaceBidViewController {
     }
 
     func deleteBid(input: AnyObject!) -> Void {
-        self.bidDollars = self.bidDollars/10
+        self.bidDollars = Int(self.bidDollars/10)
     }
 
     func clearBid(input: AnyObject!) -> Void {

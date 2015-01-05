@@ -2,7 +2,7 @@ import Quick
 import Nimble
 import Kiosk
 import ReactiveCocoa
-import Pods
+import Pods_Kiosk
 import Moya
 
 func beInTheFuture() -> MatcherFunc<NSDate> {

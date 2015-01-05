@@ -198,6 +198,7 @@
 		518A3363006EF37D2EAF5E37 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5E0F93A71A405E2D0049D829 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		5E0F93DF1A4062AE0049D829 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = KioskTests/Info.plist; sourceTree = SOURCE_ROOT; };
+		5E2381931A5B0CD600020A56 /* Pods_Kiosk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Kiosk.framework; path = "Pods/build/Debug-iphoneos/Pods_Kiosk.framework"; sourceTree = "<group>"; };
 		5E2B3D4A19DC063C00906A26 /* ListingsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5E3234301A079C33009CD3C5 /* SaleArtworkDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SaleArtworkDetailsViewController.swift; path = "Sale Artwork Details/SaleArtworkDetailsViewController.swift"; sourceTree = "<group>"; };
 		5E37FF8819C1AD8100CA348E /* ArtsyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPI.swift; sourceTree = "<group>"; };
@@ -422,6 +423,7 @@
 		16F3A19F9AD1486CACC915F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E2381931A5B0CD600020A56 /* Pods_Kiosk.framework */,
 				5E4864E41A1E451A002800E3 /* Artsy_UIColors.framework */,
 				5E4864E21A1E450A002800E3 /* Pods.framework */,
 				5E4D0ACC1A1E3A8800064A8A /* UIKit.framework */,
@@ -1403,10 +1405,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/Pods",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1428,10 +1428,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/Pods",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/KioskTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
