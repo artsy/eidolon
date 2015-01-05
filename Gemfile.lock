@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: https://github.com/orta/cocoapods-keys.git
-  revision: 901bebed09be35a93140afee359c57567d4b100d
+  revision: 7403d08b22ef4b133ee4480799b2faffa57cf287
   specs:
     cocoapods-keys (1.0.0)
       osx_keychain
