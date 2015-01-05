@@ -33,7 +33,7 @@ pod 'Artsy+UILabels'
 pod 'Artsy-UIButtons'
 
 if ENV['USER'] == "orta" || ENV['USER'] == "ash" || ENV['USER'] == "artsy" || ENV['USER'] == "Laura" || ENV['CI'] == "true"
-    pod 'Artsy+UIFonts', :git => 'https://github.com/artsy/Artsy-UIFonts.git', :branch => 'new-tracking'
+    pod 'Artsy+UIFonts', :git => 'https://github.com/artsy/Artsy-UIFonts.git', :tag => '1.1.0'
 else
     pod 'Artsy+OSSUIFonts', :git => 'https://github.com/ashfurrow/Artsy-OSSUIFonts.git'
 end
