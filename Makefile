@@ -1,5 +1,5 @@
 WORKSPACE = Kiosk.xcworkspace
-SCHEME = Kiosk
+SCHEME = KioskTests
 CONFIGURATION = Debug
 APP_NAME = Kiosk
 
