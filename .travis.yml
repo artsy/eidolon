@@ -11,10 +11,9 @@ install:
   - bundle install
   - make prepare_ci
   - make bundle
-before_script:
-  - make ci
-script:
-  - make test
+xcode_workspace: Kiosk.xcworkspace
+xcode_scheme: Kiosk
+xcode_sdk: iphonesimulator
 notifications:
   slack: 
     secure: dHJSmLJAwoLRi5inP5btz8fP6pbT/BIF89CTOFmnNO6mLEM7J++PZfvj4cg2ojM3jfjFtQXJE5CuqrOaLeXhN4uteIu91ust1sgkNdkExsQvOVgBAZhcsLZLtMQpytrVs34FXfdirAZv/S750J3d8XWr7yCZThqRkVuIy0CB5vM=
