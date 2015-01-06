@@ -1,5 +1,6 @@
 import UIKit
 import Moya
+import ReactiveCocoa
 
 public class FulfillmentNavigationController: UINavigationController {
 

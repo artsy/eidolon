@@ -21,8 +21,6 @@
 #import <FLKAutoLayout/UIView+FLKAutoLayout.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
-#import <ReactiveCocoa/ReactiveCocoa.h>
-
 // Fonts can come from one of two Pods
 #if __has_include(<Artsy+UIFonts/UIFont+ArtsyFonts.h>)
 #import <Artsy_UIFonts/UIFont+ArtsyFonts.h>

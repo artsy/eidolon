@@ -1,5 +1,6 @@
 import UIKit
 import ARAnalytics
+import ReactiveCocoa
 import Swift_RAC_Macros
 
 public class AppViewController: UIViewController, UINavigationControllerDelegate {

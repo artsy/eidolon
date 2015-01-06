@@ -1,4 +1,5 @@
 import UIKit
+import ReactiveCocoa
 
 public class KeypadView: UIView {
     public let keypadSignal = RACSubject()

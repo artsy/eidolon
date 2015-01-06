@@ -1,4 +1,5 @@
 import UIKit
+import ReactiveCocoa
 import Moya
 
 public class BidCheckingNetworkModel: NSObject {

@@ -1,6 +1,7 @@
 import UIKit
 import Artsy_UILabels
 import ARAnalytics
+import ReactiveCocoa
 
 public class LoadingViewController: UIViewController {
 

@@ -1,5 +1,6 @@
 import UIKit
 import ORStackView
+import ReactiveCocoa
 
 public class RegisterFlowView: ORStackView {
 

@@ -1,5 +1,6 @@
 import Foundation
 import ISO8601DateFormatter
+import ReactiveCocoa
 
 public class SystemTime {
     public var systemTimeInterval: NSTimeInterval? = nil
