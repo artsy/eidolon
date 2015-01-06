@@ -65,7 +65,7 @@ PODS:
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
-  - Swift-RAC-Macros (0.1):
+  - Swift-RAC-Macros (0.2):
     - ReactiveCocoa
   - SwiftyJSON (2.1.1)
   - UIImageViewAligned (0.0.1)
@@ -101,7 +101,7 @@ DEPENDENCIES:
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
   - ReactiveCocoa (from `https://github.com/ashfurrow/ReactiveCocoa`, branch `podspec`)
   - SDWebImage (~> 3.7)
-  - Swift-RAC-Macros (from `https://github.com/ashfurrow/Swift-RAC-Macros`)
+  - Swift-RAC-Macros (from `https://github.com/ashfurrow/Swift-RAC-Macros`, tag `0.2`)
   - SwiftyJSON (from `https://github.com/orta/SwiftyJSON`, branch `podspec`)
   - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
   - UIView+BooleanAnimations
@@ -141,6 +141,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/ashfurrow/ReactiveCocoa
   Swift-RAC-Macros:
     :git: https://github.com/ashfurrow/Swift-RAC-Macros
+    :tag: 0.2
   SwiftyJSON:
     :branch: podspec
     :git: https://github.com/orta/SwiftyJSON
@@ -185,11 +186,11 @@ CHECKOUT OPTIONS:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
     :git: https://github.com/ashfurrow/Reachability.git
   ReactiveCocoa:
-    :commit: 53d7c15eaa4d2a3410a992283a80832d934cf83c
+    :commit: 63abee7c5dc523673d353ea8f408a1afab072331
     :git: https://github.com/ashfurrow/ReactiveCocoa
   Swift-RAC-Macros:
-    :commit: f01ada8460d42ff49c2e1f478b60d3f68a1188fd
     :git: https://github.com/ashfurrow/Swift-RAC-Macros
+    :tag: 0.2
   SwiftyJSON:
     :commit: 252838693668023571c46f56d7ea8347e6948d1b
     :git: https://github.com/orta/SwiftyJSON
@@ -230,7 +231,7 @@ SPEC CHECKSUMS:
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
   ReactiveCocoa: f32c3dac1a4eddfc37f12af224321ddb8f62b0ef
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
-  Swift-RAC-Macros: 674067568c87398d6fc7be57af930c5d0e5cd10e
+  Swift-RAC-Macros: 6e225e474aac6a2f5898ece4dd6bc32ec9834d6d
   SwiftyJSON: 626bbe0ede796bf69e849b7aa7473778b03fe44c
   UIImageViewAligned: c188246ca50d21a5ac2a60ae754669525bb9f2f1
   UIView+BooleanAnimations: 48cc98d5469ced7f7654310bff47c8ddba72c8f4

@@ -68,7 +68,7 @@ pod 'Alamofire', :git => "https://github.com/mrackwitz/Alamofire.git", :branch =
 pod 'LlamaKit', :git => "https://github.com/ashfurrow/LlamaKit", :branch => "rac_podspec"
 pod 'ReactiveCocoa', :git => "https://github.com/ashfurrow/ReactiveCocoa", :branch => "podspec"
 pod 'Moya/Reactive', :git => "https://github.com/ashfurrow/Moya"
-pod 'Swift-RAC-Macros', :git => "https://github.com/ashfurrow/Swift-RAC-Macros"
+pod 'Swift-RAC-Macros', :git => "https://github.com/ashfurrow/Swift-RAC-Macros", :tag => "0.2"
 
 target "KioskTests" do
 
