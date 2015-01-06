@@ -171,7 +171,7 @@ CHECKOUT OPTIONS:
     :commit: 3e1f3b480213992cbc4f5706e5c27e49f6c18d39
     :git: https://github.com/ashfurrow/LlamaKit
   Moya:
-    :commit: 1107efc877fdca15e44f8947f7efb65c72017693
+    :commit: 1a5304c916ec9c97c2a0c5944db084dd9014c95e
     :git: https://github.com/ashfurrow/Moya
   Nimble:
     :commit: a4da3dc14eade2667e3cca39d63e99cc79013b5d
@@ -186,7 +186,7 @@ CHECKOUT OPTIONS:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
     :git: https://github.com/ashfurrow/Reachability.git
   ReactiveCocoa:
-    :commit: 63abee7c5dc523673d353ea8f408a1afab072331
+    :commit: 26e689f624f546e41e757b36b35317ed674ab53a
     :git: https://github.com/ashfurrow/ReactiveCocoa
   Swift-RAC-Macros:
     :git: https://github.com/ashfurrow/Swift-RAC-Macros
@@ -229,7 +229,7 @@ SPEC CHECKSUMS:
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
   Quick: fdcce541eb5d73f5ac78f95c770ca6d6d69f0b81
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
-  ReactiveCocoa: f32c3dac1a4eddfc37f12af224321ddb8f62b0ef
+  ReactiveCocoa: 7af2b133d4170e965c39b8d6a533460e68f18f9a
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   Swift-RAC-Macros: 6e225e474aac6a2f5898ece4dd6bc32ec9834d6d
   SwiftyJSON: 626bbe0ede796bf69e849b7aa7473778b03fe44c
