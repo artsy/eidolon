@@ -12,7 +12,7 @@ install:
   - make prepare_ci
   - make bundle
 xcode_workspace: Kiosk.xcworkspace
-xcode_scheme: Kiosk
+xcode_scheme: KioskTests
 xcode_sdk: iphonesimulator
 notifications:
   slack: 
