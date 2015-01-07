@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="AGaramondPro-Regular.otf">
@@ -310,6 +310,7 @@
                         <outlet property="cursor" destination="ybr-6E-470" id="rlk-8V-1J2"/>
                         <outlet property="keypadContainer" destination="A3C-Vo-Qhd" id="Kee-zX-lv9"/>
                         <outlet property="nextBidAmountLabel" destination="uVu-PR-0oJ" id="x1I-M4-sxi"/>
+                        <outlet property="yourBidTitleLabel" destination="sft-xL-TDA" id="kue-H3-ye5"/>
                         <segue destination="Yzb-AU-icr" kind="push" identifier="Confirm Bid" id="J1L-DG-oRQ"/>
                         <segue destination="2lt-co-qW2" kind="push" identifier="Place Another Bid" id="hvW-mC-OYp"/>
                     </connections>
@@ -1574,9 +1575,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="A1R-R2-CSF"/>
-        <segue reference="NOJ-G3-crU"/>
         <segue reference="Qpe-mM-52j"/>
-        <segue reference="6qF-R8-kJy"/>
+        <segue reference="hvW-mC-OYp"/>
+        <segue reference="NOJ-G3-crU"/>
+        <segue reference="A1R-R2-CSF"/>
     </inferredMetricsTieBreakers>
 </document>

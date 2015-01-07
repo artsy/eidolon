@@ -1,3 +1,4 @@
+import ReactiveCocoa
 
 extension RACSignal {
     func mapNilToEmptyString() -> RACSignal {

@@ -1,5 +1,5 @@
 WORKSPACE = Kiosk.xcworkspace
-SCHEME = Kiosk
+SCHEME = KioskTests
 CONFIGURATION = Debug
 APP_NAME = Kiosk
 
@@ -8,7 +8,7 @@ PLIST_BUDDY = /usr/libexec/PlistBuddy
 BUNDLE_VERSION = $(shell $(PLIST_BUDDY) -c "Print CFBundleVersion" $(APP_PLIST))
 GIT_COMMIT = $(shell git log -n1 --format='%h')
 DATE_VERSION = $(shell date "+%Y.%m.%d")
-DEVICE_HOST = platform='iOS Simulator',OS='8.1',name='iPad Air'
+DEVICE_HOST = "OS=8.1,name=iPad Air"
 
 # Default for `make`
 all: ci
@@ -90,7 +90,7 @@ clean:
 	xcodebuild -workspace '$(WORKSPACE)' -scheme '$(SCHEME)' -configuration '$(CONFIGURATION)' clean
 
 test:
-	set -o pipefail && xcodebuild -workspace '$(WORKSPACE)' -scheme '$(SCHEME)' -configuration Debug test -sdk iphonesimulator -destination $(DEVICE_HOST) | xcpretty -c --test
+	set -o pipefail && xcodebuild -workspace '$(WORKSPACE)' -scheme '$(SCHEME)' -configuration Debug test -sdk iphonesimulator -destination $(DEVICE_HOST) | xcpretty --test
 
 ipa:
 	$(PLIST_BUDDY) -c "Set CFBundleDisplayName $(BUNDLE_NAME)" $(APP_PLIST)

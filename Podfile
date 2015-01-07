@@ -1,8 +1,13 @@
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/artsy/Specs.git'
 
+plugin 'cocoapods-chillax-swift', {
+  :pods => ['XCGLogger']
+}
+
 plugin 'cocoapods-keys', {
   :project => "Eidolon",
+  :target => "Kiosk",
   :keys => [
     "ArtsyAPIClientSecret",
     "ArtsyAPIClientKey",
@@ -16,7 +21,8 @@ plugin 'cocoapods-keys', {
     "CardflightMerchantAccountStagingToken",
     "BalancedMarketplaceToken",
     "BalancedMarketplaceStagingToken"
-  ]}
+  ]
+}
 
 platform :ios, '8.0'
 
@@ -29,9 +35,9 @@ pod 'Artsy+UILabels'
 pod 'Artsy-UIButtons'
 
 if ENV['USER'] == "orta" || ENV['USER'] == "ash" || ENV['USER'] == "artsy" || ENV['USER'] == "Laura" || ENV['CI'] == "true"
-    pod 'Artsy+UIFonts', :git => 'https://github.com/artsy/Artsy-UIFonts.git', :branch => 'new-tracking'
+    pod 'Artsy+UIFonts', :git => 'https://github.com/artsy/Artsy-UIFonts.git', :tag => '1.1.0'
 else
-    pod 'Artsy+OSSUIFonts', :git => 'https://github.com/ashfurrow/Artsy-OSSUIFonts.git'
+    pod 'Artsy+OSSUIFonts', :git => 'https://github.com/artsy/Artsy-OSSUIFonts.git'
 end
 
 pod 'ORStackView'
@@ -62,7 +68,7 @@ pod 'Alamofire', :git => "https://github.com/mrackwitz/Alamofire.git", :branch =
 pod 'LlamaKit', :git => "https://github.com/ashfurrow/LlamaKit", :branch => "rac_podspec"
 pod 'ReactiveCocoa', :git => "https://github.com/ashfurrow/ReactiveCocoa", :branch => "podspec"
 pod 'Moya/Reactive', :git => "https://github.com/ashfurrow/Moya"
-pod 'Swift-RAC-Macros', :git => "https://github.com/ashfurrow/Swift-RAC-Macros"
+pod 'Swift-RAC-Macros', :git => "https://github.com/ashfurrow/Swift-RAC-Macros", :tag => "0.2"
 
 target "KioskTests" do
 
@@ -71,19 +77,4 @@ target "KioskTests" do
   pod 'Quick', :git => "https://github.com/Quick/Quick"
   pod 'Nimble', :git => "https://github.com/Quick/Nimble"
 
-end
-
-unoptimized_pod_names = ['XCGLogger']
-
-post_install do |installer_representation|
-  targets = installer_representation.project.targets.select { |target|
-    unoptimized_pod_names.select { |name|
-      target.display_name.end_with? name
-    }.count > 0
-  }
-  targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Onone'
-    end
-  end
 end

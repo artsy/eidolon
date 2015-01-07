@@ -1,5 +1,6 @@
 import Foundation
 import Artsy_UILabels
+import ReactiveCocoa
 import Swift_RAC_Macros
 
 class ListingsCollectionViewCell: UICollectionViewCell {

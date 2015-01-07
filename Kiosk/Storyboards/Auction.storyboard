@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="KCM-cT-BEX">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -810,10 +810,10 @@
             </objects>
             <point key="canvasLocation" x="2845" y="4043"/>
         </scene>
-        <!--View Controller-->
+        <!--Offline View Controller-->
         <scene sceneID="rEE-fV-srO">
             <objects>
-                <viewController storyboardIdentifier="No Internet Connection" automaticallyAdjustsScrollViewInsets="NO" id="8YY-cB-YpC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="No Internet Connection" automaticallyAdjustsScrollViewInsets="NO" id="8YY-cB-YpC" customClass="OfflineViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XIs-VM-2lT"/>
                         <viewControllerLayoutGuide type="bottom" id="qpD-Vb-slh"/>
@@ -838,6 +838,10 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                     </view>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="offlineLabel" destination="rMt-83-jhR" id="s63-Zw-bKF"/>
+                        <outlet property="subtitleLabel" destination="Rkr-Gi-wuZ" id="XLz-B9-iFC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mmz-aB-M8K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

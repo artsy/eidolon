@@ -1,4 +1,5 @@
 import UIKit
+import ReactiveCocoa
 
 let SwitchViewBorderWidth: CGFloat = 2
 

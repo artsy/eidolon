@@ -1,5 +1,6 @@
 import UIKit
 import balanced_ios
+import ReactiveCocoa
 
 class BalancedManager: NSObject {
 

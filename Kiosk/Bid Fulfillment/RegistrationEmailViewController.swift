@@ -1,5 +1,6 @@
 import UIKit
 import Swift_RAC_Macros
+import ReactiveCocoa
 
 class RegistrationEmailViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
 

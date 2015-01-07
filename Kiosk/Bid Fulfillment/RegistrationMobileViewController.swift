@@ -1,4 +1,5 @@
 import UIKit
+import ReactiveCocoa
 import Swift_RAC_Macros
 
 class RegistrationMobileViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {

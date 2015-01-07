@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+import ReactiveCocoa
 import Kiosk
 import Nimble_Snapshots
 

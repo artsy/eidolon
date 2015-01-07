@@ -1,5 +1,6 @@
 import Foundation
 import Moya
+import ReactiveCocoa
 
 class APIPingManager: NSObject {
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
+   LastUpgradeVersion = "0610"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -8,40 +9,12 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EA245401A1E33AA00BB3B53"
-               BuildableName = "KioskTests.xctest"
-               BlueprintName = "KioskTests"
-               ReferencedContainer = "container:Kiosk.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EA245401A1E33AA00BB3B53"
-               BuildableName = "KioskTests.xctest"
-               BlueprintName = "KioskTests"
-               ReferencedContainer = "container:Kiosk.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5E4D0AD11A1E3B1200064A8A"
+               BlueprintIdentifier = "5EB0B7011A5C3E6800B7CBF2"
                BuildableName = "KioskTests.xctest"
                BlueprintName = "KioskTests"
                ReferencedContainer = "container:Kiosk.xcodeproj">
@@ -59,27 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EA245401A1E33AA00BB3B53"
-               BuildableName = "KioskTests.xctest"
-               BlueprintName = "KioskTests"
-               ReferencedContainer = "container:Kiosk.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EA245401A1E33AA00BB3B53"
-               BuildableName = "KioskTests.xctest"
-               BlueprintName = "KioskTests"
-               ReferencedContainer = "container:Kiosk.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5E4D0AD11A1E3B1200064A8A"
+               BlueprintIdentifier = "5EB0B7011A5C3E6800B7CBF2"
                BuildableName = "KioskTests.xctest"
                BlueprintName = "KioskTests"
                ReferencedContainer = "container:Kiosk.xcodeproj">
@@ -89,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5EA245401A1E33AA00BB3B53"
+            BlueprintIdentifier = "5EB0B7011A5C3E6800B7CBF2"
             BuildableName = "KioskTests.xctest"
             BlueprintName = "KioskTests"
             ReferencedContainer = "container:Kiosk.xcodeproj">
@@ -108,7 +61,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5EA245401A1E33AA00BB3B53"
+            BlueprintIdentifier = "5EB0B7011A5C3E6800B7CBF2"
             BuildableName = "KioskTests.xctest"
             BlueprintName = "KioskTests"
             ReferencedContainer = "container:Kiosk.xcodeproj">
@@ -126,7 +79,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5EA245401A1E33AA00BB3B53"
+            BlueprintIdentifier = "5EB0B7011A5C3E6800B7CBF2"
             BuildableName = "KioskTests.xctest"
             BlueprintName = "KioskTests"
             ReferencedContainer = "container:Kiosk.xcodeproj">
