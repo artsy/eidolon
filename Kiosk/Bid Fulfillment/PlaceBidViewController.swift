@@ -31,8 +31,8 @@ public class PlaceBidViewController: UIViewController {
     lazy public var clearSignal: RACSignal!  = self.keypadContainer.keypad?.rightSignal
     lazy public var deleteSignal: RACSignal! = self.keypadContainer.keypad?.leftSignal
 
-    public class func instantiateFromStoryboard() -> PlaceBidViewController {
-        return UIStoryboard.fulfillment().viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
+    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
+        return storyboard.viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
     }
 
     override public func viewDidLoad() {

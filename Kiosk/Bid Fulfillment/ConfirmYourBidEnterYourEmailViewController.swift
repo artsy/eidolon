@@ -7,8 +7,9 @@ public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     @IBOutlet public var emailTextField: UITextField!
     @IBOutlet public var confirmButton: UIButton!
     @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
-    public class func instantiateFromStoryboard() -> ConfirmYourBidEnterYourEmailViewController {
-        return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBidEnterEmail) as ConfirmYourBidEnterYourEmailViewController
+
+    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidEnterYourEmailViewController {
+        return storyboard.viewControllerWithID(.ConfirmYourBidEnterEmail) as ConfirmYourBidEnterYourEmailViewController
     }
 
     override public func viewDidLoad() {

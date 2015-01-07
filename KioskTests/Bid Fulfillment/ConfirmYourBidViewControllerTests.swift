@@ -10,7 +10,7 @@ class ConfirmYourBidViewControllerTests: QuickSpec {
         var nav: FulfillmentNavigationController!
 
         beforeEach {
-            sut = ConfirmYourBidViewController.instantiateFromStoryboard().wrapInFulfillmentNav() as ConfirmYourBidViewController
+            sut = ConfirmYourBidViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as ConfirmYourBidViewController
             nav = FulfillmentNavigationController(rootViewController:sut)
         }
 

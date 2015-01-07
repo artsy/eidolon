@@ -12,3 +12,6 @@ extension UIViewController {
         return self
     }
 }
+
+let auctionStoryboard = UIStoryboard.auction()
+let fulfillmentStoryboard = UIStoryboard.fulfillment()

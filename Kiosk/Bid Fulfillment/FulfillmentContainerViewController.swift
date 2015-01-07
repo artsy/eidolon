@@ -58,9 +58,7 @@ public class FulfillmentContainerViewController: UIViewController {
         return self.childViewControllers.first as? FulfillmentNavigationController
     }
 
-    class func instantiateFromStoryboard() -> FulfillmentContainerViewController {
-        return  UIStoryboard(name: "Fulfillment", bundle: nil)
-            .instantiateViewControllerWithIdentifier(ViewControllerStoryboardIdentifier.FulfillmentContainer.rawValue) as FulfillmentContainerViewController
+    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> FulfillmentContainerViewController {
+        return storyboard.viewControllerWithID(.FulfillmentContainer) as FulfillmentContainerViewController
     }
-    
 }
