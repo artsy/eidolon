@@ -21,8 +21,8 @@ public class ConfirmYourBidViewController: UIViewController {
     public lazy var deleteSignal:RACSignal! = self.keypadContainer.keypad?.leftSignal
     public lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
-    public class func instantiateFromStoryboard() -> ConfirmYourBidViewController {
-        return UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController
+    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidViewController {
+        return storyboard.viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController
     }
 
     override public func viewDidLoad() {

@@ -14,10 +14,8 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     var createNewAccount = false
     lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
-    public class func instantiateFromStoryboard() -> ConfirmYourBidArtsyLoginViewController {
-        let a = UIStoryboard.fulfillment().viewControllerWithID(.ConfirmYourBidArtsyLogin)
-        println(a.navigationController)
-        return a as ConfirmYourBidArtsyLoginViewController
+    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
+        return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as ConfirmYourBidArtsyLoginViewController
     }
 
     override public func viewDidLoad() {

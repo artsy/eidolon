@@ -14,8 +14,8 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
 
     @IBOutlet weak var titleLabel: ARSerifLabel!
 
-    public class func instantiateFromStoryboard() -> SwipeCreditCardViewController {
-        return UIStoryboard.fulfillment().viewControllerWithID(.RegisterCreditCard) as SwipeCreditCardViewController
+    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> SwipeCreditCardViewController {
+        return storyboard.viewControllerWithID(.RegisterCreditCard) as SwipeCreditCardViewController
     }
 
     dynamic var cardName = ""

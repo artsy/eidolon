@@ -14,7 +14,7 @@ class PlaceBidViewControllerTests: QuickSpec {
         ]
 
         beforeEach {
-            sut = PlaceBidViewController.instantiateFromStoryboard().wrapInFulfillmentNav() as PlaceBidViewController
+            sut = PlaceBidViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as PlaceBidViewController
         }
 
         pending("looks right by default") {

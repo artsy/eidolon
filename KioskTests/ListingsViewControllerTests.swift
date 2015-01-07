@@ -9,8 +9,6 @@ import Moya
 class ListingsViewControllerTests: QuickSpec {
     let imageCache = SDImageCache.sharedImageCache()
     override func spec() {
-        let storyboard = UIStoryboard.auction()
-
         beforeEach {
             Provider.sharedProvider = Provider.StubbingProvider()
             
@@ -34,7 +32,7 @@ class ListingsViewControllerTests: QuickSpec {
         describe("when displaying stubbed contents.") {
             var sut: ListingsViewController!
             beforeEach {
-                sut = testListingsViewController(storyboard)
+                sut = testListingsViewController()
                 sut.loadViewProgrammatically()
             }
 
@@ -97,7 +95,7 @@ class ListingsViewControllerTests: QuickSpec {
             }
             
             pending("paginates to the second page to retrieve all three sale artworks") {
-                let sut = testListingsViewController(storyboard)
+                let sut = testListingsViewController()
                 sut.pageSize = 2
                 
                 sut.beginAppearanceTransition(true, animated: false)
@@ -108,7 +106,7 @@ class ListingsViewControllerTests: QuickSpec {
             }
             
             pending("updates with new values in existing sale artworks") {
-                let sut = testListingsViewController(storyboard)
+                let sut = testListingsViewController()
                 sut.syncInterval = 1
                 
                 sut.beginAppearanceTransition(true, animated: false)
@@ -122,7 +120,7 @@ class ListingsViewControllerTests: QuickSpec {
             }
             
             pending("updates with new sale artworks when lengths differ") {
-                let sut = testListingsViewController(storyboard)
+                let sut = testListingsViewController()
                 sut.syncInterval = 1
                 
                 sut.beginAppearanceTransition(true, animated: false)
@@ -143,7 +141,7 @@ let testSchedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal i
     return signal
 }
 
-func testListingsViewController(storyboard: UIStoryboard) -> ListingsViewController {
+func testListingsViewController(storyboard: UIStoryboard = auctionStoryboard) -> ListingsViewController {
     let sut = ListingsViewController.instantiateFromStoryboard(storyboard)
     sut.schedule = testSchedule
     sut.auctionID = ""

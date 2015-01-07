@@ -20,8 +20,8 @@ class RegisterViewController: UIViewController {
 
     dynamic var placingBid = true
 
-    class func instantiateFromStoryboard() -> RegisterViewController {
-        return UIStoryboard.fulfillment().viewControllerWithID(.RegisterAnAccount) as RegisterViewController
+    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegisterViewController {
+        return storyboard.viewControllerWithID(.RegisterAnAccount) as RegisterViewController
     }
 
     func internalNavController() -> UINavigationController? {

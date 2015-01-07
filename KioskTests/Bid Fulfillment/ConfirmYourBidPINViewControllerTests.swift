@@ -9,13 +9,13 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
     override func spec() {
 
         it("looks right by default") {
-            let sut = ConfirmYourBidPINViewController.instantiateFromStoryboard().wrapInFulfillmentNav() as ConfirmYourBidPINViewController
+            let sut = testConfirmYourBidPINViewController()
             expect(sut).to(haveValidSnapshot())
         }
 
         it("reacts to keypad inputs with the string") {
             let customKeySubject = RACSubject()
-            let sut = ConfirmYourBidPINViewController.instantiateFromStoryboard().wrapInFulfillmentNav() as ConfirmYourBidPINViewController
+            let sut = testConfirmYourBidPINViewController()
             sut.keypadSignal = customKeySubject;
             sut.loadViewProgrammatically()
 
@@ -34,7 +34,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             let customKeySubject = RACSubject()
             let deleteSubject = RACSubject()
 
-            let sut = ConfirmYourBidPINViewController.instantiateFromStoryboard().wrapInFulfillmentNav() as ConfirmYourBidPINViewController
+            let sut = testConfirmYourBidPINViewController()
             sut.keypadSignal = customKeySubject;
             sut.deleteSignal = deleteSubject
 
@@ -51,7 +51,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             let customKeySubject = RACSubject()
             let clearSubject = RACSubject()
 
-            let sut = ConfirmYourBidPINViewController.instantiateFromStoryboard().wrapInFulfillmentNav() as ConfirmYourBidPINViewController
+            let sut = testConfirmYourBidPINViewController()
             sut.keypadSignal = customKeySubject;
             sut.clearSignal = clearSubject
 
@@ -86,4 +86,8 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
         }
 
     }
+}
+
+func testConfirmYourBidPINViewController() -> ConfirmYourBidPINViewController {
+    return ConfirmYourBidPINViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as ConfirmYourBidPINViewController
 }
