@@ -15,8 +15,7 @@ all: ci
 
 oss: 
 	bundle install
-oss: stub_keys
-oss:
+	make stub_keys
 	bundle exec pod install
 
 bundle: 
