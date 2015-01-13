@@ -20,16 +20,8 @@ command line tools installed first.)
 ```sh
 git clone https://github.com/artsy/eidolon.git
 cd eidolon
-bundle install
 make oss
 ```
-
-Just one more thing – because the pod used to distribute the fonts we use is 
-private (regrettable, but necessary under the terms of their licenses), we have
-specified an open source pod with an equivalent header for you to use. But, 
-because of a temporary limitation from CocoaPods, you'll need to do a 
-project-wide find-and-replace that substitutes `Artsy_UIFonts` for 
-`Artsy_OSSUIFonts`. 
 
 Alrighty! We're ready to go!
 
@@ -37,17 +29,18 @@ Getting Started
 ---------------
 
 Now that we have the code [downloaded](#downloading-the-code), we can run the
-app using [Xcode 6.1+](https://developer.apple.com/xcode/downloads/). Make sure to
+app using [Xcode 6.1.1](https://developer.apple.com/xcode/downloads/). Make sure to
 open the `Kiosk.xcworkspace` workspace, and not the `Kiosk.xcodeproj` project.
 Currently, the project is compatible with Xcode 6 only, as it's swift.
-
-The Artsy API is private, making it difficult for open source developers to run
-the app. We have a toggle in the `AppDelegate` that flips the app to use only stubbbed networking.
 
 Artsy has licensed fonts for use in this app, but due to the terms of that
 license, they are not available for open source distribution. This has [required](http://artsy.github.io/blog/2014/06/20/artsys-first-closed-source-pod/)
 us to use [private pods](http://guides.cocoapods.org/making/private-cocoapods.html).
-The `Podfile` deals with the differences.
+The `Podfile` deals with the differences transparently.
+
+The Artsy API is private, making it difficult for open source developers to run
+the app. If you don't have access to the private Artsy fonts pod, then Eidolon
+infers that it should use stubbed data instead of hitting the live API. 
 
 Contributing
 ------------
