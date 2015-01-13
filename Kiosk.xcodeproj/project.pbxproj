@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3FCE6D8A07CA1FA29F4A37DC /* Pods_KioskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E64E1A65630200F8CBDD /* Logger.swift */; };
+		5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */; };
 		5E86104B1A5C429C00456E41 /* AdminCardTestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */; };
 		5E86104C1A5C429C00456E41 /* AdminLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC41A5C429C00456E41 /* AdminLogViewController.swift */; };
 		5E86104D1A5C429C00456E41 /* AdminPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC51A5C429C00456E41 /* AdminPanelViewController.swift */; };
@@ -205,7 +207,6 @@
 		5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */; };
 		5EB0B71D1A5C410D00B7CBF2 /* UITextField+RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7181A5C410D00B7CBF2 /* UITextField+RAC.swift */; };
 		5EB0B71E1A5C410D00B7CBF2 /* UIViewController+Bidding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7191A5C410D00B7CBF2 /* UIViewController+Bidding.swift */; };
-		5EB8D8EF1A5C513A008EAD6C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5EB8D8EE1A5C513A008EAD6C /* Info.plist */; };
 		D12607F71BF578705637C9A7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFB9BD12B5173B74D620D7 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -221,6 +222,8 @@
 
 /* Begin PBXFileReference section */
 		3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KioskTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E19E64E1A65630200F8CBDD /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCardTestingViewController.swift; sourceTree = "<group>"; };
 		5E860FC41A5C429C00456E41 /* AdminLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminLogViewController.swift; sourceTree = "<group>"; };
 		5E860FC51A5C429C00456E41 /* AdminPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminPanelViewController.swift; sourceTree = "<group>"; };
@@ -464,6 +467,7 @@
 				5E860FEE1A5C429C00456E41 /* UIStoryboardSegueExtensions.swift */,
 				5E860FEF1A5C429C00456E41 /* UIViewControllerExtensions.swift */,
 				5E860FF01A5C429C00456E41 /* UIViewSubclassesErrorExtensions.swift */,
+				5E19E64E1A65630200F8CBDD /* Logger.swift */,
 				5E860FF11A5C429C00456E41 /* Views */,
 			);
 			path = App;
@@ -665,6 +669,7 @@
 			isa = PBXGroup;
 			children = (
 				5E8610C31A5C43EF00456E41 /* RAC */,
+				5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -988,7 +993,6 @@
 				5E8610B81A5C429C00456E41 /* MyBiddersForAuction.json in Resources */,
 				5E8610A61A5C429C00456E41 /* Auction.storyboard in Resources */,
 				5E8610AE1A5C429C00456E41 /* AuctionInfo.json in Resources */,
-				5EB8D8EF1A5C513A008EAD6C /* Info.plist in Resources */,
 				5E8610A81A5C429C00456E41 /* KeypadView.xib in Resources */,
 				5E86108F1A5C429C00456E41 /* KeypadViewPreviewIB.png in Resources */,
 				5E8610BF1A5C429C00456E41 /* XApp.json in Resources */,
@@ -1165,6 +1169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */,
 				5E8610751A5C429C00456E41 /* Button.swift in Sources */,
 				5E8610561A5C429C00456E41 /* CardHandler.swift in Sources */,
 				5E8610691A5C429C00456E41 /* ArtsyAPI.swift in Sources */,
@@ -1291,6 +1296,7 @@
 				5E8611321A5C43EF00456E41 /* TestHelpers.swift in Sources */,
 				5E8611041A5C43EF00456E41 /* ArtsyAPISpec.swift in Sources */,
 				5E8611331A5C43EF00456E41 /* TextFieldTests.swift in Sources */,
+				5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */,
 				5E8611171A5C43EF00456E41 /* SaleArtworkTests.swift in Sources */,
 				5E8611311A5C43EF00456E41 /* SwitchViewSpec.swift in Sources */,
 				5E86110A1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift in Sources */,

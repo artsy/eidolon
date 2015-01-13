@@ -1,10 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/artsy/Specs.git'
 
-plugin 'cocoapods-chillax-swift', {
-  :pods => ['XCGLogger']
-}
-
 plugin 'cocoapods-keys', {
   :project => "Eidolon",
   :target => "Kiosk",
@@ -62,7 +58,6 @@ pod 'balanced-ios', :git => "https://github.com/orta/balanced-ios", :branch => "
 pod 'XNGMarkdownParser'
 
 # swift pods
-pod 'XCGLogger', :git => "https://github.com/ashfurrow/XCGLogger.git", :branch => "podspec"
 pod 'SwiftyJSON'
 pod 'Alamofire'
 pod 'ReactiveCocoa', '3.0.0-alpha.1'
