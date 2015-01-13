@@ -13,67 +13,12 @@ DEVICE_HOST = "OS=8.1,name=iPad Air"
 # Default for `make`
 all: ci
 
-oss: stub_keys
 oss: 
+	bundle install
+	make stub_keys
 	bundle exec pod install
-
-bootstrap:
-
-	@echo "\nSetting up API Keys, leave blank if you don't know."
-
-	@printf '\nWhat is your Artsy API Client Secret? '; \
-		read ARTSY_CLIENT_SECRET; \
-		bundle exec pod keys set ArtsyAPIClientSecret "$$ARTSY_CLIENT_SECRET" Eidolon
-
-	@printf '\nWhat is your Artsy API Client Key? '; \
-		read ARTSY_CLIENT_KEY; \
-		bundle exec pod keys set ArtsyAPIClientKey "$$ARTSY_CLIENT_KEY"
-
-	@printf '\nWhat is your Hockey Production Secret? '; \
-		read HOCKEYPRODUCTIONSECRET; \
-		bundle exec pod keys set HockeyProductionSecret "$$HOCKEYPRODUCTIONSECRET"
-
-	@printf '\nWhat is your Hockey Beta Secret? '; \
-		read HOCKEYBETASECRET; \
-		bundle exec pod keys set HockeyBetaSecret "$$HOCKEYBETASECRET"
-
-	@printf '\nWhat is your production Mixpanel API Key? '; \
-		read MIXPANEL_KEY; \
-		bundle exec pod keys set MixpanelProductionAPIClientKey "$$MIXPANEL_KEY"
-
-	@printf '\nWhat is your staging Mixpanel API Key? '; \
-		read MIXPANEL_KEY; \
-		bundle exec pod keys set MixpanelStagingAPIClientKey "$$MIXPANEL_KEY"
-
-	@printf '\nWhat is your Cardflight API Client Key? '; \
-		read CARDFLIGHT_KEY; \
-		bundle exec pod keys set CardflightAPIClientKey "$$CARDFLIGHT_KEY"
-
-	@printf '\nWhat is your Cardflight Test API Key? '; \
-		read CARDFLIGHT_KEY; \
-		bundle exec pod keys set CardflightAPIStagingClientKey "$$CARDFLIGHT_KEY"
-
-	@printf '\nWhat is your Cardflight Merchant Account Production Token? '; \
-		read CARDFLIGHT_TOKEN; \
-		bundle exec pod keys set CardflightMerchantAccountToken "$$CARDFLIGHT_TOKEN"
-
-	@printf '\nWhat is your Cardflight Merchant Account Test Token? '; \
-		read CARDFLIGHT_TOKEN; \
-		bundle exec pod keys set CardflightMerchantAccountStagingToken "$$CARDFLIGHT_TOKEN"
-
-	@printf '\nWhat is your Balanced Marketplace Token? '; \
-		read TOKEN; \
-		bundle exec pod keys set BalancedMarketplaceToken "$$TOKEN"
-
-	@printf '\nWhat is your Balanced Marketplace Staging Token? '; \
-		read TOKEN; \
-		bundle exec pod keys set BalancedMarketplaceStagingToken "$$TOKEN"
-	bundle
-	bundle exec pod install
-
 
 bundle: 
-
 	if [ ! -d ~/.cocoapods/repos/artsy ]; then \
 		bundle exec pod repo add artsy https://github.com/artsy/Specs.git; \
 	fi
@@ -118,7 +63,6 @@ stub_keys:
 	bundle exec pod keys set BalancedMarketplaceToken "-"
 	bundle exec pod keys set BalancedMarketplaceStagingToken "-"
 	
-
 ci: build
 
 beta: BUNDLE_NAME = '$(APP_NAME) β'

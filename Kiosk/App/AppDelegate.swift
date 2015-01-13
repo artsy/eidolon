@@ -1,9 +1,8 @@
 import UIKit
 import ARAnalytics
-import XCGLogger
 import SDWebImage
 
-let logger = XCGLogger.defaultInstance()
+var logger: Logger!
 
 @UIApplicationMain
 public class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -48,17 +47,14 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         setupHelpButton()
         setupUserAgent()
 
-        let destination = XCGFileLogDestination(owner: logger, writeToFile: logPath(), identifier: "main")
-        logger.addLogDestination(destination)
+        logger = Logger(destination: logPath())
 
-        logger.debug("App Started")
+        logger.log("App Started")
         ARAnalytics.event("Session Started")
         return true
     }
 
-
     func setupUserAgent() {
-        
         let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as String?
         let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as String?
         

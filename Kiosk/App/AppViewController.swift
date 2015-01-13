@@ -84,7 +84,7 @@ extension AppViewController {
 
         return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self).catch({ (error) -> RACSignal! in
 
-            logger.error("Sale Artworks: Error handling thing: \(error.artsyServerError())")
+            logger.log("Sale Artworks: Error handling thing: \(error.artsyServerError())")
             return RACSignal.empty()
         })
     }

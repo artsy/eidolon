@@ -1,10 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/artsy/Specs.git'
 
-plugin 'cocoapods-chillax-swift', {
-  :pods => ['XCGLogger']
-}
-
 plugin 'cocoapods-keys', {
   :project => "Eidolon",
   :target => "Kiosk",
@@ -62,13 +58,11 @@ pod 'balanced-ios', :git => "https://github.com/orta/balanced-ios", :branch => "
 pod 'XNGMarkdownParser'
 
 # swift pods
-pod 'XCGLogger', :git => "https://github.com/ashfurrow/XCGLogger.git", :branch => "podspec"
-pod 'SwiftyJSON', :git => "https://github.com/orta/SwiftyJSON", :branch => "podspec"
-pod 'Alamofire', :git => "https://github.com/mrackwitz/Alamofire.git", :branch => "podspec"
-pod 'LlamaKit', :git => "https://github.com/ashfurrow/LlamaKit", :branch => "rac_podspec"
-pod 'ReactiveCocoa', :git => "https://github.com/ashfurrow/ReactiveCocoa", :branch => "podspec"
-pod 'Moya/Reactive', :git => "https://github.com/ashfurrow/Moya"
-pod 'Swift-RAC-Macros', :git => "https://github.com/ashfurrow/Swift-RAC-Macros", :tag => "0.2"
+pod 'SwiftyJSON'
+pod 'Alamofire'
+pod 'ReactiveCocoa', '3.0.0-alpha.1'
+pod 'Moya/Reactive'
+pod 'Swift-RAC-Macros'
 
 target "KioskTests" do
 

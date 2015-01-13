@@ -40,7 +40,7 @@ class BalancedManager: NSObject {
 
         }) { (error) -> Void in
             registeredCardSignal.sendError(error)
-            logger.error("Error tokenizing via balanced: \(error)")
+            logger.log("Error tokenizing via balanced: \(error)")
         }
 
         return registeredCardSignal

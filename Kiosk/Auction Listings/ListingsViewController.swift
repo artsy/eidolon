@@ -81,7 +81,7 @@ public class ListingsViewController: UIViewController {
             return reduce(array ?? [], Array<AnyObject>(), +)
         }).mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
             
-            logger.error("Sale Artworks: Error handling thing: \(error.artsyServerError())")
+            logger.log("Sale Artworks: Error handling thing: \(error.artsyServerError())")
 
             return RACSignal.empty()
         }), RACScheduler.mainThreadScheduler())

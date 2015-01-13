@@ -55,8 +55,8 @@ public class BidderNetworkModel: NSObject {
         let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email!, password: newUser.password!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!, name: newUser.name ?? "")
 
         return Provider.sharedProvider.request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doError { (error) in
-            logger.error("Creating user failed.")
-            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.log("Creating user failed.")
+            logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
 
         }.then {
             self.updateProvider()
@@ -69,8 +69,8 @@ public class BidderNetworkModel: NSObject {
         let signal = provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
 
         return signal.doError { (error) in
-            logger.error("Updating user failed.")
-            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.log("Updating user failed.")
+            logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -81,8 +81,8 @@ public class BidderNetworkModel: NSObject {
         // on Staging the card tokenization fails
 
         return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).doError { (error) in
-            logger.error("Adding Card to User failed.")
-            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.log("Adding Card to User failed.")
+            logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -109,8 +109,8 @@ public class BidderNetworkModel: NSObject {
             return false
 
         }.doError { (error) in
-            logger.error("Getting user bidders failed.")
-            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.log("Getting user bidders failed.")
+            logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -125,8 +125,8 @@ public class BidderNetworkModel: NSObject {
             }
 
         } .doError { (error) in
-            logger.error("Registering for Auction Failed.")
-            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.log("Registering for Auction Failed.")
+            logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -139,8 +139,8 @@ public class BidderNetworkModel: NSObject {
             self?.details().bidderPIN =  pin
 
         } .doError { (error) in
-            logger.error("Generating a PIN for bidder has failed.")
-            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.log("Generating a PIN for bidder has failed.")
+            logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -152,8 +152,8 @@ public class BidderNetworkModel: NSObject {
             return
 
         }.doError { (error) in
-            logger.error("Getting Bidder ID failed.")
-            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.log("Getting Bidder ID failed.")
+            logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
@@ -167,8 +167,8 @@ public class BidderNetworkModel: NSObject {
             }
 
         } .doError { (error) in
-            logger.error("Getting Access Token failed.")
-            logger.error("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
+            logger.log("Getting Access Token failed.")
+            logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 }
