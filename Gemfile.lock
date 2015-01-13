@@ -1,10 +1,4 @@
 GIT
-  remote: https://github.com/CocoaPods/CLAide.git
-  revision: 9e8b9072fd66f69b91999cd3838a4bbba043a7e5
-  specs:
-    claide (0.8.0)
-
-GIT
   remote: https://github.com/CocoaPods/CocoaPods.git
   revision: 0740ff3a8310e9163dc139c9e60ee947de0752e6
   tag: 0.36.0.beta.1
@@ -23,23 +17,6 @@ GIT
       nap (~> 0.8)
       open4 (~> 1.3)
       xcodeproj (~> 0.21.0)
-
-GIT
-  remote: https://github.com/CocoaPods/Core.git
-  revision: b379dc4b484a733b0db060f8ed06facc06609fc3
-  specs:
-    cocoapods-core (0.36.0.beta.1)
-      activesupport (>= 3.2.15)
-      fuzzy_match (~> 2.0.4)
-      nap (~> 0.8.0)
-
-GIT
-  remote: https://github.com/CocoaPods/Xcodeproj.git
-  revision: 2ef226943bf432aef0b610fcbe8b99e9ae9ef1f8
-  specs:
-    xcodeproj (0.21.0)
-      activesupport (>= 3)
-      colored (~> 1.2)
 
 GIT
   remote: https://github.com/orta/cocoapods-keys.git
@@ -65,7 +42,11 @@ GEM
     aws-sdk-v1 (1.59.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
-    cocoapods-chillax-swift (0.2.0)
+    claide (0.8.0)
+    cocoapods-core (0.36.0.beta.1)
+      activesupport (>= 3.2.15)
+      fuzzy_match (~> 2.0.4)
+      nap (~> 0.8.0)
     cocoapods-downloader (0.8.1)
     cocoapods-plugins (0.4.0)
       nap
@@ -122,18 +103,17 @@ GEM
     thread_safe (0.3.4)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    xcodeproj (0.21.0)
+      activesupport (>= 3)
+      colored (~> 1.2)
     xcpretty (0.1.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  claide!
   cocoapods!
-  cocoapods-chillax-swift (~> 0.2.0)
-  cocoapods-core!
   cocoapods-keys!
   sbconstants
   shenzhen
-  xcodeproj!
   xcpretty
