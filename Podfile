@@ -31,9 +31,9 @@ pod 'Artsy+UILabels'
 pod 'Artsy-UIButtons'
 
 if ENV['USER'] == "orta" || ENV['USER'] == "ash" || ENV['USER'] == "artsy" || ENV['USER'] == "Laura" || ENV['CI'] == "true"
-    pod 'Artsy+UIFonts', :git => 'https://github.com/artsy/Artsy-UIFonts.git', :tag => '1.1.0'
+    pod 'Artsy+UIFonts', '~> 1.1.0'
 else
-    pod 'Artsy+OSSUIFonts', :git => 'https://github.com/artsy/Artsy-OSSUIFonts.git'
+    pod 'Artsy+OSSUIFonts', '~> 1.1.0'
 end
 
 pod 'ORStackView'
