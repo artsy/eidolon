@@ -80,7 +80,7 @@ DEPENDENCIES:
   - ARCollectionViewMasonryLayout (~> 2.0.0)
   - ARTiledImageView (from `https://github.com/dblock/ARTiledImageView.git`)
   - Artsy+UIColors
-  - Artsy+UIFonts (from `https://github.com/artsy/Artsy-UIFonts.git`, tag `1.1.0`)
+  - Artsy+UIFonts (~> 1.1.0)
   - Artsy+UILabels
   - Artsy-UIButtons
   - balanced-ios (from `https://github.com/orta/balanced-ios`, branch `0_5_podspec`)
@@ -108,9 +108,6 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   ARTiledImageView:
     :git: https://github.com/dblock/ARTiledImageView.git
-  Artsy+UIFonts:
-    :git: https://github.com/artsy/Artsy-UIFonts.git
-    :tag: 1.1.0
   balanced-ios:
     :branch: 0_5_podspec
     :git: https://github.com/orta/balanced-ios
@@ -132,9 +129,6 @@ CHECKOUT OPTIONS:
   ARTiledImageView:
     :commit: 28823e393124ca076b7016f864373025e239db6b
     :git: https://github.com/dblock/ARTiledImageView.git
-  Artsy+UIFonts:
-    :git: https://github.com/artsy/Artsy-UIFonts.git
-    :tag: 1.1.0
   balanced-ios:
     :commit: 49510b3b740be4cd31615af99b096659526a6acc
     :git: https://github.com/orta/balanced-ios
@@ -163,7 +157,7 @@ SPEC CHECKSUMS:
   ARCollectionViewMasonryLayout: 40993cb65522139cb2cd6ed255c91a6caee5c4dd
   ARTiledImageView: 000af4093f9bdcd0f754e6ebd964c90641389f90
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
-  Artsy+UIFonts: 108bfe625c45008ebb15c4c62003882dd345c4b8
+  Artsy+UIFonts: c51bb3b5cbf9c1a5fe198b4385d49133c5c71f5a
   Artsy+UILabels: a7c713069e3d10144a3dc8e377bef8b2253cd766
   Artsy-UIButtons: 80a957b9479417c3be1e68d5b830de6cd2ec44cc
   balanced-ios: 4081f4464e914b7e26fe9563b1ab2b4837296c3c
