@@ -22,6 +22,8 @@ plugin 'cocoapods-keys', {
 
 platform :ios, '8.0'
 
+#pod :podspec => '/Users/ash/bin/eidolon/Keys.podspec'
+
 # Yep.
 inhibit_all_warnings!
 
@@ -48,7 +50,7 @@ pod 'ARAnalytics/HockeyApp'
 
 pod 'CardFlight'
 pod 'ECPhoneNumberFormatter'
-pod 'UIImageViewAligned', :git => "https://github.com/orta/UIImageViewAligned.git"
+pod 'UIImageViewAligned', :git => "https://github.com/ashfurrow/UIImageViewAligned.git"
 pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewController.git"
 pod 'Reachability', :git => "https://github.com/ashfurrow/Reachability.git", :branch => "frameworks"
 
