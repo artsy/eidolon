@@ -1,10 +1,10 @@
 PODS:
   - Alamofire (1.1.3)
-  - ARAnalytics/CoreIOS (2.8.0)
-  - ARAnalytics/HockeyApp (2.8.0):
+  - ARAnalytics/CoreIOS (2.9.1)
+  - ARAnalytics/HockeyApp (2.9.1):
     - ARAnalytics/CoreIOS
-    - HockeySDK (= 3.5.4)
-  - ARAnalytics/Mixpanel (2.8.0):
+    - HockeySDK
+  - ARAnalytics/Mixpanel (2.9.1):
     - ARAnalytics/CoreIOS
     - Mixpanel
   - ARCollectionViewMasonryLayout (2.0.0)
@@ -28,11 +28,13 @@ PODS:
   - FBSnapshotTestCase (HEAD based on 1.5)
   - FLKAutoLayout (0.1.1)
   - fmemopen (0.0.1)
-  - HockeySDK (3.5.4)
+  - HockeySDK (3.6.2)
   - ISO8601DateFormatter (0.7)
   - Keys (1.0.0)
   - LlamaKit (0.1.1)
-  - Mixpanel (2.5.4)
+  - Mixpanel (2.7.1):
+    - Mixpanel/MPCategoryHelpers (= 2.7.1)
+  - Mixpanel/MPCategoryHelpers (2.7.1)
   - Moya/Core (0.6.1):
     - Alamofire (~> 1.1.0)
   - Moya/Reactive (0.6.1):
@@ -90,7 +92,7 @@ DEPENDENCIES:
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase (HEAD)
   - FLKAutoLayout
-  - HockeySDK (= 3.5.4)
+  - HockeySDK
   - ISO8601DateFormatter (= 0.7)
   - Keys (from `https://github.com/ashfurrow/empty-podspec.git`)
   - Moya/Reactive
@@ -160,7 +162,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 4337b1484a062640f8caf6e96f03a511bf137536
-  ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
+  ARAnalytics: a06e6d012b5999d8598ec9bacec45c8a8099f668
   ARCollectionViewMasonryLayout: 40993cb65522139cb2cd6ed255c91a6caee5c4dd
   ARTiledImageView: a747cff42142ca04d1dc5cee516186f10b6c0949
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
@@ -175,11 +177,11 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: e2914fbaabccea1dcc773d6a16b1c24540642488
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
   fmemopen: 54fc0cc9d9063de6103b40a24849818a53c8f1e5
-  HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
+  HockeySDK: bfd1f5ac75938b07499c4ac12932244b72a2e70b
   ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
   Keys: 4d91656dadf956719182facc6e2b546267fbadae
   LlamaKit: 25f47a933b6580a6fc159d95adb2e2953c7012e9
-  Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
+  Mixpanel: 57314e0e7c0a63a6471618a41002da3e1408532c
   Moya: 9547d3e8763ccf5c2378ec1b8433ab0c3338dbec
   Nimble: 79679d4cd5a3710db75e1dd9f5479f71842da6a6
   Nimble-Snapshots: a0a190abd76c1f07618cbc4e271d45cce10e4c5e

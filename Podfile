@@ -42,7 +42,7 @@ pod 'ISO8601DateFormatter', '0.7'
 pod 'ARCollectionViewMasonryLayout', '~> 2.0.0'
 pod 'SDWebImage', '~> 3.7'
 
-pod 'HockeySDK', '3.5.4'
+pod 'HockeySDK'
 pod 'ARAnalytics/Mixpanel'
 pod 'ARAnalytics/HockeyApp'
 
