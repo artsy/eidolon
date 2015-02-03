@@ -22,8 +22,6 @@ plugin 'cocoapods-keys', {
 
 platform :ios, '8.0'
 
-#pod :podspec => '/Users/ash/bin/eidolon/Keys.podspec'
-
 # Yep.
 inhibit_all_warnings!
 
