@@ -92,7 +92,7 @@ DEPENDENCIES:
   - FLKAutoLayout
   - HockeySDK (= 3.5.4)
   - ISO8601DateFormatter (= 0.7)
-  - Keys (from `https://github.com/ashfurrow/empty-podspec.git`, commit `e6588faecb89632f2616251746a313a2ad6336fa`)
+  - Keys (from `https://github.com/ashfurrow/empty-podspec.git`)
   - Moya/Reactive
   - Nimble (from `https://github.com/Quick/Nimble`)
   - Nimble-Snapshots (from `https://github.com/ashfurrow/Nimble-Snapshots`)
@@ -116,7 +116,6 @@ EXTERNAL SOURCES:
   DZNWebViewController:
     :git: https://github.com/orta/DZNWebViewController.git
   Keys:
-    :commit: e6588faecb89632f2616251746a313a2ad6336fa
     :git: https://github.com/ashfurrow/empty-podspec.git
   Nimble:
     :git: https://github.com/Quick/Nimble
