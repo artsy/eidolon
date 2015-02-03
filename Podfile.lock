@@ -1,14 +1,14 @@
 PODS:
   - Alamofire (1.1.3)
-  - ARAnalytics/CoreIOS (2.8.0)
-  - ARAnalytics/HockeyApp (2.8.0):
+  - ARAnalytics/CoreIOS (2.9.1)
+  - ARAnalytics/HockeyApp (2.9.1):
     - ARAnalytics/CoreIOS
-    - HockeySDK (= 3.5.4)
-  - ARAnalytics/Mixpanel (2.8.0):
+    - HockeySDK
+  - ARAnalytics/Mixpanel (2.9.1):
     - ARAnalytics/CoreIOS
     - Mixpanel
   - ARCollectionViewMasonryLayout (2.0.0)
-  - ARTiledImageView (1.2):
+  - ARTiledImageView (1.2.0):
     - SDWebImage/Core
   - Artsy+UIColors (1.0.0):
     - EDColor (~> 0.4)
@@ -25,13 +25,16 @@ PODS:
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
   - EDColor (0.4.0)
-  - FBSnapshotTestCase (HEAD based on 1.4)
+  - FBSnapshotTestCase (HEAD based on 1.5)
   - FLKAutoLayout (0.1.1)
   - fmemopen (0.0.1)
-  - HockeySDK (3.5.4)
+  - HockeySDK (3.6.2)
   - ISO8601DateFormatter (0.7)
+  - Keys (1.0.0)
   - LlamaKit (0.1.1)
-  - Mixpanel (2.5.4)
+  - Mixpanel (2.7.1):
+    - Mixpanel/MPCategoryHelpers (= 2.7.1)
+  - Mixpanel/MPCategoryHelpers (2.7.1)
   - Moya/Core (0.6.1):
     - Alamofire (~> 1.1.0)
   - Moya/Reactive (0.6.1):
@@ -78,7 +81,7 @@ DEPENDENCIES:
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
   - ARCollectionViewMasonryLayout (~> 2.0.0)
-  - ARTiledImageView (from `https://github.com/dblock/ARTiledImageView.git`)
+  - ARTiledImageView (from `https://github.com/ashfurrow/ARTiledImageView.git`)
   - Artsy+UIColors
   - Artsy+UIFonts (~> 1.1.0)
   - Artsy+UILabels
@@ -89,8 +92,9 @@ DEPENDENCIES:
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase (HEAD)
   - FLKAutoLayout
-  - HockeySDK (= 3.5.4)
+  - HockeySDK
   - ISO8601DateFormatter (= 0.7)
+  - Keys (from `https://github.com/ashfurrow/empty-podspec.git`)
   - Moya/Reactive
   - Nimble (from `https://github.com/Quick/Nimble`)
   - Nimble-Snapshots (from `https://github.com/ashfurrow/Nimble-Snapshots`)
@@ -101,18 +105,20 @@ DEPENDENCIES:
   - SDWebImage (~> 3.7)
   - Swift-RAC-Macros
   - SwiftyJSON
-  - UIImageViewAligned (from `https://github.com/orta/UIImageViewAligned.git`)
+  - UIImageViewAligned (from `https://github.com/ashfurrow/UIImageViewAligned.git`)
   - UIView+BooleanAnimations
   - XNGMarkdownParser
 
 EXTERNAL SOURCES:
   ARTiledImageView:
-    :git: https://github.com/dblock/ARTiledImageView.git
+    :git: https://github.com/ashfurrow/ARTiledImageView.git
   balanced-ios:
     :branch: 0_5_podspec
     :git: https://github.com/orta/balanced-ios
   DZNWebViewController:
     :git: https://github.com/orta/DZNWebViewController.git
+  Keys:
+    :git: https://github.com/ashfurrow/empty-podspec.git
   Nimble:
     :git: https://github.com/Quick/Nimble
   Nimble-Snapshots:
@@ -123,18 +129,21 @@ EXTERNAL SOURCES:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
   UIImageViewAligned:
-    :git: https://github.com/orta/UIImageViewAligned.git
+    :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 CHECKOUT OPTIONS:
   ARTiledImageView:
-    :commit: 28823e393124ca076b7016f864373025e239db6b
-    :git: https://github.com/dblock/ARTiledImageView.git
+    :commit: 2fe35ede0cb1d8cf3dc5aa4506c476c0367564b7
+    :git: https://github.com/ashfurrow/ARTiledImageView.git
   balanced-ios:
     :commit: 49510b3b740be4cd31615af99b096659526a6acc
     :git: https://github.com/orta/balanced-ios
   DZNWebViewController:
     :commit: 9121386901af95072fb19eaa3df7060ca46fc337
     :git: https://github.com/orta/DZNWebViewController.git
+  Keys:
+    :commit: e6588faecb89632f2616251746a313a2ad6336fa
+    :git: https://github.com/ashfurrow/empty-podspec.git
   Nimble:
     :commit: a4da3dc14eade2667e3cca39d63e99cc79013b5d
     :git: https://github.com/Quick/Nimble
@@ -148,14 +157,14 @@ CHECKOUT OPTIONS:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
     :git: https://github.com/ashfurrow/Reachability.git
   UIImageViewAligned:
-    :commit: c20e8b0f6da11f032aeb692665004dada75ef0fe
-    :git: https://github.com/orta/UIImageViewAligned.git
+    :commit: 6f8cb5669b219ef08c90c2e2e5a082cadfe7565b
+    :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
   Alamofire: 4337b1484a062640f8caf6e96f03a511bf137536
-  ARAnalytics: 93c5b65989145f88f4d45e262612eac277b0c219
+  ARAnalytics: a06e6d012b5999d8598ec9bacec45c8a8099f668
   ARCollectionViewMasonryLayout: 40993cb65522139cb2cd6ed255c91a6caee5c4dd
-  ARTiledImageView: 000af4093f9bdcd0f754e6ebd964c90641389f90
+  ARTiledImageView: a747cff42142ca04d1dc5cee516186f10b6c0949
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
   Artsy+UIFonts: c51bb3b5cbf9c1a5fe198b4385d49133c5c71f5a
   Artsy+UILabels: a7c713069e3d10144a3dc8e377bef8b2253cd766
@@ -165,13 +174,14 @@ SPEC CHECKSUMS:
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
-  FBSnapshotTestCase: f9f225b5ba11c8d8c09075590490df16314e4d62
+  FBSnapshotTestCase: e2914fbaabccea1dcc773d6a16b1c24540642488
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
   fmemopen: 54fc0cc9d9063de6103b40a24849818a53c8f1e5
-  HockeySDK: bf0e17f8d0c2b4778dff5ffd42248569a007ccbf
+  HockeySDK: bfd1f5ac75938b07499c4ac12932244b72a2e70b
   ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
-  LlamaKit: 430d2ae678888d13fe87f8a01d0c4fb69c06eb93
-  Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
+  Keys: 4d91656dadf956719182facc6e2b546267fbadae
+  LlamaKit: 25f47a933b6580a6fc159d95adb2e2953c7012e9
+  Mixpanel: 57314e0e7c0a63a6471618a41002da3e1408532c
   Moya: 9547d3e8763ccf5c2378ec1b8433ab0c3338dbec
   Nimble: 79679d4cd5a3710db75e1dd9f5479f71842da6a6
   Nimble-Snapshots: a0a190abd76c1f07618cbc4e271d45cce10e4c5e
@@ -179,12 +189,12 @@ SPEC CHECKSUMS:
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
   Quick: fdcce541eb5d73f5ac78f95c770ca6d6d69f0b81
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
-  ReactiveCocoa: 90459e39e5d18f55e145237fcf6e1fb72fff0eb3
+  ReactiveCocoa: 3b5e351bb3ab233d71f0329f36a7400af30d9783
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   Swift-RAC-Macros: 9fdd025f20cb97e8d6426bdd8eb26bbcbd3e0b21
   SwiftyJSON: 48be7490a3989a58a3f511cd54167f0a2b466e76
-  UIImageViewAligned: c188246ca50d21a5ac2a60ae754669525bb9f2f1
+  UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
   UIView+BooleanAnimations: 48cc98d5469ced7f7654310bff47c8ddba72c8f4
   XNGMarkdownParser: 5d1ed6c1b2bb3d3f3468a9ad591b85498403822c
 
-COCOAPODS: 0.36.0.beta.1
+COCOAPODS: 0.36.0.beta.2

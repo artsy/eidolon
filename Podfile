@@ -42,18 +42,18 @@ pod 'ISO8601DateFormatter', '0.7'
 pod 'ARCollectionViewMasonryLayout', '~> 2.0.0'
 pod 'SDWebImage', '~> 3.7'
 
-pod 'HockeySDK', '3.5.4'
+pod 'HockeySDK'
 pod 'ARAnalytics/Mixpanel'
 pod 'ARAnalytics/HockeyApp'
 
 pod 'CardFlight'
 pod 'ECPhoneNumberFormatter'
-pod 'UIImageViewAligned', :git => "https://github.com/orta/UIImageViewAligned.git"
+pod 'UIImageViewAligned', :git => "https://github.com/ashfurrow/UIImageViewAligned.git"
 pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewController.git"
 pod 'Reachability', :git => "https://github.com/ashfurrow/Reachability.git", :branch => "frameworks"
 
 pod 'UIView+BooleanAnimations'
-pod 'ARTiledImageView', :git => "https://github.com/dblock/ARTiledImageView.git"
+pod 'ARTiledImageView', :git => "https://github.com/ashfurrow/ARTiledImageView.git"
 pod 'balanced-ios', :git => "https://github.com/orta/balanced-ios", :branch => "0_5_podspec"
 pod 'XNGMarkdownParser'
 

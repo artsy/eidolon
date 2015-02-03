@@ -2,6 +2,7 @@ import UIKit
 import Artsy_UILabels
 import ReactiveCocoa
 import Swift_RAC_Macros
+import Keys
 
 public class SwipeCreditCardViewController: UIViewController, RegistrationSubController {
 
