@@ -66,9 +66,9 @@ pod 'Swift-RAC-Macros'
 
 target "KioskTests" do
 
-  pod 'FBSnapshotTestCase', :head
-  pod 'Nimble-Snapshots', :git => "https://github.com/ashfurrow/Nimble-Snapshots"
-  pod 'Quick', :git => "https://github.com/Quick/Quick"
-  pod 'Nimble', :git => "https://github.com/Quick/Nimble"
+  pod 'FBSnapshotTestCase'
+  pod 'Nimble-Snapshots'
+  pod 'Quick'
+  pod 'Nimble'
 
 end

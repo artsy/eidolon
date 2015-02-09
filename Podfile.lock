@@ -25,7 +25,7 @@ PODS:
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
   - EDColor (0.4.0)
-  - FBSnapshotTestCase (HEAD based on 1.5)
+  - FBSnapshotTestCase (1.5)
   - FLKAutoLayout (0.1.1)
   - fmemopen (0.0.1)
   - HockeySDK (3.6.2)
@@ -40,11 +40,11 @@ PODS:
   - Moya/Reactive (0.6.1):
     - Moya/Core
     - ReactiveCocoa (= 3.0.0-alpha.1)
-  - Nimble (0.2.0)
-  - Nimble-Snapshots (0.1):
-    - FBSnapshotTestCase
-    - Nimble
-    - Quick
+  - Nimble (0.3.0)
+  - Nimble-Snapshots (0.3):
+    - FBSnapshotTestCase (~> 1.5)
+    - Nimble (~> 0.3)
+    - Quick (~> 0.2)
   - NJKWebViewProgress (0.2.3):
     - NJKWebViewProgress/Core (= 0.2.3)
     - NJKWebViewProgress/ProgressView (= 0.2.3)
@@ -52,7 +52,7 @@ PODS:
   - NJKWebViewProgress/ProgressView (0.2.3)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
-  - Quick (0.2.0)
+  - Quick (0.2.2)
   - Reachability (3.1.1)
   - ReactiveCocoa (3.0.0-alpha.1):
     - LlamaKit (= 0.1.1)
@@ -90,16 +90,16 @@ DEPENDENCIES:
   - CardFlight
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
-  - FBSnapshotTestCase (HEAD)
+  - FBSnapshotTestCase
   - FLKAutoLayout
   - HockeySDK
   - ISO8601DateFormatter (= 0.7)
   - Keys (from `https://github.com/ashfurrow/empty-podspec.git`)
   - Moya/Reactive
-  - Nimble (from `https://github.com/Quick/Nimble`)
-  - Nimble-Snapshots (from `https://github.com/ashfurrow/Nimble-Snapshots`)
+  - Nimble
+  - Nimble-Snapshots
   - ORStackView
-  - Quick (from `https://github.com/Quick/Quick`)
+  - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
   - ReactiveCocoa (= 3.0.0-alpha.1)
   - SDWebImage (~> 3.7)
@@ -119,12 +119,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/orta/DZNWebViewController.git
   Keys:
     :git: https://github.com/ashfurrow/empty-podspec.git
-  Nimble:
-    :git: https://github.com/Quick/Nimble
-  Nimble-Snapshots:
-    :git: https://github.com/ashfurrow/Nimble-Snapshots
-  Quick:
-    :git: https://github.com/Quick/Quick
   Reachability:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
@@ -144,15 +138,6 @@ CHECKOUT OPTIONS:
   Keys:
     :commit: e6588faecb89632f2616251746a313a2ad6336fa
     :git: https://github.com/ashfurrow/empty-podspec.git
-  Nimble:
-    :commit: a4da3dc14eade2667e3cca39d63e99cc79013b5d
-    :git: https://github.com/Quick/Nimble
-  Nimble-Snapshots:
-    :commit: b90c44357b0f075afb4c3ef7d734487d781d5c5c
-    :git: https://github.com/ashfurrow/Nimble-Snapshots.git
-  Quick:
-    :commit: 615c695c8cd9cb02c04122d681fd30dfc2fc8f6d
-    :git: https://github.com/Quick/Quick
   Reachability:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
     :git: https://github.com/ashfurrow/Reachability.git
@@ -183,11 +168,11 @@ SPEC CHECKSUMS:
   LlamaKit: 25f47a933b6580a6fc159d95adb2e2953c7012e9
   Mixpanel: 57314e0e7c0a63a6471618a41002da3e1408532c
   Moya: 9547d3e8763ccf5c2378ec1b8433ab0c3338dbec
-  Nimble: 79679d4cd5a3710db75e1dd9f5479f71842da6a6
-  Nimble-Snapshots: a0a190abd76c1f07618cbc4e271d45cce10e4c5e
+  Nimble: a4d9d978129e83d73e33b7d8bce57443bd556068
+  Nimble-Snapshots: b2677e1b7f493eae6288cc8b71fceab4ffb496a5
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
-  Quick: fdcce541eb5d73f5ac78f95c770ca6d6d69f0b81
+  Quick: 7b89ff625e72ef931c2a9ef2f25ac3a9d2457763
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
   ReactiveCocoa: 3b5e351bb3ab233d71f0329f36a7400af30d9783
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d

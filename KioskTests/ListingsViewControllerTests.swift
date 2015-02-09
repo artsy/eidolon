@@ -6,6 +6,47 @@ import Nimble_Snapshots
 import SDWebImage
 import Moya
 
+class ListingsViewControllerConfiguration: QuickConfiguration {
+    override class func configure(configuration: Configuration) {
+        sharedExamples("a listings controller", { (sharedExampleContext: SharedExampleContext) in
+            var sut: ListingsViewController!
+
+            beforeEach{
+                sut = sharedExampleContext()["sut"] as ListingsViewController!
+            }
+
+            it("grid") {
+                sut.switchView[0]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+            it("least bids") {
+                sut.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+
+            it("most bids") {
+                sut.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+
+            it("highest bid") {
+                sut.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+
+            it("lowest bid") {
+                sut.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+
+            it("alphabetical") {
+                sut.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+        })
+    }
+}
+
 class ListingsViewControllerTests: QuickSpec {
     let imageCache = SDImageCache.sharedImageCache()
     override func spec() {
@@ -29,40 +70,15 @@ class ListingsViewControllerTests: QuickSpec {
             self.imageCache.clearDisk()
         }
         
-        describe("when displaying stubbed contents.") {
+        describe("when displaying stubbed contents") {
             var sut: ListingsViewController!
             beforeEach {
                 sut = testListingsViewController()
                 sut.loadViewProgrammatically()
             }
 
-            it("grid") {
-                sut.switchView[0]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("grid")
-            }
-            it("least bids") {
-                sut.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("least bids")
-            }
-
-            it("most bids") {
-                sut.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("most bids")
-            }
-
-            it("highest bid") {
-                sut.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("highest bid")
-            }
-
-            it("lowest bid") {
-                sut.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("lowest bid")
-            }
-
-            it("alphabetical") {
-                sut.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("alphabetical")
+            describe("without lot numbers") {
+                itBehavesLike("a listings controller") { ["sut": sut] }
             }
         }
         
