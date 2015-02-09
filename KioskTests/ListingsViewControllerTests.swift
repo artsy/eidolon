@@ -80,6 +80,15 @@ class ListingsViewControllerTests: QuickSpec {
             describe("without lot numbers") {
                 itBehavesLike("a listings controller") { ["sut": sut] }
             }
+
+            describe("with lot numbers") {
+                beforeEach {
+                    sut.beginAppearanceTransition(true, animated: false)
+                    sut.endAppearanceTransition()
+                    sut.saleArtworks.map { $0.lotNumber = 13 }
+                }
+                itBehavesLike("a listings controller") { ["sut": sut] }
+            }
         }
         
         describe("syncing") {
