@@ -399,7 +399,7 @@
 		5EB0B6ED1A5C3E6800B7CBF2 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB0B7021A5C3E6800B7CBF2 /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB0B7071A5C3E6800B7CBF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsCollectionViewCell.swift; sourceTree = "<group>"; };
+		5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListingsCollectionViewCell.swift; path = ../ListingsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5EB0B7161A5C410D00B7CBF2 /* RACSignal+Kiosk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RACSignal+Kiosk.swift"; sourceTree = "<group>"; };
 		5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Fonts.swift"; sourceTree = "<group>"; };
 		5EB0B7181A5C410D00B7CBF2 /* UITextField+RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+RAC.swift"; sourceTree = "<group>"; };
@@ -542,6 +542,7 @@
 			children = (
 				5E860FFC1A5C429C00456E41 /* ListingsCountdownManager.swift */,
 				5E860FFD1A5C429C00456E41 /* ListingsViewController.swift */,
+				5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */,
 				5E860FFE1A5C429C00456E41 /* MasonryCollectionViewCell.swift */,
 				5E860FFF1A5C429C00456E41 /* TableCollectionViewCell.swift */,
 				5E8610001A5C429C00456E41 /* WebViewController.swift */,
@@ -838,7 +839,6 @@
 				5E86102A1A5C429C00456E41 /* Storyboards */,
 				5E8610301A5C429C00456E41 /* Stubbed Responses */,
 				5E8610471A5C429C00456E41 /* Supporting Files */,
-				5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */,
 				5EB0B7161A5C410D00B7CBF2 /* RACSignal+Kiosk.swift */,
 				5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */,
 				5EB0B7181A5C410D00B7CBF2 /* UITextField+RAC.swift */,

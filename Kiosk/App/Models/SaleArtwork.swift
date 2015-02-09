@@ -47,7 +47,7 @@ public class SaleArtwork: JSONAble {
     public var highEstimateCents: Int?
 
     public dynamic var reserveStatus: String?
-    public var lotNumber: Int?
+    public dynamic var lotNumber: NSNumber?
 
     public init(id: String, artwork: Artwork) {
         self.id = id
@@ -90,7 +90,7 @@ public class SaleArtwork: JSONAble {
         highEstimateCents = newSaleArtwork.highEstimateCents
         bidCount = newSaleArtwork.bidCount
         reserveStatus = newSaleArtwork.reserveStatus
-        lotNumber = newSaleArtwork.lotNumber
+        lotNumber = newSaleArtwork.lotNumber ?? lotNumber
     }
     
     public var estimateString: String {
