@@ -47,6 +47,7 @@ public class SaleArtwork: JSONAble {
     public var highEstimateCents: Int?
 
     public dynamic var reserveStatus: String?
+    public var lotNumber: Int?
 
     public init(id: String, artwork: Artwork) {
         self.id = id
@@ -74,8 +75,9 @@ public class SaleArtwork: JSONAble {
         saleArtwork.highEstimateCents = json["high_estimate_cents"].int
         saleArtwork.bidCount = json["bidder_positions_count"].int
         saleArtwork.reserveStatus = json["reserve_status"].string
+        saleArtwork.lotNumber = json["lot_number"].int
 
-        return saleArtwork;
+        return saleArtwork
     }
     
     public func updateWithValues(newSaleArtwork: SaleArtwork) {
@@ -88,6 +90,7 @@ public class SaleArtwork: JSONAble {
         highEstimateCents = newSaleArtwork.highEstimateCents
         bidCount = newSaleArtwork.bidCount
         reserveStatus = newSaleArtwork.reserveStatus
+        lotNumber = newSaleArtwork.lotNumber
     }
     
     public var estimateString: String {
