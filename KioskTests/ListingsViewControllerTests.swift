@@ -110,7 +110,7 @@ class ListingsViewControllerTests: QuickSpec {
                 Provider.sharedProvider = ReactiveMoyaProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true)
             }
             
-            pending("paginates to the second page to retrieve all three sale artworks") {
+            it("paginates to the second page to retrieve all three sale artworks") {
                 let sut = testListingsViewController()
                 sut.pageSize = 2
                 
@@ -121,7 +121,7 @@ class ListingsViewControllerTests: QuickSpec {
                 expect(numberOfSaleArtworks) == 3
             }
             
-            pending("updates with new values in existing sale artworks") {
+            it("updates with new values in existing sale artworks") {
                 let sut = testListingsViewController()
                 sut.syncInterval = 1
                 
@@ -135,7 +135,7 @@ class ListingsViewControllerTests: QuickSpec {
                 expect(sut.saleArtworks[0].bidCount).toEventually(equal(finalBidCount), timeout: 3, pollInterval: 0.6)
             }
             
-            pending("updates with new sale artworks when lengths differ") {
+            it("updates with new sale artworks when lengths differ") {
                 let sut = testListingsViewController()
                 sut.syncInterval = 1
                 
@@ -162,6 +162,7 @@ func testListingsViewController(storyboard: UIStoryboard = auctionStoryboard) ->
     sut.schedule = testSchedule
     sut.auctionID = ""
     sut.switchView.shouldAnimate = false
+    sut.forceSync = true
     
     return sut
 }
