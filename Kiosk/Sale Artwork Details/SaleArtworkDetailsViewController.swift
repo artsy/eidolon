@@ -5,10 +5,14 @@ import Artsy_UIFonts
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-class SaleArtworkDetailsViewController: UIViewController {
-    var allowAnimations = true
-    var auctionID = AppSetup.sharedState.auctionID
-    var saleArtwork: SaleArtwork!
+public class SaleArtworkDetailsViewController: UIViewController {
+    public var allowAnimations = true
+    public var auctionID = AppSetup.sharedState.auctionID
+    public var saleArtwork: SaleArtwork!
+
+    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> SaleArtworkDetailsViewController {
+        return storyboard.viewControllerWithID(.SaleArtworkDetail) as SaleArtworkDetailsViewController
+    }
 
     lazy var artistInfoSignal: RACSignal = {
         let endpoint: ArtsyAPI = ArtsyAPI.Artwork(id: self.saleArtwork.artwork.id)
@@ -19,14 +23,14 @@ class SaleArtworkDetailsViewController: UIViewController {
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!
     @IBOutlet weak var additionalDetailScrollView: ORStackScrollView!
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         setupMetadataView()
         setupAdditionalDetailStackView()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .ZoomIntoArtwork {
             let nextViewController = segue.destinationViewController as SaleArtworkZoomViewController
             nextViewController.saleArtwork = saleArtwork
@@ -34,7 +38,8 @@ class SaleArtworkDetailsViewController: UIViewController {
     }
 
     enum MetadataStackViewTag: Int {
-        case ArtistNameLabel = 1
+        case LotNumberLabel = 1
+        case ArtistNameLabel
         case ArtworkNameLabel
         case ArtworkMediumLabel
         case ArtworkDimensionsLabel
@@ -85,10 +90,19 @@ class SaleArtworkDetailsViewController: UIViewController {
             return label
         }
 
+        let hasLotNumber = (saleArtwork.lotNumber != nil)
+
+        if let lotNumber = saleArtwork.lotNumber {
+            let lotNumberLabel = label(.SansSerif, .LotNumberLabel)
+            lotNumberLabel.font = lotNumberLabel.font.fontWithSize(12)
+            lotNumberLabel.text = "Lot \(lotNumber)"
+            metadataStackView.addSubview(lotNumberLabel, withTopMargin: "0", sideMargin: "0")
+        }
+
         if let artist = artist() {
             let artistNameLabel = label(.SansSerif, .ArtistNameLabel)
             artistNameLabel.text = artist.name
-            metadataStackView.addSubview(artistNameLabel, withTopMargin: "0", sideMargin: "0")
+            metadataStackView.addSubview(artistNameLabel, withTopMargin: hasLotNumber ? "10" : "0", sideMargin: "0")
         }
 
         let artworkNameLabel = label(.ItalicsSerif, .ArtworkNameLabel)
@@ -169,12 +183,10 @@ class SaleArtworkDetailsViewController: UIViewController {
 
     private func setupImageView(imageView: UIImageView) {
         if let image = saleArtwork.artwork.images?.first? {
-            if let url = image.fullsizeURL() {
-                imageView.sd_setImageWithURL(url, completed: { [weak self] image, error, type, url -> () in
-                    imageView.backgroundColor = UIColor.clearColor()
-                    return
-                })
-            }
+            imageView.sd_setImageWithURL(image.fullsizeURL(), completed: { image, error, type, url -> () in
+                imageView.backgroundColor = UIColor.clearColor()
+                return
+            })
 
             let heightConstraintNumber = min(400, CGFloat(538) / image.aspectRatio)
             imageView.constrainHeight( "\(heightConstraintNumber)" )
@@ -222,6 +234,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         additionalDetailScrollView.stackView.bottomMarginHeight = 40
 
         let imageView = UIImageView()
+        imageView.backgroundColor = UIColor.artsyLightGrey()
         additionalDetailScrollView.stackView.addSubview(imageView, withTopMargin: "0", sideMargin: "40")
         setupImageView(imageView)
 

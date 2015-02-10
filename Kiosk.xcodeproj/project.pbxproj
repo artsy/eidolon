@@ -180,6 +180,7 @@
 		5E8611491A5C442C00456E41 /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E8610451A5C429C00456E41 /* XApp.json */; };
 		5E86114A1A5C442C00456E41 /* XAuth.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E8610461A5C429C00456E41 /* XAuth.json */; };
 		5E8FABE81A5C49D800F6B913 /* StubResponses.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FED1A5C429C00456E41 /* StubResponses.m */; };
+		5E9F8AD41A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */; };
 		5EB0B71A1A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */; };
 		5EB0B71B1A5C410D00B7CBF2 /* RACSignal+Kiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7161A5C410D00B7CBF2 /* RACSignal+Kiosk.swift */; };
 		5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */; };
@@ -352,6 +353,7 @@
 		5E8610FF1A5C43EF00456E41 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		5E8611001A5C43EF00456E41 /* TextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTests.swift; sourceTree = "<group>"; };
 		5E8611011A5C43EF00456E41 /* XAppTokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppTokenSpec.swift; sourceTree = "<group>"; };
+		5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		5EB0B6ED1A5C3E6800B7CBF2 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB0B7021A5C3E6800B7CBF2 /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB0B7071A5C3E6800B7CBF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -722,6 +724,7 @@
 				5E8610D11A5C43EF00456E41 /* CardHandlerTests.swift */,
 				5E8610D21A5C43EF00456E41 /* KioskTests.swift */,
 				5E8610D31A5C43EF00456E41 /* ListingsViewControllerTests.swift */,
+				5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */,
 				5E8610D41A5C43EF00456E41 /* Models */,
 				5E8610FD1A5C43EF00456E41 /* RegisterFlowViewTests.swift */,
 				5E8610FE1A5C43EF00456E41 /* SwitchViewSpec.swift */,
@@ -1138,6 +1141,7 @@
 				5E8611331A5C43EF00456E41 /* TextFieldTests.swift in Sources */,
 				5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */,
 				5E8611171A5C43EF00456E41 /* SaleArtworkTests.swift in Sources */,
+				5E9F8AD41A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift in Sources */,
 				5E8611311A5C43EF00456E41 /* SwitchViewSpec.swift in Sources */,
 				5E86110A1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift in Sources */,
 				5E8611341A5C43EF00456E41 /* XAppTokenSpec.swift in Sources */,
@@ -1240,6 +1244,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/Kiosk/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1255,6 +1260,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ART SY INC";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/Kiosk/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1273,6 +1279,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1295,9 +1302,11 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = KioskTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kiosk.app/Kiosk";
 			};
 			name = Release;
