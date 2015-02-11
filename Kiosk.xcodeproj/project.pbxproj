@@ -10,6 +10,7 @@
 		3FCE6D8A07CA1FA29F4A37DC /* Pods_KioskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E64E1A65630200F8CBDD /* Logger.swift */; };
 		5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */; };
+		5E5ADF641A8B789000453250 /* WhitespaceGobbler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */; };
 		5E86104B1A5C429C00456E41 /* AdminCardTestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */; };
 		5E86104C1A5C429C00456E41 /* AdminLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC41A5C429C00456E41 /* AdminLogViewController.swift */; };
 		5E86104D1A5C429C00456E41 /* AdminPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC51A5C429C00456E41 /* AdminPanelViewController.swift */; };
@@ -203,6 +204,7 @@
 		3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KioskTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E19E64E1A65630200F8CBDD /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
+		5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitespaceGobbler.swift; sourceTree = "<group>"; };
 		5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCardTestingViewController.swift; sourceTree = "<group>"; };
 		5E860FC41A5C429C00456E41 /* AdminLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminLogViewController.swift; sourceTree = "<group>"; };
 		5E860FC51A5C429C00456E41 /* AdminPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminPanelViewController.swift; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 				5E8610271A5C429C00456E41 /* ImageTiledDataSource.swift */,
 				5E8610281A5C429C00456E41 /* SaleArtworkDetailsViewController.swift */,
 				5E8610291A5C429C00456E41 /* SaleArtworkZoomViewController.swift */,
+				5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */,
 			);
 			path = "Sale Artwork Details";
 			sourceTree = "<group>";
@@ -1104,6 +1107,7 @@
 				5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */,
 				5E8610821A5C429C00456E41 /* BidCheckingNetworkModel.swift in Sources */,
 				5E8610871A5C429C00456E41 /* ConfirmYourBidPasswordViewController.swift in Sources */,
+				5E5ADF641A8B789000453250 /* WhitespaceGobbler.swift in Sources */,
 				5E8610891A5C429C00456E41 /* ConfirmYourBidViewController.swift in Sources */,
 				5E8610651A5C429C00456E41 /* SaleArtwork.swift in Sources */,
 				5E8610A91A5C429C00456E41 /* StoryboardIdentifiers.swift in Sources */,

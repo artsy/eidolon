@@ -7,23 +7,26 @@ import Nimble_Snapshots
 class PlaceBidViewControllerTests: QuickSpec {
     override func spec() {
         var sut: PlaceBidViewController!
-        var artworkJSON = [
-            "id":"", "title" : "The Artwork Title",
-            "date": "23rd Nov", "blurb" : "Something about the artwork",
-            "price": "$33,990"
+        var artworkJSON: [String: AnyObject] = [
+            "id":"artwork_id",
+            "title" : "The Artwork Title",
+            "date": "23rd Nov",
+            "blurb" : "Something about the artwork",
+            "price": "$33,990",
+            "artist": ["id": "artist_id", "name": "Artist Name"]
         ]
 
         beforeEach {
             sut = PlaceBidViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as PlaceBidViewController
         }
 
-        pending("looks right by default") {
+        it("looks right by default") {
             sut.loadViewProgrammatically()
             sut.cursor.stopAnimating()
             expect(sut).to(haveValidSnapshot(named:"default"))
         }
 
-        pending("looks right with a custom saleArtwork") {
+        it("looks right with a custom saleArtwork") {
             let nav = FulfillmentNavigationController(rootViewController:sut)
 
             let artwork = Artwork.fromJSON(artworkJSON) as Artwork
@@ -129,7 +132,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             expect(sut.bidButton.enabled) == false
 
-            customKeySubject.sendNext(200);
+            customKeySubject.sendNext(200)
             expect(sut.bidButton.enabled) == true
         }
 
