@@ -148,6 +148,16 @@ public class SaleArtwork: JSONAble {
         }
     }
 
+    public var lotNumberSignal: RACSignal {
+        return RACObserve(self, "lotNumber").map({ (lotNumber) -> AnyObject! in
+            if let lotNumber = lotNumber as? Int {
+                return "Lot \(lotNumber)"
+            } else {
+                return nil
+            }
+        }).mapNilToEmptyString()
+    }
+
     public func currentBidSignal(prefix: String = "", missingPrefix: String = "") -> RACSignal {
         return RACObserve(self, "highestBidCents").map({ [weak self] (highestBidCents) -> AnyObject! in
             if let currentBidCents = highestBidCents as? Int {
@@ -161,6 +171,8 @@ public class SaleArtwork: JSONAble {
     override public class func keyPathsForValuesAffectingValueForKey(key: String) -> NSSet {
         if key == "estimateString" {
             return NSSet(array: ["lowEstimateCents", "highEstimateCents"])
+        } else if key == "lotNumberSignal" {
+            return NSSet(array: ["lotNumber"])
         } else {
             return super.keyPathsForValuesAffectingValueForKey(key)
         }

@@ -67,13 +67,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         contentView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         // Bind subviews
-        RAC(self, "lotNumberLabel.text") <~ RACObserve(self, "saleArtwork.lotNumber").map({ (lotNumber) -> AnyObject! in
-            if let lotNumber = lotNumber as? Int {
-                return "Lot \(lotNumber)"
-            } else {
-                return nil
-            }
-        }).mapNilToEmptyString()
+        RAC(self, "lotNumberLabel.text") <~ RACObserve(self, "saleArtwork.lotNumberSignal").switchToLatest()
 
         RACObserve(self, "saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
             if let url = (artwork as? Artwork)?.images?.first?.thumbnailURL() {

@@ -95,8 +95,9 @@ public class SaleArtworkDetailsViewController: UIViewController {
         if let lotNumber = saleArtwork.lotNumber {
             let lotNumberLabel = label(.SansSerif, .LotNumberLabel)
             lotNumberLabel.font = lotNumberLabel.font.fontWithSize(12)
-            lotNumberLabel.text = "Lot \(lotNumber)"
             metadataStackView.addSubview(lotNumberLabel, withTopMargin: "0", sideMargin: "0")
+            
+            RAC(lotNumberLabel, "text") <~ saleArtwork.lotNumberSignal
         }
 
         if let artist = artist() {
