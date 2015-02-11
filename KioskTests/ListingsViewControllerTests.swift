@@ -19,6 +19,7 @@ class ListingsViewControllerConfiguration: QuickConfiguration {
                 sut.switchView[0]?.sendActionsForControlEvents(.TouchUpInside)
                 expect(sut) == snapshot()
             }
+            
             it("least bids") {
                 sut.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
                 expect(sut) == snapshot()

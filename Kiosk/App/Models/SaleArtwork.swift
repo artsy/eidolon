@@ -172,7 +172,7 @@ public class SaleArtwork: JSONAble {
         if key == "estimateString" {
             return NSSet(array: ["lowEstimateCents", "highEstimateCents"])
         } else if key == "lotNumberSignal" {
-            return NSSet(array: ["lotNumber"])
+            return NSSet(object: "lotNumber")
         } else {
             return super.keyPathsForValuesAffectingValueForKey(key)
         }
