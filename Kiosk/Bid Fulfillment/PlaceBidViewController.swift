@@ -93,12 +93,19 @@ public class PlaceBidViewController: UIViewController {
                     case Gobbler
                 }
 
-                if let lotNumber = saleArtwork.lotNumber {
+                let lotNumber = nav.bidDetails.saleArtwork?.lotNumber
+
+                if let lotNumber = lotNumber {
                     let lotNumberLabel = smallSansSerifLabel()
                     lotNumberLabel.tag = LabelTags.LotNumber.rawValue
                     detailsStackView.addSubview(lotNumberLabel, withTopMargin: "10", sideMargin: "0")
-
-                    RAC(lotNumberLabel, "text") <~ RACObserve(saleArtwork, "lotNumber").mapNilToEmptyString().takeUntil(dissapearSignal())
+                    RAC(lotNumberLabel, "text") <~ RACObserve(saleArtwork, "lotNumber").map{
+                        if let lotNumber = $0 as? NSNumber {
+                            return "Lot \(lotNumber)"
+                        } else {
+                            return nil
+                        }
+                    }.mapNilToEmptyString().takeUntil(dissapearSignal())
                 }
 
                 let artistNameLabel = sansSerifLabel()

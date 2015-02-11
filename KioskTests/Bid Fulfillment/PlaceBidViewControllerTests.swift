@@ -4,6 +4,41 @@ import ReactiveCocoa
 import Kiosk
 import Nimble_Snapshots
 
+class PlaceBidViewControllerConfiguration: QuickConfiguration {
+    override class func configure(configuration: Configuration) {
+        sharedExamples("a bid view controller view controller", { (sharedExampleContext: SharedExampleContext) in
+            var sut: PlaceBidViewController!
+            var nav: FulfillmentNavigationController!
+
+            beforeEach {
+                sut = sharedExampleContext()["sut"] as PlaceBidViewController!
+                nav = sharedExampleContext()["nav"] as FulfillmentNavigationController!
+            }
+
+            describe("with lot number") {
+                beforeEach {
+                    nav.bidDetails.saleArtwork?.lotNumber = 13
+                    return
+                }
+
+                it("looks correct") {
+                    sut.loadViewProgrammatically()
+                    sut.cursor.stopAnimating()
+                    expect(sut) == snapshot()
+                }
+            }
+
+            describe("without lot number") {
+                it("looks correct") {
+                    sut.loadViewProgrammatically()
+                    sut.cursor.stopAnimating()
+                    expect(sut) == snapshot()
+                }
+            }
+        })
+    }
+}
+
 class PlaceBidViewControllerTests: QuickSpec {
     override func spec() {
         var sut: PlaceBidViewController!
@@ -23,7 +58,7 @@ class PlaceBidViewControllerTests: QuickSpec {
         it("looks right by default") {
             sut.loadViewProgrammatically()
             sut.cursor.stopAnimating()
-            expect(sut).to(haveValidSnapshot(named:"default"))
+            expect(sut) == snapshot()
         }
 
         it("looks right with a custom saleArtwork") {
@@ -37,13 +72,15 @@ class PlaceBidViewControllerTests: QuickSpec {
             sut.loadViewProgrammatically()
             sut.cursor.stopAnimating()
 
-            expect(sut).to(haveValidSnapshot(named:"with artwork"))
+            expect(sut) == snapshot()
         }
 
         describe("with no bids") {
+            var nav: FulfillmentNavigationController!
+
             beforeEach {
                 let customKeySubject = RACSubject()
-                let nav = FulfillmentNavigationController(rootViewController:sut)
+                nav = FulfillmentNavigationController(rootViewController:sut)
 
                 let artwork = Artwork.fromJSON(artworkJSON) as Artwork
                 let saleArtwork = SaleArtwork(id: "", artwork: artwork)
@@ -53,17 +90,13 @@ class PlaceBidViewControllerTests: QuickSpec {
                 saleArtwork.bidCount = 0
 
                 nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
-                nav.loadViewProgrammatically()
-                sut.loadViewProgrammatically()
             }
 
-            it("looks correct") {
-                sut.cursor.stopAnimating()
-                expect(sut) == snapshot("no bids")
-                return
-            }
+            itBehavesLike("a bid view controller view controller") {["sut": sut, "nav": nav]}
 
             it("assigns correct text") {
+                sut.loadViewProgrammatically()
+
                 expect(sut.currentBidTitleLabel.text).to(equal("Opening Bid:"))
                 expect(sut.currentBidAmountLabel.text).to(equal("$100"))
                 expect(sut.nextBidAmountLabel.text).to(equal("Enter $100 or more"))
@@ -71,9 +104,11 @@ class PlaceBidViewControllerTests: QuickSpec {
         }
 
         describe("with bids") {
+            var nav: FulfillmentNavigationController!
+
             beforeEach {
                 let customKeySubject = RACSubject()
-                let nav = FulfillmentNavigationController(rootViewController:sut)
+                nav = FulfillmentNavigationController(rootViewController:sut)
 
                 let artwork = Artwork.fromJSON(artworkJSON) as Artwork
                 let saleArtwork = SaleArtwork(id: "", artwork: artwork)
@@ -83,17 +118,13 @@ class PlaceBidViewControllerTests: QuickSpec {
                 saleArtwork.bidCount = 1
 
                 nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
-                nav.loadViewProgrammatically()
-                sut.loadViewProgrammatically()
             }
 
-            it("looks correct") {
-                sut.cursor.stopAnimating()
-                expect(sut) == snapshot("with bids")
-                return
-            }
+            itBehavesLike("a bid view controller view controller") {["sut": sut, "nav": nav]}
 
             it("assigns correct text") {
+                sut.loadViewProgrammatically()
+
                 expect(sut.currentBidTitleLabel.text).to(equal("Current Bid:"))
                 expect(sut.currentBidAmountLabel.text).to(equal("$200"))
                 expect(sut.nextBidAmountLabel.text).to(equal("Enter $250 or more"))
