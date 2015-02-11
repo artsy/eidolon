@@ -17,7 +17,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         return view
     }()
     
-    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.bidView, self.bidButton, self.moreInfoLabel]
+    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.lotNumberLabel, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.bidView, self.bidButton, self.moreInfoLabel]
 
     private var artworkImageViewHeightConstraint: NSLayoutConstraint?
     
@@ -34,7 +34,8 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         
         // Constrain subviews
         artworkImageView.alignTop("0", bottom: nil, toView: contentView)
-        artistNameLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkImageView, predicate: "20")
+        let lotNumberTopConstraint = lotNumberLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkImageView, predicate: "20").first as NSLayoutConstraint
+        let artistNameTopConstraint = artistNameLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: lotNumberLabel, predicate: "10").first as NSLayoutConstraint
         artistNameLabel.constrainHeight("20")
         artworkTitleLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artistNameLabel, predicate: "10")
         artworkTitleLabel.constrainHeight("16")
@@ -45,9 +46,21 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         moreInfoLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: bidButton, predicate: "0")
         moreInfoLabel.constrainHeight("44")
         moreInfoLabel.alignAttribute(.Bottom, toAttribute: .Bottom, ofView: contentView, predicate: "12")
+
+        RACObserve(lotNumberLabel, "text").subscribeNext { (text) -> Void in
+            switch text as String? {
+            case .Some(let text) where countElements(text) == 0:
+                fallthrough
+            case .None:
+                lotNumberTopConstraint.constant = 0
+                artistNameTopConstraint.constant = 20
+            default:
+                lotNumberTopConstraint.constant = 20
+                artistNameTopConstraint.constant = 10
+            }
+        }
         
         // Bind subviews
-        
         RACObserve(self, "saleArtwork").subscribeNext { [weak self] (saleArtwork) -> Void in
             if let saleArtwork = saleArtwork as? SaleArtwork {
                 if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {

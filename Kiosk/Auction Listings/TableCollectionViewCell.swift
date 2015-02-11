@@ -3,10 +3,13 @@ import UIKit
 class TableCollectionViewCell: ListingsCollectionViewCell {
     private lazy var infoView: UIView = {
         let view = UIView()
+        view.addSubview(self.lotNumberLabel)
         view.addSubview(self.artistNameLabel)
         view.addSubview(self.artworkTitleLabel)
-        
-        self.artistNameLabel.alignTop("0", bottom: nil, toView: view)
+
+        self.lotNumberLabel.alignTop("0", bottom: nil, toView: view)
+        self.lotNumberLabel.alignLeading("0", trailing: "0", toView: view)
+        self.artistNameLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: self.lotNumberLabel, predicate: "5")
         self.artistNameLabel.alignLeading("0", trailing: "0", toView: view)
         self.artworkTitleLabel.alignLeading("0", trailing: "0", toView: view)
         self.artworkTitleLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: self.artistNameLabel, predicate: "0")

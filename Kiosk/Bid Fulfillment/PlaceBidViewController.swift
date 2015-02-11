@@ -2,6 +2,8 @@ import UIKit
 import Artsy_UILabels
 import ReactiveCocoa
 import Swift_RAC_Macros
+import Artsy_UILabels
+import ORStackView
 
 public class PlaceBidViewController: UIViewController {
 
@@ -18,9 +20,7 @@ public class PlaceBidViewController: UIViewController {
     @IBOutlet public var nextBidAmountLabel: UILabel!
 
     @IBOutlet public var artworkImageView: UIImageView!
-    @IBOutlet public var artistNameLabel: ARSerifLabel!
-    @IBOutlet public var artworkTitleLabel: ARSerifLabel!
-    @IBOutlet public var artworkPriceLabel: ARSerifLabel!
+    @IBOutlet weak var detailsStackView: ORTagBasedAutoStackView!
 
     @IBOutlet public var bidButton: Button!
 
@@ -85,6 +85,39 @@ public class PlaceBidViewController: UIViewController {
                     return (tuple.first as? Int ?? 0) * 100 >= (tuple.second as? Int ?? 0)
                 }
 
+                enum LabelTags: Int {
+                    case LotNumber = 1
+                    case ArtistName
+                    case ArtworkTitle
+                    case ArtworkPrice
+                    case Gobbler
+                }
+
+                let lotNumber = nav.bidDetails.saleArtwork?.lotNumber
+
+                if let lotNumber = lotNumber {
+                    let lotNumberLabel = smallSansSerifLabel()
+                    lotNumberLabel.tag = LabelTags.LotNumber.rawValue
+                    detailsStackView.addSubview(lotNumberLabel, withTopMargin: "10", sideMargin: "0")
+                    RAC(lotNumberLabel, "text") <~ saleArtwork.lotNumberSignal.takeUntil(dissapearSignal())
+                }
+
+                let artistNameLabel = sansSerifLabel()
+                artistNameLabel.tag = LabelTags.ArtistName.rawValue
+                detailsStackView.addSubview(artistNameLabel, withTopMargin: "15", sideMargin: "0")
+
+                let artworkTitleLabel = serifLabel()
+                artworkTitleLabel.tag = LabelTags.ArtworkTitle.rawValue
+                detailsStackView.addSubview(artworkTitleLabel, withTopMargin: "15", sideMargin: "0")
+
+                let artworkPriceLabel = serifLabel()
+                artworkPriceLabel.tag = LabelTags.ArtworkPrice.rawValue
+                detailsStackView.addSubview(artworkPriceLabel, withTopMargin: "15", sideMargin: "0")
+
+                let gobbler = WhitespaceGobbler()
+                gobbler.tag = LabelTags.Gobbler.rawValue
+                detailsStackView.addSubview(gobbler, withTopMargin: "0")
+
                 if let artist = saleArtwork.artwork.artists?.first {
                     RAC(artistNameLabel, "text") <~ RACObserve(artist, "name")
                 }
@@ -126,6 +159,27 @@ public class PlaceBidViewController: UIViewController {
 
     @IBAction func privacyTapped(sender: AnyObject) {
         (UIApplication.sharedApplication().delegate as? AppDelegate)?.showPrivacyPolicy()
+    }
+}
+
+private extension PlaceBidViewController {
+    func smallSansSerifLabel() -> UILabel {
+        let label = sansSerifLabel()
+        label.font = label.font.fontWithSize(12)
+        return label
+    }
+
+    func sansSerifLabel() -> UILabel {
+        let label = ARSansSerifLabel()
+        label.numberOfLines = 1
+        return label
+    }
+
+    func serifLabel() -> UILabel {
+        let label = ARSerifLabel()
+        label.numberOfLines = 1
+        label.font = label.font.fontWithSize(16)
+        return label
     }
 }
 

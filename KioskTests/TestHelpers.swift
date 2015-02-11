@@ -50,3 +50,23 @@ extension UIImage {
         return UIImage(contentsOfFile: path!)
     }
 }
+
+func testArtwork() -> Artwork {
+    return Artwork.fromJSON(["id": "red",
+    "title" : "Rose Red",
+    "date": "June 11th 2014",
+    "blurb": "Pretty good",
+    "artist": ["id" : "artistDee", "name": "Dee Emm"],
+    "images": [
+        ["id" : "image_id",
+        "image_url" : "http://example.com/:version.jpg",
+        "image_versions" : ["large"],
+        "aspect_ratio" : 1.508,
+        "tile_base_url" : "http://example.com",
+        "tile_size" : 1]
+    ]]) as Artwork
+}
+
+func testSaleArtwork() -> SaleArtwork {
+    return SaleArtwork(id: "12312313", artwork: testArtwork())
+}

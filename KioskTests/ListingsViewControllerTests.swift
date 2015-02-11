@@ -6,6 +6,48 @@ import Nimble_Snapshots
 import SDWebImage
 import Moya
 
+class ListingsViewControllerConfiguration: QuickConfiguration {
+    override class func configure(configuration: Configuration) {
+        sharedExamples("a listings controller", { (sharedExampleContext: SharedExampleContext) in
+            var sut: ListingsViewController!
+
+            beforeEach{
+                sut = sharedExampleContext()["sut"] as ListingsViewController!
+            }
+
+            it("grid") {
+                sut.switchView[0]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+            
+            it("least bids") {
+                sut.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+
+            it("most bids") {
+                sut.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+
+            it("highest bid") {
+                sut.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+
+            it("lowest bid") {
+                sut.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+
+            it("alphabetical") {
+                sut.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
+                expect(sut) == snapshot()
+            }
+        })
+    }
+}
+
 class ListingsViewControllerTests: QuickSpec {
     let imageCache = SDImageCache.sharedImageCache()
     override func spec() {
@@ -29,40 +71,24 @@ class ListingsViewControllerTests: QuickSpec {
             self.imageCache.clearDisk()
         }
         
-        describe("when displaying stubbed contents.") {
+        describe("when displaying stubbed contents") {
             var sut: ListingsViewController!
             beforeEach {
                 sut = testListingsViewController()
                 sut.loadViewProgrammatically()
             }
 
-            it("grid") {
-                sut.switchView[0]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("grid")
-            }
-            it("least bids") {
-                sut.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("least bids")
+            describe("without lot numbers") {
+                itBehavesLike("a listings controller") { ["sut": sut] }
             }
 
-            it("most bids") {
-                sut.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("most bids")
-            }
-
-            it("highest bid") {
-                sut.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("highest bid")
-            }
-
-            it("lowest bid") {
-                sut.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("lowest bid")
-            }
-
-            it("alphabetical") {
-                sut.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(sut) == snapshot("alphabetical")
+            describe("with lot numbers") {
+                beforeEach {
+                    sut.beginAppearanceTransition(true, animated: false)
+                    sut.endAppearanceTransition()
+                    sut.saleArtworks.map { $0.lotNumber = 13 }
+                }
+                itBehavesLike("a listings controller") { ["sut": sut] }
             }
         }
         
@@ -94,7 +120,7 @@ class ListingsViewControllerTests: QuickSpec {
                 Provider.sharedProvider = ReactiveMoyaProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true)
             }
             
-            pending("paginates to the second page to retrieve all three sale artworks") {
+            it("paginates to the second page to retrieve all three sale artworks") {
                 let sut = testListingsViewController()
                 sut.pageSize = 2
                 
@@ -105,7 +131,7 @@ class ListingsViewControllerTests: QuickSpec {
                 expect(numberOfSaleArtworks) == 3
             }
             
-            pending("updates with new values in existing sale artworks") {
+            it("updates with new values in existing sale artworks") {
                 let sut = testListingsViewController()
                 sut.syncInterval = 1
                 
@@ -119,7 +145,7 @@ class ListingsViewControllerTests: QuickSpec {
                 expect(sut.saleArtworks[0].bidCount).toEventually(equal(finalBidCount), timeout: 3, pollInterval: 0.6)
             }
             
-            pending("updates with new sale artworks when lengths differ") {
+            it("updates with new sale artworks when lengths differ") {
                 let sut = testListingsViewController()
                 sut.syncInterval = 1
                 
@@ -146,6 +172,7 @@ func testListingsViewController(storyboard: UIStoryboard = auctionStoryboard) ->
     sut.schedule = testSchedule
     sut.auctionID = ""
     sut.switchView.shouldAnimate = false
+    sut.forceSync = true
     
     return sut
 }

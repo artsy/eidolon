@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="O1R-5R-23t">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="AGaramondPro-Regular.otf">
-            <string>AGaramondPro-Regular</string>
-            <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
@@ -64,7 +62,6 @@
             <string>AGaramondPro-Semibold</string>
         </mutableArray>
         <mutableArray key="ITCAvantGardeDemi_Track03.ttf">
-            <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
             <string>ITCAvantGardeDemiTrack03</string>
@@ -170,6 +167,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eOX-N9-Jb7" customClass="ORTagBasedAutoStackView">
+                                <rect key="frame" x="65" y="380" width="364" height="247"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Bid:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y81-nV-kZl">
                                 <rect key="frame" x="495" y="96" width="93" height="21"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
@@ -207,24 +208,6 @@
                                     <action selector="bidButtonTapped:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="3JS-oA-Iuv"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Estimate: $10,000" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="v7X-dR-pia" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="447" width="364" height="29"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ROY LICHTENSTEIN" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="h2j-OF-Phh" customClass="ARSansSerifLabel">
-                                <rect key="frame" x="65" y="388" width="364" height="29"/>
-                                <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Crying Girl, 1963" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="Aj2-T3-pNw" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="416" width="364" height="29"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j5m-yL-j50" customClass="UIImageViewAligned">
                                 <rect key="frame" x="65" y="190" width="364" height="182"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -299,15 +282,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="AXh-zM-wkr"/>
                     <connections>
-                        <outlet property="artistNameLabel" destination="h2j-OF-Phh" id="uix-5k-rFx"/>
                         <outlet property="artworkImageView" destination="j5m-yL-j50" id="CT4-uw-b53"/>
-                        <outlet property="artworkPriceLabel" destination="v7X-dR-pia" id="ddn-gN-BWR"/>
-                        <outlet property="artworkTitleLabel" destination="Aj2-T3-pNw" id="3FZ-B6-AkR"/>
                         <outlet property="bidAmountTextField" destination="UKQ-z8-PIR" id="mV3-4R-CLm"/>
                         <outlet property="bidButton" destination="dT1-U2-hie" id="b1u-df-a4J"/>
                         <outlet property="currentBidAmountLabel" destination="GS2-EK-4Nx" id="DlC-TX-tjz"/>
                         <outlet property="currentBidTitleLabel" destination="Y81-nV-kZl" id="ndR-mW-Tct"/>
                         <outlet property="cursor" destination="ybr-6E-470" id="rlk-8V-1J2"/>
+                        <outlet property="detailsStackView" destination="eOX-N9-Jb7" id="fKy-gP-Tnp"/>
                         <outlet property="keypadContainer" destination="A3C-Vo-Qhd" id="Kee-zX-lv9"/>
                         <outlet property="nextBidAmountLabel" destination="uVu-PR-0oJ" id="x1I-M4-sxi"/>
                         <outlet property="yourBidTitleLabel" destination="sft-xL-TDA" id="kue-H3-ye5"/>

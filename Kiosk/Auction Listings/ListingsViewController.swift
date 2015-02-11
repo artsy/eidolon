@@ -14,6 +14,7 @@ public class ListingsViewController: UIViewController {
     public var auctionID = AppSetup.sharedState.auctionID
     public var syncInterval = SyncInterval
     public var pageSize = 10
+    public var forceSync = false
     public var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
         return signal.deliverOn(scheduler)
     }
@@ -140,7 +141,7 @@ public class ListingsViewController: UIViewController {
     }
     
     func shouldSync() -> Bool {
-        return self.presentedViewController == nil && self.navigationController?.topViewController == self
+        return (presentedViewController == nil && navigationController?.topViewController == self) || forceSync
     }
     
     // Adapted from https://github.com/FUKUZAWA-Tadashi/FHCCommander/blob/67c67757ee418a106e0ce0c0820459299b3d77bb/fhcc/Convenience.swift#L33-L44

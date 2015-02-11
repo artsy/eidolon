@@ -4,6 +4,7 @@ import ReactiveCocoa
 import Swift_RAC_Macros
 
 class ListingsCollectionViewCell: UICollectionViewCell {
+    dynamic let lotNumberLabel = ListingsCollectionViewCell._sansSerifLabel()
     dynamic let artworkImageView = ListingsCollectionViewCell._artworkImageView()
     dynamic let artistNameLabel = ListingsCollectionViewCell._largeLabel()
     dynamic let artworkTitleLabel = ListingsCollectionViewCell._italicsLabel()
@@ -12,7 +13,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     dynamic let numberOfBidsLabel = ListingsCollectionViewCell._rightAlignedNormalLabel()
     dynamic let bidButton = ListingsCollectionViewCell._bidButton()
     dynamic let moreInfoLabel = ListingsCollectionViewCell._infoLabel()
-    
+
     lazy var moreInfoSignal: RACSignal = {
         // "Jump start" both the more info button signal and the image gesture signal with nil values,
         // then skip the first "jump started" value.
@@ -66,6 +67,8 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         contentView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         // Bind subviews
+        RAC(self, "lotNumberLabel.text") <~ RACObserve(self, "saleArtwork.lotNumberSignal").switchToLatest()
+
         RACObserve(self, "saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
             if let url = (artwork as? Artwork)?.images?.first?.thumbnailURL() {
                 self?.artworkImageView.sd_setImageWithURL(url)
@@ -127,7 +130,7 @@ private extension ListingsCollectionViewCell {
     
     class func _sansSerifLabel() -> UILabel {
         let label = ARSansSerifLabel()
-        label.font = label.font.fontWithSize(14)
+        label.font = label.font.fontWithSize(12)
         label.numberOfLines = 1
         return label
     }

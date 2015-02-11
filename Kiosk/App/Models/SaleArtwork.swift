@@ -47,6 +47,7 @@ public class SaleArtwork: JSONAble {
     public var highEstimateCents: Int?
 
     public dynamic var reserveStatus: String?
+    public dynamic var lotNumber: NSNumber?
 
     public init(id: String, artwork: Artwork) {
         self.id = id
@@ -74,8 +75,9 @@ public class SaleArtwork: JSONAble {
         saleArtwork.highEstimateCents = json["high_estimate_cents"].int
         saleArtwork.bidCount = json["bidder_positions_count"].int
         saleArtwork.reserveStatus = json["reserve_status"].string
+        saleArtwork.lotNumber = json["lot_number"].int
 
-        return saleArtwork;
+        return saleArtwork
     }
     
     public func updateWithValues(newSaleArtwork: SaleArtwork) {
@@ -88,6 +90,7 @@ public class SaleArtwork: JSONAble {
         highEstimateCents = newSaleArtwork.highEstimateCents
         bidCount = newSaleArtwork.bidCount
         reserveStatus = newSaleArtwork.reserveStatus
+        lotNumber = newSaleArtwork.lotNumber ?? lotNumber
     }
     
     public var estimateString: String {
@@ -145,6 +148,16 @@ public class SaleArtwork: JSONAble {
         }
     }
 
+    public var lotNumberSignal: RACSignal {
+        return RACObserve(self, "lotNumber").map({ (lotNumber) -> AnyObject! in
+            if let lotNumber = lotNumber as? Int {
+                return "Lot \(lotNumber)"
+            } else {
+                return nil
+            }
+        }).mapNilToEmptyString()
+    }
+
     public func currentBidSignal(prefix: String = "", missingPrefix: String = "") -> RACSignal {
         return RACObserve(self, "highestBidCents").map({ [weak self] (highestBidCents) -> AnyObject! in
             if let currentBidCents = highestBidCents as? Int {
@@ -158,6 +171,8 @@ public class SaleArtwork: JSONAble {
     override public class func keyPathsForValuesAffectingValueForKey(key: String) -> NSSet {
         if key == "estimateString" {
             return NSSet(array: ["lowEstimateCents", "highEstimateCents"])
+        } else if key == "lotNumberSignal" {
+            return NSSet(object: "lotNumber")
         } else {
             return super.keyPathsForValuesAffectingValueForKey(key)
         }
