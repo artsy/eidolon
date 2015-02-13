@@ -15,7 +15,7 @@ class SaleArtworkDetailsViewControllerConfiguration: QuickConfiguration {
             }
 
             it ("looks ok by default") {
-                expect(sut).to( haveValidSnapshot() )
+                expect(sut) == snapshot()
             }
         })
     }
@@ -42,6 +42,14 @@ class SaleArtworkDetailsViewControllerTests: QuickSpec {
         describe("with lot numbers") {
             beforeEach {
                 sut.saleArtwork.lotNumber = 13
+            }
+
+            itBehavesLike("a sale artwork details view controller") { ["sut": sut] }
+        }
+
+        describe("with a buyers premium") {
+            beforeEach {
+                sut.buyersPremium = { BuyersPremium(id: "id", name: "name") }
             }
 
             itBehavesLike("a sale artwork details view controller") { ["sut": sut] }
