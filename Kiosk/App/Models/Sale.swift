@@ -35,8 +35,6 @@ public class Sale: JSONAble {
         let artworkCount = json["eligible_sale_artworks_count"].intValue
         let state = json["auction_state"].stringValue
 
-        //// https://m.artsy.net/auction/[auction_id]/buyers-premium
-
         let sale = Sale(id: id, name:name, isAuction: isAuction, startDate: startDate, endDate: endDate, artworkCount: artworkCount, state: state)
 
         if let buyersPremiumDict = json["buyers_premium"].object as? [String: AnyObject] {

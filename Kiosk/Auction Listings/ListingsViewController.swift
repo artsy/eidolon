@@ -327,11 +327,9 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
             internalNav.bidDetails.saleArtwork = saleArtwork
         }
 
-        // Present the VC, then once it's ready trigger it's own showing animations
-        // TODO: This is messy. Clean up somehow – responder chain? 
-        navigationController?.parentViewController?.presentViewController(containerController, animated: false) {
+        appDelegate().appViewController?.presentViewController(containerController, animated: false, completion: { () -> Void in
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
-        }
+        })
     }
 
     public func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {

@@ -3,6 +3,7 @@ import ORStackView
 import Artsy_UILabels
 import Artsy_UIFonts
 import ReactiveCocoa
+import Artsy_UIButtons
 import Swift_RAC_Macros
 
 public class SaleArtworkDetailsViewController: UIViewController {
@@ -51,7 +52,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
         case CurrentBidValueLabel
         case NumberOfBidsPlacedLabel
         case BidButton
-        case Gobbler
+        case BuyersPremium
     }
 
     @IBAction func backWasPressed(sender: AnyObject) {
@@ -178,6 +179,38 @@ public class SaleArtworkDetailsViewController: UIViewController {
         bidButton.setTitle("Bid", forState: .Normal)
         bidButton.tag = MetadataStackViewTag.BidButton.rawValue
         metadataStackView.addSubview(bidButton, withTopMargin: "40", sideMargin: "0")
+
+        if let _ = appDelegate().sale.buyersPremium {
+            let buyersPremiumView = UIView()
+            buyersPremiumView.tag = MetadataStackViewTag.BuyersPremium.rawValue
+
+            let buyersPremiumLabel = ARSerifLabel()
+            buyersPremiumLabel.font = buyersPremiumLabel.font.fontWithSize(16)
+            buyersPremiumLabel.text = "This work has a "
+            buyersPremiumLabel.textColor = UIColor.artsyHeavyGrey()
+
+            let buyersPremiumButton = ARButton()
+            let title = "buyers premium"
+            let attributes: [String: AnyObject] = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue, NSFontAttributeName: buyersPremiumLabel.font ];
+            let attributedTitle = NSAttributedString(string: title, attributes: attributes)
+            buyersPremiumButton.setTitle(title, forState: .Normal)
+            buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
+            buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
+
+            buyersPremiumButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
+                (UIApplication.sharedApplication().delegate as? AppDelegate)?.showBuyersPremium()
+                return
+            })
+
+            buyersPremiumView.addSubview(buyersPremiumLabel)
+            buyersPremiumView.addSubview(buyersPremiumButton)
+
+            buyersPremiumLabel.alignTop("0", leading: "0", bottom: "0", trailing: nil, toView: buyersPremiumView)
+            buyersPremiumLabel.alignBaselineWithView(buyersPremiumButton, predicate: nil)
+            buyersPremiumButton.alignAttribute(.Left, toAttribute: .Right, ofView: buyersPremiumLabel, predicate: "0")
+
+            metadataStackView.addSubview(buyersPremiumView, withTopMargin: "30", sideMargin: "0")
+        }
 
         metadataStackView.bottomMarginHeight = CGFloat(NSNotFound)
     }
