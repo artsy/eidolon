@@ -2,6 +2,7 @@ import UIKit
 import Artsy_UILabels
 import ReactiveCocoa
 import Swift_RAC_Macros
+import Artsy_UIButtons
 import Artsy_UILabels
 import ORStackView
 
@@ -30,6 +31,8 @@ public class PlaceBidViewController: UIViewController {
     lazy public var keypadSignal: RACSignal! = self.keypadContainer.keypad?.keypadSignal
     lazy public var clearSignal: RACSignal!  = self.keypadContainer.keypad?.rightSignal
     lazy public var deleteSignal: RACSignal! = self.keypadContainer.keypad?.leftSignal
+
+    public var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
         return storyboard.viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
@@ -90,6 +93,7 @@ public class PlaceBidViewController: UIViewController {
                     case ArtistName
                     case ArtworkTitle
                     case ArtworkPrice
+                    case BuyersPremium
                     case Gobbler
                 }
 
@@ -113,6 +117,38 @@ public class PlaceBidViewController: UIViewController {
                 let artworkPriceLabel = serifLabel()
                 artworkPriceLabel.tag = LabelTags.ArtworkPrice.rawValue
                 detailsStackView.addSubview(artworkPriceLabel, withTopMargin: "15", sideMargin: "0")
+
+                if let _ = buyersPremium() {
+                    let buyersPremiumView = UIView()
+                    buyersPremiumView.tag = LabelTags.BuyersPremium.rawValue
+
+                    let buyersPremiumLabel = ARSerifLabel()
+                    buyersPremiumLabel.font = buyersPremiumLabel.font.fontWithSize(16)
+                    buyersPremiumLabel.text = "This work has a "
+                    buyersPremiumLabel.textColor = UIColor.artsyHeavyGrey()
+
+                    let buyersPremiumButton = ARButton()
+                    let title = "buyers premium"
+                    let attributes: [String: AnyObject] = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue, NSFontAttributeName: buyersPremiumLabel.font ];
+                    let attributedTitle = NSAttributedString(string: title, attributes: attributes)
+                    buyersPremiumButton.setTitle(title, forState: .Normal)
+                    buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
+                    buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
+
+                    buyersPremiumButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
+                        (UIApplication.sharedApplication().delegate as? AppDelegate)?.showBuyersPremium()
+                        return
+                    })
+
+                    buyersPremiumView.addSubview(buyersPremiumLabel)
+                    buyersPremiumView.addSubview(buyersPremiumButton)
+
+                    buyersPremiumLabel.alignTop("0", leading: "0", bottom: "0", trailing: nil, toView: buyersPremiumView)
+                    buyersPremiumLabel.alignBaselineWithView(buyersPremiumButton, predicate: nil)
+                    buyersPremiumButton.alignAttribute(.Left, toAttribute: .Right, ofView: buyersPremiumLabel, predicate: "0")
+                    
+                    detailsStackView.addSubview(buyersPremiumView, withTopMargin: "15", sideMargin: "0")
+                }
 
                 let gobbler = WhitespaceGobbler()
                 gobbler.tag = LabelTags.Gobbler.rawValue
@@ -154,7 +190,7 @@ public class PlaceBidViewController: UIViewController {
     }
 
     @IBAction func conditionsTapped(sender: AnyObject) {
-        (UIApplication.sharedApplication().delegate as? AppDelegate)?.showConditionsOfSale()
+        appDelegate().showConditionsOfSale()
     }
 
     @IBAction func privacyTapped(sender: AnyObject) {

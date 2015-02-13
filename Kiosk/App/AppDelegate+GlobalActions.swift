@@ -2,6 +2,10 @@ import UIKit
 import QuartzCore
 import ARAnalytics
 
+func appDelegate() -> AppDelegate {
+    return UIApplication.sharedApplication().delegate as AppDelegate
+}
+
 public extension AppDelegate {
 
     // Registration
@@ -23,6 +27,10 @@ public extension AppDelegate {
         }
     }
 
+    var sale: Sale! {
+        return appViewController!.sale
+    }
+
     internal var appViewController: AppViewController? {
         let nav = self.window.rootViewController?.findChildViewControllerOfType(UINavigationController) as? UINavigationController
         return nav?.delegate as? AppViewController
@@ -38,6 +46,10 @@ public extension AppDelegate {
         showWebControllerWithAddress("https://artsy.net/privacy")
     }
 
+    func showBuyersPremium() {
+        let saleID = sale.id
+        showWebControllerWithAddress("https://m.artsy.net/auction/\(saleID)/buyers-premium")
+    }
     
     func showWebControllerWithAddress(address: String) {
         let block = { () -> Void in
@@ -54,6 +66,13 @@ public extension AppDelegate {
 
         if helpIsVisisble {
             hideHelp {
+                // Need to give it a second to ensure view heirarchy is good.
+                dispatch_async(dispatch_get_main_queue()) {
+                    block()
+                }
+            }
+        } else if fulfillmentViewControllerIsVisisble {
+            hideFulfillmentViewConroller {
                 // Need to give it a second to ensure view heirarchy is good.
                 dispatch_async(dispatch_get_main_queue()) {
                     block()
@@ -76,10 +95,9 @@ public extension AppDelegate {
         return webViewController != nil
     }
 
-    var fulfilmentPopvoerIsVisible: Bool {
-        return webViewController != nil
+    var fulfillmentViewControllerIsVisisble: Bool {
+        return appViewController?.presentedViewController != nil
     }
-
 
     func helpButtonPressed() {
         if helpIsVisisble {
@@ -87,6 +105,10 @@ public extension AppDelegate {
         } else {
             showHelp()
         }
+    }
+
+    func hideFulfillmentViewConroller(completion: (() -> ())? = nil) {
+        appViewController?.dismissViewControllerAnimated(true, completion: completion)
     }
 
     func hidewebViewController(completion: (() -> ())? = nil) {

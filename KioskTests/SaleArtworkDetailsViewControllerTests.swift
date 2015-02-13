@@ -15,7 +15,7 @@ class SaleArtworkDetailsViewControllerConfiguration: QuickConfiguration {
             }
 
             it ("looks ok by default") {
-                expect(sut).to( haveValidSnapshot() )
+                expect(sut) == snapshot()
             }
         })
     }
@@ -46,12 +46,21 @@ class SaleArtworkDetailsViewControllerTests: QuickSpec {
 
             itBehavesLike("a sale artwork details view controller") { ["sut": sut] }
         }
+
+        describe("with a buyers premium") {
+            beforeEach {
+                sut.buyersPremium = { BuyersPremium(id: "id", name: "name") }
+            }
+
+            itBehavesLike("a sale artwork details view controller") { ["sut": sut] }
+        }
     }
 }
 
 func testSaleArtworkViewController(storyboard: UIStoryboard = auctionStoryboard, saleArtwork: SaleArtwork = testSaleArtwork()) -> SaleArtworkDetailsViewController {
     let sut = SaleArtworkDetailsViewController.instantiateFromStoryboard(storyboard)
     sut.saleArtwork = saleArtwork
+    sut.buyersPremium = { nil }
 
     return sut
 }

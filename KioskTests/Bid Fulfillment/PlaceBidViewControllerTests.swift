@@ -53,6 +53,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
         beforeEach {
             sut = PlaceBidViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as PlaceBidViewController
+            sut.buyersPremium = { nil }
         }
 
         it("looks right by default") {
@@ -93,6 +94,14 @@ class PlaceBidViewControllerTests: QuickSpec {
             }
 
             itBehavesLike("a bid view controller view controller") {["sut": sut, "nav": nav]}
+
+            describe("with a buyers premium") {
+                beforeEach {
+                    sut.buyersPremium = { BuyersPremium(id: "id", name: "name") }
+                }
+
+                itBehavesLike("a bid view controller view controller") {["sut": sut, "nav": nav]}
+            }
 
             it("assigns correct text") {
                 sut.loadViewProgrammatically()

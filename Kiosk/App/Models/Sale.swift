@@ -11,6 +11,8 @@ public class Sale: JSONAble {
     public dynamic var artworkCount: Int
     public dynamic let auctionState: String
 
+    public var buyersPremium: BuyersPremium?
+
     public init(id: String, name: String, isAuction: Bool, startDate: NSDate, endDate: NSDate, artworkCount: Int, state: String) {
         self.id = id
         self.name = name
@@ -33,7 +35,13 @@ public class Sale: JSONAble {
         let artworkCount = json["eligible_sale_artworks_count"].intValue
         let state = json["auction_state"].stringValue
 
-        return Sale(id: id, name:name, isAuction: isAuction, startDate: startDate, endDate: endDate, artworkCount: artworkCount, state: state)
+        let sale = Sale(id: id, name:name, isAuction: isAuction, startDate: startDate, endDate: endDate, artworkCount: artworkCount, state: state)
+
+        if let buyersPremiumDict = json["buyers_premium"].object as? [String: AnyObject] {
+            sale.buyersPremium = BuyersPremium.fromJSON(buyersPremiumDict) as? BuyersPremium
+        }
+
+        return sale
     }
 
     public func isActive(systemTime:SystemTime) -> Bool {

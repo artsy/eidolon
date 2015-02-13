@@ -74,7 +74,7 @@ class HelpViewController: UIViewController {
             conditionsButton.titleLabel?.font = UIFont.sansSerifFontWithSize(15)
             
             conditionsButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
-                (UIApplication.sharedApplication().delegate as? AppDelegate)?.showConditionsOfSale()
+                appDelegate().showConditionsOfSale()
                 return
             })
             
