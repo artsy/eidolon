@@ -52,6 +52,7 @@ class SaleArtworkDetailsViewControllerTests: QuickSpec {
 func testSaleArtworkViewController(storyboard: UIStoryboard = auctionStoryboard, saleArtwork: SaleArtwork = testSaleArtwork()) -> SaleArtworkDetailsViewController {
     let sut = SaleArtworkDetailsViewController.instantiateFromStoryboard(storyboard)
     sut.saleArtwork = saleArtwork
+    sut.buyersPremium = { nil }
 
     return sut
 }

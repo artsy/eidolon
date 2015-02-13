@@ -32,6 +32,8 @@ public class PlaceBidViewController: UIViewController {
     lazy public var clearSignal: RACSignal!  = self.keypadContainer.keypad?.rightSignal
     lazy public var deleteSignal: RACSignal! = self.keypadContainer.keypad?.leftSignal
 
+    public var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
+
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
         return storyboard.viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
     }
@@ -116,7 +118,7 @@ public class PlaceBidViewController: UIViewController {
                 artworkPriceLabel.tag = LabelTags.ArtworkPrice.rawValue
                 detailsStackView.addSubview(artworkPriceLabel, withTopMargin: "15", sideMargin: "0")
 
-                if let _ = appDelegate().sale.buyersPremium {
+                if let _ = buyersPremium() {
                     let buyersPremiumView = UIView()
                     buyersPremiumView.tag = LabelTags.BuyersPremium.rawValue
 

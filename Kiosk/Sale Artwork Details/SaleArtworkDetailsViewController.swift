@@ -24,6 +24,8 @@ public class SaleArtworkDetailsViewController: UIViewController {
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!
     @IBOutlet weak var additionalDetailScrollView: ORStackScrollView!
 
+    public var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
+
     public override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -180,7 +182,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
         bidButton.tag = MetadataStackViewTag.BidButton.rawValue
         metadataStackView.addSubview(bidButton, withTopMargin: "40", sideMargin: "0")
 
-        if let _ = appDelegate().sale.buyersPremium {
+        if let _ = buyersPremium() {
             let buyersPremiumView = UIView()
             buyersPremiumView.tag = MetadataStackViewTag.BuyersPremium.rawValue
 

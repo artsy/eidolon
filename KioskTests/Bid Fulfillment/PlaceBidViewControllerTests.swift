@@ -53,6 +53,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
         beforeEach {
             sut = PlaceBidViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as PlaceBidViewController
+            sut.buyersPremium = { nil }
         }
 
         it("looks right by default") {
