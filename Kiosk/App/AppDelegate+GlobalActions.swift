@@ -48,7 +48,7 @@ public extension AppDelegate {
 
     func showBuyersPremium() {
         let saleID = sale.id
-        showWebControllerWithAddress("https://artsy.net/auction/\(saleID)/buyers-premium")
+        showWebControllerWithAddress("https://m.artsy.net/auction/\(saleID)/buyers-premium")
     }
     
     func showWebControllerWithAddress(address: String) {
