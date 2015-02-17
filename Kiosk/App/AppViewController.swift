@@ -21,6 +21,8 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
+        countdownManager.setFonts()
 
         let reachableSignal:RACSignal = reachabilitySignal ?? reachability.reachSignal
         let pingerSignal:RACSignal = apiPingerSignal ?? apiPinger.letOnlineSignal
