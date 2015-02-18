@@ -73,7 +73,7 @@ PODS:
   - SwiftyJSON (2.1.3)
   - UIImageViewAligned (0.0.1)
   - UIView+BooleanAnimations (1.0.2)
-  - XNGMarkdownParser (0.2.0):
+  - XNGMarkdownParser (0.3.0):
     - fmemopen
 
 DEPENDENCIES:
@@ -180,6 +180,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 48be7490a3989a58a3f511cd54167f0a2b466e76
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
   UIView+BooleanAnimations: 48cc98d5469ced7f7654310bff47c8ddba72c8f4
-  XNGMarkdownParser: 5d1ed6c1b2bb3d3f3468a9ad591b85498403822c
+  XNGMarkdownParser: 72c20da1aceec6df477acd78d2297fb9584e7771
 
 COCOAPODS: 0.36.0.beta.2
