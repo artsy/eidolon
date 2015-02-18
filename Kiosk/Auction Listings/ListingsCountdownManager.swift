@@ -4,7 +4,7 @@ import ReactiveCocoa
 class ListingsCountdownManager: NSObject {
    
     @IBOutlet weak var countdownLabel: UILabel!
-    @IBOutlet var countdownContainerView: UIView!
+    @IBOutlet weak var countdownContainerView: UIView!
     let formatter = NSNumberFormatter()
 
     dynamic var sale: Sale?
@@ -32,6 +32,12 @@ class ListingsCountdownManager: NSObject {
 
     func setLabelsHidden(hidden: Bool) {
         countdownContainerView.hidden = hidden
+    }
+
+    func setLabelsHiddenIfSynced(hidden: Bool) {
+        if time.inSync() {
+            setLabelsHidden(hidden)
+        }
     }
 
     func hideDenomenatorLabels() {
@@ -64,7 +70,6 @@ class ListingsCountdownManager: NSObject {
                 hideDenomenatorLabels()
                 timer.invalidate()
             }
-
         }
     }
 }

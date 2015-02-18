@@ -42,7 +42,7 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
     @IBOutlet weak var registerToBidButton: ActionButton!
     public func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         let show = (viewController as? SaleArtworkZoomViewController != nil)
-        countdownManager.countdownContainerView.hidden = show
+        countdownManager.setLabelsHiddenIfSynced(!show)
         registerToBidButton.hidden = show
 
     }
