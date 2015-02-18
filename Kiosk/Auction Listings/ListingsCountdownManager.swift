@@ -4,7 +4,7 @@ import ReactiveCocoa
 class ListingsCountdownManager: NSObject {
    
     @IBOutlet weak var countdownLabel: UILabel!
-    @IBOutlet var countdownContainerView: UIView!
+    @IBOutlet weak var countdownContainerView: UIView!
     let formatter = NSNumberFormatter()
 
     dynamic var sale: Sale?
@@ -12,16 +12,32 @@ class ListingsCountdownManager: NSObject {
     let time = SystemTime()
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         formatter.minimumIntegerDigits = 2
 
-        time.syncSignal().deliverOn(RACScheduler.mainThreadScheduler()).subscribeNext { [weak self] (_) in
+        time.syncSignal().deliverOn(RACScheduler.mainThreadScheduler()).take(1).subscribeNext { [weak self] (_) in
             self?.startTimer()
             self?.setLabelsHidden(false)
         }
     }
-    
+
+    func setFonts() {
+        (countdownContainerView.subviews as [UIView]).map{ (view) -> () in
+            if let label = view as? UILabel {
+                label.font = UIFont.serifFontWithSize(15)
+            }
+        }
+        countdownLabel.font = UIFont.sansSerifFontWithSize(20)
+    }
+
     func setLabelsHidden(hidden: Bool) {
         countdownContainerView.hidden = hidden
+    }
+
+    func setLabelsHiddenIfSynced(hidden: Bool) {
+        if time.inSync() {
+            setLabelsHidden(hidden)
+        }
     }
 
     func hideDenomenatorLabels() {
@@ -54,7 +70,6 @@ class ListingsCountdownManager: NSObject {
                 hideDenomenatorLabels()
                 timer.invalidate()
             }
-
         }
     }
 }
