@@ -16,9 +16,9 @@ class RegisterFlowViewTests: QuickSpec {
             var bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
             bidDetails.newUser = NewUser()
 
-            let sut = RegisterFlowView(frame: frame)
-            sut.details = bidDetails
-            expect(sut).to( haveValidSnapshot(named: "empty") )
+            let subject = RegisterFlowView(frame: frame)
+            subject.details = bidDetails
+            expect(subject).to( haveValidSnapshot(named: "empty") )
         }
 
         xit("handles partial data") {
@@ -29,9 +29,9 @@ class RegisterFlowViewTests: QuickSpec {
             bidDetails.newUser.phoneNumber = "132131231"
             bidDetails.newUser.email = "xxx@yyy.com"
 
-            let sut = RegisterFlowView(frame: frame)
-            sut.details = bidDetails
-            expect(sut).to( haveValidSnapshot(named: "partial") )
+            let subject = RegisterFlowView(frame: frame)
+            subject.details = bidDetails
+            expect(subject).to( haveValidSnapshot(named: "partial") )
         }
 
         xit("handles different ") {
@@ -42,10 +42,10 @@ class RegisterFlowViewTests: QuickSpec {
             bidDetails.newUser.phoneNumber = "132131231"
             bidDetails.newUser.email = "xxx@yyy.com"
 
-            let sut = RegisterFlowView(frame: frame)
-            sut.highlightedIndex = 2
-            sut.details = bidDetails
-            expect(sut).to( haveValidSnapshot(named: "partial-different-highlight") )
+            let subject = RegisterFlowView(frame: frame)
+            subject.highlightedIndex = 2
+            subject.details = bidDetails
+            expect(subject).to( haveValidSnapshot(named: "partial-different-highlight") )
         }
 
 
@@ -59,9 +59,9 @@ class RegisterFlowViewTests: QuickSpec {
             bidDetails.newUser.email = "xxx@yyy.com"
             bidDetails.newUser.zipCode = "90210"
 
-            let sut = RegisterFlowView(frame: frame)
-            sut.details = bidDetails
-            expect(sut).to( haveValidSnapshot(named: "filled") )
+            let subject = RegisterFlowView(frame: frame)
+            subject.details = bidDetails
+            expect(subject).to( haveValidSnapshot(named: "filled") )
         }
 
     }

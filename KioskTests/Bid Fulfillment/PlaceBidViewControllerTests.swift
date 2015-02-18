@@ -7,11 +7,11 @@ import Nimble_Snapshots
 class PlaceBidViewControllerConfiguration: QuickConfiguration {
     override class func configure(configuration: Configuration) {
         sharedExamples("a bid view controller view controller", { (sharedExampleContext: SharedExampleContext) in
-            var sut: PlaceBidViewController!
+            var subject: PlaceBidViewController!
             var nav: FulfillmentNavigationController!
 
             beforeEach {
-                sut = sharedExampleContext()["sut"] as PlaceBidViewController!
+                subject = sharedExampleContext()["subject"] as PlaceBidViewController!
                 nav = sharedExampleContext()["nav"] as FulfillmentNavigationController!
             }
 
@@ -22,17 +22,17 @@ class PlaceBidViewControllerConfiguration: QuickConfiguration {
                 }
 
                 it("looks correct") {
-                    sut.loadViewProgrammatically()
-                    sut.cursor.stopAnimating()
-                    expect(sut) == snapshot()
+                    subject.loadViewProgrammatically()
+                    subject.cursor.stopAnimating()
+                    expect(subject) == snapshot()
                 }
             }
 
             describe("without lot number") {
                 it("looks correct") {
-                    sut.loadViewProgrammatically()
-                    sut.cursor.stopAnimating()
-                    expect(sut) == snapshot()
+                    subject.loadViewProgrammatically()
+                    subject.cursor.stopAnimating()
+                    expect(subject) == snapshot()
                 }
             }
         })
@@ -41,7 +41,7 @@ class PlaceBidViewControllerConfiguration: QuickConfiguration {
 
 class PlaceBidViewControllerTests: QuickSpec {
     override func spec() {
-        var sut: PlaceBidViewController!
+        var subject: PlaceBidViewController!
         var artworkJSON: [String: AnyObject] = [
             "id":"artwork_id",
             "title" : "The Artwork Title",
@@ -52,28 +52,28 @@ class PlaceBidViewControllerTests: QuickSpec {
         ]
 
         beforeEach {
-            sut = PlaceBidViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as PlaceBidViewController
-            sut.buyersPremium = { nil }
+            subject = PlaceBidViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as PlaceBidViewController
+            subject.buyersPremium = { nil }
         }
 
         it("looks right by default") {
-            sut.loadViewProgrammatically()
-            sut.cursor.stopAnimating()
-            expect(sut) == snapshot()
+            subject.loadViewProgrammatically()
+            subject.cursor.stopAnimating()
+            expect(subject) == snapshot()
         }
 
         it("looks right with a custom saleArtwork") {
-            let nav = FulfillmentNavigationController(rootViewController:sut)
+            let nav = FulfillmentNavigationController(rootViewController:subject)
 
             let artwork = Artwork.fromJSON(artworkJSON) as Artwork
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
 
             nav.loadViewProgrammatically()
-            sut.loadViewProgrammatically()
-            sut.cursor.stopAnimating()
+            subject.loadViewProgrammatically()
+            subject.cursor.stopAnimating()
 
-            expect(sut) == snapshot()
+            expect(subject) == snapshot()
         }
 
         describe("with no bids") {
@@ -81,7 +81,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             beforeEach {
                 let customKeySubject = RACSubject()
-                nav = FulfillmentNavigationController(rootViewController:sut)
+                nav = FulfillmentNavigationController(rootViewController:subject)
 
                 let artwork = Artwork.fromJSON(artworkJSON) as Artwork
                 let saleArtwork = SaleArtwork(id: "", artwork: artwork)
@@ -93,22 +93,22 @@ class PlaceBidViewControllerTests: QuickSpec {
                 nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
             }
 
-            itBehavesLike("a bid view controller view controller") {["sut": sut, "nav": nav]}
+            itBehavesLike("a bid view controller view controller") {["subject": subject, "nav": nav]}
 
             describe("with a buyers premium") {
                 beforeEach {
-                    sut.buyersPremium = { BuyersPremium(id: "id", name: "name") }
+                    subject.buyersPremium = { BuyersPremium(id: "id", name: "name") }
                 }
 
-                itBehavesLike("a bid view controller view controller") {["sut": sut, "nav": nav]}
+                itBehavesLike("a bid view controller view controller") {["subject": subject, "nav": nav]}
             }
 
             it("assigns correct text") {
-                sut.loadViewProgrammatically()
+                subject.loadViewProgrammatically()
 
-                expect(sut.currentBidTitleLabel.text).to(equal("Opening Bid:"))
-                expect(sut.currentBidAmountLabel.text).to(equal("$100"))
-                expect(sut.nextBidAmountLabel.text).to(equal("Enter $100 or more"))
+                expect(subject.currentBidTitleLabel.text).to(equal("Opening Bid:"))
+                expect(subject.currentBidAmountLabel.text).to(equal("$100"))
+                expect(subject.nextBidAmountLabel.text).to(equal("Enter $100 or more"))
             }
         }
 
@@ -117,7 +117,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             beforeEach {
                 let customKeySubject = RACSubject()
-                nav = FulfillmentNavigationController(rootViewController:sut)
+                nav = FulfillmentNavigationController(rootViewController:subject)
 
                 let artwork = Artwork.fromJSON(artworkJSON) as Artwork
                 let saleArtwork = SaleArtwork(id: "", artwork: artwork)
@@ -129,36 +129,36 @@ class PlaceBidViewControllerTests: QuickSpec {
                 nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
             }
 
-            itBehavesLike("a bid view controller view controller") {["sut": sut, "nav": nav]}
+            itBehavesLike("a bid view controller view controller") {["subject": subject, "nav": nav]}
 
             it("assigns correct text") {
-                sut.loadViewProgrammatically()
+                subject.loadViewProgrammatically()
 
-                expect(sut.currentBidTitleLabel.text).to(equal("Current Bid:"))
-                expect(sut.currentBidAmountLabel.text).to(equal("$200"))
-                expect(sut.nextBidAmountLabel.text).to(equal("Enter $250 or more"))
+                expect(subject.currentBidTitleLabel.text).to(equal("Current Bid:"))
+                expect(subject.currentBidAmountLabel.text).to(equal("$200"))
+                expect(subject.nextBidAmountLabel.text).to(equal("Enter $250 or more"))
             }
         }
 
         it("reacts to keypad inputs with currency") {
             let customKeySubject = RACSubject()
-            sut.keypadSignal = customKeySubject;
-            sut.loadViewProgrammatically()
+            subject.keypadSignal = customKeySubject;
+            subject.loadViewProgrammatically()
 
             customKeySubject.sendNext(2);
-            expect(sut.bidAmountTextField.text) == "2"
+            expect(subject.bidAmountTextField.text) == "2"
 
             customKeySubject.sendNext(3);
-            expect(sut.bidAmountTextField.text) == "23"
+            expect(subject.bidAmountTextField.text) == "23"
 
             customKeySubject.sendNext(4);
             customKeySubject.sendNext(4);
-            expect(sut.bidAmountTextField.text) == "2,344"
+            expect(subject.bidAmountTextField.text) == "2,344"
         }
 
         it("bid button is only enabled when bid is greater than min next bid") {
             let customKeySubject = RACSubject()
-            let nav = FulfillmentNavigationController(rootViewController:sut)
+            let nav = FulfillmentNavigationController(rootViewController:subject)
 
             let artwork = Artwork.fromJSON(artworkJSON) as Artwork
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
@@ -166,23 +166,23 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
 
-            sut.keypadSignal = customKeySubject;
+            subject.keypadSignal = customKeySubject;
             nav.loadViewProgrammatically()
-            sut.loadViewProgrammatically()
+            subject.loadViewProgrammatically()
 
-            expect(sut.bidButton.enabled) == false
+            expect(subject.bidButton.enabled) == false
 
             customKeySubject.sendNext(200)
-            expect(sut.bidButton.enabled) == true
+            expect(subject.bidButton.enabled) == true
         }
 
         it("passes the bid amount to the nav controller") {
-            let nav = FulfillmentNavigationController(rootViewController:sut)
+            let nav = FulfillmentNavigationController(rootViewController:subject)
 
             let customKeySubject = RACSubject()
-            sut.keypadSignal = customKeySubject;
+            subject.keypadSignal = customKeySubject;
             nav.loadViewProgrammatically()
-            sut.loadViewProgrammatically()
+            subject.loadViewProgrammatically()
 
             customKeySubject.sendNext(3);
             customKeySubject.sendNext(3);
