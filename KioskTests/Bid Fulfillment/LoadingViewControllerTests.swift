@@ -7,95 +7,95 @@ import Nimble_Snapshots
 class LoadingViewControllerTests: QuickSpec {
     override func spec() {
         let storyboard =  UIStoryboard.fulfillment()
-        var sut: LoadingViewController!
+        var subject: LoadingViewController!
 
         describe("default") {
             beforeEach {
-                sut = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
-                sut.bidderNetworkModel = ErrorBidderNetworkModel()
-                sut.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
-                sut.placeBidNetworkModel = DummyPlaceBidNetworkModel()
-                sut.details = BidDetails.stubbedBidDetails()
-                sut.performNetworking = false
-                sut.animate = false
+                subject = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
+                subject.bidderNetworkModel = ErrorBidderNetworkModel()
+                subject.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
+                subject.placeBidNetworkModel = DummyPlaceBidNetworkModel()
+                subject.details = BidDetails.stubbedBidDetails()
+                subject.performNetworking = false
+                subject.animate = false
             }
 
             it("placing a bid") {
-                sut.placingBid = true
-                expect(sut).to(haveValidSnapshot())
+                subject.placingBid = true
+                expect(subject).to(haveValidSnapshot())
             }
 
             it("registering a user") {
-                sut.placingBid = false
-                expect(sut).to(haveValidSnapshot())
+                subject.placingBid = false
+                expect(subject).to(haveValidSnapshot())
             }
         }
 
         describe("errors") {
             beforeEach {
-                sut = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
-                sut.bidderNetworkModel = ErrorBidderNetworkModel()
-                sut.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
-                sut.placeBidNetworkModel = DummyPlaceBidNetworkModel()
-                sut.details = BidDetails.stubbedBidDetails()
+                subject = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
+                subject.bidderNetworkModel = ErrorBidderNetworkModel()
+                subject.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
+                subject.placeBidNetworkModel = DummyPlaceBidNetworkModel()
+                subject.details = BidDetails.stubbedBidDetails()
             }
 
             it("correctly placing a bid") {
-                sut.placingBid = true
-                expect(sut).to(haveValidSnapshot())
+                subject.placingBid = true
+                expect(subject).to(haveValidSnapshot())
             }
 
             it("correctly registering a user") {
-                sut.placingBid = false
-                expect(sut).to(haveValidSnapshot())
+                subject.placingBid = false
+                expect(subject).to(haveValidSnapshot())
             }
         }
 
         describe("ending") {
             beforeEach {
-                sut = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
-                sut.bidderNetworkModel = SuccessBidderNetworkModel()
-                sut.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
-                sut.placeBidNetworkModel = DummyPlaceBidNetworkModel()
-                sut.details = BidDetails.stubbedBidDetails()
+                subject = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
+                subject.bidderNetworkModel = SuccessBidderNetworkModel()
+                subject.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
+                subject.placeBidNetworkModel = DummyPlaceBidNetworkModel()
+                subject.details = BidDetails.stubbedBidDetails()
             }
 
             it("placing bid success highest") {
-                sut.placingBid = true
-                sut.bidCheckingModel.bidIsResolved = true
-                sut.bidCheckingModel.isHighestBidder = true
+                subject.placingBid = true
+                subject.bidCheckingModel.bidIsResolved = true
+                subject.bidCheckingModel.isHighestBidder = true
 
-                expect(sut).to(haveValidSnapshot())
+                expect(subject).to(haveValidSnapshot())
             }
 
             it("placing bid success not highest") {
-                sut.placingBid = true
-                sut.bidCheckingModel.bidIsResolved = true
-                sut.bidCheckingModel.isHighestBidder = false
+                subject.placingBid = true
+                subject.bidCheckingModel.bidIsResolved = true
+                subject.bidCheckingModel.isHighestBidder = false
 
-                expect(sut).to(haveValidSnapshot())
+                expect(subject).to(haveValidSnapshot())
             }
 
             it("placing bid not resolved") {
-                sut.placingBid = true
-                sut.bidCheckingModel.bidIsResolved = true
+                subject.placingBid = true
+                subject.bidCheckingModel.bidIsResolved = true
 
-                expect(sut).to(haveValidSnapshot())
+                expect(subject).to(haveValidSnapshot())
             }
 
             it("registering user success") {
-                sut.placingBid = false
-                sut.bidderNetworkModel.createdNewBidder = true
-                sut.bidCheckingModel.bidIsResolved = true
+                subject.placingBid = false
+                subject.bidderNetworkModel.createdNewBidder = true
+                subject.bidCheckingModel.bidIsResolved = true
 
-                expect(sut).to(haveValidSnapshot())
+                expect(subject).to(haveValidSnapshot())
             }
 
             it("registering user not resolved") {
-                sut.placingBid = false
-                sut.bidCheckingModel.bidIsResolved = true
+                subject.placingBid = false
+                subject.bidCheckingModel.bidIsResolved = true
 
-                expect(sut).to(haveValidSnapshot())
+                expect(subject).to(haveValidSnapshot())
             }
         }
     }

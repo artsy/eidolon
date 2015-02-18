@@ -11,39 +11,39 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
     override func spec() {
 
         it("looks right by default") {
-            let sut = testConfirmYourBidEnterYourEmailViewController()
-            expect(sut).to(haveValidSnapshot())
+            let subject = testConfirmYourBidEnterYourEmailViewController()
+            expect(subject).to(haveValidSnapshot())
         }
 
         it("passes the email to the nav's bid details object") {
-            let sut = testConfirmYourBidEnterYourEmailViewController()
-            let nav = sut.navigationController as FulfillmentNavigationController
-            sut.loadViewProgrammatically()
+            let subject = testConfirmYourBidEnterYourEmailViewController()
+            let nav = subject.navigationController as FulfillmentNavigationController
+            subject.loadViewProgrammatically()
 
-            sut.emailTextField.text = "email"
-            sut.emailTextField.sendActionsForControlEvents(.EditingChanged)
+            subject.emailTextField.text = "email"
+            subject.emailTextField.sendActionsForControlEvents(.EditingChanged)
 
             expect(nav.bidDetails.newUser.email) == "email"
         }
 
         it("confirm button is disabled when no email") {
-            let sut = testConfirmYourBidEnterYourEmailViewController()
-            let nav = FulfillmentNavigationController(rootViewController:sut)
+            let subject = testConfirmYourBidEnterYourEmailViewController()
+            let nav = FulfillmentNavigationController(rootViewController:subject)
             nav.loadViewProgrammatically()
-            sut.loadViewProgrammatically()
+            subject.loadViewProgrammatically()
 
-            expect(sut.confirmButton.enabled) == false
+            expect(subject.confirmButton.enabled) == false
         }
 
         pending("enables the enter button when an email + password is entered") {
-            let sut = testConfirmYourBidEnterYourEmailViewController()
-            let nav = sut.navigationController as FulfillmentNavigationController
-            sut.loadViewProgrammatically()
+            let subject = testConfirmYourBidEnterYourEmailViewController()
+            let nav = subject.navigationController as FulfillmentNavigationController
+            subject.loadViewProgrammatically()
 
-            sut.emailTextField.text = "email@address.com"
-            sut.emailTextField.sendActionsForControlEvents(.EditingChanged)
+            subject.emailTextField.text = "email@address.com"
+            subject.emailTextField.sendActionsForControlEvents(.EditingChanged)
 
-            expect(sut.confirmButton.enabled) == true
+            expect(subject.confirmButton.enabled) == true
         }
 
     }
