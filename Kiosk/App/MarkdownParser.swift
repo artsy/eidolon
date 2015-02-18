@@ -11,6 +11,7 @@ class MarkdownParser: XNGMarkdownParser {
         linkFontName = UIFont.serifItalicFontWithSize(16).fontName
         boldFontName = UIFont.serifBoldFontWithSize(16).fontName
         italicFontName = UIFont.serifItalicFontWithSize(16).fontName
+        shouldParseLinks = false
 
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.minimumLineHeight = 16
