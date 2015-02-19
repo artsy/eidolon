@@ -136,7 +136,7 @@ public class PlaceBidViewController: UIViewController {
                     buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
 
                     buyersPremiumButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
-                        (UIApplication.sharedApplication().delegate as? AppDelegate)?.showBuyersPremium()
+                        appDelegate().showBuyersPremium()
                         return
                     })
 
@@ -194,7 +194,7 @@ public class PlaceBidViewController: UIViewController {
     }
 
     @IBAction func privacyTapped(sender: AnyObject) {
-        (UIApplication.sharedApplication().delegate as? AppDelegate)?.showPrivacyPolicy()
+        appDelegate().showPrivacyPolicy()
     }
 }
 

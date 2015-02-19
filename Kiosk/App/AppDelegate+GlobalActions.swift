@@ -6,23 +6,37 @@ func appDelegate() -> AppDelegate {
     return UIApplication.sharedApplication().delegate as AppDelegate
 }
 
+typealias AnimationCompletion = () -> ()
+
+private func dispatch_async_main_queue(completion: AnimationCompletion?) {
+    // Often need to give it a second to ensure view heirarchy is good.
+    if let completion = completion {
+        dispatch_async(dispatch_get_main_queue(), completion)
+    }
+}
+
 public extension AppDelegate {
 
     // Registration
 
     func showRegistration() {
         hideHelp {
-            // Need to give it a second to ensure view heirarchy is good.
-            dispatch_async(dispatch_get_main_queue()) {
-
-                let appVC = self.appViewController
-                if let fulfillment = appVC?.presentedViewController as? FulfillmentContainerViewController {
-                    fulfillment.closeFulfillmentModal() {
-                        return appVC!.registerToBidButtonWasPressed(self)
-                    }
-                } else {
-                    appVC?.registerToBidButtonWasPressed(self)
+            let appVC = self.appViewController
+            if let fulfillment = appVC?.presentedViewController as? FulfillmentContainerViewController {
+                fulfillment.closeFulfillmentModal() {
+                    return appVC!.registerToBidButtonWasPressed(self)
                 }
+            } else {
+                appVC?.registerToBidButtonWasPressed(self)
+            }
+        }
+    }
+
+    func requestBidderDetails() {
+        hideHelp {
+            let appVC = self.appViewController
+            if let presentingVIewController = appVC?.presentedViewController ?? appVC {
+                presentingVIewController.promptForBidderDetailsRetrieval()
             }
         }
     }
@@ -65,27 +79,15 @@ public extension AppDelegate {
         }
 
         if helpIsVisisble {
-            hideHelp {
-                // Need to give it a second to ensure view heirarchy is good.
-                dispatch_async(dispatch_get_main_queue()) {
-                    block()
-                }
-            }
+            hideHelp(block)
         } else if fulfillmentViewControllerIsVisisble {
-            hideFulfillmentViewConroller {
-                // Need to give it a second to ensure view heirarchy is good.
-                dispatch_async(dispatch_get_main_queue()) {
-                    block()
-                }
-            }
+            hideFulfillmentViewConroller(block)
         } else {
             block()
         }
     }
 
     // Help button and menu
-
-    typealias HelpCompletion = () -> ()
 
     var helpIsVisisble: Bool {
         return helpViewController != nil
@@ -108,11 +110,15 @@ public extension AppDelegate {
     }
 
     func hideFulfillmentViewConroller(completion: (() -> ())? = nil) {
-        appViewController?.dismissViewControllerAnimated(true, completion: completion)
+        appViewController?.dismissViewControllerAnimated(true) {
+            dispatch_async_main_queue(completion)
+        }
     }
 
-    func hidewebViewController(completion: (() -> ())? = nil) {
-        webViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: completion)
+    internal func hidewebViewController(completion: AnimationCompletion? = nil) {
+        webViewController?.presentingViewController?.dismissViewControllerAnimated(true) { () -> Void in
+            dispatch_async_main_queue(completion)
+        }
     }
 
     func setupHelpButton() {
@@ -154,7 +160,7 @@ public extension AppDelegate {
         helpButton.hidden = hidden
     }
 
-    func showHelp(completion: HelpCompletion? = nil) {
+    internal func showHelp(completion: AnimationCompletion? = nil) {
         let block = { () -> Void in
             self.setHelpButtonState(.Close)
 
@@ -169,23 +175,17 @@ public extension AppDelegate {
         }
 
         if webViewControllerIsVisible {
-            hidewebViewController {
-                // Need to give it a second to ensure view heirarchy is good.
-                dispatch_async(dispatch_get_main_queue()) {
-                    block()
-                }
-            }
+            hidewebViewController(block)
         } else {
             block()
         }
     }
 
-    func hideHelp(completion: HelpCompletion? = nil) {
+    internal func hideHelp(completion: AnimationCompletion? = nil) {
         setHelpButtonState(.Help)
 
         helpViewController?.presentingViewController?.dismissViewControllerAnimated(true) {
-            completion?()
-            return
+            dispatch_async_main_queue(completion)
         }
     }
 }

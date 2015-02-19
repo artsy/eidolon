@@ -200,7 +200,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
             buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
 
             buyersPremiumButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
-                (UIApplication.sharedApplication().delegate as? AppDelegate)?.showBuyersPremium()
+                appDelegate().showBuyersPremium()
                 return
             })
 

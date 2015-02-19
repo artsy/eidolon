@@ -8,7 +8,7 @@ class AdminPanelViewController: UIViewController {
 
     @IBAction func backTapped(sender: AnyObject) {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-        (UIApplication.sharedApplication().delegate as? AppDelegate)?.setHelpButtonHidden(false)
+        appDelegate().setHelpButtonHidden(false)
     }
 
     @IBAction func closeAppTapped(sender: AnyObject) {
@@ -18,7 +18,7 @@ class AdminPanelViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        (UIApplication.sharedApplication().delegate as? AppDelegate)?.setHelpButtonHidden(true)
+        appDelegate().setHelpButtonHidden(true)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

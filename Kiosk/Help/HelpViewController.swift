@@ -12,7 +12,7 @@ class HelpViewController: UIViewController {
     
     private let sideMargin: Float = 90.0
     private let topMargin: Float = 45.0
-    private let headerMargin: Float = 30.0
+    private let headerMargin: Float = 25.0
     private let inbetweenMargin: Float = 10.0
     
     override func viewDidLoad() {
@@ -44,7 +44,7 @@ class HelpViewController: UIViewController {
         RAC(registerButton, "enabled") <~ reachabilityManager.reachSignal
 
         registerButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (_) -> Void in
-            (UIApplication.sharedApplication().delegate as? AppDelegate)?.showRegistration()
+            appDelegate().showRegistration()
             return
         }
         
@@ -57,6 +57,15 @@ class HelpViewController: UIViewController {
         let bidderDetailsExplainLabel = wrappingSerifLabel()
         bidderDetailsExplainLabel.text = "The bidder number is how you can identify yourself to bid and see your place in bid history. The PIN is a four digit number that authenticates your bid."
         bidderDetailsExplainLabel.makeSubstringsBold(["bidder number", "PIN"])
+
+        let sendDetailsButton = ARBlackFlatButton()
+        sendDetailsButton.setTitle("Send me my details", forState: .Normal)
+        RAC(sendDetailsButton, "enabled") <~ reachabilityManager.reachSignal
+
+        sendDetailsButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (_) -> () in
+            appDelegate().requestBidderDetails()
+            return
+        }
         
         let questionsLabel = titleLabel()
         questionsLabel.text = "Questions About Artsy Auctions?"
@@ -88,7 +97,7 @@ class HelpViewController: UIViewController {
             privacyButton.titleLabel?.font = UIFont.sansSerifFontWithSize(15)
             
             privacyButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
-                (UIApplication.sharedApplication().delegate as? AppDelegate)?.showPrivacyPolicy()
+                appDelegate().showPrivacyPolicy()
                 return
             })
             
@@ -122,6 +131,7 @@ class HelpViewController: UIViewController {
         stackView.addSubview(txtLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         stackView.addSubview(bidderDetailsLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         stackView.addSubview(bidderDetailsExplainLabel, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(sideMargin)")
+        stackView.addSubview(sendDetailsButton, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(sideMargin)")
         stackView.addSubview(questionsLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         stackView.addSubview(questionsExplainView, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
     }

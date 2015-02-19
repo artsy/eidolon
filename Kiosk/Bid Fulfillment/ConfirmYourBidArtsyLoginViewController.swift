@@ -100,8 +100,8 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBAction func forgotPasswordTapped(sender: AnyObject) {
         let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .Alert)
 
-        let submitAction = UIAlertAction(title: "Send", style: .Default) { (_) in
-            let emailTextField = alertController.textFields![0] as UITextField
+        let submitAction = UIAlertAction(title: "Send", style: .Default) { [weak alertController] (_) in
+            let emailTextField = alertController!.textFields![0] as UITextField
             self.sendForgotPasswordRequest(emailTextField.text)
             return
         }
