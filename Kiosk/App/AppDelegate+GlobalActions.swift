@@ -252,10 +252,10 @@ extension RACSignal {
 }
 
 func sendDispatchCompleted(subscriber: RACSubscriber) {
-    dispatch_async(dispatch_get_main_queue()) {
-        subscriber.sendCompleted()
-        return
-    }
+    // This is useful when we need to wait for the next invocation of the run loop,
+    // often because view controller hierarchies need to stabilise.
+    let signal = RACSignal.empty().deliverOn(RACScheduler.mainThreadScheduler())
+    signal.subscribe(subscriber)
 }
 
 // MARK: - Help transtion animation
