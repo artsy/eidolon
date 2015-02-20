@@ -24,10 +24,9 @@ public class PlaceBidViewController: UIViewController {
     @IBOutlet weak var detailsStackView: ORTagBasedAutoStackView!
 
     @IBOutlet public var bidButton: Button!
+    @IBOutlet weak var conditionsOfSaleButton: UIButton!
+    @IBOutlet weak var privacyPolictyButton: UIButton!
 
-    lazy public var conditionsOfSaleAddress = "http://artsy.net/conditions-of-sale"
-    lazy public var privacyPolicyAddress = "http://artsy.net/privacy"
-    
     lazy public var keypadSignal: RACSignal! = self.keypadContainer.keypad?.keypadSignal
     lazy public var clearSignal: RACSignal!  = self.keypadContainer.keypad?.rightSignal
     lazy public var deleteSignal: RACSignal! = self.keypadContainer.keypad?.leftSignal
@@ -47,6 +46,9 @@ public class PlaceBidViewController: UIViewController {
 
         currentBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
         yourBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
+
+        conditionsOfSaleButton.rac_command = appDelegate().showConditionsOfSaleCommand()
+        privacyPolictyButton.rac_command = appDelegate().showPrivacyPolicyCommand()
 
         let keypad = self.keypadContainer!.keypad!
         let bidDollarsSignal = RACObserve(self, "bidDollars")
@@ -134,11 +136,7 @@ public class PlaceBidViewController: UIViewController {
                     buyersPremiumButton.setTitle(title, forState: .Normal)
                     buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
                     buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
-
-                    buyersPremiumButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
-                        appDelegate().showBuyersPremium()
-                        return
-                    })
+                    buyersPremiumButton.rac_command = appDelegate().showBuyersPremiumCommand()
 
                     buyersPremiumView.addSubview(buyersPremiumLabel)
                     buyersPremiumView.addSubview(buyersPremiumButton)
@@ -187,14 +185,6 @@ public class PlaceBidViewController: UIViewController {
             let nextViewController = segue.destinationViewController as LoadingViewController
             nextViewController.placingBid = true
         }
-    }
-
-    @IBAction func conditionsTapped(sender: AnyObject) {
-        appDelegate().showConditionsOfSale()
-    }
-
-    @IBAction func privacyTapped(sender: AnyObject) {
-        appDelegate().showPrivacyPolicy()
     }
 }
 

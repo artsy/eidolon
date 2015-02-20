@@ -327,7 +327,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
             internalNav.bidDetails.saleArtwork = saleArtwork
         }
 
-        appDelegate().appViewController?.presentViewController(containerController, animated: false, completion: { () -> Void in
+        appDelegate().appViewController.presentViewController(containerController, animated: false, completion: { () -> Void in
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         })
     }

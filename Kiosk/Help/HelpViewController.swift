@@ -3,6 +3,7 @@ import ORStackView
 import Artsy_UILabels
 import Artsy_UIButtons
 import Swift_RAC_Macros
+import ReactiveCocoa
 
 class HelpViewController: UIViewController {
     var positionConstraints: NSArray?
@@ -41,12 +42,7 @@ class HelpViewController: UIViewController {
 
         let registerButton = ARBlackFlatButton()
         registerButton.setTitle("Register", forState: .Normal)
-        RAC(registerButton, "enabled") <~ reachabilityManager.reachSignal
-
-        registerButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (_) -> Void in
-            appDelegate().showRegistration()
-            return
-        }
+        registerButton.rac_command = appDelegate().registerToBidCommand(enabledSignal: reachabilityManager.reachSignal)
         
         let txtLabel = wrappingSerifLabel()
         txtLabel.text = "We will send you a text message and email to update you on the status of your bid."
@@ -60,12 +56,8 @@ class HelpViewController: UIViewController {
 
         let sendDetailsButton = ARBlackFlatButton()
         sendDetailsButton.setTitle("Send me my details", forState: .Normal)
-        RAC(sendDetailsButton, "enabled") <~ reachabilityManager.reachSignal
 
-        sendDetailsButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (_) -> () in
-            appDelegate().requestBidderDetails()
-            return
-        }
+        sendDetailsButton.rac_command = appDelegate().requestBidderDetailsCommand(enabledSignal: reachabilityManager.reachSignal)
         
         let questionsLabel = titleLabel()
         questionsLabel.text = "Questions About Artsy Auctions?"
@@ -81,11 +73,8 @@ class HelpViewController: UIViewController {
             conditionsButton.setTitle("Conditions of Sale".uppercaseString, forState: .Normal)
             conditionsButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
             conditionsButton.titleLabel?.font = UIFont.sansSerifFontWithSize(15)
-            
-            conditionsButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
-                appDelegate().showConditionsOfSale()
-                return
-            })
+
+            conditionsButton.rac_command = appDelegate().showConditionsOfSaleCommand()
             
             let privacyLabel = ARSerifLabel()
             privacyLabel.font = conditionsLabel.font.fontWithSize(18)
@@ -96,10 +85,7 @@ class HelpViewController: UIViewController {
             privacyButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
             privacyButton.titleLabel?.font = UIFont.sansSerifFontWithSize(15)
             
-            privacyButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
-                appDelegate().showPrivacyPolicy()
-                return
-            })
+            privacyButton.rac_command = appDelegate().showPrivacyPolicyCommand()
             
             view.addSubview(conditionsLabel)
             view.addSubview(conditionsButton)

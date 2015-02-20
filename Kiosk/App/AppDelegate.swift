@@ -8,7 +8,7 @@ var logger: Logger!
 @UIApplicationMain
 public class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    weak var helpViewController: HelpViewController?
+    dynamic weak var helpViewController: HelpViewController?
     var helpButton: UIButton!
 
     weak var webViewController: UIViewController?

@@ -199,10 +199,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
             buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
             buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
 
-            buyersPremiumButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext({ (_) -> Void in
-                appDelegate().showBuyersPremium()
-                return
-            })
+            buyersPremiumButton.rac_command = appDelegate().showBuyersPremiumCommand()
 
             buyersPremiumView.addSubview(buyersPremiumLabel)
             buyersPremiumView.addSubview(buyersPremiumButton)

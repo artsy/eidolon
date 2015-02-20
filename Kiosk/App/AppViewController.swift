@@ -9,6 +9,7 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
 
     @IBOutlet var countdownManager: ListingsCountdownManager!
     @IBOutlet public var offlineBlockingView: UIView!
+    @IBOutlet weak var registerToBidButton: ActionButton!
 
     let reachability = ReachabilityManager()
     public var reachabilitySignal: RACSignal?
@@ -21,7 +22,9 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        registerToBidButton.rac_command = appDelegate().registerToBidCommand()
+
         countdownManager.setFonts()
 
         let reachableSignal:RACSignal = reachabilitySignal ?? reachability.reachSignal
@@ -39,35 +42,14 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
         }
     }
 
-    @IBOutlet weak var registerToBidButton: ActionButton!
     public func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-        let show = (viewController as? SaleArtworkZoomViewController != nil)
-        countdownManager.setLabelsHiddenIfSynced(!show)
-        registerToBidButton.hidden = show
-
+        let hide = (viewController as? SaleArtworkZoomViewController != nil)
+        countdownManager.setLabelsHiddenIfSynced(hide)
+        registerToBidButton.hidden = hide
     }
 }
 
 extension AppViewController {
-    
-    @IBAction func registerToBidButtonWasPressed(sender: AnyObject) {
-        ARAnalytics.event("Register To Bid Tapped")
-
-        let storyboard = UIStoryboard.fulfillment()
-        let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
-        containerController.allowAnimations = allowAnimations
-
-        if let internalNav: FulfillmentNavigationController = containerController.internalNavigationController() {
-            let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as RegisterViewController
-            registerVC.placingBid = false
-            internalNav.auctionID = auctionID
-            internalNav.viewControllers = [registerVC]
-        }
-
-        presentViewController(containerController, animated: false) {
-            containerController.viewDidAppearAnimation(containerController.allowAnimations)
-        }
-    }
 
     @IBAction func longPressForAdmin(sender: UIGestureRecognizer) {
         if sender.state != .Began {
