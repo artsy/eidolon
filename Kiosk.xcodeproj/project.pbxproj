@@ -10,6 +10,7 @@
 		3FCE6D8A07CA1FA29F4A37DC /* Pods_KioskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E64E1A65630200F8CBDD /* Logger.swift */; };
 		5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */; };
+		5E339E3A1A991899000C773D /* RACExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E339E391A991899000C773D /* RACExtensions.swift */; };
 		5E5ADF641A8B789000453250 /* WhitespaceGobbler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */; };
 		5E853EBE1A8BC9A200F91C0D /* BuyersPremium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E853EBD1A8BC9A200F91C0D /* BuyersPremium.swift */; };
 		5E86104B1A5C429C00456E41 /* AdminCardTestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */; };
@@ -206,6 +207,7 @@
 		3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KioskTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E19E64E1A65630200F8CBDD /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
+		5E339E391A991899000C773D /* RACExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensions.swift; sourceTree = "<group>"; };
 		5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitespaceGobbler.swift; sourceTree = "<group>"; };
 		5E853EBD1A8BC9A200F91C0D /* BuyersPremium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyersPremium.swift; sourceTree = "<group>"; };
 		5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCardTestingViewController.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 		5E860FC91A5C429C00456E41 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				5E339E391A991899000C773D /* RACExtensions.swift */,
 				5E860FCA1A5C429C00456E41 /* APIPingManager.swift */,
 				5E860FCB1A5C429C00456E41 /* AppDelegate+GlobalActions.swift */,
 				5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */,
@@ -1064,6 +1067,7 @@
 				5E8610671A5C429C00456E41 /* User.swift in Sources */,
 				5E8610921A5C429C00456E41 /* BidDetails.swift in Sources */,
 				5E86106D1A5C429C00456E41 /* XAppToken.swift in Sources */,
+				5E339E3A1A991899000C773D /* RACExtensions.swift in Sources */,
 				5E86107B1A5C429C00456E41 /* TextField.swift in Sources */,
 				5E8610AA1A5C429C00456E41 /* UIStoryboardExtensions.swift in Sources */,
 				5E86105F1A5C429C00456E41 /* Card.swift in Sources */,

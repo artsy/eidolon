@@ -245,19 +245,6 @@ private extension AppDelegate {
     }
 }
 
-extension RACSignal {
-    func notNil() -> RACSignal {
-        return map { $0 != nil }
-    }
-}
-
-func sendDispatchCompleted(subscriber: RACSubscriber) {
-    // This is useful when we need to wait for the next invocation of the run loop,
-    // often because view controller hierarchies need to stabilise.
-    let signal = RACSignal.empty().deliverOn(RACScheduler.mainThreadScheduler())
-    signal.subscribe(subscriber)
-}
-
 // MARK: - Help transtion animation
 
 extension AppDelegate: UIViewControllerTransitioningDelegate {
