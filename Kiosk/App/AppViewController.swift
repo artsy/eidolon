@@ -11,14 +11,22 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
     @IBOutlet public var offlineBlockingView: UIView!
     @IBOutlet weak var registerToBidButton: ActionButton!
 
-    let reachability = ReachabilityManager()
-    public var reachabilitySignal: RACSignal?
-
-    let apiPinger = APIPingManager()
-    var apiPingerSignal: RACSignal?
+    let _reachability = ReachabilityManager()
+    let _apiPinger = APIPingManager()
     
+    public lazy var reachabilitySignal: RACSignal = { [weak self] in
+        self?._reachability.reachSignal ?? RACSignal.empty()
+    }()
+    public lazy var apiPingerSignal: RACSignal = { [weak self] in
+        self?._apiPinger.letOnlineSignal ?? RACSignal.empty()
+    }()
+
     var registerToBidCommand = { () -> RACCommand in
         appDelegate().registerToBidCommand()
+    }
+
+    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> AppViewController {
+        return storyboard.viewControllerWithID(.AppViewController) as AppViewController
     }
 
     dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0, state: "")
@@ -30,10 +38,7 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
 
         countdownManager.setFonts()
 
-        let reachableSignal:RACSignal = reachabilitySignal ?? reachability.reachSignal
-        let pingerSignal:RACSignal = apiPingerSignal ?? apiPinger.letOnlineSignal
-
-        RAC(offlineBlockingView, "hidden") <~ RACSignal.combineLatest([reachableSignal, pingerSignal]).and()
+        RAC(offlineBlockingView, "hidden") <~ RACSignal.combineLatest([reachabilitySignal, apiPingerSignal]).and()
 
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")

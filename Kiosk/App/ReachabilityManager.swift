@@ -3,7 +3,7 @@ import Reachability
 import ReactiveCocoa
 
 class ReachabilityManager: NSObject {
-    let reachSignal:RACSignal = RACReplaySubject(capacity: 1)
+    let reachSignal: RACSignal = RACReplaySubject(capacity: 1)
     private let reachability = Reachability.reachabilityForInternetConnection()
 
     override init() {

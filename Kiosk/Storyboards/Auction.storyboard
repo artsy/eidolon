@@ -90,7 +90,7 @@
         <!--App View Controller-->
         <scene sceneID="JwR-1f-phG">
             <objects>
-                <viewController id="KCM-cT-BEX" customClass="AppViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AppViewController" id="KCM-cT-BEX" customClass="AppViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="t8P-M5-wvq"/>
                         <viewControllerLayoutGuide type="bottom" id="GPr-5c-DY0"/>

@@ -24,6 +24,7 @@ public enum SegueIdentifier : String {
 }
 
 public enum ViewControllerStoryboardIdentifier : String {
+    case AppViewController = "AppViewController"
     case AuctionListings = "AuctionListings"
     case CardTester = "Card Tester"
     case ConfirmYourBid = "Confirm Your Bid"
