@@ -38,6 +38,10 @@ public class HelpViewController: UIViewController {
         appDelegate().showConditionsOfSaleCommand()
     }
     
+    public lazy var hasBuyersPremiumSignal: RACSignal = {
+        RACObserve(appDelegate().appViewController, "sale.buyersPremium").notNil()
+    }()
+    
     class var width: Float {
         get {
             return 415.0
@@ -117,9 +121,9 @@ private extension HelpViewController {
         stackView.addSubview(conditionsButton, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         stackView.addSubview(privacyButton, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
         
-        RACObserve(appDelegate().appViewController, "sale").subscribeNext { [weak self] in
-            let sale = $0 as Sale
-            if let _ = sale.buyersPremium {
+        hasBuyersPremiumSignal.subscribeNext { [weak self] in
+            let hasBuyersPremium = $0 as Bool
+            if hasBuyersPremium {
                 self?.stackView.addSubview(self!.buyersPremiumButton, withTopMargin: "\(self!.inbetweenMargin)", sideMargin: "\(self!.sideMargin)")
             } else {
                 self?.stackView.removeSubview(self!.buyersPremiumButton)

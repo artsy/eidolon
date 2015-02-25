@@ -11,7 +11,7 @@ public class Sale: JSONAble {
     public dynamic var artworkCount: Int
     public dynamic let auctionState: String
 
-    public var buyersPremium: BuyersPremium?
+    public dynamic var buyersPremium: BuyersPremium?
 
     public init(id: String, name: String, isAuction: Bool, startDate: NSDate, endDate: NSDate, artworkCount: Int, state: String) {
         self.id = id

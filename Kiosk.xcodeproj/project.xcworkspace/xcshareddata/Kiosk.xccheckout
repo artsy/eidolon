@@ -11,17 +11,17 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>362140352D1F3E008D207F94C7725A404E39F65C</key>
-		<string>github.com:artsy/eidolon.git</string>
+		<string>https://github.com/artsy/eidolon.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Kiosk/Kiosk.xcodeproj</string>
+	<string>Kiosk.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>362140352D1F3E008D207F94C7725A404E39F65C</key>
-		<string>../../..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:artsy/eidolon.git</string>
+	<string>https://github.com/artsy/eidolon.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
