@@ -16,14 +16,17 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
 
     let apiPinger = APIPingManager()
     var apiPingerSignal: RACSignal?
-
+    
+    var registerToBidCommand = { () -> RACCommand in
+        appDelegate().registerToBidCommand()
+    }
 
     dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0, state: "")
 
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        registerToBidButton.rac_command = appDelegate().registerToBidCommand()
+        registerToBidButton.rac_command = registerToBidCommand()
 
         countdownManager.setFonts()
 

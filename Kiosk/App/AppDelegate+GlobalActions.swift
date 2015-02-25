@@ -117,6 +117,10 @@ private extension AppDelegate {
 
     // MARK: - Signals that do things
 
+    func ツ() -> RACSignal{
+        return hideAllTheThingsSignal()
+    }
+
     func hideAllTheThingsSignal() -> RACSignal {
         return RACSignal.empty().then {
             self.closeFulfillmentViewControllerSignal()

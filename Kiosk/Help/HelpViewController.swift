@@ -5,7 +5,7 @@ import Artsy_UIButtons
 import Swift_RAC_Macros
 import ReactiveCocoa
 
-class HelpViewController: UIViewController {
+public class HelpViewController: UIViewController {
     var positionConstraints: NSArray?
     
     private let stackView = ORTagBasedAutoStackView()
@@ -18,13 +18,33 @@ class HelpViewController: UIViewController {
     private let headerMargin: Float = 25.0
     private let inbetweenMargin: Float = 10.0
     
+    var showBuyersPremiumCommand = { () -> RACCommand in
+        appDelegate().showBuyersPremiumCommand()
+    }
+    
+    var registerToBidCommand = { (enabledSignal: RACSignal) -> RACCommand in
+        appDelegate().registerToBidCommand(enabledSignal: enabledSignal)
+    }
+    
+    var requestBidderDetailsCommand = { (enabledSignal: RACSignal) -> RACCommand in
+        appDelegate().requestBidderDetailsCommand(enabledSignal: enabledSignal)
+    }
+    
+    var showPrivacyPolicyCommand = { () -> RACCommand in
+        appDelegate().showPrivacyPolicyCommand()
+    }
+    
+    var showConditionsOfSaleCommand = { () -> RACCommand in
+        appDelegate().showConditionsOfSaleCommand()
+    }
+    
     class var width: Float {
         get {
             return 415.0
         }
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         // Configure view
@@ -63,7 +83,7 @@ private extension HelpViewController {
         bidExplainLabel.makeSubstringsBold(["mobile number", "bidder number", "PIN"])
         
         let registerButton = blackButton(.RegisterButton, title: "Register")
-        registerButton.rac_command = appDelegate().registerToBidCommand(enabledSignal: reachabilityManager.reachSignal)
+        registerButton.rac_command = registerToBidCommand(reachabilityManager.reachSignal)
         
         let bidderDetailsLabel = titleLabel(.BidderDetailsLabel, title: "What Are Bidder Details?")
         
@@ -71,16 +91,16 @@ private extension HelpViewController {
         bidderDetailsExplainLabel.makeSubstringsBold(["bidder number", "PIN"])
         
         let sendDetailsButton = blackButton(.BidderDetailsButton, title: "Send me my details")
-        sendDetailsButton.rac_command = appDelegate().requestBidderDetailsCommand(enabledSignal: reachabilityManager.reachSignal)
+        sendDetailsButton.rac_command = requestBidderDetailsCommand(reachabilityManager.reachSignal)
         
         let conditionsButton = serifButton(.ConditionsOfSaleButton, title: "Conditions of Sale")
-        conditionsButton.rac_command = appDelegate().showConditionsOfSaleCommand()
+        conditionsButton.rac_command = showConditionsOfSaleCommand()
         
         buyersPremiumButton = serifButton(.BuyersPremiumButton, title: "Buyers Premium")
-        buyersPremiumButton.rac_command = appDelegate().showBuyersPremiumCommand()
+        buyersPremiumButton.rac_command = showBuyersPremiumCommand()
         
         let privacyButton = serifButton(.PrivacyPolicyButton, title: "Privacy Policy")
-        privacyButton.rac_command = appDelegate().showPrivacyPolicyCommand()
+        privacyButton.rac_command = showPrivacyPolicyCommand()
         
         // Add subviews
         view.addSubview(stackView)

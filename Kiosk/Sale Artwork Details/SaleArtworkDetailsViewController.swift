@@ -10,6 +10,10 @@ public class SaleArtworkDetailsViewController: UIViewController {
     public var allowAnimations = true
     public var auctionID = AppSetup.sharedState.auctionID
     public var saleArtwork: SaleArtwork!
+    
+    public var showBuyersPremiumCommand = { () -> RACCommand in
+        appDelegate().showBuyersPremiumCommand()
+    }
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> SaleArtworkDetailsViewController {
         return storyboard.viewControllerWithID(.SaleArtworkDetail) as SaleArtworkDetailsViewController
@@ -199,7 +203,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
             buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
             buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
 
-            buyersPremiumButton.rac_command = appDelegate().showBuyersPremiumCommand()
+            buyersPremiumButton.rac_command = showBuyersPremiumCommand()
 
             buyersPremiumView.addSubview(buyersPremiumLabel)
             buyersPremiumView.addSubview(buyersPremiumButton)

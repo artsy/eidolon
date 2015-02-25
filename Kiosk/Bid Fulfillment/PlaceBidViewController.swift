@@ -31,6 +31,18 @@ public class PlaceBidViewController: UIViewController {
     lazy public var clearSignal: RACSignal!  = self.keypadContainer.keypad?.rightSignal
     lazy public var deleteSignal: RACSignal! = self.keypadContainer.keypad?.leftSignal
 
+    public var showBuyersPremiumCommand = { () -> RACCommand in
+        appDelegate().showBuyersPremiumCommand()
+    }
+    
+    var showPrivacyPolicyCommand = { () -> RACCommand in
+        appDelegate().showPrivacyPolicyCommand()
+    }
+    
+    var showConditionsOfSaleCommand = { () -> RACCommand in
+        appDelegate().showConditionsOfSaleCommand()
+    }
+    
     public var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
@@ -47,8 +59,8 @@ public class PlaceBidViewController: UIViewController {
         currentBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
         yourBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
 
-        conditionsOfSaleButton.rac_command = appDelegate().showConditionsOfSaleCommand()
-        privacyPolictyButton.rac_command = appDelegate().showPrivacyPolicyCommand()
+        conditionsOfSaleButton.rac_command = showConditionsOfSaleCommand()
+        privacyPolictyButton.rac_command = showPrivacyPolicyCommand()
 
         let keypad = self.keypadContainer!.keypad!
         let bidDollarsSignal = RACObserve(self, "bidDollars")
@@ -133,7 +145,7 @@ public class PlaceBidViewController: UIViewController {
                     buyersPremiumButton.titleLabel?.font = buyersPremiumLabel.font
                     buyersPremiumButton.setTitle("buyers premium", forState: .Normal)
                     buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
-                    buyersPremiumButton.rac_command = appDelegate().showBuyersPremiumCommand()
+                    buyersPremiumButton.rac_command = showBuyersPremiumCommand()
 
                     buyersPremiumView.addSubview(buyersPremiumLabel)
                     buyersPremiumView.addSubview(buyersPremiumButton)
