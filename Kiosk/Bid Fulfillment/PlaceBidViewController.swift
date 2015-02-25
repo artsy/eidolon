@@ -129,12 +129,9 @@ public class PlaceBidViewController: UIViewController {
                     buyersPremiumLabel.text = "This work has a "
                     buyersPremiumLabel.textColor = UIColor.artsyHeavyGrey()
 
-                    let buyersPremiumButton = ARButton()
-                    let title = "buyers premium"
-                    let attributes: [String: AnyObject] = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue, NSFontAttributeName: buyersPremiumLabel.font ];
-                    let attributedTitle = NSAttributedString(string: title, attributes: attributes)
-                    buyersPremiumButton.setTitle(title, forState: .Normal)
-                    buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
+                    let buyersPremiumButton = ARUnderlineButton()
+                    buyersPremiumButton.titleLabel?.font = buyersPremiumLabel.font
+                    buyersPremiumButton.setTitle("buyers premium", forState: .Normal)
                     buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
                     buyersPremiumButton.rac_command = appDelegate().showBuyersPremiumCommand()
 
