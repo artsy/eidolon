@@ -44,7 +44,12 @@ extension UIAlertController {
     
     class func failedBidderDetailsAlertController() -> UIAlertController {
         let alertController = self(title: "Incorrect Email", message: "Email was not recognized. You may not be registered to bid yet.", preferredStyle: .Alert)
-        alertController.addAction(RACAlertAction(title: "OK", style: .Default))
+        alertController.addAction(RACAlertAction(title: "Cancel", style: .Cancel))
+        
+        let retryAction = RACAlertAction(title: "Retry", style: .Default)
+        retryAction.rac_command = appDelegate().requestBidderDetailsCommand()
+        
+        alertController.addAction(retryAction)
         
         return alertController
     }
