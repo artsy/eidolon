@@ -61,6 +61,7 @@ pod 'XNGMarkdownParser'
 pod 'SwiftyJSON'
 pod 'Alamofire'
 pod 'ReactiveCocoa', '3.0.0-alpha.1'
+pod 'RACAlertAction'
 pod 'Moya/Reactive'
 pod 'Swift-RAC-Macros'
 

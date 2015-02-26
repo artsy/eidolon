@@ -53,6 +53,8 @@ PODS:
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
   - Quick (0.2.2)
+  - RACAlertAction (0.0.2):
+    - ReactiveCocoa
   - Reachability (3.1.1)
   - ReactiveCocoa (3.0.0-alpha.1):
     - LlamaKit (= 0.1.1)
@@ -100,6 +102,7 @@ DEPENDENCIES:
   - Nimble-Snapshots
   - ORStackView
   - Quick
+  - RACAlertAction
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
   - ReactiveCocoa (= 3.0.0-alpha.1)
   - SDWebImage (~> 3.7)
@@ -173,6 +176,7 @@ SPEC CHECKSUMS:
   NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
   ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
   Quick: 7b89ff625e72ef931c2a9ef2f25ac3a9d2457763
+  RACAlertAction: de99b2092590a7364b70315b15d967c74e000d6a
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
   ReactiveCocoa: 3b5e351bb3ab233d71f0329f36a7400af30d9783
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d

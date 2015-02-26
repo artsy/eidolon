@@ -90,6 +90,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
         self.presentViewController(alertController, animated: true) {}
 
         XAppRequest(endpoint, provider: Provider.sharedProvider, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { (_) -> Void in
+            // Necessary to subscribe to the actual signal. This should be in a RACCommand of the button, instead. 
             println("sent")
         }
     }
