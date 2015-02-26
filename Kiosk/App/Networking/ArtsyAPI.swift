@@ -13,8 +13,10 @@ public enum ArtsyAPI {
     
     case MyCreditCards
     case CreatePINForBidder(bidderID: String)
-    case FindBidderRegistration(auctionID: String, phone: String)
     case RegisterToBid(auctionID: String)
+
+    
+    case FindBidderRegistration(auctionID: String, phone: String)
 
     case Artwork(id: String)
     case Artist(id: String)
