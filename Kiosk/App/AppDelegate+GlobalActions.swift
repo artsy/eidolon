@@ -1,6 +1,8 @@
 import UIKit
 import QuartzCore
 import ARAnalytics
+import ReactiveCocoa
+import Swift_RAC_Macros
 
 func appDelegate() -> AppDelegate {
     return UIApplication.sharedApplication().delegate as AppDelegate
@@ -10,187 +12,244 @@ public extension AppDelegate {
 
     // Registration
 
-    func showRegistration() {
-        hideHelp {
-            // Need to give it a second to ensure view heirarchy is good.
-            dispatch_async(dispatch_get_main_queue()) {
-
-                let appVC = self.appViewController
-                if let fulfillment = appVC?.presentedViewController as? FulfillmentContainerViewController {
-                    fulfillment.closeFulfillmentModal() {
-                        return appVC!.registerToBidButtonWasPressed(self)
-                    }
-                } else {
-                    appVC?.registerToBidButtonWasPressed(self)
-                }
-            }
-        }
-    }
-
     var sale: Sale! {
         return appViewController!.sale
     }
 
-    internal var appViewController: AppViewController? {
+    internal var appViewController: AppViewController! {
         let nav = self.window.rootViewController?.findChildViewControllerOfType(UINavigationController) as? UINavigationController
         return nav?.delegate as? AppViewController
     }
 
-    // Condtions of Sale and Privacy Policy
-
-    func showConditionsOfSale() {
-        showWebControllerWithAddress("https://artsy.net/conditions-of-sale")
-    }
-    
-    func showPrivacyPolicy() {
-        showWebControllerWithAddress("https://artsy.net/privacy")
-    }
-
-    func showBuyersPremium() {
-        let saleID = sale.id
-        showWebControllerWithAddress("https://m.artsy.net/auction/\(saleID)/buyers-premium")
-    }
-    
-    func showWebControllerWithAddress(address: String) {
-        let block = { () -> Void in
-            let webController = ModalWebViewController(url: NSURL(string: address)!)
-
-            let nav = UINavigationController(rootViewController: webController)
-            nav.modalPresentationStyle = .FormSheet
-            
-            ARAnalytics.event("Show Web View", withProperties: ["url" : address])
-            self.window.rootViewController?.presentViewController(nav, animated: true, completion: nil)
-
-            self.webViewController = nav
-        }
-
-        if helpIsVisisble {
-            hideHelp {
-                // Need to give it a second to ensure view heirarchy is good.
-                dispatch_async(dispatch_get_main_queue()) {
-                    block()
-                }
-            }
-        } else if fulfillmentViewControllerIsVisisble {
-            hideFulfillmentViewConroller {
-                // Need to give it a second to ensure view heirarchy is good.
-                dispatch_async(dispatch_get_main_queue()) {
-                    block()
-                }
-            }
-        } else {
-            block()
-        }
-    }
-
     // Help button and menu
-
-    typealias HelpCompletion = () -> ()
-
-    var helpIsVisisble: Bool {
-        return helpViewController != nil
-    }
-
-    var webViewControllerIsVisible: Bool {
-        return webViewController != nil
-    }
-
-    var fulfillmentViewControllerIsVisisble: Bool {
-        return appViewController?.presentedViewController != nil
-    }
-
-    func helpButtonPressed() {
-        if helpIsVisisble {
-            hideHelp()
-        } else {
-            showHelp()
-        }
-    }
-
-    func hideFulfillmentViewConroller(completion: (() -> ())? = nil) {
-        appViewController?.dismissViewControllerAnimated(true, completion: completion)
-    }
-
-    func hidewebViewController(completion: (() -> ())? = nil) {
-        webViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: completion)
-    }
 
     func setupHelpButton() {
         helpButton = MenuButton()
         helpButton.setTitle("Help", forState: .Normal)
-        helpButton.addTarget(self, action: "helpButtonPressed", forControlEvents: .TouchUpInside)
+        helpButton.rac_command = helpButtonCommand()
         window.addSubview(helpButton)
         helpButton.alignTop(nil, leading: nil, bottom: "-24", trailing: "-24", toView: window)
         window.layoutIfNeeded()
-    }
 
-    enum HelpButtonState {
-        case Help
-        case Close
-    }
+        RACObserve(self, "helpViewController").notNil().subscribeNext {
+            let isVisible = $0 as Bool
 
-    func setHelpButtonState(state: HelpButtonState) {
-        var image: UIImage? = nil
-        var text: String? = nil
+            var image: UIImage? = isVisible ?  UIImage(named: "xbtn_white")?.imageWithRenderingMode(.AlwaysOriginal) : nil
+            var text: String? = isVisible ? nil : "HELP"
 
-        switch state {
-        case .Help:
-            text = "HELP"
-        case .Close:
-            image = UIImage(named: "xbtn_white")?.imageWithRenderingMode(.AlwaysOriginal)
+            self.helpButton.setTitle(text, forState: .Normal)
+            self.helpButton.setImage(image, forState: .Normal)
+
+            let transition = CATransition()
+            transition.duration = AnimationDuration.Normal
+            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.type = kCATransitionFade
+            self.helpButton.layer.addAnimation(transition, forKey: "fade")
         }
-
-        helpButton.setTitle(text, forState: .Normal)
-        helpButton.setImage(image, forState: .Normal)
-
-        let transition = CATransition()
-        transition.duration = AnimationDuration.Normal
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        transition.type = kCATransitionFade
-        helpButton.layer.addAnimation(transition, forKey: "fade")
     }
 
     func setHelpButtonHidden(hidden: Bool) {
         helpButton.hidden = hidden
     }
+}
 
-    func showHelp(completion: HelpCompletion? = nil) {
-        let block = { () -> Void in
-            self.setHelpButtonState(.Close)
+// MARK: - ReactiveCocoa extensions
 
+extension AppDelegate {
+    // In this extension, I'm omitting [weak self] because the app delegate will outlive everyone.
+
+    func showBuyersPremiumCommand(enabledSignal: RACSignal? = nil) -> RACCommand {
+        return RACCommand(enabled: enabledSignal) { _ -> RACSignal! in
+            self.hideAllTheThingsSignal().then {
+                self.showWebControllerSignal("https://m.artsy.net/auction/\(self.sale.id)/buyers-premium")
+            }
+        }
+    }
+
+    func registerToBidCommand(enabledSignal: RACSignal? = nil) -> RACCommand {
+        return RACCommand(enabled: enabledSignal) { _ -> RACSignal! in
+            self.hideAllTheThingsSignal().then {
+                self.showRegistrationSignal()
+            }
+        }
+    }
+
+    func requestBidderDetailsCommand(enabledSignal: RACSignal? = nil) -> RACCommand {
+        return RACCommand(enabled: enabledSignal) { _ -> RACSignal! in
+            RACSignal.empty().then {
+                self.hideHelpSignal()
+            }.then {
+                return RACSignal.createSignal { _ -> RACDisposable! in
+                    let appVC = self.appViewController
+                    if let presentingVIewController = appVC?.presentedViewController ?? appVC {
+                        // TODO: This should be a signal and stuff
+                        presentingVIewController.promptForBidderDetailsRetrieval()
+                    }
+
+                    return nil
+                }
+            }
+        }
+    }
+
+    func helpButtonCommand() -> RACCommand {
+        return RACCommand() { _ -> RACSignal! in
+            RACSignal.`if`(self.helpIsVisisbleSignal.take(1), then: self.hideHelpSignal(), `else`: self.showHelpSignal())
+        }
+    }
+
+    func showPrivacyPolicyCommand() -> RACCommand {
+        return RACCommand() { _ -> RACSignal! in
+            self.hideAllTheThingsSignal().then { self.showWebControllerSignal("https://artsy.net/privacy") }
+        }
+    }
+
+    func showConditionsOfSaleCommand() -> RACCommand {
+        return RACCommand() { _ -> RACSignal! in
+            self.hideAllTheThingsSignal().then { self.showWebControllerSignal("https://artsy.net/conditions-of-sale") }
+        }
+    }
+}
+
+// MARK: - Private ReactiveCocoa Extension
+
+private extension AppDelegate {
+
+    // MARK: - Signals that do things
+
+    func ツ() -> RACSignal{
+        return hideAllTheThingsSignal()
+    }
+
+    func hideAllTheThingsSignal() -> RACSignal {
+        return RACSignal.empty().then {
+            self.closeFulfillmentViewControllerSignal()
+        }.then {
+            self.hideHelpSignal()
+        }
+    }
+
+    func showRegistrationSignal() -> RACSignal {
+        return RACSignal.createSignal { (subscriber) -> RACDisposable! in
+            ARAnalytics.event("Register To Bid Tapped")
+
+            let storyboard = UIStoryboard.fulfillment()
+            let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
+            containerController.allowAnimations = self.appViewController.allowAnimations
+
+            if let internalNav: FulfillmentNavigationController = containerController.internalNavigationController() {
+                let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as RegisterViewController
+                registerVC.placingBid = false
+                internalNav.auctionID = self.appViewController.auctionID
+                internalNav.viewControllers = [registerVC]
+            }
+
+            self.appViewController.presentViewController(containerController, animated: false) {
+                containerController.viewDidAppearAnimation(containerController.allowAnimations)
+
+                sendDispatchCompleted(subscriber)
+            }
+
+            return nil
+        }
+    }
+
+    func showHelpSignal() -> RACSignal {
+        return RACSignal.createSignal { (subscriber) -> RACDisposable! in
             let helpViewController = HelpViewController()
             helpViewController.modalPresentationStyle = .Custom
             helpViewController.transitioningDelegate = self
 
             self.window.rootViewController?.presentViewController(helpViewController, animated: true, completion: {
                 self.helpViewController = helpViewController
-                completion?()
+                sendDispatchCompleted(subscriber)
             })
-        }
 
-        if webViewControllerIsVisible {
-            hidewebViewController {
-                // Need to give it a second to ensure view heirarchy is good.
-                dispatch_async(dispatch_get_main_queue()) {
-                    block()
-                }
-            }
-        } else {
-            block()
+            return nil
         }
     }
 
-    func hideHelp(completion: HelpCompletion? = nil) {
-        setHelpButtonState(.Help)
+    // TODO: Correct animation?
+    func closeFulfillmentViewControllerSignal() -> RACSignal {
+        let closeSignal = RACSignal.createSignal { (subscriber) -> RACDisposable! in
+            (self.appViewController.presentedViewController as? FulfillmentContainerViewController)?.closeFulfillmentModal() {
+                sendDispatchCompleted(subscriber)
+            }
 
-        helpViewController?.presentingViewController?.dismissViewControllerAnimated(true) {
-            completion?()
-            return
+            return nil
         }
+
+        return RACSignal.`if`(fullfilmentVisibleSignal, then: closeSignal, `else`: RACSignal.empty())
+    }
+
+    func showWebControllerSignal(address: String) -> RACSignal {
+        return hideWebViewControllerSignal().then {
+            RACSignal.createSignal { (subscriber) -> RACDisposable! in
+                let webController = ModalWebViewController(url: NSURL(string: address)!)
+
+                let nav = UINavigationController(rootViewController: webController)
+                nav.modalPresentationStyle = .FormSheet
+
+                ARAnalytics.event("Show Web View", withProperties: ["url" : address])
+                self.window.rootViewController?.presentViewController(nav, animated: true) {
+                    sendDispatchCompleted(subscriber)
+                }
+
+                self.webViewController = nav
+
+                return nil
+            }
+        }
+    }
+
+    func hideHelpSignal() -> RACSignal {
+        return RACSignal.createSignal { (subscriber) -> RACDisposable! in
+            if let presentingViewController = self.helpViewController?.presentingViewController? {
+                presentingViewController.dismissViewControllerAnimated(true) {
+                    sendDispatchCompleted(subscriber)
+                }
+            } else {
+                subscriber.sendCompleted()
+            }
+
+
+            return nil
+        }
+    }
+
+    func hideWebViewControllerSignal() -> RACSignal {
+        return RACSignal.createSignal { (subscriber) -> RACDisposable! in
+            if let webViewController = self.webViewController {
+                webViewController.presentingViewController?.dismissViewControllerAnimated(true) { () -> Void in
+                    sendDispatchCompleted(subscriber)
+                }
+            } else {
+                subscriber.sendCompleted()
+            }
+
+            return nil
+        }
+    }
+
+    // MARK: - Computed property signals
+
+    var fullfilmentVisibleSignal: RACSignal {
+        return RACSignal.defer {
+            return RACSignal.createSignal { (subscriber) -> RACDisposable! in
+                subscriber.sendNext((self.appViewController.presentedViewController as? FulfillmentContainerViewController) != nil)
+                subscriber.sendCompleted()
+
+                return nil
+            }
+        }
+    }
+
+    var helpIsVisisbleSignal: RACSignal {
+        return RACObserve(self, "helpViewController").notNil()
     }
 }
 
-// Help transtion animation
+// MARK: - Help transtion animation
 
 extension AppDelegate: UIViewControllerTransitioningDelegate {
     public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

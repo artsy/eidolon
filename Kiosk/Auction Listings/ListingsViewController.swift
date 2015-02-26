@@ -234,19 +234,21 @@ public class ListingsViewController: UIViewController {
             }
         })
 
-        RAC(self, "sortedSaleArtworks") <~ artworkAndLayoutSignal.map { ($0 as RACTuple).first }.doNext({ [weak self] in
-            let sortedSaleArtworks = $0 as [SaleArtwork]
+        let sortedSaleArtworksSignal = artworkAndLayoutSignal.map { ($0 as RACTuple).first }
 
+        RAC(self, "sortedSaleArtworks") <~ sortedSaleArtworksSignal.doNext{ [weak self] _ -> Void in
             self?.collectionView.reloadData()
+            return
+        }
 
-            if countElements(sortedSaleArtworks as [SaleArtwork]) > 0 {
+        sortedSaleArtworksSignal.dispatchAsyncMainScheduler().subscribeNext { [weak self] in
+            let array = ($0 ?? []) as [SaleArtwork]
+
+            if countElements(array) > 0 {
                 // Need to dispatch, since the changes in the CV's model aren't imediate
-                dispatch_async(dispatch_get_main_queue()) {
-                    self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
-                    return
-                }
+                self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
             }
-        })
+        }
 
         artworkAndLayoutSignal.map { ($0 as RACTuple).second }.subscribeNext { [weak self] (layout) -> Void in
             // Need to explicitly call animated: false and reload to avoid animation
@@ -327,7 +329,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
             internalNav.bidDetails.saleArtwork = saleArtwork
         }
 
-        appDelegate().appViewController?.presentViewController(containerController, animated: false, completion: { () -> Void in
+        appDelegate().appViewController.presentViewController(containerController, animated: false, completion: { () -> Void in
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         })
     }

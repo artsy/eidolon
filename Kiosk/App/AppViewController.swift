@@ -9,25 +9,36 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
 
     @IBOutlet var countdownManager: ListingsCountdownManager!
     @IBOutlet public var offlineBlockingView: UIView!
+    @IBOutlet weak var registerToBidButton: ActionButton!
 
-    let reachability = ReachabilityManager()
-    public var reachabilitySignal: RACSignal?
+    let _reachability = ReachabilityManager()
+    let _apiPinger = APIPingManager()
+    
+    public lazy var reachabilitySignal: RACSignal = { [weak self] in
+        self?._reachability.reachSignal ?? RACSignal.empty()
+    }()
+    public lazy var apiPingerSignal: RACSignal = { [weak self] in
+        self?._apiPinger.letOnlineSignal ?? RACSignal.empty()
+    }()
 
-    let apiPinger = APIPingManager()
-    var apiPingerSignal: RACSignal?
+    var registerToBidCommand = { () -> RACCommand in
+        appDelegate().registerToBidCommand()
+    }
 
+    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> AppViewController {
+        return storyboard.viewControllerWithID(.AppViewController) as AppViewController
+    }
 
     dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0, state: "")
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        registerToBidButton.rac_command = registerToBidCommand()
+
         countdownManager.setFonts()
 
-        let reachableSignal:RACSignal = reachabilitySignal ?? reachability.reachSignal
-        let pingerSignal:RACSignal = apiPingerSignal ?? apiPinger.letOnlineSignal
-
-        RAC(offlineBlockingView, "hidden") <~ RACSignal.combineLatest([reachableSignal, pingerSignal]).and()
+        RAC(offlineBlockingView, "hidden") <~ RACSignal.combineLatest([reachabilitySignal, apiPingerSignal]).and()
 
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
@@ -39,35 +50,14 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
         }
     }
 
-    @IBOutlet weak var registerToBidButton: ActionButton!
     public func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-        let show = (viewController as? SaleArtworkZoomViewController != nil)
-        countdownManager.setLabelsHiddenIfSynced(!show)
-        registerToBidButton.hidden = show
-
+        let hide = (viewController as? SaleArtworkZoomViewController != nil)
+        countdownManager.setLabelsHiddenIfSynced(hide)
+        registerToBidButton.hidden = hide
     }
 }
 
 extension AppViewController {
-    
-    @IBAction func registerToBidButtonWasPressed(sender: AnyObject) {
-        ARAnalytics.event("Register To Bid Tapped")
-
-        let storyboard = UIStoryboard.fulfillment()
-        let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
-        containerController.allowAnimations = allowAnimations
-
-        if let internalNav: FulfillmentNavigationController = containerController.internalNavigationController() {
-            let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as RegisterViewController
-            registerVC.placingBid = false
-            internalNav.auctionID = auctionID
-            internalNav.viewControllers = [registerVC]
-        }
-
-        presentViewController(containerController, animated: false) {
-            containerController.viewDidAppearAnimation(containerController.allowAnimations)
-        }
-    }
 
     @IBAction func longPressForAdmin(sender: UIGestureRecognizer) {
         if sender.state != .Began {

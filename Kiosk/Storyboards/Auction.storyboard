@@ -90,7 +90,7 @@
         <!--App View Controller-->
         <scene sceneID="JwR-1f-phG">
             <objects>
-                <viewController id="KCM-cT-BEX" customClass="AppViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AppViewController" id="KCM-cT-BEX" customClass="AppViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="t8P-M5-wvq"/>
                         <viewControllerLayoutGuide type="bottom" id="GPr-5c-DY0"/>
@@ -115,9 +115,6 @@
                                 <state key="disabled">
                                     <color key="titleColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="registerToBidButtonWasPressed:" destination="KCM-cT-BEX" eventType="touchUpInside" id="Avz-KA-EBN"/>
-                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V25-VZ-0aj">
                                 <rect key="frame" x="352" y="-9" width="320" height="107"/>

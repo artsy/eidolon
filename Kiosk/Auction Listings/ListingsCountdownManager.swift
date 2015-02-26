@@ -15,7 +15,7 @@ class ListingsCountdownManager: NSObject {
         super.awakeFromNib()
         formatter.minimumIntegerDigits = 2
 
-        time.syncSignal().deliverOn(RACScheduler.mainThreadScheduler()).take(1).subscribeNext { [weak self] (_) in
+        time.syncSignal().dispatchAsyncMainScheduler().take(1).subscribeNext { [weak self] (_) in
             self?.startTimer()
             self?.setLabelsHidden(false)
         }
