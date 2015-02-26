@@ -6,10 +6,10 @@ import SVProgressHUD
 public extension UIViewController {
     func promptForBidderDetailsRetrievalSignal() -> RACSignal {
         return RACSignal.createSignal { (subscriber) -> RACDisposable! in
-            let (alertControler, command) = UIAlertController.emailPromptAlertController()
+            let (alertController, command) = UIAlertController.emailPromptAlertController()
             
             subscriber.sendNext(command.executionSignals.switchToLatest())
-            self.presentViewController(alertControler, animated: true) { }
+            self.presentViewController(alertController, animated: true) { }
             
             return nil
         }.map { (emailSignal) -> AnyObject! in
