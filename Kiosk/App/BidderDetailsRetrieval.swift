@@ -17,21 +17,36 @@ public extension UIViewController {
     }
     
     func retrieveBidderDetailsSignal(emailSignal: RACSignal) -> RACSignal {
-        return emailSignal.doNext { _ -> Void in
+        return emailSignal.doNext { (thing) -> Void in
             // TODO: Show spinner for user
+            println("Got1: \(thing)")
         }.map { (email) -> AnyObject! in
             let endpoint: ArtsyAPI = ArtsyAPI.BidderDetailsNotification(auctionID: appDelegate().appViewController.sale.id, identifier: (email as String))
             
             return XAppRequest(endpoint, provider: Provider.sharedProvider, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes()
-        }.doNext { _ -> Void in
-            // TODO: Show success
+        }.switchToLatest().doCompleted { _ -> Void in
+            self.presentViewController(UIAlertController.successfulBidderDetailsAlertController(), animated: true, completion: nil)
         }.doError { _ -> Void in
-            // TODO: Show error
+            self.presentViewController(UIAlertController.failedBidderDetailsAlertController(), animated: true, completion: nil)
         }
     }
 }
 
 extension UIAlertController {
+    class func successfulBidderDetailsAlertController() -> UIAlertController {
+        let alertController = self(title: "Your details have been sent", message: nil, preferredStyle: .Alert)
+        alertController.addAction(RACAlertAction(title: "OK", style: .Default))
+        
+        return alertController
+    }
+    
+    class func failedBidderDetailsAlertController() -> UIAlertController {
+        let alertController = self(title: "Incorrect Email", message: "Enter your email address registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
+        alertController.addAction(RACAlertAction(title: "OK", style: .Default))
+        
+        return alertController
+    }
+    
     class func emailPromptAlertController() -> (UIAlertController, RACCommand) {
         let alertController = self(title: "Send Bidder Details", message: "Enter your email address registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
 
