@@ -47,7 +47,7 @@ extension UIAlertController {
         alertController.addAction(RACAlertAction(title: "Cancel", style: .Cancel))
         
         let retryAction = RACAlertAction(title: "Retry", style: .Default)
-        retryAction.rac_command = appDelegate().requestBidderDetailsCommand()
+        retryAction.command = appDelegate().requestBidderDetailsCommand()
         
         alertController.addAction(retryAction)
         
@@ -58,7 +58,7 @@ extension UIAlertController {
         let alertController = self(title: "Send Bidder Details", message: "Enter your email address registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
 
         let ok = RACAlertAction(title: "OK", style: .Default)
-        ok.rac_command = RACCommand { (_) -> RACSignal! in
+        ok.command = RACCommand { (_) -> RACSignal! in
             
             return RACSignal.createSignal { (subscriber) -> RACDisposable! in
                 let text = (alertController.textFields?.first as? UITextField)?.text ?? ""
@@ -72,6 +72,6 @@ extension UIAlertController {
         alertController.addAction(ok)
         alertController.addAction(cancel)
 
-        return (alertController, ok.rac_command)
+        return (alertController, ok.command)
     }
 }
