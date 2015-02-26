@@ -41,6 +41,7 @@ pod 'FLKAutoLayout'
 pod 'ISO8601DateFormatter', '0.7'
 pod 'ARCollectionViewMasonryLayout', '~> 2.0.0'
 pod 'SDWebImage', '~> 3.7'
+pod 'SVProgressHUD', :git => 'https://github.com/ashfurrow/SVProgressHUD.git'
 
 pod 'HockeySDK'
 pod 'ARAnalytics/Mixpanel'

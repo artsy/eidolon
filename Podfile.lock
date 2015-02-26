@@ -70,6 +70,7 @@ PODS:
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
+  - SVProgressHUD (1.1.2)
   - Swift-RAC-Macros (0.2.1):
     - ReactiveCocoa (= 3.0.0-alpha.1)
   - SwiftyJSON (2.1.3)
@@ -106,6 +107,7 @@ DEPENDENCIES:
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
   - ReactiveCocoa (= 3.0.0-alpha.1)
   - SDWebImage (~> 3.7)
+  - SVProgressHUD (from `https://github.com/ashfurrow/SVProgressHUD.git`)
   - Swift-RAC-Macros
   - SwiftyJSON
   - UIImageViewAligned (from `https://github.com/ashfurrow/UIImageViewAligned.git`)
@@ -125,6 +127,8 @@ EXTERNAL SOURCES:
   Reachability:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
+  SVProgressHUD:
+    :git: https://github.com/ashfurrow/SVProgressHUD.git
   UIImageViewAligned:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
@@ -144,6 +148,9 @@ CHECKOUT OPTIONS:
   Reachability:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
     :git: https://github.com/ashfurrow/Reachability.git
+  SVProgressHUD:
+    :commit: 72adf891646bd74a9b7478e677b8c7c1b5187443
+    :git: https://github.com/ashfurrow/SVProgressHUD.git
   UIImageViewAligned:
     :commit: 6f8cb5669b219ef08c90c2e2e5a082cadfe7565b
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
@@ -180,6 +187,7 @@ SPEC CHECKSUMS:
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
   ReactiveCocoa: 3b5e351bb3ab233d71f0329f36a7400af30d9783
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
+  SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
   Swift-RAC-Macros: 9fdd025f20cb97e8d6426bdd8eb26bbcbd3e0b21
   SwiftyJSON: 48be7490a3989a58a3f511cd54167f0a2b466e76
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee

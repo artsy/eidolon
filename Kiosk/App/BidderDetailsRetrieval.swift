@@ -1,6 +1,7 @@
 import UIKit
 import ReactiveCocoa
 import RACAlertAction
+import SVProgressHUD
 
 public extension UIViewController {
     func promptForBidderDetailsRetrievalSignal() -> RACSignal {
@@ -17,16 +18,17 @@ public extension UIViewController {
     }
     
     func retrieveBidderDetailsSignal(emailSignal: RACSignal) -> RACSignal {
-        return emailSignal.doNext { (thing) -> Void in
-            // TODO: Show spinner for user
-            println("Got1: \(thing)")
+        return emailSignal.doNext { _ -> Void in
+            SVProgressHUD.show()
         }.map { (email) -> AnyObject! in
             let endpoint: ArtsyAPI = ArtsyAPI.BidderDetailsNotification(auctionID: appDelegate().appViewController.sale.id, identifier: (email as String))
             
             return XAppRequest(endpoint, provider: Provider.sharedProvider, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes()
-        }.switchToLatest().doCompleted { _ -> Void in
+        }.switchToLatest().throttle(1).doNext { _ -> Void in
+            SVProgressHUD.dismiss()
             self.presentViewController(UIAlertController.successfulBidderDetailsAlertController(), animated: true, completion: nil)
         }.doError { _ -> Void in
+            SVProgressHUD.dismiss()
             self.presentViewController(UIAlertController.failedBidderDetailsAlertController(), animated: true, completion: nil)
         }
     }
@@ -41,7 +43,7 @@ extension UIAlertController {
     }
     
     class func failedBidderDetailsAlertController() -> UIAlertController {
-        let alertController = self(title: "Incorrect Email", message: "Enter your email address registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
+        let alertController = self(title: "Incorrect Email", message: "Email was not recognized. You may not be registered to bid yet.", preferredStyle: .Alert)
         alertController.addAction(RACAlertAction(title: "OK", style: .Default))
         
         return alertController
