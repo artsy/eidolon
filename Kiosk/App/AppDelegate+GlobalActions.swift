@@ -79,15 +79,7 @@ extension AppDelegate {
             RACSignal.empty().then {
                 self.hideHelpSignal()
             }.then {
-                return RACSignal.createSignal { _ -> RACDisposable! in
-                    let appVC = self.appViewController
-                    if let presentingVIewController = appVC?.presentedViewController ?? appVC {
-                        // TODO: This should be a signal and stuff
-                        presentingVIewController.promptForBidderDetailsRetrieval()
-                    }
-
-                    return nil
-                }
+                self.showBidderDetailsRetrievalSignal()
             }
         }
     }
@@ -127,6 +119,12 @@ private extension AppDelegate {
         }.then {
             self.hideHelpSignal()
         }
+    }
+    
+    func showBidderDetailsRetrievalSignal() -> RACSignal {
+        let appVC = self.appViewController
+        let presentingViewController: UIViewController = (appVC.presentedViewController ?? appVC)
+        return presentingViewController.promptForBidderDetailsRetrievalSignal()
     }
 
     func showRegistrationSignal() -> RACSignal {

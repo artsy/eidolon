@@ -80,7 +80,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
     @IBAction func forgotPINTapped(sender: AnyObject) {
         let auctionID = fulfillmentNav().auctionID
         let number = fulfillmentNav().bidDetails.newUser.phoneNumber ?? ""
-        let endpoint: ArtsyAPI = ArtsyAPI.LostPINNotification(auctionID: auctionID, number: number)
+        let endpoint: ArtsyAPI = ArtsyAPI.BidderDetailsNotification(auctionID: auctionID, identifier: number)
 
         let alertController = UIAlertController(title: "Forgot PIN", message: "We have sent your bidder details to your device.", preferredStyle: .Alert)
 
@@ -90,6 +90,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
         self.presentViewController(alertController, animated: true) {}
 
         XAppRequest(endpoint, provider: Provider.sharedProvider, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { (_) -> Void in
+            // Necessary to subscribe to the actual signal. This should be in a RACCommand of the button, instead. 
             println("sent")
         }
     }

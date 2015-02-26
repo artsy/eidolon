@@ -1,35 +1,77 @@
 import UIKit
+import ReactiveCocoa
+import RACAlertAction
+import SVProgressHUD
 
-extension UIViewController {
-    func promptForBidderDetailsRetrieval() {
-        let alertController = UIAlertController.emailPromptAlertViewController() { (email: String) -> () in
-            self.receivedEmail(email)
-        }
-        presentViewController(alertController, animated: true, completion: nil)
+public extension UIViewController {
+    func promptForBidderDetailsRetrievalSignal() -> RACSignal {
+        return RACSignal.createSignal { (subscriber) -> RACDisposable! in
+            let (alertController, command) = UIAlertController.emailPromptAlertController()
+            
+            subscriber.sendNext(command.executionSignals.switchToLatest())
+            self.presentViewController(alertController, animated: true) { }
+            
+            return nil
+        }.map { (emailSignal) -> AnyObject! in
+            self.retrieveBidderDetailsSignal(emailSignal as RACSignal)
+        }.switchToLatest()
     }
-
-    func receivedEmail(email: String) {
-        // TODO: API call. 
+    
+    func retrieveBidderDetailsSignal(emailSignal: RACSignal) -> RACSignal {
+        return emailSignal.doNext { _ -> Void in
+            SVProgressHUD.show()
+        }.map { (email) -> AnyObject! in
+            let endpoint: ArtsyAPI = ArtsyAPI.BidderDetailsNotification(auctionID: appDelegate().appViewController.sale.id, identifier: (email as String))
+            
+            return XAppRequest(endpoint, provider: Provider.sharedProvider, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes()
+        }.switchToLatest().throttle(1).doNext { _ -> Void in
+            SVProgressHUD.dismiss()
+            self.presentViewController(UIAlertController.successfulBidderDetailsAlertController(), animated: true, completion: nil)
+        }.doError { _ -> Void in
+            SVProgressHUD.dismiss()
+            self.presentViewController(UIAlertController.failedBidderDetailsAlertController(), animated: true, completion: nil)
+        }
     }
 }
 
 extension UIAlertController {
-    class func emailPromptAlertViewController(callback: (String) -> ()) -> Self {
+    class func successfulBidderDetailsAlertController() -> UIAlertController {
+        let alertController = self(title: "Your details have been sent", message: nil, preferredStyle: .Alert)
+        alertController.addAction(RACAlertAction(title: "OK", style: .Default))
+        
+        return alertController
+    }
+    
+    class func failedBidderDetailsAlertController() -> UIAlertController {
+        let alertController = self(title: "Incorrect Email", message: "Email was not recognized. You may not be registered to bid yet.", preferredStyle: .Alert)
+        alertController.addAction(RACAlertAction(title: "Cancel", style: .Cancel))
+        
+        let retryAction = RACAlertAction(title: "Retry", style: .Default)
+        retryAction.command = appDelegate().requestBidderDetailsCommand()
+        
+        alertController.addAction(retryAction)
+        
+        return alertController
+    }
+    
+    class func emailPromptAlertController() -> (UIAlertController, RACCommand) {
         let alertController = self(title: "Send Bidder Details", message: "Enter your email address registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
 
-        var inputTextField: UITextField!
-
-        let ok = UIAlertAction(title: "OK", style: .Default) { (action) -> Void in
-            callback(inputTextField.text)
+        let ok = RACAlertAction(title: "OK", style: .Default)
+        ok.command = RACCommand { (_) -> RACSignal! in
+            
+            return RACSignal.createSignal { (subscriber) -> RACDisposable! in
+                let text = (alertController.textFields?.first as? UITextField)?.text ?? ""
+                subscriber.sendNext(text)
+                return nil
+            }
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+        let cancel = RACAlertAction(title: "Cancel", style: .Cancel)
 
-        alertController.addTextFieldWithConfigurationHandler { (textField) -> Void in
-            inputTextField = textField
-        }
+        alertController.addTextFieldWithConfigurationHandler(nil)
         alertController.addAction(ok)
         alertController.addAction(cancel)
 
-        return alertController
+        return (alertController, ok.command)
     }
 }
