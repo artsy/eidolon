@@ -54,7 +54,7 @@ public class ConfirmYourBidViewController: UIViewController {
                     return RACSignal.empty()
                 }
 
-                let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: nav.auctionID!, phone: self!.number)
+                let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: nav.auctionID!, phone: String(self!.number))
                 return XAppRequest(endpoint, provider:self!.provider, parameters:endpoint.defaultParameters).filterStatusCode(400).doError { (error) -> Void in
 
                     // Due to AlamoFire restrictions we can't stop HTTP redirects
