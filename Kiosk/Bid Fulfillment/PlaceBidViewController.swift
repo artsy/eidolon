@@ -27,10 +27,6 @@ public class PlaceBidViewController: UIViewController {
     @IBOutlet weak var conditionsOfSaleButton: UIButton!
     @IBOutlet weak var privacyPolictyButton: UIButton!
 
-    lazy public var keypadSignal: RACSignal! = self.keypadContainer.keypad?.keypadSignal
-    lazy public var clearSignal: RACSignal!  = self.keypadContainer.keypad?.rightSignal
-    lazy public var deleteSignal: RACSignal! = self.keypadContainer.keypad?.leftSignal
-
     public var showBuyersPremiumCommand = { () -> RACCommand in
         appDelegate().showBuyersPremiumCommand()
     }
@@ -62,21 +58,13 @@ public class PlaceBidViewController: UIViewController {
         conditionsOfSaleButton.rac_command = showConditionsOfSaleCommand()
         privacyPolictyButton.rac_command = showPrivacyPolicyCommand()
 
-        let keypad = self.keypadContainer!.keypad!
+        RAC(self, "bidDollars") <~ keypadContainer.valueSignal
         let bidDollarsSignal = RACObserve(self, "bidDollars")
         let bidIsZeroSignal = bidDollarsSignal.map { return ($0 as Int == 0) }
-
-        for button in [keypad.rightButton, keypad.leftButton] {
-            RAC(button, "enabled") <~ bidIsZeroSignal.not()
-        }
-
+        
         let formattedBidTextSignal = RACObserve(self, "bidDollars").map(dollarsToCurrencyString)
 
         RAC(bidAmountTextField, "text") <~ RACSignal.`if`(bidIsZeroSignal, then: RACSignal.defer{ RACSignal.`return`("") }, `else`: formattedBidTextSignal)
-
-        keypadSignal.subscribeNext(addDigitToBid)
-        deleteSignal.subscribeNext(deleteBid)
-        clearSignal.subscribeNext(clearBid)
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
             RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { $0 as Float * 100 }.takeUntil(dissapearSignal())
@@ -227,21 +215,6 @@ private extension PlaceBidViewController {
         formatter.locale = NSLocale(localeIdentifier: "en_US")
         formatter.numberStyle = .DecimalStyle
         return formatter.stringFromNumber(input as Int)
-    }
-
-    func addDigitToBid(input: AnyObject!) -> Void {
-        let inputInt = input as? Int ?? 0
-        let newBidDollars = (10 * self.bidDollars) + inputInt
-        if (newBidDollars >= 1_000_000) { return }
-        self.bidDollars = newBidDollars
-    }
-
-    func deleteBid(input: AnyObject!) -> Void {
-        self.bidDollars = Int(self.bidDollars/10)
-    }
-
-    func clearBid(input: AnyObject!) -> Void {
-        self.bidDollars = 0
     }
 
     func toCurrentBidTitleString(input: AnyObject!) -> AnyObject! {

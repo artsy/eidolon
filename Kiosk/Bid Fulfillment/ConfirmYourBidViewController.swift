@@ -6,7 +6,7 @@ import Swift_RAC_Macros
 
 public class ConfirmYourBidViewController: UIViewController {
 
-    dynamic var number: String = ""
+    dynamic var number: Int = 0
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
@@ -15,11 +15,8 @@ public class ConfirmYourBidViewController: UIViewController {
     @IBOutlet public var keypadContainer: KeypadContainerView!
     @IBOutlet public var enterButton: UIButton!
     @IBOutlet public var useArtsyLoginButton: UIButton!
-
-    public lazy var keypadSignal:RACSignal! = self.keypadContainer.keypad?.keypadSignal
-    public lazy var clearSignal:RACSignal!  = self.keypadContainer.keypad?.rightSignal
-    public lazy var deleteSignal:RACSignal! = self.keypadContainer.keypad?.leftSignal
-    public lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    
+    public lazy var provider: ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController
@@ -34,11 +31,8 @@ public class ConfirmYourBidViewController: UIViewController {
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
 
+        RAC(self, "number") <~ keypadContainer.valueSignal.mapIntToString()
         RAC(numberAmountTextField, "text") <~ RACObserve(self, "number").map(toPhoneNumberString)
-
-        keypadSignal.subscribeNext(addDigitToNumber)
-        deleteSignal.subscribeNext(deleteDigitFromNumber)
-        clearSignal.subscribeNext(clearNumber)
 
         let nav = self.fulfillmentNav()
 
@@ -83,18 +77,6 @@ public class ConfirmYourBidViewController: UIViewController {
                 }
             }
         }
-    }
-
-    func addDigitToNumber(input:AnyObject!) -> Void {
-        self.number = "\(self.number)\(input)"
-    }
-
-    func deleteDigitFromNumber(input:AnyObject!) -> Void {
-        self.number = dropLast(self.number)
-    }
-
-    func clearNumber(input:AnyObject!) -> Void {
-        self.number = ""
     }
 
     func toOpeningBidString(cents:AnyObject!) -> AnyObject! {

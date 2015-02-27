@@ -5,16 +5,13 @@ import Swift_RAC_Macros
 
 public class ConfirmYourBidPINViewController: UIViewController {
 
-    dynamic var pin = ""
+    dynamic var pin: Int = 0
 
     @IBOutlet public var keypadContainer: KeypadContainerView!
     @IBOutlet public var pinTextField: TextField!
     @IBOutlet public var confirmButton: Button!
     @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
 
-    public lazy var keypadSignal: RACSignal! = self.keypadContainer.keypad?.keypadSignal
-    public lazy var clearSignal: RACSignal!  = self.keypadContainer.keypad?.rightSignal
-    public lazy var deleteSignal: RACSignal! = self.keypadContainer.keypad?.leftSignal
     public lazy var provider: ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
@@ -24,31 +21,21 @@ public class ConfirmYourBidPINViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let keypad = self.keypadContainer!.keypad!
-        let pinIsZeroSignal = RACObserve(self, "pin").map { (countElements($0 as String) != 4) }
-
-        for button in [keypad.rightButton, keypad.leftButton] {
-            RAC(button, "enabled") <~ pinIsZeroSignal.not()
-        }
-
-        keypadSignal.subscribeNext(addDigitToPIN)
-        deleteSignal.subscribeNext(deleteDigitFromPIN)
-        clearSignal.subscribeNext(clearPIN)
-
-        RAC(pinTextField, "text") <~ RACObserve(self, "pin")
-        RAC(fulfillmentNav().bidDetails, "bidderPIN") <~ RACObserve(self, "pin")
+        RAC(self, "pin") <~ keypadContainer.valueSignal
+        RAC(pinTextField, "text") <~ RACObserve(self, "pin").mapIntToString()
+        RAC(fulfillmentNav().bidDetails, "bidderPIN") <~ RACObserve(self, "pin").mapIntToString()
 
         bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
 
         /// verify if we can connect with number & pin
 
-        confirmButton.rac_command = RACCommand(enabled: pinIsZeroSignal.not()) { [weak self] _ in
+        confirmButton.rac_command = RACCommand(enabled: keypadContainer.valueIsZeroSignal.not()) { [weak self] _ in
             if (self == nil) { return RACSignal.empty() }
 
             let phone = self!.fulfillmentNav().bidDetails.newUser.phoneNumber
             let endpoint: ArtsyAPI = ArtsyAPI.Me
 
-            let testProvider = self!.providerForPIN(self!.pin, number:phone!)
+            let testProvider = self!.providerForPIN(String(self!.pin), number:phone!)
 
             return testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doNext { _ in
 
@@ -110,8 +97,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
     func showAuthenticationError() {
         confirmButton.flashError("Wrong PIN")
         pinTextField.flashForError()
-        pinTextField.text = ""
-        pin = ""
+        keypadContainer.resetCommand.execute(nil)
     }
 
     func checkForCreditCard() -> RACSignal {
@@ -122,19 +108,6 @@ public class ConfirmYourBidPINViewController: UIViewController {
 }
 
 private extension ConfirmYourBidPINViewController {
-
-    func addDigitToPIN(input:AnyObject!) -> Void {
-        self.pin = "\(self.pin)\(input)"
-    }
-
-    func deleteDigitFromPIN(input:AnyObject!) -> Void {
-        self.pin = dropLast(self.pin)
-    }
-
-    func clearPIN(input:AnyObject!) -> Void {
-        self.pin = ""
-    }
-
     @IBAction func dev_loggedInTapped(sender: AnyObject) {
         self.performSegue(.PINConfirmedhasCard)
     }
