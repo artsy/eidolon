@@ -1,3 +1,4 @@
+import Foundation
 import ReactiveCocoa
 import Swift_RAC_Macros
 
@@ -28,8 +29,10 @@ public class KeypadViewModel: NSObject {
     }()
     
     lazy var addDigitCommand: RACCommand = {
-        RACCommand { [weak self] (input) -> RACSignal! in
-            self?.addDigitSignal(input as Int) ?? RACSignal.empty()
+        // I have no idea why, but if you try and use `[weak self]` in the closure definition, the compiler segfaults ¯\_(ツ)_/¯
+        let localSelf = self
+        return RACCommand { [weak localSelf] (input) -> RACSignal! in
+            localSelf?.addDigitSignal(input as Int) ?? RACSignal.empty()
         }
     }()
 }
