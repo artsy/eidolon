@@ -18,9 +18,9 @@ PODS:
   - Artsy-UIButtons (1.2.0):
     - Artsy+UIColors
   - balanced-ios (0.5)
-  - CardFlight (1.8.3):
-    - CardFlight/AudioJack (= 1.8.3)
-  - CardFlight/AudioJack (1.8.3)
+  - CardFlight (1.9.2):
+    - CardFlight/AudioJack (= 1.9.2)
+  - CardFlight/AudioJack (1.9.2)
   - DZNWebViewController (2.0):
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
@@ -165,7 +165,7 @@ SPEC CHECKSUMS:
   Artsy+UILabels: a7c713069e3d10144a3dc8e377bef8b2253cd766
   Artsy-UIButtons: 80a957b9479417c3be1e68d5b830de6cd2ec44cc
   balanced-ios: 4081f4464e914b7e26fe9563b1ab2b4837296c3c
-  CardFlight: 6efbffb69e4ab27629ac0fe18e04790ac6c7d53b
+  CardFlight: f52e5e4c63cdef75536bea355f51e91e7e4b4d1a
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
