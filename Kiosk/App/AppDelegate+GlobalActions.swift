@@ -86,7 +86,13 @@ extension AppDelegate {
 
     func helpButtonCommand() -> RACCommand {
         return RACCommand() { _ -> RACSignal! in
-            RACSignal.`if`(self.helpIsVisisbleSignal.take(1), then: self.hideHelpSignal(), `else`: self.showHelpSignal())
+            let showHelpSignal = RACSignal.empty().then {
+                self.hideAllTheThingsSignal()
+            }.then {
+                self.showHelpSignal()
+            }
+            
+            return RACSignal.`if`(self.helpIsVisisbleSignal.take(1), then: self.hideHelpSignal(), `else`: showHelpSignal)
         }
     }
 
