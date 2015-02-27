@@ -1,4 +1,5 @@
 import UIKit
+import ReactiveCocoa
 
 class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     let presenting: Bool
@@ -25,6 +26,17 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         if presenting {
             let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as HelpViewController
             
+            let dismissTapGestureRecognizer = UITapGestureRecognizer()
+            dismissTapGestureRecognizer.rac_gestureSignal().subscribeNext{ (sender) -> Void in
+                let dismissTapGestureRecognizer = sender as UITapGestureRecognizer
+                let pointInContainer = dismissTapGestureRecognizer.locationInView(toView)
+                if !toView.pointInside(pointInContainer, withEvent: nil) {
+                    appDelegate().helpButtonCommand().execute(dismissTapGestureRecognizer)
+                }
+            }
+            toViewController.dismissTapGestureRecognizer = dismissTapGestureRecognizer
+            containerView.addGestureRecognizer(dismissTapGestureRecognizer)
+
             fromView.userInteractionEnabled = false
             
             containerView.backgroundColor = UIColor.blackColor()
@@ -49,6 +61,10 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         } else {
             let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! as HelpViewController
             
+            if let dismissTapGestureRecognizer = fromViewController.dismissTapGestureRecognizer {
+                containerView.removeGestureRecognizer(dismissTapGestureRecognizer)
+            }
+
             toView.userInteractionEnabled = true
             
             containerView.addSubview(toView)
