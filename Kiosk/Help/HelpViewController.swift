@@ -7,6 +7,7 @@ import ReactiveCocoa
 
 public class HelpViewController: UIViewController {
     var positionConstraints: NSArray?
+    var dismissTapGestureRecognizer: UITapGestureRecognizer?
     
     private let stackView = ORTagBasedAutoStackView()
     private let reachabilityManager = ReachabilityManager()
