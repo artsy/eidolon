@@ -834,6 +834,7 @@
 				TargetAttributes = {
 					5EB0B6EC1A5C3E6800B7CBF2 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = ZH8TGFYKDK;
 					};
 					5EB0B7011A5C3E6800B7CBF2 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -1264,7 +1265,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/Kiosk/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1281,7 +1282,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ART SY INC";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/Kiosk/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
