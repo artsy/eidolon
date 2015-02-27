@@ -31,13 +31,15 @@ public class ConfirmYourBidViewController: UIViewController {
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
 
-        RAC(self, "number") <~ keypadContainer.valueSignal.mapIntToString()
-        RAC(numberAmountTextField, "text") <~ RACObserve(self, "number").map(toPhoneNumberString)
+        RAC(self, "number") <~ keypadContainer.valueSignal
+        
+        let numberStringSignal = RACObserve(self, "number").mapIntToString().mapZeroToEmptyString()
+        RAC(numberAmountTextField, "text") <~ numberStringSignal.map(toPhoneNumberString)
 
         let nav = self.fulfillmentNav()
 
-        RAC(nav.bidDetails.newUser, "phoneNumber") <~ RACObserve(self, "number")
-        RAC(nav.bidDetails, "paddleNumber") <~ RACObserve(self, "number")
+        RAC(nav.bidDetails.newUser, "phoneNumber") <~ numberStringSignal
+        RAC(nav.bidDetails, "paddleNumber") <~ numberStringSignal
         
         bidDetailsPreviewView.bidDetails = nav.bidDetails
 
@@ -48,7 +50,7 @@ public class ConfirmYourBidViewController: UIViewController {
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
             
-            let numberIsZeroLengthSignal = RACObserve(self, "number").map(isZeroLengthString)
+            let numberIsZeroLengthSignal = numberStringSignal.map(isZeroLengthString)
             enterButton.rac_command = RACCommand(enabled: numberIsZeroLengthSignal.not()) { [weak self] _ in
                 if (self == nil) {
                     return RACSignal.empty()

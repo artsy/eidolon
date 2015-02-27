@@ -43,6 +43,17 @@ public extension RACSignal {
             return String(input as Int)
         }
     }
+    
+    func mapZeroToEmptyString() -> RACSignal {
+        return map { (input) -> AnyObject! in
+            switch (input as String) {
+            case "0":
+                return ""
+            default:
+                return input
+            }
+        }
+    }
 }
 
 private extension KeypadViewModel {

@@ -22,8 +22,9 @@ public class ConfirmYourBidPINViewController: UIViewController {
         super.viewDidLoad()
 
         RAC(self, "pin") <~ keypadContainer.valueSignal
-        RAC(pinTextField, "text") <~ RACObserve(self, "pin").mapIntToString()
-        RAC(fulfillmentNav().bidDetails, "bidderPIN") <~ RACObserve(self, "pin").mapIntToString()
+        let pinTextSignal = RACObserve(self, "pin").mapIntToString().mapZeroToEmptyString()
+        RAC(pinTextField, "text") <~ pinTextSignal
+        RAC(fulfillmentNav().bidDetails, "bidderPIN") <~ pinTextSignal
 
         bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
 
