@@ -58,7 +58,7 @@ public class PlaceBidViewController: UIViewController {
         conditionsOfSaleButton.rac_command = showConditionsOfSaleCommand()
         privacyPolictyButton.rac_command = showPrivacyPolicyCommand()
 
-        RAC(self, "bidDollars") <~ keypadContainer.valueSignal
+        RAC(self, "bidDollars") <~ keypadContainer.intValueSignal
         let bidDollarsSignal = RACObserve(self, "bidDollars")
         let bidIsZeroSignal = bidDollarsSignal.map { return ($0 as Int == 0) }
         

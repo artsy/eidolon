@@ -7,8 +7,8 @@ public class KeypadContainerView: UIView {
     private var keypad: KeypadView!
     private let viewModel = KeypadViewModel()
     
-    var valueSignal: RACSignal!
-    var valueIsZeroSignal: RACSignal!
+    var stringValueSignal: RACSignal!
+    var intValueSignal: RACSignal!
     var resetCommand: RACCommand!
 
     override public func prepareForInterfaceBuilder() {
@@ -30,11 +30,9 @@ public class KeypadContainerView: UIView {
         keypad.rightCommand = viewModel.clearCommand
         keypad.keyCommand = viewModel.addDigitCommand
         
-        valueSignal = viewModel.valueSignal.publish().autoconnect()
-        valueIsZeroSignal = viewModel.valueIsZeroSignal.publish().autoconnect()
+        stringValueSignal = viewModel.stringValueSignal.publish().autoconnect()
         resetCommand = viewModel.clearCommand
         
         self.addSubview(keypad)
     }
-
 }

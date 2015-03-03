@@ -6,7 +6,7 @@ import Swift_RAC_Macros
 
 public class ConfirmYourBidViewController: UIViewController {
 
-    dynamic var number: Int = 0
+    dynamic var number: String = ""
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
@@ -31,9 +31,9 @@ public class ConfirmYourBidViewController: UIViewController {
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
 
-        RAC(self, "number") <~ keypadContainer.valueSignal
+        RAC(self, "number") <~ keypadContainer.stringValueSignal
         
-        let numberStringSignal = RACObserve(self, "number").mapIntToString().mapZeroToEmptyString()
+        let numberStringSignal = RACObserve(self, "number")
         RAC(numberAmountTextField, "text") <~ numberStringSignal.map(toPhoneNumberString)
 
         let nav = self.fulfillmentNav()

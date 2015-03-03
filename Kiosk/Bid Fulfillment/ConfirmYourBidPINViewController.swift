@@ -5,7 +5,7 @@ import Swift_RAC_Macros
 
 public class ConfirmYourBidPINViewController: UIViewController {
 
-    dynamic var pin: Int = 0
+    dynamic var pin = ""
 
     @IBOutlet public var keypadContainer: KeypadContainerView!
     @IBOutlet public var pinTextField: TextField!
@@ -21,16 +21,18 @@ public class ConfirmYourBidPINViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        RAC(self, "pin") <~ keypadContainer.valueSignal
-        let pinTextSignal = RACObserve(self, "pin").mapIntToString().mapZeroToEmptyString()
-        RAC(pinTextField, "text") <~ pinTextSignal
-        RAC(fulfillmentNav().bidDetails, "bidderPIN") <~ pinTextSignal
+        let pinSignal = keypadContainer.stringValueSignal
+        RAC(self, "pin") <~ pinSignal
+        RAC(pinTextField, "text") <~ pinSignal
+        RAC(fulfillmentNav().bidDetails, "bidderPIN") <~ pinSignal
+        
+        let pinExistsSignal = pinSignal.map { countElements($0 as String) > 0 }
 
         bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
 
         /// verify if we can connect with number & pin
 
-        confirmButton.rac_command = RACCommand(enabled: keypadContainer.valueIsZeroSignal.not()) { [weak self] _ in
+        confirmButton.rac_command = RACCommand(enabled: pinExistsSignal) { [weak self] _ in
             if (self == nil) { return RACSignal.empty() }
 
             let phone = self!.fulfillmentNav().bidDetails.newUser.phoneNumber
