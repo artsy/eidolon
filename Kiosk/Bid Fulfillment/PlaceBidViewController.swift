@@ -39,6 +39,7 @@ public class PlaceBidViewController: UIViewController {
         appDelegate().showConditionsOfSaleCommand()
     }
     
+    public lazy var bidDollarSignal: RACSignal = { self.keypadContainer.intValueSignal }()
     public var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
@@ -58,7 +59,7 @@ public class PlaceBidViewController: UIViewController {
         conditionsOfSaleButton.rac_command = showConditionsOfSaleCommand()
         privacyPolictyButton.rac_command = showPrivacyPolicyCommand()
 
-        RAC(self, "bidDollars") <~ keypadContainer.intValueSignal
+        RAC(self, "bidDollars") <~ bidDollarSignal
         let bidDollarsSignal = RACObserve(self, "bidDollars")
         let bidIsZeroSignal = bidDollarsSignal.map { return ($0 as Int == 0) }
         

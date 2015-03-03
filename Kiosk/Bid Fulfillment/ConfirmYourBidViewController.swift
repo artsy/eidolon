@@ -6,7 +6,7 @@ import Swift_RAC_Macros
 
 public class ConfirmYourBidViewController: UIViewController {
 
-    dynamic var number: String = ""
+    private dynamic var number: String = ""
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
@@ -15,6 +15,8 @@ public class ConfirmYourBidViewController: UIViewController {
     @IBOutlet public var keypadContainer: KeypadContainerView!
     @IBOutlet public var enterButton: UIButton!
     @IBOutlet public var useArtsyLoginButton: UIButton!
+    
+    public lazy var numberSignal: RACSignal = { self.keypadContainer.stringValueSignal }()
     
     public lazy var provider: ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
@@ -31,7 +33,7 @@ public class ConfirmYourBidViewController: UIViewController {
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
 
-        RAC(self, "number") <~ keypadContainer.stringValueSignal
+        RAC(self, "number") <~ numberSignal
         
         let numberStringSignal = RACObserve(self, "number")
         RAC(numberAmountTextField, "text") <~ numberStringSignal.map(toPhoneNumberString)

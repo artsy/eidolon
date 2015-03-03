@@ -142,7 +142,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
         it("reacts to keypad inputs with currency") {
             let customKeySubject = RACSubject()
-            subject.keypadSignal = customKeySubject;
+            subject.bidDollarSignal = customKeySubject;
             subject.loadViewProgrammatically()
 
             customKeySubject.sendNext(2);
@@ -166,7 +166,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
 
-            subject.keypadSignal = customKeySubject;
+            subject.bidDollarSignal = customKeySubject;
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 
@@ -180,7 +180,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             let nav = FulfillmentNavigationController(rootViewController:subject)
 
             let customKeySubject = RACSubject()
-            subject.keypadSignal = customKeySubject;
+            subject.bidDollarSignal = customKeySubject;
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 

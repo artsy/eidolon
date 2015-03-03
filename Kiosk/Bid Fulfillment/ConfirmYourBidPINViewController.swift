@@ -12,6 +12,8 @@ public class ConfirmYourBidPINViewController: UIViewController {
     @IBOutlet public var confirmButton: Button!
     @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
 
+    public lazy var pinSignal: RACSignal = { self.keypadContainer.stringValueSignal }()
+    
     public lazy var provider: ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
@@ -21,7 +23,6 @@ public class ConfirmYourBidPINViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let pinSignal = keypadContainer.stringValueSignal
         RAC(self, "pin") <~ pinSignal
         RAC(pinTextField, "text") <~ pinSignal
         RAC(fulfillmentNav().bidDetails, "bidderPIN") <~ pinSignal

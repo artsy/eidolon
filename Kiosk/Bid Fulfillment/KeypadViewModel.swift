@@ -11,11 +11,11 @@ public class KeypadViewModel: NSObject {
     
     //MARK: - Signals
     
-    lazy var intValueSignal: RACSignal = {
+    public lazy var intValueSignal: RACSignal = {
         RACObserve(self, "intValue")
     }()
     
-    lazy var stringValueSignal: RACSignal = {
+    public lazy var stringValueSignal: RACSignal = {
         RACObserve(self, "stringValue")
     }()
     
@@ -23,21 +23,21 @@ public class KeypadViewModel: NSObject {
     
     // I have no idea why, but if you try and use `[weak self]` in the closure definition of a RACCommand, the compiler segfaults ¯\_(ツ)_/¯
     
-    lazy var deleteCommand: RACCommand = {
+    public lazy var deleteCommand: RACCommand = {
         let localSelf = self
         return RACCommand { [weak localSelf] (_) -> RACSignal! in
             localSelf?.deleteSignal() ?? RACSignal.empty()
         }
     }()
 
-    lazy var clearCommand: RACCommand = {
+    public lazy var clearCommand: RACCommand = {
         let localSelf = self
         return RACCommand { [weak localSelf] (_) -> RACSignal! in
             localSelf?.clearSignal() ?? RACSignal.empty()
         }
     }()
     
-    lazy var addDigitCommand: RACCommand = {
+    public lazy var addDigitCommand: RACCommand = {
         let localSelf = self
         return RACCommand { [weak localSelf] (input) -> RACSignal! in
             localSelf?.addDigitSignal(input as Int) ?? RACSignal.empty()

@@ -16,7 +16,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
         it("reacts to keypad inputs with the string") {
             let customKeySubject = RACSubject()
             let subject = testConfirmYourBidPINViewController()
-            subject.keypadSignal = customKeySubject;
+            subject.pinSignal = customKeySubject
             subject.loadViewProgrammatically()
 
             customKeySubject.sendNext(2);
@@ -35,15 +35,14 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             let deleteSubject = RACSubject()
 
             let subject = testConfirmYourBidPINViewController()
-            subject.keypadSignal = customKeySubject;
-            subject.deleteSignal = deleteSubject
+            subject.pinSignal = customKeySubject
 
             subject.loadViewProgrammatically()
 
             customKeySubject.sendNext(2);
             expect(subject.pinTextField.text) == "2"
 
-            deleteSubject.sendNext(0);
+            subject.keypadContainer.deleteCommand.execute(nil)
             expect(subject.pinTextField.text) == ""
         }
 
@@ -52,8 +51,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             let clearSubject = RACSubject()
 
             let subject = testConfirmYourBidPINViewController()
-            subject.keypadSignal = customKeySubject;
-            subject.clearSignal = clearSubject
+            subject.pinSignal = customKeySubject;
 
             subject.loadViewProgrammatically()
 
@@ -61,8 +59,8 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             customKeySubject.sendNext(2);
             customKeySubject.sendNext(2);
             expect(subject.pinTextField.text) == "222"
-
-            clearSubject.sendNext(0);
+            
+            subject.keypadContainer.resetCommand.execute(nil)
             expect(subject.pinTextField.text) == ""
         }
 
