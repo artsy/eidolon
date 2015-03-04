@@ -33,16 +33,10 @@ class KeypadViewModelTests: QuickSpec {
             RAC(testHarness, "intValue") <~ subject.intValueSignal
             
             var completed = false
-            
-            RACSignal.empty().then {
-                subject.addDigitCommand.execute(1)
-            }.then {
-                subject.addDigitCommand.execute(3)
-            }.then {
-                subject.addDigitCommand.execute(3)
-            }.then {
-                subject.addDigitCommand.execute(7)
-            }.subscribeCompleted { () -> Void in
+
+            [1,3,3,7].reduce(RACSignal.empty(), combine: { (signal, input) -> RACSignal in
+                signal.then { subject.addDigitCommand.execute(input) }
+            }).subscribeCompleted { () -> Void in
                 expect(testHarness.intValue) == 1337
                 expect(testHarness.stringValue) == "1337"
                 
@@ -57,18 +51,9 @@ class KeypadViewModelTests: QuickSpec {
             RAC(testHarness, "intValue") <~ subject.intValueSignal
             
             var completed = false
-            
-            RACSignal.empty().then {
-                subject.addDigitCommand.execute(0)
-            }.then {
-                subject.addDigitCommand.execute(1)
-            }.then {
-                subject.addDigitCommand.execute(3)
-            }.then {
-                subject.addDigitCommand.execute(3)
-            }.then {
-                subject.addDigitCommand.execute(7)
-            }.subscribeCompleted { () -> Void in
+            [0,1,3,3,7].reduce(RACSignal.empty(), combine: { (signal, input) -> RACSignal in
+                signal.then { subject.addDigitCommand.execute(input) }
+            }).subscribeCompleted { () -> Void in
                 expect(testHarness.intValue) == 1337
                 expect(testHarness.stringValue) == "01337"
                 
@@ -104,13 +89,9 @@ class KeypadViewModelTests: QuickSpec {
             
             var completed = false
             
-            RACSignal.empty().then {
-                subject.addDigitCommand.execute(1)
-            }.then {
-                subject.addDigitCommand.execute(3)
-            }.then {
-                subject.addDigitCommand.execute(3)
-            }.then {
+            [1,3,3].reduce(RACSignal.empty(), combine: { (signal, input) -> RACSignal in
+                signal.then { subject.addDigitCommand.execute(input) }
+            }).then {
                 subject.deleteCommand.execute(nil)
             }.subscribeCompleted { () -> Void in
                 expect(testHarness.intValue) == 13
