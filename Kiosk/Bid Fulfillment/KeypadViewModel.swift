@@ -25,14 +25,14 @@ public class KeypadViewModel: NSObject {
     
     public lazy var deleteCommand: RACCommand = {
         let localSelf = self
-        return RACCommand { [weak localSelf] (_) -> RACSignal! in
+        return RACCommand { [weak localSelf] _ -> RACSignal! in
             localSelf?.deleteSignal() ?? RACSignal.empty()
         }
     }()
 
     public lazy var clearCommand: RACCommand = {
         let localSelf = self
-        return RACCommand { [weak localSelf] (_) -> RACSignal! in
+        return RACCommand { [weak localSelf] _ -> RACSignal! in
             localSelf?.clearSignal() ?? RACSignal.empty()
         }
     }()
@@ -40,7 +40,7 @@ public class KeypadViewModel: NSObject {
     public lazy var addDigitCommand: RACCommand = {
         let localSelf = self
         return RACCommand { [weak localSelf] (input) -> RACSignal! in
-            localSelf?.addDigitSignal(input as Int) ?? RACSignal.empty()
+            return localSelf?.addDigitSignal(input as Int) ?? RACSignal.empty()
         }
     }()
 }
