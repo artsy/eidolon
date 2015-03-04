@@ -39,7 +39,7 @@ public class PlaceBidViewController: UIViewController {
         appDelegate().showConditionsOfSaleCommand()
     }
     
-    public lazy var bidDollarSignal: RACSignal = { self.keypadContainer.intValueSignal }()
+    public lazy var bidDollarsSignal: RACSignal = { self.keypadContainer.intValueSignal }()
     public var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
@@ -48,7 +48,7 @@ public class PlaceBidViewController: UIViewController {
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if !hasAlreadyPlacedABid {
             self.fulfillmentNav().reset()
         }
@@ -59,18 +59,14 @@ public class PlaceBidViewController: UIViewController {
         conditionsOfSaleButton.rac_command = showConditionsOfSaleCommand()
         privacyPolictyButton.rac_command = showPrivacyPolicyCommand()
 
-        RAC(self, "bidDollars") <~ bidDollarSignal
-        let bidDollarsSignal = RACObserve(self, "bidDollars")
-        let bidIsZeroSignal = bidDollarsSignal.map { return ($0 as Int == 0) }
-        
-        let formattedBidTextSignal = RACObserve(self, "bidDollars").map(dollarsToCurrencyString)
+        RAC(self, "bidDollars") <~ bidDollarsSignal
 
-        RAC(bidAmountTextField, "text") <~ RACSignal.`if`(bidIsZeroSignal, then: RACSignal.defer{ RACSignal.`return`("") }, `else`: formattedBidTextSignal)
+        RAC(bidAmountTextField, "text") <~ bidDollarsSignal.map(dollarsToCurrencyString)
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
             RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { $0 as Float * 100 }.takeUntil(dissapearSignal())
 
-            if let saleArtwork:SaleArtwork = nav.bidDetails.saleArtwork {
+            if let saleArtwork = nav.bidDetails.saleArtwork {
                 
                 let minimumNextBidSignal = RACObserve(saleArtwork, "minimumNextBidCents")
                 let bidCountSignal = RACObserve(saleArtwork, "bidCount")
@@ -212,10 +208,15 @@ private extension PlaceBidViewController {
 private extension PlaceBidViewController {
 
     func dollarsToCurrencyString(input: AnyObject!) -> AnyObject! {
+        let dollars = input as Int
+        if dollars == 0 {
+            return ""
+        }
+        
         let formatter = NSNumberFormatter()
         formatter.locale = NSLocale(localeIdentifier: "en_US")
         formatter.numberStyle = .DecimalStyle
-        return formatter.stringFromNumber(input as Int)
+        return formatter.stringFromNumber(dollars)
     }
 
     func toCurrentBidTitleString(input: AnyObject!) -> AnyObject! {

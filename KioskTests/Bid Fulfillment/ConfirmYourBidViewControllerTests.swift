@@ -24,7 +24,7 @@ class ConfirmYourBidViewControllerTests: QuickSpec {
             subject.numberSignal = keypadSubject
 
             subject.loadViewProgrammatically()
-            keypadSubject.sendNext(3)
+            keypadSubject.sendNext("3")
 
             expect(subject.numberAmountTextField.text) == "3"
         }

@@ -31,8 +31,8 @@ public class KeypadContainerView: UIView {
         keypad.rightCommand = viewModel.clearCommand
         keypad.keyCommand = viewModel.addDigitCommand
         
-        intValueSignal = viewModel.intValueSignal.publish().autoconnect()
-        stringValueSignal = viewModel.stringValueSignal.publish().autoconnect()
+        intValueSignal = viewModel.intValueSignal
+        stringValueSignal = viewModel.stringValueSignal
         deleteCommand = viewModel.deleteCommand
         resetCommand = viewModel.clearCommand
         
