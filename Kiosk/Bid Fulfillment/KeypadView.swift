@@ -1,25 +1,22 @@
 import UIKit
 import ReactiveCocoa
+import Swift_RAC_Macros
 
 public class KeypadView: UIView {
-    public let keypadSignal = RACSubject()
-    public let leftSignal = RACSubject()
-    public let rightSignal = RACSubject()
+    public dynamic var leftCommand: RACCommand?
+    public dynamic var rightCommand: RACCommand?
+    public dynamic var keyCommand: RACCommand?
 
-    @IBOutlet var keys: [Button]!
-    @IBOutlet public var leftButton: Button!
-    @IBOutlet public var rightButton: Button!
+    @IBOutlet private var keys: [Button]!
+    @IBOutlet private var leftButton: Button!
+    @IBOutlet private var rightButton: Button!
 
+    public override func awakeFromNib() {
+        RAC(leftButton, "rac_command") <~ RACObserve(self, "leftCommand")
+        RAC(rightButton, "rac_command") <~ RACObserve(self, "rightCommand")
+    }
+    
     @IBAction func keypadButtonTapped(sender: UIButton) {
-        keypadSignal.sendNext(sender.tag)
+        keyCommand?.execute(sender.tag)
     }
-
-    @IBAction func rightButtonTapped(sender: UIButton) {
-        rightSignal.sendNext(nil)
-    }
-
-    @IBAction func leftButtonTapped(sender: UIButton) {
-        leftSignal.sendNext(nil)
-    }
-
 }

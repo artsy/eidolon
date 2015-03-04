@@ -12,6 +12,7 @@
 		5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */; };
 		5E339E3A1A991899000C773D /* RACExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E339E391A991899000C773D /* RACExtensions.swift */; };
 		5E5ADF641A8B789000453250 /* WhitespaceGobbler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */; };
+		5E748B731AA11BCF00DE3A9D /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */; };
 		5E853EBE1A8BC9A200F91C0D /* BuyersPremium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E853EBD1A8BC9A200F91C0D /* BuyersPremium.swift */; };
 		5E86104B1A5C429C00456E41 /* AdminCardTestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */; };
 		5E86104C1A5C429C00456E41 /* AdminLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC41A5C429C00456E41 /* AdminLogViewController.swift */; };
@@ -190,6 +191,7 @@
 		5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */; };
 		5EB0B71D1A5C410D00B7CBF2 /* UITextField+RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7181A5C410D00B7CBF2 /* UITextField+RAC.swift */; };
 		5EB0B71E1A5C410D00B7CBF2 /* UIViewController+Bidding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7191A5C410D00B7CBF2 /* UIViewController+Bidding.swift */; };
+		5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */; };
 		5EFA709C1A9674BD0082C916 /* BidderDetailsRetrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */; };
 		D12607F71BF578705637C9A7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFB9BD12B5173B74D620D7 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -210,6 +212,7 @@
 		5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		5E339E391A991899000C773D /* RACExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensions.swift; sourceTree = "<group>"; };
 		5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitespaceGobbler.swift; sourceTree = "<group>"; };
+		5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModel.swift; sourceTree = "<group>"; };
 		5E853EBD1A8BC9A200F91C0D /* BuyersPremium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyersPremium.swift; sourceTree = "<group>"; };
 		5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCardTestingViewController.swift; sourceTree = "<group>"; };
 		5E860FC41A5C429C00456E41 /* AdminLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminLogViewController.swift; sourceTree = "<group>"; };
@@ -372,6 +375,7 @@
 		5EB0B7181A5C410D00B7CBF2 /* UITextField+RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+RAC.swift"; sourceTree = "<group>"; };
 		5EB0B7191A5C410D00B7CBF2 /* UIViewController+Bidding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Bidding.swift"; sourceTree = "<group>"; };
 		5EB8D8EE1A5C513A008EAD6C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModelTests.swift; sourceTree = "<group>"; };
 		5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderDetailsRetrieval.swift; sourceTree = "<group>"; };
 		B5DFB9BD12B5173B74D620D7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA79D9FDF198B37A06B262F /* Pods-KioskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -538,6 +542,7 @@
 				5E86100D1A5C429C00456E41 /* FulfillmentNavigationController.swift */,
 				5E86100E1A5C429C00456E41 /* KeypadContainerView.swift */,
 				5E86100F1A5C429C00456E41 /* KeypadView.swift */,
+				5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */,
 				5E8610101A5C429C00456E41 /* KeypadViewPreviewIB.png */,
 				5E8610111A5C429C00456E41 /* LoadingViewController.swift */,
 				5E8610121A5C429C00456E41 /* ManualCreditCardInputViewController.swift */,
@@ -665,6 +670,7 @@
 				5E8610CD1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift */,
 				5E8610CE1A5C43EF00456E41 /* LoadingViewControllerTests.swift */,
 				5E8610CF1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift */,
+				5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */,
 			);
 			path = "Bid Fulfillment";
 			sourceTree = "<group>";
@@ -1082,6 +1088,7 @@
 				5E86104B1A5C429C00456E41 /* AdminCardTestingViewController.swift in Sources */,
 				5E8610961A5C429C00456E41 /* PlaceBidViewController.swift in Sources */,
 				5E8610761A5C429C00456E41 /* RegisterFlowView.swift in Sources */,
+				5E748B731AA11BCF00DE3A9D /* KeypadViewModel.swift in Sources */,
 				5E8610931A5C429C00456E41 /* NewUser.swift in Sources */,
 				5E8610A11A5C429C00456E41 /* HelpViewController.swift in Sources */,
 				5EB0B71B1A5C410D00B7CBF2 /* RACSignal+Kiosk.swift in Sources */,
@@ -1140,6 +1147,7 @@
 				5E8611111A5C43EF00456E41 /* ArtistTests.swift in Sources */,
 				5E8611091A5C43EF00456E41 /* ConfirmYourBidViewControllerTests.swift in Sources */,
 				5E86110D1A5C43EF00456E41 /* BidDetailsTestExtensions.swift in Sources */,
+				5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */,
 				5E8611161A5C43EF00456E41 /* ImageTests.swift in Sources */,
 				5E86110B1A5C43EF00456E41 /* LoadingViewControllerTests.swift in Sources */,
 				5E86110F1A5C43EF00456E41 /* KioskTests.swift in Sources */,

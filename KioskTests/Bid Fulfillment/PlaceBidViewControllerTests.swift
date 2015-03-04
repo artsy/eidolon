@@ -63,10 +63,11 @@ class PlaceBidViewControllerTests: QuickSpec {
         }
 
         it("looks right with a custom saleArtwork") {
-            let nav = FulfillmentNavigationController(rootViewController:subject)
+            let nav = FulfillmentNavigationController(rootViewController: subject)
 
             let artwork = Artwork.fromJSON(artworkJSON) as Artwork
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
+            saleArtwork.minimumNextBidCents = 10000
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
 
             nav.loadViewProgrammatically()
@@ -142,17 +143,10 @@ class PlaceBidViewControllerTests: QuickSpec {
 
         it("reacts to keypad inputs with currency") {
             let customKeySubject = RACSubject()
-            subject.keypadSignal = customKeySubject;
+            subject.bidDollarsSignal = customKeySubject;
             subject.loadViewProgrammatically()
 
-            customKeySubject.sendNext(2);
-            expect(subject.bidAmountTextField.text) == "2"
-
-            customKeySubject.sendNext(3);
-            expect(subject.bidAmountTextField.text) == "23"
-
-            customKeySubject.sendNext(4);
-            customKeySubject.sendNext(4);
+            customKeySubject.sendNext(2344);
             expect(subject.bidAmountTextField.text) == "2,344"
         }
 
@@ -166,7 +160,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
 
-            subject.keypadSignal = customKeySubject;
+            subject.bidDollarsSignal = customKeySubject;
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 
@@ -180,12 +174,11 @@ class PlaceBidViewControllerTests: QuickSpec {
             let nav = FulfillmentNavigationController(rootViewController:subject)
 
             let customKeySubject = RACSubject()
-            subject.keypadSignal = customKeySubject;
+            subject.bidDollarsSignal = customKeySubject;
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 
-            customKeySubject.sendNext(3);
-            customKeySubject.sendNext(3);
+            customKeySubject.sendNext(33);
 
             expect(nav.bidDetails.bidAmountCents) == 3300
         }

@@ -21,17 +21,17 @@ class ConfirmYourBidViewControllerTests: QuickSpec {
 
         it("shows keypad buttons") {
             let keypadSubject = RACSubject()
-            subject.keypadSignal = keypadSubject
+            subject.numberSignal = keypadSubject
 
             subject.loadViewProgrammatically()
-            keypadSubject.sendNext(3)
+            keypadSubject.sendNext("3")
 
             expect(subject.numberAmountTextField.text) == "3"
         }
 
         pending("changes enter button to enabled") {
             let keypadSubject = RACSubject()
-            subject.keypadSignal = keypadSubject
+            subject.numberSignal = keypadSubject
 
             subject.loadViewProgrammatically()
 
