@@ -35,7 +35,7 @@ clean:
 	xcodebuild -workspace '$(WORKSPACE)' -scheme '$(SCHEME)' -configuration '$(CONFIGURATION)' clean
 
 test:
-	xcodebuild -workspace '$(WORKSPACE)' -scheme '$(SCHEME)' -configuration Debug build test -sdk iphonesimulator -destination $(DEVICE_HOST) | grep -i err
+	xcodebuild -workspace '$(WORKSPACE)' -scheme '$(SCHEME)' -configuration Debug build test -sdk iphonesimulator -destination $(DEVICE_HOST)
 
 ipa:
 	$(PLIST_BUDDY) -c "Set CFBundleDisplayName $(BUNDLE_NAME)" $(APP_PLIST)
