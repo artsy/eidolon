@@ -18,3 +18,5 @@ script:
 notifications:
   slack: 
     secure: dHJSmLJAwoLRi5inP5btz8fP6pbT/BIF89CTOFmnNO6mLEM7J++PZfvj4cg2ojM3jfjFtQXJE5CuqrOaLeXhN4uteIu91ust1sgkNdkExsQvOVgBAZhcsLZLtMQpytrVs34FXfdirAZv/S750J3d8XWr7yCZThqRkVuIy0CB5vM=
+after_failure:
+- cat /var/folders/**/T/com.apple.dt.XCTest-status/*.log | curl -F 'sprunge=<-' http://sprunge.us
