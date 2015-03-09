@@ -20,6 +20,7 @@ plugin 'cocoapods-keys', {
 }
 
 platform :ios, '8.0'
+use_frameworks!
 
 # Yep.
 inhibit_all_warnings!
