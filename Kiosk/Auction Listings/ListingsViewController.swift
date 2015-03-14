@@ -14,9 +14,11 @@ public class ListingsViewController: UIViewController {
     public var auctionID = AppSetup.sharedState.auctionID
     public var syncInterval = SyncInterval
     public var pageSize = 10
-    public var forceSync = false
     public var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
         return signal.deliverOn(scheduler)
+    }
+    public var logSync = { (date: AnyObject!) -> () in
+        println("Syncing on \(date)")
     }
 
     public dynamic var saleArtworks = [SaleArtwork]()
@@ -91,13 +93,9 @@ public class ListingsViewController: UIViewController {
     func recurringListingsRequestSignal(auctionID: String) -> RACSignal {
         let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate()).takeUntil(rac_willDeallocSignal())
         
-        return recurringSignal.filter({ [weak self] (_) -> Bool in
-            self?.shouldSync() ?? false
-        }).doNext({ (date) -> Void in
-            println("Syncing on \(date)")
-        }).map ({ [weak self] (_) -> AnyObject! in
+        return recurringSignal.doNext(logSync).map { [weak self] _ -> AnyObject! in
             return self?.allListingsRequestSignal(auctionID) ?? RACSignal.empty()
-        }).switchToLatest().map({ [weak self] (newSaleArtworks) -> AnyObject! in
+        }.switchToLatest().map { [weak self] (newSaleArtworks) -> AnyObject! in
             if self == nil {
                 return [] // Now safe to use self!
             }
@@ -137,11 +135,7 @@ public class ListingsViewController: UIViewController {
             }
             
             return newSaleArtworks
-        })
-    }
-    
-    func shouldSync() -> Bool {
-        return (presentedViewController == nil && navigationController?.topViewController == self) || forceSync
+        }
     }
     
     // Adapted from https://github.com/FUKUZAWA-Tadashi/FHCCommander/blob/67c67757ee418a106e0ce0c0820459299b3d77bb/fhcc/Convenience.swift#L33-L44
