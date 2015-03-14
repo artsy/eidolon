@@ -172,7 +172,7 @@ func testListingsViewController(storyboard: UIStoryboard = auctionStoryboard) ->
     subject.schedule = testSchedule
     subject.auctionID = ""
     subject.switchView.shouldAnimate = false
-    subject.forceSync = true
+    subject.logSync = { _ -> () in  }
     
     return subject
 }
