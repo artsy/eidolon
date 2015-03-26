@@ -14,8 +14,9 @@ public class Image: JSONAble {
     public let maxTiledHeight: Int
     public let maxTiledWidth: Int
     public let maxLevel: Int
+    public let isDefault: Bool
 
-    public init(id: String, imageFormatString: String, imageVersions: [String], imageSize: CGSize, aspectRatio: CGFloat, baseURL: String, tileSize: Int, maxTiledHeight: Int, maxTiledWidth: Int, maxLevel: Int) {
+    public init(id: String, imageFormatString: String, imageVersions: [String], imageSize: CGSize, aspectRatio: CGFloat, baseURL: String, tileSize: Int, maxTiledHeight: Int, maxTiledWidth: Int, maxLevel: Int, isDefault: Bool) {
         self.id = id
         self.imageFormatString = imageFormatString
         self.imageVersions = imageVersions
@@ -26,6 +27,7 @@ public class Image: JSONAble {
         self.maxTiledHeight = maxTiledHeight
         self.maxTiledWidth = maxTiledWidth
         self.maxLevel = maxLevel
+        self.isDefault = isDefault
     }
 
     override public class func fromJSON(json:[String: AnyObject]) -> JSONAble {
@@ -41,6 +43,7 @@ public class Image: JSONAble {
         let tileSize = json["tile_size"].intValue
         let maxTiledHeight = json["max_tiled_height"].int ?? 1
         let maxTiledWidth = json["max_tiled_width"].int ?? 1
+        let isDefault = json["is_default"].bool ?? false
 
         let dimension = max( maxTiledWidth, maxTiledHeight)
         let logD = logf( Float(dimension) )
@@ -48,15 +51,15 @@ public class Image: JSONAble {
         
         let maxLevel = Int( ceilf( logD / log2) )
 
-        return Image(id: id, imageFormatString: imageFormatString, imageVersions: imageVersions, imageSize: imageSize, aspectRatio:aspectRatio, baseURL: baseURL, tileSize: tileSize, maxTiledHeight: maxTiledHeight, maxTiledWidth: maxTiledWidth, maxLevel: maxLevel)
+        return Image(id: id, imageFormatString: imageFormatString, imageVersions: imageVersions, imageSize: imageSize, aspectRatio:aspectRatio, baseURL: baseURL, tileSize: tileSize, maxTiledHeight: maxTiledHeight, maxTiledWidth: maxTiledWidth, maxLevel: maxLevel, isDefault: isDefault)
     }
 
     public func thumbnailURL() -> NSURL? {
-        return urlFromPreferenceList(["large", "medium", "larger"])
+        return urlFromPreferenceList(["medium", "large", "larger"])
     }
 
     public func fullsizeURL() -> NSURL? {
-        return urlFromPreferenceList(["larger", "medium", "large"])
+        return urlFromPreferenceList(["larger", "large", "medium"])
     }
 
     public func localImageTileForLevel(level:Int, x:Int, y:Int) -> UIImage? {

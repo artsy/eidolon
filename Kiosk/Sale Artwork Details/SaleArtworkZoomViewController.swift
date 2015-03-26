@@ -9,7 +9,7 @@ class SaleArtworkZoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let image = saleArtwork.artwork.images!.first!
+        let image = saleArtwork.artwork.defaultImage!
         dataSource = TiledImageDataSourceWithImage(image:image)
 
         let tiledView = ARTiledImageScrollView(frame:view.bounds)

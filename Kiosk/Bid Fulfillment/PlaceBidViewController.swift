@@ -154,7 +154,7 @@ public class PlaceBidViewController: UIViewController {
                 RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price").takeUntil(dissapearSignal())
                 
                 RACObserve(saleArtwork, "artwork").subscribeNext { [weak self] (artwork) -> Void in
-                    if let url = (artwork as? Artwork)?.images?.first?.thumbnailURL() {
+                    if let url = (artwork as? Artwork)?.defaultImage?.thumbnailURL() {
                         self?.artworkImageView.sd_setImageWithURL(url)
                     } else {
                         self?.artworkImageView.image = nil

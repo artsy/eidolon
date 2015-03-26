@@ -70,7 +70,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         RAC(self, "lotNumberLabel.text") <~ RACObserve(self, "saleArtwork.lotNumberSignal").switchToLatest()
 
         RACObserve(self, "saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
-            if let url = (artwork as? Artwork)?.images?.first?.thumbnailURL() {
+            if let url = (artwork as? Artwork)?.defaultImage?.thumbnailURL() {
                 self?.artworkImageView.sd_setImageWithURL(url)
             } else {
                 self?.artworkImageView.image = nil

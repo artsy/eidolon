@@ -22,6 +22,14 @@ public class Artwork: JSONAble {
 
     public dynamic var images: [Image]?
 
+    public lazy var defaultImage: Image? = {
+        let defaultImages = self.images?.filter({ (image) -> Bool in
+            image.isDefault
+        })
+
+        return defaultImages?.first ?? self.images?.first
+    }()
+
     init(id: String, dateString: String, title: String, titleAndDate: NSAttributedString, price: String, date: String) {
         self.id = id
         self.dateString = dateString
@@ -54,7 +62,6 @@ public class Artwork: JSONAble {
         if let imageDicts = json["images"].object as? Array<Dictionary<String, AnyObject>> {
             artwork.images = imageDicts.map({ return Image.fromJSON($0) as Image })
         }
-
 
         if let dimensions = json["dimensions"].dictionary {
             artwork.dimensions = ["in", "cm"].reduce([String](), combine: { (array, key) -> [String] in
