@@ -28,7 +28,7 @@ public class BidDetailsPreviewView: UIView {
         currentBidPriceLabel.font = UIFont.serifBoldFontWithSize(14)
         
         RACObserve(self, "bidDetails.saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
-            if let url = (artwork as? Artwork)?.images?.first?.thumbnailURL() {
+            if let url = (artwork as? Artwork)?.defaultImage?.thumbnailURL() {
                 self?.artworkImageView.sd_setImageWithURL(url)
             } else {
                 self?.artworkImageView.image = nil

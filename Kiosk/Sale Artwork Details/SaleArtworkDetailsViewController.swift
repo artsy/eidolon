@@ -219,7 +219,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
     }
 
     private func setupImageView(imageView: UIImageView) {
-        if let image = saleArtwork.artwork.images?.first? {
+        if let image = saleArtwork.artwork.defaultImage? {
             imageView.sd_setImageWithURL(image.fullsizeURL(), completed: { image, error, type, url -> () in
                 imageView.backgroundColor = UIColor.clearColor()
                 return

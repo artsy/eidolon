@@ -66,7 +66,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
                 if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
                     self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
                 }
-                let imageHeight = heightForImageWithAspectRatio(saleArtwork.artwork.images?.first?.aspectRatio)
+                let imageHeight = heightForImageWithAspectRatio(saleArtwork.artwork.defaultImage?.aspectRatio)
                 self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
                 self?.layoutIfNeeded()
             }
@@ -81,7 +81,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
 
 extension MasonryCollectionViewCell {
     class func heightForSaleArtwork(saleArtwork: SaleArtwork) -> CGFloat {
-        let imageHeight = heightForImageWithAspectRatio(saleArtwork.artwork.images?.first?.aspectRatio)
+        let imageHeight = heightForImageWithAspectRatio(saleArtwork.artwork.defaultImage?.aspectRatio)
         let remainingHeight =
             20 + // padding
             20 + // artist name
