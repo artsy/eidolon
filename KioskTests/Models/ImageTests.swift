@@ -37,6 +37,18 @@ class ImageTests: QuickSpec {
             let image = self.imageForVersion("unknown")
             expect(image.thumbnailURL()).to(beNil())
         }
+
+        it("assumes it's not default if not specified") {
+            let image = Image.fromJSON([
+                "id": "",
+                "image_url":"http://image.com/:version.jpg",
+                "image_versions" : ["small"],
+                "original_width": size.width,
+                "original_height": size.height
+            ]) as Image
+
+            expect(image.isDefault) == false
+        }
     }
 
     func imageForVersion(version:String) -> Image {
