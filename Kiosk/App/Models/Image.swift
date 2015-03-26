@@ -55,11 +55,11 @@ public class Image: JSONAble {
     }
 
     public func thumbnailURL() -> NSURL? {
-        return urlFromPreferenceList(["large", "medium", "larger"])
+        return urlFromPreferenceList(["medium", "large", "larger"])
     }
 
     public func fullsizeURL() -> NSURL? {
-        return urlFromPreferenceList(["larger", "medium", "large"])
+        return urlFromPreferenceList(["larger", "large", "medium"])
     }
 
     public func localImageTileForLevel(level:Int, x:Int, y:Int) -> UIImage? {
