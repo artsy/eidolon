@@ -194,4 +194,4 @@ SPEC CHECKSUMS:
   UIView+BooleanAnimations: 48cc98d5469ced7f7654310bff47c8ddba72c8f4
   XNGMarkdownParser: 72c20da1aceec6df477acd78d2297fb9584e7771
 
-COCOAPODS: 0.36.0.rc.1
+COCOAPODS: 0.36.1

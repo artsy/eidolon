@@ -12,7 +12,7 @@ install:
   - make prepare_ci
   - make bundle
 before_script:
-  - make ci
+  - travis_retry make ci
 script:
   - make test
 notifications:
