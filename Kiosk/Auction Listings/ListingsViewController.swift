@@ -20,6 +20,16 @@ public class ListingsViewController: UIViewController {
     public var logSync = { (date: AnyObject!) -> () in
         println("Syncing on \(date)")
     }
+    public var downloadImage: ListingsCollectionViewCell.DownloadImageClosure = { (url, imageView) -> () in
+        if let url = url {
+            imageView.sd_setImageWithURL(url)
+        } else {
+            imageView.image = nil
+        }
+    }
+    public var cancelDownloadImage: ListingsCollectionViewCell.CancelDownloadImageClosure = { (imageView) -> () in
+        imageView.sd_cancelCurrentImageLoad()
+    }
 
     public dynamic var saleArtworks = [SaleArtwork]()
     public dynamic var sortedSaleArtworks = [SaleArtwork]()
@@ -218,7 +228,7 @@ public class ListingsViewController: UIViewController {
                 default:
                     return ListingsViewController.tableLayout(CGRectGetWidth(self?.switchView.frame ?? CGRectZero))
                 }
-                }()
+            }()
 
             if let switchValue = SwitchValues(rawValue: selectedIndex) {
                 return RACTuple(objectsFromArray: [switchValue.sortSaleArtworks(saleArtworks), layout])
@@ -277,11 +287,13 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return countElements(sortedSaleArtworks)
     }
-  public   
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+  public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
         
         if let listingsCell = cell as? ListingsCollectionViewCell {
+
+            listingsCell.downloadImage = downloadImage
+            listingsCell.cancelDownloadImage = cancelDownloadImage
 
             // TODO: Ideally we should disable when auction runs out
             // listingsCell.bidButton.enabled = countdownManager.auctionFinishedSignal

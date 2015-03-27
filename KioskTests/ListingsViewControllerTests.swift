@@ -3,7 +3,6 @@ import Nimble
 import Kiosk
 import ReactiveCocoa
 import Nimble_Snapshots
-import SDWebImage
 import Moya
 
 class ListingsViewControllerConfiguration: QuickConfiguration {
@@ -49,28 +48,11 @@ class ListingsViewControllerConfiguration: QuickConfiguration {
 }
 
 class ListingsViewControllerTests: QuickSpec {
-    let imageCache = SDImageCache.sharedImageCache()
     override func spec() {
         beforeEach {
             Provider.sharedProvider = Provider.StubbingProvider()
-            
-            let image = UIImage.testImage(named: "artwork", ofType: "jpg")
-            
-            let urls = [
-                "http://stagic3.artsy.net/additional_images/527c19f7a09a677dea000374/large.jpg",
-                "http://stagic1.artsy.net/additional_images/52570f80275b24468c000506/large.jpg",
-                "http://stagic1.artsy.net/additional_images/5277e3e4cd530eb866000260/1/large.jpg",
-                "http://stagic2.artsy.net/additional_images/5277f91dc9dc242b0a000156/1/large.jpg",
-                "http://stagic3.artsy.net/additional_images/526ab701c9dc24668f00011e/large.jpg"
-            ]
-            urls.map { self.imageCache.storeImage(image, forKey: $0) }
         }
-        
-        afterEach {
-            self.imageCache.clearMemory()
-            self.imageCache.clearDisk()
-        }
-        
+
         describe("when displaying stubbed contents") {
             var subject: ListingsViewController!
             beforeEach {
@@ -167,12 +149,22 @@ let testSchedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal i
     return signal
 }
 
+let listingsViewControllerTestsImage = UIImage.testImage(named: "artwork", ofType: "jpg")
+
 func testListingsViewController(storyboard: UIStoryboard = auctionStoryboard) -> ListingsViewController {
     let subject = ListingsViewController.instantiateFromStoryboard(storyboard)
     subject.schedule = testSchedule
     subject.auctionID = ""
     subject.switchView.shouldAnimate = false
     subject.logSync = { _ -> () in  }
+    subject.downloadImage = { (url, imageView) -> () in
+        if let _ = url {
+            imageView.image = listingsViewControllerTestsImage
+        } else {
+            imageView.image = nil
+        }
+    }
+    subject.cancelDownloadImage = { (imageView) -> () in }
     
     return subject
 }
