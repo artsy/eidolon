@@ -1,5 +1,14 @@
 # End User Changes
 
+### 3.2 March 26 2015
+* Fix for lots with multiple images
+* Help menu bug fixed
+* Interface messaging improvements
+* New icon
+
+### 3.1.1 Feb 27 2015
+* Buyers Premium
+
 ### 2.3.2 21 Nov 2014
 * Reserve-handling - @ashfurrow
 
