@@ -3,7 +3,10 @@ import Artsy_UILabels
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-class ListingsCollectionViewCell: UICollectionViewCell {
+public class ListingsCollectionViewCell: UICollectionViewCell {
+    public typealias DownloadImageClosure = (url: NSURL?, imageView: UIImageView) -> ()
+    public typealias CancelDownloadImageClosure = (imageView: UIImageView) -> ()
+
     dynamic let lotNumberLabel = ListingsCollectionViewCell._sansSerifLabel()
     dynamic let artworkImageView = ListingsCollectionViewCell._artworkImageView()
     dynamic let artistNameLabel = ListingsCollectionViewCell._largeLabel()
@@ -13,6 +16,9 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     dynamic let numberOfBidsLabel = ListingsCollectionViewCell._rightAlignedNormalLabel()
     dynamic let bidButton = ListingsCollectionViewCell._bidButton()
     dynamic let moreInfoLabel = ListingsCollectionViewCell._infoLabel()
+
+    public var downloadImage: DownloadImageClosure?
+    public var cancelDownloadImage: CancelDownloadImageClosure?
 
     lazy var moreInfoSignal: RACSignal = {
         // "Jump start" both the more info button signal and the image gesture signal with nil values,
@@ -47,19 +53,19 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
     
-    override func prepareForReuse() {
+    public override func prepareForReuse() {
         super.prepareForReuse()
-        artworkImageView.sd_cancelCurrentImageLoad()
+        cancelDownloadImage?(imageView: artworkImageView)
     }
     
     func setup() {
@@ -70,10 +76,9 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         RAC(self, "lotNumberLabel.text") <~ RACObserve(self, "saleArtwork.lotNumberSignal").switchToLatest()
 
         RACObserve(self, "saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
-            if let url = (artwork as? Artwork)?.defaultImage?.thumbnailURL() {
-                self?.artworkImageView.sd_setImageWithURL(url)
-            } else {
-                self?.artworkImageView.image = nil
+            if let imageView = self?.artworkImageView {
+                let url = (artwork as? Artwork)?.defaultImage?.thumbnailURL()
+                self?.downloadImage?(url: url, imageView: imageView)
             }
         }
         

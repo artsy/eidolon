@@ -1,5 +1,5 @@
 WORKSPACE = Kiosk.xcworkspace
-SCHEME = KioskTests
+SCHEME = Kiosk
 CONFIGURATION = Debug
 APP_NAME = Kiosk
 
@@ -35,7 +35,7 @@ clean:
 	xcodebuild -workspace '$(WORKSPACE)' -scheme '$(SCHEME)' -configuration '$(CONFIGURATION)' clean
 
 test:
-	xcodebuild -workspace '$(WORKSPACE)' -scheme '$(SCHEME)' -configuration Debug build test -sdk iphonesimulator -destination $(DEVICE_HOST)
+	xcodebuild -workspace '$(WORKSPACE)' -scheme '$(SCHEME)' -configuration Debug build test -sdk iphonesimulator -destination $(DEVICE_HOST) | xcpretty -ct
 
 ipa:
 	$(PLIST_BUDDY) -c "Set CFBundleDisplayName $(BUNDLE_NAME)" $(APP_PLIST)
