@@ -55,7 +55,18 @@ public class Image: JSONAble {
     }
 
     public func thumbnailURL() -> NSURL? {
-        return urlFromPreferenceList(["medium", "large", "larger"])
+        let preferredVersions = { () -> Array<String> in
+            // This is a hack for https://www.artsy.net/artwork/keith-winstein-qrpff
+            // It's a very tall image and the "medium" version looks terribad.
+            // Will work on a more general-purpose, long-term solution with our designers.
+            if self.id == "5509bd3b7261692aeeb20500" {
+                return ["large", "larger"]
+            } else {
+                return ["medium", "large", "larger"]
+            }
+        }()
+
+        return urlFromPreferenceList(preferredVersions)
     }
 
     public func fullsizeURL() -> NSURL? {
