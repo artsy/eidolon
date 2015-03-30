@@ -156,42 +156,42 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
-  Alamofire: 4337b1484a062640f8caf6e96f03a511bf137536
-  ARAnalytics: a06e6d012b5999d8598ec9bacec45c8a8099f668
-  ARCollectionViewMasonryLayout: 40993cb65522139cb2cd6ed255c91a6caee5c4dd
+  Alamofire: 1a9f0d2332a0b5792e0c94b55e9b548d8b833587
+  ARAnalytics: e00f739e2bc994ce096a3e494295950e33b057ce
+  ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: a747cff42142ca04d1dc5cee516186f10b6c0949
   Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
   Artsy+UIFonts: c51bb3b5cbf9c1a5fe198b4385d49133c5c71f5a
   Artsy+UILabels: a7c713069e3d10144a3dc8e377bef8b2253cd766
   Artsy-UIButtons: 80a957b9479417c3be1e68d5b830de6cd2ec44cc
   balanced-ios: 4081f4464e914b7e26fe9563b1ab2b4837296c3c
-  CardFlight: f52e5e4c63cdef75536bea355f51e91e7e4b4d1a
+  CardFlight: aac74eae9761ee2c8e3dba1c9a520e7a1aa0f17f
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
-  ECPhoneNumberFormatter: 5e178027d1d43472187c3f623e7b69b89fdb3187
-  EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
-  FBSnapshotTestCase: e2914fbaabccea1dcc773d6a16b1c24540642488
-  FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
-  fmemopen: 54fc0cc9d9063de6103b40a24849818a53c8f1e5
-  HockeySDK: bfd1f5ac75938b07499c4ac12932244b72a2e70b
-  ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
+  ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
+  EDColor: 89d19a013279a5604d61650721c15f20fefaaf00
+  FBSnapshotTestCase: 26f32d8fa9eb30e9f09712ecfb097808bc79b898
+  FLKAutoLayout: 95b12c5cd9652100235140b68652f063f7437851
+  fmemopen: dc31f7d3004644b33deee95e047305d23f8cfdd4
+  HockeySDK: 51ade1aff04463137e852797d2eb4dfb2511d6a9
+  ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
   Keys: 4d91656dadf956719182facc6e2b546267fbadae
   LlamaKit: 25f47a933b6580a6fc159d95adb2e2953c7012e9
-  Mixpanel: 57314e0e7c0a63a6471618a41002da3e1408532c
-  Moya: 9547d3e8763ccf5c2378ec1b8433ab0c3338dbec
-  Nimble: a4d9d978129e83d73e33b7d8bce57443bd556068
-  Nimble-Snapshots: b2677e1b7f493eae6288cc8b71fceab4ffb496a5
-  NJKWebViewProgress: 721b57080c840c76f70ff6c2dda4f836ee1b27c1
-  ORStackView: b6ccb2d7a1730548631a8a2749ba3c1bf12168db
-  Quick: 7b89ff625e72ef931c2a9ef2f25ac3a9d2457763
-  RACAlertAction: 0187fba232f03b5f8f4f4ecc2f09b6a64e419da9
+  Mixpanel: 2ffc3c261712622a5424f58c52af723d032a3add
+  Moya: 6589de6c52d9d8e5ab0d9630b4cd5c4b7f898019
+  Nimble: 55fef248ef3703024ce431db817160ad24d89ba3
+  Nimble-Snapshots: 727fb13569953b96247053978125c528ea8c492c
+  NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
+  Quick: 1bda8b4c8d43f6b4dd69ca001918b1767b3c9c93
+  RACAlertAction: f641fa41e2b63eaea096f5ad49991f45f96a3388
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
   ReactiveCocoa: 3b5e351bb3ab233d71f0329f36a7400af30d9783
-  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
+  SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
   SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
-  Swift-RAC-Macros: 9fdd025f20cb97e8d6426bdd8eb26bbcbd3e0b21
-  SwiftyJSON: 48be7490a3989a58a3f511cd54167f0a2b466e76
+  Swift-RAC-Macros: bd1ce60b127fa2ef03a5e52a4f8b61503b626552
+  SwiftyJSON: a561c2a840121085bec8a2dfeac97a360fc66901
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
-  UIView+BooleanAnimations: 48cc98d5469ced7f7654310bff47c8ddba72c8f4
-  XNGMarkdownParser: 72c20da1aceec6df477acd78d2297fb9584e7771
+  UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
+  XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e
 
 COCOAPODS: 0.36.1
