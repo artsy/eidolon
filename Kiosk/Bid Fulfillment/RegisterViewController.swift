@@ -20,10 +20,6 @@ class RegisterViewController: UIViewController {
 
     dynamic var placingBid = true
 
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegisterViewController {
-        return storyboard.viewControllerWithID(.RegisterAnAccount) as RegisterViewController
-    }
-
     func internalNavController() -> UINavigationController? {
         return self.childViewControllers.first as? UINavigationController
     }
