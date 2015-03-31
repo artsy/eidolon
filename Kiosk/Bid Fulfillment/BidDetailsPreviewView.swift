@@ -29,7 +29,7 @@ public class BidDetailsPreviewView: UIView {
         
         RACObserve(self, "bidDetails.saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
             if let url = (artwork as? Artwork)?.defaultImage?.thumbnailURL() {
-                self?.artworkImageView.sd_setImageWithURL(url)
+                self?.bidDetails?.setImage(url: url, imageView: self!.artworkImageView)
             } else {
                 self?.artworkImageView.image = nil
             }

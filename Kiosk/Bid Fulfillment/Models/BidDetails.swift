@@ -1,4 +1,8 @@
+import UIKit
+
 @objc public class BidDetails: NSObject {
+    public typealias DownloadImageClosure = (url: NSURL, imageView: UIImageView) -> ()
+
     public dynamic var newUser: NewUser = NewUser()
     public dynamic var saleArtwork: SaleArtwork?
 
@@ -6,6 +10,10 @@
     public dynamic var bidderPIN: String?
     public dynamic var bidAmountCents: NSNumber?
     public dynamic var bidderID: String?
+
+    public var setImage: DownloadImageClosure = { (url, imageView) -> () in
+        imageView.sd_setImageWithURL(url)
+    }
 
     public init(saleArtwork: SaleArtwork?, paddleNumber: String?, bidderPIN: String?, bidAmountCents:Int?) {
         self.saleArtwork = saleArtwork
