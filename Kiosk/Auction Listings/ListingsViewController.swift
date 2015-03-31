@@ -18,7 +18,9 @@ public class ListingsViewController: UIViewController {
         return signal.deliverOn(scheduler)
     }
     public var logSync = { (date: AnyObject!) -> () in
-        println("Syncing on \(date)")
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+            logger.log("Syncing on \(date)")
+        #endif
     }
     public var downloadImage: ListingsCollectionViewCell.DownloadImageClosure = { (url, imageView) -> () in
         if let url = url {

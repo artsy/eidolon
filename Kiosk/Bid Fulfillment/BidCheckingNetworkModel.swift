@@ -43,7 +43,7 @@ public class BidCheckingNetworkModel: NSObject {
         let updatedSaleArtworkSignal = getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
             self?.pollRequests++
 
-            println("Polling \(self?.pollRequests) of \(self?.maxPollRequests) for updated sale artwork")
+            logger.log("Polling \(self?.pollRequests) of \(self?.maxPollRequests) for updated sale artwork")
 
             let saleArtwork = saleObject as? SaleArtwork
             let updatedBidCents = saleArtwork?.saleHighestBid?.amountCents ?? 0

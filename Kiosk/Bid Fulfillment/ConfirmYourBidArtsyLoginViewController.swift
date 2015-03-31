@@ -69,7 +69,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
                 } ?? RACSignal.empty()
 
             }.doError { [weak self] (error) -> Void in
-                println("Error logging in: \(error.localizedDescription)")
+                logger.log("Error logging in: \(error.localizedDescription)")
                 logger.log("Error Logging in, likely bad auth creds, email = \(self?.emailTextField.text)")
                 self?.showAuthenticationError()
             }
@@ -129,7 +129,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     func sendForgotPasswordRequest(email: String) {
         let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
         XAppRequest(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { [weak self] (json) -> Void in
-            println("sent request")
+            logger.log("Sent forgot password request")
         }
     }
 

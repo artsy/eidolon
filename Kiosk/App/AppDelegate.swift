@@ -3,7 +3,14 @@ import ARAnalytics
 import SDWebImage
 import Keys
 
-var logger: Logger!
+
+func logPath() -> NSURL {
+    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as NSURL
+    return docs.URLByAppendingPathComponent("logger.txt")
+}
+
+let logger = Logger(destination: logPath())
+
 
 @UIApplicationMain
 public class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -48,8 +55,6 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         setupHelpButton()
         setupUserAgent()
 
-        logger = Logger(destination: logPath())
-
         logger.log("App Started")
         ARAnalytics.event("Session Started")
         return true
@@ -67,11 +72,6 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = NSUserDefaults.standardUserDefaults()
         let userAgentDict = ["UserAgent" as NSObject : agentString]
         defaults.registerDefaults(userAgentDict)
-    }
-
-    func logPath() -> NSURL {
-        let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as NSURL
-        return docs.URLByAppendingPathComponent("logger.txt")
     }
 }
 
