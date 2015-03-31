@@ -20,6 +20,11 @@ public enum SegueIdentifier : String {
     case ShowAdminOptions = "Show Admin Options"
     case ShowLoadingView = "Show Loading View"
     case ShowSaleArtworkDetails = "Show Sale Artwork Details"
+    case UNUSEDManualcreditcard = "UNUSED Manual credit card"
+    case UNUSEDPushtoSwipeCreditCard = "UNUSED Push to Swipe Credit Card"
+    case UNUSEDPushtoemail = "UNUSED Push to email"
+    case UNUSEDPushtoentermobilenumber = "UNUSED Push to enter mobile number"
+    case UNUSEDPushtopassword = "UNUSED Push to password"
     case ZoomIntoArtwork = "Zoom Into Artwork"
 }
 

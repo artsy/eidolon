@@ -82,7 +82,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
 
         XAppRequest(endpoint, provider: Provider.sharedProvider, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { (_) -> Void in
             // Necessary to subscribe to the actual signal. This should be in a RACCommand of the button, instead. 
-            println("sent")
+            logger.log("Sent forgot PIN request")
         }
     }
 

@@ -6,16 +6,18 @@ import Nimble_Snapshots
 
 class LoadingViewControllerTests: QuickSpec {
     override func spec() {
-        let storyboard =  UIStoryboard.fulfillment()
         var subject: LoadingViewController!
+
+        beforeEach {
+            subject = testLoadingViewController()
+        }
 
         describe("default") {
             beforeEach {
-                subject = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
+
                 subject.bidderNetworkModel = ErrorBidderNetworkModel()
                 subject.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
                 subject.placeBidNetworkModel = DummyPlaceBidNetworkModel()
-                subject.details = BidDetails.stubbedBidDetails()
                 subject.performNetworking = false
                 subject.animate = false
             }
@@ -33,11 +35,9 @@ class LoadingViewControllerTests: QuickSpec {
 
         describe("errors") {
             beforeEach {
-                subject = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
                 subject.bidderNetworkModel = ErrorBidderNetworkModel()
                 subject.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
                 subject.placeBidNetworkModel = DummyPlaceBidNetworkModel()
-                subject.details = BidDetails.stubbedBidDetails()
             }
 
             it("correctly placing a bid") {
@@ -53,11 +53,9 @@ class LoadingViewControllerTests: QuickSpec {
 
         describe("ending") {
             beforeEach {
-                subject = storyboard.viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
                 subject.bidderNetworkModel = SuccessBidderNetworkModel()
                 subject.bidCheckingModel = DummyBidCheckingNetworkModel(details: BidDetails(string: ""), provider: Provider.StubbingProvider())
                 subject.placeBidNetworkModel = DummyPlaceBidNetworkModel()
-                subject.details = BidDetails.stubbedBidDetails()
             }
 
             it("placing bid success highest") {
@@ -99,6 +97,21 @@ class LoadingViewControllerTests: QuickSpec {
             }
         }
     }
+}
+
+let loadingViewControllerTestImage = UIImage.testImage(named: "artwork", ofType: "jpg")
+
+func testLoadingViewController() -> LoadingViewController {
+    let controller = UIStoryboard.fulfillment().viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
+    controller.bidDetails = {
+        let bidDetails = BidDetails.stubbedBidDetails()
+        bidDetails.setImage = { (_, imageView) -> () in
+            imageView.image = loadingViewControllerTestImage
+        }
+        return bidDetails
+    }
+
+    return controller
 }
 
 public class SuccessBidderNetworkModel: BidderNetworkModel {

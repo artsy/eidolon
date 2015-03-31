@@ -18,7 +18,9 @@ public class ListingsViewController: UIViewController {
         return signal.deliverOn(scheduler)
     }
     public var logSync = { (date: AnyObject!) -> () in
-        println("Syncing on \(date)")
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+            logger.log("Syncing on \(date)")
+        #endif
     }
     public var downloadImage: ListingsCollectionViewCell.DownloadImageClosure = { (url, imageView) -> () in
         if let url = url {
@@ -169,7 +171,7 @@ public class ListingsViewController: UIViewController {
             developmentEnvironment = true
         #else
             if let ssid = getSSID() {
-                let developmentSSIDs = ["Ash's Wi-Fi Network", "Art.sy", "Artsy2"] as NSArray
+                let developmentSSIDs = ["Artsy", "Artsy2"] as NSArray
                 developmentEnvironment = developmentSSIDs.containsObject(ssid)
             }
         #endif

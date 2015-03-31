@@ -47,7 +47,7 @@ public class FulfillmentNavigationController: UINavigationController {
             newUser?.name = self?.user?.name
 
         } .doError { [weak self] (error) -> Void in
-            println("error, the authentication for admin is likely wrong")
+            logger.log("error, the authentication for admin is likely wrong")
             return
         }
     }

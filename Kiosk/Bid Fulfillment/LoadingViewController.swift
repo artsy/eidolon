@@ -20,13 +20,12 @@ public class LoadingViewController: UIViewController {
     public var bidderNetworkModel: BidderNetworkModel!
     public var bidCheckingModel: BidCheckingNetworkModel!
     public var placeBidNetworkModel: PlaceBidNetworkModel!
-    public var details: BidDetails?
 
     @IBOutlet public weak var backToAuctionButton: SecondaryActionButton!
     @IBOutlet public weak var placeHigherBidButton: ActionButton!
 
-    func bidDetails() -> BidDetails {
-        return details ?? self.fulfillmentNav().bidDetails
+    public lazy var bidDetails: (() -> (BidDetails)) = {
+        return (self as UIViewController).fulfillmentNav().bidDetails
     }
 
     override public func viewDidLoad() {

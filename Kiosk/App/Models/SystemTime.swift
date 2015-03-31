@@ -20,7 +20,7 @@ public class SystemTime {
                 }
                 
             }.doError { (error) -> Void in
-                println("Error: \(error.localizedDescription)")
+                logger.log("Error contacting Artsy servers: \(error.localizedDescription)")
             }
     }
 
