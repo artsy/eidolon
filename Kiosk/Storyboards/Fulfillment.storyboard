@@ -366,7 +366,7 @@
                         <outlet property="spinner" destination="3kx-gQ-2K5" id="qNd-VG-O2Y"/>
                         <outlet property="titleLabel" destination="ZJ3-lq-NnT" id="6uz-yX-WYe"/>
                         <segue destination="b7X-gR-AEL" kind="push" identifier="RegisterCreditCardToPostal" id="lC0-vU-FuX"/>
-                        <segue destination="MZV-Pg-x2N" kind="push" id="Z42-pl-Kbe"/>
+                        <segue destination="MZV-Pg-x2N" kind="push" identifier="UNUSED Manual credit card" id="Z42-pl-Kbe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PvS-Gg-Iup" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -914,7 +914,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="sGF-g9-EVG"/>
                     <connections>
-                        <segue destination="vkP-Fx-jvL" kind="push" id="IcG-nA-jcR"/>
+                        <segue destination="vkP-Fx-jvL" kind="push" identifier="UNUSED Push to enter mobile number" id="IcG-nA-jcR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Vn-wU-8Ne" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1315,7 +1315,7 @@
                     <connections>
                         <outlet property="confirmButton" destination="fHv-gs-M6J" id="83o-ao-zgm"/>
                         <outlet property="emailTextField" destination="ZuQ-9i-7RI" id="wK1-5L-Ohb"/>
-                        <segue destination="rWY-Fx-Onm" kind="push" id="wLH-WQ-lht"/>
+                        <segue destination="rWY-Fx-Onm" kind="push" identifier="UNUSED Push to password" id="wLH-WQ-lht"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XuT-69-lah" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1364,7 +1364,7 @@
                         <outlet property="confirmButton" destination="lIZ-bA-if1" id="IR7-DC-fkG"/>
                         <outlet property="passwordTextField" destination="IOI-xI-qX8" id="HV5-gm-r02"/>
                         <outlet property="subtitleLabel" destination="ZAU-fw-FVK" id="BDj-YO-CPk"/>
-                        <segue destination="HtL-zn-13v" kind="push" id="fEp-SB-tlp"/>
+                        <segue destination="HtL-zn-13v" kind="push" identifier="UNUSED Push to Swipe Credit Card" id="fEp-SB-tlp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="otW-7h-YjL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1415,7 +1415,7 @@
                     <connections>
                         <outlet property="confirmButton" destination="FIP-Hd-nwk" id="Bsf-Eh-DQw"/>
                         <outlet property="numberTextField" destination="0kr-VJ-i2m" id="uow-qi-TjH"/>
-                        <segue destination="awQ-xt-Guo" kind="push" id="uV3-To-Zwe"/>
+                        <segue destination="awQ-xt-Guo" kind="push" identifier="UNUSED Push to email" id="uV3-To-Zwe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J1J-UN-yt7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1552,9 +1552,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Qpe-mM-52j"/>
-        <segue reference="hvW-mC-OYp"/>
-        <segue reference="NOJ-G3-crU"/>
         <segue reference="A1R-R2-CSF"/>
+        <segue reference="NOJ-G3-crU"/>
+        <segue reference="Qpe-mM-52j"/>
+        <segue reference="PK6-h9-FCm"/>
     </inferredMetricsTieBreakers>
 </document>
