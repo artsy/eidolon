@@ -80,6 +80,13 @@ lane :deploy do
   #   identity: "iPhone Distribution: ART SY INC",
   # })
 
+  # Push to Hockey
+  hockey({
+    api_token: ENV['HOCKEY_API_TOKEN'],
+    notes_type: 1, # Specifies notes are in markdown format
+    notes: release_notes,
+  })
+
   # Tag release and push to GitHub
   # sh "cd .. ; git tag #{version_number} ; git push --tags"
 end
