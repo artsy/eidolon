@@ -46,14 +46,21 @@ lane :oss do
 end
 
 lane :deploy do 
-  ipa({
-    workspace: "Kiosk.xcworkspace",
-    configuration: "Release",
-    scheme: "Kiosk",
-    destination: "build",
-    embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
-    identity: "iPhone Distribution: ART SY INC",
+  build_number = Time.new.strftime("%Y.%m.%d")
+  increment_build_number({
+    build_number: build_number,
+    xcodeproj: './Kiosk.xcodeproj',
   })
+
+
+  # ipa({
+  #   workspace: "Kiosk.xcworkspace",
+  #   configuration: "Release",
+  #   scheme: "Kiosk",
+  #   destination: "build",
+  #   embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
+  #   identity: "iPhone Distribution: ART SY INC",
+  # })
 end
 
 # You can define as many lanes as you want
