@@ -79,6 +79,9 @@ lane :deploy do
   #   embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
   #   identity: "iPhone Distribution: ART SY INC",
   # })
+
+  # Tag release and push to GitHub
+  # sh "cd .. ; git tag #{version_number} ; git push --tags"
 end
 
 # You can define as many lanes as you want
