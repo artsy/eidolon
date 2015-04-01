@@ -22,8 +22,8 @@ end
 lane :oss do
   keys = ['ArtsyAPIClientSecret', 
     'ArtsyAPIClientKey', 
-    'HockeyProductionSecret', '
-    HockeyBetaSecret', 
+    'HockeyProductionSecret', 
+    'HockeyBetaSecret', 
     'MixpanelProductionAPIClientKey', 
     'MixpanelStagingAPIClientKey', 
     'CardflightAPIClientKey', 
@@ -45,6 +45,16 @@ lane :oss do
     sh "cd .. ; #{commands}"
 end
 
+lane :deploy do 
+  ipa({
+    workspace: "Kiosk.xcworkspace",
+    configuration: "Release",
+    scheme: "Kiosk",
+    destination: "build",
+    embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
+    identity: "iPhone Distribution: ART SY INC",
+  })
+end
 
 # You can define as many lanes as you want
 
