@@ -19,6 +19,31 @@ lane :test do
   )
 end
 
+lane :oss do
+  keys = ['ArtsyAPIClientSecret', 
+    'ArtsyAPIClientKey', 
+    'HockeyProductionSecret', '
+    HockeyBetaSecret', 
+    'MixpanelProductionAPIClientKey', 
+    'MixpanelStagingAPIClientKey', 
+    'CardflightAPIClientKey', 
+    'CardflightAPIStagingClientKey', 
+    'CardflightMerchantAccountToken', 
+    'CardflightMerchantAccountStagingToken', 
+    'BalancedMarketplaceToken', 
+    'BalancedMarketplaceStagingToken']
+
+    commands = keys.map { |key|
+      command = "bundle exec pod keys set #{key} '-'"
+      if key == keys.first
+        command += " Eidolon"
+      end
+
+      command
+    }.join(' ; ')
+
+    sh "cd .. ; #{commands}"
+end
 
 
 # You can define as many lanes as you want
