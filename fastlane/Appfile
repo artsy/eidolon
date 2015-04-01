@@ -1,0 +1,7 @@
+app_identifier "net.artsy.kiosk.beta" # The bundle identifier of your app
+apple_id "it+appleenterprise@artsymail.com" # Your Apple email address
+
+# You can uncomment the lines below and add your own 
+# team selection in case you're in multiple teams
+# team_name "Felix Krause"
+# team_id "Q2CBPJ58CA"
