@@ -56,13 +56,19 @@ lane :deploy do
 
   # Set version number to the one at the top of the CHANGELOG
   readme = File.read("../docs/CHANGELOG.md")
-  first_line = readme.split("\n## ").first.split("\n").first
+  latest_version = readme.split("\n## ").first
+  first_line = latest_version.split("\n").first
   version_number = first_line.split(" ")[1]
 
   increment_version_number(
     release_task: version_number,
     xcodeproj: './Kiosk.xcodeproj',
   )
+
+  # Generate release notes from CHANGELOG
+  release_notes = latest_version.split("\n")[1..-1].join("\n")
+
+
 
   # Build
   # ipa({
