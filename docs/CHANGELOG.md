@@ -1,27 +1,28 @@
-# End User Changes
+## 3.3.0 April 1 2015
+* New deploy infrastructure
 
-### 3.2 March 26 2015
+## 3.2.0 March 26 2015
 * Fix for lots with multiple images
 * Help menu bug fixed
 * Interface messaging improvements
 * New icon
 
-### 3.1.1 Feb 27 2015
+## 3.1.1 Feb 27 2015
 * Buyers Premium
 
-### 2.3.2 21 Nov 2014
+## 2.3.2 21 Nov 2014
 * Reserve-handling - @ashfurrow
 
-### 2.3.1 14th Nov 2014
+## 2.3.1 14th Nov 2014
 * Fix for requesting a PIN - @orta
 
-### 2.3.0 14th Nov 2014
+## 2.3.0 14th Nov 2014
 
 * Next buttons function on registration flow - @ash
 * A-Z is ordered correctly - @orta
 * Artwork blurb is now included :D - @orta
 
-### 2.1.1 12th Nov 2014
+## 2.1.1 12th Nov 2014
 
 * Markdown supported in Sale Artwork view - @orta
 * Artwork scrolls correctly in Sale Artwork view - @orta
@@ -29,37 +30,37 @@
 * Sale Artwork Detail View shows the additional info, not blurb - @orta
 * More info buttons work - @orta
 
-### 2.1.0 10th Nov 2014
+## 2.1.0 10th Nov 2014
 
 * Improved manual input handling - @orta
 * Fixed messages at the end of registration flow - @orta
 * Potential credit card handler fix - @orta
 
-### 2.0.0 5th Nov 2014
+## 2.0.0 5th Nov 2014
 
 * Further improvements to details view - @ash
 * Artwork details view - @ash
 * Fix for table'd artwork layout - @ash
 * Support typing in credit card details mainually - @orta
 
-### 1.1.1 4th Nov 2014
+## 1.1.1 4th Nov 2014
 
 * Admin visual overhaul - @orta
 * Modified underpinnings necessary for detail view – @ash
 * More work on details view – @ash
 
-### 1.1 3rd Nov 2014
+## 1.1.0 3rd Nov 2014
 
 * Admin section for testing Cards - @orta
 * Initial work on Artwork details view - @ash
 * If you're outbid you can bid again straight away - @orta
 
-### 1.0.1 3rd Nov 2014
+## 1.0.1 3rd Nov 2014
 
 * Admin can be accessed when networking is down - @orta
 * Offline screen - @orta
 
-### 1.0.0 21st Oct 2014
+## 1.0.0 21st Oct 2014
 
 * Help Changes around laying popovers - @laura
 * Removed the ability to have a + in an email - @orta
@@ -67,7 +68,7 @@
 * Panic web mode shows a correct X to close button - @orta
 * Analyics - @orta
 
-### 0.1.0 21st Oct 2014
+## 0.1.0 21st Oct 2014
 
 * You can create mutliple users in one session - @orta / @ash
 * Only Registering has a spinner - @orta
@@ -75,7 +76,7 @@
 * Improved networking error logging - @orta
 * Spruced up Help menu - @ash
 
-### 0.0.9 20th Oct 2014
+## 0.0.9 20th Oct 2014
 
 * Buttons are 50px - @1aura
 * Admin section can turn off dev buttons - @orta
@@ -89,7 +90,7 @@
 * Show conditions of Sale - @ash
 * Show Credit Card processing information - @orta
 
-### 0.0.8 - 20th Oct 2014
+## 0.0.8 - 20th Oct 2014
 
 * After placing a bid, the listings UI is immediately updated - @ash
 * UI fixes for tabular view – @ash
@@ -104,7 +105,7 @@
 * Popover animates into place - @orta
 
 
-### 0.0.7 - 17th Oct 2014
+## 0.0.7 - 17th Oct 2014
 
 * User Registration - @orta + @ash
 * User Bidding - @orta
@@ -117,7 +118,7 @@
 * Requesting lost password works - @orta
 * Requesting lost PIN works - @orta
 
-### 0.0.5 - 13th Oct 2014
+## 0.0.5 - 13th Oct 2014
 
 * Bid Detail Previews are shown throughout - @orta
 * Use italics for title, and no italics for dates - @orta
@@ -130,7 +131,7 @@
 * Fix bug where Delete and Clear keypad buttons were not working - @1aurabrown
 * Re-name some of the sort tabs to shorter names @1aurabrown
 
-### 0.0.4 - 9th Oct 2014
+## 0.0.4 - 9th Oct 2014
 
 * Textfields use the right fonts - @1aurabrown
 * Bid validations are correct on the place bid view - @1aura
@@ -139,12 +140,12 @@
 * Added a button to sign up - @orta
 * Registration flow set up - @orta
 
-### 0.0.3 - 7th Oct 2014
+## 0.0.3 - 7th Oct 2014
 
 * Changed buttons & fonts on place bid view - @1aurabrown
 * Added support for logging via PIN & bidder / number - @orta
 
-### 0.0.2 - 2 Oct 2014
+## 0.0.2 - 2 Oct 2014
 
 * Artwork Listings can be browsed - @ash
 * Most confirm / enter buttons now show they're disabled - @orta
