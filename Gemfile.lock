@@ -200,5 +200,4 @@ DEPENDENCIES
   cocoapods-keys!
   fastlane
   sbconstants
-  shenzhen
   xcpretty
