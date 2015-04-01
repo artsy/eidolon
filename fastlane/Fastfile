@@ -46,13 +46,25 @@ lane :oss do
 end
 
 lane :deploy do 
+
+  # Increment build number to current date
   build_number = Time.new.strftime("%Y.%m.%d")
   increment_build_number({
     build_number: build_number,
     xcodeproj: './Kiosk.xcodeproj',
   })
 
+  # Set version number to the one at the top of the CHANGELOG
+  readme = File.read("../docs/CHANGELOG.md")
+  first_line = readme.split("\n## ").first.split("\n").first
+  version_number = first_line.split(" ")[1]
 
+  increment_version_number(
+    release_task: version_number,
+    xcodeproj: './Kiosk.xcodeproj',
+  )
+
+  # Build
   # ipa({
   #   workspace: "Kiosk.xcworkspace",
   #   configuration: "Release",
