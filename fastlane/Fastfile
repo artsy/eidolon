@@ -9,8 +9,12 @@
 # Update this, if you use features of a newer version
 fastlane_version "0.4.2" 
 
-before_all do
-
+lane :build_for_test do
+  xcodebuild(
+    scheme: 'Kiosk',
+    workspace: 'Kiosk.xcworkspace',
+    destination: "OS=8.1,name=iPad Air",
+  )
 end
 
 lane :test do
@@ -45,6 +49,10 @@ lane :oss do
     sh "cd .. ; #{commands}"
 end
 
+lane :build_for_deploy do
+  # TODO
+end
+
 lane :deploy do 
 
   # Increment build number to current date
@@ -68,48 +76,38 @@ lane :deploy do
   # Generate release notes from CHANGELOG
   release_notes = latest_version.split("\n")[1..-1].join("\n")
 
-  slack(
-    message: "There is a new version of the Kiosk app available. Download it at http://artsy.net/kioskbeta",
-    success: true,        # optional, defaults to true
-    payload: {            # optional, lets you specify any number of your own Slack attachments
-      'Version' => version_number,
-      'What\'s new' => release_notes,
-    },
-    default_payloads: [],
-  )
+  # Post message to slack
+  # slack(
+  #   message: "There is a new version of the Kiosk app available. Download it at http://artsy.net/kioskbeta",
+  #   success: true,        # optional, defaults to true
+  #   payload: {            # optional, lets you specify any number of your own Slack attachments
+  #     'Version' => version_number,
+  #     'What\'s new' => release_notes,
+  #   },
+  #   default_payloads: [],
+  # )
+
   # Build
-  # ipa({
-  #   workspace: "Kiosk.xcworkspace",
-  #   configuration: "Release",
-  #   scheme: "Kiosk",
-  #   destination: "build",
-  #   embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
-  #   identity: "iPhone Distribution: ART SY INC",
-  # })
+  ipa({
+    workspace: "Kiosk.xcworkspace",
+    configuration: "Release",
+    scheme: "Kiosk",
+    destination: "build",
+    embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
+    identity: "iPhone Distribution: ART SY INC",
+  })
 
   # Push to Hockey
-  # hockey({
-  #   api_token: ENV['HOCKEY_API_TOKEN'],
-  #   notes_type: 1, # Specifies notes are in markdown format
-  #   notes: release_notes,
-  # })
+  hockey({
+    api_token: ENV['HOCKEY_API_TOKEN'],
+    notes_type: 1, # Specifies notes are in markdown format
+    notes: release_notes,
+  })
 
   # Tag release and push to GitHub
-  # sh "cd .. ; git tag #{version_number} ; git push --tags"
+  sh "cd .. ; git tag #{version_number} ; git push --tags"
 end
 
-# You can define as many lanes as you want
-
-after_all do |lane|
-  # This block is called, only if the executed lane was successful
-  # slack({
-  #   message: "Successfully deployed new App Update for [App](http://link.com).",
-  #   success: true,
-  #   channel: 'development'
-  # })
-end
-
-
-error do |lane, exception|
-  # Something bad happened
+lane :storyboard_ids do
+  sh "cd .. ; bundle exec sbconstants Kiosk/Storyboards/StoryboardIdentifiers.swift --source-dir Kiosk/Storyboards --swift"
 end
