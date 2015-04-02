@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/KrauseFx/fastlane.git
-  revision: 03c2aa98181974990810c9106e2d27d087bfba87
+  remote: https://github.com/ashfurrow/fastlane.git
+  revision: 9749f28833dcdd3580b739d0b4e010f81997cb69
   specs:
     fastlane (0.4.2)
       aws-sdk (~> 1.0)

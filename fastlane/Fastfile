@@ -50,7 +50,11 @@ lane :oss do
 end
 
 lane :build_for_deploy do
-  # TODO
+  xcodebuild(
+    scheme: 'Kiosk',
+    workspace: 'Kiosk.xcworkspace',
+    sdk: "iphoneos8.2",
+  )
 end
 
 lane :deploy do 
@@ -76,6 +80,24 @@ lane :deploy do
   # Generate release notes from CHANGELOG
   release_notes = latest_version.split("\n")[1..-1].join("\n")
 
+  # Build
+  ipa({
+    workspace: "Kiosk.xcworkspace",
+    configuration: "Release",
+    scheme: "Kiosk",
+    destination: "build",
+    embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
+    identity: "iPhone Distribution: ART SY INC",
+    'no-clean' => ' ',
+  })
+
+  # Push to Hockey
+  hockey({
+    api_token: ENV['HOCKEY_API_TOKEN'],
+    notes_type: 1, # Specifies notes are in markdown format
+    notes: release_notes,
+  })
+
   # Post message to slack
   # slack(
   #   message: "There is a new version of the Kiosk app available. Download it at http://artsy.net/kioskbeta",
@@ -86,23 +108,6 @@ lane :deploy do
   #   },
   #   default_payloads: [],
   # )
-
-  # Build
-  ipa({
-    workspace: "Kiosk.xcworkspace",
-    configuration: "Release",
-    scheme: "Kiosk",
-    destination: "build",
-    embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
-    identity: "iPhone Distribution: ART SY INC",
-  })
-
-  # Push to Hockey
-  hockey({
-    api_token: ENV['HOCKEY_API_TOKEN'],
-    notes_type: 1, # Specifies notes are in markdown format
-    notes: release_notes,
-  })
 
   # Tag release and push to GitHub
   sh "cd .. ; git tag #{version_number} ; git push --tags"
