@@ -7,14 +7,15 @@ before_install:
   - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
   - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
   - chmod 600 ~/.netrc
+  - xcrun instruments -w "iPad Air (8.1 Simulator)" || echo "(Pre)Launched the simulator."
 install: 
   - bundle install
-  - make prepare_ci
-  - make bundle
+  - bundle exec pod repo add artsy https://github.com/artsy/Specs.git
+  - bundle exec fastlane oss
 before_script:
-  - travis_retry make ci
+  - travis_retry bundle exec fastlane build_for_test
 script:
-  - make test
+  - bundle exec fastlane test
 notifications:
   slack: 
     secure: dHJSmLJAwoLRi5inP5btz8fP6pbT/BIF89CTOFmnNO6mLEM7J++PZfvj4cg2ojM3jfjFtQXJE5CuqrOaLeXhN4uteIu91ust1sgkNdkExsQvOVgBAZhcsLZLtMQpytrVs34FXfdirAZv/S750J3d8XWr7yCZThqRkVuIy0CB5vM=

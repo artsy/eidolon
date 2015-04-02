@@ -1,0 +1,106 @@
+fastlane_version "0.4.2" 
+
+lane :build_for_test do
+  xcodebuild(
+    scheme: 'Kiosk',
+    destination: "OS=8.1,name=iPad Air",
+  )
+end
+
+lane :test do
+  xctest(
+    destination: "OS=8.1,name=iPad Air",
+  )
+end
+
+lane :oss do
+  keys = ['ArtsyAPIClientSecret', 
+    'ArtsyAPIClientKey', 
+    'HockeyProductionSecret', 
+    'HockeyBetaSecret', 
+    'MixpanelProductionAPIClientKey', 
+    'MixpanelStagingAPIClientKey', 
+    'CardflightAPIClientKey', 
+    'CardflightAPIStagingClientKey', 
+    'CardflightMerchantAccountToken', 
+    'CardflightMerchantAccountStagingToken', 
+    'BalancedMarketplaceToken', 
+    'BalancedMarketplaceStagingToken']
+
+    commands = keys.map { |key|
+      command = "bundle exec pod keys set #{key} '-'"
+      if key == keys.first
+        command += " Eidolon"
+      end
+
+      command
+    }.join(' ; ')
+
+    sh "cd .. ; #{commands} ; pod install"
+end
+
+lane :build_for_deploy do
+  xcodebuild(
+    sdk: "iphoneos",
+    configuration: "release",
+  )
+end
+
+lane :deploy do 
+
+  # Increment build number to current date
+  build_number = Time.new.strftime("%Y.%m.%d")
+  increment_build_number({
+    build_number: build_number,
+    xcodeproj: './Kiosk.xcodeproj',
+  })
+
+  # Set version number to the one at the top of the CHANGELOG
+  readme = File.read("../docs/CHANGELOG.md")
+  latest_version = readme.split("\n## ").first
+  first_line = latest_version.split("\n").first
+  version_number = first_line.split(" ")[1]
+
+  increment_version_number(
+    release_task: version_number,
+    xcodeproj: './Kiosk.xcodeproj',
+  )
+
+  # Generate release notes from CHANGELOG
+  release_notes = latest_version.split("\n")[1..-1].join("\n")
+
+  # Build
+  ipa({
+    configuration: "Release",
+    destination: "build",
+    embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
+    identity: "iPhone Distribution: ART SY INC",
+    clean: false,
+  })
+
+  # Push to Hockey
+  markdown_type = 1
+  hockey({
+    api_token: ENV['HOCKEY_API_TOKEN'],
+    notes_type: markdown_type,
+    notes: release_notes,
+  })
+
+  # Post message to slack
+  slack(
+    message: "There is a new version of the Kiosk app available. Download it at http://artsy.net/kioskbeta",
+    success: true,        # optional, defaults to true
+    payload: {            # optional, lets you specify any number of your own Slack attachments
+      'Version' => version_number,
+      'What\'s new' => release_notes,
+    },
+    default_payloads: [],
+  )
+
+  # Tag release and push to GitHub
+  sh "cd .. ; git tag #{version_number} ; git push --tags"
+end
+
+lane :storyboard_ids do
+  sh "cd .. ; bundle exec sbconstants Kiosk/Storyboards/StoryboardIdentifiers.swift --source-dir Kiosk/Storyboards --swift"
+end
