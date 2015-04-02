@@ -9,13 +9,12 @@ before_install:
   - chmod 600 ~/.netrc
 install: 
   - bundle install
-  - fastlane oss
   - bundle exec pod repo add artsy https://github.com/artsy/Specs.git
-  - bundle exec pod install
+  - bundle exec fastlane oss
 before_script:
-  - travis_retry fastlane build
+  - travis_retry bundle exec fastlane build_for_test
 script:
-  - fastlane test
+  - bundle exec fastlane test
 notifications:
   slack: 
     secure: dHJSmLJAwoLRi5inP5btz8fP6pbT/BIF89CTOFmnNO6mLEM7J++PZfvj4cg2ojM3jfjFtQXJE5CuqrOaLeXhN4uteIu91ust1sgkNdkExsQvOVgBAZhcsLZLtMQpytrVs34FXfdirAZv/S750J3d8XWr7yCZThqRkVuIy0CB5vM=

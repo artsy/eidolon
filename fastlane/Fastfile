@@ -46,7 +46,7 @@ lane :oss do
       command
     }.join(' ; ')
 
-    sh "cd .. ; #{commands}"
+    sh "cd .. ; #{commands} ; pod install"
 end
 
 lane :build_for_deploy do

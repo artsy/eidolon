@@ -29,7 +29,7 @@ have API access and will use blanks for API keys.
 git clone https://github.com/artsy/eidolon.git
 cd eidolon
 bundle install
-fastlane oss
+bundle exec fastlane oss
 ```
 
 Alrighty! We're ready to go!
