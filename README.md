@@ -13,14 +13,23 @@ Project Status
 Downloading the Code
 ----------------
 
+You'll need a few things before we get started. Make sure you have Xcode installed from 
+there App Store or wherever. Then run the following two commands to install Xcode's
+command line tools and `bundler`, if you don't have that yet.
+
+```sh
+[sudo] gem install bundler
+xcode-select --install
+```
+
 The following commands will set up Eidolon with the expectation that you don't 
-have API access and will use blanks for API keys. (Note that you'll need Xcode's
-command line tools installed first.)
+have API access and will use blanks for API keys. 
 
 ```sh
 git clone https://github.com/artsy/eidolon.git
 cd eidolon
-make oss
+bundle install
+fastlane oss
 ```
 
 Alrighty! We're ready to go!
