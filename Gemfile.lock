@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/ashfurrow/fastlane.git
-  revision: 9749f28833dcdd3580b739d0b4e010f81997cb69
+  revision: 4db374158b0dce999db47135c55398c44e21b60d
   specs:
     fastlane (0.4.2)
       aws-sdk (~> 1.0)
@@ -85,7 +85,7 @@ GEM
     colored (1.2)
     commander (4.3.2)
       highline (~> 1.7.1)
-    credentials_manager (0.1.3)
+    credentials_manager (0.2.1)
       colored
       highline
       security
@@ -97,10 +97,10 @@ GEM
       security (~> 0.1.2)
       term-ansicolor (~> 1.0.7)
       terminal-table (~> 1.4.5)
-    deliver (0.8.1)
+    deliver (0.8.2)
       excon
       fastimage (~> 1.6.3)
-      fastlane_core (>= 0.2.0)
+      fastlane_core (>= 0.4.1)
       nokogiri (~> 1.6.5)
       plist (~> 3.1.0)
       prawn
@@ -118,12 +118,13 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     fastimage (1.6.8)
       addressable (~> 2.3, >= 2.3.5)
-    fastlane_core (0.3.4)
+    fastlane_core (0.4.1)
       babosa
       capybara (~> 2.4.3)
       colored
       commander (>= 4.1.0)
-      credentials_manager (>= 0.1.3)
+      credentials_manager (>= 0.2.1)
+      excon (~> 0.45.0)
       highline
       json
       multi_json
@@ -223,7 +224,7 @@ GEM
     xcodeproj (0.23.1)
       activesupport (>= 3)
       colored (~> 1.2)
-    xcpretty (0.1.7)
+    xcpretty (0.1.8)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 

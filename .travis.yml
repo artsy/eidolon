@@ -7,6 +7,7 @@ before_install:
   - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
   - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
   - chmod 600 ~/.netrc
+  - xcrun instruments -w "iPad Air (8.1 Simulator)" || echo "(Pre)Launched the simulator."
 install: 
   - bundle install
   - bundle exec pod repo add artsy https://github.com/artsy/Specs.git
