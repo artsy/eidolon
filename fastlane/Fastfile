@@ -53,7 +53,8 @@ lane :build_for_deploy do
   xcodebuild(
     scheme: 'Kiosk',
     workspace: 'Kiosk.xcworkspace',
-    sdk: "iphoneos8.2",
+    sdk: "iphoneos",
+    configuration: "release",
   )
 end
 
