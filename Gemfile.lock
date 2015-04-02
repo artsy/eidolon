@@ -1,13 +1,13 @@
 GIT
-  remote: https://github.com/ashfurrow/fastlane.git
-  revision: 4db374158b0dce999db47135c55398c44e21b60d
+  remote: https://github.com/KrauseFx/fastlane.git
+  revision: 641daaf94a794bd3a2f24ca2c7ac409dd665f858
   specs:
-    fastlane (0.4.2)
+    fastlane (0.5.0)
       aws-sdk (~> 1.0)
       cert (>= 0.1.3)
       cupertino (~> 1.3, >= 1.3.1)
       deliver (>= 0.7.13)
-      fastlane_core (>= 0.3.4)
+      fastlane_core (>= 0.4.0)
       frameit (>= 0.2.3)
       nokogiri (~> 1.6.5)
       pem (>= 0.3.8)
