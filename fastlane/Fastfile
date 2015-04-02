@@ -100,15 +100,15 @@ lane :deploy do
   })
 
   # Post message to slack
-  # slack(
-  #   message: "There is a new version of the Kiosk app available. Download it at http://artsy.net/kioskbeta",
-  #   success: true,        # optional, defaults to true
-  #   payload: {            # optional, lets you specify any number of your own Slack attachments
-  #     'Version' => version_number,
-  #     'What\'s new' => release_notes,
-  #   },
-  #   default_payloads: [],
-  # )
+  slack(
+    message: "There is a new version of the Kiosk app available. Download it at http://artsy.net/kioskbeta",
+    success: true,        # optional, defaults to true
+    payload: {            # optional, lets you specify any number of your own Slack attachments
+      'Version' => version_number,
+      'What\'s new' => release_notes,
+    },
+    default_payloads: [],
+  )
 
   # Tag release and push to GitHub
   sh "cd .. ; git tag #{version_number} ; git push --tags"
