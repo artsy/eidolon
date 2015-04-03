@@ -60,36 +60,35 @@ public class ListingsViewController: UIViewController {
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ListingsViewController {
         return storyboard.viewControllerWithID(.AuctionListings) as ListingsViewController
     }
-    
-    // Recursively calls itself with page+1 until the count of the returned array is < pageSize
-    // Sends new response objects to the subject.
-    func recursiveListingsRequestSignal(auctionID: String, page: Int, subject: RACSubject) -> RACSignal {
-        let artworksEndpoint: ArtsyAPI = ArtsyAPI.AuctionListings(id: auctionID)
-        
-        return XAppRequest(artworksEndpoint, parameters: ["size": self.pageSize, "page": page]).filterSuccessfulStatusCodes().mapJSON().flattenMap({ (object) -> RACStream! in
-            if let array = object as? Array<AnyObject> {
-                let count = countElements(array)
-                
-                subject.sendNext(object)
-                if count < self.pageSize {
-                    subject.sendCompleted()
-                    return nil
-                } else {
-                    return self.recursiveListingsRequestSignal(auctionID, page: page+1, subject: subject)
+
+    func listingsRequestSignalForPage(auctionID: String, page: Int) -> RACSignal {
+        return XAppRequest(.AuctionListings(id: auctionID), parameters: ["size": self.pageSize, "page": page]).filterSuccessfulStatusCodes().mapJSON()
+    }
+
+    // Repeatedly calls itself with page+1 until the count of the returned array is < pageSize.
+    func retrieveAllListingsRequestSignal(auctionID: String, page: Int) -> RACSignal {
+        return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
+            self?.listingsRequestSignalForPage(auctionID, page: page).subscribeNext{ (object) -> () in
+                if let array = object as? Array<AnyObject> {
+
+                    var nextPageSignal = RACSignal.empty()
+
+                    if countElements(array) >= (self?.pageSize ?? 0) {
+                        // Infer we have more results to retrieve
+                        nextPageSignal = self?.listingsRequestSignalForPage(auctionID, page: page+1) ?? RACSignal.empty()
+                    }
+
+                    RACSignal.`return`(object).concat(nextPageSignal).subscribe(subscriber)
                 }
             }
-            
-            // Should never happen
-            subject.sendCompleted()
+
             return nil
-        })
+        }
     }
     
     // Fetches all pages of the auction
     func allListingsRequestSignal(auctionID: String) -> RACSignal {
-        let initialSubject = RACReplaySubject()
-        
-        return schedule(schedule(recursiveListingsRequestSignal(auctionID, page: 1, subject: initialSubject).ignoreValues(), RACScheduler(priority: RACSchedulerPriorityDefault)).then { initialSubject }.collect().map({ (object) -> AnyObject! in
+        return schedule(schedule(retrieveAllListingsRequestSignal(auctionID, page: 1), RACScheduler(priority: RACSchedulerPriorityDefault)).collect().map({ (object) -> AnyObject! in
             // object is an array of arrays (thanks to collect()). We need to flatten it.
             
             let array = object as? Array<Array<AnyObject>>
