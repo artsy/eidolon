@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/KrauseFx/fastlane.git
-  revision: 641daaf94a794bd3a2f24ca2c7ac409dd665f858
+  revision: ff0bdfd1f853b4e65cd79e27f34cf60a598e71b5
   specs:
     fastlane (0.5.0)
       aws-sdk (~> 1.0)
@@ -118,7 +118,7 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     fastimage (1.6.8)
       addressable (~> 2.3, >= 2.3.5)
-    fastlane_core (0.4.1)
+    fastlane_core (0.4.2)
       babosa
       capybara (~> 2.4.3)
       colored

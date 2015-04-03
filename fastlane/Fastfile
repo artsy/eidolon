@@ -1,16 +1,11 @@
 fastlane_version "0.4.2" 
 
 lane :build_for_test do
-  xcodebuild(
-    scheme: 'Kiosk',
-    destination: "OS=8.1,name=iPad Air",
-  )
+  xcodebuild scheme: 'Kiosk', destination: "OS=8.1,name=iPad Air"
 end
 
 lane :test do
-  xctest(
-    destination: "OS=8.1,name=iPad Air",
-  )
+  xctest destination: "OS=8.1,name=iPad Air"
 end
 
 lane :oss do
@@ -36,24 +31,20 @@ lane :oss do
       command
     }.join(' ; ')
 
-    sh "cd .. ; #{commands} ; pod install"
+    sh "cd .. ; #{commands}"
+
+    cocoapods
 end
 
 lane :build_for_deploy do
-  xcodebuild(
-    sdk: "iphoneos",
-    configuration: "release",
-  )
+  xcodebuild sdk: "iphoneos", configuration: "release"
 end
 
 lane :deploy do 
 
   # Increment build number to current date
   build_number = Time.new.strftime("%Y.%m.%d")
-  increment_build_number({
-    build_number: build_number,
-    xcodeproj: './Kiosk.xcodeproj',
-  })
+  increment_build_number build_number: build_number
 
   # Set version number to the one at the top of the CHANGELOG
   readme = File.read("../docs/CHANGELOG.md")
@@ -61,30 +52,27 @@ lane :deploy do
   first_line = latest_version.split("\n").first
   version_number = first_line.split(" ")[1]
 
-  increment_version_number(
-    release_task: version_number,
-    xcodeproj: './Kiosk.xcodeproj',
-  )
+  increment_version_number release_task: version_number
 
   # Generate release notes from CHANGELOG
   release_notes = latest_version.split("\n")[1..-1].join("\n")
 
   # Build
-  ipa({
+  ipa(
     configuration: "Release",
     destination: "build",
     embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
     identity: "iPhone Distribution: ART SY INC",
     clean: false,
-  })
+  )
 
   # Push to Hockey
   markdown_type = 1
-  hockey({
+  hockey(
     api_token: ENV['HOCKEY_API_TOKEN'],
     notes_type: markdown_type,
     notes: release_notes,
-  })
+  )
 
   # Post message to slack
   slack(
@@ -98,7 +86,8 @@ lane :deploy do
   )
 
   # Tag release and push to GitHub
-  sh "cd .. ; git tag #{version_number} ; git push --tags"
+  add_git_tag tag: version_number
+  push_to_git_remote
 end
 
 lane :storyboard_ids do
