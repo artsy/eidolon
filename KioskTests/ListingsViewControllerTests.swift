@@ -99,7 +99,7 @@ class ListingsViewControllerTests: QuickSpec {
                     }
                 }
                 
-                Provider.sharedProvider = ReactiveMoyaProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true)
+                Provider.sharedProvider = ArtsyProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true, onlineSignal: { RACSignal.empty() })
             }
             
             it("paginates to the second page to retrieve all three sale artworks") {
@@ -165,7 +165,7 @@ func testListingsViewController(storyboard: UIStoryboard = auctionStoryboard) ->
         }
     }
     subject.cancelDownloadImage = { (imageView) -> () in }
-    
+
     return subject
 }
 

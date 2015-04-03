@@ -11,11 +11,10 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
     @IBOutlet public var offlineBlockingView: UIView!
     @IBOutlet weak var registerToBidButton: ActionButton!
 
-    let _reachability = ReachabilityManager()
     let _apiPinger = APIPingManager()
     
     public lazy var reachabilitySignal: RACSignal = { [weak self] in
-        self?._reachability.reachSignal ?? RACSignal.empty()
+        reachabilityManager.reachSignal
     }()
     public lazy var apiPingerSignal: RACSignal = { [weak self] in
         self?._apiPinger.letOnlineSignal ?? RACSignal.empty()
