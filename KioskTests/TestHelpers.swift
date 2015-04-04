@@ -25,7 +25,7 @@ func setDefaultsKeys(defaults: NSUserDefaults, key: String?, expiry: NSDate?) {
     defaults.setObject(expiry, forKey: DefaultsKeys.TokenExpiry.rawValue)
 }
 
-func setupProviderForSuite(provider: ReactiveMoyaProvider<ArtsyAPI>) {
+func setupProviderForSuite(provider: ArtsyProvider<ArtsyAPI>) {
     beforeSuite {
         Provider.sharedProvider = provider
     }

@@ -18,7 +18,7 @@ public class ConfirmYourBidViewController: UIViewController {
     
     public lazy var numberSignal: RACSignal = { self.keypadContainer.stringValueSignal }()
     
-    public lazy var provider: ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    public lazy var provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController

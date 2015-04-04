@@ -1,16 +1,8 @@
 import UIKit
 import ARAnalytics
 import SDWebImage
+import ReactiveCocoa
 import Keys
-
-
-func logPath() -> NSURL {
-    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as NSURL
-    return docs.URLByAppendingPathComponent("logger.txt")
-}
-
-let logger = Logger(destination: logPath())
-
 
 @UIApplicationMain
 public class AppDelegate: UIResponder, UIApplicationDelegate {

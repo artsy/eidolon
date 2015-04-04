@@ -103,7 +103,7 @@ public class ListingsViewController: UIViewController {
     
     func recurringListingsRequestSignal(auctionID: String) -> RACSignal {
         let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate()).takeUntil(rac_willDeallocSignal())
-        
+
         return recurringSignal.doNext(logSync).map { [weak self] _ -> AnyObject! in
             return self?.allListingsRequestSignal(auctionID) ?? RACSignal.empty()
         }.switchToLatest().map { [weak self] (newSaleArtworks) -> AnyObject! in

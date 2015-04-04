@@ -26,12 +26,12 @@ private func XAppTokenRequest(defaults: NSUserDefaults) -> RACSignal {
 }
 
 /// Request to fetch a given target. Ensures that valid XApp tokens exist before making request
+public func XAppRequest(token: ArtsyAPI, provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider,  method: Moya.Method = Moya.DefaultMethod(), parameters: [String: AnyObject] = Moya.DefaultParameters(), defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) -> RACSignal {
 
-public func XAppRequest(token: ArtsyAPI, provider: ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider,  method: Moya.Method = Moya.DefaultMethod(), parameters: [String: AnyObject] = Moya.DefaultParameters(), defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) -> RACSignal {
-
-    // First perform XAppTokenRequest(). When it completes, then the signal returned from the closure will be subscribed to.
-
-    return XAppTokenRequest(defaults).then {
-        return provider.request(token, method: method, parameters: parameters)
+    return provider.onlineSignal().then {
+        // First perform XAppTokenRequest(). When it completes, then the signal returned from the closure will be subscribed to.
+        XAppTokenRequest(defaults).then {
+            return provider.request(token, method: method, parameters: parameters)
+        }
     }
 }

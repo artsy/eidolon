@@ -10,7 +10,6 @@ public class HelpViewController: UIViewController {
     var dismissTapGestureRecognizer: UITapGestureRecognizer?
     
     private let stackView = ORTagBasedAutoStackView()
-    private let reachabilityManager = ReachabilityManager()
     
     private var buyersPremiumButton: UIButton!
     

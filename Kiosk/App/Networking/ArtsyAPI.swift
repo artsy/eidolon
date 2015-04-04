@@ -1,4 +1,5 @@
 import Foundation
+import ReactiveCocoa
 import Moya
 
 public enum ArtsyAPI {
@@ -304,6 +305,18 @@ public func endpointResolver () -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequ
     }
 }
 
+public class ArtsyProvider<T where T : MoyaTarget>: ReactiveMoyaProvider<T> {
+    public typealias OnlineSignalClosure = () -> RACSignal
+
+    // Closure that returns a signal which completes once the app is online.
+    public let onlineSignal: OnlineSignalClosure
+
+    public init(endpointsClosure: MoyaEndpointsClosure, endpointResolver: MoyaEndpointResolution = MoyaProvider.DefaultEnpointResolution(), stubResponses: Bool = false, onlineSignal: OnlineSignalClosure = connectedToInternetSignal) {
+        self.onlineSignal = onlineSignal
+        super.init(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver, stubResponses: stubResponses)
+    }
+}
+
 public struct Provider {
     private static var endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
         
@@ -321,19 +334,19 @@ public struct Provider {
         }
     }
     
-    public static func DefaultProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
-        return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: APIKeys.sharedKeys.stubResponses)
+    public static func DefaultProvider() -> ArtsyProvider<ArtsyAPI> {
+        return ArtsyProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: APIKeys.sharedKeys.stubResponses)
     }
     
-    public static func StubbingProvider() -> ReactiveMoyaProvider<ArtsyAPI> {
-        return ReactiveMoyaProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true)
+    public static func StubbingProvider() -> ArtsyProvider<ArtsyAPI> {
+        return ArtsyProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true, onlineSignal: { RACSignal.empty() })
     }
 
     private struct SharedProvider {
         static var instance = Provider.DefaultProvider()
     }
     
-    public static var sharedProvider: ReactiveMoyaProvider<ArtsyAPI> {
+    public static var sharedProvider: ArtsyProvider<ArtsyAPI> {
         get {
             return SharedProvider.instance
         }

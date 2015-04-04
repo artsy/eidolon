@@ -13,6 +13,7 @@
 		5E339E3A1A991899000C773D /* RACExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E339E391A991899000C773D /* RACExtensions.swift */; };
 		5E5ADF641A8B789000453250 /* WhitespaceGobbler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */; };
 		5E748B731AA11BCF00DE3A9D /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */; };
+		5E809A401ACF225100C30DC9 /* ArtsyProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */; };
 		5E853EBE1A8BC9A200F91C0D /* BuyersPremium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E853EBD1A8BC9A200F91C0D /* BuyersPremium.swift */; };
 		5E86104B1A5C429C00456E41 /* AdminCardTestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */; };
 		5E86104C1A5C429C00456E41 /* AdminLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC41A5C429C00456E41 /* AdminLogViewController.swift */; };
@@ -213,6 +214,7 @@
 		5E339E391A991899000C773D /* RACExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensions.swift; sourceTree = "<group>"; };
 		5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitespaceGobbler.swift; sourceTree = "<group>"; };
 		5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModel.swift; sourceTree = "<group>"; };
+		5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyProviderTests.swift; sourceTree = "<group>"; };
 		5E853EBD1A8BC9A200F91C0D /* BuyersPremium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyersPremium.swift; sourceTree = "<group>"; };
 		5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCardTestingViewController.swift; sourceTree = "<group>"; };
 		5E860FC41A5C429C00456E41 /* AdminLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminLogViewController.swift; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 			children = (
 				5E8610C31A5C43EF00456E41 /* RAC */,
 				5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */,
+				5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1167,6 +1170,7 @@
 				5E8611061A5C43EF00456E41 /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */,
 				5E8611321A5C43EF00456E41 /* TestHelpers.swift in Sources */,
 				5E8611041A5C43EF00456E41 /* ArtsyAPISpec.swift in Sources */,
+				5E809A401ACF225100C30DC9 /* ArtsyProviderTests.swift in Sources */,
 				5E8611331A5C43EF00456E41 /* TextFieldTests.swift in Sources */,
 				5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */,
 				5E8611171A5C43EF00456E41 /* SaleArtworkTests.swift in Sources */,
