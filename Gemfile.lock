@@ -20,13 +20,6 @@ GIT
       xcodeproj (~> 0.20)
       xcpretty (~> 0.1)
 
-GIT
-  remote: https://github.com/orta/cocoapods-keys.git
-  revision: f0078a8e7ee7097269050f4fc20ece3c113b7ff7
-  specs:
-    cocoapods-keys (1.0.2)
-      osx_keychain
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -76,6 +69,8 @@ GEM
       fuzzy_match (~> 2.0.4)
       nap (~> 0.8.0)
     cocoapods-downloader (0.8.1)
+    cocoapods-keys (1.1.0)
+      osx_keychain
     cocoapods-plugins (0.4.2)
       nap
     cocoapods-trunk (0.6.0)
@@ -233,7 +228,7 @@ PLATFORMS
 
 DEPENDENCIES
   cocoapods (= 0.36.1)
-  cocoapods-keys!
+  cocoapods-keys
   fastlane!
   sbconstants
   xcpretty
