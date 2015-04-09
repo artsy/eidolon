@@ -1,3 +1,6 @@
+## 3.3.1 April 9 2015
+* New release to attempt fix for crashes
+
 ## 3.3.0 April 1 2015
 * New deploy infrastructure
 
