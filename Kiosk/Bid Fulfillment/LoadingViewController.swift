@@ -136,13 +136,13 @@ public class LoadingViewController: UIViewController {
     func handleRegistered() {
         titleLabel.text = "Registration Complete"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
-        fulfillmentContainer()?.cancelButton.setTitle("Done", forState: .Normal)
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
     }
 
     func handleUpdate() {
         titleLabel.text = "Updated your Information"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
-        fulfillmentContainer()?.cancelButton.setTitle("Done", forState: .Normal)
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
     }
 
     func handleUnknownBidder() {
@@ -162,7 +162,7 @@ public class LoadingViewController: UIViewController {
         statusMessage.hidden = false
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
-        fulfillmentContainer()?.cancelButton.setTitle("Done", forState: .Normal)
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
     }
 
     func handleLowestBidder() {
