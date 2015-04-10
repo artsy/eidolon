@@ -41,8 +41,6 @@ class RegisterViewController: UIViewController {
 
         flowView.jumpToIndexSignal.subscribeNext { [weak self] (index) -> Void in
             if let nav = self?.fulfillmentNav() {
-                if index as? Int == self?.coordinator.currentIndex { return }
-
                 let registrationIndex = RegistrationIndex.fromInt(index as Int)
 
                 let nextVC = self?.coordinator.viewControllerForIndex(registrationIndex)

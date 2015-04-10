@@ -4,9 +4,9 @@ import Moya
 
 public class BidderNetworkModel: NSObject {
 
-    public var bidder:Bidder?
+    public var bidder: Bidder?
     public var createdNewBidder = false
-    public var fulfillmentNav:FulfillmentNavigationController!
+    public var fulfillmentNav: FulfillmentNavigationController!
 
     // MARK: - Getters
 
@@ -63,12 +63,19 @@ public class BidderNetworkModel: NSObject {
         }
     }
 
+    private func updateProviderIfNecessary() -> RACSignal {
+        let loggedInProviderSignalIsNil = RACSignal.`return`(fulfillmentNav.loggedInProvider == nil)
+
+        return RACSignal.`if`(loggedInProviderSignalIsNil, then: updateProvider(), `else`: RACSignal.empty())
+    }
+
     private func updateUser() -> RACSignal {
         let newUser = details().newUser
         let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!, name: newUser.name ?? "")
-        let signal = provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
 
-        return signal.doError { (error) in
+        return updateProviderIfNecessary().then {
+            self.provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
+        }.doError { (error) in
             logger.log("Updating user failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
