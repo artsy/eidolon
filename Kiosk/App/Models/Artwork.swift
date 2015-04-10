@@ -60,7 +60,11 @@ public class Artwork: JSONAble {
         }
 
         if let imageDicts = json["images"].object as? Array<Dictionary<String, AnyObject>> {
-            artwork.images = imageDicts.map({ return Image.fromJSON($0) as Image })
+            // There's a possibility that image_versions comes back as null from the API, which fromJSON() is alergic to.
+            artwork.images = imageDicts.filter { dict -> Bool in
+                let imageVersions = (dict["image_versions"] as? [String]) ?? []
+                return countElements(imageVersions) > 0
+            }.map { return Image.fromJSON($0) as Image }
         }
 
         if let dimensions = json["dimensions"].dictionary {
