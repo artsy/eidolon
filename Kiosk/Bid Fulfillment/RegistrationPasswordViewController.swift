@@ -8,11 +8,14 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
     @IBOutlet var passwordTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
     @IBOutlet var subtitleLabel: UILabel!
+    @IBOutlet var forgotPasswordButton: UIButton!
     let finishedSignal = RACSubject()
-    var isLoggingIn = false
+    dynamic var isLoggingIn = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        forgotPasswordButton.hidden = false
 
         if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
 
@@ -20,7 +23,16 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
             RAC(bidDetails, "newUser.password") <~ passwordTextSignal
 
             RAC(confirmButton, "enabled") <~ passwordTextSignal.map(minimum6CharString)
+            RAC(forgotPasswordButton, "hidden") <~ RACObserve(self, "isLoggingIn").not()
 
+            forgotPasswordButton.rac_command = RACCommand { (_) -> RACSignal! in
+                let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: self.navigationController!.fulfillmentNav().bidDetails.newUser.email!)
+                return XAppRequest(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doNext { [weak self] (json) -> Void in
+                    logger.log("Sent forgot password request")
+                }.then {
+                    self.alertUserPasswordSent()
+                }
+            }
 
             checkForEmailExistence(bidDetails.newUser.email!).subscribeNext { (response) in
                 let moyaResponse = response as MoyaResponse
@@ -57,7 +69,22 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         }
     }
 
-    
+    func alertUserPasswordSent() -> RACSignal {
+        return RACSignal.createSignal { (subscriber) -> RACDisposable! in
+
+            let alertController = UIAlertController(title: "Forgot Password", message: "We have sent you your password.", preferredStyle: .Alert)
+
+            let okAction = UIAlertAction(title: "OK", style: .Default) { (_) in }
+
+            alertController.addAction(okAction)
+
+            self.presentViewController(alertController, animated: true) {
+                subscriber.sendCompleted()
+            }
+
+            return nil
+        }
+    }
 
     func checkForEmailExistence(email: String) -> RACSignal {
 

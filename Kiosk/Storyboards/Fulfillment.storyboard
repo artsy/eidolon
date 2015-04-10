@@ -54,6 +54,7 @@
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
         </mutableArray>
         <mutableArray key="AGaramondPro-Semibold.otf">
             <string>AGaramondPro-Semibold</string>
@@ -1356,12 +1357,21 @@
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWv-ul-gFs">
+                                <rect key="frame" x="158" y="131" width="125" height="37"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="15"/>
+                                <state key="normal" title="Forgot Password?">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="7Jd-dl-gRZ"/>
                     <connections>
                         <outlet property="confirmButton" destination="lIZ-bA-if1" id="IR7-DC-fkG"/>
+                        <outlet property="forgotPasswordButton" destination="sWv-ul-gFs" id="uQa-2k-kE9"/>
                         <outlet property="passwordTextField" destination="IOI-xI-qX8" id="HV5-gm-r02"/>
                         <outlet property="subtitleLabel" destination="ZAU-fw-FVK" id="BDj-YO-CPk"/>
                         <segue destination="HtL-zn-13v" kind="push" identifier="UNUSED Push to Swipe Credit Card" id="fEp-SB-tlp"/>
@@ -1555,6 +1565,6 @@
         <segue reference="A1R-R2-CSF"/>
         <segue reference="NOJ-G3-crU"/>
         <segue reference="Qpe-mM-52j"/>
-        <segue reference="PK6-h9-FCm"/>
+        <segue reference="6qF-R8-kJy"/>
     </inferredMetricsTieBreakers>
 </document>
