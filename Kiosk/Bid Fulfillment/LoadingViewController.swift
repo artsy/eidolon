@@ -160,7 +160,6 @@ public class LoadingViewController: UIViewController {
     func handleHighestBidder() {
         titleLabel.text = "High Bid!"
         statusMessage.hidden = false
-        // TODO: improve this message
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
         fulfillmentContainer()?.cancelButton.setTitle("Done", forState: .Normal)
