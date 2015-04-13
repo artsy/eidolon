@@ -41,6 +41,8 @@ lane :build_for_deploy do
 end
 
 lane :deploy do 
+  # Make sure we start off with a clean slate
+  ensure_git_status_clean
 
   # Increment build number to current date
   build_number = Time.new.strftime("%Y.%m.%d")
@@ -85,7 +87,11 @@ lane :deploy do
     default_payloads: [],
   )
 
+  # Make sure our directory is clean, except for changes Fastlane has made
+  clean_build_artifacts
+
   # Tag release and push to GitHub
+  commit_version_bump message: "Deplying version #{version_number}"
   add_git_tag tag: version_number
   push_to_git_remote
 end
