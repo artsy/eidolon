@@ -91,7 +91,7 @@ lane :deploy do
   clean_build_artifacts
 
   # Tag release and push to GitHub
-  commit_version_bump message: "Deplying version #{version_number}"
+  commit_version_bump message: "Deploying version #{version_number}"
   add_git_tag tag: version_number
   push_to_git_remote
 end
