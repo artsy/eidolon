@@ -60,7 +60,7 @@ public class Artwork: JSONAble {
         }
 
         if let imageDicts = json["images"].object as? Array<Dictionary<String, AnyObject>> {
-            // There's a possibility that image_versions comes back as null from the API, which fromJSON() is alergic to.
+            // There's a possibility that image_versions comes back as null from the API, which fromJSON() is allergic to.
             artwork.images = imageDicts.filter { dict -> Bool in
                 let imageVersions = (dict["image_versions"] as? [String]) ?? []
                 return countElements(imageVersions) > 0
