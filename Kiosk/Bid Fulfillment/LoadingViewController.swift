@@ -115,8 +115,12 @@ public class LoadingViewController: UIViewController {
                 handleUnknownBidder()
             }
 
-        } else if createdNewBidder {
-            handleRegistered()
+        } else { // Not placing bid
+            if createdNewBidder { // Creating new user
+                handleRegistered()
+            } else { // Updating existing user
+                handleUpdate()
+            }
         }
 
         let showPlaceHigherButton = placingBid && (!isHighestBidder || reserveNotMet)
@@ -132,7 +136,13 @@ public class LoadingViewController: UIViewController {
     func handleRegistered() {
         titleLabel.text = "Registration Complete"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
-        fulfillmentContainer()?.cancelButton.setTitle("Done", forState: .Normal)
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
+    }
+
+    func handleUpdate() {
+        titleLabel.text = "Updated your Information"
+        bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
     }
 
     func handleUnknownBidder() {
@@ -150,10 +160,9 @@ public class LoadingViewController: UIViewController {
     func handleHighestBidder() {
         titleLabel.text = "High Bid!"
         statusMessage.hidden = false
-        // TODO: improve this message
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
-        fulfillmentContainer()?.cancelButton.setTitle("Done", forState: .Normal)
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
     }
 
     func handleLowestBidder() {

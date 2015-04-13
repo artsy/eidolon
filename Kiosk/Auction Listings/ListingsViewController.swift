@@ -75,7 +75,7 @@ public class ListingsViewController: UIViewController {
 
                     if countElements(array) >= (self?.pageSize ?? 0) {
                         // Infer we have more results to retrieve
-                        nextPageSignal = self?.listingsRequestSignalForPage(auctionID, page: page+1) ?? RACSignal.empty()
+                        nextPageSignal = self?.retrieveAllListingsRequestSignal(auctionID, page: page+1) ?? RACSignal.empty()
                     }
 
                     RACSignal.`return`(object).concat(nextPageSignal).subscribe(subscriber)

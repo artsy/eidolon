@@ -22,7 +22,7 @@ public class FulfillmentNavigationController: UINavigationController {
         }
     }
 
-    var loggedInProvider:ReactiveMoyaProvider<ArtsyAPI>?
+    var loggedInProvider: ReactiveMoyaProvider<ArtsyAPI>?
 
     func reset() {
         loggedInProvider = nil

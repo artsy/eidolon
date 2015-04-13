@@ -43,6 +43,22 @@ class KeypadViewModelTests: QuickSpec {
                 }
             }
         }
+
+        it("has a max int, but not max string, value") {
+            waitUntil { (done) -> Void in
+                RAC(testHarness, "stringValue") <~ subject.stringValueSignal
+                RAC(testHarness, "intValue") <~ subject.intValueSignal
+
+                [1,3,3,3,3,3,3,3,3,3,3,3,7].reduce(RACSignal.empty(), combine: { (signal, input) -> RACSignal in
+                    signal.then { subject.addDigitCommand.execute(input) }
+                }).subscribeCompleted { () -> Void in
+                    expect(testHarness.intValue) == 133333
+                    expect(testHarness.stringValue) == "1333333333337"
+
+                    done()
+                }
+            }
+        }
         
         it("handles prepended zeros") {
             waitUntil { (done) -> Void in

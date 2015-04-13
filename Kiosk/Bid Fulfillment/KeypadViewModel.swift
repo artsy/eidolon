@@ -2,7 +2,7 @@ import Foundation
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-let KeypadViewModelMaxValue = 1_000_000
+let KeypadViewModelMaxIntegerValue = 1_000_000
 
 public class KeypadViewModel: NSObject {
     
@@ -72,10 +72,10 @@ private extension KeypadViewModel {
         return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
             if let strongSelf = self {
                 let newValue = (10 * (strongSelf.intValue ?? 0)) + input
-                if (newValue < KeypadViewModelMaxValue) {
+                if (newValue < KeypadViewModelMaxIntegerValue) {
                     strongSelf.intValue = newValue
-                    strongSelf.stringValue = "\(strongSelf.stringValue)\(input)"
                 }
+                strongSelf.stringValue = "\(strongSelf.stringValue)\(input)"
             }
             subscriber.sendCompleted()
             return nil

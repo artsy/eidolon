@@ -34,7 +34,6 @@ class YourBiddingDetailsViewController: UIViewController {
         let notRegisteredCopy = "Use your Bidder Number and PIN next time you bid."
         bodyLabel?.text = registered! ? registeredCopy : notRegisteredCopy
 
-
         if let nav = self.navigationController as? FulfillmentNavigationController {
             RAC(bidderNumberLabel, "text") <~ RACObserve(nav.bidDetails, "paddleNumber")
         }
