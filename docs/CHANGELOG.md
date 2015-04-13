@@ -1,3 +1,9 @@
+## 3.4.0 April 13 2015
+* Fixes problems entering in phone numbers.
+* Adds a "Forgot Password" link when logging in with Artsy credentials.
+* Registering to bid with an existing account no longer produces an error message.
+* Fixes problem correcting email.
+
 ## 3.3.1 April 9 2015
 * New release to attempt fix for crashes
 
