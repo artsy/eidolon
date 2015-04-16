@@ -22,7 +22,12 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
             let passwordTextSignal = passwordTextField.rac_textSignal()
             RAC(bidDetails, "newUser.password") <~ passwordTextSignal
 
-            RAC(confirmButton, "enabled") <~ passwordTextSignal.map(minimum6CharString)
+            let passwordIsValidSignal = passwordTextSignal.map(minimum6CharString)
+            confirmButton.rac_command = RACCommand(enabled: passwordIsValidSignal) { [weak self] _ -> RACSignal! in
+                self?.finishedSignal.sendCompleted()
+                return RACSignal.empty()
+            }
+
             RAC(forgotPasswordButton, "hidden") <~ RACObserve(self, "isLoggingIn").not()
 
             forgotPasswordButton.rac_command = RACCommand { (_) -> RACSignal! in
@@ -43,13 +48,13 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
                     self.isLoggingIn = true
                 }
             }
+            
+            passwordTextField.returnKeySignal().subscribeNext { [weak self] _ -> Void in
+                self?.confirmButton.rac_command.execute(nil)
+                return
+            }
+            passwordTextField.becomeFirstResponder()
         }
-
-        passwordTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in
-            self?.finishedSignal.sendCompleted()
-            return
-        })
-        passwordTextField.becomeFirstResponder()
     }
 
     @IBAction func confirmTapped(sender: AnyObject) {

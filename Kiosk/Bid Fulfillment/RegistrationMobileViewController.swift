@@ -16,14 +16,18 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
 
             RAC(bidDetails, "newUser.phoneNumber") <~ numberTextField.rac_textSignal()
             
-            let numberIsInvalidSignal = RACObserve(bidDetails.newUser, "phoneNumber").map(isZeroLengthString)
-            RAC(confirmButton, "enabled") <~ numberIsInvalidSignal.not()
+            let numberIsValidSignal = RACObserve(bidDetails.newUser, "phoneNumber").map(isZeroLengthString).not()
+            
+            confirmButton.rac_command = RACCommand(enabled: numberIsValidSignal) { [weak self] _ -> RACSignal! in
+                self?.finishedSignal.sendCompleted()
+                return RACSignal.empty()
+            }
         }
 
-        numberTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in
-            self?.finishedSignal.sendCompleted()
+        numberTextField.returnKeySignal().subscribeNext { [weak self] (_) -> Void in
+            self?.confirmButton.rac_command.execute(nil)
             return
-        })
+        }
 
         numberTextField.becomeFirstResponder()
     }

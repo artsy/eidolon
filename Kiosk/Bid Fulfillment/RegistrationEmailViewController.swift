@@ -17,13 +17,16 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
             RAC(bidDetails, "newUser.email") <~ emailTextField.rac_textSignal()
 
             let emailIsValidSignal = RACObserve(bidDetails.newUser, "email").map(stringIsEmailAddress)
-            RAC(confirmButton, "enabled") <~ emailIsValidSignal
+            confirmButton.rac_command = RACCommand(enabled: emailIsValidSignal) { [weak self] _ -> RACSignal! in
+                self?.finishedSignal.sendCompleted()
+                return RACSignal.empty()
+            }
         }
 
-        emailTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in
-            self?.finishedSignal.sendCompleted()
+        emailTextField.returnKeySignal().subscribeNext { [weak self] (_) -> Void in
+            self?.confirmButton.rac_command.execute(nil)
             return
-        })
+        }
         
         emailTextField.becomeFirstResponder()
     }

@@ -15,13 +15,15 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
             zipCodeTextField.text = bidDetails.newUser.zipCode
             RAC(bidDetails, "newUser.zipCode") <~ zipCodeTextField.rac_textSignal()
             
-            let emailIsValidSignal = RACObserve(bidDetails.newUser, "zipCode").map(isZeroLengthString)
-            RAC(confirmButton, "enabled") <~ emailIsValidSignal.not()
+            let zipCodeIsValidSignal = RACObserve(bidDetails.newUser, "zipCode").map(isZeroLengthString).not()
+            confirmButton.rac_command = RACCommand(enabled: zipCodeIsValidSignal) { [weak self] _ -> RACSignal! in
+                self?.finishedSignal.sendCompleted()
+                return RACSignal.empty()
+            }
         }
 
-
         zipCodeTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in
-            self?.finishedSignal.sendCompleted()
+            self?.confirmButton.rac_command.execute(nil)
             return
         })
         zipCodeTextField.becomeFirstResponder()
