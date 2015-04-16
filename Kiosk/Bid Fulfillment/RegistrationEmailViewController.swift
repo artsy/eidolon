@@ -8,31 +8,21 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
     @IBOutlet var confirmButton: ActionButton!
     let finishedSignal = RACSubject()
 
+    lazy var viewModel: GenericFormValidationViewModel = {
+        let emailIsValidSignal = self.emailTextField.rac_textSignal().map(stringIsEmailAddress)
+        return GenericFormValidationViewModel(isValidSignal: emailIsValidSignal, manualInvocationSignal: self.emailTextField.returnKeySignal(), finishedSubject: self.finishedSignal)
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
             emailTextField.text = bidDetails.newUser.email
-
             RAC(bidDetails, "newUser.email") <~ emailTextField.rac_textSignal()
-
-            let emailIsValidSignal = RACObserve(bidDetails.newUser, "email").map(stringIsEmailAddress)
-            confirmButton.rac_command = RACCommand(enabled: emailIsValidSignal) { [weak self] _ -> RACSignal! in
-                self?.finishedSignal.sendCompleted()
-                return RACSignal.empty()
-            }
-        }
-
-        emailTextField.returnKeySignal().subscribeNext { [weak self] (_) -> Void in
-            self?.confirmButton.rac_command.execute(nil)
-            return
+            confirmButton.rac_command = viewModel.command
         }
         
         emailTextField.becomeFirstResponder()
-    }
-
-    @IBAction func confirmTapped(sender: AnyObject) {
-        finishedSignal.sendCompleted()
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {

@@ -4,13 +4,19 @@ import Moya
 import Swift_RAC_Macros
 
 class RegistrationPasswordViewController: UIViewController, RegistrationSubController {
-
     @IBOutlet var passwordTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
     @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var forgotPasswordButton: UIButton!
     let finishedSignal = RACSubject()
-    dynamic var isLoggingIn = false
+
+    lazy var viewModel: RegistrationPasswordViewModel = {
+        let email = self.navigationController?.fulfillmentNav().bidDetails.newUser.email ?? ""
+        return RegistrationPasswordViewModel(passwordSignal: self.passwordTextField.rac_textSignal(),
+            manualInvocationSignal: self.passwordTextField.returnKeySignal(),
+            finishedSubject: self.finishedSignal,
+            email: email)
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,56 +27,33 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
 
             let passwordTextSignal = passwordTextField.rac_textSignal()
             RAC(bidDetails, "newUser.password") <~ passwordTextSignal
-
-            let passwordIsValidSignal = passwordTextSignal.map(minimum6CharString)
-            confirmButton.rac_command = RACCommand(enabled: passwordIsValidSignal) { [weak self] _ -> RACSignal! in
-                self?.finishedSignal.sendCompleted()
-                return RACSignal.empty()
-            }
-
-            RAC(forgotPasswordButton, "hidden") <~ RACObserve(self, "isLoggingIn").not()
-
-            forgotPasswordButton.rac_command = RACCommand { (_) -> RACSignal! in
-                let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: self.navigationController!.fulfillmentNav().bidDetails.newUser.email!)
-                return XAppRequest(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doNext { [weak self] (json) -> Void in
-                    logger.log("Sent forgot password request")
-                }.then {
-                    self.alertUserPasswordSent()
-                }
-            }
-
-            checkForEmailExistence(bidDetails.newUser.email!).subscribeNext { (response) in
-                let moyaResponse = response as MoyaResponse
-
-                // Account exists
-                if moyaResponse.statusCode == 200 {
-                    self.subtitleLabel.text = "Enter your Artsy password"
-                    self.isLoggingIn = true
-                }
-            }
-            
-            passwordTextField.returnKeySignal().subscribeNext { [weak self] _ -> Void in
-                self?.confirmButton.rac_command.execute(nil)
+            confirmButton.rac_command = viewModel.command
+            viewModel.command.errors.subscribeNext { [weak self] _ -> Void in
+                self?.showAuthenticationError()
                 return
             }
+
+            RAC(forgotPasswordButton, "hidden") <~ viewModel.emailExistsSignal.not().startWith(true)
+
+            forgotPasswordButton.rac_command = RACCommand { [weak self] _ -> RACSignal! in
+                let email = self?.navigationController!.fulfillmentNav().bidDetails.newUser.email! ?? ""
+
+                return self?.viewModel.userForgotPasswordSignal(email).then {
+                    self?.alertUserPasswordSent() ?? RACSignal.empty()
+                } ?? RACSignal.empty()
+            }
+
+            RAC(subtitleLabel, "text") <~ viewModel.emailExistsSignal.map { (object) -> AnyObject! in
+                let emailExists = object as Bool
+
+                if emailExists {
+                    return "Enter your Artsy password"
+                } else {
+                    return "Create a password"
+                }
+            }
+
             passwordTextField.becomeFirstResponder()
-        }
-    }
-
-    @IBAction func confirmTapped(sender: AnyObject) {
-        if !isLoggingIn {
-            finishedSignal.sendCompleted()
-        } else {
-
-            let newUser = self.navigationController!.fulfillmentNav().bidDetails.newUser
-            authCheckSignal(newUser.email!, password: newUser.password!).subscribeNext({ (_) -> Void in
-                self.finishedSignal.sendCompleted()
-                return
-
-            }, error: { (_) -> Void in
-                self.showAuthenticationError()
-                return
-            })
         }
     }
 
@@ -90,18 +73,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
             return nil
         }
     }
-
-    func checkForEmailExistence(email: String) -> RACSignal {
-
-        let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: email)
-        return Provider.sharedProvider.request(endpoint, method: .GET, parameters:endpoint.defaultParameters)
-    }
-
-    func authCheckSignal(email: String, password: String) -> RACSignal {
-        let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: email, password: password)
-        return Provider.sharedProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
-    }
-
+    
     func showAuthenticationError() {
         confirmButton.flashError("Incorrect")
         passwordTextField.flashForError()

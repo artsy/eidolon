@@ -7,26 +7,19 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
     @IBOutlet var numberTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
     let finishedSignal = RACSubject()
-    
+
+    lazy var viewModel: GenericFormValidationViewModel = {
+        let numberIsValidSignal = self.numberTextField.rac_textSignal().map(isZeroLengthString).not()
+        return GenericFormValidationViewModel(isValidSignal: numberIsValidSignal, manualInvocationSignal: self.numberTextField.returnKeySignal(), finishedSubject: self.finishedSignal)
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
             numberTextField.text = bidDetails.newUser.phoneNumber
-
             RAC(bidDetails, "newUser.phoneNumber") <~ numberTextField.rac_textSignal()
-            
-            let numberIsValidSignal = RACObserve(bidDetails.newUser, "phoneNumber").map(isZeroLengthString).not()
-            
-            confirmButton.rac_command = RACCommand(enabled: numberIsValidSignal) { [weak self] _ -> RACSignal! in
-                self?.finishedSignal.sendCompleted()
-                return RACSignal.empty()
-            }
-        }
-
-        numberTextField.returnKeySignal().subscribeNext { [weak self] (_) -> Void in
-            self?.confirmButton.rac_command.execute(nil)
-            return
+            confirmButton.rac_command = viewModel.command
         }
 
         numberTextField.becomeFirstResponder()
@@ -40,9 +33,5 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
         // the API doesn't accept chars
         let notNumberChars = NSCharacterSet.decimalDigitCharacterSet().invertedSet;
         return countElements(string.stringByTrimmingCharactersInSet(notNumberChars)) != 0
-    }
-
-    @IBAction func confirmTapped(sender: AnyObject) {
-        finishedSignal.sendCompleted()
     }
 }
