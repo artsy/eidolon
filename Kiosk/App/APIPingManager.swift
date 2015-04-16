@@ -19,11 +19,6 @@ class APIPingManager: NSObject {
 
     private func pingSignal() -> RACSignal {
         let artworksEndpoint: ArtsyAPI = ArtsyAPI.Ping
-        return XAppRequest(artworksEndpoint).map { (object) -> AnyObject! in
-            if let response = object as? MoyaResponse {
-                return response.statusCode == 200
-            }
-            return false
-        }.catchTo(RACSignal.`return`(false))
+        return XAppRequest(artworksEndpoint).map(responseIsOK).retry()
     }
 }
