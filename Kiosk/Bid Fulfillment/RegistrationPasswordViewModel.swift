@@ -8,10 +8,11 @@ public class RegistrationPasswordViewModel {
         dynamic var password: String = ""
     }
 
-    let emailExistsSignal: RACSignal
-    let command: RACCommand
+    public let emailExistsSignal: RACSignal
+    public let command: RACCommand
+    let email: String
     
-    init (passwordSignal: RACSignal, manualInvocationSignal: RACSignal, finishedSubject: RACSubject, email: String) {
+    public init(passwordSignal: RACSignal, manualInvocationSignal: RACSignal, finishedSubject: RACSubject, email: String) {
         let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: email)
         let emailExistsSignal = Provider.sharedProvider.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).map(responseIsOK).replayLast()
 
@@ -34,6 +35,7 @@ public class RegistrationPasswordViewModel {
         }
 
         self.emailExistsSignal = emailExistsSignal
+        self.email = email
 
         manualInvocationSignal.subscribeNext { [weak self] _ -> Void in
             self?.command.execute(nil)
@@ -41,7 +43,7 @@ public class RegistrationPasswordViewModel {
         }
     }
 
-    func userForgotPasswordSignal(email: String) -> RACSignal {
+    public func userForgotPasswordSignal() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
         return XAppRequest(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doNext { (json) -> Void in
             logger.log("Sent forgot password request")

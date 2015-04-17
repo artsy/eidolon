@@ -4,7 +4,7 @@ import ReactiveCocoa
 public class GenericFormValidationViewModel {
     public let command: RACCommand
 
-    public init (isValidSignal: RACSignal, manualInvocationSignal: RACSignal, finishedSubject: RACSubject) {
+    public init(isValidSignal: RACSignal, manualInvocationSignal: RACSignal, finishedSubject: RACSubject) {
         command = RACCommand(enabled: isValidSignal) { _ -> RACSignal! in
             return RACSignal.createSignal { (subscriber) -> RACDisposable! in
                 finishedSubject.sendCompleted()

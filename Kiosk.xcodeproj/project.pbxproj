@@ -11,6 +11,7 @@
 		5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E64E1A65630200F8CBDD /* Logger.swift */; };
 		5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */; };
 		5E339E3A1A991899000C773D /* RACExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E339E391A991899000C773D /* RACExtensions.swift */; };
+		5E43C38C1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C38B1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift */; };
 		5E5ADF641A8B789000453250 /* WhitespaceGobbler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */; };
 		5E748B731AA11BCF00DE3A9D /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */; };
 		5E809A401ACF225100C30DC9 /* ArtsyProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */; };
@@ -215,6 +216,7 @@
 		5E19E64E1A65630200F8CBDD /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		5E339E391A991899000C773D /* RACExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensions.swift; sourceTree = "<group>"; };
+		5E43C38B1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewModelTests.swift; sourceTree = "<group>"; };
 		5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitespaceGobbler.swift; sourceTree = "<group>"; };
 		5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModel.swift; sourceTree = "<group>"; };
 		5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyProviderTests.swift; sourceTree = "<group>"; };
@@ -789,6 +791,7 @@
 			isa = PBXGroup;
 			children = (
 				5EBD314E1AE0563300648484 /* GenericFormValidationViewModelTests.swift */,
+				5E43C38B1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift */,
 			);
 			name = Registration;
 			sourceTree = "<group>";
@@ -1175,6 +1178,7 @@
 				5E8611301A5C43EF00456E41 /* RegisterFlowViewTests.swift in Sources */,
 				5E8611101A5C43EF00456E41 /* ListingsViewControllerTests.swift in Sources */,
 				5E8611111A5C43EF00456E41 /* ArtistTests.swift in Sources */,
+				5E43C38C1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift in Sources */,
 				5E8611091A5C43EF00456E41 /* ConfirmYourBidViewControllerTests.swift in Sources */,
 				5E86110D1A5C43EF00456E41 /* BidDetailsTestExtensions.swift in Sources */,
 				5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */,

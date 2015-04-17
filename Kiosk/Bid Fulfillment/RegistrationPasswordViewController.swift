@@ -36,9 +36,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
             RAC(forgotPasswordButton, "hidden") <~ viewModel.emailExistsSignal.not().startWith(true)
 
             forgotPasswordButton.rac_command = RACCommand { [weak self] _ -> RACSignal! in
-                let email = self?.navigationController!.fulfillmentNav().bidDetails.newUser.email! ?? ""
-
-                return self?.viewModel.userForgotPasswordSignal(email).then {
+                return self?.viewModel.userForgotPasswordSignal().then {
                     self?.alertUserPasswordSent() ?? RACSignal.empty()
                 } ?? RACSignal.empty()
             }
