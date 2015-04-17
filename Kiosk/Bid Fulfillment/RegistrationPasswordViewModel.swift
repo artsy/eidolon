@@ -8,7 +8,7 @@ public class RegistrationPasswordViewModel {
         dynamic var password: String = ""
     }
 
-    public let emailExistsSignal: RACSignal
+    public var emailExistsSignal: RACSignal
     public let command: RACCommand
     let email: String
     

@@ -2,7 +2,7 @@ import UIKit
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-class RegistrationMobileViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
+public class RegistrationMobileViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
     
     @IBOutlet var numberTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
@@ -13,19 +13,19 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
         return GenericFormValidationViewModel(isValidSignal: numberIsValidSignal, manualInvocationSignal: self.numberTextField.returnKeySignal(), finishedSubject: self.finishedSignal)
     }()
 
-    override func viewDidLoad() {
+    public lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
+
+    public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
-            numberTextField.text = bidDetails.newUser.phoneNumber
-            RAC(bidDetails, "newUser.phoneNumber") <~ numberTextField.rac_textSignal()
-            confirmButton.rac_command = viewModel.command
-        }
+
+        numberTextField.text = bidDetails.newUser.phoneNumber
+        RAC(bidDetails, "newUser.phoneNumber") <~ numberTextField.rac_textSignal()
+        confirmButton.rac_command = viewModel.command
 
         numberTextField.becomeFirstResponder()
     }
 
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
         // Allow delete
         if (countElements(string) == 0) { return true }
@@ -33,5 +33,9 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
         // the API doesn't accept chars
         let notNumberChars = NSCharacterSet.decimalDigitCharacterSet().invertedSet;
         return countElements(string.stringByTrimmingCharactersInSet(notNumberChars)) != 0
+    }
+
+    public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationMobileViewController {
+        return storyboard.viewControllerWithID(.RegisterMobile) as RegistrationMobileViewController
     }
 }

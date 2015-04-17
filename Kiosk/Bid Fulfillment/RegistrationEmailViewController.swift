@@ -2,30 +2,30 @@ import UIKit
 import Swift_RAC_Macros
 import ReactiveCocoa
 
-class RegistrationEmailViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
+public class RegistrationEmailViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
 
     @IBOutlet var emailTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
     let finishedSignal = RACSubject()
 
-    lazy var viewModel: GenericFormValidationViewModel = {
+    public lazy var viewModel: GenericFormValidationViewModel = {
         let emailIsValidSignal = self.emailTextField.rac_textSignal().map(stringIsEmailAddress)
         return GenericFormValidationViewModel(isValidSignal: emailIsValidSignal, manualInvocationSignal: self.emailTextField.returnKeySignal(), finishedSubject: self.finishedSignal)
     }()
 
-    override func viewDidLoad() {
+    public lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
+
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
-            emailTextField.text = bidDetails.newUser.email
-            RAC(bidDetails, "newUser.email") <~ emailTextField.rac_textSignal()
-            confirmButton.rac_command = viewModel.command
-        }
-        
+        emailTextField.text = bidDetails.newUser.email
+        RAC(bidDetails, "newUser.email") <~ emailTextField.rac_textSignal()
+        confirmButton.rac_command = viewModel.command
+
         emailTextField.becomeFirstResponder()
     }
 
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
         // Allow delete
         if (countElements(string) == 0) { return true }
@@ -34,4 +34,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
         return string != " "
     }
 
+    public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationEmailViewController {
+        return storyboard.viewControllerWithID(.RegisterEmail) as RegistrationEmailViewController
+    }
 }

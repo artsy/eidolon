@@ -10,7 +10,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         let testPassword = "password"
         let testEmail = "test@example.com"
 
-        // Just so providers form individual tets don't bleed into one another
+        // Just so providers form individual tests don't bleed into one another
         setupProviderForSuite(Provider.StubbingProvider())
 
         defaults = NSUserDefaults.standardUserDefaults()
