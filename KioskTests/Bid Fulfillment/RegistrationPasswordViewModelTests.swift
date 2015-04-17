@@ -5,10 +5,48 @@ import Swift_RAC_Macros
 import Kiosk
 import Moya
 
+let testPassword = "password"
+let testEmail = "test@example.com"
+
 class RegistrationPasswordViewModelTests: QuickSpec {
+
+    typealias Check = (() -> ())?
+    func stubProvider(#emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) {
+        let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+
+            switch target {
+            case ArtsyAPI.FindExistingEmailRegistration(let email):
+                emailCheck?()
+                expect(email) == testEmail
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(emailExists ? 200 : 404, NSData()), method: method, parameters: parameters)
+            case ArtsyAPI.LostPasswordNotification(let email):
+                passwordCheck?()
+                expect(email) == testEmail
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(passwordRequestSucceeds ? 200 : 404, NSData()), method: method, parameters: parameters)
+            case ArtsyAPI.XAuth(let email, let password):
+                loginCheck?()
+                expect(email) == testEmail
+                expect(password) == testPassword
+                // Fail auth (wrong password maybe)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(loginSucceeds ? 200 : 403, NSData()), method: method, parameters: parameters)
+            case .XApp:
+                // Any XApp requests are incidental; ignore.
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
+            default:
+                // Fail on all other cases
+                expect(true) == false
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
+            }
+        }
+
+        Provider.sharedProvider = ArtsyProvider(endpointsClosure: endpointsClosure, stubResponses: true, onlineSignal: { RACSignal.empty() })
+    }
+
+    func testSubject(passwordSubject: RACSignal = RACSignal.`return`(testPassword), invocationSignal: RACSignal = RACSubject(), finishedSubject: RACSubject = RACSubject()) -> RegistrationPasswordViewModel {
+        return RegistrationPasswordViewModel(passwordSignal: passwordSubject, manualInvocationSignal: invocationSignal, finishedSubject: finishedSubject, email: testEmail)
+    }
+
     override func spec() {
-        let testPassword = "password"
-        let testEmail = "test@example.com"
 
         // Just so providers form individual tests don't bleed into one another
         setupProviderForSuite(Provider.StubbingProvider())
@@ -18,11 +56,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("enables the command only when the password is valid") {
             let passwordSubject = RACSubject()
 
-            let subject = RegistrationPasswordViewModel(passwordSignal: passwordSubject,
-                manualInvocationSignal: RACSignal.empty(),
-                finishedSubject: RACSubject(),
-                email: testEmail)
-
+            let subject = self.testSubject(passwordSubject: passwordSubject)
 
             passwordSubject.sendNext("nope")
             expect((subject.command.enabled.first() as Bool)).toEventually( beFalse() )
@@ -37,27 +71,11 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("checks for an email when executing the command") {
             var checked = false
 
-            let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+            self.stubProvider(emailExists: false, emailCheck: { () -> () in
+                checked = true
+            }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-                switch target {
-                case ArtsyAPI.FindExistingEmailRegistration(let email):
-                    checked = true
-                    expect(email) == testEmail
-                default:
-                    // Fail on all other cases
-                    expect(true) == false
-                }
-
-                // The email doesn't exist
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(404, NSData()), method: method, parameters: parameters)
-            }
-
-            Provider.sharedProvider = ArtsyProvider(endpointsClosure: endpointsClosure, stubResponses: true, onlineSignal: { RACSignal.empty() })
-
-            let subject = RegistrationPasswordViewModel(passwordSignal: RACSignal.`return`(testPassword),
-                manualInvocationSignal: RACSignal.empty(),
-                finishedSubject: RACSubject(),
-                email: testEmail)
+            let subject = self.testSubject()
 
             subject.command.execute(nil)
 
@@ -67,18 +85,11 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("sends true on emailExistsSignal if email exists") {
             var exists = false
 
-            let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+            self.stubProvider(emailExists: true, emailCheck: { () -> () in
+                exists = true
+            }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-                // Everything is 👌, so return 200 and empty data
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
-            }
-
-            Provider.sharedProvider = ArtsyProvider(endpointsClosure: endpointsClosure, stubResponses: true, onlineSignal: { RACSignal.empty() })
-
-            let subject = RegistrationPasswordViewModel(passwordSignal: RACSignal.`return`(testPassword),
-                manualInvocationSignal: RACSignal.empty(),
-                finishedSubject: RACSubject(),
-                email: testEmail)
+            let subject = self.testSubject()
 
             subject.emailExistsSignal.subscribeNext { (object) -> Void in
                 exists = object as? Bool ?? false
@@ -92,18 +103,11 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("sends false on emailExistsSignal if email does not exist") {
             var exists: Bool?
 
-            let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+            self.stubProvider(emailExists: false, emailCheck: { () -> () in
+                exists = true
+            }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-                // Email doesn't exist, so return 404 and empty data
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(404, NSData()), method: method, parameters: parameters)
-            }
-
-            Provider.sharedProvider = ArtsyProvider(endpointsClosure: endpointsClosure, stubResponses: true, onlineSignal: { RACSignal.empty() })
-
-            let subject = RegistrationPasswordViewModel(passwordSignal: RACSignal.`return`(testPassword),
-                manualInvocationSignal: RACSignal.empty(),
-                finishedSubject: RACSubject(),
-                email: testEmail)
+            let subject = self.testSubject()
 
             subject.emailExistsSignal.subscribeNext { (object) -> Void in
                 exists = object as? Bool
@@ -119,35 +123,13 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             var checked = false
             var authed = false
 
-            let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+            self.stubProvider(emailExists: true, emailCheck: {
+                checked = true
+            }, loginSucceeds: true, loginCheck: {
+                authed = true
+            }, passwordRequestSucceeds: true, passwordCheck: nil)
 
-                switch target {
-                case ArtsyAPI.FindExistingEmailRegistration(let email):
-                    checked = true
-                    expect(email) == testEmail
-                    // The email exists
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
-                case ArtsyAPI.XAuth(let email, let password):
-                    authed = true
-                    expect(email) == testEmail
-                    expect(password) == testPassword
-
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
-                default:
-                    // Fail on all other cases
-                    expect(true) == false
-                }
-
-                // Silences compiler error
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
-            }
-
-            Provider.sharedProvider = ArtsyProvider(endpointsClosure: endpointsClosure, stubResponses: true, onlineSignal: { RACSignal.empty() })
-
-            let subject = RegistrationPasswordViewModel(passwordSignal: RACSignal.`return`(testPassword),
-                manualInvocationSignal: RACSignal.empty(),
-                finishedSubject: RACSubject(),
-                email: testEmail)
+            let subject = self.testSubject()
 
             subject.command.execute(nil)
             
@@ -156,30 +138,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         }
 
         it("sends an error on the command if the authorization fails") {
-            let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+            self.stubProvider(emailExists: true, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-                switch target {
-                case ArtsyAPI.FindExistingEmailRegistration(let email):
-                    // The email exists
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
-                case ArtsyAPI.XAuth(let email, let password):
-                    // Fail auth (wrong password maybe)
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(403, NSData()), method: method, parameters: parameters)
-                default:
-                    // Fail on all other cases
-                    expect(true) == false
-                }
-
-                // Silences compiler error
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
-            }
-
-            Provider.sharedProvider = ArtsyProvider(endpointsClosure: endpointsClosure, stubResponses: true, onlineSignal: { RACSignal.empty() })
-
-            let subject = RegistrationPasswordViewModel(passwordSignal: RACSignal.`return`(testPassword),
-                manualInvocationSignal: RACSignal.empty(),
-                finishedSubject: RACSubject(),
-                email: testEmail)
+            let subject = self.testSubject()
 
             var errored = false
 
@@ -193,25 +154,11 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         }
 
         it("executes command when manual signal sends") {
-            let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-
-                switch target {
-                case ArtsyAPI.FindExistingEmailRegistration(let email):
-                    // The email doesn't exist
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(404, NSData()), method: method, parameters: parameters)
-                default:
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
-                }
-            }
-
-            Provider.sharedProvider = ArtsyProvider(endpointsClosure: endpointsClosure, stubResponses: true, onlineSignal: { RACSignal.empty() })
+            self.stubProvider(emailExists: false, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
             let invocationSignal = RACSubject()
 
-            let subject = RegistrationPasswordViewModel(passwordSignal: RACSignal.`return`(testPassword),
-                manualInvocationSignal: invocationSignal,
-                finishedSubject: RACSubject(),
-                email: testEmail)
+            let subject = self.testSubject(invocationSignal: invocationSignal)
 
             var completed = false
 
@@ -234,10 +181,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 completed = true
             }
 
-            let subject = RegistrationPasswordViewModel(passwordSignal: RACSignal.`return`(testPassword),
-                manualInvocationSignal: invocationSignal,
-                finishedSubject: finishedSubject,
-                email: testEmail)
+            let subject = self.testSubject(invocationSignal:invocationSignal, finishedSubject: finishedSubject)
 
             subject.command.execute(nil)
 
@@ -247,34 +191,11 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("handles password reminders") {
             var sent = false
 
-            let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+            self.stubProvider(emailExists: false, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: {
+                sent = true
+            })
 
-                // Swift needs at least one executable statement per case  ¯\_(ツ)_/¯
-                var a = 0
-                switch target {
-                case ArtsyAPI.FindExistingEmailRegistration:
-                    // Ignore; the subject tests this upon initialization
-                    a = 0
-                case ArtsyAPI.LostPasswordNotification(let email):
-                    sent = true
-                    expect(email) == testEmail
-                case .XApp:
-                    a = 0
-                default:
-                    // Fail on all other cases
-                    expect(true) == false
-                }
-
-                // We're A-OK
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
-            }
-
-            Provider.sharedProvider = ArtsyProvider(endpointsClosure: endpointsClosure, stubResponses: true, onlineSignal: { RACSignal.empty() })
-
-            let subject = RegistrationPasswordViewModel(passwordSignal: RACSignal.`return`(testPassword),
-                manualInvocationSignal: RACSignal.empty(),
-                finishedSubject: RACSubject(),
-                email: testEmail)
+            let subject = self.testSubject()
 
             subject.userForgotPasswordSignal().subscribeNext { _ -> Void in
                 // do nothing – we subscribe just to force the signal to execute.
