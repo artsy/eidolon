@@ -11,5 +11,12 @@ class ConfirmYourBidArtsyLoginViewControllerTests: QuickSpec {
             expect(subject).to(haveValidSnapshot())
         }
 
+        it("looks right with an invalid password") {
+            // TODO:
+        }
+
+        it("looks right with a valid password") {
+            // TODO:
+        }
     }
 }

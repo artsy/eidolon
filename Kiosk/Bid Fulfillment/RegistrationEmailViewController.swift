@@ -2,37 +2,30 @@ import UIKit
 import Swift_RAC_Macros
 import ReactiveCocoa
 
-class RegistrationEmailViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
+public class RegistrationEmailViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
 
     @IBOutlet var emailTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
     let finishedSignal = RACSubject()
 
-    override func viewDidLoad() {
+    public lazy var viewModel: GenericFormValidationViewModel = {
+        let emailIsValidSignal = self.emailTextField.rac_textSignal().map(stringIsEmailAddress)
+        return GenericFormValidationViewModel(isValidSignal: emailIsValidSignal, manualInvocationSignal: self.emailTextField.returnKeySignal(), finishedSubject: self.finishedSignal)
+    }()
+
+    public lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
+
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
-            emailTextField.text = bidDetails.newUser.email
+        emailTextField.text = bidDetails.newUser.email
+        RAC(bidDetails, "newUser.email") <~ emailTextField.rac_textSignal()
+        confirmButton.rac_command = viewModel.command
 
-            RAC(bidDetails, "newUser.email") <~ emailTextField.rac_textSignal()
-
-            let emailIsValidSignal = RACObserve(bidDetails.newUser, "email").map(stringIsEmailAddress)
-            RAC(confirmButton, "enabled") <~ emailIsValidSignal
-        }
-
-        emailTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in
-            self?.finishedSignal.sendCompleted()
-            return
-        })
-        
         emailTextField.becomeFirstResponder()
     }
 
-    @IBAction func confirmTapped(sender: AnyObject) {
-        finishedSignal.sendCompleted()
-    }
-
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
         // Allow delete
         if (countElements(string) == 0) { return true }
@@ -41,4 +34,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
         return string != " "
     }
 
+    public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationEmailViewController {
+        return storyboard.viewControllerWithID(.RegisterEmail) as RegistrationEmailViewController
+    }
 }

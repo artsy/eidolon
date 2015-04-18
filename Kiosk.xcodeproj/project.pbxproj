@@ -11,6 +11,11 @@
 		5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E64E1A65630200F8CBDD /* Logger.swift */; };
 		5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */; };
 		5E339E3A1A991899000C773D /* RACExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E339E391A991899000C773D /* RACExtensions.swift */; };
+		5E43C38C1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C38B1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift */; };
+		5E43C38E1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C38D1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift */; };
+		5E43C3901AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C38F1AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift */; };
+		5E43C3921AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C3911AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift */; };
+		5E43C3941AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C3931AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift */; };
 		5E5ADF641A8B789000453250 /* WhitespaceGobbler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */; };
 		5E748B731AA11BCF00DE3A9D /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */; };
 		5E809A401ACF225100C30DC9 /* ArtsyProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */; };
@@ -192,6 +197,9 @@
 		5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */; };
 		5EB0B71D1A5C410D00B7CBF2 /* UITextField+RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7181A5C410D00B7CBF2 /* UITextField+RAC.swift */; };
 		5EB0B71E1A5C410D00B7CBF2 /* UIViewController+Bidding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7191A5C410D00B7CBF2 /* UIViewController+Bidding.swift */; };
+		5EBD31491AE0435600648484 /* GenericFormValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD31481AE0435600648484 /* GenericFormValidationViewModel.swift */; };
+		5EBD314B1AE047C700648484 /* RegistrationPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD314A1AE047C700648484 /* RegistrationPasswordViewModel.swift */; };
+		5EBD314F1AE0563300648484 /* GenericFormValidationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD314E1AE0563300648484 /* GenericFormValidationViewModelTests.swift */; };
 		5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */; };
 		5EFA709C1A9674BD0082C916 /* BidderDetailsRetrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */; };
 		D12607F71BF578705637C9A7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFB9BD12B5173B74D620D7 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -212,6 +220,11 @@
 		5E19E64E1A65630200F8CBDD /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		5E339E391A991899000C773D /* RACExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensions.swift; sourceTree = "<group>"; };
+		5E43C38B1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewModelTests.swift; sourceTree = "<group>"; };
+		5E43C38D1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationEmailViewControllerTests.swift; sourceTree = "<group>"; };
+		5E43C38F1AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationMobileViewControllerTests.swift; sourceTree = "<group>"; };
+		5E43C3911AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewControllerTests.swift; sourceTree = "<group>"; };
+		5E43C3931AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPostalZipViewControllerTests.swift; sourceTree = "<group>"; };
 		5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitespaceGobbler.swift; sourceTree = "<group>"; };
 		5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModel.swift; sourceTree = "<group>"; };
 		5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyProviderTests.swift; sourceTree = "<group>"; };
@@ -377,6 +390,9 @@
 		5EB0B7181A5C410D00B7CBF2 /* UITextField+RAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+RAC.swift"; sourceTree = "<group>"; };
 		5EB0B7191A5C410D00B7CBF2 /* UIViewController+Bidding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Bidding.swift"; sourceTree = "<group>"; };
 		5EB8D8EE1A5C513A008EAD6C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EBD31481AE0435600648484 /* GenericFormValidationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericFormValidationViewModel.swift; sourceTree = "<group>"; };
+		5EBD314A1AE047C700648484 /* RegistrationPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewModel.swift; sourceTree = "<group>"; };
+		5EBD314E1AE0563300648484 /* GenericFormValidationViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericFormValidationViewModelTests.swift; sourceTree = "<group>"; };
 		5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModelTests.swift; sourceTree = "<group>"; };
 		5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderDetailsRetrieval.swift; sourceTree = "<group>"; };
 		B5DFB9BD12B5173B74D620D7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -553,13 +569,10 @@
 				5E8610181A5C429C00456E41 /* PlaceBidViewController.swift */,
 				5E8610191A5C429C00456E41 /* RACFunctions.swift */,
 				5E86101A1A5C429C00456E41 /* RegisterViewController.swift */,
-				5E86101B1A5C429C00456E41 /* RegistrationEmailViewController.swift */,
-				5E86101C1A5C429C00456E41 /* RegistrationMobileViewController.swift */,
-				5E86101D1A5C429C00456E41 /* RegistrationPasswordViewController.swift */,
-				5E86101E1A5C429C00456E41 /* RegistrationPostalZipViewController.swift */,
 				5E86101F1A5C429C00456E41 /* SwipeCreditCardViewController.swift */,
 				5E8610201A5C429C00456E41 /* toolbar_close@2x.png */,
 				5E8610211A5C429C00456E41 /* YourBiddingDetailsViewController.swift */,
+				5EBD314C1AE053ED00648484 /* Registraiton */,
 			);
 			path = "Bid Fulfillment";
 			sourceTree = "<group>";
@@ -666,6 +679,7 @@
 		5E8610C81A5C43EF00456E41 /* Bid Fulfillment */ = {
 			isa = PBXGroup;
 			children = (
+				5EBD314D1AE0562900648484 /* Registration */,
 				5E8610C91A5C43EF00456E41 /* ConfirmYourBidArtsyLoginViewControllerTests.swift */,
 				5E8610CA1A5C43EF00456E41 /* ConfirmYourBidEnterYourEmailViewControllerTests.swift */,
 				5E8610CB1A5C43EF00456E41 /* ConfirmYourBidPINViewControllerTests.swift */,
@@ -766,6 +780,32 @@
 				5EB0B7071A5C3E6800B7CBF2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5EBD314C1AE053ED00648484 /* Registraiton */ = {
+			isa = PBXGroup;
+			children = (
+				5E86101B1A5C429C00456E41 /* RegistrationEmailViewController.swift */,
+				5E86101C1A5C429C00456E41 /* RegistrationMobileViewController.swift */,
+				5E86101D1A5C429C00456E41 /* RegistrationPasswordViewController.swift */,
+				5E86101E1A5C429C00456E41 /* RegistrationPostalZipViewController.swift */,
+				5EBD31481AE0435600648484 /* GenericFormValidationViewModel.swift */,
+				5EBD314A1AE047C700648484 /* RegistrationPasswordViewModel.swift */,
+			);
+			name = Registraiton;
+			sourceTree = "<group>";
+		};
+		5EBD314D1AE0562900648484 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				5EBD314E1AE0563300648484 /* GenericFormValidationViewModelTests.swift */,
+				5E43C38B1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift */,
+				5E43C38D1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift */,
+				5E43C38F1AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift */,
+				5E43C3911AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift */,
+				5E43C3931AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift */,
+			);
+			name = Registration;
 			sourceTree = "<group>";
 		};
 		D6412E48092F2A37CE44DBD3 /* Pods */ = {
@@ -1044,6 +1084,7 @@
 				5E86108E1A5C429C00456E41 /* KeypadView.swift in Sources */,
 				5E86106A1A5C429C00456E41 /* RAC+JSONAble.swift in Sources */,
 				5E8610571A5C429C00456E41 /* Constants.swift in Sources */,
+				5EBD314B1AE047C700648484 /* RegistrationPasswordViewModel.swift in Sources */,
 				5E86107D1A5C429C00456E41 /* ListingsViewController.swift in Sources */,
 				5E8610581A5C429C00456E41 /* GlobalFunctions.swift in Sources */,
 				5EB0B71D1A5C410D00B7CBF2 /* UITextField+RAC.swift in Sources */,
@@ -1079,6 +1120,7 @@
 				5E86104C1A5C429C00456E41 /* AdminLogViewController.swift in Sources */,
 				5E8610671A5C429C00456E41 /* User.swift in Sources */,
 				5E8610921A5C429C00456E41 /* BidDetails.swift in Sources */,
+				5EBD31491AE0435600648484 /* GenericFormValidationViewModel.swift in Sources */,
 				5E86106D1A5C429C00456E41 /* XAppToken.swift in Sources */,
 				5E339E3A1A991899000C773D /* RACExtensions.swift in Sources */,
 				5E86107B1A5C429C00456E41 /* TextField.swift in Sources */,
@@ -1148,14 +1190,18 @@
 				5E8611301A5C43EF00456E41 /* RegisterFlowViewTests.swift in Sources */,
 				5E8611101A5C43EF00456E41 /* ListingsViewControllerTests.swift in Sources */,
 				5E8611111A5C43EF00456E41 /* ArtistTests.swift in Sources */,
+				5E43C38C1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift in Sources */,
 				5E8611091A5C43EF00456E41 /* ConfirmYourBidViewControllerTests.swift in Sources */,
 				5E86110D1A5C43EF00456E41 /* BidDetailsTestExtensions.swift in Sources */,
 				5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */,
+				5E43C3921AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift in Sources */,
 				5E8611161A5C43EF00456E41 /* ImageTests.swift in Sources */,
 				5E86110B1A5C43EF00456E41 /* LoadingViewControllerTests.swift in Sources */,
 				5E86110F1A5C43EF00456E41 /* KioskTests.swift in Sources */,
+				5E43C3941AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift in Sources */,
 				5E8611181A5C43EF00456E41 /* SaleTests.swift in Sources */,
 				5E86110E1A5C43EF00456E41 /* CardHandlerTests.swift in Sources */,
+				5E43C38E1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift in Sources */,
 				5E8611031A5C43EF00456E41 /* AppViewControllerTests.swift in Sources */,
 				5E8611131A5C43EF00456E41 /* BidderPositionTests.swift in Sources */,
 				5E8611151A5C43EF00456E41 /* BidTests.swift in Sources */,
@@ -1168,6 +1214,7 @@
 				5E8FABE81A5C49D800F6B913 /* StubResponses.m in Sources */,
 				5E8611071A5C43EF00456E41 /* ConfirmYourBidEnterYourEmailViewControllerTests.swift in Sources */,
 				5E8611061A5C43EF00456E41 /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */,
+				5EBD314F1AE0563300648484 /* GenericFormValidationViewModelTests.swift in Sources */,
 				5E8611321A5C43EF00456E41 /* TestHelpers.swift in Sources */,
 				5E8611041A5C43EF00456E41 /* ArtsyAPISpec.swift in Sources */,
 				5E809A401ACF225100C30DC9 /* ArtsyProviderTests.swift in Sources */,
@@ -1178,6 +1225,7 @@
 				5E8611311A5C43EF00456E41 /* SwitchViewSpec.swift in Sources */,
 				5E86110A1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift in Sources */,
 				5E8611341A5C43EF00456E41 /* XAppTokenSpec.swift in Sources */,
+				5E43C3901AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

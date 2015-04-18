@@ -1,4 +1,5 @@
 import ReactiveCocoa
+import Moya
 
 // Ideally a Pod. For now a file.
 func delayToMainThread(delay:Double, closure:()->()) {
@@ -22,4 +23,11 @@ let reachabilityManager = ReachabilityManager()
 // A signal that completes when the app gets online (possibly completes immediately).
 func connectedToInternetSignal() -> RACSignal {
     return reachabilityManager.reachSignal.filter { ($0 as Bool) }.take(1).ignoreValues()
+}
+
+func responseIsOK(object: AnyObject!) -> AnyObject {
+    if let response = object as? MoyaResponse {
+        return response.statusCode == 200
+    }
+    return false
 }

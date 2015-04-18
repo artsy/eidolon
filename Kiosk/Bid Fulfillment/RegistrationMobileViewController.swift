@@ -2,33 +2,30 @@ import UIKit
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-class RegistrationMobileViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
+public class RegistrationMobileViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
     
     @IBOutlet var numberTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
     let finishedSignal = RACSubject()
-    
-    override func viewDidLoad() {
+
+    lazy var viewModel: GenericFormValidationViewModel = {
+        let numberIsValidSignal = self.numberTextField.rac_textSignal().map(isZeroLengthString).not()
+        return GenericFormValidationViewModel(isValidSignal: numberIsValidSignal, manualInvocationSignal: self.numberTextField.returnKeySignal(), finishedSubject: self.finishedSignal)
+    }()
+
+    public lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
+
+    public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
-            numberTextField.text = bidDetails.newUser.phoneNumber
 
-            RAC(bidDetails, "newUser.phoneNumber") <~ numberTextField.rac_textSignal()
-            
-            let numberIsInvalidSignal = RACObserve(bidDetails.newUser, "phoneNumber").map(isZeroLengthString)
-            RAC(confirmButton, "enabled") <~ numberIsInvalidSignal.not()
-        }
-
-        numberTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in
-            self?.finishedSignal.sendCompleted()
-            return
-        })
+        numberTextField.text = bidDetails.newUser.phoneNumber
+        RAC(bidDetails, "newUser.phoneNumber") <~ numberTextField.rac_textSignal()
+        confirmButton.rac_command = viewModel.command
 
         numberTextField.becomeFirstResponder()
     }
 
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
         // Allow delete
         if (countElements(string) == 0) { return true }
@@ -38,7 +35,7 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
         return countElements(string.stringByTrimmingCharactersInSet(notNumberChars)) != 0
     }
 
-    @IBAction func confirmTapped(sender: AnyObject) {
-        finishedSignal.sendCompleted()
+    public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationMobileViewController {
+        return storyboard.viewControllerWithID(.RegisterMobile) as RegistrationMobileViewController
     }
 }

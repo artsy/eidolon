@@ -1,33 +1,29 @@
-import UIKit
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-class RegistrationPostalZipViewController: UIViewController, RegistrationSubController {
-    
+public class RegistrationPostalZipViewController: UIViewController, RegistrationSubController {
     @IBOutlet var zipCodeTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
     let finishedSignal = RACSubject()
 
-    override func viewDidLoad() {
+    public lazy var viewModel: GenericFormValidationViewModel = {
+        let zipCodeIsValidSignal = self.zipCodeTextField.rac_textSignal().map(isZeroLengthString).not()
+        return GenericFormValidationViewModel(isValidSignal: zipCodeIsValidSignal, manualInvocationSignal: self.zipCodeTextField.returnKeySignal(), finishedSubject: self.finishedSignal)
+    }()
+
+    public lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
+
+    public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
-            zipCodeTextField.text = bidDetails.newUser.zipCode
-            RAC(bidDetails, "newUser.zipCode") <~ zipCodeTextField.rac_textSignal()
-            
-            let emailIsValidSignal = RACObserve(bidDetails.newUser, "zipCode").map(isZeroLengthString)
-            RAC(confirmButton, "enabled") <~ emailIsValidSignal.not()
-        }
 
+        zipCodeTextField.text = bidDetails.newUser.zipCode
+        RAC(bidDetails, "newUser.zipCode") <~ zipCodeTextField.rac_textSignal()
+        confirmButton.rac_command = viewModel.command
 
-        zipCodeTextField.returnKeySignal().subscribeNext({ [weak self] (_) -> Void in
-            self?.finishedSignal.sendCompleted()
-            return
-        })
         zipCodeTextField.becomeFirstResponder()
     }
 
-    @IBAction func confirmTapped(sender: AnyObject) {
-        finishedSignal.sendCompleted()
+    public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationPostalZipViewController {
+        return storyboard.viewControllerWithID(.RegisterPostalorZip) as RegistrationPostalZipViewController
     }
 }
