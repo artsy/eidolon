@@ -1,3 +1,8 @@
+## Next
+* Fixes password problems when signing in.
+* Prevents user from registering with invalid passwords.
+* Disables iPad sleep timer.
+
 ## 3.4.0 April 13 2015
 * Fixes problems entering in phone numbers.
 * Adds a "Forgot Password" link when logging in with Artsy credentials.

@@ -16,6 +16,10 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
 
+        // Disable sleep timer
+        UIApplication.sharedApplication().idleTimerDisabled = true
+
+        // Set up network layer
         if StubResponses.stubResponses() {
             Provider.sharedProvider = Provider.StubbingProvider()
         }
