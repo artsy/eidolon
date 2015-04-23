@@ -34,14 +34,14 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         super.viewDidLoad()
         expirationDateWrapperView.hidden = true
 
-        let marketplace = AppSetup.sharedState.useStaging ? keys.balancedMarketplaceStagingToken() : keys.balancedMarketplaceToken()
+        let marketplace = ""
         balancedHandler = BalancedManager(marketplace: marketplace)
 
         RAC(self, "cardName") <~ RACObserve(balancedHandler, "cardName")
         RAC(self, "cardToken") <~ RACObserve(balancedHandler, "cardToken")
         RAC(self, "cardLastDigits") <~ RACObserve(balancedHandler, "cardLastDigits")
 
-        // We show the enter credit card number, then the date switchign the views around
+        // We show the enter credit card number, then the date switching the views around
 
         if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
 

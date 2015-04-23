@@ -14,8 +14,6 @@ plugin 'cocoapods-keys', {
     "CardflightAPIClientKey",
     "CardflightMerchantAccountToken",
     "CardflightMerchantAccountStagingToken",
-    "BalancedMarketplaceToken",
-    "BalancedMarketplaceStagingToken"
   ]
 }
 
@@ -55,7 +53,6 @@ pod 'Reachability', :git => "https://github.com/ashfurrow/Reachability.git", :br
 
 pod 'UIView+BooleanAnimations'
 pod 'ARTiledImageView', :git => "https://github.com/ashfurrow/ARTiledImageView.git"
-pod 'balanced-ios', :git => "https://github.com/orta/balanced-ios", :branch => "0_5_podspec"
 pod 'XNGMarkdownParser'
 
 # swift pods
