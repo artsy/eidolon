@@ -83,7 +83,7 @@ public class BidderNetworkModel: NSObject {
 
     private func addCardToUser() -> RACSignal {
         if (details().newUser.creditCardToken == nil) { return RACSignal.empty() }
-        let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(balancedToken: details().newUser.creditCardToken!)
+        let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(stripeToken: details().newUser.creditCardToken!)
 
         // on Staging the card tokenization fails
 

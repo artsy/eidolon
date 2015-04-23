@@ -33,7 +33,7 @@ public enum ArtsyAPI {
     case UpdateMe(email: String, phone: String, postCode: String, name: String)
     case CreateUser(email: String, password: String, phone: String, postCode: String, name: String)
 
-    case RegisterCard(balancedToken: String)
+    case RegisterCard(stripeToken: String)
 
     case BidderDetailsNotification(auctionID: String, identifier: String)
     
@@ -89,7 +89,7 @@ public enum ArtsyAPI {
             ]
 
         case RegisterCard(let token):
-            return ["provider": "balanced", "token": token]
+            return ["provider": "stripe", "token": token]
 
         case FindBidderRegistration(let auctionID, let phone):
             return ["sale_id": auctionID, "number": phone]

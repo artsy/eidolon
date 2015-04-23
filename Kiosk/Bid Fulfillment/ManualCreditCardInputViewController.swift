@@ -6,8 +6,6 @@ import Keys
 public class ManualCreditCardInputViewController: UIViewController, RegistrationSubController {
     let finishedSignal = RACSubject()
 
-    var balancedHandler: BalancedManager!
-
     @IBOutlet weak var cardNumberTextField: TextField!
     @IBOutlet weak var expirationMonthTextField: TextField!
     @IBOutlet weak var expirationYearTextField: TextField!
@@ -34,12 +32,9 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         super.viewDidLoad()
         expirationDateWrapperView.hidden = true
 
-        let marketplace = ""
-        balancedHandler = BalancedManager(marketplace: marketplace)
-
-        RAC(self, "cardName") <~ RACObserve(balancedHandler, "cardName")
-        RAC(self, "cardToken") <~ RACObserve(balancedHandler, "cardToken")
-        RAC(self, "cardLastDigits") <~ RACObserve(balancedHandler, "cardLastDigits")
+//        RAC(self, "cardName") <~ RACObserve(balancedHandler, "cardName")
+//        RAC(self, "cardToken") <~ RACObserve(balancedHandler, "cardToken")
+//        RAC(self, "cardLastDigits") <~ RACObserve(balancedHandler, "cardLastDigits")
 
         // We show the enter credit card number, then the date switching the views around
 
@@ -57,8 +52,8 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
                 }
             }
 
-            let numberIsValidSignal = RACObserve(self, "cardFullDigits").map(stringIsCreditCard)
-            RAC(cardConfirmButton, "enabled") <~ numberIsValidSignal
+//            let numberIsValidSignal = RACObserve(self, "cardFullDigits").map(stringIsCreditCard)
+//            RAC(cardConfirmButton, "enabled") <~ numberIsValidSignal
 
             let monthSignal = RACObserve(self, "expirationMonth").map(islessThan3CharLengthString)
             let yearSignal = RACObserve(self, "expirationYear").map(is4CharLengthString)
@@ -76,14 +71,16 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         let month = expirationMonth.toInt() ?? 0
         let year = expirationYear.toInt() ?? 0
 
-        return balancedHandler.registerCard(cardFullDigits, month: month, year: year).doNext() { [weak self] (_) in
-            self?.finishedSignal.sendCompleted()
-            return
+//        return balancedHandler.registerCard(cardFullDigits, month: month, year: year).doNext() { [weak self] (_) in
+//            self?.finishedSignal.sendCompleted()
+//            return
+//
+//        }.doError() { [weak self] (_) -> Void in
+//            self?.errorLabel.hidden = false
+//            return
+//        }
 
-        }.doError() { [weak self] (_) -> Void in
-            self?.errorLabel.hidden = false
-            return
-        }
+        return RACSignal.empty()
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
