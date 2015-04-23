@@ -23,7 +23,7 @@ public class RegisterFlowView: ORStackView {
     }
     
     var titles = ["Mobile", "Email", "Credit Card", "Postal/Zip"]
-    var keypaths = [["phoneNumber"], ["email"], ["creditCardName", "creditCardtype"], ["zipCode"]]
+    var keypaths = [["phoneNumber"], ["email"], ["creditCardName", "creditCardType"], ["zipCode"]]
 
 
     func update() {

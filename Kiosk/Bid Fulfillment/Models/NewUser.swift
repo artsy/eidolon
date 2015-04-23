@@ -5,7 +5,7 @@
     public dynamic var creditCardDigit: String?
     public dynamic var creditCardToken: String?
     public dynamic var creditCardName: String?
-    public dynamic var creditCardtype: String?
+    public dynamic var creditCardType: String?
     public dynamic var zipCode: String?
     public dynamic var name: String?
 }

@@ -12,7 +12,6 @@ class StripeManager {
         return RACSignal.createSignal { (subscriber) -> RACDisposable! in
             STPAPIClient.sharedClient().createTokenWithCard(card) { (token, error) -> Void in
                 if (token as STPToken?).hasValue {
-                    // TODO: Need to process the token a bit. It's a STPToken or whatever.
                     subscriber.sendNext(token)
                     subscriber.sendCompleted()
                 } else {
@@ -41,7 +40,7 @@ extension STPCardBrand {
         case .MasterCard:
             return "MasterCard"
         case .Discover:
-            return "Dsicover"
+            return "Discover"
         case .JCB:
             return "JCB"
         case .DinersClub:

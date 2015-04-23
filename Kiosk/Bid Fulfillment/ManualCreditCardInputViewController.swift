@@ -15,8 +15,6 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
     @IBOutlet weak var cardNumberWrapperView: UIView!
     @IBOutlet weak var errorLabel: UILabel!
 
-    dynamic var cardToken = ""
-
     dynamic var cardFullDigits = ""
     dynamic var expirationMonth = ""
     dynamic var expirationYear = ""
@@ -65,7 +63,7 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
             let token = object as STPToken
 
             newUser.creditCardName = token.card.name
-            newUser.creditCardtype = token.card.brand.name
+            newUser.creditCardType = token.card.brand.name
             newUser.creditCardToken = token.tokenId
             newUser.creditCardDigit = token.card.last4
 

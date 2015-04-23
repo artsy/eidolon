@@ -1,5 +1,4 @@
 import Foundation
-import Dollar
 
 // Collection of stanardised mapping funtions for RAC work
 
