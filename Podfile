@@ -13,7 +13,6 @@ plugin 'cocoapods-keys', {
     "MixpanelStagingAPIClientKey",
     "CardflightAPIClientKey",
     "CardflightMerchantAccountToken",
-    "CardflightMerchantAccountStagingToken",
   ]
 }
 
