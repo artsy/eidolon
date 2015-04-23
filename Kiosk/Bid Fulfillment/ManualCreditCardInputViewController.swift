@@ -2,6 +2,7 @@ import UIKit
 import ReactiveCocoa
 import Swift_RAC_Macros
 import Keys
+import Stripe
 
 public class ManualCreditCardInputViewController: UIViewController, RegistrationSubController {
     let finishedSignal = RACSubject()
@@ -14,9 +15,6 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
     @IBOutlet weak var cardNumberWrapperView: UIView!
     @IBOutlet weak var errorLabel: UILabel!
 
-
-    dynamic var cardName = ""
-    dynamic var cardLastDigits = ""
     dynamic var cardToken = ""
 
     dynamic var cardFullDigits = ""
@@ -32,17 +30,9 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         super.viewDidLoad()
         expirationDateWrapperView.hidden = true
 
-//        RAC(self, "cardName") <~ RACObserve(balancedHandler, "cardName")
-//        RAC(self, "cardToken") <~ RACObserve(balancedHandler, "cardToken")
-//        RAC(self, "cardLastDigits") <~ RACObserve(balancedHandler, "cardLastDigits")
-
         // We show the enter credit card number, then the date switching the views around
 
         if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
-
-            RAC(bidDetails, "newUser.creditCardName") <~ RACObserve(self, "cardName")
-            RAC(bidDetails, "newUser.creditCardToken") <~ RACObserve(self, "cardToken")
-            RAC(bidDetails, "newUser.creditCardDigit") <~ RACObserve(self, "cardLastDigits")
 
             RAC(self, "cardFullDigits") <~ cardNumberTextField.rac_textSignal()
             RAC(self, "expirationYear") <~ expirationYearTextField.rac_textSignal()
@@ -52,35 +42,38 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
                 }
             }
 
-//            let numberIsValidSignal = RACObserve(self, "cardFullDigits").map(stringIsCreditCard)
-//            RAC(cardConfirmButton, "enabled") <~ numberIsValidSignal
+            let numberIsValidSignal = RACObserve(self, "cardFullDigits").map(StripeManager.stringIsCreditCard)
+            RAC(cardConfirmButton, "enabled") <~ numberIsValidSignal
 
             let monthSignal = RACObserve(self, "expirationMonth").map(islessThan3CharLengthString)
             let yearSignal = RACObserve(self, "expirationYear").map(is4CharLengthString)
 
             let formIsValid = RACSignal.combineLatest([yearSignal, monthSignal]).and()
             dateConfirmButton.rac_command = RACCommand(enabled: formIsValid) { [weak self] _ in
-                self?.registerCardSignal() ?? RACSignal.empty()
+                self?.registerCardSignal(bidDetails.newUser) ?? RACSignal.empty()
             }
         }
 
         cardNumberTextField.becomeFirstResponder()
     }
 
-    func registerCardSignal() -> RACSignal {
-        let month = expirationMonth.toInt() ?? 0
-        let year = expirationYear.toInt() ?? 0
+    func registerCardSignal(newUser: NewUser) -> RACSignal {
+        let month = expirationMonth.toUInt(defaultValue: 0)
+        let year = expirationYear.toUInt(defaultValue: 0)
 
-//        return balancedHandler.registerCard(cardFullDigits, month: month, year: year).doNext() { [weak self] (_) in
-//            self?.finishedSignal.sendCompleted()
-//            return
-//
-//        }.doError() { [weak self] (_) -> Void in
-//            self?.errorLabel.hidden = false
-//            return
-//        }
+        return StripeManager.registerCard(cardFullDigits, month: month, year: year).doNext() { [weak self] (object) in
+            let token = object as STPToken
 
-        return RACSignal.empty()
+            newUser.creditCardName = token.card.name
+            newUser.creditCardtype = token.card.brand.name
+            newUser.creditCardToken = token.tokenId
+            newUser.creditCardDigit = token.card.last4
+
+            self?.finishedSignal.sendCompleted()
+        }.doError() { [weak self] (_) -> Void in
+            self?.errorLabel.hidden = false
+            return
+        }
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {

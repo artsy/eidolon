@@ -200,6 +200,9 @@
 		5EBD314B1AE047C700648484 /* RegistrationPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD314A1AE047C700648484 /* RegistrationPasswordViewModel.swift */; };
 		5EBD314F1AE0563300648484 /* GenericFormValidationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD314E1AE0563300648484 /* GenericFormValidationViewModelTests.swift */; };
 		5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */; };
+		5EF71E781AE986000069A266 /* StripeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E771AE986000069A266 /* StripeManager.swift */; };
+		5EF71E7B1AE98F080069A266 /* STPCard+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */; };
+		5EF71E7D1AE996F50069A266 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7C1AE996F50069A266 /* SwiftExtensions.swift */; };
 		5EFA709C1A9674BD0082C916 /* BidderDetailsRetrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */; };
 		D12607F71BF578705637C9A7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFB9BD12B5173B74D620D7 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -392,6 +395,10 @@
 		5EBD314A1AE047C700648484 /* RegistrationPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewModel.swift; sourceTree = "<group>"; };
 		5EBD314E1AE0563300648484 /* GenericFormValidationViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericFormValidationViewModelTests.swift; sourceTree = "<group>"; };
 		5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModelTests.swift; sourceTree = "<group>"; };
+		5EF71E771AE986000069A266 /* StripeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeManager.swift; sourceTree = "<group>"; };
+		5EF71E791AE98F080069A266 /* STPCard+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STPCard+Validation.h"; sourceTree = "<group>"; };
+		5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "STPCard+Validation.m"; sourceTree = "<group>"; };
+		5EF71E7C1AE996F50069A266 /* SwiftExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExtensions.swift; sourceTree = "<group>"; };
 		5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderDetailsRetrieval.swift; sourceTree = "<group>"; };
 		B5DFB9BD12B5173B74D620D7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA79D9FDF198B37A06B262F /* Pods-KioskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -437,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				5E339E391A991899000C773D /* RACExtensions.swift */,
+				5EF71E7C1AE996F50069A266 /* SwiftExtensions.swift */,
 				5E860FCA1A5C429C00456E41 /* APIPingManager.swift */,
 				5E860FCB1A5C429C00456E41 /* AppDelegate+GlobalActions.swift */,
 				5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */,
@@ -459,6 +467,8 @@
 				5E860FF01A5C429C00456E41 /* UIViewSubclassesErrorExtensions.swift */,
 				5E19E64E1A65630200F8CBDD /* Logger.swift */,
 				5E860FF11A5C429C00456E41 /* Views */,
+				5EF71E791AE98F080069A266 /* STPCard+Validation.h */,
+				5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -544,6 +554,7 @@
 		5E8610011A5C429C00456E41 /* Bid Fulfillment */ = {
 			isa = PBXGroup;
 			children = (
+				5EF71E771AE986000069A266 /* StripeManager.swift */,
 				5E8610031A5C429C00456E41 /* BidCheckingNetworkModel.swift */,
 				5E8610041A5C429C00456E41 /* BidderNetworkModel.swift */,
 				5E8610051A5C429C00456E41 /* BidDetailsPreviewView.swift */,
@@ -1100,6 +1111,7 @@
 				5E8610531A5C429C00456E41 /* AppDelegate.swift in Sources */,
 				5E86109F1A5C429C00456E41 /* YourBiddingDetailsViewController.swift in Sources */,
 				5E8610701A5C429C00456E41 /* ReachabilityManager.swift in Sources */,
+				5EF71E7D1AE996F50069A266 /* SwiftExtensions.swift in Sources */,
 				5E8610991A5C429C00456E41 /* RegistrationEmailViewController.swift in Sources */,
 				5E8610771A5C429C00456E41 /* SimulatorOnlyView.swift in Sources */,
 				5E8610941A5C429C00456E41 /* RegistrationCoordinator.swift in Sources */,
@@ -1145,6 +1157,7 @@
 				5E8610541A5C429C00456E41 /* AppSetup.swift in Sources */,
 				5EB0B71A1A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift in Sources */,
 				5E8610801A5C429C00456E41 /* WebViewController.swift in Sources */,
+				5EF71E7B1AE98F080069A266 /* STPCard+Validation.m in Sources */,
 				5E8610731A5C429C00456E41 /* UIViewControllerExtensions.swift in Sources */,
 				5E8610711A5C429C00456E41 /* StubResponses.m in Sources */,
 				5E86106E1A5C429C00456E41 /* NSErrorExtensions.swift in Sources */,
@@ -1166,6 +1179,7 @@
 				5E8610631A5C429C00456E41 /* Location.swift in Sources */,
 				5EB0B71E1A5C410D00B7CBF2 /* UIViewController+Bidding.swift in Sources */,
 				5E86106F1A5C429C00456E41 /* OfflineViewController.swift in Sources */,
+				5EF71E781AE986000069A266 /* StripeManager.swift in Sources */,
 				5E86109B1A5C429C00456E41 /* RegistrationPasswordViewController.swift in Sources */,
 				5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */,
 				5E8610821A5C429C00456E41 /* BidCheckingNetworkModel.swift in Sources */,

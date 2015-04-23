@@ -16,11 +16,8 @@ lane :oss do
     'MixpanelProductionAPIClientKey', 
     'MixpanelStagingAPIClientKey', 
     'CardflightAPIClientKey', 
-    'CardflightAPIStagingClientKey', 
     'CardflightMerchantAccountToken', 
-    'CardflightMerchantAccountStagingToken', 
-    'BalancedMarketplaceToken', 
-    'BalancedMarketplaceStagingToken']
+    'StripePublishableKey']
 
     commands = keys.map { |key|
       command = "bundle exec pod keys set #{key} '-'"

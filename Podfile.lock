@@ -20,6 +20,9 @@ PODS:
   - CardFlight (1.9.2):
     - CardFlight/AudioJack (= 1.9.2)
   - CardFlight/AudioJack (1.9.2)
+  - Cent (2.1.1):
+    - Dollar (~> 2.1.1)
+  - Dollar (2.1.1)
   - DZNWebViewController (2.0):
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
@@ -69,6 +72,9 @@ PODS:
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
+  - Stripe (3.1.0):
+    - Stripe/Core (= 3.1.0)
+  - Stripe/Core (3.1.0)
   - SVProgressHUD (1.1.2)
   - Swift-RAC-Macros (0.2.1):
     - ReactiveCocoa (= 3.0.0-alpha.1)
@@ -89,6 +95,8 @@ DEPENDENCIES:
   - Artsy+UILabels
   - Artsy-UIButtons
   - CardFlight
+  - Cent
+  - Dollar (= 2.1.1)
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase
@@ -105,6 +113,7 @@ DEPENDENCIES:
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
   - ReactiveCocoa (= 3.0.0-alpha.1)
   - SDWebImage (~> 3.7)
+  - Stripe
   - SVProgressHUD (from `https://github.com/ashfurrow/SVProgressHUD.git`)
   - Swift-RAC-Macros
   - SwiftyJSON
@@ -157,6 +166,8 @@ SPEC CHECKSUMS:
   Artsy+UILabels: a7c713069e3d10144a3dc8e377bef8b2253cd766
   Artsy-UIButtons: 80a957b9479417c3be1e68d5b830de6cd2ec44cc
   CardFlight: aac74eae9761ee2c8e3dba1c9a520e7a1aa0f17f
+  Cent: f41777a655a366de6d2fa56b1a2e6c7f31055796
+  Dollar: 13f15d4bd8175069b9996293448fb5a83b3276bd
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
   EDColor: 89d19a013279a5604d61650721c15f20fefaaf00
@@ -178,6 +189,7 @@ SPEC CHECKSUMS:
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
   ReactiveCocoa: 3b5e351bb3ab233d71f0329f36a7400af30d9783
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
+  Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
   SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
   Swift-RAC-Macros: bd1ce60b127fa2ef03a5e52a4f8b61503b626552
   SwiftyJSON: a561c2a840121085bec8a2dfeac97a360fc66901
