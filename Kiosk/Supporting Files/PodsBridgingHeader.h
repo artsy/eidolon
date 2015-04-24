@@ -40,5 +40,3 @@
 #import <ARTiledImageView/ARTiledImageScrollView.h>
 
 #import <XNGMarkdownParser/XNGMarkdownParser.h>
-
-#import <balanced_ios/Balanced.h>

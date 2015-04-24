@@ -1,5 +1,4 @@
 import Foundation
-import balanced_ios
 
 // Collection of stanardised mapping funtions for RAC work
 
@@ -10,11 +9,6 @@ func stringIsEmailAddress(text:AnyObject!) -> AnyObject! {
     return testPredicate.evaluateWithObject(text) && !stringContainsPlus
 }
 
-func stringIsCreditCard(text:AnyObject!) -> AnyObject! {
-    let card = BPCard(number:text as String, expirationMonth:0, expirationYear:2023)
-    return card.numberValid
-}
-
 func centsToPresentableDollarsString(cents:AnyObject!) -> AnyObject! {
     if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
         return dollars
@@ -22,19 +16,22 @@ func centsToPresentableDollarsString(cents:AnyObject!) -> AnyObject! {
     return ""
 }
 
-func isZeroLengthString(string:AnyObject!) -> AnyObject! {
+func isZeroLengthString(string: AnyObject!) -> AnyObject! {
     return countElements(string as String) == 0
 }
 
-func is4CharLengthString(string:AnyObject!) -> AnyObject! {
-    return countElements(string as String) == 4
+func isStringLengthIn(range: Range<Int>)(string: AnyObject!) -> AnyObject! {
+    return contains(range, countElements(string as String))
 }
 
-func islessThan3CharLengthString(string:AnyObject!) -> AnyObject! {
-    return countElements(string as String) < 3
+func isStringOfLength(length: Int)(string: AnyObject!) -> AnyObject! {
+    return countElements(string as String) == length
 }
 
-func minimum6CharString(string:AnyObject!) -> AnyObject! {
-    return countElements(string as String) >= 6
+func isStringLengthAtLeast(length: Int)(string: AnyObject!) -> AnyObject! {
+    return countElements(string as String) >= length
 }
 
+func isStringLengthOneOf(lengths: [Int])(string: AnyObject!) -> AnyObject! {
+    return contains(lengths, countElements(string as String))
+}

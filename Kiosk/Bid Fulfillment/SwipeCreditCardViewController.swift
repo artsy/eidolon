@@ -29,8 +29,7 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
         super.viewDidLoad()
         self.setInProgress(false)
 
-        let merchantToken = AppSetup.sharedState.useStaging ? self.keys.cardflightMerchantAccountStagingToken() : self.keys.cardflightMerchantAccountToken()
-        let cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken:merchantToken)
+        let cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken: self.keys.cardflightMerchantAccountToken())
 
         cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
             let message = message as String

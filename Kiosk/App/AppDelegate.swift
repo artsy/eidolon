@@ -3,6 +3,7 @@ import ARAnalytics
 import SDWebImage
 import ReactiveCocoa
 import Keys
+import Stripe
 
 @UIApplicationMain
 public class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,6 +41,8 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
 
         let keys = EidolonKeys()
+        Stripe.setDefaultPublishableKey(keys.stripePublishableKey())
+
         let mixpanelToken = AppSetup.sharedState.useStaging ? keys.mixpanelStagingAPIClientKey() : keys.mixpanelProductionAPIClientKey()
 
         ARAnalytics.setupWithAnalytics([

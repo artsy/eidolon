@@ -1,6 +1,7 @@
 import UIKit
 import ORStackView
 import ReactiveCocoa
+import Dollar
 
 public class RegisterFlowView: ORStackView {
 
@@ -22,7 +23,7 @@ public class RegisterFlowView: ORStackView {
     }
     
     var titles = ["Mobile", "Email", "Credit Card", "Postal/Zip"]
-    var keypaths = ["phoneNumber", "email", "creditCardName", "zipCode"]
+    var keypaths = [["phoneNumber"], ["email"], ["creditCardName", "creditCardType"], ["zipCode"]]
 
 
     func update() {
@@ -35,9 +36,13 @@ public class RegisterFlowView: ORStackView {
 
             addSubview(itemView, withTopMargin: "10", sideMargin: "0")
 
-            if user.valueForKey(keypaths[i]) != nil {
+            let values = keypaths[i].map { (key) -> String? in
+                return user.valueForKey(key) as? String
+            }
 
-                itemView.createInfoLabel(user.valueForKey(keypaths[i]) as String)
+            if let value = $.compact(values).first {
+
+                itemView.createInfoLabel(value)
 
                 let button = itemView.createJumpToButtonAtIndex(i)
                 button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
@@ -110,8 +115,5 @@ public class RegisterFlowView: ORStackView {
             return button
 
         }
-
     }
-
-
 }

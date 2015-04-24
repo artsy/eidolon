@@ -13,9 +13,7 @@ plugin 'cocoapods-keys', {
     "MixpanelStagingAPIClientKey",
     "CardflightAPIClientKey",
     "CardflightMerchantAccountToken",
-    "CardflightMerchantAccountStagingToken",
-    "BalancedMarketplaceToken",
-    "BalancedMarketplaceStagingToken"
+    "StripePublishableKey"
   ]
 }
 
@@ -48,6 +46,7 @@ pod 'ARAnalytics/Mixpanel'
 pod 'ARAnalytics/HockeyApp'
 
 pod 'CardFlight'
+pod 'Stripe'
 pod 'ECPhoneNumberFormatter'
 pod 'UIImageViewAligned', :git => "https://github.com/ashfurrow/UIImageViewAligned.git"
 pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewController.git"
@@ -55,7 +54,6 @@ pod 'Reachability', :git => "https://github.com/ashfurrow/Reachability.git", :br
 
 pod 'UIView+BooleanAnimations'
 pod 'ARTiledImageView', :git => "https://github.com/ashfurrow/ARTiledImageView.git"
-pod 'balanced-ios', :git => "https://github.com/orta/balanced-ios", :branch => "0_5_podspec"
 pod 'XNGMarkdownParser'
 
 # swift pods
@@ -65,6 +63,8 @@ pod 'ReactiveCocoa', '3.0.0-alpha.1'
 pod 'RACAlertAction'
 pod 'Moya/Reactive'
 pod 'Swift-RAC-Macros'
+pod 'Dollar', '2.1.1'
+pod 'Cent'
 
 target "KioskTests" do
 

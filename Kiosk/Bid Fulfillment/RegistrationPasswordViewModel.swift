@@ -19,7 +19,7 @@ public class RegistrationPasswordViewModel {
         let passwordHolder = PasswordHolder()
         RAC(passwordHolder, "password") <~ passwordSignal
 
-        command = RACCommand(enabled: passwordSignal.map(minimum6CharString)) { _ -> RACSignal! in
+        command = RACCommand(enabled: passwordSignal.map(isStringLengthAtLeast(6))) { _ -> RACSignal! in
             return emailExistsSignal.map { (object) -> AnyObject! in
                 let emailExists = object as Bool
 

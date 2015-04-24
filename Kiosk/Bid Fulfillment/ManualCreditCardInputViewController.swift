@@ -2,11 +2,10 @@ import UIKit
 import ReactiveCocoa
 import Swift_RAC_Macros
 import Keys
+import Stripe
 
 public class ManualCreditCardInputViewController: UIViewController, RegistrationSubController {
     let finishedSignal = RACSubject()
-
-    var balancedHandler: BalancedManager!
 
     @IBOutlet weak var cardNumberTextField: TextField!
     @IBOutlet weak var expirationMonthTextField: TextField!
@@ -15,11 +14,6 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
     @IBOutlet weak var expirationDateWrapperView: UIView!
     @IBOutlet weak var cardNumberWrapperView: UIView!
     @IBOutlet weak var errorLabel: UILabel!
-
-
-    dynamic var cardName = ""
-    dynamic var cardLastDigits = ""
-    dynamic var cardToken = ""
 
     dynamic var cardFullDigits = ""
     dynamic var expirationMonth = ""
@@ -34,20 +28,9 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         super.viewDidLoad()
         expirationDateWrapperView.hidden = true
 
-        let marketplace = AppSetup.sharedState.useStaging ? keys.balancedMarketplaceStagingToken() : keys.balancedMarketplaceToken()
-        balancedHandler = BalancedManager(marketplace: marketplace)
-
-        RAC(self, "cardName") <~ RACObserve(balancedHandler, "cardName")
-        RAC(self, "cardToken") <~ RACObserve(balancedHandler, "cardToken")
-        RAC(self, "cardLastDigits") <~ RACObserve(balancedHandler, "cardLastDigits")
-
-        // We show the enter credit card number, then the date switchign the views around
+        // We show the enter credit card number, then the date switching the views around
 
         if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
-
-            RAC(bidDetails, "newUser.creditCardName") <~ RACObserve(self, "cardName")
-            RAC(bidDetails, "newUser.creditCardToken") <~ RACObserve(self, "cardToken")
-            RAC(bidDetails, "newUser.creditCardDigit") <~ RACObserve(self, "cardLastDigits")
 
             RAC(self, "cardFullDigits") <~ cardNumberTextField.rac_textSignal()
             RAC(self, "expirationYear") <~ expirationYearTextField.rac_textSignal()
@@ -57,29 +40,34 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
                 }
             }
 
-            let numberIsValidSignal = RACObserve(self, "cardFullDigits").map(stringIsCreditCard)
+            let numberIsValidSignal = RACObserve(self, "cardFullDigits").map(StripeManager.stringIsCreditCard)
             RAC(cardConfirmButton, "enabled") <~ numberIsValidSignal
 
-            let monthSignal = RACObserve(self, "expirationMonth").map(islessThan3CharLengthString)
-            let yearSignal = RACObserve(self, "expirationYear").map(is4CharLengthString)
+            let monthSignal = RACObserve(self, "expirationMonth").map(isStringLengthIn(0..<3))
+            let yearSignal = RACObserve(self, "expirationYear").map(isStringLengthOneOf([2,4]))
 
             let formIsValid = RACSignal.combineLatest([yearSignal, monthSignal]).and()
             dateConfirmButton.rac_command = RACCommand(enabled: formIsValid) { [weak self] _ in
-                self?.registerCardSignal() ?? RACSignal.empty()
+                self?.registerCardSignal(bidDetails.newUser) ?? RACSignal.empty()
             }
         }
 
         cardNumberTextField.becomeFirstResponder()
     }
 
-    func registerCardSignal() -> RACSignal {
-        let month = expirationMonth.toInt() ?? 0
-        let year = expirationYear.toInt() ?? 0
+    func registerCardSignal(newUser: NewUser) -> RACSignal {
+        let month = expirationMonth.toUInt(defaultValue: 0)
+        let year = expirationYear.toUInt(defaultValue: 0)
 
-        return balancedHandler.registerCard(cardFullDigits, month: month, year: year).doNext() { [weak self] (_) in
+        return StripeManager.registerCard(cardFullDigits, month: month, year: year).doNext() { [weak self] (object) in
+            let token = object as STPToken
+
+            newUser.creditCardName = token.card.name
+            newUser.creditCardType = token.card.brand.name
+            newUser.creditCardToken = token.tokenId
+            newUser.creditCardDigit = token.card.last4
+
             self?.finishedSignal.sendCompleted()
-            return
-
         }.doError() { [weak self] (_) -> Void in
             self?.errorLabel.hidden = false
             return
