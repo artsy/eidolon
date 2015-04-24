@@ -2,8 +2,8 @@ import Foundation
 import ReactiveCocoa
 import Stripe
 
-class StripeManager {
-    class func registerCard(digits: String, month: UInt, year: UInt) -> RACSignal {
+public class StripeManager: NSObject {
+    public func registerCard(digits: String, month: UInt, year: UInt) -> RACSignal {
         let card = STPCard()
         card.number = digits
         card.expMonth = month
@@ -23,7 +23,7 @@ class StripeManager {
         }
     }
 
-    class func stringIsCreditCard(object: AnyObject!) -> AnyObject! {
+    public func stringIsCreditCard(object: AnyObject!) -> AnyObject! {
         let cardNumber = object as String
 
         return STPCard.validateCardNumber(cardNumber)

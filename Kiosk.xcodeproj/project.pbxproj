@@ -203,6 +203,12 @@
 		5EF71E781AE986000069A266 /* StripeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E771AE986000069A266 /* StripeManager.swift */; };
 		5EF71E7B1AE98F080069A266 /* STPCard+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */; };
 		5EF71E7D1AE996F50069A266 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7C1AE996F50069A266 /* SwiftExtensions.swift */; };
+		5EF71E7F1AE9B60D0069A266 /* RACExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7E1AE9B60D0069A266 /* RACExtensionsTests.swift */; };
+		5EF71E811AE9B6170069A266 /* SwiftExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E801AE9B6170069A266 /* SwiftExtensionsTests.swift */; };
+		5EF71E831AE9B6A80069A266 /* StripeManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E821AE9B6A80069A266 /* StripeManagerTests.swift */; };
+		5EF71E851AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */; };
+		5EF71E871AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E861AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift */; };
+		5EF71E891AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E881AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift */; };
 		5EFA709C1A9674BD0082C916 /* BidderDetailsRetrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */; };
 		D12607F71BF578705637C9A7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFB9BD12B5173B74D620D7 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -399,6 +405,12 @@
 		5EF71E791AE98F080069A266 /* STPCard+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STPCard+Validation.h"; sourceTree = "<group>"; };
 		5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "STPCard+Validation.m"; sourceTree = "<group>"; };
 		5EF71E7C1AE996F50069A266 /* SwiftExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExtensions.swift; sourceTree = "<group>"; };
+		5EF71E7E1AE9B60D0069A266 /* RACExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensionsTests.swift; sourceTree = "<group>"; };
+		5EF71E801AE9B6170069A266 /* SwiftExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExtensionsTests.swift; sourceTree = "<group>"; };
+		5EF71E821AE9B6A80069A266 /* StripeManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeManagerTests.swift; sourceTree = "<group>"; };
+		5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCreditCardInputViewControllerTests.swift; sourceTree = "<group>"; };
+		5EF71E861AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCreditCardInputViewModelTests.swift; sourceTree = "<group>"; };
+		5EF71E881AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCreditCardInputViewModel.swift; sourceTree = "<group>"; };
 		5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderDetailsRetrieval.swift; sourceTree = "<group>"; };
 		B5DFB9BD12B5173B74D620D7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA79D9FDF198B37A06B262F /* Pods-KioskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -572,6 +584,7 @@
 				5E8610101A5C429C00456E41 /* KeypadViewPreviewIB.png */,
 				5E8610111A5C429C00456E41 /* LoadingViewController.swift */,
 				5E8610121A5C429C00456E41 /* ManualCreditCardInputViewController.swift */,
+				5EF71E881AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift */,
 				5E8610131A5C429C00456E41 /* Models */,
 				5E8610171A5C429C00456E41 /* PlaceBidNetworkModel.swift */,
 				5E8610181A5C429C00456E41 /* PlaceBidViewController.swift */,
@@ -672,6 +685,7 @@
 				5E8610C31A5C43EF00456E41 /* RAC */,
 				5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */,
 				5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */,
+				5EF71E801AE9B6170069A266 /* SwiftExtensionsTests.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -680,6 +694,7 @@
 			isa = PBXGroup;
 			children = (
 				5E8610C41A5C43EF00456E41 /* RAC+JSONAbleTests.swift */,
+				5EF71E7E1AE9B60D0069A266 /* RACExtensionsTests.swift */,
 			);
 			path = RAC;
 			sourceTree = "<group>";
@@ -696,6 +711,9 @@
 				5E8610CE1A5C43EF00456E41 /* LoadingViewControllerTests.swift */,
 				5E8610CF1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift */,
 				5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */,
+				5EF71E821AE9B6A80069A266 /* StripeManagerTests.swift */,
+				5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */,
+				5EF71E861AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift */,
 			);
 			path = "Bid Fulfillment";
 			sourceTree = "<group>";
@@ -760,6 +778,7 @@
 		5EB0B7051A5C3E6800B7CBF2 /* KioskTests */ = {
 			isa = PBXGroup;
 			children = (
+				5E8610FF1A5C43EF00456E41 /* TestHelpers.swift */,
 				5E8610C21A5C43EF00456E41 /* App */,
 				5E8610C51A5C43EF00456E41 /* AppViewControllerTests.swift */,
 				5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */,
@@ -774,7 +793,6 @@
 				5E8610D41A5C43EF00456E41 /* Models */,
 				5E8610FD1A5C43EF00456E41 /* RegisterFlowViewTests.swift */,
 				5E8610FE1A5C43EF00456E41 /* SwitchViewSpec.swift */,
-				5E8610FF1A5C43EF00456E41 /* TestHelpers.swift */,
 				5E8611001A5C43EF00456E41 /* TextFieldTests.swift */,
 				5E8611011A5C43EF00456E41 /* XAppTokenSpec.swift */,
 				5EB0B7061A5C3E6800B7CBF2 /* Supporting Files */,
@@ -1166,6 +1184,7 @@
 				5E86105C1A5C429C00456E41 /* Bid.swift in Sources */,
 				5E8610911A5C429C00456E41 /* ManualCreditCardInputViewController.swift in Sources */,
 				5E86104D1A5C429C00456E41 /* AdminPanelViewController.swift in Sources */,
+				5EF71E891AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift in Sources */,
 				5E86105B1A5C429C00456E41 /* Artwork.swift in Sources */,
 				5E8610971A5C429C00456E41 /* RACFunctions.swift in Sources */,
 				5E86106B1A5C429C00456E41 /* UserCredentials.swift in Sources */,
@@ -1208,8 +1227,10 @@
 				5E8611161A5C43EF00456E41 /* ImageTests.swift in Sources */,
 				5E86110B1A5C43EF00456E41 /* LoadingViewControllerTests.swift in Sources */,
 				5E86110F1A5C43EF00456E41 /* KioskTests.swift in Sources */,
+				5EF71E871AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift in Sources */,
 				5E43C3941AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift in Sources */,
 				5E8611181A5C43EF00456E41 /* SaleTests.swift in Sources */,
+				5EF71E7F1AE9B60D0069A266 /* RACExtensionsTests.swift in Sources */,
 				5E86110E1A5C43EF00456E41 /* CardHandlerTests.swift in Sources */,
 				5E43C38E1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift in Sources */,
 				5E8611031A5C43EF00456E41 /* AppViewControllerTests.swift in Sources */,
@@ -1228,9 +1249,12 @@
 				5E8611321A5C43EF00456E41 /* TestHelpers.swift in Sources */,
 				5E8611041A5C43EF00456E41 /* ArtsyAPISpec.swift in Sources */,
 				5E809A401ACF225100C30DC9 /* ArtsyProviderTests.swift in Sources */,
+				5EF71E811AE9B6170069A266 /* SwiftExtensionsTests.swift in Sources */,
 				5E8611331A5C43EF00456E41 /* TextFieldTests.swift in Sources */,
 				5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */,
 				5E8611171A5C43EF00456E41 /* SaleArtworkTests.swift in Sources */,
+				5EF71E831AE9B6A80069A266 /* StripeManagerTests.swift in Sources */,
+				5EF71E851AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift in Sources */,
 				5E9F8AD41A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift in Sources */,
 				5E8611311A5C43EF00456E41 /* SwitchViewSpec.swift in Sources */,
 				5E86110A1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift in Sources */,
