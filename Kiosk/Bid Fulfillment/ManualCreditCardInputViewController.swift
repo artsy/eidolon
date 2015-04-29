@@ -8,7 +8,7 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
 
     @IBOutlet weak var cardNumberTextField: TextField!
     @IBOutlet weak var expirationMonthTextField: TextField!
-    @IBOutlet weak var expirationYearTextField: TextField!
+    @IBOutlet weak public var expirationYearTextField: TextField!
 
     @IBOutlet weak var expirationDateWrapperView: UIView!
     @IBOutlet weak var cardNumberWrapperView: UIView!
@@ -50,7 +50,7 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         return viewModel.isEntryValid(string)
     }
 
-    @IBAction func cardNumberconfirmTapped(sender: AnyObject) {
+    @IBAction public func cardNumberconfirmTapped(sender: AnyObject) {
         cardNumberWrapperView.hidden = true
         expirationDateWrapperView.hidden = false
 
@@ -64,5 +64,9 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         expirationDateWrapperView.hidden = true
 
         cardNumberTextField.becomeFirstResponder()
+    }
+
+    public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ManualCreditCardInputViewController {
+        return storyboard.viewControllerWithID(.ManualCardDetailsInput) as ManualCreditCardInputViewController
     }
 }
