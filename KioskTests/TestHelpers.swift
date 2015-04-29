@@ -70,3 +70,7 @@ func testArtwork() -> Artwork {
 func testSaleArtwork() -> SaleArtwork {
     return SaleArtwork(id: "12312313", artwork: testArtwork())
 }
+
+func testBidDetails() -> BidDetails {
+    return BidDetails(saleArtwork: testSaleArtwork(), paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+}
