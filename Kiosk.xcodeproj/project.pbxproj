@@ -203,7 +203,7 @@
 		5EF71E781AE986000069A266 /* StripeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E771AE986000069A266 /* StripeManager.swift */; };
 		5EF71E7B1AE98F080069A266 /* STPCard+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */; };
 		5EF71E7D1AE996F50069A266 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7C1AE996F50069A266 /* SwiftExtensions.swift */; };
-		5EF71E7F1AE9B60D0069A266 /* RACExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7E1AE9B60D0069A266 /* RACExtensionsTests.swift */; };
+		5EF71E7F1AE9B60D0069A266 /* RACFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7E1AE9B60D0069A266 /* RACFunctionsTests.swift */; };
 		5EF71E811AE9B6170069A266 /* SwiftExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E801AE9B6170069A266 /* SwiftExtensionsTests.swift */; };
 		5EF71E831AE9B6A80069A266 /* StripeManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E821AE9B6A80069A266 /* StripeManagerTests.swift */; };
 		5EF71E851AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */; };
@@ -405,7 +405,7 @@
 		5EF71E791AE98F080069A266 /* STPCard+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STPCard+Validation.h"; sourceTree = "<group>"; };
 		5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "STPCard+Validation.m"; sourceTree = "<group>"; };
 		5EF71E7C1AE996F50069A266 /* SwiftExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExtensions.swift; sourceTree = "<group>"; };
-		5EF71E7E1AE9B60D0069A266 /* RACExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensionsTests.swift; sourceTree = "<group>"; };
+		5EF71E7E1AE9B60D0069A266 /* RACFunctionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RACFunctionsTests.swift; path = ../App/RAC/RACFunctionsTests.swift; sourceTree = "<group>"; };
 		5EF71E801AE9B6170069A266 /* SwiftExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExtensionsTests.swift; sourceTree = "<group>"; };
 		5EF71E821AE9B6A80069A266 /* StripeManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeManagerTests.swift; sourceTree = "<group>"; };
 		5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCreditCardInputViewControllerTests.swift; sourceTree = "<group>"; };
@@ -694,7 +694,6 @@
 			isa = PBXGroup;
 			children = (
 				5E8610C41A5C43EF00456E41 /* RAC+JSONAbleTests.swift */,
-				5EF71E7E1AE9B60D0069A266 /* RACExtensionsTests.swift */,
 			);
 			path = RAC;
 			sourceTree = "<group>";
@@ -703,6 +702,7 @@
 			isa = PBXGroup;
 			children = (
 				5EBD314D1AE0562900648484 /* Registration */,
+				5EF71E7E1AE9B60D0069A266 /* RACFunctionsTests.swift */,
 				5E8610C91A5C43EF00456E41 /* ConfirmYourBidArtsyLoginViewControllerTests.swift */,
 				5E8610CA1A5C43EF00456E41 /* ConfirmYourBidEnterYourEmailViewControllerTests.swift */,
 				5E8610CB1A5C43EF00456E41 /* ConfirmYourBidPINViewControllerTests.swift */,
@@ -1230,7 +1230,7 @@
 				5EF71E871AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift in Sources */,
 				5E43C3941AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift in Sources */,
 				5E8611181A5C43EF00456E41 /* SaleTests.swift in Sources */,
-				5EF71E7F1AE9B60D0069A266 /* RACExtensionsTests.swift in Sources */,
+				5EF71E7F1AE9B60D0069A266 /* RACFunctionsTests.swift in Sources */,
 				5E86110E1A5C43EF00456E41 /* CardHandlerTests.swift in Sources */,
 				5E43C38E1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift in Sources */,
 				5E8611031A5C43EF00456E41 /* AppViewControllerTests.swift in Sources */,
