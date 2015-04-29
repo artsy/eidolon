@@ -3,6 +3,7 @@
 * Prevents user from registering with invalid passwords.
 * Disables iPad sleep timer.
 * Moves from Balanced to Stripe for credit card processing.
+* Allows registration with email addresses containing plus signs.
 
 ## 3.4.0 April 13 2015
 * Fixes problems entering in phone numbers.
