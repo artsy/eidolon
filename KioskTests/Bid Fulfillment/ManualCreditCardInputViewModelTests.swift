@@ -12,6 +12,8 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
         var subject: ManualCreditCardInputViewModel!
 
         beforeEach{ () -> () in
+            Stripe.setDefaultPublishableKey("some key")
+
             bidDetails = testBidDetails()
             testStripeManager = ManualCreditCardInputViewModelTestsStripeManager()
 
@@ -19,6 +21,10 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             subject.stripeManager = testStripeManager
         }
 
+        afterEach {
+            Stripe.setDefaultPublishableKey(nil)
+        }
+        
         it("initializer assigns bid details") { () -> () in
             expect(subject.bidDetails) == bidDetails
         }

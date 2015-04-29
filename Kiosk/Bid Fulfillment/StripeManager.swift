@@ -3,14 +3,16 @@ import ReactiveCocoa
 import Stripe
 
 public class StripeManager: NSObject {
+    public var stripeClient = STPAPIClient.sharedClient()
+
     public func registerCard(digits: String, month: UInt, year: UInt) -> RACSignal {
         let card = STPCard()
         card.number = digits
         card.expMonth = month
         card.expYear = year
 
-        return RACSignal.createSignal { (subscriber) -> RACDisposable! in
-            STPAPIClient.sharedClient().createTokenWithCard(card) { (token, error) -> Void in
+        return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
+            self?.stripeClient.createTokenWithCard(card) { (token, error) -> Void in
                 if (token as STPToken?).hasValue {
                     subscriber.sendNext(token)
                     subscriber.sendCompleted()

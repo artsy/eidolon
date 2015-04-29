@@ -93,13 +93,13 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
 
             waitUntil { (done) -> Void in
                 testViewModel.testRegisterButtonCommand.execute(nil).subscribeError { (_) -> Void in
-
-                    expect(subject).to( haveValidSnapshot() )
                     done()
                 }
 
                 return
             }
+
+            expect(subject).to( haveValidSnapshot() )
         }
     }
 }
