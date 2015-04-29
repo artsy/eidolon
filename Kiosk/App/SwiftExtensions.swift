@@ -9,8 +9,8 @@ extension Optional {
     }
 }
 
-extension String {
-    func toUInt() -> UInt? {
+public extension String {
+    public func toUInt() -> UInt? {
         let i = toInt()
         if let i = i {
             return UInt(i)
@@ -19,7 +19,7 @@ extension String {
         }
     }
 
-    func toUInt(#defaultValue: UInt) -> UInt {
+    public func toUInt(#defaultValue: UInt) -> UInt {
         let i = toInt()
         if let i = i {
             return UInt(i)
