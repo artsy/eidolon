@@ -26,7 +26,7 @@ public class RegistrationPasswordViewController: UIViewController, RegistrationS
         forgotPasswordButton.hidden = false
 
         let passwordTextSignal = passwordTextField.rac_textSignal()
-        RAC(bidDetails, "newUser.password") <~ passwordTextSignal
+        RAC(bidDetails, "newUser.password") <~ passwordTextSignal.takeUntil(viewWillDisappearSignal())
         confirmButton.rac_command = viewModel.command
         viewModel.command.errors.subscribeNext { [weak self] _ -> Void in
             self?.showAuthenticationError()

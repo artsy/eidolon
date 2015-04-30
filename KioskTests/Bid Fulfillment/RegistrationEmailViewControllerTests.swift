@@ -17,5 +17,20 @@ class RegistrationEmailViewControllerTests: QuickSpec {
             subject.bidDetails.newUser.email = "test@example.com"
             expect(subject).to( haveValidSnapshot() )
         }
+
+        it("unbinds bidDetails on viewWillDisappear:") {
+            let runLifecycleOfViewController = { (bidDetails: BidDetails) -> RegistrationEmailViewController in
+                let subject = RegistrationEmailViewController.instantiateFromStoryboard(fulfillmentStoryboard)
+                subject.bidDetails = bidDetails
+                subject.loadViewProgrammatically()
+                subject.viewWillDisappear(false)
+                return subject
+            }
+
+            let bidDetails = testBidDetails()
+            runLifecycleOfViewController(bidDetails)
+
+            expect { runLifecycleOfViewController(bidDetails) }.toNot( raiseException() )
+        }
     }
 }

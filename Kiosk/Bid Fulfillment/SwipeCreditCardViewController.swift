@@ -24,6 +24,7 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
     dynamic var cardToken = ""
 
     lazy var keys = EidolonKeys()
+    public lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,12 +73,10 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
             self.finishedSignal.sendCompleted()
         })
         cardHandler.startSearching()
-        
-        if let bidDetails = self.navigationController?.fulfillmentNav().bidDetails {
-            RAC(bidDetails, "newUser.creditCardName") <~ RACObserve(self, "cardName")
-            RAC(bidDetails, "newUser.creditCardDigit") <~ RACObserve(self, "cardLastDigits")
-            RAC(bidDetails, "newUser.creditCardToken") <~ RACObserve(self, "cardToken")
-        }
+
+        RAC(bidDetails, "newUser.creditCardName") <~ RACObserve(self, "cardName").takeUntil(viewWillDisappearSignal())
+        RAC(bidDetails, "newUser.creditCardDigit") <~ RACObserve(self, "cardLastDigits").takeUntil(viewWillDisappearSignal())
+        RAC(bidDetails, "newUser.creditCardToken") <~ RACObserve(self, "cardToken").takeUntil(viewWillDisappearSignal())
     }
 
     func setInProgress(show: Bool) {

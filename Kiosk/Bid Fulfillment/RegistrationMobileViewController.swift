@@ -19,7 +19,7 @@ public class RegistrationMobileViewController: UIViewController, RegistrationSub
         super.viewDidLoad()
 
         numberTextField.text = bidDetails.newUser.phoneNumber
-        RAC(bidDetails, "newUser.phoneNumber") <~ numberTextField.rac_textSignal()
+        RAC(bidDetails, "newUser.phoneNumber") <~ numberTextField.rac_textSignal().takeUntil(viewWillDisappearSignal())
         confirmButton.rac_command = viewModel.command
 
         numberTextField.becomeFirstResponder()

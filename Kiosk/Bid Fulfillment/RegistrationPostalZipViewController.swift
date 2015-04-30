@@ -17,7 +17,7 @@ public class RegistrationPostalZipViewController: UIViewController, Registration
         super.viewDidLoad()
 
         zipCodeTextField.text = bidDetails.newUser.zipCode
-        RAC(bidDetails, "newUser.zipCode") <~ zipCodeTextField.rac_textSignal()
+        RAC(bidDetails, "newUser.zipCode") <~ zipCodeTextField.rac_textSignal().takeUntil(viewWillDisappearSignal())
         confirmButton.rac_command = viewModel.command
 
         zipCodeTextField.becomeFirstResponder()

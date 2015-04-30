@@ -47,5 +47,20 @@ class RegistrationPasswordViewControllerTests: QuickSpec {
             subject.passwordTextField.text = "short"
             expect(subject).to( haveValidSnapshot() )
         }
+
+        it("unbinds bidDetails on viewWillDisappear:") {
+            let runLifecycleOfViewController = { (bidDetails: BidDetails) -> RegistrationPasswordViewController in
+                let subject = RegistrationPasswordViewController.instantiateFromStoryboard(fulfillmentStoryboard)
+                subject.bidDetails = bidDetails
+                subject.loadViewProgrammatically()
+                subject.viewWillDisappear(false)
+                return subject
+            }
+
+            let bidDetails = testBidDetails()
+            runLifecycleOfViewController(bidDetails)
+
+            expect { runLifecycleOfViewController(bidDetails) }.toNot( raiseException() )
+        }
     }
 }

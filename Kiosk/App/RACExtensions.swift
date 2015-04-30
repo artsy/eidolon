@@ -18,3 +18,8 @@ func sendDispatchCompleted(subscriber: RACSubscriber) {
     signal.subscribe(subscriber)
 }
 
+public extension UIViewController {
+    public func viewWillDisappearSignal() -> RACSignal {
+        return rac_signalForSelector("viewWillDisappear:")
+    }
+}

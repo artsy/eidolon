@@ -19,5 +19,20 @@ class RegistrationMobileViewControllerTests: QuickSpec {
             subject.bidDetails.newUser.phoneNumber = "1234567890"
             expect(subject).to( haveValidSnapshot() )
         }
+
+        it("unbinds bidDetails on viewWillDisappear:") {
+            let runLifecycleOfViewController = { (bidDetails: BidDetails) -> RegistrationMobileViewController in
+                let subject = RegistrationMobileViewController.instantiateFromStoryboard(fulfillmentStoryboard)
+                subject.bidDetails = bidDetails
+                subject.loadViewProgrammatically()
+                subject.viewWillDisappear(false)
+                return subject
+            }
+
+            let bidDetails = testBidDetails()
+            runLifecycleOfViewController(bidDetails)
+
+            expect { runLifecycleOfViewController(bidDetails) }.toNot( raiseException() )
+        }
     }
 }
