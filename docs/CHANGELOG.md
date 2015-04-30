@@ -5,6 +5,8 @@
 * Moves from Balanced to Stripe for credit card processing.
 * Allows registration with email addresses containing plus signs.
 * New and improved bidder registration details screen.
+* Removed interstitial screen between registration confirmation and showing bidder details.
+* Bidder details screen no longer hides PIN.
 
 ## 3.4.0 April 13 2015
 * Fixes problems entering in phone numbers.

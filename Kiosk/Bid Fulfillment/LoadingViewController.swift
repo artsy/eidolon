@@ -126,7 +126,7 @@ public class LoadingViewController: UIViewController {
         let showPlaceHigherButton = placingBid && (!isHighestBidder || reserveNotMet)
         placeHigherBidButton.hidden = !showPlaceHigherButton
 
-        let showAuctionButton = !placingBid || createdNewBidder
+        let showAuctionButton = showPlaceHigherButton || isHighestBidder || (!placingBid && !createdNewBidder)
         backToAuctionButton.hidden = !showAuctionButton
 
         let title = reserveNotMet ? "NO, THANKS" : (createdNewBidder ? "CONTINUE" : "BACK TO AUCTION")
@@ -137,6 +137,10 @@ public class LoadingViewController: UIViewController {
         titleLabel.text = "Registration Complete"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
         fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
+        RACSignal.interval(1, onScheduler: RACScheduler.mainThreadScheduler()).take(1).subscribeCompleted { [weak self] () -> Void in
+            self?.performSegue(.PushtoRegisterConfirmed)
+            return
+        }
     }
 
     func handleUpdate() {
