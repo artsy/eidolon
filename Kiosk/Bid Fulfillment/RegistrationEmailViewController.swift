@@ -19,7 +19,7 @@ public class RegistrationEmailViewController: UIViewController, RegistrationSubC
         super.viewDidLoad()
 
         emailTextField.text = bidDetails.newUser.email
-        RAC(bidDetails, "newUser.email") <~ emailTextField.rac_textSignal()
+        RAC(bidDetails, "newUser.email") <~ emailTextField.rac_textSignal().takeUntil(viewWillDisappearSignal())
         confirmButton.rac_command = viewModel.command
 
         emailTextField.becomeFirstResponder()

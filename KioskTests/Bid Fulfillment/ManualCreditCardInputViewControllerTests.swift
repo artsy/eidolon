@@ -15,6 +15,21 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
             subject.viewModel = testViewModel
         }
 
+        it("unbinds bidDetails on viewWillDisappear:") {
+            let runLifecycleOfViewController = { (bidDetails: BidDetails) -> ManualCreditCardInputViewController in
+                let subject = ManualCreditCardInputViewController.instantiateFromStoryboard(fulfillmentStoryboard)
+                subject.viewModel = ManualCreditCardInputTestViewModel(bidDetails: bidDetails)
+                subject.loadViewProgrammatically()
+                subject.viewWillDisappear(false)
+                return subject
+            }
+
+            let bidDetails = testBidDetails()
+            runLifecycleOfViewController(bidDetails)
+
+            expect { runLifecycleOfViewController(bidDetails) }.toNot( raiseException() )
+        }
+
         it("asks for CC number by default") {
             expect(subject).to( haveValidSnapshot() )
         }

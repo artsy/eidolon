@@ -17,5 +17,20 @@ class RegistrationPostalViewControllerTests: QuickSpec {
             subject.bidDetails.newUser.zipCode = "A1A1A1"
             expect(subject).to( haveValidSnapshot() )
         }
+
+        it("unbinds bidDetails on viewWillDisappear:") {
+            let runLifecycleOfViewController = { (bidDetails: BidDetails) -> RegistrationPostalZipViewController in
+                let subject = RegistrationPostalZipViewController.instantiateFromStoryboard(fulfillmentStoryboard)
+                subject.bidDetails = bidDetails
+                subject.loadViewProgrammatically()
+                subject.viewWillDisappear(false)
+                return subject
+            }
+
+            let bidDetails = testBidDetails()
+            runLifecycleOfViewController(bidDetails)
+
+            expect { runLifecycleOfViewController(bidDetails) }.toNot( raiseException() )
+        }
     }
 }

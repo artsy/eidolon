@@ -11,6 +11,8 @@
 		5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E64E1A65630200F8CBDD /* Logger.swift */; };
 		5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */; };
 		5E339E3A1A991899000C773D /* RACExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E339E391A991899000C773D /* RACExtensions.swift */; };
+		5E38FD2E1AF2154C00D30C17 /* RACExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E38FD2D1AF2154C00D30C17 /* RACExtensionsTests.swift */; };
+		5E38FD301AF21ABA00D30C17 /* SwipeCreditCardViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E38FD2F1AF21ABA00D30C17 /* SwipeCreditCardViewControllerTests.swift */; };
 		5E43C38C1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C38B1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift */; };
 		5E43C38E1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C38D1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift */; };
 		5E43C3901AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C38F1AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift */; };
@@ -228,6 +230,8 @@
 		5E19E64E1A65630200F8CBDD /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		5E339E391A991899000C773D /* RACExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensions.swift; sourceTree = "<group>"; };
+		5E38FD2D1AF2154C00D30C17 /* RACExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensionsTests.swift; sourceTree = "<group>"; };
+		5E38FD2F1AF21ABA00D30C17 /* SwipeCreditCardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeCreditCardViewControllerTests.swift; sourceTree = "<group>"; };
 		5E43C38B1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewModelTests.swift; sourceTree = "<group>"; };
 		5E43C38D1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationEmailViewControllerTests.swift; sourceTree = "<group>"; };
 		5E43C38F1AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationMobileViewControllerTests.swift; sourceTree = "<group>"; };
@@ -686,6 +690,7 @@
 				5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */,
 				5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */,
 				5EF71E801AE9B6170069A266 /* SwiftExtensionsTests.swift */,
+				5E38FD2D1AF2154C00D30C17 /* RACExtensionsTests.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -712,7 +717,6 @@
 				5E8610CF1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift */,
 				5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */,
 				5EF71E821AE9B6A80069A266 /* StripeManagerTests.swift */,
-				5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */,
 				5EF71E861AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift */,
 			);
 			path = "Bid Fulfillment";
@@ -830,6 +834,8 @@
 				5E43C38F1AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift */,
 				5E43C3911AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift */,
 				5E43C3931AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift */,
+				5E38FD2F1AF21ABA00D30C17 /* SwipeCreditCardViewControllerTests.swift */,
+				5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */,
 			);
 			name = Registration;
 			sourceTree = "<group>";
@@ -1225,6 +1231,7 @@
 				5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */,
 				5E43C3921AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift in Sources */,
 				5E8611161A5C43EF00456E41 /* ImageTests.swift in Sources */,
+				5E38FD301AF21ABA00D30C17 /* SwipeCreditCardViewControllerTests.swift in Sources */,
 				5E86110B1A5C43EF00456E41 /* LoadingViewControllerTests.swift in Sources */,
 				5E86110F1A5C43EF00456E41 /* KioskTests.swift in Sources */,
 				5EF71E871AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift in Sources */,
@@ -1259,6 +1266,7 @@
 				5E8611311A5C43EF00456E41 /* SwitchViewSpec.swift in Sources */,
 				5E86110A1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift in Sources */,
 				5E8611341A5C43EF00456E41 /* XAppTokenSpec.swift in Sources */,
+				5E38FD2E1AF2154C00D30C17 /* RACExtensionsTests.swift in Sources */,
 				5E43C3901AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
