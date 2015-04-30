@@ -198,12 +198,9 @@ public class LoadingViewController: UIViewController {
     }
 
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue == .PushtoBidConfirmed {
+        if segue == .PushtoRegisterConfirmed {
             let detailsVC = segue.destinationViewController as YourBiddingDetailsViewController
             detailsVC.confirmationImage = bidConfirmationImageView.image
-            detailsVC.hidePreview = bidDetailsPreviewView.hidden
-            detailsVC.registered = bidderNetworkModel.createdNewBidder
-            detailsVC.isHighestBidder = bidCheckingModel.isHighestBidder
         }
 
         if segue == .PlaceaHigherBidAfterNotBeingHighestBidder {
@@ -219,7 +216,7 @@ public class LoadingViewController: UIViewController {
 
     @IBAction func backToAuctionTapped(sender: AnyObject) {
         if bidderNetworkModel.createdNewBidder {
-            self.performSegue(.PushtoBidConfirmed)
+            self.performSegue(.PushtoRegisterConfirmed)
         } else {
             fulfillmentContainer()?.closeFulfillmentModal()
         }

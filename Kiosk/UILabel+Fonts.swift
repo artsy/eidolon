@@ -1,13 +1,13 @@
 import UIKit
 
-extension UILabel {
-    func makeSubstringsBold(text: [String]) {
+public extension UILabel {
+    public func makeSubstringsBold(text: [String]) {
         text.map {
             self.makeSubstringBold($0)
         }
     }
 
-    func makeSubstringBold(text: String) {
+    public func makeSubstringBold(text: String) {
         let attributedText = self.attributedText.mutableCopy() as NSMutableAttributedString
 
         let range: NSRange! = (self.text ?? NSString()).rangeOfString(text)
@@ -18,13 +18,13 @@ extension UILabel {
         self.attributedText = attributedText
     }
 
-    func makeSubstringsItalic(text: [String]) {
+    public func makeSubstringsItalic(text: [String]) {
         text.map {
             self.makeSubstringItalic($0)
         }
     }
 
-    func makeSubstringItalic(text: String) {
+    public func makeSubstringItalic(text: String) {
         let attributedText = self.attributedText.mutableCopy() as NSMutableAttributedString
 
         let range: NSRange! = (self.text ?? NSString()).rangeOfString(text)
@@ -33,5 +33,21 @@ extension UILabel {
         }
 
         self.attributedText = attributedText
+    }
+
+    public func setLineHeight(lineHeight: Int) {
+        let displayText = text ?? ""
+        let attributedString = NSMutableAttributedString(string: displayText)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = CGFloat(lineHeight)
+        paragraphStyle.alignment = textAlignment
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, countElements(displayText)))
+
+        attributedText = attributedString
+    }
+
+    public func makeTransparent() {
+        opaque = false
+        backgroundColor = .clearColor()
     }
 }
