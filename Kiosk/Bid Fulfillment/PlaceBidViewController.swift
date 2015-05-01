@@ -64,7 +64,7 @@ public class PlaceBidViewController: UIViewController {
         RAC(bidAmountTextField, "text") <~ bidDollarsSignal.map(dollarsToCurrencyString)
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
-            RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { $0 as Float * 100 }.takeUntil(dissapearSignal())
+            RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { $0 as Float * 100 }.takeUntil(viewWillDisappearSignal())
 
             if let saleArtwork = nav.bidDetails.saleArtwork {
                 
@@ -80,7 +80,7 @@ public class PlaceBidViewController: UIViewController {
                     let tuple = $0 as RACTuple
                     let bidCount = tuple.first as? Int ?? 0
                     return (bidCount > 0 ? tuple.second : tuple.third) ?? 0
-                }.map(centsToPresentableDollarsString).takeUntil(dissapearSignal())
+                }.map(centsToPresentableDollarsString).takeUntil(viewWillDisappearSignal())
 
                 RAC(bidButton, "enabled") <~ RACSignal.combineLatest([bidDollarsSignal, minimumNextBidSignal]).map {
                     let tuple = $0 as RACTuple
@@ -102,7 +102,7 @@ public class PlaceBidViewController: UIViewController {
                     let lotNumberLabel = smallSansSerifLabel()
                     lotNumberLabel.tag = LabelTags.LotNumber.rawValue
                     detailsStackView.addSubview(lotNumberLabel, withTopMargin: "10", sideMargin: "0")
-                    RAC(lotNumberLabel, "text") <~ saleArtwork.lotNumberSignal.takeUntil(dissapearSignal())
+                    RAC(lotNumberLabel, "text") <~ saleArtwork.lotNumberSignal.takeUntil(viewWillDisappearSignal())
                 }
 
                 let artistNameLabel = sansSerifLabel()
@@ -151,7 +151,7 @@ public class PlaceBidViewController: UIViewController {
                 }
 
                 RAC(artworkTitleLabel, "attributedText") <~ RACObserve(saleArtwork.artwork, "titleAndDate").takeUntil(rac_willDeallocSignal())
-                RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price").takeUntil(dissapearSignal())
+                RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price").takeUntil(viewWillDisappearSignal())
                 
                 RACObserve(saleArtwork, "artwork").subscribeNext { [weak self] (artwork) -> Void in
                     if let url = (artwork as? Artwork)?.defaultImage?.thumbnailURL() {
@@ -162,10 +162,6 @@ public class PlaceBidViewController: UIViewController {
                 }
             }
         }
-    }
-
-    func dissapearSignal() -> RACSignal {
-        return rac_signalForSelector("viewDidDisappear:")
     }
 
     @IBAction func bidButtonTapped(sender: AnyObject) {
