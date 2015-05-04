@@ -21,7 +21,7 @@ public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
         
         let newUserCredentials = nav.bidDetails.newUser
         let emailTextSignal = emailTextField.rac_textSignal()
-        RAC(newUserCredentials, "email") <~ emailTextField.rac_textSignal().takeUntil(rac_signalForSelector("viewDidDisappear:"))
+        RAC(newUserCredentials, "email") <~ emailTextField.rac_textSignal().takeUntil(viewWillDisappearSignal())
         let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
 
         confirmButton.rac_command = RACCommand(enabled: inputIsEmail) { [weak self] _ in

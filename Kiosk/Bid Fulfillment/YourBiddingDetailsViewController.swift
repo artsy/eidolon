@@ -2,56 +2,44 @@ import UIKit
 import Swift_RAC_Macros
 import Artsy_UILabels
 import Artsy_UIButtons
+import Dollar
 
-class YourBiddingDetailsViewController: UIViewController {
+public class YourBiddingDetailsViewController: UIViewController {
 
     @IBOutlet dynamic var bidderNumberLabel: UILabel!
     @IBOutlet dynamic var pinNumberLabel: UILabel!
-    @IBOutlet dynamic var bidDetailsView: BidDetailsPreviewView!
 
-    @IBOutlet weak var titleLabel: ARSerifLabel!
     @IBOutlet weak var confirmationImageView: UIImageView!
     @IBOutlet weak var subtitleLabel: ARSerifLabel!
     @IBOutlet weak var bodyLabel: ARSerifLabel!
+    @IBOutlet weak var notificationLabel: ARSerifLabel!
 
-    var titleColor: UIColor!
-    var titleText: String!
-    var confirmationImage: UIImage!
-    var registered: Bool!
-    var hidePreview: Bool!
-    var isHighestBidder: Bool!
+    var confirmationImage: UIImage?
 
-    @IBOutlet weak var confirmButton: SecondaryActionButton!
-    override func viewDidLoad() {
+    public lazy var bidDetails: BidDetails! = { (self.navigationController as FulfillmentNavigationController).bidDetails }()
+
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel.text = titleText
-        titleLabel.textColor = titleColor
-        confirmationImageView.image = confirmationImage
-        subtitleLabel.hidden = !registered
+        $.each([notificationLabel, bidderNumberLabel, pinNumberLabel]) { $0.makeTransparent() }
+        notificationLabel.setLineHeight(5)
+        bodyLabel.setLineHeight(10)
 
-        let registeredCopy = "You will be asked for your Bidder Number and PIN next time you bid instead of entering all your information."
-        let notRegisteredCopy = "Use your Bidder Number and PIN next time you bid."
-        bodyLabel?.text = registered! ? registeredCopy : notRegisteredCopy
-
-        if let nav = self.navigationController as? FulfillmentNavigationController {
-            RAC(bidderNumberLabel, "text") <~ RACObserve(nav.bidDetails, "paddleNumber")
+        if let image = confirmationImage {
+            confirmationImageView.image = image
         }
 
-        let hidden = hidePreview ?? false
-        bidDetailsView?.hidden = hidden
-        if !hidden {
-            bidDetailsView?.bidDetails = self.fulfillmentNav().bidDetails
-        }
-    }
+        bodyLabel?.makeSubstringsBold(["Bidder Number", "PIN"])
 
-    @IBAction func revealAppTapped(sender: AnyObject) {
-        pinNumberLabel.text = self.fulfillmentNav().bidDetails.bidderPIN
-        let button = sender as ARFlatButton
-        button.hidden = true
+        RAC(bidderNumberLabel, "text") <~ RACObserve(bidDetails, "paddleNumber")
+        RAC(pinNumberLabel, "text") <~ RACObserve(bidDetails, "bidderPIN")
     }
 
     @IBAction func confirmButtonTapped(sender: AnyObject) {
         fulfillmentContainer()?.closeFulfillmentModal()
+    }
+
+    public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> YourBiddingDetailsViewController {
+        return storyboard.viewControllerWithID(.YourBidderDetails) as YourBiddingDetailsViewController
     }
 }

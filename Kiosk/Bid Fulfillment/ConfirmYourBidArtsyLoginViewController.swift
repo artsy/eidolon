@@ -34,8 +34,8 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
         let emailTextSignal = emailTextField.rac_textSignal()
         let passwordTextSignal = passwordTextField.rac_textSignal()
-        RAC(nav.bidDetails.newUser, "email") <~ emailTextSignal
-        RAC(nav.bidDetails.newUser, "password") <~ passwordTextSignal
+        RAC(nav.bidDetails.newUser, "email") <~ emailTextSignal.takeUntil(viewWillDisappearSignal())
+        RAC(nav.bidDetails.newUser, "password") <~ passwordTextSignal.takeUntil(viewWillDisappearSignal())
 
         let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
         let passwordIsLongEnough = passwordTextSignal.map(isZeroLengthString).not()
