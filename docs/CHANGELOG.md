@@ -7,6 +7,7 @@
 * New and improved bidder registration details screen.
 * Removed interstitial screen between registration confirmation and showing bidder details.
 * Bidder details screen no longer hides PIN.
+* Fixes potential crash for existing users signing in with phone numbers.
 
 ## 3.4.0 April 13 2015
 * Fixes problems entering in phone numbers.
