@@ -15,13 +15,7 @@ public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let nav = self.fulfillmentNav()
-
-        bidDetailsPreviewView.bidDetails = nav.bidDetails
-        
-        let newUserCredentials = nav.bidDetails.newUser
         let emailTextSignal = emailTextField.rac_textSignal()
-        RAC(newUserCredentials, "email") <~ emailTextField.rac_textSignal().takeUntil(viewWillDisappearSignal())
         let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
 
         confirmButton.rac_command = RACCommand(enabled: inputIsEmail) { [weak self] _ in
@@ -41,11 +35,17 @@ public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
             }
         }
 
+        let unbindSignal = confirmButton.rac_command.executing.ignore(false)
+
+        let nav = self.fulfillmentNav()
+
+        bidDetailsPreviewView.bidDetails = nav.bidDetails
+        RAC(nav.bidDetails.newUser, "email") <~ emailTextSignal.takeUntil(unbindSignal)
+
         emailTextField.returnKeySignal().subscribeNext { [weak self] (_) -> Void in
             self?.confirmButton.rac_command.execute(nil)
             return
         }
-
     }
 
     override public func viewWillAppear(animated: Bool) {

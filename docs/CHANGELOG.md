@@ -6,6 +6,7 @@
 * Allows registration with email addresses containing plus signs.
 * New and improved bidder registration details screen.
 * Removed interstitial screen between registration confirmation and showing bidder details.
+* Fixes potential crash for existing users signing in with phone numbers.
 * Bidder details screen no longer hides PIN.
 
 ## 3.4.0 April 13 2015
