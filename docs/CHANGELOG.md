@@ -1,4 +1,4 @@
-## Next
+## 3.5.0 May 6 2015
 * Fixes password problems when signing in.
 * Prevents user from registering with invalid passwords.
 * Disables iPad sleep timer.
