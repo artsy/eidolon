@@ -1,13 +1,16 @@
 fastlane_version "0.4.2" 
 
+desc "Build and prepare the app for testing"
 lane :build_for_test do
   xcodebuild scheme: 'Kiosk', destination: "OS=8.1,name=iPad Air"
 end
 
+desc "Run all iOS tests on an iPad"
 lane :test do
   xctest destination: "OS=8.1,name=iPad Air"
 end
 
+desc "Set all the API keys required for distribution"
 lane :oss do
   keys = ['ArtsyAPIClientSecret', 
     'ArtsyAPIClientKey', 
@@ -33,10 +36,20 @@ lane :oss do
     cocoapods
 end
 
+desc "Build and prepare deployment"
 lane :build_for_deploy do
   xcodebuild sdk: "iphoneos", configuration: "release"
 end
 
+desc "Release a new beta version on Hockey"
+desc "This action does the following:"
+desc ""
+desc "- Ensures a clean git status"
+desc "- Increment the build number"
+desc "- Build and sign the app"
+desc "- Upload the ipa file to hockey"
+desc "- Post a message to slack containing the download link"
+desc "- Commit and push the version bump"
 lane :deploy do 
   # Make sure we start off with a clean slate
   ensure_git_status_clean
