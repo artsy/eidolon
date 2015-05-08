@@ -79,10 +79,8 @@ lane :deploy do
   )
 
   # Push to Hockey
-  markdown_type = 1
   hockey(
     api_token: ENV['HOCKEY_API_TOKEN'],
-    notes_type: markdown_type,
     notes: release_notes,
   )
 
