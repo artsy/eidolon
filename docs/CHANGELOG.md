@@ -1,3 +1,6 @@
+## 3.5.1 May 8 2015
+* Fixes problem installing app.
+
 ## 3.5.0 May 6 2015
 * Fixes password problems when signing in.
 * Prevents user from registering with invalid passwords.
