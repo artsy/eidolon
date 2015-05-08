@@ -3,7 +3,6 @@ source 'https://github.com/artsy/Specs.git'
 
 plugin 'cocoapods-keys', {
   :project => "Eidolon",
-  :target => "Kiosk",
   :keys => [
     "ArtsyAPIClientSecret",
     "ArtsyAPIClientKey",
