@@ -1,4 +1,4 @@
-fastlane_version "0.4.2" 
+fastlane_version "1.0.2" 
 
 desc "Build and prepare the app for testing"
 lane :build_for_test do
