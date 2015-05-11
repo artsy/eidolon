@@ -1,4 +1,4 @@
-fastlane_version "0.4.2" 
+fastlane_version "1.0.2"
 
 desc "Build and prepare the app for testing"
 lane :build_for_test do
@@ -79,10 +79,8 @@ lane :deploy do
   )
 
   # Push to Hockey
-  markdown_type = 1
   hockey(
     api_token: ENV['HOCKEY_API_TOKEN'],
-    notes_type: markdown_type,
     notes: release_notes,
   )
 

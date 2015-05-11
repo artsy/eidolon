@@ -28,7 +28,7 @@
 #import <Artsy_OSSUIFonts/UIFont+OSSArtsyFonts.h>
 #endif
 
-#import <CardFlight/CardFlight.h>
+#import "CardFlight.h"
 
 #import <UIImageViewAligned/UIImageViewAligned.h>
 #import <DZNWebViewController/DZNWebViewController.h>
