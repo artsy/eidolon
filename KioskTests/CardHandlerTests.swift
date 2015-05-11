@@ -1,7 +1,6 @@
 import Quick
 import Nimble
 import Kiosk
-import CardFlight
 
 class CardHandlerTests: QuickSpec {
     var handler: CardHandler!

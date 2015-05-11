@@ -1,5 +1,4 @@
 import UIKit
-import CardFlight
 import ReactiveCocoa
 
 public class CardHandler: NSObject, CFTReaderDelegate {
