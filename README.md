@@ -9,6 +9,8 @@ Project Status
 ----------------
 
 <img src ="https://raw.githubusercontent.com/artsy/eidolon/master/docs/eidolon_preview.jpg">
+Featured [in Vogue](http://www.vogue.com/slideshow/13261562/choice-works-auction-at-sothebys-acria-unframed-party/#5)
+
 
 Downloading the Code
 ----------------
