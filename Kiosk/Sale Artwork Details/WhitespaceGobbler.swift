@@ -1,12 +1,12 @@
 import UIKit
 
 class WhitespaceGobbler: UIView {
-    override convenience init(frame: CGRect) {
-        self.init()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
 
-    required convenience init(coder aDecoder: NSCoder) {
-        self.init()
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
     convenience init() {
