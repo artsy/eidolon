@@ -36,7 +36,7 @@ func setupProviderForSuite(provider: ArtsyProvider<ArtsyAPI>) {
 }
 
 func yearFromDate(date: NSDate) -> Int {
-    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+    let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     return calendar.components(.CalendarUnitYear, fromDate: date).year
 }
 
