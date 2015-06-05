@@ -14,8 +14,8 @@ func clearDefaultsKeys(defaults: NSUserDefaults) {
 }
 
 func getDefaultsKeys(defaults: NSUserDefaults) -> (key: String?, expiry: NSDate?) {
-    let key = defaults.objectForKey(DefaultsKeys.TokenKey.rawValue) as String?
-    let expiry = defaults.objectForKey(DefaultsKeys.TokenExpiry.rawValue) as NSDate?
+    let key = defaults.objectForKey(DefaultsKeys.TokenKey.rawValue) as! String?
+    let expiry = defaults.objectForKey(DefaultsKeys.TokenExpiry.rawValue) as! NSDate?
     
     return (key: key, expiry: expiry)
 }

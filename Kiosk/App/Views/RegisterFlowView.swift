@@ -30,7 +30,7 @@ public class RegisterFlowView: ORStackView {
         let user = details!.newUser
 
         removeAllSubviews()
-        for i in 0 ..< countElements(titles) {
+        for i in 0 ..< count(titles) {
             let itemView = ItemView(frame: self.bounds)
             itemView.createTitleViewWithTitle(titles[i])
 
@@ -100,7 +100,7 @@ public class RegisterFlowView: ORStackView {
         }
 
         func createJumpToButtonAtIndex(index: NSInteger) -> UIButton {
-            let button = UIButton.buttonWithType(.Custom) as UIButton
+            let button = UIButton.buttonWithType(.Custom) as! UIButton
             button.tag = index
             button.setImage(UIImage(named: "edit_button"), forState: .Normal)
             button.userInteractionEnabled = true

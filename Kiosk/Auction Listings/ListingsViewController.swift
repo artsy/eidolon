@@ -58,11 +58,11 @@ public class ListingsViewController: UIViewController {
     }()
     
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ListingsViewController {
-        return storyboard.viewControllerWithID(.AuctionListings) as ListingsViewController
+        return storyboard.viewControllerWithID(.AuctionListings) as! ListingsViewController
     }
 
     func listingsRequestSignalForPage(auctionID: String, page: Int) -> RACSignal {
-        return XAppRequest(.AuctionListings(id: auctionID), parameters: ["size": self.pageSize, "page": page]).filterSuccessfulStatusCodes().mapJSON()
+        return XAppRequest(.AuctionListings(id: auctionID, page: page, pageSize: self.pageSize)).filterSuccessfulStatusCodes().mapJSON()
     }
 
     // Repeatedly calls itself with page+1 until the count of the returned array is < pageSize.
@@ -73,7 +73,7 @@ public class ListingsViewController: UIViewController {
 
                     var nextPageSignal = RACSignal.empty()
 
-                    if countElements(array) >= (self?.pageSize ?? 0) {
+                    if count(array) >= (self?.pageSize ?? 0) {
                         // Infer we have more results to retrieve
                         nextPageSignal = self?.retrieveAllListingsRequestSignal(auctionID, page: page+1) ?? RACSignal.empty()
                     }
@@ -113,7 +113,7 @@ public class ListingsViewController: UIViewController {
             let currentSaleArtworks = self!.saleArtworks
             
             func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) -> Bool {
-                assert(countElements(currentSaleArtworks) == countElements(newSaleArtworks), "Arrays' counts must be equal.")
+                assert(count(currentSaleArtworks) == count(newSaleArtworks), "Arrays' counts must be equal.")
                 // Updating the currentSaleArtworks is easy. First we sort both according to the same criteria
                 // Because we assume that their length is the same, we just do a linear scane through and
                 // copy values from the new to the old.
@@ -121,8 +121,8 @@ public class ListingsViewController: UIViewController {
                 let sortedCurentSaleArtworks = currentSaleArtworks.sorted(sortById)
                 let sortedNewSaleArtworks = newSaleArtworks.sorted(sortById)
                 
-                let count = countElements(sortedCurentSaleArtworks)
-                for var i = 0; i < count; i++ {
+                let saleArtworksCount = count(sortedCurentSaleArtworks)
+                for var i = 0; i < saleArtworksCount; i++ {
                     if currentSaleArtworks[i].id == newSaleArtworks[i].id {
                         currentSaleArtworks[i].updateWithValues(newSaleArtworks[i])
                     } else {
@@ -138,7 +138,7 @@ public class ListingsViewController: UIViewController {
             // then update the individual values in the current array and return the existing value.
             // If the array's length has changed, then we pass through the new array
             if let newSaleArtworks = newSaleArtworks as? Array<SaleArtwork> {
-                if countElements(newSaleArtworks) == countElements(currentSaleArtworks) {
+                if count(newSaleArtworks) == count(currentSaleArtworks) {
                     if update(currentSaleArtworks, newSaleArtworks) {
                         return currentSaleArtworks
                     }
@@ -198,7 +198,7 @@ public class ListingsViewController: UIViewController {
         RAC(self, "loadingSpinner.hidden") <~ RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool()
 
         let gridSelectedSignal = switchView.selectedIndexSignal.map { (index) -> AnyObject! in
-            switch index as Int {
+            switch index as! Int {
             case SwitchValues.Grid.rawValue:
                 return true
             default:
@@ -207,7 +207,7 @@ public class ListingsViewController: UIViewController {
         }
         
         RAC(self, "cellIdentifier") <~ gridSelectedSignal.map({ (gridSelected) -> AnyObject! in
-            switch gridSelected as Bool {
+            switch gridSelected as! Bool {
             case true:
                 return MasonryCellIdentifier
             default:
@@ -216,14 +216,14 @@ public class ListingsViewController: UIViewController {
         })
 
         let artworkAndLayoutSignal = RACSignal.combineLatest([RACObserve(self, "saleArtworks").distinctUntilChanged(), switchView.selectedIndexSignal, gridSelectedSignal]).map({ [weak self] in
-            let tuple = $0 as RACTuple
-            let saleArtworks = tuple.first as [SaleArtwork]
-            let selectedIndex = tuple.second as Int
+            let tuple = $0 as! RACTuple
+            let saleArtworks = tuple.first as! [SaleArtwork]
+            let selectedIndex = tuple.second as! Int
 
             let gridSelected: AnyObject! = tuple.third
 
             let layout = { () -> UICollectionViewLayout in
-                switch gridSelected as Bool {
+                switch gridSelected as! Bool {
                 case true:
                     return ListingsViewController.masonryLayout()
                 default:
@@ -239,7 +239,7 @@ public class ListingsViewController: UIViewController {
             }
         })
 
-        let sortedSaleArtworksSignal = artworkAndLayoutSignal.map { ($0 as RACTuple).first }
+        let sortedSaleArtworksSignal = artworkAndLayoutSignal.map { ($0 as! RACTuple).first }
 
         RAC(self, "sortedSaleArtworks") <~ sortedSaleArtworksSignal.doNext{ [weak self] _ -> Void in
             self?.collectionView.reloadData()
@@ -247,25 +247,25 @@ public class ListingsViewController: UIViewController {
         }
 
         sortedSaleArtworksSignal.dispatchAsyncMainScheduler().subscribeNext { [weak self] in
-            let array = ($0 ?? []) as [SaleArtwork]
+            let array = ($0 ?? []) as! [SaleArtwork]
 
-            if countElements(array) > 0 {
+            if count(array) > 0 {
                 // Need to dispatch, since the changes in the CV's model aren't imediate
                 self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
             }
         }
 
-        artworkAndLayoutSignal.map { ($0 as RACTuple).second }.subscribeNext { [weak self] (layout) -> Void in
+        artworkAndLayoutSignal.map { ($0 as! RACTuple).second }.subscribeNext { [weak self] (layout) -> Void in
             // Need to explicitly call animated: false and reload to avoid animation
-            self?.collectionView.setCollectionViewLayout(layout as UICollectionViewLayout, animated: false)
+            self?.collectionView.setCollectionViewLayout(layout as! UICollectionViewLayout, animated: false)
             return
         }
     }
     
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .ShowSaleArtworkDetails {
-            let saleArtwork = sender as SaleArtwork!
-            let detailsViewController = segue.destinationViewController as SaleArtworkDetailsViewController
+            let saleArtwork = sender as! SaleArtwork!
+            let detailsViewController = segue.destinationViewController as! SaleArtworkDetailsViewController
             detailsViewController.saleArtwork = saleArtwork
             ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork.artwork.id])
         }
@@ -286,10 +286,10 @@ public class ListingsViewController: UIViewController {
 
 extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, ARCollectionViewMasonryLayoutDelegate {
     public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return countElements(sortedSaleArtworks)
+        return count(sortedSaleArtworks)
     }
   public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
         
         if let listingsCell = cell as? ListingsCollectionViewCell {
 
@@ -328,7 +328,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         ARAnalytics.event("Bid Button Tapped")
 
         let storyboard = UIStoryboard.fulfillment()
-        let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
+        let containerController = storyboard.instantiateInitialViewController() as! FulfillmentContainerViewController
         containerController.allowAnimations = allowAnimations
 
         if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {

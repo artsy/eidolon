@@ -13,7 +13,7 @@ public extension UIViewController {
             
             return nil
         }.map { (emailSignal) -> AnyObject! in
-            self.retrieveBidderDetailsSignal(emailSignal as RACSignal)
+            self.retrieveBidderDetailsSignal(emailSignal as! RACSignal)
         }.switchToLatest()
     }
     
@@ -21,9 +21,9 @@ public extension UIViewController {
         return emailSignal.doNext { _ -> Void in
             SVProgressHUD.show()
         }.map { (email) -> AnyObject! in
-            let endpoint: ArtsyAPI = ArtsyAPI.BidderDetailsNotification(auctionID: appDelegate().appViewController.sale.id, identifier: (email as String))
+            let endpoint: ArtsyAPI = ArtsyAPI.BidderDetailsNotification(auctionID: appDelegate().appViewController.sale.id, identifier: (email as! String))
             
-            return XAppRequest(endpoint, provider: Provider.sharedProvider, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes()
+            return XAppRequest(endpoint, provider: Provider.sharedProvider).filterSuccessfulStatusCodes()
         }.switchToLatest().throttle(1).doNext { _ -> Void in
             SVProgressHUD.dismiss()
             self.presentViewController(UIAlertController.successfulBidderDetailsAlertController(), animated: true, completion: nil)

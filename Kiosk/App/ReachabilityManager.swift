@@ -11,15 +11,15 @@ public class ReachabilityManager: NSObject {
         super.init()
 
         reachability.reachableBlock = { (_) in
-            return (self.reachSignal as RACSubject).sendNext(true)
+            return (self.reachSignal as! RACSubject).sendNext(true)
         }
 
         reachability.unreachableBlock = { (_) in
-            return (self.reachSignal as RACSubject).sendNext(false)
+            return (self.reachSignal as! RACSubject).sendNext(false)
         }
 
         reachability.startNotifier()
-        (reachSignal as RACSubject).sendNext(reachability.isReachable())
+        (reachSignal as! RACSubject).sendNext(reachability.isReachable())
     }
 
     public func isReachable() -> Bool {

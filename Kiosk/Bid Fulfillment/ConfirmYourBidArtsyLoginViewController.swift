@@ -15,7 +15,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
-        return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as ConfirmYourBidArtsyLoginViewController
+        return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
     }
 
     override public func viewDidLoad() {
@@ -61,7 +61,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
                 return self?.creditCardSignal().doNext { (cards) -> Void in
                     if (self == nil) { return }
 
-                    if countElements(cards as [Card]) > 0 {
+                    if count(cards as! [Card]) > 0 {
                         self!.performSegue(.EmailLoginConfirmedHighestBidder)
                     } else {
                         self!.performSegue(.ArtsyUserHasNotRegisteredCard)
@@ -78,7 +78,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if countElements(emailTextField.text) == 0 {
+        if count(emailTextField.text) == 0 {
             emailTextField.becomeFirstResponder()
         } else {
             passwordTextField.becomeFirstResponder()
@@ -94,14 +94,14 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     func xAuthSignal() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: emailTextField.text, password: passwordTextField.text)
-        return provider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
+        return provider.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
     }
     
     @IBAction func forgotPasswordTapped(sender: AnyObject) {
         let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .Alert)
 
         let submitAction = UIAlertAction(title: "Send", style: .Default) { [weak alertController] (_) in
-            let emailTextField = alertController!.textFields![0] as UITextField
+            let emailTextField = alertController!.textFields![0] as! UITextField
             self.sendForgotPasswordRequest(emailTextField.text)
             return
         }
@@ -128,7 +128,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     func sendForgotPasswordRequest(email: String) {
         let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
-        XAppRequest(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { [weak self] (json) -> Void in
+        XAppRequest(endpoint).filterSuccessfulStatusCodes().subscribeNext { [weak self] (json) -> Void in
             logger.log("Sent forgot password request")
         }
     }
@@ -136,13 +136,13 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     func creditCardSignal() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
         let authProvider = self.fulfillmentNav().loggedInProvider!
-        return authProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
+        return authProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
     }
 
     @IBAction func useBidderTapped(sender: AnyObject) {
         for controller in navigationController!.viewControllers {
             if controller.isKindOfClass(ConfirmYourBidViewController.self) {
-                navigationController!.popToViewController(controller as UIViewController, animated:true);
+                navigationController!.popToViewController(controller as! UIViewController, animated:true);
                 break;
             }
         }

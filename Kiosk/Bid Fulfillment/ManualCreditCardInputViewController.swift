@@ -67,6 +67,6 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
     }
 
     public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ManualCreditCardInputViewController {
-        return storyboard.viewControllerWithID(.ManualCardDetailsInput) as ManualCreditCardInputViewController
+        return storyboard.viewControllerWithID(.ManualCardDetailsInput) as! ManualCreditCardInputViewController
     }
 }

@@ -20,7 +20,7 @@ class ArtsyAPISpec: QuickSpec {
     override func spec() {
 
         func newXAppRequest() -> RACSignal {
-            return XAppRequest(ArtsyAPI.Auctions, method: Moya.DefaultMethod(), parameters: Moya.DefaultParameters(), defaults: defaults)
+            return XAppRequest(ArtsyAPI.Auctions, defaults: defaults)
         }
 
         describe("keys", {

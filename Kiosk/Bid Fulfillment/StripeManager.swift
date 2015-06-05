@@ -26,7 +26,7 @@ public class StripeManager: NSObject {
     }
 
     public func stringIsCreditCard(object: AnyObject!) -> AnyObject! {
-        let cardNumber = object as String
+        let cardNumber = object as! String
 
         return STPCard.validateCardNumber(cardNumber)
     }

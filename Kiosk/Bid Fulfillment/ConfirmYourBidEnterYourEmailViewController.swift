@@ -9,7 +9,7 @@ public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidEnterYourEmailViewController {
-        return storyboard.viewControllerWithID(.ConfirmYourBidEnterEmail) as ConfirmYourBidEnterYourEmailViewController
+        return storyboard.viewControllerWithID(.ConfirmYourBidEnterEmail) as! ConfirmYourBidEnterYourEmailViewController
     }
 
     override public func viewDidLoad() {
@@ -24,7 +24,7 @@ public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
             }
 
             let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: self!.emailTextField.text)
-            return XAppRequest(endpoint, provider:Provider.sharedProvider, method: .HEAD, parameters:endpoint.defaultParameters).filterStatusCode(200).doNext({ (__) -> Void in
+            return XAppRequest(endpoint).filterStatusCode(200).doNext({ (__) -> Void in
 
                 self?.performSegue(.ExistingArtsyUserFound)
                 return

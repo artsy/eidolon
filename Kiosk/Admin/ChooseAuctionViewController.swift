@@ -15,11 +15,11 @@ class ChooseAuctionViewController: UIViewController {
 
         let endpoint: ArtsyAPI = ArtsyAPI.ActiveAuctions
 
-        XAppRequest(endpoint, method: .GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Sale.self)
+        XAppRequest(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Sale.self)
             .subscribeNext({ [weak self] (activeSales) -> Void in
-                self!.auctions = activeSales as [Sale]
+                self!.auctions = activeSales as! [Sale]
 
-                for i in 0 ..< countElements(self!.auctions) {
+                for i in 0 ..< count(self!.auctions) {
                     let sale = self!.auctions[i]
                     let title = " \(sale.name) - #\(sale.auctionState) - \(sale.artworkCount)"
 

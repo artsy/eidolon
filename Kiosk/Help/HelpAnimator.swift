@@ -24,11 +24,11 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let b = transitionContext.viewForKey(UITransitionContextToViewKey)
 
         if presenting {
-            let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as HelpViewController
+            let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as! HelpViewController
             
             let dismissTapGestureRecognizer = UITapGestureRecognizer()
             dismissTapGestureRecognizer.rac_gestureSignal().subscribeNext{ (sender) -> Void in
-                let dismissTapGestureRecognizer = sender as UITapGestureRecognizer
+                let dismissTapGestureRecognizer = sender as! UITapGestureRecognizer
                 let pointInContainer = dismissTapGestureRecognizer.locationInView(toView)
                 if !toView.pointInside(pointInContainer, withEvent: nil) {
                     appDelegate().helpButtonCommand().execute(dismissTapGestureRecognizer)
@@ -50,7 +50,7 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             containerView.layoutIfNeeded()
             
             UIView.animateWithDuration(transitionDuration(transitionContext), animations: {
-                containerView.removeConstraints(toViewController.positionConstraints ?? [])
+                containerView.removeConstraints((toViewController.positionConstraints ?? []) as [AnyObject])
                 toViewController.positionConstraints = toView.alignLeading(nil, trailing: "0", toView: containerView)
                 containerView.layoutIfNeeded()
                 
@@ -59,7 +59,7 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 transitionContext.completeTransition(true)
             })
         } else {
-            let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! as HelpViewController
+            let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! as! HelpViewController
             
             if let dismissTapGestureRecognizer = fromViewController.dismissTapGestureRecognizer {
                 containerView.removeGestureRecognizer(dismissTapGestureRecognizer)
@@ -71,7 +71,7 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             containerView.addSubview(fromView)
             
             UIView.animateWithDuration(self.transitionDuration(transitionContext), animations: {
-                containerView.removeConstraints(fromViewController.positionConstraints ?? [])
+                containerView.removeConstraints((fromViewController.positionConstraints ?? []) as [AnyObject])
                 fromViewController.positionConstraints = fromView.alignAttribute(.Left, toAttribute: .Right, ofView: containerView, predicate: "0")
                 containerView.layoutIfNeeded()
                 

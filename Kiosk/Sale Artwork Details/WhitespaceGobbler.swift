@@ -9,8 +9,8 @@ class WhitespaceGobbler: UIView {
         self.init()
     }
 
-    override init() {
-        super.init(frame: CGRect.zeroRect)
+    convenience init() {
+        self.init(frame: CGRect.zeroRect)
 
         setContentHuggingPriority(50, forAxis: .Vertical)
         setContentHuggingPriority(50, forAxis: .Horizontal)

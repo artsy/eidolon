@@ -23,7 +23,7 @@ public class SwitchView: UIView {
     
     public init(buttonTitles: Array<String>) {
         buttons = buttonTitles.map { (buttonTitle: String) -> UIButton in
-            var button = UIButton.buttonWithType(.Custom) as UIButton
+            var button = UIButton.buttonWithType(.Custom) as! UIButton
             
             button.setTitle(buttonTitle, forState: .Normal)
             button.setTitle(buttonTitle, forState: .Disabled)
@@ -73,7 +73,7 @@ public class SwitchView: UIView {
     
     public subscript(index: Int) -> UIButton? {
         get {
-            if index >= 0 && index < countElements(buttons) {
+            if index >= 0 && index < count(buttons) {
                 return buttons[index]
             }
             return nil
@@ -127,7 +127,7 @@ private extension SwitchView {
         selectionIndicator.constrainWidthToView(self, predicate: widthPredicateMultiplier)
         selectionIndicator.alignTop("0", bottom: "0", toView: self)
         
-        selectionConstraint = selectionIndicator.alignLeadingEdgeWithView(self, predicate: nil).last! as NSLayoutConstraint
+        selectionConstraint = selectionIndicator.alignLeadingEdgeWithView(self, predicate: nil).last! as! NSLayoutConstraint
     }
     
     func widthMultiplier() -> Float {
@@ -149,7 +149,7 @@ private extension SwitchView {
             button.enabled = false
             
             // Set the x-position of the selection indicator as a fraction of the total width of the switch view according to which button was pressed.
-            let multiplier = CGFloat(index) / CGFloat(countElements(self.buttons))
+            let multiplier = CGFloat(index) / CGFloat(count(self.buttons))
             
             self.removeConstraint(self.selectionConstraint)
             self.selectionConstraint = NSLayoutConstraint(item: self.selectionIndicator, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Right, multiplier: multiplier, constant: 0)

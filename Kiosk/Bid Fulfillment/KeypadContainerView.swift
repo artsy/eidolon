@@ -13,7 +13,7 @@ public class KeypadContainerView: UIView {
     public var resetCommand: RACCommand!
 
     override public func prepareForInterfaceBuilder() {
-        for subview in subviews as [UIView] { subview.removeFromSuperview() }
+        for subview in subviews as! [UIView] { subview.removeFromSuperview() }
 
         let bundle = NSBundle(forClass: self.dynamicType)
         let image  = UIImage(named: "KeypadViewPreviewIB", inBundle: bundle, compatibleWithTraitCollection: self.traitCollection)

@@ -35,11 +35,10 @@ public class BidderNetworkModel: NSObject {
     // MARK: - Chained Signals
 
     private func checkUserEmailExists(email: String) -> RACSignal {
-        let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: email)
-        let request = Provider.sharedProvider.request(endpoint, method: .HEAD, parameters:endpoint.defaultParameters)
+        let request = Provider.sharedProvider.request(.FindExistingEmailRegistration(email: email))
 
         return request.map { [weak self] (response) -> NSNumber in
-            let moyaResponse = response as MoyaResponse
+            let moyaResponse = response as! MoyaResponse
             return moyaResponse.statusCode != 404
         }
     }
@@ -54,7 +53,7 @@ public class BidderNetworkModel: NSObject {
         let newUser = details().newUser
         let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email!, password: newUser.password!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!, name: newUser.name ?? "")
 
-        return Provider.sharedProvider.request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doError { (error) in
+        return Provider.sharedProvider.request(endpoint).filterSuccessfulStatusCodes().doError { (error) in
             logger.log("Creating user failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
 
@@ -74,7 +73,7 @@ public class BidderNetworkModel: NSObject {
         let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!, name: newUser.name ?? "")
 
         return updateProviderIfNecessary().then {
-            self.provider().request(endpoint, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
+            self.provider().request(endpoint).filterSuccessfulStatusCodes().mapJSON()
         }.doError { (error) in
             logger.log("Updating user failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
@@ -87,7 +86,7 @@ public class BidderNetworkModel: NSObject {
 
         // on Staging the card tokenization fails
 
-        return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).doError { (error) in
+        return provider().request(endpoint).doError { (error) in
             logger.log("Adding Card to User failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
@@ -104,10 +103,10 @@ public class BidderNetworkModel: NSObject {
 
     private func checkForBidderOnAuction(auctionID: String) -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)
-        let request = provider().request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Bidder.self)
+        let request = provider().request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Bidder.self)
 
         return request.map { [weak self] (bidders) -> NSNumber in
-            let bidders = bidders as [Bidder]
+            let bidders = bidders as! [Bidder]
             if let bidder = bidders.first {
                 self?.details().bidderID = bidder.id
                 self?.details().bidderPIN =  bidder.pin
@@ -123,7 +122,7 @@ public class BidderNetworkModel: NSObject {
 
     private func registerToAuction() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: fulfillmentNav.auctionID)
-        let signal = provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(Bidder.self)
+        let signal = provider().request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Bidder.self)
 
         return signal.doNext{ [weak self] (bidder) in
             if let bidder = bidder as? Bidder {
@@ -140,10 +139,10 @@ public class BidderNetworkModel: NSObject {
     private func generateAPIN() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.CreatePINForBidder(bidderID: self.details().bidderID!)
 
-        return provider().request(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext { [weak self](json) -> Void in
+        return provider().request(endpoint).filterSuccessfulStatusCodes().mapJSON().doNext { [weak self](json) -> Void in
 
-            let pin = json["pin"] as String?
-            self?.details().bidderPIN =  pin
+            let pin = json["pin"] as? String
+            self?.details().bidderPIN = pin
 
         } .doError { (error) in
             logger.log("Generating a PIN for bidder has failed.")
@@ -153,9 +152,9 @@ public class BidderNetworkModel: NSObject {
 
     private func getMyPaddleNumber() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
-        return provider().request(endpoint, method: .GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self).doNext { [weak self](user) -> Void in
+        return provider().request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self).doNext { [weak self] (user) -> Void in
 
-            self?.details().paddleNumber =  (user as User).paddleNumber
+            self?.details().paddleNumber =  (user as! User).paddleNumber
             return
 
         }.doError { (error) in
@@ -167,7 +166,7 @@ public class BidderNetworkModel: NSObject {
     private func updateProvider() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: details().newUser.email!, password: details().newUser.password!)
 
-        return provider().request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext { [weak self] (accessTokenDict) -> Void in
+        return provider().request(endpoint).filterSuccessfulStatusCodes().mapJSON().doNext { [weak self] (accessTokenDict) -> Void in
 
             if let accessToken = accessTokenDict["access_token"] as? String {
                 self?.fulfillmentNav.xAccessToken = accessToken

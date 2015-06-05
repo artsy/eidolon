@@ -34,7 +34,7 @@ public class ManualCreditCardInputViewModel: NSObject {
 
     public var moveToYearSignal: RACSignal {
         return RACObserve(self, "expirationMonth").filter { (value) -> Bool in
-            return countElements(value as String) == 2
+            return count(value as! String) == 2
         }
     }
 
@@ -47,11 +47,11 @@ public class ManualCreditCardInputViewModel: NSObject {
 
     public func isEntryValid(entry: String) -> Bool {
         // Allow delete
-        if (countElements(entry) == 0) { return true }
+        if (count(entry) == 0) { return true }
 
         // the API doesn't accept chars
         let notNumberChars = NSCharacterSet.decimalDigitCharacterSet().invertedSet;
-        return countElements(entry.stringByTrimmingCharactersInSet(notNumberChars)) != 0
+        return count(entry.stringByTrimmingCharactersInSet(notNumberChars)) != 0
     }
 
     /// MARK: - Private Methods
@@ -61,7 +61,7 @@ public class ManualCreditCardInputViewModel: NSObject {
         let year = expirationYear.toUInt(defaultValue: 0)
 
         return stripeManager.registerCard(cardFullDigits, month: month, year: year).doNext() { (object) in
-            let token = object as STPToken
+            let token = object as! STPToken
 
             newUser.creditCardName = token.card.name
             newUser.creditCardType = token.card.brand.name

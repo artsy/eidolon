@@ -23,7 +23,7 @@ class AdminPanelViewController: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .LoadAdminWebViewController {
-            let webVC = segue.destinationViewController as AuctionWebViewController
+            let webVC = segue.destinationViewController as! AuctionWebViewController
             let auctionID = AppSetup.sharedState.auctionID
             let base = AppSetup.sharedState.useStaging ? "staging.artsy.net" : "artsy.net"
 

@@ -9,11 +9,6 @@ public class CursorView: UIView {
         setup()
     }
 
-    override public init(){
-        super.init()
-        setup()
-    }
-
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()

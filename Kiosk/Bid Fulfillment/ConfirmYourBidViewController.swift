@@ -21,7 +21,7 @@ public class ConfirmYourBidViewController: UIViewController {
     public lazy var provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidViewController {
-        return storyboard.viewControllerWithID(.ConfirmYourBid) as ConfirmYourBidViewController
+        return storyboard.viewControllerWithID(.ConfirmYourBid) as! ConfirmYourBidViewController
     }
 
     override public func viewDidLoad() {
@@ -59,7 +59,7 @@ public class ConfirmYourBidViewController: UIViewController {
                 }
 
                 let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: nav.auctionID!, phone: String(self!.number))
-                return XAppRequest(endpoint, provider:self!.provider, parameters:endpoint.defaultParameters).filterStatusCode(400).doError { (error) -> Void in
+                return XAppRequest(endpoint, provider:self!.provider).filterStatusCode(400).doError { (error) -> Void in
 
                     // Due to AlamoFire restrictions we can't stop HTTP redirects
                     // so to figure out if we got 302'd we have to introspect the
@@ -67,7 +67,7 @@ public class ConfirmYourBidViewController: UIViewController {
                     // request suceedded
 
                     let moyaResponse = error.userInfo?["data"] as? MoyaResponse
-                    let responseURL = moyaResponse?.response?.URL?.absoluteString?
+                    let responseURL = moyaResponse?.response?.URL?.absoluteString
 
                     if let responseURL = responseURL {
                         if (responseURL as NSString).containsString("v1/bidder/") {
@@ -91,8 +91,8 @@ public class ConfirmYourBidViewController: UIViewController {
     }
 
     func toPhoneNumberString(number:AnyObject!) -> AnyObject! {
-        let numberString = number as String
-        if countElements(numberString) >= 7 {
+        let numberString = number as! String
+        if count(numberString) >= 7 {
             return self.phoneNumberFormatter.stringForObjectValue(numberString)
         } else {
             return numberString

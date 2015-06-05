@@ -16,7 +16,7 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
     @IBOutlet weak var titleLabel: ARSerifLabel!
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> SwipeCreditCardViewController {
-        return storyboard.viewControllerWithID(.RegisterCreditCard) as SwipeCreditCardViewController
+        return storyboard.viewControllerWithID(.RegisterCreditCard) as! SwipeCreditCardViewController
     }
 
     dynamic var cardName = ""
@@ -33,7 +33,7 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
         let cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken: self.keys.cardflightMerchantAccountToken())
 
         cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
-            let message = message as String
+            let message = message as! String
             self.cardStatusLabel.text = "Card Status: \(message)"
             if message == "Got Card" {
                 self.setInProgress(true)

@@ -10,11 +10,11 @@ private func XAppTokenRequest(defaults: NSUserDefaults) -> RACSignal {
     // I don't like an extension of a class referencing what is essentially a singleton of that class.
     var appToken = XAppToken(defaults: defaults)
 
-    let newTokenSignal = Provider.sharedProvider.request(ArtsyAPI.XApp, parameters: ArtsyAPI.XApp.defaultParameters).filterSuccessfulStatusCodes().mapJSON().doNext({ (response) -> Void in
+    let newTokenSignal = Provider.sharedProvider.request(ArtsyAPI.XApp).filterSuccessfulStatusCodes().mapJSON().doNext({ (response) -> Void in
         if let dictionary = response as? NSDictionary {
             let formatter = ISO8601DateFormatter()
-            appToken.token = dictionary["xapp_token"] as String?
-            appToken.expiry = formatter.dateFromString(dictionary["expires_in"] as String?)
+            appToken.token = dictionary["xapp_token"] as? String
+            appToken.expiry = formatter.dateFromString(dictionary["expires_in"] as? String)
         }
     }).logError().ignoreValues()
 
@@ -26,12 +26,12 @@ private func XAppTokenRequest(defaults: NSUserDefaults) -> RACSignal {
 }
 
 /// Request to fetch a given target. Ensures that valid XApp tokens exist before making request
-public func XAppRequest(token: ArtsyAPI, provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider,  method: Moya.Method = Moya.DefaultMethod(), parameters: [String: AnyObject] = Moya.DefaultParameters(), defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) -> RACSignal {
+public func XAppRequest(token: ArtsyAPI, provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider, defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) -> RACSignal {
 
     return provider.onlineSignal().then {
         // First perform XAppTokenRequest(). When it completes, then the signal returned from the closure will be subscribed to.
         XAppTokenRequest(defaults).then {
-            return provider.request(token, method: method, parameters: parameters)
+            return provider.request(token)
         }
     }
 }

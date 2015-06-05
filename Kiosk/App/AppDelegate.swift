@@ -13,9 +13,9 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
 
     weak var webViewController: UIViewController?
 
-    var window: UIWindow! = UIWindow(frame:CGRectMake(0, 0, UIScreen.mainScreen().bounds.height, UIScreen.mainScreen().bounds.width))
+    public var window: UIWindow? = UIWindow(frame:CGRectMake(0, 0, UIScreen.mainScreen().bounds.height, UIScreen.mainScreen().bounds.width))
 
-    func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
+    public func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
 
         // Disable sleep timer
         UIApplication.sharedApplication().idleTimerDisabled = true
@@ -37,8 +37,8 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenExpiry.rawValue)
 
         let auctionStoryboard = UIStoryboard(name: "Auction", bundle: nil)
-        window.rootViewController = auctionStoryboard.instantiateInitialViewController() as? UIViewController
-        window.makeKeyAndVisible()
+        window?.rootViewController = auctionStoryboard.instantiateInitialViewController() as? UIViewController
+        window?.makeKeyAndVisible()
 
         let keys = EidolonKeys()
         Stripe.setDefaultPublishableKey(keys.stripePublishableKey())
@@ -60,8 +60,8 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func setupUserAgent() {
-        let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as String?
-        let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as String?
+        let version = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as! String?
+        let build = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as! String?
         
         let webView = UIWebView(frame: CGRectZero)
         let oldAgent = webView.stringByEvaluatingJavaScriptFromString("navigator.userAgent")

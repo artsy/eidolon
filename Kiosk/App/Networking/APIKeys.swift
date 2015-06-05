@@ -28,7 +28,7 @@ public struct APIKeys {
     // MARK: Methods
 
     public var stubResponses: Bool {
-        return countElements(key) < minimumKeyLength || countElements(secret) < minimumKeyLength
+        return count(key) < minimumKeyLength || count(secret) < minimumKeyLength
     }
 
     // MARK: Initializers

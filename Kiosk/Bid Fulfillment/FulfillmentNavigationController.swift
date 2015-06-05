@@ -13,8 +13,8 @@ public class FulfillmentNavigationController: UINavigationController {
     var xAccessToken: String? {
         didSet(oldToken) {
 
-            let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-                var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+            let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
+                var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
 
                 return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": self.xAccessToken!])
             }
@@ -28,13 +28,13 @@ public class FulfillmentNavigationController: UINavigationController {
         loggedInProvider = nil
         let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         for cookie in storage.cookies! {
-            storage.deleteCookie(cookie as NSHTTPCookie)
+            storage.deleteCookie(cookie as! NSHTTPCookie)
         }
     }
 
     func updateUserCredentials() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
-        let request = loggedInProvider!.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self)
+        let request = loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self)
 
         return request.doNext { [weak self] (fullUser) -> Void in
             let newUser = self?.bidDetails.newUser

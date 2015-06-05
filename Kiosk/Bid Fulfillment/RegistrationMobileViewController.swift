@@ -28,14 +28,14 @@ public class RegistrationMobileViewController: UIViewController, RegistrationSub
     public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
         // Allow delete
-        if (countElements(string) == 0) { return true }
+        if (count(string) == 0) { return true }
 
         // the API doesn't accept chars
         let notNumberChars = NSCharacterSet.decimalDigitCharacterSet().invertedSet;
-        return countElements(string.stringByTrimmingCharactersInSet(notNumberChars)) != 0
+        return count(string.stringByTrimmingCharactersInSet(notNumberChars)) != 0
     }
 
     public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationMobileViewController {
-        return storyboard.viewControllerWithID(.RegisterMobile) as RegistrationMobileViewController
+        return storyboard.viewControllerWithID(.RegisterMobile) as! RegistrationMobileViewController
     }
 }

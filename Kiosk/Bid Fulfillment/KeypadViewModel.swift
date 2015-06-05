@@ -40,7 +40,7 @@ public class KeypadViewModel: NSObject {
     public lazy var addDigitCommand: RACCommand = {
         let localSelf = self
         return RACCommand { [weak localSelf] (input) -> RACSignal! in
-            return localSelf?.addDigitSignal(input as Int) ?? RACSignal.empty()
+            return localSelf?.addDigitSignal(input as! Int) ?? RACSignal.empty()
         }
     }()
 }
@@ -50,7 +50,7 @@ private extension KeypadViewModel {
         return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
             if let strongSelf = self {
                 strongSelf.intValue = Int(strongSelf.intValue/10)
-                if countElements(strongSelf.stringValue) > 0 {
+                if count(strongSelf.stringValue) > 0 {
                     strongSelf.stringValue = dropLast(strongSelf.stringValue)
                 }
             }

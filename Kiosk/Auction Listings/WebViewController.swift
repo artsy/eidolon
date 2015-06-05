@@ -13,7 +13,7 @@ class WebViewController: DZNWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let webView = view as UIWebView
+        let webView = view as! UIWebView
         webView.scalesPageToFit = true
         
         self.navigationItem.rightBarButtonItem = nil

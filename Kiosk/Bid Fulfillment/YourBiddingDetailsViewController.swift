@@ -16,7 +16,7 @@ public class YourBiddingDetailsViewController: UIViewController {
 
     var confirmationImage: UIImage?
 
-    public lazy var bidDetails: BidDetails! = { (self.navigationController as FulfillmentNavigationController).bidDetails }()
+    public lazy var bidDetails: BidDetails! = { (self.navigationController as! FulfillmentNavigationController).bidDetails }()
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,6 @@ public class YourBiddingDetailsViewController: UIViewController {
     }
 
     public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> YourBiddingDetailsViewController {
-        return storyboard.viewControllerWithID(.YourBidderDetails) as YourBiddingDetailsViewController
+        return storyboard.viewControllerWithID(.YourBidderDetails) as! YourBiddingDetailsViewController
     }
 }

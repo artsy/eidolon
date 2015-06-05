@@ -12,7 +12,7 @@ func delayToMainThread(delay:Double, closure:()->()) {
 }
 
 func logPath() -> NSURL {
-    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as NSURL
+    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as! NSURL
     return docs.URLByAppendingPathComponent("logger.txt")
 }
 
@@ -22,7 +22,7 @@ let reachabilityManager = ReachabilityManager()
 
 // A signal that completes when the app gets online (possibly completes immediately).
 func connectedToInternetSignal() -> RACSignal {
-    return reachabilityManager.reachSignal.filter { ($0 as Bool) }.take(1).ignoreValues()
+    return reachabilityManager.reachSignal.filter { ($0 as! Bool) }.take(1).ignoreValues()
 }
 
 func responseIsOK(object: AnyObject!) -> AnyObject {
