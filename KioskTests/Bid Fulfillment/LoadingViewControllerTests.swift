@@ -102,7 +102,7 @@ class LoadingViewControllerTests: QuickSpec {
 let loadingViewControllerTestImage = UIImage.testImage(named: "artwork", ofType: "jpg")
 
 func testLoadingViewController() -> LoadingViewController {
-    let controller = UIStoryboard.fulfillment().viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as LoadingViewController
+    let controller = UIStoryboard.fulfillment().viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as! LoadingViewController
     controller.bidDetails = {
         let bidDetails = BidDetails.stubbedBidDetails()
         bidDetails.setImage = { (_, imageView) -> () in

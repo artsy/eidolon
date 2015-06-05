@@ -3,7 +3,7 @@ import Nimble
 import Kiosk
 
 func logPath() -> NSURL {
-    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as NSURL
+    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as! NSURL
     return docs.URLByAppendingPathComponent("logger.txt")
 }
 

@@ -14,7 +14,7 @@ class ImageTests: QuickSpec {
             let imageFormats = ["big", "small", "patch"]
             let data:[String: AnyObject] = [ "id": id, "image_url": url, "image_versions": imageFormats, "original_width": size.width, "original_height": size.height]
 
-            let image = Image.fromJSON(data) as Image
+            let image = Image.fromJSON(data) as! Image
 
             expect(image.id) == id
             expect(image.imageFormatString) == url
@@ -45,7 +45,7 @@ class ImageTests: QuickSpec {
                 "image_versions" : ["small"],
                 "original_width": size.width,
                 "original_height": size.height
-            ]) as Image
+            ])as! Image
 
             expect(image.isDefault) == false
         }
@@ -58,6 +58,6 @@ class ImageTests: QuickSpec {
             "image_versions" : [version],
             "original_width": size.width,
             "original_height": size.height
-        ]) as Image
+        ])as! Image
     }
 }

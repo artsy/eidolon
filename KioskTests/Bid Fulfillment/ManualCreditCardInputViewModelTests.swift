@@ -37,12 +37,12 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
 
         it("has valid credit card when credit card is valid") { () -> () in
             testStripeManager.isValidCreditCard = true
-            expect((subject.creditCardNumberIsValidSignal.first() as Bool)) == true
+            expect((subject.creditCardNumberIsValidSignal.first() as! Bool)) == true
         }
 
         it("has invalid credit card when credit card is invalid") { () -> () in
             testStripeManager.isValidCreditCard = false
-            expect((subject.creditCardNumberIsValidSignal.first() as Bool)) == false
+            expect((subject.creditCardNumberIsValidSignal.first() as! Bool)) == false
         }
 
         it("moves to year when month reaches two digits") {
@@ -77,17 +77,17 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
 
                 it("is valid when month is two digits") {
                     subject.expirationMonth = "12"
-                    expect((subject.expiryDatesAreValidSignal.first() as Bool)) == true
+                    expect((subject.expiryDatesAreValidSignal.first() as! Bool)) == true
                 }
 
                 it("is valid when month is one digit") {
                     subject.expirationMonth = "1"
-                    expect((subject.expiryDatesAreValidSignal.first() as Bool)) == true
+                    expect((subject.expiryDatesAreValidSignal.first() as! Bool)) == true
                 }
 
                 it("is invalid when month is no digits") {
                     subject.expirationMonth = ""
-                    expect((subject.expiryDatesAreValidSignal.first() as Bool)) == false
+                    expect((subject.expiryDatesAreValidSignal.first() as! Bool)) == false
                 }
             }
 
@@ -98,27 +98,27 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
 
                 it("is valid when year is two digits") {
                     subject.expirationYear = "22"
-                    expect((subject.expiryDatesAreValidSignal.first() as Bool)) == true
+                    expect((subject.expiryDatesAreValidSignal.first() as! Bool)) == true
                 }
 
                 it("is valid when year is four digits") {
                     subject.expirationYear = "2022"
-                    expect((subject.expiryDatesAreValidSignal.first() as Bool)) == true
+                    expect((subject.expiryDatesAreValidSignal.first() as! Bool)) == true
                 }
 
                 it("is invalid when year is one digit") {
                     subject.expirationYear = "2"
-                    expect((subject.expiryDatesAreValidSignal.first() as Bool)) == false
+                    expect((subject.expiryDatesAreValidSignal.first() as! Bool)) == false
                 }
 
                 it("is invalid when year is no digits") {
                     subject.expirationYear = ""
-                    expect((subject.expiryDatesAreValidSignal.first() as Bool)) == false
+                    expect((subject.expiryDatesAreValidSignal.first() as! Bool)) == false
                 }
 
                 it("is invalid when year is five digits") {
                     subject.expirationYear = "22022"
-                    expect((subject.expiryDatesAreValidSignal.first() as Bool)) == false
+                    expect((subject.expiryDatesAreValidSignal.first() as! Bool)) == false
                 }
             }
         }
@@ -127,13 +127,13 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             it("enables command with a valid credit card") {
                 testStripeManager.isValidCreditCard = true
                 subject.cardFullDigits = ""
-                expect((subject.registerButtonCommand().enabled.first() as Bool)) == true
+                expect((subject.registerButtonCommand().enabled.first() as! Bool)) == true
             }
 
             it("disables command with invalid credit card") {
                 testStripeManager.isValidCreditCard = false
                 subject.cardFullDigits = ""
-                expect((subject.registerButtonCommand().enabled.first() as Bool)) == false
+                expect((subject.registerButtonCommand().enabled.first() as! Bool)) == false
             }
 
             describe("a valid card") {

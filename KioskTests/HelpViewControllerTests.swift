@@ -10,7 +10,7 @@ class HelpViewControllerConfiguration: QuickConfiguration {
             var subject: HelpViewController!
             
             beforeEach {
-                subject = sharedExampleContext()["subject"] as HelpViewController!
+                subject = sharedExampleContext()["subject"] as! HelpViewController!
             }
             
             it("looks correct") {

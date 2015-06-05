@@ -9,7 +9,7 @@ class BidTests: QuickSpec {
             let amount = 100000
             let data:[String: AnyObject] =  ["id":id , "amount_cents" : amount ]
 
-            let bid = Bid.fromJSON(data) as Bid
+            let bid = Bid.fromJSON(data) as! Bid
 
             expect(bid.id) == id
             expect(bid.amountCents) == amount

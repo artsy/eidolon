@@ -17,7 +17,7 @@ class RAC_JSONAbleTests: QuickSpec {
 
             var success = false
             objectSignal.subscribeNext({ (object) -> Void in
-                let bidder = object as Bidder
+                let bidder = object as! Bidder
                 success = (bidder.id == id)
             })
 
@@ -32,7 +32,7 @@ class RAC_JSONAbleTests: QuickSpec {
 
             var success = false
             objectSignal.subscribeNext({ (object) -> Void in
-                let bidder = object as [Bidder]
+                let bidder = object as! [Bidder]
                 success = (bidder.count == 2)
             })
 

@@ -26,7 +26,7 @@ class StripeManagerTests: QuickSpec {
         it("sends the correct token upon success") {
             waitUntil { (done) -> Void in
                 subject.registerCard("", month: 0, year: 0).subscribeNext { (object) -> Void in
-                    let token = object as STPToken
+                    let token = object as! STPToken
 
                     expect(token.tokenId) == "12345"
                     done()

@@ -64,7 +64,7 @@ func testArtwork() -> Artwork {
         "aspect_ratio" : 1.508,
         "tile_base_url" : "http://example.com",
         "tile_size" : 1]
-    ]]) as Artwork
+    ]]) as! Artwork
 }
 
 func testSaleArtwork() -> SaleArtwork {

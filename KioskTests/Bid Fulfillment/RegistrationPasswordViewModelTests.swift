@@ -12,30 +12,30 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
     typealias Check = (() -> ())?
     func stubProvider(#emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) {
-        let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+        let endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
 
             switch target {
             case ArtsyAPI.FindExistingEmailRegistration(let email):
                 emailCheck?()
                 expect(email) == testEmail
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(emailExists ? 200 : 404, NSData()), method: method, parameters: parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(emailExists ? 200 : 404, {NSData()}), method: target.method, parameters: target.parameters)
             case ArtsyAPI.LostPasswordNotification(let email):
                 passwordCheck?()
                 expect(email) == testEmail
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(passwordRequestSucceeds ? 200 : 404, NSData()), method: method, parameters: parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(passwordRequestSucceeds ? 200 : 404, {NSData()}), method: target.method, parameters: target.parameters)
             case ArtsyAPI.XAuth(let email, let password):
                 loginCheck?()
                 expect(email) == testEmail
                 expect(password) == testPassword
                 // Fail auth (wrong password maybe)
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(loginSucceeds ? 200 : 403, NSData()), method: method, parameters: parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(loginSucceeds ? 200 : 403, {NSData()}), method: target.method, parameters: target.parameters)
             case .XApp:
                 // Any XApp requests are incidental; ignore.
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {NSData()}), method: target.method, parameters: target.parameters)
             default:
                 // Fail on all other cases
                 expect(true) == false
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, NSData()), method: method, parameters: parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {NSData()}), method: target.method, parameters: target.parameters)
             }
         }
 
@@ -59,13 +59,13 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             let subject = self.testSubject(passwordSubject: passwordSubject)
 
             passwordSubject.sendNext("nope")
-            expect((subject.command.enabled.first() as Bool)).toEventually( beFalse() )
+            expect((subject.command.enabled.first() as! Bool)).toEventually( beFalse() )
 
             passwordSubject.sendNext("validpassword")
-            expect((subject.command.enabled.first() as Bool)).toEventually( beTrue() )
+            expect((subject.command.enabled.first() as! Bool)).toEventually( beTrue() )
 
             passwordSubject.sendNext("")
-            expect((subject.command.enabled.first() as Bool)).toEventually( beFalse() )
+            expect((subject.command.enabled.first() as! Bool)).toEventually( beFalse() )
         }
 
         it("checks for an email when executing the command") {

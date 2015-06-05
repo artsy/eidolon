@@ -8,7 +8,7 @@ class SaleArtworkTests: QuickSpec {
             var saleArtwork: SaleArtwork!
             beforeEach {
 
-                let artwork = Artwork.fromJSON([:]) as Artwork
+                let artwork = Artwork.fromJSON([:]) as! Artwork
                 saleArtwork = SaleArtwork(id: "id", artwork: artwork)
             }
             
