@@ -58,11 +58,11 @@ pod 'XNGMarkdownParser'
 # swift pods
 pod 'SwiftyJSON'
 pod 'Alamofire'
-pod 'ReactiveCocoa', '3.0.0-alpha.1'
+pod 'ReactiveCocoa', '3.0-beta.6'
 pod 'RACAlertAction'
 pod 'Moya/Reactive'
 pod 'Swift-RAC-Macros'
-pod 'Dollar', '2.1.1'
+pod 'Dollar'
 pod 'Cent'
 
 target "KioskTests" do
