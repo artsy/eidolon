@@ -40,7 +40,7 @@ Getting Started
 ---------------
 
 Now that we have the code [downloaded](#downloading-the-code), we can run the
-app using [Xcode 6.1.1](https://developer.apple.com/xcode/downloads/). Make sure to
+app using [Xcode 6.2](https://developer.apple.com/xcode/downloads/). Make sure to
 open the `Kiosk.xcworkspace` workspace, and not the `Kiosk.xcodeproj` project.
 Currently, the project is compatible with Xcode 6 only, as it's swift.
 
