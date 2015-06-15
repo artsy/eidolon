@@ -33,7 +33,7 @@ end
 
 desc "Build and prepare deployment"
 lane :build_for_deploy do
-  xctool :build, ["-configuration", "release"]
+  xctool :build, ["-configuration", "release"].join(" ")
 end
 
 desc "Release a new beta version on Hockey"
