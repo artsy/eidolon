@@ -11,5 +11,4 @@ dependencies:
     - bundle exec fastlane oss
 test:
   override:
-    - bundle exec fastlane build_for_test
     - bundle exec fastlane test
