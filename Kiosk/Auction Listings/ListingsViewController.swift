@@ -3,6 +3,7 @@ import SystemConfiguration
 import ARAnalytics
 import ReactiveCocoa
 import Swift_RAC_Macros
+import ARCollectionViewMasonryLayout
 
 let HorizontalMargins = 65
 let VerticalMargins = 26
