@@ -34,8 +34,8 @@ public class ListingsViewController: UIViewController {
         imageView.sd_cancelCurrentImageLoad()
     }
 
-    public dynamic var saleArtworks = [SaleArtwork]()
-    public dynamic var sortedSaleArtworks = [SaleArtwork]()
+    public dynamic var saleArtworks = Array<SaleArtwork>()
+    public dynamic var sortedSaleArtworks = Array<SaleArtwork>()
 
     public dynamic var cellIdentifier = MasonryCellIdentifier
 

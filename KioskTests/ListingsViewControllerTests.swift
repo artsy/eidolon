@@ -3,6 +3,7 @@ import Nimble
 import Kiosk
 import ReactiveCocoa
 import Nimble_Snapshots
+import Foundation
 import Moya
 
 class ListingsViewControllerConfiguration: QuickConfiguration {
@@ -11,7 +12,7 @@ class ListingsViewControllerConfiguration: QuickConfiguration {
             var subject: ListingsViewController!
 
             beforeEach{
-                subject = sharedExampleContext()["subject"] as ListingsViewController!
+                subject = sharedExampleContext()["subject"] as! ListingsViewController
             }
 
             it("grid") {
@@ -79,23 +80,23 @@ class ListingsViewControllerTests: QuickSpec {
             let finalBidCount = 5
             
             var bidCount = initialBidCount
-            var count: Int?
+            var saleArtworksCount: Int?
             
             beforeEach {
                 bidCount = initialBidCount
-                count = nil
+                saleArtworksCount = nil
                 
-                let endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+                let endpointsClosure: MoyaProvider<ArtsyAPI>.MoyaEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
                     
                     switch target {
                     case ArtsyAPI.AuctionListings:
-                        if let page = parameters["page"] as? Int {
-                            return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, listingsDataForPage(page, bidCount, count)), method: method, parameters: parameters)
+                        if let page = target.parameters["page"] as? Int {
+                            return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {listingsDataForPage(page, bidCount, saleArtworksCount)}), method: target.method, parameters: target.parameters)
                         } else {
-                            return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+                            return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
                         }
                     default:
-                        return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+                        return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
                     }
                 }
                 
@@ -108,8 +109,8 @@ class ListingsViewControllerTests: QuickSpec {
                 
                 subject.beginAppearanceTransition(true, animated: false)
                 subject.endAppearanceTransition()
-                
-                let numberOfSaleArtworks = countElements(subject.saleArtworks)
+
+                let numberOfSaleArtworks = count(subject.saleArtworks)
                 expect(numberOfSaleArtworks) == 3
             }
             
@@ -119,7 +120,7 @@ class ListingsViewControllerTests: QuickSpec {
                 
                 subject.beginAppearanceTransition(true, animated: false)
                 subject.endAppearanceTransition()
-                
+
                 let firstSale = subject.saleArtworks[0]
                 expect(subject.saleArtworks[0].bidCount) == initialBidCount
                 
@@ -134,11 +135,11 @@ class ListingsViewControllerTests: QuickSpec {
                 subject.beginAppearanceTransition(true, animated: false)
                 subject.endAppearanceTransition()
                 
-                count = 2
-                expect(countElements(subject.saleArtworks)) == 2
+                saleArtworksCount = 2
+                expect(count(subject.saleArtworks)) == 2
                 
-                count = 5
-                expect(countElements(subject.saleArtworks)).toEventually(equal(5), timeout: 3, pollInterval: 0.6)
+                saleArtworksCount = 5
+                expect(count(subject.saleArtworks)).toEventually(equal(5), timeout: 3, pollInterval: 0.6)
             }
         }
     }
