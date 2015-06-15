@@ -57,7 +57,7 @@ extension ArtsyAPI : MoyaPath {
         case Auctions:
             return "/api/v1/sales"
 
-        case AuctionListings(let id):
+        case AuctionListings(let id, _, _):
             return "/api/v1/sale/\(id)/sale_artworks"
 
         case AuctionInfoForArtwork(let auctionID, let artworkID):
