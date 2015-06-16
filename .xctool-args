@@ -2,6 +2,5 @@
   "-workspace", "Kiosk.xcworkspace",
   "-scheme", "Kiosk", 
   "-destination", "platform=iOS Simulator,name=iPad Air,OS=8.1", 
-  "-sdk", "iphonesimulator",
-  "-reporter", "pretty"
+  "-sdk", "iphonesimulator"
 ]
