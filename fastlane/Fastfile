@@ -2,7 +2,7 @@ fastlane_version "1.0.2"
 
 desc "Run all iOS tests on an iPad"
 lane :test do
-  xctool :test
+  xctest destination: "OS=8.1,name=iPad Air"
 end
 
 desc "Set all the API keys required for distribution"
@@ -33,7 +33,7 @@ end
 
 desc "Build and prepare deployment"
 lane :build_for_deploy do
-  xctool :build, ["-configuration", "release"].join(" ")
+  xcodebuild sdk: "iphoneos", configuration: "release"
 end
 
 desc "Release a new beta version on Hockey"
