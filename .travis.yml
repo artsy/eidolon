@@ -1,0 +1,17 @@
+osx_image: beta-xcode6.3
+language: objective-c
+env:
+  global:
+    secure: "OAS4DiQWzSPuhqhh9nd2M02JMaAri5MOzuOaVxkKBXSad0m+T4L63mHs4PGIHzoUJHCwtY7m0IKkWzmlgs8Ukua5z8faDKfJQazzhYASAdyiGghI0ZgvFvMYbbkkmRUIVDc43tfDqE+U5C1/B9V9QOqro2ZKTH31Y1x7QZnH68o="
+before_install:
+  - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
+  - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
+  - chmod 600 ~/.netrc
+  - xcrun instruments -w "iPad Air (8.1 Simulator)" || echo "(Pre)Launched the simulator."
+install: 
+  - bundle install
+  - bundle exec fastlane oss
+  - bundle exec fastlane test
+notifications:
+  slack: 
+    secure: dHJSmLJAwoLRi5inP5btz8fP6pbT/BIF89CTOFmnNO6mLEM7J++PZfvj4cg2ojM3jfjFtQXJE5CuqrOaLeXhN4uteIu91ust1sgkNdkExsQvOVgBAZhcsLZLtMQpytrVs34FXfdirAZv/S750J3d8XWr7yCZThqRkVuIy0CB5vM=
