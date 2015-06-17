@@ -43,7 +43,7 @@ public class PlaceBidViewController: UIViewController {
     public var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
-        return storyboard.viewControllerWithID(.PlaceYourBid) as PlaceBidViewController
+        return storyboard.viewControllerWithID(.PlaceYourBid) as! PlaceBidViewController
     }
 
     override public func viewDidLoad() {
@@ -64,7 +64,7 @@ public class PlaceBidViewController: UIViewController {
         RAC(bidAmountTextField, "text") <~ bidDollarsSignal.map(dollarsToCurrencyString)
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
-            RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { $0 as Float * 100 }.takeUntil(viewWillDisappearSignal())
+            RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { $0 as! Float * 100 }.takeUntil(viewWillDisappearSignal())
 
             if let saleArtwork = nav.bidDetails.saleArtwork {
                 
@@ -77,13 +77,13 @@ public class PlaceBidViewController: UIViewController {
                 RAC(nextBidAmountLabel, "text") <~ minimumNextBidSignal.map(toNextBidString)
 
                 RAC(currentBidAmountLabel, "text") <~ RACSignal.combineLatest([bidCountSignal, highestBidSignal, openingBidSignal]).map {
-                    let tuple = $0 as RACTuple
+                    let tuple = $0 as! RACTuple
                     let bidCount = tuple.first as? Int ?? 0
                     return (bidCount > 0 ? tuple.second : tuple.third) ?? 0
                 }.map(centsToPresentableDollarsString).takeUntil(viewWillDisappearSignal())
 
                 RAC(bidButton, "enabled") <~ RACSignal.combineLatest([bidDollarsSignal, minimumNextBidSignal]).map {
-                    let tuple = $0 as RACTuple
+                    let tuple = $0 as! RACTuple
                     return (tuple.first as? Int ?? 0) * 100 >= (tuple.second as? Int ?? 0)
                 }
 
@@ -172,7 +172,7 @@ public class PlaceBidViewController: UIViewController {
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         if segue == .PlaceAnotherBid {
-            let nextViewController = segue.destinationViewController as LoadingViewController
+            let nextViewController = segue.destinationViewController as! LoadingViewController
             nextViewController.placingBid = true
         }
     }
@@ -204,7 +204,7 @@ private extension PlaceBidViewController {
 private extension PlaceBidViewController {
 
     func dollarsToCurrencyString(input: AnyObject!) -> AnyObject! {
-        let dollars = input as Int
+        let dollars = input as! Int
         if dollars == 0 {
             return ""
         }

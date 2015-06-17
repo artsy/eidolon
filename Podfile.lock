@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (1.1.3)
+  - Alamofire (1.2.2)
   - ARAnalytics/CoreIOS (2.9.1)
   - ARAnalytics/HockeyApp (2.9.1):
     - ARAnalytics/CoreIOS
@@ -17,36 +17,36 @@ PODS:
     - Artsy+UIColors
   - Artsy-UIButtons (1.2.0):
     - Artsy+UIColors
+  - Box (1.2.2)
   - CardFlight (1.9.2):
     - CardFlight/AudioJack (= 1.9.2)
   - CardFlight/AudioJack (1.9.2)
-  - Cent (2.1.1):
-    - Dollar (~> 2.1.1)
-  - Dollar (2.1.1)
+  - Cent (3.0.1):
+    - Dollar (~> 3.0.1)
+  - Dollar (3.0.1)
   - DZNWebViewController (2.0):
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
   - EDColor (0.4.0)
-  - FBSnapshotTestCase (1.5)
+  - FBSnapshotTestCase (1.8.1)
   - FLKAutoLayout (0.1.1)
   - fmemopen (0.0.1)
   - HockeySDK (3.6.2)
   - ISO8601DateFormatter (0.7)
   - Keys (1.0.0)
-  - LlamaKit (0.1.1)
   - Mixpanel (2.7.1):
     - Mixpanel/MPCategoryHelpers (= 2.7.1)
   - Mixpanel/MPCategoryHelpers (2.7.1)
-  - Moya/Core (0.6.1):
-    - Alamofire (~> 1.1.0)
-  - Moya/Reactive (0.6.1):
+  - Moya/Core (1.0.0):
+    - Alamofire (~> 1.2.0)
+  - Moya/Reactive (1.0.0):
     - Moya/Core
-    - ReactiveCocoa (= 3.0.0-alpha.1)
-  - Nimble (0.3.0)
-  - Nimble-Snapshots (0.3):
-    - FBSnapshotTestCase (~> 1.5)
-    - Nimble (~> 0.3)
-    - Quick (~> 0.2)
+    - ReactiveCocoa (= 3.0-beta.6)
+  - Nimble (0.4.2)
+  - Nimble-Snapshots (0.4.0):
+    - FBSnapshotTestCase (~> 1.7)
+    - Nimble (~> 0.4)
+    - Quick (~> 0.3)
   - NJKWebViewProgress (0.2.3):
     - NJKWebViewProgress/Core (= 0.2.3)
     - NJKWebViewProgress/ProgressView (= 0.2.3)
@@ -54,21 +54,27 @@ PODS:
   - NJKWebViewProgress/ProgressView (0.2.3)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
-  - Quick (0.2.2)
+  - Quick (0.3.1)
   - RACAlertAction (0.1.0):
     - ReactiveCocoa
   - Reachability (3.1.1)
-  - ReactiveCocoa (3.0.0-alpha.1):
-    - LlamaKit (= 0.1.1)
-    - ReactiveCocoa/UI (= 3.0.0-alpha.1)
-  - ReactiveCocoa/Core (3.0.0-alpha.1):
-    - LlamaKit (= 0.1.1)
+  - ReactiveCocoa (3.0-beta.6):
+    - Box (~> 1.2.0)
+    - ReactiveCocoa/UI (= 3.0-beta.6)
+    - Result (~> 0.4.1)
+  - ReactiveCocoa/Core (3.0-beta.6):
+    - Box (~> 1.2.0)
     - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (3.0.0-alpha.1):
-    - LlamaKit (= 0.1.1)
-  - ReactiveCocoa/UI (3.0.0-alpha.1):
-    - LlamaKit (= 0.1.1)
+    - Result (~> 0.4.1)
+  - ReactiveCocoa/no-arc (3.0-beta.6):
+    - Box (~> 1.2.0)
+    - Result (~> 0.4.1)
+  - ReactiveCocoa/UI (3.0-beta.6):
+    - Box (~> 1.2.0)
     - ReactiveCocoa/Core
+    - Result (~> 0.4.1)
+  - Result (0.4.3):
+    - Box (~> 1.2)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
@@ -76,9 +82,9 @@ PODS:
     - Stripe/Core (= 3.1.0)
   - Stripe/Core (3.1.0)
   - SVProgressHUD (1.1.2)
-  - Swift-RAC-Macros (0.2.1):
-    - ReactiveCocoa (= 3.0.0-alpha.1)
-  - SwiftyJSON (2.1.3)
+  - Swift-RAC-Macros (0.2.2):
+    - ReactiveCocoa (< 4.0, >= 2.0)
+  - SwiftyJSON (2.2.0)
   - UIImageViewAligned (0.0.1)
   - UIView+BooleanAnimations (1.0.2)
   - XNGMarkdownParser (0.3.0):
@@ -96,7 +102,7 @@ DEPENDENCIES:
   - Artsy-UIButtons
   - CardFlight
   - Cent
-  - Dollar (= 2.1.1)
+  - Dollar
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase
@@ -111,7 +117,7 @@ DEPENDENCIES:
   - Quick
   - RACAlertAction
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - ReactiveCocoa (= 3.0.0-alpha.1)
+  - ReactiveCocoa (= 3.0-beta.6)
   - SDWebImage (~> 3.7)
   - Stripe
   - SVProgressHUD (from `https://github.com/ashfurrow/SVProgressHUD.git`)
@@ -154,7 +160,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
-  Alamofire: 1a9f0d2332a0b5792e0c94b55e9b548d8b833587
+  Alamofire: 11a6022f5089887d92ffb5a3014c97a0a915ab98
   ARAnalytics: e00f739e2bc994ce096a3e494295950e33b057ce
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: a747cff42142ca04d1dc5cee516186f10b6c0949
@@ -162,34 +168,35 @@ SPEC CHECKSUMS:
   Artsy+UIFonts: c51bb3b5cbf9c1a5fe198b4385d49133c5c71f5a
   Artsy+UILabels: a7c713069e3d10144a3dc8e377bef8b2253cd766
   Artsy-UIButtons: 80a957b9479417c3be1e68d5b830de6cd2ec44cc
+  Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
   CardFlight: aac74eae9761ee2c8e3dba1c9a520e7a1aa0f17f
-  Cent: f41777a655a366de6d2fa56b1a2e6c7f31055796
-  Dollar: 13f15d4bd8175069b9996293448fb5a83b3276bd
+  Cent: eb8da65c1b35207038f982cce20d2a18aa46527c
+  Dollar: abd25582c46a218d7af38ff8762abbc4d8466d73
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
   EDColor: 89d19a013279a5604d61650721c15f20fefaaf00
-  FBSnapshotTestCase: 26f32d8fa9eb30e9f09712ecfb097808bc79b898
+  FBSnapshotTestCase: 3dc3899168747a0319c5278f5b3445c13a6532dd
   FLKAutoLayout: 95b12c5cd9652100235140b68652f063f7437851
   fmemopen: dc31f7d3004644b33deee95e047305d23f8cfdd4
   HockeySDK: 51ade1aff04463137e852797d2eb4dfb2511d6a9
   ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
   Keys: 253e4d01f8fe0a795e628b0040257c99f6ab7eab
-  LlamaKit: 25f47a933b6580a6fc159d95adb2e2953c7012e9
   Mixpanel: 2ffc3c261712622a5424f58c52af723d032a3add
-  Moya: 6589de6c52d9d8e5ab0d9630b4cd5c4b7f898019
-  Nimble: 55fef248ef3703024ce431db817160ad24d89ba3
-  Nimble-Snapshots: 727fb13569953b96247053978125c528ea8c492c
+  Moya: 8366901250530a71a8b7fc27c00e03693a7ed10d
+  Nimble: 49b7a7da8919f42823d37c6d68cc6d15a7009f32
+  Nimble-Snapshots: 216ae8c0ea3f4105be1606749fe15d8b2138af40
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
-  Quick: 1bda8b4c8d43f6b4dd69ca001918b1767b3c9c93
+  Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
   RACAlertAction: f641fa41e2b63eaea096f5ad49991f45f96a3388
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
-  ReactiveCocoa: 3b5e351bb3ab233d71f0329f36a7400af30d9783
+  ReactiveCocoa: 859d1dd9dd38d6f2fa4a6917259bb2b512f3c5f7
+  Result: 910839ce03c5c573ec94026678b7cecb69ee862e
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
   SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
-  Swift-RAC-Macros: bd1ce60b127fa2ef03a5e52a4f8b61503b626552
-  SwiftyJSON: a561c2a840121085bec8a2dfeac97a360fc66901
+  Swift-RAC-Macros: f4c98417d9931ff2d689ae1c261a201e65556af2
+  SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e

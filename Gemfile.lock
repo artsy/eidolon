@@ -222,10 +222,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cocoapods (>= 0.37.0.beta.1)
+  cocoapods
   cocoapods-keys
   fastlane
   sbconstants
 
 BUNDLED WITH
-   1.10.2
+   1.10.3

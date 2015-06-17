@@ -17,7 +17,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
     public lazy var provider: ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
-        return storyboard.viewControllerWithID(.ConfirmYourBidPIN) as ConfirmYourBidPINViewController
+        return storyboard.viewControllerWithID(.ConfirmYourBidPIN) as! ConfirmYourBidPINViewController
     }
 
     override public func viewDidLoad() {
@@ -27,7 +27,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
         RAC(pinTextField, "text") <~ pinSignal
         RAC(fulfillmentNav().bidDetails, "bidderPIN") <~ pinSignal
         
-        let pinExistsSignal = pinSignal.map { countElements($0 as String) > 0 }
+        let pinExistsSignal = pinSignal.map { count($0 as! String) > 0 }
 
         bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
 
@@ -41,7 +41,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
 
             let testProvider = self!.providerForPIN(String(self!.pin), number:phone!)
 
-            return testProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doNext { _ in
+            return testProvider.request(endpoint).filterSuccessfulStatusCodes().doNext { _ in
 
                 self?.fulfillmentNav().loggedInProvider = testProvider
                 return
@@ -54,7 +54,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
 
             }.doNext { (cards) in
                 if (self == nil) { return }
-                if countElements(cards as [Card]) > 0 {
+                if count(cards as! [Card]) > 0 {
                     self?.performSegue(.PINConfirmedhasCard)
 
                 } else {
@@ -80,15 +80,15 @@ public class ConfirmYourBidPINViewController: UIViewController {
 
         self.presentViewController(alertController, animated: true) {}
 
-        XAppRequest(endpoint, provider: Provider.sharedProvider, method: .PUT, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().subscribeNext { (_) -> Void in
+        XAppRequest(endpoint, provider: Provider.sharedProvider).filterSuccessfulStatusCodes().subscribeNext { (_) -> Void in
             // Necessary to subscribe to the actual signal. This should be in a RACCommand of the button, instead. 
             logger.log("Sent forgot PIN request")
         }
     }
 
     public func providerForPIN(pin:String, number:String) -> ReactiveMoyaProvider<ArtsyAPI> {
-        let newEndpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
-            var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+        let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
+            var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
 
             let auctionID = self.fulfillmentNav().auctionID
             return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number, "sale_id": auctionID])
@@ -107,7 +107,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
     func checkForCreditCard() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
         let authProvider = self.fulfillmentNav().loggedInProvider!
-        return authProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
+        return authProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
     }
 }
 

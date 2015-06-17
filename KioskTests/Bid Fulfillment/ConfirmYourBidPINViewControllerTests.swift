@@ -65,10 +65,10 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             nav.auctionID = auctionID
 
             let provider: ReactiveMoyaProvider<ArtsyAPI> = subject.providerForPIN(pin, number: number)
-            let endpoint = provider.endpointsClosure(ArtsyAPI.Me, method: Moya.Method.GET, parameters:["":""])
+            let endpoint = provider.endpointsClosure(ArtsyAPI.Me)
             let request = provider.endpointResolver(endpoint: endpoint)
 
-            let address = request.URL.absoluteString!
+            let address = request.URL!.absoluteString!
             expect(address).to( contain(auctionID) )
             expect(address).to( contain(pin) )
             expect(address).to( contain(number) )
@@ -79,5 +79,5 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
 }
 
 func testConfirmYourBidPINViewController() -> ConfirmYourBidPINViewController {
-    return ConfirmYourBidPINViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as ConfirmYourBidPINViewController
+    return ConfirmYourBidPINViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as! ConfirmYourBidPINViewController
 }

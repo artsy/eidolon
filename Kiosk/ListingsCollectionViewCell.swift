@@ -105,7 +105,7 @@ public class ListingsCollectionViewCell: UICollectionViewCell {
         }).switchToLatest().mapNilToEmptyString()
         
         bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self] (_) -> Void in
-            (self?.bidWasPressedSignal as RACSubject).sendNext(nil)
+            (self?.bidWasPressedSignal as! RACSubject).sendNext(nil)
         }
     }
 }

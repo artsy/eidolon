@@ -100,7 +100,7 @@ public class BidCheckingNetworkModel: NSObject {
         let auctionID = bidDetails.saleArtwork!.auctionID!
 
         let endpoint: ArtsyAPI = ArtsyAPI.MyBidPositionsForAuctionArtwork(auctionID: auctionID, artworkID: artworkID)
-        return loggedInProvider.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(BidderPosition.self)
+        return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(BidderPosition.self)
     }
 
     private func getUpdatedSaleArtwork() -> RACSignal {
@@ -109,6 +109,6 @@ public class BidCheckingNetworkModel: NSObject {
         let auctionID = bidDetails.saleArtwork!.auctionID!
 
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionInfoForArtwork(auctionID: auctionID, artworkID: artworkID)
-        return loggedInProvider.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON().mapToObject(SaleArtwork.self)
+        return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(SaleArtwork.self)
     }
 }

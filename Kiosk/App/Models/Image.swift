@@ -1,5 +1,4 @@
 import Foundation
-import LlamaKit
 import SwiftyJSON
 
 public class Image: JSONAble {
@@ -35,7 +34,7 @@ public class Image: JSONAble {
 
         let id = json["id"].stringValue
         let imageFormatString = json["image_url"].stringValue
-        let imageVersions = json["image_versions"].object as [String]
+        let imageVersions = json["image_versions"].object as! [String]
         let imageSize = CGSize(width: json["original_width"].int ?? 1, height: json["original_height"].int ?? 1)
         let aspectRatio = CGFloat( json["aspect_ratio"].floatValue )
 
@@ -75,7 +74,7 @@ public class Image: JSONAble {
 
     public func localImageTileForLevel(level:Int, x:Int, y:Int) -> UIImage? {
         let path = localPathForImageTileAtLevel(level, x:x, y:y)
-        return UIImage(contentsOfFile:path)
+        return UIImage(contentsOfFile:path as String)
     }
 
     private func urlFromPreferenceList(preferenceList: Array<String>) -> NSURL? {
@@ -87,7 +86,7 @@ public class Image: JSONAble {
     }
 
     func localPathForImageTileAtLevel(level:Int, x:Int, y:Int) -> NSString {
-        let directoryURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as NSURL
+        let directoryURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as! NSURL
         return ""
     }
 }

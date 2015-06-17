@@ -8,7 +8,7 @@ public extension UILabel {
     }
 
     public func makeSubstringBold(text: String) {
-        let attributedText = self.attributedText.mutableCopy() as NSMutableAttributedString
+        let attributedText = self.attributedText.mutableCopy() as! NSMutableAttributedString
 
         let range: NSRange! = (self.text ?? NSString()).rangeOfString(text)
         if range.location != NSNotFound {
@@ -25,7 +25,7 @@ public extension UILabel {
     }
 
     public func makeSubstringItalic(text: String) {
-        let attributedText = self.attributedText.mutableCopy() as NSMutableAttributedString
+        let attributedText = self.attributedText.mutableCopy() as! NSMutableAttributedString
 
         let range: NSRange! = (self.text ?? NSString()).rangeOfString(text)
         if range.location != NSNotFound {
@@ -41,7 +41,7 @@ public extension UILabel {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = CGFloat(lineHeight)
         paragraphStyle.alignment = textAlignment
-        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, countElements(displayText)))
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, count(displayText)))
 
         attributedText = attributedString
     }

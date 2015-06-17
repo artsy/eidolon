@@ -203,12 +203,12 @@ public class LoadingViewController: UIViewController {
 
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .PushtoRegisterConfirmed {
-            let detailsVC = segue.destinationViewController as YourBiddingDetailsViewController
+            let detailsVC = segue.destinationViewController as! YourBiddingDetailsViewController
             detailsVC.confirmationImage = bidConfirmationImageView.image
         }
 
         if segue == .PlaceaHigherBidAfterNotBeingHighestBidder {
-            let placeBidVC = segue.destinationViewController as PlaceBidViewController
+            let placeBidVC = segue.destinationViewController as! PlaceBidViewController
             placeBidVC.hasAlreadyPlacedABid = true
         }
     }

@@ -14,8 +14,8 @@ func clearDefaultsKeys(defaults: NSUserDefaults) {
 }
 
 func getDefaultsKeys(defaults: NSUserDefaults) -> (key: String?, expiry: NSDate?) {
-    let key = defaults.objectForKey(DefaultsKeys.TokenKey.rawValue) as String?
-    let expiry = defaults.objectForKey(DefaultsKeys.TokenExpiry.rawValue) as NSDate?
+    let key = defaults.objectForKey(DefaultsKeys.TokenKey.rawValue) as! String?
+    let expiry = defaults.objectForKey(DefaultsKeys.TokenExpiry.rawValue) as! NSDate?
     
     return (key: key, expiry: expiry)
 }
@@ -36,7 +36,7 @@ func setupProviderForSuite(provider: ArtsyProvider<ArtsyAPI>) {
 }
 
 func yearFromDate(date: NSDate) -> Int {
-    let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+    let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     return calendar.components(.CalendarUnitYear, fromDate: date).year
 }
 
@@ -64,7 +64,7 @@ func testArtwork() -> Artwork {
         "aspect_ratio" : 1.508,
         "tile_base_url" : "http://example.com",
         "tile_size" : 1]
-    ]]) as Artwork
+    ]]) as! Artwork
 }
 
 func testSaleArtwork() -> SaleArtwork {

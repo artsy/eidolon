@@ -1,4 +1,4 @@
-osx_image: xcode611
+osx_image: beta-xcode6.3
 language: objective-c
 env:
   global:
@@ -11,12 +11,7 @@ before_install:
 install: 
   - bundle install
   - bundle exec fastlane oss
-before_script:
-  - travis_retry bundle exec fastlane build_for_test
-script:
   - bundle exec fastlane test
 notifications:
   slack: 
     secure: dHJSmLJAwoLRi5inP5btz8fP6pbT/BIF89CTOFmnNO6mLEM7J++PZfvj4cg2ojM3jfjFtQXJE5CuqrOaLeXhN4uteIu91ust1sgkNdkExsQvOVgBAZhcsLZLtMQpytrVs34FXfdirAZv/S750J3d8XWr7yCZThqRkVuIy0CB5vM=
-after_failure:
-- cat /var/folders/gw/_2jq29095y7b__wtby9dg_5h0000gn/T/com.apple.dt.XCTest-status/*.log | curl -F 'sprunge=<-' http://sprunge.us

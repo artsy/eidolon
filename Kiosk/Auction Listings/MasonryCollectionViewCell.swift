@@ -34,8 +34,8 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         
         // Constrain subviews
         artworkImageView.alignTop("0", bottom: nil, toView: contentView)
-        let lotNumberTopConstraint = lotNumberLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkImageView, predicate: "20").first as NSLayoutConstraint
-        let artistNameTopConstraint = artistNameLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: lotNumberLabel, predicate: "10").first as NSLayoutConstraint
+        let lotNumberTopConstraint = lotNumberLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkImageView, predicate: "20").first as! NSLayoutConstraint
+        let artistNameTopConstraint = artistNameLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: lotNumberLabel, predicate: "10").first as! NSLayoutConstraint
         artistNameLabel.constrainHeight("20")
         artworkTitleLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artistNameLabel, predicate: "10")
         artworkTitleLabel.constrainHeight("16")
@@ -48,8 +48,8 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         moreInfoLabel.alignAttribute(.Bottom, toAttribute: .Bottom, ofView: contentView, predicate: "12")
 
         RACObserve(lotNumberLabel, "text").subscribeNext { (text) -> Void in
-            switch text as String? {
-            case .Some(let text) where countElements(text) == 0:
+            switch text as! String? {
+            case .Some(let text) where count(text) == 0:
                 fallthrough
             case .None:
                 lotNumberTopConstraint.constant = 0

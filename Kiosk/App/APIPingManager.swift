@@ -5,7 +5,7 @@ import ReactiveCocoa
 class APIPingManager: NSObject {
 
     let syncInterval: NSTimeInterval = 2
-    let letOnlineSignal: RACSignal!
+    var letOnlineSignal: RACSignal!
 
     override init() {
         super.init()

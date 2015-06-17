@@ -4,7 +4,7 @@ import Kiosk
 import Nimble_Snapshots
 
 func testConfirmYourBidEnterYourEmailViewController() -> ConfirmYourBidEnterYourEmailViewController {
-    return ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as ConfirmYourBidEnterYourEmailViewController
+    return ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as! ConfirmYourBidEnterYourEmailViewController
 }
 
 class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
@@ -17,7 +17,7 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
 
         it("passes the email to the nav's bid details object") {
             let subject = testConfirmYourBidEnterYourEmailViewController()
-            let nav = subject.navigationController as FulfillmentNavigationController
+            let nav = subject.navigationController as! FulfillmentNavigationController
             subject.loadViewProgrammatically()
 
             subject.emailTextField.text = "email"
@@ -37,7 +37,7 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
 
         pending("enables the enter button when an email + password is entered") {
             let subject = testConfirmYourBidEnterYourEmailViewController()
-            let nav = subject.navigationController as FulfillmentNavigationController
+            let nav = subject.navigationController as! FulfillmentNavigationController
             subject.loadViewProgrammatically()
 
             subject.emailTextField.text = "email@address.com"

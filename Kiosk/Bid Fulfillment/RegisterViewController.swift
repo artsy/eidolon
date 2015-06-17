@@ -30,7 +30,7 @@ class RegisterViewController: UIViewController {
         bidderNetworkModel.fulfillmentNav = fulfillmentNav()
         coordinator.storyboard = self.storyboard!
         let registerIndexSignal = RACObserve(coordinator, "currentIndex")
-        let indexIsConfirmSignal = registerIndexSignal.map { return ($0 as Int == RegistrationIndex.ConfirmVC.toInt()) }
+        let indexIsConfirmSignal = registerIndexSignal.map { return ($0 as! Int == RegistrationIndex.ConfirmVC.toInt()) }
         
         RAC(confirmButton, "hidden") <~ indexIsConfirmSignal.not()
         RAC(flowView, "highlightedIndex") <~ registerIndexSignal
@@ -41,7 +41,7 @@ class RegisterViewController: UIViewController {
 
         flowView.jumpToIndexSignal.subscribeNext { [weak self] (index) -> Void in
             if let nav = self?.fulfillmentNav() {
-                let registrationIndex = RegistrationIndex.fromInt(index as Int)
+                let registrationIndex = RegistrationIndex.fromInt(index as! Int)
 
                 let nextVC = self?.coordinator.viewControllerForIndex(registrationIndex)
                 self?.goToViewController(nextVC!)
@@ -71,7 +71,7 @@ class RegisterViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         if segue == .ShowLoadingView {
-            let nextViewController = segue.destinationViewController as LoadingViewController
+            let nextViewController = segue.destinationViewController as! LoadingViewController
             nextViewController.bidderNetworkModel = bidderNetworkModel
             nextViewController.placingBid = placingBid
         }

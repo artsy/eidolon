@@ -4,7 +4,7 @@ class AdminLogViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.text = NSString(contentsOfURL: logPath(), encoding: NSASCIIStringEncoding, error: nil)
+        textView.text = NSString(contentsOfURL: logPath(), encoding: NSASCIIStringEncoding, error: nil) as! String
     }
 
     @IBOutlet weak var textView: UITextView!
@@ -13,7 +13,7 @@ class AdminLogViewController: UIViewController {
     }
 
     func logPath() -> NSURL {
-        let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as NSURL
+        let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as! NSURL
         return docs.URLByAppendingPathComponent("logger.txt")
     }
 

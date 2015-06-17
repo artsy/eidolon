@@ -28,13 +28,13 @@ public class RegistrationEmailViewController: UIViewController, RegistrationSubC
     public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
         // Allow delete
-        if (countElements(string) == 0) { return true }
+        if (count(string) == 0) { return true }
 
         // the API doesn't accept spaces
         return string != " "
     }
 
     public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationEmailViewController {
-        return storyboard.viewControllerWithID(.RegisterEmail) as RegistrationEmailViewController
+        return storyboard.viewControllerWithID(.RegisterEmail) as! RegistrationEmailViewController
     }
 }

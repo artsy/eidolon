@@ -2,7 +2,7 @@ import UIKit
 
 class AppSetup {
 
-    lazy var auctionID = "two-x-two-2014"
+    lazy var auctionID = "los-angeles-modern-auctions-march-2015"
     lazy var useStaging = true
     lazy var showDebugButtons = false
     lazy var disableCardReader = false

@@ -22,7 +22,7 @@ class ListingsCountdownManager: NSObject {
     }
 
     func setFonts() {
-        (countdownContainerView.subviews as [UIView]).map{ (view) -> () in
+        (countdownContainerView.subviews as! [UIView]).map{ (view) -> () in
             if let label = view as? UILabel {
                 label.font = UIFont.serifFontWithSize(15)
             }
@@ -41,7 +41,7 @@ class ListingsCountdownManager: NSObject {
     }
 
     func hideDenomenatorLabels() {
-        for subview in countdownContainerView.subviews as [UIView] {
+        for subview in countdownContainerView.subviews as! [UIView] {
             subview.hidden = subview != countdownLabel
         }
     }

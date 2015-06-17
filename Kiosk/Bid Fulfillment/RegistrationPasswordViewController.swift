@@ -42,7 +42,7 @@ public class RegistrationPasswordViewController: UIViewController, RegistrationS
         }
 
         RAC(subtitleLabel, "text") <~ viewModel.emailExistsSignal.map { (object) -> AnyObject! in
-            let emailExists = object as Bool
+            let emailExists = object as! Bool
 
             if emailExists {
                 return "Enter your Artsy password"
@@ -80,6 +80,6 @@ public class RegistrationPasswordViewController: UIViewController, RegistrationS
     }
 
     public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationPasswordViewController {
-        return storyboard.viewControllerWithID(.RegisterPassword) as RegistrationPasswordViewController
+        return storyboard.viewControllerWithID(.RegisterPassword) as! RegistrationPasswordViewController
     }
 }

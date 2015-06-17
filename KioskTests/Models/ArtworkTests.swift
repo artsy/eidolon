@@ -18,7 +18,7 @@ class ArtworkTests: QuickSpec {
         var artwork: Artwork!
 
         beforeEach {
-            artwork = Artwork.fromJSON(data) as Artwork
+            artwork = Artwork.fromJSON(data) as! Artwork
         }
 
         it("converts from JSON") {
@@ -35,14 +35,14 @@ class ArtworkTests: QuickSpec {
                 "original_width": size.width,
                 "original_height": size.height,
                 "default_image": true
-                ]) as Image
+                ]) as! Image
             let otherImage = Image.fromJSON([
                 "id": "nonDefault",
                 "image_url":"http://image.com/:version.jpg",
                 "image_versions" : ["small"],
                 "original_width": size.width,
                 "original_height": size.height
-            ]) as Image
+            ]) as! Image
 
             artwork.images = [defaultImage, otherImage]
 
@@ -56,14 +56,14 @@ class ArtworkTests: QuickSpec {
                 "image_versions" : ["small"],
                 "original_width": size.width,
                 "original_height": size.height,
-            ]) as Image
+            ]) as! Image
             let otherImage = Image.fromJSON([
                 "id": "nonDefault",
                 "image_url":"http://image.com/:version.jpg",
                 "image_versions" : ["small"],
                 "original_width": size.width,
                 "original_height": size.height
-            ]) as Image
+            ]) as! Image
 
             artwork.images = [image, otherImage]
 

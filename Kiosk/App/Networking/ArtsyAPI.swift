@@ -21,7 +21,7 @@ public enum ArtsyAPI {
     case Artist(id: String)
 
     case Auctions
-    case AuctionListings(id: String)
+    case AuctionListings(id: String, page: Int, pageSize: Int)
     case AuctionInfo(auctionID: String)
     case AuctionInfoForArtwork(auctionID: String, artworkID: String)
     case ActiveAuctions
@@ -39,83 +39,6 @@ public enum ArtsyAPI {
     
     case LostPasswordNotification(email: String)
     case FindExistingEmailRegistration(email: String)
-
-    var defaultParameters: [String: AnyObject] {
-        switch self {
-
-        case XAuth(let email, let password):
-            return [
-                "client_id": APIKeys.sharedKeys.key ?? "",
-                "client_secret": APIKeys.sharedKeys.secret ?? "",
-                "email": email,
-                "password":  password,
-                "grant_type": "credentials"
-            ]
-
-        case XApp:
-            return ["client_id": APIKeys.sharedKeys.key ?? "",
-                    "client_secret": APIKeys.sharedKeys.secret ?? ""]
-
-        case Auctions:
-            return ["is_auction": "true"]
-
-        case RegisterToBid(let auctionID):
-            return ["sale_id": auctionID]
-
-        case MyBiddersForAuction(let auctionID):
-            return ["sale_id": auctionID]
-
-        case PlaceABid(let auctionID, let artworkID, let maxBidCents):
-            return [
-                "sale_id": auctionID,
-                "artwork_id":  artworkID,
-                "max_bid_amount_cents": maxBidCents
-            ]
-
-        case TrustToken(let number, let auctionID):
-            return ["number": number, "auction_pin": auctionID]
-
-        case CreateUser(let email, let password,let phone,let postCode, let name):
-            return [
-                "email": email, "password": password,
-                "phone": phone, "name": name,
-                "location": [ "postal_code": postCode ]
-            ]
-
-        case UpdateMe(let email, let phone,let postCode, let name):
-            return [
-                "email": email, "phone": phone,
-                "name": name, "location": [ "postal_code": postCode ]
-            ]
-
-        case RegisterCard(let token):
-            return ["provider": "stripe", "token": token]
-
-        case FindBidderRegistration(let auctionID, let phone):
-            return ["sale_id": auctionID, "number": phone]
-
-        case BidderDetailsNotification(let auctionID, let identifier):
-            return ["sale_id": auctionID, "identifier": identifier]
-
-        case LostPasswordNotification(let email):
-            return ["email": email]
-
-        case FindExistingEmailRegistration(let email):
-            return ["email": email]
-
-        case AuctionListings:
-            return ["size": 10]
-
-        case ActiveAuctions:
-            return ["is_auction": true, "live": true]
-
-        case MyBidPositionsForAuctionArtwork(let auctionID, let artworkID):
-            return ["sale_id": auctionID, "artwork_id": artworkID]
-
-        default:
-            return [:]
-        }
-    }
 }
 
 extension ArtsyAPI : MoyaPath {
@@ -134,7 +57,7 @@ extension ArtsyAPI : MoyaPath {
         case Auctions:
             return "/api/v1/sales"
 
-        case AuctionListings(let id):
+        case AuctionListings(let id, _, _):
             return "/api/v1/sale/\(id)/sale_artworks"
 
         case AuctionInfoForArtwork(let auctionID, let artworkID):
@@ -208,6 +131,103 @@ extension ArtsyAPI : MoyaTarget {
 
     public var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
     public var baseURL: NSURL { return NSURL(string: base)! }
+
+    public var parameters: [String: AnyObject] {
+        switch self {
+
+        case XAuth(let email, let password):
+            return [
+                "client_id": APIKeys.sharedKeys.key ?? "",
+                "client_secret": APIKeys.sharedKeys.secret ?? "",
+                "email": email,
+                "password":  password,
+                "grant_type": "credentials"
+            ]
+
+        case XApp:
+            return ["client_id": APIKeys.sharedKeys.key ?? "",
+                "client_secret": APIKeys.sharedKeys.secret ?? ""]
+
+        case Auctions:
+            return ["is_auction": "true"]
+
+        case RegisterToBid(let auctionID):
+            return ["sale_id": auctionID]
+
+        case MyBiddersForAuction(let auctionID):
+            return ["sale_id": auctionID]
+
+        case PlaceABid(let auctionID, let artworkID, let maxBidCents):
+            return [
+                "sale_id": auctionID,
+                "artwork_id":  artworkID,
+                "max_bid_amount_cents": maxBidCents
+            ]
+
+        case TrustToken(let number, let auctionID):
+            return ["number": number, "auction_pin": auctionID]
+
+        case CreateUser(let email, let password,let phone,let postCode, let name):
+            return [
+                "email": email, "password": password,
+                "phone": phone, "name": name,
+                "location": [ "postal_code": postCode ]
+            ]
+
+        case UpdateMe(let email, let phone,let postCode, let name):
+            return [
+                "email": email, "phone": phone,
+                "name": name, "location": [ "postal_code": postCode ]
+            ]
+
+        case RegisterCard(let token):
+            return ["provider": "stripe", "token": token]
+
+        case FindBidderRegistration(let auctionID, let phone):
+            return ["sale_id": auctionID, "number": phone]
+
+        case BidderDetailsNotification(let auctionID, let identifier):
+            return ["sale_id": auctionID, "identifier": identifier]
+
+        case LostPasswordNotification(let email):
+            return ["email": email]
+
+        case FindExistingEmailRegistration(let email):
+            return ["email": email]
+
+        case AuctionListings(_, let page, let pageSize):
+            return ["size": pageSize, "page": page]
+
+        case ActiveAuctions:
+            return ["is_auction": true, "live": true]
+
+        case MyBidPositionsForAuctionArtwork(let auctionID, let artworkID):
+            return ["sale_id": auctionID, "artwork_id": artworkID]
+            
+        default:
+            return [:]
+        }
+    }
+
+    public var method: Moya.Method {
+    //TODO:
+        switch self {
+        case .LostPasswordNotification,
+             .CreateUser,
+             .PlaceABid,
+             .RegisterCard,
+             .RegisterToBid,
+             .CreatePINForBidder:
+            return .POST
+        case .FindExistingEmailRegistration:
+            return .HEAD
+        case .UpdateMe,
+             .BidderDetailsNotification:
+            return .PUT
+        default:
+            return .GET
+        }
+    }
 
     public var sampleData: NSData {
         switch self {
@@ -299,28 +319,28 @@ extension ArtsyAPI : MoyaTarget {
 
 public func endpointResolver () -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest)) {
     return { (endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest) in
-        let request: NSMutableURLRequest = endpoint.urlRequest.mutableCopy() as NSMutableURLRequest
+        let request: NSMutableURLRequest = endpoint.urlRequest.mutableCopy() as! NSMutableURLRequest
         request.HTTPShouldHandleCookies = false
         return request
     }
 }
 
-public class ArtsyProvider<T where T : MoyaTarget>: ReactiveMoyaProvider<T> {
+public class ArtsyProvider<T where T: MoyaTarget>: ReactiveMoyaProvider<T> {
     public typealias OnlineSignalClosure = () -> RACSignal
 
     // Closure that returns a signal which completes once the app is online.
     public let onlineSignal: OnlineSignalClosure
 
-    public init(endpointsClosure: MoyaEndpointsClosure, endpointResolver: MoyaEndpointResolution = MoyaProvider.DefaultEnpointResolution(), stubResponses: Bool = false, onlineSignal: OnlineSignalClosure = connectedToInternetSignal) {
+    public init(endpointsClosure: MoyaEndpointsClosure = MoyaProvider.DefaultEndpointMapping(), endpointResolver: MoyaEndpointResolution = MoyaProvider.DefaultEnpointResolution(), stubResponses: Bool = false, stubBehavior: MoyaStubbedBehavior = MoyaProvider.DefaultStubBehavior, networkActivityClosure: Moya.NetworkActivityClosure? = nil, onlineSignal: OnlineSignalClosure = connectedToInternetSignal) {
         self.onlineSignal = onlineSignal
-        super.init(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver, stubResponses: stubResponses)
+        super.init(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver, stubResponses: stubResponses, networkActivityClosure: networkActivityClosure)
     }
 }
 
 public struct Provider {
-    private static var endpointsClosure = { (target: ArtsyAPI, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<ArtsyAPI> in
+    private static var endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
         
-        var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters)
+        var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
         // Sign all non-XApp token requests
 
         switch target {

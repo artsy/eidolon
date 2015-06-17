@@ -11,7 +11,7 @@ class SaleArtworkDetailsViewControllerConfiguration: QuickConfiguration {
             var subject: SaleArtworkDetailsViewController!
 
             beforeEach{
-                subject = sharedExampleContext()["subject"] as SaleArtworkDetailsViewController!
+                subject = sharedExampleContext()["subject"] as! SaleArtworkDetailsViewController!
             }
 
             it ("looks ok by default") {

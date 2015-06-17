@@ -10,11 +10,6 @@ public class TextField: UITextField {
         setup()
     }
 
-    override public init(){
-        super.init()
-        setup()
-    }
-
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
@@ -87,7 +82,7 @@ public class TextField: UITextField {
 
 public class SecureTextField: TextField {
 
-    public var actualText: String = NSString()
+    public var actualText: String = ""
 
     override public var text: String! {
         get {
@@ -133,10 +128,10 @@ public class SecureTextField: TextField {
     func dotPlaceholder() -> String {
         var index = 0;
         let dots = NSMutableString();
-        while (index < countElements(text)) {
+        while (index < count(text)) {
             dots.appendString("•");
             index++;
         }
-        return dots;
+        return dots as String;
     }
 }

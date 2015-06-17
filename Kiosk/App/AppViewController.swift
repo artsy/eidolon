@@ -25,7 +25,7 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
     }
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> AppViewController {
-        return storyboard.viewControllerWithID(.AppViewController) as AppViewController
+        return storyboard.viewControllerWithID(.AppViewController) as! AppViewController
     }
 
     dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0, state: "")

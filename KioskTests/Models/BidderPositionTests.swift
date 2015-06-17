@@ -15,7 +15,7 @@ class BidderPositionTests: QuickSpec {
 
             let data:[String: AnyObject] =  ["id":id , "max_bid_amount_cents" : maxBidAmountCents, "highest_bid":bidData]
 
-            let position = BidderPosition.fromJSON(data) as BidderPosition
+            let position = BidderPosition.fromJSON(data) as! BidderPosition
 
             expect(position.id) == id
             expect(position.maxBidAmountCents) == maxBidAmountCents

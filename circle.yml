@@ -1,0 +1,13 @@
+machine:
+  xcode:
+    version: "6.3.1"
+dependencies:
+  override:
+    - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
+    - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
+    - chmod 600 ~/.netrc
+    - bundle install
+    - bundle exec fastlane oss
+test:
+  override:
+    - bundle exec fastlane test

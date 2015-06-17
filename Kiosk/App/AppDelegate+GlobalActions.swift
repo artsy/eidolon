@@ -5,7 +5,7 @@ import ReactiveCocoa
 import Swift_RAC_Macros
 
 func appDelegate() -> AppDelegate {
-    return UIApplication.sharedApplication().delegate as AppDelegate
+    return UIApplication.sharedApplication().delegate as! AppDelegate
 }
 
 public extension AppDelegate {
@@ -17,7 +17,7 @@ public extension AppDelegate {
     }
 
     internal var appViewController: AppViewController! {
-        let nav = self.window.rootViewController?.findChildViewControllerOfType(UINavigationController) as? UINavigationController
+        let nav = self.window?.rootViewController?.findChildViewControllerOfType(UINavigationController) as? UINavigationController
         return nav?.delegate as? AppViewController
     }
 
@@ -27,12 +27,12 @@ public extension AppDelegate {
         helpButton = MenuButton()
         helpButton.setTitle("Help", forState: .Normal)
         helpButton.rac_command = helpButtonCommand()
-        window.addSubview(helpButton)
+        window?.addSubview(helpButton)
         helpButton.alignTop(nil, leading: nil, bottom: "-24", trailing: "-24", toView: window)
-        window.layoutIfNeeded()
+        window?.layoutIfNeeded()
 
         RACObserve(self, "helpViewController").notNil().subscribeNext {
-            let isVisible = $0 as Bool
+            let isVisible = $0 as! Bool
 
             var image: UIImage? = isVisible ?  UIImage(named: "xbtn_white")?.imageWithRenderingMode(.AlwaysOriginal) : nil
             var text: String? = isVisible ? nil : "HELP"
@@ -138,11 +138,11 @@ private extension AppDelegate {
             ARAnalytics.event("Register To Bid Tapped")
 
             let storyboard = UIStoryboard.fulfillment()
-            let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
+            let containerController = storyboard.instantiateInitialViewController() as! FulfillmentContainerViewController
             containerController.allowAnimations = self.appViewController.allowAnimations
 
             if let internalNav: FulfillmentNavigationController = containerController.internalNavigationController() {
-                let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as RegisterViewController
+                let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as! RegisterViewController
                 registerVC.placingBid = false
                 internalNav.auctionID = self.appViewController.auctionID
                 internalNav.viewControllers = [registerVC]
@@ -164,7 +164,7 @@ private extension AppDelegate {
             helpViewController.modalPresentationStyle = .Custom
             helpViewController.transitioningDelegate = self
 
-            self.window.rootViewController?.presentViewController(helpViewController, animated: true, completion: {
+            self.window?.rootViewController?.presentViewController(helpViewController, animated: true, completion: {
                 self.helpViewController = helpViewController
                 sendDispatchCompleted(subscriber)
             })
@@ -195,7 +195,7 @@ private extension AppDelegate {
                 nav.modalPresentationStyle = .FormSheet
 
                 ARAnalytics.event("Show Web View", withProperties: ["url" : address])
-                self.window.rootViewController?.presentViewController(nav, animated: true) {
+                self.window?.rootViewController?.presentViewController(nav, animated: true) {
                     sendDispatchCompleted(subscriber)
                 }
 
@@ -208,7 +208,7 @@ private extension AppDelegate {
 
     func hideHelpSignal() -> RACSignal {
         return RACSignal.createSignal { (subscriber) -> RACDisposable! in
-            if let presentingViewController = self.helpViewController?.presentingViewController? {
+            if let presentingViewController = self.helpViewController?.presentingViewController {
                 presentingViewController.dismissViewControllerAnimated(true) {
                     sendDispatchCompleted(subscriber)
                 }

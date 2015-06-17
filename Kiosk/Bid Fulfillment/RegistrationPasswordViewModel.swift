@@ -14,18 +14,18 @@ public class RegistrationPasswordViewModel {
     
     public init(passwordSignal: RACSignal, manualInvocationSignal: RACSignal, finishedSubject: RACSubject, email: String) {
         let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: email)
-        let emailExistsSignal = Provider.sharedProvider.request(endpoint, method: .GET, parameters:endpoint.defaultParameters).map(responseIsOK).replayLast()
+        let emailExistsSignal = Provider.sharedProvider.request(endpoint).map(responseIsOK).replayLast()
 
         let passwordHolder = PasswordHolder()
         RAC(passwordHolder, "password") <~ passwordSignal
 
         command = RACCommand(enabled: passwordSignal.map(isStringLengthAtLeast(6))) { _ -> RACSignal! in
             return emailExistsSignal.map { (object) -> AnyObject! in
-                let emailExists = object as Bool
+                let emailExists = object as! Bool
 
                 if emailExists {
                     let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: email, password: passwordHolder.password)
-                    return Provider.sharedProvider.request(endpoint, method:.GET, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
+                    return Provider.sharedProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
                 } else {
                     return RACSignal.empty()
                 }
@@ -45,7 +45,7 @@ public class RegistrationPasswordViewModel {
 
     public func userForgotPasswordSignal() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
-        return XAppRequest(endpoint, method: .POST, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().doNext { (json) -> Void in
+        return XAppRequest(endpoint).filterSuccessfulStatusCodes().doNext { (json) -> Void in
             logger.log("Sent forgot password request")
         }
     }

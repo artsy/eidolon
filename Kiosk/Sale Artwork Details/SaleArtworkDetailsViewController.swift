@@ -16,12 +16,11 @@ public class SaleArtworkDetailsViewController: UIViewController {
     }
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> SaleArtworkDetailsViewController {
-        return storyboard.viewControllerWithID(.SaleArtworkDetail) as SaleArtworkDetailsViewController
+        return storyboard.viewControllerWithID(.SaleArtworkDetail) as! SaleArtworkDetailsViewController
     }
 
     lazy var artistInfoSignal: RACSignal = {
-        let endpoint: ArtsyAPI = ArtsyAPI.Artwork(id: self.saleArtwork.artwork.id)
-        let signal = XAppRequest(endpoint, parameters: endpoint.defaultParameters).filterSuccessfulStatusCodes().mapJSON()
+        let signal = XAppRequest(.Artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
         return signal.replayLast()
     }()
     
@@ -39,7 +38,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
 
     public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .ZoomIntoArtwork {
-            let nextViewController = segue.destinationViewController as SaleArtworkZoomViewController
+            let nextViewController = segue.destinationViewController as! SaleArtworkZoomViewController
             nextViewController.saleArtwork = saleArtwork
         }
     }
@@ -118,24 +117,24 @@ public class SaleArtworkDetailsViewController: UIViewController {
         metadataStackView.addSubview(artworkNameLabel, withTopMargin: "10", sideMargin: "0")
 
         if let medium = saleArtwork.artwork.medium {
-            if countElements(medium) > 0 {
+            if count(medium) > 0 {
                 let mediumLabel = label(.Serif, .ArtworkMediumLabel)
                 mediumLabel.text = medium
                 metadataStackView.addSubview(mediumLabel, withTopMargin: "22", sideMargin: "0")
             }
         }
 
-        if countElements(saleArtwork.artwork.dimensions) > 0 {
+        if count(saleArtwork.artwork.dimensions) > 0 {
             let dimensionsLabel = label(.Serif, .ArtworkDimensionsLabel)
             dimensionsLabel.text = (saleArtwork.artwork.dimensions as NSArray).componentsJoinedByString("\n")
             metadataStackView.addSubview(dimensionsLabel, withTopMargin: "5", sideMargin: "0")
         }
 
         retrieveImageRights().filter { (imageRights) -> Bool in
-            return (countElements(imageRights as? String ?? "") > 0)
+            return (count(imageRights as? String ?? "") > 0)
 
         }.subscribeNext { [weak self] (imageRights) -> Void in
-            if countElements(imageRights as String) > 0 {
+            if count(imageRights as! String) > 0 {
                 let rightsLabel = label(.Serif, .ImageRightsLabel)
                 rightsLabel.text = imageRights as? String
                 self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
@@ -219,7 +218,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
     }
 
     private func setupImageView(imageView: UIImageView) {
-        if let image = saleArtwork.artwork.defaultImage? {
+        if let image = saleArtwork.artwork.defaultImage {
             imageView.sd_setImageWithURL(image.fullsizeURL(), completed: { image, error, type, url -> () in
                 imageView.backgroundColor = UIColor.clearColor()
                 return
@@ -290,15 +289,15 @@ public class SaleArtworkDetailsViewController: UIViewController {
         additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "40")
 
         retrieveAdditionalInfo().filter { (info) -> Bool in
-            return (countElements(info as? String ?? "") > 0)
+            return (count(info as? String ?? "") > 0)
 
             }.subscribeNext { [weak self] (info) -> Void in
-                additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( info as String )
+                additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( info as! String )
         }
 
         if let artist = artist() {
             retrieveArtistBlurb().filter { (blurb) -> Bool in
-                return (countElements(blurb as? String ?? "") > 0)
+                return (count(blurb as? String ?? "") > 0)
 
                 }.subscribeNext { [weak self] (blurb) -> Void in
                     if self == nil {

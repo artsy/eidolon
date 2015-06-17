@@ -6,7 +6,7 @@ extension UIViewController {
         ARAnalytics.event("Bid Button Tapped")
         
         let storyboard = UIStoryboard.fulfillment()
-        let containerController = storyboard.instantiateInitialViewController() as FulfillmentContainerViewController
+        let containerController = storyboard.instantiateInitialViewController() as! FulfillmentContainerViewController
         containerController.allowAnimations = allowAnimations
 
         if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {

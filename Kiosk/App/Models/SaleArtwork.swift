@@ -30,9 +30,6 @@ public class SaleArtwork: JSONAble {
 
     public var auctionID: String?
 
-    // The bidder is given from JSON if user is registered
-    public let bidder: Bidder?
-
     public var saleHighestBid: Bid?
     public dynamic var bidCount:  NSNumber?
 
@@ -57,8 +54,8 @@ public class SaleArtwork: JSONAble {
     override public class func fromJSON(json: [String: AnyObject]) -> JSONAble {
         let json = JSON(json)
         let id = json["id"].stringValue
-        let artworkDict = json["artwork"].object as [String: AnyObject]
-        let artwork = Artwork.fromJSON(artworkDict) as Artwork
+        let artworkDict = json["artwork"].object as! [String: AnyObject]
+        let artwork = Artwork.fromJSON(artworkDict) as! Artwork
 
         let saleArtwork = SaleArtwork(id: id, artwork: artwork) as SaleArtwork
 
@@ -114,7 +111,7 @@ public class SaleArtwork: JSONAble {
         return RACObserve(self, "bidCount").map { (optionalBidCount) -> AnyObject! in
             // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
             // So we need to unwrap it as an optional optional. Yo dawg.
-            let bidCount = optionalBidCount as Int?
+            let bidCount = optionalBidCount as! Int?
 
             if let bidCount = bidCount {
                 let suffix = bidCount == 1 ? "" : "s"
@@ -128,8 +125,8 @@ public class SaleArtwork: JSONAble {
     // The language used here is very specific – see https://github.com/artsy/eidolon/pull/325#issuecomment-64121996 for details
     public var numberOfBidsWithReserveSignal: RACSignal {
         return RACSignal.combineLatest([numberOfBidsSignal, RACObserve(self, "reserveStatus")]).map { (object) -> AnyObject! in
-            let tuple = object as RACTuple
-            let numberOfBidsString = tuple.first as String
+            let tuple = object as! RACTuple
+            let numberOfBidsString = tuple.first as! String
             let reserveStatus = ReserveStatus.initOrDefault(tuple.second as? String)
 
             // if there is no reserve, just return the number of bids string.
@@ -168,11 +165,11 @@ public class SaleArtwork: JSONAble {
         })
     }
 
-    override public class func keyPathsForValuesAffectingValueForKey(key: String) -> NSSet {
+    override public class func keyPathsForValuesAffectingValueForKey(key: String) -> Set<NSObject> {
         if key == "estimateString" {
-            return NSSet(array: ["lowEstimateCents", "highEstimateCents"])
+            return ["lowEstimateCents", "highEstimateCents"] as Set
         } else if key == "lotNumberSignal" {
-            return NSSet(object: "lotNumber")
+            return ["lotNumber"] as Set
         } else {
             return super.keyPathsForValuesAffectingValueForKey(key)
         }

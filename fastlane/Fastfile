@@ -1,10 +1,5 @@
 fastlane_version "1.0.2"
 
-desc "Build and prepare the app for testing"
-lane :build_for_test do
-  xcodebuild scheme: 'Kiosk', destination: "OS=8.1,name=iPad Air"
-end
-
 desc "Run all iOS tests on an iPad"
 lane :test do
   xctest destination: "OS=8.1,name=iPad Air"
