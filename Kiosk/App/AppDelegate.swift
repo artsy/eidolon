@@ -36,7 +36,7 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenKey.rawValue)
         defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenExpiry.rawValue)
 
-        let auctionStoryboard = UIStoryboard(name: "Auction", bundle: nil)
+        let auctionStoryboard = UIStoryboard.auction()
         window?.rootViewController = auctionStoryboard.instantiateInitialViewController() as? UIViewController
         window?.makeKeyAndVisible()
 

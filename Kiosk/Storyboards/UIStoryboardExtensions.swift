@@ -3,11 +3,11 @@ import UIKit
 public extension UIStoryboard {
     
     public class func auction() -> UIStoryboard {
-        return UIStoryboard(name: "Auction", bundle: nil)
+        return UIStoryboard(name: StoryboardNames.Auction.rawValue, bundle: nil)
     }
 
     public class func fulfillment() -> UIStoryboard {
-        return UIStoryboard(name: "Fulfillment", bundle: nil)
+        return UIStoryboard(name: StoryboardNames.Fulfillment.rawValue, bundle: nil)
     }
 
     public func viewControllerWithID(identifier:ViewControllerStoryboardIdentifier) -> UIViewController {
