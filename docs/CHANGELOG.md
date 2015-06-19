@@ -1,3 +1,6 @@
+## 3.5.2 June 19 2015
+* Attempts to fix problem tokenizing credit cards.
+
 ## 3.5.1 May 8 2015
 * Fixes problem installing app.
 
