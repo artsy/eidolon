@@ -59,7 +59,7 @@ lane :deploy do
   first_line = latest_version.split("\n").first
   version_number = first_line.split(" ")[1]
 
-  increment_version_number release_task: version_number
+  increment_version_number version_number: version_number
 
   # Generate release notes from CHANGELOG
   release_notes = latest_version.split("\n")[1..-1].join("\n")
