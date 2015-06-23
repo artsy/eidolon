@@ -124,8 +124,9 @@ public class SaleArtwork: JSONAble {
 
     // The language used here is very specific – see https://github.com/artsy/eidolon/pull/325#issuecomment-64121996 for details
     public var numberOfBidsWithReserveSignal: RACSignal {
-        return RACSignal.combineLatest([numberOfBidsSignal, RACObserve(self, "reserveStatus")]).map { (object) -> AnyObject! in
-            let tuple = object as! RACTuple
+        return RACSignal.combineLatest([numberOfBidsSignal, RACObserve(self, "reserveStatus"), RACObserve(self, "highestBidCents")]).map { (object) -> AnyObject! in
+            let tuple = object as! RACTuple // Ignoring highestBidCents; only there to trigger on bid update.
+
             let numberOfBidsString = tuple.first as! String
             let reserveStatus = ReserveStatus.initOrDefault(tuple.second as? String)
 
