@@ -359,8 +359,8 @@ public class SaleArtworkDetailsViewController: UIViewController {
             if let blurb = artist.blurb {
                 return RACSignal.`return`(blurb)
             } else {
-                let endpoint: ArtsyAPI = ArtsyAPI.Artist(id: artist.id)
-                return artistInfoSignal.map{ (json) -> AnyObject! in
+                let artistSignal = XAppRequest(.Artist(id: artist.id)).filterSuccessfulStatusCodes().mapJSON()
+                return artistSignal.map{ (json) -> AnyObject! in
                     return json["blurb"]
                     }.filter({ (blurb) -> Bool in
                         blurb != nil
