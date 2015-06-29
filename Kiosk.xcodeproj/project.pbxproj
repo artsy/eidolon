@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3FCE6D8A07CA1FA29F4A37DC /* Pods_KioskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5E0A4E3E1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A4E3D1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift */; };
 		5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E64E1A65630200F8CBDD /* Logger.swift */; };
 		5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */; };
 		5E339E3A1A991899000C773D /* RACExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E339E391A991899000C773D /* RACExtensions.swift */; };
@@ -229,6 +230,7 @@
 
 /* Begin PBXFileReference section */
 		3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KioskTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E0A4E3D1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+LongPressDisplayMessage.swift"; path = "Kiosk/UIView+LongPressDisplayMessage.swift"; sourceTree = SOURCE_ROOT; };
 		5E19E64E1A65630200F8CBDD /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
 		5E339E391A991899000C773D /* RACExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensions.swift; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 				5E8610201A5C429C00456E41 /* toolbar_close@2x.png */,
 				5E8610211A5C429C00456E41 /* YourBiddingDetailsViewController.swift */,
 				5EBD314C1AE053ED00648484 /* Registration */,
+				5E0A4E3D1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift */,
 			);
 			path = "Bid Fulfillment";
 			sourceTree = "<group>";
@@ -1204,6 +1207,7 @@
 				5E86109A1A5C429C00456E41 /* RegistrationMobileViewController.swift in Sources */,
 				5E8610681A5C429C00456E41 /* APIKeys.swift in Sources */,
 				5EFA709C1A9674BD0082C916 /* BidderDetailsRetrieval.swift in Sources */,
+				5E0A4E3E1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift in Sources */,
 				5E86108C1A5C429C00456E41 /* FulfillmentNavigationController.swift in Sources */,
 				5E8610621A5C429C00456E41 /* JSONAble.swift in Sources */,
 				5E8610721A5C429C00456E41 /* UIStoryboardSegueExtensions.swift in Sources */,
@@ -1386,7 +1390,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5b9273b0-3d08-46f2-82cc-2ddd47c304fb";
+				PROVISIONING_PROFILE = "ebbf82db-5281-4642-9165-2749cae2e369";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";

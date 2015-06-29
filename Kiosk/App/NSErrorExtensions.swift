@@ -1,12 +1,17 @@
 import Foundation
+import Moya
 
 extension NSError {
 
     func artsyServerError() -> NSString {
-        if let errorJSON = self.userInfo?["data"] as? [String: AnyObject] {
+        if let errorJSON = userInfo?["data"] as? [String: AnyObject] {
             let error =  GenericError.fromJSON(errorJSON) as! GenericError
             return "\(error.message) - \(error.detail) + \(error.detail)"
+        } else if let response = userInfo?["data"] as? MoyaResponse {
+            let stringData = NSString(data: response.data, encoding: NSUTF8StringEncoding)
+            return "Status Code: \(response.statusCode), Data Length: \(response.data.length), String Data: \(stringData)"
         }
-        return ""
+
+        return "\(userInfo)"
     }
 }

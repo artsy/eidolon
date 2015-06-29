@@ -51,7 +51,7 @@ public class LoadingViewController: UIViewController {
         if !performNetworking { return }
 
         bidderNetworkModel.createOrGetBidder().doError { (error) -> Void in
-            self.bidderError()
+            self.bidderError(error)
 
         } .then {
             if !self.placingBid {
@@ -86,8 +86,8 @@ public class LoadingViewController: UIViewController {
         let auctionID = self.fulfillmentNav().auctionID!
         placeBidNetworkModel.fulfillmentNav = self.fulfillmentNav()
 
-        return placeBidNetworkModel.bidSignal(bidDetails()).doError { (_) in
-            self.bidPlacementFailed()
+        return placeBidNetworkModel.bidSignal(bidDetails()).doError { (error) in
+            self.bidPlacementFailed(error: error)
         }
     }
 
@@ -179,18 +179,24 @@ public class LoadingViewController: UIViewController {
 
     // MARK: - Error Handling
 
-    func bidderError() {
+    func bidderError(error: NSError?) {
         if placingBid {
             // If you are bidding, we show a bidding error regardless of whether or not you're also registering.
-            bidPlacementFailed()
+            bidPlacementFailed(error: error)
         } else {
             // If you're not placing a bid, you're here because you're just registering.
             presentError("Registration Failed", message: "There was a problem registering for the auction. Please speak to an Artsy representative.")
         }
     }
 
-    func bidPlacementFailed() {
+    func bidPlacementFailed(error: NSError? = nil) {
         presentError("Bid Failed", message: "There was a problem placing your bid. Please speak to an Artsy representative.")
+
+        if let error = error {
+            statusMessage.presentOnLongPress("Error: \(error.localizedDescription). \n \(error.artsyServerError())", title: "Bidding error", closure: { [weak self] (alertController) -> Void in
+                self?.presentViewController(alertController, animated: true, completion: nil)
+            })
+        }
     }
 
     func presentError(title: String, message: String) {

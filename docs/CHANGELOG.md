@@ -1,5 +1,5 @@
 ## Next
-
+* Adds long-tap gesture to bidding error message to provide technical error details.
 * Fixes problem manually entering in credit card info.
 
 ## 3.5.2 June 19 2015
