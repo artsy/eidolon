@@ -21,7 +21,7 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
 
     public lazy var viewModel: ManualCreditCardInputViewModel = {
         var bidDetails = self.navigationController?.fulfillmentNav().bidDetails
-        return ManualCreditCardInputViewModel(bidDetails: bidDetails)
+        return ManualCreditCardInputViewModel(bidDetails: bidDetails, finishedSubject: self.finishedSignal)
     }()
 
     public override func viewDidLoad() {

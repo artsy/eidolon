@@ -17,7 +17,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             bidDetails = testBidDetails()
             testStripeManager = ManualCreditCardInputViewModelTestsStripeManager()
 
-            subject = ManualCreditCardInputViewModel(bidDetails: bidDetails)
+            subject = ManualCreditCardInputViewModel(bidDetails: bidDetails, finishedSubject: RACSubject())
             subject.stripeManager = testStripeManager
         }
 
@@ -156,33 +156,80 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                     subject.expirationYear = "2017"
                 }
 
-                it("registers with stripe") {
-                    var registered = false
-                    testStripeManager.registrationClosure = {
-                        registered = true
+                describe("successful registration") { () -> Void in
+                    it("registers with stripe") {
+                        var registered = false
+                        testStripeManager.registrationClosure = {
+                            registered = true
+                        }
+
+                        subject.registerButtonCommand().execute(nil)
+
+                        expect(registered).toEventually( beTrue() )
                     }
 
-                    subject.registerButtonCommand().execute(nil)
+                    it("sets user state after successful registration") {
+                        testStripeManager.token = STPToken(attributeDictionary: [
+                            "id": "12345",
+                            "card": [
+                                "brand": "American Express",
+                                "name": "Simon Suyez",
+                                "last4": "0001"
+                            ]
+                            ])
 
-                    expect(registered).toEventually( beTrue() )
+                        subject.registerButtonCommand().execute(nil)
+
+                        expect(subject.bidDetails.newUser.creditCardName).toEventually( equal("Simon Suyez") )
+                        expect(subject.bidDetails.newUser.creditCardType).toEventually( equal("American Express") )
+                        expect(subject.bidDetails.newUser.creditCardToken).toEventually( equal("12345") )
+                        expect(subject.bidDetails.newUser.creditCardDigit).toEventually( equal("0001") )
+                    }
+
+
+                    it("sends completed to finishedSubject after reigsterButtonCommand successfully executes") {
+                        var finished = false
+
+                        subject.finishedSubject?.subscribeCompleted { () -> Void in
+                            finished = true
+                        }
+
+                        waitUntil { (done) -> Void in
+                            subject.registerButtonCommand().execute(nil).subscribeCompleted { () -> Void in
+                                done()
+                            }
+
+                            return
+                        }
+
+                        expect(finished) == true
+                    }
                 }
 
-                it("sets userUser state after successful registration") {
-                    testStripeManager.token = STPToken(attributeDictionary: [
-                        "id": "12345",
-                        "card": [
-                            "brand": "American Express",
-                            "name": "Simon Suyez",
-                            "last4": "0001"
-                        ]
-                    ])
+                describe("unsuccessful registration") { () -> Void in
+                    beforeEach { () -> () in
+                        testStripeManager.shouldSucceed = false
+                    }
 
-                    subject.registerButtonCommand().execute(nil)
 
-                    expect(subject.bidDetails.newUser.creditCardName).toEventually( equal("Simon Suyez") )
-                    expect(subject.bidDetails.newUser.creditCardType).toEventually( equal("American Express") )
-                    expect(subject.bidDetails.newUser.creditCardToken).toEventually( equal("12345") )
-                    expect(subject.bidDetails.newUser.creditCardDigit).toEventually( equal("0001") )
+                    it("does not send completed to finishedSubject after reigsterButtonCommand errors") {
+                        var finished = false
+
+                        subject.finishedSubject?.subscribeCompleted { () -> Void in
+                            finished = true
+                        }
+
+                        waitUntil { (done) -> Void in
+                            let command = subject.registerButtonCommand()
+                            command.errors.subscribeNext{ _ -> Void in
+                                done()
+                            }
+
+                            command.execute(nil)
+                        }
+
+                        expect(finished) == false
+                    }
                 }
             }
         }
@@ -206,6 +253,7 @@ class ManualCreditCardInputViewModelTestsStripeManager: StripeManager {
 
     var registrationClosure: (() -> ())?
     var token: STPToken?
+    var shouldSucceed = true
 
     override func stringIsCreditCard(object: AnyObject!) -> AnyObject! {
         return isValidCreditCard
@@ -215,11 +263,15 @@ class ManualCreditCardInputViewModelTestsStripeManager: StripeManager {
         return RACSignal.createSignal { (subscriber) -> RACDisposable! in
             self.registrationClosure?()
 
-            if let token = self.token {
-                subscriber.sendNext(token)
-            }
+            if self.shouldSucceed {
+                if let token = self.token {
+                    subscriber.sendNext(token)
+                }
 
-            subscriber.sendCompleted()
+                subscriber.sendCompleted()
+            } else {
+                subscriber.sendError(nil)
+            }
 
             return nil
         }
