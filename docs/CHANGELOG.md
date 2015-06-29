@@ -1,3 +1,7 @@
+## Next
+
+* Fixes problem manually entering in credit card info.
+
 ## 3.5.2 June 19 2015
 * Attempts to fix problem tokenizing credit cards.
 

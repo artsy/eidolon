@@ -721,8 +721,6 @@
 				5E82BD341AF2C6E700CB02DD /* YourBiddingDetailsViewControllerTests.swift */,
 				5E8610CF1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift */,
 				5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */,
-				5EF71E821AE9B6A80069A266 /* StripeManagerTests.swift */,
-				5EF71E861AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift */,
 			);
 			path = "Bid Fulfillment";
 			sourceTree = "<group>";
@@ -841,6 +839,8 @@
 				5E43C3911AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift */,
 				5E43C3931AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift */,
 				5E38FD2F1AF21ABA00D30C17 /* SwipeCreditCardViewControllerTests.swift */,
+				5EF71E821AE9B6A80069A266 /* StripeManagerTests.swift */,
+				5EF71E861AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift */,
 				5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */,
 			);
 			name = Registration;

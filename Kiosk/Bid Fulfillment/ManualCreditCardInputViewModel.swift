@@ -12,13 +12,15 @@ public class ManualCreditCardInputViewModel: NSObject {
     public dynamic var expirationYear = ""
 
     public private(set) var bidDetails: BidDetails!
+    public private(set) var finishedSubject: RACSubject?
 
     /// Mark: - Public members
 
-    public init(bidDetails: BidDetails!) {
+    public init(bidDetails: BidDetails!, finishedSubject: RACSubject? = nil) {
         super.init()
 
         self.bidDetails = bidDetails
+        self.finishedSubject = finishedSubject
     }
 
     public var creditCardNumberIsValidSignal: RACSignal {
@@ -40,8 +42,11 @@ public class ManualCreditCardInputViewModel: NSObject {
 
     public func registerButtonCommand() -> RACCommand {
         let newUser = bidDetails.newUser
-        return RACCommand(enabled: self.creditCardNumberIsValidSignal) { [weak self] _ in
-            self?.registerCardSignal(newUser) ?? RACSignal.empty()
+        let enabled = RACSignal.combineLatest([creditCardNumberIsValidSignal, expiryDatesAreValidSignal]).and()
+        return RACCommand(enabled: enabled) { [weak self] _ in
+            (self?.registerCardSignal(newUser) ?? RACSignal.empty())?.doCompleted { () -> Void in
+                self?.finishedSubject?.sendCompleted()
+            }
         }
     }
 

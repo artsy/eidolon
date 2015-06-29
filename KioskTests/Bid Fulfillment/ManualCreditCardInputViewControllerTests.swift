@@ -124,7 +124,7 @@ class ManualCreditCardInputTestViewModel: ManualCreditCardInputViewModel {
     var moveToYearSubject = RACSubject()
     var testRegisterButtonCommand: RACCommand
 
-    override init(bidDetails: BidDetails!) {
+    override init(bidDetails: BidDetails!, finishedSubject: RACSubject? = nil) {
         testRegisterButtonCommand = RACCommand(enabled: RACSignal.`return`(false)) { (subscriber) -> RACSignal! in
             return RACSignal.empty()
         }
