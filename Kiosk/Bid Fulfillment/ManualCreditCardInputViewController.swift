@@ -38,7 +38,7 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         dateConfirmButton.rac_command = viewModel.registerButtonCommand()
         RAC(errorLabel, "hidden") <~ dateConfirmButton.rac_command.errors.take(1).mapReplace(false).startWith(true)
 
-        viewModel.moveToYearSignal.subscribeNext { [weak self] _ -> Void in
+        viewModel.moveToYearSignal.take(1).subscribeNext { [weak self] _ -> Void in
             self?.expirationYearTextField.becomeFirstResponder()
             return
         }
