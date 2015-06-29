@@ -124,22 +124,36 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
         }
 
         describe("credit card registration") { () -> () in
-            it("enables command with a valid credit card") {
+            it("enables command with a valid credit card and valid expiry dates") {
                 testStripeManager.isValidCreditCard = true
                 subject.cardFullDigits = ""
+                subject.expirationMonth = "02"
+                subject.expirationYear = "2017"
                 expect((subject.registerButtonCommand().enabled.first() as! Bool)) == true
             }
 
             it("disables command with invalid credit card") {
                 testStripeManager.isValidCreditCard = false
                 subject.cardFullDigits = ""
+                subject.expirationMonth = "02"
+                subject.expirationYear = "2017"
                 expect((subject.registerButtonCommand().enabled.first() as! Bool)) == false
             }
 
-            describe("a valid card") {
+            it("disables command with invalid expiry date") {
+                testStripeManager.isValidCreditCard = false
+                subject.cardFullDigits = ""
+                subject.expirationMonth = "02"
+                subject.expirationYear = "207"
+                expect((subject.registerButtonCommand().enabled.first() as! Bool)) == false
+            }
+
+            describe("a valid card and expiry date") {
                 beforeEach {
                     testStripeManager.isValidCreditCard = true
                     subject.cardFullDigits = ""
+                    subject.expirationMonth = "02"
+                    subject.expirationYear = "2017"
                 }
 
                 it("registers with stripe") {

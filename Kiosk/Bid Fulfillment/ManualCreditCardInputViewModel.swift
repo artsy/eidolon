@@ -40,7 +40,8 @@ public class ManualCreditCardInputViewModel: NSObject {
 
     public func registerButtonCommand() -> RACCommand {
         let newUser = bidDetails.newUser
-        return RACCommand(enabled: self.creditCardNumberIsValidSignal) { [weak self] _ in
+        let enabled = RACSignal.combineLatest([creditCardNumberIsValidSignal, expiryDatesAreValidSignal]).and()
+        return RACCommand(enabled: enabled) { [weak self] _ in
             self?.registerCardSignal(newUser) ?? RACSignal.empty()
         }
     }
