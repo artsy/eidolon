@@ -1,6 +1,7 @@
 ## Next
 * Adds long-tap gesture to bidding error message to provide technical error details.
 * Fixes problem manually entering in credit card info.
+* Disables bid buttons and marks them as "SOLD" for artworks that have been sold.
 
 ## 3.5.2 June 19 2015
 * Attempts to fix problem tokenizing credit cards.

@@ -54,6 +54,14 @@ class SaleArtworkDetailsViewControllerTests: QuickSpec {
 
             itBehavesLike("a sale artwork details view controller") { ["subject": subject] }
         }
+
+        describe("with an artwork not for sale") {
+            beforeEach {
+                subject.saleArtwork.artwork.soldStatus = "sold"
+            }
+
+            itBehavesLike("a sale artwork details view controller") { ["subject": subject] }
+        }
     }
 }
 

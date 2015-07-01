@@ -43,15 +43,9 @@ public class ListingsCollectionViewCell: UICollectionViewCell {
     dynamic var saleArtwork: SaleArtwork?
     dynamic var bidWasPressedSignal: RACSignal = RACSubject()
 
-    var enableBidButtonSignal: RACSignal? {
-        // Creates a write-once property as RAC doesnt not allow having two binded 
-        // observers to the same place
-        didSet(oldSignal) {
-            if (oldSignal == nil) {
-                RAC(self.bidButton, "enabled") <~ enableBidButtonSignal!
-            }
-        }
-    }
+    lazy var artworkForSaleSignal: RACSignal = {
+        return RACObserve(self, "saleArtwork.forSaleSignal").switchToLatest()
+    }()
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -103,7 +97,14 @@ public class ListingsCollectionViewCell: UICollectionViewCell {
         RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
             return (saleArtwork as? SaleArtwork)?.numberOfBidsSignal ?? RACSignal.`return`(nil)
         }).switchToLatest().mapNilToEmptyString()
-        
+
+        RAC(self.bidButton, "enabled") <~ artworkForSaleSignal
+        artworkForSaleSignal.subscribeNext { [weak bidButton] (forSale) -> Void in
+            let forSale = forSale as! Bool
+
+            let title = forSale ? "BID" : "SOLD"
+            bidButton?.setTitle(title, forState: .Normal)
+        }
         bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self] (_) -> Void in
             (self?.bidWasPressedSignal as! RACSubject).sendNext(nil)
         }

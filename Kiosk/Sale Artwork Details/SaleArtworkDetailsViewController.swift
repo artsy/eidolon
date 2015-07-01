@@ -181,7 +181,13 @@ public class SaleArtworkDetailsViewController: UIViewController {
                 strongSelf.bid(strongSelf.auctionID, saleArtwork: strongSelf.saleArtwork, allowAnimations: strongSelf.allowAnimations)
             }
         }
-        bidButton.setTitle("Bid", forState: .Normal)
+        saleArtwork.forSaleSignal.subscribeNext { [weak bidButton] (forSale) -> Void in
+            let forSale = forSale as! Bool
+
+            let title = forSale ? "BID" : "SOLD"
+            bidButton?.setTitle(title, forState: .Normal)
+        }
+        RAC(bidButton, "enabled") <~ saleArtwork.forSaleSignal
         bidButton.tag = MetadataStackViewTag.BidButton.rawValue
         metadataStackView.addSubview(bidButton, withTopMargin: "40", sideMargin: "0")
 

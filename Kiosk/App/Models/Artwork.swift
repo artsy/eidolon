@@ -2,6 +2,21 @@ import Foundation
 import SwiftyJSON
 
 public class Artwork: JSONAble {
+
+    public enum SoldStatus {
+        case NotSold
+        case Sold
+
+        static func fromString(string: String) -> SoldStatus {
+            switch string.lowercaseString {
+            case "sold":
+                return .Sold
+            default:
+                return .NotSold
+            }
+        }
+    }
+
     public let id: String
 
     public let dateString: String
@@ -10,6 +25,7 @@ public class Artwork: JSONAble {
     public dynamic let price: String
     public dynamic let date: String
 
+    public dynamic var soldStatus: String
     public dynamic var medium: String?
     public dynamic var dimensions = [String]()
 
@@ -30,13 +46,14 @@ public class Artwork: JSONAble {
         return defaultImages?.first ?? self.images?.first
     }()
 
-    init(id: String, dateString: String, title: String, titleAndDate: NSAttributedString, price: String, date: String) {
+    init(id: String, dateString: String, title: String, titleAndDate: NSAttributedString, price: String, date: String, sold: String) {
         self.id = id
         self.dateString = dateString
         self.title = title
         self.titleAndDate = titleAndDate
         self.price = price
         self.date = date
+        self.soldStatus = sold
     }
 
     override public class func fromJSON(json: [String: AnyObject]) -> JSONAble {
@@ -47,9 +64,10 @@ public class Artwork: JSONAble {
         let dateString = json["date"].stringValue
         let price = json["price"].stringValue
         let date = json["date"].stringValue
+        let sold = json["sold"].stringValue
         let titleAndDate = titleAndDateAttributedString(title, dateString)
         
-        let artwork = Artwork(id: id, dateString: dateString, title: title, titleAndDate:titleAndDate, price: price, date: date)
+        let artwork = Artwork(id: id, dateString: dateString, title: title, titleAndDate:titleAndDate, price: price, date: date, sold: sold)
 
         artwork.additionalInfo = json["additional_information"].string
         artwork.medium = json["medium"].string

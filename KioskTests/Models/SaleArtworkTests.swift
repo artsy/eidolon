@@ -31,6 +31,16 @@ class SaleArtworkTests: QuickSpec {
                 saleArtwork.highEstimateCents = 200_00
                 expect(saleArtwork.estimateString) == "Estimate: $200"
             }
+
+            it("indicates that an artwork is not for sale") {
+                saleArtwork.artwork.soldStatus = "sold"
+                expect((saleArtwork.forSaleSignal.first() as! Bool)).toEventually( beFalse() )
+            }
+
+            it("indicates that an artwork is for sale") {
+                saleArtwork.artwork.soldStatus = "anything else"
+                expect((saleArtwork.forSaleSignal.first() as! Bool)).toEventually( beTrue() )
+            }
         }
 
         describe("reserve status") {

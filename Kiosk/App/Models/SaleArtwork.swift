@@ -156,6 +156,14 @@ public class SaleArtwork: JSONAble {
         }).mapNilToEmptyString()
     }
 
+    public var forSaleSignal: RACSignal {
+        return RACObserve(self, "artwork").map { (artwork) -> AnyObject! in
+            let artwork = artwork as! Artwork
+
+            return Artwork.SoldStatus.fromString(artwork.soldStatus) == .NotSold
+        }
+    }
+
     public func currentBidSignal(prefix: String = "", missingPrefix: String = "") -> RACSignal {
         return RACObserve(self, "highestBidCents").map({ [weak self] (highestBidCents) -> AnyObject! in
             if let currentBidCents = highestBidCents as? Int {
