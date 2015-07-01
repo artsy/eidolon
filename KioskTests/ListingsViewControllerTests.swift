@@ -73,6 +73,16 @@ class ListingsViewControllerTests: QuickSpec {
                 }
                 itBehavesLike("a listings controller") { ["subject": subject] }
             }
+
+            describe("with artworks not for sale") {
+                beforeEach {
+                    subject.beginAppearanceTransition(true, animated: false)
+                    subject.endAppearanceTransition()
+                    subject.saleArtworks.map { $0.artwork.soldStatus = "sold" }
+                }
+
+                itBehavesLike("a listings controller") { ["subject": subject] }
+            }
         }
         
         describe("syncing") {
