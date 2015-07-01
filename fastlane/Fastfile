@@ -2,7 +2,14 @@ fastlane_version "1.0.2"
 
 desc "Run all iOS tests on an iPad"
 lane :test do
-  xctest destination: "OS=8.1,name=iPad Air"
+  xctest_config = { destination: "OS=8.1,name=iPad Air" }
+  circle_directory = ENV['CIRCLE_TEST_REPORTS']
+
+  if circle_directory
+    xctest_config.merge! reports: [{report: 'junit', output: "#{circle_directory}/xcode/results.xml"}]
+  end
+
+  xctest xctest_config
 end
 
 desc "Set all the API keys required for distribution"
