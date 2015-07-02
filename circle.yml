@@ -2,6 +2,8 @@ machine:
   xcode:
     version: "6.3.1"
 dependencies:
+  pre:
+    - cd /Library/Developer/CoreSimulator/Profiles/Runtimes && find . -name dyld_sim -exec sudo chgrp wheel {} \;
   override:
     - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
     - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
