@@ -1,4 +1,4 @@
-osx_image: beta-xcode6.3
+osx_image: xcode6.4
 language: objective-c
 env:
   global:
@@ -8,10 +8,10 @@ before_install:
   - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
   - chmod 600 ~/.netrc
   - xcrun instruments -w "iPad Air (8.1 Simulator)" || echo "(Pre)Launched the simulator."
-install: 
+install:
   - bundle install
   - bundle exec fastlane oss
   - bundle exec fastlane test
 notifications:
-  slack: 
+  slack:
     secure: dHJSmLJAwoLRi5inP5btz8fP6pbT/BIF89CTOFmnNO6mLEM7J++PZfvj4cg2ojM3jfjFtQXJE5CuqrOaLeXhN4uteIu91ust1sgkNdkExsQvOVgBAZhcsLZLtMQpytrVs34FXfdirAZv/S750J3d8XWr7yCZThqRkVuIy0CB5vM=
