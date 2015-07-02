@@ -11,6 +11,16 @@ class SaleArtworkTests: QuickSpec {
             saleArtwork = SaleArtwork(id: "id", artwork: artwork)
         }
 
+        it("updates the soldStatus") {
+            let newArtwork = Artwork.fromJSON([:]) as! Artwork
+            newArtwork.soldStatus = "sold"
+            let newSaleArtwork = SaleArtwork(id: "id", artwork: newArtwork)
+
+            saleArtwork.updateWithValues(newSaleArtwork)
+
+            expect(newSaleArtwork.artwork.soldStatus) == "sold"
+        }
+
         describe("estimates") {
             it("gives no estimtates when no estimates present") {
                 expect(saleArtwork.estimateString) == "No Estimate"

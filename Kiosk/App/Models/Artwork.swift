@@ -98,6 +98,11 @@ public class Artwork: JSONAble {
         return artwork
     }
 
+    public func updateWithValues(newArtwork: Artwork) {
+        // soldStatus is the only value we expect to change at runtime.
+        soldStatus = newArtwork.soldStatus
+    }
+
     func sortableArtistID() -> String {
         return artists?.first?.sortableID ?? "_"
     }

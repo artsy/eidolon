@@ -69,5 +69,14 @@ class ArtworkTests: QuickSpec {
 
             expect(artwork.defaultImage!.id) == "default"
         }
+
+        it("updates the soldStatus") {
+            let newArtwork = Artwork.fromJSON(data) as! Artwork
+            newArtwork.soldStatus = "sold"
+
+            artwork.updateWithValues(newArtwork)
+
+            expect(artwork.soldStatus) == "sold"
+        }
     }
 }
