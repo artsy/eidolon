@@ -88,6 +88,8 @@ public class SaleArtwork: JSONAble {
         bidCount = newSaleArtwork.bidCount
         reserveStatus = newSaleArtwork.reserveStatus
         lotNumber = newSaleArtwork.lotNumber ?? lotNumber
+
+        artwork.updateWithValues(newSaleArtwork.artwork)
     }
     
     public var estimateString: String {
