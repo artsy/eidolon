@@ -51,6 +51,13 @@ The Artsy API is private, making it difficult for open source developers to run
 the app. If you don't have access to the private Artsy fonts pod, then Eidolon
 infers that it should use stubbed data instead of hitting the live API. 
 
+Questions
+---------
+
+If you have questions about any aspect of this project, please feel free to
+[open an issue](https://github.com/artsy/eidolon/issues/new). We'd love to hear
+from you!
+
 Contributing
 ------------
 
