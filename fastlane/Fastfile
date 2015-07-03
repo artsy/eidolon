@@ -2,19 +2,20 @@ fastlane_version "1.0.2"
 
 desc "Run all iOS tests on an iPad"
 lane :test do
-  xctest destination: "OS=8.1,name=iPad Air"
+  # xctest destination: "OS=8.1,name=iPad Air"
+  # platform='iOS Simulator'
 end
 
 desc "Set all the API keys required for distribution"
 lane :oss do
-  keys = ['ArtsyAPIClientSecret', 
-    'ArtsyAPIClientKey', 
-    'HockeyProductionSecret', 
-    'HockeyBetaSecret', 
-    'MixpanelProductionAPIClientKey', 
-    'MixpanelStagingAPIClientKey', 
-    'CardflightAPIClientKey', 
-    'CardflightMerchantAccountToken', 
+  keys = ['ArtsyAPIClientSecret',
+    'ArtsyAPIClientKey',
+    'HockeyProductionSecret',
+    'HockeyBetaSecret',
+    'MixpanelProductionAPIClientKey',
+    'MixpanelStagingAPIClientKey',
+    'CardflightAPIClientKey',
+    'CardflightMerchantAccountToken',
     'StripePublishableKey']
 
     commands = keys.map { |key|
@@ -45,7 +46,7 @@ desc "- Build and sign the app"
 desc "- Upload the ipa file to hockey"
 desc "- Post a message to slack containing the download link"
 desc "- Commit and push the version bump"
-lane :deploy do 
+lane :deploy do
   # Make sure we start off with a clean slate
   ensure_git_status_clean
 

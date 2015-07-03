@@ -1,17 +1,26 @@
-osx_image: beta-xcode6.3
+osx_image: xcode6.4
 language: objective-c
+
+cache:
+  - bundler
+  - cocoapods
+
 env:
   global:
     secure: "OAS4DiQWzSPuhqhh9nd2M02JMaAri5MOzuOaVxkKBXSad0m+T4L63mHs4PGIHzoUJHCwtY7m0IKkWzmlgs8Ukua5z8faDKfJQazzhYASAdyiGghI0ZgvFvMYbbkkmRUIVDc43tfDqE+U5C1/B9V9QOqro2ZKTH31Y1x7QZnH68o="
+
 before_install:
   - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
   - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
   - chmod 600 ~/.netrc
-  - xcrun instruments -w "iPad Air (8.1 Simulator)" || echo "(Pre)Launched the simulator."
-install: 
-  - bundle install
+
+install:
+  - bundle install --jobs=3 --retry=3 --deployment --without distribution --path=${BUNDLE_PATH:-vendor/bundle}
   - bundle exec fastlane oss
-  - bundle exec fastlane test
+
+script:
+  - set -o pipefail && xcodebuild -workspace Kiosk.xcworkspace -scheme Kiosk -configuration Debug test -sdk iphonesimulator -destination platform='iOS Simulator',OS='8.1',name='iPad Air' | bundle exec xcpretty -c --test
+
 notifications:
-  slack: 
+  slack:
     secure: dHJSmLJAwoLRi5inP5btz8fP6pbT/BIF89CTOFmnNO6mLEM7J++PZfvj4cg2ojM3jfjFtQXJE5CuqrOaLeXhN4uteIu91ust1sgkNdkExsQvOVgBAZhcsLZLtMQpytrVs34FXfdirAZv/S750J3d8XWr7yCZThqRkVuIy0CB5vM=
