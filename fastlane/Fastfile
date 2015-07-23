@@ -99,6 +99,7 @@ lane :deploy do
   push_to_git_remote
 end
 
+desc "Updates the storyboard identifier Swift values."
 lane :storyboard_ids do
   sh "cd .. ; bundle exec sbconstants Kiosk/Storyboards/StoryboardIdentifiers.swift --source-dir Kiosk/Storyboards --swift"
 end
