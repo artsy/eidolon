@@ -1,3 +1,5 @@
+require 'yaml'
+
 fastlane_version "1.0.2"
 
 desc "Run all iOS tests on an iPad"
@@ -31,11 +33,6 @@ lane :oss do
     cocoapods
 end
 
-desc "Build and prepare deployment"
-lane :build_for_deploy do
-  xcodebuild sdk: "iphoneos", configuration: "release"
-end
-
 desc "Release a new beta version on Hockey"
 desc "This action does the following:"
 desc ""
@@ -54,19 +51,20 @@ lane :deploy do
   increment_build_number build_number: build_number
 
   # Set version number to the one at the top of the CHANGELOG
-  readme = File.read("../docs/CHANGELOG.md")
-  latest_version = readme.split("\n## ").first
-  first_line = latest_version.split("\n").first
-  version_number = first_line.split(" ")[1]
-
-  increment_version_number version_number: version_number
+  changelog = YAML.load_file('../CHANGELOG.yml')
+  version_number = changelog['upcoming']['version']
 
   # Generate release notes from CHANGELOG
-  release_notes = latest_version.split("\n")[1..-1].join("\n")
+  release_notes = changelog['upcoming']['notes'].map{ |note| note.prepend '- ' }.join("\n")
+
+  # Increment to the changelog version number
+  increment_version_number version_number: version_number
+
+  # It would be cool to reserialize a new changelog out, but it looses some human readability :\
 
   # Build
   ipa(
-    configuration: "Release",
+    configuration: "release",
     destination: "build",
     embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
     identity: "iPhone Distribution: ART SY INC",
@@ -99,6 +97,7 @@ lane :deploy do
   push_to_git_remote
 end
 
+desc "Updates the storyboard identifier Swift values."
 lane :storyboard_ids do
   sh "cd .. ; bundle exec sbconstants Kiosk/Storyboards/StoryboardIdentifiers.swift --source-dir Kiosk/Storyboards --swift"
 end
