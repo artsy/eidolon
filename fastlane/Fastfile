@@ -31,11 +31,6 @@ lane :oss do
     cocoapods
 end
 
-desc "Build and prepare deployment"
-lane :build_for_deploy do
-  xcodebuild sdk: "iphoneos", configuration: "release"
-end
-
 desc "Release a new beta version on Hockey"
 desc "This action does the following:"
 desc ""
