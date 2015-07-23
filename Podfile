@@ -27,7 +27,7 @@ pod 'Artsy+UIColors'
 pod 'Artsy+UILabels'
 pod 'Artsy-UIButtons'
 
-if ENV['USER'] == "orta" || ENV['USER'] == "ash" || ENV['USER'] == "artsy" || ENV['USER'] == "Laura" || ENV['CI'] == "true"
+if ['orta', 'ash', 'artsy', 'Laura', 'CI'].include?(ENV['USER'])
     pod 'Artsy+UIFonts', '~> 1.1.0'
 else
     pod 'Artsy+OSSUIFonts', '~> 1.1.0'
@@ -68,7 +68,7 @@ pod 'Cent'
 target "KioskTests" do
 
   pod 'FBSnapshotTestCase'
-  pod 'Nimble-Snapshots'
+  pod 'Nimble-Snapshots', :path => '../Nimble-Snapshots'
   pod 'Quick'
   pod 'Nimble'
 

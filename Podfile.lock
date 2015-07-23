@@ -112,7 +112,7 @@ DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys/`)
   - Moya/Reactive
   - Nimble
-  - Nimble-Snapshots
+  - Nimble-Snapshots (from `../Nimble-Snapshots`)
   - ORStackView
   - Quick
   - RACAlertAction
@@ -134,6 +134,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/orta/DZNWebViewController.git
   Keys:
     :path: Pods/CocoaPodsKeys/
+  Nimble-Snapshots:
+    :path: "../Nimble-Snapshots"
   Reachability:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
@@ -164,7 +166,7 @@ SPEC CHECKSUMS:
   ARAnalytics: e00f739e2bc994ce096a3e494295950e33b057ce
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: a747cff42142ca04d1dc5cee516186f10b6c0949
-  Artsy+UIColors: d1d5e084a0e542d310c507acb5446bae6a322241
+  Artsy+UIColors: 7a4c987885a8d8da3e22672a3232761f929dd2b6
   Artsy+UIFonts: c51bb3b5cbf9c1a5fe198b4385d49133c5c71f5a
   Artsy+UILabels: a7c713069e3d10144a3dc8e377bef8b2253cd766
   Artsy-UIButtons: 80a957b9479417c3be1e68d5b830de6cd2ec44cc
