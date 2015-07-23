@@ -1,8 +1,9 @@
 upcoming: 
-- Adds long-tap gesture to bidding error message to provide technical error details.
-- Fixes problem manually entering in credit card info.
-- Disables bid buttons and marks them as "SOLD" for artworks that have been sold.
-
+  version: 3.6.0
+  notes:
+  - Adds long-tap gesture to bidding error message to provide technical error details.
+  - Fixes problem manually entering in credit card info.
+  - Disables bid buttons and marks them as "SOLD" for artworks that have been sold.
 releases:
 - version: 3.5.2
   date: June 19 2015
