@@ -166,6 +166,15 @@ public class LoadingViewController: UIViewController {
         statusMessage.hidden = false
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
+
+        let recognizer = UITapGestureRecognizer()
+        recognizer.rac_gestureSignal().subscribeNext { [weak self] _ -> Void in
+            self?.fulfillmentContainer()?.cancelButton.sendActionsForControlEvents(.TouchUpInside)
+        }
+
+        bidConfirmationImageView.userInteractionEnabled = true
+        bidConfirmationImageView.addGestureRecognizer(recognizer)
+
         fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
     }
 
