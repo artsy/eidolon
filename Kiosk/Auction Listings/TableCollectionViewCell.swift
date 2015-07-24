@@ -52,6 +52,11 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         bidButton.alignBottom(nil, trailing: "0", toView: contentView)
         bidButton.alignCenterYWithView(artworkImageView, predicate: "0")
         bidButton.constrainWidth("127")
+
+        // Replaces the signal defined in the superclass, normally used to emit taps to a "More Info" label, which we don't have.
+        let recognizer = UITapGestureRecognizer()
+        contentView.addGestureRecognizer(recognizer)
+        self.moreInfoSignal = recognizer.rac_gestureSignal()
     }
 
     override func layoutSubviews() {
