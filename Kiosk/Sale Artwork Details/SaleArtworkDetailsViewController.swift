@@ -5,6 +5,7 @@ import Artsy_UIFonts
 import ReactiveCocoa
 import Artsy_UIButtons
 import Swift_RAC_Macros
+import SDWebImage
 
 public class SaleArtworkDetailsViewController: UIViewController {
     public var allowAnimations = true
@@ -225,9 +226,19 @@ public class SaleArtworkDetailsViewController: UIViewController {
 
     private func setupImageView(imageView: UIImageView) {
         if let image = saleArtwork.artwork.defaultImage {
-            imageView.sd_setImageWithURL(image.fullsizeURL(), completed: { image, error, type, url -> () in
-                imageView.backgroundColor = UIColor.clearColor()
-                return
+
+            // We'll try to retrieve the thumbnail image from the cache. If we don't have it, we'll set the background colour to grey to indicate that we're downloading it.
+            let key = SDWebImageManager.sharedManager().cacheKeyForURL(image.thumbnailURL())
+            let thumbnailImage = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(key)
+            if thumbnailImage == nil {
+                imageView.backgroundColor = UIColor.artsyLightGrey()
+            }
+
+            imageView.sd_setImageWithURL(image.fullsizeURL(), placeholderImage: thumbnailImage, completed: { (image, _, _, _) -> Void in
+                // If the image was successfully downloaded, make sure we aren't still displaying grey.
+                if image != nil {
+                    imageView.backgroundColor = UIColor.clearColor()
+                }
             })
 
             let heightConstraintNumber = { () -> CGFloat in
@@ -283,7 +294,6 @@ public class SaleArtworkDetailsViewController: UIViewController {
         additionalDetailScrollView.stackView.bottomMarginHeight = 40
 
         let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.artsyLightGrey()
         additionalDetailScrollView.stackView.addSubview(imageView, withTopMargin: "0", sideMargin: "40")
         setupImageView(imageView)
 
