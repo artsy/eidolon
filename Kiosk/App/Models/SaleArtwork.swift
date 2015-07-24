@@ -40,6 +40,7 @@ public class SaleArtwork: JSONAble {
     public dynamic var minimumNextBidCents: NSNumber?
     
     public dynamic var highestBidCents: NSNumber?
+    public var estimateCents: Int?
     public var lowEstimateCents: Int?
     public var highEstimateCents: Int?
 
@@ -68,6 +69,7 @@ public class SaleArtwork: JSONAble {
         saleArtwork.minimumNextBidCents = json["minimum_next_bid_cents"].int
 
         saleArtwork.highestBidCents = json["highest_bid_amount_cents"].int
+        saleArtwork.estimateCents = json["estimate_cents"].int
         saleArtwork.lowEstimateCents = json["low_estimate_cents"].int
         saleArtwork.highEstimateCents = json["high_estimate_cents"].int
         saleArtwork.bidCount = json["bidder_positions_count"].int
@@ -83,6 +85,7 @@ public class SaleArtwork: JSONAble {
         openingBidCents = newSaleArtwork.openingBidCents
         minimumNextBidCents = newSaleArtwork.minimumNextBidCents
         highestBidCents = newSaleArtwork.highestBidCents
+        estimateCents = newSaleArtwork.estimateCents
         lowEstimateCents = newSaleArtwork.lowEstimateCents
         highEstimateCents = newSaleArtwork.highEstimateCents
         bidCount = newSaleArtwork.bidCount
@@ -93,17 +96,18 @@ public class SaleArtwork: JSONAble {
     }
     
     public var estimateString: String {
+        // Default to estimateCents
+        if let estimateCents = estimateCents {
+            let dollars = NSNumberFormatter.currencyStringForCents(estimateCents)
+            return "Estimate: \(dollars)"
+        }
+
+        // Try to extract non-nil low/high estimates. Return a default otherwise.
         switch (lowEstimateCents, highEstimateCents) {
         case let (.Some(lowCents), .Some(highCents)):
             let lowDollars = NSNumberFormatter.currencyStringForCents(lowCents)
             let highDollars = NSNumberFormatter.currencyStringForCents(highCents)
             return "Estimate: \(lowDollars)–\(highDollars)"
-        case let (.Some(lowCents), nil):
-            let lowDollars = NSNumberFormatter.currencyStringForCents(lowCents)
-            return "Estimate: \(lowDollars)"
-        case let (nil, .Some(highCents)):
-            let highDollars = NSNumberFormatter.currencyStringForCents(highCents)
-            return "Estimate: \(highDollars)"
         default:
             return "No Estimate"
         }

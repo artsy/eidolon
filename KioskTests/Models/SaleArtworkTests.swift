@@ -26,20 +26,32 @@ class SaleArtworkTests: QuickSpec {
                 expect(saleArtwork.estimateString) == "No Estimate"
             }
             
-            it("gives estimtates when low and high are present") {
+            it("gives estimtate range when low and high are present") {
                 saleArtwork.lowEstimateCents = 100_00
                 saleArtwork.highEstimateCents = 200_00
                 expect(saleArtwork.estimateString) == "Estimate: $100–$200"
             }
-            
-            it("gives estimtates when low is present") {
+
+            it("gives estimate if present") {
+                saleArtwork.estimateCents = 200_00
+                expect(saleArtwork.estimateString) == "Estimate: $200"
+            }
+
+            it("give estimate if estimate both and low/high are present") {
+                saleArtwork.highEstimateCents = 300_00
                 saleArtwork.lowEstimateCents = 100_00
-                expect(saleArtwork.estimateString) == "Estimate: $100"
+                saleArtwork.estimateCents = 200_00
+                expect(saleArtwork.estimateString) == "Estimate: $200"
             }
             
-            it("gives estimtates when high is present") {
-                saleArtwork.highEstimateCents = 200_00
-                expect(saleArtwork.estimateString) == "Estimate: $200"
+            it("gives no estimate if only high is present") {
+                saleArtwork.highEstimateCents = 100_00
+                expect(saleArtwork.estimateString) == "No Estimate"
+            }
+
+            it("gives no estimate if only low is present") {
+                saleArtwork.lowEstimateCents = 100_00
+                expect(saleArtwork.estimateString) == "No Estimate"
             }
 
             it("indicates that an artwork is not for sale") {
