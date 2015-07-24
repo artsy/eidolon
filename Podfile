@@ -68,7 +68,7 @@ pod 'Cent'
 target "KioskTests" do
 
   pod 'FBSnapshotTestCase'
-  pod 'Nimble-Snapshots', :path => '../Nimble-Snapshots'
+  pod 'Nimble-Snapshots'
   pod 'Quick'
   pod 'Nimble'
 
