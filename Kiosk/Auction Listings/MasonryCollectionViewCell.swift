@@ -102,7 +102,9 @@ extension MasonryCollectionViewCell {
 
 private func heightForImageWithAspectRatio(aspectRatio: CGFloat?) -> CGFloat {
     if let ratio = aspectRatio {
-        return CGFloat(MasonryCollectionViewCellWidth) / ratio
+        if ratio != 0 {
+            return CGFloat(MasonryCollectionViewCellWidth) / ratio
+        }
     }
     return CGFloat(MasonryCollectionViewCellWidth)
 }

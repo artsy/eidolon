@@ -230,7 +230,14 @@ public class SaleArtworkDetailsViewController: UIViewController {
                 return
             })
 
-            let heightConstraintNumber = min(400, CGFloat(538) / image.aspectRatio)
+            let heightConstraintNumber = { () -> CGFloat in
+                if let aspectRatio = image.aspectRatio {
+                    if aspectRatio != 0 {
+                        return min(400, CGFloat(538) / aspectRatio)
+                    }
+                }
+                return 400
+            }()
             imageView.constrainHeight( "\(heightConstraintNumber)" )
 
             imageView.contentMode = .ScaleAspectFit

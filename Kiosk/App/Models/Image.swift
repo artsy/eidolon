@@ -6,16 +6,16 @@ public class Image: JSONAble {
     public let imageFormatString: String
     public let imageVersions: [String]
     public let imageSize: CGSize
-    public let aspectRatio: CGFloat
+    public let aspectRatio: CGFloat?
 
-    public let baseURL:String
+    public let baseURL: String
     public let tileSize: Int
     public let maxTiledHeight: Int
     public let maxTiledWidth: Int
     public let maxLevel: Int
     public let isDefault: Bool
 
-    public init(id: String, imageFormatString: String, imageVersions: [String], imageSize: CGSize, aspectRatio: CGFloat, baseURL: String, tileSize: Int, maxTiledHeight: Int, maxTiledWidth: Int, maxLevel: Int, isDefault: Bool) {
+    public init(id: String, imageFormatString: String, imageVersions: [String], imageSize: CGSize, aspectRatio: CGFloat?, baseURL: String, tileSize: Int, maxTiledHeight: Int, maxTiledWidth: Int, maxLevel: Int, isDefault: Bool) {
         self.id = id
         self.imageFormatString = imageFormatString
         self.imageVersions = imageVersions
@@ -36,7 +36,12 @@ public class Image: JSONAble {
         let imageFormatString = json["image_url"].stringValue
         let imageVersions = json["image_versions"].object as! [String]
         let imageSize = CGSize(width: json["original_width"].int ?? 1, height: json["original_height"].int ?? 1)
-        let aspectRatio = CGFloat( json["aspect_ratio"].floatValue )
+        let aspectRatio = { () -> CGFloat? in
+            if let aspectRatio = json["aspect_ratio"].float {
+                return CGFloat(aspectRatio)
+            }
+            return nil
+        }()
 
         let baseURL = json["tile_base_url"].stringValue
         let tileSize = json["tile_size"].intValue
@@ -50,7 +55,7 @@ public class Image: JSONAble {
         
         let maxLevel = Int( ceilf( logD / log2) )
 
-        return Image(id: id, imageFormatString: imageFormatString, imageVersions: imageVersions, imageSize: imageSize, aspectRatio:aspectRatio, baseURL: baseURL, tileSize: tileSize, maxTiledHeight: maxTiledHeight, maxTiledWidth: maxTiledWidth, maxLevel: maxLevel, isDefault: isDefault)
+        return Image(id: id, imageFormatString: imageFormatString, imageVersions: imageVersions, imageSize: imageSize, aspectRatio: aspectRatio, baseURL: baseURL, tileSize: tileSize, maxTiledHeight: maxTiledHeight, maxTiledWidth: maxTiledWidth, maxLevel: maxLevel, isDefault: isDefault)
     }
 
     public func thumbnailURL() -> NSURL? {

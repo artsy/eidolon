@@ -5,6 +5,7 @@ upcoming:
   - Fixes problem manually entering in credit card info [ash]
   - Disables bid buttons and marks them as "SOLD" for artworks that have been sold [ash]
   - Adds support for new estimate field [ash]
+  - Fixes crash with images that have unspecified aspect ratios [ash]
 releases:
 - version: 3.5.2
   date: June 19 2015
