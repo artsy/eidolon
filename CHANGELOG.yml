@@ -7,6 +7,7 @@ upcoming:
   - Adds support for new estimate field [ash]
   - Fixes crash with images that have unspecified aspect ratios [ash]
   - Displays artwork thumbnail until full image is downlaoded for detail view [ash]
+  - Tapping anywhere in the table cells shows more details [ash]
 releases:
 - version: 3.5.2
   date: June 19 2015
