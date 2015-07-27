@@ -210,7 +210,6 @@ extension ArtsyAPI : MoyaTarget {
     }
 
     public var method: Moya.Method {
-    //TODO:
         switch self {
         case .LostPasswordNotification,
              .CreateUser,

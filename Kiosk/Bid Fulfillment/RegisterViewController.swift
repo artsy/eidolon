@@ -16,7 +16,6 @@ class RegisterViewController: UIViewController {
     @IBOutlet var confirmButton: UIButton!
 
     let coordinator = RegistrationCoordinator()
-    let bidderNetworkModel = BidderNetworkModel()
 
     dynamic var placingBid = true
 
@@ -27,7 +26,6 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bidderNetworkModel.fulfillmentNav = fulfillmentNav()
         coordinator.storyboard = self.storyboard!
         let registerIndexSignal = RACObserve(coordinator, "currentIndex")
         let indexIsConfirmSignal = registerIndexSignal.map { return ($0 as! Int == RegistrationIndex.ConfirmVC.toInt()) }
@@ -72,7 +70,6 @@ class RegisterViewController: UIViewController {
 
         if segue == .ShowLoadingView {
             let nextViewController = segue.destinationViewController as! LoadingViewController
-            nextViewController.bidderNetworkModel = bidderNetworkModel
             nextViewController.placingBid = placingBid
         }
     }

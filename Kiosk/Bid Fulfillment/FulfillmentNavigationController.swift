@@ -2,15 +2,27 @@ import UIKit
 import Moya
 import ReactiveCocoa
 
-public class FulfillmentNavigationController: UINavigationController {
+// We abstract this out so that we don't have network models, etc, aware of the view controller.
+// This is a "source of truth" that should be referenced in lieu of many independent variables. 
+public protocol FulfillmentController {
+    var bidDetails: BidDetails { get set }
+    var auctionID: String! { get set }
+    var xAccessToken: String? { get set }
+    var loggedInProvider: ReactiveMoyaProvider<ArtsyAPI>? { get }
+    var loggedInOrDefaultProvider: ReactiveMoyaProvider<ArtsyAPI> { get }
+}
+
+public class FulfillmentNavigationController: UINavigationController, FulfillmentController {
+
+    // MARK: - FulfillmentController bits
 
     /// The the collection of details necessary to eventually create a bid
     public var bidDetails = BidDetails(saleArtwork:nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents:nil)
-    public var auctionID:String!
-    public var user:User!
+    public var auctionID: String!
+    public var user: User!
 
     /// Otherwise we're fine with a legit auth token
-    var xAccessToken: String? {
+    public var xAccessToken: String? {
         didSet(oldToken) {
 
             let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
@@ -22,7 +34,17 @@ public class FulfillmentNavigationController: UINavigationController {
         }
     }
 
-    var loggedInProvider: ReactiveMoyaProvider<ArtsyAPI>?
+    public var loggedInProvider: ReactiveMoyaProvider<ArtsyAPI>?
+
+    public var loggedInOrDefaultProvider: ReactiveMoyaProvider<ArtsyAPI> {
+        if let loggedInProvider = loggedInProvider {
+            return loggedInProvider
+        }
+
+        return Provider.sharedProvider
+    }
+
+    // MARK: - Everything else
 
     func reset() {
         loggedInProvider = nil
