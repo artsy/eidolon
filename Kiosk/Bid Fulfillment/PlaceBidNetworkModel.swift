@@ -4,8 +4,14 @@ import Moya
 
 public class PlaceBidNetworkModel: NSObject {
 
-    var fulfillmentNav:FulfillmentNavigationController!
-    var bidderPosition:BidderPosition?
+    public var fulfillmentController: FulfillmentController!
+    public var bidderPosition: BidderPosition?
+
+    public init(fulfillmentController: FulfillmentController) {
+        self.fulfillmentController = fulfillmentController
+
+        super.init()
+    }
 
     public func bidSignal(bidDetails: BidDetails) -> RACSignal {
 
@@ -14,17 +20,11 @@ public class PlaceBidNetworkModel: NSObject {
         return bidOnSaleArtwork(saleArtwork!, bidAmountCents: cents)
     }
 
-    public func provider() -> ReactiveMoyaProvider<ArtsyAPI>  {
-        if let provider = fulfillmentNav.loggedInProvider {
-            return provider
-        }
-        return Provider.sharedProvider
-    }
 
     private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> RACSignal {
         let bidEndpoint: ArtsyAPI = ArtsyAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
 
-        let request = provider().request(bidEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)
+        let request = fulfillmentController.loggedInProvider!.request(bidEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)
 
         return request.doNext { [weak self] (position) -> Void in
             self?.bidderPosition = position as? BidderPosition

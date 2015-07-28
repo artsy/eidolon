@@ -196,6 +196,8 @@
 		5E8FABE81A5C49D800F6B913 /* StubResponses.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FED1A5C429C00456E41 /* StubResponses.m */; };
 		5E9F8AD41A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */; };
 		5EA637211A9E6AC60094A86E /* HelpViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */; };
+		5EA6B1111B668F8300FEB3ED /* LoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */; };
+		5EA6B1131B668F9300FEB3ED /* LoadingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */; };
 		5EB0B71A1A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */; };
 		5EB0B71B1A5C410D00B7CBF2 /* RACSignal+Kiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7161A5C410D00B7CBF2 /* RACSignal+Kiosk.swift */; };
 		5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */; };
@@ -398,6 +400,8 @@
 		5E8611011A5C43EF00456E41 /* XAppTokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppTokenSpec.swift; sourceTree = "<group>"; };
 		5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewControllerTests.swift; sourceTree = "<group>"; };
+		5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewModel.swift; sourceTree = "<group>"; };
+		5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewModelTests.swift; sourceTree = "<group>"; };
 		5EB0B6ED1A5C3E6800B7CBF2 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB0B7021A5C3E6800B7CBF2 /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB0B7071A5C3E6800B7CBF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -593,6 +597,7 @@
 				5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */,
 				5E8610101A5C429C00456E41 /* KeypadViewPreviewIB.png */,
 				5E8610111A5C429C00456E41 /* LoadingViewController.swift */,
+				5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */,
 				5E8610121A5C429C00456E41 /* ManualCreditCardInputViewController.swift */,
 				5EF71E881AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift */,
 				5E8610131A5C429C00456E41 /* Models */,
@@ -721,6 +726,7 @@
 				5E8610CC1A5C43EF00456E41 /* ConfirmYourBidViewControllerTests.swift */,
 				5E8610CD1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift */,
 				5E8610CE1A5C43EF00456E41 /* LoadingViewControllerTests.swift */,
+				5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */,
 				5E82BD341AF2C6E700CB02DD /* YourBiddingDetailsViewControllerTests.swift */,
 				5E8610CF1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift */,
 				5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */,
@@ -1169,6 +1175,7 @@
 				5E86105F1A5C429C00456E41 /* Card.swift in Sources */,
 				5E86105E1A5C429C00456E41 /* BidderPosition.swift in Sources */,
 				5E8610951A5C429C00456E41 /* PlaceBidNetworkModel.swift in Sources */,
+				5EA6B1111B668F8300FEB3ED /* LoadingViewModel.swift in Sources */,
 				5E86105A1A5C429C00456E41 /* Artist.swift in Sources */,
 				5E86107A1A5C429C00456E41 /* CursorView.swift in Sources */,
 				5E86104B1A5C429C00456E41 /* AdminCardTestingViewController.swift in Sources */,
@@ -1256,6 +1263,7 @@
 				5E8611151A5C43EF00456E41 /* BidTests.swift in Sources */,
 				5E86110C1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift in Sources */,
 				5E8611141A5C43EF00456E41 /* BidderTests.swift in Sources */,
+				5EA6B1131B668F9300FEB3ED /* LoadingViewModelTests.swift in Sources */,
 				5E8611121A5C43EF00456E41 /* ArtworkTests.swift in Sources */,
 				5E8611021A5C43EF00456E41 /* RAC+JSONAbleTests.swift in Sources */,
 				5E8611191A5C43EF00456E41 /* SystemTimeTests.swift in Sources */,

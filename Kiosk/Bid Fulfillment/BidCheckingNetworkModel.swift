@@ -9,19 +9,17 @@ public class BidCheckingNetworkModel: NSObject {
     private var pollRequests = 0
 
     // inputs
-    public let bidDetails:BidDetails
-    public let loggedInProvider:ReactiveMoyaProvider<ArtsyAPI>
+    public let fulfillmentController: FulfillmentController
 
     // outputs
-    public var bidIsResolved = false
-    public var isHighestBidder = false
-    public var reserveNotMet = false
+    public dynamic var bidIsResolved = false
+    public dynamic var isHighestBidder = false
+    public dynamic var reserveNotMet = false
 
     private var mostRecentSaleArtwork:SaleArtwork?
 
-    public init(details: BidDetails, provider: ReactiveMoyaProvider<ArtsyAPI>) {
-        self.bidDetails = details
-        self.loggedInProvider = provider
+    public init(fulfillmentController: FulfillmentController) {
+        self.fulfillmentController = fulfillmentController
     }
 
     public func waitForBidResolution () -> RACSignal {
@@ -38,7 +36,7 @@ public class BidCheckingNetworkModel: NSObject {
 
     private func pollForUpdatedSaleArtwork() -> RACSignal {
 
-        let beginningBidCents = bidDetails.saleArtwork?.saleHighestBid?.amountCents ?? 0
+        let beginningBidCents = fulfillmentController.bidDetails.saleArtwork?.saleHighestBid?.amountCents ?? 0
 
         let updatedSaleArtworkSignal = getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
             self?.pollRequests++
@@ -54,7 +52,7 @@ public class BidCheckingNetworkModel: NSObject {
                 // This is an updated model – hooray!
                 if let saleArtwork = saleArtwork {
                     self?.mostRecentSaleArtwork = saleArtwork
-                    self?.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
+                    self?.fulfillmentController.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
                     self?.reserveNotMet = ReserveStatus.initOrDefault(saleArtwork.reserveStatus).reserveNotMet
                 }
 
@@ -96,19 +94,19 @@ public class BidCheckingNetworkModel: NSObject {
 
 
     private func getMyBidderPositions() -> RACSignal {
-        let artworkID = bidDetails.saleArtwork!.artwork.id;
-        let auctionID = bidDetails.saleArtwork!.auctionID!
+        let artworkID = fulfillmentController.bidDetails.saleArtwork!.artwork.id;
+        let auctionID = fulfillmentController.bidDetails.saleArtwork!.auctionID!
 
         let endpoint: ArtsyAPI = ArtsyAPI.MyBidPositionsForAuctionArtwork(auctionID: auctionID, artworkID: artworkID)
-        return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(BidderPosition.self)
+        return fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(BidderPosition.self)
     }
 
     private func getUpdatedSaleArtwork() -> RACSignal {
 
-        let artworkID = bidDetails.saleArtwork!.artwork.id;
-        let auctionID = bidDetails.saleArtwork!.auctionID!
+        let artworkID = fulfillmentController.bidDetails.saleArtwork!.artwork.id;
+        let auctionID = fulfillmentController.bidDetails.saleArtwork!.auctionID!
 
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionInfoForArtwork(auctionID: auctionID, artworkID: artworkID)
-        return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(SaleArtwork.self)
+        return fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(SaleArtwork.self)
     }
 }

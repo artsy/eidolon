@@ -2,6 +2,7 @@ import UIKit
 import Artsy_UILabels
 import ARAnalytics
 import ReactiveCocoa
+import Swift_RAC_Macros
 
 public class LoadingViewController: UIViewController {
 
@@ -14,25 +15,20 @@ public class LoadingViewController: UIViewController {
 
     public var placingBid = true
 
-    public var performNetworking = true
     public var animate = true
-
-    public var bidderNetworkModel: BidderNetworkModel!
-    public var bidCheckingModel: BidCheckingNetworkModel!
-    public var placeBidNetworkModel: PlaceBidNetworkModel!
 
     @IBOutlet public weak var backToAuctionButton: SecondaryActionButton!
     @IBOutlet public weak var placeHigherBidButton: ActionButton!
 
-    public lazy var bidDetails: (() -> (BidDetails)) = {
-        return (self as UIViewController).fulfillmentNav().bidDetails
-    }
+    public lazy var viewModel: LoadingViewModel = { () -> LoadingViewModel in
+        return LoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()), placingBid: self.placingBid)
+    }()
 
     override public func viewDidLoad() {
         super.viewDidLoad()
 
         if placingBid  {
-            bidDetailsPreviewView.bidDetails = bidDetails()
+            bidDetailsPreviewView.bidDetails = viewModel.bidDetails
         } else {
             bidDetailsPreviewView.hidden = true
         }
@@ -45,58 +41,23 @@ public class LoadingViewController: UIViewController {
 
         titleLabel.text = placingBid ? "Placing bid..." : "Registering..."
 
-        bidderNetworkModel = bidderNetworkModel ?? BidderNetworkModel()
-        bidderNetworkModel.fulfillmentNav = fulfillmentNav()
-
-        if !performNetworking { return }
-
-        bidderNetworkModel.createOrGetBidder().doError { (error) -> Void in
-            self.bidderError(error)
-
-        } .then {
-            if !self.placingBid {
-                ARAnalytics.event("Registered New User Only")
-                return RACSignal.empty()
-            }
-
-            ARAnalytics.event("Started Placing Bid")
-            return self.placeBid()
-
-        } .then { [weak self] (_) in
-            if self == nil { return RACSignal.empty() }
-
-            self?.bidCheckingModel = self?.bidCheckingModel ?? self?.createBidCheckingModel()
-            if self?.placingBid == false { return RACSignal.empty() }
-
-            return self!.bidCheckingModel.waitForBidResolution()
-
-        } .subscribeCompleted { [weak self] (_) in
+        // The view model will perform actions like registering a user if necessary,
+        // placing a bid if requested, and polling for results.
+        viewModel.performActions().subscribeError({ [weak self] (error) -> Void in
+            self?.bidderError(error)
+        }, completed: { [weak self] () -> Void in
             self?.finishUp()
-            return
-        }
+        })
     }
 
-    func createBidCheckingModel() -> BidCheckingNetworkModel {
-        let nav = fulfillmentNav()
-        return BidCheckingNetworkModel(details: nav.bidDetails, provider: nav.loggedInProvider!)
-    }
-
-    func placeBid() -> RACSignal {
-        placeBidNetworkModel = placeBidNetworkModel ?? PlaceBidNetworkModel()
-        let auctionID = self.fulfillmentNav().auctionID!
-        placeBidNetworkModel.fulfillmentNav = self.fulfillmentNav()
-
-        return placeBidNetworkModel.bidSignal(bidDetails()).doError { (error) in
-            self.bidPlacementFailed(error: error)
-        }
-    }
 
     func finishUp() {
         self.spinner.hidden = true
-        let reserveNotMet = bidCheckingModel.reserveNotMet
-        let isHighestBidder = bidCheckingModel.isHighestBidder
-        let bidIsResolved = bidCheckingModel.bidIsResolved
-        let createdNewBidder = bidderNetworkModel.createdNewBidder
+
+        let reserveNotMet = viewModel.reserveNotMet
+        let isHighestBidder = viewModel.isHighestBidder
+        let bidIsResolved = viewModel.bidIsResolved
+        let createdNewBidder = viewModel.createdNewBidder
 
         if placingBid {
             ARAnalytics.event("Placed a bid", withProperties: ["top_bidder" : isHighestBidder])
@@ -166,6 +127,15 @@ public class LoadingViewController: UIViewController {
         statusMessage.hidden = false
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
+
+        let recognizer = UITapGestureRecognizer()
+        recognizer.rac_gestureSignal().subscribeNext { [weak self] _ -> Void in
+            self?.fulfillmentContainer()?.cancelButton.sendActionsForControlEvents(.TouchUpInside)
+        }
+
+        bidConfirmationImageView.userInteractionEnabled = true
+        bidConfirmationImageView.addGestureRecognizer(recognizer)
+
         fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
     }
 
@@ -225,7 +195,7 @@ public class LoadingViewController: UIViewController {
     }
 
     @IBAction func backToAuctionTapped(sender: AnyObject) {
-        if bidderNetworkModel.createdNewBidder {
+        if viewModel.createdNewBidder {
             self.performSegue(.PushtoRegisterConfirmed)
         } else {
             fulfillmentContainer()?.closeFulfillmentModal()
