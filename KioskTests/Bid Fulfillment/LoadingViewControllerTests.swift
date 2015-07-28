@@ -73,17 +73,6 @@ class LoadingViewControllerTests: QuickSpec {
                 expect(subject).to(haveValidSnapshot())
             }
 
-            pending("dismisses by tapping green checkmark when bidding was a success") {
-                subject.placingBid = true
-                let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
-                stubViewModel.bidIsResolved = true
-                stubViewModel.isHighestBidder = true
-                subject.viewModel = stubViewModel
-
-                expect(subject).to(haveValidSnapshot())
-            }
-
             it("placing bid success not highest") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()
