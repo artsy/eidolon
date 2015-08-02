@@ -14,7 +14,7 @@ Downloading the Code
 ----------------
 
 You'll need a few things before we get started. Make sure you have Xcode installed from 
-there App Store or wherever. Then run the following two commands to install Xcode's
+the App Store or wherever. Then run the following two commands to install Xcode's
 command line tools and `bundler`, if you don't have that yet.
 
 ```sh
