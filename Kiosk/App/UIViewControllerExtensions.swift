@@ -1,6 +1,6 @@
 import UIKit
 
-extension UIViewController {
+public extension UIViewController {
 
     /// Short hand syntax for loading the view controller 
 

@@ -71,5 +71,6 @@ target "KioskTests" do
   pod 'Nimble-Snapshots'
   pod 'Quick'
   pod 'Nimble'
+  pod 'Forgeries'
 
 end

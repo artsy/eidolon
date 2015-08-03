@@ -1,7 +1,7 @@
 import UIKit
 
 public class FulfillmentContainerViewController: UIViewController {
-    var allowAnimations:Bool = true;
+    public var allowAnimations = true
 
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var contentView: UIView!

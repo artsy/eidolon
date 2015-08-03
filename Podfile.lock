@@ -31,6 +31,7 @@ PODS:
   - FBSnapshotTestCase (1.8.1)
   - FLKAutoLayout (0.1.1)
   - fmemopen (0.0.1)
+  - Forgeries (0.1.0)
   - HockeySDK (3.6.2)
   - ISO8601DateFormatter (0.7)
   - Keys (1.0.0)
@@ -107,6 +108,7 @@ DEPENDENCIES:
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase
   - FLKAutoLayout
+  - Forgeries
   - HockeySDK
   - ISO8601DateFormatter (= 0.7)
   - Keys (from `Pods/CocoaPodsKeys`)
@@ -178,6 +180,7 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: 3dc3899168747a0319c5278f5b3445c13a6532dd
   FLKAutoLayout: 95b12c5cd9652100235140b68652f063f7437851
   fmemopen: dc31f7d3004644b33deee95e047305d23f8cfdd4
+  Forgeries: ce03936ada2a8d33d3711d7bb7123be505b83430
   HockeySDK: 51ade1aff04463137e852797d2eb4dfb2511d6a9
   ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
