@@ -24,6 +24,12 @@ public class LoadingViewController: UIViewController {
         return LoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()), placingBid: self.placingBid)
     }()
 
+    public lazy var recognizer = UITapGestureRecognizer()
+    public lazy var closeSelf: () -> Void = { [weak self] in
+        self?.fulfillmentContainer()?.closeFulfillmentModal()
+        return
+    }
+
     override public func viewDidLoad() {
         super.viewDidLoad()
 
@@ -128,9 +134,8 @@ public class LoadingViewController: UIViewController {
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
 
-        let recognizer = UITapGestureRecognizer()
         recognizer.rac_gestureSignal().subscribeNext { [weak self] _ -> Void in
-            self?.fulfillmentContainer()?.cancelButton.sendActionsForControlEvents(.TouchUpInside)
+            self?.closeSelf()
         }
 
         bidConfirmationImageView.userInteractionEnabled = true
@@ -198,7 +203,7 @@ public class LoadingViewController: UIViewController {
         if viewModel.createdNewBidder {
             self.performSegue(.PushtoRegisterConfirmed)
         } else {
-            fulfillmentContainer()?.closeFulfillmentModal()
+            closeSelf()
         }
     }
 }
