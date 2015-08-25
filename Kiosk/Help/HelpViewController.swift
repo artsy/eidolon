@@ -6,7 +6,7 @@ import Swift_RAC_Macros
 import ReactiveCocoa
 
 public class HelpViewController: UIViewController {
-    var positionConstraints: NSArray?
+    var positionConstraints: [NSLayoutConstraint]?
     var dismissTapGestureRecognizer: UITapGestureRecognizer?
     
     private let stackView = ORTagBasedAutoStackView()

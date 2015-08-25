@@ -49,7 +49,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
 
         RACObserve(lotNumberLabel, "text").subscribeNext { (text) -> Void in
             switch text as! String? {
-            case .Some(let text) where count(text) == 0:
+            case .Some(let text) where text.isEmpty:
                 fallthrough
             case .None:
                 lotNumberTopConstraint.constant = 0

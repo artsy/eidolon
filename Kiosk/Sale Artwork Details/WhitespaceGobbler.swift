@@ -5,12 +5,12 @@ class WhitespaceGobbler: UIView {
         super.init(frame: frame)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
     convenience init() {
-        self.init(frame: CGRect.zeroRect)
+        self.init(frame: CGRect.zero)
 
         setContentHuggingPriority(50, forAxis: .Vertical)
         setContentHuggingPriority(50, forAxis: .Horizontal)
@@ -18,6 +18,6 @@ class WhitespaceGobbler: UIView {
     }
 
     override func intrinsicContentSize() -> CGSize {
-        return CGSize.zeroSize
+        return CGSize.zero
     }
 }

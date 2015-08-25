@@ -23,7 +23,7 @@ public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
                 return RACSignal.empty()
             }
 
-            let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: self!.emailTextField.text)
+            let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: self!.emailTextField.text ?? "")
             return XAppRequest(endpoint).filterStatusCode(200).doNext({ (__) -> Void in
 
                 self?.performSegue(.ExistingArtsyUserFound)

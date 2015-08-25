@@ -22,7 +22,7 @@ class ListingsCountdownManager: NSObject {
     }
 
     func setFonts() {
-        (countdownContainerView.subviews as! [UIView]).map{ (view) -> () in
+        (countdownContainerView.subviews).forEach{ (view) -> () in
             if let label = view as? UILabel {
                 label.font = UIFont.serifFontWithSize(15)
             }
@@ -41,7 +41,7 @@ class ListingsCountdownManager: NSObject {
     }
 
     func hideDenomenatorLabels() {
-        for subview in countdownContainerView.subviews as! [UIView] {
+        for subview in countdownContainerView.subviews {
             subview.hidden = subview != countdownLabel
         }
     }
@@ -60,8 +60,7 @@ class ListingsCountdownManager: NSObject {
 
             if sale.isActive(time) {
                 let now = time.date()
-                let flags: NSCalendarUnit = .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond
-                let components = NSCalendar.currentCalendar().components(flags, fromDate: now, toDate: sale.endDate, options: nil)
+                let components = NSCalendar.currentCalendar().components([.Hour, .Minute, .Second], fromDate: now, toDate: sale.endDate, options: [])
                 
                 self.countdownLabel.text = "\(formatter.stringFromNumber(components.hour)!) : \(formatter.stringFromNumber(components.minute)!) : \(formatter.stringFromNumber(components.second)!)"
 

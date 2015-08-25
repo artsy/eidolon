@@ -8,8 +8,8 @@ public protocol FulfillmentController {
     var bidDetails: BidDetails { get set }
     var auctionID: String! { get set }
     var xAccessToken: String? { get set }
-    var loggedInProvider: ReactiveMoyaProvider<ArtsyAPI>? { get }
-    var loggedInOrDefaultProvider: ReactiveMoyaProvider<ArtsyAPI> { get }
+    var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>? { get }
+    var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> { get }
 }
 
 public class FulfillmentNavigationController: UINavigationController, FulfillmentController {
@@ -26,17 +26,17 @@ public class FulfillmentNavigationController: UINavigationController, Fulfillmen
         didSet(oldToken) {
 
             let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-                var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
+                let endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
 
                 return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": self.xAccessToken!])
             }
-            loggedInProvider = ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, endpointResolver: endpointResolver(), stubResponses: APIKeys.sharedKeys.stubResponses)
+            loggedInProvider = ReactiveCocoaMoyaProvider(endpointClosure: newEndpointsClosure, endpointResolver: endpointResolver(), stubBehavior: Provider.APIKeysBasedStubBehaviour)
         }
     }
 
-    public var loggedInProvider: ReactiveMoyaProvider<ArtsyAPI>?
+    public var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>?
 
-    public var loggedInOrDefaultProvider: ReactiveMoyaProvider<ArtsyAPI> {
+    public var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> {
         if let loggedInProvider = loggedInProvider {
             return loggedInProvider
         }
@@ -50,7 +50,7 @@ public class FulfillmentNavigationController: UINavigationController, Fulfillmen
         loggedInProvider = nil
         let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         for cookie in storage.cookies! {
-            storage.deleteCookie(cookie as! NSHTTPCookie)
+            storage.deleteCookie(cookie )
         }
     }
 
@@ -68,7 +68,7 @@ public class FulfillmentNavigationController: UINavigationController, Fulfillmen
             newUser?.zipCode = self?.user?.location?.postalCode
             newUser?.name = self?.user?.name
 
-        } .doError { [weak self] (error) -> Void in
+        } .doError { (error) -> Void in
             logger.log("error, the authentication for admin is likely wrong")
             return
         }

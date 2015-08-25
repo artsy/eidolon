@@ -98,7 +98,7 @@ public class PlaceBidViewController: UIViewController {
 
                 let lotNumber = nav.bidDetails.saleArtwork?.lotNumber
 
-                if let lotNumber = lotNumber {
+                if let _ = lotNumber {
                     let lotNumberLabel = smallSansSerifLabel()
                     lotNumberLabel.tag = LabelTags.LotNumber.rawValue
                     detailsStackView.addSubview(lotNumberLabel, withTopMargin: "10", sideMargin: "0")

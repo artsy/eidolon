@@ -23,7 +23,7 @@ public class SwitchView: UIView {
     
     public init(buttonTitles: Array<String>) {
         buttons = buttonTitles.map { (buttonTitle: String) -> UIButton in
-            var button = UIButton.buttonWithType(.Custom) as! UIButton
+            let button = UIButton(type: .Custom)
             
             button.setTitle(buttonTitle, forState: .Normal)
             button.setTitle(buttonTitle, forState: .Disabled)
@@ -67,13 +67,13 @@ public class SwitchView: UIView {
     }
     
     public func selectedButton(button: UIButton!) {
-        let index = find(buttons, button)!
+        let index = buttons.indexOf(button)!
         setSelectedIndex(index, animated: shouldAnimate)
     }
     
     public subscript(index: Int) -> UIButton? {
         get {
-            if index >= 0 && index < count(buttons) {
+            if index >= 0 && index < buttons.count {
                 return buttons[index]
             }
             return nil
@@ -90,7 +90,7 @@ private extension SwitchView {
         let widthPredicateMultiplier = "*\(widthMultiplier())"
         
         for var i = 0; i < buttons.count; i++ {
-            var button = buttons[i]
+            let button = buttons[i]
             
             self.addSubview(button)
             button.addTarget(self, action: "selectedButton:", forControlEvents: .TouchUpInside)
@@ -142,14 +142,14 @@ private extension SwitchView {
         UIView.animateIf(shouldAnimate && animated, duration: animationDuration, options: .CurveEaseOut) { () -> Void in
             let button = self.buttons[index]
             
-            self.buttons.map { (button: UIButton) -> Void in
+            self.buttons.forEach { (button: UIButton) -> Void in
                 button.enabled = true
             }
             
             button.enabled = false
             
             // Set the x-position of the selection indicator as a fraction of the total width of the switch view according to which button was pressed.
-            let multiplier = CGFloat(index) / CGFloat(count(self.buttons))
+            let multiplier = CGFloat(index) / CGFloat(self.buttons.count)
             
             self.removeConstraint(self.selectionConstraint)
             self.selectionConstraint = NSLayoutConstraint(item: self.selectionIndicator, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Right, multiplier: multiplier, constant: 0)

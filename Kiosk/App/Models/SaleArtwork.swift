@@ -170,7 +170,7 @@ public class SaleArtwork: JSONAble {
         }
     }
 
-    public func currentBidSignal(prefix: String = "", missingPrefix: String = "") -> RACSignal {
+    public func currentBidSignal(prefix prefix: String = "", missingPrefix: String = "") -> RACSignal {
         return RACObserve(self, "highestBidCents").map({ [weak self] (highestBidCents) -> AnyObject! in
             if let currentBidCents = highestBidCents as? Int {
                 return "\(prefix)\(NSNumberFormatter.currencyStringForCents(currentBidCents))"

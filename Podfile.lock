@@ -84,7 +84,7 @@ PODS:
     - Stripe/Core (= 3.1.0)
   - Stripe/Core (3.1.0)
   - SVProgressHUD (1.1.2)
-  - Swift-RAC-Macros (0.3.0):
+  - Swift-RAC-Macros (0.3.1):
     - ReactiveCocoa (< 4.0, >= 2.0)
   - SwiftyJSON (2.2.1)
   - UIImageViewAligned (0.0.1)
@@ -237,7 +237,7 @@ SPEC CHECKSUMS:
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
   SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
-  Swift-RAC-Macros: d733884ede3e50d075e945719a6e7fc88c68b7f3
+  Swift-RAC-Macros: bc3d768601da52eee35a083a11d30cee316de860
   SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97

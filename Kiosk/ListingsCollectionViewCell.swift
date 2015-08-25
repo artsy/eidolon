@@ -52,7 +52,7 @@ public class ListingsCollectionViewCell: UICollectionViewCell {
         setup()
     }
     
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
@@ -64,7 +64,7 @@ public class ListingsCollectionViewCell: UICollectionViewCell {
     
     func setup() {
         // Necessary to use Autolayout
-        contentView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         // Bind subviews
         RAC(self, "lotNumberLabel.text") <~ RACObserve(self, "saleArtwork.lotNumberSignal").switchToLatest()

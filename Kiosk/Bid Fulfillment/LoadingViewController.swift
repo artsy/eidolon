@@ -157,7 +157,7 @@ public class LoadingViewController: UIViewController {
     func bidderError(error: NSError?) {
         if placingBid {
             // If you are bidding, we show a bidding error regardless of whether or not you're also registering.
-            bidPlacementFailed(error: error)
+            bidPlacementFailed(error)
         } else {
             // If you're not placing a bid, you're here because you're just registering.
             presentError("Registration Failed", message: "There was a problem registering for the auction. Please speak to an Artsy representative.")

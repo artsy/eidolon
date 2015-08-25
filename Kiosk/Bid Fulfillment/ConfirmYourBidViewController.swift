@@ -28,7 +28,7 @@ public class ConfirmYourBidViewController: UIViewController {
         super.viewDidLoad()
 
         let titleString = useArtsyLoginButton.titleForState(useArtsyLoginButton.state)! ?? ""
-        var attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
+        let attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
             NSFontAttributeName: useArtsyLoginButton.titleLabel!.font];
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
@@ -66,7 +66,7 @@ public class ConfirmYourBidViewController: UIViewController {
                     // error to see if it's the original URL to know if the
                     // request suceedded
 
-                    let moyaResponse = error.userInfo?["data"] as? MoyaResponse
+                    let moyaResponse = error.userInfo["data"] as? MoyaResponse
                     let responseURL = moyaResponse?.response?.URL?.absoluteString
 
                     if let responseURL = responseURL {
@@ -92,7 +92,7 @@ public class ConfirmYourBidViewController: UIViewController {
 
     func toPhoneNumberString(number:AnyObject!) -> AnyObject! {
         let numberString = number as! String
-        if count(numberString) >= 7 {
+        if numberString.characters.count >= 7 {
             return self.phoneNumberFormatter.stringForObjectValue(numberString)
         } else {
             return numberString

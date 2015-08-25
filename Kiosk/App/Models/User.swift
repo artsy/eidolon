@@ -29,7 +29,6 @@ public class User: JSONAble {
         let email = json["email"].stringValue
         let paddleNumber = json["paddle_number"].stringValue
         let phoneNumber = json["phone"].stringValue
-        let postalCode = json["location"]["postal_code"].stringValue
 
         var location:Location?
         if let bidDictionary = json["location"].object as? [String: AnyObject] {

@@ -99,8 +99,8 @@ public class SaleArtworkDetailsViewController: UIViewController {
 
         let hasLotNumber = (saleArtwork.lotNumber != nil)
 
-        if let lotNumber = saleArtwork.lotNumber {
-            let lotNumberLabel = label(.SansSerif, .LotNumberLabel)
+        if let _ = saleArtwork.lotNumber {
+            let lotNumberLabel = label(.SansSerif, tag: .LotNumberLabel)
             lotNumberLabel.font = lotNumberLabel.font.fontWithSize(12)
             metadataStackView.addSubview(lotNumberLabel, withTopMargin: "0", sideMargin: "0")
             
@@ -108,35 +108,35 @@ public class SaleArtworkDetailsViewController: UIViewController {
         }
 
         if let artist = artist() {
-            let artistNameLabel = label(.SansSerif, .ArtistNameLabel)
+            let artistNameLabel = label(.SansSerif, tag: .ArtistNameLabel)
             artistNameLabel.text = artist.name
             metadataStackView.addSubview(artistNameLabel, withTopMargin: hasLotNumber ? "10" : "0", sideMargin: "0")
         }
 
-        let artworkNameLabel = label(.ItalicsSerif, .ArtworkNameLabel)
+        let artworkNameLabel = label(.ItalicsSerif, tag: .ArtworkNameLabel)
         artworkNameLabel.text = "\(saleArtwork.artwork.title), \(saleArtwork.artwork.date)"
         metadataStackView.addSubview(artworkNameLabel, withTopMargin: "10", sideMargin: "0")
 
         if let medium = saleArtwork.artwork.medium {
-            if count(medium) > 0 {
-                let mediumLabel = label(.Serif, .ArtworkMediumLabel)
+            if medium.isEmpty == false {
+                let mediumLabel = label(.Serif, tag: .ArtworkMediumLabel)
                 mediumLabel.text = medium
                 metadataStackView.addSubview(mediumLabel, withTopMargin: "22", sideMargin: "0")
             }
         }
 
-        if count(saleArtwork.artwork.dimensions) > 0 {
-            let dimensionsLabel = label(.Serif, .ArtworkDimensionsLabel)
+        if saleArtwork.artwork.dimensions.count > 0 {
+            let dimensionsLabel = label(.Serif, tag: .ArtworkDimensionsLabel)
             dimensionsLabel.text = (saleArtwork.artwork.dimensions as NSArray).componentsJoinedByString("\n")
             metadataStackView.addSubview(dimensionsLabel, withTopMargin: "5", sideMargin: "0")
         }
 
         retrieveImageRights().filter { (imageRights) -> Bool in
-            return (count(imageRights as? String ?? "") > 0)
+            return (imageRights as? String ?? "").isEmpty == false
 
         }.subscribeNext { [weak self] (imageRights) -> Void in
-            if count(imageRights as! String) > 0 {
-                let rightsLabel = label(.Serif, .ImageRightsLabel)
+            if (imageRights as! String).isEmpty == false {
+                let rightsLabel = label(.Serif, tag: .ImageRightsLabel)
                 rightsLabel.text = imageRights as? String
                 self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
             }
@@ -147,7 +147,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
         estimateTopBorder.tag = MetadataStackViewTag.EstimateTopBorder.rawValue
         metadataStackView.addSubview(estimateTopBorder, withTopMargin: "22", sideMargin: "0")
 
-        let estimateLabel = label(.Serif, .EstimateLabel)
+        let estimateLabel = label(.Serif, tag: .EstimateLabel)
         estimateLabel.text = saleArtwork.estimateString
         metadataStackView.addSubview(estimateLabel, withTopMargin: "15", sideMargin: "0")
 
@@ -164,15 +164,15 @@ public class SaleArtworkDetailsViewController: UIViewController {
         let hasBidsSignal = RACObserve(saleArtwork, "highestBidCents").map{ (cents) -> AnyObject! in
             return (cents != nil) && ((cents as? NSNumber ?? 0) > 0)
         }
-        let currentBidLabel = label(.Serif, .CurrentBidLabel)
+        let currentBidLabel = label(.Serif, tag: .CurrentBidLabel)
         RAC(currentBidLabel, "text") <~ RACSignal.`if`(hasBidsSignal, then: RACSignal.`return`("Current Bid:"), `else`: RACSignal.`return`("Starting Bid:"))
         metadataStackView.addSubview(currentBidLabel, withTopMargin: "22", sideMargin: "0")
 
-        let currentBidValueLabel = label(.Bold, .CurrentBidValueLabel, fontSize: 27)
+        let currentBidValueLabel = label(.Bold, tag: .CurrentBidValueLabel, fontSize: 27)
         RAC(currentBidValueLabel, "text") <~ saleArtwork.currentBidSignal()
         metadataStackView.addSubview(currentBidValueLabel, withTopMargin: "10", sideMargin: "0")
 
-        let numberOfBidsPlacedLabel = label(.Serif, .NumberOfBidsPlacedLabel)
+        let numberOfBidsPlacedLabel = label(.Serif, tag: .NumberOfBidsPlacedLabel)
         RAC(numberOfBidsPlacedLabel, "text") <~ saleArtwork.numberOfBidsWithReserveSignal
         metadataStackView.addSubview(numberOfBidsPlacedLabel, withTopMargin: "10", sideMargin: "0")
 
@@ -312,15 +312,15 @@ public class SaleArtworkDetailsViewController: UIViewController {
         additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "40")
 
         retrieveAdditionalInfo().filter { (info) -> Bool in
-            return (count(info as? String ?? "") > 0)
+            return (info as? String ?? "").isEmpty == false
 
-            }.subscribeNext { [weak self] (info) -> Void in
-                additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( info as! String )
+        }.subscribeNext { (info) -> Void in
+            additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( info as! String )
         }
 
         if let artist = artist() {
             retrieveArtistBlurb().filter { (blurb) -> Bool in
-                return (count(blurb as? String ?? "") > 0)
+                return (blurb as? String ?? "").isEmpty == false
 
                 }.subscribeNext { [weak self] (blurb) -> Void in
                     if self == nil {

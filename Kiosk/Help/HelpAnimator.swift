@@ -9,19 +9,15 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         super.init()
     }
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return AnimationDuration.Normal
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let containerView = transitionContext.containerView()
-        
+        let containerView = transitionContext.containerView()!
         
         let fromView:UIView! = transitionContext.viewForKey(UITransitionContextFromViewKey) ?? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!.view
         let toView:UIView! = transitionContext.viewForKey(UITransitionContextToViewKey) ?? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!.view
-        
-        let a = transitionContext.viewForKey(UITransitionContextFromViewKey)
-        let b = transitionContext.viewForKey(UITransitionContextToViewKey)
 
         if presenting {
             let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as! HelpViewController
@@ -46,12 +42,12 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             
             toView.alignTop("0", bottom: "0", toView: containerView)
             toView.constrainWidth("\(HelpViewController.width)")
-            toViewController.positionConstraints = toView.alignAttribute(.Left, toAttribute: .Right, ofView: containerView, predicate: "0")
+            toViewController.positionConstraints = toView.alignAttribute(.Left, toAttribute: .Right, ofView: containerView, predicate: "0") as? [NSLayoutConstraint]
             containerView.layoutIfNeeded()
             
             UIView.animateWithDuration(transitionDuration(transitionContext), animations: {
-                containerView.removeConstraints((toViewController.positionConstraints ?? []) as [AnyObject])
-                toViewController.positionConstraints = toView.alignLeading(nil, trailing: "0", toView: containerView)
+                containerView.removeConstraints(toViewController.positionConstraints ?? [])
+                toViewController.positionConstraints = toView.alignLeading(nil, trailing: "0", toView: containerView) as? [NSLayoutConstraint]
                 containerView.layoutIfNeeded()
                 
                 fromView.alpha = 0.5
@@ -71,8 +67,8 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             containerView.addSubview(fromView)
             
             UIView.animateWithDuration(self.transitionDuration(transitionContext), animations: {
-                containerView.removeConstraints((fromViewController.positionConstraints ?? []) as [AnyObject])
-                fromViewController.positionConstraints = fromView.alignAttribute(.Left, toAttribute: .Right, ofView: containerView, predicate: "0")
+                containerView.removeConstraints(fromViewController.positionConstraints ?? [])
+                fromViewController.positionConstraints = fromView.alignAttribute(.Left, toAttribute: .Right, ofView: containerView, predicate: "0") as? [NSLayoutConstraint]
                 containerView.layoutIfNeeded()
                 
                 toView.alpha = 1.0

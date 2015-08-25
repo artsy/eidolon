@@ -27,7 +27,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
         RAC(pinTextField, "text") <~ pinSignal
         RAC(fulfillmentNav().bidDetails, "bidderPIN") <~ pinSignal
         
-        let pinExistsSignal = pinSignal.map { count($0 as! String) > 0 }
+        let pinExistsSignal = pinSignal.map { ($0 as! String).isEmpty == false }
 
         bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
 
@@ -54,7 +54,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
 
             }.doNext { (cards) in
                 if (self == nil) { return }
-                if count(cards as! [Card]) > 0 {
+                if (cards as! [Card]).count > 0 {
                     self?.performSegue(.PINConfirmedhasCard)
 
                 } else {

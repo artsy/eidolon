@@ -16,7 +16,7 @@ extension UIView {
         let recognizer = UILongPressGestureRecognizer()
 
         recognizer.rac_gestureSignal().subscribeNext { _ -> Void in
-            closure(alertController: alertController(message, title))
+            closure(alertController: alertController(message, title: title))
         }
 
         userInteractionEnabled = true

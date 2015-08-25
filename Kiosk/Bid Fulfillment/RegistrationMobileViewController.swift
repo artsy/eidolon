@@ -28,11 +28,11 @@ public class RegistrationMobileViewController: UIViewController, RegistrationSub
     public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
         // Allow delete
-        if (count(string) == 0) { return true }
+        if string.isEmpty { return true }
 
         // the API doesn't accept chars
         let notNumberChars = NSCharacterSet.decimalDigitCharacterSet().invertedSet;
-        return count(string.stringByTrimmingCharactersInSet(notNumberChars)) != 0
+        return string.stringByTrimmingCharactersInSet(notNumberChars).isEmpty == false
     }
 
     public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationMobileViewController {

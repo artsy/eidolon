@@ -10,7 +10,7 @@ public class TextField: UITextField {
         setup()
     }
 
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
@@ -128,7 +128,7 @@ public class SecureTextField: TextField {
     func dotPlaceholder() -> String {
         var index = 0;
         let dots = NSMutableString();
-        while (index < count(text)) {
+        while (index < text.characters.count) {
             dots.appendString("•");
             index++;
         }

@@ -4,7 +4,6 @@ extension Button {
 
     func flashError(message:String) {
         let originalTitle = self.titleForState(.Normal)
-        let originalBG = UIColor.blackColor()
 
         setTitleColor(UIColor.whiteColor(), forState: .Disabled)
         setBackgroundColor(UIColor.artsyRed(), forState: .Disabled, animated: true)

@@ -14,7 +14,7 @@ extension RACSignal {
     func mapArrayLengthExistenceToBool() -> RACSignal {
         return map { (array) -> AnyObject! in
             if let array = array as? [AnyObject] {
-                return count(array) > 0
+                return array.count > 0
             } else {
                 return false
             }

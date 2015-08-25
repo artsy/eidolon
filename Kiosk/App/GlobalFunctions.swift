@@ -12,7 +12,7 @@ func delayToMainThread(delay:Double, closure:()->()) {
 }
 
 func logPath() -> NSURL {
-    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as! NSURL
+    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!
     return docs.URLByAppendingPathComponent("logger.txt")
 }
 

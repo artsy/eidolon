@@ -30,7 +30,7 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         artworkImageView.clipsToBounds = true
         
         // Add subviews
-        cellSubviews.map{ self.contentView.addSubview($0) }
+        cellSubviews.forEach{ self.contentView.addSubview($0) }
         
         // Constrain subviews
         artworkImageView.alignAttribute(.Width, toAttribute: .Height, ofView: artworkImageView, predicate: nil)

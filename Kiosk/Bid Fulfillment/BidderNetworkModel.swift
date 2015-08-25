@@ -29,7 +29,7 @@ public class BidderNetworkModel: NSObject {
     private func checkUserEmailExists(email: String) -> RACSignal {
         let request = Provider.sharedProvider.request(.FindExistingEmailRegistration(email: email))
 
-        return request.map { [weak self] (response) -> NSNumber in
+        return request.map { (response) -> NSNumber in
             let moyaResponse = response as! MoyaResponse
             return moyaResponse.statusCode != 404
         }
