@@ -11,7 +11,7 @@ let testEmail = "test@example.com"
 class RegistrationPasswordViewModelTests: QuickSpec {
 
     typealias Check = (() -> ())?
-    func stubProvider(#emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) {
+    func stubProvider(emailExists emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) {
         let endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
 
             switch target {

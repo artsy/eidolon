@@ -2,17 +2,17 @@ source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/artsy/Specs.git'
 
 plugin 'cocoapods-keys', {
-  :project => "Eidolon",
+  :project => 'Eidolon',
   :keys => [
-    "ArtsyAPIClientSecret",
-    "ArtsyAPIClientKey",
-    "HockeyProductionSecret",
-    "HockeyBetaSecret",
-    "MixpanelProductionAPIClientKey",
-    "MixpanelStagingAPIClientKey",
-    "CardflightAPIClientKey",
-    "CardflightMerchantAccountToken",
-    "StripePublishableKey"
+    'ArtsyAPIClientSecret',
+    'ArtsyAPIClientKey',
+    'HockeyProductionSecret',
+    'HockeyBetaSecret',
+    'MixpanelProductionAPIClientKey',
+    'MixpanelStagingAPIClientKey',
+    'CardflightAPIClientKey',
+    'CardflightMerchantAccountToken',
+    'StripePublishableKey'
   ]
 }
 
@@ -38,7 +38,8 @@ pod 'FLKAutoLayout'
 pod 'ISO8601DateFormatter', '0.7'
 pod 'ARCollectionViewMasonryLayout', '~> 2.0.0'
 pod 'SDWebImage', '~> 3.7'
-pod 'SVProgressHUD', :git => 'https://github.com/ashfurrow/SVProgressHUD.git'
+pod 'SVProgressHUD', :git => 'https://github.com/ashfurrow/SVProgressHUD.git' # TODO: use official instead
+pod 'RACAlertAction'
 
 pod 'HockeySDK'
 pod 'ARAnalytics/Mixpanel'
@@ -47,25 +48,28 @@ pod 'ARAnalytics/HockeyApp'
 pod 'CardFlight'
 pod 'Stripe'
 pod 'ECPhoneNumberFormatter'
-pod 'UIImageViewAligned', :git => "https://github.com/ashfurrow/UIImageViewAligned.git"
-pod 'DZNWebViewController', :git => "https://github.com/orta/DZNWebViewController.git"
-pod 'Reachability', :git => "https://github.com/ashfurrow/Reachability.git", :branch => "frameworks"
+pod 'UIImageViewAligned', :git => 'https://github.com/ashfurrow/UIImageViewAligned.git'
+pod 'DZNWebViewController', :git => 'https://github.com/orta/DZNWebViewController.git'
+pod 'Reachability', :git => 'https://github.com/ashfurrow/Reachability.git', :branch => 'frameworks'
 
 pod 'UIView+BooleanAnimations'
-pod 'ARTiledImageView', :git => "https://github.com/ashfurrow/ARTiledImageView.git"
+pod 'ARTiledImageView', :git => 'https://github.com/ashfurrow/ARTiledImageView.git'
 pod 'XNGMarkdownParser'
 
-# swift pods
-pod 'SwiftyJSON'
-pod 'Alamofire'
-pod 'ReactiveCocoa', '3.0-beta.6'
-pod 'RACAlertAction'
-pod 'Moya/Reactive'
-pod 'Swift-RAC-Macros'
-pod 'Dollar'
-pod 'Cent'
+# Swift indirect dependencies we need to force to Swift 2
+pod 'Box', :head
+pod 'Result', :head
 
-target "KioskTests" do
+# Swift pods
+pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :branch => 'xcode7'
+pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift-2.0'
+pod 'ReactiveCocoa', :git => 'https://github.com/ashfurrow/ReactiveCocoa.git', :branch => 'swift2'
+pod 'Moya/ReactiveCocoa', :git => 'https://github.com/Moya/Moya.git', :branch => 'swift-2.0'
+pod 'Swift-RAC-Macros'
+pod 'Dollar', :git => 'https://github.com/ashfurrow/Dollar.swift.git', :branch => 'swift-2-xcode-7'
+pod 'Cent', :git => 'https://github.com/ashfurrow/Dollar.swift.git',:branch => 'swift-2-xcode-7'
+
+target 'KioskTests' do
 
   pod 'FBSnapshotTestCase'
   pod 'Nimble-Snapshots'

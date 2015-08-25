@@ -94,7 +94,7 @@ public class ListingsViewController: UIViewController {
             
             let array = object as? Array<Array<AnyObject>>
             return reduce(array ?? [], Array<AnyObject>(), +)
-        }).mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
+    }).mapToObjectArray(SaleArtwork.self).`catch`({ (error) -> RACSignal! in
             
             logger.log("Sale Artworks: Error handling thing: \(error.artsyServerError())")
 

@@ -201,5 +201,5 @@ func listingsDataForPage(page: Int, bidCount: Int, _count: Int?) -> NSData {
         return memo.arrayByAddingObject(model)
     })
     
-    return NSJSONSerialization.dataWithJSONObject(models, options: nil, error: nil)!
+    return try! NSJSONSerialization.dataWithJSONObject(models, options: [])
 }
