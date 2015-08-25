@@ -73,7 +73,7 @@ extension AppViewController {
     func auctionRequestSignal(auctionID: String) -> RACSignal {
         let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
 
-        return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self).catch({ (error) -> RACSignal! in
+        return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self).`catch`({ (error) -> RACSignal! in
 
             logger.log("Sale Artworks: Error handling thing: \(error.artsyServerError())")
             return RACSignal.empty()

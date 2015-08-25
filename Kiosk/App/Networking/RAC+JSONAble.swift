@@ -12,7 +12,7 @@ extension RACSignal {
 
         return tryMap({ (object, error) -> AnyObject! in
             if let dict = object as? [String:AnyObject] {
-                return resultFromJSON(dict, classType)
+                return resultFromJSON(dict, classType: classType)
             }
 
             if error != nil {

@@ -180,7 +180,7 @@ public class SaleArtwork: JSONAble {
         })
     }
 
-    override public class func keyPathsForValuesAffectingValueForKey(key: String) -> Set<NSObject> {
+    override public class func keyPathsForValuesAffectingValueForKey(key: String) -> Set<String> {
         if key == "estimateString" {
             return ["lowEstimateCents", "highEstimateCents"] as Set
         } else if key == "lotNumberSignal" {

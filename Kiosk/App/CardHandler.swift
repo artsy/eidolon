@@ -3,6 +3,7 @@ import ReactiveCocoa
 
 public class CardHandler: NSObject, CFTReaderDelegate {
 
+    // TODO: If this errors, it can't send again. Need something a bit better.
     public let cardSwipedSignal = RACSubject()
     public var card: CFTCard?
     
@@ -51,7 +52,7 @@ public class CardHandler: NSObject, CFTReaderDelegate {
             })
             
         } else if let error = error {
-            self.cardSwipedSignal.sendNext("response Error");
+            self.cardSwipedSignal.sendNext("response Error \(error)");
             logger.log("CardReader got a response it cannot handle")
 
 
@@ -105,10 +106,10 @@ public class LocalCardReader: CFTReader {
     override public func beginSwipeWithMessage(message: String!) {
         if fail {
             let error = NSError(domain: "eidolon", code: 111, userInfo: nil)
-            self.delegate.readerCardResponse(nil, withError: error)
+            self.delegate?.readerCardResponse(nil, withError: error)
 
         } else {
-            self.delegate.readerCardResponse(CFTCard(), withError: nil)
+            self.delegate?.readerCardResponse(CFTCard(), withError: nil)
         }
     }
 }

@@ -14,7 +14,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
 
     public lazy var pinSignal: RACSignal = { self.keypadContainer.stringValueSignal }()
     
-    public lazy var provider: ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    public lazy var provider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidPIN) as! ConfirmYourBidPINViewController
@@ -86,15 +86,15 @@ public class ConfirmYourBidPINViewController: UIViewController {
         }
     }
 
-    public func providerForPIN(pin:String, number:String) -> ReactiveMoyaProvider<ArtsyAPI> {
+    public func providerForPIN(pin: String, number: String) -> ReactiveCocoaMoyaProvider<ArtsyAPI> {
         let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-            var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
+            let endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
 
             let auctionID = self.fulfillmentNav().auctionID
             return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number, "sale_id": auctionID])
         }
 
-        return ReactiveMoyaProvider(endpointsClosure: newEndpointsClosure, endpointResolver: endpointResolver(), stubResponses: APIKeys.sharedKeys.stubResponses)
+        return ReactiveCocoaMoyaProvider(endpointClosure: newEndpointsClosure, endpointResolver: endpointResolver(), stubBehavior: Provider.APIKeysBasedStubBehaviour)
 
     }
 

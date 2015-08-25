@@ -41,7 +41,7 @@ public enum ArtsyAPI {
     case FindExistingEmailRegistration(email: String)
 }
 
-extension ArtsyAPI : MoyaPath {
+extension ArtsyAPI : MoyaTarget {
      public var path: String {
         switch self {
 
@@ -125,9 +125,6 @@ extension ArtsyAPI : MoyaPath {
 
         }
     }
-}
-
-extension ArtsyAPI : MoyaTarget {
 
     public var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
     public var baseURL: NSURL { return NSURL(string: base)! }
@@ -316,7 +313,7 @@ extension ArtsyAPI : MoyaTarget {
 
 // MARK: - Provider setup
 
-public func endpointResolver () -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest)) {
+public func endpointResolver() -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest)) {
     return { (endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest) in
         let request: NSMutableURLRequest = endpoint.urlRequest.mutableCopy() as! NSMutableURLRequest
         request.HTTPShouldHandleCookies = false
@@ -324,15 +321,15 @@ public func endpointResolver () -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequ
     }
 }
 
-public class ArtsyProvider<T where T: MoyaTarget>: ReactiveMoyaProvider<T> {
+public class ArtsyProvider<T where T: MoyaTarget>: ReactiveCocoaMoyaProvider<T> {
     public typealias OnlineSignalClosure = () -> RACSignal
 
     // Closure that returns a signal which completes once the app is online.
     public let onlineSignal: OnlineSignalClosure
 
-    public init(endpointsClosure: MoyaEndpointsClosure = MoyaProvider.DefaultEndpointMapping(), endpointResolver: MoyaEndpointResolution = MoyaProvider.DefaultEnpointResolution(), stubResponses: Bool = false, stubBehavior: MoyaStubbedBehavior = MoyaProvider.DefaultStubBehavior, networkActivityClosure: Moya.NetworkActivityClosure? = nil, onlineSignal: OnlineSignalClosure = connectedToInternetSignal) {
+    public init(endpointClosure: MoyaEndpointsClosure = MoyaProvider.DefaultEndpointMapping, endpointResolver: MoyaEndpointResolution = MoyaProvider.DefaultEnpointResolution, stubBehavior: MoyaStubbedBehavior = MoyaProvider.NoStubbingBehavior, networkActivityClosure: Moya.NetworkActivityClosure? = nil, onlineSignal: OnlineSignalClosure = connectedToInternetSignal) {
         self.onlineSignal = onlineSignal
-        super.init(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver, stubResponses: stubResponses, networkActivityClosure: networkActivityClosure)
+        super.init(endpointClosure: endpointClosure, endpointResolver: endpointResolver, stubBehavior: stubBehavior, networkActivityClosure: networkActivityClosure)
     }
 }
 
@@ -352,13 +349,18 @@ public struct Provider {
             return endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
         }
     }
-    
+
+    public static func APIKeysBasedStubBehaviour(target: ArtsyAPI) -> Moya.StubbedBehavior {
+        return APIKeys.sharedKeys.stubResponses ? .Immediate : .NoStubbing
+    }
+
+    // init(endpointClosure: MoyaEndpointsClosure = MoyaProvider.DefaultEndpointMapping, endpointResolver: MoyaEndpointResolution = MoyaProvider.DefaultEnpointResolution, stubBehavior: MoyaStubbedBehavior = MoyaProvider.NoStubbingBehavior, networkActivityClosure: Moya.NetworkActivityClosure? = nil, onlineSignal: OnlineSignalClosure = connectedToInternetSignal) {
     public static func DefaultProvider() -> ArtsyProvider<ArtsyAPI> {
-        return ArtsyProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: APIKeys.sharedKeys.stubResponses)
+        return ArtsyProvider(endpointClosure: endpointsClosure, endpointResolver: endpointResolver(), stubBehavior: APIKeysBasedStubBehaviour)
     }
     
     public static func StubbingProvider() -> ArtsyProvider<ArtsyAPI> {
-        return ArtsyProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true, onlineSignal: { RACSignal.empty() })
+        return ArtsyProvider(endpointClosure: endpointsClosure, endpointResolver: endpointResolver(), stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: { RACSignal.empty() })
     }
 
     private struct SharedProvider {
@@ -380,7 +382,7 @@ public struct Provider {
 // MARK: - Provider support
 
 private func stubbedResponse(filename: String) -> NSData! {
-    @objc class TestClass { }
+    @objc class TestClass: NSObject { }
     
     let bundle = NSBundle(forClass: TestClass.self)
     let path = bundle.pathForResource(filename, ofType: "json")
@@ -394,5 +396,5 @@ private extension String {
 }
 
 public func url(route: MoyaTarget) -> String {
-    return route.baseURL.URLByAppendingPathComponent(route.path).absoluteString!
+    return route.baseURL.URLByAppendingPathComponent(route.path).absoluteString
 }
