@@ -45,11 +45,11 @@ PODS:
     - ReactiveCocoa
   - Moya/ReactiveCore (2.0.0):
     - Moya/Core
-  - Nimble (0.4.2)
-  - Nimble-Snapshots (0.4.0):
+  - Nimble (HEAD based on 2.0.0-rc.2)
+  - Nimble-Snapshots (1.0.0):
     - FBSnapshotTestCase (~> 1.7)
-    - Nimble (~> 0.4)
-    - Quick (~> 0.3)
+    - Nimble (~> 2.0.0-rc.2)
+    - Quick (~> 0.5)
   - NJKWebViewProgress (0.2.3):
     - NJKWebViewProgress/Core (= 0.2.3)
     - NJKWebViewProgress/ProgressView (= 0.2.3)
@@ -57,7 +57,7 @@ PODS:
   - NJKWebViewProgress/ProgressView (0.2.3)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
-  - Quick (0.3.1)
+  - Quick (HEAD based on 0.5.1)
   - RACAlertAction (0.1.0):
     - ReactiveCocoa
   - Reachability (3.1.1)
@@ -115,10 +115,10 @@ DEPENDENCIES:
   - ISO8601DateFormatter (= 0.7)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Moya/ReactiveCocoa (from `https://github.com/Moya/Moya.git`, branch `swift-2.0`)
-  - Nimble
+  - Nimble (HEAD)
   - Nimble-Snapshots
   - ORStackView
-  - Quick
+  - Quick (HEAD)
   - RACAlertAction
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
   - ReactiveCocoa (from `https://github.com/ashfurrow/ReactiveCocoa.git`, branch `swift2`)
@@ -225,11 +225,11 @@ SPEC CHECKSUMS:
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mixpanel: 2ffc3c261712622a5424f58c52af723d032a3add
   Moya: 4f6ee0cc668b80d6eed825ba48b571a67781240f
-  Nimble: 49b7a7da8919f42823d37c6d68cc6d15a7009f32
-  Nimble-Snapshots: 216ae8c0ea3f4105be1606749fe15d8b2138af40
+  Nimble: e3cf5e73a491daf21c2bc88783dbfc55ce8b8e02
+  Nimble-Snapshots: c16dd279a4840ec06288198fafd53f3c17750ff3
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
-  Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
+  Quick: 7426537a99e75076d6930c5b6da58006e4a9f38a
   RACAlertAction: f641fa41e2b63eaea096f5ad49991f45f96a3388
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
   ReactiveCocoa: d99571cf654b8e6703f338ca13f486b999c51969

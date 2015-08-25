@@ -73,8 +73,8 @@ target 'KioskTests' do
 
   pod 'FBSnapshotTestCase'
   pod 'Nimble-Snapshots'
-  pod 'Quick'
-  pod 'Nimble'
+  pod 'Quick', :head
+  pod 'Nimble', :head
   pod 'Forgeries'
 
 end
