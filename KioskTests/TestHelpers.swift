@@ -40,7 +40,7 @@ func yearFromDate(date: NSDate) -> Int {
     return calendar.components(.Year, fromDate: date).year
 }
 
-class TestClass { }
+@objc class TestClass: NSObject { }
 
 // Necessary since UIImage(named:) doesn't work correctly in the test bundle
 extension UIImage {

@@ -47,7 +47,8 @@ private extension Logger {
     func stringRepresentation(message: String, function: String, file: String, line: Int) -> String {
         let dateString = dateFormatter.stringFromDate(NSDate())
 
-        return "\(dateString) [\(NSURL(fileURLWithPath: file).lastPathComponent):\(line)] \(function): \(message)\n"
+        let file = NSURL(fileURLWithPath: file).lastPathComponent ?? "(Unknown File)"
+        return "\(dateString) [\(file):\(line)] \(function): \(message)\n"
     }
 
     func printToConsole(logMessage: String) {

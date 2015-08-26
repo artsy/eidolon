@@ -8,7 +8,6 @@ class AppViewControllerTests: QuickSpec {
     override func spec() {
 
         it("looks right offline") {
-            // TODO: This isn't working – causing Autolayout issues
             let subject = UIStoryboard.auction().viewControllerWithID(.NoInternetConnection) as UIViewController
             subject.loadViewProgrammatically()
             subject.view.backgroundColor = UIColor.blackColor()

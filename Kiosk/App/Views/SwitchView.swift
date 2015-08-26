@@ -1,6 +1,5 @@
 import UIKit
 import ReactiveCocoa
-import FLKAutoLayout
 
 let SwitchViewBorderWidth: CGFloat = 2
 

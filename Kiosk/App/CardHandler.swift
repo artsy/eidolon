@@ -3,7 +3,6 @@ import ReactiveCocoa
 
 public class CardHandler: NSObject, CFTReaderDelegate {
 
-    // TODO: If this errors, it can't send again. Need something a bit better.
     public let cardSwipedSignal = RACSubject()
     public var card: CFTCard?
     

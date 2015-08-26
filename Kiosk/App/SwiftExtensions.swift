@@ -11,20 +11,10 @@ extension Optional {
 
 public extension String {
     public func toUInt() -> UInt? {
-        let i = Int(self)
-        if let i = i {
-            return UInt(i)
-        } else {
-            return nil
-        }
+        return UInt(self)
     }
 
     public func toUIntWithDefault(defaultValue: UInt) -> UInt {
-        let i = Int(self)
-        if let i = i {
-            return UInt(i)
-        } else {
-        return defaultValue
-        }
+        return UInt(self) ?? defaultValue
     }
 }

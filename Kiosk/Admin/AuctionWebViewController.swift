@@ -5,7 +5,6 @@ class AuctionWebViewController: WebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        _ = self.toolbarItems
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: "")
         
         let exitImage = UIImage(named: "toolbar_close")
