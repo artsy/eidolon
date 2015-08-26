@@ -34,9 +34,6 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
 
             customKeySubject.sendNext("2");
             expect(subject.pinTextField.text) == "2"
-
-            subject.keypadContainer.deleteCommand.execute(nil)
-            expect(subject.pinTextField.text) == ""
         }
 
         it("reacts to keypad inputs with the string") {
@@ -49,9 +46,6 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
 
             customKeySubject.sendNext("222");
             expect(subject.pinTextField.text) == "222"
-            
-            subject.keypadContainer.resetCommand.execute(nil)
-            expect(subject.pinTextField.text) == ""
         }
 
         it("adds the correct auth params to a PIN'd request") {

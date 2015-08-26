@@ -1,5 +1,6 @@
 import UIKit
 import ReactiveCocoa
+import FLKAutoLayout
 
 let SwitchViewBorderWidth: CGFloat = 2
 
@@ -152,7 +153,12 @@ private extension SwitchView {
             let multiplier = CGFloat(index) / CGFloat(self.buttons.count)
             
             self.removeConstraint(self.selectionConstraint)
-            self.selectionConstraint = NSLayoutConstraint(item: self.selectionIndicator, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Right, multiplier: multiplier, constant: 0)
+            // It's illegal to have a multiplier of zero, so if we're at index zero, we just stick to the left side.
+            if multiplier == 0 {
+                self.selectionConstraint = self.selectionIndicator.alignLeadingEdgeWithView(self, predicate: nil).last! as! NSLayoutConstraint
+            } else {
+                self.selectionConstraint = NSLayoutConstraint(item: self.selectionIndicator, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Right, multiplier: multiplier, constant: 0)
+            }
             self.addConstraint(self.selectionConstraint)
             self.layoutIfNeeded()
         }
