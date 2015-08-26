@@ -37,7 +37,7 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
 
         pending("enables the enter button when an email + password is entered") {
             let subject = testConfirmYourBidEnterYourEmailViewController()
-            let nav = subject.navigationController as! FulfillmentNavigationController
+            _ = subject.navigationController as! FulfillmentNavigationController
             subject.loadViewProgrammatically()
 
             subject.emailTextField.text = "email@address.com"

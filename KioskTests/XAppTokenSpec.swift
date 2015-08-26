@@ -10,7 +10,7 @@ class XAppTokenSpec: QuickSpec {
         it("returns correct data") {
             let key = "some key"
             let expiry = NSDate(timeIntervalSinceNow: 1000)
-            setDefaultsKeys(defaults, key, expiry)
+            setDefaultsKeys(defaults, key: key, expiry: expiry)
             
             expect(token.token).to(equal(key))
             expect(token.expiry).to(equal(expiry))
@@ -19,7 +19,7 @@ class XAppTokenSpec: QuickSpec {
         it("correctly calculates validity for expired tokens") {
             let key = "some key"
             let past = NSDate(timeIntervalSinceNow: -1000)
-            setDefaultsKeys(defaults, key, past)
+            setDefaultsKeys(defaults, key: key, expiry: past)
             
             expect(token.isValid).to(beFalsy())
         }
@@ -27,7 +27,7 @@ class XAppTokenSpec: QuickSpec {
         it("correctly calculates validity for non-expired tokens") {
             let key = "some key"
             let future = NSDate(timeIntervalSinceNow: 1000)
-            setDefaultsKeys(defaults, key, future)
+            setDefaultsKeys(defaults, key: key, expiry: future)
             
             expect(token.isValid).to(beTruthy())
         }
@@ -35,13 +35,13 @@ class XAppTokenSpec: QuickSpec {
         it("correctly calculates validity for empty keys") {
             let key = ""
             let future = NSDate(timeIntervalSinceNow: 1000)
-            setDefaultsKeys(defaults, key, future)
+            setDefaultsKeys(defaults, key: key, expiry: future)
             
             expect(token.isValid).to(beFalsy())
         }
         
         it("properly calculates validity for missing tokens") {
-            setDefaultsKeys(defaults, nil, nil)
+            setDefaultsKeys(defaults, key: nil, expiry: nil)
             
             expect(token.isValid).to(beFalsy())
         }

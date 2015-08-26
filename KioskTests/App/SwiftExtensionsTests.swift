@@ -18,7 +18,7 @@ class SwiftExtensionsTests: QuickSpec {
 
             it("uses a default if no conversion is available") {
                 let input = "not a number"
-                expect(input.toUInt(defaultValue: 4)) == 4
+                expect(input.toUIntWithDefault(4)) == 4
             }
         }
     }

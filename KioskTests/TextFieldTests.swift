@@ -38,7 +38,7 @@ class TextFieldTests: QuickSpec {
                 textField = SecureTextField(frame: CGRectMake(0, 0, 255, 44))
                 textField!.shouldAnimateStateChange = false
                 textField!.text = ""
-                textField!.font = UIFont.serifFontWithSize(textField!.font.pointSize)
+                textField!.font = UIFont.serifFontWithSize(textField!.font!.pointSize)
                 vc.view.addSubview(textField!)
                 window.rootViewController = vc
                 window.makeKeyAndVisible()

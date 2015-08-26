@@ -26,7 +26,6 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
 
         it("reacts to keypad inputs with the string") {
             let customKeySubject = RACSubject()
-            let deleteSubject = RACSubject()
 
             let subject = testConfirmYourBidPINViewController()
             subject.pinSignal = customKeySubject
@@ -42,7 +41,6 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
 
         it("reacts to keypad inputs with the string") {
             let customKeySubject = RACSubject()
-            let clearSubject = RACSubject()
 
             let subject = testConfirmYourBidPINViewController()
             subject.pinSignal = customKeySubject;
@@ -64,11 +62,11 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             let nav = FulfillmentNavigationController(rootViewController:subject)
             nav.auctionID = auctionID
 
-            let provider: ReactiveMoyaProvider<ArtsyAPI> = subject.providerForPIN(pin, number: number)
-            let endpoint = provider.endpointsClosure(ArtsyAPI.Me)
+            let provider: ReactiveCocoaMoyaProvider<ArtsyAPI> = subject.providerForPIN(pin, number: number)
+            let endpoint = provider.endpointClosure(ArtsyAPI.Me)
             let request = provider.endpointResolver(endpoint: endpoint)
 
-            let address = request.URL!.absoluteString!
+            let address = request.URL!.absoluteString
             expect(address).to( contain(auctionID) )
             expect(address).to( contain(pin) )
             expect(address).to( contain(number) )

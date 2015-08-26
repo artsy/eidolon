@@ -99,8 +99,6 @@ class KeypadViewModelTests: QuickSpec {
                 RAC(testHarness, "stringValue") <~ subject.stringValueSignal
                 RAC(testHarness, "intValue") <~ subject.intValueSignal
                 
-                var completed = false
-                
                 [1,3,3].reduce(RACSignal.empty(), combine: { (signal, input) -> RACSignal in
                     signal.then { subject.addDigitCommand.execute(input) }
                 }).then {

@@ -19,7 +19,7 @@ public extension String {
         }
     }
 
-    public func toUInt(defaultValue: UInt) -> UInt {
+    public func toUIntWithDefault(defaultValue: UInt) -> UInt {
         let i = Int(self)
         if let i = i {
             return UInt(i)

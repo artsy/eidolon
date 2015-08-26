@@ -177,6 +177,6 @@ public class StubFulfillmentController: FulfillmentController {
 
     public var auctionID: String! = ""
     public var xAccessToken: String?
-    public var loggedInProvider: ReactiveMoyaProvider<ArtsyAPI>? = Provider.StubbingProvider()
-    public var loggedInOrDefaultProvider: ReactiveMoyaProvider<ArtsyAPI> = Provider.StubbingProvider()
+    public var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>? = Provider.StubbingProvider()
+    public var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.StubbingProvider()
 }

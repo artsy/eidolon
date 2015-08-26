@@ -6,7 +6,7 @@ import Nimble_Snapshots
 
 class PlaceBidViewControllerConfiguration: QuickConfiguration {
     override class func configure(configuration: Configuration) {
-        sharedExamples("a bid view controller view controller", { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a bid view controller view controller", closure: { (sharedExampleContext: SharedExampleContext) in
             var subject: PlaceBidViewController!
             var nav: FulfillmentNavigationController!
 
@@ -42,7 +42,7 @@ class PlaceBidViewControllerConfiguration: QuickConfiguration {
 class PlaceBidViewControllerTests: QuickSpec {
     override func spec() {
         var subject: PlaceBidViewController!
-        var artworkJSON: [String: AnyObject] = [
+        let artworkJSON: [String: AnyObject] = [
             "id":"artwork_id",
             "title" : "The Artwork Title",
             "date": "23rd Nov",
@@ -81,7 +81,6 @@ class PlaceBidViewControllerTests: QuickSpec {
             var nav: FulfillmentNavigationController!
 
             beforeEach {
-                let customKeySubject = RACSubject()
                 nav = FulfillmentNavigationController(rootViewController:subject)
 
                 let artwork = Artwork.fromJSON(artworkJSON) as! Artwork
@@ -117,7 +116,6 @@ class PlaceBidViewControllerTests: QuickSpec {
             var nav: FulfillmentNavigationController!
 
             beforeEach {
-                let customKeySubject = RACSubject()
                 nav = FulfillmentNavigationController(rootViewController:subject)
 
                 let artwork = Artwork.fromJSON(artworkJSON) as! Artwork
