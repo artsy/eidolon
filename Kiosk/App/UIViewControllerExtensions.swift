@@ -24,7 +24,7 @@ public extension UIViewController {
     }
 
     public func findChildViewControllerOfType(klass: AnyClass) -> UIViewController? {
-        for child in childViewControllers as! [UIViewController] {
+        for child in childViewControllers {
             if child.isKindOfClass(klass) {
                 return child
             }

@@ -8,7 +8,7 @@ import Moya
 
 class ListingsViewControllerConfiguration: QuickConfiguration {
     override class func configure(configuration: Configuration) {
-        sharedExamples("a listings controller", { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a listings controller", closure: { (sharedExampleContext: SharedExampleContext) in
             var subject: ListingsViewController!
 
             beforeEach{
@@ -69,7 +69,7 @@ class ListingsViewControllerTests: QuickSpec {
                 beforeEach {
                     subject.beginAppearanceTransition(true, animated: false)
                     subject.endAppearanceTransition()
-                    subject.saleArtworks.map { $0.lotNumber = 13 }
+                    subject.saleArtworks.forEach { $0.lotNumber = 13 }
                 }
                 itBehavesLike("a listings controller") { ["subject": subject] }
             }
@@ -78,7 +78,7 @@ class ListingsViewControllerTests: QuickSpec {
                 beforeEach {
                     subject.beginAppearanceTransition(true, animated: false)
                     subject.endAppearanceTransition()
-                    subject.saleArtworks.map { $0.artwork.soldStatus = "sold" }
+                    subject.saleArtworks.forEach { $0.artwork.soldStatus = "sold" }
                 }
 
                 itBehavesLike("a listings controller") { ["subject": subject] }
@@ -101,7 +101,7 @@ class ListingsViewControllerTests: QuickSpec {
                     switch target {
                     case ArtsyAPI.AuctionListings:
                         if let page = target.parameters["page"] as? Int {
-                            return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {listingsDataForPage(page, bidCount, saleArtworksCount)}), method: target.method, parameters: target.parameters)
+                            return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {listingsDataForPage(page, bidCount: bidCount, modelCount: saleArtworksCount)}), method: target.method, parameters: target.parameters)
                         } else {
                             return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
                         }
@@ -110,7 +110,7 @@ class ListingsViewControllerTests: QuickSpec {
                     }
                 }
                 
-                Provider.sharedProvider = ArtsyProvider(endpointsClosure: endpointsClosure, endpointResolver: endpointResolver(), stubResponses: true, onlineSignal: { RACSignal.empty() })
+                Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, endpointResolver: endpointResolver(), stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: { RACSignal.empty() })
             }
             
             it("paginates to the second page to retrieve all three sale artworks") {
@@ -120,7 +120,7 @@ class ListingsViewControllerTests: QuickSpec {
                 subject.beginAppearanceTransition(true, animated: false)
                 subject.endAppearanceTransition()
 
-                let numberOfSaleArtworks = count(subject.saleArtworks)
+                let numberOfSaleArtworks = subject.saleArtworks.count
                 expect(numberOfSaleArtworks) == 3
             }
             
@@ -132,7 +132,7 @@ class ListingsViewControllerTests: QuickSpec {
                 subject.endAppearanceTransition()
 
                 let firstSale = subject.saleArtworks[0]
-                expect(subject.saleArtworks[0].bidCount) == initialBidCount
+                expect(firstSale.bidCount) == initialBidCount
                 
                 bidCount = finalBidCount
                 expect(subject.saleArtworks[0].bidCount).toEventually(equal(finalBidCount), timeout: 3, pollInterval: 0.6)
@@ -146,10 +146,10 @@ class ListingsViewControllerTests: QuickSpec {
                 subject.endAppearanceTransition()
                 
                 saleArtworksCount = 2
-                expect(count(subject.saleArtworks)) == 2
+                expect(subject.saleArtworks.count) == 2
                 
                 saleArtworksCount = 5
-                expect(count(subject.saleArtworks)).toEventually(equal(5), timeout: 3, pollInterval: 0.6)
+                expect(subject.saleArtworks.count).toEventually(equal(5), timeout: 3, pollInterval: 0.6)
             }
         }
     }
@@ -180,11 +180,8 @@ func testListingsViewController(storyboard: UIStoryboard = auctionStoryboard) ->
     return subject
 }
 
-func listingsDataForPage(page: Int, bidCount: Int, _count: Int?) -> NSData {
-    var count = page == 1 ? 2 : 1
-    if _count != nil {
-        count = _count!
-    }
+func listingsDataForPage(page: Int, bidCount: Int, modelCount: Int?) -> NSData {
+    let count = modelCount ?? (page == 1 ? 2 : 1)
     
     let models = Array<Int>(1...count).reduce(NSArray(), combine: { (memo: NSArray, page: Int) -> NSArray in
         let model = [
@@ -201,5 +198,5 @@ func listingsDataForPage(page: Int, bidCount: Int, _count: Int?) -> NSData {
         return memo.arrayByAddingObject(model)
     })
     
-    return NSJSONSerialization.dataWithJSONObject(models, options: nil, error: nil)!
+    return try! NSJSONSerialization.dataWithJSONObject(models, options: [])
 }

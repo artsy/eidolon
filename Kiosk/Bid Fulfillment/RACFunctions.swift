@@ -18,21 +18,21 @@ public func centsToPresentableDollarsString(cents:AnyObject!) -> AnyObject! {
 }
 
 public func isZeroLengthString(string: AnyObject!) -> AnyObject! {
-    return count(string as! String) == 0
+    return (string as! String).isEmpty
 }
 
 public func isStringLengthIn(range: Range<Int>)(string: AnyObject!) -> AnyObject! {
-    return contains(range, count(string as! String))
+    return range.contains((string as! String).characters.count)
 }
 
 public func isStringOfLength(length: Int)(string: AnyObject!) -> AnyObject! {
-    return count(string as! String) == length
+    return (string as! String).characters.count == length
 }
 
 public func isStringLengthAtLeast(length: Int)(string: AnyObject!) -> AnyObject! {
-    return count(string as! String) >= length
+    return (string as! String).characters.count >= length
 }
 
 public func isStringLengthOneOf(lengths: [Int])(string: AnyObject!) -> AnyObject! {
-    return contains(lengths, count(string as! String))
+    return lengths.contains((string as! String).characters.count)
 }

@@ -2,7 +2,7 @@ import UIKit
 
 class AppSetup {
 
-    lazy var auctionID = "los-angeles-modern-auctions-march-2015"
+    var auctionID = "los-angeles-modern-auctions-march-2015"
     lazy var useStaging = true
     lazy var showDebugButtons = false
     lazy var disableCardReader = false
@@ -25,6 +25,6 @@ class AppSetup {
         showDebugButtons = defaults.boolForKey("KioskShowDebugButtons")
         disableCardReader = defaults.boolForKey("KioskDisableCardReader")
 
-        if let inTests: AnyClass = NSClassFromString("XCTest") { isTesting = true }
+        if let _ = NSClassFromString("XCTest") { isTesting = true }
     }
 }

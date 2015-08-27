@@ -38,7 +38,7 @@ class RegisterViewController: UIViewController {
         bidDetailsPreviewView.bidDetails = details
 
         flowView.jumpToIndexSignal.subscribeNext { [weak self] (index) -> Void in
-            if let nav = self?.fulfillmentNav() {
+            if let _ = self?.fulfillmentNav() {
                 let registrationIndex = RegistrationIndex.fromInt(index as! Int)
 
                 let nextVC = self?.coordinator.viewControllerForIndex(registrationIndex)

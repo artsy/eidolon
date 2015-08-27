@@ -7,7 +7,7 @@ import Moya
 
 class RegistrationPasswordViewControllerTests: QuickSpec {
 
-    func testSubject(emailExists: Bool = false) -> RegistrationPasswordViewController {
+    func testSubject(emailExists emailExists: Bool = false) -> RegistrationPasswordViewController {
 
         class TestViewModel: RegistrationPasswordViewModel {
             init (emailExists: Bool = false) {

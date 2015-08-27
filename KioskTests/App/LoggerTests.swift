@@ -3,8 +3,8 @@ import Nimble
 import Kiosk
 
 func logPath() -> NSURL {
-    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last as! NSURL
-    return docs.URLByAppendingPathComponent("logger.txt")
+    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
+    return docs!.URLByAppendingPathComponent("logger.txt")
 }
 
 class LoggerTests: QuickSpec {
@@ -15,13 +15,13 @@ class LoggerTests: QuickSpec {
 
             logger.log(testString)
 
-            let fileContents = NSString(contentsOfURL: logPath(), encoding: NSUTF8StringEncoding, error: nil)
+            let fileContents = try! NSString(contentsOfURL: logPath(), encoding: NSUTF8StringEncoding)
 
             expect(fileContents).to(contain(testString))
         }
 
         afterEach { () -> () in
-            NSFileManager.defaultManager().removeItemAtURL(logPath(), error: nil)
+            try! NSFileManager.defaultManager().removeItemAtURL(logPath())
             return
         }
     }

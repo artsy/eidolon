@@ -26,7 +26,7 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         // I couldn't figure how to swizzle this out like we do in objc.
-        if let inTests: AnyClass = NSClassFromString("XCTest") { return true }
+        if let _ = NSClassFromString("XCTest") { return true }
 
         // Clear possible old contents from cache and defaults. 
         let imageCache = SDImageCache.sharedImageCache()
@@ -37,7 +37,7 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenExpiry.rawValue)
 
         let auctionStoryboard = UIStoryboard.auction()
-        window?.rootViewController = auctionStoryboard.instantiateInitialViewController() as? UIViewController
+        window?.rootViewController = auctionStoryboard.instantiateInitialViewController()
         window?.makeKeyAndVisible()
 
         let keys = EidolonKeys()
@@ -69,7 +69,7 @@ public class AppDelegate: UIResponder, UIApplicationDelegate {
         let agentString = "\(oldAgent) Artsy-Mobile/\(version!) Eigen/\(build!) Kiosk Eidolon"
 
         let defaults = NSUserDefaults.standardUserDefaults()
-        let userAgentDict = ["UserAgent" as NSObject : agentString]
+        let userAgentDict = ["UserAgent": agentString]
         defaults.registerDefaults(userAgentDict)
     }
 }

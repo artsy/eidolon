@@ -4,7 +4,7 @@ import Artsy_UIButtons
 
 public class Button: ARFlatButton {
 
-    public override func  setup() {
+    public override func setup() {
         super.setup()
         setTitleShadowColor(UIColor.clearColor(), forState: .Normal)
         setTitleShadowColor(UIColor.clearColor(), forState: .Highlighted)

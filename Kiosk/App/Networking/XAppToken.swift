@@ -56,7 +56,7 @@ public struct XAppToken {
     
     public var isValid: Bool {
         if let token = token {
-            return count(token) > 0 && !expired
+            return token.isNotEmpty && !expired
         }
             
         return false

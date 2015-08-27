@@ -12,7 +12,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBOutlet var confirmCredentialsButton: Button!
 
     var createNewAccount = false
-    lazy var provider:ReactiveMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    lazy var provider:ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
@@ -22,7 +22,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         super.viewDidLoad()
 
         let titleString = useArtsyBidderButton.titleForState(useArtsyBidderButton.state)! ?? ""
-        var attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
+        let attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
             NSFontAttributeName: useArtsyBidderButton.titleLabel!.font];
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyBidderButton.setAttributedTitle(attrTitle, forState:useArtsyBidderButton.state)
@@ -45,7 +45,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
             if (self == nil) {
                 return RACSignal.empty()
             }
-            return self!.xAuthSignal().try { (accessTokenDict, errorPointer) -> Bool in
+            return self!.xAuthSignal().`try` { (accessTokenDict, errorPointer) -> Bool in
                 if let accessToken = accessTokenDict["access_token"] as? String {
                     self?.fulfillmentNav().xAccessToken = accessToken
                     return true
@@ -61,7 +61,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
                 return self?.creditCardSignal().doNext { (cards) -> Void in
                     if (self == nil) { return }
 
-                    if count(cards as! [Card]) > 0 {
+                    if cards.count > 0 {
                         self!.performSegue(.EmailLoginConfirmedHighestBidder)
                     } else {
                         self!.performSegue(.ArtsyUserHasNotRegisteredCard)
@@ -78,7 +78,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if count(emailTextField.text) == 0 {
+        if (emailTextField.text ?? "").isEmpty {
             emailTextField.becomeFirstResponder()
         } else {
             passwordTextField.becomeFirstResponder()
@@ -93,7 +93,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     }
 
     func xAuthSignal() -> RACSignal {
-        let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: emailTextField.text, password: passwordTextField.text)
+        let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
         return provider.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
     }
     
@@ -101,8 +101,8 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .Alert)
 
         let submitAction = UIAlertAction(title: "Send", style: .Default) { [weak alertController] (_) in
-            let emailTextField = alertController!.textFields![0] as! UITextField
-            self.sendForgotPasswordRequest(emailTextField.text)
+            let emailTextField = alertController!.textFields![0]
+            self.sendForgotPasswordRequest(emailTextField.text ?? "")
             return
         }
 
@@ -128,7 +128,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     func sendForgotPasswordRequest(email: String) {
         let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
-        XAppRequest(endpoint).filterSuccessfulStatusCodes().subscribeNext { [weak self] (json) -> Void in
+        XAppRequest(endpoint).filterSuccessfulStatusCodes().subscribeNext { (json) -> Void in
             logger.log("Sent forgot password request")
         }
     }
@@ -142,7 +142,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBAction func useBidderTapped(sender: AnyObject) {
         for controller in navigationController!.viewControllers {
             if controller.isKindOfClass(ConfirmYourBidViewController.self) {
-                navigationController!.popToViewController(controller as! UIViewController, animated:true);
+                navigationController!.popToViewController(controller, animated:true);
                 break;
             }
         }

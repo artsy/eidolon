@@ -19,7 +19,7 @@ class ChooseAuctionViewController: UIViewController {
             .subscribeNext({ [weak self] (activeSales) -> Void in
                 self!.auctions = activeSales as! [Sale]
 
-                for i in 0 ..< count(self!.auctions) {
+                for i in 0 ..< self!.auctions.count {
                     let sale = self!.auctions[i]
                     let title = " \(sale.name) - #\(sale.auctionState) - \(sale.artworkCount)"
 

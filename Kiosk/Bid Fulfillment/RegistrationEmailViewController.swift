@@ -28,7 +28,7 @@ public class RegistrationEmailViewController: UIViewController, RegistrationSubC
     public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
         // Allow delete
-        if (count(string) == 0) { return true }
+        if (string.isEmpty) { return true }
 
         // the API doesn't accept spaces
         return string != " "

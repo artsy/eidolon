@@ -11,7 +11,7 @@ let testEmail = "test@example.com"
 class RegistrationPasswordViewModelTests: QuickSpec {
 
     typealias Check = (() -> ())?
-    func stubProvider(#emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) {
+    func stubProvider(emailExists emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) {
         let endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
 
             switch target {
@@ -39,7 +39,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             }
         }
 
-        Provider.sharedProvider = ArtsyProvider(endpointsClosure: endpointsClosure, stubResponses: true, onlineSignal: { RACSignal.empty() })
+        Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: { RACSignal.empty() })
     }
 
     func testSubject(passwordSubject: RACSignal = RACSignal.`return`(testPassword), invocationSignal: RACSignal = RACSubject(), finishedSubject: RACSubject = RACSubject()) -> RegistrationPasswordViewModel {
@@ -56,7 +56,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("enables the command only when the password is valid") {
             let passwordSubject = RACSubject()
 
-            let subject = self.testSubject(passwordSubject: passwordSubject)
+            let subject = self.testSubject(passwordSubject)
 
             passwordSubject.sendNext("nope")
             expect((subject.command.enabled.first() as! Bool)).toEventually( beFalse() )

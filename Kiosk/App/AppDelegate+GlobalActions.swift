@@ -34,8 +34,8 @@ public extension AppDelegate {
         RACObserve(self, "helpViewController").notNil().subscribeNext {
             let isVisible = $0 as! Bool
 
-            var image: UIImage? = isVisible ?  UIImage(named: "xbtn_white")?.imageWithRenderingMode(.AlwaysOriginal) : nil
-            var text: String? = isVisible ? nil : "HELP"
+            let image: UIImage? = isVisible ?  UIImage(named: "xbtn_white")?.imageWithRenderingMode(.AlwaysOriginal) : nil
+            let text: String? = isVisible ? nil : "HELP"
 
             self.helpButton.setTitle(text, forState: .Normal)
             self.helpButton.setImage(image, forState: .Normal)
@@ -238,7 +238,7 @@ private extension AppDelegate {
     // MARK: - Computed property signals
 
     var fullfilmentVisibleSignal: RACSignal {
-        return RACSignal.defer {
+        return RACSignal.`defer` {
             return RACSignal.createSignal { (subscriber) -> RACDisposable! in
                 subscriber.sendNext((self.appViewController.presentedViewController as? FulfillmentContainerViewController) != nil)
                 subscriber.sendCompleted()

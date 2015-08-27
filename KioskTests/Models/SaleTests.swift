@@ -32,7 +32,7 @@ class SaleTests: QuickSpec {
                 let artsyTime = SystemTime()
                 artsyTime.systemTimeInterval = 0
 
-                let date = NSDate.distantPast() as! NSDate
+                let date = NSDate.distantPast()
                 let dateString = self.stringFromDate(date)
 
                 let data:[String: AnyObject] =  ["start_at": dateString, "end_at" : dateString]
@@ -45,10 +45,10 @@ class SaleTests: QuickSpec {
                 let artsyTime = SystemTime()
                 artsyTime.systemTimeInterval = 0
 
-                let pastDate = NSDate.distantPast() as! NSDate
+                let pastDate = NSDate.distantPast()
                 let pastString = self.stringFromDate(pastDate)
 
-                let futureDate = NSDate.distantFuture() as! NSDate
+                let futureDate = NSDate.distantFuture()
                 let futureString = self.stringFromDate(futureDate)
 
                 let data:[String: AnyObject] =  ["start_at": pastString, "end_at" : futureString]
@@ -62,7 +62,7 @@ class SaleTests: QuickSpec {
                 let artsyTime = SystemTime()
                 artsyTime.systemTimeInterval = 0
 
-                let date = NSDate.distantFuture() as! NSDate
+                let date = NSDate.distantFuture()
                 let dateString = self.stringFromDate(date)
 
                 let data:[String: AnyObject] =  ["start_at": dateString, "end_at" : dateString]

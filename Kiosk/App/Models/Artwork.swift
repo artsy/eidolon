@@ -65,7 +65,7 @@ public class Artwork: JSONAble {
         let price = json["price"].stringValue
         let date = json["date"].stringValue
         let sold = json["sold"].stringValue
-        let titleAndDate = titleAndDateAttributedString(title, dateString)
+        let titleAndDate = titleAndDateAttributedString(title, dateString: dateString)
         
         let artwork = Artwork(id: id, dateString: dateString, title: title, titleAndDate:titleAndDate, price: price, date: date, sold: sold)
 
@@ -81,7 +81,7 @@ public class Artwork: JSONAble {
             // There's a possibility that image_versions comes back as null from the API, which fromJSON() is allergic to.
             artwork.images = imageDicts.filter { dict -> Bool in
                 let imageVersions = (dict["image_versions"] as? [String]) ?? []
-                return count(imageVersions) > 0
+                return imageVersions.count > 0
             }.map { return Image.fromJSON($0) as! Image }
         }
 
@@ -109,11 +109,11 @@ public class Artwork: JSONAble {
 }
 
 private func titleAndDateAttributedString(title: String, dateString: String) -> NSAttributedString {
-    let workTitle = count(title) > 0 ? title : "Untitled"
+    let workTitle = title.isEmpty ? "Untitled" : title
     let workFont = UIFont.serifItalicFontWithSize(16)
-    var attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSFontAttributeName : workFont ])
+    let attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSFontAttributeName : workFont ])
     
-    if count(dateString) > 0 {
+    if dateString.isNotEmpty {
         let dateFont = UIFont.serifFontWithSize(16)
         let dateString = NSMutableAttributedString(string: ", " + dateString, attributes: [ NSFontAttributeName : dateFont ])
         attributedString.appendAttributedString(dateString)

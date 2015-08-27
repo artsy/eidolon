@@ -6,7 +6,7 @@ import Swift_RAC_Macros
 import ReactiveCocoa
 
 public class HelpViewController: UIViewController {
-    var positionConstraints: NSArray?
+    var positionConstraints: [NSLayoutConstraint]?
     var dismissTapGestureRecognizer: UITapGestureRecognizer?
     
     private let stackView = ORTagBasedAutoStackView()
@@ -23,11 +23,11 @@ public class HelpViewController: UIViewController {
     }
     
     var registerToBidCommand = { (enabledSignal: RACSignal) -> RACCommand in
-        appDelegate().registerToBidCommand(enabledSignal: enabledSignal)
+        appDelegate().registerToBidCommand(enabledSignal)
     }
     
     var requestBidderDetailsCommand = { (enabledSignal: RACSignal) -> RACCommand in
-        appDelegate().requestBidderDetailsCommand(enabledSignal: enabledSignal)
+        appDelegate().requestBidderDetailsCommand(enabledSignal)
     }
     
     var showPrivacyPolicyCommand = { () -> RACCommand in
@@ -157,7 +157,7 @@ private extension HelpViewController {
         label.preferredMaxLayoutWidth = CGFloat(HelpViewController.width - sideMargin)
         label.tag = tag.rawValue
         
-        var paragraphStyle = NSMutableParagraphStyle()
+        let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 4
         
         label.attributedText = NSAttributedString(string: text, attributes: [NSParagraphStyleAttributeName: paragraphStyle])

@@ -7,7 +7,7 @@ import Moya
 
 func beInTheFuture() -> MatcherFunc<NSDate> {
     return MatcherFunc { actualExpression, failureMessage in
-        let instance = actualExpression.evaluate()!
+        let instance = try! actualExpression.evaluate()!
         let now = NSDate()
         return instance.compare(now) == NSComparisonResult.OrderedDescending
     }
@@ -49,7 +49,7 @@ class ArtsyAPISpec: QuickSpec {
             }
             
             it("returns some data") {
-                setDefaultsKeys(defaults, nil, nil)
+                setDefaultsKeys(defaults, key: nil, expiry: nil)
                 
                 var called = false
 
@@ -62,7 +62,7 @@ class ArtsyAPISpec: QuickSpec {
             }
             
             it("gets XApp token if it doesn't exist yet") {
-                setDefaultsKeys(defaults, nil, nil)
+                setDefaultsKeys(defaults, key: nil, expiry: nil)
                 
                 newXAppRequest().subscribeNext({ (object) -> Void in
                     // nop
@@ -76,7 +76,7 @@ class ArtsyAPISpec: QuickSpec {
             
             it("gets XApp token if it has expired") {
                 let past = NSDate(timeIntervalSinceNow: -1000)
-                setDefaultsKeys(defaults, "some expired key", past)
+                setDefaultsKeys(defaults, key: "some expired key", expiry: past)
                 
                 newXAppRequest().subscribeNext({ (object) -> Void in
                     // nop

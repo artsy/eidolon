@@ -74,7 +74,7 @@ public class ListingsViewController: UIViewController {
 
                     var nextPageSignal = RACSignal.empty()
 
-                    if count(array) >= (self?.pageSize ?? 0) {
+                    if array.count >= (self?.pageSize ?? 0) {
                         // Infer we have more results to retrieve
                         nextPageSignal = self?.retrieveAllListingsRequestSignal(auctionID, page: page+1) ?? RACSignal.empty()
                     }
@@ -93,8 +93,8 @@ public class ListingsViewController: UIViewController {
             // object is an array of arrays (thanks to collect()). We need to flatten it.
             
             let array = object as? Array<Array<AnyObject>>
-            return reduce(array ?? [], Array<AnyObject>(), +)
-        }).mapToObjectArray(SaleArtwork.self).catch({ (error) -> RACSignal! in
+            return (array ?? []).reduce(Array<AnyObject>(), combine: +)
+    }).mapToObjectArray(SaleArtwork.self).`catch`({ (error) -> RACSignal! in
             
             logger.log("Sale Artworks: Error handling thing: \(error.artsyServerError())")
 
@@ -114,18 +114,18 @@ public class ListingsViewController: UIViewController {
             let currentSaleArtworks = self!.saleArtworks
             
             func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) -> Bool {
-                assert(count(currentSaleArtworks) == count(newSaleArtworks), "Arrays' counts must be equal.")
+                assert(currentSaleArtworks.count == newSaleArtworks.count, "Arrays' counts must be equal.")
                 // Updating the currentSaleArtworks is easy. First we sort both according to the same criteria
                 // Because we assume that their length is the same, we just do a linear scane through and
                 // copy values from the new to the old.
                 
-                let sortedCurentSaleArtworks = currentSaleArtworks.sorted(sortById)
-                let sortedNewSaleArtworks = newSaleArtworks.sorted(sortById)
+                let sortedCurentSaleArtworks = currentSaleArtworks.sort(sortById)
+                let sortedNewSaleArtworks = newSaleArtworks.sort(sortById)
                 
-                let saleArtworksCount = count(sortedCurentSaleArtworks)
+                let saleArtworksCount = sortedCurentSaleArtworks.count
                 for var i = 0; i < saleArtworksCount; i++ {
                     if currentSaleArtworks[i].id == newSaleArtworks[i].id {
-                        currentSaleArtworks[i].updateWithValues(newSaleArtworks[i])
+                        currentSaleArtworks[i].updateWithValues(sortedNewSaleArtworks[i])
                     } else {
                         // Failure: the list was the same size but had different artworks
                         return false
@@ -139,8 +139,8 @@ public class ListingsViewController: UIViewController {
             // then update the individual values in the current array and return the existing value.
             // If the array's length has changed, then we pass through the new array
             if let newSaleArtworks = newSaleArtworks as? Array<SaleArtwork> {
-                if count(newSaleArtworks) == count(currentSaleArtworks) {
-                    if update(currentSaleArtworks, newSaleArtworks) {
+                if newSaleArtworks.count == currentSaleArtworks.count {
+                    if update(currentSaleArtworks, newSaleArtworks: newSaleArtworks) {
                         return currentSaleArtworks
                     }
                 }
@@ -152,14 +152,14 @@ public class ListingsViewController: UIViewController {
     
     // Adapted from https://github.com/FUKUZAWA-Tadashi/FHCCommander/blob/67c67757ee418a106e0ce0c0820459299b3d77bb/fhcc/Convenience.swift#L33-L44
     func getSSID() -> String? {
-        let interfaces: CFArray! = CNCopySupportedInterfaces()?.takeRetainedValue()
+        let interfaces: CFArray! = CNCopySupportedInterfaces()
         if interfaces == nil { return nil }
         
         let if0: UnsafePointer<Void>? = CFArrayGetValueAtIndex(interfaces, 0)
         if if0 == nil { return nil }
         
         let interfaceName: CFStringRef = unsafeBitCast(if0!, CFStringRef.self)
-        let dictionary = CNCopyCurrentNetworkInfo(interfaceName)?.takeRetainedValue() as NSDictionary?
+        let dictionary = CNCopyCurrentNetworkInfo(interfaceName) as NSDictionary?
         if dictionary == nil { return nil }
         
         return dictionary?[kCNNetworkInfoKeySSID as String] as? String
@@ -250,7 +250,7 @@ public class ListingsViewController: UIViewController {
         sortedSaleArtworksSignal.dispatchAsyncMainScheduler().subscribeNext { [weak self] in
             let array = ($0 ?? []) as! [SaleArtwork]
 
-            if count(array) > 0 {
+            if array.count > 0 {
                 // Need to dispatch, since the changes in the CV's model aren't imediate
                 self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
             }
@@ -287,10 +287,10 @@ public class ListingsViewController: UIViewController {
 
 extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, ARCollectionViewMasonryLayoutDelegate {
     public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return count(sortedSaleArtworks)
+        return sortedSaleArtworks.count
     }
   public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) 
         
         if let listingsCell = cell as? ListingsCollectionViewCell {
 
@@ -354,7 +354,7 @@ private extension ListingsViewController {
     // MARK: Class methods
     
     class func masonryLayout() -> ARCollectionViewMasonryLayout {
-        var layout = ARCollectionViewMasonryLayout(direction: .Vertical)
+        let layout = ARCollectionViewMasonryLayout(direction: .Vertical)
         layout.itemMargins = CGSizeMake(65, 20)
         layout.dimensionLength = CGFloat(MasonryCollectionViewCellWidth)
         layout.rank = 3
@@ -382,27 +382,27 @@ private extension ListingsViewController {
 
 // MARK: - Sorting Functions
 
-func leastBidsSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+func leastBidsSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
     return (lhs.bidCount ?? 0) < (rhs.bidCount ?? 0)
 }
 
-func mostBidsSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+func mostBidsSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
     return !leastBidsSort(lhs, rhs)
 }
 
-func lowestCurrentBidSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+func lowestCurrentBidSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
     return (lhs.highestBidCents ?? 0) < (rhs.highestBidCents ?? 0)
 }
 
-func highestCurrentBidSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+func highestCurrentBidSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
     return !lowestCurrentBidSort(lhs, rhs)
 }
 
-func alphabeticalSort(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+func alphabeticalSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
     return lhs.artwork.sortableArtistID().caseInsensitiveCompare(rhs.artwork.sortableArtistID()) == .OrderedAscending
 }
 
-func sortById(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+func sortById(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
     return lhs.id.caseInsensitiveCompare(rhs.id) == .OrderedAscending
 }
 
@@ -438,15 +438,15 @@ enum SwitchValues: Int {
         case Grid:
             return saleArtworks
         case LeastBids:
-            return saleArtworks.sorted(leastBidsSort)
+            return saleArtworks.sort(leastBidsSort)
         case MostBids:
-            return saleArtworks.sorted(mostBidsSort)
+            return saleArtworks.sort(mostBidsSort)
         case HighestCurrentBid:
-            return saleArtworks.sorted(highestCurrentBidSort)
+            return saleArtworks.sort(highestCurrentBidSort)
         case LowestCurrentBid:
-            return saleArtworks.sorted(lowestCurrentBidSort)
+            return saleArtworks.sort(lowestCurrentBidSort)
         case Alphabetical:
-            return saleArtworks.sorted(alphabeticalSort)
+            return saleArtworks.sort(alphabeticalSort)
         }
     }
     

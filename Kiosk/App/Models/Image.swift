@@ -77,21 +77,11 @@ public class Image: JSONAble {
         return urlFromPreferenceList(["larger", "large", "medium"])
     }
 
-    public func localImageTileForLevel(level:Int, x:Int, y:Int) -> UIImage? {
-        let path = localPathForImageTileAtLevel(level, x:x, y:y)
-        return UIImage(contentsOfFile:path as String)
-    }
-
     private func urlFromPreferenceList(preferenceList: Array<String>) -> NSURL? {
-        if let format = preferenceList.filter({ contains(self.imageVersions, $0) }).first {
+        if let format = preferenceList.filter({ self.imageVersions.contains($0) }).first {
             let path = NSString(string: self.imageFormatString).stringByReplacingOccurrencesOfString(":version", withString: format)
             return NSURL(string: path)
         }
         return nil
-    }
-
-    func localPathForImageTileAtLevel(level:Int, x:Int, y:Int) -> NSString {
-        let directoryURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0] as! NSURL
-        return ""
     }
 }

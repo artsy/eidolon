@@ -37,10 +37,10 @@ func setupProviderForSuite(provider: ArtsyProvider<ArtsyAPI>) {
 
 func yearFromDate(date: NSDate) -> Int {
     let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-    return calendar.components(.CalendarUnitYear, fromDate: date).year
+    return calendar.components(.Year, fromDate: date).year
 }
 
-@objc class TestClass { }
+@objc class TestClass: NSObject { }
 
 // Necessary since UIImage(named:) doesn't work correctly in the test bundle
 extension UIImage {

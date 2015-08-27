@@ -11,7 +11,7 @@ class CardHandlerTests: QuickSpec {
         let accountToken = "dxcvxfvdfgvxcv"
 
         beforeEach {
-            var manager = CFTSessionManager()
+            let manager = CFTSessionManager()
             self.reader = LocalCardReader()
 
             self.handler = CardHandler(apiKey: apiKey, accountToken: accountToken)

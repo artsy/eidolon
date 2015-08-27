@@ -36,14 +36,14 @@ public extension UIViewController {
 
 extension UIAlertController {
     class func successfulBidderDetailsAlertController() -> UIAlertController {
-        let alertController = self(title: "Your details have been sent", message: nil, preferredStyle: .Alert)
+        let alertController = self.init(title: "Your details have been sent", message: nil, preferredStyle: .Alert)
         alertController.addAction(RACAlertAction(title: "OK", style: .Default))
         
         return alertController
     }
     
     class func failedBidderDetailsAlertController() -> UIAlertController {
-        let alertController = self(title: "Incorrect Email", message: "Email was not recognized. You may not be registered to bid yet.", preferredStyle: .Alert)
+        let alertController = self.init(title: "Incorrect Email", message: "Email was not recognized. You may not be registered to bid yet.", preferredStyle: .Alert)
         alertController.addAction(RACAlertAction(title: "Cancel", style: .Cancel))
         
         let retryAction = RACAlertAction(title: "Retry", style: .Default)
@@ -55,13 +55,13 @@ extension UIAlertController {
     }
     
     class func emailPromptAlertController() -> (UIAlertController, RACCommand) {
-        let alertController = self(title: "Send Bidder Details", message: "Enter your email address registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
+        let alertController = self.init(title: "Send Bidder Details", message: "Enter your email address registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
 
         let ok = RACAlertAction(title: "OK", style: .Default)
         ok.command = RACCommand { (_) -> RACSignal! in
             
             return RACSignal.createSignal { (subscriber) -> RACDisposable! in
-                let text = (alertController.textFields?.first as? UITextField)?.text ?? ""
+                let text = (alertController.textFields?.first)?.text ?? ""
                 subscriber.sendNext(text)
                 return nil
             }
