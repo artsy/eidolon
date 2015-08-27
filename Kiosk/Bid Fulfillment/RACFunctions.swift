@@ -18,7 +18,7 @@ public func centsToPresentableDollarsString(cents:AnyObject!) -> AnyObject! {
 }
 
 public func isZeroLengthString(string: AnyObject!) -> AnyObject! {
-    return (string as! String).characters.count == 0
+    return (string as! String).isEmpty
 }
 
 public func isStringLengthIn(range: Range<Int>)(string: AnyObject!) -> AnyObject! {

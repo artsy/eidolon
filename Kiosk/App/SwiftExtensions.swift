@@ -17,4 +17,8 @@ public extension String {
     public func toUIntWithDefault(defaultValue: UInt) -> UInt {
         return UInt(self) ?? defaultValue
     }
+
+    public var isNotEmpty: Bool {
+        return !isEmpty
+    }
 }

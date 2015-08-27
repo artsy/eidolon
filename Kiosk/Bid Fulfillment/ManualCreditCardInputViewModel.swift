@@ -56,7 +56,7 @@ public class ManualCreditCardInputViewModel: NSObject {
 
         // the API doesn't accept chars
         let notNumberChars = NSCharacterSet.decimalDigitCharacterSet().invertedSet;
-        return entry.stringByTrimmingCharactersInSet(notNumberChars).isEmpty == false
+        return entry.stringByTrimmingCharactersInSet(notNumberChars).isNotEmpty
     }
 
     /// MARK: - Private Methods

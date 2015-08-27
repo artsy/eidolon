@@ -32,7 +32,7 @@ public class RegistrationMobileViewController: UIViewController, RegistrationSub
 
         // the API doesn't accept chars
         let notNumberChars = NSCharacterSet.decimalDigitCharacterSet().invertedSet;
-        return string.stringByTrimmingCharactersInSet(notNumberChars).isEmpty == false
+        return string.stringByTrimmingCharactersInSet(notNumberChars).isNotEmpty
     }
 
     public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationMobileViewController {

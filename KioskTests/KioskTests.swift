@@ -8,7 +8,7 @@ extension UIViewController {
     func wrapInFulfillmentNav() -> UIViewController {
         let nav = FulfillmentNavigationController(rootViewController: self)
         nav.auctionID = ""
-        objc_setAssociatedObject(self, &AssociatedObjectHandle, nav, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        objc_setAssociatedObject(self, &AssociatedObjectHandle, nav, .OBJC_ASSOCIATION_RETAIN)
         return self
     }
 }

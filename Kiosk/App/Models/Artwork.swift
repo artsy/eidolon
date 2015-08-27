@@ -113,7 +113,7 @@ private func titleAndDateAttributedString(title: String, dateString: String) -> 
     let workFont = UIFont.serifItalicFontWithSize(16)
     let attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSFontAttributeName : workFont ])
     
-    if dateString.isEmpty == false {
+    if dateString.isNotEmpty {
         let dateFont = UIFont.serifFontWithSize(16)
         let dateString = NSMutableAttributedString(string: ", " + dateString, attributes: [ NSFontAttributeName : dateFont ])
         attributedString.appendAttributedString(dateString)

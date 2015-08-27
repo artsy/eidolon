@@ -27,7 +27,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
         RAC(pinTextField, "text") <~ pinSignal
         RAC(fulfillmentNav().bidDetails, "bidderPIN") <~ pinSignal
         
-        let pinExistsSignal = pinSignal.map { ($0 as! String).isEmpty == false }
+        let pinExistsSignal = pinSignal.map { ($0 as! String).isNotEmpty }
 
         bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
 

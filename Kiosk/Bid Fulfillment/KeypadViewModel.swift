@@ -50,7 +50,7 @@ private extension KeypadViewModel {
         return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
             if let strongSelf = self {
                 strongSelf.intValue = Int(strongSelf.intValue/10)
-                if !strongSelf.stringValue.isEmpty {
+                if strongSelf.stringValue.isNotEmpty {
                     let string = strongSelf.stringValue
                     strongSelf.stringValue = string.substringToIndex(string.endIndex.predecessor())
                 }

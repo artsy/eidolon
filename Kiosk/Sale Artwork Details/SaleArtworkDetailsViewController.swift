@@ -118,7 +118,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
         metadataStackView.addSubview(artworkNameLabel, withTopMargin: "10", sideMargin: "0")
 
         if let medium = saleArtwork.artwork.medium {
-            if medium.isEmpty == false {
+            if medium.isNotEmpty {
                 let mediumLabel = label(.Serif, tag: .ArtworkMediumLabel)
                 mediumLabel.text = medium
                 metadataStackView.addSubview(mediumLabel, withTopMargin: "22", sideMargin: "0")
@@ -132,10 +132,10 @@ public class SaleArtworkDetailsViewController: UIViewController {
         }
 
         retrieveImageRights().filter { (imageRights) -> Bool in
-            return (imageRights as? String ?? "").isEmpty == false
+            return (imageRights as? String ?? "").isNotEmpty
 
         }.subscribeNext { [weak self] (imageRights) -> Void in
-            if (imageRights as! String).isEmpty == false {
+            if (imageRights as! String).isNotEmpty {
                 let rightsLabel = label(.Serif, tag: .ImageRightsLabel)
                 rightsLabel.text = imageRights as? String
                 self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
@@ -312,7 +312,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
         additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "40")
 
         retrieveAdditionalInfo().filter { (info) -> Bool in
-            return (info as? String ?? "").isEmpty == false
+            return (info as? String ?? "").isNotEmpty
 
         }.subscribeNext { (info) -> Void in
             additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( info as! String )
@@ -320,7 +320,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
 
         if let artist = artist() {
             retrieveArtistBlurb().filter { (blurb) -> Bool in
-                return (blurb as? String ?? "").isEmpty == false
+                return (blurb as? String ?? "").isNotEmpty
 
                 }.subscribeNext { [weak self] (blurb) -> Void in
                     if self == nil {
