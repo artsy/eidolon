@@ -3,44 +3,44 @@ import ReactiveCocoa
 import Swift_RAC_Macros
 import Stripe
 
-public class ManualCreditCardInputViewModel: NSObject {
+class ManualCreditCardInputViewModel: NSObject {
 
     /// MARK: - Things the user is entering (expecting to be bound to signals)
 
-    public dynamic var cardFullDigits = ""
-    public dynamic var expirationMonth = ""
-    public dynamic var expirationYear = ""
+    dynamic var cardFullDigits = ""
+    dynamic var expirationMonth = ""
+    dynamic var expirationYear = ""
 
-    public private(set) var bidDetails: BidDetails!
-    public private(set) var finishedSubject: RACSubject?
+    private(set) var bidDetails: BidDetails!
+    private(set) var finishedSubject: RACSubject?
 
     /// Mark: - Public members
 
-    public init(bidDetails: BidDetails!, finishedSubject: RACSubject? = nil) {
+    init(bidDetails: BidDetails!, finishedSubject: RACSubject? = nil) {
         super.init()
 
         self.bidDetails = bidDetails
         self.finishedSubject = finishedSubject
     }
 
-    public var creditCardNumberIsValidSignal: RACSignal {
+    var creditCardNumberIsValidSignal: RACSignal {
         return RACObserve(self, "cardFullDigits").map(stripeManager.stringIsCreditCard)
     }
 
-    public var expiryDatesAreValidSignal: RACSignal {
+    var expiryDatesAreValidSignal: RACSignal {
         let monthSignal = RACObserve(self, "expirationMonth").map(isStringLengthIn(1..<3))
         let yearSignal = RACObserve(self, "expirationYear").map(isStringLengthOneOf([2,4]))
 
         return RACSignal.combineLatest([yearSignal, monthSignal]).and()
     }
 
-    public var moveToYearSignal: RACSignal {
+    var moveToYearSignal: RACSignal {
         return RACObserve(self, "expirationMonth").filter { (value) -> Bool in
             return (value as! String).characters.count == 2
         }
     }
 
-    public func registerButtonCommand() -> RACCommand {
+    func registerButtonCommand() -> RACCommand {
         let newUser = bidDetails.newUser
         let enabled = RACSignal.combineLatest([creditCardNumberIsValidSignal, expiryDatesAreValidSignal]).and()
         return RACCommand(enabled: enabled) { [weak self] _ in
@@ -50,7 +50,7 @@ public class ManualCreditCardInputViewModel: NSObject {
         }
     }
 
-    public func isEntryValid(entry: String) -> Bool {
+    func isEntryValid(entry: String) -> Bool {
         // Allow delete
         if (entry.isEmpty) { return true }
 
@@ -75,6 +75,6 @@ public class ManualCreditCardInputViewModel: NSObject {
         }
     }
 
-    // Only public for testing purposes
-    public lazy var stripeManager: StripeManager = StripeManager()
+    // Only for testing purposes
+    lazy var stripeManager: StripeManager = StripeManager()
 }

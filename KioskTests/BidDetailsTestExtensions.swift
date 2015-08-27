@@ -1,4 +1,5 @@
 import Foundation
+@testable
 import Kiosk
 
 extension BidDetails {

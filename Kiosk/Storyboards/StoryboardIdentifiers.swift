@@ -1,6 +1,6 @@
 // Auto generated file from SBConstants - any changes may be lost
 
-public enum SegueIdentifier : String {
+enum SegueIdentifier : String {
     case ArtsyUserHasNotRegisteredCard = "Artsy User Has Not Registered Card"
     case ArtsyUserviaPINHasNotRegisteredCard = "Artsy User via PIN Has Not Registered Card"
     case ConfirmBid = "Confirm Bid"
@@ -28,12 +28,12 @@ public enum SegueIdentifier : String {
     case ZoomIntoArtwork = "Zoom Into Artwork"
 }
 
-public enum StoryboardNames : String {
+enum StoryboardNames : String {
     case Auction = "Auction"
     case Fulfillment = "Fulfillment"
 }
 
-public enum ViewControllerStoryboardIdentifier : String {
+enum ViewControllerStoryboardIdentifier : String {
     case AppViewController = "AppViewController"
     case AuctionListings = "AuctionListings"
     case CardTester = "Card Tester"

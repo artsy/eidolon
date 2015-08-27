@@ -3,12 +3,12 @@ import ReactiveCocoa
 import Swift_RAC_Macros
 import Keys
 
-public class ManualCreditCardInputViewController: UIViewController, RegistrationSubController {
+class ManualCreditCardInputViewController: UIViewController, RegistrationSubController {
     let finishedSignal = RACSubject()
 
     @IBOutlet weak var cardNumberTextField: TextField!
     @IBOutlet weak var expirationMonthTextField: TextField!
-    @IBOutlet weak public var expirationYearTextField: TextField!
+    @IBOutlet weak var expirationYearTextField: TextField!
 
     @IBOutlet weak var expirationDateWrapperView: UIView!
     @IBOutlet weak var cardNumberWrapperView: UIView!
@@ -19,12 +19,12 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
 
     lazy var keys = EidolonKeys()
 
-    public lazy var viewModel: ManualCreditCardInputViewModel = {
+    lazy var viewModel: ManualCreditCardInputViewModel = {
         var bidDetails = self.navigationController?.fulfillmentNav().bidDetails
         return ManualCreditCardInputViewModel(bidDetails: bidDetails, finishedSubject: self.finishedSignal)
     }()
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         expirationDateWrapperView.hidden = true
 
@@ -50,7 +50,7 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         return viewModel.isEntryValid(string)
     }
 
-    @IBAction public func cardNumberconfirmTapped(sender: AnyObject) {
+    @IBAction func cardNumberconfirmTapped(sender: AnyObject) {
         cardNumberWrapperView.hidden = true
         expirationDateWrapperView.hidden = false
 
@@ -66,7 +66,7 @@ public class ManualCreditCardInputViewController: UIViewController, Registration
         cardNumberTextField.becomeFirstResponder()
     }
 
-    public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ManualCreditCardInputViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ManualCreditCardInputViewController {
         return storyboard.viewControllerWithID(.ManualCardDetailsInput) as! ManualCreditCardInputViewController
     }
 }

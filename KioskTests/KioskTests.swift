@@ -1,5 +1,6 @@
 import ObjectiveC
 import UIKit
+@testable
 import Kiosk
 
 var AssociatedObjectHandle: UInt8 = 0

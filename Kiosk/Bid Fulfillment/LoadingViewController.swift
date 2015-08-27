@@ -4,7 +4,7 @@ import ARAnalytics
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-public class LoadingViewController: UIViewController {
+class LoadingViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: ARSerifLabel!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
@@ -13,24 +13,24 @@ public class LoadingViewController: UIViewController {
     @IBOutlet weak var spinner: Spinner!
     @IBOutlet weak var bidConfirmationImageView: UIImageView!
 
-    public var placingBid = true
+    var placingBid = true
 
-    public var animate = true
+    var animate = true
 
-    @IBOutlet public weak var backToAuctionButton: SecondaryActionButton!
-    @IBOutlet public weak var placeHigherBidButton: ActionButton!
+    @IBOutlet weak var backToAuctionButton: SecondaryActionButton!
+    @IBOutlet weak var placeHigherBidButton: ActionButton!
 
-    public lazy var viewModel: LoadingViewModel = { () -> LoadingViewModel in
+    lazy var viewModel: LoadingViewModel = { () -> LoadingViewModel in
         return LoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()), placingBid: self.placingBid)
     }()
 
-    public lazy var recognizer = UITapGestureRecognizer()
-    public lazy var closeSelf: () -> Void = { [weak self] in
+    lazy var recognizer = UITapGestureRecognizer()
+    lazy var closeSelf: () -> Void = { [weak self] in
         self?.fulfillmentContainer()?.closeFulfillmentModal()
         return
     }
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         if placingBid  {
@@ -182,7 +182,7 @@ public class LoadingViewController: UIViewController {
         statusMessage.hidden = false
     }
 
-    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .PushtoRegisterConfirmed {
             let detailsVC = segue.destinationViewController as! YourBiddingDetailsViewController
             detailsVC.confirmationImage = bidConfirmationImageView.image

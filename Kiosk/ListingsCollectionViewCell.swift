@@ -3,9 +3,9 @@ import Artsy_UILabels
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-public class ListingsCollectionViewCell: UICollectionViewCell {
-    public typealias DownloadImageClosure = (url: NSURL?, imageView: UIImageView) -> ()
-    public typealias CancelDownloadImageClosure = (imageView: UIImageView) -> ()
+class ListingsCollectionViewCell: UICollectionViewCell {
+    typealias DownloadImageClosure = (url: NSURL?, imageView: UIImageView) -> ()
+    typealias CancelDownloadImageClosure = (imageView: UIImageView) -> ()
 
     dynamic let lotNumberLabel = ListingsCollectionViewCell._sansSerifLabel()
     dynamic let artworkImageView = ListingsCollectionViewCell._artworkImageView()
@@ -17,8 +17,8 @@ public class ListingsCollectionViewCell: UICollectionViewCell {
     dynamic let bidButton = ListingsCollectionViewCell._bidButton()
     dynamic let moreInfoLabel = ListingsCollectionViewCell._infoLabel()
 
-    public var downloadImage: DownloadImageClosure?
-    public var cancelDownloadImage: CancelDownloadImageClosure?
+    var downloadImage: DownloadImageClosure?
+    var cancelDownloadImage: CancelDownloadImageClosure?
 
     lazy var moreInfoSignal: RACSignal = {
         // "Jump start" both the more info button signal and the image gesture signal with nil values,
@@ -47,17 +47,17 @@ public class ListingsCollectionViewCell: UICollectionViewCell {
         return RACObserve(self, "saleArtwork.forSaleSignal").switchToLatest()
     }()
 
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
     
-    public override func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
         cancelDownloadImage?(imageView: artworkImageView)
     }

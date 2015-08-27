@@ -2,18 +2,18 @@ import UIKit
 import ReactiveCocoa
 import Moya
 
-public class PlaceBidNetworkModel: NSObject {
+class PlaceBidNetworkModel: NSObject {
 
-    public var fulfillmentController: FulfillmentController!
-    public var bidderPosition: BidderPosition?
+    var fulfillmentController: FulfillmentController!
+    var bidderPosition: BidderPosition?
 
-    public init(fulfillmentController: FulfillmentController) {
+    init(fulfillmentController: FulfillmentController) {
         self.fulfillmentController = fulfillmentController
 
         super.init()
     }
 
-    public func bidSignal(bidDetails: BidDetails) -> RACSignal {
+    func bidSignal(bidDetails: BidDetails) -> RACSignal {
 
         let saleArtwork = bidDetails.saleArtwork
         let cents = String(bidDetails.bidAmountCents! as Int)

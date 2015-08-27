@@ -1,16 +1,16 @@
 import UIKit
 
-public extension UIStoryboard {
+extension UIStoryboard {
     
-    public class func auction() -> UIStoryboard {
+    class func auction() -> UIStoryboard {
         return UIStoryboard(name: StoryboardNames.Auction.rawValue, bundle: nil)
     }
 
-    public class func fulfillment() -> UIStoryboard {
+    class func fulfillment() -> UIStoryboard {
         return UIStoryboard(name: StoryboardNames.Fulfillment.rawValue, bundle: nil)
     }
 
-    public func viewControllerWithID(identifier:ViewControllerStoryboardIdentifier) -> UIViewController {
+    func viewControllerWithID(identifier:ViewControllerStoryboardIdentifier) -> UIViewController {
         return self.instantiateViewControllerWithIdentifier(identifier.rawValue)
     }
 }

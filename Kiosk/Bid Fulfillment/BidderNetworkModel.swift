@@ -2,20 +2,20 @@ import Foundation
 import ReactiveCocoa
 import Moya
 
-public class BidderNetworkModel: NSObject {
-    public dynamic var createdNewBidder = false
+class BidderNetworkModel: NSObject {
+    dynamic var createdNewBidder = false
 
     // MARK: - Getters
 
-    public var fulfillmentController: FulfillmentController
+    var fulfillmentController: FulfillmentController
 
-    public init(fulfillmentController: FulfillmentController) {
+    init(fulfillmentController: FulfillmentController) {
         self.fulfillmentController = fulfillmentController
     }
 
     // MARK: - Main Signal
 
-    public func createOrGetBidder() -> RACSignal {
+    func createOrGetBidder() -> RACSignal {
         return createOrUpdateUser().then {
             self.createOrUpdateBidder()
 

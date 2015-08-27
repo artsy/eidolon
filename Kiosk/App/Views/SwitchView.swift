@@ -3,11 +3,11 @@ import ReactiveCocoa
 
 let SwitchViewBorderWidth: CGFloat = 2
 
-public class SwitchView: UIView {
-    public var shouldAnimate = true
-    public var animationDuration: NSTimeInterval = AnimationDuration.Short
+class SwitchView: UIView {
+    var shouldAnimate = true
+    var animationDuration: NSTimeInterval = AnimationDuration.Short
     private var _selectedIndexSubject = RACSubject()
-    lazy public var selectedIndexSignal: RACSignal = {
+    lazy var selectedIndexSignal: RACSignal = {
         self._selectedIndexSubject.startWith(0)
     }()
     
@@ -21,7 +21,7 @@ public class SwitchView: UIView {
 
     var selectionConstraint: NSLayoutConstraint!
     
-    public init(buttonTitles: Array<String>) {
+    init(buttonTitles: Array<String>) {
         buttons = buttonTitles.map { (buttonTitle: String) -> UIButton in
             let button = UIButton(type: .Custom)
             
@@ -50,7 +50,7 @@ public class SwitchView: UIView {
         setup()
     }
 
-    public override func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         var rect = CGRectMake(0, 0, CGRectGetWidth(layer.bounds), SwitchViewBorderWidth)
         topBar.frame = rect
@@ -58,20 +58,20 @@ public class SwitchView: UIView {
         bottomBar.frame = rect
     }
 
-    required convenience public init(coder aDecoder: NSCoder) {
+    required convenience init(coder aDecoder: NSCoder) {
         self.init(buttonTitles: [])
     }
     
-    override public func intrinsicContentSize() -> CGSize {
+    override func intrinsicContentSize() -> CGSize {
         return CGSize(width: UIViewNoIntrinsicMetric, height: 46)
     }
     
-    public func selectedButton(button: UIButton!) {
+    func selectedButton(button: UIButton!) {
         let index = buttons.indexOf(button)!
         setSelectedIndex(index, animated: shouldAnimate)
     }
     
-    public subscript(index: Int) -> UIButton? {
+    subscript(index: Int) -> UIButton? {
         get {
             if index >= 0 && index < buttons.count {
                 return buttons[index]

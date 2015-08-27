@@ -10,11 +10,11 @@ extension Optional {
 }
 
 extension String {
-    public func toUInt() -> UInt? {
+    func toUInt() -> UInt? {
         return UInt(self)
     }
 
-    public func toUIntWithDefault(defaultValue: UInt) -> UInt {
+    func toUIntWithDefault(defaultValue: UInt) -> UInt {
         return UInt(self) ?? defaultValue
     }
 }

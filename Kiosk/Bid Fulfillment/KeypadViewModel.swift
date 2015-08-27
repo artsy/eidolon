@@ -4,18 +4,18 @@ import Swift_RAC_Macros
 
 let KeypadViewModelMaxIntegerValue = 1_000_000
 
-public class KeypadViewModel: NSObject {
+class KeypadViewModel: NSObject {
     
     dynamic private var intValue: Int = 0
     dynamic private var stringValue: String = ""
     
     //MARK: - Signals
     
-    public lazy var intValueSignal: RACSignal = {
+    lazy var intValueSignal: RACSignal = {
         RACObserve(self, "intValue")
     }()
     
-    public lazy var stringValueSignal: RACSignal = {
+    lazy var stringValueSignal: RACSignal = {
         RACObserve(self, "stringValue")
     }()
     
@@ -23,21 +23,21 @@ public class KeypadViewModel: NSObject {
     
     // I have no idea why, but if you try and use `[weak self]` in the closure definition of a RACCommand, the compiler segfaults ¯\_(ツ)_/¯
     
-    public lazy var deleteCommand: RACCommand = {
+    lazy var deleteCommand: RACCommand = {
         let localSelf = self
         return RACCommand { [weak localSelf] _ -> RACSignal! in
             localSelf?.deleteSignal() ?? RACSignal.empty()
         }
     }()
 
-    public lazy var clearCommand: RACCommand = {
+    lazy var clearCommand: RACCommand = {
         let localSelf = self
         return RACCommand { [weak localSelf] _ -> RACSignal! in
             localSelf?.clearSignal() ?? RACSignal.empty()
         }
     }()
     
-    public lazy var addDigitCommand: RACCommand = {
+    lazy var addDigitCommand: RACCommand = {
         let localSelf = self
         return RACCommand { [weak localSelf] (input) -> RACSignal! in
             return localSelf?.addDigitSignal(input as! Int) ?? RACSignal.empty()

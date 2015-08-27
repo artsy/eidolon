@@ -3,18 +3,18 @@ import ORStackView
 import ReactiveCocoa
 import Dollar
 
-public class RegisterFlowView: ORStackView {
+class RegisterFlowView: ORStackView {
 
-    public dynamic var highlightedIndex = 0
-    public let jumpToIndexSignal = RACSubject()
+    dynamic var highlightedIndex = 0
+    let jumpToIndexSignal = RACSubject()
 
-    public var details: BidDetails? {
+    var details: BidDetails? {
         didSet {
             self.update()
         }
     }
 
-    override public func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
         
         self.backgroundColor = UIColor.whiteColor()

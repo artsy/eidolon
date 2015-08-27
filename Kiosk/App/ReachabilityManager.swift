@@ -2,12 +2,12 @@ import UIKit
 import Reachability
 import ReactiveCocoa
 
-public class ReachabilityManager: NSObject {
-    public let reachSignal: RACSignal = RACReplaySubject(capacity: 1)
+class ReachabilityManager: NSObject {
+    let reachSignal: RACSignal = RACReplaySubject(capacity: 1)
     
     private let reachability = Reachability.reachabilityForInternetConnection()
 
-    public override init() {
+    override init() {
         super.init()
 
         reachability.reachableBlock = { (_) in
@@ -22,7 +22,7 @@ public class ReachabilityManager: NSObject {
         (reachSignal as! RACSubject).sendNext(reachability.isReachable())
     }
 
-    public func isReachable() -> Bool {
+    func isReachable() -> Bool {
         return Reachability.reachabilityForInternetConnection().isReachable()
     }
 }

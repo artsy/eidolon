@@ -2,10 +2,10 @@ import Foundation
 import ReactiveCocoa
 import Stripe
 
-public class StripeManager: NSObject {
-    public var stripeClient = STPAPIClient.sharedClient()
+class StripeManager: NSObject {
+    var stripeClient = STPAPIClient.sharedClient()
 
-    public func registerCard(digits: String, month: UInt, year: UInt) -> RACSignal {
+    func registerCard(digits: String, month: UInt, year: UInt) -> RACSignal {
         let card = STPCard()
         card.number = digits
         card.expMonth = month
@@ -25,7 +25,7 @@ public class StripeManager: NSObject {
         }
     }
 
-    public func stringIsCreditCard(object: AnyObject!) -> AnyObject! {
+    func stringIsCreditCard(object: AnyObject!) -> AnyObject! {
         let cardNumber = object as! String
 
         return STPCard.validateCardNumber(cardNumber)

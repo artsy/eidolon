@@ -1,6 +1,7 @@
 import Quick
 import Nimble
 import ReactiveCocoa
+@testable
 import Kiosk
 
 class RAC_JSONAbleTests: QuickSpec {

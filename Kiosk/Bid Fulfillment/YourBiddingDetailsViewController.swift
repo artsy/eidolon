@@ -4,7 +4,7 @@ import Artsy_UILabels
 import Artsy_UIButtons
 import Dollar
 
-public class YourBiddingDetailsViewController: UIViewController {
+class YourBiddingDetailsViewController: UIViewController {
 
     @IBOutlet dynamic var bidderNumberLabel: UILabel!
     @IBOutlet dynamic var pinNumberLabel: UILabel!
@@ -16,9 +16,9 @@ public class YourBiddingDetailsViewController: UIViewController {
 
     var confirmationImage: UIImage?
 
-    public lazy var bidDetails: BidDetails! = { (self.navigationController as! FulfillmentNavigationController).bidDetails }()
+    lazy var bidDetails: BidDetails! = { (self.navigationController as! FulfillmentNavigationController).bidDetails }()
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         $.each([notificationLabel, bidderNumberLabel, pinNumberLabel]) { $0.makeTransparent() }
@@ -39,7 +39,7 @@ public class YourBiddingDetailsViewController: UIViewController {
         fulfillmentContainer()?.closeFulfillmentModal()
     }
 
-    public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> YourBiddingDetailsViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> YourBiddingDetailsViewController {
         return storyboard.viewControllerWithID(.YourBidderDetails) as! YourBiddingDetailsViewController
     }
 }

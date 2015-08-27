@@ -3,16 +3,16 @@ import Foundation
 import ReactiveCocoa
 
 //@IBDesignable
-public class KeypadContainerView: UIView {
+class KeypadContainerView: UIView {
     private var keypad: KeypadView!
     private let viewModel = KeypadViewModel()
     
-    public var stringValueSignal: RACSignal!
-    public var intValueSignal: RACSignal!
-    public var deleteCommand: RACCommand!
-    public var resetCommand: RACCommand!
+    var stringValueSignal: RACSignal!
+    var intValueSignal: RACSignal!
+    var deleteCommand: RACCommand!
+    var resetCommand: RACCommand!
 
-    override public func prepareForInterfaceBuilder() {
+    override func prepareForInterfaceBuilder() {
         for subview in subviews { subview.removeFromSuperview() }
 
         let bundle = NSBundle(forClass: self.dynamicType)
@@ -23,7 +23,7 @@ public class KeypadContainerView: UIView {
         self.addSubview(imageView)
     }
 
-    override public func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
         
         keypad = NSBundle(forClass: self.dynamicType).loadNibNamed("KeypadView", owner: self, options: nil).first as? KeypadView

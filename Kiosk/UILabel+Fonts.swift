@@ -1,11 +1,11 @@
 import UIKit
 
-public extension UILabel {
-    public func makeSubstringsBold(text: [String]) {
+extension UILabel {
+    func makeSubstringsBold(text: [String]) {
         text.forEach { self.makeSubstringBold($0) }
     }
 
-    public func makeSubstringBold(text: String) {
+    func makeSubstringBold(text: String) {
         let attributedText = self.attributedText!.mutableCopy() as! NSMutableAttributedString
 
         let range: NSRange! = (self.text ?? NSString()).rangeOfString(text)
@@ -16,11 +16,11 @@ public extension UILabel {
         self.attributedText = attributedText
     }
 
-    public func makeSubstringsItalic(text: [String]) {
+    func makeSubstringsItalic(text: [String]) {
         text.forEach { self.makeSubstringItalic($0) }
     }
 
-    public func makeSubstringItalic(text: String) {
+    func makeSubstringItalic(text: String) {
         let attributedText = self.attributedText!.mutableCopy() as! NSMutableAttributedString
 
         let range: NSRange! = (self.text ?? NSString()).rangeOfString(text)
@@ -31,7 +31,7 @@ public extension UILabel {
         self.attributedText = attributedText
     }
 
-    public func setLineHeight(lineHeight: Int) {
+    func setLineHeight(lineHeight: Int) {
         let displayText = text ?? ""
         let attributedString = NSMutableAttributedString(string: displayText)
         let paragraphStyle = NSMutableParagraphStyle()
@@ -42,7 +42,7 @@ public extension UILabel {
         attributedText = attributedString
     }
 
-    public func makeTransparent() {
+    func makeTransparent() {
         opaque = false
         backgroundColor = .clearColor()
     }

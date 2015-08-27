@@ -26,7 +26,7 @@ private func XAppTokenRequest(defaults: NSUserDefaults) -> RACSignal {
 }
 
 /// Request to fetch a given target. Ensures that valid XApp tokens exist before making request
-public func XAppRequest(token: ArtsyAPI, provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider, defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) -> RACSignal {
+func XAppRequest(token: ArtsyAPI, provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider, defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) -> RACSignal {
 
     return provider.onlineSignal().then {
         // First perform XAppTokenRequest(). When it completes, then the signal returned from the closure will be subscribed to.

@@ -2,9 +2,9 @@ import UIKit
 import QuartzCore
 import Artsy_UIButtons
 
-public class Button: ARFlatButton {
+class Button: ARFlatButton {
 
-    public override func setup() {
+    override func setup() {
         super.setup()
         setTitleShadowColor(UIColor.clearColor(), forState: .Normal)
         setTitleShadowColor(UIColor.clearColor(), forState: .Highlighted)
@@ -13,13 +13,13 @@ public class Button: ARFlatButton {
     }
 }
 
-public class ActionButton: Button {
+class ActionButton: Button {
 
-    public override func intrinsicContentSize() -> CGSize {
+    override func intrinsicContentSize() -> CGSize {
         return CGSizeMake(UIViewNoIntrinsicMetric, ButtonHeight)
     }
 
-    public override func setup() {
+    override func setup() {
         super.setup()
 
         setBorderColor(UIColor.blackColor(), forState: .Normal, animated: false)
@@ -36,13 +36,13 @@ public class ActionButton: Button {
     }
 }
 
-public class SecondaryActionButton: Button {
+class SecondaryActionButton: Button {
 
-    public override func intrinsicContentSize() -> CGSize {
+    override func intrinsicContentSize() -> CGSize {
         return CGSizeMake(UIViewNoIntrinsicMetric, ButtonHeight)
     }
 
-    public override func setup() {
+    override func setup() {
         super.setup()
 
         setBorderColor(UIColor.artsyMediumGrey(), forState: .Normal, animated: false)
@@ -60,9 +60,9 @@ public class SecondaryActionButton: Button {
 }
 
 
-public class KeypadButton: Button {
+class KeypadButton: Button {
 
-    public override func setup() {
+    override func setup() {
         super.setup()
         shouldAnimateStateChange = false;
         layer.borderWidth = 0
@@ -71,28 +71,28 @@ public class KeypadButton: Button {
     }
 }
 
-public class LargeKeypadButton: KeypadButton {
-    public override func setup() {
+class LargeKeypadButton: KeypadButton {
+    override func setup() {
         super.setup()
         self.titleLabel!.font = UIFont.sansSerifFontWithSize(20)
     }
 }
 
-public class MenuButton: ARMenuButton {
-    public override func setup() {
+class MenuButton: ARMenuButton {
+    override func setup() {
         super.setup()
         if let titleLabel = titleLabel {
             titleLabel.font = titleLabel.font.fontWithSize(12)
         }
     }
 
-    public override func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         if let titleLabel = titleLabel { self.bringSubviewToFront(titleLabel) }
         if let imageView = imageView { self.bringSubviewToFront(imageView) }
     }
 
-    public override func intrinsicContentSize() -> CGSize {
+    override func intrinsicContentSize() -> CGSize {
         return CGSize(width: 45, height: 45)
     }
 }

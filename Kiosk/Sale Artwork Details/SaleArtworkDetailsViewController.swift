@@ -7,16 +7,16 @@ import Artsy_UIButtons
 import Swift_RAC_Macros
 import SDWebImage
 
-public class SaleArtworkDetailsViewController: UIViewController {
-    public var allowAnimations = true
-    public var auctionID = AppSetup.sharedState.auctionID
-    public var saleArtwork: SaleArtwork!
+class SaleArtworkDetailsViewController: UIViewController {
+    var allowAnimations = true
+    var auctionID = AppSetup.sharedState.auctionID
+    var saleArtwork: SaleArtwork!
     
-    public var showBuyersPremiumCommand = { () -> RACCommand in
+    var showBuyersPremiumCommand = { () -> RACCommand in
         appDelegate().showBuyersPremiumCommand()
     }
 
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> SaleArtworkDetailsViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> SaleArtworkDetailsViewController {
         return storyboard.viewControllerWithID(.SaleArtworkDetail) as! SaleArtworkDetailsViewController
     }
 
@@ -28,16 +28,16 @@ public class SaleArtworkDetailsViewController: UIViewController {
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!
     @IBOutlet weak var additionalDetailScrollView: ORStackScrollView!
 
-    public var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
+    var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         setupMetadataView()
         setupAdditionalDetailStackView()
     }
 
-    public override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .ZoomIntoArtwork {
             let nextViewController = segue.destinationViewController as! SaleArtworkZoomViewController
             nextViewController.saleArtwork = saleArtwork

@@ -8,7 +8,7 @@ func appDelegate() -> AppDelegate {
     return UIApplication.sharedApplication().delegate as! AppDelegate
 }
 
-public extension AppDelegate {
+extension AppDelegate {
 
     // Registration
 
@@ -256,11 +256,11 @@ private extension AppDelegate {
 // MARK: - Help transtion animation
 
 extension AppDelegate: UIViewControllerTransitioningDelegate {
-    public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return HelpAnimator(presenting: true)
     }
     
-    public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return HelpAnimator()
     }
 }

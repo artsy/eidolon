@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+@testable
 import Kiosk
 import Nimble_Snapshots
 

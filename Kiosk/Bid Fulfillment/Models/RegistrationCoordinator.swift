@@ -1,6 +1,6 @@
 import UIKit
 
-public enum RegistrationIndex {
+enum RegistrationIndex {
     case MobileVC
     case EmailVC
     case PasswordVC
@@ -8,7 +8,7 @@ public enum RegistrationIndex {
     case ZipCodeVC
     case ConfirmVC
     
-    public func toInt() -> Int {
+    func toInt() -> Int {
         switch (self) {
             case MobileVC: return 0
             case EmailVC: return 1
@@ -19,7 +19,7 @@ public enum RegistrationIndex {
         }
     }
 
-    public static func fromInt(index:Int) -> RegistrationIndex {
+    static func fromInt(index:Int) -> RegistrationIndex {
         switch (index) {
             case 0: return .MobileVC
             case 1: return .EmailVC
@@ -31,10 +31,10 @@ public enum RegistrationIndex {
     }
 }
 
-public class RegistrationCoordinator: NSObject {
+class RegistrationCoordinator: NSObject {
 
-    public dynamic var currentIndex: Int = 0
-    public var storyboard:UIStoryboard!
+    dynamic var currentIndex: Int = 0
+    var storyboard:UIStoryboard!
 
     func viewControllerForIndex(index: RegistrationIndex) -> UIViewController {
         currentIndex = index.toInt()

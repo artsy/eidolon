@@ -2,6 +2,7 @@ import Quick
 import Nimble
 import ReactiveCocoa
 import Swift_RAC_Macros
+@testable
 import Kiosk
 
 class KeypadViewModelTestClass: NSObject {

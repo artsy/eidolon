@@ -2,15 +2,15 @@ import UIKit
 
 // Unused ATM
 
-public class ConfirmYourBidPasswordViewController: UIViewController {
+class ConfirmYourBidPasswordViewController: UIViewController {
 
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPasswordViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPasswordViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBid) as! ConfirmYourBidPasswordViewController
     }
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails

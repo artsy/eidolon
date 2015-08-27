@@ -5,7 +5,7 @@ import Artsy_UIButtons
 import Swift_RAC_Macros
 import ReactiveCocoa
 
-public class HelpViewController: UIViewController {
+class HelpViewController: UIViewController {
     var positionConstraints: [NSLayoutConstraint]?
     var dismissTapGestureRecognizer: UITapGestureRecognizer?
     
@@ -38,7 +38,7 @@ public class HelpViewController: UIViewController {
         appDelegate().showConditionsOfSaleCommand()
     }
     
-    public lazy var hasBuyersPremiumSignal: RACSignal = {
+    lazy var hasBuyersPremiumSignal: RACSignal = {
         RACObserve(appDelegate().appViewController, "sale.buyersPremium").notNil()
     }()
     
@@ -48,7 +48,7 @@ public class HelpViewController: UIViewController {
         }
     }
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         // Configure view

@@ -5,7 +5,7 @@ import ReactiveCocoa
 extension RACSignal {
 
     /// Get given JSONified data, pass back objects
-    public func mapToObject(classType: JSONAble.Type) -> RACSignal {
+    func mapToObject(classType: JSONAble.Type) -> RACSignal {
         func resultFromJSON(object:[String: AnyObject], classType: JSONAble.Type) -> AnyObject {
             return classType.fromJSON(object)
         }
@@ -24,7 +24,7 @@ extension RACSignal {
     }
 
     /// Get given JSONified data, pass back objects as an array
-    public func mapToObjectArray(classType: JSONAble.Type) -> RACSignal {
+    func mapToObjectArray(classType: JSONAble.Type) -> RACSignal {
 
         func resultFromJSON(object:[String: AnyObject], classType: JSONAble.Type) -> AnyObject {
             return classType.fromJSON(object)

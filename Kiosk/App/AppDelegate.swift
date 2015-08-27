@@ -6,16 +6,16 @@ import Keys
 import Stripe
 
 @UIApplicationMain
-public class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     dynamic weak var helpViewController: HelpViewController?
     var helpButton: UIButton!
 
     weak var webViewController: UIViewController?
 
-    public var window: UIWindow? = UIWindow(frame:CGRectMake(0, 0, UIScreen.mainScreen().bounds.height, UIScreen.mainScreen().bounds.width))
+    var window: UIWindow? = UIWindow(frame:CGRectMake(0, 0, UIScreen.mainScreen().bounds.height, UIScreen.mainScreen().bounds.width))
 
-    public func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
 
         // Disable sleep timer
         UIApplication.sharedApplication().idleTimerDisabled = true
