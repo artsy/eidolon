@@ -78,7 +78,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if (emailTextField.text ?? "").isEmpty {
+        if emailTextField.text.isNilOrEmpty {
             emailTextField.becomeFirstResponder()
         } else {
             passwordTextField.becomeFirstResponder()

@@ -132,7 +132,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
         }
 
         retrieveImageRights().filter { (imageRights) -> Bool in
-            return (imageRights as? String ?? "").isNotEmpty
+            return (imageRights as? String).isNotNilNotEmpty
 
         }.subscribeNext { [weak self] (imageRights) -> Void in
             if (imageRights as! String).isNotEmpty {
@@ -312,7 +312,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
         additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "40")
 
         retrieveAdditionalInfo().filter { (info) -> Bool in
-            return (info as? String ?? "").isNotEmpty
+            return (info as? String).isNotNilNotEmpty
 
         }.subscribeNext { (info) -> Void in
             additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( info as! String )
@@ -320,7 +320,7 @@ public class SaleArtworkDetailsViewController: UIViewController {
 
         if let artist = artist() {
             retrieveArtistBlurb().filter { (blurb) -> Bool in
-                return (blurb as? String ?? "").isNotEmpty
+                return (blurb as? String).isNotNilNotEmpty
 
                 }.subscribeNext { [weak self] (blurb) -> Void in
                     if self == nil {
