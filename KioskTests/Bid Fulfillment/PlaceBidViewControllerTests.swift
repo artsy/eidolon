@@ -1,6 +1,7 @@
 import Quick
 import Nimble
 import ReactiveCocoa
+@testable
 import Kiosk
 import Nimble_Snapshots
 

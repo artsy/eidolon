@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+@testable
 import Kiosk
 import Moya
 import ReactiveCocoa
@@ -149,11 +150,11 @@ func testLoadingViewController() -> LoadingViewController {
     return controller
 }
 
-public class StubLoadingViewModel: LoadingViewModel {
+class StubLoadingViewModel: LoadingViewModel {
     var errors = false
     var completes = true
 
-    public override func performActions() -> RACSignal {
+    override func performActions() -> RACSignal {
         if completes {
             if errors {
                 return RACSignal.error(NSError(domain: "", code: 0, userInfo: nil))
@@ -166,8 +167,8 @@ public class StubLoadingViewModel: LoadingViewModel {
     }
 }
 
-public class StubFulfillmentController: FulfillmentController {
-    public lazy var bidDetails: BidDetails = { () -> BidDetails in
+class StubFulfillmentController: FulfillmentController {
+    lazy var bidDetails: BidDetails = { () -> BidDetails in
         let bidDetails = BidDetails.stubbedBidDetails()
         bidDetails.setImage = { (_, imageView) -> () in
             imageView.image = loadingViewControllerTestImage
@@ -175,8 +176,8 @@ public class StubFulfillmentController: FulfillmentController {
         return bidDetails
     }()
 
-    public var auctionID: String! = ""
-    public var xAccessToken: String?
-    public var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>? = Provider.StubbingProvider()
-    public var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.StubbingProvider()
+    var auctionID: String! = ""
+    var xAccessToken: String?
+    var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>? = Provider.StubbingProvider()
+    var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.StubbingProvider()
 }

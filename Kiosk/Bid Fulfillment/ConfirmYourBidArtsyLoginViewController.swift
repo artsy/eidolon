@@ -3,7 +3,7 @@ import Moya
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-public class ConfirmYourBidArtsyLoginViewController: UIViewController {
+class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: TextField!
@@ -14,11 +14,11 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
     var createNewAccount = false
     lazy var provider:ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
     }
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         let titleString = useArtsyBidderButton.titleForState(useArtsyBidderButton.state)! ?? ""
@@ -76,7 +76,7 @@ public class ConfirmYourBidArtsyLoginViewController: UIViewController {
         }
     }
     
-    public override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if emailTextField.text.isNilOrEmpty {
             emailTextField.becomeFirstResponder()

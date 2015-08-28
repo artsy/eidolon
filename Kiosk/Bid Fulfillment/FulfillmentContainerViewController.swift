@@ -1,13 +1,13 @@
 import UIKit
 
-public class FulfillmentContainerViewController: UIViewController {
-    public var allowAnimations = true
+class FulfillmentContainerViewController: UIViewController {
+    var allowAnimations = true
 
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var contentView: UIView!
     @IBOutlet var backgroundView: UIView!
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
 
@@ -58,7 +58,7 @@ public class FulfillmentContainerViewController: UIViewController {
         return self.childViewControllers.first as? FulfillmentNavigationController
     }
 
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> FulfillmentContainerViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> FulfillmentContainerViewController {
         return storyboard.viewControllerWithID(.FulfillmentContainer) as! FulfillmentContainerViewController
     }
 }

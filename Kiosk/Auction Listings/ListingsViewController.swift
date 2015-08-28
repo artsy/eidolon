@@ -10,37 +10,37 @@ let VerticalMargins = 26
 let MasonryCellIdentifier = "MasonryCell"
 let TableCellIdentifier = "TableCell"
 
-public class ListingsViewController: UIViewController {
-    public var allowAnimations = true
-    public var auctionID = AppSetup.sharedState.auctionID
-    public var syncInterval = SyncInterval
-    public var pageSize = 10
-    public var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
+class ListingsViewController: UIViewController {
+    var allowAnimations = true
+    var auctionID = AppSetup.sharedState.auctionID
+    var syncInterval = SyncInterval
+    var pageSize = 10
+    var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
         return signal.deliverOn(scheduler)
     }
-    public var logSync = { (date: AnyObject!) -> () in
+    var logSync = { (date: AnyObject!) -> () in
         #if (arch(i386) || arch(x86_64)) && os(iOS)
             logger.log("Syncing on \(date)")
         #endif
     }
-    public var downloadImage: ListingsCollectionViewCell.DownloadImageClosure = { (url, imageView) -> () in
+    var downloadImage: ListingsCollectionViewCell.DownloadImageClosure = { (url, imageView) -> () in
         if let url = url {
             imageView.sd_setImageWithURL(url)
         } else {
             imageView.image = nil
         }
     }
-    public var cancelDownloadImage: ListingsCollectionViewCell.CancelDownloadImageClosure = { (imageView) -> () in
+    var cancelDownloadImage: ListingsCollectionViewCell.CancelDownloadImageClosure = { (imageView) -> () in
         imageView.sd_cancelCurrentImageLoad()
     }
 
-    public dynamic var saleArtworks = Array<SaleArtwork>()
-    public dynamic var sortedSaleArtworks = Array<SaleArtwork>()
+    dynamic var saleArtworks = Array<SaleArtwork>()
+    dynamic var sortedSaleArtworks = Array<SaleArtwork>()
 
-    public dynamic var cellIdentifier = MasonryCellIdentifier
+    dynamic var cellIdentifier = MasonryCellIdentifier
 
-    @IBOutlet public var stagingFlag: UIImageView!
-    @IBOutlet public var loadingSpinner: Spinner!
+    @IBOutlet var stagingFlag: UIImageView!
+    @IBOutlet var loadingSpinner: Spinner!
     
     lazy var collectionView: UICollectionView = {
         var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())
@@ -54,11 +54,11 @@ public class ListingsViewController: UIViewController {
         return collectionView
     }()
 
-    lazy public var switchView: SwitchView = {
+    lazy var switchView: SwitchView = {
         return SwitchView(buttonTitles: SwitchValues.allSwitchValues().map{$0.name.uppercaseString})
     }()
     
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ListingsViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ListingsViewController {
         return storyboard.viewControllerWithID(.AuctionListings) as! ListingsViewController
     }
 
@@ -178,7 +178,7 @@ public class ListingsViewController: UIViewController {
         return developmentEnvironment
     }
     
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         if detectDevelopment() {
@@ -263,7 +263,7 @@ public class ListingsViewController: UIViewController {
         }
     }
     
-    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .ShowSaleArtworkDetails {
             let saleArtwork = sender as! SaleArtwork!
             let detailsViewController = segue.destinationViewController as! SaleArtworkDetailsViewController
@@ -272,7 +272,7 @@ public class ListingsViewController: UIViewController {
         }
     }
 
-    override public func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         let switchHeightPredicate = "\(switchView.intrinsicContentSize().height)"
         
         switchView.constrainHeight(switchHeightPredicate)
@@ -286,10 +286,10 @@ public class ListingsViewController: UIViewController {
 // MARK: - Collection View
 
 extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, ARCollectionViewMasonryLayoutDelegate {
-    public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sortedSaleArtworks.count
     }
-  public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) 
         
         if let listingsCell = cell as? ListingsCollectionViewCell {
@@ -320,11 +320,11 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         return cell
     }
     
-    public func presentDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
+    func presentDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
         performSegueWithIdentifier(SegueIdentifier.ShowSaleArtworkDetails.rawValue, sender: saleArtwork)
     }
 
-    public func presentModalForSaleArtwork(saleArtwork: SaleArtwork) {
+    func presentModalForSaleArtwork(saleArtwork: SaleArtwork) {
 
         ARAnalytics.event("Bid Button Tapped")
 
@@ -342,7 +342,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         })
     }
 
-    public func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
         return MasonryCollectionViewCell.heightForSaleArtwork(saleArtworkAtIndexPath(indexPath))
     }
 }

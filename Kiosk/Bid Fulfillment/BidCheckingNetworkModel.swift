@@ -2,27 +2,27 @@ import UIKit
 import ReactiveCocoa
 import Moya
 
-public class BidCheckingNetworkModel: NSObject {
+class BidCheckingNetworkModel: NSObject {
 
     private var pollInterval = NSTimeInterval(1)
     private var maxPollRequests = 6
     private var pollRequests = 0
 
     // inputs
-    public let fulfillmentController: FulfillmentController
+    let fulfillmentController: FulfillmentController
 
     // outputs
-    public dynamic var bidIsResolved = false
-    public dynamic var isHighestBidder = false
-    public dynamic var reserveNotMet = false
+    dynamic var bidIsResolved = false
+    dynamic var isHighestBidder = false
+    dynamic var reserveNotMet = false
 
     private var mostRecentSaleArtwork:SaleArtwork?
 
-    public init(fulfillmentController: FulfillmentController) {
+    init(fulfillmentController: FulfillmentController) {
         self.fulfillmentController = fulfillmentController
     }
 
-    public func waitForBidResolution () -> RACSignal {
+    func waitForBidResolution () -> RACSignal {
         return self.pollForUpdatedSaleArtwork().then { [weak self] (_) in
             return self == nil ? RACSignal.empty() : self!.checkForMaxBid()
 

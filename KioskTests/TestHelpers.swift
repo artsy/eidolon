@@ -1,5 +1,6 @@
 import Foundation
 import Quick
+@testable
 import Kiosk
 import Moya
 

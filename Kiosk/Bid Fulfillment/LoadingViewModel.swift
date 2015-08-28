@@ -4,26 +4,26 @@ import ReactiveCocoa
 import Swift_RAC_Macros
 
 /// Encapsulates activities of the LoadingViewController.
-public class LoadingViewModel: NSObject {
-    public let placingBid: Bool
-    public let bidderNetworkModel: BidderNetworkModel
+class LoadingViewModel: NSObject {
+    let placingBid: Bool
+    let bidderNetworkModel: BidderNetworkModel
 
-    public lazy var placeBidNetworkModel: PlaceBidNetworkModel = {
+    lazy var placeBidNetworkModel: PlaceBidNetworkModel = {
         return PlaceBidNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
-    public lazy var bidCheckingModel: BidCheckingNetworkModel = { () -> BidCheckingNetworkModel in
+    lazy var bidCheckingModel: BidCheckingNetworkModel = { () -> BidCheckingNetworkModel in
         return BidCheckingNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
 
-    public dynamic var createdNewBidder = false
-    public dynamic var bidIsResolved = false
-    public dynamic var isHighestBidder = false
-    public dynamic var reserveNotMet = false
-    public var bidDetails: BidDetails {
+    dynamic var createdNewBidder = false
+    dynamic var bidIsResolved = false
+    dynamic var isHighestBidder = false
+    dynamic var reserveNotMet = false
+    var bidDetails: BidDetails {
         return bidderNetworkModel.fulfillmentController.bidDetails
     }
 
-    public init(bidNetworkModel: BidderNetworkModel, placingBid: Bool) {
+    init(bidNetworkModel: BidderNetworkModel, placingBid: Bool) {
         self.bidderNetworkModel = bidNetworkModel
         self.placingBid = placingBid
 
@@ -39,7 +39,7 @@ public class LoadingViewModel: NSObject {
     /// - Registering new users
     /// - Placing bids for users
     /// - Polling for bid results
-    public func performActions() -> RACSignal {
+    func performActions() -> RACSignal {
         return bidderNetworkModel.createOrGetBidder().then { [weak self] () -> RACSignal in
             if self?.placingBid == false {
                 ARAnalytics.event("Registered New User Only")

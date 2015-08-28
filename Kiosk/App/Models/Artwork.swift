@@ -1,9 +1,9 @@
 import Foundation
 import SwiftyJSON
 
-public class Artwork: JSONAble {
+class Artwork: JSONAble {
 
-    public enum SoldStatus {
+    enum SoldStatus {
         case NotSold
         case Sold
 
@@ -17,28 +17,28 @@ public class Artwork: JSONAble {
         }
     }
 
-    public let id: String
+    let id: String
 
-    public let dateString: String
-    public dynamic let title: String
-    public dynamic let titleAndDate: NSAttributedString
-    public dynamic let price: String
-    public dynamic let date: String
+    let dateString: String
+    dynamic let title: String
+    dynamic let titleAndDate: NSAttributedString
+    dynamic let price: String
+    dynamic let date: String
 
-    public dynamic var soldStatus: String
-    public dynamic var medium: String?
-    public dynamic var dimensions = [String]()
+    dynamic var soldStatus: String
+    dynamic var medium: String?
+    dynamic var dimensions = [String]()
 
-    public dynamic var imageRights: String?
-    public dynamic var additionalInfo: String?
-    public dynamic var blurb: String?
+    dynamic var imageRights: String?
+    dynamic var additionalInfo: String?
+    dynamic var blurb: String?
 
-    public dynamic var artists: [Artist]?
-    public dynamic var culturalMarker: String?
+    dynamic var artists: [Artist]?
+    dynamic var culturalMarker: String?
 
-    public dynamic var images: [Image]?
+    dynamic var images: [Image]?
 
-    public lazy var defaultImage: Image? = {
+    lazy var defaultImage: Image? = {
         let defaultImages = self.images?.filter({ (image) -> Bool in
             image.isDefault
         })
@@ -56,7 +56,7 @@ public class Artwork: JSONAble {
         self.soldStatus = sold
     }
 
-    override public class func fromJSON(json: [String: AnyObject]) -> JSONAble {
+    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
         let json = JSON(json)
 
         let id = json["id"].stringValue
@@ -98,7 +98,7 @@ public class Artwork: JSONAble {
         return artwork
     }
 
-    public func updateWithValues(newArtwork: Artwork) {
+    func updateWithValues(newArtwork: Artwork) {
         // soldStatus is the only value we expect to change at runtime.
         soldStatus = newArtwork.soldStatus
     }

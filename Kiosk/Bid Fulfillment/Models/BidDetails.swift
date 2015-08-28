@@ -1,21 +1,21 @@
 import UIKit
 
-@objc public class BidDetails: NSObject {
-    public typealias DownloadImageClosure = (url: NSURL, imageView: UIImageView) -> ()
+@objc class BidDetails: NSObject {
+    typealias DownloadImageClosure = (url: NSURL, imageView: UIImageView) -> ()
 
-    public dynamic var newUser: NewUser = NewUser()
-    public dynamic var saleArtwork: SaleArtwork?
+    dynamic var newUser: NewUser = NewUser()
+    dynamic var saleArtwork: SaleArtwork?
 
-    public dynamic var paddleNumber: String?
-    public dynamic var bidderPIN: String?
-    public dynamic var bidAmountCents: NSNumber?
-    public dynamic var bidderID: String?
+    dynamic var paddleNumber: String?
+    dynamic var bidderPIN: String?
+    dynamic var bidAmountCents: NSNumber?
+    dynamic var bidderID: String?
 
-    public var setImage: DownloadImageClosure = { (url, imageView) -> () in
+    var setImage: DownloadImageClosure = { (url, imageView) -> () in
         imageView.sd_setImageWithURL(url)
     }
 
-    public init(saleArtwork: SaleArtwork?, paddleNumber: String?, bidderPIN: String?, bidAmountCents:Int?) {
+    init(saleArtwork: SaleArtwork?, paddleNumber: String?, bidderPIN: String?, bidAmountCents:Int?) {
         self.saleArtwork = saleArtwork
         self.paddleNumber = paddleNumber
         self.bidderPIN = bidderPIN
@@ -23,7 +23,7 @@ import UIKit
     }
 
     /// Not for production use
-    public convenience init(string: String) {
+    convenience init(string: String) {
         self.init(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
     }
 }

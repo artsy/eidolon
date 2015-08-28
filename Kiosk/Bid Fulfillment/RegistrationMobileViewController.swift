@@ -2,7 +2,7 @@ import UIKit
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-public class RegistrationMobileViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
+class RegistrationMobileViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
     
     @IBOutlet var numberTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
@@ -13,9 +13,9 @@ public class RegistrationMobileViewController: UIViewController, RegistrationSub
         return GenericFormValidationViewModel(isValidSignal: numberIsValidSignal, manualInvocationSignal: self.numberTextField.returnKeySignal(), finishedSubject: self.finishedSignal)
     }()
 
-    public lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
+    lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         numberTextField.text = bidDetails.newUser.phoneNumber
@@ -25,7 +25,7 @@ public class RegistrationMobileViewController: UIViewController, RegistrationSub
         numberTextField.becomeFirstResponder()
     }
 
-    public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
         // Allow delete
         if string.isEmpty { return true }
@@ -35,7 +35,7 @@ public class RegistrationMobileViewController: UIViewController, RegistrationSub
         return string.stringByTrimmingCharactersInSet(notNumberChars).isNotEmpty
     }
 
-    public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationMobileViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationMobileViewController {
         return storyboard.viewControllerWithID(.RegisterMobile) as! RegistrationMobileViewController
     }
 }

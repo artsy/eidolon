@@ -3,56 +3,56 @@ import SwiftyJSON
 import Swift_RAC_Macros
 import ReactiveCocoa
 
-public enum ReserveStatus: String {
+enum ReserveStatus: String {
     case ReserveNotMet = "reserve_not_met"
     case NoReserve = "no_reserve"
     case ReserveMet = "reserve_met"
 
-    public var reserveNotMet: Bool {
+    var reserveNotMet: Bool {
         return self == .ReserveNotMet
     }
 
-    public static func initOrDefault (rawValue: String?) -> ReserveStatus {
+    static func initOrDefault (rawValue: String?) -> ReserveStatus {
         return ReserveStatus(rawValue: rawValue ?? "") ?? .NoReserve
     }
 }
 
-public struct SaleNumberFormatter {
+struct SaleNumberFormatter {
     static let dollarFormatter = createDollarFormatter()
 }
 
 private let kNoBidsString = "0 bids placed"
 
-public class SaleArtwork: JSONAble {
+class SaleArtwork: JSONAble {
 
-    public let id: String
-    public let artwork: Artwork
+    let id: String
+    let artwork: Artwork
 
-    public var auctionID: String?
+    var auctionID: String?
 
-    public var saleHighestBid: Bid?
-    public dynamic var bidCount:  NSNumber?
+    var saleHighestBid: Bid?
+    dynamic var bidCount:  NSNumber?
 
-    public var userBidderPosition: BidderPosition?
-    public var positions: [String]?
+    var userBidderPosition: BidderPosition?
+    var positions: [String]?
 
-    public dynamic var openingBidCents: NSNumber?
-    public dynamic var minimumNextBidCents: NSNumber?
+    dynamic var openingBidCents: NSNumber?
+    dynamic var minimumNextBidCents: NSNumber?
     
-    public dynamic var highestBidCents: NSNumber?
-    public var estimateCents: Int?
-    public var lowEstimateCents: Int?
-    public var highEstimateCents: Int?
+    dynamic var highestBidCents: NSNumber?
+    var estimateCents: Int?
+    var lowEstimateCents: Int?
+    var highEstimateCents: Int?
 
-    public dynamic var reserveStatus: String?
-    public dynamic var lotNumber: NSNumber?
+    dynamic var reserveStatus: String?
+    dynamic var lotNumber: NSNumber?
 
-    public init(id: String, artwork: Artwork) {
+    init(id: String, artwork: Artwork) {
         self.id = id
         self.artwork = artwork
     }
 
-    override public class func fromJSON(json: [String: AnyObject]) -> JSONAble {
+    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
         let json = JSON(json)
         let id = json["id"].stringValue
         let artworkDict = json["artwork"].object as! [String: AnyObject]
@@ -79,7 +79,7 @@ public class SaleArtwork: JSONAble {
         return saleArtwork
     }
     
-    public func updateWithValues(newSaleArtwork: SaleArtwork) {
+    func updateWithValues(newSaleArtwork: SaleArtwork) {
         saleHighestBid = newSaleArtwork.saleHighestBid
         auctionID = newSaleArtwork.auctionID
         openingBidCents = newSaleArtwork.openingBidCents
@@ -95,7 +95,7 @@ public class SaleArtwork: JSONAble {
         artwork.updateWithValues(newSaleArtwork.artwork)
     }
     
-    public var estimateString: String {
+    var estimateString: String {
         // Default to estimateCents
         if let estimateCents = estimateCents {
             let dollars = NSNumberFormatter.currencyStringForCents(estimateCents)
@@ -113,7 +113,7 @@ public class SaleArtwork: JSONAble {
         }
     }
 
-    public var numberOfBidsSignal: RACSignal {
+    var numberOfBidsSignal: RACSignal {
         return RACObserve(self, "bidCount").map { (optionalBidCount) -> AnyObject! in
             // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
             // So we need to unwrap it as an optional optional. Yo dawg.
@@ -129,7 +129,7 @@ public class SaleArtwork: JSONAble {
     }
 
     // The language used here is very specific – see https://github.com/artsy/eidolon/pull/325#issuecomment-64121996 for details
-    public var numberOfBidsWithReserveSignal: RACSignal {
+    var numberOfBidsWithReserveSignal: RACSignal {
         return RACSignal.combineLatest([numberOfBidsSignal, RACObserve(self, "reserveStatus"), RACObserve(self, "highestBidCents")]).map { (object) -> AnyObject! in
             let tuple = object as! RACTuple // Ignoring highestBidCents; only there to trigger on bid update.
 
@@ -152,7 +152,7 @@ public class SaleArtwork: JSONAble {
         }
     }
 
-    public var lotNumberSignal: RACSignal {
+    var lotNumberSignal: RACSignal {
         return RACObserve(self, "lotNumber").map({ (lotNumber) -> AnyObject! in
             if let lotNumber = lotNumber as? Int {
                 return "Lot \(lotNumber)"
@@ -162,7 +162,7 @@ public class SaleArtwork: JSONAble {
         }).mapNilToEmptyString()
     }
 
-    public var forSaleSignal: RACSignal {
+    var forSaleSignal: RACSignal {
         return RACObserve(self, "artwork").map { (artwork) -> AnyObject! in
             let artwork = artwork as! Artwork
 
@@ -170,7 +170,7 @@ public class SaleArtwork: JSONAble {
         }
     }
 
-    public func currentBidSignal(prefix prefix: String = "", missingPrefix: String = "") -> RACSignal {
+    func currentBidSignal(prefix prefix: String = "", missingPrefix: String = "") -> RACSignal {
         return RACObserve(self, "highestBidCents").map({ [weak self] (highestBidCents) -> AnyObject! in
             if let currentBidCents = highestBidCents as? Int {
                 return "\(prefix)\(NSNumberFormatter.currencyStringForCents(currentBidCents))"
@@ -180,7 +180,7 @@ public class SaleArtwork: JSONAble {
         })
     }
 
-    override public class func keyPathsForValuesAffectingValueForKey(key: String) -> Set<String> {
+    override class func keyPathsForValuesAffectingValueForKey(key: String) -> Set<String> {
         if key == "estimateString" {
             return ["lowEstimateCents", "highEstimateCents"] as Set
         } else if key == "lotNumberSignal" {

@@ -1,10 +1,10 @@
 import Foundation
 import SwiftyJSON
 
-public class BidderPosition: JSONAble {
-    public let id: String
-    public let highestBid:Bid?
-    public let maxBidAmountCents: Int
+class BidderPosition: JSONAble {
+    let id: String
+    let highestBid:Bid?
+    let maxBidAmountCents: Int
 
     init(id: String, highestBid:Bid?, maxBidAmountCents: Int) {
         self.id = id
@@ -12,7 +12,7 @@ public class BidderPosition: JSONAble {
         self.maxBidAmountCents = maxBidAmountCents
     }
 
-    override public class func fromJSON(source:[String: AnyObject]) -> JSONAble {
+    override class func fromJSON(source:[String: AnyObject]) -> JSONAble {
         let json = JSON(source)
 
         let id = json["id"].stringValue

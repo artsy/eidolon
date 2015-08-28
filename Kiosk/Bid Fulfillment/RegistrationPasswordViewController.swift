@@ -3,14 +3,14 @@ import ReactiveCocoa
 import Moya
 import Swift_RAC_Macros
 
-public class RegistrationPasswordViewController: UIViewController, RegistrationSubController {
-    @IBOutlet public var passwordTextField: TextField!
+class RegistrationPasswordViewController: UIViewController, RegistrationSubController {
+    @IBOutlet var passwordTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
     @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var forgotPasswordButton: UIButton!
     let finishedSignal = RACSubject()
 
-    public lazy var viewModel: RegistrationPasswordViewModel = {
+    lazy var viewModel: RegistrationPasswordViewModel = {
         let email = self.navigationController?.fulfillmentNav().bidDetails.newUser.email ?? ""
         return RegistrationPasswordViewModel(passwordSignal: self.passwordTextField.rac_textSignal(),
             manualInvocationSignal: self.passwordTextField.returnKeySignal(),
@@ -18,9 +18,9 @@ public class RegistrationPasswordViewController: UIViewController, RegistrationS
             email: email)
     }()
 
-    public lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
+    lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         forgotPasswordButton.hidden = false
@@ -54,7 +54,7 @@ public class RegistrationPasswordViewController: UIViewController, RegistrationS
         passwordTextField.becomeFirstResponder()
     }
 
-    public func alertUserPasswordSent() -> RACSignal {
+    func alertUserPasswordSent() -> RACSignal {
         return RACSignal.createSignal { (subscriber) -> RACDisposable! in
 
             let alertController = UIAlertController(title: "Forgot Password", message: "We have sent you your password.", preferredStyle: .Alert)
@@ -79,7 +79,7 @@ public class RegistrationPasswordViewController: UIViewController, RegistrationS
         passwordTextField.text = ""
     }
 
-    public class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationPasswordViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationPasswordViewController {
         return storyboard.viewControllerWithID(.RegisterPassword) as! RegistrationPasswordViewController
     }
 }

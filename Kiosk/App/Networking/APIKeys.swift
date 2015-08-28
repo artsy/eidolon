@@ -5,7 +5,7 @@ private let minimumKeyLength = 2
 
 // Mark: - API Keys
 
-public struct APIKeys {
+struct APIKeys {
     let key: String
     let secret: String
 
@@ -15,7 +15,7 @@ public struct APIKeys {
         static var instance = APIKeys()
     }
 
-    public static var sharedKeys: APIKeys {
+    static var sharedKeys: APIKeys {
         get {
         return SharedKeys.instance
         }
@@ -27,22 +27,22 @@ public struct APIKeys {
 
     // MARK: Methods
 
-    public var stubResponses: Bool {
+    var stubResponses: Bool {
         return key.characters.count < minimumKeyLength || secret.characters.count < minimumKeyLength
     }
 
     // MARK: Initializers
 
-    public init(key: String, secret: String) {
+    init(key: String, secret: String) {
         self.key = key
         self.secret = secret
     }
 
-    public init(keys: EidolonKeys) {
+    init(keys: EidolonKeys) {
         self.init(key: keys.artsyAPIClientKey() ?? "", secret: keys.artsyAPIClientSecret() ?? "")
     }
 
-    public init() {
+    init() {
         let keys = EidolonKeys()
         self.init(keys: keys)
     }

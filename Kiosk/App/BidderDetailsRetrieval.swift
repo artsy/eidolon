@@ -3,7 +3,7 @@ import ReactiveCocoa
 import RACAlertAction
 import SVProgressHUD
 
-public extension UIViewController {
+extension UIViewController {
     func promptForBidderDetailsRetrievalSignal() -> RACSignal {
         return RACSignal.createSignal { (subscriber) -> RACDisposable! in
             let (alertController, command) = UIAlertController.emailPromptAlertController()

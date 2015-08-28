@@ -6,28 +6,28 @@ import Artsy_UIButtons
 import Artsy_UILabels
 import ORStackView
 
-public class PlaceBidViewController: UIViewController {
+class PlaceBidViewController: UIViewController {
 
-    public dynamic var bidDollars: Int = 0
-    public var hasAlreadyPlacedABid: Bool = false
+    dynamic var bidDollars: Int = 0
+    var hasAlreadyPlacedABid: Bool = false
 
-    @IBOutlet public var bidAmountTextField: TextField!
-    @IBOutlet public var cursor: CursorView!
-    @IBOutlet public var keypadContainer: KeypadContainerView!
+    @IBOutlet var bidAmountTextField: TextField!
+    @IBOutlet var cursor: CursorView!
+    @IBOutlet var keypadContainer: KeypadContainerView!
 
-    @IBOutlet public var currentBidTitleLabel: UILabel!
-    @IBOutlet public var yourBidTitleLabel: UILabel!
-    @IBOutlet public var currentBidAmountLabel: UILabel!
-    @IBOutlet public var nextBidAmountLabel: UILabel!
+    @IBOutlet var currentBidTitleLabel: UILabel!
+    @IBOutlet var yourBidTitleLabel: UILabel!
+    @IBOutlet var currentBidAmountLabel: UILabel!
+    @IBOutlet var nextBidAmountLabel: UILabel!
 
-    @IBOutlet public var artworkImageView: UIImageView!
+    @IBOutlet var artworkImageView: UIImageView!
     @IBOutlet weak var detailsStackView: ORTagBasedAutoStackView!
 
-    @IBOutlet public var bidButton: Button!
+    @IBOutlet var bidButton: Button!
     @IBOutlet weak var conditionsOfSaleButton: UIButton!
     @IBOutlet weak var privacyPolictyButton: UIButton!
 
-    public var showBuyersPremiumCommand = { () -> RACCommand in
+    var showBuyersPremiumCommand = { () -> RACCommand in
         appDelegate().showBuyersPremiumCommand()
     }
     
@@ -39,14 +39,14 @@ public class PlaceBidViewController: UIViewController {
         appDelegate().showConditionsOfSaleCommand()
     }
     
-    public lazy var bidDollarsSignal: RACSignal = { self.keypadContainer.intValueSignal }()
-    public var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
+    lazy var bidDollarsSignal: RACSignal = { self.keypadContainer.intValueSignal }()
+    var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
         return storyboard.viewControllerWithID(.PlaceYourBid) as! PlaceBidViewController
     }
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         if !hasAlreadyPlacedABid {
@@ -169,7 +169,7 @@ public class PlaceBidViewController: UIViewController {
         performSegue(identifier)
     }
 
-    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         if segue == .PlaceAnotherBid {
             let nextViewController = segue.destinationViewController as! LoadingViewController

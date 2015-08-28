@@ -1,21 +1,21 @@
 import UIKit
 
-public class TextField: UITextField {
+class TextField: UITextField {
 
-    public var shouldAnimateStateChange: Bool = true
-    public var shouldChangeColorWhenEditing: Bool = true
+    var shouldAnimateStateChange: Bool = true
+    var shouldChangeColorWhenEditing: Bool = true
 
-    override public init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
 
-    override public func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
         setup()
     }
@@ -71,20 +71,20 @@ public class TextField: UITextField {
         self.layer.borderColor = color.CGColor
     }
 
-    override public func textRectForBounds(bounds: CGRect) -> CGRect {
+    override func textRectForBounds(bounds: CGRect) -> CGRect {
         return CGRectInset( bounds, 10, 0 )
     }
 
-    override public func editingRectForBounds(bounds: CGRect) -> CGRect {
+    override func editingRectForBounds(bounds: CGRect) -> CGRect {
         return CGRectInset( bounds, 10 , 0 )
     }
 }
 
-public class SecureTextField: TextField {
+class SecureTextField: TextField {
 
-    public var actualText: String = ""
+    var actualText: String = ""
 
-    override public var text: String! {
+    override var text: String! {
         get {
             if editing {
                 return super.text

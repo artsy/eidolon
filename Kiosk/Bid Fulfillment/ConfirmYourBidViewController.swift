@@ -4,27 +4,27 @@ import Moya
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-public class ConfirmYourBidViewController: UIViewController {
+class ConfirmYourBidViewController: UIViewController {
 
     private dynamic var number: String = ""
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
-    @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
-    @IBOutlet public var numberAmountTextField: TextField!
-    @IBOutlet public var cursor: CursorView!
-    @IBOutlet public var keypadContainer: KeypadContainerView!
-    @IBOutlet public var enterButton: UIButton!
-    @IBOutlet public var useArtsyLoginButton: UIButton!
+    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
+    @IBOutlet var numberAmountTextField: TextField!
+    @IBOutlet var cursor: CursorView!
+    @IBOutlet var keypadContainer: KeypadContainerView!
+    @IBOutlet var enterButton: UIButton!
+    @IBOutlet var useArtsyLoginButton: UIButton!
     
-    public lazy var numberSignal: RACSignal = { self.keypadContainer.stringValueSignal }()
+    lazy var numberSignal: RACSignal = { self.keypadContainer.stringValueSignal }()
     
-    public lazy var provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider
+    lazy var provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider
 
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBid) as! ConfirmYourBidViewController
     }
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         let titleString = useArtsyLoginButton.titleForState(useArtsyLoginButton.state)! ?? ""

@@ -2,7 +2,7 @@ import Foundation
 import ReactiveCocoa
 import Moya
 
-public enum ArtsyAPI {
+enum ArtsyAPI {
     case XApp
     case XAuth(email: String, password: String)
     case TrustToken(number: String, auctionPIN: String)
@@ -42,7 +42,7 @@ public enum ArtsyAPI {
 }
 
 extension ArtsyAPI : MoyaTarget {
-     public var path: String {
+     var path: String {
         switch self {
 
         case .XApp:
@@ -126,10 +126,10 @@ extension ArtsyAPI : MoyaTarget {
         }
     }
 
-    public var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
-    public var baseURL: NSURL { return NSURL(string: base)! }
+    var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
+    var baseURL: NSURL { return NSURL(string: base)! }
 
-    public var parameters: [String: AnyObject] {
+    var parameters: [String: AnyObject] {
         switch self {
 
         case XAuth(let email, let password):
@@ -206,7 +206,7 @@ extension ArtsyAPI : MoyaTarget {
         }
     }
 
-    public var method: Moya.Method {
+    var method: Moya.Method {
         switch self {
         case .LostPasswordNotification,
              .CreateUser,
@@ -225,7 +225,7 @@ extension ArtsyAPI : MoyaTarget {
         }
     }
 
-    public var sampleData: NSData {
+    var sampleData: NSData {
         switch self {
 
         case XApp:
@@ -313,7 +313,7 @@ extension ArtsyAPI : MoyaTarget {
 
 // MARK: - Provider setup
 
-public func endpointResolver() -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest)) {
+func endpointResolver() -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest)) {
     return { (endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest) in
         let request: NSMutableURLRequest = endpoint.urlRequest.mutableCopy() as! NSMutableURLRequest
         request.HTTPShouldHandleCookies = false
@@ -321,19 +321,19 @@ public func endpointResolver() -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLReque
     }
 }
 
-public class ArtsyProvider<T where T: MoyaTarget>: ReactiveCocoaMoyaProvider<T> {
-    public typealias OnlineSignalClosure = () -> RACSignal
+class ArtsyProvider<T where T: MoyaTarget>: ReactiveCocoaMoyaProvider<T> {
+    typealias OnlineSignalClosure = () -> RACSignal
 
     // Closure that returns a signal which completes once the app is online.
-    public let onlineSignal: OnlineSignalClosure
+    let onlineSignal: OnlineSignalClosure
 
-    public init(endpointClosure: MoyaEndpointsClosure = MoyaProvider.DefaultEndpointMapping, endpointResolver: MoyaEndpointResolution = MoyaProvider.DefaultEnpointResolution, stubBehavior: MoyaStubbedBehavior = MoyaProvider.NoStubbingBehavior, networkActivityClosure: Moya.NetworkActivityClosure? = nil, onlineSignal: OnlineSignalClosure = connectedToInternetSignal) {
+    init(endpointClosure: MoyaEndpointsClosure = MoyaProvider.DefaultEndpointMapping, endpointResolver: MoyaEndpointResolution = MoyaProvider.DefaultEnpointResolution, stubBehavior: MoyaStubbedBehavior = MoyaProvider.NoStubbingBehavior, networkActivityClosure: Moya.NetworkActivityClosure? = nil, onlineSignal: OnlineSignalClosure = connectedToInternetSignal) {
         self.onlineSignal = onlineSignal
         super.init(endpointClosure: endpointClosure, endpointResolver: endpointResolver, stubBehavior: stubBehavior, networkActivityClosure: networkActivityClosure)
     }
 }
 
-public struct Provider {
+struct Provider {
     private static var endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
         
         var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
@@ -350,16 +350,16 @@ public struct Provider {
         }
     }
 
-    public static func APIKeysBasedStubBehaviour(target: ArtsyAPI) -> Moya.StubbedBehavior {
+    static func APIKeysBasedStubBehaviour(target: ArtsyAPI) -> Moya.StubbedBehavior {
         return APIKeys.sharedKeys.stubResponses ? .Immediate : .NoStubbing
     }
 
     // init(endpointClosure: MoyaEndpointsClosure = MoyaProvider.DefaultEndpointMapping, endpointResolver: MoyaEndpointResolution = MoyaProvider.DefaultEnpointResolution, stubBehavior: MoyaStubbedBehavior = MoyaProvider.NoStubbingBehavior, networkActivityClosure: Moya.NetworkActivityClosure? = nil, onlineSignal: OnlineSignalClosure = connectedToInternetSignal) {
-    public static func DefaultProvider() -> ArtsyProvider<ArtsyAPI> {
+    static func DefaultProvider() -> ArtsyProvider<ArtsyAPI> {
         return ArtsyProvider(endpointClosure: endpointsClosure, endpointResolver: endpointResolver(), stubBehavior: APIKeysBasedStubBehaviour)
     }
     
-    public static func StubbingProvider() -> ArtsyProvider<ArtsyAPI> {
+    static func StubbingProvider() -> ArtsyProvider<ArtsyAPI> {
         return ArtsyProvider(endpointClosure: endpointsClosure, endpointResolver: endpointResolver(), stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: { RACSignal.empty() })
     }
 
@@ -367,7 +367,7 @@ public struct Provider {
         static var instance = Provider.DefaultProvider()
     }
     
-    public static var sharedProvider: ArtsyProvider<ArtsyAPI> {
+    static var sharedProvider: ArtsyProvider<ArtsyAPI> {
         get {
             return SharedProvider.instance
         }
@@ -395,6 +395,6 @@ private extension String {
     }
 }
 
-public func url(route: MoyaTarget) -> String {
+func url(route: MoyaTarget) -> String {
     return route.baseURL.URLByAppendingPathComponent(route.path).absoluteString
 }

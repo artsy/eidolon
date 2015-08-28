@@ -2,17 +2,17 @@ import UIKit
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
+class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
-    @IBOutlet public var emailTextField: UITextField!
-    @IBOutlet public var confirmButton: UIButton!
-    @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
+    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var confirmButton: UIButton!
+    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidEnterYourEmailViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidEnterYourEmailViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidEnterEmail) as! ConfirmYourBidEnterYourEmailViewController
     }
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         let emailTextSignal = emailTextField.rac_textSignal()
@@ -48,7 +48,7 @@ public class ConfirmYourBidEnterYourEmailViewController: UIViewController {
         }
     }
 
-    override public func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     
         self.emailTextField.becomeFirstResponder()

@@ -1,20 +1,20 @@
 import UIKit
 
-public class CursorView: UIView {
+class CursorView: UIView {
 
-    public let cursorLayer: CALayer = CALayer()
+    let cursorLayer: CALayer = CALayer()
 
-    override public init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
 
-    override public func awakeFromNib() {
+    override func awakeFromNib() {
         setupCursorLayer()
         startAnimating()
     }
@@ -30,7 +30,7 @@ public class CursorView: UIView {
         cursorLayer.opacity = 0.0
     }
 
-    public func startAnimating() {
+    func startAnimating() {
         animate(Float.infinity)
     }
 
@@ -45,7 +45,7 @@ public class CursorView: UIView {
         cursorLayer.addAnimation(fade, forKey: "opacity")
     }
 
-    public func stopAnimating() {
+    func stopAnimating() {
         cursorLayer.removeAllAnimations()
     }
 }

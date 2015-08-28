@@ -2,6 +2,7 @@ import Quick
 import Nimble
 import Nimble_Snapshots
 import ReactiveCocoa
+@testable
 import Kiosk
 
 class HelpViewControllerConfiguration: QuickConfiguration {

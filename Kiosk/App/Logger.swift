@@ -1,7 +1,7 @@
 import Foundation
 
-public class Logger {
-    public let destination: NSURL
+class Logger {
+    let destination: NSURL
     lazy private var dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.locale = NSLocale.currentLocale()
@@ -27,7 +27,7 @@ public class Logger {
         return nil
     }()
 
-    public init(destination: NSURL) {
+    init(destination: NSURL) {
         self.destination = destination
     }
 
@@ -35,7 +35,7 @@ public class Logger {
         fileHandle?.closeFile()
     }
 
-    public func log(message: String, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    func log(message: String, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
         let logMessage = stringRepresentation(message, function: function, file: file, line: line)
 
         printToConsole(logMessage)

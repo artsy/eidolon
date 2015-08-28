@@ -1,6 +1,7 @@
 import Quick
 import Nimble
 import Nimble_Snapshots
+@testable
 import Kiosk
 
 class ConfirmYourBidArtsyLoginViewControllerTests: QuickSpec {

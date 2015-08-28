@@ -3,24 +3,24 @@ import Moya
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-public class ConfirmYourBidPINViewController: UIViewController {
+class ConfirmYourBidPINViewController: UIViewController {
 
     dynamic var pin = ""
 
-    @IBOutlet public var keypadContainer: KeypadContainerView!
-    @IBOutlet public var pinTextField: TextField!
-    @IBOutlet public var confirmButton: Button!
-    @IBOutlet public var bidDetailsPreviewView: BidDetailsPreviewView!
+    @IBOutlet var keypadContainer: KeypadContainerView!
+    @IBOutlet var pinTextField: TextField!
+    @IBOutlet var confirmButton: Button!
+    @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
-    public lazy var pinSignal: RACSignal = { self.keypadContainer.stringValueSignal }()
+    lazy var pinSignal: RACSignal = { self.keypadContainer.stringValueSignal }()
     
-    public lazy var provider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    lazy var provider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidPIN) as! ConfirmYourBidPINViewController
     }
 
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         RAC(self, "pin") <~ pinSignal
@@ -86,7 +86,7 @@ public class ConfirmYourBidPINViewController: UIViewController {
         }
     }
 
-    public func providerForPIN(pin: String, number: String) -> ReactiveCocoaMoyaProvider<ArtsyAPI> {
+    func providerForPIN(pin: String, number: String) -> ReactiveCocoaMoyaProvider<ArtsyAPI> {
         let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
             let endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
 

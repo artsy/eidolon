@@ -4,7 +4,7 @@ import ReactiveCocoa
 import Swift_RAC_Macros
 import Keys
 
-public class SwipeCreditCardViewController: UIViewController, RegistrationSubController {
+class SwipeCreditCardViewController: UIViewController, RegistrationSubController {
 
     @IBOutlet var cardStatusLabel: ARSerifLabel!
     let finishedSignal = RACSubject()
@@ -15,7 +15,7 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
 
     @IBOutlet weak var titleLabel: ARSerifLabel!
 
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> SwipeCreditCardViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> SwipeCreditCardViewController {
         return storyboard.viewControllerWithID(.RegisterCreditCard) as! SwipeCreditCardViewController
     }
 
@@ -24,9 +24,9 @@ public class SwipeCreditCardViewController: UIViewController, RegistrationSubCon
     dynamic var cardToken = ""
 
     lazy var keys = EidolonKeys()
-    public lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
+    lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.setInProgress(false)
 

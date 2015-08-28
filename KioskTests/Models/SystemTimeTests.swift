@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+@testable
 import Kiosk
 
 // Note, stubbed json contains a date in 2422

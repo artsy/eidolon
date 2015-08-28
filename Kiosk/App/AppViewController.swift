@@ -3,20 +3,20 @@ import ARAnalytics
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-public class AppViewController: UIViewController, UINavigationControllerDelegate {
+class AppViewController: UIViewController, UINavigationControllerDelegate {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
 
     @IBOutlet var countdownManager: ListingsCountdownManager!
-    @IBOutlet public var offlineBlockingView: UIView!
+    @IBOutlet var offlineBlockingView: UIView!
     @IBOutlet weak var registerToBidButton: ActionButton!
 
     let _apiPinger = APIPingManager()
     
-    public lazy var reachabilitySignal: RACSignal = { [weak self] in
+    lazy var reachabilitySignal: RACSignal = { [weak self] in
         reachabilityManager.reachSignal
     }()
-    public lazy var apiPingerSignal: RACSignal = { [weak self] in
+    lazy var apiPingerSignal: RACSignal = { [weak self] in
         self?._apiPinger.letOnlineSignal ?? RACSignal.empty()
     }()
 
@@ -24,13 +24,13 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
         appDelegate().registerToBidCommand()
     }
 
-    class public func instantiateFromStoryboard(storyboard: UIStoryboard) -> AppViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> AppViewController {
         return storyboard.viewControllerWithID(.AppViewController) as! AppViewController
     }
 
     dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0, state: "")
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         registerToBidButton.rac_command = registerToBidCommand()
@@ -49,7 +49,7 @@ public class AppViewController: UIViewController, UINavigationControllerDelegate
         }
     }
 
-    public func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         let hide = (viewController as? SaleArtworkZoomViewController != nil)
         countdownManager.setLabelsHiddenIfSynced(hide)
         registerToBidButton.hidden = hide

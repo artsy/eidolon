@@ -3,16 +3,16 @@ import ReactiveCocoa
 import Moya
 import Swift_RAC_Macros
 
-public class RegistrationPasswordViewModel {
+class RegistrationPasswordViewModel {
     private class PasswordHolder: NSObject {
         dynamic var password: String = ""
     }
 
-    public var emailExistsSignal: RACSignal
-    public let command: RACCommand
+    var emailExistsSignal: RACSignal
+    let command: RACCommand
     let email: String
     
-    public init(passwordSignal: RACSignal, manualInvocationSignal: RACSignal, finishedSubject: RACSubject, email: String) {
+    init(passwordSignal: RACSignal, manualInvocationSignal: RACSignal, finishedSubject: RACSubject, email: String) {
         let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: email)
         let emailExistsSignal = Provider.sharedProvider.request(endpoint).map(responseIsOK).replayLast()
 
@@ -43,7 +43,7 @@ public class RegistrationPasswordViewModel {
         }
     }
 
-    public func userForgotPasswordSignal() -> RACSignal {
+    func userForgotPasswordSignal() -> RACSignal {
         let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
         return XAppRequest(endpoint).filterSuccessfulStatusCodes().doNext { (json) -> Void in
             logger.log("Sent forgot password request")

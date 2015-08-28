@@ -4,7 +4,7 @@ import ReactiveCocoa
 
 // We abstract this out so that we don't have network models, etc, aware of the view controller.
 // This is a "source of truth" that should be referenced in lieu of many independent variables. 
-public protocol FulfillmentController {
+protocol FulfillmentController {
     var bidDetails: BidDetails { get set }
     var auctionID: String! { get set }
     var xAccessToken: String? { get set }
@@ -12,17 +12,17 @@ public protocol FulfillmentController {
     var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> { get }
 }
 
-public class FulfillmentNavigationController: UINavigationController, FulfillmentController {
+class FulfillmentNavigationController: UINavigationController, FulfillmentController {
 
     // MARK: - FulfillmentController bits
 
     /// The the collection of details necessary to eventually create a bid
-    public var bidDetails = BidDetails(saleArtwork:nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents:nil)
-    public var auctionID: String!
-    public var user: User!
+    var bidDetails = BidDetails(saleArtwork:nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents:nil)
+    var auctionID: String!
+    var user: User!
 
     /// Otherwise we're fine with a legit auth token
-    public var xAccessToken: String? {
+    var xAccessToken: String? {
         didSet(oldToken) {
 
             let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
@@ -34,9 +34,9 @@ public class FulfillmentNavigationController: UINavigationController, Fulfillmen
         }
     }
 
-    public var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>?
+    var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>?
 
-    public var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> {
+    var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> {
         if let loggedInProvider = loggedInProvider {
             return loggedInProvider
         }

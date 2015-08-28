@@ -1,21 +1,21 @@
 import Foundation
 import SwiftyJSON
 
-public class Image: JSONAble {
-    public let id: String
-    public let imageFormatString: String
-    public let imageVersions: [String]
-    public let imageSize: CGSize
-    public let aspectRatio: CGFloat?
+class Image: JSONAble {
+    let id: String
+    let imageFormatString: String
+    let imageVersions: [String]
+    let imageSize: CGSize
+    let aspectRatio: CGFloat?
 
-    public let baseURL: String
-    public let tileSize: Int
-    public let maxTiledHeight: Int
-    public let maxTiledWidth: Int
-    public let maxLevel: Int
-    public let isDefault: Bool
+    let baseURL: String
+    let tileSize: Int
+    let maxTiledHeight: Int
+    let maxTiledWidth: Int
+    let maxLevel: Int
+    let isDefault: Bool
 
-    public init(id: String, imageFormatString: String, imageVersions: [String], imageSize: CGSize, aspectRatio: CGFloat?, baseURL: String, tileSize: Int, maxTiledHeight: Int, maxTiledWidth: Int, maxLevel: Int, isDefault: Bool) {
+    init(id: String, imageFormatString: String, imageVersions: [String], imageSize: CGSize, aspectRatio: CGFloat?, baseURL: String, tileSize: Int, maxTiledHeight: Int, maxTiledWidth: Int, maxLevel: Int, isDefault: Bool) {
         self.id = id
         self.imageFormatString = imageFormatString
         self.imageVersions = imageVersions
@@ -29,7 +29,7 @@ public class Image: JSONAble {
         self.isDefault = isDefault
     }
 
-    override public class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
         let json = JSON(json)
 
         let id = json["id"].stringValue
@@ -58,7 +58,7 @@ public class Image: JSONAble {
         return Image(id: id, imageFormatString: imageFormatString, imageVersions: imageVersions, imageSize: imageSize, aspectRatio: aspectRatio, baseURL: baseURL, tileSize: tileSize, maxTiledHeight: maxTiledHeight, maxTiledWidth: maxTiledWidth, maxLevel: maxLevel, isDefault: isDefault)
     }
 
-    public func thumbnailURL() -> NSURL? {
+    func thumbnailURL() -> NSURL? {
         let preferredVersions = { () -> Array<String> in
             // This is a hack for https://www.artsy.net/artwork/keith-winstein-qrpff
             // It's a very tall image and the "medium" version looks terribad.
@@ -73,7 +73,7 @@ public class Image: JSONAble {
         return urlFromPreferenceList(preferredVersions)
     }
 
-    public func fullsizeURL() -> NSURL? {
+    func fullsizeURL() -> NSURL? {
         return urlFromPreferenceList(["larger", "large", "medium"])
     }
 
