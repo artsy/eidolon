@@ -18,22 +18,21 @@ class ListingsViewModel: NSObject {
     dynamic var saleArtworks = Array<SaleArtwork>()
     dynamic var sortedSaleArtworks = Array<SaleArtwork>()
 
-
-    func listingsRequestSignalForPage(auctionID: String, page: Int) -> RACSignal {
+    func listingsRequestSignalForPage(page: Int) -> RACSignal {
         return XAppRequest(.AuctionListings(id: auctionID, page: page, pageSize: self.pageSize)).filterSuccessfulStatusCodes().mapJSON()
     }
 
     // Repeatedly calls itself with page+1 until the count of the returned array is < pageSize.
-    func retrieveAllListingsRequestSignal(auctionID: String, page: Int) -> RACSignal {
+    func retrieveAllListingsRequestSignal(page: Int) -> RACSignal {
         return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
-            self?.listingsRequestSignalForPage(auctionID, page: page).subscribeNext{ (object) -> () in
+            self?.listingsRequestSignalForPage(page).subscribeNext{ (object) -> () in
                 if let array = object as? Array<AnyObject> {
 
                     var nextPageSignal = RACSignal.empty()
 
                     if array.count >= (self?.pageSize ?? 0) {
                         // Infer we have more results to retrieve
-                        nextPageSignal = self?.retrieveAllListingsRequestSignal(auctionID, page: page+1) ?? RACSignal.empty()
+                        nextPageSignal = self?.retrieveAllListingsRequestSignal(page+1) ?? RACSignal.empty()
                     }
 
                     RACSignal.`return`(object).concat(nextPageSignal).subscribe(subscriber)
@@ -45,8 +44,8 @@ class ListingsViewModel: NSObject {
     }
 
     // Fetches all pages of the auction
-    func allListingsRequestSignal(auctionID: String) -> RACSignal {
-        return schedule(schedule(retrieveAllListingsRequestSignal(auctionID, page: 1), RACScheduler(priority: RACSchedulerPriorityDefault)).collect().map({ (object) -> AnyObject! in
+    func allListingsRequestSignal() -> RACSignal {
+        return schedule(schedule(retrieveAllListingsRequestSignal(1), RACScheduler(priority: RACSchedulerPriorityDefault)).collect().map({ (object) -> AnyObject! in
             // object is an array of arrays (thanks to collect()). We need to flatten it.
 
             let array = object as? Array<Array<AnyObject>>
@@ -59,11 +58,11 @@ class ListingsViewModel: NSObject {
         }), RACScheduler.mainThreadScheduler())
     }
 
-    func recurringListingsRequestSignal(auctionID: String) -> RACSignal {
+    func recurringListingsRequestSignal() -> RACSignal {
         let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate()).takeUntil(rac_willDeallocSignal())
 
         return recurringSignal.doNext(logSync).map { [weak self] _ -> AnyObject! in
-            return self?.allListingsRequestSignal(auctionID) ?? RACSignal.empty()
+            return self?.allListingsRequestSignal() ?? RACSignal.empty()
             }.switchToLatest().map { [weak self] (newSaleArtworks) -> AnyObject! in
                 if self == nil {
                     return [] // Now safe to use self!
@@ -107,30 +106,12 @@ class ListingsViewModel: NSObject {
         }
     }
 
-    // Adapted from https://github.com/FUKUZAWA-Tadashi/FHCCommander/blob/67c67757ee418a106e0ce0c0820459299b3d77bb/fhcc/Convenience.swift#L33-L44
-    func getSSID() -> String? {
-        let interfaces: CFArray! = CNCopySupportedInterfaces()
-        if interfaces == nil { return nil }
-
-        let if0: UnsafePointer<Void>? = CFArrayGetValueAtIndex(interfaces, 0)
-        if if0 == nil { return nil }
-
-        let interfaceName: CFStringRef = unsafeBitCast(if0!, CFStringRef.self)
-        let dictionary = CNCopyCurrentNetworkInfo(interfaceName) as NSDictionary?
-        if dictionary == nil { return nil }
-
-        return dictionary?[kCNNetworkInfoKeySSID as String] as? String
-    }
-
     func detectDevelopment() -> Bool {
         var developmentEnvironment = false
         #if (arch(i386) || arch(x86_64)) && os(iOS)
             developmentEnvironment = true
-            #else
-            if let ssid = getSSID() {
-                let developmentSSIDs = ["Artsy", "Artsy2"] as NSArray
-                developmentEnvironment = developmentSSIDs.containsObject(ssid)
-            }
+        #else
+            developmentEnvironment = getSSID()?.lowercaseString.containsString("artsy") ?? false
         #endif
         return developmentEnvironment
     }
@@ -187,6 +168,10 @@ class ListingsViewModel: NSObject {
         
         static func allSwitchValues() -> [SwitchValues] {
             return [Grid, LeastBids, MostBids, HighestCurrentBid, LowestCurrentBid, Alphabetical]
+        }
+
+        static func allSwitchValueNames() -> [String] {
+            return allSwitchValues().map{$0.name.uppercaseString}
         }
     }
 }

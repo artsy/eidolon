@@ -28,8 +28,6 @@ class ListingsViewController: UIViewController {
         return ListingsViewModel()
     }()
 
-    // TODO: Consider EVERYTHING beneath here for a view model.
-
     dynamic var cellIdentifier = MasonryCellIdentifier
 
     @IBOutlet var stagingFlag: UIImageView!
@@ -48,12 +46,8 @@ class ListingsViewController: UIViewController {
     }()
 
     lazy var switchView: SwitchView = {
-        return SwitchView(buttonTitles: ListingsViewModel.SwitchValues.allSwitchValues().map{$0.name.uppercaseString})
+        return SwitchView(buttonTitles: ListingsViewModel.SwitchValues.allSwitchValueNames())
     }()
-    
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ListingsViewController {
-        return storyboard.viewControllerWithID(.AuctionListings) as! ListingsViewController
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +65,7 @@ class ListingsViewController: UIViewController {
         view.insertSubview(collectionView, belowSubview: loadingSpinner)
         
         // Set up reactive bindings
-        RAC(viewModel, "saleArtworks") <~ viewModel.recurringListingsRequestSignal(viewModel.auctionID)
+        RAC(viewModel, "saleArtworks") <~ viewModel.recurringListingsRequestSignal()
 
         RAC(self, "loadingSpinner.hidden") <~ RACObserve(viewModel, "saleArtworks").mapArrayLengthExistenceToBool()
 
@@ -160,6 +154,12 @@ class ListingsViewController: UIViewController {
     }
 }
 
+extension ListingsViewController {
+    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ListingsViewController {
+        return storyboard.viewControllerWithID(.AuctionListings) as! ListingsViewController
+    }
+}
+
 // MARK: - Collection View
 
 extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, ARCollectionViewMasonryLayoutDelegate {
@@ -208,7 +208,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         let containerController = storyboard.instantiateInitialViewController() as! FulfillmentContainerViewController
         containerController.allowAnimations = allowAnimations
 
-        if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
+        if let internalNav: FulfillmentNavigationController = containerController.internalNavigationController() {
             internalNav.auctionID = viewModel.auctionID
             internalNav.bidDetails.saleArtwork = saleArtwork
         }
