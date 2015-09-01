@@ -33,17 +33,7 @@ class ListingsViewController: UIViewController {
     @IBOutlet var stagingFlag: UIImageView!
     @IBOutlet var loadingSpinner: Spinner!
     
-    lazy var collectionView: UICollectionView = {
-        var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())
-        collectionView.backgroundColor = UIColor.clearColor()
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.alwaysBounceVertical = true
-        collectionView.registerClass(MasonryCollectionViewCell.self, forCellWithReuseIdentifier: MasonryCellIdentifier)
-        collectionView.registerClass(TableCollectionViewCell.self, forCellWithReuseIdentifier: TableCellIdentifier)
-        collectionView.allowsSelection = false
-        return collectionView
-    }()
+    lazy var collectionView: UICollectionView = { return UICollectionView.listingsCollectionViewWithDelegateDatasource(self) }()
 
     lazy var switchView: SwitchView = {
         return SwitchView(buttonTitles: ListingsViewModel.SwitchValues.allSwitchValueNames())
@@ -51,6 +41,8 @@ class ListingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Set up development environment.
         
         if viewModel.detectDevelopment() {
             let flagImageName = AppSetup.sharedState.useStaging ? "StagingFlag" : "ProductionFlag"
@@ -61,6 +53,7 @@ class ListingsViewController: UIViewController {
         }
         
         // Add subviews
+
         view.addSubview(switchView)
         view.insertSubview(collectionView, belowSubview: loadingSpinner)
         
@@ -68,33 +61,34 @@ class ListingsViewController: UIViewController {
 
         RAC(self, "loadingSpinner.hidden") <~ viewModel.showSpinnerSignal
 
+        // Map switch selection to cell reuse identifier.
         RAC(self, "cellIdentifier") <~ viewModel.gridSelectedSignal.map { (gridSelected) -> AnyObject! in
-            switch gridSelected as! Bool {
-            case true:
+            switch gridSelected as? Bool {
+            case .Some(true):
                 return MasonryCellIdentifier
             default:
                 return TableCellIdentifier
             }
         }
 
-        let layoutSignal = viewModel.gridSelectedSignal.map { [weak self] (gridSelected) -> AnyObject! in
+        // Reload collection view when there is new content.
+        viewModel.updatedContentsSignal.mapReplace(collectionView).doNext { (collectionView) -> Void in
+            (collectionView as! UICollectionView).reloadData()
+            return
+        }.dispatchAsyncMainScheduler().subscribeNext { (collectionView) -> Void in
+            // Need to dispatchAsyncMainScheduler, since the changes in the CV's model aren't imediate, so we may scroll to a cell that doesn't exist yet.
+            (collectionView as! UICollectionView).scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
+        }
+
+        // Respond to changes in layout, driven by switch selection.
+        viewModel.gridSelectedSignal.map { [weak self] (gridSelected) -> AnyObject! in
             switch gridSelected as! Bool {
             case true:
                 return ListingsViewController.masonryLayout()
             default:
                 return ListingsViewController.tableLayout(CGRectGetWidth(self?.switchView.frame ?? CGRectZero))
             }
-        }
-
-        viewModel.updatedContentsSignal.mapReplace(collectionView).doNext { (collectionView) -> Void in
-            (collectionView as! UICollectionView).reloadData()
-            return
-        }.dispatchAsyncMainScheduler().subscribeNext { (collectionView) -> Void in
-            // Need to dispatch, since the changes in the CV's model aren't imediate
-            (collectionView as! UICollectionView).scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
-        }
-
-        layoutSignal.subscribeNext { [weak self] (layout) -> Void in
+        }.subscribeNext { [weak self] (layout) -> Void in
             // Need to explicitly call animated: false and reload to avoid animation
             self?.collectionView.setCollectionViewLayout(layout as! UICollectionViewLayout, animated: false)
             return
@@ -213,5 +207,22 @@ private extension ListingsViewController {
         layout.minimumLineSpacing = 0.0
         
         return layout
+    }
+}
+
+// MARK: Collection view setup
+
+extension UICollectionView {
+
+    class func listingsCollectionViewWithDelegateDatasource<T where T: UICollectionViewDelegate, T: UICollectionViewDataSource>(delegateDatasource: T) -> UICollectionView {
+        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())
+        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.dataSource = delegateDatasource
+        collectionView.delegate = delegateDatasource
+        collectionView.alwaysBounceVertical = true
+        collectionView.registerClass(MasonryCollectionViewCell.self, forCellWithReuseIdentifier: MasonryCellIdentifier)
+        collectionView.registerClass(TableCollectionViewCell.self, forCellWithReuseIdentifier: TableCellIdentifier)
+        collectionView.allowsSelection = false
+        return collectionView
     }
 }
