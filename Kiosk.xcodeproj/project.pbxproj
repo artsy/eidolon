@@ -198,6 +198,7 @@
 		5EA637211A9E6AC60094A86E /* HelpViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */; };
 		5EA6B1111B668F8300FEB3ED /* LoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */; };
 		5EA6B1131B668F9300FEB3ED /* LoadingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */; };
+		5EA6CF771B96246800FE1122 /* ListingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6CF761B96246800FE1122 /* ListingsViewModel.swift */; settings = {ASSET_TAGS = (); }; };
 		5EB0B71A1A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */; };
 		5EB0B71B1A5C410D00B7CBF2 /* RACSignal+Kiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7161A5C410D00B7CBF2 /* RACSignal+Kiosk.swift */; };
 		5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */; };
@@ -402,6 +403,7 @@
 		5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewControllerTests.swift; sourceTree = "<group>"; };
 		5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewModel.swift; sourceTree = "<group>"; };
 		5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewModelTests.swift; sourceTree = "<group>"; };
+		5EA6CF761B96246800FE1122 /* ListingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsViewModel.swift; sourceTree = "<group>"; };
 		5EB0B6ED1A5C3E6800B7CBF2 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB0B7021A5C3E6800B7CBF2 /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB0B7071A5C3E6800B7CBF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 			children = (
 				5E860FFC1A5C429C00456E41 /* ListingsCountdownManager.swift */,
 				5E860FFD1A5C429C00456E41 /* ListingsViewController.swift */,
+				5EA6CF761B96246800FE1122 /* ListingsViewModel.swift */,
 				5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */,
 				5E860FFE1A5C429C00456E41 /* MasonryCollectionViewCell.swift */,
 				5E860FFF1A5C429C00456E41 /* TableCollectionViewCell.swift */,
@@ -1165,6 +1168,7 @@
 				5E86108D1A5C429C00456E41 /* KeypadContainerView.swift in Sources */,
 				5E86107E1A5C429C00456E41 /* MasonryCollectionViewCell.swift in Sources */,
 				5E86104F1A5C429C00456E41 /* ChooseAuctionViewController.swift in Sources */,
+				5EA6CF771B96246800FE1122 /* ListingsViewModel.swift in Sources */,
 				5E8610641A5C429C00456E41 /* Sale.swift in Sources */,
 				5E86104C1A5C429C00456E41 /* AdminLogViewController.swift in Sources */,
 				5E8610671A5C429C00456E41 /* User.swift in Sources */,
