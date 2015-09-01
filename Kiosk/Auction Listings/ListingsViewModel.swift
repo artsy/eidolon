@@ -1,9 +1,10 @@
 import Foundation
 import ReactiveCocoa
+import Swift_RAC_Macros
 
 class ListingsViewModel: NSObject {
+    let auctionID: String
 
-    var auctionID = AppSetup.sharedState.auctionID
     var syncInterval = SyncInterval
     var pageSize = 10
     var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
@@ -15,8 +16,49 @@ class ListingsViewModel: NSObject {
         #endif
     }
 
-    dynamic var saleArtworks = Array<SaleArtwork>()
+    private dynamic var saleArtworks = Array<SaleArtwork>()
     dynamic var sortedSaleArtworks = Array<SaleArtwork>()
+
+    var showSpinnerSignal: RACSignal!
+    var gridSelectedSignal: RACSignal!
+    var updatedContentsSignal: RACSignal!
+
+    init(selectedIndexSignal: RACSignal, auctionID: String = AppSetup.sharedState.auctionID) {
+        self.auctionID = auctionID
+
+        super.init()
+
+        let saleArtworksSignal = recurringListingsRequestSignal()
+        RAC(self, "saleArtworks") <~ saleArtworksSignal
+
+        showSpinnerSignal = RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool()
+        gridSelectedSignal = selectedIndexSignal.map { (index) -> AnyObject! in
+            switch ListingsViewModel.SwitchValues(rawValue: index as! Int) {
+            case .Some(.Grid):
+                return true
+            default:
+                return false
+            }
+        }
+
+        let sortedSaleArtworksSignal = RACSignal.combineLatest([saleArtworksSignal.distinctUntilChanged(), selectedIndexSignal]).map {
+            let tuple = $0 as! RACTuple
+            let saleArtworks = tuple.first as! [SaleArtwork]
+            let selectedIndex = tuple.second as! Int
+
+            if let switchValue = ListingsViewModel.SwitchValues(rawValue: selectedIndex) {
+                return switchValue.sortSaleArtworks(saleArtworks)
+            } else {
+                // Necessary for compiler – won't execute
+                return saleArtworks
+            }
+        }
+
+        RAC(self, "sortedSaleArtworks") <~ sortedSaleArtworksSignal
+        updatedContentsSignal = sortedSaleArtworksSignal.mapArrayLengthExistenceToBool().ignore(false).mapReplace(nil)
+    }
+
+
 
     func listingsRequestSignalForPage(page: Int) -> RACSignal {
         return XAppRequest(.AuctionListings(id: auctionID, page: page, pageSize: self.pageSize)).filterSuccessfulStatusCodes().mapJSON()

@@ -24,8 +24,8 @@ class ListingsViewController: UIViewController {
         imageView.sd_cancelCurrentImageLoad()
     }
 
-    lazy var viewModel = {
-        return ListingsViewModel()
+    lazy var viewModel: ListingsViewModel = {
+        return ListingsViewModel(selectedIndexSignal: self.switchView.selectedIndexSignal)
     }()
 
     dynamic var cellIdentifier = MasonryCellIdentifier
@@ -65,69 +65,36 @@ class ListingsViewController: UIViewController {
         view.insertSubview(collectionView, belowSubview: loadingSpinner)
         
         // Set up reactive bindings
-        RAC(viewModel, "saleArtworks") <~ viewModel.recurringListingsRequestSignal()
 
-        RAC(self, "loadingSpinner.hidden") <~ RACObserve(viewModel, "saleArtworks").mapArrayLengthExistenceToBool()
+        RAC(self, "loadingSpinner.hidden") <~ viewModel.showSpinnerSignal
 
-        let gridSelectedSignal = switchView.selectedIndexSignal.map { (index) -> AnyObject! in
-            switch ListingsViewModel.SwitchValues(rawValue: index as! Int) {
-            case .Some(.Grid):
-                return true
-            default:
-                return false
-            }
-        }
-        
-        RAC(self, "cellIdentifier") <~ gridSelectedSignal.map({ (gridSelected) -> AnyObject! in
+        RAC(self, "cellIdentifier") <~ viewModel.gridSelectedSignal.map { (gridSelected) -> AnyObject! in
             switch gridSelected as! Bool {
             case true:
                 return MasonryCellIdentifier
             default:
                 return TableCellIdentifier
             }
-        })
+        }
 
-        let artworkAndLayoutSignal = RACSignal.combineLatest([RACObserve(viewModel, "saleArtworks").distinctUntilChanged(), switchView.selectedIndexSignal, gridSelectedSignal]).map({ [weak self] in
-            let tuple = $0 as! RACTuple
-            let saleArtworks = tuple.first as! [SaleArtwork]
-            let selectedIndex = tuple.second as! Int
-
-            let gridSelected: AnyObject! = tuple.third
-
-            let layout = { () -> UICollectionViewLayout in
-                switch gridSelected as! Bool {
-                case true:
-                    return ListingsViewController.masonryLayout()
-                default:
-                    return ListingsViewController.tableLayout(CGRectGetWidth(self?.switchView.frame ?? CGRectZero))
-                }
-            }()
-
-            if let switchValue = ListingsViewModel.SwitchValues(rawValue: selectedIndex) {
-                return RACTuple(objectsFromArray: [switchValue.sortSaleArtworks(saleArtworks), layout])
-            } else {
-                // Necessary for compiler – won't execute
-                return RACTuple(objectsFromArray: [saleArtworks, layout])
+        let layoutSignal = viewModel.gridSelectedSignal.map { [weak self] (gridSelected) -> AnyObject! in
+            switch gridSelected as! Bool {
+            case true:
+                return ListingsViewController.masonryLayout()
+            default:
+                return ListingsViewController.tableLayout(CGRectGetWidth(self?.switchView.frame ?? CGRectZero))
             }
-        })
+        }
 
-        let sortedSaleArtworksSignal = artworkAndLayoutSignal.map { ($0 as! RACTuple).first }
-
-        RAC(viewModel, "sortedSaleArtworks") <~ sortedSaleArtworksSignal.doNext{ [weak self] _ -> Void in
-            self?.collectionView.reloadData()
+        viewModel.updatedContentsSignal.mapReplace(collectionView).doNext { (collectionView) -> Void in
+            (collectionView as! UICollectionView).reloadData()
             return
+        }.dispatchAsyncMainScheduler().subscribeNext { (collectionView) -> Void in
+            // Need to dispatch, since the changes in the CV's model aren't imediate
+            (collectionView as! UICollectionView).scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
         }
 
-        sortedSaleArtworksSignal.dispatchAsyncMainScheduler().subscribeNext { [weak self] in
-            let array = ($0 ?? []) as! [SaleArtwork]
-
-            if array.count > 0 {
-                // Need to dispatch, since the changes in the CV's model aren't imediate
-                self?.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
-            }
-        }
-
-        artworkAndLayoutSignal.map { ($0 as! RACTuple).second }.subscribeNext { [weak self] (layout) -> Void in
+        layoutSignal.subscribeNext { [weak self] (layout) -> Void in
             // Need to explicitly call animated: false and reload to avoid animation
             self?.collectionView.setCollectionViewLayout(layout as! UICollectionViewLayout, animated: false)
             return
