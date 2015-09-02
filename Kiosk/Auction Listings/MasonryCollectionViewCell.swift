@@ -61,7 +61,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         }
         
         // Bind subviews
-        RACObserve(self, "saleArtwork").subscribeNext { [weak self] (saleArtwork) -> Void in
+        latestSaleArtworkSignal.subscribeNext { [weak self] (saleArtwork) -> Void in
             if let saleArtwork = saleArtwork as? SaleArtwork {
                 if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
                     self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
@@ -80,8 +80,8 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
 }
 
 extension MasonryCollectionViewCell {
-    class func heightForSaleArtwork(saleArtwork: SaleArtwork) -> CGFloat {
-        let imageHeight = heightForImageWithAspectRatio(saleArtwork.artwork.defaultImage?.aspectRatio)
+    class func heightForCellWithImageAspectRatio(aspectRatio: CGFloat?) -> CGFloat {
+        let imageHeight = heightForImageWithAspectRatio(aspectRatio)
         let remainingHeight =
             20 + // padding
             20 + // artist name

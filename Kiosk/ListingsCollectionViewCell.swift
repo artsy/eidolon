@@ -40,12 +40,22 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         return recognizer.rac_gestureSignal()
     }()
     
-    dynamic var saleArtwork: SaleArtwork?
+    dynamic var saleArtworkSignal: RACSignal!
     dynamic var bidWasPressedSignal: RACSignal = RACSubject()
 
     lazy var artworkForSaleSignal: RACSignal = {
-        return RACObserve(self, "saleArtwork.forSaleSignal").switchToLatest()
+        return self.latestSaleArtworkSignal.map { (saleArtwork) -> AnyObject! in
+            return (saleArtwork as! SaleArtwork).forSaleSignal
+        }.switchToLatest()
     }()
+
+    lazy var latestArtworkSignal: RACSignal! = {
+        return self.latestSaleArtworkSignal.map { (saleArtwork) -> AnyObject! in
+            return (saleArtwork as! SaleArtwork).artwork
+        }
+    }()
+
+    lazy var latestSaleArtworkSignal: RACSignal! = { RACObserve(self, "saleArtworkSignal").switchToLatest() }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,36 +75,36 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     func setup() {
         // Necessary to use Autolayout
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Bind subviews
-        RAC(self, "lotNumberLabel.text") <~ RACObserve(self, "saleArtwork.lotNumberSignal").switchToLatest()
 
-        RACObserve(self, "saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
+        // Bind subviews
+        RAC(self, "lotNumberLabel.text") <~ latestSaleArtworkSignal.map { (saleArtwork) -> AnyObject! in
+            return (saleArtwork as! SaleArtwork).lotNumberSignal
+        }.switchToLatest()
+
+        latestSaleArtworkSignal.subscribeNext { [weak self] (saleArtwork) -> Void in
             if let imageView = self?.artworkImageView {
-                let url = (artwork as? Artwork)?.defaultImage?.thumbnailURL()
+                let url = (saleArtwork as? SaleArtwork)?.artwork.defaultImage?.thumbnailURL()
                 self?.downloadImage?(url: url, imageView: imageView)
             }
         }
         
-        RAC(self, "artistNameLabel.text") <~ RACObserve(self, "saleArtwork.artwork").map({ (artwork) -> AnyObject! in
+        RAC(self, "artistNameLabel.text") <~ latestArtworkSignal.map({ (artwork) -> AnyObject! in
             return (artwork as? Artwork)?.artists?.first?.name
         }).mapNilToEmptyString()
         
-        RAC(self, "artworkTitleLabel.attributedText") <~ RACObserve(self, "saleArtwork.artwork").map({ (artwork) -> AnyObject! in
-            if let artwork = artwork as? Artwork {
-                return artwork.titleAndDate
-            } else {
-                return nil
-            }
+        RAC(self, "artworkTitleLabel.attributedText") <~ latestArtworkSignal.map({ (artwork) -> AnyObject! in
+            return (artwork as? Artwork)?.titleAndDate
         }).mapNilToEmptyAttributedString()
         
-        RAC(self, "estimateLabel.text") <~ RACObserve(self, "saleArtwork.estimateString").mapNilToEmptyString()
+        RAC(self, "estimateLabel.text") <~ latestSaleArtworkSignal.map({ (saleArtwork) -> AnyObject! in
+            return (saleArtwork as! SaleArtwork).estimateString
+        }).mapNilToEmptyString()
         
-        RAC(self, "currentBidLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
+        RAC(self, "currentBidLabel.text") <~ latestSaleArtworkSignal.map({ (saleArtwork) -> AnyObject! in
             return (saleArtwork as? SaleArtwork)?.currentBidSignal(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ") ?? RACSignal.`return`(nil)
         }).switchToLatest().mapNilToEmptyString()
         
-        RAC(self, "numberOfBidsLabel.text") <~ RACObserve(self, "saleArtwork").map({ (saleArtwork) -> AnyObject! in
+        RAC(self, "numberOfBidsLabel.text") <~ latestSaleArtworkSignal.map({ (saleArtwork) -> AnyObject! in
             return (saleArtwork as? SaleArtwork)?.numberOfBidsSignal ?? RACSignal.`return`(nil)
         }).switchToLatest().mapNilToEmptyString()
 

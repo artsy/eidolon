@@ -13,8 +13,11 @@ extension RACSignal {
 
     func mapArrayLengthExistenceToBool() -> RACSignal {
         return map { (array) -> AnyObject! in
-            guard let array = array as? [AnyObject] where array.isNotEmpty else { return false }
-            return true
+            if let array = array as? [AnyObject] {
+                return array.isNotEmpty
+            } else {
+                return false
+            }
         }
     }
 

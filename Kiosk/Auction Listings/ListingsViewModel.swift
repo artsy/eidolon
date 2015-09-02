@@ -3,8 +3,14 @@ import ReactiveCocoa
 import Swift_RAC_Macros
 
 class ListingsViewModel: NSObject {
-    let auctionID: String
+    typealias ShowDetailsClosure = (SaleArtwork) -> Void
+    typealias PresentModalClosure = (SaleArtwork) -> Void
 
+    // These are private to the view model – should not be accessed directly
+    private dynamic var saleArtworks = Array<SaleArtwork>()
+    private dynamic var sortedSaleArtworks = Array<SaleArtwork>()
+
+    let auctionID: String
     var syncInterval = SyncInterval
     var pageSize = 10
     var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
@@ -16,15 +22,23 @@ class ListingsViewModel: NSObject {
         #endif
     }
 
-    private dynamic var saleArtworks = Array<SaleArtwork>()
-    dynamic var sortedSaleArtworks = Array<SaleArtwork>()
+    var numberOfSaleArtworks: Int {
+        return saleArtworks.count
+    }
 
     var showSpinnerSignal: RACSignal!
     var gridSelectedSignal: RACSignal!
-    var updatedContentsSignal: RACSignal!
+    var updatedContentsSignal: RACSignal! {
+        return RACObserve(self, "sortedSaleArtworks").mapArrayLengthExistenceToBool().ignore(false).map { _ -> AnyObject! in NSDate() }
+    }
 
-    init(selectedIndexSignal: RACSignal, auctionID: String = AppSetup.sharedState.auctionID) {
+    let showDetails: ShowDetailsClosure
+    let presentModal: PresentModalClosure
+
+    init(selectedIndexSignal: RACSignal, showDetails: ShowDetailsClosure, presentModal: PresentModalClosure, auctionID: String = AppSetup.sharedState.auctionID) {
         self.auctionID = auctionID
+        self.showDetails = showDetails
+        self.presentModal = presentModal
 
         super.init()
 
@@ -55,7 +69,6 @@ class ListingsViewModel: NSObject {
         }
 
         RAC(self, "sortedSaleArtworks") <~ sortedSaleArtworksSignal
-        updatedContentsSignal = sortedSaleArtworksSignal.mapArrayLengthExistenceToBool().ignore(false).map { _ -> AnyObject! in NSDate() }
     }
 
 
@@ -160,8 +173,20 @@ class ListingsViewModel: NSObject {
 
     // MARK: Instance methods
 
-    func saleArtworkAtIndexPath(indexPath: NSIndexPath) -> SaleArtwork {
-        return sortedSaleArtworks[indexPath.item];
+    func saleArtworkSignalAtIndexPath(indexPath: NSIndexPath) -> RACSignal {
+        return RACSignal.`return`(sortedSaleArtworks[indexPath.item])
+    }
+
+    func imageAspectRatioForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> CGFloat? {
+        return sortedSaleArtworks[indexPath.item].artwork.defaultImage?.aspectRatio
+    }
+
+    func showDetailsForSaleArtworkAtIndexPath(indexPath: NSIndexPath) {
+        showDetails(sortedSaleArtworks[indexPath.item])
+    }
+
+    func presentModalForSaleArtworkAtIndexPath(indexPath: NSIndexPath) {
+        presentModal(sortedSaleArtworks[indexPath.item])
     }
 
     // MARK: - Switch Values

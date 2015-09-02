@@ -25,7 +25,7 @@ class ListingsViewController: UIViewController {
     }
 
     lazy var viewModel: ListingsViewModel = {
-        return ListingsViewModel(selectedIndexSignal: self.switchView.selectedIndexSignal)
+        return ListingsViewModel(selectedIndexSignal: self.switchView.selectedIndexSignal, showDetails: self.showDetailsForSaleArtwork, presentModal: self.presentModalForSaleArtwork)
     }()
 
     dynamic var cellIdentifier = MasonryCellIdentifier
@@ -126,7 +126,7 @@ extension ListingsViewController {
 extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, ARCollectionViewMasonryLayoutDelegate {
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.sortedSaleArtworks.count
+        return viewModel.numberOfSaleArtworks
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -137,27 +137,23 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
             listingsCell.downloadImage = downloadImage
             listingsCell.cancelDownloadImage = cancelDownloadImage
 
-            listingsCell.saleArtwork = viewModel.saleArtworkAtIndexPath(indexPath)
+            listingsCell.saleArtworkSignal = viewModel.saleArtworkSignalAtIndexPath(indexPath)
 
             let bidSignal: RACSignal = listingsCell.bidWasPressedSignal.takeUntil(cell.rac_prepareForReuseSignal)
             bidSignal.subscribeNext({ [weak self] (_) -> Void in
-                if let saleArtwork = self?.viewModel.saleArtworkAtIndexPath(indexPath) {
-                    self?.presentModalForSaleArtwork(saleArtwork)
-                }
+                self?.viewModel.presentModalForSaleArtworkAtIndexPath(indexPath)
             })
             
             let moreInfoSignal = listingsCell.moreInfoSignal.takeUntil(cell.rac_prepareForReuseSignal)
             moreInfoSignal.subscribeNext({ [weak self] (_) -> Void in
-                if let saleArtwork = self?.viewModel.saleArtworkAtIndexPath(indexPath) {
-                    self?.presentDetailsForSaleArtwork(saleArtwork)
-                }
+                self?.viewModel.showDetailsForSaleArtworkAtIndexPath(indexPath)
             })
         }
         
         return cell
     }
     
-    func presentDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
+    func showDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
         performSegueWithIdentifier(SegueIdentifier.ShowSaleArtworkDetails.rawValue, sender: saleArtwork)
     }
 
@@ -180,7 +176,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return MasonryCollectionViewCell.heightForSaleArtwork(viewModel.saleArtworkAtIndexPath(indexPath))
+        return MasonryCollectionViewCell.heightForCellWithImageAspectRatio(viewModel.imageAspectRatioForSaleArtworkAtIndexPath(indexPath))
     }
 }
 
