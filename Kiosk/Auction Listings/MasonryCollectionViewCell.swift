@@ -61,15 +61,14 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         }
         
         // Bind subviews
-        latestSaleArtworkSignal.subscribeNext { [weak self] (saleArtwork) -> Void in
-            if let saleArtwork = saleArtwork as? SaleArtwork {
-                if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
-                    self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
-                }
-                let imageHeight = heightForImageWithAspectRatio(saleArtwork.artwork.defaultImage?.aspectRatio)
-                self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
-                self?.layoutIfNeeded()
+        viewModelSignal.subscribeNext { [weak self] (viewModel) -> Void in
+            let viewModel = viewModel as! SaleArtworkViewModel
+            if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
+                self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
             }
+            let imageHeight = heightForImageWithAspectRatio(viewModel.thumbnailAspectRatop)
+            self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
+            self?.layoutIfNeeded()
         }
     }
 

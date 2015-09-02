@@ -137,7 +137,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
             listingsCell.downloadImage = downloadImage
             listingsCell.cancelDownloadImage = cancelDownloadImage
 
-            listingsCell.saleArtworkSignal = viewModel.saleArtworkSignalAtIndexPath(indexPath)
+            listingsCell.viewModel = viewModel.saleArtworkViewModelAtIndexPath(indexPath)
 
             let bidSignal: RACSignal = listingsCell.bidWasPressedSignal.takeUntil(cell.rac_prepareForReuseSignal)
             bidSignal.subscribeNext({ [weak self] (_) -> Void in

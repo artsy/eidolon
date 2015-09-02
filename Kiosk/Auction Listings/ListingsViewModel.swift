@@ -70,14 +70,14 @@ class ListingsViewModel: NSObject {
         RAC(self, "sortedSaleArtworks") <~ sortedSaleArtworksSignal
     }
 
+    // MARK: Private Methods
 
-
-    func listingsRequestSignalForPage(page: Int) -> RACSignal {
+    private func listingsRequestSignalForPage(page: Int) -> RACSignal {
         return XAppRequest(.AuctionListings(id: auctionID, page: page, pageSize: self.pageSize)).filterSuccessfulStatusCodes().mapJSON()
     }
 
     // Repeatedly calls itself with page+1 until the count of the returned array is < pageSize.
-    func retrieveAllListingsRequestSignal(page: Int) -> RACSignal {
+    private func retrieveAllListingsRequestSignal(page: Int) -> RACSignal {
         return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
             self?.listingsRequestSignalForPage(page).subscribeNext{ (object) -> () in
                 if let array = object as? Array<AnyObject> {
@@ -98,7 +98,7 @@ class ListingsViewModel: NSObject {
     }
 
     // Fetches all pages of the auction
-    func allListingsRequestSignal() -> RACSignal {
+    private func allListingsRequestSignal() -> RACSignal {
         return schedule(schedule(retrieveAllListingsRequestSignal(1), RACScheduler(priority: RACSchedulerPriorityDefault)).collect().map({ (object) -> AnyObject! in
             // object is an array of arrays (thanks to collect()). We need to flatten it.
 
@@ -112,7 +112,7 @@ class ListingsViewModel: NSObject {
         }), RACScheduler.mainThreadScheduler())
     }
 
-    func recurringListingsRequestSignal() -> RACSignal {
+    private func recurringListingsRequestSignal() -> RACSignal {
         let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate()).takeUntil(rac_willDeallocSignal())
 
         return recurringSignal.doNext(logSync).map { [weak self] _ -> AnyObject! in
@@ -160,6 +160,8 @@ class ListingsViewModel: NSObject {
         }
     }
 
+    // MARK: Public methods
+
     func detectDevelopment() -> Bool {
         var developmentEnvironment = false
         #if (arch(i386) || arch(x86_64)) && os(iOS)
@@ -170,10 +172,8 @@ class ListingsViewModel: NSObject {
         return developmentEnvironment
     }
 
-    // MARK: Instance methods
-
-    func saleArtworkSignalAtIndexPath(indexPath: NSIndexPath) -> RACSignal {
-        return RACSignal.`return`(sortedSaleArtworks[indexPath.item])
+    func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel {
+        return sortedSaleArtworks[indexPath.item].viewModel
     }
 
     func imageAspectRatioForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> CGFloat? {
