@@ -24,51 +24,51 @@ class SaleArtworkTests: QuickSpec {
 
         describe("estimates") {
             it("gives no estimtates when no estimates present") {
-                expect(saleArtwork.estimateString) == "No Estimate"
+                expect(saleArtwork.viewModel.estimateString) == "No Estimate"
             }
             
             it("gives estimtate range when low and high are present") {
                 saleArtwork.lowEstimateCents = 100_00
                 saleArtwork.highEstimateCents = 200_00
-                expect(saleArtwork.estimateString) == "Estimate: $100–$200"
+                expect(saleArtwork.viewModel.estimateString) == "Estimate: $100–$200"
             }
 
             it("gives estimate if present") {
                 saleArtwork.estimateCents = 200_00
-                expect(saleArtwork.estimateString) == "Estimate: $200"
+                expect(saleArtwork.viewModel.estimateString) == "Estimate: $200"
             }
 
             it("give estimate if estimate both and low/high are present") {
                 saleArtwork.highEstimateCents = 300_00
                 saleArtwork.lowEstimateCents = 100_00
                 saleArtwork.estimateCents = 200_00
-                expect(saleArtwork.estimateString) == "Estimate: $200"
+                expect(saleArtwork.viewModel.estimateString) == "Estimate: $200"
             }
             
             it("gives no estimate if only high is present") {
                 saleArtwork.highEstimateCents = 100_00
-                expect(saleArtwork.estimateString) == "No Estimate"
+                expect(saleArtwork.viewModel.estimateString) == "No Estimate"
             }
 
             it("gives no estimate if only low is present") {
                 saleArtwork.lowEstimateCents = 100_00
-                expect(saleArtwork.estimateString) == "No Estimate"
+                expect(saleArtwork.viewModel.estimateString) == "No Estimate"
             }
 
             it("indicates that an artwork is not for sale") {
                 saleArtwork.artwork.soldStatus = "sold"
-                expect((saleArtwork.forSaleSignal.first() as! Bool)).toEventually( beFalse() )
+                expect((saleArtwork.viewModel.forSaleSignal.first() as! Bool)).toEventually( beFalse() )
             }
 
             it("indicates that an artwork is for sale") {
                 saleArtwork.artwork.soldStatus = "anything else"
-                expect((saleArtwork.forSaleSignal.first() as! Bool)).toEventually( beTrue() )
+                expect((saleArtwork.viewModel.forSaleSignal.first() as! Bool)).toEventually( beTrue() )
             }
         }
 
         describe("reserve status") {
             it("gives default number of bids") {
-                let reserveStatus = saleArtwork.numberOfBidsWithReserveSignal.first() as! String
+                let reserveStatus = saleArtwork.viewModel.numberOfBidsWithReserveSignal.first() as! String
 
                 expect(reserveStatus) == "0 bids placed"
             }
@@ -79,7 +79,7 @@ class SaleArtworkTests: QuickSpec {
                 }
 
                 it("gives default number of bids") {
-                    let reserveStatus = saleArtwork.numberOfBidsWithReserveSignal.first() as! String
+                    let reserveStatus = saleArtwork.viewModel.numberOfBidsWithReserveSignal.first() as! String
 
                     expect(reserveStatus) == "1 bid placed"
                 }
@@ -87,7 +87,7 @@ class SaleArtworkTests: QuickSpec {
                 it("updates reserve status when reserve status changes") {
 
                     var reserveStatus = ""
-                    saleArtwork.numberOfBidsWithReserveSignal.subscribeNext { (newReserveStatus) -> Void in
+                    saleArtwork.viewModel.numberOfBidsWithReserveSignal.subscribeNext { (newReserveStatus) -> Void in
                         reserveStatus = newReserveStatus as! String
                     }
 
@@ -99,7 +99,7 @@ class SaleArtworkTests: QuickSpec {
 
                 it("sends new status when reserve status changes") {
                     var invocations = 0
-                    saleArtwork.numberOfBidsWithReserveSignal.subscribeNext { (newReserveStatus) -> Void in
+                    saleArtwork.viewModel.numberOfBidsWithReserveSignal.subscribeNext { (newReserveStatus) -> Void in
                         invocations++
                     }
                     
@@ -112,7 +112,7 @@ class SaleArtworkTests: QuickSpec {
                 it("updates reserve status when number of bids changes") {
 
                     var reserveStatus = ""
-                    saleArtwork.numberOfBidsWithReserveSignal.subscribeNext { (newReserveStatus) -> Void in
+                    saleArtwork.viewModel.numberOfBidsWithReserveSignal.subscribeNext { (newReserveStatus) -> Void in
                         reserveStatus = newReserveStatus as! String
                     }
 
@@ -123,7 +123,7 @@ class SaleArtworkTests: QuickSpec {
 
                 it("sends new status when number of bids changes") {
                     var invocations = 0
-                    saleArtwork.numberOfBidsWithReserveSignal.subscribeNext { (newReserveStatus) -> Void in
+                    saleArtwork.viewModel.numberOfBidsWithReserveSignal.subscribeNext { (newReserveStatus) -> Void in
                         invocations++
                     }
 
@@ -135,7 +135,7 @@ class SaleArtworkTests: QuickSpec {
 
                 it("sends new status when highest bid changes") {
                     var invocations = 0
-                    saleArtwork.numberOfBidsWithReserveSignal.subscribeNext { (newReserveStatus) -> Void in
+                    saleArtwork.viewModel.numberOfBidsWithReserveSignal.subscribeNext { (newReserveStatus) -> Void in
                         invocations++
                     }
 
