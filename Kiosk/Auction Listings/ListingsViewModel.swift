@@ -2,9 +2,28 @@ import Foundation
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-class ListingsViewModel: NSObject {
-    typealias ShowDetailsClosure = (SaleArtwork) -> Void
-    typealias PresentModalClosure = (SaleArtwork) -> Void
+typealias ShowDetailsClosure = (SaleArtwork) -> Void
+typealias PresentModalClosure = (SaleArtwork) -> Void
+
+protocol ListingsViewModelType {
+    var auctionID: String { get }
+    var syncInterval: NSTimeInterval { get }
+    var pageSize: Int { get }
+    var schedule: (RACSignal, RACScheduler) -> RACSignal { get }
+    var logSync: (AnyObject!) -> Void { get }
+    var numberOfSaleArtworks: Int { get }
+
+    var showSpinnerSignal: RACSignal! { get }
+    var gridSelectedSignal: RACSignal! { get }
+    var updatedContentsSignal: RACSignal! { get }
+
+    func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel
+    func showDetailsForSaleArtworkAtIndexPath(indexPath: NSIndexPath)
+    func presentModalForSaleArtworkAtIndexPath(indexPath: NSIndexPath)
+    func imageAspectRatioForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> CGFloat?
+}
+
+class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // These are private to the view model – should not be accessed directly
     private dynamic var saleArtworks = Array<SaleArtwork>()
@@ -16,7 +35,7 @@ class ListingsViewModel: NSObject {
     var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
         return signal.deliverOn(scheduler)
     }
-    var logSync = { (date: AnyObject!) -> () in
+    var logSync = { (date: AnyObject!) -> Void in
         #if (arch(i386) || arch(x86_64)) && os(iOS)
             logger.log("Syncing on \(date)")
         #endif
@@ -44,7 +63,7 @@ class ListingsViewModel: NSObject {
 
         RAC(self, "saleArtworks") <~ recurringListingsRequestSignal()
 
-        showSpinnerSignal = RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool()
+        showSpinnerSignal = RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool().not()
         gridSelectedSignal = selectedIndexSignal.map { (index) -> AnyObject! in
             switch ListingsViewModel.SwitchValues(rawValue: index as! Int) {
             case .Some(.Grid):
@@ -161,16 +180,6 @@ class ListingsViewModel: NSObject {
     }
 
     // MARK: Public methods
-
-    func detectDevelopment() -> Bool {
-        var developmentEnvironment = false
-        #if (arch(i386) || arch(x86_64)) && os(iOS)
-            developmentEnvironment = true
-            #else
-            developmentEnvironment = getSSID()?.lowercaseString.containsString("artsy") ?? false
-        #endif
-        return developmentEnvironment
-    }
 
     func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel {
         return sortedSaleArtworks[indexPath.item].viewModel

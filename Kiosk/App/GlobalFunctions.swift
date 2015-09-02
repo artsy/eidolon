@@ -46,3 +46,13 @@ func getSSID() -> String? {
 
     return dictionary?[kCNNetworkInfoKeySSID as String] as? String
 }
+
+func detectDevelopment() -> Bool {
+    var developmentEnvironment = false
+    #if (arch(i386) || arch(x86_64)) && os(iOS)
+        developmentEnvironment = true
+        #else
+        developmentEnvironment = getSSID()?.lowercaseString.containsString("artsy") ?? false
+    #endif
+    return developmentEnvironment
+}

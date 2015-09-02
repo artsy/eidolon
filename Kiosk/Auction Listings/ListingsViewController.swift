@@ -24,7 +24,7 @@ class ListingsViewController: UIViewController {
         imageView.sd_cancelCurrentImageLoad()
     }
 
-    lazy var viewModel: ListingsViewModel = {
+    lazy var viewModel: ListingsViewModelType = {
         return ListingsViewModel(selectedIndexSignal: self.switchView.selectedIndexSignal, showDetails: self.showDetailsForSaleArtwork, presentModal: self.presentModalForSaleArtwork)
     }()
 
@@ -44,7 +44,7 @@ class ListingsViewController: UIViewController {
 
         // Set up development environment.
         
-        if viewModel.detectDevelopment() {
+        if detectDevelopment() {
             let flagImageName = AppSetup.sharedState.useStaging ? "StagingFlag" : "ProductionFlag"
             stagingFlag.image = UIImage(named: flagImageName)
             stagingFlag.hidden = AppSetup.sharedState.isTesting
@@ -59,7 +59,7 @@ class ListingsViewController: UIViewController {
         
         // Set up reactive bindings
 
-        RAC(self, "loadingSpinner.hidden") <~ viewModel.showSpinnerSignal
+        RAC(self, "loadingSpinner.hidden") <~ viewModel.showSpinnerSignal.not()
 
         // Map switch selection to cell reuse identifier.
         RAC(self, "cellIdentifier") <~ viewModel.gridSelectedSignal.map { (gridSelected) -> AnyObject! in
@@ -152,7 +152,16 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         
         return cell
     }
-    
+
+    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        return MasonryCollectionViewCell.heightForCellWithImageAspectRatio(viewModel.imageAspectRatioForSaleArtworkAtIndexPath(indexPath))
+    }
+}
+
+// MARK: Private Methods
+
+private extension ListingsViewController {
+
     func showDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
         performSegueWithIdentifier(SegueIdentifier.ShowSaleArtworkDetails.rawValue, sender: saleArtwork)
     }
@@ -174,15 +183,6 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         })
     }
-
-    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return MasonryCollectionViewCell.heightForCellWithImageAspectRatio(viewModel.imageAspectRatioForSaleArtworkAtIndexPath(indexPath))
-    }
-}
-
-// MARK: Private Methods
-
-private extension ListingsViewController {
     
     // MARK: Class methods
     
