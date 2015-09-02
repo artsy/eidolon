@@ -22,9 +22,6 @@ PODS:
   - CardFlight (1.9.2):
     - CardFlight/AudioJack (= 1.9.2)
   - CardFlight/AudioJack (1.9.2)
-  - Cent (3.0.2):
-    - Dollar (~> 3.0.2)
-  - Dollar (3.0.2)
   - DZNWebViewController (2.0):
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
@@ -46,7 +43,7 @@ PODS:
     - ReactiveCocoa
   - Moya/ReactiveCore (2.0.0):
     - Moya/Core
-  - Nimble (HEAD based on 2.0.0-rc.2)
+  - Nimble (HEAD based on 2.0.0-rc.3)
   - Nimble-Snapshots (1.0.0):
     - FBSnapshotTestCase (~> 1.7)
     - Nimble (~> 2.0.0-rc.2)
@@ -58,7 +55,7 @@ PODS:
   - NJKWebViewProgress/ProgressView (0.2.3)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
-  - Quick (HEAD based on 0.5.1)
+  - Quick (HEAD based on 0.6.0)
   - RACAlertAction (0.1.0):
     - ReactiveCocoa
   - Reachability (3.1.1)
@@ -105,8 +102,6 @@ DEPENDENCIES:
   - Artsy-UIButtons
   - Box (HEAD)
   - CardFlight
-  - Cent (from `https://github.com/ashfurrow/Dollar.swift.git`, branch `swift-2-xcode-7`)
-  - Dollar (from `https://github.com/ashfurrow/Dollar.swift.git`, branch `swift-2-xcode-7`)
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase
@@ -139,12 +134,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/Alamofire/Alamofire.git
   ARTiledImageView:
     :git: https://github.com/ashfurrow/ARTiledImageView.git
-  Cent:
-    :branch: swift-2-xcode-7
-    :git: https://github.com/ashfurrow/Dollar.swift.git
-  Dollar:
-    :branch: swift-2-xcode-7
-    :git: https://github.com/ashfurrow/Dollar.swift.git
   DZNWebViewController:
     :git: https://github.com/orta/DZNWebViewController.git
   Keys:
@@ -173,12 +162,6 @@ CHECKOUT OPTIONS:
   ARTiledImageView:
     :commit: 2fe35ede0cb1d8cf3dc5aa4506c476c0367564b7
     :git: https://github.com/ashfurrow/ARTiledImageView.git
-  Cent:
-    :commit: 3f40b9ceb1ff892a21c35e8a8baa786c1e7d7fc2
-    :git: https://github.com/ashfurrow/Dollar.swift.git
-  Dollar:
-    :commit: 3f40b9ceb1ff892a21c35e8a8baa786c1e7d7fc2
-    :git: https://github.com/ashfurrow/Dollar.swift.git
   DZNWebViewController:
     :commit: 9121386901af95072fb19eaa3df7060ca46fc337
     :git: https://github.com/orta/DZNWebViewController.git
@@ -208,12 +191,10 @@ SPEC CHECKSUMS:
   ARTiledImageView: a747cff42142ca04d1dc5cee516186f10b6c0949
   Artsy+UIColors: 7a4c987885a8d8da3e22672a3232761f929dd2b6
   Artsy+UIFonts: c51bb3b5cbf9c1a5fe198b4385d49133c5c71f5a
-  Artsy+UILabels: a7c713069e3d10144a3dc8e377bef8b2253cd766
+  Artsy+UILabels: 43da757ee01bce8165ec83123eccccdf1fe8843c
   Artsy-UIButtons: 6f67de2a5285f18acb5d0e2919d1b17188acbc27
   Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
   CardFlight: aac74eae9761ee2c8e3dba1c9a520e7a1aa0f17f
-  Cent: b45372f015d559d68680d19a2743efadeac155b9
-  Dollar: fa1c277042a5e8208f2276abba056f27a812fcfe
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
   EDColor: 89d19a013279a5604d61650721c15f20fefaaf00
@@ -226,11 +207,11 @@ SPEC CHECKSUMS:
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mixpanel: 2ffc3c261712622a5424f58c52af723d032a3add
   Moya: 4f6ee0cc668b80d6eed825ba48b571a67781240f
-  Nimble: e3cf5e73a491daf21c2bc88783dbfc55ce8b8e02
+  Nimble: 9dff98ee195ffe7351d3b2fb01d3a1420fd97948
   Nimble-Snapshots: c16dd279a4840ec06288198fafd53f3c17750ff3
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
-  Quick: 7426537a99e75076d6930c5b6da58006e4a9f38a
+  Quick: 563686dbcf0ae0f9f7401ac9cd2d786ee1b7f3d7
   RACAlertAction: f641fa41e2b63eaea096f5ad49991f45f96a3388
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
   ReactiveCocoa: d99571cf654b8e6703f338ca13f486b999c51969

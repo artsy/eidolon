@@ -2,7 +2,6 @@ import UIKit
 import Swift_RAC_Macros
 import Artsy_UILabels
 import Artsy_UIButtons
-import Dollar
 
 class YourBiddingDetailsViewController: UIViewController {
 
@@ -21,7 +20,7 @@ class YourBiddingDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        $.each([notificationLabel, bidderNumberLabel, pinNumberLabel]) { $0.makeTransparent() }
+        [notificationLabel, bidderNumberLabel, pinNumberLabel].forEach { $0.makeTransparent() }
         notificationLabel.setLineHeight(5)
         bodyLabel.setLineHeight(10)
 

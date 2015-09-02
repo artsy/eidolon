@@ -66,8 +66,6 @@ pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch =
 pod 'ReactiveCocoa', :git => 'https://github.com/ashfurrow/ReactiveCocoa.git', :branch => 'swift2'
 pod 'Moya/ReactiveCocoa', :git => 'https://github.com/Moya/Moya.git', :branch => 'swift-2.0'
 pod 'Swift-RAC-Macros'
-pod 'Dollar', :git => 'https://github.com/ashfurrow/Dollar.swift.git', :branch => 'swift-2-xcode-7'
-pod 'Cent', :git => 'https://github.com/ashfurrow/Dollar.swift.git',:branch => 'swift-2-xcode-7'
 
 target 'KioskTests' do
 

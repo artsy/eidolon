@@ -1,7 +1,6 @@
 import UIKit
 import ORStackView
 import ReactiveCocoa
-import Dollar
 
 class RegisterFlowView: ORStackView {
 
@@ -36,12 +35,7 @@ class RegisterFlowView: ORStackView {
 
             addSubview(itemView, withTopMargin: "10", sideMargin: "0")
 
-            let values = keypaths[i].map { (key) -> String? in
-                return user.valueForKey(key) as? String
-            }
-
-            if let value = $.compact(values).first {
-
+            if let value = (keypaths[i].flatMap { user.valueForKey($0) as? String }.first) {
                 itemView.createInfoLabel(value)
 
                 let button = itemView.createJumpToButtonAtIndex(i)
