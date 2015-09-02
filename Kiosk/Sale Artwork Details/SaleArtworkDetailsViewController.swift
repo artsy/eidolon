@@ -199,7 +199,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             let buyersPremiumLabel = ARSerifLabel()
             buyersPremiumLabel.font = buyersPremiumLabel.font.fontWithSize(16)
             buyersPremiumLabel.text = "This work has a "
-            buyersPremiumLabel.textColor = UIColor.artsyHeavyGrey()
+            buyersPremiumLabel.textColor = .artsyHeavyGrey()
 
             let buyersPremiumButton = ARButton()
             let title = "buyers premium"
@@ -207,7 +207,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             let attributedTitle = NSAttributedString(string: title, attributes: attributes)
             buyersPremiumButton.setTitle(title, forState: .Normal)
             buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
-            buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
+            buyersPremiumButton.setTitleColor(.artsyHeavyGrey(), forState: .Normal)
 
             buyersPremiumButton.rac_command = showBuyersPremiumCommand()
 
@@ -231,13 +231,13 @@ class SaleArtworkDetailsViewController: UIViewController {
             let key = SDWebImageManager.sharedManager().cacheKeyForURL(image.thumbnailURL())
             let thumbnailImage = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(key)
             if thumbnailImage == nil {
-                imageView.backgroundColor = UIColor.artsyLightGrey()
+                imageView.backgroundColor = .artsyLightGrey()
             }
 
             imageView.sd_setImageWithURL(image.fullsizeURL(), placeholderImage: thumbnailImage, completed: { (image, _, _, _) -> Void in
                 // If the image was successfully downloaded, make sure we aren't still displaying grey.
                 if image != nil {
-                    imageView.backgroundColor = UIColor.clearColor()
+                    imageView.backgroundColor = .clearColor()
                 }
             })
 

@@ -61,7 +61,7 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.drawBottomSolidBorderWithColor(UIColor.artsyMediumGrey())
+        contentView.drawBottomSolidBorderWithColor(.artsyMediumGrey())
     }
 }
 

@@ -25,7 +25,7 @@ class TextField: UITextField {
         layer.cornerRadius = 0
         layer.masksToBounds = true
         layer.borderWidth = 1
-        tintColor = UIColor.blackColor()
+        tintColor = .blackColor()
         stateChangedAnimated(false)
         setupEvents()
     }
@@ -61,9 +61,9 @@ class TextField: UITextField {
 
     func borderColorForState() -> UIColor {
         if editing && shouldChangeColorWhenEditing {
-            return UIColor.artsyPurple()
+            return .artsyPurple()
         } else {
-            return UIColor.artsyMediumGrey()
+            return .artsyMediumGrey()
         }
     }
 

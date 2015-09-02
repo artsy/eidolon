@@ -75,7 +75,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        bidView.drawTopDottedBorderWithColor(UIColor.artsyMediumGrey())
+        bidView.drawTopDottedBorderWithColor(.artsyMediumGrey())
     }
 }
 

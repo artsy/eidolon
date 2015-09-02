@@ -116,7 +116,7 @@ private extension ListingsCollectionViewCell {
     // Mark: UIView-property-methods – need an _ prefix to appease the compiler ¯\_(ツ)_/¯
     class func _artworkImageView() -> UIImageView {
         let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.artsyLightGrey()
+        imageView.backgroundColor = .artsyLightGrey()
         return imageView
     }
 
@@ -169,7 +169,7 @@ private extension ListingsCollectionViewCell {
     
     class func _infoLabel() -> UILabel {
         let label = ARSansSerifLabelWithChevron()
-        label.tintColor = UIColor.blackColor()
+        label.tintColor = .blackColor()
         label.text = "MORE INFO"
         return label
     }

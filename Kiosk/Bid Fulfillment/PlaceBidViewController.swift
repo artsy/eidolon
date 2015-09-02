@@ -124,12 +124,12 @@ class PlaceBidViewController: UIViewController {
                     let buyersPremiumLabel = ARSerifLabel()
                     buyersPremiumLabel.font = buyersPremiumLabel.font.fontWithSize(16)
                     buyersPremiumLabel.text = "This work has a "
-                    buyersPremiumLabel.textColor = UIColor.artsyHeavyGrey()
+                    buyersPremiumLabel.textColor = .artsyHeavyGrey()
 
                     let buyersPremiumButton = ARUnderlineButton()
                     buyersPremiumButton.titleLabel?.font = buyersPremiumLabel.font
                     buyersPremiumButton.setTitle("buyers premium", forState: .Normal)
-                    buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
+                    buyersPremiumButton.setTitleColor(.artsyHeavyGrey(), forState: .Normal)
                     buyersPremiumButton.rac_command = showBuyersPremiumCommand()
 
                     buyersPremiumView.addSubview(buyersPremiumLabel)

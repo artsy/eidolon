@@ -9,7 +9,7 @@ class ChooseAuctionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        stackScrollView.backgroundColor = UIColor.whiteColor()
+        stackScrollView.backgroundColor = .whiteColor()
         stackScrollView.bottomMarginHeight = CGFloat(NSNotFound)
         stackScrollView.updateConstraints()
 
@@ -25,7 +25,7 @@ class ChooseAuctionViewController: UIViewController {
 
                     let button = ARFlatButton()
                     button.setTitle(title, forState: .Normal)
-                    button.setTitleColor(UIColor.blackColor(), forState: .Normal)
+                    button.setTitleColor(.blackColor(), forState: .Normal)
                     button.tag = i
                     button.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (_) in
                         let defaults = NSUserDefaults.standardUserDefaults()

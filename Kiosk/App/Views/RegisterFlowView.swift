@@ -16,7 +16,7 @@ class RegisterFlowView: ORStackView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = .whiteColor()
         self.bottomMarginHeight = CGFloat(NSNotFound)
         self.updateConstraints()
     }
@@ -67,7 +67,7 @@ class RegisterFlowView: ORStackView {
         var titleLabel: UILabel?
 
         func highlight() {
-            titleLabel?.textColor = UIColor.artsyPurple()
+            titleLabel?.textColor = .artsyPurple()
         }
 
         func createTitleViewWithTitle(title: String)  {

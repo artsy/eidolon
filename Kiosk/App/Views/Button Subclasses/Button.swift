@@ -6,9 +6,9 @@ class Button: ARFlatButton {
 
     override func setup() {
         super.setup()
-        setTitleShadowColor(UIColor.clearColor(), forState: .Normal)
-        setTitleShadowColor(UIColor.clearColor(), forState: .Highlighted)
-        setTitleShadowColor(UIColor.clearColor(), forState: .Disabled)
+        setTitleShadowColor(.clearColor(), forState: .Normal)
+        setTitleShadowColor(.clearColor(), forState: .Highlighted)
+        setTitleShadowColor(.clearColor(), forState: .Disabled)
         shouldDimWhenDisabled = false;
     }
 }
@@ -22,17 +22,17 @@ class ActionButton: Button {
     override func setup() {
         super.setup()
 
-        setBorderColor(UIColor.blackColor(), forState: .Normal, animated: false)
-        setBorderColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
-        setBorderColor(UIColor.artsyMediumGrey(), forState: .Disabled, animated: false)
+        setBorderColor(.blackColor(), forState: .Normal, animated: false)
+        setBorderColor(.artsyPurple(), forState: .Highlighted, animated: false)
+        setBorderColor(.artsyMediumGrey(), forState: .Disabled, animated: false)
 
-        setBackgroundColor(UIColor.blackColor(), forState: .Normal, animated: false)
-        setBackgroundColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
-        setBackgroundColor(UIColor.whiteColor(), forState: .Disabled, animated: false)
+        setBackgroundColor(.blackColor(), forState: .Normal, animated: false)
+        setBackgroundColor(.artsyPurple(), forState: .Highlighted, animated: false)
+        setBackgroundColor(.whiteColor(), forState: .Disabled, animated: false)
 
-        setTitleColor(UIColor.whiteColor(), forState:.Normal)
-        setTitleColor(UIColor.whiteColor(), forState:.Highlighted)
-        setTitleColor(UIColor.artsyHeavyGrey(), forState:.Disabled)
+        setTitleColor(.whiteColor(), forState:.Normal)
+        setTitleColor(.whiteColor(), forState:.Highlighted)
+        setTitleColor(.artsyHeavyGrey(), forState:.Disabled)
     }
 }
 
@@ -45,17 +45,17 @@ class SecondaryActionButton: Button {
     override func setup() {
         super.setup()
 
-        setBorderColor(UIColor.artsyMediumGrey(), forState: .Normal, animated: false)
-        setBorderColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
-        setBorderColor(UIColor.artsyLightGrey(), forState: .Disabled, animated: false)
+        setBorderColor(.artsyMediumGrey(), forState: .Normal, animated: false)
+        setBorderColor(.artsyPurple(), forState: .Highlighted, animated: false)
+        setBorderColor(.artsyLightGrey(), forState: .Disabled, animated: false)
 
-        setBackgroundColor(UIColor.whiteColor(), forState: .Normal, animated: false)
-        setBackgroundColor(UIColor.artsyPurple(), forState: .Highlighted, animated: false)
-        setBackgroundColor(UIColor.whiteColor(), forState: .Disabled, animated: false)
+        setBackgroundColor(.whiteColor(), forState: .Normal, animated: false)
+        setBackgroundColor(.artsyPurple(), forState: .Highlighted, animated: false)
+        setBackgroundColor(.whiteColor(), forState: .Disabled, animated: false)
 
-        setTitleColor(UIColor.blackColor(), forState:.Normal)
-        setTitleColor(UIColor.whiteColor(), forState:.Highlighted)
-        setTitleColor(UIColor.artsyHeavyGrey(), forState:.Disabled)
+        setTitleColor(.blackColor(), forState:.Normal)
+        setTitleColor(.whiteColor(), forState:.Highlighted)
+        setTitleColor(.artsyHeavyGrey(), forState:.Disabled)
     }
 }
 
@@ -66,8 +66,8 @@ class KeypadButton: Button {
         super.setup()
         shouldAnimateStateChange = false;
         layer.borderWidth = 0
-        setBackgroundColor(UIColor.blackColor(), forState: .Highlighted, animated: false)
-        setBackgroundColor(UIColor.whiteColor(), forState: .Normal, animated: false)
+        setBackgroundColor(.blackColor(), forState: .Highlighted, animated: false)
+        setBackgroundColor(.whiteColor(), forState: .Normal, animated: false)
     }
 }
 

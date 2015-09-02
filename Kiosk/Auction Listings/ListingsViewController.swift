@@ -33,7 +33,7 @@ class ListingsViewController: UIViewController {
     @IBOutlet var stagingFlag: UIImageView!
     @IBOutlet var loadingSpinner: Spinner!
     
-    lazy var collectionView: UICollectionView = { return UICollectionView.listingsCollectionViewWithDelegateDatasource(self) }()
+    lazy var collectionView: UICollectionView = { return .listingsCollectionViewWithDelegateDatasource(self) }()
 
     lazy var switchView: SwitchView = {
         return SwitchView(buttonTitles: ListingsViewModel.SwitchValues.allSwitchValueNames())
@@ -77,7 +77,7 @@ class ListingsViewController: UIViewController {
             return
         }.dispatchAsyncMainScheduler().subscribeNext { (collectionView) -> Void in
             // Need to dispatchAsyncMainScheduler, since the changes in the CV's model aren't imediate, so we may scroll to a cell that doesn't exist yet.
-            (collectionView as! UICollectionView).scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: false)
+            (collectionView as! UICollectionView).scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: .Top, animated: false)
         }
 
         // Respond to changes in layout, driven by switch selection.
@@ -216,7 +216,7 @@ extension UICollectionView {
 
     class func listingsCollectionViewWithDelegateDatasource<T where T: UICollectionViewDelegate, T: UICollectionViewDataSource>(delegateDatasource: T) -> UICollectionView {
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())
-        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.backgroundColor = .clearColor()
         collectionView.dataSource = delegateDatasource
         collectionView.delegate = delegateDatasource
         collectionView.alwaysBounceVertical = true

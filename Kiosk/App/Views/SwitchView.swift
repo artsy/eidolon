@@ -30,14 +30,14 @@ class SwitchView: UIView {
             
             if let titleLabel = button.titleLabel {
                 titleLabel.font = UIFont.sansSerifFontWithSize(13)
-                titleLabel.backgroundColor = UIColor.whiteColor()
+                titleLabel.backgroundColor = .whiteColor()
                 titleLabel.opaque = true
             }
             
-            button.backgroundColor = UIColor.whiteColor()
-            button.setTitleColor(UIColor.blackColor(), forState: .Disabled)
-            button.setTitleColor(UIColor.blackColor(), forState: .Selected)
-            button.setTitleColor(UIColor.artsyMediumGrey(), forState: .Normal)
+            button.backgroundColor = .whiteColor()
+            button.setTitleColor(.blackColor(), forState: .Disabled)
+            button.setTitleColor(.blackColor(), forState: .Selected)
+            button.setTitleColor(.artsyMediumGrey(), forState: .Normal)
             
             return button
         }
@@ -114,8 +114,8 @@ private extension SwitchView {
         selectionIndicator.addSubview(topSelectionIndicator)
         selectionIndicator.addSubview(bottomSelectionIndicator)
         
-        topSelectionIndicator.backgroundColor = UIColor.blackColor()
-        bottomSelectionIndicator.backgroundColor = UIColor.blackColor()
+        topSelectionIndicator.backgroundColor = .blackColor()
+        bottomSelectionIndicator.backgroundColor = .blackColor()
         
         topSelectionIndicator.alignTop("0", leading: "0", bottom: nil, trailing: "0", toView: selectionIndicator)
         bottomSelectionIndicator.alignTop(nil, leading: "0", bottom: "0", trailing: "0", toView: selectionIndicator)

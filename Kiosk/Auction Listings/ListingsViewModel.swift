@@ -55,7 +55,7 @@ class ListingsViewModel: NSObject {
         }
 
         RAC(self, "sortedSaleArtworks") <~ sortedSaleArtworksSignal
-        updatedContentsSignal = sortedSaleArtworksSignal.mapArrayLengthExistenceToBool().ignore(false).mapReplace(nil)
+        updatedContentsSignal = sortedSaleArtworksSignal.mapArrayLengthExistenceToBool().ignore(false).map { _ -> AnyObject! in NSDate() }
     }
 
 
@@ -152,7 +152,7 @@ class ListingsViewModel: NSObject {
         var developmentEnvironment = false
         #if (arch(i386) || arch(x86_64)) && os(iOS)
             developmentEnvironment = true
-        #else
+            #else
             developmentEnvironment = getSSID()?.lowercaseString.containsString("artsy") ?? false
         #endif
         return developmentEnvironment
@@ -207,7 +207,7 @@ class ListingsViewModel: NSObject {
                 return saleArtworks.sort(alphabeticalSort)
             }
         }
-        
+
         static func allSwitchValues() -> [SwitchValues] {
             return [Grid, LeastBids, MostBids, HighestCurrentBid, LowestCurrentBid, Alphabetical]
         }

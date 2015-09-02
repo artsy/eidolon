@@ -35,7 +35,7 @@ class ModalWebViewController: WebViewController {
         closeButton = UIButton()
         view.addSubview(closeButton)
         closeButton.titleLabel?.font = UIFont.sansSerifFontWithSize(14)
-        closeButton.setTitleColor(UIColor.artsyMediumGrey(), forState:.Normal)
+        closeButton.setTitleColor(.artsyMediumGrey(), forState:.Normal)
         closeButton.setTitle("CLOSE", forState:.Normal)
         closeButton.constrainWidth("140", height: "72")
         closeButton.alignTop("0", leading:"0", bottom:nil, trailing:nil, toView:view)
