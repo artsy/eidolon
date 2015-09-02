@@ -29,7 +29,7 @@ class ListingsViewModel: NSObject {
     var showSpinnerSignal: RACSignal!
     var gridSelectedSignal: RACSignal!
     var updatedContentsSignal: RACSignal! {
-        return RACObserve(self, "sortedSaleArtworks").mapArrayLengthExistenceToBool().ignore(false).map { _ -> AnyObject! in NSDate() }
+        return RACObserve(self, "sortedSaleArtworks").distinctUntilChanged().mapArrayLengthExistenceToBool().ignore(false).map { _ -> AnyObject! in NSDate() }
     }
 
     let showDetails: ShowDetailsClosure
@@ -42,8 +42,7 @@ class ListingsViewModel: NSObject {
 
         super.init()
 
-        let saleArtworksSignal = recurringListingsRequestSignal()
-        RAC(self, "saleArtworks") <~ saleArtworksSignal
+        RAC(self, "saleArtworks") <~ recurringListingsRequestSignal()
 
         showSpinnerSignal = RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool()
         gridSelectedSignal = selectedIndexSignal.map { (index) -> AnyObject! in
@@ -55,7 +54,7 @@ class ListingsViewModel: NSObject {
             }
         }
 
-        let sortedSaleArtworksSignal = RACSignal.combineLatest([saleArtworksSignal.distinctUntilChanged(), selectedIndexSignal]).map {
+        let sortedSaleArtworksSignal = RACSignal.combineLatest([RACObserve(self, "saleArtworks").distinctUntilChanged(), selectedIndexSignal]).map {
             let tuple = $0 as! RACTuple
             let saleArtworks = tuple.first as! [SaleArtwork]
             let selectedIndex = tuple.second as! Int
