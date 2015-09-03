@@ -64,14 +64,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         RAC(self, "saleArtworks") <~ recurringListingsRequestSignal()
 
         showSpinnerSignal = RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool().not()
-        gridSelectedSignal = selectedIndexSignal.map { (index) -> AnyObject! in
-            switch ListingsViewModel.SwitchValues(rawValue: index as! Int) {
-            case .Some(.Grid):
-                return true
-            default:
-                return false
-            }
-        }
+        gridSelectedSignal = selectedIndexSignal.map { return ListingsViewModel.SwitchValues(rawValue: $0 as! Int) == .Some(.Grid) }
 
         let sortedSaleArtworksSignal = RACSignal.combineLatest([RACObserve(self, "saleArtworks").distinctUntilChanged(), selectedIndexSignal]).map {
             let tuple = $0 as! RACTuple
