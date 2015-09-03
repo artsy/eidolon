@@ -40,7 +40,7 @@ extension SaleArtworkViewModel {
         return saleArtwork.artwork.defaultImage?.thumbnailURL()
     }
 
-    var thumbnailAspectRatop: CGFloat? {
+    var thumbnailAspectRatio: CGFloat? {
         return saleArtwork.artwork.defaultImage?.aspectRatio
     }
 

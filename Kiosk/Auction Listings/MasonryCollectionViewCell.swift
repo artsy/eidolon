@@ -66,7 +66,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
             if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
                 self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
             }
-            let imageHeight = heightForImageWithAspectRatio(viewModel.thumbnailAspectRatop)
+            let imageHeight = heightForImageWithAspectRatio(viewModel.thumbnailAspectRatio)
             self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
             self?.layoutIfNeeded()
         }
