@@ -54,6 +54,10 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
         defaults = NSUserDefaults.standardUserDefaults()
 
+        afterEach { () -> () in
+            Provider.sharedProvider = Provider.StubbingProvider()
+        }
+
         it("enables the command only when the password is valid") {
             let passwordSubject = RACSubject()
 

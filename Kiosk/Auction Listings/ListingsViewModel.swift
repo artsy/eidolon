@@ -30,16 +30,10 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     private dynamic var sortedSaleArtworks = Array<SaleArtwork>()
 
     let auctionID: String
-    var syncInterval = SyncInterval
-    var pageSize = 10
-    var schedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
-        return signal.deliverOn(scheduler)
-    }
-    var logSync = { (date: AnyObject!) -> Void in
-        #if (arch(i386) || arch(x86_64)) && os(iOS)
-            logger.log("Syncing on \(date)")
-        #endif
-    }
+    let pageSize: Int
+    let syncInterval: NSTimeInterval
+    let logSync: (AnyObject!) -> Void
+    var schedule: (RACSignal, RACScheduler) -> RACSignal
 
     var numberOfSaleArtworks: Int {
         return saleArtworks.count
@@ -54,13 +48,31 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     let showDetails: ShowDetailsClosure
     let presentModal: PresentModalClosure
 
-    init(selectedIndexSignal: RACSignal, showDetails: ShowDetailsClosure, presentModal: PresentModalClosure, auctionID: String = AppSetup.sharedState.auctionID) {
+    init(selectedIndexSignal: RACSignal,
+         showDetails: ShowDetailsClosure,
+         presentModal: PresentModalClosure,
+         pageSize: Int = 10,
+         syncInterval: NSTimeInterval = SyncInterval,
+         logSync: (AnyObject!) -> Void = ListingsViewModel.DefaultLogging,
+         schedule: (signal: RACSignal, scheduler: RACScheduler) -> RACSignal = ListingsViewModel.DefaultScheduler,
+         auctionID: String = AppSetup.sharedState.auctionID) {
+
         self.auctionID = auctionID
         self.showDetails = showDetails
         self.presentModal = presentModal
+        self.pageSize = pageSize
+        self.syncInterval = syncInterval
+        self.logSync = logSync
+        self.schedule = schedule
 
         super.init()
 
+        setup(selectedIndexSignal)
+    }
+
+    // MARK: Private Methods
+
+    private func setup(selectedIndexSignal: RACSignal) {
         RAC(self, "saleArtworks") <~ recurringListingsRequestSignal()
 
         showSpinnerSignal = RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool().not()
@@ -82,16 +94,15 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         RAC(self, "sortedSaleArtworks") <~ sortedSaleArtworksSignal
     }
 
-    // MARK: Private Methods
-
     private func listingsRequestSignalForPage(page: Int) -> RACSignal {
         return XAppRequest(.AuctionListings(id: auctionID, page: page, pageSize: self.pageSize)).filterSuccessfulStatusCodes().mapJSON()
     }
 
     // Repeatedly calls itself with page+1 until the count of the returned array is < pageSize.
     private func retrieveAllListingsRequestSignal(page: Int) -> RACSignal {
+
         return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
-            self?.listingsRequestSignalForPage(page).subscribeNext{ (object) -> () in
+            self?.listingsRequestSignalForPage(page).subscribeNext { (object) -> () in
                 if let array = object as? Array<AnyObject> {
 
                     var nextPageSignal = RACSignal.empty()
@@ -128,11 +139,10 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate()).takeUntil(rac_willDeallocSignal())
 
         return recurringSignal.doNext(logSync).map { [weak self] _ -> AnyObject! in
-            return self?.allListingsRequestSignal() ?? RACSignal.empty()
+                return self?.allListingsRequestSignal() ?? RACSignal.empty()
             }.switchToLatest().map { [weak self] (newSaleArtworks) -> AnyObject! in
-                if self == nil {
-                    return [] // Now safe to use self!
-                }
+                guard self != nil else { return [] } // Now safe to use self!
+
                 let currentSaleArtworks = self!.saleArtworks
 
                 func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) -> Bool {
@@ -170,6 +180,18 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
                 return newSaleArtworks
         }
+    }
+
+    // MARK: Private class methods
+
+    private class func DefaultLogging(date: AnyObject!) {
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+            logger.log("Syncing on \(date)")
+        #endif
+    }
+
+    private class func DefaultScheduler(signal: RACSignal, _ scheduler: RACScheduler) -> RACSignal {
+        return signal.deliverOn(scheduler)
     }
 
     // MARK: Public methods
