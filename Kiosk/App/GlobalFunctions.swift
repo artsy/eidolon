@@ -47,7 +47,8 @@ func getSSID() -> String? {
     return dictionary?[kCNNetworkInfoKeySSID as String] as? String
 }
 
-func detectDevelopment() -> Bool {
+/// Looks for a connection to an Artsy WiFi network.
+func detectDevelopmentEnvironment() -> Bool {
     var developmentEnvironment = false
     #if (arch(i386) || arch(x86_64)) && os(iOS)
         developmentEnvironment = true

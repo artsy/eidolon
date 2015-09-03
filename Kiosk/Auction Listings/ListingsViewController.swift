@@ -44,7 +44,7 @@ class ListingsViewController: UIViewController {
 
         // Set up development environment.
         
-        if detectDevelopment() {
+        if detectDevelopmentEnvironment() {
             let flagImageName = AppSetup.sharedState.useStaging ? "StagingFlag" : "ProductionFlag"
             stagingFlag.image = UIImage(named: flagImageName)
             stagingFlag.hidden = AppSetup.sharedState.isTesting
