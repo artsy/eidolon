@@ -210,7 +210,7 @@ private extension ListingsViewController {
 
 extension UICollectionView {
 
-    class func listingsCollectionViewWithDelegateDatasource<T where T: UICollectionViewDelegate, T: UICollectionViewDataSource>(delegateDatasource: T) -> UICollectionView {
+    class func listingsCollectionViewWithDelegateDatasource(delegateDatasource: ListingsViewController) -> UICollectionView {
         let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())
         collectionView.backgroundColor = .clearColor()
         collectionView.dataSource = delegateDatasource
