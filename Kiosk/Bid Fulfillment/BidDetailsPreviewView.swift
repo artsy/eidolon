@@ -14,7 +14,7 @@ class BidDetailsPreviewView: UIView {
     dynamic let currentBidPriceLabel = ARSerifLabel()
 
     override func awakeFromNib() {
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = .whiteColor()
 
         artistNameLabel.numberOfLines = 1
         artworkTitleLabel.numberOfLines = 1

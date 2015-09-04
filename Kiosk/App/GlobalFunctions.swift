@@ -31,3 +31,29 @@ func responseIsOK(object: AnyObject!) -> AnyObject {
     }
     return false
 }
+
+// Adapted from https://github.com/FUKUZAWA-Tadashi/FHCCommander/blob/67c67757ee418a106e0ce0c0820459299b3d77bb/fhcc/Convenience.swift#L33-L44
+func getSSID() -> String? {
+    let interfaces: CFArray! = CNCopySupportedInterfaces()
+    if interfaces == nil { return nil }
+
+    let if0: UnsafePointer<Void>? = CFArrayGetValueAtIndex(interfaces, 0)
+    if if0 == nil { return nil }
+
+    let interfaceName: CFStringRef = unsafeBitCast(if0!, CFStringRef.self)
+    let dictionary = CNCopyCurrentNetworkInfo(interfaceName) as NSDictionary?
+    if dictionary == nil { return nil }
+
+    return dictionary?[kCNNetworkInfoKeySSID as String] as? String
+}
+
+/// Looks for a connection to an Artsy WiFi network.
+func detectDevelopmentEnvironment() -> Bool {
+    var developmentEnvironment = false
+    #if (arch(i386) || arch(x86_64)) && os(iOS)
+        developmentEnvironment = true
+        #else
+        developmentEnvironment = getSSID()?.lowercaseString.containsString("artsy") ?? false
+    #endif
+    return developmentEnvironment
+}

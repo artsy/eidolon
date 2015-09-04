@@ -1,7 +1,6 @@
 import UIKit
 import ORStackView
 import ReactiveCocoa
-import Dollar
 
 class RegisterFlowView: ORStackView {
 
@@ -17,7 +16,7 @@ class RegisterFlowView: ORStackView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = .whiteColor()
         self.bottomMarginHeight = CGFloat(NSNotFound)
         self.updateConstraints()
     }
@@ -36,12 +35,7 @@ class RegisterFlowView: ORStackView {
 
             addSubview(itemView, withTopMargin: "10", sideMargin: "0")
 
-            let values = keypaths[i].map { (key) -> String? in
-                return user.valueForKey(key) as? String
-            }
-
-            if let value = $.compact(values).first {
-
+            if let value = (keypaths[i].flatMap { user.valueForKey($0) as? String }.first) {
                 itemView.createInfoLabel(value)
 
                 let button = itemView.createJumpToButtonAtIndex(i)
@@ -73,7 +67,7 @@ class RegisterFlowView: ORStackView {
         var titleLabel: UILabel?
 
         func highlight() {
-            titleLabel?.textColor = UIColor.artsyPurple()
+            titleLabel?.textColor = .artsyPurple()
         }
 
         func createTitleViewWithTitle(title: String)  {

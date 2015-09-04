@@ -104,7 +104,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             lotNumberLabel.font = lotNumberLabel.font.fontWithSize(12)
             metadataStackView.addSubview(lotNumberLabel, withTopMargin: "0", sideMargin: "0")
             
-            RAC(lotNumberLabel, "text") <~ saleArtwork.lotNumberSignal
+            RAC(lotNumberLabel, "text") <~ saleArtwork.viewModel.lotNumberSignal
         }
 
         if let artist = artist() {
@@ -148,7 +148,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         metadataStackView.addSubview(estimateTopBorder, withTopMargin: "22", sideMargin: "0")
 
         let estimateLabel = label(.Serif, tag: .EstimateLabel)
-        estimateLabel.text = saleArtwork.estimateString
+        estimateLabel.text = saleArtwork.viewModel.estimateString
         metadataStackView.addSubview(estimateLabel, withTopMargin: "15", sideMargin: "0")
 
         let estimateBottomBorder = UIView()
@@ -169,11 +169,11 @@ class SaleArtworkDetailsViewController: UIViewController {
         metadataStackView.addSubview(currentBidLabel, withTopMargin: "22", sideMargin: "0")
 
         let currentBidValueLabel = label(.Bold, tag: .CurrentBidValueLabel, fontSize: 27)
-        RAC(currentBidValueLabel, "text") <~ saleArtwork.currentBidSignal()
+        RAC(currentBidValueLabel, "text") <~ saleArtwork.viewModel.currentBidSignal()
         metadataStackView.addSubview(currentBidValueLabel, withTopMargin: "10", sideMargin: "0")
 
         let numberOfBidsPlacedLabel = label(.Serif, tag: .NumberOfBidsPlacedLabel)
-        RAC(numberOfBidsPlacedLabel, "text") <~ saleArtwork.numberOfBidsWithReserveSignal
+        RAC(numberOfBidsPlacedLabel, "text") <~ saleArtwork.viewModel.numberOfBidsWithReserveSignal
         metadataStackView.addSubview(numberOfBidsPlacedLabel, withTopMargin: "10", sideMargin: "0")
 
         let bidButton = ActionButton()
@@ -182,13 +182,13 @@ class SaleArtworkDetailsViewController: UIViewController {
                 strongSelf.bid(strongSelf.auctionID, saleArtwork: strongSelf.saleArtwork, allowAnimations: strongSelf.allowAnimations)
             }
         }
-        saleArtwork.forSaleSignal.subscribeNext { [weak bidButton] (forSale) -> Void in
+        saleArtwork.viewModel.forSaleSignal.subscribeNext { [weak bidButton] (forSale) -> Void in
             let forSale = forSale as! Bool
 
             let title = forSale ? "BID" : "SOLD"
             bidButton?.setTitle(title, forState: .Normal)
         }
-        RAC(bidButton, "enabled") <~ saleArtwork.forSaleSignal
+        RAC(bidButton, "enabled") <~ saleArtwork.viewModel.forSaleSignal
         bidButton.tag = MetadataStackViewTag.BidButton.rawValue
         metadataStackView.addSubview(bidButton, withTopMargin: "40", sideMargin: "0")
 
@@ -199,7 +199,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             let buyersPremiumLabel = ARSerifLabel()
             buyersPremiumLabel.font = buyersPremiumLabel.font.fontWithSize(16)
             buyersPremiumLabel.text = "This work has a "
-            buyersPremiumLabel.textColor = UIColor.artsyHeavyGrey()
+            buyersPremiumLabel.textColor = .artsyHeavyGrey()
 
             let buyersPremiumButton = ARButton()
             let title = "buyers premium"
@@ -207,7 +207,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             let attributedTitle = NSAttributedString(string: title, attributes: attributes)
             buyersPremiumButton.setTitle(title, forState: .Normal)
             buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
-            buyersPremiumButton.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
+            buyersPremiumButton.setTitleColor(.artsyHeavyGrey(), forState: .Normal)
 
             buyersPremiumButton.rac_command = showBuyersPremiumCommand()
 
@@ -231,13 +231,13 @@ class SaleArtworkDetailsViewController: UIViewController {
             let key = SDWebImageManager.sharedManager().cacheKeyForURL(image.thumbnailURL())
             let thumbnailImage = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(key)
             if thumbnailImage == nil {
-                imageView.backgroundColor = UIColor.artsyLightGrey()
+                imageView.backgroundColor = .artsyLightGrey()
             }
 
             imageView.sd_setImageWithURL(image.fullsizeURL(), placeholderImage: thumbnailImage, completed: { (image, _, _, _) -> Void in
                 // If the image was successfully downloaded, make sure we aren't still displaying grey.
                 if image != nil {
-                    imageView.backgroundColor = UIColor.clearColor()
+                    imageView.backgroundColor = .clearColor()
                 }
             })
 

@@ -48,7 +48,7 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
             self.cardStatusLabel.text = "Card Status: Errored"
             self.setInProgress(false)
             self.titleLabel.text = "Please Swipe a Valid Credit Card"
-            self.titleLabel.textColor = UIColor.artsyRed()
+            self.titleLabel.textColor = .artsyRed()
 
         }, completed: {
             self.cardStatusLabel.text = "Card Status: completed"

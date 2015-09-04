@@ -52,7 +52,7 @@ class HelpViewController: UIViewController {
         super.viewDidLoad()
         
         // Configure view
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = .whiteColor()
         
         addSubviews()
     }
@@ -142,7 +142,7 @@ private extension HelpViewController {
     func serifButton(tag: SubviewTag, title: String) -> ARUnderlineButton {
         let button = ARUnderlineButton()
         button.setTitle(title, forState: .Normal)
-        button.setTitleColor(UIColor.artsyHeavyGrey(), forState: .Normal)
+        button.setTitleColor(.artsyHeavyGrey(), forState: .Normal)
         button.titleLabel?.font = UIFont.serifFontWithSize(18)
         button.contentHorizontalAlignment = .Left
         button.tag = tag.rawValue

@@ -35,7 +35,7 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
             fromView.userInteractionEnabled = false
             
-            containerView.backgroundColor = UIColor.blackColor()
+            containerView.backgroundColor = .blackColor()
             
             containerView.addSubview(fromView)
             containerView.addSubview(toView)

@@ -146,7 +146,7 @@ class LoadingViewController: UIViewController {
 
     func handleLowestBidder() {
         titleLabel.text = "Higher bid needed"
-        titleLabel.textColor = UIColor.artsyRed()
+        titleLabel.textColor = .artsyRed()
         statusMessage.hidden = false
         statusMessage.text = "Another bidder has placed a higher maximum bid. Place a higher bid to secure the lot."
         bidConfirmationImageView.image = UIImage(named: "BidNotHighestBidder")
@@ -176,7 +176,7 @@ class LoadingViewController: UIViewController {
 
     func presentError(title: String, message: String) {
         spinner.hidden = true
-        titleLabel.textColor = UIColor.artsyRed()
+        titleLabel.textColor = .artsyRed()
         titleLabel.text = title
         statusMessage.text = message
         statusMessage.hidden = false

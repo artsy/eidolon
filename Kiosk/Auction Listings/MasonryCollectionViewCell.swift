@@ -61,27 +61,26 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         }
         
         // Bind subviews
-        RACObserve(self, "saleArtwork").subscribeNext { [weak self] (saleArtwork) -> Void in
-            if let saleArtwork = saleArtwork as? SaleArtwork {
-                if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
-                    self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
-                }
-                let imageHeight = heightForImageWithAspectRatio(saleArtwork.artwork.defaultImage?.aspectRatio)
-                self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
-                self?.layoutIfNeeded()
+        viewModelSignal.subscribeNext { [weak self] (viewModel) -> Void in
+            let viewModel = viewModel as! SaleArtworkViewModel
+            if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
+                self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
             }
+            let imageHeight = heightForImageWithAspectRatio(viewModel.thumbnailAspectRatio)
+            self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
+            self?.layoutIfNeeded()
         }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        bidView.drawTopDottedBorderWithColor(UIColor.artsyMediumGrey())
+        bidView.drawTopDottedBorderWithColor(.artsyMediumGrey())
     }
 }
 
 extension MasonryCollectionViewCell {
-    class func heightForSaleArtwork(saleArtwork: SaleArtwork) -> CGFloat {
-        let imageHeight = heightForImageWithAspectRatio(saleArtwork.artwork.defaultImage?.aspectRatio)
+    class func heightForCellWithImageAspectRatio(aspectRatio: CGFloat?) -> CGFloat {
+        let imageHeight = heightForImageWithAspectRatio(aspectRatio)
         let remainingHeight =
             20 + // padding
             20 + // artist name

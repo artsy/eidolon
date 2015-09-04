@@ -6,14 +6,14 @@ class Spinner: UIView {
 
     func createSpinner() -> UIView {
         let view = UIView(frame: CGRectMake(0, 0, 20, 5))
-        view.backgroundColor = UIColor.blackColor()
+        view.backgroundColor = .blackColor()
         return view
     }
 
     override func awakeFromNib() {
         spinner = createSpinner()
         addSubview(spinner)
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = .clearColor()
         animateN(Float.infinity)
     }
 

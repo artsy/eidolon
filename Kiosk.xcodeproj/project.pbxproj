@@ -198,6 +198,7 @@
 		5EA637211A9E6AC60094A86E /* HelpViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */; };
 		5EA6B1111B668F8300FEB3ED /* LoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */; };
 		5EA6B1131B668F9300FEB3ED /* LoadingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */; };
+		5EA6CF771B96246800FE1122 /* ListingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6CF761B96246800FE1122 /* ListingsViewModel.swift */; settings = {ASSET_TAGS = (); }; };
 		5EB0B71A1A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */; };
 		5EB0B71B1A5C410D00B7CBF2 /* RACSignal+Kiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7161A5C410D00B7CBF2 /* RACSignal+Kiosk.swift */; };
 		5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */; };
@@ -217,6 +218,8 @@
 		5EF71E871AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E861AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift */; };
 		5EF71E891AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E881AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift */; };
 		5EFA709C1A9674BD0082C916 /* BidderDetailsRetrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */; };
+		5EFFE24E1B977DD3006BF64C /* SaleArtworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFE24D1B977DD3006BF64C /* SaleArtworkViewModel.swift */; settings = {ASSET_TAGS = (); }; };
+		5EFFE2501B978C3C006BF64C /* ListingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFE24F1B978C3C006BF64C /* ListingsViewModelTests.swift */; settings = {ASSET_TAGS = (); }; };
 		D12607F71BF578705637C9A7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFB9BD12B5173B74D620D7 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -402,6 +405,7 @@
 		5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewControllerTests.swift; sourceTree = "<group>"; };
 		5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewModel.swift; sourceTree = "<group>"; };
 		5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewModelTests.swift; sourceTree = "<group>"; };
+		5EA6CF761B96246800FE1122 /* ListingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsViewModel.swift; sourceTree = "<group>"; };
 		5EB0B6ED1A5C3E6800B7CBF2 /* Kiosk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kiosk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB0B7021A5C3E6800B7CBF2 /* KioskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KioskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB0B7071A5C3E6800B7CBF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -426,6 +430,8 @@
 		5EF71E861AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCreditCardInputViewModelTests.swift; sourceTree = "<group>"; };
 		5EF71E881AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCreditCardInputViewModel.swift; sourceTree = "<group>"; };
 		5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderDetailsRetrieval.swift; sourceTree = "<group>"; };
+		5EFFE24D1B977DD3006BF64C /* SaleArtworkViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkViewModel.swift; sourceTree = "<group>"; };
+		5EFFE24F1B978C3C006BF64C /* ListingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsViewModelTests.swift; sourceTree = "<group>"; };
 		B5DFB9BD12B5173B74D620D7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA79D9FDF198B37A06B262F /* Pods-KioskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.release.xcconfig"; sourceTree = "<group>"; };
 		CB3EBEE2789DABF779E6EB67 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -514,6 +520,7 @@
 				5E860FDD1A5C429C00456E41 /* Location.swift */,
 				5E860FDE1A5C429C00456E41 /* Sale.swift */,
 				5E860FDF1A5C429C00456E41 /* SaleArtwork.swift */,
+				5EFFE24D1B977DD3006BF64C /* SaleArtworkViewModel.swift */,
 				5E853EBD1A8BC9A200F91C0D /* BuyersPremium.swift */,
 				5E860FE01A5C429C00456E41 /* SystemTime.swift */,
 				5E860FE11A5C429C00456E41 /* User.swift */,
@@ -569,6 +576,7 @@
 			children = (
 				5E860FFC1A5C429C00456E41 /* ListingsCountdownManager.swift */,
 				5E860FFD1A5C429C00456E41 /* ListingsViewController.swift */,
+				5EA6CF761B96246800FE1122 /* ListingsViewModel.swift */,
 				5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */,
 				5E860FFE1A5C429C00456E41 /* MasonryCollectionViewCell.swift */,
 				5E860FFF1A5C429C00456E41 /* TableCollectionViewCell.swift */,
@@ -806,6 +814,7 @@
 				5E8610D11A5C43EF00456E41 /* CardHandlerTests.swift */,
 				5E8610D21A5C43EF00456E41 /* KioskTests.swift */,
 				5E8610D31A5C43EF00456E41 /* ListingsViewControllerTests.swift */,
+				5EFFE24F1B978C3C006BF64C /* ListingsViewModelTests.swift */,
 				5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */,
 				5E8610D41A5C43EF00456E41 /* Models */,
 				5E8610FD1A5C43EF00456E41 /* RegisterFlowViewTests.swift */,
@@ -1165,6 +1174,7 @@
 				5E86108D1A5C429C00456E41 /* KeypadContainerView.swift in Sources */,
 				5E86107E1A5C429C00456E41 /* MasonryCollectionViewCell.swift in Sources */,
 				5E86104F1A5C429C00456E41 /* ChooseAuctionViewController.swift in Sources */,
+				5EA6CF771B96246800FE1122 /* ListingsViewModel.swift in Sources */,
 				5E8610641A5C429C00456E41 /* Sale.swift in Sources */,
 				5E86104C1A5C429C00456E41 /* AdminLogViewController.swift in Sources */,
 				5E8610671A5C429C00456E41 /* User.swift in Sources */,
@@ -1211,6 +1221,7 @@
 				5EF71E891AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift in Sources */,
 				5E86105B1A5C429C00456E41 /* Artwork.swift in Sources */,
 				5E8610971A5C429C00456E41 /* RACFunctions.swift in Sources */,
+				5EFFE24E1B977DD3006BF64C /* SaleArtworkViewModel.swift in Sources */,
 				5E86106B1A5C429C00456E41 /* UserCredentials.swift in Sources */,
 				5E8610781A5C429C00456E41 /* Spinner.swift in Sources */,
 				5E86109A1A5C429C00456E41 /* RegistrationMobileViewController.swift in Sources */,
@@ -1273,6 +1284,7 @@
 				5E8FABE81A5C49D800F6B913 /* StubResponses.m in Sources */,
 				5E8611071A5C43EF00456E41 /* ConfirmYourBidEnterYourEmailViewControllerTests.swift in Sources */,
 				5E8611061A5C43EF00456E41 /* ConfirmYourBidArtsyLoginViewControllerTests.swift in Sources */,
+				5EFFE2501B978C3C006BF64C /* ListingsViewModelTests.swift in Sources */,
 				5EBD314F1AE0563300648484 /* GenericFormValidationViewModelTests.swift in Sources */,
 				5E8611321A5C43EF00456E41 /* TestHelpers.swift in Sources */,
 				5E8611041A5C43EF00456E41 /* ArtsyAPISpec.swift in Sources */,
