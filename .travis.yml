@@ -1,5 +1,8 @@
 osx_image: xcode7
 language: objective-c
+cache:
+  - bundler
+  - cocoapods
 env:
   global:
     secure: "OAS4DiQWzSPuhqhh9nd2M02JMaAri5MOzuOaVxkKBXSad0m+T4L63mHs4PGIHzoUJHCwtY7m0IKkWzmlgs8Ukua5z8faDKfJQazzhYASAdyiGghI0ZgvFvMYbbkkmRUIVDc43tfDqE+U5C1/B9V9QOqro2ZKTH31Y1x7QZnH68o="
