@@ -14,7 +14,7 @@ before_install:
 install: 
   - bundle install
   - bundle exec fastlane oss
-  - bundle exec fastlane test
+  - set -o pipefail && xcodebuild -destination "OS=8.1,name=iPad Air" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | xcpretty --color --test
 notifications:
   slack: 
     secure: dHJSmLJAwoLRi5inP5btz8fP6pbT/BIF89CTOFmnNO6mLEM7J++PZfvj4cg2ojM3jfjFtQXJE5CuqrOaLeXhN4uteIu91ust1sgkNdkExsQvOVgBAZhcsLZLtMQpytrVs34FXfdirAZv/S750J3d8XWr7yCZThqRkVuIy0CB5vM=
