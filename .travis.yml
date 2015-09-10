@@ -6,10 +6,11 @@ cache:
   - cocoapods
 
 env:
-  secure: "OAS4DiQWzSPuhqhh9nd2M02JMaAri5MOzuOaVxkKBXSad0m+T4L63mHs4PGIHzoUJHCwtY7m0IKkWzmlgs8Ukua5z8faDKfJQazzhYASAdyiGghI0ZgvFvMYbbkkmRUIVDc43tfDqE+U5C1/B9V9QOqro2ZKTH31Y1x7QZnH68o="
-  secure: "g9UrNEkmXCOWAEfOIS43b0YnOY1d9V2fO6AuAUsrkstK8FoaVoPyqO1oZS/6AWYIpDjssynWGzlhGsQaCX6/Zkd/L5tjEfK0KwomrYf46Sh4/V4CTYWzaMbWnuau/J9G/l1BLCfqFIGyUJdR7CbGWxz5cNBiRKIyhKcwJ70Sjt4="
-  secure: "glqnDo2eK21EF+YJ45rZsj6BXbEVme2Mh8RbJTXXWwWchUTBT+7NR7EX4YbaFY1nkODTV5LOvRcnptGiT3SJlJN6BGnl41xMLtoJQexdZIwC7D82dJ0KETKo2e8kLUpH/nFC1dxjhLjMEklyci9gE5pzs/aLRGvYvxA90MQK9c4="
-  secure: "ID0uaQKT49b9CwDLENUhSnRHLa7jjWj6ieSX5s+MJNkFSpBiFupdKE/ts6re2izMZfZNQEHtT4EaNYAVAbRv0iQsAY/+qWD0JidBaMnxFbzeAsXukNbGISQ2NJwKjXcPQocxFzTn1dhzYpuFvJQIFfvPBfNAdxrDBWR8YTeshTI="
+  global:
+  - secure: "Mf1cI1+LHjKuguQIrMQVp+U9CH8dj9IRiZsYUe9Gx15smntDBgh2fLLRWPOomW2wAur7uOohZBWzQ/whx83KPgXZwSJTW3S0nbdEEeQNMdfNnNXifm3f0pm9bgrzYMvga9C3SRjq5O/+zAD4xqP9TGtYum3oPHf0lpMlopXZgyo="
+  - secure: "g9UrNEkmXCOWAEfOIS43b0YnOY1d9V2fO6AuAUsrkstK8FoaVoPyqO1oZS/6AWYIpDjssynWGzlhGsQaCX6/Zkd/L5tjEfK0KwomrYf46Sh4/V4CTYWzaMbWnuau/J9G/l1BLCfqFIGyUJdR7CbGWxz5cNBiRKIyhKcwJ70Sjt4="
+  - secure: "glqnDo2eK21EF+YJ45rZsj6BXbEVme2Mh8RbJTXXWwWchUTBT+7NR7EX4YbaFY1nkODTV5LOvRcnptGiT3SJlJN6BGnl41xMLtoJQexdZIwC7D82dJ0KETKo2e8kLUpH/nFC1dxjhLjMEklyci9gE5pzs/aLRGvYvxA90MQK9c4="
+  - secure: "ID0uaQKT49b9CwDLENUhSnRHLa7jjWj6ieSX5s+MJNkFSpBiFupdKE/ts6re2izMZfZNQEHtT4EaNYAVAbRv0iQsAY/+qWD0JidBaMnxFbzeAsXukNbGISQ2NJwKjXcPQocxFzTn1dhzYpuFvJQIFfvPBfNAdxrDBWR8YTeshTI="
 
 before_install:
   - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
@@ -17,7 +18,7 @@ before_install:
   - chmod 600 ~/.netrc
   - xcrun instruments -w "iPad Air (8.1 Simulator)" || echo "(Pre)Launched the simulator."
 
-install: 
+install:
   - bundle install
   - bundle exec fastlane oss
 
@@ -27,5 +28,5 @@ before_script:
 script: set -o pipefail && xcodebuild -destination "OS=8.1,name=iPad Air" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | second_curtain | xcpretty --color --test
 
 notifications:
-  slack: 
+  slack:
     secure: dHJSmLJAwoLRi5inP5btz8fP6pbT/BIF89CTOFmnNO6mLEM7J++PZfvj4cg2ojM3jfjFtQXJE5CuqrOaLeXhN4uteIu91ust1sgkNdkExsQvOVgBAZhcsLZLtMQpytrVs34FXfdirAZv/S750J3d8XWr7yCZThqRkVuIy0CB5vM=
