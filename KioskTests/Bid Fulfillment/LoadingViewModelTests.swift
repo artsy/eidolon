@@ -72,7 +72,7 @@ class LoadingViewModelTests: QuickSpec {
 
         it("creates a new bidder if necessary") {
             subject = LoadingViewModel(bidNetworkModel: StubBidderNetworkModel(), placingBid: false)
-            listingsWaitUntil { (done) in
+            kioskWaitUntil { (done) in
                 subject.performActions().subscribeCompleted { done() }
             }
 
@@ -94,7 +94,7 @@ class LoadingViewModelTests: QuickSpec {
             }
 
             it("places a bid if necessary") {
-                listingsWaitUntil { (done) -> Void in
+                kioskWaitUntil { (done) -> Void in
                     subject.performActions().subscribeCompleted { done() }
                     return
                 }
@@ -103,7 +103,7 @@ class LoadingViewModelTests: QuickSpec {
             }
 
             it("waits for bid resolution if bid was placed") {
-                listingsWaitUntil { (done) -> Void in
+                kioskWaitUntil { (done) -> Void in
                     subject.performActions().subscribeCompleted { done() }
                     return
                 }
@@ -151,11 +151,4 @@ class StubBidCheckingNetworkModel: BidCheckingNetworkModel {
 
         return RACSignal.empty()
     }
-}
-
-/// Nimble is currently having issues with nondeterministic async expectations. 
-/// This will have to do for now 😢
-/// See: https://github.com/Quick/Nimble/issues/177
-func listingsWaitUntil(action: (() -> Void) -> Void) {
-    waitUntil(timeout: 10, action: action)
 }
