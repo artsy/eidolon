@@ -4,7 +4,11 @@ fastlane_version "1.0.2"
 
 desc "Run all iOS tests on an iPad"
 lane :test do
-  xctest destination: "OS=8.1,name=iPad Air"
+  xcodebuild(
+    build: true,
+    test: true,
+    destination: "OS=8.1,name=iPad Air"
+  )
 end
 
 desc "Set all the API keys required for distribution"
