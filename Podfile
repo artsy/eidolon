@@ -27,7 +27,7 @@ pod 'Artsy+UIColors'
 pod 'Artsy+UILabels'
 pod 'Artsy-UIButtons'
 
-if ['orta', 'ash', 'artsy', 'Laura', 'CI', 'distiller'].include?(ENV['USER'])
+if ['orta', 'ash', 'artsy', 'Laura', 'CI', 'distiller', 'travis'].include?(ENV['USER'])
     pod 'Artsy+UIFonts', '~> 1.1.0'
 else
     pod 'Artsy+OSSUIFonts', '~> 1.1.0'
@@ -62,7 +62,7 @@ pod 'Result', :head
 
 # Swift pods
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :branch => 'xcode7'
-pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift-2.0'
+pod 'Alamofire'
 pod 'ReactiveCocoa', :git => 'https://github.com/ashfurrow/ReactiveCocoa.git', :branch => 'swift2'
 pod 'Moya/ReactiveCocoa', :git => 'https://github.com/Moya/Moya.git', :branch => 'swift-2.0'
 pod 'Swift-RAC-Macros'

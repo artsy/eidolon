@@ -1,5 +1,6 @@
 import Foundation
 import Quick
+import Nimble
 @testable
 import Kiosk
 import Moya
@@ -74,4 +75,11 @@ func testSaleArtwork() -> SaleArtwork {
 
 func testBidDetails() -> BidDetails {
     return BidDetails(saleArtwork: testSaleArtwork(), paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+}
+
+/// Nimble is currently having issues with nondeterministic async expectations.
+/// This will have to do for now 😢
+/// See: https://github.com/Quick/Nimble/issues/177
+func kioskWaitUntil(action: (() -> Void) -> Void) {
+    waitUntil(timeout: 10, action: action)
 }
