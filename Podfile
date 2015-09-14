@@ -38,7 +38,7 @@ pod 'FLKAutoLayout'
 pod 'ISO8601DateFormatter', '0.7'
 pod 'ARCollectionViewMasonryLayout', '~> 2.0.0'
 pod 'SDWebImage', '~> 3.7'
-pod 'SVProgressHUD', :git => 'https://github.com/ashfurrow/SVProgressHUD.git' # TODO: use official instead
+pod 'SVProgressHUD'
 pod 'RACAlertAction'
 
 pod 'HockeySDK'
@@ -56,23 +56,18 @@ pod 'UIView+BooleanAnimations'
 pod 'ARTiledImageView', :git => 'https://github.com/ashfurrow/ARTiledImageView.git'
 pod 'XNGMarkdownParser'
 
-# Swift indirect dependencies we need to force to Swift 2
-pod 'Box', :head
-pod 'Result', :head
-
 # Swift pods
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :branch => 'xcode7'
-pod 'Alamofire'
-pod 'ReactiveCocoa', :git => 'https://github.com/ashfurrow/ReactiveCocoa.git', :branch => 'swift2'
-pod 'Moya/ReactiveCocoa', :git => 'https://github.com/Moya/Moya.git', :branch => 'swift-2.0'
+pod 'ReactiveCocoa', '= 3.0.0-swift2'
+pod 'Moya/ReactiveCocoa'
 pod 'Swift-RAC-Macros'
 
 target 'KioskTests' do
 
   pod 'FBSnapshotTestCase'
   pod 'Nimble-Snapshots'
-  pod 'Quick', :head
-  pod 'Nimble', :head
+  pod 'Quick'
+  pod 'Nimble', '= 2.0.0-rc.3'
   pod 'Forgeries'
 
 end

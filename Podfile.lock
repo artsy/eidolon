@@ -18,7 +18,6 @@ PODS:
   - Artsy-UIButtons (1.4.0):
     - Artsy+UIColors
     - UIView+BooleanAnimations
-  - Box (HEAD based on 1.2.2)
   - CardFlight (1.9.2):
     - CardFlight/AudioJack (= 1.9.2)
   - CardFlight/AudioJack (1.9.2)
@@ -36,14 +35,14 @@ PODS:
   - Mixpanel (2.7.1):
     - Mixpanel/MPCategoryHelpers (= 2.7.1)
   - Mixpanel/MPCategoryHelpers (2.7.1)
-  - Moya/Core (2.0.0):
-    - Alamofire
-  - Moya/ReactiveCocoa (2.0.0):
+  - Moya/Core (2.2.1):
+    - Alamofire (~> 2.0)
+  - Moya/ReactiveCocoa (2.2.1):
     - Moya/ReactiveCore
-    - ReactiveCocoa
-  - Moya/ReactiveCore (2.0.0):
+    - ReactiveCocoa (~> 3.0.0-swift2)
+  - Moya/ReactiveCore (2.2.1):
     - Moya/Core
-  - Nimble (HEAD based on 2.0.0-rc.3)
+  - Nimble (2.0.0-rc.3)
   - Nimble-Snapshots (1.0.0):
     - FBSnapshotTestCase (~> 1.7)
     - Nimble (~> 2.0.0-rc.2)
@@ -55,33 +54,29 @@ PODS:
   - NJKWebViewProgress/ProgressView (0.2.3)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
-  - Quick (HEAD based on 0.6.0)
+  - Quick (0.6.0)
   - RACAlertAction (0.1.0):
     - ReactiveCocoa
   - Reachability (3.1.1)
-  - ReactiveCocoa (3.0-swift2):
-    - Box
-    - ReactiveCocoa/UI (= 3.0-swift2)
-    - Result
-  - ReactiveCocoa/Core (3.0-swift2):
-    - Box
+  - ReactiveCocoa (3.0.0-swift2):
+    - ReactiveCocoa/UI (= 3.0.0-swift2)
+    - Result (~> 0.6-beta.1)
+  - ReactiveCocoa/Core (3.0.0-swift2):
     - ReactiveCocoa/no-arc
-    - Result
-  - ReactiveCocoa/no-arc (3.0-swift2):
-    - Box
-    - Result
-  - ReactiveCocoa/UI (3.0-swift2):
-    - Box
+    - Result (~> 0.6-beta.1)
+  - ReactiveCocoa/no-arc (3.0.0-swift2):
+    - Result (~> 0.6-beta.1)
+  - ReactiveCocoa/UI (3.0.0-swift2):
     - ReactiveCocoa/Core
-    - Result
-  - Result (HEAD based on 0.6-beta.1)
+    - Result (~> 0.6-beta.1)
+  - Result (0.6-beta.1)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
   - Stripe (3.1.0):
     - Stripe/Core (= 3.1.0)
   - Stripe/Core (3.1.0)
-  - SVProgressHUD (1.1.2)
+  - SVProgressHUD (1.1.3)
   - Swift-RAC-Macros (0.3.1):
     - ReactiveCocoa (< 4.0, >= 2.0)
   - SwiftyJSON (2.2.1)
@@ -91,7 +86,6 @@ PODS:
     - fmemopen
 
 DEPENDENCIES:
-  - Alamofire
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
   - ARCollectionViewMasonryLayout (~> 2.0.0)
@@ -100,7 +94,6 @@ DEPENDENCIES:
   - Artsy+UIFonts (~> 1.1.0)
   - Artsy+UILabels
   - Artsy-UIButtons
-  - Box (HEAD)
   - CardFlight
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
@@ -110,18 +103,17 @@ DEPENDENCIES:
   - HockeySDK
   - ISO8601DateFormatter (= 0.7)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Moya/ReactiveCocoa (from `https://github.com/Moya/Moya.git`, branch `swift-2.0`)
-  - Nimble (HEAD)
+  - Moya/ReactiveCocoa
+  - Nimble (= 2.0.0-rc.3)
   - Nimble-Snapshots
   - ORStackView
-  - Quick (HEAD)
+  - Quick
   - RACAlertAction
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - ReactiveCocoa (from `https://github.com/ashfurrow/ReactiveCocoa.git`, branch `swift2`)
-  - Result (HEAD)
+  - ReactiveCocoa (= 3.0.0-swift2)
   - SDWebImage (~> 3.7)
   - Stripe
-  - SVProgressHUD (from `https://github.com/ashfurrow/SVProgressHUD.git`)
+  - SVProgressHUD
   - Swift-RAC-Macros
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, branch `xcode7`)
   - UIImageViewAligned (from `https://github.com/ashfurrow/UIImageViewAligned.git`)
@@ -135,17 +127,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/orta/DZNWebViewController.git
   Keys:
     :path: Pods/CocoaPodsKeys
-  Moya:
-    :branch: swift-2.0
-    :git: https://github.com/Moya/Moya.git
   Reachability:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
-  ReactiveCocoa:
-    :branch: swift2
-    :git: https://github.com/ashfurrow/ReactiveCocoa.git
-  SVProgressHUD:
-    :git: https://github.com/ashfurrow/SVProgressHUD.git
   SwiftyJSON:
     :branch: xcode7
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -159,18 +143,9 @@ CHECKOUT OPTIONS:
   DZNWebViewController:
     :commit: 9121386901af95072fb19eaa3df7060ca46fc337
     :git: https://github.com/orta/DZNWebViewController.git
-  Moya:
-    :commit: 4386dce401652b2ca8b0e34938cbc3559d7a721a
-    :git: https://github.com/Moya/Moya.git
   Reachability:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
     :git: https://github.com/ashfurrow/Reachability.git
-  ReactiveCocoa:
-    :commit: b653f8db9f1788ec1f1ae6523a2f2e01a289b3c1
-    :git: https://github.com/ashfurrow/ReactiveCocoa.git
-  SVProgressHUD:
-    :commit: 72adf891646bd74a9b7478e677b8c7c1b5187443
-    :git: https://github.com/ashfurrow/SVProgressHUD.git
   SwiftyJSON:
     :commit: f269523ac572979245baa99c8475eab73caf1e9b
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -187,7 +162,6 @@ SPEC CHECKSUMS:
   Artsy+UIFonts: c51bb3b5cbf9c1a5fe198b4385d49133c5c71f5a
   Artsy+UILabels: 43da757ee01bce8165ec83123eccccdf1fe8843c
   Artsy-UIButtons: 6f67de2a5285f18acb5d0e2919d1b17188acbc27
-  Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
   CardFlight: aac74eae9761ee2c8e3dba1c9a520e7a1aa0f17f
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
@@ -200,7 +174,7 @@ SPEC CHECKSUMS:
   ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mixpanel: 2ffc3c261712622a5424f58c52af723d032a3add
-  Moya: bcedfe036d33a2bc3d4800df9e7d49752e4350b1
+  Moya: 017c5161f463d524fc73aa24b62c3740b71e0ca9
   Nimble: 9dff98ee195ffe7351d3b2fb01d3a1420fd97948
   Nimble-Snapshots: c16dd279a4840ec06288198fafd53f3c17750ff3
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
@@ -208,11 +182,11 @@ SPEC CHECKSUMS:
   Quick: 563686dbcf0ae0f9f7401ac9cd2d786ee1b7f3d7
   RACAlertAction: f641fa41e2b63eaea096f5ad49991f45f96a3388
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
-  ReactiveCocoa: d99571cf654b8e6703f338ca13f486b999c51969
+  ReactiveCocoa: b17191e37a655ff35d095040a203ecd9dd04e8bd
   Result: 6c990ec4a72470672f9fc5b6fef009da0f6f40d1
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
-  SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
+  SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   Swift-RAC-Macros: bc3d768601da52eee35a083a11d30cee316de860
   SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
