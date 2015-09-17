@@ -66,13 +66,13 @@ lane :deploy do
 
   # It would be cool to reserialize a new changelog out, but it looses some human readability :\
 
+  sigh
+
+  ENV["PROFILE_UDID"] = lane_context[SharedValues::SIGH_UDID]
+
   # Build
-  ipa(
-    configuration: "release",
-    destination: "build",
-    embed: "fastlane/Distribution_net.artsy.kiosk.beta.mobileprovision",
-    identity: "iPhone Distribution: ART SY INC",
-    clean: false,
+  gym(
+    scheme: "Kiosk",
   )
 
   # Push to Hockey

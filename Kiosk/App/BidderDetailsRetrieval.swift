@@ -1,6 +1,5 @@
 import UIKit
 import ReactiveCocoa
-import RACAlertAction
 import SVProgressHUD
 
 extension UIViewController {
