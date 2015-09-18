@@ -207,6 +207,7 @@
 		5EBD31491AE0435600648484 /* GenericFormValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD31481AE0435600648484 /* GenericFormValidationViewModel.swift */; };
 		5EBD314B1AE047C700648484 /* RegistrationPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD314A1AE047C700648484 /* RegistrationPasswordViewModel.swift */; };
 		5EBD314F1AE0563300648484 /* GenericFormValidationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD314E1AE0563300648484 /* GenericFormValidationViewModelTests.swift */; };
+		5EDBB3251BAB59A000D6A6C8 /* RACAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDBB3241BAB59A000D6A6C8 /* RACAlertAction.m */; settings = {ASSET_TAGS = (); }; };
 		5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */; };
 		5EF71E781AE986000069A266 /* StripeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E771AE986000069A266 /* StripeManager.swift */; };
 		5EF71E7B1AE98F080069A266 /* STPCard+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */; };
@@ -418,6 +419,8 @@
 		5EBD31481AE0435600648484 /* GenericFormValidationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericFormValidationViewModel.swift; sourceTree = "<group>"; };
 		5EBD314A1AE047C700648484 /* RegistrationPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewModel.swift; sourceTree = "<group>"; };
 		5EBD314E1AE0563300648484 /* GenericFormValidationViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericFormValidationViewModelTests.swift; sourceTree = "<group>"; };
+		5EDBB3231BAB59A000D6A6C8 /* RACAlertAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACAlertAction.h; sourceTree = "<group>"; };
+		5EDBB3241BAB59A000D6A6C8 /* RACAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACAlertAction.m; sourceTree = "<group>"; };
 		5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModelTests.swift; sourceTree = "<group>"; };
 		5EF71E771AE986000069A266 /* StripeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeManager.swift; sourceTree = "<group>"; };
 		5EF71E791AE98F080069A266 /* STPCard+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STPCard+Validation.h"; sourceTree = "<group>"; };
@@ -501,6 +504,8 @@
 				5E860FF11A5C429C00456E41 /* Views */,
 				5EF71E791AE98F080069A266 /* STPCard+Validation.h */,
 				5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */,
+				5EDBB3231BAB59A000D6A6C8 /* RACAlertAction.h */,
+				5EDBB3241BAB59A000D6A6C8 /* RACAlertAction.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1182,6 +1187,7 @@
 				5EBD31491AE0435600648484 /* GenericFormValidationViewModel.swift in Sources */,
 				5E86106D1A5C429C00456E41 /* XAppToken.swift in Sources */,
 				5E339E3A1A991899000C773D /* RACExtensions.swift in Sources */,
+				5EDBB3251BAB59A000D6A6C8 /* RACAlertAction.m in Sources */,
 				5E86107B1A5C429C00456E41 /* TextField.swift in Sources */,
 				5E8610AA1A5C429C00456E41 /* UIStoryboardExtensions.swift in Sources */,
 				5E86105F1A5C429C00456E41 /* Card.swift in Sources */,
@@ -1402,7 +1408,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
-				CURRENT_PROJECT_VERSION = 2015.06.22;
+				CURRENT_PROJECT_VERSION = 2015.09.17;
+				ENABLE_BITCODE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1413,7 +1420,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ebbf82db-5281-4642-9165-2749cae2e369";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1428,7 +1434,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
-				CURRENT_PROJECT_VERSION = 2015.06.22;
+				CURRENT_PROJECT_VERSION = 2015.09.17;
+				ENABLE_BITCODE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1439,7 +1446,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "$(PROFILE_UDID)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/BridgingHeader.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
