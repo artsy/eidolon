@@ -39,9 +39,7 @@ pod 'ISO8601DateFormatter', '0.7'
 pod 'ARCollectionViewMasonryLayout', '~> 2.0.0'
 pod 'SDWebImage', '~> 3.7'
 pod 'SVProgressHUD'
-pod 'RACAlertAction'
 
-pod 'HockeySDK'
 pod 'ARAnalytics/Mixpanel'
 pod 'ARAnalytics/HockeyApp'
 
@@ -58,7 +56,7 @@ pod 'XNGMarkdownParser'
 
 # Swift pods
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :branch => 'xcode7'
-pod 'ReactiveCocoa', '= 3.0.0-swift2'
+pod 'ReactiveCocoa', '~> 4.0.1-alpha-2'
 pod 'Moya/ReactiveCocoa'
 pod 'Swift-RAC-Macros'
 
