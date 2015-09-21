@@ -34,31 +34,29 @@ class ConfirmYourBidPINViewController: UIViewController {
         /// verify if we can connect with number & pin
 
         confirmButton.rac_command = RACCommand(enabled: pinExistsSignal) { [weak self] _ in
-            if (self == nil) { return RACSignal.empty() }
+            guard let strongSelf = self else { return RACSignal.empty() }
 
-            let phone = self!.fulfillmentNav().bidDetails.newUser.phoneNumber
+            let phone = strongSelf.fulfillmentNav().bidDetails.newUser.phoneNumber ?? ""
             let endpoint: ArtsyAPI = ArtsyAPI.Me
 
-            let testProvider = self!.providerForPIN(String(self!.pin), number:phone!)
+            let loggedInProvider = strongSelf.providerForPIN(strongSelf.pin, number: phone)
 
-            return testProvider.request(endpoint).filterSuccessfulStatusCodes().doNext { _ in
-
-                self?.fulfillmentNav().loggedInProvider = testProvider
-                return
-
+            return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().doNext { _ in
+                // If the request to ArtsyAPI.Me succeeds, we have logged in and can use this provider.
+                self?.fulfillmentNav().loggedInProvider = loggedInProvider
             }.then {
+                // We want to put the data we've collected up to the server.
                 self?.fulfillmentNav().updateUserCredentials() ?? RACSignal.empty()
-
             }.then {
+                // This looks for credit cards on the users account, and sends them on the signal
                 self?.checkForCreditCard() ?? RACSignal.empty()
-
             }.doNext { (cards) in
-                if (self == nil) { return }
-                if (cards as! [Card]).count > 0 {
-                    self?.performSegue(.PINConfirmedhasCard)
-
-                } else {
+                // If the cards list doesn't exist, or its empty, then perform the segue to collect one.
+                // Otherwise, proceed directly to the loading view controller to place the bid.
+                if (cards as? [Card]).isNilOrEmpty {
                     self?.performSegue(.ArtsyUserviaPINHasNotRegisteredCard)
+                } else {
+                    self?.performSegue(.PINConfirmedhasCard)
                 }
 
             }.doError({ [weak self] (error) -> Void in
