@@ -19,9 +19,12 @@ lane :oss do
     'HockeyBetaSecret', 
     'MixpanelProductionAPIClientKey', 
     'MixpanelStagingAPIClientKey', 
-    'CardflightAPIClientKey', 
-    'CardflightMerchantAccountToken', 
-    'StripePublishableKey']
+    'CardflightStagingAPIClientKey', 
+    'CardflightStagingMerchantAccountToken', 
+    'StripeStagingPublishableKey', 
+    'CardflightProductionAPIClientKey', 
+    'CardflightProductionMerchantAccountToken', 
+    'StripeProductionPublishableKey']
 
     commands = keys.map { |key|
       command = "bundle exec pod keys set #{key} '-'"

@@ -10,9 +10,12 @@ plugin 'cocoapods-keys', {
     'HockeyBetaSecret',
     'MixpanelProductionAPIClientKey',
     'MixpanelStagingAPIClientKey',
-    'CardflightAPIClientKey',
-    'CardflightMerchantAccountToken',
-    'StripePublishableKey'
+    'CardflightProductionAPIClientKey',
+    'CardflightProductionMerchantAccountToken',
+    'StripeProductionPublishableKey',
+    'CardflightStagingAPIClientKey',
+    'CardflightStagingMerchantAccountToken',
+    'StripeStagingPublishableKey'
   ]
 }
 

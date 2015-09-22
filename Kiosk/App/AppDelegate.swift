@@ -41,7 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         let keys = EidolonKeys()
-        Stripe.setDefaultPublishableKey(keys.stripePublishableKey())
+
+        if AppSetup.sharedState.useStaging {
+            Stripe.setDefaultPublishableKey(keys.stripeStagingPublishableKey())
+        } else {
+            Stripe.setDefaultPublishableKey(keys.stripeProductionPublishableKey())
+        }
 
         let mixpanelToken = AppSetup.sharedState.useStaging ? keys.mixpanelStagingAPIClientKey() : keys.mixpanelProductionAPIClientKey()
 

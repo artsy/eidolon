@@ -15,8 +15,12 @@ class AdminCardTestingViewController: UIViewController {
 
         self.logTextView.text = ""
 
-        cardHandler = CardHandler(apiKey: self.keys.cardflightAPIClientKey(), accountToken: self.keys.cardflightMerchantAccountToken())
-        
+        if AppSetup.sharedState.useStaging {
+            cardHandler = CardHandler(apiKey: self.keys.cardflightStagingAPIClientKey(), accountToken: self.keys.cardflightStagingMerchantAccountToken())
+        } else {
+            cardHandler = CardHandler(apiKey: self.keys.cardflightProductionAPIClientKey(), accountToken: self.keys.cardflightProductionMerchantAccountToken())
+        }
+
         cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
                 self.log("\(message)")
                 return
