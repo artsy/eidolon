@@ -5,7 +5,7 @@ import Moya
 class BidCheckingNetworkModel: NSObject {
 
     private var pollInterval = NSTimeInterval(1)
-    private var maxPollRequests = 6
+    private var maxPollRequests = 20
     private var pollRequests = 0
 
     // inputs
