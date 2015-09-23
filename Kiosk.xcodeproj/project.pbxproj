@@ -209,6 +209,7 @@
 		5EBD314F1AE0563300648484 /* GenericFormValidationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD314E1AE0563300648484 /* GenericFormValidationViewModelTests.swift */; };
 		5EDBB3251BAB59A000D6A6C8 /* RACAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDBB3241BAB59A000D6A6C8 /* RACAlertAction.m */; settings = {ASSET_TAGS = (); }; };
 		5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */; };
+		5EE5B0CE1BB3479300069312 /* PlaceBidNetworkModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE5B0CD1BB3479300069312 /* PlaceBidNetworkModelTests.swift */; settings = {ASSET_TAGS = (); }; };
 		5EF71E781AE986000069A266 /* StripeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E771AE986000069A266 /* StripeManager.swift */; };
 		5EF71E7B1AE98F080069A266 /* STPCard+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */; };
 		5EF71E7D1AE996F50069A266 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7C1AE996F50069A266 /* SwiftExtensions.swift */; };
@@ -422,6 +423,7 @@
 		5EDBB3231BAB59A000D6A6C8 /* RACAlertAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACAlertAction.h; sourceTree = "<group>"; };
 		5EDBB3241BAB59A000D6A6C8 /* RACAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACAlertAction.m; sourceTree = "<group>"; };
 		5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModelTests.swift; sourceTree = "<group>"; };
+		5EE5B0CD1BB3479300069312 /* PlaceBidNetworkModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidNetworkModelTests.swift; sourceTree = "<group>"; };
 		5EF71E771AE986000069A266 /* StripeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeManager.swift; sourceTree = "<group>"; };
 		5EF71E791AE98F080069A266 /* STPCard+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STPCard+Validation.h"; sourceTree = "<group>"; };
 		5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "STPCard+Validation.m"; sourceTree = "<group>"; };
@@ -743,6 +745,7 @@
 				5E82BD341AF2C6E700CB02DD /* YourBiddingDetailsViewControllerTests.swift */,
 				5E8610CF1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift */,
 				5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */,
+				5EE5B0CD1BB3479300069312 /* PlaceBidNetworkModelTests.swift */,
 			);
 			path = "Bid Fulfillment";
 			sourceTree = "<group>";
@@ -1257,6 +1260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EE5B0CE1BB3479300069312 /* PlaceBidNetworkModelTests.swift in Sources */,
 				5E8611081A5C43EF00456E41 /* ConfirmYourBidPINViewControllerTests.swift in Sources */,
 				5E8611301A5C43EF00456E41 /* RegisterFlowViewTests.swift in Sources */,
 				5E8611101A5C43EF00456E41 /* ListingsViewControllerTests.swift in Sources */,

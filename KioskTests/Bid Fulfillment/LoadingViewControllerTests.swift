@@ -109,7 +109,7 @@ class LoadingViewControllerTests: QuickSpec {
                 expect(subject).to(haveValidSnapshot())
             }
 
-            fit("placing bid not resolved") {
+            it("placing bid not resolved") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()
                 let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
@@ -165,19 +165,4 @@ class StubLoadingViewModel: LoadingViewModel {
             return RACSignal.never()
         }
     }
-}
-
-class StubFulfillmentController: FulfillmentController {
-    lazy var bidDetails: BidDetails = { () -> BidDetails in
-        let bidDetails = BidDetails.stubbedBidDetails()
-        bidDetails.setImage = { (_, imageView) -> () in
-            imageView.image = loadingViewControllerTestImage
-        }
-        return bidDetails
-    }()
-
-    var auctionID: String! = ""
-    var xAccessToken: String?
-    var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>? = Provider.StubbingProvider()
-    var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.StubbingProvider()
 }

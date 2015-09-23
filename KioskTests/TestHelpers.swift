@@ -70,11 +70,28 @@ func testArtwork() -> Artwork {
 }
 
 func testSaleArtwork() -> SaleArtwork {
-    return SaleArtwork(id: "12312313", artwork: testArtwork())
+    let saleArtwork = SaleArtwork(id: "12312313", artwork: testArtwork())
+    saleArtwork.auctionID = "AUCTION"
+    return saleArtwork
 }
 
 func testBidDetails() -> BidDetails {
     return BidDetails(saleArtwork: testSaleArtwork(), paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+}
+
+class StubFulfillmentController: FulfillmentController {
+    lazy var bidDetails: BidDetails = { () -> BidDetails in
+        let bidDetails = BidDetails.stubbedBidDetails()
+        bidDetails.setImage = { (_, imageView) -> () in
+            imageView.image = loadingViewControllerTestImage
+        }
+        return bidDetails
+        }()
+
+    var auctionID: String! = ""
+    var xAccessToken: String?
+    var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>? = Provider.StubbingProvider()
+    var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.StubbingProvider()
 }
 
 /// Nimble is currently having issues with nondeterministic async expectations.

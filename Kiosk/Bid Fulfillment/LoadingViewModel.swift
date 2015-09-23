@@ -48,7 +48,7 @@ class LoadingViewModel: NSObject {
 
             if let strongSelf = self {
                 ARAnalytics.event("Started Placing Bid")
-                return strongSelf.placeBidNetworkModel.bidSignal(strongSelf.bidderNetworkModel.fulfillmentController.bidDetails)
+                return strongSelf.placeBidNetworkModel.bidSignal()
             } else {
                 return RACSignal.empty()
             }
