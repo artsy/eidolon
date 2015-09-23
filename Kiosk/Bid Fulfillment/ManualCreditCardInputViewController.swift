@@ -70,3 +70,25 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         return storyboard.viewControllerWithID(.ManualCardDetailsInput) as! ManualCreditCardInputViewController
     }
 }
+
+private extension ManualCreditCardInputViewController {
+    func applyCardWithSuccess(success: Bool) {
+        cardNumberTextField.text = success ? "4242424242424242" : "4000000000000002"
+        cardNumberTextField.sendActionsForControlEvents(.AllEditingEvents)
+        cardConfirmButton.sendActionsForControlEvents(.TouchUpInside)
+
+        expirationMonthTextField.text = "04"
+        expirationMonthTextField.sendActionsForControlEvents(.AllEditingEvents)
+        expirationYearTextField.text = "2018"
+        expirationYearTextField.sendActionsForControlEvents(.AllEditingEvents)
+        dateConfirmButton.sendActionsForControlEvents(.TouchUpInside)
+    }
+
+    @IBAction func dev_creditCardOKTapped(sender: AnyObject) {
+        applyCardWithSuccess(true)
+    }
+
+    @IBAction func dev_creditCardFailTapped(sender: AnyObject) {
+        applyCardWithSuccess(false)
+    }
+}

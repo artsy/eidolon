@@ -3,6 +3,7 @@ import Artsy_UILabels
 import ReactiveCocoa
 import Swift_RAC_Macros
 import Keys
+import Stripe
 
 class SwipeCreditCardViewController: UIViewController, RegistrationSubController {
 
@@ -85,14 +86,35 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
         processingLabel.hidden = !show
         spinner.hidden = !show
     }
+
+    // Used only for development, in private extension for testing.
+    private lazy var stripeManager = StripeManager()
 }
 
 private extension SwipeCreditCardViewController {
-    @IBAction func dev_creditCradOKTapped(sender: AnyObject) {
-        self.cardName = "KIOSK SKIPPED CARD CHECK"
-        self.cardLastDigits = "2323"
-        self.cardToken = "3223423423423"
+    func applyCardWithSuccess(success: Bool) {
+        let cardFullDigits = success ? "4242424242424242" : "4000000000000002"
 
-        self.finishedSignal.sendCompleted()
+        stripeManager.registerCard(cardFullDigits, month: 04, year: 2018).subscribeNext() { [weak self] (object) in
+            let token = object as! STPToken
+
+            self?.cardName = "Kiosk Staging CC Test"
+            self?.cardToken = token.tokenId
+            self?.cardLastDigits = token.card.last4
+
+            if let newUser = self?.navigationController?.fulfillmentNav().bidDetails.newUser {
+                newUser.name = token.card.brand.name
+            }
+
+            self?.finishedSignal.sendCompleted()
+        }
+    }
+
+    @IBAction func dev_creditCardOKTapped(sender: AnyObject) {
+        applyCardWithSuccess(true)
+    }
+
+    @IBAction func dev_creditCardFailTapped(sender: AnyObject) {
+        applyCardWithSuccess(false)
     }
 }
