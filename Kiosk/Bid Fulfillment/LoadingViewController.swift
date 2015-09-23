@@ -117,7 +117,7 @@ class LoadingViewController: UIViewController {
     }
 
     func handleUnknownBidder() {
-        titleLabel.text = "Bid Confirmed"
+        titleLabel.text = "Bid Submitted"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
     }
 
