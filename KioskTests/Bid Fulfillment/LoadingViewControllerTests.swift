@@ -109,11 +109,11 @@ class LoadingViewControllerTests: QuickSpec {
                 expect(subject).to(haveValidSnapshot())
             }
 
-            it("placing bid not resolved") {
+            fit("placing bid not resolved") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()
                 let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
-                stubViewModel.bidIsResolved = true
+                stubViewModel.bidIsResolved = false
                 subject.viewModel = stubViewModel
 
                 expect(subject).to(haveValidSnapshot())
