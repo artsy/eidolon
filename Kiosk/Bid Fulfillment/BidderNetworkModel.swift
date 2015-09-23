@@ -41,7 +41,7 @@ class BidderNetworkModel: NSObject {
         // If the user exists, update their info to the API, otherwise create a new user.
         let signal = RACSignal.`if`(boolSignal, then: self.updateUser(), `else`: self.createNewUser())
 
-        // After update/create signal finishes, add a CC to their account (if we've collceted one)
+        // After update/create signal finishes, add a CC to their account (if we've collected one)
         return signal.then { self.addCardToUser() }
     }
 

@@ -27,16 +27,18 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
     lazy var keys = EidolonKeys()
     lazy var bidDetails: BidDetails! = { self.navigationController!.fulfillmentNav().bidDetails }()
 
+    lazy var appSetup = AppSetup.sharedState
+    lazy var cardHandler: CardHandler = {
+        if self.appSetup.useStaging {
+            return CardHandler(apiKey: self.keys.cardflightStagingAPIClientKey(), accountToken: self.keys.cardflightStagingMerchantAccountToken())
+        } else {
+            return CardHandler(apiKey: self.keys.cardflightProductionAPIClientKey(), accountToken: self.keys.cardflightProductionMerchantAccountToken())
+        }
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setInProgress(false)
-
-        let cardHandler: CardHandler
-        if AppSetup.sharedState.useStaging {
-            cardHandler = CardHandler(apiKey: self.keys.cardflightStagingAPIClientKey(), accountToken: self.keys.cardflightStagingMerchantAccountToken())
-        } else {
-            cardHandler = CardHandler(apiKey: self.keys.cardflightProductionAPIClientKey(), accountToken: self.keys.cardflightProductionMerchantAccountToken())
-        }
 
         cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
             let message = message as! String
@@ -59,7 +61,7 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
         }, completed: {
             self.cardStatusLabel.text = "Card Status: completed"
 
-            if let card = cardHandler.card {
+            if let card = self.cardHandler.card {
                 self.cardName = card.name
                 self.cardLastDigits = card.encryptedSwipedCardNumber
 
@@ -71,7 +73,7 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
                 }
             }
 
-            cardHandler.end()
+            self.cardHandler.end()
             self.finishedSignal.sendCompleted()
         })
         cardHandler.startSearching()

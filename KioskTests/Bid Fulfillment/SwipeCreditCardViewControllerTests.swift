@@ -1,7 +1,27 @@
 import Quick
 import Nimble
+import Keys
 @testable
 import Kiosk
+
+class StubKeys: EidolonKeys {
+    override func cardflightProductionAPIClientKey() -> String! {
+        return "PRODUCTION API KEY"
+    }
+
+    override func cardflightProductionMerchantAccountToken() -> String! {
+        return "PRODUCTION ACCOUNT TOKEN"
+    }
+
+    override func cardflightStagingAPIClientKey() -> String! {
+        return "STAGING API KEY"
+    }
+
+    override func cardflightStagingMerchantAccountToken() -> String! {
+        return "STAGING ACCOUNT TOKEN"
+    }
+}
+
 
 class SwipeCreditCardViewControllerTests: QuickSpec {
     override func spec() {
@@ -18,6 +38,44 @@ class SwipeCreditCardViewControllerTests: QuickSpec {
             runLifecycleOfViewController(bidDetails)
 
             expect { runLifecycleOfViewController(bidDetails) }.toNot( raiseException() )
+        }
+
+        let stubKeys = StubKeys()
+
+        describe("on staging") {
+            var subject: SwipeCreditCardViewController!
+
+            beforeEach {
+                let appSetup = AppSetup()
+                appSetup.useStaging = true
+
+                subject = SwipeCreditCardViewController.instantiateFromStoryboard(fulfillmentStoryboard)
+                subject.appSetup = appSetup
+                subject.keys = stubKeys
+            }
+
+            it("sets up the CardHandler for staging") {
+                expect(subject.cardHandler.APIKey) == stubKeys.cardflightStagingAPIClientKey()
+                expect(subject.cardHandler.APIToken) == stubKeys.cardflightStagingMerchantAccountToken()
+            }
+        }
+
+        describe("on production") {
+            var subject: SwipeCreditCardViewController!
+
+            beforeEach {
+                let appSetup = AppSetup()
+                appSetup.useStaging = false
+
+                subject = SwipeCreditCardViewController.instantiateFromStoryboard(fulfillmentStoryboard)
+                subject.appSetup = appSetup
+                subject.keys = stubKeys
+            }
+
+            it("sets up the CardHandler for staging") {
+                expect(subject.cardHandler.APIKey) == stubKeys.cardflightProductionAPIClientKey()
+                expect(subject.cardHandler.APIToken) == stubKeys.cardflightProductionMerchantAccountToken()
+            }
         }
     }
 }

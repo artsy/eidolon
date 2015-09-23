@@ -9,6 +9,7 @@ upcoming:
   - Displays artwork thumbnail until full image is downlaoded for detail view [ash]
   - Tapping anywhere in the table cells shows more details [ash]
   - Allows users to dismiss high bid screens by tapping checkmark [ash]
+  - Adds staging-only credit card testing [ash]
 releases:
 - version: 3.5.2
   date: June 19 2015
