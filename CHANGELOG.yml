@@ -1,4 +1,6 @@
 upcoming: 
+releases:
+  date: September 24 2015
   version: 3.6.0
   notes:
   - Adds long-tap gesture to bidding error message to provide technical error details [ash]
@@ -10,7 +12,6 @@ upcoming:
   - Tapping anywhere in the table cells shows more details [ash]
   - Allows users to dismiss high bid screens by tapping checkmark [ash]
   - Adds staging-only credit card testing [ash]
-releases:
 - version: 3.5.2
   date: June 19 2015
   notes:
