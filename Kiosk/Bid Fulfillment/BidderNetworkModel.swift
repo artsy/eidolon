@@ -36,8 +36,12 @@ class BidderNetworkModel: NSObject {
     }
 
     private func createOrUpdateUser() -> RACSignal {
-        let boolSignal = self.checkUserEmailExists(fulfillmentController.bidDetails.newUser.email!)
+        // Signal to test for user existence (does a user exist with this email?)
+        let boolSignal = self.checkUserEmailExists(fulfillmentController.bidDetails.newUser.email ?? "")
+        // If the user exists, update their info to the API, otherwise create a new user.
         let signal = RACSignal.`if`(boolSignal, then: self.updateUser(), `else`: self.createNewUser())
+
+        // After update/create signal finishes, add a CC to their account (if we've collected one)
         return signal.then { self.addCardToUser() }
     }
 
@@ -66,19 +70,22 @@ class BidderNetworkModel: NSObject {
 
         return updateProviderIfNecessary().then {
             self.fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
-        }.doError { (error) in
+        }.logNext().doError { (error) in
             logger.log("Updating user failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
     }
 
     private func addCardToUser() -> RACSignal {
-        if (fulfillmentController.bidDetails.newUser.creditCardToken == nil) { return RACSignal.empty() }
-        let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(stripeToken: fulfillmentController.bidDetails.newUser.creditCardToken!)
+        // If the user was asked to swipe a card, we'd have stored the token. 
+        // If the token is not there, then the user must already have one on file. So we can skip this step.
+        guard let token = fulfillmentController.bidDetails.newUser.creditCardToken else {
+            return RACSignal.empty()
+        }
 
-        // on Staging the card tokenization fails
+        let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(stripeToken: token)
 
-        return fulfillmentController.loggedInProvider!.request(endpoint).doError { (error) in
+        return fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().doError { (error) in
             logger.log("Adding Card to User failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }

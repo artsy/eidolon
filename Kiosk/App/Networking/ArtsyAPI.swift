@@ -381,7 +381,7 @@ struct Provider {
 
 // MARK: - Provider support
 
-private func stubbedResponse(filename: String) -> NSData! {
+func stubbedResponse(filename: String) -> NSData! {
     @objc class TestClass: NSObject { }
     
     let bundle = NSBundle(forClass: TestClass.self)

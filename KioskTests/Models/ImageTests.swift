@@ -7,10 +7,10 @@ let size = CGSize(width: 100, height: 100)
 
 class ImageTests: QuickSpec {
     override func spec() {
+        let id = "wah-wah"
+        let url = "http://url.com"
 
         it("converts from JSON") {
-            let id = "wah-wah"
-            let url = "http://url.com"
 
             let imageFormats = ["big", "small", "patch"]
             let data:[String: AnyObject] = [ "id": id, "image_url": url, "image_versions": imageFormats, "original_width": size.width, "original_height": size.height]
@@ -37,6 +37,12 @@ class ImageTests: QuickSpec {
         it("handles unknown image formats"){
             let image = self.imageForVersion("unknown")
             expect(image.thumbnailURL()).to(beNil())
+        }
+
+        it("handles incorrect image_versions JSON") {
+            let data:[String: AnyObject] = [ "id": id, "image_url": url, "image_versions": "something invalid"]
+
+            expect(Image.fromJSON(data) as! Image).toNot( throwError() )
         }
 
         it("assumes it's not default if not specified") {

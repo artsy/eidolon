@@ -75,6 +75,6 @@ class ManualCreditCardInputViewModel: NSObject {
         }
     }
 
-    // Only for testing purposes
+    // Only set for testing purposes, otherwise ignore.
     lazy var stripeManager: StripeManager = StripeManager()
 }

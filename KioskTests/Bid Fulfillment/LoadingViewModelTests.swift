@@ -132,7 +132,7 @@ class StubPlaceBidNetworkModel: PlaceBidNetworkModel {
         super.init(fulfillmentController: StubFulfillmentController())
     }
 
-    override func bidSignal(bidDetails: BidDetails) -> RACSignal {
+    override func bidSignal() -> RACSignal {
         bid = true
 
         return RACSignal.empty()

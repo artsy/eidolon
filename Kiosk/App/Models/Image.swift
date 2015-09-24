@@ -34,7 +34,7 @@ class Image: JSONAble {
 
         let id = json["id"].stringValue
         let imageFormatString = json["image_url"].stringValue
-        let imageVersions = json["image_versions"].object as! [String]
+        let imageVersions = (json["image_versions"].object as? [String]) ?? []
         let imageSize = CGSize(width: json["original_width"].int ?? 1, height: json["original_height"].int ?? 1)
         let aspectRatio = { () -> CGFloat? in
             if let aspectRatio = json["aspect_ratio"].float {

@@ -49,7 +49,10 @@ class LoadingViewController: UIViewController {
 
         // The view model will perform actions like registering a user if necessary,
         // placing a bid if requested, and polling for results.
-        viewModel.performActions().subscribeError({ [weak self] (error) -> Void in
+        viewModel.performActions().finally { [weak self] in
+            // Regardless of error or completion. hide the spinner.
+            self?.spinner.hidden = true
+        }.subscribeError({ [weak self] (error) -> Void in
             self?.bidderError(error)
         }, completed: { [weak self] () -> Void in
             self?.finishUp()
@@ -58,8 +61,6 @@ class LoadingViewController: UIViewController {
 
 
     func finishUp() {
-        self.spinner.hidden = true
-
         let reserveNotMet = viewModel.reserveNotMet
         let isHighestBidder = viewModel.isHighestBidder
         let bidIsResolved = viewModel.bidIsResolved
@@ -117,7 +118,7 @@ class LoadingViewController: UIViewController {
     }
 
     func handleUnknownBidder() {
-        titleLabel.text = "Bid Confirmed"
+        titleLabel.text = "Bid Submitted"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
     }
 
@@ -157,7 +158,11 @@ class LoadingViewController: UIViewController {
     func bidderError(error: NSError?) {
         if placingBid {
             // If you are bidding, we show a bidding error regardless of whether or not you're also registering.
-            bidPlacementFailed(error)
+            if error?.domain == OutbidDomain {
+                handleLowestBidder()
+            } else {
+                bidPlacementFailed(error)
+            }
         } else {
             // If you're not placing a bid, you're here because you're just registering.
             presentError("Registration Failed", message: "There was a problem registering for the auction. Please speak to an Artsy representative.")
@@ -175,7 +180,6 @@ class LoadingViewController: UIViewController {
     }
 
     func presentError(title: String, message: String) {
-        spinner.hidden = true
         titleLabel.textColor = .artsyRed()
         titleLabel.text = title
         statusMessage.text = message
