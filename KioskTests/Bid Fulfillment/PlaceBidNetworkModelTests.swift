@@ -40,7 +40,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
             expect(subject.bidderPosition?.id) == "5437dd107261692daa170000"
         }
 
-        it("maps bid deatils into a proper request") {
+        it("maps bid details into a proper request") {
             var auctionID: String?
             var artworkID: String?
             var bidCents: String?
