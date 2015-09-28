@@ -157,7 +157,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
                         if currentSaleArtworks[i].id == newSaleArtworks[i].id {
                             currentSaleArtworks[i].updateWithValues(newSaleArtworks[i])
                         } else {
-                            // Failure: the list was the same size but had different artworks
+                            // Failure: the list was the same size but had different artworks.
                             return false
                         }
                     }
