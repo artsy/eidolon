@@ -3,8 +3,8 @@ upcoming:
   notes:
   - Fixes problem with lot numbers changing during the auction [ash]
 releases:
+- version: 3.6.0
   date: September 24 2015
-  version: 3.6.0
   notes:
   - Adds long-tap gesture to bidding error message to provide technical error details [ash]
   - Fixes problem manually entering in credit card info [ash]
