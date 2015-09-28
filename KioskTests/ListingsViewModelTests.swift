@@ -106,27 +106,70 @@ class ListingsViewModelTests: QuickSpec {
                 }
             }
         }
+
+        it("syncs correctly even if lot numbers have changed") {
+            var reverseIDs = false
+
+            let endpointsClosure: MoyaProvider<ArtsyAPI>.MoyaEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
+                switch target {
+                case ArtsyAPI.AuctionListings:
+                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {listingsDataForPage(1, bidCount: 0, modelCount: 3, reverseIDs: reverseIDs)}), method: target.method, parameters: target.parameters)
+                default:
+                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
+                }
+            }
+
+            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: { RACSignal.empty() })
+
+            subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 4, syncInterval: 1, logSync: { _ in})
+
+            var initialFirstLotID: String?
+            var subsequentFirstLotID: String?
+
+            // First we get our initial sync
+            kioskWaitUntil { done -> Void in
+                subject.updatedContentsSignal.take(1).subscribeCompleted {
+                    initialFirstLotID = subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).saleArtworkID
+                    done()
+                }
+            }
+
+            // Now we reverse the lot numbers
+            reverseIDs = true
+            kioskWaitUntil { done -> Void in
+                subject.updatedContentsSignal.skip(1).take(1).subscribeCompleted {
+                    subsequentFirstLotID = subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).saleArtworkID
+                    done()
+                }
+            }
+
+            expect(initialFirstLotID).toNot( beEmpty() )
+            expect(subsequentFirstLotID).toNot( beEmpty() )
+
+            // Now that the IDs have changed, check that they're not equal.
+            expect(initialFirstLotID) != subsequentFirstLotID
+        }
     }
 }
 
 
-func listingsDataForPage(page: Int, bidCount: Int, modelCount: Int?) -> NSData {
+func listingsDataForPage(page: Int, bidCount: Int, modelCount: Int?, reverseIDs: Bool = false) -> NSData {
     let count = modelCount ?? (page == 1 ? 2 : 1)
 
-    let models = Array<Int>(1...count).reduce(NSArray(), combine: { (memo: NSArray, page: Int) -> NSArray in
-        let model = [
-            "id": "\(count+page*10)",
+    let models = Array<Int>(1...count).map { index -> NSDictionary in
+        return [
+            "id": "\(count+page*10 + (reverseIDs ? count - index : index))",
             "artwork": [
                 "id": "artwork-id",
                 "title": "artwork title",
                 "date": "late 2014",
                 "blurb": "Some description",
-                "price": "1200"
+                "price": "1200",
             ],
+            "lot_number": index,
             "bidder_positions_count": bidCount
         ]
-        return memo.arrayByAddingObject(model)
-    })
+    }
 
     return try! NSJSONSerialization.dataWithJSONObject(models, options: [])
 }

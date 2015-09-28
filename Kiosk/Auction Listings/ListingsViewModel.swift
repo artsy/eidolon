@@ -147,19 +147,17 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
                 func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) -> Bool {
                     assert(currentSaleArtworks.count == newSaleArtworks.count, "Arrays' counts must be equal.")
-                    // Updating the currentSaleArtworks is easy. First we sort both according to the same criteria
-                    // Because we assume that their length is the same, we just do a linear scane through and
-                    // copy values from the new to the old.
+                    // Updating the currentSaleArtworks is easy. Both are already sorted as they came from the API (by lot #).
+                    // Because we assume that their length is the same, we just do a linear scan through and
+                    // copy values from the new to the existing.
 
-                    let sortedCurentSaleArtworks = currentSaleArtworks.sort(sortById)
-                    let sortedNewSaleArtworks = newSaleArtworks.sort(sortById)
+                    let saleArtworksCount = currentSaleArtworks.count
 
-                    let saleArtworksCount = sortedCurentSaleArtworks.count
                     for var i = 0; i < saleArtworksCount; i++ {
                         if currentSaleArtworks[i].id == newSaleArtworks[i].id {
-                            currentSaleArtworks[i].updateWithValues(sortedNewSaleArtworks[i])
+                            currentSaleArtworks[i].updateWithValues(newSaleArtworks[i])
                         } else {
-                            // Failure: the list was the same size but had different artworks
+                            // Failure: the list was the same size but had different artworks.
                             return false
                         }
                     }

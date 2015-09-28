@@ -1,4 +1,7 @@
-upcoming: 
+upcoming:
+  version: 3.6.1
+  notes:
+  - Fixes problem with lot numbers changing during the auction [ash]
 releases:
   date: September 24 2015
   version: 3.6.0

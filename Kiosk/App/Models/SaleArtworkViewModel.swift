@@ -52,6 +52,10 @@ extension SaleArtworkViewModel {
         return saleArtwork.artwork.titleAndDate
     }
 
+    var saleArtworkID: String {
+        return saleArtwork.id
+    }
+
     // Signals representing values that change over time.
 
     var numberOfBidsSignal: RACSignal {
