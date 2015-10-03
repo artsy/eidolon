@@ -28,6 +28,7 @@ enum ArtsyAPI {
     
     case MyBiddersForAuction(auctionID: String)
     case MyBidPositionsForAuctionArtwork(auctionID: String, artworkID: String)
+    case MyBidPosition(id: String)
     case PlaceABid(auctionID: String, artworkID: String, maxBidCents: String)
 
     case UpdateMe(email: String, phone: String, postCode: String, name: String)
@@ -95,6 +96,9 @@ extension ArtsyAPI : MoyaTarget {
 
         case MyBidPositionsForAuctionArtwork:
             return "/api/v1/me/bidder_positions"
+
+        case MyBidPosition(let id):
+            return "/api/v1/me/bidder_positions/\(id)"
 
         case Artwork(let id):
             return "/api/v1/artwork/\(id)"
@@ -303,6 +307,9 @@ extension ArtsyAPI : MoyaTarget {
 
         case MyBidPositionsForAuctionArtwork:
             return stubbedResponse("MyBidPositionsForAuctionArtwork")
+            
+        case MyBidPosition:
+            return stubbedResponse("MyBidPosition")
 
         case Ping:
             return stubbedResponse("Ping")

@@ -22,10 +22,31 @@ class BidCheckingNetworkModel: NSObject {
         self.fulfillmentController = fulfillmentController
     }
 
-    func waitForBidResolution () -> RACSignal {
-        return self.pollForUpdatedSaleArtwork().then { [weak self] (_) in
-            return self == nil ? RACSignal.empty() : self!.checkForMaxBid()
-
+    func waitForBidResolution (bidderPositionId: String) -> RACSignal {
+        return self.pollForUpdatedBidderPosition(bidderPositionId).then { [weak self] in
+            if let me = self {
+                me.getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
+                    self?.pollRequests++
+                    
+                    logger.log("Polling \(self?.pollRequests) of \(self?.maxPollRequests) for updated sale artwork")
+                    
+                    // This is an updated model – hooray!
+                    if let saleArtwork = saleObject as? SaleArtwork {
+                        self?.mostRecentSaleArtwork = saleArtwork
+                        self?.fulfillmentController.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
+                        self?.reserveNotMet = ReserveStatus.initOrDefault(saleArtwork.reserveStatus).reserveNotMet
+                        return RACSignal.`return`(saleArtwork)
+                    } else {
+                        logger.log("Bidder position was processed but corresponding saleArtwork was not found")
+                        // TODO should return a strongly typed error
+                        return RACSignal.error(nil)
+                    }
+                }
+                
+                return me.checkForMaxBid()
+            } else {
+                return RACSignal.empty()
+            }
         } .doNext { _ in
             self.bidIsResolved = true
             return
@@ -33,48 +54,35 @@ class BidCheckingNetworkModel: NSObject {
         // If polling fails, we can still show bid confirmation. Do not error.
         } .catchTo( RACSignal.empty() )
     }
-
-    private func pollForUpdatedSaleArtwork() -> RACSignal {
-
-        let beginningBidCents = fulfillmentController.bidDetails.saleArtwork?.saleHighestBid?.amountCents ?? 0
-
-        let updatedSaleArtworkSignal = getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
+    
+    private func pollForUpdatedBidderPosition(bidderPositionId: String) -> RACSignal {
+        let updatedBidderPosition = getUpdatedBidderPosition(bidderPositionId).flattenMap { [weak self] bidderPositionObject in
             self?.pollRequests++
-
+            
             logger.log("Polling \(self?.pollRequests) of \(self?.maxPollRequests) for updated sale artwork")
-
-            let saleArtwork = saleObject as? SaleArtwork
-            let updatedBidCents = saleArtwork?.saleHighestBid?.amountCents ?? 0
-
+            
             // TODO: handle the case where the user was already the highest bidder
-            if  updatedBidCents != beginningBidCents {
-
-                // This is an updated model – hooray!
-                if let saleArtwork = saleArtwork {
-                    self?.mostRecentSaleArtwork = saleArtwork
-                    self?.fulfillmentController.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
-                    self?.reserveNotMet = ReserveStatus.initOrDefault(saleArtwork.reserveStatus).reserveNotMet
-                }
-
-                return RACSignal.empty()
-
+            if let processedAt = (bidderPositionObject as? BidderPosition)?.processedAt {
+                logger.log("BidPosition finished processing at \(processedAt), proceeding...")
+                
+                return RACSignal.`return`(processedAt)
             } else {
-
+                // The backend hasn't finished processing the bid yet
+                
                 if (self?.pollRequests ?? 0) >= (self?.maxPollRequests ?? 0) {
                     // We have exceeded our max number of polls, fail.
                     return RACSignal.error(nil)
-
+                    
                 } else {
-
                     // We didn't get an updated value, so let's try again.
                     return RACSignal.empty().delay(self?.pollInterval ?? 1).then({ () -> RACSignal! in
-                        return self?.pollForUpdatedSaleArtwork()
+                        return self?.pollForUpdatedBidderPosition(bidderPositionId)
                     })
                 }
             }
         }
-
-        return RACSignal.empty().delay(pollInterval).then { updatedSaleArtworkSignal }
+        
+        return RACSignal.empty().delay(pollInterval).then { updatedBidderPosition }
     }
 
     private func checkForMaxBid() -> RACSignal {
@@ -108,5 +116,10 @@ class BidCheckingNetworkModel: NSObject {
 
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionInfoForArtwork(auctionID: auctionID, artworkID: artworkID)
         return fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(SaleArtwork.self)
+    }
+    
+    private func getUpdatedBidderPosition(bidderPositionId: String) -> RACSignal {
+        let endpoint: ArtsyAPI = ArtsyAPI.MyBidPosition(id: bidderPositionId)
+        return fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)
     }
 }
