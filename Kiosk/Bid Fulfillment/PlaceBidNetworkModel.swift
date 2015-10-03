@@ -34,10 +34,9 @@ class PlaceBidNetworkModel: NSObject {
 
         let request = provider.request(bidEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)
 
-        return request.doNext { [weak self] (position) -> Void in
+        return request.map { [weak self] position in
             self?.bidderPosition = position as? BidderPosition
-            return
-
+            return position?.id
         }.`catch` { error -> RACSignal! in
             // We've received an error. We're going to check to see if it's type is "param_error", which indicates we were outbid.
             let data = error.userInfo["data"]
