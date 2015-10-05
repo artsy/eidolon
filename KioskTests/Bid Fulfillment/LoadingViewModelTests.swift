@@ -135,7 +135,7 @@ class StubPlaceBidNetworkModel: PlaceBidNetworkModel {
     override func bidSignal() -> RACSignal {
         bid = true
 
-        return RACSignal.empty()
+        return RACSignal.`return`(NSDate())
     }
 }
 
