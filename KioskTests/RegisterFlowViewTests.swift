@@ -4,66 +4,98 @@ import Nimble
 import Kiosk
 import Nimble_Snapshots
 
+private let frame = CGRect(x: 0, y: 0, width: 180, height: 320)
+
+class RegisterFlowViewConfiguration: QuickConfiguration {
+    override class func configure(configuration: Configuration) {
+        sharedExamples("a register flow view") { (sharedExampleContext: SharedExampleContext) in
+            var subject: RegisterFlowView!
+
+            beforeEach {
+                subject = sharedExampleContext()["subject"] as! RegisterFlowView
+            }
+
+            it("looks right by default") {
+                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                bidDetails.newUser = NewUser()
+
+                subject.details = bidDetails
+
+                subject.snapshotViewAfterScreenUpdates(true)
+                expect(subject).to( haveValidSnapshot() )
+            }
+
+            it("handles partial data") {
+                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                bidDetails.newUser = NewUser()
+
+                bidDetails.newUser.phoneNumber = "132131231"
+                bidDetails.newUser.email = "xxx@yyy.com"
+
+                subject.details = bidDetails
+
+                subject.snapshotViewAfterScreenUpdates(true)
+                expect(subject).to( haveValidSnapshot() )
+            }
+
+            it("handles highlighted index") {
+                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                bidDetails.newUser = NewUser()
+
+                bidDetails.newUser.phoneNumber = "132131231"
+                bidDetails.newUser.email = "xxx@yyy.com"
+
+                subject.highlightedIndex = 2
+                subject.details = bidDetails
+
+                subject.snapshotViewAfterScreenUpdates(true)
+                expect(subject).to( haveValidSnapshot() )
+            }
+
+
+            it("handles full data") {
+                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                bidDetails.newUser = NewUser()
+
+                bidDetails.newUser.phoneNumber = "132131231"
+                bidDetails.newUser.creditCardToken = "...2323"
+                bidDetails.newUser.email = "xxx@yyy.com"
+                bidDetails.newUser.zipCode = "90210"
+                subject.details = bidDetails
+
+                subject.snapshotViewAfterScreenUpdates(true)
+                expect(subject).to( haveValidSnapshot() )
+            }
+        }
+    }
+}
+
 class RegisterFlowViewTests: QuickSpec {
-
     override func spec() {
+        var appSetup: AppSetup!
+        var subject: RegisterFlowView!
 
-        // These seem to record perfectly, and the images look the same
-        // unsure why they're failing.
-
-        xit("looks right by default") {
-
-            let frame = CGRect(x: 0, y: 0, width: 180, height: 320)
-            let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
-            bidDetails.newUser = NewUser()
-
-            let subject = RegisterFlowView(frame: frame)
-            subject.details = bidDetails
-            expect(subject).to( haveValidSnapshot(named: "empty") )
+        beforeEach {
+            appSetup = AppSetup()
+            subject = RegisterFlowView(frame: frame)
+            subject.constrainWidth("180")
+            subject.constrainHeight("320")
+            subject.appSetup = appSetup
+            subject.backgroundColor = .whiteColor()
         }
 
-        xit("handles partial data") {
-            let frame = CGRect(x: 0, y: 0, width: 180, height: 320)
-            let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
-            bidDetails.newUser = NewUser()
-
-            bidDetails.newUser.phoneNumber = "132131231"
-            bidDetails.newUser.email = "xxx@yyy.com"
-
-            let subject = RegisterFlowView(frame: frame)
-            subject.details = bidDetails
-            expect(subject).to( haveValidSnapshot(named: "partial") )
+        describe("requiring zip code") {
+            itBehavesLike("a register flow view") { () -> (NSDictionary) in
+                appSetup.disableCardReader = true
+                return ["subject": subject]
+            }
         }
 
-        xit("handles different ") {
-            let frame = CGRect(x: 0, y: 0, width: 180, height: 320)
-            let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
-            bidDetails.newUser = NewUser()
-
-            bidDetails.newUser.phoneNumber = "132131231"
-            bidDetails.newUser.email = "xxx@yyy.com"
-
-            let subject = RegisterFlowView(frame: frame)
-            subject.highlightedIndex = 2
-            subject.details = bidDetails
-            expect(subject).to( haveValidSnapshot(named: "partial-different-highlight") )
+        describe("not requiring zip code") {
+            itBehavesLike("a register flow view") { () -> (NSDictionary) in
+                appSetup.disableCardReader = false
+                return ["subject": subject]
+            }
         }
-
-
-        xit("handles full data") {
-            let frame = CGRect(x: 0, y: 0, width: 180, height: 320)
-            let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
-            bidDetails.newUser = NewUser()
-
-            bidDetails.newUser.phoneNumber = "132131231"
-            bidDetails.newUser.creditCardToken = "...2323"
-            bidDetails.newUser.email = "xxx@yyy.com"
-            bidDetails.newUser.zipCode = "90210"
-
-            let subject = RegisterFlowView(frame: frame)
-            subject.details = bidDetails
-            expect(subject).to( haveValidSnapshot(named: "filled") )
-        }
-
     }
 }

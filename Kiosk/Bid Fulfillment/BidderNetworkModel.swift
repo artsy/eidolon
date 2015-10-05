@@ -47,7 +47,7 @@ class BidderNetworkModel: NSObject {
 
     private func createNewUser() -> RACSignal {
         let newUser = fulfillmentController.bidDetails.newUser
-        let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email!, password: newUser.password!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!, name: newUser.name ?? "")
+        let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email!, password: newUser.password!, phone: newUser.phoneNumber!, postCode: newUser.zipCode ?? "", name: newUser.name ?? "")
 
         return Provider.sharedProvider.request(endpoint).filterSuccessfulStatusCodes().doError { (error) in
             logger.log("Creating user failed.")
@@ -66,7 +66,7 @@ class BidderNetworkModel: NSObject {
 
     private func updateUser() -> RACSignal {
         let newUser = fulfillmentController.bidDetails.newUser
-        let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode!, name: newUser.name ?? "")
+        let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode ?? "", name: newUser.name ?? "")
 
         return updateProviderIfNecessary().then {
             self.fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON()

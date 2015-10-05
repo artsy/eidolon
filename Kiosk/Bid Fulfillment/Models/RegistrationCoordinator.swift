@@ -83,7 +83,7 @@ class RegistrationCoordinator: NSObject {
             return viewControllerForIndex(.CreditCardVC)
         }
 
-        if notSet(details.newUser.zipCode) {
+        if notSet(details.newUser.zipCode) && AppSetup.sharedState.needsZipCode {
             return viewControllerForIndex(.ZipCodeVC)
         }
 

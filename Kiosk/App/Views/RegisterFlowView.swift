@@ -7,6 +7,8 @@ class RegisterFlowView: ORStackView {
     dynamic var highlightedIndex = 0
     let jumpToIndexSignal = RACSubject()
 
+    lazy var appSetup: AppSetup = .sharedState
+
     var details: BidDetails? {
         didSet {
             self.update()
@@ -21,9 +23,17 @@ class RegisterFlowView: ORStackView {
         self.updateConstraints()
     }
     
-    var titles = ["Mobile", "Email", "Credit Card", "Postal/Zip"]
-    var keypaths = [["phoneNumber"], ["email"], ["creditCardName", "creditCardType"], ["zipCode"]]
+    var titles: Array<String> {
+        var titles =  ["Mobile", "Email", "Credit Card", "Postal/Zip"]
+        titles.removeLastIfNoZipCodeNeeded(self.appSetup)
 
+        return titles
+    }
+    var keypaths: Array<Array<String>> {
+        var keypaths = [["phoneNumber"], ["email"], ["creditCardName", "creditCardType"], ["zipCode"]]
+        keypaths.removeLastIfNoZipCodeNeeded(self.appSetup)
+        return keypaths
+    }
 
     func update() {
         let user = details!.newUser
@@ -108,6 +118,14 @@ class RegisterFlowView: ORStackView {
             
             return button
 
+        }
+    }
+}
+
+extension Array {
+    mutating func removeLastIfNoZipCodeNeeded(appSetup: AppSetup) {
+        if appSetup.needsZipCode == false {
+            removeLast()
         }
     }
 }
