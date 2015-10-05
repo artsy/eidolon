@@ -81,6 +81,7 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
         RAC(bidDetails, "newUser.creditCardName") <~ RACObserve(self, "cardName").takeUntil(viewWillDisappearSignal())
         RAC(bidDetails, "newUser.creditCardDigit") <~ RACObserve(self, "cardLastDigits").takeUntil(viewWillDisappearSignal())
         RAC(bidDetails, "newUser.creditCardToken") <~ RACObserve(self, "cardToken").takeUntil(viewWillDisappearSignal())
+        bidDetails.newUser.swipedCreditCard = true
     }
 
     func setInProgress(show: Bool) {

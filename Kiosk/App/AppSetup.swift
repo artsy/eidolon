@@ -27,4 +27,9 @@ class AppSetup {
 
         if let _ = NSClassFromString("XCTest") { isTesting = true }
     }
+
+    var needsZipCode: Bool {
+        // If we're swiping with the card reaer, we don't need to collect a zip code.
+        return disableCardReader
+    }
 }

@@ -8,4 +8,6 @@
     dynamic var creditCardType: String?
     dynamic var zipCode: String?
     dynamic var name: String?
+
+    var swipedCreditCard = false
 }
