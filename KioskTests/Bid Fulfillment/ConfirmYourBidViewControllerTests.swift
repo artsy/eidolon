@@ -8,11 +8,9 @@ import Kiosk
 class ConfirmYourBidViewControllerTests: QuickSpec {
     override func spec() {
         var subject: ConfirmYourBidViewController!
-        var nav: FulfillmentNavigationController!
 
         beforeEach {
             subject = ConfirmYourBidViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as! ConfirmYourBidViewController
-            nav = FulfillmentNavigationController(rootViewController:subject)
         }
 
         pending("looks right by default") {

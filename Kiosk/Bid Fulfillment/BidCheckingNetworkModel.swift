@@ -24,29 +24,24 @@ class BidCheckingNetworkModel: NSObject {
 
     func waitForBidResolution (bidderPositionId: String) -> RACSignal {
         return self.pollForUpdatedBidderPosition(bidderPositionId).then { [weak self] in
-            if let me = self {
-                me.getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
-                    self?.pollRequests++
-                    
-                    logger.log("Polling \(self?.pollRequests) of \(self?.maxPollRequests) for updated sale artwork")
-                    
-                    // This is an updated model – hooray!
-                    if let saleArtwork = saleObject as? SaleArtwork {
-                        self?.mostRecentSaleArtwork = saleArtwork
-                        self?.fulfillmentController.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
-                        self?.reserveNotMet = ReserveStatus.initOrDefault(saleArtwork.reserveStatus).reserveNotMet
-                        return RACSignal.`return`(saleArtwork)
-                    } else {
-                        logger.log("Bidder position was processed but corresponding saleArtwork was not found")
-                        // TODO should return a strongly typed error
-                        return RACSignal.error(nil)
-                    }
-                }
+            guard let me = self else { return RACSignal.empty() }
+
+            me.getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
+                guard let me = self else { return RACSignal.empty() }
                 
-                return me.checkForMaxBid()
-            } else {
-                return RACSignal.empty()
+                // This is an updated model – hooray!
+                if let saleArtwork = saleObject as? SaleArtwork {
+                    me.mostRecentSaleArtwork = saleArtwork
+                    me.fulfillmentController.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
+                    me.reserveNotMet = ReserveStatus.initOrDefault(saleArtwork.reserveStatus).reserveNotMet
+                    return RACSignal.`return`(saleArtwork)
+                } else {
+                    logger.log("Bidder position was processed but corresponding saleArtwork was not found")
+                    return RACSignal.empty()
+                }
             }
+            
+            return me.checkForMaxBid()
         } .doNext { _ in
             self.bidIsResolved = true
             return
