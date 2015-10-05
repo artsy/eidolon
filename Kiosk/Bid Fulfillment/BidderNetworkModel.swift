@@ -83,7 +83,8 @@ class BidderNetworkModel: NSObject {
             return RACSignal.empty()
         }
 
-        let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(stripeToken: token)
+        let swiped = fulfillmentController.bidDetails.newUser.swipedCreditCard
+        let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(stripeToken: token, swiped: swiped)
 
         return fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().doError { (error) in
             logger.log("Adding Card to User failed.")

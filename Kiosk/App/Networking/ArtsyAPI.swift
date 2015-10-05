@@ -33,7 +33,7 @@ enum ArtsyAPI {
     case UpdateMe(email: String, phone: String, postCode: String, name: String)
     case CreateUser(email: String, password: String, phone: String, postCode: String, name: String)
 
-    case RegisterCard(stripeToken: String)
+    case RegisterCard(stripeToken: String, swiped: Bool)
 
     case BidderDetailsNotification(auctionID: String, identifier: String)
     
@@ -177,8 +177,8 @@ extension ArtsyAPI : MoyaTarget {
                 "name": name, "location": [ "postal_code": postCode ]
             ]
 
-        case RegisterCard(let token):
-            return ["provider": "stripe", "token": token]
+        case RegisterCard(let token, let swiped):
+            return ["provider": "stripe", "token": token, "created_by_trusted_client": swiped]
 
         case FindBidderRegistration(let auctionID, let phone):
             return ["sale_id": auctionID, "number": phone]
