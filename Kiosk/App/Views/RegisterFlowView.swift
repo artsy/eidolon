@@ -23,17 +23,12 @@ class RegisterFlowView: ORStackView {
         self.updateConstraints()
     }
     
-    var titles: Array<String> {
-        var titles =  ["Mobile", "Email", "Credit Card", "Postal/Zip"]
-        titles.removeLastIfNoZipCodeNeeded(self.appSetup)
-
-        return titles
-    }
-    var keypaths: Array<Array<String>> {
-        var keypaths = [["phoneNumber"], ["email"], ["creditCardName", "creditCardType"], ["zipCode"]]
-        keypaths.removeLastIfNoZipCodeNeeded(self.appSetup)
-        return keypaths
-    }
+    lazy var titles: Array<String> = {
+        return ["Mobile", "Email", "Credit Card"] + (self.appSetup.needsZipCode ? ["Postal/Zip"] : [])
+    }()
+    lazy var keypaths: Array<Array<String>> = {
+        return [["phoneNumber"], ["email"], ["creditCardName", "creditCardType"]] + (self.appSetup.needsZipCode ? [["zipCode"]] : [])
+    }()
 
     func update() {
         let user = details!.newUser
@@ -118,14 +113,6 @@ class RegisterFlowView: ORStackView {
             
             return button
 
-        }
-    }
-}
-
-extension Array {
-    mutating func removeLastIfNoZipCodeNeeded(appSetup: AppSetup) {
-        if appSetup.needsZipCode == false {
-            removeLast()
         }
     }
 }
