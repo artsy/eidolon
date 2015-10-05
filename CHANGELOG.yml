@@ -1,8 +1,13 @@
 upcoming:
-  version: 3.6.1
+  version: 3.7.0
+  notes:
+  - Removes Zip code requiement for swiped credit cards [ash]
+  - Adds new parameters for trusted clients [ash]
+releases:
+- version: 3.6.1
+  date: September 27 2015
   notes:
   - Fixes problem with lot numbers changing during the auction [ash]
-releases:
 - version: 3.6.0
   date: September 24 2015
   notes:
