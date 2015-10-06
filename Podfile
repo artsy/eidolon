@@ -30,7 +30,7 @@ pod 'Artsy+UIColors'
 pod 'Artsy+UILabels'
 pod 'Artsy-UIButtons'
 
-if ['orta', 'ash', 'artsy', 'Laura', 'acjay', 'CI', 'distiller', 'travis'].include?(ENV['USER'])
+if ['orta', 'ash', 'artsy', 'Laura', 'alan', 'CI', 'distiller', 'travis'].include?(ENV['USER'])
     pod 'Artsy+UIFonts', '~> 1.1.0'
 else
     pod 'Artsy+OSSUIFonts', '~> 1.1.0'
