@@ -5,11 +5,12 @@ import Stripe
 class StripeManager: NSObject {
     var stripeClient = STPAPIClient.sharedClient()
 
-    func registerCard(digits: String, month: UInt, year: UInt) -> RACSignal {
+    func registerCard(digits: String, month: UInt, year: UInt, securityCode: String) -> RACSignal {
         let card = STPCard()
         card.number = digits
         card.expMonth = month
         card.expYear = year
+        card.cvc = securityCode
 
         return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
             self?.stripeClient.createTokenWithCard(card) { (token, error) -> Void in
