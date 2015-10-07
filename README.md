@@ -15,6 +15,8 @@ Featured [in Vogue](http://www.vogue.com/slideshow/13261562/choice-works-auction
 Downloading the Code
 ----------------
 
+(Note: if you're an Artsy employee, you'll need to follow [these directions](docs/artsy_dev.md) instead.)
+
 You'll need a few things before we get started. Make sure you have Xcode installed from 
 the App Store or wherever. Then run the following two commands to install Xcode's
 command line tools and `bundler`, if you don't have that yet.
