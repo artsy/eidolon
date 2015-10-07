@@ -43,7 +43,6 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
 
         securityCodeConfirmButton.rac_command = viewModel.registerButtonCommand()
 
-        RAC(expirationDateErrorLabel, "hidden") <~ dateConfirmButton.rac_command.errors.take(1).mapReplace(false).startWith(true)
         RAC(securityCodeErrorLabel, "hidden") <~ securityCodeConfirmButton.rac_command.errors.take(1).mapReplace(false).startWith(true)
 
         viewModel.moveToYearSignal.take(1).subscribeNext { [weak self] _ -> Void in
