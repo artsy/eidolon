@@ -148,7 +148,7 @@ class StubBidCheckingNetworkModel: BidCheckingNetworkModel {
         super.init(fulfillmentController: StubFulfillmentController())
     }
 
-    func waitForBidResolution() -> RACSignal {
+    override func waitForBidResolution(_: String) -> RACSignal {
         checked = true
 
         return RACSignal.empty()
