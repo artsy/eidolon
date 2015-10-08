@@ -1,9 +1,14 @@
 upcoming:
-  version: 3.7.0
+  version: 3.8.0
+  notes:
+  - New polling mechanism to avoid bidding problems [alan]
+  - Adds CVV field to manual CC entry screen [alan]
+releases:
+- version: 3.7.0
+  date: October 7 2015
   notes:
   - Removes Zip code requiement for swiped credit cards [ash]
   - Adds new parameters for trusted clients [ash]
-releases:
 - version: 3.6.1
   date: September 27 2015
   notes:
