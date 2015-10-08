@@ -130,6 +130,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 subject.cardFullDigits = ""
                 subject.expirationMonth = "02"
                 subject.expirationYear = "2017"
+                subject.securityCode = "123"
                 expect((subject.registerButtonCommand().enabled.first() as! Bool)) == true
             }
 
@@ -155,6 +156,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                     subject.cardFullDigits = ""
                     subject.expirationMonth = "02"
                     subject.expirationYear = "2017"
+                    subject.securityCode = "123"
                 }
 
                 describe("successful registration") { () -> Void in
@@ -260,7 +262,7 @@ class ManualCreditCardInputViewModelTestsStripeManager: StripeManager {
         return isValidCreditCard
     }
 
-    override func registerCard(digits: String, month: UInt, year: UInt) -> RACSignal {
+    override func registerCard(digits: String, month: UInt, year: UInt, securityCode: String) -> RACSignal {
         return RACSignal.createSignal { (subscriber) -> RACDisposable! in
             self.registrationClosure?()
 

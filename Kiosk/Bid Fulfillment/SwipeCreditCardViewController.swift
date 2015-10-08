@@ -98,7 +98,7 @@ private extension SwipeCreditCardViewController {
     func applyCardWithSuccess(success: Bool) {
         let cardFullDigits = success ? "4242424242424242" : "4000000000000002"
 
-        stripeManager.registerCard(cardFullDigits, month: 04, year: 2018).subscribeNext() { [weak self] (object) in
+        stripeManager.registerCard(cardFullDigits, month: 04, year: 2018, securityCode: "123").subscribeNext() { [weak self] (object) in
             let token = object as! STPToken
 
             self?.cardName = "Kiosk Staging CC Test"

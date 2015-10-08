@@ -10,6 +10,7 @@ class ManualCreditCardInputViewModel: NSObject {
     dynamic var cardFullDigits = ""
     dynamic var expirationMonth = ""
     dynamic var expirationYear = ""
+    dynamic var securityCode = ""
 
     private(set) var bidDetails: BidDetails!
     private(set) var finishedSubject: RACSubject?
@@ -34,6 +35,10 @@ class ManualCreditCardInputViewModel: NSObject {
         return RACSignal.combineLatest([yearSignal, monthSignal]).and()
     }
 
+    var securityCodeIsValidSignal: RACSignal {
+        return RACObserve(self, "securityCode").map(isStringLengthIn(3..<5))
+    }
+
     var moveToYearSignal: RACSignal {
         return RACObserve(self, "expirationMonth").filter { (value) -> Bool in
             return (value as! String).characters.count == 2
@@ -42,7 +47,7 @@ class ManualCreditCardInputViewModel: NSObject {
 
     func registerButtonCommand() -> RACCommand {
         let newUser = bidDetails.newUser
-        let enabled = RACSignal.combineLatest([creditCardNumberIsValidSignal, expiryDatesAreValidSignal]).and()
+        let enabled = RACSignal.combineLatest([creditCardNumberIsValidSignal, expiryDatesAreValidSignal, securityCodeIsValidSignal]).and()
         return RACCommand(enabled: enabled) { [weak self] _ in
             (self?.registerCardSignal(newUser) ?? RACSignal.empty())?.doCompleted { () -> Void in
                 self?.finishedSubject?.sendCompleted()
@@ -65,7 +70,7 @@ class ManualCreditCardInputViewModel: NSObject {
         let month = expirationMonth.toUIntWithDefault(0)
         let year = expirationYear.toUIntWithDefault(0)
 
-        return stripeManager.registerCard(cardFullDigits, month: month, year: year).doNext() { (object) in
+        return stripeManager.registerCard(cardFullDigits, month: month, year: year, securityCode: securityCode).doNext() { (object) in
             let token = object as! STPToken
 
             newUser.creditCardName = token.card.name

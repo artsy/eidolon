@@ -50,10 +50,6 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
                 subject.cardNumberconfirmTapped(subject)
             }
 
-            it("asks for expiry") {
-                expect(subject).to( haveValidSnapshot() )
-            }
-
             it("moves cursor to year once month is entered") {
                 var moved = false
                 subject.expirationYearTextField?.rac_signalForSelector("becomeFirstResponder").subscribeNext { _ -> Void in
@@ -106,13 +102,12 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
 
             subject.loadViewProgrammatically()
             subject.cardNumberconfirmTapped(subject)
+            subject.expirationDateConfirmTapped(subject)
 
-            waitUntil { (done) -> Void in
+            waitUntil { done -> Void in
                 testViewModel.testRegisterButtonCommand.execute(nil).subscribeError { (_) -> Void in
                     done()
                 }
-
-                return
             }
 
             expect(subject).to( haveValidSnapshot() )
