@@ -130,6 +130,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 subject.cardFullDigits = ""
                 subject.expirationMonth = "02"
                 subject.expirationYear = "2017"
+                subject.securityCode = "123"
                 expect((subject.registerButtonCommand().enabled.first() as! Bool)) == true
             }
 
@@ -155,6 +156,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                     subject.cardFullDigits = ""
                     subject.expirationMonth = "02"
                     subject.expirationYear = "2017"
+                    subject.securityCode = "123"
                 }
 
                 describe("successful registration") { () -> Void in
