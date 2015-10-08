@@ -114,6 +114,8 @@ class LoadingViewModelTests: QuickSpec {
     }
 }
 
+let bidderID = "some-bidder-id"
+
 class StubBidderNetworkModel: BidderNetworkModel {
     init() {
         super.init(fulfillmentController: StubFulfillmentController())
@@ -135,7 +137,7 @@ class StubPlaceBidNetworkModel: PlaceBidNetworkModel {
     override func bidSignal() -> RACSignal {
         bid = true
 
-        return RACSignal.empty()
+        return RACSignal.`return`(bidderID)
     }
 }
 
@@ -146,7 +148,7 @@ class StubBidCheckingNetworkModel: BidCheckingNetworkModel {
         super.init(fulfillmentController: StubFulfillmentController())
     }
 
-    override func waitForBidResolution() -> RACSignal {
+    override func waitForBidResolution(_: String) -> RACSignal {
         checked = true
 
         return RACSignal.empty()
