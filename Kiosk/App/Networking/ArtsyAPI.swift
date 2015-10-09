@@ -98,7 +98,7 @@ extension ArtsyAPI : MoyaTarget {
             return "/api/v1/me/bidder_positions"
 
         case MyBidPosition(let id):
-            return "/api/v1/me/bidder_positions/\(id)"
+            return "/api/v1/me/bidder_position/\(id)"
 
         case Artwork(let id):
             return "/api/v1/artwork/\(id)"

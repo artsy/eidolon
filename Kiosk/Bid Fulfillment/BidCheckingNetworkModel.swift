@@ -26,7 +26,7 @@ class BidCheckingNetworkModel: NSObject {
         return self.pollForUpdatedBidderPosition(bidderPositionId).then { [weak self] in
             guard let me = self else { return RACSignal.empty() }
 
-            me.getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
+            return me.getUpdatedSaleArtwork().flattenMap { [weak self] (saleObject) -> RACStream! in
                 guard let me = self else { return RACSignal.empty() }
                 
                 // This is an updated model – hooray!
@@ -39,9 +39,13 @@ class BidCheckingNetworkModel: NSObject {
                     logger.log("Bidder position was processed but corresponding saleArtwork was not found")
                     return RACSignal.empty()
                 }
+            }.flattenMap { [weak self] mostRecentSaleArtwork in
+                // TODO: adjust logic to use parameter instead of instance variable
+
+                guard let me = self else { return RACSignal.empty() }
+
+                return me.checkForMaxBid()
             }
-            
-            return me.checkForMaxBid()
         } .doNext { _ in
             self.bidIsResolved = true
             return
