@@ -1,9 +1,13 @@
 upcoming:
-  version: 3.8.0
+  version: 3.8.1
+  notes:
+  - Fixes new polling mechanism [alan]
+releases:
+- version: 3.8.0
+  date: October 8 2015
   notes:
   - New polling mechanism to avoid bidding problems [alan]
   - Adds CVV field to manual CC entry screen [alan]
-releases:
 - version: 3.7.0
   date: October 7 2015
   notes:
