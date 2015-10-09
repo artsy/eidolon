@@ -53,8 +53,10 @@ class LoadingViewController: UIViewController {
             // Regardless of error or completion. hide the spinner.
             self?.spinner.hidden = true
         }.subscribeError({ [weak self] (error) -> Void in
+            logger.log("Bidder error \(error)")
             self?.bidderError(error)
         }, completed: { [weak self] () -> Void in
+            logger.log("Bid placement and polling completed")
             self?.finishUp()
         })
     }
@@ -65,6 +67,8 @@ class LoadingViewController: UIViewController {
         let isHighestBidder = viewModel.isHighestBidder
         let bidIsResolved = viewModel.bidIsResolved
         let createdNewBidder = viewModel.createdNewBidder
+
+        logger.log("Bidding process result: reserveNotMet \(reserveNotMet), isHighestBidder \(isHighestBidder), bidIsResolved \(bidIsResolved), createdNewbidder \(createdNewBidder)")
 
         if placingBid {
             ARAnalytics.event("Placed a bid", withProperties: ["top_bidder" : isHighestBidder])
