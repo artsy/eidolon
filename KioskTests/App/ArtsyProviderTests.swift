@@ -17,7 +17,7 @@ class ArtsyProviderTests: QuickSpec {
 
         beforeEach {
             fakeOnlineSignal = RACSubject()
-            subject = ArtsyProvider<ArtsyAPI>(endpointClosure: fakeEndpointsClosure, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: { fakeOnlineSignal })
+            subject = ArtsyProvider<ArtsyAPI>(endpointClosure: fakeEndpointsClosure, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: fakeOnlineSignal)
 
             // We fake our defaults to avoid actually hitting the network
             defaults = NSUserDefaults()

@@ -38,8 +38,8 @@ class AppViewControllerTests: QuickSpec {
 
             it("hides the offlineBlockingView when offline signal is false"){
                 subject.loadViewProgrammatically()
-                
-                subject.offlineBlockingView.hidden = true
+
+                fakeReachabilitySignal.sendNext(true)
                 expect(subject.offlineBlockingView.hidden) == true
                 
                 

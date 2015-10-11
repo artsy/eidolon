@@ -1,4 +1,5 @@
 import ReactiveCocoa
+import Reachability
 import Moya
 
 // Ideally a Pod. For now a file.
@@ -18,14 +19,14 @@ func logPath() -> NSURL {
 
 let logger = Logger(destination: logPath())
 
-let reachabilityManager = ReachabilityManager()
+private let reachabilityManager = ReachabilityManager()
 
 // A signal that completes when the app gets online (possibly completes immediately).
 func connectedToInternetOrStubbingSignal() -> RACSignal {
-    let online = reachabilityManager.reachSignal.filter { ($0 as! Bool) }.take(1).ignoreValues()
+    let online = reachabilityManager.reachSignal
     let stubbing = RACSignal.`return`(APIKeys.sharedKeys.stubResponses)
 
-    return RACSignal.`if`(stubbing, then: RACSignal.empty(), `else`: online)
+    return RACSignal.combineLatest([online, stubbing]).or()
 }
 
 func responseIsOK(object: AnyObject!) -> AnyObject {
@@ -60,3 +61,25 @@ func detectDevelopmentEnvironment() -> Bool {
     #endif
     return developmentEnvironment
 }
+
+private class ReachabilityManager: NSObject {
+    let reachSignal: RACSignal = RACReplaySubject(capacity: 1)
+
+    private let reachability = Reachability.reachabilityForInternetConnection()
+
+    override init() {
+        super.init()
+
+        reachability.reachableBlock = { (_) in
+            return (self.reachSignal as! RACSubject).sendNext(true)
+        }
+
+        reachability.unreachableBlock = { (_) in
+            return (self.reachSignal as! RACSubject).sendNext(false)
+        }
+
+        reachability.startNotifier()
+        (reachSignal as! RACSubject).sendNext(reachability.isReachable())
+    }
+}
+

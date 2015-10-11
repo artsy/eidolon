@@ -49,11 +49,12 @@ class ListingsViewController: UIViewController {
         } else if detectDevelopmentEnvironment() {
             let flagImageName = AppSetup.sharedState.useStaging ? "StagingFlag" : "ProductionFlag"
             stagingFlag.image = UIImage(named: flagImageName)
-            stagingFlag.hidden = AppSetup.sharedState.isTesting
         } else {
             stagingFlag.hidden = AppSetup.sharedState.useStaging == false
         }
-        
+
+        stagingFlag.hidden = AppSetup.sharedState.isTesting
+
         // Add subviews
 
         view.addSubview(switchView)
