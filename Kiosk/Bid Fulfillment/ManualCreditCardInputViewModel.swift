@@ -69,8 +69,9 @@ class ManualCreditCardInputViewModel: NSObject {
     private func registerCardSignal(newUser: NewUser) -> RACSignal {
         let month = expirationMonth.toUIntWithDefault(0)
         let year = expirationYear.toUIntWithDefault(0)
+        let postalCode = newUser.zipCode ?? ""
 
-        return stripeManager.registerCard(cardFullDigits, month: month, year: year, securityCode: securityCode).doNext() { (object) in
+        return stripeManager.registerCard(cardFullDigits, month: month, year: year, securityCode: securityCode, postalCode: postalCode).doNext() { (object) in
             let token = object as! STPToken
 
             newUser.creditCardName = token.card.name

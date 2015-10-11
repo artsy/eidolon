@@ -24,10 +24,10 @@ class RegisterFlowView: ORStackView {
     }
     
     lazy var titles: Array<String> = {
-        return ["Mobile", "Email", "Credit Card"] + (self.appSetup.needsZipCode ? ["Postal/Zip"] : [])
+        return ["Mobile", "Email"] + (self.appSetup.needsZipCode ? ["Postal/Zip"] : []) + ["Credit Card"]
     }()
     lazy var keypaths: Array<Array<String>> = {
-        return [["phoneNumber"], ["email"], ["creditCardName", "creditCardType"]] + (self.appSetup.needsZipCode ? [["zipCode"]] : [])
+        return [["phoneNumber"], ["email"]] + (self.appSetup.needsZipCode ? [["zipCode"]] : []) + [["creditCardName", "creditCardType"]]
     }()
 
     func update() {

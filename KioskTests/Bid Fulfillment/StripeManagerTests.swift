@@ -26,7 +26,7 @@ class StripeManagerTests: QuickSpec {
 
         it("sends the correct token upon success") {
             waitUntil { (done) -> Void in
-                subject.registerCard("", month: 0, year: 0, securityCode: "").subscribeNext { (object) -> Void in
+                subject.registerCard("", month: 0, year: 0, securityCode: "", postalCode: "").subscribeNext { (object) -> Void in
                     let token = object as! STPToken
 
                     expect(token.tokenId) == "12345"
@@ -39,7 +39,7 @@ class StripeManagerTests: QuickSpec {
         it("sends the correct token upon success") {
             var completed = false
             waitUntil { (done) -> Void in
-                subject.registerCard("", month: 0, year: 0, securityCode: "").subscribeCompleted { () -> Void in
+                subject.registerCard("", month: 0, year: 0, securityCode: "", postalCode: "").subscribeCompleted { () -> Void in
                     completed = true
                     done()
                 }
@@ -54,7 +54,7 @@ class StripeManagerTests: QuickSpec {
             
             var errored = false
             waitUntil { (done) -> Void in
-                subject.registerCard("", month: 0, year: 0, securityCode: "").subscribeError { _ -> Void in
+                subject.registerCard("", month: 0, year: 0, securityCode: "", postalCode: "").subscribeError { _ -> Void in
                     errored = true
                     done()
                 }

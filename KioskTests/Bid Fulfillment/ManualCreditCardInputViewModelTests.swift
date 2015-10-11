@@ -262,7 +262,7 @@ class ManualCreditCardInputViewModelTestsStripeManager: StripeManager {
         return isValidCreditCard
     }
 
-    override func registerCard(digits: String, month: UInt, year: UInt, securityCode: String) -> RACSignal {
+    override func registerCard(digits: String, month: UInt, year: UInt, securityCode: String, postalCode: String) -> RACSignal {
         return RACSignal.createSignal { (subscriber) -> RACDisposable! in
             self.registrationClosure?()
 
