@@ -43,8 +43,10 @@ class ListingsViewController: UIViewController {
         super.viewDidLoad()
 
         // Set up development environment.
-        
-        if detectDevelopmentEnvironment() {
+
+        if APIKeys.sharedKeys.stubResponses {
+            stagingFlag.image = UIImage(named: "StubbingFlag")
+        } else if detectDevelopmentEnvironment() {
             let flagImageName = AppSetup.sharedState.useStaging ? "StagingFlag" : "ProductionFlag"
             stagingFlag.image = UIImage(named: flagImageName)
             stagingFlag.hidden = AppSetup.sharedState.isTesting

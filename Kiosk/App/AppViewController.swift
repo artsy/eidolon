@@ -37,7 +37,11 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
 
         countdownManager.setFonts()
 
-        RAC(offlineBlockingView, "hidden") <~ RACSignal.combineLatest([reachabilitySignal, apiPingerSignal]).and()
+        let stubbingAPIResponses = RACSignal.`return`(APIKeys.sharedKeys.stubResponses)
+        let internetNotReachable = RACSignal.combineLatest([reachabilitySignal, apiPingerSignal]).and()
+        let hideOfflineView = RACSignal.combineLatest([stubbingAPIResponses, internetNotReachable]).or()
+
+        RAC(offlineBlockingView, "hidden") <~ hideOfflineView
 
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")

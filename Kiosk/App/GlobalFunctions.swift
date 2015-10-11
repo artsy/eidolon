@@ -21,8 +21,11 @@ let logger = Logger(destination: logPath())
 let reachabilityManager = ReachabilityManager()
 
 // A signal that completes when the app gets online (possibly completes immediately).
-func connectedToInternetSignal() -> RACSignal {
-    return reachabilityManager.reachSignal.filter { ($0 as! Bool) }.take(1).ignoreValues()
+func connectedToInternetOrStubbingSignal() -> RACSignal {
+    let online = reachabilityManager.reachSignal.filter { ($0 as! Bool) }.take(1).ignoreValues()
+    let stubbing = RACSignal.`return`(APIKeys.sharedKeys.stubResponses)
+
+    return RACSignal.`if`(stubbing, then: RACSignal.empty(), `else`: online)
 }
 
 func responseIsOK(object: AnyObject!) -> AnyObject {
