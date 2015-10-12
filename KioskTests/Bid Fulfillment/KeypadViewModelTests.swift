@@ -53,7 +53,7 @@ class KeypadViewModelTests: QuickSpec {
                 [1,3,3,3,3,3,3,3,3,3,3,3,7].reduce(RACSignal.empty(), combine: { (signal, input) -> RACSignal in
                     signal.then { subject.addDigitCommand.execute(input) }
                 }).subscribeCompleted { () -> Void in
-                    expect(testHarness.intValue) == 133333
+                    expect(testHarness.intValue) == 1333333
                     expect(testHarness.stringValue) == "1333333333337"
 
                     done()
