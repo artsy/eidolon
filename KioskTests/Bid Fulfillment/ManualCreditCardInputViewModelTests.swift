@@ -131,6 +131,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 subject.expirationMonth = "02"
                 subject.expirationYear = "2017"
                 subject.securityCode = "123"
+                subject.billingZip = "10003"
                 expect((subject.registerButtonCommand().enabled.first() as! Bool)) == true
             }
 

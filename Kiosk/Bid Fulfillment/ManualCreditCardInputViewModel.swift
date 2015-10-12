@@ -11,6 +11,7 @@ class ManualCreditCardInputViewModel: NSObject {
     dynamic var expirationMonth = ""
     dynamic var expirationYear = ""
     dynamic var securityCode = ""
+    dynamic var billingZip = ""
 
     private(set) var bidDetails: BidDetails!
     private(set) var finishedSubject: RACSubject?
@@ -39,6 +40,10 @@ class ManualCreditCardInputViewModel: NSObject {
         return RACObserve(self, "securityCode").map(isStringLengthIn(3..<5))
     }
 
+    var billingZipIsValidSignal: RACSignal {
+        return RACObserve(self, "billingZip").map(isStringLengthIn(4..<8))
+    }
+
     var moveToYearSignal: RACSignal {
         return RACObserve(self, "expirationMonth").filter { (value) -> Bool in
             return (value as! String).characters.count == 2
@@ -47,7 +52,7 @@ class ManualCreditCardInputViewModel: NSObject {
 
     func registerButtonCommand() -> RACCommand {
         let newUser = bidDetails.newUser
-        let enabled = RACSignal.combineLatest([creditCardNumberIsValidSignal, expiryDatesAreValidSignal, securityCodeIsValidSignal]).and()
+        let enabled = RACSignal.combineLatest([creditCardNumberIsValidSignal, expiryDatesAreValidSignal, securityCodeIsValidSignal, billingZipIsValidSignal]).and()
         return RACCommand(enabled: enabled) { [weak self] _ in
             (self?.registerCardSignal(newUser) ?? RACSignal.empty())?.doCompleted { () -> Void in
                 self?.finishedSubject?.sendCompleted()
@@ -69,9 +74,8 @@ class ManualCreditCardInputViewModel: NSObject {
     private func registerCardSignal(newUser: NewUser) -> RACSignal {
         let month = expirationMonth.toUIntWithDefault(0)
         let year = expirationYear.toUIntWithDefault(0)
-        let postalCode = newUser.zipCode ?? ""
 
-        return stripeManager.registerCard(cardFullDigits, month: month, year: year, securityCode: securityCode, postalCode: postalCode).doNext() { (object) in
+        return stripeManager.registerCard(cardFullDigits, month: month, year: year, securityCode: securityCode, postalCode: billingZip).doNext() { (object) in
             let token = object as! STPToken
 
             newUser.creditCardName = token.card.name

@@ -60,6 +60,8 @@
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
             <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
+            <string>AGaramondPro-Regular</string>
         </mutableArray>
         <mutableArray key="AGaramondPro-Semibold.otf">
             <string>AGaramondPro-Semibold</string>
@@ -1516,12 +1518,6 @@
                                         <rect key="frame" x="1" y="163" width="157" height="1"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We could not register your card, please verify it is correct" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cN6-Or-nel" customClass="ARSerifLabel">
-                                        <rect key="frame" x="189" y="125" width="220" height="57"/>
-                                        <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="17"/>
-                                        <color key="textColor" red="0.5" green="0.1639877614959997" blue="0.15207728362497658" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -1585,14 +1581,60 @@
                                         <rect key="frame" x="1" y="163" width="183" height="1"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We could not register your card, please verify it is correct" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6Y-pw-6Cb" customClass="ARSerifLabel">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37S-GW-TXB" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                        <rect key="frame" x="85" y="74" width="94" height="50"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="ENTER">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="securityCodeConfirmTapped:" destination="MZV-Pg-x2N" eventType="touchUpInside" id="bLQ-8y-TMS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qh2-N1-Vp9">
+                                <rect key="frame" x="0.0" y="0.0" width="449" height="186"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Billing ZIP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUk-dd-dSQ" customClass="ARSerifLabel">
+                                        <rect key="frame" x="1" y="0.0" width="230" height="41"/>
+                                        <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="33"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vF-W2-JYY">
+                                        <rect key="frame" x="0.0" y="132" width="184" height="43"/>
+                                        <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
+                                        <state key="normal" title="Back to security code">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backToSecurityCode:" destination="MZV-Pg-x2N" eventType="touchUpInside" id="xL1-Y2-wS6"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="10001" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xfs-0c-ibW" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="73" width="111" height="50"/>
+                                        <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="MZV-Pg-x2N" id="Mf7-qF-ZLc"/>
+                                        </connections>
+                                    </textField>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="msS-oW-V8W">
+                                        <rect key="frame" x="1" y="163" width="183" height="1"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We could not register your card, please verify it is correct" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4c7-vz-asF" customClass="ARSerifLabel">
                                         <rect key="frame" x="202" y="125" width="220" height="57"/>
                                         <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="17"/>
                                         <color key="textColor" red="0.5" green="0.1639877615" blue="0.1520772836" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37S-GW-TXB" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                        <rect key="frame" x="85" y="74" width="94" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCu-AL-O6x" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                        <rect key="frame" x="119" y="74" width="94" height="50"/>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="ENTER">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1607,16 +1649,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="yAl-Ey-kjB"/>
                     <connections>
+                        <outlet property="billingZipConfirmButton" destination="aCu-AL-O6x" id="O68-1O-xE0"/>
+                        <outlet property="billingZipErrorLabel" destination="4c7-vz-asF" id="2UA-Xt-dSZ"/>
+                        <outlet property="billingZipTextField" destination="xfs-0c-ibW" id="yxw-na-4GQ"/>
+                        <outlet property="billingZipWrapperView" destination="Qh2-N1-Vp9" id="rkI-Rd-cez"/>
                         <outlet property="cardConfirmButton" destination="xKi-Wo-EZk" id="jzy-2F-bIt"/>
                         <outlet property="cardNumberTextField" destination="Fpf-7i-KGw" id="Nkv-do-5sw"/>
                         <outlet property="cardNumberWrapperView" destination="7pX-W6-hoy" id="JJs-hH-Oat"/>
                         <outlet property="dateConfirmButton" destination="7hl-ab-tGc" id="AcE-R2-nHg"/>
-                        <outlet property="expirationDateErrorLabel" destination="cN6-Or-nel" id="CWz-zB-saH"/>
                         <outlet property="expirationDateWrapperView" destination="AZ0-nr-rbz" id="M9H-NG-aVt"/>
                         <outlet property="expirationMonthTextField" destination="7RU-Bu-dIn" id="L0J-rn-BXZ"/>
                         <outlet property="expirationYearTextField" destination="Gr7-jc-dxb" id="RC2-SA-IZJ"/>
                         <outlet property="securityCodeConfirmButton" destination="37S-GW-TXB" id="3IQ-aa-gKK"/>
-                        <outlet property="securityCodeErrorLabel" destination="z6Y-pw-6Cb" id="rEH-zm-iVR"/>
                         <outlet property="securityCodeWrapperView" destination="P8i-qo-Hld" id="9Ht-RJ-rEE"/>
                         <outlet property="securitycodeTextField" destination="iCa-YE-nVI" id="tmH-JD-SCY"/>
                     </connections>
@@ -1637,9 +1681,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="TrF-tJ-vaM"/>
+        <segue reference="eZu-3X-lXX"/>
         <segue reference="Qpe-mM-52j"/>
-        <segue reference="PK6-h9-FCm"/>
-        <segue reference="NOJ-G3-crU"/>
+        <segue reference="gjD-og-8Iv"/>
+        <segue reference="ccv-le-Cu0"/>
     </inferredMetricsTieBreakers>
 </document>
