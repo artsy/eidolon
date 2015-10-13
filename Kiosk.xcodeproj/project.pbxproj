@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3FCE6D8A07CA1FA29F4A37DC /* Pods_KioskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3FCE6D8A07CA1FA29F4A37DC /* Pods_KioskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */; };
 		5E0A4E3E1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A4E3D1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift */; };
 		5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E64E1A65630200F8CBDD /* Logger.swift */; };
 		5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */; };
@@ -219,10 +219,11 @@
 		5EF71E851AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */; };
 		5EF71E871AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E861AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift */; };
 		5EF71E891AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E881AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift */; };
+		5EFA08261BCDB051007E8EC1 /* NetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA08251BCDB051007E8EC1 /* NetworkLogger.swift */; settings = {ASSET_TAGS = (); }; };
 		5EFA709C1A9674BD0082C916 /* BidderDetailsRetrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */; };
 		5EFFE24E1B977DD3006BF64C /* SaleArtworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFE24D1B977DD3006BF64C /* SaleArtworkViewModel.swift */; settings = {ASSET_TAGS = (); }; };
 		5EFFE2501B978C3C006BF64C /* ListingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFE24F1B978C3C006BF64C /* ListingsViewModelTests.swift */; settings = {ASSET_TAGS = (); }; };
-		D12607F71BF578705637C9A7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFB9BD12B5173B74D620D7 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D12607F71BF578705637C9A7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFB9BD12B5173B74D620D7 /* Pods.framework */; };
 		E70556731BC40BFB0064ABF8 /* MyBidPosition.json in Resources */ = {isa = PBXBuildFile; fileRef = E70556721BC40BFB0064ABF8 /* MyBidPosition.json */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -435,6 +436,7 @@
 		5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCreditCardInputViewControllerTests.swift; sourceTree = "<group>"; };
 		5EF71E861AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCreditCardInputViewModelTests.swift; sourceTree = "<group>"; };
 		5EF71E881AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCreditCardInputViewModel.swift; sourceTree = "<group>"; };
+		5EFA08251BCDB051007E8EC1 /* NetworkLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLogger.swift; sourceTree = "<group>"; };
 		5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderDetailsRetrieval.swift; sourceTree = "<group>"; };
 		5EFFE24D1B977DD3006BF64C /* SaleArtworkViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkViewModel.swift; sourceTree = "<group>"; };
 		5EFFE24F1B978C3C006BF64C /* ListingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsViewModelTests.swift; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 			children = (
 				5E860FE31A5C429C00456E41 /* APIKeys.swift */,
 				5E860FE41A5C429C00456E41 /* ArtsyAPI.swift */,
+				5EFA08251BCDB051007E8EC1 /* NetworkLogger.swift */,
 				5E860FE51A5C429C00456E41 /* RAC+JSONAble.swift */,
 				5E860FE61A5C429C00456E41 /* UserCredentials.swift */,
 				5E860FE71A5C429C00456E41 /* XAppAuthentication.swift */,
@@ -1157,6 +1160,7 @@
 				5EBD314B1AE047C700648484 /* RegistrationPasswordViewModel.swift in Sources */,
 				5E86107D1A5C429C00456E41 /* ListingsViewController.swift in Sources */,
 				5E8610581A5C429C00456E41 /* GlobalFunctions.swift in Sources */,
+				5EFA08261BCDB051007E8EC1 /* NetworkLogger.swift in Sources */,
 				5EB0B71D1A5C410D00B7CBF2 /* UITextField+RAC.swift in Sources */,
 				5E8610901A5C429C00456E41 /* LoadingViewController.swift in Sources */,
 				5E8610841A5C429C00456E41 /* BidDetailsPreviewView.swift in Sources */,

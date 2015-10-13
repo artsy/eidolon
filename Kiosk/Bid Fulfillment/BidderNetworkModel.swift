@@ -27,7 +27,7 @@ class BidderNetworkModel: NSObject {
     // MARK: - Chained Signals
 
     private func checkUserEmailExists(email: String) -> RACSignal {
-        let request = Provider.sharedProvider.request(.FindExistingEmailRegistration(email: email))
+        let request: RACSignal = Provider.sharedProvider.request(.FindExistingEmailRegistration(email: email))
 
         return request.map { (response) -> NSNumber in
             let moyaResponse = response as! MoyaResponse
