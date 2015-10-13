@@ -68,7 +68,7 @@ target 'KioskTests' do
   pod 'FBSnapshotTestCase'
   pod 'Nimble-Snapshots'
   pod 'Quick'
-  pod 'Nimble', '= 2.0.0-rc.3'
+  pod 'Nimble'
   pod 'Forgeries'
 
 end
