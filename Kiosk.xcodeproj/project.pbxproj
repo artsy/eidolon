@@ -62,7 +62,6 @@
 		5E86106D1A5C429C00456E41 /* XAppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE81A5C429C00456E41 /* XAppToken.swift */; };
 		5E86106E1A5C429C00456E41 /* NSErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE91A5C429C00456E41 /* NSErrorExtensions.swift */; };
 		5E86106F1A5C429C00456E41 /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FEA1A5C429C00456E41 /* OfflineViewController.swift */; };
-		5E8610701A5C429C00456E41 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FEB1A5C429C00456E41 /* ReachabilityManager.swift */; };
 		5E8610711A5C429C00456E41 /* StubResponses.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FED1A5C429C00456E41 /* StubResponses.m */; };
 		5E8610721A5C429C00456E41 /* UIStoryboardSegueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FEE1A5C429C00456E41 /* UIStoryboardSegueExtensions.swift */; };
 		5E8610731A5C429C00456E41 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FEF1A5C429C00456E41 /* UIViewControllerExtensions.swift */; };
@@ -292,7 +291,6 @@
 		5E860FE81A5C429C00456E41 /* XAppToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppToken.swift; sourceTree = "<group>"; };
 		5E860FE91A5C429C00456E41 /* NSErrorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSErrorExtensions.swift; sourceTree = "<group>"; };
 		5E860FEA1A5C429C00456E41 /* OfflineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
-		5E860FEB1A5C429C00456E41 /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		5E860FEC1A5C429C00456E41 /* StubResponses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StubResponses.h; sourceTree = "<group>"; };
 		5E860FED1A5C429C00456E41 /* StubResponses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StubResponses.m; sourceTree = "<group>"; };
 		5E860FEE1A5C429C00456E41 /* UIStoryboardSegueExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegueExtensions.swift; sourceTree = "<group>"; };
@@ -498,7 +496,6 @@
 				5E860FE21A5C429C00456E41 /* Networking */,
 				5E860FE91A5C429C00456E41 /* NSErrorExtensions.swift */,
 				5E860FEA1A5C429C00456E41 /* OfflineViewController.swift */,
-				5E860FEB1A5C429C00456E41 /* ReachabilityManager.swift */,
 				5E860FEC1A5C429C00456E41 /* StubResponses.h */,
 				5E860FED1A5C429C00456E41 /* StubResponses.m */,
 				5E860FEE1A5C429C00456E41 /* UIStoryboardSegueExtensions.swift */,
@@ -1172,7 +1169,6 @@
 				5E8610741A5C429C00456E41 /* UIViewSubclassesErrorExtensions.swift in Sources */,
 				5E8610531A5C429C00456E41 /* AppDelegate.swift in Sources */,
 				5E86109F1A5C429C00456E41 /* YourBiddingDetailsViewController.swift in Sources */,
-				5E8610701A5C429C00456E41 /* ReachabilityManager.swift in Sources */,
 				5EF71E7D1AE996F50069A266 /* SwiftExtensions.swift in Sources */,
 				5E8610991A5C429C00456E41 /* RegistrationEmailViewController.swift in Sources */,
 				5E8610771A5C429C00456E41 /* SimulatorOnlyView.swift in Sources */,

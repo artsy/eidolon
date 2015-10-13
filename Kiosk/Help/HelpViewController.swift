@@ -87,7 +87,7 @@ private extension HelpViewController {
         bidExplainLabel.makeSubstringsBold(["mobile number", "bidder number", "PIN"])
         
         let registerButton = blackButton(.RegisterButton, title: "Register")
-        registerButton.rac_command = registerToBidCommand(reachabilityManager.reachSignal)
+        registerButton.rac_command = registerToBidCommand(connectedToInternetOrStubbingSignal())
         
         let bidderDetailsLabel = titleLabel(.BidderDetailsLabel, title: "What Are Bidder Details?")
         
@@ -95,7 +95,7 @@ private extension HelpViewController {
         bidderDetailsExplainLabel.makeSubstringsBold(["bidder number", "PIN"])
         
         let sendDetailsButton = blackButton(.BidderDetailsButton, title: "Send me my details")
-        sendDetailsButton.rac_command = requestBidderDetailsCommand(reachabilityManager.reachSignal)
+        sendDetailsButton.rac_command = requestBidderDetailsCommand(connectedToInternetOrStubbingSignal())
         
         let conditionsButton = serifButton(.ConditionsOfSaleButton, title: "Conditions of Sale")
         conditionsButton.rac_command = showConditionsOfSaleCommand()

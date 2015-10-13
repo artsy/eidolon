@@ -17,7 +17,7 @@ struct APIKeys {
 
     static var sharedKeys: APIKeys {
         get {
-        return SharedKeys.instance
+            return SharedKeys.instance
         }
 
         set (newSharedKeys) {

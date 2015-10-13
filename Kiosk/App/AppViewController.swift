@@ -14,7 +14,7 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
     let _apiPinger = APIPingManager()
     
     lazy var reachabilitySignal: RACSignal = { [weak self] in
-        reachabilityManager.reachSignal
+        return RACSignal.combineLatest([connectedToInternetOrStubbingSignal(), self!.apiPingerSignal]).and()
     }()
     lazy var apiPingerSignal: RACSignal = { [weak self] in
         self?._apiPinger.letOnlineSignal ?? RACSignal.empty()
@@ -37,7 +37,7 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
 
         countdownManager.setFonts()
 
-        RAC(offlineBlockingView, "hidden") <~ RACSignal.combineLatest([reachabilitySignal, apiPingerSignal]).and()
+        RAC(offlineBlockingView, "hidden") <~ reachabilitySignal
 
         RAC(self, "sale") <~ auctionRequestSignal(auctionID)
         RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")

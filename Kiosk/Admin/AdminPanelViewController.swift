@@ -37,7 +37,11 @@ class AdminPanelViewController: UIViewController {
         super.viewDidLoad()
         let state = AppSetup.sharedState
 
-        auctionIDLabel.text = state.auctionID
+        if APIKeys.sharedKeys.stubResponses {
+            auctionIDLabel.text = "STUBBING API RESPONSES\nNOT CONTACTING ARTSY API"
+        } else {
+            auctionIDLabel.text = state.auctionID
+        }
 
         let environment = state.useStaging ? "PRODUCTION" : "STAGING"
         environmentChangeButton.setTitle("USE \(environment)", forState: .Normal)
