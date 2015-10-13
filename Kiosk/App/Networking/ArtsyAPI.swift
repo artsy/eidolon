@@ -394,7 +394,17 @@ struct Provider {
     }
 
     static var plugins: [Plugin<ArtsyAPI>] {
-        return [NetworkLogger<ArtsyAPI>()]
+        return [NetworkLogger<ArtsyAPI>(whitelist: { (target: ArtsyAPI) -> Bool in
+            switch target {
+            case .MyBidPosition: return true
+            default: return false
+            }
+        }, blacklist: { target -> Bool in
+            switch target {
+            case .Ping: return true
+            default: return false
+            }
+        })]
     }
 }
 
