@@ -2,7 +2,7 @@ import Foundation
 import ReactiveCocoa
 import Swift_RAC_Macros
 
-let KeypadViewModelMaxIntegerValue = 1_000_000
+let KeypadViewModelMaxIntegerValue = 10_000_000
 
 class KeypadViewModel: NSObject {
     

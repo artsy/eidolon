@@ -40,7 +40,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             }
         }
 
-        Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: { RACSignal.empty() })
+        Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: RACSignal.empty())
     }
 
     func testSubject(passwordSubject: RACSignal = RACSignal.`return`(testPassword), invocationSignal: RACSignal = RACSubject(), finishedSubject: RACSubject = RACSubject()) -> RegistrationPasswordViewModel {

@@ -5,6 +5,12 @@ upcoming:
 releases:
 - version: 3.8.1
   notes:
+  - Increases max bid to 10 000 000 [alan]
+  - New safeguard to ensure Kiosk is hitting network [ash]
+releases:
+- version: 3.8.1
+  date: October 9 2015
+  notes:
   - Fixes new polling mechanism [alan]
 - version: 3.8.0
   date: October 8 2015
