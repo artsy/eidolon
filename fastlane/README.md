@@ -5,11 +5,6 @@ fastlane documentation
 sudo gem install fastlane
 ```
 # Available Actions
-### build_for_test
-```
-fastlane build_for_test
-```
-Build and prepare the app for testing
 ### test
 ```
 fastlane test
@@ -20,11 +15,6 @@ Run all iOS tests on an iPad
 fastlane oss
 ```
 Set all the API keys required for distribution
-### build_for_deploy
-```
-fastlane build_for_deploy
-```
-Build and prepare deployment
 ### deploy
 ```
 fastlane deploy
@@ -50,9 +40,10 @@ This action does the following:
 ```
 fastlane storyboard_ids
 ```
-
+Updates the storyboard identifier Swift values.
 
 ----
 
+Generate this documentation by running `fastlane docs`
 More information about fastlane can be found on [https://fastlane.tools](https://fastlane.tools).
 The documentation of fastlane can be found on [GitHub](https://github.com/KrauseFx/fastlane)
