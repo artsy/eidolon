@@ -60,6 +60,10 @@ class ConfirmYourBidPINViewController: UIViewController {
                 }
 
             }.doError({ [weak self] (error) -> Void in
+                if let response = error.userInfo["data"] as? MoyaResponse {
+                    let responseBody = NSString(data: response.data, encoding: NSUTF8StringEncoding)
+                    print("Error authenticating(\(response.statusCode)): \(responseBody)")
+                }
                 self?.showAuthenticationError()
                 return
             })
@@ -86,7 +90,8 @@ class ConfirmYourBidPINViewController: UIViewController {
 
     func providerForPIN(pin: String, number: String) -> ReactiveCocoaMoyaProvider<ArtsyAPI> {
         let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-            let endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
+            // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
+            let endpoint = Provider.sharedProvider.endpointClosure(target)
 
             let auctionID = self.fulfillmentNav().auctionID
             return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number, "sale_id": auctionID])

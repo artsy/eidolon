@@ -26,7 +26,8 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
         didSet(oldToken) {
 
             let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-                let endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
+                // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
+                let endpoint = Provider.sharedProvider.endpointClosure(target)
 
                 return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": self.xAccessToken!])
             }
@@ -73,3 +74,4 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
         }
     }
 }
+
