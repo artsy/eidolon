@@ -1,6 +1,7 @@
 import Foundation
 import ReactiveCocoa
 import Moya
+import Alamofire
 
 enum ArtsyAPI {
     case XApp
@@ -133,7 +134,7 @@ extension ArtsyAPI : MoyaTarget {
     var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
     var baseURL: NSURL { return NSURL(string: base)! }
 
-    var parameters: [String: AnyObject] {
+    var parameters: [String: AnyObject]? {
         switch self {
 
         case XAuth(let email, let password):
@@ -206,7 +207,7 @@ extension ArtsyAPI : MoyaTarget {
             return ["sale_id": auctionID, "artwork_id": artworkID]
             
         default:
-            return [:]
+            return nil
         }
     }
 
@@ -320,29 +321,36 @@ extension ArtsyAPI : MoyaTarget {
 
 // MARK: - Provider setup
 
-func endpointResolver() -> ((endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest)) {
-    return { (endpoint: Endpoint<ArtsyAPI>) -> (NSURLRequest) in
+// (Endpoint<Target>, NSURLRequest -> Void) -> Void
+func endpointResolver() -> MoyaProvider<ArtsyAPI>.RequestClosure {
+    return { (endpoint, closure) in
         let request: NSMutableURLRequest = endpoint.urlRequest.mutableCopy() as! NSMutableURLRequest
         request.HTTPShouldHandleCookies = false
-        return request
+        closure(request)
     }
 }
 
-class ArtsyProvider<T where T: MoyaTarget>: ReactiveCocoaMoyaProvider<T> {
+class ArtsyProvider<Target where Target: MoyaTarget>: ReactiveCocoaMoyaProvider<Target> {
     typealias OnlineSignalClosure = () -> RACSignal
 
     let onlineSignal: RACSignal
 
-    init(endpointClosure: MoyaEndpointsClosure = MoyaProvider.DefaultEndpointMapping, endpointResolver: MoyaEndpointResolution = MoyaProvider.DefaultEndpointResolution, stubBehavior: MoyaStubbedBehavior = MoyaProvider.NoStubbingBehavior, networkActivityClosure: Moya.NetworkActivityClosure? = nil, onlineSignal: RACSignal = connectedToInternetOrStubbingSignal()) {
-        self.onlineSignal = onlineSignal.replayLast()
-        super.init(endpointClosure: endpointClosure, endpointResolver: endpointResolver, stubBehavior: stubBehavior, networkActivityClosure: networkActivityClosure)
+    init(endpointClosure: MoyaProvider<Target>.EndpointClosure = MoyaProvider.DefaultEndpointMapping,
+        requestClosure: MoyaProvider<Target>.RequestClosure = MoyaProvider.DefaultRequestMapping,
+        stubClosure: MoyaProvider<Target>.StubClosure = MoyaProvider.NeverStub,
+        manager: Manager = Alamofire.Manager.sharedInstance,
+        plugins: [Plugin<Target>] = [],
+        onlineSignal: RACSignal = connectedToInternetOrStubbingSignal()) {
+
+            self.onlineSignal = onlineSignal
+            super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins)
     }
 }
 
 struct Provider {
     private static var endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
         
-        var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
+        var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
         // Sign all non-XApp token requests
 
         switch target {
@@ -356,16 +364,18 @@ struct Provider {
         }
     }
 
-    static func APIKeysBasedStubBehaviour(target: ArtsyAPI) -> Moya.StubbedBehavior {
-        return APIKeys.sharedKeys.stubResponses ? .Immediate : .NoStubbing
+    static func APIKeysBasedStubBehaviour(_: ArtsyAPI) -> Moya.StubBehavior {
+        return APIKeys.sharedKeys.stubResponses ? .Immediate : .Never
     }
 
     static func DefaultProvider() -> ArtsyProvider<ArtsyAPI> {
-        return ArtsyProvider(endpointClosure: endpointsClosure, endpointResolver: endpointResolver(), stubBehavior: APIKeysBasedStubBehaviour)
+        return ArtsyProvider(endpointClosure: endpointsClosure,
+            requestClosure: endpointResolver(),
+            stubClosure: APIKeysBasedStubBehaviour)
     }
     
     static func StubbingProvider() -> ArtsyProvider<ArtsyAPI> {
-        return ArtsyProvider(endpointClosure: endpointsClosure, endpointResolver: endpointResolver(), stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: RACSignal.`return`(true))
+        return ArtsyProvider(endpointClosure: endpointsClosure, requestClosure: endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.`return`(true))
     }
 
     private struct SharedProvider {
