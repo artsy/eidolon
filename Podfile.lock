@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (2.0.1)
+  - Alamofire (3.0.0)
   - ARAnalytics/CoreIOS (3.8.0)
   - ARAnalytics/HockeyApp (3.8.0):
     - ARAnalytics/CoreIOS
@@ -35,12 +35,12 @@ PODS:
   - Mixpanel (2.8.3):
     - Mixpanel/Mixpanel (= 2.8.3)
   - Mixpanel/Mixpanel (2.8.3)
-  - Moya/Core (2.2.2):
-    - Alamofire (~> 2.0)
-  - Moya/ReactiveCocoa (2.2.2):
+  - Moya/Core (4.0.0):
+    - Alamofire (~> 3.0)
+  - Moya/ReactiveCocoa (4.0.0):
     - Moya/ReactiveCore
     - ReactiveCocoa (~> 4.0-alpha.1)
-  - Moya/ReactiveCore (2.2.2):
+  - Moya/ReactiveCore (4.0.0):
     - Moya/Core
   - Nimble (2.0.0-rc.3)
   - Nimble-Snapshots (1.0.0):
@@ -150,7 +150,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
-  Alamofire: 1d8e208d616fbbfd2391b15eae766d07c96cdc49
+  Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
   ARAnalytics: 5468652928cee7100dd0e6b5162631409da37106
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: a747cff42142ca04d1dc5cee516186f10b6c0949
@@ -170,7 +170,7 @@ SPEC CHECKSUMS:
   ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
-  Moya: 9a98841c81a45c3cc9059cec26920122c1035839
+  Moya: b701739e9157718a514d2d8dcee383bb74c682f5
   Nimble: 9dff98ee195ffe7351d3b2fb01d3a1420fd97948
   Nimble-Snapshots: c16dd279a4840ec06288198fafd53f3c17750ff3
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
@@ -188,4 +188,4 @@ SPEC CHECKSUMS:
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e
 
-COCOAPODS: 0.39.0.beta.4
+COCOAPODS: 0.39.0
