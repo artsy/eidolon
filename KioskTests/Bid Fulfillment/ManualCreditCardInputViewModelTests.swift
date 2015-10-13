@@ -36,12 +36,12 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             expect(subject.expirationYear) == ""
         }
 
-        it("has valid credit card when credit card is valid") { () -> () in
+        it("has valid credit card when credit card is valid") {
             testStripeManager.isValidCreditCard = true
             expect((subject.creditCardNumberIsValidSignal.first() as! Bool)) == true
         }
 
-        it("has invalid credit card when credit card is invalid") { () -> () in
+        it("has invalid credit card when credit card is invalid") {
             testStripeManager.isValidCreditCard = false
             expect((subject.creditCardNumberIsValidSignal.first() as! Bool)) == false
         }
@@ -158,6 +158,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                     subject.expirationMonth = "02"
                     subject.expirationYear = "2017"
                     subject.securityCode = "123"
+                    subject.billingZip = "10001"
                 }
 
                 describe("successful registration") { () -> Void in
