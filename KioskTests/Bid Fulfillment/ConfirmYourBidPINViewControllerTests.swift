@@ -63,7 +63,8 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
 
             let provider: ReactiveCocoaMoyaProvider<ArtsyAPI> = subject.providerForPIN(pin, number: number)
             let endpoint = provider.endpointClosure(ArtsyAPI.Me)
-            let request = provider.endpointResolver(endpoint: endpoint)
+            var request: NSURLRequest!
+            provider.requestClosure(endpoint) { request = $0 }
 
             let address = request.URL!.absoluteString
             expect(address).to( contain(auctionID) )
@@ -75,14 +76,14 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             var externalClosureInvoked = false
 
             let externalClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-                let endpoint = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
+                let endpoint = Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
 
                 externalClosureInvoked = true
 
                 return endpoint
             }
 
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: externalClosure, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: RACSignal.`return`(true))
+            Provider.sharedProvider = ArtsyProvider(endpointClosure: externalClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, onlineSignal: RACSignal.`return`(true))
 
 
             let subject = ConfirmYourBidPINViewController()

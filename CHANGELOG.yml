@@ -1,9 +1,10 @@
 upcoming:
-  version: 3.8.2
+  version: 3.8.3
   notes:
-  - Adds zip code to manually entered CC tokenization [ash]
+  - Adds selective network logging. [ash]
 releases:
-- version: 3.8.1
+- version: 3.8.2
+  date: October 13 2015
   notes:
   - Increases max bid to 10 000 000 [alan]
   - New safeguard to ensure Kiosk is hitting network [ash]

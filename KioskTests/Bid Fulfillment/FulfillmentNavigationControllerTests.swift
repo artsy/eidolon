@@ -36,14 +36,14 @@ class FulfillmentNavigationControllerTests: QuickSpec {
             var externalClosureInvoked = false
 
             let externalClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-                let endpoint = Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
+                let endpoint = Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
 
                 externalClosureInvoked = true
 
                 return endpoint
             }
 
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: externalClosure, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: RACSignal.`return`(true))
+            Provider.sharedProvider = ArtsyProvider(endpointClosure: externalClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.`return`(true))
 
 
             let target = ArtsyAPI.Me

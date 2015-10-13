@@ -19,28 +19,28 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             case ArtsyAPI.FindExistingEmailRegistration(let email):
                 emailCheck?()
                 expect(email) == testEmail
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(emailExists ? 200 : 404, {NSData()}), method: target.method, parameters: target.parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(emailExists ? 200 : 404, NSData())}, method: target.method, parameters: target.parameters)
             case ArtsyAPI.LostPasswordNotification(let email):
                 passwordCheck?()
                 expect(email) == testEmail
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(passwordRequestSucceeds ? 200 : 404, {NSData()}), method: target.method, parameters: target.parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(emailExists ? 200 : 404, NSData())}, method: target.method, parameters: target.parameters)
             case ArtsyAPI.XAuth(let email, let password):
                 loginCheck?()
                 expect(email) == testEmail
                 expect(password) == testPassword
                 // Fail auth (wrong password maybe)
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(loginSucceeds ? 200 : 403, {NSData()}), method: target.method, parameters: target.parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(emailExists ? 200 : 403, NSData())}, method: target.method, parameters: target.parameters)
             case .XApp:
                 // Any XApp requests are incidental; ignore.
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {NSData()}), method: target.method, parameters: target.parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, NSData())}, method: target.method, parameters: target.parameters)
             default:
                 // Fail on all other cases
                 expect(true) == false
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {NSData()}), method: target.method, parameters: target.parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, NSData())}, method: target.method, parameters: target.parameters)
             }
         }
 
-        Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: RACSignal.empty())
+        Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.empty())
     }
 
     func testSubject(passwordSubject: RACSignal = RACSignal.`return`(testPassword), invocationSignal: RACSignal = RACSubject(), finishedSubject: RACSubject = RACSubject()) -> RegistrationPasswordViewModel {
