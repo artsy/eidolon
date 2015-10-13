@@ -35,12 +35,12 @@ PODS:
   - Mixpanel (2.8.3):
     - Mixpanel/Mixpanel (= 2.8.3)
   - Mixpanel/Mixpanel (2.8.3)
-  - Moya/Core (4.0.0):
+  - Moya/Core (4.0.1):
     - Alamofire (~> 3.0)
-  - Moya/ReactiveCocoa (4.0.0):
+  - Moya/ReactiveCocoa (4.0.1):
     - Moya/ReactiveCore
     - ReactiveCocoa (~> 4.0-alpha.1)
-  - Moya/ReactiveCore (4.0.0):
+  - Moya/ReactiveCore (4.0.1):
     - Moya/Core
   - Nimble (2.0.0-rc.3)
   - Nimble-Snapshots (1.0.0):
@@ -170,7 +170,7 @@ SPEC CHECKSUMS:
   ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
-  Moya: b701739e9157718a514d2d8dcee383bb74c682f5
+  Moya: 8cdea400271d924df769fbce25a2eee39e9bbeac
   Nimble: 9dff98ee195ffe7351d3b2fb01d3a1420fd97948
   Nimble-Snapshots: c16dd279a4840ec06288198fafd53f3c17750ff3
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d

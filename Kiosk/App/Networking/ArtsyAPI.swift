@@ -371,7 +371,8 @@ struct Provider {
     static func DefaultProvider() -> ArtsyProvider<ArtsyAPI> {
         return ArtsyProvider(endpointClosure: endpointsClosure,
             requestClosure: endpointResolver(),
-            stubClosure: APIKeysBasedStubBehaviour)
+            stubClosure: APIKeysBasedStubBehaviour,
+            plugins: Provider.plugins)
     }
     
     static func StubbingProvider() -> ArtsyProvider<ArtsyAPI> {
@@ -390,6 +391,10 @@ struct Provider {
         set (newSharedProvider) {
             SharedProvider.instance = newSharedProvider
         }
+    }
+
+    static var plugins: [Plugin<ArtsyAPI>] {
+        return [NetworkLogger<ArtsyAPI>()]
     }
 }
 

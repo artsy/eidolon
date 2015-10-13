@@ -31,7 +31,7 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
 
                 return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": self.xAccessToken!])
             }
-            loggedInProvider = ReactiveCocoaMoyaProvider(endpointClosure: newEndpointsClosure, requestClosure: endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour)
+            loggedInProvider = ReactiveCocoaMoyaProvider(endpointClosure: newEndpointsClosure, requestClosure: endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
         }
     }
 
