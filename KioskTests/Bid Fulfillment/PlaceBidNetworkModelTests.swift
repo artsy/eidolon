@@ -53,8 +53,8 @@ class PlaceBidNetworkModelTests: QuickSpec {
                 }
 
                 let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString
-                return Endpoint(URL: url, sampleResponse: .Success(200, {stubbedResponse("CreateABid")}), method: target.method, parameters: target.parameters)
-                }, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour)
+                return Endpoint(URL: url, sampleResponseClosure: {.NetworkResponse(200, stubbedResponse("CreateABid"))}, method: target.method, parameters: target.parameters)
+                }, stubClosure: MoyaProvider.ImmediatelyStub)
 
             fulfillmentController.loggedInProvider = provider
 
@@ -75,8 +75,8 @@ class PlaceBidNetworkModelTests: QuickSpec {
             beforeEach {
                 let provider = ReactiveCocoaMoyaProvider(endpointClosure: { target -> (Endpoint<ArtsyAPI>) in
                     let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString
-                    return Endpoint(URL: url, sampleResponse: .Success(400, {stubbedResponse("CreateABidFail")}), method: target.method, parameters: target.parameters)
-                }, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour)
+                    return Endpoint(URL: url, sampleResponseClosure: {.NetworkResponse(400, stubbedResponse("CreateABidFail"))}, method: target.method, parameters: target.parameters)
+                }, stubClosure: MoyaProvider.ImmediatelyStub)
 
                 fulfillmentController.loggedInProvider = provider
             }

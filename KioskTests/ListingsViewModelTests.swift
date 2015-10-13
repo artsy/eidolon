@@ -20,20 +20,20 @@ class ListingsViewModelTests: QuickSpec {
 
             saleArtworksCount = nil
 
-            let endpointsClosure: MoyaProvider<ArtsyAPI>.MoyaEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
+            let endpointsClosure: MoyaProvider<ArtsyAPI>.EndpointClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
                 switch target {
                 case ArtsyAPI.AuctionListings:
-                    if let page = target.parameters["page"] as? Int {
-                        return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {listingsDataForPage(page, bidCount: bidCount, modelCount: saleArtworksCount)}), method: target.method, parameters: target.parameters)
+                    if let page = target.parameters!["page"] as? Int {
+                        return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, listingsDataForPage(page, bidCount: bidCount, modelCount: saleArtworksCount))}, method: target.method, parameters: target.parameters)
                     } else {
-                        return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
+                        return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
                     }
                 default:
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
+                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
                 }
             }
 
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: RACSignal.empty())
+            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.empty())
         }
 
         afterEach { () -> () in
@@ -110,16 +110,16 @@ class ListingsViewModelTests: QuickSpec {
         it("syncs correctly even if lot numbers have changed") {
             var reverseIDs = false
 
-            let endpointsClosure: MoyaProvider<ArtsyAPI>.MoyaEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
+            let endpointsClosure: MoyaProvider<ArtsyAPI>.EndpointClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
                 switch target {
                 case ArtsyAPI.AuctionListings:
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {listingsDataForPage(1, bidCount: 0, modelCount: 3, reverseIDs: reverseIDs)}), method: target.method, parameters: target.parameters)
+                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, listingsDataForPage(1, bidCount: 0, modelCount: 3, reverseIDs: reverseIDs))}, method: target.method, parameters: target.parameters)
                 default:
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponse: .Success(200, {target.sampleData}), method: target.method, parameters: target.parameters)
+                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
                 }
             }
 
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubBehavior: MoyaProvider.ImmediateStubbingBehaviour, onlineSignal: RACSignal.empty())
+            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.empty())
 
             subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 4, syncInterval: 1, logSync: { _ in})
 
