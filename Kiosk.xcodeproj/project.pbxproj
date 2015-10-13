@@ -209,6 +209,7 @@
 		5EDBB3251BAB59A000D6A6C8 /* RACAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDBB3241BAB59A000D6A6C8 /* RACAlertAction.m */; settings = {ASSET_TAGS = (); }; };
 		5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */; };
 		5EE5B0CE1BB3479300069312 /* PlaceBidNetworkModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE5B0CD1BB3479300069312 /* PlaceBidNetworkModelTests.swift */; settings = {ASSET_TAGS = (); }; };
+		5EEAF9CA1BCD796B00C1470F /* FulfillmentNavigationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEAF9C91BCD796B00C1470F /* FulfillmentNavigationControllerTests.swift */; settings = {ASSET_TAGS = (); }; };
 		5EF71E781AE986000069A266 /* StripeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E771AE986000069A266 /* StripeManager.swift */; };
 		5EF71E7B1AE98F080069A266 /* STPCard+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */; };
 		5EF71E7D1AE996F50069A266 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7C1AE996F50069A266 /* SwiftExtensions.swift */; };
@@ -423,6 +424,7 @@
 		5EDBB3241BAB59A000D6A6C8 /* RACAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACAlertAction.m; sourceTree = "<group>"; };
 		5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModelTests.swift; sourceTree = "<group>"; };
 		5EE5B0CD1BB3479300069312 /* PlaceBidNetworkModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidNetworkModelTests.swift; sourceTree = "<group>"; };
+		5EEAF9C91BCD796B00C1470F /* FulfillmentNavigationControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentNavigationControllerTests.swift; sourceTree = "<group>"; };
 		5EF71E771AE986000069A266 /* StripeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripeManager.swift; sourceTree = "<group>"; };
 		5EF71E791AE98F080069A266 /* STPCard+Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STPCard+Validation.h"; sourceTree = "<group>"; };
 		5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "STPCard+Validation.m"; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 				5E8610CB1A5C43EF00456E41 /* ConfirmYourBidPINViewControllerTests.swift */,
 				5E8610CC1A5C43EF00456E41 /* ConfirmYourBidViewControllerTests.swift */,
 				5E8610CD1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift */,
+				5EEAF9C91BCD796B00C1470F /* FulfillmentNavigationControllerTests.swift */,
 				5E8610CE1A5C43EF00456E41 /* LoadingViewControllerTests.swift */,
 				5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */,
 				5E82BD341AF2C6E700CB02DD /* YourBiddingDetailsViewControllerTests.swift */,
@@ -1307,6 +1310,7 @@
 				5EF71E851AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift in Sources */,
 				5E9F8AD41A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift in Sources */,
 				5E8611311A5C43EF00456E41 /* SwitchViewSpec.swift in Sources */,
+				5EEAF9CA1BCD796B00C1470F /* FulfillmentNavigationControllerTests.swift in Sources */,
 				5E86110A1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift in Sources */,
 				5E8611341A5C43EF00456E41 /* XAppTokenSpec.swift in Sources */,
 				5E38FD2E1AF2154C00D30C17 /* RACExtensionsTests.swift in Sources */,
