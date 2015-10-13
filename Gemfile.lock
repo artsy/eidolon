@@ -28,22 +28,23 @@ GEM
       spaceship (>= 0.6.0)
     claide (0.9.1)
     cliver (0.3.2)
-    cocoapods (0.39.0.beta.4)
-      activesupport (>= 3.2.15)
+    cocoapods (0.39.0)
+      activesupport (>= 4.0.2)
       claide (~> 0.9.1)
-      cocoapods-core (= 0.39.0.beta.4)
+      cocoapods-core (= 0.39.0)
       cocoapods-downloader (~> 0.9.3)
       cocoapods-plugins (~> 0.4.2)
-      cocoapods-stats (~> 0.6.1)
+      cocoapods-search (~> 0.1.0)
+      cocoapods-stats (~> 0.6.2)
       cocoapods-trunk (~> 0.6.4)
       cocoapods-try (~> 0.5.1)
       colored (~> 1.2)
       escape (~> 0.0.4)
-      molinillo (~> 0.3.1)
+      molinillo (~> 0.4.0)
       nap (~> 1.0)
-      xcodeproj (~> 0.27.2)
-    cocoapods-core (0.39.0.beta.4)
-      activesupport (>= 3.2.15)
+      xcodeproj (~> 0.28.2)
+    cocoapods-core (0.39.0)
+      activesupport (>= 4.0.2)
       fuzzy_match (~> 2.0.4)
       nap (~> 1.0)
     cocoapods-downloader (0.9.3)
@@ -52,7 +53,8 @@ GEM
       osx_keychain
     cocoapods-plugins (0.4.2)
       nap
-    cocoapods-stats (0.6.1)
+    cocoapods-search (0.1.0)
+    cocoapods-stats (0.6.2)
     cocoapods-trunk (0.6.4)
       nap (>= 0.8, < 2.0)
       netrc (= 0.7.8)
@@ -154,8 +156,8 @@ GEM
     mime-types (2.6.2)
     mini_magick (4.0.4)
     mini_portile (0.6.2)
-    minitest (5.8.0)
-    molinillo (0.3.1)
+    minitest (5.8.1)
+    molinillo (0.4.0)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -227,7 +229,7 @@ GEM
     websocket-driver (0.6.2)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    xcodeproj (0.27.2)
+    xcodeproj (0.28.2)
       activesupport (>= 3)
       claide (~> 0.9.1)
       colored (~> 1.2)
@@ -239,7 +241,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cocoapods (= 0.39.0.beta.4)
+  cocoapods
   cocoapods-keys
   fastlane
   sbconstants
