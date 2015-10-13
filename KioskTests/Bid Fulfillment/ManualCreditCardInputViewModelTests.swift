@@ -36,12 +36,12 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             expect(subject.expirationYear) == ""
         }
 
-        it("has valid credit card when credit card is valid") { () -> () in
+        it("has valid credit card when credit card is valid") {
             testStripeManager.isValidCreditCard = true
             expect((subject.creditCardNumberIsValidSignal.first() as! Bool)) == true
         }
 
-        it("has invalid credit card when credit card is invalid") { () -> () in
+        it("has invalid credit card when credit card is invalid") {
             testStripeManager.isValidCreditCard = false
             expect((subject.creditCardNumberIsValidSignal.first() as! Bool)) == false
         }
@@ -131,6 +131,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 subject.expirationMonth = "02"
                 subject.expirationYear = "2017"
                 subject.securityCode = "123"
+                subject.billingZip = "10003"
                 expect((subject.registerButtonCommand().enabled.first() as! Bool)) == true
             }
 
@@ -157,6 +158,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                     subject.expirationMonth = "02"
                     subject.expirationYear = "2017"
                     subject.securityCode = "123"
+                    subject.billingZip = "10001"
                 }
 
                 describe("successful registration") { () -> Void in
@@ -262,7 +264,7 @@ class ManualCreditCardInputViewModelTestsStripeManager: StripeManager {
         return isValidCreditCard
     }
 
-    override func registerCard(digits: String, month: UInt, year: UInt, securityCode: String) -> RACSignal {
+    override func registerCard(digits: String, month: UInt, year: UInt, securityCode: String, postalCode: String) -> RACSignal {
         return RACSignal.createSignal { (subscriber) -> RACDisposable! in
             self.registrationClosure?()
 

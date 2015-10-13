@@ -10,16 +10,18 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
     @IBOutlet weak var expirationMonthTextField: TextField!
     @IBOutlet weak var expirationYearTextField: TextField!
     @IBOutlet weak var securitycodeTextField: TextField!
+    @IBOutlet weak var billingZipTextField: TextField!
 
     @IBOutlet weak var cardNumberWrapperView: UIView!
     @IBOutlet weak var expirationDateWrapperView: UIView!
-    @IBOutlet weak var expirationDateErrorLabel: UILabel!
     @IBOutlet weak var securityCodeWrapperView: UIView!
-    @IBOutlet weak var securityCodeErrorLabel: UILabel!
+    @IBOutlet weak var billingZipWrapperView: UIView!
+    @IBOutlet weak var billingZipErrorLabel: UILabel!
 
     @IBOutlet weak var cardConfirmButton: ActionButton!
     @IBOutlet weak var dateConfirmButton: ActionButton!
     @IBOutlet weak var securityCodeConfirmButton: ActionButton!
+    @IBOutlet weak var billingZipConfirmButton: ActionButton!
 
     lazy var keys = EidolonKeys()
 
@@ -32,18 +34,19 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         super.viewDidLoad()
         expirationDateWrapperView.hidden = true
         securityCodeWrapperView.hidden = true
+        billingZipWrapperView.hidden = true
 
         // We show the enter credit card number, then the date switching the views around
         RAC(viewModel, "cardFullDigits") <~ cardNumberTextField.rac_textSignal()
         RAC(viewModel, "expirationYear") <~ expirationYearTextField.rac_textSignal()
         RAC(viewModel, "expirationMonth") <~ expirationMonthTextField.rac_textSignal()
         RAC(viewModel, "securityCode") <~ securitycodeTextField.rac_textSignal()
+        RAC(viewModel, "billingZip") <~ billingZipTextField.rac_textSignal()
 
         RAC(cardConfirmButton, "enabled") <~ viewModel.creditCardNumberIsValidSignal
 
-        securityCodeConfirmButton.rac_command = viewModel.registerButtonCommand()
-
-        RAC(securityCodeErrorLabel, "hidden") <~ securityCodeConfirmButton.rac_command.errors.take(1).mapReplace(false).startWith(true)
+        billingZipConfirmButton.rac_command = viewModel.registerButtonCommand()
+        RAC(billingZipErrorLabel, "hidden") <~ billingZipConfirmButton.rac_command.errors.take(1).mapReplace(false).startWith(true)
 
         viewModel.moveToYearSignal.take(1).subscribeNext { [weak self] _ -> Void in
             self?.expirationYearTextField.becomeFirstResponder()
@@ -61,6 +64,7 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         cardNumberWrapperView.hidden = true
         expirationDateWrapperView.hidden = false
         securityCodeWrapperView.hidden = true
+        billingZipWrapperView.hidden = true
 
         expirationDateWrapperView.frame = CGRectMake(0, 0, CGRectGetWidth(expirationDateWrapperView.frame), CGRectGetHeight(expirationDateWrapperView.frame))
 
@@ -71,16 +75,29 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         cardNumberWrapperView.hidden = true
         expirationDateWrapperView.hidden = true
         securityCodeWrapperView.hidden = false
+        billingZipWrapperView.hidden = true
 
         securityCodeWrapperView.frame = CGRectMake(0, 0, CGRectGetWidth(securityCodeWrapperView.frame), CGRectGetHeight(securityCodeWrapperView.frame))
 
         securitycodeTextField.becomeFirstResponder()
     }
 
+    @IBAction func securityCodeConfirmTapped(sender: AnyObject) {
+        cardNumberWrapperView.hidden = true
+        expirationDateWrapperView.hidden = true
+        securityCodeWrapperView.hidden = true
+        billingZipWrapperView.hidden = false
+
+        billingZipWrapperView.frame = CGRectMake(0, 0, CGRectGetWidth(billingZipWrapperView.frame), CGRectGetHeight(billingZipWrapperView.frame))
+
+        billingZipTextField.becomeFirstResponder()
+    }
+
     @IBAction func backToCardNumber(sender: AnyObject) {
         cardNumberWrapperView.hidden = false
         expirationDateWrapperView.hidden = true
         securityCodeWrapperView.hidden = true
+        billingZipWrapperView.hidden = true
 
         cardNumberTextField.becomeFirstResponder()
     }
@@ -89,8 +106,18 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         cardNumberWrapperView.hidden = true
         expirationDateWrapperView.hidden = false
         securityCodeWrapperView.hidden = true
+        billingZipWrapperView.hidden = true
 
         expirationMonthTextField.becomeFirstResponder()
+    }
+
+    @IBAction func backToSecurityCode(sender: AnyObject) {
+        cardNumberWrapperView.hidden = true
+        expirationDateWrapperView.hidden = true
+        securityCodeWrapperView.hidden = false
+        billingZipWrapperView.hidden = true
+
+        securitycodeTextField.becomeFirstResponder()
     }
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ManualCreditCardInputViewController {
@@ -113,6 +140,10 @@ private extension ManualCreditCardInputViewController {
         securitycodeTextField.text = "123"
         securitycodeTextField.sendActionsForControlEvents(.AllEditingEvents)
         securityCodeConfirmButton.sendActionsForControlEvents(.TouchUpInside)
+
+        billingZipTextField.text = "10001"
+        billingZipTextField.sendActionsForControlEvents(.AllEditingEvents)
+        billingZipTextField.sendActionsForControlEvents(.TouchUpInside)
     }
 
     @IBAction func dev_creditCardOKTapped(sender: AnyObject) {

@@ -30,6 +30,6 @@ class AppSetup {
 
     var needsZipCode: Bool {
         // If we're swiping with the card reaer, we don't need to collect a zip code.
-        return disableCardReader
+        return false
     }
 }

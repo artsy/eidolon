@@ -1,4 +1,9 @@
 upcoming:
+  version: 3.8.2
+  notes:
+  - Adds zip code to manually entered CC tokenization [ash]
+releases:
+- version: 3.8.1
   notes:
   - Increases max bid to 10 000 000 [alan]
   - New safeguard to ensure Kiosk is hitting network [ash]

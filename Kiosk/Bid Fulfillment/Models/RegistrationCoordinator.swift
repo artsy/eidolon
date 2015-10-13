@@ -13,8 +13,8 @@ enum RegistrationIndex {
             case MobileVC: return 0
             case EmailVC: return 1
             case PasswordVC: return 1
-            case CreditCardVC: return 2
-            case ZipCodeVC: return 3
+            case ZipCodeVC: return 2
+            case CreditCardVC: return 3
             case ConfirmVC: return 4
         }
     }
@@ -24,8 +24,8 @@ enum RegistrationIndex {
             case 0: return .MobileVC
             case 1: return .EmailVC
             case 1: return .PasswordVC
-            case 2: return .CreditCardVC
-            case 3: return .ZipCodeVC
+            case 2: return .ZipCodeVC
+            case 3: return .CreditCardVC
             default : return .ConfirmVC
         }
     }
@@ -50,16 +50,15 @@ class RegistrationCoordinator: NSObject {
         case .PasswordVC:
             return storyboard.viewControllerWithID(.RegisterPassword)
 
+        case .ZipCodeVC:
+            return storyboard.viewControllerWithID(.RegisterPostalorZip)
+
         case .CreditCardVC:
             if AppSetup.sharedState.disableCardReader {
                 return storyboard.viewControllerWithID(.ManualCardDetailsInput)
             } else {
                 return storyboard.viewControllerWithID(.RegisterCreditCard)
             }
-
-
-        case .ZipCodeVC:
-            return storyboard.viewControllerWithID(.RegisterPostalorZip)
 
         case .ConfirmVC:
             return storyboard.viewControllerWithID(.RegisterConfirm)
@@ -79,12 +78,12 @@ class RegistrationCoordinator: NSObject {
             return viewControllerForIndex(.PasswordVC)
         }
 
-        if notSet(details.newUser.creditCardToken) {
-            return viewControllerForIndex(.CreditCardVC)
-        }
-
         if notSet(details.newUser.zipCode) && AppSetup.sharedState.needsZipCode {
             return viewControllerForIndex(.ZipCodeVC)
+        }
+
+        if notSet(details.newUser.creditCardToken) {
+            return viewControllerForIndex(.CreditCardVC)
         }
 
         return viewControllerForIndex(.ConfirmVC)

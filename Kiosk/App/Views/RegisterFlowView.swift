@@ -22,25 +22,32 @@ class RegisterFlowView: ORStackView {
         self.bottomMarginHeight = CGFloat(NSNotFound)
         self.updateConstraints()
     }
-    
-    lazy var titles: Array<String> = {
-        return ["Mobile", "Email", "Credit Card"] + (self.appSetup.needsZipCode ? ["Postal/Zip"] : [])
-    }()
-    lazy var keypaths: Array<Array<String>> = {
-        return [["phoneNumber"], ["email"], ["creditCardName", "creditCardType"]] + (self.appSetup.needsZipCode ? [["zipCode"]] : [])
+
+    private struct SubViewParams {
+        let title: String
+        let keypath: Array<String>
+    }
+
+    private lazy var subViewParams: Array<SubViewParams> = {
+        return [
+            [SubViewParams(title: "Mobile", keypath: ["phoneNumber"])],
+            [SubViewParams(title: "Email", keypath: ["email"])],
+            [SubViewParams(title: "Postal/Zip", keypath: ["zipCode"])].filter { _ in self.appSetup.needsZipCode }, // TODO: may remove, in which case no need to flatten the array
+            [SubViewParams(title: "Credit Card", keypath: ["creditCardName", "creditCardType"])]
+        ].flatMap {$0}
     }()
 
     func update() {
         let user = details!.newUser
 
         removeAllSubviews()
-        for i in 0 ..< titles.count {
+        for (i, subViewParam) in subViewParams.enumerate() {
             let itemView = ItemView(frame: self.bounds)
-            itemView.createTitleViewWithTitle(titles[i])
+            itemView.createTitleViewWithTitle(subViewParam.title)
 
             addSubview(itemView, withTopMargin: "10", sideMargin: "0")
 
-            if let value = (keypaths[i].flatMap { user.valueForKey($0) as? String }.first) {
+            if let value = (subViewParam.keypath.flatMap { user.valueForKey($0) as? String }.first) {
                 itemView.createInfoLabel(value)
 
                 let button = itemView.createJumpToButtonAtIndex(i)
