@@ -155,6 +155,7 @@ class LoadingViewController: UIViewController {
         statusMessage.hidden = false
         statusMessage.text = "Another bidder has placed a higher maximum bid. Place a higher bid to secure the lot."
         bidConfirmationImageView.image = UIImage(named: "BidNotHighestBidder")
+        placeHigherBidButton.hidden = false
     }
 
     // MARK: - Error Handling

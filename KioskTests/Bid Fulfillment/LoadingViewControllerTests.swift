@@ -109,6 +109,20 @@ class LoadingViewControllerTests: QuickSpec {
                 expect(subject).to(haveValidSnapshot())
             }
 
+            it("placing bid error due to outbid") {
+                subject.placingBid = true
+                let fulfillmentController = StubFulfillmentController()
+                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
+                subject.viewModel = stubViewModel
+
+                subject.loadViewProgrammatically()
+
+                let error = NSError(domain: OutbidDomain, code: 0, userInfo: nil)
+                subject.bidderError(error)
+
+                expect(subject).to(haveValidSnapshot())
+            }
+
             it("placing bid succeeded but not resolved") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()
