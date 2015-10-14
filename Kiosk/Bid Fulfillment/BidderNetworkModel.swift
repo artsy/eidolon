@@ -86,7 +86,12 @@ class BidderNetworkModel: NSObject {
         let swiped = fulfillmentController.bidDetails.newUser.swipedCreditCard
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(stripeToken: token, swiped: swiped)
 
-        return fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().doError { (error) in
+        return fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().doCompleted { [weak self] in
+            // Adding the credit card succeeded, so we shoudl clear the newUser.creditCardToken so that we don't
+            // inadvertently try to re-add their card token if they need to increase their bid.
+
+            self?.fulfillmentController.bidDetails.newUser.creditCardToken = nil
+        }.doError { (error) in
             logger.log("Adding Card to User failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
         }
