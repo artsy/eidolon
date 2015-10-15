@@ -40,13 +40,12 @@ class CardHandler: NSObject, CFTReaderDelegate {
             self.card = card;
             cardSwipedSignal.sendNext("Got Card")
 
-            card.tokenizeCardWithSuccess({ () -> Void in
-                self.cardSwipedSignal.sendCompleted()
+            card.tokenizeCardWithSuccess({ [weak self] () -> Void in
+                self?.cardSwipedSignal.sendCompleted()
                 logger.log("Card was tokenized")
 
-
-            }, failure: { (error) -> Void in
-                self.cardSwipedSignal.sendNext("Card Flight Error: \(error)");
+            }, failure: { [weak self] (error) -> Void in
+                self?.cardSwipedSignal.sendNext("Card Flight Error: \(error)");
                 logger.log("Card was not tokenizable")
             })
             
@@ -95,20 +94,6 @@ class CardHandler: NSObject, CFTReaderDelegate {
             } else {
                 cardSwipedSignal.sendNext("Reader is disconnected");
             }
-        }
-    }
-}
-
-class LocalCardReader: CFTReader {
-    var fail = false
-
-    override func beginSwipeWithMessage(message: String!) {
-        if fail {
-            let error = NSError(domain: "eidolon", code: 111, userInfo: nil)
-            self.delegate?.readerCardResponse(nil, withError: error)
-
-        } else {
-            self.delegate?.readerCardResponse(CFTCard(), withError: nil)
         }
     }
 }
