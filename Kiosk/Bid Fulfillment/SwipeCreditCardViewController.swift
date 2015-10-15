@@ -40,7 +40,7 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
         super.viewDidLoad()
         self.setInProgress(false)
 
-        cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
+        cardHandler.cardSwipedSignal.takeUntil(self.viewWillDisappearSignal()).subscribeNext({ (message) -> Void in
             let message = message as! String
             self.cardStatusLabel.text = "Card Status: \(message)"
             if message == "Got Card" {

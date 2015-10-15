@@ -66,3 +66,17 @@ class CardHandlerTests: QuickSpec {
 
     }
 }
+
+class LocalCardReader: CFTReader {
+    var fail = false
+
+    override func beginSwipeWithMessage(message: String!) {
+        if fail {
+            let error = NSError(domain: "eidolon", code: 111, userInfo: nil)
+            self.delegate?.readerCardResponse(nil, withError: error)
+
+        } else {
+            self.delegate?.readerCardResponse(CFTCard(), withError: nil)
+        }
+    }
+}
