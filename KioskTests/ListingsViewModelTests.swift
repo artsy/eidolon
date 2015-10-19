@@ -74,8 +74,8 @@ class ListingsViewModelTests: QuickSpec {
             bidCount = finalBidCount
 
             waitUntil(timeout: 5) { done -> Void in
-                // We skip 1 to avoid getting the existing value, and wait for the updated one when the subject syncs.
-                subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).numberOfBidsSignal.skip(1).subscribeNext { string -> Void in
+                // We skip 2 to avoid getting the existing value, and wait for the updated one when the subject syncs.
+                subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).numberOfBidsSignal.skip(2).subscribeNext { string -> Void in
                     expect(string as? String) == "\(finalBidCount) bids placed"
                     done()
                 }
@@ -167,7 +167,8 @@ func listingsDataForPage(page: Int, bidCount: Int, modelCount: Int?, reverseIDs:
                 "price": "1200",
             ],
             "lot_number": index,
-            "bidder_positions_count": bidCount
+            "bidder_positions_count": bidCount,
+            "highest_bid_amount_cents": 1_000_00
         ]
     }
 

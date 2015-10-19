@@ -76,6 +76,7 @@ class SaleArtworkTests: QuickSpec {
             describe("with some bids") { () -> Void in
                 beforeEach {
                     saleArtwork.bidCount = 1
+                    saleArtwork.highestBidCents = 1_000_00
                 }
 
                 it("gives default number of bids") {
@@ -139,10 +140,10 @@ class SaleArtworkTests: QuickSpec {
                         invocations++
                     }
 
-                    saleArtwork.highestBidCents = 1_00
+                    saleArtwork.highestBidCents = 1_001_00
 
                     // Once for initial subscription, another for update.
-                    expect(invocations) == 2
+                    expect(invocations) > 1
                 }
             }
         }
