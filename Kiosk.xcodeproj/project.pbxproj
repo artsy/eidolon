@@ -20,6 +20,7 @@
 		5E43C3921AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C3911AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift */; };
 		5E43C3941AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C3931AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift */; };
 		5E5ADF641A8B789000453250 /* WhitespaceGobbler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */; };
+		5E5BD1CE1BD59CC70004CFC6 /* SaleArtworkVIewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BD1CD1BD59CC70004CFC6 /* SaleArtworkVIewModelTests.swift */; settings = {ASSET_TAGS = (); }; };
 		5E748B731AA11BCF00DE3A9D /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */; };
 		5E809A401ACF225100C30DC9 /* ArtsyProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */; };
 		5E82BD351AF2C6E700CB02DD /* YourBiddingDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E82BD341AF2C6E700CB02DD /* YourBiddingDetailsViewControllerTests.swift */; };
@@ -251,6 +252,7 @@
 		5E43C3911AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewControllerTests.swift; sourceTree = "<group>"; };
 		5E43C3931AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPostalZipViewControllerTests.swift; sourceTree = "<group>"; };
 		5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitespaceGobbler.swift; sourceTree = "<group>"; };
+		5E5BD1CD1BD59CC70004CFC6 /* SaleArtworkVIewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkVIewModelTests.swift; sourceTree = "<group>"; };
 		5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModel.swift; sourceTree = "<group>"; };
 		5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyProviderTests.swift; sourceTree = "<group>"; };
 		5E82BD341AF2C6E700CB02DD /* YourBiddingDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourBiddingDetailsViewControllerTests.swift; sourceTree = "<group>"; };
@@ -766,6 +768,7 @@
 				5E8610D91A5C43EF00456E41 /* BidTests.swift */,
 				5E8610DA1A5C43EF00456E41 /* ImageTests.swift */,
 				5E8610DB1A5C43EF00456E41 /* SaleArtworkTests.swift */,
+				5E5BD1CD1BD59CC70004CFC6 /* SaleArtworkVIewModelTests.swift */,
 				5E8610DC1A5C43EF00456E41 /* SaleTests.swift */,
 				5E8610DD1A5C43EF00456E41 /* SystemTimeTests.swift */,
 			);
@@ -1289,6 +1292,7 @@
 				5E86110E1A5C43EF00456E41 /* CardHandlerTests.swift in Sources */,
 				5E43C38E1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift in Sources */,
 				5E8611031A5C43EF00456E41 /* AppViewControllerTests.swift in Sources */,
+				5E5BD1CE1BD59CC70004CFC6 /* SaleArtworkVIewModelTests.swift in Sources */,
 				5E8611131A5C43EF00456E41 /* BidderPositionTests.swift in Sources */,
 				5E8611151A5C43EF00456E41 /* BidTests.swift in Sources */,
 				5E86110C1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift in Sources */,
