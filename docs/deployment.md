@@ -25,3 +25,15 @@ fastlane deploy
 ```
 
 The first time you deploy, you'll be asked to sign in to the developer portal through Fastlane. The password is in 1Password, too. 
+
+If you get an SSL error, like this:
+
+```rb
+connect': SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed (Faraday::SSLError)
+```
+
+Then it's most likely an RVM issue. Re-installing your ruby without binaries should fix the problem:
+
+```sh
+rvm reinstall ruby-2.1.2 --disable-binary
+```
