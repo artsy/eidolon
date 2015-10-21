@@ -76,6 +76,7 @@ lane :deploy do
   # Build
   gym(
     scheme: "Kiosk",
+    export_method: 'enterprise',
   )
 
   # Push to Hockey
