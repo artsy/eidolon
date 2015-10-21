@@ -94,11 +94,6 @@ class ListingsViewControllerTests: QuickSpec {
     }
 }
 
-let testSchedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
-    // Tricks the subject to thinking it's been scheduled on another queue
-    return signal
-}
-
 let listingsViewControllerTestsImage = UIImage.testImage(named: "artwork", ofType: "jpg")
 
 func testListingsViewController(storyboard: UIStoryboard = auctionStoryboard) -> ListingsViewController {
