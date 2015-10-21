@@ -331,7 +331,6 @@ func endpointResolver() -> MoyaProvider<ArtsyAPI>.RequestClosure {
 }
 
 class ArtsyProvider<Target where Target: MoyaTarget>: ReactiveCocoaMoyaProvider<Target> {
-    typealias OnlineSignalClosure = () -> RACSignal
 
     let onlineSignal: RACSignal
 
