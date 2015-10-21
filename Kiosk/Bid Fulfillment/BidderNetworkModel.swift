@@ -1,13 +1,16 @@
 import Foundation
 import ReactiveCocoa
+import Swift_RAC_Macros
 import Moya
 
 class BidderNetworkModel: NSObject {
-    dynamic var createdNewBidder = false
-
     // MARK: - Getters
 
     var fulfillmentController: FulfillmentController
+
+    var createdNewUser: RACSignal {
+        return RACObserve(self.fulfillmentController.bidDetails.newUser, "hasBeenRegistered")
+    }
 
     init(fulfillmentController: FulfillmentController) {
         self.fulfillmentController = fulfillmentController
@@ -132,7 +135,7 @@ class BidderNetworkModel: NSObject {
         return signal.doNext{ [weak self] (bidder) in
             if let bidder = bidder as? Bidder {
                 self?.fulfillmentController.bidDetails.bidderID = bidder.id
-                self?.createdNewBidder = true
+                self?.fulfillmentController.bidDetails.newUser.hasBeenRegistered = true
             }
 
         }.doError { (error) in

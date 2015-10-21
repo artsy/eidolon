@@ -73,7 +73,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     // MARK: Private Methods
 
     private func setup(selectedIndexSignal: RACSignal) {
-        RAC(self, "saleArtworks") <~ recurringListingsRequestSignal()
+        RAC(self, "saleArtworks") <~ recurringListingsRequestSignal().takeUntil(self.rac_willDeallocSignal())
 
         showSpinnerSignal = RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool().not()
         gridSelectedSignal = selectedIndexSignal.map { return ListingsViewModel.SwitchValues(rawValue: $0 as! Int) == .Some(.Grid) }

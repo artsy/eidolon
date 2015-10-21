@@ -5,6 +5,11 @@ import Moya
 @testable
 import Kiosk
 
+let testSchedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
+    // Tricks the subject to thinking it's been scheduled on another queue
+    return signal
+}
+
 class ListingsViewModelTests: QuickSpec {
     override func spec() {
         var subject: ListingsViewModel!
@@ -33,7 +38,7 @@ class ListingsViewModelTests: QuickSpec {
                 }
             }
 
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.empty())
+            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.`return`(true))
         }
 
         afterEach { () -> () in
@@ -46,7 +51,7 @@ class ListingsViewModelTests: QuickSpec {
 
 
         it("paginates to the second page to retrieve all three sale artworks") {
-            subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, logSync: { _ in})
+            subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, logSync: { _ in}, schedule: testSchedule)
 
             kioskWaitUntil { done -> Void in
                 subject.updatedContentsSignal.take(1).subscribeCompleted {
@@ -58,7 +63,7 @@ class ListingsViewModelTests: QuickSpec {
         }
 
         it("updates with new values in existing sale artworks") {
-            subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, syncInterval: 1, logSync: { _ in}, schedule: { signal, _ -> RACSignal in return signal })
+            subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, syncInterval: 1, logSync: { _ in}, schedule: testSchedule)
 
             // Verify that initial value is correct
             waitUntil(timeout: 5) { done -> Void in
@@ -83,7 +88,7 @@ class ListingsViewModelTests: QuickSpec {
         }
 
         it("updates with new sale artworks when lengths differ") {
-            let subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, syncInterval: 1, logSync: { _ in}, schedule: { signal, _ -> RACSignal in return signal })
+            let subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, syncInterval: 1, logSync: { _ in}, schedule: testSchedule)
 
             saleArtworksCount = 2
 
@@ -119,9 +124,9 @@ class ListingsViewModelTests: QuickSpec {
                 }
             }
 
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.empty())
+            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.`return`(true))
 
-            subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 4, syncInterval: 1, logSync: { _ in})
+            subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 4, syncInterval: 1, logSync: { _ in}, schedule: testSchedule)
 
             var initialFirstLotID: String?
             var subsequentFirstLotID: String?

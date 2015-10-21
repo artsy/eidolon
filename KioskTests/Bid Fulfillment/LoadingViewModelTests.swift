@@ -38,8 +38,9 @@ class LoadingViewModelTests: QuickSpec {
         }
 
         it("binds createdNewBidder") {
-            subject = LoadingViewModel(bidNetworkModel: StubBidderNetworkModel(), placingBid: true)
-            subject.bidderNetworkModel.createdNewBidder = true
+            let stubbedBidderNetworkModel = StubBidderNetworkModel()
+            subject = LoadingViewModel(bidNetworkModel: stubbedBidderNetworkModel, placingBid: true)
+            stubbedBidderNetworkModel.createdNewBidderSubject.sendNext(true)
 
             expect(subject.createdNewBidder) == true
         }
@@ -117,13 +118,19 @@ class LoadingViewModelTests: QuickSpec {
 let bidderID = "some-bidder-id"
 
 class StubBidderNetworkModel: BidderNetworkModel {
+    var createdNewBidderSubject = RACSubject()
+
     init() {
         super.init(fulfillmentController: StubFulfillmentController())
     }
 
     override func createOrGetBidder() -> RACSignal {
-        createdNewBidder = true
+        createdNewBidderSubject.sendNext(true)
         return RACSignal.empty()
+    }
+
+    override var createdNewUser: RACSignal {
+        return createdNewBidderSubject.startWith(false)
     }
 }
 
