@@ -1,8 +1,12 @@
 upcoming:
+  version: 3.8.5
+  notes:
+  - A newly registered bidder will now be shown their details no matter how many times they get outbid [ash]
+releases:
   version: 3.8.4
+  date: October 21 2015
   notes:
   - Displays zero bids for a sale artwork that has no highest bid [ash]
-releases:
 - version: 3.8.3
   date: October 13 2015
   notes:

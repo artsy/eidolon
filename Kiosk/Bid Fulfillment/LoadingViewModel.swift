@@ -29,7 +29,7 @@ class LoadingViewModel: NSObject {
 
         super.init()
 
-        RAC(self, "createdNewBidder") <~ RACObserve(bidderNetworkModel, "createdNewBidder")
+        RAC(self, "createdNewBidder") <~ bidderNetworkModel.createdNewUser
         RAC(self, "bidIsResolved") <~ RACObserve(bidCheckingModel, "bidIsResolved")
         RAC(self, "isHighestBidder") <~ RACObserve(bidCheckingModel, "isHighestBidder")
         RAC(self, "reserveNotMet") <~ RACObserve(bidCheckingModel, "reserveNotMet")

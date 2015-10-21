@@ -9,5 +9,7 @@
     dynamic var zipCode: String?
     dynamic var name: String?
 
+    dynamic var hasBeenRegistered: Bool = false
+
     var swipedCreditCard = false
 }
