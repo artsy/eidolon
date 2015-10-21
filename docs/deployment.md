@@ -1,5 +1,7 @@
 ### Deployment
 
+**Note**: These docs omit `bundle exec` in front of the commands.
+
 We deploy using [Fastlane](https://github.com/KrauseFx/fastlane). You'll need the following environment variables set up. 
 
 ```
@@ -9,22 +11,24 @@ export SLACK_URL='https://hooks.slack.com/services/REST_OF_THE_URL_FROM_1PASSWOR
 
 They're in the Artsy Engineering 1Password vault. Just add them to your `.zshenv` (or equivalent file). 
 
-The changelog needs to have a `version` in its `upcoming` dictionary. 
+The changelog needs to be valid YAML, with an array of changelog entries to deploy.
 
 ```yaml
 upcoming:
-  version: whatever
-  notes:
-  - some fix [done by some dev]
+- some fix [done by some dev]
 ```
 
-Fastlane is going to extract the version number and release notes from this file. It'll also create a new git tag based on the version number, so you should be on a local `master` branch which is up-to-date with the remote. Then, it's as easy as this:
+Fastlane will take care of the rest. You can check out the specifics of what it does by executing `fastlane lanes`.
+
+To make a deploy, run the following:
 
 ```sh
-fastlane deploy
+fastlane deploy version:A.B.C
 ```
 
 The first time you deploy, you'll be asked to sign in to the developer portal through Fastlane. The password is in 1Password, too. 
+
+Once the deploy is finished, a message with release notes will be posted to Slack.
 
 If you get an SSL error, like this:
 

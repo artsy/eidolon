@@ -50,7 +50,13 @@ desc "- Build and sign the app"
 desc "- Upload the ipa file to hockey"
 desc "- Post a message to slack containing the download link"
 desc "- Commit and push the version bump"
-lane :deploy do 
+lane :deploy do |options|
+
+  version = options[:version]
+  raise "You must specify a version in A.B.X format to deploy." if version.nil? || version.scan(/\d+\.\d+\.\d+/).length == 0
+
+  hockey_api_token = ENV['HOCKEY_API_TOKEN']
+  raise "You must specify a HOCKEY_API_TOKEN environment variable to deploy." if hockey_api_token.nil?
 
   # Make sure not to ship with OSS
   verify_keys
@@ -62,17 +68,33 @@ lane :deploy do
   build_number = Time.new.strftime("%Y.%m.%d")
   increment_build_number build_number: build_number
 
-  # Set version number to the one at the top of the CHANGELOG
-  changelog = YAML.load_file('../CHANGELOG.yml')
-  version_number = changelog['upcoming']['version']
-
   # Generate release notes from CHANGELOG
-  release_notes = changelog['upcoming']['notes'].map{ |note| note.prepend '- ' }.join("\n")
+  changelog_filename = '../CHANGELOG.yml'
+  changelog_yaml = YAML.load_file(changelog_filename)
+  release_notes = changelog_yaml['upcoming'].map{ |note| note.prepend '- ' }.join("\n")
 
-  # Increment to the changelog version number
-  increment_version_number version_number: version_number
+  # Increment to the specified version number
+  increment_version_number version_number: version
 
-  # It would be cool to reserialize a new changelog out, but it looses some human readability :\
+  # Add a changelog entry for this version
+
+  changelog_contents = File.read(changelog_filename)
+  existing_releases = changelog_contents.split('releases:').last
+  this_release = changelog_yaml['upcoming'].map{ |note| note.prepend '  ' }.join("\n")
+  changelog_contents = <<-EOS
+upcoming:
+
+releases:
+- version: #{version}
+  date: #{Time.new.strftime("%B %d %Y")}
+  notes:
+#{this_release}
+#{existing_releases}
+EOS
+
+  File.open(changelog_filename, 'w') { |file| file.puts changelog_contents }
+
+  # Grab the latest profiles from Apple
 
   sigh
 
@@ -86,7 +108,7 @@ lane :deploy do
 
   # Push to Hockey
   hockey(
-    api_token: ENV['HOCKEY_API_TOKEN'],
+    api_token: hockey_api_token,
     notes: release_notes,
   )
 
@@ -113,4 +135,10 @@ end
 desc "Updates the storyboard identifier Swift values."
 lane :storyboard_ids do
   sh "cd .. ; bundle exec sbconstants Kiosk/Storyboards/StoryboardIdentifiers.swift --source-dir Kiosk/Storyboards --swift"
+end
+
+error do |lane, exception|
+  puts "Unable to deploy, resetting git repository."
+  clean_build_artifacts
+  reset_git_repo
 end
