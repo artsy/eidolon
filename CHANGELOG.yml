@@ -15,7 +15,6 @@ releases:
   - Increases max bid to 10 000 000 [alan]
   - New safeguard to ensure Kiosk is hitting network [ash]
   - Fixes problem logging in with bidder/phone number and pin [ash]
-releases:
 - version: 3.8.1
   date: October 9 2015
   notes:
