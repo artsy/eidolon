@@ -43,6 +43,7 @@ end
 desc "Release a new beta version on Hockey"
 desc "This action does the following:"
 desc ""
+desc "- Verifies API keys are non-empty"
 desc "- Ensures a clean git status"
 desc "- Increment the build number"
 desc "- Build and sign the app"
@@ -50,6 +51,10 @@ desc "- Upload the ipa file to hockey"
 desc "- Post a message to slack containing the download link"
 desc "- Commit and push the version bump"
 lane :deploy do 
+
+  # Make sure not to ship with OSS
+  verify_keys
+
   # Make sure we start off with a clean slate
   ensure_git_status_clean
 
@@ -109,28 +114,3 @@ desc "Updates the storyboard identifier Swift values."
 lane :storyboard_ids do
   sh "cd .. ; bundle exec sbconstants Kiosk/Storyboards/StoryboardIdentifiers.swift --source-dir Kiosk/Storyboards --swift"
 end
-
-before_all do |lane|
-
-  # Ensure no deploys with OSS keys
-  require 'cocoapods-core'
-  puts "Validating CocoaPods Keys"
-  Dir.chdir ".." do
-    podfile = Pod::Podfile.from_file "Podfile"
-    target = podfile.plugins["cocoapods-keys"]["target"] || ""
-    podfile.plugins["cocoapods-keys"]["keys"].each do |key|
-      puts " - #{key}"
-
-        value = `bundle exec pod keys get #{key} #{target}`
-        value = value.split("]").last.strip
-
-      if value == "-" || value == ""
-        puts "Did not pass validation for key #{key}."
-        puts "Run `bundle exec pod keys get #{key} #{target}` to see what it is."
-        puts "It's likely this is running with OSS keys."
-        exit()
-      end
-    end
-  end
-end
-
