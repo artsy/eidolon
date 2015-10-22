@@ -25,6 +25,8 @@ This action does the following:
 
 
 
+- Verifies API keys are non-empty
+
 - Ensures a clean git status
 
 - Increment the build number

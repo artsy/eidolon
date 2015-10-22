@@ -1,4 +1,11 @@
 upcoming:
+
+releases:
+- version: 3.8.5
+  date: October 21 2015
+  notes:
+  - A newly registered bidder will now be shown their details no matter how many times they get outbid [ash]
+
   version: 3.8.6
   notes:
   - Fixes problem with staging flag [ash]
@@ -11,36 +18,43 @@ releases:
   date: October 21 2015
   notes:
   - Displays zero bids for a sale artwork that has no highest bid [ash]
+
 - version: 3.8.3
   date: October 13 2015
   notes:
   - Adds selective network logging [ash]
   - Fixes problems with new users increasing bids [ash]
   - Fixes problem with the "Place Higher Bid" button not always appearing [ash]
+
 - version: 3.8.2
   date: October 13 2015
   notes:
   - Increases max bid to 10 000 000 [alan]
   - New safeguard to ensure Kiosk is hitting network [ash]
   - Fixes problem logging in with bidder/phone number and pin [ash]
+
 - version: 3.8.1
   date: October 9 2015
   notes:
   - Fixes new polling mechanism [alan]
+
 - version: 3.8.0
   date: October 8 2015
   notes:
   - New polling mechanism to avoid bidding problems [alan]
   - Adds CVV field to manual CC entry screen [alan]
+
 - version: 3.7.0
   date: October 7 2015
   notes:
   - Removes Zip code requiement for swiped credit cards [ash]
   - Adds new parameters for trusted clients [ash]
+
 - version: 3.6.1
   date: September 27 2015
   notes:
   - Fixes problem with lot numbers changing during the auction [ash]
+
 - version: 3.6.0
   date: September 24 2015
   notes:
@@ -53,14 +67,17 @@ releases:
   - Tapping anywhere in the table cells shows more details [ash]
   - Allows users to dismiss high bid screens by tapping checkmark [ash]
   - Adds staging-only credit card testing [ash]
+
 - version: 3.5.2
   date: June 19 2015
   notes:
   - Attempts to fix problem tokenizing credit cards [ash]
+
 - version: 3.5.1
   date: May 8 2015
   notes:
   - Fixes problem installing app [ash]
+
 - version: 3.5.0
   date: May 6 2015
   notes:
@@ -73,6 +90,7 @@ releases:
   - Removed interstitial screen between registration confirmation and showing bidder details [ash]
   - Fixes potential crash for existing users signing in with phone numbers [ash]
   - Bidder details screen no longer hides PIN [ash]
+
 - version: 3.4.0
   date: April 13 2015
   notes:
@@ -80,14 +98,17 @@ releases:
   - Adds a "Forgot Password" link when logging in with Artsy credentials [ash]
   - Registering to bid with an existing account no longer produces an error message [ash]
   - Fixes problem correcting email [ash]
+
 - version: 3.3.1
   date: April 9 2015
   notes:
   - New release to attempt fix for crashes [ash]
+
 - version: 3.3.0
   date: April 1 2015
   notes:
   - New deploy infrastructure [ash]
+
 - version: 3.2.0
   date: March 26 2015
   notes:
@@ -95,24 +116,29 @@ releases:
   - Help menu bug fixed [ash]
   - Interface messaging improvements [ash]
   - New icon [orta]
+
 - version: 3.1.1
   date: February 27 2015
   notes:
   - Buyers Premium [ash]
+
 - version: 2.3.2
   date: November 21 2014
   notes:
   - Reserve-handling [ashfurrow]
+
 - version: 2.3.1
   date: November 14 2014
   notes:
   - Fix for requesting a PIN [orta]
+
 - version: 2.3.0
   date: November 14 2014
   notes:
   - Next buttons function on registration flow [ash]
   - A-Z is ordered correctly [orta]
   - Artwork blurb is now included :D [orta]
+
 - version: 2.1.1
   date: November 12 2014
   notes:
@@ -121,12 +147,14 @@ releases:
   - Sale Artwork Detail View handles artworks with no Artists [orta]
   - Sale Artwork Detail View shows the additional info, not blurb [orta]
   - More info buttons work [orta]
+
 - version: 2.1.0
   date: November 10 2014
   notes:
   - Improved manual input handling [orta]
   - Fixed messages at the end of registration flow [orta]
   - Potential credit card handler fix [orta]
+
 - version: 2.0.0
   date: November 5 2014
   notes:
@@ -134,23 +162,27 @@ releases:
   - Artwork details view [ash]
   - Fix for table'd artwork layout [ash]
   - Support typing in credit card details mainually [orta]
+
 - version: 1.1.1
   date: November 4 2014
   notes:
   - Admin visual overhaul [orta]
   - Modified underpinnings necessary for detail view [ash]
   - More work on details view [ash]
+
 - version: 1.1.0
   date: November 3 2014
   notes:
   - Admin section for testing Cards [orta]
   - Initial work on Artwork details view [ash]
   - If you're outbid you can bid again straight away [orta]
+
 - version: 1.0.1
   date: November 3 2014
   notes:
   - Admin can be accessed when networking is down [orta]
   - Offline screen [orta]
+
 - version: 1.0.0
   date: October 21 2014
   notes:
@@ -159,6 +191,7 @@ releases:
   - Admin section hides the Help button [orta]
   - Panic web mode shows a correct X to close button [orta]
   - Analyics [orta]
+
 - version: 0.1.0
   date: October 21 2014
   notes:
@@ -167,6 +200,7 @@ releases:
   - Error states on PIN / Artsy Login / Password View [orta]
   - Improved networking error logging [orta]
   - Spruced up Help menu [ash]
+
 - version: 0.0.9
   date: October 20 2014
   notes:
@@ -181,6 +215,7 @@ releases:
   - Jump between bidder log in and email log in [laura]
   - Show conditions of Sale [ash]
   - Show Credit Card processing information [orta]
+
 - version: 0.0.8
   date: October 20 2014
   notes:
@@ -195,6 +230,7 @@ releases:
   - Image Aspect Ratio fixes in Grid view [orta]
   - Can jump between different Registration stages [orta]
   - Popover animates into place [orta]
+
 - version: 0.0.7
   date: October 17 2014
   notes:
@@ -208,6 +244,7 @@ releases:
   - Layout fixes in the artwork listings [ash]
   - Requesting lost password works [orta]
   - Requesting lost PIN works [orta]
+
 - version: 0.0.5
   date: October 13 2014
   notes:
@@ -221,6 +258,7 @@ releases:
   - Use Avant Garde font with custom tracking [1aurabrown]
   - Fix bug where Delete and Clear keypad buttons were not working [1aurabrown]
   - Re-name some of the sort tabs to shorter names [1aurabrown]
+
 - version: 0.0.4
   date: October 9 2014
   notes:
@@ -230,11 +268,13 @@ releases:
   - Support sorting Auction Artworks [ash]
   - Added a button to sign up [orta]
   - Registration flow set up [orta]
+
 - version: 0.0.3
   date: October 7 2014
   notes:
   - Changed buttons and fonts on place bid view [1aurabrown]
   - Added support for logging via PIN and bidder / number [orta]
+
 - version: 0.0.2
   date: October 2 2014
   notes:
