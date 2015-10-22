@@ -44,16 +44,19 @@ class ListingsViewController: UIViewController {
 
         // Set up development environment.
 
-        if APIKeys.sharedKeys.stubResponses {
-            stagingFlag.image = UIImage(named: "StubbingFlag")
-        } else if detectDevelopmentEnvironment() {
-            let flagImageName = AppSetup.sharedState.useStaging ? "StagingFlag" : "ProductionFlag"
-            stagingFlag.image = UIImage(named: flagImageName)
+        if AppSetup.sharedState.isTesting {
+            stagingFlag.hidden = true
         } else {
-            stagingFlag.hidden = AppSetup.sharedState.useStaging == false
+            if APIKeys.sharedKeys.stubResponses {
+                stagingFlag.image = UIImage(named: "StubbingFlag")
+            } else if detectDevelopmentEnvironment() {
+                let flagImageName = AppSetup.sharedState.useStaging ? "StagingFlag" : "ProductionFlag"
+                stagingFlag.image = UIImage(named: flagImageName)
+            } else {
+                stagingFlag.hidden = AppSetup.sharedState.useStaging == false
+            }
         }
 
-        stagingFlag.hidden = AppSetup.sharedState.isTesting
 
         // Add subviews
 
