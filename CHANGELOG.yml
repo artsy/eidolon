@@ -6,6 +6,14 @@ releases:
   notes:
   - A newly registered bidder will now be shown their details no matter how many times they get outbid [ash]
 
+  version: 3.8.6
+  notes:
+  - Fixes problem with staging flag [ash]
+releases:
+- version: 3.8.5
+  date: October 21 2015
+  notes:
+  - A newly registered bidder will now be shown their details no matter how many times they get outbid [ash]
 - version: 3.8.4
   date: October 21 2015
   notes:

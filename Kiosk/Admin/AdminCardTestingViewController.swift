@@ -27,7 +27,7 @@ class AdminCardTestingViewController: UIViewController {
 
             }, error: { (error) -> Void in
 
-                self.log("\n====Error====\n\(error)\n\n")
+                self.log("\n====Error====\n\(error)\nThe card reader may have become disconnected.\n\n")
                 if self.cardHandler.card != nil {
                     self.log("==\n\(self.cardHandler.card!)\n\n")
                 }

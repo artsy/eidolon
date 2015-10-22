@@ -54,7 +54,7 @@ extension UIAlertController {
     }
     
     class func emailPromptAlertController() -> (UIAlertController, RACCommand) {
-        let alertController = self.init(title: "Send Bidder Details", message: "Enter your email address registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
+        let alertController = self.init(title: "Send Bidder Details", message: "Enter your email address or phone number registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
 
         let ok = RACAlertAction(title: "OK", style: .Default)
         ok.command = RACCommand { (_) -> RACSignal! in
