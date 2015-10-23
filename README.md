@@ -3,7 +3,7 @@ Eidolon
 
 [![Build Status](https://travis-ci.org/artsy/eidolon.svg?branch=master)](https://travis-ci.org/artsy/eidolon)
 
-The [Artsy](https://artsy.net) Auction Kiosk App.
+The [Artsy](https://www.artsy.net/) Auction Kiosk App.
 
 Project Status
 ----------------
@@ -42,7 +42,7 @@ Getting Started
 ---------------
 
 Now that we have the code [downloaded](#downloading-the-code), we can run the
-app using [Xcode 7](https://developer.apple.com/xcode/downloads/). Make sure to
+app using [Xcode 7](https://developer.apple.com/xcode/download/). Make sure to
 open the `Kiosk.xcworkspace` workspace, and not the `Kiosk.xcodeproj` project.
 Currently, the project is compatible with Xcode 7 only, as it's Swift 2.
 
@@ -68,5 +68,5 @@ Contributing
 This project is being developed by Artsy primarily for its use as Artsy's
 auction kiosk app, and we are not expecting to have significant community
 contributions back to it. We are developing this project in the open because
-it is not part of our core IP, and open source is [part of our job](http://code.dblock.org/open-source-is-simply-part-of-my-teams-job-description). However, if you notice something that is wrong or could be
+it is not part of our core IP, and open source is [part of our job](http://code.dblock.org/2011/07/15/open-source-is-simply-part-of-my-teams-job-description.html). However, if you notice something that is wrong or could be
 improved, don't hesitate to send us a pull request.
