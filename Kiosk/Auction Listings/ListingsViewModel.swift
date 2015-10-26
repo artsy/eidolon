@@ -267,7 +267,16 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 // MARK: - Sorting Functions
 
 func leastBidsSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
-    return (lhs.bidCount ?? 0) < (rhs.bidCount ?? 0)
+    switch (lhs.highestBidCents.hasValue, rhs.highestBidCents.hasValue) {
+    case (true, true): // Both valid, compare bidCount.
+        return (lhs.bidCount ?? 0) < (rhs.bidCount ?? 0)
+    case (true, _): // First valid, it comes first.
+        return true
+    case (_, true): // Second valid, it comes first.
+        return false
+    default: // Neither valid, doesn't matter.
+        return true
+    }
 }
 
 func mostBidsSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
