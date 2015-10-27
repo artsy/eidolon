@@ -23,10 +23,10 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as! HelpViewController
             
             let dismissTapGestureRecognizer = UITapGestureRecognizer()
-            dismissTapGestureRecognizer.rac_gestureSignal().subscribeNext{ (sender) -> Void in
+            dismissTapGestureRecognizer.rac_gestureSignal().subscribeNext{ [weak toView] (sender) -> Void in
                 let dismissTapGestureRecognizer = sender as! UITapGestureRecognizer
                 let pointInContainer = dismissTapGestureRecognizer.locationInView(toView)
-                if !toView.pointInside(pointInContainer, withEvent: nil) {
+                if toView?.pointInside(pointInContainer, withEvent: nil) == false {
                     appDelegate().helpButtonCommand().execute(dismissTapGestureRecognizer)
                 }
             }
