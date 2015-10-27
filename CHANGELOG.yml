@@ -1,4 +1,5 @@
 upcoming:
+- Removes unnecessary logic around bid counting [ash]
 
 releases:
 - version: 3.8.5
@@ -9,11 +10,12 @@ releases:
   version: 3.8.6
   notes:
   - Fixes problem with staging flag [ash]
-releases:
+
 - version: 3.8.5
   date: October 21 2015
   notes:
   - A newly registered bidder will now be shown their details no matter how many times they get outbid [ash]
+
 - version: 3.8.4
   date: October 21 2015
   notes:
@@ -21,13 +23,11 @@ releases:
 
 - version: 3.8.3
   date: October 13 2015
-  version: 3.8.3
   notes:
   - Adds selective network logging [ash]
   - Fixes problems with new users increasing bids [ash]
   - Fixes problem with the "Place Higher Bid" button not always appearing [ash]
 
-releases:
 - version: 3.8.2
   date: October 13 2015
   notes:
