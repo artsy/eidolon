@@ -40,8 +40,8 @@ class ConfirmYourBidViewController: UIViewController {
 
         let nav = self.fulfillmentNav()
 
-        RAC(nav.bidDetails.newUser, "phoneNumber") <~ numberStringSignal
-        RAC(nav.bidDetails, "paddleNumber") <~ numberStringSignal
+        RAC(nav.bidDetails.newUser, "phoneNumber") <~ numberStringSignal.takeUntil(viewWillDisappearSignal())
+        RAC(nav.bidDetails, "paddleNumber") <~ numberStringSignal.takeUntil(viewWillDisappearSignal())
         
         bidDetailsPreviewView.bidDetails = nav.bidDetails
 
@@ -51,15 +51,15 @@ class ConfirmYourBidViewController: UIViewController {
 
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
+            let auctionID = nav.auctionID
             
             let numberIsZeroLengthSignal = numberStringSignal.map(isZeroLengthString)
             enterButton.rac_command = RACCommand(enabled: numberIsZeroLengthSignal.not()) { [weak self] _ in
-                if (self == nil) {
-                    return RACSignal.empty()
-                }
+                guard let me = self else { return RACSignal.empty() }
 
-                let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: nav.auctionID!, phone: String(self!.number))
-                return XAppRequest(endpoint, provider:self!.provider).filterStatusCode(400).doError { (error) -> Void in
+                let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me.number))
+                return XAppRequest(endpoint, provider:me.provider).filterStatusCode(400).doError { (error) -> Void in
+                    guard let me = self else { return }
 
                     // Due to AlamoFire restrictions we can't stop HTTP redirects
                     // so to figure out if we got 302'd we have to introspect the
@@ -71,12 +71,12 @@ class ConfirmYourBidViewController: UIViewController {
 
                     if let responseURL = responseURL {
                         if (responseURL as NSString).containsString("v1/bidder/") {
-                            self?.performSegue(.ConfirmyourBidBidderFound)
+                            me.performSegue(.ConfirmyourBidBidderFound)
                             return
                         }
                     }
 
-                    self?.performSegue(.ConfirmyourBidBidderNotFound)
+                    me.performSegue(.ConfirmyourBidBidderNotFound)
                     return
                 }
             }
