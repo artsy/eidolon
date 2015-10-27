@@ -197,20 +197,20 @@
 		5EA637211A9E6AC60094A86E /* HelpViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */; };
 		5EA6B1111B668F8300FEB3ED /* LoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */; };
 		5EA6B1131B668F9300FEB3ED /* LoadingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */; };
-		5EA6CF771B96246800FE1122 /* ListingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6CF761B96246800FE1122 /* ListingsViewModel.swift */; settings = {ASSET_TAGS = (); }; };
+		5EA6CF771B96246800FE1122 /* ListingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6CF761B96246800FE1122 /* ListingsViewModel.swift */; };
 		5EB0B71A1A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */; };
 		5EB0B71B1A5C410D00B7CBF2 /* RACSignal+Kiosk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7161A5C410D00B7CBF2 /* RACSignal+Kiosk.swift */; };
 		5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */; };
 		5EB0B71D1A5C410D00B7CBF2 /* UITextField+RAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7181A5C410D00B7CBF2 /* UITextField+RAC.swift */; };
 		5EB0B71E1A5C410D00B7CBF2 /* UIViewController+Bidding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7191A5C410D00B7CBF2 /* UIViewController+Bidding.swift */; };
-		5EBB3C071BD7E92C0013EBC3 /* BidderNetworkModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBB3C061BD7E92C0013EBC3 /* BidderNetworkModelTests.swift */; settings = {ASSET_TAGS = (); }; };
+		5EBB3C071BD7E92C0013EBC3 /* BidderNetworkModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBB3C061BD7E92C0013EBC3 /* BidderNetworkModelTests.swift */; };
 		5EBD31491AE0435600648484 /* GenericFormValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD31481AE0435600648484 /* GenericFormValidationViewModel.swift */; };
 		5EBD314B1AE047C700648484 /* RegistrationPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD314A1AE047C700648484 /* RegistrationPasswordViewModel.swift */; };
 		5EBD314F1AE0563300648484 /* GenericFormValidationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD314E1AE0563300648484 /* GenericFormValidationViewModelTests.swift */; };
-		5EDBB3251BAB59A000D6A6C8 /* RACAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDBB3241BAB59A000D6A6C8 /* RACAlertAction.m */; settings = {ASSET_TAGS = (); }; };
+		5EDBB3251BAB59A000D6A6C8 /* RACAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EDBB3241BAB59A000D6A6C8 /* RACAlertAction.m */; };
 		5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDD04D11AA69D2700B30AE9 /* KeypadViewModelTests.swift */; };
-		5EE5B0CE1BB3479300069312 /* PlaceBidNetworkModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE5B0CD1BB3479300069312 /* PlaceBidNetworkModelTests.swift */; settings = {ASSET_TAGS = (); }; };
-		5EEAF9CA1BCD796B00C1470F /* FulfillmentNavigationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEAF9C91BCD796B00C1470F /* FulfillmentNavigationControllerTests.swift */; settings = {ASSET_TAGS = (); }; };
+		5EE5B0CE1BB3479300069312 /* PlaceBidNetworkModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE5B0CD1BB3479300069312 /* PlaceBidNetworkModelTests.swift */; };
+		5EEAF9CA1BCD796B00C1470F /* FulfillmentNavigationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEAF9C91BCD796B00C1470F /* FulfillmentNavigationControllerTests.swift */; };
 		5EF71E781AE986000069A266 /* StripeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E771AE986000069A266 /* StripeManager.swift */; };
 		5EF71E7B1AE98F080069A266 /* STPCard+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */; };
 		5EF71E7D1AE996F50069A266 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E7C1AE996F50069A266 /* SwiftExtensions.swift */; };
@@ -220,12 +220,12 @@
 		5EF71E851AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */; };
 		5EF71E871AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E861AE9B6EC0069A266 /* ManualCreditCardInputViewModelTests.swift */; };
 		5EF71E891AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF71E881AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift */; };
-		5EFA08261BCDB051007E8EC1 /* NetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA08251BCDB051007E8EC1 /* NetworkLogger.swift */; settings = {ASSET_TAGS = (); }; };
+		5EFA08261BCDB051007E8EC1 /* NetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA08251BCDB051007E8EC1 /* NetworkLogger.swift */; };
 		5EFA709C1A9674BD0082C916 /* BidderDetailsRetrieval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFA709B1A9674BD0082C916 /* BidderDetailsRetrieval.swift */; };
-		5EFFE24E1B977DD3006BF64C /* SaleArtworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFE24D1B977DD3006BF64C /* SaleArtworkViewModel.swift */; settings = {ASSET_TAGS = (); }; };
-		5EFFE2501B978C3C006BF64C /* ListingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFE24F1B978C3C006BF64C /* ListingsViewModelTests.swift */; settings = {ASSET_TAGS = (); }; };
+		5EFFE24E1B977DD3006BF64C /* SaleArtworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFE24D1B977DD3006BF64C /* SaleArtworkViewModel.swift */; };
+		5EFFE2501B978C3C006BF64C /* ListingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFE24F1B978C3C006BF64C /* ListingsViewModelTests.swift */; };
 		D12607F71BF578705637C9A7 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DFB9BD12B5173B74D620D7 /* Pods.framework */; };
-		E70556731BC40BFB0064ABF8 /* MyBidPosition.json in Resources */ = {isa = PBXBuildFile; fileRef = E70556721BC40BFB0064ABF8 /* MyBidPosition.json */; settings = {ASSET_TAGS = (); }; };
+		E70556731BC40BFB0064ABF8 /* MyBidPosition.json in Resources */ = {isa = PBXBuildFile; fileRef = E70556721BC40BFB0064ABF8 /* MyBidPosition.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1293,7 +1293,6 @@
 				5E43C38E1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift in Sources */,
 				5E8611031A5C43EF00456E41 /* AppViewControllerTests.swift in Sources */,
 				5EBB3C071BD7E92C0013EBC3 /* BidderNetworkModelTests.swift in Sources */,
-				5E5BD1CE1BD59CC70004CFC6 /* SaleArtworkVIewModelTests.swift in Sources */,
 				5E8611131A5C43EF00456E41 /* BidderPositionTests.swift in Sources */,
 				5E8611151A5C43EF00456E41 /* BidTests.swift in Sources */,
 				5E86110C1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift in Sources */,
