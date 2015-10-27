@@ -21,11 +21,13 @@ releases:
 
 - version: 3.8.3
   date: October 13 2015
+  version: 3.8.3
   notes:
   - Adds selective network logging [ash]
   - Fixes problems with new users increasing bids [ash]
   - Fixes problem with the "Place Higher Bid" button not always appearing [ash]
 
+releases:
 - version: 3.8.2
   date: October 13 2015
   notes:
