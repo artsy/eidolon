@@ -12,7 +12,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBOutlet var confirmCredentialsButton: Button!
 
     var createNewAccount = false
-    lazy var provider:ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    lazy var provider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
@@ -31,21 +31,20 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         bidDetailsPreviewView.bidDetails = nav.bidDetails
 
         emailTextField.text = nav.bidDetails.newUser.email ?? ""
-
-        let emailTextSignal = emailTextField.rac_textSignal()
-        let passwordTextSignal = passwordTextField.rac_textSignal()
-        RAC(nav.bidDetails.newUser, "email") <~ emailTextSignal.takeUntil(viewWillDisappearSignal())
-        RAC(nav.bidDetails.newUser, "password") <~ passwordTextSignal.takeUntil(viewWillDisappearSignal())
+        
+        let emailTextSignal = emailTextField.rac_textSignal().takeUntil(viewWillDisappearSignal())
+        let passwordTextSignal = passwordTextField.rac_textSignal().takeUntil(viewWillDisappearSignal())
+        RAC(nav.bidDetails.newUser, "email") <~ emailTextSignal
+        RAC(nav.bidDetails.newUser, "password") <~ passwordTextSignal
 
         let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
         let passwordIsLongEnough = passwordTextSignal.map(isZeroLengthString).not()
         let formIsValid = RACSignal.combineLatest([inputIsEmail, passwordIsLongEnough]).and()
 
         confirmCredentialsButton.rac_command = RACCommand(enabled: formIsValid) { [weak self] _ in
-            if (self == nil) {
-                return RACSignal.empty()
-            }
-            return self!.xAuthSignal().`try` { (accessTokenDict, errorPointer) -> Bool in
+            guard let me = self else { return RACSignal.empty() }
+
+            return me.xAuthSignal().`try` { (accessTokenDict, errorPointer) -> Bool in
                 if let accessToken = accessTokenDict["access_token"] as? String {
                     self?.fulfillmentNav().xAccessToken = accessToken
                     return true
