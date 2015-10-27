@@ -27,7 +27,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
         coordinator.storyboard = self.storyboard!
-        let registerIndexSignal = RACObserve(coordinator, "currentIndex")
+        let registerIndexSignal = RACObserve(coordinator, "currentIndex").takeUntil(viewWillDisappearSignal())
         let indexIsConfirmSignal = registerIndexSignal.map { return ($0 as! Int == RegistrationIndex.ConfirmVC.toInt()) }
         
         RAC(confirmButton, "hidden") <~ indexIsConfirmSignal.not()
@@ -52,17 +52,16 @@ class RegisterViewController: UIViewController {
     func goToNextVC() {
         let nextVC = coordinator.nextViewControllerForBidDetails(fulfillmentNav().bidDetails)
         goToViewController(nextVC)
-
     }
 
     func goToViewController(controller: UIViewController) {
         self.internalNavController()!.viewControllers = [controller]
 
         if let subscribableVC = controller as? RegistrationSubController {
-            subscribableVC.finishedSignal.subscribeCompleted({ [weak self] () -> Void in
+            subscribableVC.finishedSignal.subscribeCompleted { [weak self] () -> Void in
                 self?.goToNextVC()
                 self?.flowView.update()
-            })
+            }
         }
     }
 
