@@ -30,7 +30,7 @@ class PlaceBidViewController: UIViewController {
     var showBuyersPremiumCommand = { () -> RACCommand in
         appDelegate().showBuyersPremiumCommand()
     }
-    
+
     var showPrivacyPolicyCommand = { () -> RACCommand in
         appDelegate().showPrivacyPolicyCommand()
     }
@@ -199,34 +199,32 @@ private extension PlaceBidViewController {
     }
 }
 
+
 /// These are for RAC only
 
-private extension PlaceBidViewController {
-
-    func dollarsToCurrencyString(input: AnyObject!) -> AnyObject! {
-        let dollars = input as! Int
-        if dollars == 0 {
-            return ""
-        }
-        
-        let formatter = NSNumberFormatter()
-        formatter.locale = NSLocale(localeIdentifier: "en_US")
-        formatter.numberStyle = .DecimalStyle
-        return formatter.stringFromNumber(dollars)
-    }
-
-    func toCurrentBidTitleString(input: AnyObject!) -> AnyObject! {
-        if let count = input as? Int {
-            return count > 0 ? "Current Bid:" : "Opening Bid:"
-        } else {
-            return ""
-        }
-    }
-
-    func toNextBidString(cents: AnyObject!) -> AnyObject! {
-        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
-            return "Enter \(dollars) or more"
-        }
+func dollarsToCurrencyString(input: AnyObject!) -> AnyObject! {
+    let dollars = input as! Int
+    if dollars == 0 {
         return ""
     }
+
+    let formatter = NSNumberFormatter()
+    formatter.locale = NSLocale(localeIdentifier: "en_US")
+    formatter.numberStyle = .DecimalStyle
+    return formatter.stringFromNumber(dollars)
+}
+
+func toCurrentBidTitleString(input: AnyObject!) -> AnyObject! {
+    if let count = input as? Int {
+        return count > 0 ? "Current Bid:" : "Opening Bid:"
+    } else {
+        return ""
+    }
+}
+
+func toNextBidString(cents: AnyObject!) -> AnyObject! {
+    if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
+        return "Enter \(dollars) or more"
+    }
+    return ""
 }
