@@ -22,8 +22,8 @@ class CardHandlerTests: QuickSpec {
         }
 
         pending("sets up the Cardflight API + Token") {
-            expect(self.handler.sessionManager.getApiToken()) == apiKey
-            expect(self.handler.sessionManager.getAccountToken()) == accountToken
+            expect(self.handler.sessionManager.apiToken()) == apiKey
+            expect(self.handler.sessionManager.accountToken()) == accountToken
         }
 
         xit("sends a signal with a card if successful") {
@@ -70,7 +70,7 @@ class CardHandlerTests: QuickSpec {
 class LocalCardReader: CFTReader {
     var fail = false
 
-    override func beginSwipeWithMessage(message: String!) {
+    override func beginSwipe() {
         if fail {
             let error = NSError(domain: "eidolon", code: 111, userInfo: nil)
             self.delegate?.readerCardResponse(nil, withError: error)
