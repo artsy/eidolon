@@ -49,6 +49,10 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
 
+    deinit {
+        countdownManager.invalidate()
+    }
+
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         let hide = (viewController as? SaleArtworkZoomViewController != nil)
         countdownManager.setLabelsHiddenIfSynced(hide)
