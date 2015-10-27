@@ -280,7 +280,16 @@ func leastBidsSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
 }
 
 func mostBidsSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
-    return !leastBidsSort(lhs, rhs)
+    switch (lhs.highestBidCents.hasValue, rhs.highestBidCents.hasValue) {
+    case (true, true): // Both valid, compare bidCount.
+        return (lhs.bidCount ?? 0) > (rhs.bidCount ?? 0)
+    case (true, _): // First valid, it comes first.
+        return true
+    case (_, true): // Second valid, it comes first.
+        return false
+    default: // Neither valid, doesn't matter.
+        return true
+    }
 }
 
 func lowestCurrentBidSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
