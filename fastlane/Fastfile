@@ -117,7 +117,7 @@ EOS
     message: "There is a new version of the Kiosk app available. Download it at http://artsy.net/kioskbeta",
     success: true,        # optional, defaults to true
     payload: {            # optional, lets you specify any number of your own Slack attachments
-      'Version' => version_number,
+      'Version' => version,
       'What\'s new' => release_notes,
     },
     default_payloads: [],
@@ -127,8 +127,8 @@ EOS
   clean_build_artifacts
 
   # Tag release and push to GitHub
-  commit_version_bump message: "Deploying version #{version_number}."
-  add_git_tag tag: version_number
+  commit_version_bump message: "Deploying version #{version}."
+  add_git_tag tag: version
   push_to_git_remote
 end
 
