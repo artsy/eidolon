@@ -21,7 +21,11 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var placeHigherBidButton: ActionButton!
 
     lazy var viewModel: LoadingViewModel = { () -> LoadingViewModel in
-        return LoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()), placingBid: self.placingBid)
+        return LoadingViewModel(
+            bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()),
+            placingBid: self.placingBid,
+            actionsCompleteSignal: self.viewWillDisappearSignal()
+        )
     }()
 
     lazy var recognizer = UITapGestureRecognizer()
@@ -47,6 +51,8 @@ class LoadingViewController: UIViewController {
 
         titleLabel.text = placingBid ? "Placing bid..." : "Registering..."
 
+        // TODO: Some cycle in bidding code.
+
         // The view model will perform actions like registering a user if necessary,
         // placing a bid if requested, and polling for results.
         viewModel.performActions().finally { [weak self] in
@@ -61,7 +67,6 @@ class LoadingViewController: UIViewController {
         })
     }
 
-
     func finishUp() {
         let reserveNotMet = viewModel.reserveNotMet
         let isHighestBidder = viewModel.isHighestBidder
@@ -71,38 +76,38 @@ class LoadingViewController: UIViewController {
         logger.log("Bidding process result: reserveNotMet \(reserveNotMet), isHighestBidder \(isHighestBidder), bidIsResolved \(bidIsResolved), createdNewbidder \(createdNewBidder)")
 
         if placingBid {
-            ARAnalytics.event("Placed a bid", withProperties: ["top_bidder" : isHighestBidder])
-
-            if bidIsResolved {
-
-                if reserveNotMet {
-                    handleReserveNotMet()
-                } else if isHighestBidder {
-                    handleHighestBidder()
-                } else {
-                    handleLowestBidder()
-                }
-
-            } else {
-                handleUnknownBidder()
-            }
-
-        } else { // Not placing bid
-            if createdNewBidder { // Creating new user
-                handleRegistered()
-            } else { // Updating existing user
-                handleUpdate()
-            }
+//            ARAnalytics.event("Placed a bid", withProperties: ["top_bidder" : isHighestBidder])
+//
+//            if bidIsResolved {
+//
+//                if reserveNotMet {
+//                    handleReserveNotMet()
+//                } else if isHighestBidder {
+//                    handleHighestBidder()
+//                } else {
+//                    handleLowestBidder()
+//                }
+//
+//            } else {
+//                handleUnknownBidder()
+//            }
+//
+//        } else { // Not placing bid
+//            if createdNewBidder { // Creating new user
+//                handleRegistered()
+//            } else { // Updating existing user
+//                handleUpdate()
+//            }
         }
-
-        let showPlaceHigherButton = placingBid && (!isHighestBidder || reserveNotMet)
-        placeHigherBidButton.hidden = !showPlaceHigherButton
-
-        let showAuctionButton = showPlaceHigherButton || isHighestBidder || (!placingBid && !createdNewBidder)
-        backToAuctionButton.hidden = !showAuctionButton
-
-        let title = reserveNotMet ? "NO, THANKS" : (createdNewBidder ? "CONTINUE" : "BACK TO AUCTION")
-        backToAuctionButton.setTitle(title, forState: .Normal)
+//
+//        let showPlaceHigherButton = placingBid && (!isHighestBidder || reserveNotMet)
+//        placeHigherBidButton.hidden = !showPlaceHigherButton
+//
+//        let showAuctionButton = showPlaceHigherButton || isHighestBidder || (!placingBid && !createdNewBidder)
+//        backToAuctionButton.hidden = !showAuctionButton
+//
+//        let title = reserveNotMet ? "NO, THANKS" : (createdNewBidder ? "CONTINUE" : "BACK TO AUCTION")
+//        backToAuctionButton.setTitle(title, forState: .Normal)
     }
 
     func handleRegistered() {

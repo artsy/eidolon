@@ -16,7 +16,7 @@ class BidCheckingNetworkModel: NSObject {
     dynamic var isHighestBidder = false
     dynamic var reserveNotMet = false
 
-    private var mostRecentSaleArtwork:SaleArtwork?
+    private var mostRecentSaleArtwork: SaleArtwork?
 
     init(fulfillmentController: FulfillmentController) {
         self.fulfillmentController = fulfillmentController

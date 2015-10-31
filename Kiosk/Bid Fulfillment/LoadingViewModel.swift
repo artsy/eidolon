@@ -9,11 +9,13 @@ class LoadingViewModel: NSObject {
     let bidderNetworkModel: BidderNetworkModel
 
     lazy var placeBidNetworkModel: PlaceBidNetworkModel = {
-        return PlaceBidNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
+        return PlaceBidNetworkModel(bidDetails: self.bidDetails, provider: self.bidderNetworkModel.fulfillmentController.loggedInProvider!)
     }()
-    lazy var bidCheckingModel: BidCheckingNetworkModel = { () -> BidCheckingNetworkModel in
+    lazy var bidCheckingModel: BidCheckingNetworkModel = { 
         return BidCheckingNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
+
+    private let actionsCompleteSignal: RACSignal
 
     dynamic var createdNewBidder = false
     dynamic var bidIsResolved = false
@@ -23,16 +25,17 @@ class LoadingViewModel: NSObject {
         return bidderNetworkModel.fulfillmentController.bidDetails
     }
 
-    init(bidNetworkModel: BidderNetworkModel, placingBid: Bool) {
+    init(bidNetworkModel: BidderNetworkModel, placingBid: Bool, actionsCompleteSignal: RACSignal) {
         self.bidderNetworkModel = bidNetworkModel
         self.placingBid = placingBid
+        self.actionsCompleteSignal = actionsCompleteSignal
 
         super.init()
 
-        RAC(self, "createdNewBidder") <~ bidderNetworkModel.createdNewUser
-        RAC(self, "bidIsResolved") <~ RACObserve(bidCheckingModel, "bidIsResolved")
-        RAC(self, "isHighestBidder") <~ RACObserve(bidCheckingModel, "isHighestBidder")
-        RAC(self, "reserveNotMet") <~ RACObserve(bidCheckingModel, "reserveNotMet")
+        RAC(self, "createdNewBidder") <~ bidderNetworkModel.createdNewUser.takeUntil(actionsCompleteSignal)
+        RAC(self, "bidIsResolved") <~ RACObserve(bidCheckingModel, "bidIsResolved").takeUntil(actionsCompleteSignal)
+        RAC(self, "isHighestBidder") <~ RACObserve(bidCheckingModel, "isHighestBidder").takeUntil(actionsCompleteSignal)
+        RAC(self, "reserveNotMet") <~ RACObserve(bidCheckingModel, "reserveNotMet").takeUntil(actionsCompleteSignal)
     }
 
     /// Encapsulates essential activities of the LoadingViewController, including:

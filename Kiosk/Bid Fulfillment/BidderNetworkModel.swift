@@ -9,7 +9,7 @@ class BidderNetworkModel: NSObject {
     var fulfillmentController: FulfillmentController
 
     var createdNewUser: RACSignal {
-        return RACObserve(self.fulfillmentController.bidDetails.newUser, "hasBeenRegistered")
+        return RACObserve(self.fulfillmentController.bidDetails.newUser, "hasBeenRegistered").takeUntil(rac_willDeallocSignal())
     }
 
     init(fulfillmentController: FulfillmentController) {
@@ -56,8 +56,8 @@ class BidderNetworkModel: NSObject {
             logger.log("Creating user failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
 
-        }.then {
-            self.updateProvider()
+        }.then { [weak self] in
+            self?.updateProvider() ?? RACSignal.empty()
         }
     }
 
@@ -71,8 +71,8 @@ class BidderNetworkModel: NSObject {
         let newUser = fulfillmentController.bidDetails.newUser
         let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode ?? "", name: newUser.name ?? "")
 
-        return updateProviderIfNecessary().then {
-            self.fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
+        return updateProviderIfNecessary().then { [weak self] in
+            self?.fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON() ?? RACSignal.empty()
         }.logNext().doError { (error) in
             logger.log("Updating user failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
@@ -105,7 +105,7 @@ class BidderNetworkModel: NSObject {
     private func createOrUpdateBidder() -> RACSignal {
         let boolSignal = self.checkForBidderOnAuction(self.fulfillmentController.auctionID)
         let trueSignal = RACSignal.empty()
-        let falseSignal = self.registerToAuction().then { self.generateAPIN() }
+        let falseSignal = self.registerToAuction().then { [weak self] in self?.generateAPIN() ?? RACSignal.empty() }
         return RACSignal.`if`(boolSignal, then: trueSignal, `else`: falseSignal)
     }
 
