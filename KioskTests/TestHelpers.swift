@@ -97,6 +97,6 @@ class StubFulfillmentController: FulfillmentController {
 /// Nimble is currently having issues with nondeterministic async expectations.
 /// This will have to do for now 😢
 /// See: https://github.com/Quick/Nimble/issues/177
-func kioskWaitUntil(action: ((Any?...) -> Void) -> Void) {
+func kioskWaitUntil(action: (() -> Void) -> Void) {
     waitUntil(timeout: 10, action: action)
 }

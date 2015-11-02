@@ -1,7 +1,7 @@
 import Quick
 import Nimble
 import ReactiveCocoa
-import @testable
+@testable
 import Kiosk
 import Moya
 
