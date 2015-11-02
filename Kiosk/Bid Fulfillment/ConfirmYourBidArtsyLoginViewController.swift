@@ -52,10 +52,10 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
                     return false
                 }
 
-            }.then {
-                return self?.fulfillmentNav().updateUserCredentials() ?? RACSignal.empty()
+            }.andThen {
+                return self?.fulfillmentNav().updateUserCredentials()
 
-            }.then {
+            }.andThen {
                 return self?.creditCardSignal().doNext { (cards) -> Void in
                     if (self == nil) { return }
 
@@ -64,7 +64,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
                     } else {
                         self!.performSegue(.ArtsyUserHasNotRegisteredCard)
                     }
-                } ?? RACSignal.empty()
+                }
 
             }.doError { [weak self] (error) -> Void in
                 logger.log("Error logging in: \(error.localizedDescription)")

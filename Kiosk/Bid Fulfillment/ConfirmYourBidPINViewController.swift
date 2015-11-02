@@ -43,12 +43,12 @@ class ConfirmYourBidPINViewController: UIViewController {
             return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().doNext { _ in
                 // If the request to ArtsyAPI.Me succeeds, we have logged in and can use this provider.
                 self?.fulfillmentNav().loggedInProvider = loggedInProvider
-            }.then {
+            }.andThen {
                 // We want to put the data we've collected up to the server.
-                self?.fulfillmentNav().updateUserCredentials() ?? RACSignal.empty()
-            }.then {
+                self?.fulfillmentNav().updateUserCredentials()
+            }.andThen {
                 // This looks for credit cards on the users account, and sends them on the signal
-                self?.checkForCreditCard() ?? RACSignal.empty()
+                self?.checkForCreditCard()
             }.doNext { (cards) in
                 // If the cards list doesn't exist, or its empty, then perform the segue to collect one.
                 // Otherwise, proceed directly to the loading view controller to place the bid.

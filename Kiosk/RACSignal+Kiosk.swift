@@ -31,4 +31,10 @@ extension RACSignal {
         }
     }
 
+    /// Just like then() but it allows the block to return nil.
+    func andThen(block: () -> RACSignal?) -> RACSignal {
+        return self.then {
+            return block() ?? RACSignal.empty()
+        }
+    }
 }

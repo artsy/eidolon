@@ -18,11 +18,11 @@ class BidderNetworkModel: NSObject {
     // MARK: - Main Signal
 
     func createOrGetBidder() -> RACSignal {
-        return createOrUpdateUser().then { [weak self] in
-            self?.createOrUpdateBidder() ?? RACSignal.empty()
+        return createOrUpdateUser().andThen { [weak self] in
+            self?.createOrUpdateBidder()
 
-        }.then { [weak self] in
-            self?.getMyPaddleNumber() ?? RACSignal.empty()
+        }.andThen { [weak self] in
+            self?.getMyPaddleNumber()
         }
     }
 
@@ -55,8 +55,8 @@ class BidderNetworkModel: NSObject {
             logger.log("Creating user failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
 
-        }.then { [weak self] in
-            self?.updateProvider() ?? RACSignal.empty()
+        }.andThen { [weak self] in
+            self?.updateProvider()
         }
     }
 
@@ -69,8 +69,8 @@ class BidderNetworkModel: NSObject {
     private func updateUser() -> RACSignal {
         let newUser = fulfillmentController.bidDetails.newUser
         let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode ?? "", name: newUser.name ?? "")
-        return updateProviderIfNecessary().then { [weak self] in
-            self?.fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON() ?? RACSignal.empty()
+        return updateProviderIfNecessary().andThen { [weak self] in
+            self?.fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
         }.logNext().doError { (error) in
             logger.log("Updating user failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
@@ -103,7 +103,7 @@ class BidderNetworkModel: NSObject {
     private func createOrUpdateBidder() -> RACSignal {
         let boolSignal = self.checkForBidderOnAuction(self.fulfillmentController.auctionID)
         let trueSignal = RACSignal.empty()
-        let falseSignal = self.registerToAuction().then { [weak self] in self?.generateAPIN() ?? RACSignal.empty() }
+        let falseSignal = self.registerToAuction().andThen { [weak self] in self?.generateAPIN() }
         return RACSignal.`if`(boolSignal, then: trueSignal, `else`: falseSignal)
     }
 
