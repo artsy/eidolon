@@ -18,11 +18,11 @@ class BidderNetworkModel: NSObject {
     // MARK: - Main Signal
 
     func createOrGetBidder() -> RACSignal {
-        return createOrUpdateUser().then {
-            self.createOrUpdateBidder()
+        return createOrUpdateUser().then { [weak self] in
+            self?.createOrUpdateBidder() ?? RACSignal.empty()
 
-        }.then {
-            self.getMyPaddleNumber()
+        }.then { [weak self] in
+            self?.getMyPaddleNumber() ?? RACSignal.empty()
         }
     }
 

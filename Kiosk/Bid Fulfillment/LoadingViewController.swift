@@ -50,8 +50,6 @@ class LoadingViewController: UIViewController {
 
         titleLabel.text = placingBid ? "Placing bid..." : "Registering..."
 
-        // TODO: Some cycle in bidding code.
-
         // The view model will perform actions like registering a user if necessary,
         // placing a bid if requested, and polling for results.
         viewModel.performActions().finally { [weak self] in
