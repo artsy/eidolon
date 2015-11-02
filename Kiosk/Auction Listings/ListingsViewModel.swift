@@ -1,6 +1,5 @@
 import Foundation
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 typealias ShowDetailsClosure = (SaleArtwork) -> Void
 typealias PresentModalClosure = (SaleArtwork) -> Void

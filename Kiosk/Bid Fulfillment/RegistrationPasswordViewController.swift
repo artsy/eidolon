@@ -1,7 +1,6 @@
 import UIKit
 import ReactiveCocoa
 import Moya
-import Swift_RAC_Macros
 
 class RegistrationPasswordViewController: UIViewController, RegistrationSubController {
     @IBOutlet var passwordTextField: TextField!

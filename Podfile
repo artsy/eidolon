@@ -59,9 +59,8 @@ pod 'XNGMarkdownParser'
 
 # Swift pods
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :branch => 'xcode7'
-pod 'ReactiveCocoa', '~> 4.0.1-alpha-2'
+pod 'ReactiveCocoa'
 pod 'Moya/ReactiveCocoa'
-pod 'Swift-RAC-Macros'
 
 target 'KioskTests' do
 

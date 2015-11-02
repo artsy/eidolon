@@ -1,6 +1,5 @@
 import UIKit
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 @objc protocol RegistrationSubController {
     // I know, leaky abstraction, but the amount

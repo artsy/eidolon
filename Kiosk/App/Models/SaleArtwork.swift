@@ -1,6 +1,5 @@
 import UIKit
 import SwiftyJSON
-import Swift_RAC_Macros
 import ReactiveCocoa
 
 enum ReserveStatus: String {

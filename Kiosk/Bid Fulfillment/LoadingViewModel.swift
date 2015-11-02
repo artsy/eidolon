@@ -1,7 +1,6 @@
 import Foundation
 import ARAnalytics
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 /// Encapsulates activities of the LoadingViewController.
 class LoadingViewModel: NSObject {
@@ -9,7 +8,7 @@ class LoadingViewModel: NSObject {
     let bidderNetworkModel: BidderNetworkModel
 
     lazy var placeBidNetworkModel: PlaceBidNetworkModel = {
-        return PlaceBidNetworkModel(bidDetails: self.bidDetails, provider: self.bidderNetworkModel.fulfillmentController.loggedInProvider!)
+        return PlaceBidNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
     lazy var bidCheckingModel: BidCheckingNetworkModel = { 
         return BidCheckingNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)

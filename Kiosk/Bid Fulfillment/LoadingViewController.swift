@@ -2,7 +2,6 @@ import UIKit
 import Artsy_UILabels
 import ARAnalytics
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 class LoadingViewController: UIViewController {
 

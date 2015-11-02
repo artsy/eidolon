@@ -1,7 +1,6 @@
 import Foundation
 import ReactiveCocoa
 import Moya
-import Swift_RAC_Macros
 
 class RegistrationPasswordViewModel {
     private class PasswordHolder: NSObject {

@@ -1,5 +1,4 @@
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 class RegistrationPostalZipViewController: UIViewController, RegistrationSubController {
     @IBOutlet var zipCodeTextField: TextField!

@@ -1,6 +1,5 @@
 import Foundation
 import ReactiveCocoa
-import Swift_RAC_Macros
 import Moya
 
 class BidderNetworkModel: NSObject {

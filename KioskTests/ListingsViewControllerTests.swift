@@ -3,8 +3,8 @@ import Nimble
 @testable
 import Kiosk
 import ReactiveCocoa
-import Swift_RAC_Macros
-import Nimble_Snapshots
+import
+ Nimble_Snapshots
 import Foundation
 import Moya
 

@@ -1,8 +1,7 @@
 import Quick
 import Nimble
 import ReactiveCocoa
-import Swift_RAC_Macros
-@testable
+import @testable
 import Kiosk
 import Moya
 
