@@ -9,7 +9,7 @@ class BidCheckingNetworkModel: NSObject {
     private var pollRequests = 0
 
     // inputs
-    let fulfillmentController: FulfillmentController
+    unowned let fulfillmentController: FulfillmentController
 
     // outputs
     dynamic var bidIsResolved = false

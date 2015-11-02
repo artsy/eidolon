@@ -7,7 +7,7 @@ let OutbidDomain = "Outbid"
 
 class PlaceBidNetworkModel: NSObject {
 
-    var fulfillmentController: FulfillmentController!
+    unowned let fulfillmentController: FulfillmentController
     var bidderPosition: BidderPosition?
 
     var provider: ReactiveCocoaMoyaProvider<ArtsyAPI>! {

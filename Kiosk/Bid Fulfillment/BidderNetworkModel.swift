@@ -5,7 +5,7 @@ import Moya
 class BidderNetworkModel: NSObject {
     // MARK: - Getters
 
-    var fulfillmentController: FulfillmentController
+    unowned let fulfillmentController: FulfillmentController
 
     var createdNewUser: RACSignal {
         return RACObserve(self.fulfillmentController.bidDetails.newUser, "hasBeenRegistered").takeUntil(rac_willDeallocSignal())

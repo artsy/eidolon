@@ -75,38 +75,38 @@ class LoadingViewController: UIViewController {
         logger.log("Bidding process result: reserveNotMet \(reserveNotMet), isHighestBidder \(isHighestBidder), bidIsResolved \(bidIsResolved), createdNewbidder \(createdNewBidder)")
 
         if placingBid {
-//            ARAnalytics.event("Placed a bid", withProperties: ["top_bidder" : isHighestBidder])
-//
-//            if bidIsResolved {
-//
-//                if reserveNotMet {
-//                    handleReserveNotMet()
-//                } else if isHighestBidder {
-//                    handleHighestBidder()
-//                } else {
-//                    handleLowestBidder()
-//                }
-//
-//            } else {
-//                handleUnknownBidder()
-//            }
-//
-//        } else { // Not placing bid
-//            if createdNewBidder { // Creating new user
-//                handleRegistered()
-//            } else { // Updating existing user
-//                handleUpdate()
-//            }
+            ARAnalytics.event("Placed a bid", withProperties: ["top_bidder" : isHighestBidder])
+
+            if bidIsResolved {
+
+                if reserveNotMet {
+                    handleReserveNotMet()
+                } else if isHighestBidder {
+                    handleHighestBidder()
+                } else {
+                    handleLowestBidder()
+                }
+
+            } else {
+                handleUnknownBidder()
+            }
+
+        } else { // Not placing bid
+            if createdNewBidder { // Creating new user
+                handleRegistered()
+            } else { // Updating existing user
+                handleUpdate()
+            }
         }
-//
-//        let showPlaceHigherButton = placingBid && (!isHighestBidder || reserveNotMet)
-//        placeHigherBidButton.hidden = !showPlaceHigherButton
-//
-//        let showAuctionButton = showPlaceHigherButton || isHighestBidder || (!placingBid && !createdNewBidder)
-//        backToAuctionButton.hidden = !showAuctionButton
-//
-//        let title = reserveNotMet ? "NO, THANKS" : (createdNewBidder ? "CONTINUE" : "BACK TO AUCTION")
-//        backToAuctionButton.setTitle(title, forState: .Normal)
+
+        let showPlaceHigherButton = placingBid && (!isHighestBidder || reserveNotMet)
+        placeHigherBidButton.hidden = !showPlaceHigherButton
+
+        let showAuctionButton = showPlaceHigherButton || isHighestBidder || (!placingBid && !createdNewBidder)
+        backToAuctionButton.hidden = !showAuctionButton
+
+        let title = reserveNotMet ? "NO, THANKS" : (createdNewBidder ? "CONTINUE" : "BACK TO AUCTION")
+        backToAuctionButton.setTitle(title, forState: .Normal)
     }
 
     func handleRegistered() {
