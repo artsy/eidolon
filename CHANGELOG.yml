@@ -1,7 +1,12 @@
 upcoming:
-- Removes unnecessary logic around bid counting [ash]
+- iOS 9 support [ash]
+- Removes support for iOS 8 [ash]
+- Removes check for wifi network name [ash]
 
 releases:
+- version: 3.8.6
+  date: October 30 2015
+  - Removes unnecessary logic around bid counting [ash]
 - version: 3.8.5
   date: October 21 2015
   notes:

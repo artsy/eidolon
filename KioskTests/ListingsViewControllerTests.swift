@@ -3,8 +3,7 @@ import Nimble
 @testable
 import Kiosk
 import ReactiveCocoa
-import
- Nimble_Snapshots
+import Nimble_Snapshots
 import Foundation
 import Moya
 
@@ -62,7 +61,9 @@ class ListingsViewControllerTests: QuickSpec {
     override func spec() {
 
         describe("when displaying stubbed contents") {
+
             var subject: ListingsViewController!
+
             beforeEach {
                 subject = testListingsViewController()
             }
