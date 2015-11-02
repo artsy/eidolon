@@ -19,7 +19,7 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var backToAuctionButton: SecondaryActionButton!
     @IBOutlet weak var placeHigherBidButton: ActionButton!
 
-    lazy var viewModel: LoadingViewModel = { () -> LoadingViewModel in
+    lazy var viewModel: LoadingViewModel = {
         return LoadingViewModel(
             bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()),
             placingBid: self.placingBid,

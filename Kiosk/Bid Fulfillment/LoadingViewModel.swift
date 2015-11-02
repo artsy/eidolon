@@ -14,8 +14,6 @@ class LoadingViewModel: NSObject {
         return BidCheckingNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
 
-    private let actionsCompleteSignal: RACSignal
-
     dynamic var createdNewBidder = false
     dynamic var bidIsResolved = false
     dynamic var isHighestBidder = false
@@ -27,7 +25,6 @@ class LoadingViewModel: NSObject {
     init(bidNetworkModel: BidderNetworkModel, placingBid: Bool, actionsCompleteSignal: RACSignal) {
         self.bidderNetworkModel = bidNetworkModel
         self.placingBid = placingBid
-        self.actionsCompleteSignal = actionsCompleteSignal
 
         super.init()
 

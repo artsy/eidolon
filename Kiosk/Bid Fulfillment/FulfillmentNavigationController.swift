@@ -24,12 +24,13 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
     /// Otherwise we're fine with a legit auth token
     var xAccessToken: String? {
         didSet(oldToken) {
+            let accessToken = self.xAccessToken!
 
             let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
                 // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
                 let endpoint = Provider.sharedProvider.endpointClosure(target)
 
-                return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": self.xAccessToken!])
+                return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": accessToken])
             }
             loggedInProvider = ReactiveCocoaMoyaProvider(endpointClosure: newEndpointsClosure, requestClosure: endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
         }

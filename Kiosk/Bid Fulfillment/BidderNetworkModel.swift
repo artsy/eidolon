@@ -8,7 +8,7 @@ class BidderNetworkModel: NSObject {
     unowned let fulfillmentController: FulfillmentController
 
     var createdNewUser: RACSignal {
-        return RACObserve(self.fulfillmentController.bidDetails.newUser, "hasBeenRegistered").takeUntil(rac_willDeallocSignal())
+        return RACObserve(self.fulfillmentController.bidDetails.newUser, "hasBeenRegistered")
     }
 
     init(fulfillmentController: FulfillmentController) {
@@ -69,7 +69,6 @@ class BidderNetworkModel: NSObject {
     private func updateUser() -> RACSignal {
         let newUser = fulfillmentController.bidDetails.newUser
         let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode ?? "", name: newUser.name ?? "")
-
         return updateProviderIfNecessary().then { [weak self] in
             self?.fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON() ?? RACSignal.empty()
         }.logNext().doError { (error) in
