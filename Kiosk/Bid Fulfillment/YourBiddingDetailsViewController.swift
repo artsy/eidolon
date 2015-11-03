@@ -1,5 +1,4 @@
 import UIKit
-import Swift_RAC_Macros
 import Artsy_UILabels
 import Artsy_UIButtons
 

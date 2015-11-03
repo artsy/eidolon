@@ -1,7 +1,6 @@
 import Foundation
 import ARAnalytics
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 /// Encapsulates activities of the LoadingViewController.
 class LoadingViewModel: NSObject {
@@ -11,7 +10,7 @@ class LoadingViewModel: NSObject {
     lazy var placeBidNetworkModel: PlaceBidNetworkModel = {
         return PlaceBidNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
-    lazy var bidCheckingModel: BidCheckingNetworkModel = { () -> BidCheckingNetworkModel in
+    lazy var bidCheckingModel: BidCheckingNetworkModel = { 
         return BidCheckingNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
 
@@ -23,16 +22,16 @@ class LoadingViewModel: NSObject {
         return bidderNetworkModel.fulfillmentController.bidDetails
     }
 
-    init(bidNetworkModel: BidderNetworkModel, placingBid: Bool) {
+    init(bidNetworkModel: BidderNetworkModel, placingBid: Bool, actionsCompleteSignal: RACSignal) {
         self.bidderNetworkModel = bidNetworkModel
         self.placingBid = placingBid
 
         super.init()
 
-        RAC(self, "createdNewBidder") <~ bidderNetworkModel.createdNewUser
-        RAC(self, "bidIsResolved") <~ RACObserve(bidCheckingModel, "bidIsResolved")
-        RAC(self, "isHighestBidder") <~ RACObserve(bidCheckingModel, "isHighestBidder")
-        RAC(self, "reserveNotMet") <~ RACObserve(bidCheckingModel, "reserveNotMet")
+        RAC(self, "createdNewBidder") <~ bidderNetworkModel.createdNewUser.takeUntil(actionsCompleteSignal)
+        RAC(self, "bidIsResolved") <~ RACObserve(bidCheckingModel, "bidIsResolved").takeUntil(actionsCompleteSignal)
+        RAC(self, "isHighestBidder") <~ RACObserve(bidCheckingModel, "isHighestBidder").takeUntil(actionsCompleteSignal)
+        RAC(self, "reserveNotMet") <~ RACObserve(bidCheckingModel, "reserveNotMet").takeUntil(actionsCompleteSignal)
     }
 
     /// Encapsulates essential activities of the LoadingViewController, including:

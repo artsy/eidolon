@@ -2,7 +2,6 @@ import UIKit
 import Artsy_UILabels
 import ARAnalytics
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 class LoadingViewController: UIViewController {
 
@@ -20,8 +19,12 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var backToAuctionButton: SecondaryActionButton!
     @IBOutlet weak var placeHigherBidButton: ActionButton!
 
-    lazy var viewModel: LoadingViewModel = { () -> LoadingViewModel in
-        return LoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()), placingBid: self.placingBid)
+    lazy var viewModel: LoadingViewModel = {
+        return LoadingViewModel(
+            bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()),
+            placingBid: self.placingBid,
+            actionsCompleteSignal: self.viewWillDisappearSignal()
+        )
     }()
 
     lazy var recognizer = UITapGestureRecognizer()
@@ -60,7 +63,6 @@ class LoadingViewController: UIViewController {
             self?.finishUp()
         })
     }
-
 
     func finishUp() {
         let reserveNotMet = viewModel.reserveNotMet

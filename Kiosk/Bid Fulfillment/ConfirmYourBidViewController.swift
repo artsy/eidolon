@@ -2,7 +2,6 @@ import UIKit
 import ECPhoneNumberFormatter
 import Moya
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 class ConfirmYourBidViewController: UIViewController {
 
@@ -15,8 +14,9 @@ class ConfirmYourBidViewController: UIViewController {
     @IBOutlet var keypadContainer: KeypadContainerView!
     @IBOutlet var enterButton: UIButton!
     @IBOutlet var useArtsyLoginButton: UIButton!
-    
-    lazy var numberSignal: RACSignal = { self.keypadContainer.stringValueSignal }()
+
+    // Need takeUntil because we bind this signal eventually to bidDetails, making us stick around longer than we should!
+    lazy var numberSignal: RACSignal = { self.keypadContainer.stringValueSignal.takeUntil(self.viewWillDisappearSignal()) }()
     
     lazy var provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider
 
@@ -34,14 +34,13 @@ class ConfirmYourBidViewController: UIViewController {
         useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
 
         RAC(self, "number") <~ numberSignal
-        
-        let numberStringSignal = RACObserve(self, "number")
-        RAC(numberAmountTextField, "text") <~ numberStringSignal.map(toPhoneNumberString)
+
+        RAC(numberAmountTextField, "text") <~ numberSignal.map(toPhoneNumberString)
 
         let nav = self.fulfillmentNav()
 
-        RAC(nav.bidDetails.newUser, "phoneNumber") <~ numberStringSignal
-        RAC(nav.bidDetails, "paddleNumber") <~ numberStringSignal
+        RAC(nav.bidDetails.newUser, "phoneNumber") <~ numberSignal
+        RAC(nav.bidDetails, "paddleNumber") <~ numberSignal
         
         bidDetailsPreviewView.bidDetails = nav.bidDetails
 
@@ -49,36 +48,33 @@ class ConfirmYourBidViewController: UIViewController {
         //   if so forward to PIN input VC
         //   else send to enter email
 
+        let auctionID = nav.auctionID
+        
+        let numberIsZeroLengthSignal = numberSignal.map(isZeroLengthString)
+        enterButton.rac_command = RACCommand(enabled: numberIsZeroLengthSignal.not()) { [weak self] _ in
+            guard let me = self else { return RACSignal.empty() }
 
-        if let nav = self.navigationController as? FulfillmentNavigationController {
-            
-            let numberIsZeroLengthSignal = numberStringSignal.map(isZeroLengthString)
-            enterButton.rac_command = RACCommand(enabled: numberIsZeroLengthSignal.not()) { [weak self] _ in
-                if (self == nil) {
-                    return RACSignal.empty()
-                }
+            let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me.number))
+            return XAppRequest(endpoint, provider:me.provider).filterStatusCode(400).doError { (error) -> Void in
+                guard let me = self else { return }
 
-                let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: nav.auctionID!, phone: String(self!.number))
-                return XAppRequest(endpoint, provider:self!.provider).filterStatusCode(400).doError { (error) -> Void in
+                // Due to AlamoFire restrictions we can't stop HTTP redirects
+                // so to figure out if we got 302'd we have to introspect the
+                // error to see if it's the original URL to know if the
+                // request succeeded.
 
-                    // Due to AlamoFire restrictions we can't stop HTTP redirects
-                    // so to figure out if we got 302'd we have to introspect the
-                    // error to see if it's the original URL to know if the
-                    // request suceedded
+                let moyaResponse = error.userInfo["data"] as? MoyaResponse
+                let responseURL = moyaResponse?.response?.URL?.absoluteString
 
-                    let moyaResponse = error.userInfo["data"] as? MoyaResponse
-                    let responseURL = moyaResponse?.response?.URL?.absoluteString
-
-                    if let responseURL = responseURL {
-                        if (responseURL as NSString).containsString("v1/bidder/") {
-                            self?.performSegue(.ConfirmyourBidBidderFound)
-                            return
-                        }
+                if let responseURL = responseURL {
+                    if (responseURL as NSString).containsString("v1/bidder/") {
+                        me.performSegue(.ConfirmyourBidBidderFound)
+                        return
                     }
-
-                    self?.performSegue(.ConfirmyourBidBidderNotFound)
-                    return
                 }
+
+                me.performSegue(.ConfirmyourBidBidderNotFound)
+                return
             }
         }
     }

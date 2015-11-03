@@ -19,6 +19,7 @@
 		5E43C3901AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C38F1AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift */; };
 		5E43C3921AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C3911AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift */; };
 		5E43C3941AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43C3931AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift */; };
+		5E5705A41BE7E6E100850B0E /* ReactiveCocoaBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5705A31BE7E6E100850B0E /* ReactiveCocoaBindings.swift */; };
 		5E5ADF641A8B789000453250 /* WhitespaceGobbler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */; };
 		5E748B731AA11BCF00DE3A9D /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */; };
 		5E809A401ACF225100C30DC9 /* ArtsyProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */; };
@@ -251,6 +252,7 @@
 		5E43C38F1AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationMobileViewControllerTests.swift; sourceTree = "<group>"; };
 		5E43C3911AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewControllerTests.swift; sourceTree = "<group>"; };
 		5E43C3931AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPostalZipViewControllerTests.swift; sourceTree = "<group>"; };
+		5E5705A31BE7E6E100850B0E /* ReactiveCocoaBindings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCocoaBindings.swift; sourceTree = "<group>"; };
 		5E5ADF631A8B789000453250 /* WhitespaceGobbler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitespaceGobbler.swift; sourceTree = "<group>"; };
 		5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadViewModel.swift; sourceTree = "<group>"; };
 		5E809A3F1ACF225100C30DC9 /* ArtsyProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyProviderTests.swift; sourceTree = "<group>"; };
@@ -809,6 +811,7 @@
 				5E8610301A5C429C00456E41 /* Stubbed Responses */,
 				5E8610471A5C429C00456E41 /* Supporting Files */,
 				5EB0B7161A5C410D00B7CBF2 /* RACSignal+Kiosk.swift */,
+				5E5705A31BE7E6E100850B0E /* ReactiveCocoaBindings.swift */,
 				5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */,
 				5EB0B7181A5C410D00B7CBF2 /* UITextField+RAC.swift */,
 				5EB0B7191A5C410D00B7CBF2 /* UIViewController+Bidding.swift */,
@@ -1154,6 +1157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */,
+				5E5705A41BE7E6E100850B0E /* ReactiveCocoaBindings.swift in Sources */,
 				5E8610751A5C429C00456E41 /* Button.swift in Sources */,
 				5E8610561A5C429C00456E41 /* CardHandler.swift in Sources */,
 				5E8610691A5C429C00456E41 /* ArtsyAPI.swift in Sources */,

@@ -9,14 +9,14 @@ class BidCheckingNetworkModel: NSObject {
     private var pollRequests = 0
 
     // inputs
-    let fulfillmentController: FulfillmentController
+    unowned let fulfillmentController: FulfillmentController
 
     // outputs
     dynamic var bidIsResolved = false
     dynamic var isHighestBidder = false
     dynamic var reserveNotMet = false
 
-    private var mostRecentSaleArtwork:SaleArtwork?
+    private var mostRecentSaleArtwork: SaleArtwork?
 
     init(fulfillmentController: FulfillmentController) {
         self.fulfillmentController = fulfillmentController

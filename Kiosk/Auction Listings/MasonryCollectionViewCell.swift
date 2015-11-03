@@ -1,5 +1,4 @@
 import UIKit
-import Swift_RAC_Macros
 
 let MasonryCollectionViewCellWidth: CGFloat = 254
 

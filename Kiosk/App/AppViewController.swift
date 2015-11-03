@@ -1,7 +1,6 @@
 import UIKit
 import ARAnalytics
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 class AppViewController: UIViewController, UINavigationControllerDelegate {
     var allowAnimations = true
@@ -47,6 +46,10 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
                 nav.delegate = self
             }
         }
+    }
+
+    deinit {
+        countdownManager.invalidate()
     }
 
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
