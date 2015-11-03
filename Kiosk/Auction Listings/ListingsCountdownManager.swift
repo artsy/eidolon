@@ -23,7 +23,7 @@ class ListingsCountdownManager: NSObject {
         }
     }
 
-    /// Immediately invalidates all timers. No further updates will be made to the UI after this method is called.
+    /// Immediately invalidates the timer. No further updates will be made to the UI after this method is called.
     func invalidate() {
         _timer?.invalidate()
     }

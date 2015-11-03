@@ -3,8 +3,7 @@ import Nimble
 @testable
 import Kiosk
 import ReactiveCocoa
-import
- Nimble_Snapshots
+import Nimble_Snapshots
 import Foundation
 import Moya
 
