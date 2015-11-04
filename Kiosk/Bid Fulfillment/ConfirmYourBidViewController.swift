@@ -61,7 +61,7 @@ class ConfirmYourBidViewController: UIViewController {
                 // Due to AlamoFire restrictions we can't stop HTTP redirects
                 // so to figure out if we got 302'd we have to introspect the
                 // error to see if it's the original URL to know if the
-                // request suceedded
+                // request succeeded.
 
                 let moyaResponse = error.userInfo["data"] as? MoyaResponse
                 let responseURL = moyaResponse?.response?.URL?.absoluteString

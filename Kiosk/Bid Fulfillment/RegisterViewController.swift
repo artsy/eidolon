@@ -57,7 +57,7 @@ class RegisterViewController: UIViewController {
         self.internalNavController()!.viewControllers = [controller]
 
         if let subscribableVC = controller as? RegistrationSubController {
-            subscribableVC.finishedSignal.subscribeCompleted { [weak self] () -> Void in
+            subscribableVC.finishedSignal.subscribeCompleted { [weak self] in
                 self?.goToNextVC()
                 self?.flowView.update()
             }
