@@ -39,7 +39,7 @@ func responseIsOK(object: AnyObject!) -> AnyObject {
 
 func detectDevelopmentEnvironment() -> Bool {
     var developmentEnvironment = false
-    #if (arch(i386) || arch(x86_64)) && os(iOS)
+    #if DEBUG || (arch(i386) || arch(x86_64)) && os(iOS)
         developmentEnvironment = true
     #endif
     return developmentEnvironment
