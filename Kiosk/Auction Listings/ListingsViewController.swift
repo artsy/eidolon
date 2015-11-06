@@ -80,7 +80,10 @@ class ListingsViewController: UIViewController {
         viewModel.updatedContentsSignal.mapReplace(collectionView).doNext { (collectionView) -> Void in
             (collectionView as! UICollectionView).reloadData()
             return
-        }.dispatchAsyncMainScheduler().subscribeNext { (collectionView) -> Void in
+        }.dispatchAsyncMainScheduler().subscribeNext { [weak self] (collectionView) -> Void in
+            // Make sure we're on screen and not in a test or something.
+            guard let _ = self?.view.window else { return }
+
             // Need to dispatchAsyncMainScheduler, since the changes in the CV's model aren't imediate, so we may scroll to a cell that doesn't exist yet.
             (collectionView as! UICollectionView).scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: .Top, animated: false)
         }

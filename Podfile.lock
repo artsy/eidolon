@@ -47,7 +47,7 @@ PODS:
   - Moya/ReactiveCore (4.3.1):
     - Moya/Core
   - Nimble (3.0.0)
-  - Nimble-Snapshots (2.0.0):
+  - Nimble-Snapshots (3.0.0):
     - FBSnapshotTestCase (~> 2.0.7)
     - Nimble
     - Quick
@@ -173,7 +173,7 @@ SPEC CHECKSUMS:
   Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
   Moya: 980fa0218d80a3f7379c12c7b983e9a664b8b55a
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
-  Nimble-Snapshots: 6ea674f21e2795e20e116fa1f18a397a1b21e610
+  Nimble-Snapshots: ab41dd737dcd33a0b0cb005a30465fef70b7207a
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab

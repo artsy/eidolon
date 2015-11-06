@@ -61,7 +61,9 @@ class ListingsViewControllerTests: QuickSpec {
     override func spec() {
 
         describe("when displaying stubbed contents") {
+
             var subject: ListingsViewController!
+
             beforeEach {
                 subject = testListingsViewController()
             }
