@@ -48,7 +48,7 @@ GEM
       fuzzy_match (~> 2.0.4)
       nap (~> 1.0)
     cocoapods-downloader (0.9.3)
-    cocoapods-keys (1.5.2)
+    cocoapods-keys (1.6.0)
       dotenv
       osx_keychain
     cocoapods-plugins (0.4.2)
