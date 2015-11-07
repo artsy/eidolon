@@ -7,7 +7,7 @@ lane :test do
   xcodebuild(
     build: true,
     test: true,
-    destination: "OS=8.1,name=iPad Air"
+    destination: "OS=9.1,name=iPad Air"
   )
 end
 
