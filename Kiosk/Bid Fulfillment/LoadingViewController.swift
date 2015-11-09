@@ -50,6 +50,9 @@ class LoadingViewController: UIViewController {
 
         titleLabel.text = placingBid ? "Placing bid..." : "Registering..."
 
+        // Either finishUp() or bidderError() are responsible for providing a way back to the auction.
+        fulfillmentContainer()?.cancelButton.hidden = true
+
         // The view model will perform actions like registering a user if necessary,
         // placing a bid if requested, and polling for results.
         viewModel.performActions().finally { [weak self] in
@@ -191,6 +194,7 @@ class LoadingViewController: UIViewController {
         titleLabel.text = title
         statusMessage.text = message
         statusMessage.hidden = false
+        backToAuctionButton.hidden = false
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
