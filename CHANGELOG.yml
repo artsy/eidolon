@@ -2,6 +2,7 @@ upcoming:
 - iOS 9 support [ash]
 - Removes support for iOS 8 [ash]
 - Removes check for wifi network name [ash]
+- Improved analytics [ash]
 
 releases:
 - version: 3.8.6

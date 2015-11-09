@@ -3,7 +3,7 @@ import ARAnalytics
 
 extension UIViewController {
     func bid(auctionID: String, saleArtwork: SaleArtwork, allowAnimations: Bool) {
-        ARAnalytics.event("Bid Button Tapped")
+        ARAnalytics.event("Bid Button Tapped", withProperties: ["id": saleArtwork.artwork.id])
         
         let storyboard = UIStoryboard.fulfillment()
         let containerController = storyboard.instantiateInitialViewController() as! FulfillmentContainerViewController
