@@ -10,7 +10,12 @@ class PasswordAlertViewController: UIAlertController {
             return
         }
 
-        exitAction.enabled = false
+        if detectDevelopmentEnvironment() {
+            exitAction.enabled = true
+        } else {
+            exitAction.enabled = false
+        }
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
 
         alertController.addTextFieldWithConfigurationHandler { (textField) in
@@ -18,12 +23,7 @@ class PasswordAlertViewController: UIAlertController {
 
             NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
                 // compiler crashes when using weak
-
-                #if (arch(i386) || arch(x86_64)) && os(iOS)
-                    exitAction.enabled = true
-                #else
-                    exitAction.enabled = textField.text == "Genome401"
-                #endif
+                exitAction.enabled = textField.text == "Genome401"
             }
         }
 
