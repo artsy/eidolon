@@ -244,6 +244,7 @@
 		5E0A4E3D1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+LongPressDisplayMessage.swift"; path = "Kiosk/UIView+LongPressDisplayMessage.swift"; sourceTree = SOURCE_ROOT; };
 		5E19E64E1A65630200F8CBDD /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
+		5E3102ED1BF14E2500CA1823 /* CHANGELOG.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG.yml; sourceTree = "<group>"; };
 		5E339E391A991899000C773D /* RACExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensions.swift; sourceTree = "<group>"; };
 		5E38FD2D1AF2154C00D30C17 /* RACExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RACExtensionsTests.swift; sourceTree = "<group>"; };
 		5E38FD2F1AF21ABA00D30C17 /* SwipeCreditCardViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeCreditCardViewControllerTests.swift; sourceTree = "<group>"; };
@@ -780,6 +781,7 @@
 		5EB0B6E41A5C3E6800B7CBF2 = {
 			isa = PBXGroup;
 			children = (
+				5E3102ED1BF14E2500CA1823 /* CHANGELOG.yml */,
 				5EB0B6EF1A5C3E6800B7CBF2 /* Kiosk */,
 				5EB0B7051A5C3E6800B7CBF2 /* KioskTests */,
 				5EB0B6EE1A5C3E6800B7CBF2 /* Products */,

@@ -3,6 +3,7 @@ upcoming:
 - Removes support for iOS 8 [ash]
 - No longer allow users to "cancel" after confirming a bid [ash]
 - Removes check for wifi network name [ash]
+- Improved analytics [ash]
 
 releases:
 - version: 3.8.6

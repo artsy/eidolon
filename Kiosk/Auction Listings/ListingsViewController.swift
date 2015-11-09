@@ -171,12 +171,14 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
 private extension ListingsViewController {
 
     func showDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
+
+        ARAnalytics.event("Artwork Details Tapped", withProperties: ["id": saleArtwork.artwork.id])
         performSegueWithIdentifier(SegueIdentifier.ShowSaleArtworkDetails.rawValue, sender: saleArtwork)
     }
 
     func presentModalForSaleArtwork(saleArtwork: SaleArtwork) {
 
-        ARAnalytics.event("Bid Button Tapped")
+        ARAnalytics.event("Bid Button Tapped", withProperties: ["id": saleArtwork.artwork.id])
 
         let storyboard = UIStoryboard.fulfillment()
         let containerController = storyboard.instantiateInitialViewController() as! FulfillmentContainerViewController

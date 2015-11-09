@@ -1,5 +1,4 @@
 import UIKit
-import ARAnalytics
 import ReactiveCocoa
 
 class AppViewController: UIViewController, UINavigationControllerDelegate {
