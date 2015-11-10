@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.1.1)
+  - Alamofire (3.1.2)
   - ARAnalytics/CoreIOS (3.8.0)
   - ARAnalytics/HockeyApp (3.8.0):
     - ARAnalytics/CoreIOS
@@ -39,13 +39,13 @@ PODS:
   - Mixpanel (2.8.3):
     - Mixpanel/Mixpanel (= 2.8.3)
   - Mixpanel/Mixpanel (2.8.3)
-  - Moya/Core (4.3.1):
+  - Moya/Core (4.4.0):
     - Alamofire (~> 3.0)
-  - Moya/ReactiveCocoa (4.3.1):
-    - Moya/ReactiveCore
-    - ReactiveCocoa (= 4.0.2-alpha-3)
-  - Moya/ReactiveCore (4.3.1):
+  - Moya/ReactiveCore (4.4.0):
     - Moya/Core
+  - Moya/RxSwift (4.4.0):
+    - Moya/ReactiveCore
+    - RxSwift (~> 2.0.0-beta)
   - Nimble (3.0.0)
   - Nimble-Snapshots (3.0.0):
     - FBSnapshotTestCase (~> 2.0.7)
@@ -60,18 +60,7 @@ PODS:
     - FLKAutoLayout (~> 0.1)
   - Quick (0.8.0)
   - Reachability (3.1.1)
-  - ReactiveCocoa (4.0.2-alpha-3):
-    - ReactiveCocoa/UI (= 4.0.2-alpha-3)
-    - Result (~> 0.6.0-beta.6)
-  - ReactiveCocoa/Core (4.0.2-alpha-3):
-    - ReactiveCocoa/no-arc
-    - Result (~> 0.6.0-beta.6)
-  - ReactiveCocoa/no-arc (4.0.2-alpha-3):
-    - Result (~> 0.6.0-beta.6)
-  - ReactiveCocoa/UI (4.0.2-alpha-3):
-    - ReactiveCocoa/Core
-    - Result (~> 0.6.0-beta.6)
-  - Result (0.6.0-beta.6)
+  - RxSwift (2.0.0-beta.2)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
@@ -102,13 +91,13 @@ DEPENDENCIES:
   - Forgeries
   - ISO8601DateFormatter (= 0.7)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Moya/ReactiveCocoa
+  - Moya/RxSwift
   - Nimble
   - Nimble-Snapshots
   - ORStackView
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - ReactiveCocoa (= 4.0.2-alpha-3)
+  - RxSwift (~> 2.0.0-beta)
   - SDWebImage (~> 3.7)
   - Stripe
   - SVProgressHUD
@@ -151,7 +140,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
-  Alamofire: 9b0a7188b961a03914a99304488bd226b0e46c0e
+  Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
   ARAnalytics: 5468652928cee7100dd0e6b5162631409da37106
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: a747cff42142ca04d1dc5cee516186f10b6c0949
@@ -171,15 +160,14 @@ SPEC CHECKSUMS:
   ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
-  Moya: 980fa0218d80a3f7379c12c7b983e9a664b8b55a
+  Moya: 0ade653ca4bc83bec120493130ecc32f137e5683
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   Nimble-Snapshots: ab41dd737dcd33a0b0cb005a30465fef70b7207a
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
-  ReactiveCocoa: 441c518a69d0f6202a1886d77b66d8f79e1f4a81
-  Result: dc390d0b58f9ec43fcd536f1ebdd130803cc6cbc
+  RxSwift: 795720c22352cf1f62669ef3695b5df7e195103b
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
