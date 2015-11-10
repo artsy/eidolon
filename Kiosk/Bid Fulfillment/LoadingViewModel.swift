@@ -1,6 +1,6 @@
 import Foundation
 import ARAnalytics
-import ReactiveCocoa
+import RxSwift
 
 /// Encapsulates activities of the LoadingViewController.
 class LoadingViewModel: NSObject {

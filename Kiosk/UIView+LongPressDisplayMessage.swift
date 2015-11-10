@@ -1,5 +1,5 @@
 import UIKit
-import ReactiveCocoa
+import RxSwift
 
 private func alertController(message: String, title: String) -> UIAlertController {
     let alertController =  UIAlertController(title: title, message: message, preferredStyle: .Alert)

@@ -1,4 +1,4 @@
-import ReactiveCocoa
+import RxSwift
 import Reachability
 import Moya
 

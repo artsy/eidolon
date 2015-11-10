@@ -1,4 +1,4 @@
-import ReactiveCocoa
+import RxSwift
 
 class RegistrationPostalZipViewController: UIViewController, RegistrationSubController {
     @IBOutlet var zipCodeTextField: TextField!

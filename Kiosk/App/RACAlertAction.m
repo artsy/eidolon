@@ -1,5 +1,5 @@
 #import "RACAlertAction.h"
-@import ReactiveCocoa;
+@import RxSwift;
 #import <objc/runtime.h>
 
 static void *RACAlertActionCommandKey = &RACAlertActionCommandKey;

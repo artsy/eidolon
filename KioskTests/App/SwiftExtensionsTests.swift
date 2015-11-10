@@ -1,6 +1,6 @@
 import Quick
 import Nimble
-import ReactiveCocoa
+import RxSwift
 
 @testable
 import Kiosk

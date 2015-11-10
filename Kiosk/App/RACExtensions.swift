@@ -1,4 +1,4 @@
-import ReactiveCocoa
+import RxSwift
 
 extension RACSignal {
     func notNil() -> RACSignal {

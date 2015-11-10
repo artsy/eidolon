@@ -1,7 +1,7 @@
 import UIKit
 import Artsy_UILabels
 import ARAnalytics
-import ReactiveCocoa
+import RxSwift
 
 class LoadingViewController: UIViewController {
 

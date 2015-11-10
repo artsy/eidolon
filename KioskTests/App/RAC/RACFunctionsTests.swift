@@ -2,7 +2,7 @@ import Quick
 import Nimble
 @testable
 import Kiosk
-import ReactiveCocoa
+import RxSwift
 
 class RACFunctionsTests: QuickSpec {
     override func spec() {

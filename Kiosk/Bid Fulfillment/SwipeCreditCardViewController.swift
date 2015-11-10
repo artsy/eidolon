@@ -1,6 +1,6 @@
 import UIKit
 import Artsy_UILabels
-import ReactiveCocoa
+import RxSwift
 import Keys
 import Stripe
 

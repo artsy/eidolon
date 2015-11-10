@@ -1,6 +1,6 @@
 import Foundation
 import Artsy_UILabels
-import ReactiveCocoa
+import RxSwift
 
 class ListingsCollectionViewCell: UICollectionViewCell {
     typealias DownloadImageClosure = (url: NSURL?, imageView: UIImageView) -> ()

@@ -1,5 +1,5 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 
 private let kNoBidsString = "0 bids placed"
 

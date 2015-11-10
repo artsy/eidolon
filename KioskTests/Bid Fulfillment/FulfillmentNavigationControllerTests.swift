@@ -3,7 +3,7 @@ import Nimble
 @testable
 import Kiosk
 import Moya
-import ReactiveCocoa
+import RxSwift
 
 class FulfillmentNavigationControllerTests: QuickSpec {
     override func spec() {

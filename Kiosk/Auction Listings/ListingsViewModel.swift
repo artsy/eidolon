@@ -1,5 +1,5 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 
 typealias ShowDetailsClosure = (SaleArtwork) -> Void
 typealias PresentModalClosure = (SaleArtwork) -> Void

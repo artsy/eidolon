@@ -3,7 +3,7 @@ import Nimble
 @testable
 import Kiosk
 import Moya
-import ReactiveCocoa
+import RxSwift
 import Nimble_Snapshots
 
 class ConfirmYourBidPINViewControllerTests: QuickSpec {

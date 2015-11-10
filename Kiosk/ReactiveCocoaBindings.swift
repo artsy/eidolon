@@ -1,5 +1,5 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 
 // So I expect the ReactiveCocoa fellows to figure out a replacement API for the RAC macro.
 // Currently, I don't see one there, so we'll use this solution until an official one exists.

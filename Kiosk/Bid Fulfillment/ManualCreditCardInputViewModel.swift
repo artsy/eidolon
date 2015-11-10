@@ -1,5 +1,5 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 import Stripe
 
 class ManualCreditCardInputViewModel: NSObject {

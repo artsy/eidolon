@@ -1,6 +1,6 @@
 import UIKit
 import SwiftyJSON
-import ReactiveCocoa
+import RxSwift
 
 enum ReserveStatus: String {
     case ReserveNotMet = "reserve_not_met"

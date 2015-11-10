@@ -1,7 +1,7 @@
 import UIKit
 import ECPhoneNumberFormatter
 import Moya
-import ReactiveCocoa
+import RxSwift
 
 class ConfirmYourBidViewController: UIViewController {
 

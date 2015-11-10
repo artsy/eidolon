@@ -1,5 +1,5 @@
 import UIKit
-import ReactiveCocoa
+import RxSwift
 
 extension UITextField {
     func returnKeySignal () -> RACSignal {

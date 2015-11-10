@@ -1,6 +1,6 @@
 import UIKit
 import Foundation
-import ReactiveCocoa
+import RxSwift
 
 //@IBDesignable
 class KeypadContainerView: UIView {

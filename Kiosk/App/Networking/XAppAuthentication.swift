@@ -1,7 +1,7 @@
 import Foundation
 import ISO8601DateFormatter
 import Moya
-import ReactiveCocoa
+import RxSwift
 
 /// Request to fetch and store new XApp token if the current token is missing or expired.
 
