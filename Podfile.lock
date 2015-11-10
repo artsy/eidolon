@@ -60,6 +60,8 @@ PODS:
     - FLKAutoLayout (~> 0.1)
   - Quick (0.8.0)
   - Reachability (3.1.1)
+  - RxCocoa (2.0.0-beta.2):
+    - RxSwift (~> 2.0.0-beta)
   - RxSwift (2.0.0-beta.2)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
@@ -97,6 +99,7 @@ DEPENDENCIES:
   - ORStackView
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
+  - RxCocoa (~> 2.0.0-beta)
   - RxSwift (~> 2.0.0-beta)
   - SDWebImage (~> 3.7)
   - Stripe
@@ -167,6 +170,7 @@ SPEC CHECKSUMS:
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
+  RxCocoa: ee39aa3ab24a8dde3832669f8e1e2c7652925e0c
   RxSwift: 795720c22352cf1f62669ef3695b5df7e195103b
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1

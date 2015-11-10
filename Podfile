@@ -60,6 +60,7 @@ pod 'XNGMarkdownParser'
 # Swift pods
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :branch => 'xcode7'
 pod 'RxSwift', '~> 2.0.0-beta'
+pod 'RxCocoa', '~> 2.0.0-beta'
 pod 'Moya/RxSwift'
 
 target 'KioskTests' do
