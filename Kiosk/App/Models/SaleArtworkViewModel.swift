@@ -57,7 +57,7 @@ extension SaleArtworkViewModel {
 
     // Signals representing values that change over time.
 
-    var numberOfBidsSignal: Observable<String> {
+    func numberOfBidsSignal() -> Observable<String> {
         return RACObserve(saleArtwork, "bidCount").map { (optionalBidCount) -> AnyObject! in
             // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
             // So we need to unwrap it as an optional optional. Yo dawg.
@@ -106,7 +106,7 @@ extension SaleArtworkViewModel {
         }.mapNilToEmptyString()
     }
 
-    var forSaleSignal: Observable<Bool> {
+    func forSaleSignal() -> Observable<Bool> {
         return RACObserve(saleArtwork, "artwork").map { (artwork) -> AnyObject! in
             let artwork = artwork as! Artwork
 
