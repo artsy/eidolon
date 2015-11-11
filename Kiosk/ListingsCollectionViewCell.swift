@@ -20,10 +20,10 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     var downloadImage: DownloadImageClosure?
     var cancelDownloadImage: CancelDownloadImageClosure?
 
-    var moreInfoSignal: Observable<NSDate> {
+    lazy var moreInfoSignal: Observable<NSDate> = {
         // TODO: Skip 1 or anything?
-        return [imageGestureSigal, infoGestureSignal].asObservable().merge()
-    }
+        return [self.imageGestureSigal, self.infoGestureSignal].asObservable().merge()
+    }()
     
     private lazy var imageGestureSigal: Observable<NSDate> = {
         let recognizer = UITapGestureRecognizer()
@@ -77,6 +77,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
 
         // Start with things not expected to ever change. 
         viewModel.flatMap(SaleArtworkViewModel.lotNumberSignal)
+            .replaceNilWith("")
             .bindTo(lotNumberLabel.rx_text)
             .addDisposableTo(disposeBag)
 

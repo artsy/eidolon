@@ -63,4 +63,14 @@ extension Observable where Element: OptionalType {
             }
         }
     }
+
+    func replaceNilWith(nilValue: Element.Wrapped) -> Observable<Element.Wrapped> {
+        return flatMap { (element) -> Observable<Element.Wrapped> in
+            if let value = element.value {
+                return just(value)
+            } else {
+                return just(nilValue)
+            }
+        }
+    }
 }

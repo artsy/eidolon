@@ -1,4 +1,5 @@
 import UIKit
+import RxCocoa
 
 class TableCollectionViewCell: ListingsCollectionViewCell {
     private lazy var infoView: UIView = {
@@ -56,7 +57,9 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         // Replaces the signal defined in the superclass, normally used to emit taps to a "More Info" label, which we don't have.
         let recognizer = UITapGestureRecognizer()
         contentView.addGestureRecognizer(recognizer)
-        self.moreInfoSignal = recognizer.rac_gestureSignal()
+        self.moreInfoSignal = recognizer.rx_event.map { _ -> NSDate in
+            return NSDate()
+        }
     }
 
     override func layoutSubviews() {

@@ -96,7 +96,7 @@ extension SaleArtworkViewModel {
         }
     }
 
-    func lotNumberSignal() -> Observable<String> {
+    func lotNumberSignal() -> Observable<String?> {
         return RACObserve(saleArtwork, "lotNumber").map { (lotNumber) -> AnyObject! in
             if let lotNumber = lotNumber as? Int {
                 return "Lot \(lotNumber)"
