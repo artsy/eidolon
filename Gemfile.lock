@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/ffi/ffi.git
+  revision: d94b923c1f574ff63743f0a3eefc917da03386b9
+  branch: elcapt
+  specs:
+    ffi (1.9.10)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -257,6 +264,7 @@ DEPENDENCIES
   cocoapods
   cocoapods-keys
   fastlane
+  ffi!
   sbconstants
   second_curtain
 
