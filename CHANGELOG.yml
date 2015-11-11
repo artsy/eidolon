@@ -1,8 +1,12 @@
 upcoming:
-- Shows app version in admin screen [ash]
-- Can scroll to bottom of admin logs [ash]
 
 releases:
+- version: 4.0.1
+  date: November 11 2015
+  notes:
+  - Shows app version in admin screen [ash]
+  - Can scroll to bottom of admin logs [ash]
+
 - version: 4.0.0
   date: November 11 2015
   notes:
@@ -300,4 +304,5 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
