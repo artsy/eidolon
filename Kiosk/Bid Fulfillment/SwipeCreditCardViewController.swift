@@ -62,7 +62,7 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
 
             if let card = self.cardHandler.card {
                 self.cardName = card.name
-                self.cardLastDigits = card.encryptedSwipedCardNumber
+                self.cardLastDigits = card.last4
 
                 self.cardToken = card.cardToken
 

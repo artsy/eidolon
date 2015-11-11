@@ -36,7 +36,7 @@ class AdminCardTestingViewController: UIViewController {
             }, completed: {
 
                 if let card = self.cardHandler.card {
-                    let cardDetails = "Card: \(card.name) - \(card.encryptedSwipedCardNumber) \n \(card.cardToken)"
+                    let cardDetails = "Card: \(card.name) - \(card.last4) \n \(card.cardToken)"
                     self.log(cardDetails)
                 }
 
