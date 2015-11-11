@@ -73,10 +73,10 @@ class LocalCardReader: CFTReader {
     override func beginSwipe() {
         if fail {
             let error = NSError(domain: "eidolon", code: 111, userInfo: nil)
-            self.delegate?.readerCardResponse(nil, withError: error)
+            self.delegate?.readerCardResponse!(nil, withError: error)
 
         } else {
-            self.delegate?.readerCardResponse(CFTCard(), withError: nil)
+            self.delegate?.readerCardResponse!(CFTCard(), withError: nil)
         }
     }
 }
