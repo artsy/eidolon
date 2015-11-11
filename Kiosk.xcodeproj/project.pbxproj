@@ -196,6 +196,8 @@
 		5EB0B71A1A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7151A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift */; };
 		5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */; };
 		5EB0B71E1A5C410D00B7CBF2 /* UIViewController+Bidding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB0B7191A5C410D00B7CBF2 /* UIViewController+Bidding.swift */; };
+		5EBA94571BF2A48B00DE3045 /* Observable+Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBA94561BF2A48B00DE3045 /* Observable+Logging.swift */; };
+		5EBA94591BF2B11400DE3045 /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBA94581BF2B11400DE3045 /* Observable+Operators.swift */; };
 		5EBB3C071BD7E92C0013EBC3 /* BidderNetworkModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBB3C061BD7E92C0013EBC3 /* BidderNetworkModelTests.swift */; };
 		5EBD31491AE0435600648484 /* GenericFormValidationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD31481AE0435600648484 /* GenericFormValidationViewModel.swift */; };
 		5EBD314B1AE047C700648484 /* RegistrationPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD314A1AE047C700648484 /* RegistrationPasswordViewModel.swift */; };
@@ -404,6 +406,8 @@
 		5EB0B7171A5C410D00B7CBF2 /* UILabel+Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Fonts.swift"; sourceTree = "<group>"; };
 		5EB0B7191A5C410D00B7CBF2 /* UIViewController+Bidding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Bidding.swift"; sourceTree = "<group>"; };
 		5EB8D8EE1A5C513A008EAD6C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EBA94561BF2A48B00DE3045 /* Observable+Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Logging.swift"; sourceTree = "<group>"; };
+		5EBA94581BF2B11400DE3045 /* Observable+Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Operators.swift"; sourceTree = "<group>"; };
 		5EBB3C061BD7E92C0013EBC3 /* BidderNetworkModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidderNetworkModelTests.swift; sourceTree = "<group>"; };
 		5EBD31481AE0435600648484 /* GenericFormValidationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericFormValidationViewModel.swift; sourceTree = "<group>"; };
 		5EBD314A1AE047C700648484 /* RegistrationPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewModel.swift; sourceTree = "<group>"; };
@@ -765,6 +769,7 @@
 		5EB0B6EF1A5C3E6800B7CBF2 /* Kiosk */ = {
 			isa = PBXGroup;
 			children = (
+				5EBA94551BF2A47500DE3045 /* RxSwift Extensions */,
 				5E860FC21A5C429C00456E41 /* Admin */,
 				5E860FC91A5C429C00456E41 /* App */,
 				5E860FFB1A5C429C00456E41 /* Auction Listings */,
@@ -814,6 +819,15 @@
 				5EB0B7071A5C3E6800B7CBF2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5EBA94551BF2A47500DE3045 /* RxSwift Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5EBA94561BF2A48B00DE3045 /* Observable+Logging.swift */,
+				5EBA94581BF2B11400DE3045 /* Observable+Operators.swift */,
+			);
+			name = "RxSwift Extensions";
 			sourceTree = "<group>";
 		};
 		5EBD314C1AE053ED00648484 /* Registration */ = {
@@ -1128,6 +1142,7 @@
 				5E86107D1A5C429C00456E41 /* ListingsViewController.swift in Sources */,
 				5E8610581A5C429C00456E41 /* GlobalFunctions.swift in Sources */,
 				5EFA08261BCDB051007E8EC1 /* NetworkLogger.swift in Sources */,
+				5EBA94591BF2B11400DE3045 /* Observable+Operators.swift in Sources */,
 				5E8610901A5C429C00456E41 /* LoadingViewController.swift in Sources */,
 				5E8610841A5C429C00456E41 /* BidDetailsPreviewView.swift in Sources */,
 				5E8610791A5C429C00456E41 /* SwitchView.swift in Sources */,
@@ -1187,6 +1202,7 @@
 				5E8610601A5C429C00456E41 /* GenericError.swift in Sources */,
 				5E8610541A5C429C00456E41 /* AppSetup.swift in Sources */,
 				5EB0B71A1A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift in Sources */,
+				5EBA94571BF2A48B00DE3045 /* Observable+Logging.swift in Sources */,
 				5E8610801A5C429C00456E41 /* WebViewController.swift in Sources */,
 				5EF71E7B1AE98F080069A266 /* STPCard+Validation.m in Sources */,
 				5E8610731A5C429C00456E41 /* UIViewControllerExtensions.swift in Sources */,

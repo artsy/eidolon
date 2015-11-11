@@ -99,8 +99,8 @@ DEPENDENCIES:
   - ORStackView
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - RxCocoa (~> 2.0.0-beta)
-  - RxSwift (~> 2.0.0-beta)
+  - RxCocoa (from `../RxSwift`)
+  - RxSwift (from `../RxSwift`)
   - SDWebImage (~> 3.7)
   - Stripe
   - SVProgressHUD
@@ -119,6 +119,10 @@ EXTERNAL SOURCES:
   Reachability:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
+  RxCocoa:
+    :path: "../RxSwift"
+  RxSwift:
+    :path: "../RxSwift"
   SwiftyJSON:
     :branch: xcode7
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
