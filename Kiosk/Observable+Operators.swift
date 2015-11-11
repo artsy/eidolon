@@ -22,7 +22,7 @@ extension Observable where Element: Equatable {
     }
 }
 
-extension Observable where Element: Equatable {
+extension Observable {
     // OK, so the idea is that I have a Variable that exposes an Observable and I want
     // to switch to the latest without mapping.
     //
@@ -38,5 +38,29 @@ extension Observable where Element: Equatable {
         return self.map { (s) -> Observable<R> in
             return something(s)()
         }.switchLatest()
+    }
+}
+
+protocol OptionalType {
+    typealias Wrapped
+
+    var value: Wrapped? { get }
+}
+
+extension Optional: OptionalType {
+    var value: Wrapped? {
+        return self
+    }
+}
+
+extension Observable where Element: OptionalType {
+    func filterNil() -> Observable<Element.Wrapped> {
+        return flatMap { (element) -> Observable<Element.Wrapped> in
+            if let value = element.value {
+                return just(value)
+            } else {
+                return empty()
+            }
+        }
     }
 }
