@@ -17,4 +17,7 @@ class AdminLogViewController: UIViewController {
         return docs.URLByAppendingPathComponent("logger.txt")
     }
 
+    @IBAction func scrollTapped(sender: AnyObject) {
+        textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count - 1, 1))
+    }
 }

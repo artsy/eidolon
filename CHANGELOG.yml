@@ -1,4 +1,6 @@
 upcoming:
+- Shows app version in admin screen [ash]
+- Can scroll to bottom of admin logs [ash]
 
 releases:
 - version: 4.0.0
