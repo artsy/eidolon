@@ -1,11 +1,15 @@
 upcoming:
-- iOS 9 support [ash]
-- Removes support for iOS 8 [ash]
-- No longer allow users to "cancel" after confirming a bid [ash]
-- Removes check for wifi network name [ash]
-- Improved analytics [ash]
 
 releases:
+- version: 4.0.0
+  date: November 11 2015
+  notes:
+  - iOS 9 support [ash]
+  - Removes support for iOS 8 [ash]
+  - No longer allow users to "cancel" after confirming a bid [ash]
+  - Removes check for wifi network name [ash]
+  - Improved analytics [ash]
+
 - version: 3.8.6
   date: October 30 2015
   notes:
@@ -294,3 +298,4 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
