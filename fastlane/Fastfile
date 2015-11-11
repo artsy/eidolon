@@ -127,7 +127,7 @@ EOS
   clean_build_artifacts
 
   # Tag release and push to GitHub
-  commit_version_bump message: "Deploying version #{version}.", force: true
+  sh "git add .. ; git commit -m 'Deploying version #{version}.'" # Can't use commit_version_bump to include changelog changes
   add_git_tag tag: version
   push_to_git_remote
 end
