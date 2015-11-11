@@ -1,7 +1,11 @@
 upcoming:
-- Compatibility with new card readers [ash]
 
 releases:
+- version: 4.1.0
+  date: November 11 2015
+  notes:
+  - Compatibility with new card readers [ash]
+
 - version: 4.0.1
   date: November 11 2015
   notes:
@@ -305,5 +309,6 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
