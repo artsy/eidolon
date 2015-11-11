@@ -1,6 +1,7 @@
 import Foundation
 import Artsy_UILabels
 import RxSwift
+import RxCocoa
 
 class ListingsCollectionViewCell: UICollectionViewCell {
     typealias DownloadImageClosure = (url: NSURL?, imageView: UIImageView) -> ()
@@ -19,32 +20,32 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     var downloadImage: DownloadImageClosure?
     var cancelDownloadImage: CancelDownloadImageClosure?
 
-    lazy var moreInfoSignal: RACSignal = {
-        // "Jump start" both the more info button signal and the image gesture signal with nil values,
-        // then skip the first "jump started" value.
-        RACSignal.combineLatest([self.infoGestureSignal.startWith(nil), self.imageGestureSigal.startWith(nil)]).mapReplace(nil).skip(1)
-    }()
+    var moreInfoSignal: Observable<NSDate> {
+        // TODO: Skip 1 or anything?
+        return [imageGestureSigal, infoGestureSignal].asObservable().merge()
+    }
     
-    private lazy var imageGestureSigal: RACSignal = {
+    private lazy var imageGestureSigal: Observable<NSDate> = {
         let recognizer = UITapGestureRecognizer()
         self.artworkImageView.addGestureRecognizer(recognizer)
         self.artworkImageView.userInteractionEnabled = true
-        return recognizer.rac_gestureSignal()
+        return recognizer.rx_event.map { _ in NSDate() }
     }()
 
-    private lazy var infoGestureSignal: RACSignal = {
+    private lazy var infoGestureSignal: Observable<NSDate> = {
         let recognizer = UITapGestureRecognizer()
         self.moreInfoLabel.addGestureRecognizer(recognizer)
         self.moreInfoLabel.userInteractionEnabled = true
-        return recognizer.rac_gestureSignal()
-    }()
-
-    lazy var viewModelSignal: RACSignal = {
-        return RACObserve(self, "viewModel").ignore(nil)
+        return recognizer.rx_event.map { _ in NSDate() }
     }()
     
-    dynamic var viewModel: SaleArtworkViewModel!
-    dynamic var bidWasPressedSignal: RACSignal = RACSubject()
+    var viewModel = PublishSubject<SaleArtworkViewModel>()
+    var _bidPressed = Variable(NSDate()).skip(1) // TODO: Private?
+    var bidPressed: Observable<NSDate> {
+        return _bidPressed.asObservable()
+    }
+
+    let disposeBag = DisposeBag()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,53 +69,54 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         // Bind subviews
 
         // Start with things not expected to ever change. 
+        viewModel.flatMap(SaleArtworkViewModel.lotNumberSignal)
+            .bindTo(lotNumberLabel.rx_text)
+            .addDisposableTo(disposeBag)
 
-        RAC(self, "lotNumberLabel.text") <~ viewModelSignal.map { (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).lotNumberSignal
-        }.switchToLatest()
 
-        viewModelSignal.subscribeNext { [weak self] (viewModel) -> Void in
-            if let imageView = self?.artworkImageView {
-                let url = (viewModel as? SaleArtworkViewModel)?.thumbnailURL
-                self?.downloadImage?(url: url, imageView: imageView)
-            }
-        }
-        
-        RAC(self, "artistNameLabel.text") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).artistName
-        }).mapNilToEmptyString()
-        
-        RAC(self, "artworkTitleLabel.attributedText") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).titleAndDateAttributedString
-        }).mapNilToEmptyAttributedString()
-        
-        RAC(self, "estimateLabel.text") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).estimateString
-        }).mapNilToEmptyString()
-
-        // Now do properties that _do_ change.
-
-        RAC(self, "currentBidLabel.text") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).currentBidSignal(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ")
-        }).switchToLatest().mapNilToEmptyString()
-        
-        RAC(self, "numberOfBidsLabel.text") <~ viewModelSignal.map { (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).numberOfBidsSignal
-        }.switchToLatest().mapNilToEmptyString()
-
-        RAC(self.bidButton, "enabled") <~ viewModelSignal.map { (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).forSaleSignal
-        }.switchToLatest().doNext { [weak bidButton] (forSale) -> Void in
-            // Button titles aren't KVO-able
-            let forSale = forSale as! Bool
-
-            let title = forSale ? "BID" : "SOLD"
-            bidButton?.setTitle(title, forState: .Normal)
-        }
-
-        bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self] (_) -> Void in
-            (self?.bidWasPressedSignal as! RACSubject).sendNext(nil)
-        }
+//
+//        viewModelSignal.subscribeNext { [weak self] (viewModel) -> Void in
+//            if let imageView = self?.artworkImageView {
+//                let url = (viewModel as? SaleArtworkViewModel)?.thumbnailURL
+//                self?.downloadImage?(url: url, imageView: imageView)
+//            }
+//        }
+//        
+//        RAC(self, "artistNameLabel.text") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
+//            return (viewModel as! SaleArtworkViewModel).artistName
+//        }).mapNilToEmptyString()
+//        
+//        RAC(self, "artworkTitleLabel.attributedText") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
+//            return (viewModel as! SaleArtworkViewModel).titleAndDateAttributedString
+//        }).mapNilToEmptyAttributedString()
+//        
+//        RAC(self, "estimateLabel.text") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
+//            return (viewModel as! SaleArtworkViewModel).estimateString
+//        }).mapNilToEmptyString()
+//
+//        // Now do properties that _do_ change.
+//
+//        RAC(self, "currentBidLabel.text") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
+//            return (viewModel as! SaleArtworkViewModel).currentBidSignal(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ")
+//        }).switchToLatest().mapNilToEmptyString()
+//        
+//        RAC(self, "numberOfBidsLabel.text") <~ viewModelSignal.map { (viewModel) -> AnyObject! in
+//            return (viewModel as! SaleArtworkViewModel).numberOfBidsSignal
+//        }.switchToLatest().mapNilToEmptyString()
+//
+//        RAC(self.bidButton, "enabled") <~ viewModelSignal.map { (viewModel) -> AnyObject! in
+//            return (viewModel as! SaleArtworkViewModel).forSaleSignal
+//        }.switchToLatest().doNext { [weak bidButton] (forSale) -> Void in
+//            // Button titles aren't KVO-able
+//            let forSale = forSale as! Bool
+//
+//            let title = forSale ? "BID" : "SOLD"
+//            bidButton?.setTitle(title, forState: .Normal)
+//        }
+//
+//        bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self] (_) -> Void in
+//            (self?.bidWasPressedSignal as! RACSubject).sendNext(nil)
+//        }
     }
 }
 

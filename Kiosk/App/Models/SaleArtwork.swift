@@ -1,6 +1,5 @@
 import UIKit
 import SwiftyJSON
-import RxSwift
 
 enum ReserveStatus: String {
     case ReserveNotMet = "reserve_not_met"
@@ -28,15 +27,15 @@ class SaleArtwork: JSONAble {
     var auctionID: String?
 
     var saleHighestBid: Bid?
-    dynamic var bidCount:  NSNumber?
+    var bidCount: NSNumber?
 
     var userBidderPosition: BidderPosition?
     var positions: [String]?
 
-    dynamic var openingBidCents: NSNumber?
-    dynamic var minimumNextBidCents: NSNumber?
+    var openingBidCents: NSNumber?
+    var minimumNextBidCents: NSNumber?
     
-    dynamic var highestBidCents: NSNumber?
+    var highestBidCents: NSNumber?
     var estimateCents: Int?
     var lowEstimateCents: Int?
     var highEstimateCents: Int?
