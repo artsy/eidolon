@@ -798,17 +798,28 @@
                                     <action selector="backWasPressed:" destination="Jj5-n3-bv0" eventType="touchUpInside" id="dAC-r5-N37"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaV-qR-857">
+                                <rect key="frame" x="781" y="134" width="178" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Scroll to Bottom"/>
+                                <connections>
+                                    <action selector="scrollTapped:" destination="yff-WV-ozf" eventType="touchUpInside" id="3ts-Rt-qaO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="qaV-qR-857" firstAttribute="trailing" secondItem="UF5-ed-jli" secondAttribute="trailing" id="1nI-bw-AHA"/>
                             <constraint firstItem="UF5-ed-jli" firstAttribute="leading" secondItem="F6N-AU-wHA" secondAttribute="leadingMargin" constant="45" id="8RA-5Z-LKs"/>
                             <constraint firstItem="8uE-be-wKG" firstAttribute="top" secondItem="UF5-ed-jli" secondAttribute="bottom" constant="52" id="AJw-Nq-prk"/>
                             <constraint firstItem="XhT-kc-pON" firstAttribute="leading" secondItem="F6N-AU-wHA" secondAttribute="leadingMargin" id="CLd-KA-slJ"/>
                             <constraint firstItem="UF5-ed-jli" firstAttribute="centerX" secondItem="8uE-be-wKG" secondAttribute="centerX" id="DuF-9W-Qve"/>
+                            <constraint firstItem="qaV-qR-857" firstAttribute="leading" secondItem="8uE-be-wKG" secondAttribute="trailing" constant="8" symbolic="YES" id="ITT-gW-pg3"/>
                             <constraint firstItem="eAS-Ua-xue" firstAttribute="top" secondItem="8uE-be-wKG" secondAttribute="bottom" constant="105" id="N4h-1K-0Wp"/>
                             <constraint firstItem="UF5-ed-jli" firstAttribute="centerX" secondItem="F6N-AU-wHA" secondAttribute="centerX" id="RBt-w1-vVt"/>
                             <constraint firstItem="UF5-ed-jli" firstAttribute="top" secondItem="XhT-kc-pON" secondAttribute="bottom" constant="15" id="TDw-uO-FqT"/>
+                            <constraint firstItem="qaV-qR-857" firstAttribute="top" secondItem="8uE-be-wKG" secondAttribute="top" id="Ta8-Qg-tQU"/>
                             <constraint firstItem="a7Q-o1-h2E" firstAttribute="leading" secondItem="XhT-kc-pON" secondAttribute="trailing" constant="24" id="Xn3-Af-Bvd"/>
                             <constraint firstItem="XhT-kc-pON" firstAttribute="bottom" secondItem="a7Q-o1-h2E" secondAttribute="bottom" id="hAc-zb-1Ns"/>
                             <constraint firstAttribute="bottom" secondItem="UF5-ed-jli" secondAttribute="bottom" constant="686" id="k5g-rx-9dF"/>
