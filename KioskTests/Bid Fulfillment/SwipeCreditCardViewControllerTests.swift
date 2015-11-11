@@ -6,19 +6,19 @@ import Kiosk
 
 class StubKeys: EidolonKeys {
     override func cardflightProductionAPIClientKey() -> String! {
-        return "PRODUCTION API KEY"
+        return "PRODUCTIONAPIKEY"
     }
 
     override func cardflightProductionMerchantAccountToken() -> String! {
-        return "PRODUCTION ACCOUNT TOKEN"
+        return "PRODUCTIONACCOUNTTOKEN"
     }
 
     override func cardflightStagingAPIClientKey() -> String! {
-        return "STAGING API KEY"
+        return "STAGINGAPIKEY"
     }
 
     override func cardflightStagingMerchantAccountToken() -> String! {
-        return "STAGING ACCOUNT TOKEN"
+        return "STAGINGACCOUNTTOKEN"
     }
 }
 
