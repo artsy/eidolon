@@ -2,7 +2,6 @@ import UIKit
 import Artsy_UILabels
 import ARAnalytics
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 class LoadingViewController: UIViewController {
 
@@ -20,8 +19,12 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var backToAuctionButton: SecondaryActionButton!
     @IBOutlet weak var placeHigherBidButton: ActionButton!
 
-    lazy var viewModel: LoadingViewModel = { () -> LoadingViewModel in
-        return LoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()), placingBid: self.placingBid)
+    lazy var viewModel: LoadingViewModel = {
+        return LoadingViewModel(
+            bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()),
+            placingBid: self.placingBid,
+            actionsCompleteSignal: self.viewWillDisappearSignal()
+        )
     }()
 
     lazy var recognizer = UITapGestureRecognizer()
@@ -47,6 +50,9 @@ class LoadingViewController: UIViewController {
 
         titleLabel.text = placingBid ? "Placing bid..." : "Registering..."
 
+        // Either finishUp() or bidderError() are responsible for providing a way back to the auction.
+        fulfillmentContainer()?.cancelButton.hidden = true
+
         // The view model will perform actions like registering a user if necessary,
         // placing a bid if requested, and polling for results.
         viewModel.performActions().finally { [weak self] in
@@ -61,7 +67,6 @@ class LoadingViewController: UIViewController {
         })
     }
 
-
     func finishUp() {
         let reserveNotMet = viewModel.reserveNotMet
         let isHighestBidder = viewModel.isHighestBidder
@@ -71,7 +76,7 @@ class LoadingViewController: UIViewController {
         logger.log("Bidding process result: reserveNotMet \(reserveNotMet), isHighestBidder \(isHighestBidder), bidIsResolved \(bidIsResolved), createdNewbidder \(createdNewBidder)")
 
         if placingBid {
-            ARAnalytics.event("Placed a bid", withProperties: ["top_bidder" : isHighestBidder])
+            ARAnalytics.event("Placed a bid", withProperties: ["top_bidder" : isHighestBidder, "sale_artwork": viewModel.bidDetails.saleArtwork?.artwork.id ?? ""])
 
             if bidIsResolved {
 
@@ -189,6 +194,7 @@ class LoadingViewController: UIViewController {
         titleLabel.text = title
         statusMessage.text = message
         statusMessage.hidden = false
+        backToAuctionButton.hidden = false
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

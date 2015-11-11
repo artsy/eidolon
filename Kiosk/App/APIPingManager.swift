@@ -19,6 +19,6 @@ class APIPingManager: NSObject {
 
     private func pingSignal() -> RACSignal {
         let artworksEndpoint: ArtsyAPI = ArtsyAPI.Ping
-        return XAppRequest(artworksEndpoint).map(responseIsOK).retry()
+        return XAppRequest(artworksEndpoint).map(responseIsOK)
     }
 }

@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 import ReactiveCocoa
 import Moya
 import SwiftyJSON
@@ -7,7 +7,7 @@ let OutbidDomain = "Outbid"
 
 class PlaceBidNetworkModel: NSObject {
 
-    var fulfillmentController: FulfillmentController!
+    unowned let fulfillmentController: FulfillmentController
     var bidderPosition: BidderPosition?
 
     var provider: ReactiveCocoaMoyaProvider<ArtsyAPI>! {
@@ -27,7 +27,6 @@ class PlaceBidNetworkModel: NSObject {
         let cents = String(bidDetails.bidAmountCents! as Int)
         return bidOnSaleArtwork(saleArtwork!, bidAmountCents: cents)
     }
-
 
     private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> RACSignal {
         let bidEndpoint: ArtsyAPI = ArtsyAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)

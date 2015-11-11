@@ -1,6 +1,5 @@
 import UIKit
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 

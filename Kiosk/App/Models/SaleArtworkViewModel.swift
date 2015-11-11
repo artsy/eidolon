@@ -1,6 +1,5 @@
 import Foundation
 import ReactiveCocoa
-import Swift_RAC_Macros
 
 private let kNoBidsString = "0 bids placed"
 
@@ -59,22 +58,7 @@ extension SaleArtworkViewModel {
     // Signals representing values that change over time.
 
     var numberOfBidsSignal: RACSignal {
-        let bidCount = RACObserve(saleArtwork, "bidCount")
-        let highestBidCents = RACObserve(saleArtwork, "highestBidCents")
-        return RACSignal.combineLatest([bidCount, highestBidCents]).map { tuple -> AnyObject! in
-            guard let tuple = tuple as? RACTuple else { return nil }
-            
-            let highestBidCents = tuple.second as? Int
-            let bidCount = tuple.first
-            
-            // We only display a number of bids if we have a highest bid.
-            // This prevents displaying 1 bid on an sale artwork which had its only bid cancelled.
-            if let _ = highestBidCents {
-                return bidCount
-            } else {
-                return nil
-            }
-        }.map { (optionalBidCount) -> AnyObject! in
+        return RACObserve(saleArtwork, "bidCount").map { (optionalBidCount) -> AnyObject! in
             // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
             // So we need to unwrap it as an optional optional. Yo dawg.
             let bidCount = optionalBidCount as! Int?

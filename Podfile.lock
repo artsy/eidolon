@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.0.0)
+  - Alamofire (3.1.1)
   - ARAnalytics/CoreIOS (3.8.0)
   - ARAnalytics/HockeyApp (3.8.0):
     - ARAnalytics/CoreIOS
@@ -25,7 +25,11 @@ PODS:
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
   - EDColor (0.4.0)
-  - FBSnapshotTestCase (1.8.1)
+  - FBSnapshotTestCase (2.0.7):
+    - FBSnapshotTestCase/SwiftSupport (= 2.0.7)
+  - FBSnapshotTestCase/Core (2.0.7)
+  - FBSnapshotTestCase/SwiftSupport (2.0.7):
+    - FBSnapshotTestCase/Core
   - FLKAutoLayout (0.1.1)
   - fmemopen (0.0.1)
   - Forgeries (0.1.0)
@@ -35,18 +39,18 @@ PODS:
   - Mixpanel (2.8.3):
     - Mixpanel/Mixpanel (= 2.8.3)
   - Mixpanel/Mixpanel (2.8.3)
-  - Moya/Core (4.0.1):
+  - Moya/Core (4.3.1):
     - Alamofire (~> 3.0)
-  - Moya/ReactiveCocoa (4.0.1):
+  - Moya/ReactiveCocoa (4.3.1):
     - Moya/ReactiveCore
-    - ReactiveCocoa (~> 4.0-alpha.1)
-  - Moya/ReactiveCore (4.0.1):
+    - ReactiveCocoa (= 4.0.2-alpha-3)
+  - Moya/ReactiveCore (4.3.1):
     - Moya/Core
-  - Nimble (2.0.0)
-  - Nimble-Snapshots (1.0.0):
-    - FBSnapshotTestCase (~> 1.7)
-    - Nimble (~> 2.0.0-rc.2)
-    - Quick (~> 0.5)
+  - Nimble (3.0.0)
+  - Nimble-Snapshots (3.0.0):
+    - FBSnapshotTestCase (~> 2.0.7)
+    - Nimble
+    - Quick
   - NJKWebViewProgress (0.2.3):
     - NJKWebViewProgress/Core (= 0.2.3)
     - NJKWebViewProgress/ProgressView (= 0.2.3)
@@ -54,20 +58,20 @@ PODS:
   - NJKWebViewProgress/ProgressView (0.2.3)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
-  - Quick (0.6.0)
+  - Quick (0.8.0)
   - Reachability (3.1.1)
-  - ReactiveCocoa (4.0.2-alpha-1):
-    - ReactiveCocoa/UI (= 4.0.2-alpha-1)
-    - Result (~> 0.6-beta.1)
-  - ReactiveCocoa/Core (4.0.2-alpha-1):
+  - ReactiveCocoa (4.0.2-alpha-3):
+    - ReactiveCocoa/UI (= 4.0.2-alpha-3)
+    - Result (~> 0.6.0-beta.6)
+  - ReactiveCocoa/Core (4.0.2-alpha-3):
     - ReactiveCocoa/no-arc
-    - Result (~> 0.6-beta.1)
-  - ReactiveCocoa/no-arc (4.0.2-alpha-1):
-    - Result (~> 0.6-beta.1)
-  - ReactiveCocoa/UI (4.0.2-alpha-1):
+    - Result (~> 0.6.0-beta.6)
+  - ReactiveCocoa/no-arc (4.0.2-alpha-3):
+    - Result (~> 0.6.0-beta.6)
+  - ReactiveCocoa/UI (4.0.2-alpha-3):
     - ReactiveCocoa/Core
-    - Result (~> 0.6-beta.1)
-  - Result (0.6-beta.1)
+    - Result (~> 0.6.0-beta.6)
+  - Result (0.6.0-beta.6)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
@@ -75,8 +79,6 @@ PODS:
     - Stripe/Core (= 3.1.0)
   - Stripe/Core (3.1.0)
   - SVProgressHUD (1.1.3)
-  - Swift-RAC-Macros (0.3.4):
-    - ReactiveCocoa (= 4.0.2-alpha-1)
   - SwiftyJSON (2.2.1)
   - UIImageViewAligned (0.0.1)
   - UIView+BooleanAnimations (1.0.2)
@@ -106,11 +108,10 @@ DEPENDENCIES:
   - ORStackView
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - ReactiveCocoa (~> 4.0.1-alpha-2)
+  - ReactiveCocoa (= 4.0.2-alpha-3)
   - SDWebImage (~> 3.7)
   - Stripe
   - SVProgressHUD
-  - Swift-RAC-Macros
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, branch `xcode7`)
   - UIImageViewAligned (from `https://github.com/ashfurrow/UIImageViewAligned.git`)
   - UIView+BooleanAnimations
@@ -150,7 +151,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
-  Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
+  Alamofire: 9b0a7188b961a03914a99304488bd226b0e46c0e
   ARAnalytics: 5468652928cee7100dd0e6b5162631409da37106
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: a747cff42142ca04d1dc5cee516186f10b6c0949
@@ -162,7 +163,7 @@ SPEC CHECKSUMS:
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
   EDColor: 89d19a013279a5604d61650721c15f20fefaaf00
-  FBSnapshotTestCase: 3dc3899168747a0319c5278f5b3445c13a6532dd
+  FBSnapshotTestCase: 7e85180d0d141a0cf472352edda7e80d7eaeb547
   FLKAutoLayout: 95b12c5cd9652100235140b68652f063f7437851
   fmemopen: dc31f7d3004644b33deee95e047305d23f8cfdd4
   Forgeries: ce03936ada2a8d33d3711d7bb7123be505b83430
@@ -170,19 +171,18 @@ SPEC CHECKSUMS:
   ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
-  Moya: 8cdea400271d924df769fbce25a2eee39e9bbeac
-  Nimble: 472e75466819eb8c06299233e87c694a9b51328a
-  Nimble-Snapshots: c16dd279a4840ec06288198fafd53f3c17750ff3
+  Moya: 980fa0218d80a3f7379c12c7b983e9a664b8b55a
+  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
+  Nimble-Snapshots: ab41dd737dcd33a0b0cb005a30465fef70b7207a
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
-  Quick: 563686dbcf0ae0f9f7401ac9cd2d786ee1b7f3d7
+  Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
-  ReactiveCocoa: 652cf90e5de65708e7e2111f77405756da21aabe
-  Result: af24e3e57ab81005ec4221a53fd36dc1e7a52869
+  ReactiveCocoa: 441c518a69d0f6202a1886d77b66d8f79e1f4a81
+  Result: dc390d0b58f9ec43fcd536f1ebdd130803cc6cbc
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
-  Swift-RAC-Macros: 712ec265e8acb2b535f3e1eac4bfa8d858041222
   SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97

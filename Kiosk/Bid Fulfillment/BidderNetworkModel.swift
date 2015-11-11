@@ -1,12 +1,11 @@
 import Foundation
 import ReactiveCocoa
-import Swift_RAC_Macros
 import Moya
 
 class BidderNetworkModel: NSObject {
     // MARK: - Getters
 
-    var fulfillmentController: FulfillmentController
+    unowned let fulfillmentController: FulfillmentController
 
     var createdNewUser: RACSignal {
         return RACObserve(self.fulfillmentController.bidDetails.newUser, "hasBeenRegistered")
@@ -19,11 +18,11 @@ class BidderNetworkModel: NSObject {
     // MARK: - Main Signal
 
     func createOrGetBidder() -> RACSignal {
-        return createOrUpdateUser().then {
-            self.createOrUpdateBidder()
+        return createOrUpdateUser().andThen { [weak self] in
+            self?.createOrUpdateBidder()
 
-        }.then {
-            self.getMyPaddleNumber()
+        }.andThen { [weak self] in
+            self?.getMyPaddleNumber()
         }
     }
 
@@ -56,8 +55,8 @@ class BidderNetworkModel: NSObject {
             logger.log("Creating user failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
 
-        }.then {
-            self.updateProvider()
+        }.andThen { [weak self] in
+            self?.updateProvider()
         }
     }
 
@@ -70,9 +69,8 @@ class BidderNetworkModel: NSObject {
     private func updateUser() -> RACSignal {
         let newUser = fulfillmentController.bidDetails.newUser
         let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email!, phone: newUser.phoneNumber!, postCode: newUser.zipCode ?? "", name: newUser.name ?? "")
-
-        return updateProviderIfNecessary().then {
-            self.fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
+        return updateProviderIfNecessary().andThen { [weak self] in
+            self?.fulfillmentController.loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
         }.logNext().doError { (error) in
             logger.log("Updating user failed.")
             logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
@@ -105,7 +103,7 @@ class BidderNetworkModel: NSObject {
     private func createOrUpdateBidder() -> RACSignal {
         let boolSignal = self.checkForBidderOnAuction(self.fulfillmentController.auctionID)
         let trueSignal = RACSignal.empty()
-        let falseSignal = self.registerToAuction().then { self.generateAPIN() }
+        let falseSignal = self.registerToAuction().andThen { [weak self] in self?.generateAPIN() }
         return RACSignal.`if`(boolSignal, then: trueSignal, `else`: falseSignal)
     }
 

@@ -2,7 +2,6 @@ import UIKit
 import SystemConfiguration
 import ARAnalytics
 import ReactiveCocoa
-import Swift_RAC_Macros
 import ARCollectionViewMasonryLayout
 
 let HorizontalMargins = 65
@@ -81,7 +80,10 @@ class ListingsViewController: UIViewController {
         viewModel.updatedContentsSignal.mapReplace(collectionView).doNext { (collectionView) -> Void in
             (collectionView as! UICollectionView).reloadData()
             return
-        }.dispatchAsyncMainScheduler().subscribeNext { (collectionView) -> Void in
+        }.dispatchAsyncMainScheduler().subscribeNext { [weak self] (collectionView) -> Void in
+            // Make sure we're on screen and not in a test or something.
+            guard let _ = self?.view.window else { return }
+
             // Need to dispatchAsyncMainScheduler, since the changes in the CV's model aren't imediate, so we may scroll to a cell that doesn't exist yet.
             (collectionView as! UICollectionView).scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: .Top, animated: false)
         }
@@ -169,12 +171,14 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
 private extension ListingsViewController {
 
     func showDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
+
+        ARAnalytics.event("Artwork Details Tapped", withProperties: ["id": saleArtwork.artwork.id])
         performSegueWithIdentifier(SegueIdentifier.ShowSaleArtworkDetails.rawValue, sender: saleArtwork)
     }
 
     func presentModalForSaleArtwork(saleArtwork: SaleArtwork) {
 
-        ARAnalytics.event("Bid Button Tapped")
+        ARAnalytics.event("Bid Button Tapped", withProperties: ["id": saleArtwork.artwork.id])
 
         let storyboard = UIStoryboard.fulfillment()
         let containerController = storyboard.instantiateInitialViewController() as! FulfillmentContainerViewController

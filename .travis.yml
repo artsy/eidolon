@@ -1,4 +1,4 @@
-osx_image: xcode7
+osx_image: xcode7.1
 language: objective-c
 
 cache:
@@ -16,7 +16,7 @@ before_install:
   - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
   - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
   - chmod 600 ~/.netrc
-  - xcrun instruments -w "iPad Air (8.1 Simulator)" || echo "(Pre)Launched the simulator."
+  - xcrun instruments -w "iPad Air 2 (9.0 Simulator)" || echo "(Pre)Launched the simulator."
 
 install:
   - bundle install
@@ -25,7 +25,7 @@ install:
 before_script:
   - export LANG=en_US.UTF-8
 
-script: set -o pipefail && xcodebuild -destination "OS=8.1,name=iPad Air" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | second_curtain | xcpretty --color --test
+script: set -o pipefail && xcodebuild -destination "OS=9.0,name=iPad Air 2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | second_curtain | xcpretty --color --test
 
 notifications:
   slack:

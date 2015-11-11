@@ -168,6 +168,10 @@ class StubLoadingViewModel: LoadingViewModel {
     var errors = false
     var completes = true
 
+    init(bidNetworkModel: BidderNetworkModel, placingBid: Bool) {
+        super.init(bidNetworkModel: bidNetworkModel, placingBid: placingBid, actionsCompleteSignal: RACSignal.never())
+    }
+
     override func performActions() -> RACSignal {
         if completes {
             if errors {

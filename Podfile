@@ -19,7 +19,7 @@ plugin 'cocoapods-keys', {
   ]
 }
 
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 # Yep.
@@ -59,9 +59,8 @@ pod 'XNGMarkdownParser'
 
 # Swift pods
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :branch => 'xcode7'
-pod 'ReactiveCocoa', '~> 4.0.1-alpha-2'
+pod 'ReactiveCocoa', '= 4.0.2-alpha-3'
 pod 'Moya/ReactiveCocoa'
-pod 'Swift-RAC-Macros'
 
 target 'KioskTests' do
 

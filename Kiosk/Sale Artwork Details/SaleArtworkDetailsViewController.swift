@@ -4,7 +4,6 @@ import Artsy_UILabels
 import Artsy_UIFonts
 import ReactiveCocoa
 import Artsy_UIButtons
-import Swift_RAC_Macros
 import SDWebImage
 
 class SaleArtworkDetailsViewController: UIViewController {
