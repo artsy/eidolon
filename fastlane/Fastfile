@@ -59,7 +59,7 @@ lane :deploy do |options|
   raise "You must specify a HOCKEY_API_TOKEN environment variable to deploy." if hockey_api_token.nil?
 
   # Make sure not to ship with OSS
-  verify_keys
+  verify_pod_keys
 
   # Make sure we start off with a clean slate
   ensure_git_status_clean
