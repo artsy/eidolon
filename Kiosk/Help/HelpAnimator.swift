@@ -1,5 +1,5 @@
 import UIKit
-import ReactiveCocoa
+import RxSwift
 
 class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     let presenting: Bool

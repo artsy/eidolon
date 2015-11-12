@@ -1,5 +1,5 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 import Keys
 
 class AdminCardTestingViewController: UIViewController {

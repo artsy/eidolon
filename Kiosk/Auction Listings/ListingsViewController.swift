@@ -1,7 +1,7 @@
 import UIKit
 import SystemConfiguration
 import ARAnalytics
-import ReactiveCocoa
+import RxSwift
 import ARCollectionViewMasonryLayout
 
 let HorizontalMargins = 65

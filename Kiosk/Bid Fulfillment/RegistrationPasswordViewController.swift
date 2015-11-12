@@ -1,5 +1,5 @@
 import UIKit
-import ReactiveCocoa
+import RxSwift
 import Moya
 
 class RegistrationPasswordViewController: UIViewController, RegistrationSubController {

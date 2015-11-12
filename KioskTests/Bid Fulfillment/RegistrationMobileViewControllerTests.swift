@@ -2,7 +2,7 @@ import Quick
 import Nimble
 @testable
 import Kiosk
-import ReactiveCocoa
+import RxSwift
 import Nimble_Snapshots
 import Moya
 

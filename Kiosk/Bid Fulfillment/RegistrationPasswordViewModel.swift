@@ -1,5 +1,5 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 import Moya
 
 class RegistrationPasswordViewModel {
@@ -7,11 +7,15 @@ class RegistrationPasswordViewModel {
         dynamic var password: String = ""
     }
 
-    var emailExistsSignal: RACSignal
-    let command: RACCommand
+    private let emailExists = Variable<Bool>(false)
+
+    var emailExistsSignal: Observable<Bool> {
+        return emailExists.asObservable()
+    }
+//    let command: RACCommand
     let email: String
     
-    init(passwordSignal: RACSignal, manualInvocationSignal: RACSignal, finishedSubject: RACSubject, email: String) {
+    init(passwordSignal: Observable<String>, execute: Observable<Void>, completed: AnyObserver<Void>, email: String) {
         let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: email)
         let emailExistsSignal = Provider.sharedProvider.request(endpoint).map(responseIsOK).replayLast()
 

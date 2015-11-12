@@ -1,6 +1,6 @@
 import UIKit
 import Moya
-import ReactiveCocoa
+import RxSwift
 
 // We abstract this out so that we don't have network models, etc, aware of the view controller.
 // This is a "source of truth" that should be referenced in lieu of many independent variables. 

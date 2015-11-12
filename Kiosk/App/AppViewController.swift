@@ -1,5 +1,5 @@
 import UIKit
-import ReactiveCocoa
+import RxSwift
 
 class AppViewController: UIViewController, UINavigationControllerDelegate {
     var allowAnimations = true

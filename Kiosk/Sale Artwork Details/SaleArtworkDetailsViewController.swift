@@ -2,7 +2,7 @@ import UIKit
 import ORStackView
 import Artsy_UILabels
 import Artsy_UIFonts
-import ReactiveCocoa
+import RxSwift
 import Artsy_UIButtons
 import SDWebImage
 

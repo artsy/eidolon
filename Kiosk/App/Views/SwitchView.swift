@@ -1,15 +1,16 @@
 import UIKit
-import ReactiveCocoa
+import RxSwift
 
 let SwitchViewBorderWidth: CGFloat = 2
 
 class SwitchView: UIView {
+
+    private var _selectedIndex = Variable(0)
+
+    var selectedIndexSignal: Observable<Int> { _selectedIndex.asObservable() }
+
     var shouldAnimate = true
     var animationDuration: NSTimeInterval = AnimationDuration.Short
-    private var _selectedIndexSubject = RACSubject()
-    lazy var selectedIndexSignal: RACSignal = {
-        self._selectedIndexSubject.startWith(0)
-    }()
     
     private let buttons: Array<UIButton>
     private let selectionIndicator: UIView
@@ -162,6 +163,6 @@ private extension SwitchView {
             self.layoutIfNeeded()
         }
 
-        self._selectedIndexSubject.sendNext(index)
+        self._selectedIndex.value = index
     }
 }

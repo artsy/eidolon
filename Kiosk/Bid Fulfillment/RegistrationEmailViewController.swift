@@ -1,5 +1,5 @@
 import UIKit
-import ReactiveCocoa
+import RxSwift
 
 class RegistrationEmailViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
 

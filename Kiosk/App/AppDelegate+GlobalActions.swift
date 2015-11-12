@@ -1,7 +1,7 @@
 import UIKit
 import QuartzCore
 import ARAnalytics
-import ReactiveCocoa
+import RxSwift
 
 func appDelegate() -> AppDelegate {
     return UIApplication.sharedApplication().delegate as! AppDelegate

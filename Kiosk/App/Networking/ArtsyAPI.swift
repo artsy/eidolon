@@ -1,5 +1,5 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 import Moya
 import Alamofire
 
@@ -330,18 +330,18 @@ func endpointResolver() -> MoyaProvider<ArtsyAPI>.RequestClosure {
     }
 }
 
-class ArtsyProvider<Target where Target: MoyaTarget>: ReactiveCocoaMoyaProvider<Target> {
+class ArtsyProvider<Target where Target: MoyaTarget>: RxMoyaProvider<Target> {
 
-    let onlineSignal: RACSignal
+    let online: Observable<Bool>
 
     init(endpointClosure: MoyaProvider<Target>.EndpointClosure = MoyaProvider.DefaultEndpointMapping,
         requestClosure: MoyaProvider<Target>.RequestClosure = MoyaProvider.DefaultRequestMapping,
         stubClosure: MoyaProvider<Target>.StubClosure = MoyaProvider.NeverStub,
         manager: Manager = Alamofire.Manager.sharedInstance,
         plugins: [Plugin<Target>] = [],
-        onlineSignal: RACSignal = connectedToInternetOrStubbingSignal()) {
+        online: Observable<Bool> = connectedToInternetOrStubbingSignal()) {
 
-            self.onlineSignal = onlineSignal
+            self.online = online
             super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins)
     }
 }
@@ -375,7 +375,7 @@ struct Provider {
     }
     
     static func StubbingProvider() -> ArtsyProvider<ArtsyAPI> {
-        return ArtsyProvider(endpointClosure: endpointsClosure, requestClosure: endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.`return`(true))
+        return ArtsyProvider(endpointClosure: endpointsClosure, requestClosure: endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
     }
 
     private struct SharedProvider {

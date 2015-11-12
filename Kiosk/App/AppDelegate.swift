@@ -1,7 +1,7 @@
 import UIKit
 import ARAnalytics
 import SDWebImage
-import ReactiveCocoa
+import RxSwift
 import Keys
 import Stripe
 

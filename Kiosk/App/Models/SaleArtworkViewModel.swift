@@ -1,5 +1,5 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 
 private let kNoBidsString = "0 bids placed"
 
@@ -57,7 +57,7 @@ extension SaleArtworkViewModel {
 
     // Signals representing values that change over time.
 
-    var numberOfBidsSignal: RACSignal {
+    func numberOfBidsSignal() -> Observable<String> {
         return RACObserve(saleArtwork, "bidCount").map { (optionalBidCount) -> AnyObject! in
             // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
             // So we need to unwrap it as an optional optional. Yo dawg.
@@ -73,7 +73,7 @@ extension SaleArtworkViewModel {
     }
 
     // The language used here is very specific – see https://github.com/artsy/eidolon/pull/325#issuecomment-64121996 for details
-    var numberOfBidsWithReserveSignal: RACSignal {
+    var numberOfBidsWithReserveSignal: Observable<String> {
         return RACSignal.combineLatest([numberOfBidsSignal, RACObserve(saleArtwork, "reserveStatus"), RACObserve(saleArtwork, "highestBidCents")]).map { (object) -> AnyObject! in
             let tuple = object as! RACTuple // Ignoring highestBidCents; only there to trigger on bid update.
 
@@ -96,7 +96,7 @@ extension SaleArtworkViewModel {
         }
     }
 
-    var lotNumberSignal: RACSignal {
+    func lotNumberSignal() -> Observable<String?> {
         return RACObserve(saleArtwork, "lotNumber").map { (lotNumber) -> AnyObject! in
             if let lotNumber = lotNumber as? Int {
                 return "Lot \(lotNumber)"
@@ -106,7 +106,7 @@ extension SaleArtworkViewModel {
         }.mapNilToEmptyString()
     }
 
-    var forSaleSignal: RACSignal {
+    func forSaleSignal() -> Observable<Bool> {
         return RACObserve(saleArtwork, "artwork").map { (artwork) -> AnyObject! in
             let artwork = artwork as! Artwork
 
@@ -114,7 +114,7 @@ extension SaleArtworkViewModel {
         }
     }
 
-    func currentBidSignal(prefix prefix: String = "", missingPrefix: String = "") -> RACSignal {
+    func currentBidSignal(prefix prefix: String = "", missingPrefix: String = "") ->Observable<String> {
         return RACObserve(saleArtwork, "highestBidCents").map { [weak self] (highestBidCents) -> AnyObject! in
             if let currentBidCents = highestBidCents as? Int {
                 return "\(prefix)\(NSNumberFormatter.currencyStringForCents(currentBidCents))"

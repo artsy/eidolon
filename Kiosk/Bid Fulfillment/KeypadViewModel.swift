@@ -1,5 +1,5 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 
 let KeypadViewModelMaxIntegerValue = 10_000_000
 

@@ -2,7 +2,7 @@ import Quick
 import Nimble
 @testable
 import Kiosk
-import ReactiveCocoa
+import RxSwift
 
 class LoadingViewModelTests: QuickSpec {
     override func spec() {

@@ -1,20 +1,23 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 
 typealias ShowDetailsClosure = (SaleArtwork) -> Void
 typealias PresentModalClosure = (SaleArtwork) -> Void
 
 protocol ListingsViewModelType {
+
     var auctionID: String { get }
     var syncInterval: NSTimeInterval { get }
     var pageSize: Int { get }
-    var schedule: (RACSignal, RACScheduler) -> RACSignal { get }
     var logSync: (AnyObject!) -> Void { get }
     var numberOfSaleArtworks: Int { get }
 
-    var showSpinnerSignal: RACSignal! { get }
-    var gridSelectedSignal: RACSignal! { get }
-    var updatedContentsSignal: RACSignal! { get }
+    var showSpinnerSignal: Observable<Bool>! { get }
+    var gridSelectedSignal: Observable<Bool>! { get }
+    var updatedContentsSignal: Observable<NSDate> { get }
+
+    // TODO: Schedulers?
+//    var schedule: (Observable<T>, SchedulerType) -> Observable<T> { get }
 
     func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel
     func showDetailsForSaleArtworkAtIndexPath(indexPath: NSIndexPath)
@@ -25,35 +28,43 @@ protocol ListingsViewModelType {
 class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // These are private to the view model – should not be accessed directly
-    private dynamic var saleArtworks = Array<SaleArtwork>()
-    private dynamic var sortedSaleArtworks = Array<SaleArtwork>()
+    private var saleArtworks = Variable(Array<SaleArtwork>())
+    private var sortedSaleArtworks: Observable<Array<SaleArtwork>>!
 
     let auctionID: String
     let pageSize: Int
     let syncInterval: NSTimeInterval
     let logSync: (AnyObject!) -> Void
-    var schedule: (RACSignal, RACScheduler) -> RACSignal
+//    var schedule: (RACSignal, RACScheduler) -> RACSignal
 
     var numberOfSaleArtworks: Int {
-        return saleArtworks.count
+        return saleArtworks.value.count
     }
 
-    var showSpinnerSignal: RACSignal!
-    var gridSelectedSignal: RACSignal!
-    var updatedContentsSignal: RACSignal! {
-        return RACObserve(self, "sortedSaleArtworks").distinctUntilChanged().mapArrayLengthExistenceToBool().ignore(false).map { _ -> AnyObject! in NSDate() }
+    var showSpinnerSignal: Observable<Bool>!
+    var gridSelectedSignal: Observable<Bool>!
+    var updatedContentsSignal: Observable<NSDate> {
+        return saleArtworks.distinctUntilChanged { (lhs, rhs) -> Bool in
+                // Awwww yeeaaaahhhhhh 😎
+                return lhs as NSArray == rhs as NSArray
+            }
+            .map { saleArtworks -> Bool in
+                return saleArtworks.count > 0
+            }
+            .ignore(false)
+            .map { _ in NSDate() }
     }
 
     let showDetails: ShowDetailsClosure
     let presentModal: PresentModalClosure
 
-    init(selectedIndexSignal: RACSignal,
+    init(selectedIndexSignal: Observable<Int>,
          showDetails: ShowDetailsClosure,
          presentModal: PresentModalClosure,
          pageSize: Int = 10,
          syncInterval: NSTimeInterval = SyncInterval,
          logSync: (AnyObject!) -> Void = ListingsViewModel.DefaultLogging,
-         schedule: (signal: RACSignal, scheduler: RACScheduler) -> RACSignal = ListingsViewModel.DefaultScheduler,
+//         schedule: (signal: RACSignal, scheduler: RACScheduler) -> RACSignal = ListingsViewModel.DefaultScheduler,
          auctionID: String = AppSetup.sharedState.auctionID) {
 
         self.auctionID = auctionID
@@ -62,7 +73,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         self.pageSize = pageSize
         self.syncInterval = syncInterval
         self.logSync = logSync
-        self.schedule = schedule
+//        self.schedule = schedule
 
         super.init()
 
@@ -71,8 +82,10 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // MARK: Private Methods
 
-    private func setup(selectedIndexSignal: RACSignal) {
-        RAC(self, "saleArtworks") <~ recurringListingsRequestSignal().takeUntil(self.rac_willDeallocSignal())
+    private func setup(selectedIndexSignal: Observable<Int>) {
+        
+        recurringListingsRequestSignal().takeUntil(rx_deallocated)
+
 
         showSpinnerSignal = RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool().not()
         gridSelectedSignal = selectedIndexSignal.map { return ListingsViewModel.SwitchValues(rawValue: $0 as! Int) == .Some(.Grid) }
@@ -134,7 +147,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         }), RACScheduler.mainThreadScheduler())
     }
 
-    private func recurringListingsRequestSignal() -> RACSignal {
+    private func recurringListingsRequestSignal() -> Observable<Array<SaleArtwork>> {
         let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate()).takeUntil(rac_willDeallocSignal())
 
         return recurringSignal.doNext(logSync).map { [weak self] _ -> AnyObject! in

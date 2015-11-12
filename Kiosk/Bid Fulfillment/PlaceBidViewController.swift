@@ -1,6 +1,6 @@
 import UIKit
 import Artsy_UILabels
-import ReactiveCocoa
+import RxSwift
 import Artsy_UIButtons
 import Artsy_UILabels
 import ORStackView
