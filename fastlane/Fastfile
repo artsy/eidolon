@@ -104,6 +104,7 @@ EOS
   gym(
     scheme: "Kiosk",
     export_method: 'enterprise',
+    use_legacy_build_api: true
   )
 
   # Push to Hockey
