@@ -99,8 +99,8 @@ DEPENDENCIES:
   - ORStackView
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - RxCocoa (from `../RxSwift`)
-  - RxSwift (from `../RxSwift`)
+  - RxCocoa (from `https://github.com/ashfurrow/RxSwift.git`, branch `temp-develop`)
+  - RxSwift (from `https://github.com/ashfurrow/RxSwift.git`, branch `temp-develop`)
   - SDWebImage (~> 3.7)
   - Stripe
   - SVProgressHUD
@@ -120,9 +120,11 @@ EXTERNAL SOURCES:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
   RxCocoa:
-    :path: ../RxSwift
+    :branch: temp-develop
+    :git: https://github.com/ashfurrow/RxSwift.git
   RxSwift:
-    :path: ../RxSwift
+    :branch: temp-develop
+    :git: https://github.com/ashfurrow/RxSwift.git
   SwiftyJSON:
     :branch: xcode7
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -139,6 +141,12 @@ CHECKOUT OPTIONS:
   Reachability:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
     :git: https://github.com/ashfurrow/Reachability.git
+  RxCocoa:
+    :commit: adb81f219372f1fd40fdb8de72019b19627d498e
+    :git: https://github.com/ashfurrow/RxSwift.git
+  RxSwift:
+    :commit: adb81f219372f1fd40fdb8de72019b19627d498e
+    :git: https://github.com/ashfurrow/RxSwift.git
   SwiftyJSON:
     :commit: f269523ac572979245baa99c8475eab73caf1e9b
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
