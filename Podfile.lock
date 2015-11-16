@@ -120,9 +120,9 @@ EXTERNAL SOURCES:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
   RxCocoa:
-    :path: "../RxSwift"
+    :path: ../RxSwift
   RxSwift:
-    :path: "../RxSwift"
+    :path: ../RxSwift
   SwiftyJSON:
     :branch: xcode7
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git

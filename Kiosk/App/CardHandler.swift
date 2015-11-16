@@ -3,10 +3,10 @@ import RxSwift
 
 class CardHandler: NSObject, CFTReaderDelegate {
 
-    private let _cardStatus = BehaviorSubject(value: "")
+    private let _cardStatus = PublishSubject<String>()
 
     var cardStatus: Observable<String> {
-        return _cardStatus.asObservable().skip(1)
+        return _cardStatus.asObservable()
     }
 
     var card: CFTCard?
