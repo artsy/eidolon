@@ -59,7 +59,7 @@ lane :deploy do |options|
   raise "You must specify a HOCKEY_API_TOKEN environment variable to deploy." if hockey_api_token.nil?
 
   # Make sure not to ship with OSS
-  verify_keys
+  verify_pod_keys
 
   # Make sure we start off with a clean slate
   ensure_git_status_clean
@@ -104,6 +104,7 @@ EOS
   gym(
     scheme: "Kiosk",
     export_method: 'enterprise',
+    use_legacy_build_api: true
   )
 
   # Push to Hockey
@@ -127,7 +128,7 @@ EOS
   clean_build_artifacts
 
   # Tag release and push to GitHub
-  commit_version_bump message: "Deploying version #{version}.", force: true
+  sh "git add .. ; git commit -m 'Deploying version #{version}.'" # Can't use commit_version_bump to include changelog changes
   add_git_tag tag: version
   push_to_git_remote
 end

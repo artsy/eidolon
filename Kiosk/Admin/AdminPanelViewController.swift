@@ -40,7 +40,8 @@ class AdminPanelViewController: UIViewController {
         if APIKeys.sharedKeys.stubResponses {
             auctionIDLabel.text = "STUBBING API RESPONSES\nNOT CONTACTING ARTSY API"
         } else {
-            auctionIDLabel.text = state.auctionID
+            let version = (NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String)  ?? "Unknown"
+            auctionIDLabel.text = "\(state.auctionID), Kiosk version: \(version)"
         }
 
         let environment = state.useStaging ? "PRODUCTION" : "STAGING"

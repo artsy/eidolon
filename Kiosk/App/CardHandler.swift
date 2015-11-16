@@ -29,14 +29,14 @@ class CardHandler: NSObject, CFTReaderDelegate {
     func startSearching() {
         sessionManager.setLogging(true)
 
-        reader = CFTReader(andConnect: ())
-        reader.delegate = self;
-        reader.swipeTimeoutDuration(0)
-        _cardStatus.onNext("Started searching")
+        reader = CFTReader(reader: 1)
+        reader.delegate = self
+        reader.swipeHasTimeout(false)
+            _cardStatus.onNext("Started searching")
     }
 
     func end() {
-        reader.cancelSwipeWithMessage(nil)
+        reader.cancelTransaction()
         reader = nil
     }
 
@@ -59,8 +59,12 @@ class CardHandler: NSObject, CFTReaderDelegate {
             logger.log("CardReader got a response it cannot handle")
 
 
-            reader.beginSwipeWithMessage(nil);
+            reader.beginSwipe();
         }
+    }
+
+    func transactionResult(charge: CFTCharge!, withError error: NSError!) {
+        logger.log("Unexcepted call to transactionResult callback: \(charge)\n\(error)")
     }
 
     // handle other delegate call backs with the status messages
@@ -84,14 +88,24 @@ class CardHandler: NSObject, CFTReaderDelegate {
     }
 
     func readerGenericResponse(cardData: String!) {
+<<<<<<< HEAD
         _cardStatus.onNext("Reader received non-card data: \(cardData) ");
         reader.beginSwipeWithMessage(nil);
+=======
+        cardSwipedSignal.sendNext("Reader received non-card data: \(cardData) ");
+        reader.beginSwipe();
+>>>>>>> master
     }
 
     func readerIsConnected(isConnected: Bool, withError error: NSError!) {
         if isConnected {
+<<<<<<< HEAD
             _cardStatus.onNext("Reader is connected");
             reader.beginSwipeWithMessage(nil);
+=======
+            cardSwipedSignal.sendNext("Reader is connected");
+            reader.beginSwipe();
+>>>>>>> master
 
         } else {
             if (error != nil) {
