@@ -88,25 +88,14 @@ class CardHandler: NSObject, CFTReaderDelegate {
     }
 
     func readerGenericResponse(cardData: String!) {
-<<<<<<< HEAD
         _cardStatus.onNext("Reader received non-card data: \(cardData) ");
-        reader.beginSwipeWithMessage(nil);
-=======
-        cardSwipedSignal.sendNext("Reader received non-card data: \(cardData) ");
-        reader.beginSwipe();
->>>>>>> master
+        reader.beginSwipe()
     }
 
     func readerIsConnected(isConnected: Bool, withError error: NSError!) {
         if isConnected {
-<<<<<<< HEAD
-            _cardStatus.onNext("Reader is connected");
-            reader.beginSwipeWithMessage(nil);
-=======
-            cardSwipedSignal.sendNext("Reader is connected");
-            reader.beginSwipe();
->>>>>>> master
-
+            _cardStatus.onNext("Reader is connected")
+            reader.beginSwipe()
         } else {
             if (error != nil) {
                 _cardStatus.onNext("Reader is disconnected: \(error.localizedDescription)");
