@@ -189,6 +189,8 @@
 		5E86114A1A5C442C00456E41 /* XAuth.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E8610461A5C429C00456E41 /* XAuth.json */; };
 		5E8FABE81A5C49D800F6B913 /* StubResponses.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FED1A5C429C00456E41 /* StubResponses.m */; };
 		5E9F8AD41A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */; };
+		5EA1F7291BFBC84E00F90655 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */; };
+		5EA1F72B1BFE65A500F90655 /* SubjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1F72A1BFE65A500F90655 /* SubjectExtensions.swift */; };
 		5EA637211A9E6AC60094A86E /* HelpViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */; };
 		5EA6B1111B668F8300FEB3ED /* LoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */; };
 		5EA6B1131B668F9300FEB3ED /* LoadingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */; };
@@ -395,6 +397,8 @@
 		5E8611001A5C43EF00456E41 /* TextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTests.swift; sourceTree = "<group>"; };
 		5E8611011A5C43EF00456E41 /* XAppTokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppTokenSpec.swift; sourceTree = "<group>"; };
 		5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkDetailsViewControllerTests.swift; sourceTree = "<group>"; };
+		5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		5EA1F72A1BFE65A500F90655 /* SubjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectExtensions.swift; sourceTree = "<group>"; };
 		5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewControllerTests.swift; sourceTree = "<group>"; };
 		5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewModel.swift; sourceTree = "<group>"; };
 		5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewModelTests.swift; sourceTree = "<group>"; };
@@ -826,6 +830,8 @@
 			children = (
 				5EBA94561BF2A48B00DE3045 /* Observable+Logging.swift */,
 				5EBA94581BF2B11400DE3045 /* Observable+Operators.swift */,
+				5EA1F72A1BFE65A500F90655 /* SubjectExtensions.swift */,
+				5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */,
 			);
 			name = "RxSwift Extensions";
 			sourceTree = "<group>";
@@ -1216,6 +1222,7 @@
 				5EF71E891AE9B71C0069A266 /* ManualCreditCardInputViewModel.swift in Sources */,
 				5E86105B1A5C429C00456E41 /* Artwork.swift in Sources */,
 				5EFFE24E1B977DD3006BF64C /* SaleArtworkViewModel.swift in Sources */,
+				5EA1F72B1BFE65A500F90655 /* SubjectExtensions.swift in Sources */,
 				5E86106B1A5C429C00456E41 /* UserCredentials.swift in Sources */,
 				5E8610781A5C429C00456E41 /* Spinner.swift in Sources */,
 				5E86109A1A5C429C00456E41 /* RegistrationMobileViewController.swift in Sources */,
@@ -1228,6 +1235,7 @@
 				5E8610631A5C429C00456E41 /* Location.swift in Sources */,
 				5EB0B71E1A5C410D00B7CBF2 /* UIViewController+Bidding.swift in Sources */,
 				5E86106F1A5C429C00456E41 /* OfflineViewController.swift in Sources */,
+				5EA1F7291BFBC84E00F90655 /* HelperFunctions.swift in Sources */,
 				5EF71E781AE986000069A266 /* StripeManager.swift in Sources */,
 				5E86109B1A5C429C00456E41 /* RegistrationPasswordViewController.swift in Sources */,
 				5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */,

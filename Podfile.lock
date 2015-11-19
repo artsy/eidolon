@@ -1,4 +1,7 @@
 PODS:
+  - Action (1.0.0):
+    - RxCocoa (~> 2.0.0-beta)
+    - RxSwift (~> 2.0.0-beta)
   - Alamofire (3.1.2)
   - ARAnalytics/CoreIOS (3.8.0)
   - ARAnalytics/HockeyApp (3.8.0):
@@ -56,6 +59,8 @@ PODS:
     - NJKWebViewProgress/ProgressView (= 0.2.3)
   - NJKWebViewProgress/Core (0.2.3)
   - NJKWebViewProgress/ProgressView (0.2.3)
+  - NSObject+Rx (1.1.0):
+    - RxSwift (~> 2.0.0-beta)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
   - Quick (0.8.0)
@@ -77,6 +82,7 @@ PODS:
     - fmemopen
 
 DEPENDENCIES:
+  - Action (from `https://github.com/ashfurrow/Action.git`)
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
   - ARCollectionViewMasonryLayout (~> 2.0.0)
@@ -96,6 +102,7 @@ DEPENDENCIES:
   - Moya/RxSwift
   - Nimble
   - Nimble-Snapshots
+  - NSObject+Rx
   - ORStackView
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
@@ -110,6 +117,8 @@ DEPENDENCIES:
   - XNGMarkdownParser
 
 EXTERNAL SOURCES:
+  Action:
+    :git: https://github.com/ashfurrow/Action.git
   ARTiledImageView:
     :git: https://github.com/ashfurrow/ARTiledImageView.git
   DZNWebViewController:
@@ -132,6 +141,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 CHECKOUT OPTIONS:
+  Action:
+    :commit: 7a5afcd58628be7fd30b94f18ee4c6344845f859
+    :git: https://github.com/ashfurrow/Action.git
   ARTiledImageView:
     :commit: 2fe35ede0cb1d8cf3dc5aa4506c476c0367564b7
     :git: https://github.com/ashfurrow/ARTiledImageView.git
@@ -155,6 +167,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
+  Action: f17ec0ba5238046f53b9454610a7e21d09e13448
   Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
   ARAnalytics: 5468652928cee7100dd0e6b5162631409da37106
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
@@ -179,6 +192,7 @@ SPEC CHECKSUMS:
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   Nimble-Snapshots: ab41dd737dcd33a0b0cb005a30465fef70b7207a
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  NSObject+Rx: 3704f64fad3a476a5212402d500e2ce4133adb69
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece

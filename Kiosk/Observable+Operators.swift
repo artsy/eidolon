@@ -20,9 +20,9 @@ extension Observable {
     //
     // Still not sure if this is a good idea.
 
-    func flatMap<R>(something: Element -> () -> Observable<R>) -> Observable<R> {
+    func flatMap<R>(selector: Element -> () -> Observable<R>) -> Observable<R> {
         return self.map { (s) -> Observable<R> in
-            return something(s)()
+            return selector(s)()
         }.switchLatest()
     }
 }
@@ -56,6 +56,28 @@ extension Observable where Element: OptionalType {
                 return just(value)
             } else {
                 return just(nilValue)
+            }
+        }
+    }
+}
+
+extension Observable {
+    func doOnNext(closure: Element -> Void) -> Observable<Element> {
+        return doOn { (event: Event) -> Void in
+            switch event {
+            case .Next(let value):
+                closure(value)
+            default: break
+            }
+        }
+    }
+
+    func doOnCompleted(closure: () -> Void) -> Observable<Element> {
+        return doOn { (event: Event) -> Void in
+            switch event {
+            case .Completed:
+                closure()
+            default: break
             }
         }
     }

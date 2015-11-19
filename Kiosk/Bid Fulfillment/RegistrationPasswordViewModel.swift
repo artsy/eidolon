@@ -1,54 +1,51 @@
 import Foundation
 import RxSwift
 import Moya
+import Action
 
 class RegistrationPasswordViewModel {
-    private class PasswordHolder: NSObject {
-        dynamic var password: String = ""
-    }
+    private let password = BehaviorSubject(value: "")
 
-    private let emailExists = Variable<Bool>(false)
+    let action: Action<Void, AnyObject>
 
-    var emailExistsSignal: Observable<Bool> {
-        return emailExists.asObservable()
-    }
-//    let command: RACCommand
     let email: String
+
+    let disposeBag = DisposeBag()
     
     init(passwordSignal: Observable<String>, execute: Observable<Void>, completed: AnyObserver<Void>, email: String) {
-        let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: email)
-        let emailExistsSignal = Provider.sharedProvider.request(endpoint).map(responseIsOK).replayLast()
-
-        let passwordHolder = PasswordHolder()
-        RAC(passwordHolder, "password") <~ passwordSignal
-
-        command = RACCommand(enabled: passwordSignal.map(isStringLengthAtLeast(6))) { _ -> RACSignal! in
-            return emailExistsSignal.map { (object) -> AnyObject! in
-                let emailExists = object as! Bool
-
-                if emailExists {
-                    let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: email, password: passwordHolder.password)
-                    return Provider.sharedProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
-                } else {
-                    return RACSignal.empty()
-                }
-            }.switchToLatest().doCompleted { () -> Void in
-                finishedSubject.sendCompleted()
-            }
-        }
-
-        self.emailExistsSignal = emailExistsSignal
         self.email = email
 
-        manualInvocationSignal.subscribeNext { [weak self] _ -> Void in
-            self?.command.execute(nil)
-            return
-        }
+        let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: email)
+        let emailExistsSignal = Provider.sharedProvider.request(endpoint).map(responseIsOK).replay(1)
+
+        passwordSignal.bindTo(self.password).addDisposableTo(disposeBag)
+
+        let password = self.password
+
+        let action: Action<Void, AnyObject> = Action(enabledIf: passwordSignal.map(isStringLengthAtLeast(6)), workFactory: { (_) -> Observable<AnyObject> in
+            return emailExistsSignal.map { exists -> Observable<AnyObject> in
+                if exists {
+                    let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: email, password: password.value ?? "")
+                    return Provider.sharedProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
+                } else {
+                    return empty()
+                }
+                }.switchLatest().doOnCompleted {
+                    completed.onCompleted()
+            }
+        })
+
+        self.action = action
+
+        execute.subscribeNext { _ in
+            action.execute(Void())
+        }.addDisposableTo(disposeBag)
+
     }
 
-    func userForgotPasswordSignal() -> RACSignal {
+    func userForgotPasswordSignal() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
-        return XAppRequest(endpoint).filterSuccessfulStatusCodes().doNext { (json) -> Void in
+        return XAppRequest(endpoint).filterSuccessfulStatusCodes().map(void).doOnNext { (t) -> Void in
             logger.log("Sent forgot password request")
         }
     }
