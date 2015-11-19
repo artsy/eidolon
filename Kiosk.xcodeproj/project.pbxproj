@@ -191,6 +191,7 @@
 		5E9F8AD41A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */; };
 		5EA1F7291BFBC84E00F90655 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */; };
 		5EA1F72B1BFE65A500F90655 /* SubjectExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1F72A1BFE65A500F90655 /* SubjectExtensions.swift */; };
+		5EA1F72D1BFE672200F90655 /* UIKit+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1F72C1BFE672200F90655 /* UIKit+Rx.swift */; };
 		5EA637211A9E6AC60094A86E /* HelpViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */; };
 		5EA6B1111B668F8300FEB3ED /* LoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */; };
 		5EA6B1131B668F9300FEB3ED /* LoadingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */; };
@@ -399,6 +400,7 @@
 		5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		5EA1F72A1BFE65A500F90655 /* SubjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectExtensions.swift; sourceTree = "<group>"; };
+		5EA1F72C1BFE672200F90655 /* UIKit+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIKit+Rx.swift"; sourceTree = "<group>"; };
 		5EA637201A9E6AC60094A86E /* HelpViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewControllerTests.swift; sourceTree = "<group>"; };
 		5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewModel.swift; sourceTree = "<group>"; };
 		5EA6B1121B668F9300FEB3ED /* LoadingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewModelTests.swift; sourceTree = "<group>"; };
@@ -832,6 +834,7 @@
 				5EBA94581BF2B11400DE3045 /* Observable+Operators.swift */,
 				5EA1F72A1BFE65A500F90655 /* SubjectExtensions.swift */,
 				5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */,
+				5EA1F72C1BFE672200F90655 /* UIKit+Rx.swift */,
 			);
 			name = "RxSwift Extensions";
 			sourceTree = "<group>";
@@ -1182,6 +1185,7 @@
 				5E8610671A5C429C00456E41 /* User.swift in Sources */,
 				5E8610921A5C429C00456E41 /* BidDetails.swift in Sources */,
 				5EBD31491AE0435600648484 /* GenericFormValidationViewModel.swift in Sources */,
+				5EA1F72D1BFE672200F90655 /* UIKit+Rx.swift in Sources */,
 				5E86106D1A5C429C00456E41 /* XAppToken.swift in Sources */,
 				5E86107B1A5C429C00456E41 /* TextField.swift in Sources */,
 				5E8610AA1A5C429C00456E41 /* UIStoryboardExtensions.swift in Sources */,

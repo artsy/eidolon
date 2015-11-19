@@ -82,3 +82,15 @@ extension Observable {
         }
     }
 }
+
+extension Observable {
+    func mapReplace<T>(value: T) -> Observable<T> {
+        return map { _ -> T in
+            return value
+        }
+    }
+
+    func dispatchAsyncMainScheduler() -> Observable<E> {
+        return self.observeOn(MainScheduler.sharedInstance)
+    }
+}

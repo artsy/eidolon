@@ -23,7 +23,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
 
     lazy var moreInfoSignal: Observable<NSDate> = {
         // TODO: Skip 1 or anything?
-        return [self.imageGestureSigal, self.infoGestureSignal].asObservable().merge()
+        return [self.imageGestureSigal, self.infoGestureSignal].toObservable().merge()
     }()
     
     private lazy var imageGestureSigal: Observable<NSDate> = {
