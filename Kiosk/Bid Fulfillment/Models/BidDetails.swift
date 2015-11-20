@@ -1,25 +1,26 @@
 import UIKit
+import RxSwift
 
 @objc class BidDetails: NSObject {
     typealias DownloadImageClosure = (url: NSURL, imageView: UIImageView) -> ()
 
-    dynamic var newUser: NewUser = NewUser()
-    dynamic var saleArtwork: SaleArtwork?
+    var newUser: NewUser = NewUser()
+    var saleArtwork: SaleArtwork?
 
-    dynamic var paddleNumber: String?
-    dynamic var bidderPIN: String?
-    dynamic var bidAmountCents: NSNumber?
-    dynamic var bidderID: String?
+    var paddleNumber = Variable<String?>(nil)
+    var bidderPIN = Variable<String?>(nil)
+    var bidAmountCents = Variable<NSNumber?>(nil)
+    var bidderID = Variable<String?>(nil)
 
     var setImage: DownloadImageClosure = { (url, imageView) -> () in
         imageView.sd_setImageWithURL(url)
     }
 
-    init(saleArtwork: SaleArtwork?, paddleNumber: String?, bidderPIN: String?, bidAmountCents:Int?) {
+    init(saleArtwork: SaleArtwork?, paddleNumber: String?, bidderPIN: String?, bidAmountCents: Int?) {
         self.saleArtwork = saleArtwork
-        self.paddleNumber = paddleNumber
-        self.bidderPIN = bidderPIN
-        self.bidAmountCents = bidAmountCents
+        self.paddleNumber.value = paddleNumber
+        self.bidderPIN.value = bidderPIN
+        self.bidAmountCents.value = bidAmountCents
     }
 
     /// Not for production use

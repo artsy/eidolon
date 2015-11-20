@@ -2,10 +2,11 @@ import UIKit
 import ECPhoneNumberFormatter
 import Moya
 import RxSwift
+import Action
 
 class ConfirmYourBidViewController: UIViewController {
 
-    private dynamic var number: String = ""
+    private var _number = Variable("")
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
@@ -15,8 +16,13 @@ class ConfirmYourBidViewController: UIViewController {
     @IBOutlet var enterButton: UIButton!
     @IBOutlet var useArtsyLoginButton: UIButton!
 
+    private let _viewWillDisappear = PublishSubject<Void>()
+    var viewWillDisappear: Observable<Void> {
+        return self._viewWillDisappear.asObserver()
+    }
+
     // Need takeUntil because we bind this signal eventually to bidDetails, making us stick around longer than we should!
-    lazy var numberSignal: RACSignal = { self.keypadContainer.stringValueSignal.takeUntil(self.viewWillDisappearSignal()) }()
+    lazy var numberSignal: Observable<String> = { self.keypadContainer.stringValueSignal.takeUntil(self.viewWillDisappear) }()
     
     lazy var provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider
 
@@ -33,16 +39,27 @@ class ConfirmYourBidViewController: UIViewController {
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
 
-        RAC(self, "number") <~ numberSignal
+        numberSignal
+            .bindTo(_number)
+            .addDisposableTo(rx_disposeBag)
 
-        RAC(numberAmountTextField, "text") <~ numberSignal.map(toPhoneNumberString)
+        numberSignal
+            .map(toPhoneNumberString)
+            .bindTo(numberAmountTextField.rx_text)
+            .addDisposableTo(rx_disposeBag)
 
         let nav = self.fulfillmentNav()
 
-        RAC(nav.bidDetails.newUser, "phoneNumber") <~ numberSignal
-        RAC(nav.bidDetails, "paddleNumber") <~ numberSignal
-        
-        bidDetailsPreviewView.bidDetails = nav.bidDetails
+        let optionalNumberSignal = numberSignal.map { number in
+            return Optional(number)
+        }
+
+        // We don't know if it's a paddle number or a phone number yet, so bind both ¯\_(ツ)_/¯
+        [nav.bidDetails.paddleNumber, nav.bidDetails.newUser.phoneNumber].forEach { variable in
+            optionalNumberSignal
+                .bindTo(variable)
+                .addDisposableTo(rx_disposeBag)
+        }
 
         // Does a bidder exist for this phone number?
         //   if so forward to PIN input VC
@@ -51,8 +68,9 @@ class ConfirmYourBidViewController: UIViewController {
         let auctionID = nav.auctionID
         
         let numberIsZeroLengthSignal = numberSignal.map(isZeroLengthString)
-        enterButton.rac_command = RACCommand(enabled: numberIsZeroLengthSignal.not()) { [weak self] _ in
-            guard let me = self else { return RACSignal.empty() }
+
+        enterButton.rx_action = CocoaAction(enabledIf: numberIsZeroLengthSignal.not(), workFactory: { [weak self] _ in
+            guard let me = self else { return empty() }
 
             let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me.number))
             return XAppRequest(endpoint, provider:me.provider).filterStatusCode(400).doError { (error) -> Void in
@@ -76,7 +94,8 @@ class ConfirmYourBidViewController: UIViewController {
                 me.performSegue(.ConfirmyourBidBidderNotFound)
                 return
             }
-        }
+
+        })
     }
 
     func toOpeningBidString(cents:AnyObject!) -> AnyObject! {
@@ -86,12 +105,11 @@ class ConfirmYourBidViewController: UIViewController {
         return ""
     }
 
-    func toPhoneNumberString(number:AnyObject!) -> AnyObject! {
-        let numberString = number as! String
-        if numberString.characters.count >= 7 {
-            return self.phoneNumberFormatter.stringForObjectValue(numberString)
+    func toPhoneNumberString(number: String) -> String {
+        if number.characters.count >= 7 {
+            return phoneNumberFormatter.stringForObjectValue(number) ?? number
         } else {
-            return numberString
+            return number
         }
     }
 }

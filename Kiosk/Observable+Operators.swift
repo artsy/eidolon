@@ -94,3 +94,12 @@ extension Observable {
         return self.observeOn(MainScheduler.sharedInstance)
     }
 }
+
+// Maps true to false and vice versa
+extension Observable where Element: BooleanLiteralType {
+    func not() -> Observable<Element> {
+        return self.map { input in
+            return !input
+        }
+    }
+}

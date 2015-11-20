@@ -1,15 +1,17 @@
-@objc class NewUser: NSObject {
-    dynamic var email: String?
-    dynamic var password: String?
-    dynamic var phoneNumber: String?
-    dynamic var creditCardDigit: String?
-    dynamic var creditCardToken: String?
-    dynamic var creditCardName: String?
-    dynamic var creditCardType: String?
-    dynamic var zipCode: String?
-    dynamic var name: String?
+import RxSwift
 
-    dynamic var hasBeenRegistered: Bool = false
+class NewUser {
+    var email = Variable<String?>(nil)
+    var password = Variable<String?>(nil)
+    var phoneNumber = Variable<String?>(nil)
+    var creditCardDigit = Variable<String?>(nil)
+    var creditCardToken = Variable<String?>(nil)
+    var creditCardName = Variable<String?>(nil)
+    var creditCardType = Variable<String?>(nil)
+    var zipCode = Variable<String?>(nil)
+    var name = Variable<String?>(nil)
+
+    var hasBeenRegistered = Variable(false)
 
     var swipedCreditCard = false
 }
