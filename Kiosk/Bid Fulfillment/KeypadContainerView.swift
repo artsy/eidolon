@@ -1,16 +1,17 @@
 import UIKit
 import Foundation
 import RxSwift
+import Action
 
 //@IBDesignable
 class KeypadContainerView: UIView {
     private var keypad: KeypadView!
     private let viewModel = KeypadViewModel()
     
-    var stringValueSignal: RACSignal!
-    var intValueSignal: RACSignal!
-    var deleteCommand: RACCommand!
-    var resetCommand: RACCommand!
+    var stringValue: Observable<String>!
+    var intValue: Observable<Int>!
+    var deleteAction: CocoaAction!
+    var resetAction: CocoaAction!
 
     override func prepareForInterfaceBuilder() {
         for subview in subviews { subview.removeFromSuperview() }
@@ -27,14 +28,14 @@ class KeypadContainerView: UIView {
         super.awakeFromNib()
         
         keypad = NSBundle(forClass: self.dynamicType).loadNibNamed("KeypadView", owner: self, options: nil).first as? KeypadView
-        keypad.leftCommand = viewModel.deleteCommand
-        keypad.rightCommand = viewModel.clearCommand
-        keypad.keyCommand = viewModel.addDigitCommand
+        keypad.leftAction = viewModel.deleteAction
+        keypad.rightAction = viewModel.clearAction
+        keypad.keyAction = viewModel.addDigitAction
         
-        intValueSignal = viewModel.intValueSignal
-        stringValueSignal = viewModel.stringValueSignal
-        deleteCommand = viewModel.deleteCommand
-        resetCommand = viewModel.clearCommand
+        intValue = viewModel.intValue.asObservable()
+        stringValue = viewModel.stringValue.asObservable()
+        deleteAction = viewModel.deleteAction
+        resetAction = viewModel.clearAction
         
         self.addSubview(keypad)
     }

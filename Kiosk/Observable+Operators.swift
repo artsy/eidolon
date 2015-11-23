@@ -96,10 +96,21 @@ extension Observable {
 }
 
 // Maps true to false and vice versa
-extension Observable where Element: BooleanLiteralType {
-    func not() -> Observable<Element> {
+extension Observable where Element: BooleanType {
+    func not() -> Observable<BooleanType> {
         return self.map { input in
-            return !input
+            return !input.boolValue
+        }
+    }
+}
+
+extension CollectionType where Generator.Element: ObservableConvertibleType, Generator.Element.E: BooleanType {
+
+    func combineLatestAnd() -> Observable<Bool> {
+        return combineLatest { bools in
+            bools.reduce(true, combine: { (memo, element) in
+                return memo && element.boolValue
+            })
         }
     }
 }

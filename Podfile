@@ -58,12 +58,12 @@ pod 'ARTiledImageView', :git => 'https://github.com/ashfurrow/ARTiledImageView.g
 pod 'XNGMarkdownParser'
 
 # Swift pods
-pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :branch => 'xcode7'
+pod 'SwiftyJSON'
 pod 'RxSwift', :git => 'https://github.com/ashfurrow/RxSwift.git', :branch => 'temp-develop' #'~> 2.0.0-beta'
 pod 'RxCocoa', :git => 'https://github.com/ashfurrow/RxSwift.git', :branch => 'temp-develop' #'~> 2.0.0-beta'
 pod 'Moya/RxSwift'
 pod 'NSObject+Rx'
-pod 'Action', :git => 'https://github.com/ashfurrow/Action.git'
+pod 'Action'
 
 target 'KioskTests' do
 

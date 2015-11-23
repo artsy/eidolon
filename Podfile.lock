@@ -1,5 +1,5 @@
 PODS:
-  - Action (1.0.0):
+  - Action (0.2.1):
     - RxCocoa (~> 2.0.0-beta)
     - RxSwift (~> 2.0.0-beta)
   - Alamofire (3.1.2)
@@ -75,14 +75,14 @@ PODS:
     - Stripe/Core (= 3.1.0)
   - Stripe/Core (3.1.0)
   - SVProgressHUD (1.1.3)
-  - SwiftyJSON (2.2.1)
+  - SwiftyJSON (2.3.1)
   - UIImageViewAligned (0.0.1)
   - UIView+BooleanAnimations (1.0.2)
   - XNGMarkdownParser (0.3.0):
     - fmemopen
 
 DEPENDENCIES:
-  - Action (from `https://github.com/ashfurrow/Action.git`)
+  - Action
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
   - ARCollectionViewMasonryLayout (~> 2.0.0)
@@ -111,14 +111,12 @@ DEPENDENCIES:
   - SDWebImage (~> 3.7)
   - Stripe
   - SVProgressHUD
-  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, branch `xcode7`)
+  - SwiftyJSON
   - UIImageViewAligned (from `https://github.com/ashfurrow/UIImageViewAligned.git`)
   - UIView+BooleanAnimations
   - XNGMarkdownParser
 
 EXTERNAL SOURCES:
-  Action:
-    :git: https://github.com/ashfurrow/Action.git
   ARTiledImageView:
     :git: https://github.com/ashfurrow/ARTiledImageView.git
   DZNWebViewController:
@@ -134,16 +132,10 @@ EXTERNAL SOURCES:
   RxSwift:
     :branch: temp-develop
     :git: https://github.com/ashfurrow/RxSwift.git
-  SwiftyJSON:
-    :branch: xcode7
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
   UIImageViewAligned:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 CHECKOUT OPTIONS:
-  Action:
-    :commit: 7a5afcd58628be7fd30b94f18ee4c6344845f859
-    :git: https://github.com/ashfurrow/Action.git
   ARTiledImageView:
     :commit: 2fe35ede0cb1d8cf3dc5aa4506c476c0367564b7
     :git: https://github.com/ashfurrow/ARTiledImageView.git
@@ -159,15 +151,12 @@ CHECKOUT OPTIONS:
   RxSwift:
     :commit: adb81f219372f1fd40fdb8de72019b19627d498e
     :git: https://github.com/ashfurrow/RxSwift.git
-  SwiftyJSON:
-    :commit: f269523ac572979245baa99c8475eab73caf1e9b
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
   UIImageViewAligned:
     :commit: 6f8cb5669b219ef08c90c2e2e5a082cadfe7565b
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
-  Action: f17ec0ba5238046f53b9454610a7e21d09e13448
+  Action: f1aacbed6c9a75bcc461b1b46725da72e9c69284
   Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
   ARAnalytics: 5468652928cee7100dd0e6b5162631409da37106
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
@@ -201,7 +190,7 @@ SPEC CHECKSUMS:
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
-  SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
+  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e

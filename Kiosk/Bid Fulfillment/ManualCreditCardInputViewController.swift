@@ -3,7 +3,7 @@ import RxSwift
 import Keys
 
 class ManualCreditCardInputViewController: UIViewController, RegistrationSubController {
-    let finishedSignal = RACSubject()
+    let finished = PublishSubject<Void>()
 
     @IBOutlet weak var cardNumberTextField: TextField!
     @IBOutlet weak var expirationMonthTextField: TextField!
@@ -26,7 +26,7 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
 
     lazy var viewModel: ManualCreditCardInputViewModel = {
         var bidDetails = self.navigationController?.fulfillmentNav().bidDetails
-        return ManualCreditCardInputViewModel(bidDetails: bidDetails, finishedSubject: self.finishedSignal)
+        return ManualCreditCardInputViewModel(bidDetails: bidDetails, finishedSubject: self.finished)
     }()
 
     override func viewDidLoad() {
@@ -36,21 +36,50 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         billingZipWrapperView.hidden = true
 
         // We show the enter credit card number, then the date switching the views around
-        RAC(viewModel, "cardFullDigits") <~ cardNumberTextField.rac_textSignal()
-        RAC(viewModel, "expirationYear") <~ expirationYearTextField.rac_textSignal()
-        RAC(viewModel, "expirationMonth") <~ expirationMonthTextField.rac_textSignal()
-        RAC(viewModel, "securityCode") <~ securitycodeTextField.rac_textSignal()
-        RAC(viewModel, "billingZip") <~ billingZipTextField.rac_textSignal()
+        viewModel
+            .cardFullDigits
+            .bindTo(cardNumberTextField.rx_text)
+            .addDisposableTo(rx_disposeBag)
 
-        RAC(cardConfirmButton, "enabled") <~ viewModel.creditCardNumberIsValidSignal
+        viewModel
+            .expirationYear
+            .bindTo(expirationYearTextField.rx_text)
+            .addDisposableTo(rx_disposeBag)
 
-        billingZipConfirmButton.rac_command = viewModel.registerButtonCommand()
-        RAC(billingZipErrorLabel, "hidden") <~ billingZipConfirmButton.rac_command.errors.take(1).mapReplace(false).startWith(true)
+        viewModel
+            .expirationMonth
+            .bindTo(expirationMonthTextField.rx_text)
+            .addDisposableTo(rx_disposeBag)
 
-        viewModel.moveToYearSignal.take(1).subscribeNext { [weak self] _ -> Void in
+        viewModel
+            .securityCode
+            .bindTo(securitycodeTextField.rx_text)
+            .addDisposableTo(rx_disposeBag)
+
+        viewModel
+            .billingZip
+            .bindTo(billingZipTextField.rx_text)
+            .addDisposableTo(rx_disposeBag)
+
+        viewModel
+            .creditCardNumberIsValid
+            .bindTo(cardConfirmButton.rx_enabled)
+            .addDisposableTo(rx_disposeBag)
+
+        let action = viewModel.registerButtonCommand()
+        billingZipConfirmButton.rx_action = action
+
+        action
+            .errors // Based on errors
+            .take(1) // On the first error, then forever
+            .mapReplace(false) // Replace the error with false
+            .startWith(true) // But begin with true
+            .bindTo(billingZipErrorLabel.rx_hidden) // show the error label
+            .addDisposableTo(rx_disposeBag)
+
+        viewModel.moveToYear.take(1).subscribeNext { [weak self] _ in
             self?.expirationYearTextField.becomeFirstResponder()
-            return
-        }
+        }.addDisposableTo(rx_disposeBag)
 
         cardNumberTextField.becomeFirstResponder()
     }

@@ -22,7 +22,7 @@ class ConfirmYourBidViewController: UIViewController {
     }
 
     // Need takeUntil because we bind this signal eventually to bidDetails, making us stick around longer than we should!
-    lazy var numberSignal: Observable<String> = { self.keypadContainer.stringValueSignal.takeUntil(self.viewWillDisappear) }()
+    lazy var numberSignal: Observable<String> = { self.keypadContainer.stringValue.takeUntil(self.viewWillDisappear) }()
     
     lazy var provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider
 
