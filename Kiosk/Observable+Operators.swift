@@ -16,11 +16,11 @@ extension Observable {
     //
     // Becomes...
     //
-    // viewModel.flatMap(SaleArtworkViewModel.lotNumberSignal)
+    // viewModel.flatMapTo(SaleArtworkViewModel.lotNumberSignal)
     //
     // Still not sure if this is a good idea.
 
-    func flatMap<R>(selector: Element -> () -> Observable<R>) -> Observable<R> {
+    func flatMapTo<R>(selector: Element -> () -> Observable<R>) -> Observable<R> {
         return self.map { (s) -> Observable<R> in
             return selector(s)()
         }.switchLatest()
@@ -112,5 +112,23 @@ extension CollectionType where Generator.Element: ObservableConvertibleType, Gen
                 return memo && element.boolValue
             })
         }
+    }
+}
+
+extension Observable {
+    func then(@autoclosure(escaping) closure: () -> Observable<Element>) -> Observable<Element> {
+        let next = deferred {
+            return closure()
+        }
+
+        return self
+            .ignoreElements()
+            .concat(next)
+    }
+}
+
+func sendDispatchCompleted<T>(observer: AnyObserver<T>) {
+    dispatch_async(dispatch_get_main_queue()) {
+        observer.onCompleted()
     }
 }

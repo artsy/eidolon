@@ -75,7 +75,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         // Bind subviews
 
         // Start with things not expected to ever change. 
-        viewModel.flatMap(SaleArtworkViewModel.lotNumberSignal)
+        viewModel.flatMapTo(SaleArtworkViewModel.lotNumberSignal)
             .replaceNilWith("")
             .bindTo(lotNumberLabel.rx_text)
             .addDisposableTo(rx_disposeBag)
@@ -101,17 +101,17 @@ class ListingsCollectionViewCell: UICollectionViewCell {
 
         // Now do properties that _do_ change.
 
-        viewModel.flatMap { (viewModel) -> Observable<String> in
+        viewModel.flatMapTo { (viewModel) -> Observable<String> in
                 return viewModel.currentBidSignal(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ")
             }
             .bindTo(currentBidLabel.rx_text)
             .addDisposableTo(rx_disposeBag)
 
-        viewModel.flatMap(SaleArtworkViewModel.numberOfBidsSignal)
+        viewModel.flatMapTo(SaleArtworkViewModel.numberOfBidsSignal)
             .bindTo(numberOfBidsLabel.rx_text)
             .addDisposableTo(rx_disposeBag)
 
-        viewModel.flatMap(SaleArtworkViewModel.forSaleSignal)
+        viewModel.flatMapTo(SaleArtworkViewModel.forSaleSignal)
             .subscribeNext { [weak bidButton] forSale in
                 // Button titles aren't KVO-able
                 bidButton?.setTitle((forSale ? "BID" : "SOLD"), forState: .Normal)
