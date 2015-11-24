@@ -86,7 +86,7 @@ extension Observable {
         return doOn { (event: Event) -> Void in
             switch event {
             case .Error(let error):
-                closure(value)
+                closure(error)
             default: break
             }
         }
