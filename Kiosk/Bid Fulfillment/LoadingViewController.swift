@@ -114,10 +114,12 @@ class LoadingViewController: UIViewController {
         titleLabel.text = "Registration Complete"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
         fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
-        RACSignal.interval(1, onScheduler: RACScheduler.mainThreadScheduler()).take(1).subscribeCompleted { [weak self] () -> Void in
-            self?.performSegue(.PushtoRegisterConfirmed)
-            return
-        }
+        interval(1, MainScheduler.sharedInstance)
+            .take(1)
+            .subscribeCompleted { [weak self] in
+                self?.performSegue(.PushtoRegisterConfirmed)
+            }
+            .addDisposableTo(rx_disposeBag)
     }
 
     func handleUpdate() {

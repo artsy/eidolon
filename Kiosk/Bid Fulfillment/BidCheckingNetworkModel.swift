@@ -12,9 +12,9 @@ class BidCheckingNetworkModel: NSObject {
     unowned let fulfillmentController: FulfillmentController
 
     // outputs
-    dynamic var bidIsResolved = false
-    dynamic var isHighestBidder = false
-    dynamic var reserveNotMet = false
+    var bidIsResolved = Variable(false)
+    var isHighestBidder = Variable(false)
+    var reserveNotMet = Variable(false)
 
     private var mostRecentSaleArtwork: SaleArtwork?
 

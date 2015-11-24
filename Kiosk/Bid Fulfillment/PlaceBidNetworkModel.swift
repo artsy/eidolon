@@ -20,7 +20,7 @@ class PlaceBidNetworkModel: NSObject {
         super.init()
     }
 
-    func bidSignal() -> RACSignal {
+    func bidSignal() -> Observable<String> {
         let bidDetails = fulfillmentController.bidDetails
 
         let saleArtwork = bidDetails.saleArtwork

@@ -7,8 +7,8 @@ class BidderNetworkModel: NSObject {
 
     unowned let fulfillmentController: FulfillmentController
 
-    var createdNewUser: RACSignal {
-        return RACObserve(self.fulfillmentController.bidDetails.newUser, "hasBeenRegistered")
+    var createdNewUser: Observable<Bool> {
+        return self.fulfillmentController.bidDetails.newUser.hasBeenRegistered.asObservable()
     }
 
     init(fulfillmentController: FulfillmentController) {
@@ -17,7 +17,7 @@ class BidderNetworkModel: NSObject {
 
     // MARK: - Main Signal
 
-    func createOrGetBidder() -> RACSignal {
+    func createOrGetBidder() -> Observable<User> {
         return createOrUpdateUser().andThen { [weak self] in
             self?.createOrUpdateBidder()
 

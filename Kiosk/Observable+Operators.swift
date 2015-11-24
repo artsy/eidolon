@@ -126,6 +126,11 @@ extension CollectionType where Generator.Element: ObservableConvertibleType, Gen
 }
 
 extension Observable {
+
+    func then(closure: () -> Observable<Element>) -> Observable<Element> {
+        return then(closure())
+    }
+
     func then(@autoclosure(escaping) closure: () -> Observable<Element>) -> Observable<Element> {
         let next = deferred {
             return closure()
