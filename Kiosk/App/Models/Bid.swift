@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-class Bid: JSONAble {
+final class Bid: NSObject, JSONAbleType {
     let id: String
     let amountCents: Int
 
@@ -10,7 +10,7 @@ class Bid: JSONAble {
         self.amountCents = amountCents
     }
 
-    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+    static func fromJSON(json:[String: AnyObject]) -> Bid {
         let json = JSON(json)
 
         let id = json["id"].stringValue

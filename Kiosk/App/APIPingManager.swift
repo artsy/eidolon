@@ -5,7 +5,7 @@ import RxSwift
 class APIPingManager: NSObject {
 
     let syncInterval: NSTimeInterval = 2
-    var letOnlineSignal: RACSignal!
+    var letOnlineSignal: Observable<Bool>!
 
     override init() {
         super.init()

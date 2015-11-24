@@ -187,6 +187,7 @@
 		5E8611481A5C442C00456E41 /* SystemTime.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E8610441A5C429C00456E41 /* SystemTime.json */; };
 		5E8611491A5C442C00456E41 /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E8610451A5C429C00456E41 /* XApp.json */; };
 		5E86114A1A5C442C00456E41 /* XAuth.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E8610461A5C429C00456E41 /* XAuth.json */; };
+		5E87BBA81C03C39F00D46BB5 /* Observable+JSONAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87BBA71C03C39F00D46BB5 /* Observable+JSONAble.swift */; };
 		5E8FABE81A5C49D800F6B913 /* StubResponses.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FED1A5C429C00456E41 /* StubResponses.m */; };
 		5E9F8AD41A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */; };
 		5EA1F7291BFBC84E00F90655 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */; };
@@ -397,6 +398,7 @@
 		5E8610FF1A5C43EF00456E41 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		5E8611001A5C43EF00456E41 /* TextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTests.swift; sourceTree = "<group>"; };
 		5E8611011A5C43EF00456E41 /* XAppTokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppTokenSpec.swift; sourceTree = "<group>"; };
+		5E87BBA71C03C39F00D46BB5 /* Observable+JSONAble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+JSONAble.swift"; sourceTree = "<group>"; };
 		5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		5EA1F72A1BFE65A500F90655 /* SubjectExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectExtensions.swift; sourceTree = "<group>"; };
@@ -835,6 +837,7 @@
 				5EA1F72A1BFE65A500F90655 /* SubjectExtensions.swift */,
 				5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */,
 				5EA1F72C1BFE672200F90655 /* UIKit+Rx.swift */,
+				5E87BBA71C03C39F00D46BB5 /* Observable+JSONAble.swift */,
 			);
 			name = "RxSwift Extensions";
 			sourceTree = "<group>";
@@ -1157,6 +1160,7 @@
 				5E8610791A5C429C00456E41 /* SwitchView.swift in Sources */,
 				5E8610611A5C429C00456E41 /* Image.swift in Sources */,
 				5E8610661A5C429C00456E41 /* SystemTime.swift in Sources */,
+				5E87BBA81C03C39F00D46BB5 /* Observable+JSONAble.swift in Sources */,
 				5E8610511A5C429C00456E41 /* APIPingManager.swift in Sources */,
 				5E8610981A5C429C00456E41 /* RegisterViewController.swift in Sources */,
 				5E86109D1A5C429C00456E41 /* SwipeCreditCardViewController.swift in Sources */,

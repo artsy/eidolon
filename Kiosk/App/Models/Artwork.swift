@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-class Artwork: JSONAble {
+final class Artwork: NSObject, JSONAbleType {
 
     enum SoldStatus {
         case NotSold
@@ -56,7 +56,7 @@ class Artwork: JSONAble {
         self.soldStatus = sold
     }
 
-    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
+    static func fromJSON(json: [String: AnyObject]) -> Artwork {
         let json = JSON(json)
 
         let id = json["id"].stringValue

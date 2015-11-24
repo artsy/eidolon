@@ -2,7 +2,7 @@ import Foundation
 import ISO8601DateFormatter
 import SwiftyJSON
 
-class BidderPosition: JSONAble {
+final class BidderPosition: NSObject, JSONAbleType {
     let id: String
     let highestBid: Bid?
     let maxBidAmountCents: Int
@@ -15,7 +15,7 @@ class BidderPosition: JSONAble {
         self.processedAt = processedAt
     }
 
-    override class func fromJSON(source:[String: AnyObject]) -> JSONAble {
+    static func fromJSON(source:[String: AnyObject]) -> BidderPosition {
         let json = JSON(source)
         let formatter = ISO8601DateFormatter()
 

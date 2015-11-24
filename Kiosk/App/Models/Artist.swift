@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-class Artist: JSONAble {
+final class Artist: NSObject, JSONAbleType {
 
     let id: String
     dynamic var name: String
@@ -15,7 +15,7 @@ class Artist: JSONAble {
         self.sortableID = sortableID
     }
 
-    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+    static func fromJSON(json:[String: AnyObject]) -> Artist {
         let json = JSON(json)
 
         let id = json["id"].stringValue

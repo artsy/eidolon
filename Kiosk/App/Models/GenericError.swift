@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-class GenericError: JSONAble {
+final class GenericError: NSObject, JSONAbleType {
     let detail: [String:AnyObject]
     let message: String
     let type: String
@@ -12,7 +12,7 @@ class GenericError: JSONAble {
         self.type = type
     }
     
-    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+    static func fromJSON(json:[String: AnyObject]) -> GenericError {
         let json = JSON(json)
         
         let type = json["type"].stringValue

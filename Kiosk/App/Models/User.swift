@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-class User: JSONAble {
+final class User: NSObject, JSONAbleType {
 
     dynamic let id: String
     dynamic let email: String
@@ -21,7 +21,7 @@ class User: JSONAble {
         self.location = location
     }
     
-    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
+    static func fromJSON(json: [String: AnyObject]) -> User {
         let json = JSON(json)
         
         let id = json["id"].stringValue

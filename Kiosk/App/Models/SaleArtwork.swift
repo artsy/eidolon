@@ -19,7 +19,7 @@ struct SaleNumberFormatter {
     static let dollarFormatter = createDollarFormatter()
 }
 
-class SaleArtwork: JSONAble {
+final class SaleArtwork: NSObject, JSONAbleType {
 
     let id: String
     let artwork: Artwork
@@ -52,7 +52,7 @@ class SaleArtwork: JSONAble {
         return SaleArtworkViewModel(saleArtwork: self)
     }()
 
-    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
+    static func fromJSON(json: [String: AnyObject]) -> SaleArtwork {
         let json = JSON(json)
         let id = json["id"].stringValue
         let artworkDict = json["artwork"].object as! [String: AnyObject]
