@@ -8,8 +8,8 @@ protocol FulfillmentController: class {
     var bidDetails: BidDetails { get set }
     var auctionID: String! { get set }
     var xAccessToken: String? { get set }
-    var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>? { get }
-    var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> { get }
+    var loggedInProvider: RxMoyaProvider<ArtsyAPI>? { get }
+    var loggedInOrDefaultProvider: RxMoyaProvider<ArtsyAPI> { get }
 }
 
 class FulfillmentNavigationController: UINavigationController, FulfillmentController {
@@ -33,13 +33,13 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
                 return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": accessToken])
             }
 
-            loggedInProvider = ReactiveCocoaMoyaProvider(endpointClosure: newEndpointsClosure, requestClosure: endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
+            loggedInProvider = RxMoyaProvider(endpointClosure: newEndpointsClosure, requestClosure: endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
         }
     }
 
-    var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>?
+    var loggedInProvider: RxMoyaProvider<ArtsyAPI>?
 
-    var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> {
+    var loggedInOrDefaultProvider: RxMoyaProvider<ArtsyAPI> {
         if let loggedInProvider = loggedInProvider {
             return loggedInProvider
         }
@@ -56,24 +56,26 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
         cookies?.forEach { storage.deleteCookie($0) }
     }
 
-    func updateUserCredentials() -> RACSignal {
+    func updateUserCredentials() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
-        let request = loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(User.self)
+        let request = loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(User)
 
-        return request.doNext { [weak self] (fullUser) -> Void in
-            let newUser = self?.bidDetails.newUser
-            self?.user = fullUser as? User
-            
-            newUser?.email = self?.user?.email
-            newUser?.password = "----"
-            newUser?.phoneNumber = self?.user?.phoneNumber
-            newUser?.zipCode = self?.user?.location?.postalCode
-            newUser?.name = self?.user?.name
+        return request
+            .doOnNext { [weak self] fullUser in
+                guard let me = self else { return }
 
-        } .doError { (error) -> Void in
-            logger.log("error, the authentication for admin is likely wrong")
-            return
-        }
+                me.user = fullUser
+
+                let newUser = me.bidDetails.newUser
+
+                newUser.email.value = me.user.email
+                newUser.password.value = "----"
+                newUser.phoneNumber.value = me.user.phoneNumber
+                newUser.zipCode.value = me.user.location?.postalCode
+                newUser.name.value = me.user.name
+            }
+            .logError("error, the authentication for admin is likely wrong: ")
+            .map(void)
     }
 }
 
