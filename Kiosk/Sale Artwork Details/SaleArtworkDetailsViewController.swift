@@ -5,13 +5,14 @@ import Artsy_UIFonts
 import RxSwift
 import Artsy_UIButtons
 import SDWebImage
+import Action
 
 class SaleArtworkDetailsViewController: UIViewController {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
     var saleArtwork: SaleArtwork!
     
-    var showBuyersPremiumCommand = { () -> RACCommand in
+    var showBuyersPremiumCommand = { () -> CocoaAction in
         appDelegate().showBuyersPremiumCommand()
     }
 
@@ -19,15 +20,16 @@ class SaleArtworkDetailsViewController: UIViewController {
         return storyboard.viewControllerWithID(.SaleArtworkDetail) as! SaleArtworkDetailsViewController
     }
 
-    lazy var artistInfoSignal: RACSignal = {
+    lazy var artistInfoSignal: Observable<AnyObject> = {
         let signal = XAppRequest(.Artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
-        return signal.replayLast()
+        return signal.replay(1)
     }()
     
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!
     @IBOutlet weak var additionalDetailScrollView: ORStackScrollView!
 
     var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
+    var layoutSubviewsClosure: () -> Void = {}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,8 +104,13 @@ class SaleArtworkDetailsViewController: UIViewController {
             let lotNumberLabel = label(.SansSerif, tag: .LotNumberLabel)
             lotNumberLabel.font = lotNumberLabel.font.fontWithSize(12)
             metadataStackView.addSubview(lotNumberLabel, withTopMargin: "0", sideMargin: "0")
-            
-            RAC(lotNumberLabel, "text") <~ saleArtwork.viewModel.lotNumberSignal
+
+            saleArtwork
+                .viewModel
+                .lotNumberSignal()
+                .filterNil()
+                .bindTo(lotNumberLabel.rx_text)
+                .addDisposableTo(rx_disposeBag)
         }
 
         if let artist = artist() {
@@ -155,7 +162,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         estimateBottomBorder.tag = MetadataStackViewTag.EstimateBottomBorder.rawValue
         metadataStackView.addSubview(estimateBottomBorder, withTopMargin: "10", sideMargin: "0")
 
-        rac_signalForSelector("viewDidLayoutSubviews").subscribeNext { [weak estimateTopBorder, weak estimateBottomBorder] (_) -> Void in
+        layoutSubviewsClosure = { [weak estimateTopBorder, weak estimateBottomBorder] in
             estimateTopBorder?.drawDottedBorders()
             estimateBottomBorder?.drawDottedBorders()
         }
@@ -181,7 +188,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                 strongSelf.bid(strongSelf.auctionID, saleArtwork: strongSelf.saleArtwork, allowAnimations: strongSelf.allowAnimations)
             }
         }
-        saleArtwork.viewModel.forSaleSignal.subscribeNext { [weak bidButton] (forSale) -> Void in
+        saleArtwork.viewModel.forSaleSignal().subscribeNext { [weak bidButton] (forSale) -> Void in
             let forSale = forSale as! Bool
 
             let title = forSale ? "BID" : "SOLD"
@@ -221,6 +228,11 @@ class SaleArtworkDetailsViewController: UIViewController {
         }
 
         metadataStackView.bottomMarginHeight = CGFloat(NSNotFound)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        layoutSubviewsClosure()
     }
 
     private func setupImageView(imageView: UIImageView) {

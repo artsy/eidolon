@@ -27,7 +27,7 @@ final class SaleArtwork: NSObject, JSONAbleType {
     var auctionID: String?
 
     var saleHighestBid: Bid?
-    var bidCount: NSNumber?
+    dynamic var bidCount: NSNumber?
 
     var userBidderPosition: BidderPosition?
     var positions: [String]?
@@ -35,7 +35,7 @@ final class SaleArtwork: NSObject, JSONAbleType {
     var openingBidCents: NSNumber?
     var minimumNextBidCents: NSNumber?
     
-    var highestBidCents: NSNumber?
+    dynamic var highestBidCents: NSNumber?
     var estimateCents: Int?
     var lowEstimateCents: Int?
     var highEstimateCents: Int?
@@ -56,12 +56,12 @@ final class SaleArtwork: NSObject, JSONAbleType {
         let json = JSON(json)
         let id = json["id"].stringValue
         let artworkDict = json["artwork"].object as! [String: AnyObject]
-        let artwork = Artwork.fromJSON(artworkDict) as! Artwork
+        let artwork = Artwork.fromJSON(artworkDict)
 
         let saleArtwork = SaleArtwork(id: id, artwork: artwork) as SaleArtwork
 
         if let highestBidDict = json["highest_bid"].object as? [String: AnyObject] {
-            saleArtwork.saleHighestBid = Bid.fromJSON(highestBidDict) as? Bid
+            saleArtwork.saleHighestBid = Bid.fromJSON(highestBidDict)
         }
 
         saleArtwork.auctionID = json["sale_id"].string
