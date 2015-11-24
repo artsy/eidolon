@@ -47,7 +47,7 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
 
         sale
             .asObservable()
-            .map { Optional($0) }
+            .mapToOptional()
             .bindTo(countdownManager.sale)
             .addDisposableTo(rx_disposeBag)
 

@@ -81,6 +81,16 @@ extension Observable {
             }
         }
     }
+
+    func doOnError(closure: ErrorType -> Void) -> Observable<Element> {
+        return doOn { (event: Event) -> Void in
+            switch event {
+            case .Error(let error):
+                closure(value)
+            default: break
+            }
+        }
+    }
 }
 
 extension Observable {
@@ -97,7 +107,7 @@ extension Observable {
 
 // Maps true to false and vice versa
 extension Observable where Element: BooleanType {
-    func not() -> Observable<BooleanType> {
+    func not() -> Observable<Bool> {
         return self.map { input in
             return !input.boolValue
         }
@@ -124,6 +134,12 @@ extension Observable {
         return self
             .ignoreElements()
             .concat(next)
+    }
+}
+
+extension Observable {
+    func mapToOptional() -> Observable<Optional<Element>> {
+        return map { Optional($0) }
     }
 }
 

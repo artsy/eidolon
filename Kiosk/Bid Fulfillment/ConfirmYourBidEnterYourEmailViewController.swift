@@ -1,5 +1,7 @@
 import UIKit
 import RxSwift
+import RxCocoa
+import Action
 
 class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
@@ -14,37 +16,43 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let emailTextSignal = emailTextField.rac_textSignal()
+        let emailTextSignal = emailTextField.rx_text
         let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
 
-        confirmButton.rac_command = RACCommand(enabled: inputIsEmail) { [weak self] _ in
-            if (self == nil) {
-                return RACSignal.empty()
-            }
+        let action = CocoaAction(enabledIf: inputIsEmail) { [weak self] _ in
+            guard let me = self else { return empty() }
 
-            let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: self!.emailTextField.text ?? "")
-            return XAppRequest(endpoint).filterStatusCode(200).doNext({ (__) -> Void in
+            let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: me.emailTextField.text ?? "")
 
-                self?.performSegue(.ExistingArtsyUserFound)
-                return
-            }).doError { (error) -> Void in
+            return XAppRequest(endpoint)
+                .filterStatusCode(200)
+                .doOnNext { _ in
+                    me.performSegue(.ExistingArtsyUserFound)
+                }
+                .doOnError { error in
 
                 self?.performSegue(.EmailNotFoundonArtsy)
-                return
-            }
+            }.map(void)
         }
 
-        let unbindSignal = confirmButton.rac_command.executing.ignore(false)
+        confirmButton.rx_action = action
+
+        let unbindSignal = action.executing.ignore(false)
 
         let nav = self.fulfillmentNav()
 
         bidDetailsPreviewView.bidDetails = nav.bidDetails
-        RAC(nav.bidDetails.newUser, "email") <~ emailTextSignal.takeUntil(unbindSignal)
 
-        emailTextField.returnKeySignal().subscribeNext { [weak self] (_) -> Void in
-            self?.confirmButton.rac_command.execute(nil)
-            return
-        }
+        emailTextSignal
+            .asObservable()
+            .mapToOptional()
+            .takeUntil(unbindSignal)
+            .bindTo(nav.bidDetails.newUser.email)
+            .addDisposableTo(rx_disposeBag)
+
+        emailTextField.returnKeySignal().subscribeNext { _ in
+            action.execute()
+        }.addDisposableTo(rx_disposeBag)
     }
 
     override func viewWillAppear(animated: Bool) {

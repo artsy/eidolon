@@ -50,9 +50,7 @@ class ConfirmYourBidViewController: UIViewController {
 
         let nav = self.fulfillmentNav()
 
-        let optionalNumberSignal = numberSignal.map { number in
-            return Optional(number)
-        }
+        let optionalNumberSignal = numberSignal.mapToOptional()
 
         // We don't know if it's a paddle number or a phone number yet, so bind both ¯\_(ツ)_/¯
         [nav.bidDetails.paddleNumber, nav.bidDetails.newUser.phoneNumber].forEach { variable in
