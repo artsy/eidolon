@@ -13,20 +13,17 @@ class KeypadViewModel: NSObject {
     lazy var stringValue = Variable("")
     
     // MARK: - Actions
-    
-    // I have no idea why, but if you try and use `[weak self]` in the closure definition of a Action, the compiler segfaults ¯\_(ツ)_/¯
+
     
     lazy var deleteAction: CocoaAction = {
-        let localSelf = self
-        return CocoaAction { [weak localSelf] _ in
-            localSelf?.deleteSignal() ?? empty()
+        return CocoaAction { [weak self] _ in
+            self?.deleteSignal() ?? empty()
         }
     }()
 
     lazy var clearAction: CocoaAction = {
-        let localSelf = self
-        return CocoaAction { [weak localSelf] _ in
-            localSelf?.clearSignal() ?? empty()
+        return CocoaAction { [weak self] _ in
+            self?.clearSignal() ?? empty()
         }
     }()
     
