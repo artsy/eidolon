@@ -7,21 +7,20 @@ class SystemTime {
 
     init () {}
 
-    func syncSignal() -> RACSignal {
+    func syncSignal() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.SystemTime
 
-        return XAppRequest(endpoint).filterSuccessfulStatusCodes().mapJSON()
-            .doNext { [weak self] (response) -> Void in
-                if let dictionary = response as? NSDictionary {
-                    let formatter = ISO8601DateFormatter()
+        return XAppRequest(endpoint)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .doOnNext { [weak self] response in
+                guard let dictionary = response as? NSDictionary else { return }
+                let formatter = ISO8601DateFormatter()
 
-                    let artsyDate = formatter.dateFromString(dictionary["iso8601"] as! String?)
-                    self?.systemTimeInterval = NSDate().timeIntervalSinceDate(artsyDate)
-                }
-                
-            }.doError { (error) -> Void in
-                logger.log("Error contacting Artsy servers: \(error.localizedDescription)")
-            }
+                let artsyDate = formatter.dateFromString(dictionary["iso8601"] as! String?)
+                self?.systemTimeInterval = NSDate().timeIntervalSinceDate(artsyDate)
+
+            }.logError().map(void)
     }
 
     func inSync() -> Bool {
