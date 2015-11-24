@@ -63,7 +63,7 @@ pod 'RxSwift', :git => 'https://github.com/ashfurrow/RxSwift.git', :branch => 't
 pod 'RxCocoa', :git => 'https://github.com/ashfurrow/RxSwift.git', :branch => 'temp-develop' #'~> 2.0.0-beta'
 pod 'Moya/RxSwift'
 pod 'NSObject+Rx'
-pod 'Action'
+pod 'Action', :git => 'https://github.com/ashfurrow/Action.git', :branch => 'alertaction'
 
 target 'KioskTests' do
 
