@@ -10,7 +10,7 @@ class PlaceBidNetworkModel: NSObject {
     unowned let fulfillmentController: FulfillmentController
     var bidderPosition: BidderPosition?
 
-    var provider: ReactiveCocoaMoyaProvider<ArtsyAPI>! {
+    var provider: RxMoyaProvider<ArtsyAPI>! {
         return self.fulfillmentController.loggedInProvider
     }
 
@@ -22,39 +22,43 @@ class PlaceBidNetworkModel: NSObject {
 
     func bidSignal() -> Observable<String> {
         let bidDetails = fulfillmentController.bidDetails
-
         let saleArtwork = bidDetails.saleArtwork
-        let cents = String(bidDetails.bidAmountCents! as Int)
+
+        assert(saleArtwork.hasValue, "Sale artwork is nil at bidding stage.")
+
+        let cents = String(bidDetails.bidAmountCents)
         return bidOnSaleArtwork(saleArtwork!, bidAmountCents: cents)
     }
 
-    private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> RACSignal {
+    private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> Observable<String> {
         let bidEndpoint: ArtsyAPI = ArtsyAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
 
-        let request = provider.request(bidEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)
+        let request = provider
+            .request(bidEndpoint)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .mapToObject(BidderPosition)
 
         return request.map { [weak self] position in
-            self?.bidderPosition = position as? BidderPosition
-            return position?.id
-        }.`catch` { error -> RACSignal! in
+            self?.bidderPosition = position
+            return position.id
+        }.catchError { error -> Observable<String> in
             // We've received an error. We're going to check to see if it's type is "param_error", which indicates we were outbid.
-            let data = error.userInfo["data"]
 
-            return RACSignal.`return`(data).mapJSON().tryMap{ (object, errorPointer) -> AnyObject! in
-                if let type = JSON(object)["type"].string where type == "param_error" {
-                    errorPointer.memory = NSError(domain: OutbidDomain, code: 0, userInfo: [NSUnderlyingErrorKey: error])
-                } else {
-                    errorPointer.memory = error
-                }
-
-                // Return nil, causing this signal to error again. This time, it may have a new error, though.
-                return nil
+            guard let data: AnyObject = (error as NSError).userInfo["data"] else {
+                throw error
             }
 
-        }.doError { (error) in
-            logger.log("Bidding on Sale Artwork failed.")
-            logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
-        }
+            if let type = JSON(data)["type"].string where type == "param_error" {
+                throw NSError(domain: OutbidDomain, code: 0, userInfo: [NSUnderlyingErrorKey: error as NSError])
+            } else {
+                throw error
+            }
+
+            // Just to silence the compiler
+            return empty()
+            }
+            .logError()
     }
 
 }

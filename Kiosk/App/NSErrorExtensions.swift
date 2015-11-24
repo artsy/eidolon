@@ -5,7 +5,7 @@ extension NSError {
 
     func artsyServerError() -> NSString {
         if let errorJSON = userInfo["data"] as? [String: AnyObject] {
-            let error =  GenericError.fromJSON(errorJSON) as! GenericError
+            let error =  GenericError.fromJSON(errorJSON)
             return "\(error.message) - \(error.detail) + \(error.detail)"
         } else if let response = userInfo["data"] as? MoyaResponse {
             let stringData = NSString(data: response.data, encoding: NSUTF8StringEncoding)
