@@ -153,3 +153,11 @@ func sendDispatchCompleted<T>(observer: AnyObserver<T>) {
         observer.onCompleted()
     }
 }
+
+extension Observable where Element: Array<Equatable> {
+    func distinctUntilChanged() -> Observable<Element> {
+        return distinctUntilChanged { (lhs, rhs) -> Bool in
+            return lhs == rhs
+        }
+    }
+}
