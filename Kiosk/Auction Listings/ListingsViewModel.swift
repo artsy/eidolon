@@ -46,7 +46,11 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     var showSpinnerSignal: Observable<Bool>!
     var gridSelectedSignal: Observable<Bool>!
     var updatedContentsSignal: Observable<NSDate> {
-        return saleArtworks.asObservable().distinctUntilChanged()
+        return saleArtworks
+            .asObservable()
+            .distinctUntilChanged { (lhs, rhs) -> Bool in
+                return lhs == rhs
+            }
             .map { $0.count > 0 }
             .ignore(false)
             .map { _ in NSDate() }
@@ -92,7 +96,12 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
         gridSelectedSignal = selectedIndexSignal.map { ListingsViewModel.SwitchValues(rawValue: $0) == .Some(.Grid) }
 
-        let distinctSaleArtworks: Observable<[SaleArtwork]> = saleArtworks.asObservable().distinctUntilChanged()
+        let distinctSaleArtworks: Observable<[SaleArtwork]> = saleArtworks
+            .asObservable()
+            .distinctUntilChanged { (lhs, rhs) -> Bool in
+                return lhs == rhs
+            }
+
         zip(distinctSaleArtworks, selectedIndexSignal)
             { (saleArtworks, selectedIndex) -> [SaleArtwork] in
                 // Necessary to satisfy compiler.

@@ -1,6 +1,7 @@
 import UIKit
 import Moya
 import RxSwift
+import Action
 
 class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
@@ -10,8 +11,13 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBOutlet var useArtsyBidderButton: UIButton!
     @IBOutlet var confirmCredentialsButton: Button!
 
+    private let _viewWillDisappear = PublishSubject<Void>()
+    var viewWillDisappear: Observable<Void> {
+        return self._viewWillDisappear.asObserver()
+    }
+
     var createNewAccount = false
-    lazy var provider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    lazy var provider: RxMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
@@ -29,47 +35,57 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         let nav = self.fulfillmentNav()
         bidDetailsPreviewView.bidDetails = nav.bidDetails
 
-        emailTextField.text = nav.bidDetails.newUser.email ?? ""
+        emailTextField.text = nav.bidDetails.newUser.email.value ?? ""
         
-        let emailTextSignal = emailTextField.rac_textSignal().takeUntil(viewWillDisappearSignal())
-        let passwordTextSignal = passwordTextField.rac_textSignal().takeUntil(viewWillDisappearSignal())
-        RAC(nav.bidDetails.newUser, "email") <~ emailTextSignal
-        RAC(nav.bidDetails.newUser, "password") <~ passwordTextSignal
+        let emailTextSignal = emailTextField.rx_text.takeUntil(viewWillDisappear)
+        let passwordTextSignal = passwordTextField.rx_text.takeUntil(viewWillDisappear)
+
+        emailTextSignal
+            .mapToOptional()
+            .bindTo(nav.bidDetails.newUser.email)
+            .addDisposableTo(rx_disposeBag)
+
+        passwordTextSignal
+            .mapToOptional()
+            .bindTo(nav.bidDetails.newUser.password)
+            .addDisposableTo(rx_disposeBag)
 
         let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
         let passwordIsLongEnough = passwordTextSignal.map(isZeroLengthString).not()
-        let formIsValid = RACSignal.combineLatest([inputIsEmail, passwordIsLongEnough]).and()
+        let formIsValid = [inputIsEmail, passwordIsLongEnough].combineLatestAnd()
 
-        confirmCredentialsButton.rac_command = RACCommand(enabled: formIsValid) { [weak self] _ in
-            guard let me = self else { return RACSignal.empty() }
+        confirmCredentialsButton.rx_action = CocoaAction(enabledIf: formIsValid) { [weak self] _ -> Observable<Void> in
+            guard let me = self else { return empty() }
 
-            return me.xAuthSignal().`try` { (accessTokenDict, errorPointer) -> Bool in
-                if let accessToken = accessTokenDict["access_token"] as? String {
-                    self?.fulfillmentNav().xAccessToken = accessToken
-                    return true
-                } else {
-                    errorPointer.memory = NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
-                    return false
-                }
-
-            }.andThen {
-                return self?.fulfillmentNav().updateUserCredentials()
-
-            }.andThen {
-                return self?.creditCardSignal().doNext { (cards) -> Void in
-                    if (self == nil) { return }
-
-                    if cards.count > 0 {
-                        self!.performSegue(.EmailLoginConfirmedHighestBidder)
-                    } else {
-                        self!.performSegue(.ArtsyUserHasNotRegisteredCard)
+            return me.xAuthSignal()
+                .map { accessTokenDict -> Void in
+                    guard let accessToken = accessTokenDict["access_token"] as? String else {
+                        throw NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
                     }
-                }
 
-            }.doError { [weak self] (error) -> Void in
-                logger.log("Error logging in: \(error.localizedDescription)")
-                logger.log("Error Logging in, likely bad auth creds, email = \(self?.emailTextField.text)")
-                self?.showAuthenticationError()
+                    self?.fulfillmentNav().xAccessToken = accessToken
+                    return Void()
+                }
+                .then {
+                    return self?.fulfillmentNav().updateUserCredentials()
+                }.then {
+                    return self?
+                        .creditCardSignal()
+                        .doOnNext { cards in
+                            guard let me = self else { return }
+
+                            if cards.count > 0 {
+                                me.performSegue(.EmailLoginConfirmedHighestBidder)
+                            } else {
+                                me.performSegue(.ArtsyUserHasNotRegisteredCard)
+                            }
+                        }
+                        .map(void)
+
+                }.doOnError { [weak self] error in
+                    logger.log("Error logging in: \((error as NSError).localizedDescription)")
+                    logger.log("Error Logging in, likely bad auth creds, email = \(self?.emailTextField.text)")
+                    self?.showAuthenticationError()
             }
         }
     }
@@ -83,14 +99,19 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         }
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        _viewWillDisappear.onNext()
+    }
+
     func showAuthenticationError() {
         confirmCredentialsButton.flashError("Wrong login info")
         passwordTextField.flashForError()
-        fulfillmentNav().bidDetails.newUser.password = ""
+        fulfillmentNav().bidDetails.newUser.password.value = ""
         passwordTextField.text = ""
     }
 
-    func xAuthSignal() -> RACSignal {
+    func xAuthSignal() -> Observable<AnyObject> {
         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
         return provider.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
     }
@@ -105,7 +126,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         }
 
         submitAction.enabled = false
-        submitAction.enabled = stringIsEmailAddress(emailTextField.text).boolValue
+        submitAction.enabled = stringIsEmailAddress(emailTextField.text ?? "")
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
 
@@ -114,7 +135,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             textField.text = self.emailTextField.text
 
             NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
-                submitAction.enabled = stringIsEmailAddress(textField.text).boolValue
+                submitAction.enabled = stringIsEmailAddress(textField.text ?? "").boolValue
             }
         }
 
@@ -126,12 +147,17 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     func sendForgotPasswordRequest(email: String) {
         let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
-        XAppRequest(endpoint).filterSuccessfulStatusCodes().subscribeNext { (json) -> Void in
-            logger.log("Sent forgot password request")
-        }
+
+        // TODO: This ought to be in an Action
+        XAppRequest(endpoint)
+            .filterSuccessfulStatusCodes()
+            .subscribeNext { (json) -> Void in
+                logger.log("Sent forgot password request")
+            }
+            .addDisposableTo(rx_disposeBag)
     }
 
-    func creditCardSignal() -> RACSignal {
+    func creditCardSignal() -> Observable<[Card]> {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
         let authProvider = self.fulfillmentNav().loggedInProvider!
         return authProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
