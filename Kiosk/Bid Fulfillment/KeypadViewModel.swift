@@ -1,84 +1,75 @@
 import Foundation
+import Action
 import RxSwift
 
 let KeypadViewModelMaxIntegerValue = 10_000_000
 
 class KeypadViewModel: NSObject {
     
-    dynamic private var intValue: Int = 0
-    dynamic private var stringValue: String = ""
+    //MARK: - Variables
     
-    //MARK: - Signals
+    lazy var intValue = Variable(0)
     
-    lazy var intValueSignal: RACSignal = {
-        RACObserve(self, "intValue")
-    }()
+    lazy var stringValue = Variable("")
     
-    lazy var stringValueSignal: RACSignal = {
-        RACObserve(self, "stringValue")
-    }()
+    // MARK: - Actions
+
     
-    // MARK: - Commands
-    
-    // I have no idea why, but if you try and use `[weak self]` in the closure definition of a RACCommand, the compiler segfaults ¯\_(ツ)_/¯
-    
-    lazy var deleteCommand: RACCommand = {
-        let localSelf = self
-        return RACCommand { [weak localSelf] _ -> RACSignal! in
-            localSelf?.deleteSignal() ?? RACSignal.empty()
+    lazy var deleteAction: CocoaAction = {
+        return CocoaAction { [weak self] _ in
+            self?.deleteSignal() ?? empty()
         }
     }()
 
-    lazy var clearCommand: RACCommand = {
-        let localSelf = self
-        return RACCommand { [weak localSelf] _ -> RACSignal! in
-            localSelf?.clearSignal() ?? RACSignal.empty()
+    lazy var clearAction: CocoaAction = {
+        return CocoaAction { [weak self] _ in
+            self?.clearSignal() ?? empty()
         }
     }()
     
-    lazy var addDigitCommand: RACCommand = {
+    lazy var addDigitAction: Action<Int, Void> = {
         let localSelf = self
-        return RACCommand { [weak localSelf] (input) -> RACSignal! in
-            return localSelf?.addDigitSignal(input as! Int) ?? RACSignal.empty()
+        return Action<Int, Void> { [weak localSelf] input in
+            return localSelf?.addDigitSignal(input) ?? empty()
         }
     }()
 }
 
 private extension KeypadViewModel {
-    func deleteSignal() -> RACSignal {
-        return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
+    func deleteSignal() -> Observable<Void> {
+        return create { [weak self] observer in
             if let strongSelf = self {
-                strongSelf.intValue = Int(strongSelf.intValue/10)
-                if strongSelf.stringValue.isNotEmpty {
-                    let string = strongSelf.stringValue
-                    strongSelf.stringValue = string.substringToIndex(string.endIndex.predecessor())
+                strongSelf.intValue.value = Int(strongSelf.intValue.value / 10)
+                if strongSelf.stringValue.value.isNotEmpty {
+                    let string = strongSelf.stringValue.value
+                    strongSelf.stringValue.value = string.substringToIndex(string.endIndex.predecessor())
                 }
             }
-            subscriber.sendCompleted()
-            return nil
+            observer.onCompleted()
+            return NopDisposable.instance
         }
     }
     
-    func clearSignal() -> RACSignal {
-        return  RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
-            self?.intValue = 0
-            self?.stringValue = ""
-            subscriber.sendCompleted()
-            return nil
+    func clearSignal() -> Observable<Void> {
+        return create { [weak self] observer in
+            self?.intValue.value = 0
+            self?.stringValue.value = ""
+            observer.onCompleted()
+            return NopDisposable.instance
         }
     }
     
-    func addDigitSignal(input: Int) -> RACSignal {
-        return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
+    func addDigitSignal(input: Int) -> Observable<Void> {
+        return create { [weak self] observer in
             if let strongSelf = self {
-                let newValue = (10 * (strongSelf.intValue ?? 0)) + input
+                let newValue = (10 * strongSelf.intValue.value) + input
                 if (newValue < KeypadViewModelMaxIntegerValue) {
-                    strongSelf.intValue = newValue
+                    strongSelf.intValue.value = newValue
                 }
-                strongSelf.stringValue = "\(strongSelf.stringValue)\(input)"
+                strongSelf.stringValue.value = "\(strongSelf.stringValue.value)\(input)"
             }
-            subscriber.sendCompleted()
-            return nil
+            observer.onCompleted()
+            return NopDisposable.instance
         }
     }
 }

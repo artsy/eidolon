@@ -16,13 +16,13 @@ extension Observable {
     //
     // Becomes...
     //
-    // viewModel.flatMap(SaleArtworkViewModel.lotNumberSignal)
+    // viewModel.flatMapTo(SaleArtworkViewModel.lotNumberSignal)
     //
     // Still not sure if this is a good idea.
 
-    func flatMap<R>(something: Element -> () -> Observable<R>) -> Observable<R> {
+    func flatMapTo<R>(selector: Element -> () -> Observable<R>) -> Observable<R> {
         return self.map { (s) -> Observable<R> in
-            return something(s)()
+            return selector(s)()
         }.switchLatest()
     }
 }
@@ -58,5 +58,98 @@ extension Observable where Element: OptionalType {
                 return just(nilValue)
             }
         }
+    }
+}
+
+extension Observable {
+    func doOnNext(closure: Element -> Void) -> Observable<Element> {
+        return doOn { (event: Event) -> Void in
+            switch event {
+            case .Next(let value):
+                closure(value)
+            default: break
+            }
+        }
+    }
+
+    func doOnCompleted(closure: () -> Void) -> Observable<Element> {
+        return doOn { (event: Event) -> Void in
+            switch event {
+            case .Completed:
+                closure()
+            default: break
+            }
+        }
+    }
+
+    func doOnError(closure: ErrorType -> Void) -> Observable<Element> {
+        return doOn { (event: Event) -> Void in
+            switch event {
+            case .Error(let error):
+                closure(error)
+            default: break
+            }
+        }
+    }
+}
+
+extension Observable {
+    func mapReplace<T>(value: T) -> Observable<T> {
+        return map { _ -> T in
+            return value
+        }
+    }
+
+    func dispatchAsyncMainScheduler() -> Observable<E> {
+        return self.observeOn(MainScheduler.sharedInstance)
+    }
+}
+
+// Maps true to false and vice versa
+extension Observable where Element: BooleanType {
+    func not() -> Observable<Bool> {
+        return self.map { input in
+            return !input.boolValue
+        }
+    }
+}
+
+extension CollectionType where Generator.Element: ObservableConvertibleType, Generator.Element.E: BooleanType {
+
+    func combineLatestAnd() -> Observable<Bool> {
+        return combineLatest { bools in
+            bools.reduce(true, combine: { (memo, element) in
+                return memo && element.boolValue
+            })
+        }
+    }
+}
+
+extension Observable {
+
+    func then(closure: () -> Observable<Element>?) -> Observable<Element> {
+        return then(closure() ?? empty())
+    }
+
+    func then(@autoclosure(escaping) closure: () -> Observable<Element>) -> Observable<Element> {
+        let next = deferred {
+            return closure() ?? empty()
+        }
+
+        return self
+            .ignoreElements()
+            .concat(next)
+    }
+}
+
+extension Observable {
+    func mapToOptional() -> Observable<Optional<Element>> {
+        return map { Optional($0) }
+    }
+}
+
+func sendDispatchCompleted<T>(observer: AnyObserver<T>) {
+    dispatch_async(dispatch_get_main_queue()) {
+        observer.onCompleted()
     }
 }

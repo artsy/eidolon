@@ -3,6 +3,7 @@ import SystemConfiguration
 import ARAnalytics
 import RxSwift
 import ARCollectionViewMasonryLayout
+import NSObject_Rx
 
 let HorizontalMargins = 65
 let VerticalMargins = 26
@@ -27,7 +28,7 @@ class ListingsViewController: UIViewController {
         return ListingsViewModel(selectedIndexSignal: self.switchView.selectedIndexSignal, showDetails: self.showDetailsForSaleArtwork, presentModal: self.presentModalForSaleArtwork)
     }()
 
-    dynamic var cellIdentifier = MasonryCellIdentifier
+    var cellIdentifier = Variable(MasonryCellIdentifier)
 
     @IBOutlet var stagingFlag: UIImageView!
     @IBOutlet var loadingSpinner: Spinner!
@@ -63,44 +64,57 @@ class ListingsViewController: UIViewController {
         view.insertSubview(collectionView, belowSubview: loadingSpinner)
         
         // Set up reactive bindings
-
-        RAC(self, "loadingSpinner.hidden") <~ viewModel.showSpinnerSignal.not()
+        viewModel
+            .showSpinnerSignal
+            .bindTo(loadingSpinner.rx_hidden)
+            .addDisposableTo(rx_disposeBag)
 
         // Map switch selection to cell reuse identifier.
-        RAC(self, "cellIdentifier") <~ viewModel.gridSelectedSignal.map { (gridSelected) -> AnyObject! in
-            switch gridSelected as? Bool {
-            case .Some(true):
-                return MasonryCellIdentifier
-            default:
-                return TableCellIdentifier
+        viewModel
+            .gridSelectedSignal
+            .map { gridSelected -> String in
+                if gridSelected {
+                    return MasonryCellIdentifier
+                } else {
+                    return TableCellIdentifier
+                }
             }
-        }
+            .bindTo(cellIdentifier)
+            .addDisposableTo(rx_disposeBag)
+
 
         // Reload collection view when there is new content.
-        viewModel.updatedContentsSignal.mapReplace(collectionView).doNext { (collectionView) -> Void in
-            (collectionView as! UICollectionView).reloadData()
-            return
-        }.dispatchAsyncMainScheduler().subscribeNext { [weak self] (collectionView) -> Void in
-            // Make sure we're on screen and not in a test or something.
-            guard let _ = self?.view.window else { return }
+        viewModel
+            .updatedContentsSignal
+            .mapReplace(collectionView)
+            .doOnNext { collectionView in
+                collectionView.reloadData()
+            }
+            .dispatchAsyncMainScheduler().subscribeNext { [weak self] collectionView -> Void in
+                // Make sure we're on screen and not in a test or something.
+                guard let _ = self?.view.window else { return }
 
-            // Need to dispatchAsyncMainScheduler, since the changes in the CV's model aren't imediate, so we may scroll to a cell that doesn't exist yet.
-            (collectionView as! UICollectionView).scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: .Top, animated: false)
-        }
+                // Need to dispatchAsyncMainScheduler, since the changes in the CV's model aren't imediate, so we may scroll to a cell that doesn't exist yet.
+                collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: .Top, animated: false)
+            }
+            .addDisposableTo(rx_disposeBag)
 
         // Respond to changes in layout, driven by switch selection.
-        viewModel.gridSelectedSignal.map { [weak self] (gridSelected) -> AnyObject! in
-            switch gridSelected as! Bool {
-            case true:
-                return ListingsViewController.masonryLayout()
-            default:
-                return ListingsViewController.tableLayout(CGRectGetWidth(self?.switchView.frame ?? CGRectZero))
+        viewModel
+            .gridSelectedSignal
+            .map { [weak self] gridSelected -> UICollectionViewLayout in
+                switch gridSelected {
+                case true:
+                    return ListingsViewController.masonryLayout()
+                default:
+                    return ListingsViewController.tableLayout(CGRectGetWidth(self?.switchView.frame ?? CGRectZero))
+                }
             }
-        }.subscribeNext { [weak self] (layout) -> Void in
+            .subscribeNext { [weak self] layout in
             // Need to explicitly call animated: false and reload to avoid animation
-            self?.collectionView.setCollectionViewLayout(layout as! UICollectionViewLayout, animated: false)
-            return
-        }
+            self?.collectionView.setCollectionViewLayout(layout, animated: false)
+            }
+            .addDisposableTo(rx_disposeBag)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -138,24 +152,30 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier.value, forIndexPath: indexPath)
 
         if let listingsCell = cell as? ListingsCollectionViewCell {
 
             listingsCell.downloadImage = downloadImage
             listingsCell.cancelDownloadImage = cancelDownloadImage
 
-            listingsCell.viewModel = viewModel.saleArtworkViewModelAtIndexPath(indexPath)
+            // TODO: Abstract this, it feels icky.
+            listingsCell.viewModel.onNext(viewModel.saleArtworkViewModelAtIndexPath(indexPath))
 
-            let bidSignal: RACSignal = listingsCell.bidWasPressedSignal.takeUntil(cell.rac_prepareForReuseSignal)
-            bidSignal.subscribeNext({ [weak self] (_) -> Void in
-                self?.viewModel.presentModalForSaleArtworkAtIndexPath(indexPath)
-            })
-            
-            let moreInfoSignal = listingsCell.moreInfoSignal.takeUntil(cell.rac_prepareForReuseSignal)
-            moreInfoSignal.subscribeNext({ [weak self] (_) -> Void in
-                self?.viewModel.showDetailsForSaleArtworkAtIndexPath(indexPath)
-            })
+            let bidSignal = listingsCell.bidPressed.takeUntil(listingsCell.preparingForReuse)
+            let moreInfoSignal = listingsCell.moreInfoSignal.takeUntil(listingsCell.preparingForReuse)
+
+            bidSignal
+                .subscribeNext { [weak self] _ in
+                    self?.viewModel.presentModalForSaleArtworkAtIndexPath(indexPath)
+                }
+                .addDisposableTo(rx_disposeBag)
+
+            moreInfoSignal
+                .subscribeNext{ [weak self] _ in
+                    self?.viewModel.showDetailsForSaleArtworkAtIndexPath(indexPath)
+                }
+                .addDisposableTo(rx_disposeBag)
         }
         
         return cell

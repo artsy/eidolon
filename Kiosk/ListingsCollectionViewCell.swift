@@ -2,6 +2,7 @@ import Foundation
 import Artsy_UILabels
 import RxSwift
 import RxCocoa
+import NSObject_Rx
 
 class ListingsCollectionViewCell: UICollectionViewCell {
     typealias DownloadImageClosure = (url: NSURL?, imageView: UIImageView) -> ()
@@ -22,7 +23,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
 
     lazy var moreInfoSignal: Observable<NSDate> = {
         // TODO: Skip 1 or anything?
-        return [self.imageGestureSigal, self.infoGestureSignal].asObservable().merge()
+        return [self.imageGestureSigal, self.infoGestureSignal].toObservable().merge()
     }()
     
     private lazy var imageGestureSigal: Observable<NSDate> = {
@@ -51,8 +52,6 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         return _bidPressed.skip(1).asObservable()
     }
 
-    let disposeBag = DisposeBag()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -76,53 +75,53 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         // Bind subviews
 
         // Start with things not expected to ever change. 
-        viewModel.flatMap(SaleArtworkViewModel.lotNumberSignal)
+        viewModel.flatMapTo(SaleArtworkViewModel.lotNumberSignal)
             .replaceNilWith("")
             .bindTo(lotNumberLabel.rx_text)
-            .addDisposableTo(disposeBag)
+            .addDisposableTo(rx_disposeBag)
 
         viewModel.map { (viewModel) -> NSURL? in
                 return viewModel.thumbnailURL
             }.subscribeNext { [weak self] url in
                 guard let imageView = self?.artworkImageView else { return }
                 self?.downloadImage?(url: url, imageView: imageView)
-            }.addDisposableTo(disposeBag)
+            }.addDisposableTo(rx_disposeBag)
 
         viewModel.map { $0.artistName ?? "" }
             .bindTo(artistNameLabel.rx_text)
-            .addDisposableTo(disposeBag)
+            .addDisposableTo(rx_disposeBag)
 
         viewModel.map { $0.titleAndDateAttributedString ?? NSAttributedString() }
             .bindTo(artworkTitleLabel.rx_attributedText)
-            .addDisposableTo(disposeBag)
+            .addDisposableTo(rx_disposeBag)
 
         viewModel.map { $0.estimateString }
             .bindTo(estimateLabel.rx_text)
-            .addDisposableTo(disposeBag)
+            .addDisposableTo(rx_disposeBag)
 
         // Now do properties that _do_ change.
 
-        viewModel.flatMap { (viewModel) -> Observable<String> in
+        viewModel.flatMapTo { (viewModel) -> Observable<String> in
                 return viewModel.currentBidSignal(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ")
             }
             .bindTo(currentBidLabel.rx_text)
-            .addDisposableTo(disposeBag)
+            .addDisposableTo(rx_disposeBag)
 
-        viewModel.flatMap(SaleArtworkViewModel.numberOfBidsSignal)
+        viewModel.flatMapTo(SaleArtworkViewModel.numberOfBidsSignal)
             .bindTo(numberOfBidsLabel.rx_text)
-            .addDisposableTo(disposeBag)
+            .addDisposableTo(rx_disposeBag)
 
-        viewModel.flatMap(SaleArtworkViewModel.forSaleSignal)
+        viewModel.flatMapTo(SaleArtworkViewModel.forSaleSignal)
             .subscribeNext { [weak bidButton] forSale in
                 // Button titles aren't KVO-able
                 bidButton?.setTitle((forSale ? "BID" : "SOLD"), forState: .Normal)
             }
-            .addDisposableTo(disposeBag)
+            .addDisposableTo(rx_disposeBag)
 
         bidButton.rx_tap.subscribeNext { [weak self] in
                 self?._bidPressed.onNext(NSDate())
             }
-            .addDisposableTo(disposeBag)
+            .addDisposableTo(rx_disposeBag)
     }
 }
 

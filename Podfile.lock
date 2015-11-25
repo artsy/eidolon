@@ -1,4 +1,7 @@
 PODS:
+  - Action (0.2.0):
+    - RxCocoa (~> 2.0.0-beta)
+    - RxSwift (~> 2.0.0-beta)
   - Alamofire (3.1.2)
   - ARAnalytics/CoreIOS (3.8.0)
   - ARAnalytics/HockeyApp (3.8.0):
@@ -56,13 +59,15 @@ PODS:
     - NJKWebViewProgress/ProgressView (= 0.2.3)
   - NJKWebViewProgress/Core (0.2.3)
   - NJKWebViewProgress/ProgressView (0.2.3)
+  - NSObject+Rx (1.1.0):
+    - RxSwift (~> 2.0.0-beta)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
   - Quick (0.8.0)
   - Reachability (3.1.1)
-  - RxCocoa (2.0.0-beta.2):
+  - RxCocoa (2.0.0-beta.3):
     - RxSwift (~> 2.0.0-beta)
-  - RxSwift (2.0.0-beta.2)
+  - RxSwift (2.0.0-beta.3)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
@@ -70,13 +75,14 @@ PODS:
     - Stripe/Core (= 3.1.0)
   - Stripe/Core (3.1.0)
   - SVProgressHUD (1.1.3)
-  - SwiftyJSON (2.2.1)
+  - SwiftyJSON (2.3.1)
   - UIImageViewAligned (0.0.1)
   - UIView+BooleanAnimations (1.0.2)
   - XNGMarkdownParser (0.3.0):
     - fmemopen
 
 DEPENDENCIES:
+  - Action (from `https://github.com/ashfurrow/Action.git`, branch `alertaction`)
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
   - ARCollectionViewMasonryLayout (~> 2.0.0)
@@ -96,20 +102,24 @@ DEPENDENCIES:
   - Moya/RxSwift
   - Nimble
   - Nimble-Snapshots
+  - NSObject+Rx
   - ORStackView
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - RxCocoa (from `../RxSwift`)
-  - RxSwift (from `../RxSwift`)
+  - RxCocoa (from `https://github.com/ashfurrow/RxSwift.git`, branch `temp-develop`)
+  - RxSwift (from `https://github.com/ashfurrow/RxSwift.git`, branch `temp-develop`)
   - SDWebImage (~> 3.7)
   - Stripe
   - SVProgressHUD
-  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, branch `xcode7`)
+  - SwiftyJSON
   - UIImageViewAligned (from `https://github.com/ashfurrow/UIImageViewAligned.git`)
   - UIView+BooleanAnimations
   - XNGMarkdownParser
 
 EXTERNAL SOURCES:
+  Action:
+    :branch: alertaction
+    :git: https://github.com/ashfurrow/Action.git
   ARTiledImageView:
     :git: https://github.com/ashfurrow/ARTiledImageView.git
   DZNWebViewController:
@@ -120,16 +130,18 @@ EXTERNAL SOURCES:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
   RxCocoa:
-    :path: "../RxSwift"
+    :branch: temp-develop
+    :git: https://github.com/ashfurrow/RxSwift.git
   RxSwift:
-    :path: "../RxSwift"
-  SwiftyJSON:
-    :branch: xcode7
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+    :branch: temp-develop
+    :git: https://github.com/ashfurrow/RxSwift.git
   UIImageViewAligned:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 CHECKOUT OPTIONS:
+  Action:
+    :commit: 62ff2d0774a7369ee208b206fee97ba5802c0f58
+    :git: https://github.com/ashfurrow/Action.git
   ARTiledImageView:
     :commit: 2fe35ede0cb1d8cf3dc5aa4506c476c0367564b7
     :git: https://github.com/ashfurrow/ARTiledImageView.git
@@ -139,14 +151,18 @@ CHECKOUT OPTIONS:
   Reachability:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
     :git: https://github.com/ashfurrow/Reachability.git
-  SwiftyJSON:
-    :commit: f269523ac572979245baa99c8475eab73caf1e9b
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  RxCocoa:
+    :commit: adb81f219372f1fd40fdb8de72019b19627d498e
+    :git: https://github.com/ashfurrow/RxSwift.git
+  RxSwift:
+    :commit: adb81f219372f1fd40fdb8de72019b19627d498e
+    :git: https://github.com/ashfurrow/RxSwift.git
   UIImageViewAligned:
     :commit: 6f8cb5669b219ef08c90c2e2e5a082cadfe7565b
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
+  Action: 836da3ae9615435467a3d1cddd384f4ea6036ba2
   Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
   ARAnalytics: 5468652928cee7100dd0e6b5162631409da37106
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
@@ -171,15 +187,16 @@ SPEC CHECKSUMS:
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   Nimble-Snapshots: ab41dd737dcd33a0b0cb005a30465fef70b7207a
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  NSObject+Rx: 3704f64fad3a476a5212402d500e2ce4133adb69
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
-  RxCocoa: ee39aa3ab24a8dde3832669f8e1e2c7652925e0c
-  RxSwift: 795720c22352cf1f62669ef3695b5df7e195103b
+  RxCocoa: 1472006304b296d03c847f78b21384523cc4902e
+  RxSwift: 19fbe885b404d1d36d42ac8535134739a9b42952
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
-  SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
+  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e

@@ -5,20 +5,19 @@ import RxSwift
 class APIPingManager: NSObject {
 
     let syncInterval: NSTimeInterval = 2
-    var letOnlineSignal: RACSignal!
+    var letOnlineSignal: Observable<Bool>!
 
     override init() {
         super.init()
 
-        let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate()).takeUntil(rac_willDeallocSignal())
-
-        letOnlineSignal = recurringSignal.map { [weak self] (_) -> AnyObject! in
-            return self?.pingSignal() ?? RACSignal.empty()
-        }.switchToLatest().startWith(true)
+        letOnlineSignal = interval(syncInterval, MainScheduler.sharedInstance)
+            .flatMap { [weak self] _ in
+                return self?.pingSignal() ?? empty()
+            }
+            .startWith(true)
     }
 
-    private func pingSignal() -> RACSignal {
-        let artworksEndpoint: ArtsyAPI = ArtsyAPI.Ping
-        return XAppRequest(artworksEndpoint).map(responseIsOK)
+    private func pingSignal() -> Observable<Bool> {
+        return XAppRequest(ArtsyAPI.Ping).map(responseIsOK)
     }
 }

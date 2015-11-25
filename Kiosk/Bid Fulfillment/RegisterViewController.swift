@@ -1,11 +1,11 @@
 import UIKit
 import RxSwift
 
-@objc protocol RegistrationSubController {
+protocol RegistrationSubController {
     // I know, leaky abstraction, but the amount
     // of useless syntax to change it isn't worth it.
 
-    var finishedSignal: RACSubject { get }
+    var finished: PublishSubject<Void> { get }
 }
 
 class RegisterViewController: UIViewController {

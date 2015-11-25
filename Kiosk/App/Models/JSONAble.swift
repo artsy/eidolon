@@ -1,5 +1,3 @@
-class JSONAble: NSObject {
-    class func fromJSON(_: [String:AnyObject]) -> JSONAble {
-        return JSONAble()
-    }
+protocol JSONAbleType {
+    static func fromJSON(_: [String:AnyObject]) -> Self
 }

@@ -46,7 +46,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         moreInfoLabel.constrainHeight("44")
         moreInfoLabel.alignAttribute(.Bottom, toAttribute: .Bottom, ofView: contentView, predicate: "12")
 
-        viewModel.flatMap(SaleArtworkViewModel.lotNumberSignal)
+        viewModel.flatMapTo(SaleArtworkViewModel.lotNumberSignal)
             .subscribeNext { (lotNumber)in
                 switch lotNumber {
                 case .Some(let text) where text.isEmpty:

@@ -7,7 +7,7 @@ class ListingsCountdownManager: NSObject {
     @IBOutlet weak var countdownContainerView: UIView!
     let formatter = NSNumberFormatter()
 
-    dynamic var sale: Sale?
+    let sale = Variable<Sale?>(nil)
 
     let time = SystemTime()
 
@@ -63,22 +63,21 @@ class ListingsCountdownManager: NSObject {
     }
     
     func tick(timer: NSTimer) {
-        if let sale = sale {
-            if time.inSync() == false { return }
-            if sale.id == "" { return }
+        guard let sale = sale.value else { return }
+        guard time.inSync() else { return }
+        guard sale.id != "" else { return }
 
-            if sale.isActive(time) {
-                let now = time.date()
-                let components = NSCalendar.currentCalendar().components([.Hour, .Minute, .Second], fromDate: now, toDate: sale.endDate, options: [])
-                
-                self.countdownLabel.text = "\(formatter.stringFromNumber(components.hour)!) : \(formatter.stringFromNumber(components.minute)!) : \(formatter.stringFromNumber(components.second)!)"
+        if sale.isActive(time) {
+            let now = time.date()
+            let components = NSCalendar.currentCalendar().components([.Hour, .Minute, .Second], fromDate: now, toDate: sale.endDate, options: [])
 
-            } else {
-                self.countdownLabel.text = "CLOSED"
-                hideDenomenatorLabels()
-                timer.invalidate()
-                _timer = nil
-            }
+            self.countdownLabel.text = "\(formatter.stringFromNumber(components.hour)!) : \(formatter.stringFromNumber(components.minute)!) : \(formatter.stringFromNumber(components.second)!)"
+
+        } else {
+            self.countdownLabel.text = "CLOSED"
+            hideDenomenatorLabels()
+            timer.invalidate()
+            _timer = nil
         }
     }
 }

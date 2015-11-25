@@ -1,21 +1,26 @@
 import UIKit
 import RxSwift
+import Action
 
 class KeypadView: UIView {
-    dynamic var leftCommand: RACCommand?
-    dynamic var rightCommand: RACCommand?
-    dynamic var keyCommand: RACCommand?
+    var leftAction: CocoaAction? {
+        didSet {
+            self.leftButton.rx_action = leftAction
+        }
+    }
+    var rightAction: CocoaAction? {
+        didSet {
+            self.rightButton.rx_action = rightAction
+        }
+    }
+
+    var keyAction: Action<Int, Void>?
 
     @IBOutlet private var keys: [Button]!
     @IBOutlet private var leftButton: Button!
     @IBOutlet private var rightButton: Button!
-
-    override func awakeFromNib() {
-        RAC(leftButton, "rac_command") <~ RACObserve(self, "leftCommand")
-        RAC(rightButton, "rac_command") <~ RACObserve(self, "rightCommand")
-    }
     
     @IBAction func keypadButtonTapped(sender: UIButton) {
-        keyCommand?.execute(sender.tag)
+        keyAction?.execute(sender.tag)
     }
 }

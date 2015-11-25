@@ -31,11 +31,8 @@ func connectedToInternetOrStubbingSignal() -> Observable<Bool> {
 //    return RACSignal.combineLatest([online, stubbing]).or()
 }
 
-func responseIsOK(object: AnyObject!) -> AnyObject {
-    if let response = object as? MoyaResponse {
-        return response.statusCode == 200
-    }
-    return false
+func responseIsOK(response: MoyaResponse) -> Bool {
+    return response.statusCode == 200
 }
 
 
