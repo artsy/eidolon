@@ -5,21 +5,17 @@ import Action
 
 extension UIViewController {
     func promptForBidderDetailsRetrievalSignal() -> Observable<Void> {
-        return deferred { () -> Observable<Bool> in
-            let (alertController, command) = UIAlertController.emailPromptAlertController()
+        return deferred { () -> Observable<Void> in
+            let alertController = self.emailPromptAlertController()
 
             self.presentViewController(alertController, animated: true) { }
             
-            return command.executing
-            // TODO: We need to send String over the action, but it can only accept Void :(
-        }.flatMap { emailSignal -> Observable<Void> in
-//            self.retrieveBidderDetailsSignal(emailSignal)
             return empty()
         }
     }
     
-    func retrieveBidderDetailsSignal(emailSignal: Observable<String>) -> Observable<Void> {
-        return emailSignal
+    func retrieveBidderDetailsSignal(email: String) -> Observable<Void> {
+        return just(email)
             .take(1)
             .doOnNext { _ in
                 SVProgressHUD.show()
@@ -38,6 +34,27 @@ extension UIViewController {
                 SVProgressHUD.dismiss()
                 self.presentViewController(UIAlertController.failedBidderDetailsAlertController(), animated: true, completion: nil)
             }
+    }
+
+    func emailPromptAlertController() -> UIAlertController {
+        let alertController = UIAlertController(title: "Send Bidder Details", message: "Enter your email address or phone number registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
+
+        let ok = UIAlertAction.Action("OK", style: .Default)
+        let action = CocoaAction { _ -> Observable<Void> in
+            let text = (alertController.textFields?.first)?.text ?? ""
+
+            return self
+                .retrieveBidderDetailsSignal(text)
+                .map(void)
+        }
+        ok.rx_action = action
+        let cancel = UIAlertAction.Action("Cancel", style: .Cancel)
+
+        alertController.addTextFieldWithConfigurationHandler(nil)
+        alertController.addAction(ok)
+        alertController.addAction(cancel)
+
+        return alertController
     }
 }
 
@@ -59,26 +76,5 @@ extension UIAlertController {
         alertController.addAction(retryAction)
         
         return alertController
-    }
-    
-    class func emailPromptAlertController() -> (UIAlertController, CocoaAction) {
-        let alertController = self.init(title: "Send Bidder Details", message: "Enter your email address or phone number registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
-
-        let ok = UIAlertAction.Action("OK", style: .Default)
-        let action = CocoaAction { _ -> Observable<Void> in
-            
-            return create { observer -> Disposable in
-                observer.onNext()
-                return NopDisposable.instance
-            }
-        }
-        ok.rx_action = action
-        let cancel = UIAlertAction.Action("Cancel", style: .Cancel)
-
-        alertController.addTextFieldWithConfigurationHandler(nil)
-        alertController.addAction(ok)
-        alertController.addAction(cancel)
-
-        return (alertController, action)
     }
 }
