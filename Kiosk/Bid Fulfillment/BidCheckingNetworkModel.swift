@@ -103,10 +103,8 @@ class BidCheckingNetworkModel: NSObject {
                 guard let me = self else { return }
 
                 if let topBidID = me.mostRecentSaleArtwork?.saleHighestBid?.id {
-                    for position in newBidderPositions {
-                        if position.highestBid?.id == topBidID {
-                            me.isHighestBidder.value = true
-                        }
+                    for position in newBidderPositions where position.highestBid?.id == topBidID {
+                        me.isHighestBidder.value = true
                     }
                 }
             }
