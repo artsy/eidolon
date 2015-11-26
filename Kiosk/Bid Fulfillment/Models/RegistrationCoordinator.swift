@@ -1,4 +1,5 @@
 import UIKit
+import RxSwift
 
 enum RegistrationIndex {
     case MobileVC
@@ -33,11 +34,11 @@ enum RegistrationIndex {
 
 class RegistrationCoordinator: NSObject {
 
-    dynamic var currentIndex: Int = 0
-    var storyboard:UIStoryboard!
+    let currentIndex = Variable(0)
+    var storyboard: UIStoryboard!
 
     func viewControllerForIndex(index: RegistrationIndex) -> UIViewController {
-        currentIndex = index.toInt()
+        currentIndex.value = index.toInt()
         
         switch index {
 
@@ -66,23 +67,23 @@ class RegistrationCoordinator: NSObject {
     }
 
     func nextViewControllerForBidDetails(details: BidDetails) -> UIViewController {
-        if notSet(details.newUser.phoneNumber) {
+        if notSet(details.newUser.phoneNumber.value) {
             return viewControllerForIndex(.MobileVC)
         }
 
-        if notSet(details.newUser.email) {
+        if notSet(details.newUser.email.value) {
             return viewControllerForIndex(.EmailVC)
         }
 
-        if notSet(details.newUser.password) {
+        if notSet(details.newUser.password.value) {
             return viewControllerForIndex(.PasswordVC)
         }
 
-        if notSet(details.newUser.zipCode) && AppSetup.sharedState.needsZipCode {
+        if notSet(details.newUser.zipCode.value) && AppSetup.sharedState.needsZipCode {
             return viewControllerForIndex(.ZipCodeVC)
         }
 
-        if notSet(details.newUser.creditCardToken) {
+        if notSet(details.newUser.creditCardToken.value) {
             return viewControllerForIndex(.CreditCardVC)
         }
 
@@ -90,6 +91,6 @@ class RegistrationCoordinator: NSObject {
     }
 }
 
-private func notSet(string:String?) -> Bool {
+private func notSet(string: String?) -> Bool {
     return string?.isEmpty ?? true
 }

@@ -18,6 +18,11 @@ class RegisterViewController: UIViewController {
 
     dynamic var placingBid = true
 
+    private let _viewWillDisappear = PublishSubject<Void>()
+    var viewWillDisappear: Observable<Void> {
+        return self._viewWillDisappear.asObserver()
+    }
+
     func internalNavController() -> UINavigationController? {
         return self.childViewControllers.first as? UINavigationController
     }
@@ -26,11 +31,17 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
         coordinator.storyboard = self.storyboard!
-        let registerIndexSignal = RACObserve(coordinator, "currentIndex").takeUntil(viewWillDisappearSignal())
-        let indexIsConfirmSignal = registerIndexSignal.map { return ($0 as! Int == RegistrationIndex.ConfirmVC.toInt()) }
-        
-        RAC(confirmButton, "hidden") <~ indexIsConfirmSignal.not()
-        RAC(flowView, "highlightedIndex") <~ registerIndexSignal
+        let registerIndexSignal = coordinator.currentIndex
+        let indexIsConfirmSignal = registerIndexSignal.map { return ($0 == RegistrationIndex.ConfirmVC.toInt()) }
+
+        indexIsConfirmSignal
+            .not()
+            .bindTo(confirmButton.rx_hidden)
+            .addDisposableTo(rx_disposeBag)
+
+        registerIndexSignal
+            .bindTo(flowView.highlightedIndex)
+            .addDisposableTo(rx_disposeBag)
 
         let details = self.fulfillmentNav().bidDetails
         flowView.details = details
@@ -48,6 +59,12 @@ class RegisterViewController: UIViewController {
         goToNextVC()
     }
 
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        _viewWillDisappear.onNext()
+    }
+
     func goToNextVC() {
         let nextVC = coordinator.nextViewControllerForBidDetails(fulfillmentNav().bidDetails)
         goToViewController(nextVC)
@@ -57,10 +74,13 @@ class RegisterViewController: UIViewController {
         self.internalNavController()!.viewControllers = [controller]
 
         if let subscribableVC = controller as? RegistrationSubController {
-            subscribableVC.finishedSignal.subscribeCompleted { [weak self] in
-                self?.goToNextVC()
-                self?.flowView.update()
-            }
+            subscribableVC
+                .finished
+                .subscribeCompleted { [weak self] in
+                    self?.goToNextVC()
+                    self?.flowView.update()
+                }
+                .addDisposableTo(rx_disposeBag)
         }
     }
 

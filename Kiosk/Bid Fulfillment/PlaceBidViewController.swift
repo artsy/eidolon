@@ -4,10 +4,11 @@ import RxSwift
 import Artsy_UIButtons
 import Artsy_UILabels
 import ORStackView
+import Action
 
 class PlaceBidViewController: UIViewController {
 
-    dynamic var bidDollars: Int = 0
+    var bidDollars = Variable(0)
     var hasAlreadyPlacedABid: Bool = false
 
     @IBOutlet var bidAmountTextField: TextField!
@@ -26,19 +27,19 @@ class PlaceBidViewController: UIViewController {
     @IBOutlet weak var conditionsOfSaleButton: UIButton!
     @IBOutlet weak var privacyPolictyButton: UIButton!
 
-    var showBuyersPremiumCommand = { () -> RACCommand in
+    var showBuyersPremiumCommand = { () -> CocoaAction in
         appDelegate().showBuyersPremiumCommand()
     }
 
-    var showPrivacyPolicyCommand = { () -> RACCommand in
+    var showPrivacyPolicyCommand = { () -> CocoaAction in
         appDelegate().showPrivacyPolicyCommand()
     }
     
-    var showConditionsOfSaleCommand = { () -> RACCommand in
+    var showConditionsOfSaleCommand = { () -> CocoaAction in
         appDelegate().showConditionsOfSaleCommand()
     }
     
-    lazy var bidDollarsSignal: RACSignal = { self.keypadContainer.intValueSignal }()
+    lazy var bidDollarsSignal: Observable<Int> = { self.keypadContainer.intValue }()
     var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
@@ -55,12 +56,18 @@ class PlaceBidViewController: UIViewController {
         currentBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
         yourBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
 
-        conditionsOfSaleButton.rac_command = showConditionsOfSaleCommand()
-        privacyPolictyButton.rac_command = showPrivacyPolicyCommand()
+        conditionsOfSaleButton.rx_action = showConditionsOfSaleCommand()
+        privacyPolictyButton.rx_action = showPrivacyPolicyCommand()
 
-        RAC(self, "bidDollars") <~ bidDollarsSignal
+        bidDollarsSignal
+            .bindTo(bidDollars)
+            .addDisposableTo(rx_disposeBag)
 
-        RAC(bidAmountTextField, "text") <~ bidDollarsSignal.map(dollarsToCurrencyString)
+        bidDollarsSignal
+            .map(dollarsToCurrencyString)
+            .bindTo(bidAmountTextField.rx_text)
+            .addDisposableTo(rx_disposeBag)
+
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
             RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { $0 as! Float * 100 }.takeUntil(viewWillDisappearSignal())
@@ -201,8 +208,7 @@ private extension PlaceBidViewController {
 
 /// These are for RAC only
 
-func dollarsToCurrencyString(input: AnyObject!) -> AnyObject! {
-    let dollars = input as! Int
+func dollarsToCurrencyString(dollars: Int) -> String {
     if dollars == 0 {
         return ""
     }
@@ -210,7 +216,7 @@ func dollarsToCurrencyString(input: AnyObject!) -> AnyObject! {
     let formatter = NSNumberFormatter()
     formatter.locale = NSLocale(localeIdentifier: "en_US")
     formatter.numberStyle = .DecimalStyle
-    return formatter.stringFromNumber(dollars)
+    return formatter.stringFromNumber(dollars) ?? ""
 }
 
 func toCurrentBidTitleString(input: AnyObject!) -> AnyObject! {

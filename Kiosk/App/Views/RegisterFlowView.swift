@@ -4,8 +4,8 @@ import RxSwift
 
 class RegisterFlowView: ORStackView {
 
-    dynamic var highlightedIndex = 0
-    let jumpToIndexSignal = RACSubject()
+    let highlightedIndex = Variable(0)
+    let jumpToIndexSignal = PublishSubject<Void>()
 
     lazy var appSetup: AppSetup = .sharedState
 
