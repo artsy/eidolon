@@ -1,22 +1,27 @@
 import Foundation
 import RxSwift
+import Action
 
 class GenericFormValidationViewModel {
-    let command: RACCommand
+    let command: CocoaAction
+    let disposeBag = DisposeBag()
 
-    init(isValidSignal: RACSignal, manualInvocationSignal: RACSignal, finishedSubject: RACSubject) {
-        command = RACCommand(enabled: isValidSignal) { _ -> RACSignal! in
-            return RACSignal.createSignal { (subscriber) -> RACDisposable! in
-                finishedSubject.sendCompleted()
-                subscriber.sendCompleted()
+    init(isValidSignal: Observable<Bool>, manualInvocationSignal: Observable<Void>, finishedSubject: PublishSubject<Void>) {
 
-                return nil
+        command = CocoaAction(enabledIf: isValidSignal) { _ in
+            return create { ovserver in
+                
+                finishedSubject.onCompleted()
+                ovserver.onCompleted()
+
+                return NopDisposable.instance
             }
         }
 
-        manualInvocationSignal.subscribeNext { [weak self] _ -> Void in
-            self?.command.execute(nil)
-            return
-        }
+        manualInvocationSignal
+            .subscribeNext { [weak self] _ in
+                self?.command.execute()
+            }
+            .addDisposableTo(disposeBag)
     }
 }
