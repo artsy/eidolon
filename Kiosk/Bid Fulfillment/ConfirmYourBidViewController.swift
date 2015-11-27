@@ -97,6 +97,12 @@ class ConfirmYourBidViewController: UIViewController {
         })
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        _viewWillDisappear.onNext()
+    }
+
     func toOpeningBidString(cents:AnyObject!) -> AnyObject! {
         if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
             return "Enter \(dollars) or more"
