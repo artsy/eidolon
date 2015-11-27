@@ -131,6 +131,7 @@ class PlaceBidViewController: UIViewController {
                     detailsStackView.addSubview(lotNumberLabel, withTopMargin: "10", sideMargin: "0")
                     saleArtwork.viewModel
                         .lotNumberSignal()
+                        .filterNil()
                         .takeUntil(viewWillDisappear)
                         .bindTo(lotNumberLabel.rx_text)
                         .addDisposableTo(rx_disposeBag)

@@ -94,7 +94,7 @@ extension SaleArtworkViewModel {
         }
     }
 
-    func lotNumberSignal() -> Observable<String> {
+    func lotNumberSignal() -> Observable<String?> {
         return saleArtwork.rx_observe(NSNumber.self, "lotNumber").map { lotNumber  in
             if let lotNumber = lotNumber as? Int {
                 return "Lot \(lotNumber)"

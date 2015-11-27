@@ -29,8 +29,19 @@ class YourBiddingDetailsViewController: UIViewController {
 
         bodyLabel?.makeSubstringsBold(["Bidder Number", "PIN"])
 
-        RAC(bidderNumberLabel, "text") <~ RACObserve(bidDetails, "paddleNumber")
-        RAC(pinNumberLabel, "text") <~ RACObserve(bidDetails, "bidderPIN")
+        bidDetails
+            .paddleNumber
+            .asObservable()
+            .filterNil()
+            .bindTo(bidderNumberLabel.rx_text)
+            .addDisposableTo(rx_disposeBag)
+
+        bidDetails
+            .bidderPIN
+            .asObservable()
+            .filterNil()
+            .bindTo(pinNumberLabel.rx_text)
+            .addDisposableTo(rx_disposeBag)
     }
 
     @IBAction func confirmButtonTapped(sender: AnyObject) {

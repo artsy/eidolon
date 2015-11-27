@@ -47,14 +47,17 @@ class RegisterViewController: UIViewController {
         flowView.details = details
         bidDetailsPreviewView.bidDetails = details
 
-        flowView.jumpToIndexSignal.subscribeNext { [weak self] (index) -> Void in
-            if let _ = self?.fulfillmentNav() {
-                let registrationIndex = RegistrationIndex.fromInt(index as! Int)
+        flowView
+            .jumpToIndexSignal
+            .subscribeNext { [weak self] (index) -> Void in
+                if let _ = self?.fulfillmentNav() {
+                    let registrationIndex = RegistrationIndex.fromInt(index as! Int)
 
-                let nextVC = self?.coordinator.viewControllerForIndex(registrationIndex)
-                self?.goToViewController(nextVC!)
+                    let nextVC = self?.coordinator.viewControllerForIndex(registrationIndex)
+                    self?.goToViewController(nextVC!)
+                }
             }
-        }
+            .addDisposableTo(rx_disposeBag)
 
         goToNextVC()
     }

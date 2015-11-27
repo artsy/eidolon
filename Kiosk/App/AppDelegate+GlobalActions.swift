@@ -13,7 +13,7 @@ extension AppDelegate {
     // Registration
 
     var sale: Sale! {
-        return appViewController!.sale
+        return appViewController!.sale.value
     }
 
     internal var appViewController: AppViewController! {

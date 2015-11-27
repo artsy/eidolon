@@ -7,7 +7,7 @@ class RegistrationPasswordViewModel {
 
     private let password = Variable("")
 
-    let action: CocoaAction
+    var action: CocoaAction!
 
     let email: String
     let emailExistsSignal: Observable<Bool>
