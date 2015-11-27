@@ -128,8 +128,7 @@ private extension HelpViewController {
         stackView.addSubview(privacyButton, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
         
         hasBuyersPremiumSignal
-            .subscribeNext { [weak self] in
-                let hasBuyersPremium = $0
+            .subscribeNext { [weak self] hasBuyersPremium in
                 if hasBuyersPremium {
                     self?.stackView.addSubview(self!.buyersPremiumButton, withTopMargin: "\(self!.inbetweenMargin)", sideMargin: "\(self!.sideMargin)")
                 } else {

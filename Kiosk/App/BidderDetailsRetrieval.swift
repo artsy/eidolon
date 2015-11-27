@@ -43,9 +43,7 @@ extension UIViewController {
         let action = CocoaAction { _ -> Observable<Void> in
             let text = (alertController.textFields?.first)?.text ?? ""
 
-            return self
-                .retrieveBidderDetailsSignal(text)
-                .map(void)
+            return self.retrieveBidderDetailsSignal(text)
         }
         ok.rx_action = action
         let cancel = UIAlertAction.Action("Cancel", style: .Cancel)
