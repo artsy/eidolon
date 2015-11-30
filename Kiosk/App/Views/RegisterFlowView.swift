@@ -5,7 +5,6 @@ import RxSwift
 class RegisterFlowView: ORStackView {
 
     let highlightedIndex = Variable(0)
-    let jumpToIndexSignal = PublishSubject<Void>()
 
     lazy var appSetup: AppSetup = .sharedState
 
@@ -58,7 +57,7 @@ class RegisterFlowView: ORStackView {
                 itemView.constrainHeight("20")
             }
 
-            if i == highlightedIndex {
+            if i == highlightedIndex.value {
                 itemView.highlight()
             }
         }
@@ -71,7 +70,7 @@ class RegisterFlowView: ORStackView {
     }
 
     func pressed(sender: UIButton!) {
-        jumpToIndexSignal.sendNext(sender.tag)
+        highlightedIndex.value = sender.tag
     }
 
     class ItemView : UIView {

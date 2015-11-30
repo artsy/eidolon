@@ -48,10 +48,10 @@ class RegisterViewController: UIViewController {
         bidDetailsPreviewView.bidDetails = details
 
         flowView
-            .jumpToIndexSignal
+            .highlightedIndex
             .subscribeNext { [weak self] (index) -> Void in
                 if let _ = self?.fulfillmentNav() {
-                    let registrationIndex = RegistrationIndex.fromInt(index as! Int)
+                    let registrationIndex = RegistrationIndex.fromInt(index)
 
                     let nextVC = self?.coordinator.viewControllerForIndex(registrationIndex)
                     self?.goToViewController(nextVC!)
@@ -61,7 +61,6 @@ class RegisterViewController: UIViewController {
 
         goToNextVC()
     }
-
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)

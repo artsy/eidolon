@@ -74,7 +74,7 @@ final class Artwork: NSObject, JSONAbleType {
         artwork.blurb = json["blurb"].string
 
         if let artistDictionary = json["artist"].object as? [String: AnyObject] {
-            artwork.artists = [Artist.fromJSON(artistDictionary) as! Artist]
+            artwork.artists = [Artist.fromJSON(artistDictionary)]
         }
 
         if let imageDicts = json["images"].object as? Array<Dictionary<String, AnyObject>> {
@@ -82,7 +82,7 @@ final class Artwork: NSObject, JSONAbleType {
             artwork.images = imageDicts.filter { dict -> Bool in
                 let imageVersions = (dict["image_versions"] as? [String]) ?? []
                 return imageVersions.count > 0
-            }.map { return Image.fromJSON($0) as! Image }
+            }.map { return Image.fromJSON($0) }
         }
 
         if let dimensions = json["dimensions"].dictionary {

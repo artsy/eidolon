@@ -82,7 +82,7 @@ class BidCheckingNetworkModel: NSObject {
                     }
 
                     // We didn't get an updated value, so let's try again.
-                    interval(self?.pollInterval ?? 1, MainScheduler.sharedInstance)
+                    return interval(self?.pollInterval ?? 1, MainScheduler.sharedInstance)
                         .take(1)
                         .map(void)
                         .then {
