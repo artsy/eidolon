@@ -31,7 +31,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // These are private to the view model – should not be accessed directly
     private var saleArtworks = Variable(Array<SaleArtwork>())
-    private var sortedSaleArtworks: Variable<Array<SaleArtwork>>!
+    private var sortedSaleArtworks = Variable<Array<SaleArtwork>>([])
 
     let auctionID: String
     let pageSize: Int
@@ -40,17 +40,14 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     var schedule: (signal: Observable<AnyObject>) -> Observable<AnyObject>
 
     var numberOfSaleArtworks: Int {
-        return saleArtworks.value.count
+        return sortedSaleArtworks.value.count
     }
 
     var showSpinnerSignal: Observable<Bool>!
     var gridSelectedSignal: Observable<Bool>!
     var updatedContentsSignal: Observable<NSDate> {
-        return saleArtworks
+        return sortedSaleArtworks
             .asObservable()
-            .distinctUntilChanged { (lhs, rhs) -> Bool in
-                return lhs == rhs
-            }
             .map { $0.count > 0 }
             .ignore(false)
             .map { _ in NSDate() }
@@ -90,27 +87,36 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
             .bindTo(saleArtworks)
             .addDisposableTo(rx_disposeBag)
 
-        showSpinnerSignal = saleArtworks.map { saleArtworks in
-            return saleArtworks.count == 0
+        showSpinnerSignal = sortedSaleArtworks.map { sortedSaleArtworks in
+            return sortedSaleArtworks.count == 0
         }
 
         gridSelectedSignal = selectedIndexSignal.map { ListingsViewModel.SwitchValues(rawValue: $0) == .Some(.Grid) }
 
-        let distinctSaleArtworks: Observable<[SaleArtwork]> = saleArtworks
+        let distinctSaleArtworks = saleArtworks
             .asObservable()
             .distinctUntilChanged { (lhs, rhs) -> Bool in
                 return lhs == rhs
             }
+            .mapReplace(0)
 
-        zip(distinctSaleArtworks, selectedIndexSignal)
-            { (saleArtworks, selectedIndex) -> [SaleArtwork] in
-                // Necessary to satisfy compiler.
-                guard let switchValue = ListingsViewModel.SwitchValues(rawValue: selectedIndex) else { return saleArtworks }
-
-                return switchValue.sortSaleArtworks(saleArtworks)
+        [selectedIndexSignal, distinctSaleArtworks]
+            .combineLatest { ints in
+                // We use distinctSaleArtworks to trigger an update, but ints[1] is unused.
+                return ints[0]
+            }
+            .startWith(0)
+            .map { selectedIndex in
+                return ListingsViewModel.SwitchValues(rawValue: selectedIndex)
+            }
+            .filterNil()
+            .map { [weak self] switchValue -> [SaleArtwork] in
+                guard let me = self else { return [] }
+                return switchValue.sortSaleArtworks(me.saleArtworks.value)
             }
             .bindTo(sortedSaleArtworks)
             .addDisposableTo(rx_disposeBag)
+
     }
 
     private func listingsRequestSignalForPage(page: Int) -> Observable<AnyObject> {

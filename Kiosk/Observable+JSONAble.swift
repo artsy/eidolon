@@ -2,16 +2,20 @@ import Foundation
 import Moya
 import RxSwift
 
-enum EidolonError: ErrorType {
+enum EidolonError: String {
     case CouldNotParseJSON
 }
 
+extension EidolonError: ErrorType { }
+
 extension Observable {
+
+    typealias Dictionary = [String: AnyObject]
 
     /// Get given JSONified data, pass back objects
     func mapToObject<B: JSONAbleType>(classType: B.Type) -> Observable<B> {
         return self.map { json in
-            guard let dict = json as? [String:AnyObject] else {
+            guard let dict = json as? Dictionary else {
                 throw EidolonError.CouldNotParseJSON
             }
 
@@ -22,7 +26,11 @@ extension Observable {
     /// Get given JSONified data, pass back objects as an array
     func mapToObjectArray<B: JSONAbleType>(classType: B.Type) -> Observable<[B]> {
         return self.map { json in
-            guard let dicts = json as? [[String: AnyObject]] else {
+            guard let array = json as? [AnyObject] else {
+                throw EidolonError.CouldNotParseJSON
+            }
+
+            guard let dicts = array as? [Dictionary] else {
                 throw EidolonError.CouldNotParseJSON
             }
 

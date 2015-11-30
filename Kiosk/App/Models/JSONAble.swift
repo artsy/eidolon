@@ -1,3 +1,3 @@
 protocol JSONAbleType {
-    static func fromJSON(_: [String:AnyObject]) -> Self
+    static func fromJSON(_: [String: AnyObject]) -> Self
 }

@@ -92,5 +92,6 @@ extension AppViewController {
             .mapToObject(Sale)
             .logError()
             .retry()
+            .throttle(1, MainScheduler.sharedInstance)
     }
 }

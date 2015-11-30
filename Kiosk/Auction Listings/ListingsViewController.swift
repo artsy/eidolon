@@ -66,6 +66,7 @@ class ListingsViewController: UIViewController {
         // Set up reactive bindings
         viewModel
             .showSpinnerSignal
+            .not()
             .bindTo(loadingSpinner.rx_hidden)
             .addDisposableTo(rx_disposeBag)
 
@@ -90,7 +91,8 @@ class ListingsViewController: UIViewController {
             .doOnNext { collectionView in
                 collectionView.reloadData()
             }
-            .dispatchAsyncMainScheduler().subscribeNext { [weak self] collectionView -> Void in
+            .dispatchAsyncMainScheduler()
+            .subscribeNext { [weak self] collectionView -> Void in
                 // Make sure we're on screen and not in a test or something.
                 guard let _ = self?.view.window else { return }
 
@@ -111,8 +113,8 @@ class ListingsViewController: UIViewController {
                 }
             }
             .subscribeNext { [weak self] layout in
-            // Need to explicitly call animated: false and reload to avoid animation
-            self?.collectionView.setCollectionViewLayout(layout, animated: false)
+                // Need to explicitly call animated: false and reload to avoid animation
+                self?.collectionView.setCollectionViewLayout(layout, animated: false)
             }
             .addDisposableTo(rx_disposeBag)
     }
