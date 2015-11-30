@@ -15,7 +15,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         return self._viewWillDisappear.asObserver()
     }
 
-    lazy var viewModel: RegistrationPasswordViewModel = {
+    lazy var viewModel: RegistrationPasswordViewModelType = {
         let email = self.navigationController?.fulfillmentNav().bidDetails.newUser.email.value ?? ""
 
         return RegistrationPasswordViewModel(

@@ -19,7 +19,7 @@ class SaleTests: QuickSpec {
             let name = "name"
             let data:[String: AnyObject] =  ["id":id , "is_auction" : isAuction, "name": name, "start_at":startDate, "end_at":endDate]
 
-            let sale = Sale.fromJSON(data) as! Sale
+            let sale = Sale.fromJSON(data)
 
             expect(sale.id) == id
             expect(sale.isAuction) == isAuction
@@ -38,7 +38,7 @@ class SaleTests: QuickSpec {
 
                 let data:[String: AnyObject] =  ["start_at": dateString, "end_at" : dateString]
 
-                let sale = Sale.fromJSON(data) as! Sale
+                let sale = Sale.fromJSON(data)
                 expect(sale.isActive(artsyTime)) == false
             }
 
@@ -54,7 +54,7 @@ class SaleTests: QuickSpec {
 
                 let data:[String: AnyObject] =  ["start_at": pastString, "end_at" : futureString]
 
-                let sale = Sale.fromJSON(data) as! Sale
+                let sale = Sale.fromJSON(data)
 
                 expect(sale.isActive(artsyTime)) == true
             }
@@ -68,7 +68,7 @@ class SaleTests: QuickSpec {
 
                 let data:[String: AnyObject] =  ["start_at": dateString, "end_at" : dateString]
 
-                let sale = Sale.fromJSON(data) as! Sale
+                let sale = Sale.fromJSON(data)
                 expect(sale.isActive(artsyTime)) == false
             }
         }

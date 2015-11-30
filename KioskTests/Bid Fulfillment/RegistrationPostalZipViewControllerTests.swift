@@ -15,7 +15,7 @@ class RegistrationPostalViewControllerTests: QuickSpec {
         it("looks right with existing postal code") {
             let subject = RegistrationPostalZipViewController.instantiateFromStoryboard(fulfillmentStoryboard)
             subject.bidDetails = BidDetails.stubbedBidDetails()
-            subject.bidDetails.newUser.zipCode = "A1A1A1"
+            subject.bidDetails.newUser.zipCode.value = "A1A1A1"
             expect(subject).to( haveValidSnapshot() )
         }
 

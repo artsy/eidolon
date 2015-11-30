@@ -29,8 +29,8 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
                 let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
                 bidDetails.newUser = NewUser()
 
-                bidDetails.newUser.phoneNumber = "132131231"
-                bidDetails.newUser.email = "xxx@yyy.com"
+                bidDetails.newUser.phoneNumber.value = "132131231"
+                bidDetails.newUser.email.value = "xxx@yyy.com"
 
                 subject.details = bidDetails
 
@@ -42,10 +42,10 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
                 let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
                 bidDetails.newUser = NewUser()
 
-                bidDetails.newUser.phoneNumber = "132131231"
-                bidDetails.newUser.email = "xxx@yyy.com"
+                bidDetails.newUser.phoneNumber.value = "132131231"
+                bidDetails.newUser.email.value = "xxx@yyy.com"
 
-                subject.highlightedIndex = 2
+                subject.highlightedIndex.value = 2
                 subject.details = bidDetails
 
                 subject.snapshotViewAfterScreenUpdates(true)
@@ -57,10 +57,10 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
                 let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
                 bidDetails.newUser = NewUser()
 
-                bidDetails.newUser.phoneNumber = "132131231"
-                bidDetails.newUser.creditCardToken = "...2323"
-                bidDetails.newUser.email = "xxx@yyy.com"
-                bidDetails.newUser.zipCode = "90210"
+                bidDetails.newUser.phoneNumber.value = "132131231"
+                bidDetails.newUser.creditCardToken.value = "...2323"
+                bidDetails.newUser.email.value = "xxx@yyy.com"
+                bidDetails.newUser.zipCode.value = "90210"
                 subject.details = bidDetails
 
                 subject.snapshotViewAfterScreenUpdates(true)

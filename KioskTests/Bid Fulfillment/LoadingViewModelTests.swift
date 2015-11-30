@@ -45,7 +45,7 @@ class LoadingViewModelTests: QuickSpec {
 
         it("binds createdNewBidder") {
             subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: RACSignal.never())
-            stubbedNetworkModel.createdNewBidderSubject.sendNext(true)
+            stubbedNetworkModel.createdNewBidderSubject.onNext(true)
 
             expect(subject.createdNewBidder) == true
         }
@@ -100,7 +100,7 @@ class LoadingViewModelTests: QuickSpec {
             }
 
             it("places a bid if necessary") {
-                kioskWaitUntil { (done) -> Void in
+                kioskWaitUntil { done in
                     subject.performActions().subscribeCompleted { done() }
                     return
                 }
@@ -109,7 +109,7 @@ class LoadingViewModelTests: QuickSpec {
             }
 
             it("waits for bid resolution if bid was placed") {
-                kioskWaitUntil { (done) -> Void in
+                kioskWaitUntil { done in
                     subject.performActions().subscribeCompleted { done() }
                     return
                 }
@@ -132,7 +132,7 @@ class StubBidderNetworkModel: BidderNetworkModel {
     }
 
     override func createOrGetBidder() -> RACSignal {
-        createdNewBidderSubject.sendNext(true)
+        createdNewBidderSubject.onNext(true)
         return RACSignal.empty()
     }
 

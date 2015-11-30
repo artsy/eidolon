@@ -4,6 +4,7 @@ import RxSwift
 @testable
 import Kiosk
 import Moya
+import RxBlocking
 
 let testPassword = "password"
 let testEmail = "test@example.com"
@@ -39,11 +40,11 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             }
         }
 
-        Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.`return`(true))
+        Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
     }
 
-    func testSubject(passwordSubject: RACSignal = RACSignal.`return`(testPassword), invocationSignal: RACSignal = RACSubject(), finishedSubject: RACSubject = RACSubject()) -> RegistrationPasswordViewModel {
-        return RegistrationPasswordViewModel(passwordSignal: passwordSubject, manualInvocationSignal: invocationSignal, finishedSubject: finishedSubject, email: testEmail)
+    func testSubject(passwordSubject: Observable<String> = just(testPassword), invocationSignal: Observable<Void> = PublishSubject<Void>().asObservable(), finishedSubject: PublishSubject<Void> = PublishSubject<Void>()) -> RegistrationPasswordViewModel {
+        return RegistrationPasswordViewModel(passwordSignal: passwordSubject, execute: invocationSignal, completed: finishedSubject, email: testEmail)
     }
 
     override func spec() {
@@ -53,23 +54,29 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
         defaults = NSUserDefaults.standardUserDefaults()
 
+        var disposeBag: DisposeBag!
+
+        beforeEach {
+            disposeBag = DisposeBag()
+        }
+
         afterEach { () -> () in
             Provider.sharedProvider = Provider.StubbingProvider()
         }
 
         it("enables the command only when the password is valid") {
-            let passwordSubject = RACSubject()
+            let passwordSubject = PublishSubject<String>()
 
-            let subject = self.testSubject(passwordSubject)
+            let subject = self.testSubject(passwordSubject.asObservable())
 
-            passwordSubject.sendNext("nope")
-            expect((subject.command.enabled.first() as! Bool)).toEventually( beFalse() )
+            passwordSubject.onNext("nope")
+            expect(try! subject.action.enabled.toBlocking().first()).toEventually( beFalse() )
 
-            passwordSubject.sendNext("validpassword")
-            expect((subject.command.enabled.first() as! Bool)).toEventually( beTrue() )
+            passwordSubject.onNext("validpassword")
+            expect(try! subject.action.enabled.toBlocking().first()).toEventually( beTrue() )
 
-            passwordSubject.sendNext("")
-            expect((subject.command.enabled.first() as! Bool)).toEventually( beFalse() )
+            passwordSubject.onNext("")
+            expect(try! subject.action.enabled.toBlocking().first()).toEventually( beFalse() )
         }
 
         it("checks for an email when executing the command") {
@@ -81,7 +88,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             let subject = self.testSubject()
 
-            subject.command.execute(nil)
+            subject.action.execute()
 
             expect(checked).toEventually( beTrue() )
         }
@@ -95,11 +102,14 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             let subject = self.testSubject()
 
-            subject.emailExistsSignal.subscribeNext { (object) -> Void in
-                exists = object as? Bool ?? false
-            }
+            subject
+                .emailExistsSignal
+                .subscribeNext { (object) -> Void in
+                    exists = object
+                }
+                .addDisposableTo(disposeBag)
 
-            subject.command.execute(nil)
+            subject.action.execute()
             
             expect(exists).toEventually( beTrue() )
         }
@@ -113,11 +123,14 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             let subject = self.testSubject()
 
-            subject.emailExistsSignal.subscribeNext { (object) -> Void in
-                exists = object as? Bool
-            }
+            subject
+                .emailExistsSignal
+                .subscribeNext { (object) -> Void in
+                    exists = object
+                }
+                .addDisposableTo(disposeBag)
 
-            subject.command.execute(nil)
+            subject.action.execute()
 
             expect(exists).toEventuallyNot( beNil() )
             expect(exists).toEventually( beFalse() )
@@ -135,7 +148,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             let subject = self.testSubject()
 
-            subject.command.execute(nil)
+            subject.action.execute()
             
             expect(checked).toEventually( beTrue() )
             expect(authed).toEventually( beTrue() )
@@ -148,11 +161,15 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             var errored = false
 
-            subject.command.errors.subscribeNext { _ -> Void in
-                errored = true
-            }
+            subject
+                .action
+                .errors
+                .subscribeNext { _ -> Void in
+                    errored = true
+                }
+                .addDisposableTo(disposeBag)
 
-            subject.command.execute(nil)
+            subject.action.execute()
 
             expect(errored).toEventually( beTrue() )
         }
@@ -160,34 +177,41 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("executes command when manual signal sends") {
             self.stubProvider(emailExists: false, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let invocationSignal = RACSubject()
+            let invocationSignal = PublishSubject<Void>()
 
             let subject = self.testSubject(invocationSignal: invocationSignal)
 
             var completed = false
 
-            subject.command.executing.take(1).subscribeNext { _ -> Void in
-                completed = true
-            }
+            subject
+                .action
+                .executing
+                .take(1)
+                .subscribeNext { _ -> Void in
+                    completed = true
+                }
+                .addDisposableTo(disposeBag)
 
-            invocationSignal.sendNext(nil)
+            invocationSignal.onNext()
             
             expect(completed).toEventually( beTrue() )
         }
 
         it("sends completed on finishedSubject when command is executed") {
-            let invocationSignal = RACSubject()
-            let finishedSubject = RACSubject()
+            let invocationSignal = PublishSubject<Void>()
+            let finishedSubject = PublishSubject<Void>()
 
             var completed = false
 
-            finishedSubject.subscribeCompleted { () -> Void in
-                completed = true
-            }
+            finishedSubject
+                .subscribeCompleted { () -> Void in
+                    completed = true
+                }
+                .addDisposableTo(disposeBag)
 
             let subject = self.testSubject(invocationSignal:invocationSignal, finishedSubject: finishedSubject)
 
-            subject.command.execute(nil)
+            subject.action.execute()
 
             expect(completed).toEventually( beTrue() )
         }
@@ -201,9 +225,12 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             let subject = self.testSubject()
 
-            subject.userForgotPasswordSignal().subscribeNext { _ -> Void in
-                // do nothing – we subscribe just to force the signal to execute.
-            }
+            subject
+                .userForgotPasswordSignal()
+                .subscribeNext { _ -> Void in
+                    // do nothing – we subscribe just to force the signal to execute.
+                }
+                .addDisposableTo(disposeBag)
             
             expect(sent).toEventually( beTrue() )
             Provider.sharedProvider = Provider.StubbingProvider()

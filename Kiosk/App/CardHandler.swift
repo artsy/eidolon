@@ -32,7 +32,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
         reader = CFTReader(reader: 1)
         reader.delegate = self
         reader.swipeHasTimeout(false)
-            _cardStatus.onNext("Started searching")
+        _cardStatus.onNext("Started searching")
     }
 
     func end() {

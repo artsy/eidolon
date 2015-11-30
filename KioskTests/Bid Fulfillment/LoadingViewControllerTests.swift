@@ -21,7 +21,7 @@ class LoadingViewControllerTests: QuickSpec {
             it("placing a bid") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
                 stubViewModel.completes = false
                 subject.viewModel = stubViewModel
 
@@ -31,7 +31,7 @@ class LoadingViewControllerTests: QuickSpec {
             it("registering a user") {
                 subject.placingBid = false
                 let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
                 stubViewModel.completes = false
                 subject.viewModel = stubViewModel
 
@@ -44,7 +44,7 @@ class LoadingViewControllerTests: QuickSpec {
             it("correctly placing a bid") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
                 stubViewModel.errors = true
                 subject.viewModel = stubViewModel
 
@@ -54,7 +54,7 @@ class LoadingViewControllerTests: QuickSpec {
             it("correctly registering a user") {
                 subject.placingBid = false
                 let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
                 stubViewModel.errors = true
                 subject.viewModel = stubViewModel
 
@@ -67,9 +67,9 @@ class LoadingViewControllerTests: QuickSpec {
             it("placing bid success highest") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
-                stubViewModel.bidIsResolved = true
-                stubViewModel.isHighestBidder = true
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
+                stubViewModel.bidIsResolved.value = true
+                stubViewModel.isHighestBidder.value = true
                 subject.viewModel = stubViewModel
 
                 expect(subject).to(haveValidSnapshot())
@@ -78,9 +78,9 @@ class LoadingViewControllerTests: QuickSpec {
             it("dismisses by tapping green checkmark when bidding was a success") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
-                stubViewModel.bidIsResolved = true
-                stubViewModel.isHighestBidder = true
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
+                stubViewModel.bidIsResolved.value = true
+                stubViewModel.isHighestBidder.value = true
                 subject.viewModel = stubViewModel
 
                 var closed = false
@@ -101,9 +101,9 @@ class LoadingViewControllerTests: QuickSpec {
             it("placing bid success not highest") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
-                stubViewModel.bidIsResolved = true
-                stubViewModel.isHighestBidder = false
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
+                stubViewModel.bidIsResolved.value = true
+                stubViewModel.isHighestBidder.value = false
                 subject.viewModel = stubViewModel
 
                 expect(subject).to(haveValidSnapshot())
@@ -112,7 +112,7 @@ class LoadingViewControllerTests: QuickSpec {
             it("placing bid error due to outbid") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
                 subject.viewModel = stubViewModel
 
                 subject.loadViewProgrammatically()
@@ -126,8 +126,8 @@ class LoadingViewControllerTests: QuickSpec {
             it("placing bid succeeded but not resolved") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
-                stubViewModel.bidIsResolved = false
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
+                stubViewModel.bidIsResolved.value = false
                 subject.viewModel = stubViewModel
 
                 expect(subject).to(haveValidSnapshot())
@@ -136,9 +136,9 @@ class LoadingViewControllerTests: QuickSpec {
             it("registering user success") {
                 subject.placingBid = false
                 let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
-                stubViewModel.createdNewBidder = true
-                stubViewModel.bidIsResolved = true
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
+                stubViewModel.createdNewBidder.value = true
+                stubViewModel.bidIsResolved.value = true
                 subject.viewModel = stubViewModel
 
                 expect(subject).to(haveValidSnapshot())
@@ -147,8 +147,8 @@ class LoadingViewControllerTests: QuickSpec {
             it("registering user not resolved") {
                 subject.placingBid = false
                 let fulfillmentController = StubFulfillmentController()
-                let stubViewModel = StubLoadingViewModel(bidNetworkModel: BidderNetworkModel(fulfillmentController: fulfillmentController), placingBid: subject.placingBid)
-                stubViewModel.bidIsResolved = true
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
+                stubViewModel.bidIsResolved.value = true
                 subject.viewModel = stubViewModel
 
                 expect(subject).to(haveValidSnapshot())
@@ -164,23 +164,31 @@ func testLoadingViewController() -> LoadingViewController {
     return controller
 }
 
-class StubLoadingViewModel: LoadingViewModel {
+class StubLoadingViewModel: LoadingViewModelType {
     var errors = false
     var completes = true
 
-    init(bidNetworkModel: BidderNetworkModel, placingBid: Bool) {
-        super.init(bidNetworkModel: bidNetworkModel, placingBid: placingBid, actionsCompleteSignal: RACSignal.never())
+    // LoadingViewModelType conformance
+    let createdNewBidder = Variable(false)
+    let bidIsResolved = Variable(false)
+    let isHighestBidder = Variable(false)
+    let reserveNotMet = Variable(false)
+
+    var bidDetails: BidDetails
+
+    init(bidDetails: BidDetails) {
+        self.bidDetails = bidDetails
     }
 
-    override func performActions() -> RACSignal {
+    func performActions() -> Observable<Void> {
         if completes {
             if errors {
-                return RACSignal.error(NSError(domain: "", code: 0, userInfo: nil))
+                return failWith(NSError(domain: "", code: 0, userInfo: nil) as ErrorType)
             } else {
-                return RACSignal.empty()
+                return empty()
             }
         } else {
-            return RACSignal.never()
+            return never()
         }
     }
 }

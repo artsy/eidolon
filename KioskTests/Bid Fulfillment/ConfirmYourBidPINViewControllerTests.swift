@@ -20,36 +20,36 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
         }
 
         it("reacts to keypad inputs with the string") {
-            let customKeySubject = RACSubject()
+            let customKeySubject = PublishSubject<String>()
             let subject = testConfirmYourBidPINViewController()
-            subject.pinSignal = customKeySubject
+            subject.pinSignal = customKeySubject.asObservable()
             subject.loadViewProgrammatically()
 
-            customKeySubject.sendNext("2344");
+            customKeySubject.onNext("2344");
             expect(subject.pinTextField.text) == "2344"
         }
 
         it("reacts to keypad inputs with the string") {
-            let customKeySubject = RACSubject()
+            let customKeySubject = PublishSubject<String>()
 
             let subject = testConfirmYourBidPINViewController()
             subject.pinSignal = customKeySubject
 
             subject.loadViewProgrammatically()
 
-            customKeySubject.sendNext("2");
+            customKeySubject.onNext("2");
             expect(subject.pinTextField.text) == "2"
         }
 
         it("reacts to keypad inputs with the string") {
-            let customKeySubject = RACSubject()
+            let customKeySubject = PublishSubject<String>()
 
             let subject = testConfirmYourBidPINViewController()
             subject.pinSignal = customKeySubject;
 
             subject.loadViewProgrammatically()
 
-            customKeySubject.sendNext("222");
+            customKeySubject.onNext("222");
             expect(subject.pinTextField.text) == "222"
         }
 
@@ -61,7 +61,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             let nav = FulfillmentNavigationController(rootViewController:subject)
             nav.auctionID = auctionID
 
-            let provider: ReactiveCocoaMoyaProvider<ArtsyAPI> = subject.providerForPIN(pin, number: number)
+            let provider: RxMoyaProvider<ArtsyAPI> = subject.providerForPIN(pin, number: number)
             let endpoint = provider.endpointClosure(ArtsyAPI.Me)
             var request: NSURLRequest!
             provider.requestClosure(endpoint) { request = $0 }
@@ -83,18 +83,21 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
                 return endpoint
             }
 
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: externalClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, onlineSignal: RACSignal.`return`(true))
+            Provider.sharedProvider = ArtsyProvider(endpointClosure: externalClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, online: just(true))
 
-
+            let disposeBag = DisposeBag()
             let subject = ConfirmYourBidPINViewController()
             let nav = FulfillmentNavigationController(rootViewController: subject)
             nav.auctionID = "AUCTION"
-            let provider: ReactiveCocoaMoyaProvider<ArtsyAPI> = subject.providerForPIN("12341234", number: "1234")
+            let provider: RxMoyaProvider<ArtsyAPI> = subject.providerForPIN("12341234", number: "1234")
 
             waitUntil{ done -> Void in
-                provider.request(.Me).subscribeCompleted {
-                    done()
-                }
+                provider
+                    .request(.Me)
+                    .subscribeCompleted {
+                        done()
+                    }
+                    .addDisposableTo(disposeBag)
             }
 
             expect(externalClosureInvoked) == true

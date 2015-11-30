@@ -17,7 +17,7 @@ protocol ListingsViewModelType {
     var updatedContentsSignal: Observable<NSDate> { get }
 
     var scheduleOnBackground: (signal: Observable<AnyObject>) -> Observable<AnyObject> { get }
-    var scheduleOnForeground:  (signal: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> { get }
+    var scheduleOnForeground: (signal: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> { get }
 
     func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel
     func showDetailsForSaleArtworkAtIndexPath(indexPath: NSIndexPath)

@@ -4,16 +4,19 @@ import Nimble
 import Kiosk
 import RxSwift
 import Nimble_Snapshots
+import Action
 
 class ManualCreditCardInputViewControllerTests: QuickSpec {
     override func spec() {
         var subject: ManualCreditCardInputViewController!
         var testViewModel: ManualCreditCardInputTestViewModel!
+        var disposeBag: DisposeBag!
 
         beforeEach {
             testViewModel = ManualCreditCardInputTestViewModel(bidDetails: testBidDetails())
             subject = ManualCreditCardInputViewController.instantiateFromStoryboard(fulfillmentStoryboard)
             subject.viewModel = testViewModel
+            disposeBag = DisposeBag()
         }
 
         it("unbinds bidDetails on viewWillDisappear:") {
@@ -42,25 +45,10 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
 
         describe("after CC is entered") {
             beforeEach {
-                testViewModel.testRegisterButtonCommand = RACCommand(enabled: RACSignal.`return`(false)) { _ -> RACSignal! in
-                    return RACSignal.empty()
-                }
+                testViewModel.testRegisterButtonCommand = disabledAction()
 
                 subject.loadViewProgrammatically()
                 subject.cardNumberconfirmTapped(subject)
-            }
-
-            it("moves cursor to year once month is entered") {
-                var moved = false
-                subject.expirationYearTextField?.rac_signalForSelector("becomeFirstResponder").subscribeNext { _ -> Void in
-                    moved = true
-                }
-                testViewModel.moveToYearSubject.sendNext(nil)
-                expect(moved).toEventually( beTrue() )
-            }
-
-
-            describe("date confirm button") {
             }
         }
 
@@ -69,9 +57,9 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
 
             beforeEach {
                 executed = false
-                testViewModel.testRegisterButtonCommand = RACCommand(enabled: RACSignal.`return`(true)) { _ -> RACSignal! in
+                testViewModel.testRegisterButtonCommand = CocoaAction { _ in
                     executed = true
-                    return RACSignal.empty()
+                    return empty()
                 }
 
                 subject.loadViewProgrammatically()
@@ -83,12 +71,16 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
             }
 
             it("invokes registerButtonCommand on press") {
-                waitUntil { (done) -> Void in
-                    testViewModel.testRegisterButtonCommand.execute(nil).subscribeCompleted { (_) -> Void in
+                waitUntil { done in
+                    testViewModel
+                        .testRegisterButtonCommand
+                        .execute()
+                        .subscribeCompleted { (_) -> Void in
 
-                        expect(executed) == true
-                        done()
-                    }
+                            expect(executed) == true
+                            done()
+                        }
+                        .addDisposableTo(disposeBag)
                     
                     return
                 }
@@ -96,18 +88,20 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
         }
 
         it("shows errors") {
-            testViewModel.testRegisterButtonCommand = RACCommand(enabled: RACSignal.`return`(true)) { _ -> RACSignal! in
-                return RACSignal.error(nil)
-            }
+            testViewModel.testRegisterButtonCommand = errorAction()
 
             subject.loadViewProgrammatically()
             subject.cardNumberconfirmTapped(subject)
             subject.expirationDateConfirmTapped(subject)
 
             waitUntil { done -> Void in
-                testViewModel.testRegisterButtonCommand.execute(nil).subscribeError { (_) -> Void in
-                    done()
-                }
+                testViewModel
+                    .testRegisterButtonCommand
+                    .execute()
+                    .subscribeError { (_) -> Void in
+                        done()
+                    }
+                    .addDisposableTo(disposeBag)
             }
 
             expect(subject).to( haveValidSnapshot() )
@@ -117,26 +111,18 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
 
 class ManualCreditCardInputTestViewModel: ManualCreditCardInputViewModel {
     var CCIsValid = false
-    var moveToYearSubject = RACSubject()
-    var testRegisterButtonCommand: RACCommand
+    var moveToYearSubject = PublishSubject<Void>()
+    var testRegisterButtonCommand = CocoaAction(enabledIf: just(false)) { _ in empty() }
 
-    override init(bidDetails: BidDetails!, finishedSubject: RACSubject? = nil) {
-        testRegisterButtonCommand = RACCommand(enabled: RACSignal.`return`(false)) { (subscriber) -> RACSignal! in
-            return RACSignal.empty()
-        }
-
-        super.init(bidDetails: bidDetails)
+    override var creditCardNumberIsValid: Observable<Bool> {
+        return just(CCIsValid)
     }
 
-    override var creditCardNumberIsValidSignal: RACSignal {
-        return RACSignal.`return`(CCIsValid)
+    override var moveToYear: Observable<Void> {
+        return moveToYearSubject.asObservable()
     }
 
-    override var moveToYearSignal: RACSignal {
-        return moveToYearSubject
-    }
-
-    override func registerButtonCommand() -> RACCommand {
+    override func registerButtonCommand() -> CocoaAction {
         return testRegisterButtonCommand
     }
 }

@@ -3,7 +3,14 @@ import RxSwift
 import Moya
 import Action
 
-class RegistrationPasswordViewModel {
+protocol RegistrationPasswordViewModelType {
+    var emailExistsSignal: Observable<Bool> { get }
+    var action: CocoaAction! { get }
+
+    func userForgotPasswordSignal() -> Observable<Void>
+}
+
+class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
 
     private let password = Variable("")
 
