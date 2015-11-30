@@ -24,15 +24,15 @@ class RegisterFlowView: ORStackView {
 
     private struct SubViewParams {
         let title: String
-        let keypath: Array<String>
+        let getters: Array<NewUser -> String?>
     }
 
     private lazy var subViewParams: Array<SubViewParams> = {
         return [
-            [SubViewParams(title: "Mobile", keypath: ["phoneNumber"])],
-            [SubViewParams(title: "Email", keypath: ["email"])],
-            [SubViewParams(title: "Postal/Zip", keypath: ["zipCode"])].filter { _ in self.appSetup.needsZipCode }, // TODO: may remove, in which case no need to flatten the array
-            [SubViewParams(title: "Credit Card", keypath: ["creditCardName", "creditCardType"])]
+            [SubViewParams(title: "Mobile", getters: [{ $0.phoneNumber.value }])],
+            [SubViewParams(title: "Email", getters: [{ $0.email.value }])],
+            [SubViewParams(title: "Postal/Zip", getters: [{ $0.zipCode.value }])].filter { _ in self.appSetup.needsZipCode }, // TODO: may remove, in which case no need to flatten the array
+            [SubViewParams(title: "Credit Card", getters: [{ $0.creditCardName.value }, { $0.creditCardType.value }])]
         ].flatMap {$0}
     }()
 
@@ -46,7 +46,7 @@ class RegisterFlowView: ORStackView {
 
             addSubview(itemView, withTopMargin: "10", sideMargin: "0")
 
-            if let value = (subViewParam.keypath.flatMap { user.valueForKey($0) as? String }.first) {
+            if let value = (subViewParam.getters.flatMap { $0(user) }.first) {
                 itemView.createInfoLabel(value)
 
                 let button = itemView.createJumpToButtonAtIndex(i)
