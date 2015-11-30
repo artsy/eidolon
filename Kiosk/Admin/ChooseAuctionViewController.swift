@@ -19,11 +19,11 @@ class ChooseAuctionViewController: UIViewController {
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .mapToObjectArray(Sale.self)
-            .subscribeNext { [weak self] (activeSales) -> Void in
-                self!.auctions = activeSales
+            .subscribeNext { activeSales in
+                self.auctions = activeSales
 
-                for i in 0 ..< self!.auctions.count {
-                    let sale = self!.auctions[i]
+                for i in 0 ..< self.auctions.count {
+                    let sale = self.auctions[i]
                     let title = " \(sale.name) - #\(sale.auctionState) - \(sale.artworkCount)"
 
                     let button = ARFlatButton()
@@ -36,9 +36,9 @@ class ChooseAuctionViewController: UIViewController {
                         defaults.synchronize()
                         exit(1)
                         }
-                        .addDisposableTo(self!.rx_disposeBag)
+                        .addDisposableTo(self.rx_disposeBag)
 
-                    self!.stackScrollView.addSubview(button, withTopMargin: "12", sideMargin: "0")
+                    self.stackScrollView.addSubview(button, withTopMargin: "12", sideMargin: "0")
                     button.constrainHeight("50")
                 }
             }

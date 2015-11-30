@@ -9,10 +9,10 @@ class GenericFormValidationViewModel {
     init(isValidSignal: Observable<Bool>, manualInvocationSignal: Observable<Void>, finishedSubject: PublishSubject<Void>) {
 
         command = CocoaAction(enabledIf: isValidSignal) { _ in
-            return create { ovserver in
+            return create { observer in
                 
                 finishedSubject.onCompleted()
-                ovserver.onCompleted()
+                observer.onCompleted()
 
                 return NopDisposable.instance
             }

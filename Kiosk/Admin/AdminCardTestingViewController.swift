@@ -32,13 +32,14 @@ class AdminCardTestingViewController: UIViewController {
                         self.log("==\n\(self.cardHandler.card!)\n\n")
                     }
                 case .Completed:
-                    if let card = self.cardHandler.card {
-                        let cardDetails = "Card: \(card.name) - \(card.last4) \n \(card.cardToken)"
-                        self.log(cardDetails)
+                    guard let card = self.cardHandler.card else {
+                        // Restarts the card reader
+                        self.cardHandler.startSearching()
+                        return
                     }
 
-                    // Restarts the card reader
-                    self.cardHandler.startSearching()
+                    let cardDetails = "Card: \(card.name) - \(card.last4) \n \(card.cardToken)"
+                    self.log(cardDetails)
                 }
             }
             .addDisposableTo(rx_disposeBag)
