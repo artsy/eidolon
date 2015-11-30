@@ -32,7 +32,7 @@ final class User: NSObject, JSONAbleType {
 
         var location:Location?
         if let bidDictionary = json["location"].object as? [String: AnyObject] {
-            location = Location.fromJSON(bidDictionary) as? Location
+            location = Location.fromJSON(bidDictionary)
         }
 
 

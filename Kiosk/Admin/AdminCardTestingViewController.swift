@@ -21,27 +21,28 @@ class AdminCardTestingViewController: UIViewController {
             cardHandler = CardHandler(apiKey: self.keys.cardflightProductionAPIClientKey(), accountToken: self.keys.cardflightProductionMerchantAccountToken())
         }
 
-        cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
-                self.log("\(message)")
-                return
+        cardHandler.cardStatus
+            .subscribe { (event) -> Void in
+                switch event {
+                case .Next(let message):
+                    self.log("\(message)")
+                case .Error(let error):
+                    self.log("\n====Error====\n\(error)\nThe card reader may have become disconnected.\n\n")
+                    if self.cardHandler.card != nil {
+                        self.log("==\n\(self.cardHandler.card!)\n\n")
+                    }
+                case .Completed:
+                    if let card = self.cardHandler.card {
+                        let cardDetails = "Card: \(card.name) - \(card.last4) \n \(card.cardToken)"
+                        self.log(cardDetails)
+                    }
 
-            }, error: { (error) -> Void in
-
-                self.log("\n====Error====\n\(error)\nThe card reader may have become disconnected.\n\n")
-                if self.cardHandler.card != nil {
-                    self.log("==\n\(self.cardHandler.card!)\n\n")
+                    // Restarts the card reader
+                    self.cardHandler.startSearching()
                 }
+            }
+            .addDisposableTo(rx_disposeBag)
 
-
-            }, completed: {
-
-                if let card = self.cardHandler.card {
-                    let cardDetails = "Card: \(card.name) - \(card.last4) \n \(card.cardToken)"
-                    self.log(cardDetails)
-                }
-
-                self.cardHandler.startSearching()
-        })
 
         cardHandler.startSearching()
     }

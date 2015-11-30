@@ -123,6 +123,14 @@ extension CollectionType where Generator.Element: ObservableConvertibleType, Gen
             })
         }
     }
+
+    func combineLatestOr() -> Observable<Bool> {
+        return combineLatest { bools in
+            bools.reduce(false, combine: { (memo, element) in
+                return memo || element.boolValue
+            })
+        }
+    }
 }
 
 extension Observable {

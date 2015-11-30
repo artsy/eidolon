@@ -15,9 +15,12 @@ class ChooseAuctionViewController: UIViewController {
 
         let endpoint: ArtsyAPI = ArtsyAPI.ActiveAuctions
 
-        XAppRequest(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Sale.self)
-            .subscribeNext({ [weak self] (activeSales) -> Void in
-                self!.auctions = activeSales as! [Sale]
+        XAppRequest(endpoint)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .mapToObjectArray(Sale.self)
+            .subscribeNext { [weak self] (activeSales) -> Void in
+                self!.auctions = activeSales
 
                 for i in 0 ..< self!.auctions.count {
                     let sale = self!.auctions[i]
@@ -27,18 +30,20 @@ class ChooseAuctionViewController: UIViewController {
                     button.setTitle(title, forState: .Normal)
                     button.setTitleColor(.blackColor(), forState: .Normal)
                     button.tag = i
-                    button.rac_signalForControlEvents(.TouchUpInside).subscribeNext { (_) in
+                    button.rx_tap.subscribeNext { (_) in
                         let defaults = NSUserDefaults.standardUserDefaults()
                         defaults.setObject(sale.id, forKey: "KioskAuctionID")
                         defaults.synchronize()
                         exit(1)
-                    }
+                        }
+                        .addDisposableTo(self!.rx_disposeBag)
 
                     self!.stackScrollView.addSubview(button, withTopMargin: "12", sideMargin: "0")
                     button.constrainHeight("50")
                 }
-        })
-
+            }
+            .addDisposableTo(rx_disposeBag)
+        
     }
 
     @IBOutlet weak var stackScrollView: ORStackView!

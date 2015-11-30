@@ -101,7 +101,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
 
         // Now do properties that _do_ change.
 
-        viewModel.flatMapTo { (viewModel) -> Observable<String> in
+        viewModel.flatMap { (viewModel) -> Observable<String> in
                 return viewModel.currentBidSignal(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ")
             }
             .bindTo(currentBidLabel.rx_text)

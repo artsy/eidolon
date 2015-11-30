@@ -25,7 +25,7 @@ final class BidderPosition: NSObject, JSONAbleType {
 
         var bid: Bid?
         if let bidDictionary = json["highest_bid"].object as? [String: AnyObject] {
-            bid = Bid.fromJSON(bidDictionary) as? Bid
+            bid = Bid.fromJSON(bidDictionary)
         }
 
         return BidderPosition(id: id, highestBid: bid, maxBidAmountCents: maxBidAmount, processedAt: processedAt)

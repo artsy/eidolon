@@ -70,30 +70,37 @@ class ConfirmYourBidViewController: UIViewController {
         enterButton.rx_action = CocoaAction(enabledIf: numberIsZeroLengthSignal.not(), workFactory: { [weak self] _ in
             guard let me = self else { return empty() }
 
-            let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me.number))
-            return XAppRequest(endpoint, provider:me.provider).filterStatusCode(400).doError { (error) -> Void in
-                guard let me = self else { return }
+            let endpoint = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me._number.value))
 
-                // Due to AlamoFire restrictions we can't stop HTTP redirects
-                // so to figure out if we got 302'd we have to introspect the
-                // error to see if it's the original URL to know if the
-                // request succeeded.
+            return XAppRequest(endpoint, provider: me.provider)
+                .filterStatusCode(400)
+                .map(void)
+                .doOnError { (error) -> Void in
+                    guard let me = self else { return }
 
-                let moyaResponse = error.userInfo["data"] as? MoyaResponse
-                let responseURL = moyaResponse?.response?.URL?.absoluteString
+                    // Due to AlamoFire restrictions we can't stop HTTP redirects
+                    // so to figure out if we got 302'd we have to introspect the
+                    // error to see if it's the original URL to know if the
+                    // request succeeded.
 
-                if let responseURL = responseURL {
-                    if (responseURL as NSString).containsString("v1/bidder/") {
+                    let moyaResponse = (error as NSError).userInfo["data"] as? MoyaResponse
+
+                    if let responseURL = moyaResponse?.response?.URL?.absoluteString
+                        where responseURL.containsString("v1/bidder/") {
+
                         me.performSegue(.ConfirmyourBidBidderFound)
-                        return
+                    } else {
+                        me.performSegue(.ConfirmyourBidBidderNotFound)
                     }
                 }
 
-                me.performSegue(.ConfirmyourBidBidderNotFound)
-                return
-            }
-
         })
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        _viewWillDisappear.onNext()
     }
 
     func toOpeningBidString(cents:AnyObject!) -> AnyObject! {

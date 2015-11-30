@@ -15,9 +15,12 @@ extension UIView {
     func presentOnLongPress(message: String, title: String, closure: PresentAlertClosure) {
         let recognizer = UILongPressGestureRecognizer()
 
-        recognizer.rac_gestureSignal().subscribeNext { _ -> Void in
-            closure(alertController: alertController(message, title: title))
-        }
+        recognizer
+            .rx_event
+            .subscribeNext { _ -> Void in
+                closure(alertController: alertController(message, title: title))
+            }
+            .addDisposableTo(rx_disposeBag)
 
         userInteractionEnabled = true
         addGestureRecognizer(recognizer)

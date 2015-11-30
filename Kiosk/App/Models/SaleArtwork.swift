@@ -108,3 +108,7 @@ func createDollarFormatter() -> NSNumberFormatter {
     formatter.maximumFractionDigits = 0
     return formatter
 }
+
+func ==(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
+    return lhs.id == rhs.id
+}

@@ -4,10 +4,11 @@ import RxSwift
 import Artsy_UIButtons
 import Artsy_UILabels
 import ORStackView
+import Action
 
 class PlaceBidViewController: UIViewController {
 
-    dynamic var bidDollars: Int = 0
+    var bidDollars = Variable(0)
     var hasAlreadyPlacedABid: Bool = false
 
     @IBOutlet var bidAmountTextField: TextField!
@@ -26,23 +27,28 @@ class PlaceBidViewController: UIViewController {
     @IBOutlet weak var conditionsOfSaleButton: UIButton!
     @IBOutlet weak var privacyPolictyButton: UIButton!
 
-    var showBuyersPremiumCommand = { () -> RACCommand in
+    var showBuyersPremiumCommand = { () -> CocoaAction in
         appDelegate().showBuyersPremiumCommand()
     }
 
-    var showPrivacyPolicyCommand = { () -> RACCommand in
+    var showPrivacyPolicyCommand = { () -> CocoaAction in
         appDelegate().showPrivacyPolicyCommand()
     }
     
-    var showConditionsOfSaleCommand = { () -> RACCommand in
+    var showConditionsOfSaleCommand = { () -> CocoaAction in
         appDelegate().showConditionsOfSaleCommand()
     }
     
-    lazy var bidDollarsSignal: RACSignal = { self.keypadContainer.intValueSignal }()
+    lazy var bidDollarsSignal: Observable<Int> = { self.keypadContainer.intValue }()
     var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
         return storyboard.viewControllerWithID(.PlaceYourBid) as! PlaceBidViewController
+    }
+
+    private let _viewWillDisappear = PublishSubject<Void>()
+    var viewWillDisappear: Observable<Void> {
+        return self._viewWillDisappear.asObserver()
     }
 
     override func viewDidLoad() {
@@ -55,36 +61,58 @@ class PlaceBidViewController: UIViewController {
         currentBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
         yourBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
 
-        conditionsOfSaleButton.rac_command = showConditionsOfSaleCommand()
-        privacyPolictyButton.rac_command = showPrivacyPolicyCommand()
+        conditionsOfSaleButton.rx_action = showConditionsOfSaleCommand()
+        privacyPolictyButton.rx_action = showPrivacyPolicyCommand()
 
-        RAC(self, "bidDollars") <~ bidDollarsSignal
+        bidDollarsSignal
+            .bindTo(bidDollars)
+            .addDisposableTo(rx_disposeBag)
 
-        RAC(bidAmountTextField, "text") <~ bidDollarsSignal.map(dollarsToCurrencyString)
+        bidDollarsSignal
+            .map(dollarsToCurrencyString)
+            .bindTo(bidAmountTextField.rx_text)
+            .addDisposableTo(rx_disposeBag)
+
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
-            RAC(nav.bidDetails, "bidAmountCents") <~ bidDollarsSignal.map { $0 as! Float * 100 }.takeUntil(viewWillDisappearSignal())
+            bidDollarsSignal
+                .map { $0 * 100 }
+                .takeUntil(viewWillDisappear)
+                .bindTo(nav.bidDetails.bidAmountCents)
+                .addDisposableTo(rx_disposeBag)
 
             if let saleArtwork = nav.bidDetails.saleArtwork {
                 
-                let minimumNextBidSignal = RACObserve(saleArtwork, "minimumNextBidCents")
-                let bidCountSignal = RACObserve(saleArtwork, "bidCount")
-                let openingBidSignal = RACObserve(saleArtwork, "openingBidCents")
-                let highestBidSignal = RACObserve(saleArtwork, "highestBidCents")
+                let minimumNextBidSignal = saleArtwork
+                    .rx_observe(NSNumber.self, "minimumNextBidCents")
+                    .filterNil()
+                    .map { $0 as Int }
 
-                RAC(currentBidTitleLabel, "text") <~ bidCountSignal.map(toCurrentBidTitleString)
-                RAC(nextBidAmountLabel, "text") <~ minimumNextBidSignal.map(toNextBidString)
+                saleArtwork.viewModel
+                    .currentBidOrOpeningBidLabel()
+                    .bindTo(currentBidTitleLabel.rx_text)
+                    .addDisposableTo(rx_disposeBag)
 
-                RAC(currentBidAmountLabel, "text") <~ RACSignal.combineLatest([bidCountSignal, highestBidSignal, openingBidSignal]).map {
-                    let tuple = $0 as! RACTuple
-                    let bidCount = tuple.first as? Int ?? 0
-                    return (bidCount > 0 ? tuple.second : tuple.third) ?? 0
-                }.map(centsToPresentableDollarsString).takeUntil(viewWillDisappearSignal())
+                saleArtwork.viewModel
+                    .currentBidOrOpeningBid()
+                    .bindTo(currentBidAmountLabel.rx_text)
+                    .addDisposableTo(rx_disposeBag)
 
-                RAC(bidButton, "enabled") <~ RACSignal.combineLatest([bidDollarsSignal, minimumNextBidSignal]).map {
-                    let tuple = $0 as! RACTuple
-                    return (tuple.first as? Int ?? 0) * 100 >= (tuple.second as? Int ?? 0)
-                }
+
+                minimumNextBidSignal
+                    .map { $0 as Int }
+                    .map(toNextBidString)
+                    .bindTo(nextBidAmountLabel.rx_text)
+                    .addDisposableTo(rx_disposeBag)
+
+
+                [bidDollarsSignal, minimumNextBidSignal]
+                    .combineLatest { ints in
+                        return (ints[0]) * 100 >= (ints[1])
+                    }
+                    .bindTo(bidButton.rx_enabled)
+                    .addDisposableTo(rx_disposeBag)
+
 
                 enum LabelTags: Int {
                     case LotNumber = 1
@@ -101,7 +129,13 @@ class PlaceBidViewController: UIViewController {
                     let lotNumberLabel = smallSansSerifLabel()
                     lotNumberLabel.tag = LabelTags.LotNumber.rawValue
                     detailsStackView.addSubview(lotNumberLabel, withTopMargin: "10", sideMargin: "0")
-                    RAC(lotNumberLabel, "text") <~ saleArtwork.viewModel.lotNumberSignal.takeUntil(viewWillDisappearSignal())
+                    saleArtwork.viewModel
+                        .lotNumberSignal()
+                        .filterNil()
+                        .takeUntil(viewWillDisappear)
+                        .bindTo(lotNumberLabel.rx_text)
+                        .addDisposableTo(rx_disposeBag)
+
                 }
 
                 let artistNameLabel = sansSerifLabel()
@@ -129,7 +163,7 @@ class PlaceBidViewController: UIViewController {
                     buyersPremiumButton.titleLabel?.font = buyersPremiumLabel.font
                     buyersPremiumButton.setTitle("buyers premium", forState: .Normal)
                     buyersPremiumButton.setTitleColor(.artsyHeavyGrey(), forState: .Normal)
-                    buyersPremiumButton.rac_command = showBuyersPremiumCommand()
+                    buyersPremiumButton.rx_action = showBuyersPremiumCommand()
 
                     buyersPremiumView.addSubview(buyersPremiumLabel)
                     buyersPremiumView.addSubview(buyersPremiumButton)
@@ -146,21 +180,42 @@ class PlaceBidViewController: UIViewController {
                 detailsStackView.addSubview(gobbler, withTopMargin: "0")
 
                 if let artist = saleArtwork.artwork.artists?.first {
-                    RAC(artistNameLabel, "text") <~ RACObserve(artist, "name")
+                    artist
+                        .rx_observe(String.self, "name")
+                        .filterNil()
+                        .bindTo(artistNameLabel.rx_text)
+                        .addDisposableTo(rx_disposeBag)
                 }
 
-                RAC(artworkTitleLabel, "attributedText") <~ RACObserve(saleArtwork.artwork, "titleAndDate").takeUntil(rac_willDeallocSignal())
-                RAC(artworkPriceLabel, "text") <~ RACObserve(saleArtwork.artwork, "price").takeUntil(viewWillDisappearSignal())
-                
-                RACObserve(saleArtwork, "artwork").subscribeNext { [weak self] (artwork) -> Void in
-                    if let url = (artwork as? Artwork)?.defaultImage?.thumbnailURL() {
-                        self?.artworkImageView.sd_setImageWithURL(url)
-                    } else {
-                        self?.artworkImageView.image = nil
-                    }
+                saleArtwork
+                    .artwork
+                    .rx_observe(NSAttributedString.self, "titleAndDate")
+                    .filterNil()
+                    .takeUntil(rx_deallocating)
+                    .bindTo(artworkTitleLabel.rx_attributedText)
+                    .addDisposableTo(rx_disposeBag)
+
+                saleArtwork
+                    .artwork
+                    .rx_observe(String.self, "price")
+                    .filterNil()
+                    .takeUntil(rx_deallocating)
+                    .bindTo(artworkPriceLabel.rx_text)
+                    .addDisposableTo(rx_disposeBag)
+
+                if let url = saleArtwork.artwork.defaultImage?.thumbnailURL() {
+                    self.artworkImageView.sd_setImageWithURL(url)
+                } else {
+                    self.artworkImageView.image = nil
                 }
             }
         }
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        _viewWillDisappear.onNext()
     }
 
     @IBAction func bidButtonTapped(sender: AnyObject) {
@@ -201,8 +256,7 @@ private extension PlaceBidViewController {
 
 /// These are for RAC only
 
-func dollarsToCurrencyString(input: AnyObject!) -> AnyObject! {
-    let dollars = input as! Int
+func dollarsToCurrencyString(dollars: Int) -> String {
     if dollars == 0 {
         return ""
     }
@@ -210,20 +264,12 @@ func dollarsToCurrencyString(input: AnyObject!) -> AnyObject! {
     let formatter = NSNumberFormatter()
     formatter.locale = NSLocale(localeIdentifier: "en_US")
     formatter.numberStyle = .DecimalStyle
-    return formatter.stringFromNumber(dollars)
+    return formatter.stringFromNumber(dollars) ?? ""
 }
 
-func toCurrentBidTitleString(input: AnyObject!) -> AnyObject! {
-    if let count = input as? Int {
-        return count > 0 ? "Current Bid:" : "Opening Bid:"
-    } else {
+func toNextBidString(cents: Int) -> String {
+    guard let dollars = NSNumberFormatter.currencyStringForCents(cents)  else {
         return ""
     }
-}
-
-func toNextBidString(cents: AnyObject!) -> AnyObject! {
-    if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
-        return "Enter \(dollars) or more"
-    }
-    return ""
+    return "Enter \(dollars) or more"
 }

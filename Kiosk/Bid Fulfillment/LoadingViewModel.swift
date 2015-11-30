@@ -51,7 +51,7 @@ class LoadingViewModel: NSObject {
         return bidderNetworkModel
             .createOrGetBidder()
             .map(void)
-            .then { [weak self] () -> Observable<Void> in
+            .flatMap { [weak self] _ -> Observable<String> in
                 guard let me = self else { return empty() }
                 guard me.placingBid else {
                     ARAnalytics.event("Registered New User Only")
@@ -63,7 +63,6 @@ class LoadingViewModel: NSObject {
                 return me
                     .placeBidNetworkModel
                     .bidSignal()
-                    .map(void)
             }
             .flatMap { [weak self] position -> Observable<Void> in
                 guard let me = self else { return empty() }

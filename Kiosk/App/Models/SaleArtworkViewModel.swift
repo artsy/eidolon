@@ -110,12 +110,38 @@ extension SaleArtworkViewModel {
         }
     }
 
-    func currentBidSignal(prefix prefix: String = "", missingPrefix: String = "") ->Observable<String> {
+    func currentBidSignal(prefix prefix: String = "", missingPrefix: String = "") -> Observable<String> {
         return saleArtwork.rx_observe(Optional<NSNumber>.self, "highestBidCents").map { [weak self] highestBidCents in
             if let currentBidCents = highestBidCents as? Int {
                 return "\(prefix)\(NSNumberFormatter.currencyStringForCents(currentBidCents))"
             } else {
                 return "\(missingPrefix)\(NSNumberFormatter.currencyStringForCents(self?.saleArtwork.openingBidCents ?? 0))"
+            }
+        }
+    }
+
+    func currentBidOrOpeningBid() -> Observable<String> {
+        let signals = [
+            saleArtwork.rx_observe(NSNumber.self, "bidCount"),
+            saleArtwork.rx_observe(NSNumber.self, "openingBidCents"),
+            saleArtwork.rx_observe(NSNumber.self, "highestBidCents")
+        ]
+
+        return signals.combineLatest { numbers -> Int in
+            let bidCount = (numbers[0] ?? 0) as Int
+            let openingBid = numbers[1] as Int?
+            let highestBid = numbers[2] as Int?
+
+            return (bidCount > 0 ? highestBid : openingBid) ?? 0
+        }.map(centsToPresentableDollarsString)
+    }
+
+    func currentBidOrOpeningBidLabel() -> Observable<String> {
+        return saleArtwork.rx_observe(NSNumber.self, "bidCount").map { input in
+            if let count = input as? Int where count > 0 {
+                return "Current Bid:"
+            } else {
+                return "Opening Bid:"
             }
         }
     }

@@ -23,12 +23,10 @@ private let reachabilityManager = ReachabilityManager()
 
 // A signal that completes when the app gets online (possibly completes immediately).
 func connectedToInternetOrStubbingSignal() -> Observable<Bool> {
-    // TODO:
-    return just(true)
-//    let online = reachabilityManager.reachSignal
-//    let stubbing = RACSignal.`return`(APIKeys.sharedKeys.stubResponses)
-//
-//    return RACSignal.combineLatest([online, stubbing]).or()
+    let online = reachabilityManager.reachSignal
+    let stubbing = just(APIKeys.sharedKeys.stubResponses)
+
+    return [online, stubbing].combineLatestOr()
 }
 
 func responseIsOK(response: MoyaResponse) -> Bool {
@@ -45,23 +43,26 @@ func detectDevelopmentEnvironment() -> Bool {
 }
 
 private class ReachabilityManager: NSObject {
-    let reachSignal: RACSignal = RACReplaySubject(capacity: 1)
+    let _reachSignal = ReplaySubject<Bool>.create(bufferSize: 1)
+    var reachSignal: Observable<Bool> {
+        return _reachSignal.asObservable()
+    }
 
     private let reachability = Reachability.reachabilityForInternetConnection()
 
     override init() {
         super.init()
 
-        reachability.reachableBlock = { (_) in
-            return (self.reachSignal as! RACSubject).sendNext(true)
+        reachability.reachableBlock = { [weak self] _ in
+            self?._reachSignal.onNext(true)
         }
 
-        reachability.unreachableBlock = { (_) in
-            return (self.reachSignal as! RACSubject).sendNext(false)
+        reachability.unreachableBlock = { [weak self] _ in
+            self?._reachSignal.onNext(true)
         }
 
         reachability.startNotifier()
-        (reachSignal as! RACSubject).sendNext(reachability.isReachable())
+        _reachSignal.onNext(reachability.isReachable())
     }
 }
 

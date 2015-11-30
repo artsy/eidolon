@@ -39,24 +39,22 @@ class PlaceBidNetworkModel: NSObject {
             .mapJSON()
             .mapToObject(BidderPosition)
 
-        return request.map { [weak self] position in
-            self?.bidderPosition = position
-            return position.id
-        }.catchError { error -> Observable<String> in
-            // We've received an error. We're going to check to see if it's type is "param_error", which indicates we were outbid.
+        return request
+            .map { [weak self] position in
+                self?.bidderPosition = position
+                return position.id
+            }.catchError { error -> Observable<String> in
+                // We've received an error. We're going to check to see if it's type is "param_error", which indicates we were outbid.
 
-            guard let data: AnyObject = (error as NSError).userInfo["data"] else {
-                throw error
-            }
+                guard let data: AnyObject = (error as NSError).userInfo["data"] else {
+                    throw error
+                }
 
-            if let type = JSON(data)["type"].string where type == "param_error" {
-                throw NSError(domain: OutbidDomain, code: 0, userInfo: [NSUnderlyingErrorKey: error as NSError])
-            } else {
-                throw error
-            }
-
-            // Just to silence the compiler
-            return empty()
+                if let type = JSON(data)["type"].string where type == "param_error" {
+                    throw NSError(domain: OutbidDomain, code: 0, userInfo: [NSUnderlyingErrorKey: error as NSError])
+                } else {
+                    throw error
+                }
             }
             .logError()
     }

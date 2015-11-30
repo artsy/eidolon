@@ -59,7 +59,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
                     artistNameTopConstraint.constant = 10
                 }
             }
-            .addDisposableTo(disposeBag)
+            .addDisposableTo(rx_disposeBag)
 
         // Bind subviews
 
@@ -71,7 +71,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
                 self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
                 self?.layoutIfNeeded()
             }
-            .addDisposableTo(disposeBag)
+            .addDisposableTo(rx_disposeBag)
     }
 
     override func layoutSubviews() {

@@ -2,10 +2,17 @@ import UIKit
 import Artsy_UILabels
 import Artsy_UIButtons
 import UIImageViewAligned
+import RxSwift
+import RxCocoa
 
 class BidDetailsPreviewView: UIView {
-    
-    dynamic var bidDetails: BidDetails?
+
+    let _bidDetails = Variable<BidDetails?>(nil)
+    var bidDetails: BidDetails? {
+        didSet {
+            self._bidDetails.value = bidDetails
+        }
+    }
 
     dynamic let artworkImageView = UIImageViewAligned()
     dynamic let artistNameLabel = ARSansSerifLabel()
@@ -25,33 +32,55 @@ class BidDetailsPreviewView: UIView {
 
         artistNameLabel.font = UIFont.sansSerifFontWithSize(14)
         currentBidPriceLabel.font = UIFont.serifBoldFontWithSize(14)
-        
-        RACObserve(self, "bidDetails.saleArtwork.artwork").subscribeNext { [weak self] (artwork) -> Void in
-            if let url = (artwork as? Artwork)?.defaultImage?.thumbnailURL() {
-                self?.bidDetails?.setImage(url: url, imageView: self!.artworkImageView)
-            } else {
-                self?.artworkImageView.image = nil
-            }
-        }
-        
-        RAC(self, "artistNameLabel.text") <~ RACObserve(self, "bidDetails.saleArtwork.artwork").map({ (artwork) -> AnyObject! in
-            return (artwork as? Artwork)?.artists?.first?.name
-        }).mapNilToEmptyString()
-        
-        RAC(self, "artworkTitleLabel.attributedText") <~ RACObserve(self, "bidDetails.saleArtwork.artwork").map({ (artwork) -> AnyObject! in
-            if let artwork = artwork as? Artwork {
-                return artwork.titleAndDate
-            } else {
-                return nil
-            }
-        }).mapNilToEmptyAttributedString()
 
-        RAC(self, "currentBidPriceLabel.text") <~ RACObserve(self, "bidDetails").map({ (bidDetails) -> AnyObject! in
-            if let cents = (bidDetails as? BidDetails)?.bidAmountCents {
-            	return "Your bid: " + NSNumberFormatter.currencyStringForCents(cents)
+        let artwork = _bidDetails
+            .asObservable()
+            .filterNil()
+            .map { bidDetails in
+                return bidDetails.saleArtwork?.artwork
             }
-            return nil
-        }).mapNilToEmptyString()
+            .take(1)
+
+        artwork
+            .subscribeNext { [weak self] artwork in
+                if let url = artwork?.defaultImage?.thumbnailURL() {
+                    self?.bidDetails?.setImage(url: url, imageView: self!.artworkImageView)
+                } else {
+                    self?.artworkImageView.image = nil
+                }
+            }
+            .addDisposableTo(rx_disposeBag)
+
+        artwork
+            .map { artwork in
+                return artwork?.artists?.first?.name
+            }
+            .map { name in
+                return name ?? ""
+            }
+            .bindTo(artistNameLabel.rx_text)
+            .addDisposableTo(rx_disposeBag)
+
+        artwork
+            .map { artwork -> NSAttributedString in
+                guard let artwork = artwork else {
+                    return NSAttributedString()
+                }
+
+                return artwork.titleAndDate
+            }
+            .bindTo(artworkTitleLabel.rx_attributedText)
+            .addDisposableTo(rx_disposeBag)
+
+        _bidDetails
+            .asObservable()
+            .filterNil()
+            .take(1)
+            .map { bidDetails in
+                return "Your bid: " + NSNumberFormatter.currencyStringForCents(bidDetails.bidAmountCents.value)
+            }
+            .bindTo(currentBidPriceLabel.rx_text)
+            .addDisposableTo(rx_disposeBag)
         
         for subview in [artworkImageView, artistNameLabel, artworkTitleLabel, currentBidPriceLabel] {
             self.addSubview(subview)

@@ -17,13 +17,14 @@ class BidderNetworkModel: NSObject {
 
     // MARK: - Main Signal
 
-    func createOrGetBidder() -> Observable<User> {
-        return createOrUpdateUser().then { [weak self] in
-            self?.createOrUpdateBidder()
-
-        }.andThen { [weak self] in
-            self?.getMyPaddleNumber()
-        }
+    func createOrGetBidder() -> Observable<Void> {
+        return createOrUpdateUser()
+            .then { [weak self] in
+                self?.createOrUpdateBidder()
+            }
+            .then { [weak self] in
+                self?.getMyPaddleNumber()
+            }
     }
 
     // MARK: - Chained Signals
@@ -41,7 +42,8 @@ class BidderNetworkModel: NSObject {
         let boolSignal = self.checkUserEmailExists(fulfillmentController.bidDetails.newUser.email.value ?? "")
 
         // If the user exists, update their info to the API, otherwise create a new user.
-        return boolSignal.flatMap { emailExists in
+        return boolSignal
+            .flatMap { emailExists -> Observable<Void> in
                 if emailExists {
                     return self.updateUser()
                 } else {
@@ -49,8 +51,6 @@ class BidderNetworkModel: NSObject {
                 }
             }
             .then (self.addCardToUser()) // After update/create signal finishes, add a CC to their account (if we've collected one)
-
-
     }
 
     private func createNewUser() -> Observable<Void> {
@@ -121,7 +121,6 @@ class BidderNetworkModel: NSObject {
 
     private func createOrUpdateBidder() -> Observable<Void> {
         let boolSignal = self.checkForBidderOnAuction(self.fulfillmentController.auctionID)
-
 
         return boolSignal.flatMap { exists -> Observable<Void> in
             if exists {

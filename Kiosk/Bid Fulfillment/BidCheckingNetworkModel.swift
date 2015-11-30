@@ -82,7 +82,7 @@ class BidCheckingNetworkModel: NSObject {
                     }
 
                     // We didn't get an updated value, so let's try again.
-                    interval(self?.pollInterval ?? 1, MainScheduler.sharedInstance)
+                    return interval(self?.pollInterval ?? 1, MainScheduler.sharedInstance)
                         .take(1)
                         .map(void)
                         .then {
@@ -103,10 +103,8 @@ class BidCheckingNetworkModel: NSObject {
                 guard let me = self else { return }
 
                 if let topBidID = me.mostRecentSaleArtwork?.saleHighestBid?.id {
-                    for position in newBidderPositions {
-                        if position.highestBid?.id == topBidID {
-                            me.isHighestBidder.value = true
-                        }
+                    for position in newBidderPositions where position.highestBid?.id == topBidID {
+                        me.isHighestBidder.value = true
                     }
                 }
             }

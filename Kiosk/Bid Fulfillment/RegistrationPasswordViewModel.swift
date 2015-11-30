@@ -4,16 +4,24 @@ import Moya
 import Action
 
 class RegistrationPasswordViewModel {
+
     private let password = Variable("")
 
-    let action: CocoaAction
+    var action: CocoaAction!
 
     let email: String
+    let emailExistsSignal: Observable<Bool>
 
     let disposeBag = DisposeBag()
-    
-    init(passwordSignal: Observable<String>, execute: Observable<Void>, completed: AnyObserver<Void>, email: String) {
+
+    init(passwordSignal: Observable<String>, execute: Observable<Void>, completed: PublishSubject<Void>, email: String) {
         self.email = email
+
+        emailExistsSignal = Provider
+            .sharedProvider
+            .request(ArtsyAPI.FindExistingEmailRegistration(email: email))
+            .map(responseIsOK)
+            .replay(1)
 
         passwordSignal.bindTo(self.password).addDisposableTo(disposeBag)
 
@@ -24,14 +32,14 @@ class RegistrationPasswordViewModel {
         // If it doesn't exist, then it does nothing.
         let action = CocoaAction(enabledIf: passwordSignal.map(isStringLengthAtLeast(6))) { _ in
 
-            let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: email)
-            let emailExistsSignal = Provider.sharedProvider.request(endpoint).map(responseIsOK).replay(1)
-
-            return emailExistsSignal
+            return self.emailExistsSignal
                 .map { exists -> Observable<Void> in
                     if exists {
                         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: email, password: password.value ?? "")
-                        return Provider.sharedProvider.request(endpoint).filterSuccessfulStatusCodes().map(void)
+                        return Provider
+                            .sharedProvider
+                            .request(endpoint)
+                            .filterSuccessfulStatusCodes().map(void)
                     } else {
                         return empty()
                     }
