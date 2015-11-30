@@ -22,7 +22,7 @@ extension UIView {
 }
 
 extension UITextField {
-    func returnKeySignal() -> Observable<Void> {
+    var rx_returnKey: Observable<Void> {
         return rx_controlEvents(.EditingDidEndOnExit).takeUntil(rx_deallocating)
     }
 }

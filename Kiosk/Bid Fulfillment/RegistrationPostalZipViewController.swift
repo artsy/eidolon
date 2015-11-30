@@ -7,7 +7,7 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
 
     lazy var viewModel: GenericFormValidationViewModel = {
         let zipCodeIsValidSignal = self.zipCodeTextField.rx_text.map(isZeroLengthString).not()
-        return GenericFormValidationViewModel(isValidSignal: zipCodeIsValidSignal, manualInvocationSignal: self.zipCodeTextField.returnKeySignal(), finishedSubject: self.finished)
+        return GenericFormValidationViewModel(isValidSignal: zipCodeIsValidSignal, manualInvocationSignal: self.zipCodeTextField.rx_returnKey, finishedSubject: self.finished)
     }()
 
     private let _viewWillDisappear = PublishSubject<Void>()

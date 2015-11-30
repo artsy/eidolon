@@ -50,7 +50,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
             .bindTo(nav.bidDetails.newUser.email)
             .addDisposableTo(rx_disposeBag)
 
-        emailTextField.returnKeySignal().subscribeNext { _ in
+        emailTextField.rx_returnKey.subscribeNext { _ in
             action.execute()
         }.addDisposableTo(rx_disposeBag)
     }
