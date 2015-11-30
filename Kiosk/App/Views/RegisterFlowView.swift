@@ -31,7 +31,7 @@ class RegisterFlowView: ORStackView {
         return [
             [SubViewParams(title: "Mobile", getters: [{ $0.phoneNumber.value }])],
             [SubViewParams(title: "Email", getters: [{ $0.email.value }])],
-            [SubViewParams(title: "Postal/Zip", getters: [{ $0.zipCode.value }])].filter { _ in self.appSetup.needsZipCode }, // TODO: may remove, in which case no need to flatten the array
+            [SubViewParams(title: "Postal/Zip", getters: [{ $0.zipCode.value }])].filter { _ in self.appSetup.needsZipCode },
             [SubViewParams(title: "Credit Card", getters: [{ $0.creditCardName.value }, { $0.creditCardType.value }])]
         ].flatMap {$0}
     }()

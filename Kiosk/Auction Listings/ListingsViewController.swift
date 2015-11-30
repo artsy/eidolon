@@ -161,8 +161,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
             listingsCell.downloadImage = downloadImage
             listingsCell.cancelDownloadImage = cancelDownloadImage
 
-            // TODO: Abstract this, it feels icky.
-            listingsCell.viewModel.onNext(viewModel.saleArtworkViewModelAtIndexPath(indexPath))
+            listingsCell.setViewModel(viewModel.saleArtworkViewModelAtIndexPath(indexPath))
 
             let bidSignal = listingsCell.bidPressed.takeUntil(listingsCell.preparingForReuse)
             let moreInfoSignal = listingsCell.moreInfoSignal.takeUntil(listingsCell.preparingForReuse)
