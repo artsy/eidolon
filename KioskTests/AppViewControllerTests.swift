@@ -17,14 +17,14 @@ class AppViewControllerTests: QuickSpec {
 
         describe("view") {
             var subject: AppViewController!
-            var fakeReachabilitySignal: RACSubject!
+            var fakeReachabilitySignal: Variable<Bool>!
 
             beforeEach {
                 subject = AppViewController.instantiateFromStoryboard(auctionStoryboard)
-                fakeReachabilitySignal = RACSubject()
+                fakeReachabilitySignal = Variable(true)
                 
-                subject.reachabilitySignal = fakeReachabilitySignal
-                subject.apiPingerSignal = RACSignal.`return`(true).take(1)
+                subject.reachabilitySignal = fakeReachabilitySignal.asObservable()
+                subject.apiPingerSignal = just(true).take(1)
             }
 
             it("shows the offlineBlockingView when offline signal is true"){
@@ -32,22 +32,21 @@ class AppViewControllerTests: QuickSpec {
                 
                 subject.offlineBlockingView.hidden = false
                 
-                fakeReachabilitySignal.onNext(true)
+                fakeReachabilitySignal.value = true
                 expect(subject.offlineBlockingView.hidden) == true
             }
 
             it("hides the offlineBlockingView when offline signal is false"){
                 subject.loadViewProgrammatically()
 
-                fakeReachabilitySignal.onNext(true)
+                fakeReachabilitySignal.value = true
                 expect(subject.offlineBlockingView.hidden) == true
                 
                 
-                fakeReachabilitySignal.onNext(false)
+                fakeReachabilitySignal.value = false
                 expect(subject.offlineBlockingView.hidden) == false
                 
             }
-
         }
     }
 }

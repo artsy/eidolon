@@ -2,11 +2,23 @@ import UIKit
 import RxSwift
 import Moya
 
-enum BidCheckingError: ErrorType {
+enum BidCheckingError: String {
     case PollingExceeded
 }
 
-class BidCheckingNetworkModel: NSObject {
+extension BidCheckingError: ErrorType { }
+
+protocol BidCheckingNetworkModelType {
+    var fulfillmentController: FulfillmentController { get }
+
+    var bidIsResolved: Variable<Bool> { get }
+    var isHighestBidder: Variable<Bool> { get }
+    var reserveNotMet: Variable<Bool> { get }
+
+    func waitForBidResolution (bidderPositionId: String) -> Observable<Void>
+}
+
+class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     private var pollInterval = NSTimeInterval(1)
     private var maxPollRequests = 20

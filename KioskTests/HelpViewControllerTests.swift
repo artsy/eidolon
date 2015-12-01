@@ -30,14 +30,14 @@ class HelpViewControllerTests: QuickSpec {
         beforeEach {
             subject = HelpViewController()
             // Default to no buyers premium
-            subject.hasBuyersPremiumSignal = RACSignal.`return`(false).take(1)
+            subject.hasBuyersPremiumSignal = just(false).take(1)
         }
         
         itBehavesLike("a help view controller") { ["subject": subject] }
         
         describe("with a buyers premium") {
             beforeEach {
-                subject.hasBuyersPremiumSignal = RACSignal.`return`(true).take(1)
+                subject.hasBuyersPremiumSignal = just(true).take(1)
             }
             
             itBehavesLike("a help view controller") { ["subject": subject] }

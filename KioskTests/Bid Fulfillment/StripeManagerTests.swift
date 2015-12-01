@@ -5,11 +5,11 @@ import RxSwift
 import Kiosk
 import Stripe
 
-
 class StripeManagerTests: QuickSpec {
     override func spec() {
         var subject: StripeManager!
         var testStripeClient: TestSTPAPIClient!
+        var disposeBag: DisposeBag!
 
         beforeEach {
             Stripe.setDefaultPublishableKey("some key")
@@ -17,6 +17,7 @@ class StripeManagerTests: QuickSpec {
             subject = StripeManager()
             testStripeClient = TestSTPAPIClient()
             subject.stripeClient = testStripeClient
+            disposeBag = DisposeBag()
         }
 
         afterEach {
@@ -26,12 +27,11 @@ class StripeManagerTests: QuickSpec {
         it("sends the correct token upon success") {
             waitUntil { done in
                 subject.registerCard("", month: 0, year: 0, securityCode: "", postalCode: "").subscribeNext { (object) -> Void in
-                    let token = object as! STPToken
+                    let token = object
 
                     expect(token.tokenId) == "12345"
                     done()
-                }
-                return
+                }.addDisposableTo(disposeBag)
             }
         }
 
@@ -41,8 +41,7 @@ class StripeManagerTests: QuickSpec {
                 subject.registerCard("", month: 0, year: 0, securityCode: "", postalCode: "").subscribeCompleted { () -> Void in
                     completed = true
                     done()
-                }
-                return
+                }.addDisposableTo(disposeBag)
             }
 
             expect(completed) == true
@@ -56,8 +55,7 @@ class StripeManagerTests: QuickSpec {
                 subject.registerCard("", month: 0, year: 0, securityCode: "", postalCode: "").subscribeError { _ -> Void in
                     errored = true
                     done()
-                }
-                return
+                }.addDisposableTo(disposeBag)
             }
 
             expect(errored) == true

@@ -5,7 +5,13 @@ import SwiftyJSON
 
 let OutbidDomain = "Outbid"
 
-class PlaceBidNetworkModel: NSObject {
+protocol PlaceBidNetworkModelType {
+    var fulfillmentController: FulfillmentController { get }
+
+    func bidSignal() -> Observable<String>
+}
+
+class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
 
     unowned let fulfillmentController: FulfillmentController
     var bidderPosition: BidderPosition?

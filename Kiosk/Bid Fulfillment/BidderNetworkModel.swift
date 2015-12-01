@@ -2,7 +2,14 @@ import Foundation
 import RxSwift
 import Moya
 
-class BidderNetworkModel: NSObject {
+protocol BidderNetworkModelType {
+    var createdNewUser: Observable<Bool> { get }
+    var fulfillmentController: FulfillmentController { get }
+
+    func createOrGetBidder() -> Observable<Void>
+}
+
+class BidderNetworkModel: NSObject, BidderNetworkModelType {
     // MARK: - Getters
 
     unowned let fulfillmentController: FulfillmentController
@@ -26,10 +33,13 @@ class BidderNetworkModel: NSObject {
                 self?.getMyPaddleNumber()
             }
     }
+}
+
+private extension BidderNetworkModel {
 
     // MARK: - Chained Signals
 
-    private func checkUserEmailExists(email: String) -> Observable<Bool> {
+    func checkUserEmailExists(email: String) -> Observable<Bool> {
         let request = Provider.sharedProvider.request(.FindExistingEmailRegistration(email: email))
 
         return request.map { response in
@@ -37,7 +47,7 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    private func createOrUpdateUser() -> Observable<Void> {
+    func createOrUpdateUser() -> Observable<Void> {
         // Signal to test for user existence (does a user exist with this email?)
         let boolSignal = self.checkUserEmailExists(fulfillmentController.bidDetails.newUser.email.value ?? "")
 
@@ -53,7 +63,7 @@ class BidderNetworkModel: NSObject {
             .then (self.addCardToUser()) // After update/create signal finishes, add a CC to their account (if we've collected one)
     }
 
-    private func createNewUser() -> Observable<Void> {
+    func createNewUser() -> Observable<Void> {
         let newUser = fulfillmentController.bidDetails.newUser
         let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email.value!, password: newUser.password.value!, phone: newUser.phoneNumber.value!, postCode: newUser.zipCode.value ?? "", name: newUser.name.value ?? "")
 
@@ -69,7 +79,7 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    private func updateProviderIfNecessary() -> Observable<Void> {
+    func updateProviderIfNecessary() -> Observable<Void> {
         if fulfillmentController.loggedInProvider.hasValue {
             return empty()
         } else {
@@ -77,7 +87,7 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    private func updateUser() -> Observable<Void> {
+    func updateUser() -> Observable<Void> {
         let newUser = fulfillmentController.bidDetails.newUser
         let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email.value!, phone: newUser.phoneNumber.value!, postCode: newUser.zipCode.value ?? "", name: newUser.name.value ?? "")
         return updateProviderIfNecessary()
@@ -93,7 +103,7 @@ class BidderNetworkModel: NSObject {
             .logServerError("Updating user failed.")
     }
 
-    private func addCardToUser() -> Observable<Void> {
+    func addCardToUser() -> Observable<Void> {
         // If the user was asked to swipe a card, we'd have stored the token. 
         // If the token is not there, then the user must already have one on file. So we can skip this step.
         guard let token = fulfillmentController.bidDetails.newUser.creditCardToken.value else {
@@ -119,7 +129,7 @@ class BidderNetworkModel: NSObject {
 
     // MARK: - Auction / Bidder Signals
 
-    private func createOrUpdateBidder() -> Observable<Void> {
+    func createOrUpdateBidder() -> Observable<Void> {
         let boolSignal = self.checkForBidderOnAuction(self.fulfillmentController.auctionID)
 
         return boolSignal.flatMap { exists -> Observable<Void> in
@@ -131,7 +141,7 @@ class BidderNetworkModel: NSObject {
         }
     }
 
-    private func checkForBidderOnAuction(auctionID: String) -> Observable<Bool> {
+    func checkForBidderOnAuction(auctionID: String) -> Observable<Bool> {
         let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)
         let request = fulfillmentController
             .loggedInProvider!
@@ -152,7 +162,7 @@ class BidderNetworkModel: NSObject {
         }.logServerError("Getting user bidders failed.")
     }
 
-    private func registerToAuction() -> Observable<Void> {
+    func registerToAuction() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: fulfillmentController.auctionID)
         let signal = fulfillmentController
             .loggedInProvider!
@@ -170,7 +180,7 @@ class BidderNetworkModel: NSObject {
             .map(void)
     }
 
-    private func generateAPIN() -> Observable<Void> {
+    func generateAPIN() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.CreatePINForBidder(bidderID: fulfillmentController.bidDetails.bidderID.value!)
 
         return fulfillmentController
@@ -186,7 +196,7 @@ class BidderNetworkModel: NSObject {
             .map(void)
     }
 
-    private func getMyPaddleNumber() -> Observable<Void> {
+    func getMyPaddleNumber() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         return fulfillmentController
             .loggedInProvider!
@@ -201,7 +211,7 @@ class BidderNetworkModel: NSObject {
             .map(void)
     }
 
-    private func updateProvider() -> Observable<Void> {
+    func updateProvider() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: fulfillmentController.bidDetails.newUser.email.value!, password: fulfillmentController.bidDetails.newUser.password.value!)
 
         return fulfillmentController
