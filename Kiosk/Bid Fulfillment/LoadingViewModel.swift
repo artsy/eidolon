@@ -16,12 +16,12 @@ protocol LoadingViewModelType {
 /// Encapsulates activities of the LoadingViewController.
 class LoadingViewModel: NSObject, LoadingViewModelType {
     let placingBid: Bool
-    let bidderNetworkModel: BidderNetworkModel
+    let bidderNetworkModel: BidderNetworkModelType
 
-    lazy var placeBidNetworkModel: PlaceBidNetworkModel = {
+    lazy var placeBidNetworkModel: PlaceBidNetworkModelType = {
         return PlaceBidNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
-    lazy var bidCheckingModel: BidCheckingNetworkModel = { 
+    lazy var bidCheckingModel: BidCheckingNetworkModelType = {
         return BidCheckingNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
 
@@ -34,7 +34,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
         return bidderNetworkModel.fulfillmentController.bidDetails
     }
 
-    init(bidNetworkModel: BidderNetworkModel, placingBid: Bool, actionsCompleteSignal: Observable<Void>) {
+    init(bidNetworkModel: BidderNetworkModelType, placingBid: Bool, actionsCompleteSignal: Observable<Void>) {
         self.bidderNetworkModel = bidNetworkModel
         self.placingBid = placingBid
 

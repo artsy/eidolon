@@ -141,8 +141,8 @@ class PlaceBidViewControllerTests: QuickSpec {
         }
 
         it("reacts to keypad inputs with currency") {
-            let customKeySubject = RACSubject()
-            subject.bidDollarsSignal = customKeySubject;
+            let customKeySubject = PublishSubject<Int>()
+            subject.bidDollarsSignal = customKeySubject.asObservable()
             subject.loadViewProgrammatically()
 
             customKeySubject.onNext(2344);
@@ -150,7 +150,7 @@ class PlaceBidViewControllerTests: QuickSpec {
         }
 
         it("bid button is only enabled when bid is greater than min next bid") {
-            let customKeySubject = RACSubject()
+            let customKeySubject = PublishSubject<Int>()
             let nav = FulfillmentNavigationController(rootViewController:subject)
 
             let artwork = Artwork.fromJSON(artworkJSON)
@@ -159,7 +159,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
 
-            subject.bidDollarsSignal = customKeySubject;
+            subject.bidDollarsSignal = customKeySubject.asObservable()
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 
@@ -172,8 +172,8 @@ class PlaceBidViewControllerTests: QuickSpec {
         it("passes the bid amount to the nav controller") {
             let nav = FulfillmentNavigationController(rootViewController:subject)
 
-            let customKeySubject = RACSubject()
-            subject.bidDollarsSignal = customKeySubject;
+            let customKeySubject = PublishSubject<Int>()
+            subject.bidDollarsSignal = customKeySubject.asObservable()
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 

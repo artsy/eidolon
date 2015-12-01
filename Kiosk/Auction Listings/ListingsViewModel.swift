@@ -17,7 +17,7 @@ protocol ListingsViewModelType {
     var updatedContentsSignal: Observable<NSDate> { get }
 
     var scheduleOnBackground: (signal: Observable<AnyObject>) -> Observable<AnyObject> { get }
-    var scheduleOnForeground: (signal: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> { get }
+    var scheduleOnForeground:  (signal: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> { get }
 
     func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel
     func showDetailsForSaleArtworkAtIndexPath(indexPath: NSIndexPath)
@@ -102,7 +102,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
             .distinctUntilChanged { (lhs, rhs) -> Bool in
                 return lhs == rhs
             }
-            .mapReplace(0)
+            .mapReplace(0) // To use in combineLatest, we must have an array of identically-typed observables. 
 
         [selectedIndexSignal, distinctSaleArtworks]
             .combineLatest { ints in

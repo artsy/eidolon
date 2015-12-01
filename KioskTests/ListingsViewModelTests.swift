@@ -5,10 +5,8 @@ import Moya
 @testable
 import Kiosk
 
-let testSchedule = { (signal: RACSignal, scheduler: RACScheduler) -> RACSignal in
-    // Tricks the subject to thinking it's been scheduled on another queue
-    return signal
-}
+let testScheduleOnBackground: (signal: Observable<AnyObject>) -> Observable<AnyObject> = { signal in signal }
+let testScheduleOnForeground: (signal: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { signal in signal }
 
 class ListingsViewModelTests: QuickSpec {
     override func spec() {
@@ -19,6 +17,8 @@ class ListingsViewModelTests: QuickSpec {
 
         var bidCount: Int!
         var saleArtworksCount: Int?
+
+        var disposeBag: DisposeBag!
 
         beforeEach { () -> () in
             bidCount = initialBidCount
@@ -38,7 +38,9 @@ class ListingsViewModelTests: QuickSpec {
                 }
             }
 
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.`return`(true))
+            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
+
+            disposeBag = DisposeBag()
         }
 
         afterEach { () -> () in
@@ -51,28 +53,29 @@ class ListingsViewModelTests: QuickSpec {
 
 
         it("paginates to the second page to retrieve all three sale artworks") {
-            subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, logSync: { _ in}, schedule: testSchedule)
+
+            subject = ListingsViewModel(selectedIndexSignal: just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
             kioskWaitUntil { done -> Void in
                 subject.updatedContentsSignal.take(1).subscribeCompleted {
                     done()
-                }
+                }.addDisposableTo(disposeBag)
             }
 
             expect(subject.numberOfSaleArtworks) == 3
         }
 
         it("updates with new values in existing sale artworks") {
-            subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, syncInterval: 1, logSync: { _ in}, schedule: testSchedule)
+            subject = ListingsViewModel(selectedIndexSignal: just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, syncInterval: 1, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
             // Verify that initial value is correct
             waitUntil(timeout: 5) { done -> Void in
-                subject.updatedContentsSignal.take(1).then {
-                    return subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).numberOfBidsSignal.take(1)
+                subject.updatedContentsSignal.take(1).flatMap { _ in
+                    return subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).numberOfBidsSignal().take(1)
                 }.subscribeNext { string -> Void in
-                    expect(string as? String) == "\(initialBidCount) bids placed"
+                    expect(string) == "\(initialBidCount) bids placed"
                     done()
-                }
+                }.addDisposableTo(disposeBag)
             }
 
             // Simulate update from API, wait for sync to happen
@@ -80,15 +83,15 @@ class ListingsViewModelTests: QuickSpec {
 
             waitUntil(timeout: 5) { done -> Void in
                 // We skip 1 to avoid getting the existing value, and wait for the updated one when the subject syncs.
-                subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).numberOfBidsSignal.skip(1).subscribeNext { string -> Void in
-                    expect(string as? String) == "\(finalBidCount) bids placed"
+                subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).numberOfBidsSignal().skip(1).subscribeNext { string -> Void in
+                    expect(string) == "\(finalBidCount) bids placed"
                     done()
-                }
+                }.addDisposableTo(disposeBag)
             }
         }
 
         it("updates with new sale artworks when lengths differ") {
-            let subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, syncInterval: 1, logSync: { _ in}, schedule: testSchedule)
+            let subject = ListingsViewModel(selectedIndexSignal: just(0), showDetails: { _ in }, presentModal: { _ in }, syncInterval: 1, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
             saleArtworksCount = 2
 
@@ -97,7 +100,7 @@ class ListingsViewModelTests: QuickSpec {
                 subject.updatedContentsSignal.take(1).subscribeCompleted {
                     expect(subject.numberOfSaleArtworks) == 2
                     done()
-                }
+                }.addDisposableTo(disposeBag)
             }
 
             // Simulate update from API, wait for sync to happen
@@ -108,7 +111,7 @@ class ListingsViewModelTests: QuickSpec {
                 subject.updatedContentsSignal.skip(1).take(1).subscribeCompleted {
                     expect(subject.numberOfSaleArtworks) == 5
                     done()
-                }
+                }.addDisposableTo(disposeBag)
             }
         }
 
@@ -124,9 +127,9 @@ class ListingsViewModelTests: QuickSpec {
                 }
             }
 
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.`return`(true))
+            Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
 
-            subject = ListingsViewModel(selectedIndexSignal: RACSignal.`return`(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 4, syncInterval: 1, logSync: { _ in}, schedule: testSchedule)
+            subject = ListingsViewModel(selectedIndexSignal: just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 4, syncInterval: 1, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
             var initialFirstLotID: String?
             var subsequentFirstLotID: String?
@@ -136,7 +139,7 @@ class ListingsViewModelTests: QuickSpec {
                 subject.updatedContentsSignal.take(1).subscribeCompleted {
                     initialFirstLotID = subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).saleArtworkID
                     done()
-                }
+                }.addDisposableTo(disposeBag)
             }
 
             // Now we reverse the lot numbers
@@ -145,7 +148,7 @@ class ListingsViewModelTests: QuickSpec {
                 subject.updatedContentsSignal.skip(1).take(1).subscribeCompleted {
                     subsequentFirstLotID = subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).saleArtworkID
                     done()
-                }
+                }.addDisposableTo(disposeBag)
             }
 
             expect(initialFirstLotID).toNot( beEmpty() )

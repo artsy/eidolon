@@ -43,7 +43,7 @@ class FulfillmentNavigationControllerTests: QuickSpec {
                 return endpoint
             }
 
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: externalClosure, stubClosure: MoyaProvider.ImmediatelyStub, onlineSignal: RACSignal.`return`(true))
+            Provider.sharedProvider = ArtsyProvider(endpointClosure: externalClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
 
 
             let target = ArtsyAPI.Me

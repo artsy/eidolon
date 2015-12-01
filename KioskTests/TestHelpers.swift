@@ -113,13 +113,7 @@ public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Observabl
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
         let actualValue = try actualExpression.evaluate()?.toBlocking().first()
 
-        let matches = actualValue == expectedValue && expectedValue != nil
-        if expectedValue == nil || actualValue == nil {
-            if expectedValue == nil {
-                failureMessage.postfixActual = " (use beNil() to match nils)"
-            }
-            return false
-        }
+        let matches = actualValue == expectedValue
         return matches
     }
 }
@@ -131,12 +125,6 @@ public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Variable<
         let actualValue = try actualExpression.evaluate()?.value
 
         let matches = actualValue == expectedValue && expectedValue != nil
-        if expectedValue == nil || actualValue == nil {
-            if expectedValue == nil {
-                failureMessage.postfixActual = " (use beNil() to match nils)"
-            }
-            return false
-        }
         return matches
     }
 }
@@ -147,14 +135,12 @@ public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Observabl
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
         let actualValue = try actualExpression.evaluate()?.toBlocking().first()
 
-        let matches = actualValue == expectedValue && expectedValue != nil
-        if expectedValue == nil || actualValue == nil {
-            if expectedValue == nil {
-                failureMessage.postfixActual = " (use beNil() to match nils)"
-            }
-            return false
+        switch actualValue {
+        case .None:
+            return expectedValue == nil
+        case .Some(let wrapped):
+            return wrapped == expectedValue
         }
-        return matches
     }
 }
 
@@ -164,14 +150,12 @@ public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Variable<
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
         let actualValue = try actualExpression.evaluate()?.value
 
-        let matches = actualValue == expectedValue && expectedValue != nil
-        if expectedValue == nil || actualValue == nil {
-            if expectedValue == nil {
-                failureMessage.postfixActual = " (use beNil() to match nils)"
-            }
-            return false
+        switch actualValue {
+        case .None:
+            return expectedValue == nil
+        case .Some(let wrapped):
+            return wrapped == expectedValue
         }
-        return matches
     }
 }
 

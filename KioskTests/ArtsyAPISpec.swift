@@ -17,11 +17,16 @@ func beInTheFuture() -> MatcherFunc<NSDate> {
 var defaults = NSUserDefaults()
 
 class ArtsyAPISpec: QuickSpec {
-
     override func spec() {
 
-        func newXAppRequest() -> RACSignal {
+        func newXAppRequest() -> Observable<MoyaResponse> {
             return XAppRequest(ArtsyAPI.Auctions, defaults: defaults)
+        }
+
+        var disposeBag: DisposeBag!
+
+        beforeEach {
+            disposeBag = DisposeBag()
         }
 
         describe("keys", {
@@ -57,7 +62,7 @@ class ArtsyAPISpec: QuickSpec {
                 // Make any XApp request, doesn't matter which, but make sure to subscribe so it actually fires
                 newXAppRequest().subscribeNext({ (object) -> Void in
                     called = true
-                })
+                }).addDisposableTo(disposeBag)
                 
                 expect(called).to(beTruthy())
             }
@@ -67,7 +72,7 @@ class ArtsyAPISpec: QuickSpec {
                 
                 newXAppRequest().subscribeNext({ (object) -> Void in
                     // nop
-                })
+                }).addDisposableTo(disposeBag)
                 
                 let past = NSDate(timeIntervalSinceNow: -1000)
                 expect(getDefaultsKeys(defaults).key).to(equal("STUBBED TOKEN!"))
@@ -81,7 +86,7 @@ class ArtsyAPISpec: QuickSpec {
                 
                 newXAppRequest().subscribeNext({ (object) -> Void in
                     // nop
-                })
+                }).addDisposableTo(disposeBag)
                 
                 expect(getDefaultsKeys(defaults).key).to(equal("STUBBED TOKEN!"))
                 expect(getDefaultsKeys(defaults).expiry).toNot(beNil())

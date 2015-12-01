@@ -15,7 +15,7 @@ class RegistrationEmailViewControllerTests: QuickSpec {
         it("looks right with existing email") {
             let subject = RegistrationEmailViewController.instantiateFromStoryboard(fulfillmentStoryboard)
             subject.bidDetails = BidDetails.stubbedBidDetails()
-            subject.bidDetails.newUser.email = "test@example.com"
+            subject.bidDetails.newUser.email.value = "test@example.com"
             expect(subject).to( haveValidSnapshot() )
         }
 

@@ -11,13 +11,13 @@ class ArtsyProviderTests: QuickSpec {
             return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
         }
 
-        var fakeOnlineSignal: RACSubject!
+        var fakeOnlineSignal: PublishSubject<Bool>!
         var subject: ArtsyProvider<ArtsyAPI>!
         var defaults: NSUserDefaults!
 
         beforeEach {
-            fakeOnlineSignal = RACSubject()
-            subject = ArtsyProvider<ArtsyAPI>(endpointClosure: fakeEndpointsClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, onlineSignal: fakeOnlineSignal)
+            fakeOnlineSignal = PublishSubject<Bool>()
+            subject = ArtsyProvider<ArtsyAPI>(endpointClosure: fakeEndpointsClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, online: fakeOnlineSignal.asObservable())
 
             // We fake our defaults to avoid actually hitting the network
             defaults = NSUserDefaults()
@@ -28,14 +28,15 @@ class ArtsyProviderTests: QuickSpec {
         it ("waits for the internet to happen before continuing with network operations") {
             var called = false
 
+            let disposeBag = DisposeBag()
             XAppRequest(.Ping, provider: subject, defaults: defaults).subscribeNext { _ -> Void in
                 called = true
-            }
+            }.addDisposableTo(disposeBag)
 
             expect(called) == false
 
             // Fake getting online
-            fakeOnlineSignal.sendCompleted()
+            fakeOnlineSignal.onCompleted()
 
             expect(called) == true
         }

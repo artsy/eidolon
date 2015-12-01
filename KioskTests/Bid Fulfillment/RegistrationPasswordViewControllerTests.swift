@@ -14,7 +14,7 @@ class RegistrationPasswordViewControllerTests: QuickSpec {
         class TestViewModel: RegistrationPasswordViewModelType {
 
             var emailExistsSignal: Observable<Bool>
-            var action: CocoaAction!
+            var action: CocoaAction! = emptyAction()
 
             init (emailExists: Bool = false) {
                 emailExistsSignal = just(emailExists)
