@@ -26,31 +26,31 @@ class ListingsViewControllerConfiguration: QuickConfiguration {
             
             it("least bids") {
                 subject.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
-                viewModel.gridSelected = false
+                viewModel.gridSelected.value = false
                 expect(subject) == snapshot()
             }
 
             it("most bids") {
                 subject.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
-                viewModel.gridSelected = false
+                viewModel.gridSelected.value = false
                 expect(subject) == snapshot()
             }
 
             it("highest bid") {
                 subject.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
-                viewModel.gridSelected = false
+                viewModel.gridSelected.value = false
                 expect(subject) == snapshot()
             }
 
             it("lowest bid") {
                 subject.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
-                viewModel.gridSelected = false
+                viewModel.gridSelected.value = false
                 expect(subject) == snapshot()
             }
 
             it("alphabetical") {
                 subject.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
-                viewModel.gridSelected = false
+                viewModel.gridSelected.value = false
                 expect(subject) == snapshot()
             }
         })
@@ -113,20 +113,24 @@ func testListingsViewController(storyboard: UIStoryboard = auctionStoryboard) ->
 }
 
 class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelType {
+
     var auctionID = "los-angeles-modern-auctions-march-2015"
     var syncInterval = SyncInterval
     var pageSize = 10
-    var schedule: (RACSignal, RACScheduler) -> RACSignal = { signal, _ -> RACSignal in signal }
-    var logSync: (AnyObject!) -> Void = { _ in}
+    var logSync: (NSDate) -> Void = { _ in}
     var numberOfSaleArtworks = 10
 
-    var showSpinnerSignal = RACSignal.`return`(false)
-    var gridSelectedSignal: RACSignal! {
-        return RACObserve(self, "gridSelected")
+    var showSpinnerSignal: Observable<Bool>! = just(false)
+    var gridSelectedSignal: Observable<Bool>! {
+        return gridSelected.asObservable()
     }
-    var updatedContentsSignal: RACSignal! {
-        return RACSignal.`return`(NSDate())
+    var updatedContentsSignal: Observable<NSDate> {
+        return just(NSDate())
     }
+
+    var scheduleOnBackground: (signal: Observable<AnyObject>) -> Observable<AnyObject> = { signal in return signal }
+    var scheduleOnForeground: (signal: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { signal in return signal }
+
 
     func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel {
         let saleArtwork = testSaleArtwork()
@@ -149,5 +153,5 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
     // Testing values
     var lotNumber: Int?
     var soldStatus: String?
-    dynamic var gridSelected = true
+    var gridSelected = Variable(true)
 }

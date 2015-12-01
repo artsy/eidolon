@@ -66,7 +66,7 @@ class PlaceBidViewControllerTests: QuickSpec {
         it("looks right with a custom saleArtwork") {
             let nav = FulfillmentNavigationController(rootViewController: subject)
 
-            let artwork = Artwork.fromJSON(artworkJSON) as! Artwork
+            let artwork = Artwork.fromJSON(artworkJSON)
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             saleArtwork.minimumNextBidCents = 10000
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
@@ -84,7 +84,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             beforeEach {
                 nav = FulfillmentNavigationController(rootViewController:subject)
 
-                let artwork = Artwork.fromJSON(artworkJSON) as! Artwork
+                let artwork = Artwork.fromJSON(artworkJSON)
                 let saleArtwork = SaleArtwork(id: "", artwork: artwork)
                 saleArtwork.minimumNextBidCents = 10000
                 saleArtwork.openingBidCents = 10000
@@ -119,7 +119,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             beforeEach {
                 nav = FulfillmentNavigationController(rootViewController:subject)
 
-                let artwork = Artwork.fromJSON(artworkJSON) as! Artwork
+                let artwork = Artwork.fromJSON(artworkJSON)
                 let saleArtwork = SaleArtwork(id: "", artwork: artwork)
                 saleArtwork.minimumNextBidCents = 25000
                 saleArtwork.openingBidCents = 10000
@@ -145,7 +145,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             subject.bidDollarsSignal = customKeySubject;
             subject.loadViewProgrammatically()
 
-            customKeySubject.sendNext(2344);
+            customKeySubject.onNext(2344);
             expect(subject.bidAmountTextField.text) == "2,344"
         }
 
@@ -153,7 +153,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             let customKeySubject = RACSubject()
             let nav = FulfillmentNavigationController(rootViewController:subject)
 
-            let artwork = Artwork.fromJSON(artworkJSON) as! Artwork
+            let artwork = Artwork.fromJSON(artworkJSON)
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             saleArtwork.minimumNextBidCents = 100
 
@@ -165,7 +165,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             expect(subject.bidButton.enabled) == false
 
-            customKeySubject.sendNext(200)
+            customKeySubject.onNext(200)
             expect(subject.bidButton.enabled) == true
         }
 
@@ -177,7 +177,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 
-            customKeySubject.sendNext(33);
+            customKeySubject.onNext(33);
 
             expect(nav.bidDetails.bidAmountCents) == 3300
         }

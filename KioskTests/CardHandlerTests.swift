@@ -2,6 +2,7 @@ import Quick
 import Nimble
 @testable
 import Kiosk
+import RxSwift
 
 class CardHandlerTests: QuickSpec {
     var handler: CardHandler!
@@ -11,6 +12,8 @@ class CardHandlerTests: QuickSpec {
         let apiKey = "jhfbsdhbfsd"
         let accountToken = "dxcvxfvdfgvxcv"
 
+        var disposeBag: DisposeBag!
+
         beforeEach {
             let manager = CFTSessionManager()
             self.reader = LocalCardReader()
@@ -19,6 +22,8 @@ class CardHandlerTests: QuickSpec {
 
             self.handler.reader = self.reader!
             self.handler.sessionManager = manager
+
+            disposeBag = DisposeBag()
         }
 
         pending("sets up the Cardflight API + Token") {
@@ -28,9 +33,12 @@ class CardHandlerTests: QuickSpec {
 
         xit("sends a signal with a card if successful") {
             var success = false
-            self.handler.cardSwipedSignal.subscribeCompleted({ input -> Void in
-                success = true
-            })
+            self.handler
+                .cardStatus
+                .subscribeCompleted { input -> Void in
+                    success = true
+                }
+                .addDisposableTo(disposeBag)
 
             self.handler.startSearching()
             expect(success) == true
@@ -40,9 +48,12 @@ class CardHandlerTests: QuickSpec {
             self.reader.fail = true
 
             var success = false
-            self.handler.cardSwipedSignal.subscribeError({ input -> Void in
-                success = true
-            })
+            self.handler
+                .cardStatus
+                .subscribeError { input -> Void in
+                    success = true
+                }
+                .addDisposableTo(disposeBag)
 
             self.handler!.startSearching()
             expect(success) == true
@@ -51,9 +62,12 @@ class CardHandlerTests: QuickSpec {
         xit("passes messages along the card signal as things are moving") {
             var messageCount = 0
 
-            self.handler!.cardSwipedSignal.subscribeNext({ (message) -> Void in
-                messageCount = messageCount + 1
-            })
+            self.handler!
+                .cardStatus
+                .subscribeNext { (message) -> Void in
+                    messageCount = messageCount + 1
+                }
+                .addDisposableTo(disposeBag)
 
             self.handler!.readerIsAttached()
             self.handler!.readerIsConnecting()

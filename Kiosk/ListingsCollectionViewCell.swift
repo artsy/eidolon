@@ -22,7 +22,6 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     var cancelDownloadImage: CancelDownloadImageClosure?
 
     lazy var moreInfoSignal: Observable<NSDate> = {
-        // TODO: Skip 1 or anything?
         return [self.imageGestureSigal, self.infoGestureSignal].toObservable().merge()
     }()
     
@@ -45,11 +44,15 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     var preparingForReuse: Observable<Void> {
         return _preparingForReuse.asObservable()
     }
-    
+
     var viewModel = PublishSubject<SaleArtworkViewModel>()
-    var _bidPressed = PublishSubject<NSDate>() // TODO: Private?
+    func setViewModel(newViewModel: SaleArtworkViewModel) {
+        self.viewModel.onNext(newViewModel)
+    }
+
+    private var _bidPressed = PublishSubject<NSDate>()
     var bidPressed: Observable<NSDate> {
-        return _bidPressed.skip(1).asObservable()
+        return _bidPressed.asObservable()
     }
 
     override init(frame: CGRect) {

@@ -19,7 +19,7 @@ class ArtworkTests: QuickSpec {
         var artwork: Artwork!
 
         beforeEach {
-            artwork = Artwork.fromJSON(data) as! Artwork
+            artwork = Artwork.fromJSON(data)
         }
 
         it("converts from JSON") {
@@ -36,14 +36,14 @@ class ArtworkTests: QuickSpec {
                 "original_width": size.width,
                 "original_height": size.height,
                 "default_image": true
-                ]) as! Image
+                ])
             let otherImage = Image.fromJSON([
                 "id": "nonDefault",
                 "image_url":"http://image.com/:version.jpg",
                 "image_versions" : ["small"],
                 "original_width": size.width,
                 "original_height": size.height
-            ]) as! Image
+            ])
 
             artwork.images = [defaultImage, otherImage]
 
@@ -57,14 +57,14 @@ class ArtworkTests: QuickSpec {
                 "image_versions" : ["small"],
                 "original_width": size.width,
                 "original_height": size.height,
-            ]) as! Image
+            ])
             let otherImage = Image.fromJSON([
                 "id": "nonDefault",
                 "image_url":"http://image.com/:version.jpg",
                 "image_versions" : ["small"],
                 "original_width": size.width,
                 "original_height": size.height
-            ]) as! Image
+            ])
 
             artwork.images = [image, otherImage]
 
@@ -72,7 +72,7 @@ class ArtworkTests: QuickSpec {
         }
 
         it("updates the soldStatus") {
-            let newArtwork = Artwork.fromJSON(data) as! Artwork
+            let newArtwork = Artwork.fromJSON(data)
             newArtwork.soldStatus = "sold"
 
             artwork.updateWithValues(newArtwork)

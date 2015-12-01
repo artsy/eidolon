@@ -16,7 +16,8 @@ protocol ListingsViewModelType {
     var gridSelectedSignal: Observable<Bool>! { get }
     var updatedContentsSignal: Observable<NSDate> { get }
 
-    var schedule: (signal: Observable<AnyObject>) -> Observable<AnyObject> { get }
+    var scheduleOnBackground: (signal: Observable<AnyObject>) -> Observable<AnyObject> { get }
+    var scheduleOnForeground: (signal: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> { get }
 
     func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel
     func showDetailsForSaleArtworkAtIndexPath(indexPath: NSIndexPath)
@@ -31,26 +32,24 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // These are private to the view model – should not be accessed directly
     private var saleArtworks = Variable(Array<SaleArtwork>())
-    private var sortedSaleArtworks: Variable<Array<SaleArtwork>>!
+    private var sortedSaleArtworks = Variable<Array<SaleArtwork>>([])
 
     let auctionID: String
     let pageSize: Int
     let syncInterval: NSTimeInterval
     let logSync: (NSDate) -> Void
-    var schedule: (signal: Observable<AnyObject>) -> Observable<AnyObject>
+    var scheduleOnBackground: (signal: Observable<AnyObject>) -> Observable<AnyObject>
+    var scheduleOnForeground:  (signal: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]>
 
     var numberOfSaleArtworks: Int {
-        return saleArtworks.value.count
+        return sortedSaleArtworks.value.count
     }
 
     var showSpinnerSignal: Observable<Bool>!
     var gridSelectedSignal: Observable<Bool>!
     var updatedContentsSignal: Observable<NSDate> {
-        return saleArtworks
+        return sortedSaleArtworks
             .asObservable()
-            .distinctUntilChanged { (lhs, rhs) -> Bool in
-                return lhs == rhs
-            }
             .map { $0.count > 0 }
             .ignore(false)
             .map { _ in NSDate() }
@@ -65,7 +64,8 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
          pageSize: Int = 10,
          syncInterval: NSTimeInterval = SyncInterval,
          logSync:(NSDate) -> Void = ListingsViewModel.DefaultLogging,
-         schedule: (signal: Observable<AnyObject>) -> Observable<AnyObject> = ListingsViewModel.DefaultScheduler,
+         scheduleOnBackground: (signal: Observable<AnyObject>) -> Observable<AnyObject> = ListingsViewModel.DefaultScheduler(onBackground: true),
+         scheduleOnForeground: (signal: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = ListingsViewModel.DefaultScheduler(onBackground: false),
          auctionID: String = AppSetup.sharedState.auctionID) {
 
         self.auctionID = auctionID
@@ -74,7 +74,8 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         self.pageSize = pageSize
         self.syncInterval = syncInterval
         self.logSync = logSync
-        self.schedule = schedule
+        self.scheduleOnBackground = scheduleOnBackground
+        self.scheduleOnForeground = scheduleOnForeground
 
         super.init()
 
@@ -90,27 +91,36 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
             .bindTo(saleArtworks)
             .addDisposableTo(rx_disposeBag)
 
-        showSpinnerSignal = saleArtworks.map { saleArtworks in
-            return saleArtworks.count == 0
+        showSpinnerSignal = sortedSaleArtworks.map { sortedSaleArtworks in
+            return sortedSaleArtworks.count == 0
         }
 
         gridSelectedSignal = selectedIndexSignal.map { ListingsViewModel.SwitchValues(rawValue: $0) == .Some(.Grid) }
 
-        let distinctSaleArtworks: Observable<[SaleArtwork]> = saleArtworks
+        let distinctSaleArtworks = saleArtworks
             .asObservable()
             .distinctUntilChanged { (lhs, rhs) -> Bool in
                 return lhs == rhs
             }
+            .mapReplace(0)
 
-        zip(distinctSaleArtworks, selectedIndexSignal)
-            { (saleArtworks, selectedIndex) -> [SaleArtwork] in
-                // Necessary to satisfy compiler.
-                guard let switchValue = ListingsViewModel.SwitchValues(rawValue: selectedIndex) else { return saleArtworks }
-
-                return switchValue.sortSaleArtworks(saleArtworks)
+        [selectedIndexSignal, distinctSaleArtworks]
+            .combineLatest { ints in
+                // We use distinctSaleArtworks to trigger an update, but ints[1] is unused.
+                return ints[0]
+            }
+            .startWith(0)
+            .map { selectedIndex in
+                return ListingsViewModel.SwitchValues(rawValue: selectedIndex)
+            }
+            .filterNil()
+            .map { [weak self] switchValue -> [SaleArtwork] in
+                guard let me = self else { return [] }
+                return switchValue.sortSaleArtworks(me.saleArtworks.value)
             }
             .bindTo(sortedSaleArtworks)
             .addDisposableTo(rx_disposeBag)
+
     }
 
     private func listingsRequestSignalForPage(page: Int) -> Observable<AnyObject> {
@@ -145,7 +155,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // Fetches all pages of the auction
     private func allListingsRequestSignal() -> Observable<[SaleArtwork]> {
-        return schedule(signal: retrieveAllListingsRequestSignal(1)).reduce([AnyObject]())
+        let backgroundJSONParsing = scheduleOnBackground(signal: retrieveAllListingsRequestSignal(1)).reduce([AnyObject]())
             { (memo, object) in
                 guard let array = object as? Array<AnyObject> else { return memo }
                 return memo + array
@@ -153,7 +163,8 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
             .mapToObjectArray(SaleArtwork)
             .logServerError("Sale artworks failed to retrieve+parse")
             .catchErrorJustReturn([])
-            .observeOn(MainScheduler.sharedInstance) // TODO: This MainScheduler should be injected as a dependency.
+
+        return scheduleOnForeground(signal: backgroundJSONParsing)
     }
 
     private func recurringListingsRequestSignal() -> Observable<Array<SaleArtwork>> {
@@ -194,8 +205,12 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         #endif
     }
 
-    private class func DefaultScheduler(signal: Observable<AnyObject>) -> Observable<AnyObject> {
-        return signal.observeOn(backgroundScheduler)
+    private class func DefaultScheduler<T>(onBackground background: Bool)(signal: Observable<T>) -> Observable<T> {
+        if background {
+            return signal.observeOn(backgroundScheduler)
+        } else {
+            return signal.observeOn(MainScheduler.sharedInstance)
+        }
     }
 
     // MARK: Public methods

@@ -22,12 +22,12 @@ class PlaceBidNetworkModel: NSObject {
 
     func bidSignal() -> Observable<String> {
         let bidDetails = fulfillmentController.bidDetails
-        let saleArtwork = bidDetails.saleArtwork
+        let saleArtwork = bidDetails.saleArtwork.value
 
         assert(saleArtwork.hasValue, "Sale artwork is nil at bidding stage.")
 
-        let cents = String(bidDetails.bidAmountCents)
-        return bidOnSaleArtwork(saleArtwork!, bidAmountCents: cents)
+        let cents = (bidDetails.bidAmountCents.value as? Int) ?? 0
+        return bidOnSaleArtwork(saleArtwork!, bidAmountCents: String(cents))
     }
 
     private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> Observable<String> {

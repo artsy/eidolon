@@ -65,6 +65,8 @@ PODS:
     - FLKAutoLayout (~> 0.1)
   - Quick (0.8.0)
   - Reachability (3.1.1)
+  - RxBlocking (2.0.0-beta.3):
+    - RxSwift (~> 2.0.0-beta)
   - RxCocoa (2.0.0-beta.3):
     - RxSwift (~> 2.0.0-beta)
   - RxSwift (2.0.0-beta.3)
@@ -106,8 +108,9 @@ DEPENDENCIES:
   - ORStackView
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - RxCocoa (from `https://github.com/ashfurrow/RxSwift.git`, branch `temp-develop`)
-  - RxSwift (from `https://github.com/ashfurrow/RxSwift.git`, branch `temp-develop`)
+  - RxBlocking (~> 2.0.0-beta)
+  - RxCocoa (~> 2.0.0-beta)
+  - RxSwift (~> 2.0.0-beta)
   - SDWebImage (~> 3.7)
   - Stripe
   - SVProgressHUD
@@ -129,12 +132,6 @@ EXTERNAL SOURCES:
   Reachability:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
-  RxCocoa:
-    :branch: temp-develop
-    :git: https://github.com/ashfurrow/RxSwift.git
-  RxSwift:
-    :branch: temp-develop
-    :git: https://github.com/ashfurrow/RxSwift.git
   UIImageViewAligned:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
@@ -151,12 +148,6 @@ CHECKOUT OPTIONS:
   Reachability:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
     :git: https://github.com/ashfurrow/Reachability.git
-  RxCocoa:
-    :commit: adb81f219372f1fd40fdb8de72019b19627d498e
-    :git: https://github.com/ashfurrow/RxSwift.git
-  RxSwift:
-    :commit: adb81f219372f1fd40fdb8de72019b19627d498e
-    :git: https://github.com/ashfurrow/RxSwift.git
   UIImageViewAligned:
     :commit: 6f8cb5669b219ef08c90c2e2e5a082cadfe7565b
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
@@ -191,6 +182,7 @@ SPEC CHECKSUMS:
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
+  RxBlocking: 331f8bdedf77198f8ff1a37f09c492f1f4f631e5
   RxCocoa: 1472006304b296d03c847f78b21384523cc4902e
   RxSwift: 19fbe885b404d1d36d42ac8535134739a9b42952
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575

@@ -11,8 +11,7 @@ extension UIView {
             case .Next(let value):
                 self?.hidden = value
             case .Error(let error):
-//                bindingErrorToInterface(error) // TODO: see https://github.com/ReactiveX/RxSwift/issues/274
-                print(error)
+                bindingErrorToInterface(error)
                 break
             case .Completed:
                 break
@@ -22,7 +21,7 @@ extension UIView {
 }
 
 extension UITextField {
-    func returnKeySignal() -> Observable<Void> {
+    var rx_returnKey: Observable<Void> {
         return rx_controlEvents(.EditingDidEndOnExit).takeUntil(rx_deallocating)
     }
 }

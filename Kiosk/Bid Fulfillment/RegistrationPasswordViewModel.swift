@@ -3,7 +3,14 @@ import RxSwift
 import Moya
 import Action
 
-class RegistrationPasswordViewModel {
+protocol RegistrationPasswordViewModelType {
+    var emailExistsSignal: Observable<Bool> { get }
+    var action: CocoaAction! { get }
+
+    func userForgotPasswordSignal() -> Observable<Void>
+}
+
+class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
 
     private let password = Variable("")
 
@@ -17,11 +24,13 @@ class RegistrationPasswordViewModel {
     init(passwordSignal: Observable<String>, execute: Observable<Void>, completed: PublishSubject<Void>, email: String) {
         self.email = email
 
-        emailExistsSignal = Provider
+        let checkEmail = Provider
             .sharedProvider
             .request(ArtsyAPI.FindExistingEmailRegistration(email: email))
             .map(responseIsOK)
             .replay(1)
+
+        emailExistsSignal = checkEmail
 
         passwordSignal.bindTo(self.password).addDisposableTo(disposeBag)
 
@@ -33,7 +42,7 @@ class RegistrationPasswordViewModel {
         let action = CocoaAction(enabledIf: passwordSignal.map(isStringLengthAtLeast(6))) { _ in
 
             return self.emailExistsSignal
-                .map { exists -> Observable<Void> in
+                .flatMap { exists -> Observable<Void> in
                     if exists {
                         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: email, password: password.value ?? "")
                         return Provider
@@ -41,16 +50,19 @@ class RegistrationPasswordViewModel {
                             .request(endpoint)
                             .filterSuccessfulStatusCodes().map(void)
                     } else {
-                        return empty()
+                        // Return a non-empty observable, so that the action sends something on its elements observable.
+                        return just()
                     }
                 }
-                .switchLatest()
                 .doOnCompleted {
                     completed.onCompleted()
                 }
         }
 
         self.action = action
+
+        // Need to trigger the API check manually.
+        checkEmail.connect()
 
         execute
             .subscribeNext { _ in

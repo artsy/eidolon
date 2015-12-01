@@ -2,8 +2,19 @@ import Foundation
 import ARAnalytics
 import RxSwift
 
+protocol LoadingViewModelType {
+
+    var createdNewBidder: Variable<Bool> { get }
+    var bidIsResolved: Variable<Bool> { get }
+    var isHighestBidder: Variable<Bool> { get }
+    var reserveNotMet: Variable<Bool> { get }
+    var bidDetails: BidDetails { get }
+
+    func performActions() -> Observable<Void>
+}
+
 /// Encapsulates activities of the LoadingViewController.
-class LoadingViewModel: NSObject {
+class LoadingViewModel: NSObject, LoadingViewModelType {
     let placingBid: Bool
     let bidderNetworkModel: BidderNetworkModel
 

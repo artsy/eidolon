@@ -9,7 +9,7 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
 
     lazy var viewModel: GenericFormValidationViewModel = {
         let numberIsValidSignal = self.numberTextField.rx_text.map(isZeroLengthString).not()
-        return GenericFormValidationViewModel(isValidSignal: numberIsValidSignal, manualInvocationSignal: self.numberTextField.returnKeySignal(), finishedSubject: self.finished)
+        return GenericFormValidationViewModel(isValidSignal: numberIsValidSignal, manualInvocationSignal: self.numberTextField.rx_returnKey, finishedSubject: self.finished)
     }()
 
     private let _viewWillDisappear = PublishSubject<Void>()

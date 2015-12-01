@@ -32,18 +32,18 @@ class AppViewControllerTests: QuickSpec {
                 
                 subject.offlineBlockingView.hidden = false
                 
-                fakeReachabilitySignal.sendNext(true)
+                fakeReachabilitySignal.onNext(true)
                 expect(subject.offlineBlockingView.hidden) == true
             }
 
             it("hides the offlineBlockingView when offline signal is false"){
                 subject.loadViewProgrammatically()
 
-                fakeReachabilitySignal.sendNext(true)
+                fakeReachabilitySignal.onNext(true)
                 expect(subject.offlineBlockingView.hidden) == true
                 
                 
-                fakeReachabilitySignal.sendNext(false)
+                fakeReachabilitySignal.onNext(false)
                 expect(subject.offlineBlockingView.hidden) == false
                 
             }

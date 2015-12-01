@@ -24,7 +24,7 @@ class LoadingViewController: UIViewController {
         return self._viewWillDisappear.asObserver()
     }
     
-    lazy var viewModel: LoadingViewModel = {
+    lazy var viewModel: LoadingViewModelType = {
         return LoadingViewModel(
             bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()),
             placingBid: self.placingBid,
@@ -94,7 +94,7 @@ class LoadingViewController: UIViewController {
     }
 }
 
-private extension LoadingViewController {
+extension LoadingViewController {
 
     func finishUp() {
         let reserveNotMet = viewModel.reserveNotMet.value

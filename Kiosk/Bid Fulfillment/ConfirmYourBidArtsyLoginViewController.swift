@@ -119,20 +119,29 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBAction func forgotPasswordTapped(sender: AnyObject) {
         let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .Alert)
 
-        let submitAction = UIAlertAction(title: "Send", style: .Default) { [weak alertController] (_) in
-            let emailTextField = alertController!.textFields![0]
-            self.sendForgotPasswordRequest(emailTextField.text ?? "")
-            return
-        }
+        let submitAction = UIAlertAction.Action("Send", style: .Default)
+        let email = Variable("")
+        submitAction.rx_action = CocoaAction(enabledIf: email.map(stringIsEmailAddress), workFactory: { () -> Observable<Void> in
+            let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email.value)
 
-        submitAction.enabled = false
-        submitAction.enabled = stringIsEmailAddress(emailTextField.text ?? "")
+            return XAppRequest(endpoint)
+                .filterSuccessfulStatusCodes()
+                .doOnNext { _ in
+                    logger.log("Sent forgot password request")
+                }
+                .map(void)
+        })
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
 
-        alertController.addTextFieldWithConfigurationHandler { (textField) in
+        alertController.addTextFieldWithConfigurationHandler { textField in
             textField.placeholder = "email@domain.com"
             textField.text = self.emailTextField.text
+
+            textField
+                .rx_text
+                .bindTo(email)
+                .addDisposableTo(textField.rx_disposeBag)
 
             NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
                 submitAction.enabled = stringIsEmailAddress(textField.text ?? "").boolValue
@@ -143,18 +152,6 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         alertController.addAction(cancelAction)
 
         self.presentViewController(alertController, animated: true) {}
-    }
-
-    func sendForgotPasswordRequest(email: String) {
-        let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
-
-        // TODO: This ought to be in an Action
-        XAppRequest(endpoint)
-            .filterSuccessfulStatusCodes()
-            .subscribeNext { (json) -> Void in
-                logger.log("Sent forgot password request")
-            }
-            .addDisposableTo(rx_disposeBag)
     }
 
     func creditCardSignal() -> Observable<[Card]> {

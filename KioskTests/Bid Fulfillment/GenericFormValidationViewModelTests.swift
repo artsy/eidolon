@@ -19,7 +19,7 @@ class GenericFormValidationViewModelTests: QuickSpec {
                 completed = true
             }
 
-            invocationSignal.sendNext(nil)
+            invocationSignal.onNext(nil)
 
             expect(completed).toEventually( beTrue() )
         }
@@ -46,13 +46,13 @@ class GenericFormValidationViewModelTests: QuickSpec {
 
             let subject = GenericFormValidationViewModel(isValidSignal: validSubject, manualInvocationSignal: RACSignal.empty(), finishedSubject: RACSubject())
 
-            validSubject.sendNext(false)
+            validSubject.onNext(false)
             expect((subject.command.enabled.first() as! Bool)).toEventually( beFalse() )
 
-            validSubject.sendNext(true)
+            validSubject.onNext(true)
             expect((subject.command.enabled.first() as! Bool)).toEventually( beTrue() )
 
-            validSubject.sendNext(false)
+            validSubject.onNext(false)
             expect((subject.command.enabled.first() as! Bool)).toEventually( beFalse() )
         }
     }

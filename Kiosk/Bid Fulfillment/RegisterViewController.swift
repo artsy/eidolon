@@ -32,9 +32,9 @@ class RegisterViewController: UIViewController {
 
         coordinator.storyboard = self.storyboard!
         let registerIndexSignal = coordinator.currentIndex
-        let indexIsConfirmSignal = registerIndexSignal.map { return ($0 == RegistrationIndex.ConfirmVC.toInt()) }
+        let indexIsConfirmedSignal = registerIndexSignal.map { return ($0 == RegistrationIndex.ConfirmVC.toInt()) }
 
-        indexIsConfirmSignal
+        indexIsConfirmedSignal
             .not()
             .bindTo(confirmButton.rx_hidden)
             .addDisposableTo(rx_disposeBag)
@@ -49,6 +49,7 @@ class RegisterViewController: UIViewController {
 
         flowView
             .highlightedIndex
+            .distinctUntilChanged()
             .subscribeNext { [weak self] (index) -> Void in
                 if let _ = self?.fulfillmentNav() {
                     let registrationIndex = RegistrationIndex.fromInt(index)

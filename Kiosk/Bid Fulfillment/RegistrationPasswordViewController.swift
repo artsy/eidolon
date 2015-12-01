@@ -15,12 +15,12 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         return self._viewWillDisappear.asObserver()
     }
 
-    lazy var viewModel: RegistrationPasswordViewModel = {
+    lazy var viewModel: RegistrationPasswordViewModelType = {
         let email = self.navigationController?.fulfillmentNav().bidDetails.newUser.email.value ?? ""
 
         return RegistrationPasswordViewModel(
             passwordSignal: self.passwordTextField.rx_text.asObservable(),
-            execute: self.passwordTextField.returnKeySignal(),
+            execute: self.passwordTextField.rx_returnKey,
             completed: self.finished,
             email: email)
     }()

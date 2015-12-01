@@ -66,3 +66,11 @@ private class ReachabilityManager: NSObject {
     }
 }
 
+func bindingErrorToInterface(error: ErrorType) {
+    let error = "Binding error to UI: \(error)"
+    #if DEBUG
+        fatalError(error)
+    #else
+        print(error)
+    #endif
+}

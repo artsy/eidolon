@@ -93,6 +93,8 @@ extension Observable {
     }
 }
 
+private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueuePriority: .Default)
+
 extension Observable {
     func mapReplace<T>(value: T) -> Observable<T> {
         return map { _ -> T in
@@ -101,7 +103,7 @@ extension Observable {
     }
 
     func dispatchAsyncMainScheduler() -> Observable<E> {
-        return self.observeOn(MainScheduler.sharedInstance)
+        return self.observeOn(backgroundScheduler).observeOn(MainScheduler.sharedInstance)
     }
 }
 

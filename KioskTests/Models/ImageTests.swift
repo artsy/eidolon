@@ -15,7 +15,7 @@ class ImageTests: QuickSpec {
             let imageFormats = ["big", "small", "patch"]
             let data:[String: AnyObject] = [ "id": id, "image_url": url, "image_versions": imageFormats, "original_width": size.width, "original_height": size.height]
 
-            let image = Image.fromJSON(data) as! Image
+            let image = Image.fromJSON(data)
 
             expect(image.id) == id
             expect(image.imageFormatString) == url
@@ -42,7 +42,7 @@ class ImageTests: QuickSpec {
         it("handles incorrect image_versions JSON") {
             let data:[String: AnyObject] = [ "id": id, "image_url": url, "image_versions": "something invalid"]
 
-            expect(Image.fromJSON(data) as! Image).toNot( throwError() )
+            expect(Image.fromJSON(data)).toNot( throwError() )
         }
 
         it("assumes it's not default if not specified") {
@@ -52,7 +52,7 @@ class ImageTests: QuickSpec {
                 "image_versions" : ["small"],
                 "original_width": size.width,
                 "original_height": size.height
-            ])as! Image
+            ])
 
             expect(image.isDefault) == false
         }
@@ -65,6 +65,6 @@ class ImageTests: QuickSpec {
             "image_versions" : [version],
             "original_width": size.width,
             "original_height": size.height
-        ])as! Image
+        ])
     }
 }
