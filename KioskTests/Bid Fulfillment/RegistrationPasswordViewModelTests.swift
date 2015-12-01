@@ -23,19 +23,19 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             case ArtsyAPI.LostPasswordNotification(let email):
                 passwordCheck?()
                 expect(email) == testEmail
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(emailExists ? 200 : 404, NSData())}, method: target.method, parameters: target.parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(passwordRequestSucceeds ? 200 : 404, NSData())}, method: target.method, parameters: target.parameters)
             case ArtsyAPI.XAuth(let email, let password):
                 loginCheck?()
                 expect(email) == testEmail
                 expect(password) == testPassword
                 // Fail auth (wrong password maybe)
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(emailExists ? 200 : 403, NSData())}, method: target.method, parameters: target.parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(loginSucceeds ? 200 : 403, NSData())}, method: target.method, parameters: target.parameters)
             case .XApp:
                 // Any XApp requests are incidental; ignore.
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, NSData())}, method: target.method, parameters: target.parameters)
+                return MoyaProvider<ArtsyAPI>.DefaultEndpointMapping(target)
             default:
                 // Fail on all other cases
-                expect(true) == false
+                fail("Unexpected network call")
                 return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, NSData())}, method: target.method, parameters: target.parameters)
             }
         }
@@ -219,19 +219,22 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("handles password reminders") {
             var sent = false
 
-            self.stubProvider(emailExists: false, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: {
+            self.stubProvider(emailExists: true, emailCheck: nil, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: {
                 sent = true
             })
 
             let subject = self.testSubject()
 
-            subject
-                .userForgotPasswordSignal()
-                .subscribeNext { _ -> Void in
-                    // do nothing – we subscribe just to force the signal to execute.
-                }
-                .addDisposableTo(disposeBag)
-            
+            waitUntil { done in
+                subject
+                    .userForgotPasswordSignal()
+                    .subscribeCompleted {
+                        // do nothing – we subscribe just to force the signal to execute.
+                        done()
+                    }
+                    .addDisposableTo(disposeBag)
+            }
+
             expect(sent).toEventually( beTrue() )
             Provider.sharedProvider = Provider.StubbingProvider()
         }

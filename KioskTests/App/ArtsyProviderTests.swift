@@ -36,7 +36,7 @@ class ArtsyProviderTests: QuickSpec {
             expect(called) == false
 
             // Fake getting online
-            fakeOnlineSignal.onCompleted()
+            fakeOnlineSignal.onNext(true)
 
             expect(called) == true
         }

@@ -131,7 +131,6 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
     var scheduleOnBackground: (signal: Observable<AnyObject>) -> Observable<AnyObject> = { signal in return signal }
     var scheduleOnForeground: (signal: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { signal in return signal }
 
-
     func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel {
         let saleArtwork = testSaleArtwork()
 

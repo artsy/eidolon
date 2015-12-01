@@ -48,7 +48,8 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
                         return Provider
                             .sharedProvider
                             .request(endpoint)
-                            .filterSuccessfulStatusCodes().map(void)
+                            .filterSuccessfulStatusCodes()
+                            .map(void)
                     } else {
                         // Return a non-empty observable, so that the action sends something on its elements observable.
                         return just()
@@ -72,11 +73,11 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
     }
 
     func userForgotPasswordSignal() -> Observable<Void> {
-        let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
+        let endpoint = ArtsyAPI.LostPasswordNotification(email: email)
         return XAppRequest(endpoint)
             .filterSuccessfulStatusCodes()
             .map(void)
-            .doOnNext { (t) -> Void in
+            .doOnNext { _ in
                 logger.log("Sent forgot password request")
             }
     }
