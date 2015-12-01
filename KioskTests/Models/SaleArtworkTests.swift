@@ -72,6 +72,7 @@ class SaleArtworkTests: QuickSpec {
 
         describe("reserve status") {
             it("gives default number of bids") {
+            // highest bid, reserve status, and number of bids
                 expect(saleArtwork.viewModel.numberOfBidsWithReserveSignal) == "0 bids placed"
             }
 

@@ -78,7 +78,7 @@ class TestSTPAPIClient: STPAPIClient {
         if succeed {
             completion(token, nil)
         } else {
-            completion(nil, nil)
+            completion(nil, TestError.Default as NSError)
         }
     }
 }

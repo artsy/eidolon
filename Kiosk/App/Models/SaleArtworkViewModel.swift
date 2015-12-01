@@ -69,11 +69,11 @@ extension SaleArtworkViewModel {
 
     // The language used here is very specific – see https://github.com/artsy/eidolon/pull/325#issuecomment-64121996 for details
     var numberOfBidsWithReserveSignal: Observable<String> {
-        numberOfBidsSignal()
 
         // Ignoring highestBidCents; only there to trigger on bid update.
-        let highestBidString = saleArtwork.rx_observe(Optional<NSNumber>.self, "highestBidCents").filterNil().map { "\($0)" }
-        return [numberOfBidsSignal(), saleArtwork.rx_observe(String.self, "reserveStatus").filterNil(), highestBidString].combineLatest { strings -> String in
+        let highestBidString = saleArtwork.rx_observe(NSNumber.self, "highestBidCents").map { "\($0)" }
+        let reserveStatus = saleArtwork.rx_observe(String.self, "reserveStatus").map { "\($0)" }
+        return [numberOfBidsSignal(), reserveStatus, highestBidString].combineLatest { strings -> String in
 
             let numberOfBidsString = strings[0]
             let reserveStatus = ReserveStatus.initOrDefault(strings[1])
