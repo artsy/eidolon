@@ -113,9 +113,10 @@ extension SaleArtworkViewModel {
     }
 
     func forSaleSignal() -> Observable<Bool> {
-        return just(saleArtwork.artwork).map { artwork in
-            return Artwork.SoldStatus.fromString(artwork.soldStatus) == .NotSold
+        return saleArtwork.artwork.rx_observe(String.self, "soldStatus").filterNil().map { status in
+            return Artwork.SoldStatus.fromString(status) == .NotSold
         }
+
     }
 
     func currentBidSignal(prefix prefix: String = "", missingPrefix: String = "") -> Observable<String> {
@@ -146,7 +147,9 @@ extension SaleArtworkViewModel {
 
     func currentBidOrOpeningBidLabel() -> Observable<String> {
         return saleArtwork.rx_observe(NSNumber.self, "bidCount").map { input in
-            if let count = input as? Int where count > 0 {
+            guard let count = input as? Int else { return "" }
+
+            if count > 0 {
                 return "Current Bid:"
             } else {
                 return "Opening Bid:"

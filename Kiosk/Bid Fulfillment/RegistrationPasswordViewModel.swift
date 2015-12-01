@@ -28,7 +28,7 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
             .sharedProvider
             .request(ArtsyAPI.FindExistingEmailRegistration(email: email))
             .map(responseIsOK)
-            .replay(1)
+            .shareReplay(1)
 
         emailExistsSignal = checkEmail
 
@@ -61,9 +61,6 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
         }
 
         self.action = action
-
-        // Need to trigger the API check manually.
-        checkEmail.connect()
 
         execute
             .subscribeNext { _ in

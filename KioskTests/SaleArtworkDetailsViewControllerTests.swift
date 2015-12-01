@@ -5,7 +5,6 @@ import Kiosk
 import Nimble_Snapshots
 import SDWebImage
 
-
 class SaleArtworkDetailsViewControllerConfiguration: QuickConfiguration {
     override class func configure(configuration: Configuration) {
         sharedExamples("a sale artwork details view controller", closure: { (sharedExampleContext: SharedExampleContext) in
@@ -15,7 +14,7 @@ class SaleArtworkDetailsViewControllerConfiguration: QuickConfiguration {
                 subject = sharedExampleContext()["subject"] as! SaleArtworkDetailsViewController!
             }
 
-            it ("looks ok by default") {
+            it("looks ok by default") {
                 expect(subject) == snapshot()
             }
         })
@@ -26,6 +25,7 @@ class SaleArtworkDetailsViewControllerTests: QuickSpec {
     let imageCache = SDImageCache.sharedImageCache()
     override func spec() {
         var subject: SaleArtworkDetailsViewController!
+
         beforeEach {
             Provider.sharedProvider = Provider.StubbingProvider()
 

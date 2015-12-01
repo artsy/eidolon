@@ -22,7 +22,7 @@ class SaleArtworkDetailsViewController: UIViewController {
 
     lazy var artistInfoSignal: Observable<AnyObject> = {
         let signal = XAppRequest(.Artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
-        return signal.replay(1)
+        return signal.shareReplay(1)
     }()
     
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!
@@ -30,12 +30,32 @@ class SaleArtworkDetailsViewController: UIViewController {
 
     var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
     let layoutSubviews = PublishSubject<Void>()
+    let viewWillAppear = PublishSubject<Void>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupMetadataView()
         setupAdditionalDetailStackView()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        // OK, so this is pretty weird, eh? So basically we need to be notified of layout changes _just after_ the layout
+        // is actually done. For whatever reason, the UIKit hack to get the labels to adhere to their proper width only
+        // works if we defer recalculating their geometry to the next runloop.
+        // This wasn't an issue with RAC's rac_signalForSelector because that invoked the signal _after_ this method completed.
+        // So that's what I've done here.
+        dispatch_async(dispatch_get_main_queue()) {
+            self.layoutSubviews.onNext()
+        }
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        viewWillAppear.onCompleted()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -161,9 +181,8 @@ class SaleArtworkDetailsViewController: UIViewController {
         estimateBottomBorder.tag = MetadataStackViewTag.EstimateBottomBorder.rawValue
         metadataStackView.addSubview(estimateBottomBorder, withTopMargin: "10", sideMargin: "0")
 
-        layoutSubviews
-            .take(1)
-            .subscribeNext { [weak estimateTopBorder, weak estimateBottomBorder] _ in
+        viewWillAppear
+            .subscribeCompleted { [weak estimateTopBorder, weak estimateBottomBorder] in
                 estimateTopBorder?.drawDottedBorders()
                 estimateBottomBorder?.drawDottedBorders()
             }
@@ -270,11 +289,6 @@ class SaleArtworkDetailsViewController: UIViewController {
         metadataStackView.bottomMarginHeight = CGFloat(NSNotFound)
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        layoutSubviews.onNext()
-    }
-
     private func setupImageView(imageView: UIImageView) {
         if let image = saleArtwork.artwork.defaultImage {
 
@@ -371,8 +385,10 @@ class SaleArtworkDetailsViewController: UIViewController {
         retrieveAdditionalInfo()
             .filter { info in
                 return info.isNotEmpty
-            }.subscribeNext { info in
+            }.subscribeNext { [weak self] info in
                 additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString(info)
+                self?.view.setNeedsLayout()
+                self?.view.layoutIfNeeded()
             }
             .addDisposableTo(rx_disposeBag)
 
