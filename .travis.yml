@@ -27,6 +27,9 @@ before_script:
 
 script: set -o pipefail && xcodebuild -destination "OS=9.0,name=iPad Air 2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | second_curtain | xcpretty --color --test
 
+after_success:
+  - sleep 5
+
 notifications:
   slack:
     secure: dHJSmLJAwoLRi5inP5btz8fP6pbT/BIF89CTOFmnNO6mLEM7J++PZfvj4cg2ojM3jfjFtQXJE5CuqrOaLeXhN4uteIu91ust1sgkNdkExsQvOVgBAZhcsLZLtMQpytrVs34FXfdirAZv/S750J3d8XWr7yCZThqRkVuIy0CB5vM=
