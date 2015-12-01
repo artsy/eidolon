@@ -44,19 +44,19 @@ class CardHandlerTests: QuickSpec {
             expect(success) == true
         }
 
-        xit("sends a signal with a error if failed") {
+        xit("sends a signal with an error if failed") {
             self.reader.fail = true
 
-            var success = false
+            var failed = false
             self.handler
                 .cardStatus
-                .subscribeError { input -> Void in
-                    success = true
+                .subscribeError { _ in
+                    failed = true
                 }
                 .addDisposableTo(disposeBag)
 
             self.handler!.startSearching()
-            expect(success) == true
+            expect(failed) == true
         }
 
         xit("passes messages along the card signal as things are moving") {
