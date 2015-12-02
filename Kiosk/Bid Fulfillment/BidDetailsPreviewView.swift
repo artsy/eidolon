@@ -69,6 +69,7 @@ class BidDetailsPreviewView: UIView {
 
                 return artwork.titleAndDate
             }
+            .mapToOptional()
             .bindTo(artworkTitleLabel.rx_attributedText)
             .addDisposableTo(rx_disposeBag)
 
