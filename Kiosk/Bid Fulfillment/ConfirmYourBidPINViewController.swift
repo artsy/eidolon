@@ -5,7 +5,7 @@ import Action
 
 class ConfirmYourBidPINViewController: UIViewController {
 
-    var _pin = Variable("")
+    private var _pin = Variable("")
 
     @IBOutlet var keypadContainer: KeypadContainerView!
     @IBOutlet var pinTextField: TextField!
