@@ -5,19 +5,19 @@ import RxSwift
 class APIPingManager: NSObject {
 
     let syncInterval: NSTimeInterval = 2
-    var letOnlineSignal: Observable<Bool>!
+    var letOnline: Observable<Bool>!
 
     override init() {
         super.init()
 
-        letOnlineSignal = interval(syncInterval, MainScheduler.sharedInstance)
+        letOnline = interval(syncInterval, MainScheduler.sharedInstance)
             .flatMap { [weak self] _ in
-                return self?.pingSignal() ?? empty()
+                return self?.ping() ?? empty()
             }
             .startWith(true)
     }
 
-    private func pingSignal() -> Observable<Bool> {
+    private func ping() -> Observable<Bool> {
         return XAppRequest(ArtsyAPI.Ping).map(responseIsOK)
     }
 }

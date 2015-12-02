@@ -23,12 +23,12 @@ class HelpViewController: UIViewController {
         appDelegate().showBuyersPremiumCommand()
     }
     
-    var registerToBidCommand = { (enabledSignal: Observable<Bool>) -> CocoaAction in
-        appDelegate().registerToBidCommand(enabledSignal)
+    var registerToBidCommand = { (enabled: Observable<Bool>) -> CocoaAction in
+        appDelegate().registerToBidCommand(enabled)
     }
     
-    var requestBidderDetailsCommand = { (enabledSignal: Observable<Bool>) -> CocoaAction in
-        appDelegate().requestBidderDetailsCommand(enabledSignal)
+    var requestBidderDetailsCommand = { (enabled: Observable<Bool>) -> CocoaAction in
+        appDelegate().requestBidderDetailsCommand(enabled)
     }
     
     var showPrivacyPolicyCommand = { () -> CocoaAction in
@@ -39,7 +39,7 @@ class HelpViewController: UIViewController {
         appDelegate().showConditionsOfSaleCommand()
     }
     
-    lazy var hasBuyersPremiumSignal: Observable<Bool> = {
+    lazy var hasBuyersPremium: Observable<Bool> = {
         return appDelegate()
             .appViewController
             .sale
@@ -93,7 +93,7 @@ private extension HelpViewController {
         bidExplainLabel.makeSubstringsBold(["mobile number", "bidder number", "PIN"])
         
         let registerButton = blackButton(.RegisterButton, title: "Register")
-        registerButton.rx_action = registerToBidCommand(connectedToInternetOrStubbingSignal())
+        registerButton.rx_action = registerToBidCommand(connectedToInternetOrStubbing())
         
         let bidderDetailsLabel = titleLabel(.BidderDetailsLabel, title: "What Are Bidder Details?")
         
@@ -101,7 +101,7 @@ private extension HelpViewController {
         bidderDetailsExplainLabel.makeSubstringsBold(["bidder number", "PIN"])
         
         let sendDetailsButton = blackButton(.BidderDetailsButton, title: "Send me my details")
-        sendDetailsButton.rx_action = requestBidderDetailsCommand(connectedToInternetOrStubbingSignal())
+        sendDetailsButton.rx_action = requestBidderDetailsCommand(connectedToInternetOrStubbing())
         
         let conditionsButton = serifButton(.ConditionsOfSaleButton, title: "Conditions of Sale")
         conditionsButton.rx_action = showConditionsOfSaleCommand()
@@ -127,7 +127,7 @@ private extension HelpViewController {
         stackView.addSubview(conditionsButton, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         stackView.addSubview(privacyButton, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
         
-        hasBuyersPremiumSignal
+        hasBuyersPremium
             .subscribeNext { [weak self] hasBuyersPremium in
                 if hasBuyersPremium {
                     self?.stackView.addSubview(self!.buyersPremiumButton, withTopMargin: "\(self!.inbetweenMargin)", sideMargin: "\(self!.sideMargin)")

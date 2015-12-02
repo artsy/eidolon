@@ -4,7 +4,7 @@ import SVProgressHUD
 import Action
 
 extension UIViewController {
-    func promptForBidderDetailsRetrievalSignal() -> Observable<Void> {
+    func promptForBidderDetailsRetrieval() -> Observable<Void> {
         return deferred { () -> Observable<Void> in
             let alertController = self.emailPromptAlertController()
 
@@ -14,7 +14,7 @@ extension UIViewController {
         }
     }
     
-    func retrieveBidderDetailsSignal(email: String) -> Observable<Void> {
+    func retrieveBidderDetails(email: String) -> Observable<Void> {
         return just(email)
             .take(1)
             .doOnNext { _ in
@@ -26,11 +26,11 @@ extension UIViewController {
                 return XAppRequest(endpoint, provider: Provider.sharedProvider).filterSuccessfulStatusCodes().map(void)
             }
             .throttle(1, MainScheduler.sharedInstance)
-            .doOnNext { _ -> Void in
+            .doOnNext { _ in
                 SVProgressHUD.dismiss()
                 self.presentViewController(UIAlertController.successfulBidderDetailsAlertController(), animated: true, completion: nil)
             }
-            .doOnError { _ -> Void in
+            .doOnError { _ in
                 SVProgressHUD.dismiss()
                 self.presentViewController(UIAlertController.failedBidderDetailsAlertController(), animated: true, completion: nil)
             }
@@ -43,7 +43,7 @@ extension UIViewController {
         let action = CocoaAction { _ -> Observable<Void> in
             let text = (alertController.textFields?.first)?.text ?? ""
 
-            return self.retrieveBidderDetailsSignal(text)
+            return self.retrieveBidderDetails(text)
         }
         ok.rx_action = action
         let cancel = UIAlertAction.Action("Cancel", style: .Cancel)

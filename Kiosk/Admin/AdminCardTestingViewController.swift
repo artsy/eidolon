@@ -22,7 +22,7 @@ class AdminCardTestingViewController: UIViewController {
         }
 
         cardHandler.cardStatus
-            .subscribe { (event) -> Void in
+            .subscribe { (event) in
                 switch event {
                 case .Next(let message):
                     self.log("\(message)")

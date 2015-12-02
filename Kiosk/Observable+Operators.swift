@@ -2,9 +2,9 @@ import RxSwift
 
 extension Observable where Element: Equatable {
     func ignore(value: Element) -> Observable<Element> {
-        return filter({ (e) -> Bool in
+        return filter { (e) -> Bool in
             return value != e
-        })
+        }
     }
 }
 
@@ -12,11 +12,11 @@ extension Observable {
     // OK, so the idea is that I have a Variable that exposes an Observable and I want
     // to switch to the latest without mapping.
     //
-    // viewModel.flatMap { saleArtworkViewModel in return saleArtworkViewModel.lotNumberSignal }
+    // viewModel.flatMap { saleArtworkViewModel in return saleArtworkViewModel.lotNumber }
     //
     // Becomes...
     //
-    // viewModel.flatMapTo(SaleArtworkViewModel.lotNumberSignal)
+    // viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
     //
     // Still not sure if this is a good idea.
 
@@ -63,7 +63,7 @@ extension Observable where Element: OptionalType {
 
 extension Observable {
     func doOnNext(closure: Element -> Void) -> Observable<Element> {
-        return doOn { (event: Event) -> Void in
+        return doOn { (event: Event) in
             switch event {
             case .Next(let value):
                 closure(value)
@@ -73,7 +73,7 @@ extension Observable {
     }
 
     func doOnCompleted(closure: () -> Void) -> Observable<Element> {
-        return doOn { (event: Event) -> Void in
+        return doOn { (event: Event) in
             switch event {
             case .Completed:
                 closure()
@@ -83,7 +83,7 @@ extension Observable {
     }
 
     func doOnError(closure: ErrorType -> Void) -> Observable<Element> {
-        return doOn { (event: Event) -> Void in
+        return doOn { (event: Event) in
             switch event {
             case .Error(let error):
                 closure(error)

@@ -22,7 +22,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
         it("reacts to keypad inputs with the string") {
             let customKeySubject = PublishSubject<String>()
             let subject = testConfirmYourBidPINViewController()
-            subject.pinSignal = customKeySubject.asObservable()
+            subject.pin = customKeySubject.asObservable()
             subject.loadViewProgrammatically()
 
             customKeySubject.onNext("2344");
@@ -33,7 +33,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             let customKeySubject = PublishSubject<String>()
 
             let subject = testConfirmYourBidPINViewController()
-            subject.pinSignal = customKeySubject
+            subject.pin = customKeySubject
 
             subject.loadViewProgrammatically()
 
@@ -45,7 +45,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             let customKeySubject = PublishSubject<String>()
 
             let subject = testConfirmYourBidPINViewController()
-            subject.pinSignal = customKeySubject;
+            subject.pin = customKeySubject;
 
             subject.loadViewProgrammatically()
 
@@ -91,7 +91,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             nav.auctionID = "AUCTION"
             let provider: RxMoyaProvider<ArtsyAPI> = subject.providerForPIN("12341234", number: "1234")
 
-            waitUntil{ done -> Void in
+            waitUntil{ done in
                 provider
                     .request(.Me)
                     .subscribeCompleted {

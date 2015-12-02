@@ -39,9 +39,9 @@ final class Artwork: NSObject, JSONAbleType {
     dynamic var images: [Image]?
 
     lazy var defaultImage: Image? = {
-        let defaultImages = self.images?.filter({ (image) -> Bool in
+        let defaultImages = self.images?.filter { (image) -> Bool in
             image.isDefault
-        })
+        }
 
         return defaultImages?.first ?? self.images?.first
     }()

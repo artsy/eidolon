@@ -28,7 +28,7 @@ class LoadingViewController: UIViewController {
         return LoadingViewModel(
             bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()),
             placingBid: self.placingBid,
-            actionsCompleteSignal: self.viewWillDisappear
+            actionsComplete: self.viewWillDisappear
         )
     }()
 
@@ -175,7 +175,7 @@ extension LoadingViewController {
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
 
-        recognizer.rx_event.subscribeNext { [weak self] _ -> Void in
+        recognizer.rx_event.subscribeNext { [weak self] _ in
             self?.closeSelf()
         }.addDisposableTo(rx_disposeBag)
 
@@ -214,9 +214,9 @@ extension LoadingViewController {
         presentError("Bid Failed", message: "There was a problem placing your bid. Please speak to an Artsy representative.")
 
         if let error = error {
-            statusMessage.presentOnLongPress("Error: \(error.localizedDescription). \n \(error.artsyServerError())", title: "Bidding error", closure: { [weak self] (alertController) -> Void in
+            statusMessage.presentOnLongPress("Error: \(error.localizedDescription). \n \(error.artsyServerError())", title: "Bidding error") { [weak self] (alertController) in
                 self?.presentViewController(alertController, animated: true, completion: nil)
-            })
+            }
         }
     }
 

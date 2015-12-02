@@ -7,7 +7,7 @@ import Nimble_Snapshots
 
 class PlaceBidViewControllerConfiguration: QuickConfiguration {
     override class func configure(configuration: Configuration) {
-        sharedExamples("a bid view controller view controller", closure: { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a bid view controller view controller") { (sharedExampleContext: SharedExampleContext) in
             var subject: PlaceBidViewController!
             var nav: FulfillmentNavigationController!
 
@@ -36,7 +36,7 @@ class PlaceBidViewControllerConfiguration: QuickConfiguration {
                     expect(subject) == snapshot()
                 }
             }
-        })
+        }
     }
 }
 
@@ -142,7 +142,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
         it("reacts to keypad inputs with currency") {
             let customKeySubject = PublishSubject<Int>()
-            subject.bidDollarsSignal = customKeySubject.asObservable()
+            subject.bidDollars = customKeySubject.asObservable()
             subject.loadViewProgrammatically()
 
             customKeySubject.onNext(2344);
@@ -159,7 +159,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
 
-            subject.bidDollarsSignal = customKeySubject.asObservable()
+            subject.bidDollars = customKeySubject.asObservable()
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 
@@ -173,7 +173,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             let nav = FulfillmentNavigationController(rootViewController:subject)
 
             let customKeySubject = PublishSubject<Int>()
-            subject.bidDollarsSignal = customKeySubject.asObservable()
+            subject.bidDollars = customKeySubject.asObservable()
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 

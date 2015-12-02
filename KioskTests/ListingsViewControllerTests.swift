@@ -9,7 +9,7 @@ import Moya
 
 class ListingsViewControllerConfiguration: QuickConfiguration {
     override class func configure(configuration: Configuration) {
-        sharedExamples("a listings controller", closure: { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a listings controller") { (sharedExampleContext: SharedExampleContext) in
             var subject: ListingsViewController!
             var viewModel: ListingsViewControllerTestsStubbedViewModel!
 
@@ -26,34 +26,34 @@ class ListingsViewControllerConfiguration: QuickConfiguration {
             
             it("least bids") {
                 subject.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
-                viewModel.gridSelected.value = false
+                viewModel._gridSelected.value = false
                 expect(subject) == snapshot()
             }
 
             it("most bids") {
                 subject.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
-                viewModel.gridSelected.value = false
+                viewModel._gridSelected.value = false
                 expect(subject) == snapshot()
             }
 
             it("highest bid") {
                 subject.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
-                viewModel.gridSelected.value = false
+                viewModel._gridSelected.value = false
                 expect(subject) == snapshot()
             }
 
             it("lowest bid") {
                 subject.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
-                viewModel.gridSelected.value = false
+                viewModel._gridSelected.value = false
                 expect(subject) == snapshot()
             }
 
             it("alphabetical") {
                 subject.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
-                viewModel.gridSelected.value = false
+                viewModel._gridSelected.value = false
                 expect(subject) == snapshot()
             }
-        })
+        }
     }
 }
 
@@ -120,16 +120,16 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
     var logSync: (NSDate) -> Void = { _ in}
     var numberOfSaleArtworks = 10
 
-    var showSpinnerSignal: Observable<Bool>! = just(false)
-    var gridSelectedSignal: Observable<Bool>! {
-        return gridSelected.asObservable()
+    var showSpinner: Observable<Bool>! = just(false)
+    var gridSelected: Observable<Bool>! {
+        return _gridSelected.asObservable()
     }
-    var updatedContentsSignal: Observable<NSDate> {
+    var updatedContents: Observable<NSDate> {
         return just(NSDate())
     }
 
-    var scheduleOnBackground: (signal: Observable<AnyObject>) -> Observable<AnyObject> = { signal in return signal }
-    var scheduleOnForeground: (signal: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { signal in return signal }
+    var scheduleOnBackground: (observable: Observable<AnyObject>) -> Observable<AnyObject> = { observable in observable }
+    var scheduleOnForeground: (observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { observable in observable }
 
     func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel {
         let saleArtwork = testSaleArtwork()
@@ -152,5 +152,5 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
     // Testing values
     var lotNumber: Int?
     var soldStatus: String?
-    var gridSelected = Variable(true)
+    var _gridSelected = Variable(true)
 }

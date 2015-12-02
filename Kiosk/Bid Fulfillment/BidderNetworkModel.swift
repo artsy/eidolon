@@ -22,7 +22,7 @@ class BidderNetworkModel: NSObject, BidderNetworkModelType {
         self.fulfillmentController = fulfillmentController
     }
 
-    // MARK: - Main Signal
+    // MARK: - Main observable
 
     func createOrGetBidder() -> Observable<Void> {
         return createOrUpdateUser()
@@ -37,7 +37,7 @@ class BidderNetworkModel: NSObject, BidderNetworkModelType {
 
 private extension BidderNetworkModel {
 
-    // MARK: - Chained Signals
+    // MARK: - Chained observables
 
     func checkUserEmailExists(email: String) -> Observable<Bool> {
         let request = Provider.sharedProvider.request(.FindExistingEmailRegistration(email: email))
@@ -48,11 +48,11 @@ private extension BidderNetworkModel {
     }
 
     func createOrUpdateUser() -> Observable<Void> {
-        // Signal to test for user existence (does a user exist with this email?)
-        let boolSignal = self.checkUserEmailExists(fulfillmentController.bidDetails.newUser.email.value ?? "")
+        // observable to test for user existence (does a user exist with this email?)
+        let bool = self.checkUserEmailExists(fulfillmentController.bidDetails.newUser.email.value ?? "")
 
         // If the user exists, update their info to the API, otherwise create a new user.
-        return boolSignal
+        return bool
             .flatMap { emailExists -> Observable<Void> in
                 if emailExists {
                     return self.updateUser()
@@ -60,7 +60,7 @@ private extension BidderNetworkModel {
                     return self.createNewUser()
                 }
             }
-            .then (self.addCardToUser()) // After update/create signal finishes, add a CC to their account (if we've collected one)
+            .then (self.addCardToUser()) // After update/create observable finishes, add a CC to their account (if we've collected one)
     }
 
     func createNewUser() -> Observable<Void> {
@@ -127,12 +127,12 @@ private extension BidderNetworkModel {
             .logServerError("Adding Card to User failed")
     }
 
-    // MARK: - Auction / Bidder Signals
+    // MARK: - Auction / Bidder observables
 
     func createOrUpdateBidder() -> Observable<Void> {
-        let boolSignal = self.checkForBidderOnAuction(self.fulfillmentController.auctionID)
+        let bool = self.checkForBidderOnAuction(self.fulfillmentController.auctionID)
 
-        return boolSignal.flatMap { exists -> Observable<Void> in
+        return bool.flatMap { exists -> Observable<Void> in
             if exists {
                 return empty()
             } else {
@@ -164,15 +164,15 @@ private extension BidderNetworkModel {
 
     func registerToAuction() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: fulfillmentController.auctionID)
-        let signal = fulfillmentController
+        let register = fulfillmentController
             .loggedInProvider!
             .request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .mapToObject(Bidder)
 
-        return signal
-            .doOnNext{ [weak self] bidder in
+        return 
+            register.doOnNext{ [weak self] bidder in
                 self?.fulfillmentController.bidDetails.bidderID.value = bidder.id
                 self?.fulfillmentController.bidDetails.newUser.hasBeenRegistered.value = true
             }

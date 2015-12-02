@@ -8,8 +8,8 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
     var finished = PublishSubject<Void>()
 
     lazy var viewModel: GenericFormValidationViewModel = {
-        let emailIsValidSignal = self.emailTextField.rx_text.map(stringIsEmailAddress)
-        return GenericFormValidationViewModel(isValidSignal: emailIsValidSignal, manualInvocationSignal: self.emailTextField.rx_returnKey, finishedSubject: self.finished)
+        let emailIsValid = self.emailTextField.rx_text.map(stringIsEmailAddress)
+        return GenericFormValidationViewModel(isValid: emailIsValid, manualInvocation: self.emailTextField.rx_returnKey, finishedSubject: self.finished)
     }()
 
 

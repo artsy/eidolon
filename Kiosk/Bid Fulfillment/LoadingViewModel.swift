@@ -34,7 +34,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
         return bidderNetworkModel.fulfillmentController.bidDetails
     }
 
-    init(bidNetworkModel: BidderNetworkModelType, placingBid: Bool, actionsCompleteSignal: Observable<Void>) {
+    init(bidNetworkModel: BidderNetworkModelType, placingBid: Bool, actionsComplete: Observable<Void>) {
         self.bidderNetworkModel = bidNetworkModel
         self.placingBid = placingBid
 
@@ -48,7 +48,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
             (bidCheckingModel.reserveNotMet.asObservable(), reserveNotMet)
         ].forEach { pair in
             pair.0
-                .takeUntil(actionsCompleteSignal)
+                .takeUntil(actionsComplete)
                 .bindTo(pair.1)
                 .addDisposableTo(rx_disposeBag)
         }
@@ -73,7 +73,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
 
                 return me
                     .placeBidNetworkModel
-                    .bidSignal()
+                    .bid()
             }
             .flatMap { [weak self] position -> Observable<Void> in
                 guard let me = self else { return empty() }

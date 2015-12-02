@@ -25,7 +25,7 @@ class ListingsViewController: UIViewController {
     }
 
     lazy var viewModel: ListingsViewModelType = {
-        return ListingsViewModel(selectedIndexSignal: self.switchView.selectedIndexSignal, showDetails: self.showDetailsForSaleArtwork, presentModal: self.presentModalForSaleArtwork)
+        return ListingsViewModel(selectedIndex: self.switchView.selectedIndex, showDetails: self.showDetailsForSaleArtwork, presentModal: self.presentModalForSaleArtwork)
     }()
 
     var cellIdentifier = Variable(MasonryCellIdentifier)
@@ -65,14 +65,14 @@ class ListingsViewController: UIViewController {
         
         // Set up reactive bindings
         viewModel
-            .showSpinnerSignal
+            .showSpinner
             .not()
             .bindTo(loadingSpinner.rx_hidden)
             .addDisposableTo(rx_disposeBag)
 
         // Map switch selection to cell reuse identifier.
         viewModel
-            .gridSelectedSignal
+            .gridSelected
             .map { gridSelected -> String in
                 if gridSelected {
                     return MasonryCellIdentifier
@@ -86,13 +86,13 @@ class ListingsViewController: UIViewController {
 
         // Reload collection view when there is new content.
         viewModel
-            .updatedContentsSignal
+            .updatedContents
             .mapReplace(collectionView)
             .doOnNext { collectionView in
                 collectionView.reloadData()
             }
             .dispatchAsyncMainScheduler()
-            .subscribeNext { [weak self] collectionView -> Void in
+            .subscribeNext { [weak self] collectionView in
                 // Make sure we're on screen and not in a test or something.
                 guard let _ = self?.view.window else { return }
 
@@ -103,7 +103,7 @@ class ListingsViewController: UIViewController {
 
         // Respond to changes in layout, driven by switch selection.
         viewModel
-            .gridSelectedSignal
+            .gridSelected
             .map { [weak self] gridSelected -> UICollectionViewLayout in
                 switch gridSelected {
                 case true:
@@ -163,16 +163,16 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
 
             listingsCell.setViewModel(viewModel.saleArtworkViewModelAtIndexPath(indexPath))
 
-            let bidSignal = listingsCell.bidPressed.takeUntil(listingsCell.preparingForReuse)
-            let moreInfoSignal = listingsCell.moreInfoSignal.takeUntil(listingsCell.preparingForReuse)
+            let bid = listingsCell.bidPressed.takeUntil(listingsCell.preparingForReuse)
+            let moreInfo = listingsCell.moreInfo.takeUntil(listingsCell.preparingForReuse)
 
-            bidSignal
+            bid
                 .subscribeNext { [weak self] _ in
                     self?.viewModel.presentModalForSaleArtworkAtIndexPath(indexPath)
                 }
                 .addDisposableTo(rx_disposeBag)
 
-            moreInfoSignal
+            moreInfo
                 .subscribeNext{ [weak self] _ in
                     self?.viewModel.showDetailsForSaleArtworkAtIndexPath(indexPath)
                 }
@@ -210,7 +210,7 @@ private extension ListingsViewController {
             internalNav.bidDetails.saleArtwork = saleArtwork
         }
 
-        appDelegate().appViewController.presentViewController(containerController, animated: false, completion: { () -> Void in
+        appDelegate().appViewController.presentViewController(containerController, animated: false, completion: {
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         })
     }

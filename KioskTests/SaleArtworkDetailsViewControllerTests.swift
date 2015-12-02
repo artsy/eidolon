@@ -7,7 +7,7 @@ import SDWebImage
 
 class SaleArtworkDetailsViewControllerConfiguration: QuickConfiguration {
     override class func configure(configuration: Configuration) {
-        sharedExamples("a sale artwork details view controller", closure: { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a sale artwork details view controller") { (sharedExampleContext: SharedExampleContext) in
             var subject: SaleArtworkDetailsViewController!
 
             beforeEach{
@@ -17,7 +17,7 @@ class SaleArtworkDetailsViewControllerConfiguration: QuickConfiguration {
             it("looks ok by default") {
                 expect(subject) == snapshot()
             }
-        })
+        }
     }
 }
 

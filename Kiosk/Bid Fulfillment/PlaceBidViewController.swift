@@ -8,7 +8,7 @@ import Action
 
 class PlaceBidViewController: UIViewController {
 
-    var bidDollars = Variable(0)
+    var _bidDollars = Variable(0)
     var hasAlreadyPlacedABid: Bool = false
 
     @IBOutlet var bidAmountTextField: TextField!
@@ -39,7 +39,7 @@ class PlaceBidViewController: UIViewController {
         appDelegate().showConditionsOfSaleCommand()
     }
     
-    lazy var bidDollarsSignal: Observable<Int> = { self.keypadContainer.intValue }()
+    lazy var bidDollars: Observable<Int> = { self.keypadContainer.intValue }()
     var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
@@ -64,18 +64,18 @@ class PlaceBidViewController: UIViewController {
         conditionsOfSaleButton.rx_action = showConditionsOfSaleCommand()
         privacyPolictyButton.rx_action = showPrivacyPolicyCommand()
 
-        bidDollarsSignal
-            .bindTo(bidDollars)
+        bidDollars
+            .bindTo(_bidDollars)
             .addDisposableTo(rx_disposeBag)
 
-        bidDollarsSignal
+        bidDollars
             .map(dollarsToCurrencyString)
             .bindTo(bidAmountTextField.rx_text)
             .addDisposableTo(rx_disposeBag)
 
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
-            bidDollarsSignal
+            bidDollars
                 .map { $0 * 100 }
                 .takeUntil(viewWillDisappear)
                 .bindTo(nav.bidDetails.bidAmountCents)
@@ -83,7 +83,7 @@ class PlaceBidViewController: UIViewController {
 
             if let saleArtwork = nav.bidDetails.saleArtwork {
                 
-                let minimumNextBidSignal = saleArtwork
+                let minimumNextBid = saleArtwork
                     .rx_observe(NSNumber.self, "minimumNextBidCents")
                     .filterNil()
                     .map { $0 as Int }
@@ -99,14 +99,14 @@ class PlaceBidViewController: UIViewController {
                     .addDisposableTo(rx_disposeBag)
 
 
-                minimumNextBidSignal
+                minimumNextBid
                     .map { $0 as Int }
                     .map(toNextBidString)
                     .bindTo(nextBidAmountLabel.rx_text)
                     .addDisposableTo(rx_disposeBag)
 
 
-                [bidDollarsSignal, minimumNextBidSignal]
+                [bidDollars, minimumNextBid]
                     .combineLatest { ints in
                         return (ints[0]) * 100 >= (ints[1])
                     }
@@ -130,7 +130,7 @@ class PlaceBidViewController: UIViewController {
                     lotNumberLabel.tag = LabelTags.LotNumber.rawValue
                     detailsStackView.addSubview(lotNumberLabel, withTopMargin: "10", sideMargin: "0")
                     saleArtwork.viewModel
-                        .lotNumberSignal()
+                        .lotNumber()
                         .filterNil()
                         .takeUntil(viewWillDisappear)
                         .bindTo(lotNumberLabel.rx_text)

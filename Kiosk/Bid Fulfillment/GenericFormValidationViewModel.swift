@@ -6,9 +6,9 @@ class GenericFormValidationViewModel {
     let command: CocoaAction
     let disposeBag = DisposeBag()
 
-    init(isValidSignal: Observable<Bool>, manualInvocationSignal: Observable<Void>, finishedSubject: PublishSubject<Void>) {
+    init(isValid: Observable<Bool>, manualInvocation: Observable<Void>, finishedSubject: PublishSubject<Void>) {
 
-        command = CocoaAction(enabledIf: isValidSignal) { _ in
+        command = CocoaAction(enabledIf: isValid) { _ in
             return create { observer in
                 
                 finishedSubject.onCompleted()
@@ -18,7 +18,7 @@ class GenericFormValidationViewModel {
             }
         }
 
-        manualInvocationSignal
+        manualInvocation
             .subscribeNext { [weak self] _ in
                 self?.command.execute()
             }

@@ -5,14 +5,14 @@ import Action
 
 class ConfirmYourBidPINViewController: UIViewController {
 
-    var pin = Variable("")
+    var _pin = Variable("")
 
     @IBOutlet var keypadContainer: KeypadContainerView!
     @IBOutlet var pinTextField: TextField!
     @IBOutlet var confirmButton: Button!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
-    lazy var pinSignal: Observable<String> = { self.keypadContainer.stringValue }()
+    lazy var pin: Observable<String> = { self.keypadContainer.stringValue }()
     
     lazy var provider: RxMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
@@ -23,31 +23,31 @@ class ConfirmYourBidPINViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        pinSignal
-            .bindTo(pin)
+        pin
+            .bindTo(_pin)
             .addDisposableTo(rx_disposeBag)
 
-        pinSignal
+        pin
             .bindTo(pinTextField.rx_text)
             .addDisposableTo(rx_disposeBag)
 
-        pinSignal
+        pin
             .mapToOptional()
             .bindTo(fulfillmentNav().bidDetails.bidderPIN)
             .addDisposableTo(rx_disposeBag)
         
-        let pinExistsSignal = pinSignal.map { $0.isNotEmpty }
+        let pinExists = pin.map { $0.isNotEmpty }
 
         bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
 
         /// verify if we can connect with number & pin
 
-        confirmButton.rx_action = CocoaAction(enabledIf: pinExistsSignal) { [weak self] _ in
+        confirmButton.rx_action = CocoaAction(enabledIf: pinExists) { [weak self] _ in
             guard let me = self else { return empty() }
 
             let phone = me.fulfillmentNav().bidDetails.newUser.phoneNumber.value ?? ""
 
-            let loggedInProvider = me.providerForPIN(me.pin.value, number: phone)
+            let loggedInProvider = me.providerForPIN(me._pin.value, number: phone)
 
             return loggedInProvider
                 .request(ArtsyAPI.Me)
@@ -60,10 +60,10 @@ class ConfirmYourBidPINViewController: UIViewController {
                     // We want to put the data we've collected up to the server.
                     self?.fulfillmentNav().updateUserCredentials()
                 }.then {
-                    // This looks for credit cards on the users account, and sends them on the signal
+                    // This looks for credit cards on the users account, and sends them on the observable
                     return self?
                         .checkForCreditCard()
-                        .doOnNext { (cards) -> Void in
+                        .doOnNext { (cards) in
 
                             // If the cards list doesn't exist, or its empty, then perform the segue to collect one.
                             // Otherwise, proceed directly to the loading view controller to place the bid.
@@ -102,7 +102,7 @@ class ConfirmYourBidPINViewController: UIViewController {
             .filterSuccessfulStatusCodes()
             .subscribeNext { _ in
 
-                // Necessary to subscribe to the actual signal. This should be in a CocoaAction of the button, instead.
+                // Necessary to subscribe to the actual observable. This should be in a CocoaAction of the button, instead.
                 logger.log("Sent forgot PIN request")
             }
             .addDisposableTo(rx_disposeBag)

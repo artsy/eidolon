@@ -13,14 +13,14 @@ class RegistrationPasswordViewControllerTests: QuickSpec {
 
         class TestViewModel: RegistrationPasswordViewModelType {
 
-            var emailExistsSignal: Observable<Bool>
+            var emailExists: Observable<Bool>
             var action: CocoaAction! = emptyAction()
 
             init (emailExists: Bool = false) {
-                emailExistsSignal = just(emailExists)
+                self.emailExists = just(emailExists)
             }
 
-            func userForgotPasswordSignal() -> Observable<Void> {
+            func userForgotPassword() -> Observable<Void> {
                 return empty()
             }
         }

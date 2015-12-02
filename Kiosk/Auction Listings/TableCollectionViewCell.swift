@@ -54,10 +54,10 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         bidButton.alignCenterYWithView(artworkImageView, predicate: "0")
         bidButton.constrainWidth("127")
 
-        // Replaces the signal defined in the superclass, normally used to emit taps to a "More Info" label, which we don't have.
+        // Replaces the observable defined in the superclass, normally used to emit taps to a "More Info" label, which we don't have.
         let recognizer = UITapGestureRecognizer()
         contentView.addGestureRecognizer(recognizer)
-        self.moreInfoSignal = recognizer.rx_event.map { _ -> NSDate in
+        self.moreInfo = recognizer.rx_event.map { _ -> NSDate in
             return NSDate()
         }
     }

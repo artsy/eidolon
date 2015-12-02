@@ -37,28 +37,28 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
         emailTextField.text = nav.bidDetails.newUser.email.value ?? ""
         
-        let emailTextSignal = emailTextField.rx_text.takeUntil(viewWillDisappear)
-        let passwordTextSignal = passwordTextField.rx_text.takeUntil(viewWillDisappear)
+        let emailText = emailTextField.rx_text.takeUntil(viewWillDisappear)
+        let passwordText = passwordTextField.rx_text.takeUntil(viewWillDisappear)
 
-        emailTextSignal
+        emailText
             .mapToOptional()
             .bindTo(nav.bidDetails.newUser.email)
             .addDisposableTo(rx_disposeBag)
 
-        passwordTextSignal
+        passwordText
             .mapToOptional()
             .bindTo(nav.bidDetails.newUser.password)
             .addDisposableTo(rx_disposeBag)
 
-        let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
-        let passwordIsLongEnough = passwordTextSignal.map(isZeroLengthString).not()
+        let inputIsEmail = emailText.map(stringIsEmailAddress)
+        let passwordIsLongEnough = passwordText.map(isZeroLengthString).not()
         let formIsValid = [inputIsEmail, passwordIsLongEnough].combineLatestAnd()
 
         confirmCredentialsButton.rx_action = CocoaAction(enabledIf: formIsValid) { [weak self] _ -> Observable<Void> in
             guard let me = self else { return empty() }
 
-            return me.xAuthSignal()
-                .map { accessTokenDict -> Void in
+            return me.xAuth()
+                .map { accessTokenDict in
                     guard let accessToken = accessTokenDict["access_token"] as? String else {
                         throw NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
                     }
@@ -70,7 +70,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
                     return self?.fulfillmentNav().updateUserCredentials()
                 }.then {
                     return self?
-                        .creditCardSignal()
+                        .creditCard()
                         .doOnNext { cards in
                             guard let me = self else { return }
 
@@ -111,7 +111,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         passwordTextField.text = ""
     }
 
-    func xAuthSignal() -> Observable<AnyObject> {
+    func xAuth() -> Observable<AnyObject> {
         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
         return provider.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
     }
@@ -154,7 +154,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         self.presentViewController(alertController, animated: true) {}
     }
 
-    func creditCardSignal() -> Observable<[Card]> {
+    func creditCard() -> Observable<[Card]> {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
         let authProvider = self.fulfillmentNav().loggedInProvider!
         return authProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)

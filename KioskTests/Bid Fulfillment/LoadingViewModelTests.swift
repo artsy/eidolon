@@ -17,69 +17,69 @@ class LoadingViewModelTests: QuickSpec {
         }
 
         it("loads placeBidNetworkModel") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsCompleteSignal: never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsComplete: never())
             expect(subject.placeBidNetworkModel.fulfillmentController as AnyObject) === subject.bidderNetworkModel.fulfillmentController as AnyObject
         }
 
         it("loads bidCheckingModel") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsCompleteSignal: never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsComplete: never())
             expect(subject.bidCheckingModel.fulfillmentController as AnyObject) === subject.bidderNetworkModel.fulfillmentController
         }
 
         it("initializes with bidNetworkModel") {
             let networkModel = StubBidderNetworkModel()
-            subject = LoadingViewModel(bidNetworkModel: networkModel, placingBid: false, actionsCompleteSignal: never())
+            subject = LoadingViewModel(bidNetworkModel: networkModel, placingBid: false, actionsComplete: never())
 
             expect(subject.bidderNetworkModel.fulfillmentController as AnyObject) === networkModel.fulfillmentController as AnyObject
         }
 
         it("initializes with placingBid = false") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsCompleteSignal: never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsComplete: never())
 
             expect(subject.placingBid) == false
         }
 
         it("initializes with placingBid = true") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
 
             expect(subject.placingBid) == true
         }
 
         it("binds createdNewBidder") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
             stubbedNetworkModel.createdNewBidderSubject.onNext(true)
 
             expect(subject.createdNewBidder) == true
         }
 
         it("binds bidIsResolved") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
             subject.bidCheckingModel.bidIsResolved.value = true
 
             expect(subject.bidIsResolved) == true
         }
 
         it("binds isHighestBidder") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
             subject.bidCheckingModel.isHighestBidder.value = true
 
             expect(subject.isHighestBidder) == true
         }
 
         it("binds reserveNotMet") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
             subject.bidCheckingModel.reserveNotMet.value = true
 
             expect(subject.reserveNotMet) == true
         }
 
         it("infers bidDetals") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
             expect(subject.bidDetails) === subject.bidderNetworkModel.fulfillmentController.bidDetails
         }
 
         it("creates a new bidder if necessary") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsCompleteSignal: never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsComplete: never())
             kioskWaitUntil { (done) in
                 subject.performActions().subscribeCompleted { done() }.addDisposableTo(disposeBag)
             }
@@ -95,7 +95,7 @@ class LoadingViewModelTests: QuickSpec {
                 stubPlaceBidNetworkModel = StubPlaceBidNetworkModel()
                 stubBidCheckingNetworkModel = StubBidCheckingNetworkModel()
 
-                subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: never())
+                subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
 
                 subject.placeBidNetworkModel = stubPlaceBidNetworkModel
                 subject.bidCheckingModel = stubBidCheckingNetworkModel
@@ -107,7 +107,7 @@ class LoadingViewModelTests: QuickSpec {
                     return
                 }
 
-                expect(stubPlaceBidNetworkModel.bid) == true
+                expect(stubPlaceBidNetworkModel.hasBid) == true
             }
 
             it("waits for bid resolution if bid was placed") {
@@ -140,12 +140,12 @@ class StubBidderNetworkModel: BidderNetworkModelType {
 }
 
 class StubPlaceBidNetworkModel: PlaceBidNetworkModelType {
-    var bid = false
+    var hasBid = false
 
     let fulfillmentController: FulfillmentController = StubFulfillmentController()
 
-    func bidSignal() -> Observable<String> {
-        bid = true
+    func bid() -> Observable<String> {
+        hasBid = true
 
         return just(bidderID)
     }

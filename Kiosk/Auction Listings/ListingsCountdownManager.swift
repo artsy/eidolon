@@ -18,7 +18,7 @@ class ListingsCountdownManager: NSObject {
         formatter.minimumIntegerDigits = 2
 
         time
-            .syncSignal()
+            .sync()
             .dispatchAsyncMainScheduler()
             .take(1)
             .subscribeNext { [weak self] (_) in

@@ -75,7 +75,7 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
                     testViewModel
                         .testRegisterButtonCommand
                         .execute()
-                        .subscribeCompleted { (_) -> Void in
+                        .subscribeCompleted { (_) in
 
                             expect(executed) == true
                             done()
@@ -94,11 +94,11 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
             subject.cardNumberconfirmTapped(subject)
             subject.expirationDateConfirmTapped(subject)
 
-            waitUntil { done -> Void in
+            waitUntil { done in
                 testViewModel
                     .testRegisterButtonCommand
                     .execute()
-                    .subscribeError { (_) -> Void in
+                    .subscribeError { (_) in
                         done()
                     }
                     .addDisposableTo(disposeBag)

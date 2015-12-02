@@ -111,7 +111,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     private func checkForMaxBid() -> Observable<Void> {
         return getMyBidderPositions()
-            .doOnNext{ [weak self] newBidderPositions -> Void in
+            .doOnNext{ [weak self] newBidderPositions in
                 guard let me = self else { return }
 
                 if let topBidID = me.mostRecentSaleArtwork?.saleHighestBid?.id {

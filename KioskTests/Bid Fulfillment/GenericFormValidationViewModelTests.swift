@@ -14,18 +14,18 @@ class GenericFormValidationViewModelTests: QuickSpec {
             disposeBag = DisposeBag()
         }
 
-        it("executes command when manual signal sends") {
+        it("executes command when manual  sends") {
             var completed = false
 
-            let invocationSignal = PublishSubject<Void>()
+            let invocation = PublishSubject<Void>()
 
-            let subject = GenericFormValidationViewModel(isValidSignal: validSubject, manualInvocationSignal: invocationSignal, finishedSubject: PublishSubject<Void>())
+            let subject = GenericFormValidationViewModel(isValid: validSubject, manualInvocation: invocation, finishedSubject: PublishSubject<Void>())
 
-            subject.command.executing.take(1).subscribeNext { _ -> Void in
+            subject.command.executing.take(1).subscribeNext { _ in
                 completed = true
             }.addDisposableTo(disposeBag)
 
-            invocationSignal.onNext()
+            invocation.onNext()
 
             expect(completed).toEventually( beTrue() )
         }
@@ -33,24 +33,24 @@ class GenericFormValidationViewModelTests: QuickSpec {
         it("sends completed on finishedSubject when command is executed") {
             var completed = false
 
-            let invocationSignal = PublishSubject<Void>()
+            let invocation = PublishSubject<Void>()
             let finishedSubject = PublishSubject<Void>()
 
-            finishedSubject.subscribeCompleted { () -> Void in
+            finishedSubject.subscribeCompleted {
                 completed = true
             }.addDisposableTo(disposeBag)
 
-            let subject = GenericFormValidationViewModel(isValidSignal: validSubject, manualInvocationSignal: invocationSignal, finishedSubject: finishedSubject)
+            let subject = GenericFormValidationViewModel(isValid: validSubject, manualInvocation: invocation, finishedSubject: finishedSubject)
 
             subject.command.execute()
 
             expect(completed).toEventually( beTrue() )
         }
 
-        it("uses the isValidSignal for the command enabledness") {
+        it("uses the isValid for the command enabledness") {
             let validSubject = PublishSubject<Bool>()
 
-            let subject = GenericFormValidationViewModel(isValidSignal: validSubject, manualInvocationSignal: empty(), finishedSubject: PublishSubject<Void>())
+            let subject = GenericFormValidationViewModel(isValid: validSubject, manualInvocation: empty(), finishedSubject: PublishSubject<Void>())
 
             validSubject.onNext(false)
             expect(subject.command.enabled).toEventually( equalFirst(false) )

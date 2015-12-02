@@ -39,10 +39,10 @@ class KeypadViewModelTests: QuickSpec {
         it("adds digits") {
             waitUntil { done in
                 [1,3,3,7]
-                    .reduce(empty(), combine: { (signal, input) -> Observable<Void> in
-                        signal.then { subject.addDigitAction.execute(input) }
+                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                        observable.then { subject.addDigitAction.execute(input) }
                     })
-                    .subscribeCompleted { () -> Void in
+                    .subscribeCompleted {
                         expect(testHarness.intValue) == 1337
                         expect(testHarness.stringValue) == "1337"
 
@@ -57,10 +57,10 @@ class KeypadViewModelTests: QuickSpec {
             waitUntil { done in
 
                 [1,3,3,3,3,3,3,3,3,3,3,3,7]
-                    .reduce(empty(), combine: { (signal, input) -> Observable<Void> in
-                        signal.then { subject.addDigitAction.execute(input) }
+                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                        observable.then { subject.addDigitAction.execute(input) }
                     })
-                    .subscribeCompleted { () -> Void in
+                    .subscribeCompleted {
                         expect(testHarness.intValue) == 1333333
                         expect(testHarness.stringValue) == "1333333333337"
 
@@ -73,10 +73,10 @@ class KeypadViewModelTests: QuickSpec {
         it("handles prepended zeros") {
             waitUntil { done in
                 [0,1,3,3,7]
-                    .reduce(empty(), combine: { (signal, input) -> Observable<Void> in
-                        signal.then { subject.addDigitAction.execute(input) }
+                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                        observable.then { subject.addDigitAction.execute(input) }
                     })
-                    .subscribeCompleted { () -> Void in
+                    .subscribeCompleted {
                         expect(testHarness.intValue) == 1337
                         expect(testHarness.stringValue) == "01337"
                         
@@ -95,7 +95,7 @@ class KeypadViewModelTests: QuickSpec {
                     .then {
                         subject.clearAction.execute()
                     }
-                    .subscribeCompleted { () -> Void in // TODO: project-wide find/replace to get rid of this.
+                    .subscribeCompleted {
                         expect(testHarness.intValue) == 0
                         expect(testHarness.stringValue) == ""
                         
@@ -108,12 +108,12 @@ class KeypadViewModelTests: QuickSpec {
         it("deletes") {
             waitUntil { done in
                 [1,3,3]
-                    .reduce(empty(), combine: { (signal, input) -> Observable<Void> in
-                        signal.then { subject.addDigitAction.execute(input) }
+                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                        observable.then { subject.addDigitAction.execute(input) }
                     })
                     .then {
                         subject.deleteAction.execute()
-                    }.subscribeCompleted { () -> Void in
+                    }.subscribeCompleted {
                         expect(testHarness.intValue) == 13
                         expect(testHarness.stringValue) == "13"
 

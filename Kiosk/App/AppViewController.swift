@@ -12,12 +12,12 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
 
     let _apiPinger = APIPingManager()
     
-    lazy var reachabilitySignal: Observable<Bool> = {
-        [connectedToInternetOrStubbingSignal(), self.apiPingerSignal].combineLatestAnd()
+    lazy var reachability: Observable<Bool> = {
+        [connectedToInternetOrStubbing(), self.apiPinger].combineLatestAnd()
     }()
 
-    lazy var apiPingerSignal: Observable<Bool> = {
-        self._apiPinger.letOnlineSignal
+    lazy var apiPinger: Observable<Bool> = {
+        self._apiPinger.letOnline
     }()
 
     var registerToBidCommand = { () -> CocoaAction in
@@ -37,11 +37,11 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
 
         countdownManager.setFonts()
 
-        reachabilitySignal
+        reachability
             .bindTo(offlineBlockingView.rx_hidden)
             .addDisposableTo(rx_disposeBag)
 
-        auctionRequestSignal(auctionID)
+        auctionRequest(auctionID)
             .bindTo(sale)
             .addDisposableTo(rx_disposeBag)
 
@@ -76,14 +76,14 @@ extension AppViewController {
             return
         }
         
-        let passwordVC = PasswordAlertViewController.alertView { [weak self] () -> () in
+        let passwordVC = PasswordAlertViewController.alertView { [weak self] in
             self?.performSegue(.ShowAdminOptions)
             return
         }
         self.presentViewController(passwordVC, animated: true) {}
     }
 
-    func auctionRequestSignal(auctionID: String) -> Observable<Sale> {
+    func auctionRequest(auctionID: String) -> Observable<Sale> {
         let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
 
         return XAppRequest(auctionEndpoint)
