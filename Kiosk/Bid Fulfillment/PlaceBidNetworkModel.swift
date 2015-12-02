@@ -52,11 +52,13 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
             }.catchError { error -> Observable<String> in
                 // We've received an error. We're going to check to see if it's type is "param_error", which indicates we were outbid.
 
-                guard let data: AnyObject = (error as NSError).userInfo["data"] else {
+                guard let response = (error as NSError).userInfo["data"] as? MoyaResponse else {
                     throw error
                 }
 
-                if let type = JSON(data)["type"].string where type == "param_error" {
+                let json = JSON(data: response.data)
+
+                if let type = json["type"].string where type == "param_error" {
                     throw NSError(domain: OutbidDomain, code: 0, userInfo: [NSUnderlyingErrorKey: error as NSError])
                 } else {
                     throw error

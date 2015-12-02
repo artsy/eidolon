@@ -115,10 +115,11 @@ class ListingsCollectionViewCell: UICollectionViewCell {
             .addDisposableTo(rx_disposeBag)
 
         viewModel.flatMapTo(SaleArtworkViewModel.forSaleSignal)
-            .subscribeNext { [weak bidButton] forSale in
+            .doOnNext { [weak bidButton] forSale in
                 // Button titles aren't KVO-able
                 bidButton?.setTitle((forSale ? "BID" : "SOLD"), forState: .Normal)
             }
+            .bindTo(bidButton.rx_enabled)
             .addDisposableTo(rx_disposeBag)
 
         bidButton.rx_tap.subscribeNext { [weak self] in

@@ -190,7 +190,6 @@ class PlaceBidViewController: UIViewController {
                 saleArtwork
                     .artwork
                     .rx_observe(NSAttributedString.self, "titleAndDate")
-                    .filterNil()
                     .takeUntil(rx_deallocating)
                     .bindTo(artworkTitleLabel.rx_attributedText)
                     .addDisposableTo(rx_disposeBag)

@@ -135,13 +135,13 @@ extension CollectionType where Generator.Element: ObservableConvertibleType, Gen
     }
 }
 
-extension Observable {
+extension ObservableType {
 
-    func then(closure: () -> Observable<Element>?) -> Observable<Element> {
+    func then(closure: () -> Observable<E>?) -> Observable<E> {
         return then(closure() ?? empty())
     }
 
-    func then(@autoclosure(escaping) closure: () -> Observable<Element>) -> Observable<Element> {
+    func then(@autoclosure(escaping) closure: () -> Observable<E>) -> Observable<E> {
         let next = deferred {
             return closure() ?? empty()
         }

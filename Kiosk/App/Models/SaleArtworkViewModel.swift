@@ -72,7 +72,15 @@ extension SaleArtworkViewModel {
 
         // Ignoring highestBidCents; only there to trigger on bid update.
         let highestBidString = saleArtwork.rx_observe(NSNumber.self, "highestBidCents").map { "\($0)" }
-        let reserveStatus = saleArtwork.rx_observe(String.self, "reserveStatus").map { "\($0)" }
+        let reserveStatus = saleArtwork.rx_observe(String.self, "reserveStatus").map { input -> String in
+            switch input {
+            case .Some(let reserveStatus):
+                return reserveStatus
+            default:
+                return ""
+            }
+        }
+
         return [numberOfBidsSignal(), reserveStatus, highestBidString].combineLatest { strings -> String in
 
             let numberOfBidsString = strings[0]
@@ -105,9 +113,10 @@ extension SaleArtworkViewModel {
     }
 
     func forSaleSignal() -> Observable<Bool> {
-        return just(saleArtwork.artwork).map { artwork in
-            return Artwork.SoldStatus.fromString(artwork.soldStatus) == .NotSold
+        return saleArtwork.artwork.rx_observe(String.self, "soldStatus").filterNil().map { status in
+            return Artwork.SoldStatus.fromString(status) == .NotSold
         }
+
     }
 
     func currentBidSignal(prefix prefix: String = "", missingPrefix: String = "") -> Observable<String> {
@@ -138,7 +147,9 @@ extension SaleArtworkViewModel {
 
     func currentBidOrOpeningBidLabel() -> Observable<String> {
         return saleArtwork.rx_observe(NSNumber.self, "bidCount").map { input in
-            if let count = input as? Int where count > 0 {
+            guard let count = input as? Int else { return "" }
+
+            if count > 0 {
                 return "Current Bid:"
             } else {
                 return "Opening Bid:"

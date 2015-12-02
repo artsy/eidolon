@@ -113,7 +113,6 @@ class LoadingViewModelTests: QuickSpec {
             it("waits for bid resolution if bid was placed") {
                 kioskWaitUntil { done in
                     subject.performActions().subscribeCompleted { done() }.addDisposableTo(disposeBag)
-                    return
                 }
 
                 expect(stubBidCheckingNetworkModel.checked) == true
@@ -136,7 +135,7 @@ class StubBidderNetworkModel: BidderNetworkModelType {
 
     func createOrGetBidder() -> Observable<Void> {
         createdNewBidderSubject.onNext(true)
-        return empty()
+        return just()
     }
 }
 

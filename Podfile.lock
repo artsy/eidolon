@@ -1,5 +1,5 @@
 PODS:
-  - Action (0.2.0):
+  - Action (0.3.0):
     - RxCocoa (~> 2.0.0-beta)
     - RxSwift (~> 2.0.0-beta)
   - Alamofire (3.1.2)
@@ -84,7 +84,7 @@ PODS:
     - fmemopen
 
 DEPENDENCIES:
-  - Action (from `https://github.com/ashfurrow/Action.git`, branch `alertaction`)
+  - Action
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
   - ARCollectionViewMasonryLayout (~> 2.0.0)
@@ -108,9 +108,9 @@ DEPENDENCIES:
   - ORStackView
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - RxBlocking (~> 2.0.0-beta)
-  - RxCocoa (~> 2.0.0-beta)
-  - RxSwift (~> 2.0.0-beta)
+  - RxBlocking (from `https://github.com/ReactiveX/RxSwift.git`, branch `develop`)
+  - RxCocoa (from `https://github.com/ReactiveX/RxSwift.git`, branch `develop`)
+  - RxSwift (from `https://github.com/ReactiveX/RxSwift.git`, branch `develop`)
   - SDWebImage (~> 3.7)
   - Stripe
   - SVProgressHUD
@@ -120,9 +120,6 @@ DEPENDENCIES:
   - XNGMarkdownParser
 
 EXTERNAL SOURCES:
-  Action:
-    :branch: alertaction
-    :git: https://github.com/ashfurrow/Action.git
   ARTiledImageView:
     :git: https://github.com/ashfurrow/ARTiledImageView.git
   DZNWebViewController:
@@ -132,13 +129,19 @@ EXTERNAL SOURCES:
   Reachability:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
+  RxBlocking:
+    :branch: develop
+    :git: https://github.com/ReactiveX/RxSwift.git
+  RxCocoa:
+    :branch: develop
+    :git: https://github.com/ReactiveX/RxSwift.git
+  RxSwift:
+    :branch: develop
+    :git: https://github.com/ReactiveX/RxSwift.git
   UIImageViewAligned:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 CHECKOUT OPTIONS:
-  Action:
-    :commit: 62ff2d0774a7369ee208b206fee97ba5802c0f58
-    :git: https://github.com/ashfurrow/Action.git
   ARTiledImageView:
     :commit: 2fe35ede0cb1d8cf3dc5aa4506c476c0367564b7
     :git: https://github.com/ashfurrow/ARTiledImageView.git
@@ -148,12 +151,21 @@ CHECKOUT OPTIONS:
   Reachability:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
     :git: https://github.com/ashfurrow/Reachability.git
+  RxBlocking:
+    :commit: 63127838ec6b830af52de8133727752c05415706
+    :git: https://github.com/ReactiveX/RxSwift.git
+  RxCocoa:
+    :commit: 63127838ec6b830af52de8133727752c05415706
+    :git: https://github.com/ReactiveX/RxSwift.git
+  RxSwift:
+    :commit: 63127838ec6b830af52de8133727752c05415706
+    :git: https://github.com/ReactiveX/RxSwift.git
   UIImageViewAligned:
     :commit: 6f8cb5669b219ef08c90c2e2e5a082cadfe7565b
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
-  Action: 836da3ae9615435467a3d1cddd384f4ea6036ba2
+  Action: da3ac4ae245c10f909fd07db34680a90beb4aa21
   Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
   ARAnalytics: 5468652928cee7100dd0e6b5162631409da37106
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116

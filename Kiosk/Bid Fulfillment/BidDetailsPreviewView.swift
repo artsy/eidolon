@@ -69,6 +69,7 @@ class BidDetailsPreviewView: UIView {
 
                 return artwork.titleAndDate
             }
+            .mapToOptional()
             .bindTo(artworkTitleLabel.rx_attributedText)
             .addDisposableTo(rx_disposeBag)
 
@@ -77,7 +78,9 @@ class BidDetailsPreviewView: UIView {
             .filterNil()
             .take(1)
             .map { bidDetails in
-                return "Your bid: " + NSNumberFormatter.currencyStringForCents(bidDetails.bidAmountCents.value)
+                guard let cents = bidDetails.bidAmountCents.value else { return "" }
+
+                return "Your bid: " + NSNumberFormatter.currencyStringForCents(cents)
             }
             .bindTo(currentBidPriceLabel.rx_text)
             .addDisposableTo(rx_disposeBag)
