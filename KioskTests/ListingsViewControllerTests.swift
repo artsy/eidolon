@@ -9,7 +9,7 @@ import Moya
 
 class ListingsViewControllerConfiguration: QuickConfiguration {
     override class func configure(configuration: Configuration) {
-        sharedExamples("a listings controller", closure: { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a listings controller") { (sharedExampleContext: SharedExampleContext) in
             var subject: ListingsViewController!
             var viewModel: ListingsViewControllerTestsStubbedViewModel!
 
@@ -53,7 +53,7 @@ class ListingsViewControllerConfiguration: QuickConfiguration {
                 viewModel.gridSelected.value = false
                 expect(subject) == snapshot()
             }
-        })
+        }
     }
 }
 

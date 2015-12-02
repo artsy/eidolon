@@ -54,7 +54,7 @@ class ManualCreditCardInputViewModel: NSObject {
         let newUser = bidDetails.newUser
         let enabled = [creditCardNumberIsValid, expiryDatesAreValid, securityCodeIsValid, billingZipIsValid].combineLatestAnd()
 
-        return CocoaAction(enabledIf: enabled, workFactory: { [weak self] _ in
+        return CocoaAction(enabledIf: enabled) { [weak self] _ in
             guard let me = self else {
                 return empty()
             }
@@ -62,7 +62,7 @@ class ManualCreditCardInputViewModel: NSObject {
             return me.registerCardSignal(newUser).doOnCompleted {
                 me.finishedSubject?.onCompleted()
             }.map(void)
-        })
+        }
 
     }
 

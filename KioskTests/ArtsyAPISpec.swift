@@ -29,7 +29,7 @@ class ArtsyAPISpec: QuickSpec {
             disposeBag = DisposeBag()
         }
 
-        describe("keys", {
+        describe("keys") {
             it("stubs responses for invalid keys") {
                 let invalidKeys = APIKeys(key: "", secret: "")
                 expect(invalidKeys.stubResponses).to(beTruthy())
@@ -39,7 +39,7 @@ class ArtsyAPISpec: QuickSpec {
                 let validKeys = APIKeys(key: "key", secret: "secret")
                 expect(validKeys.stubResponses).to(beFalsy())
             }
-        })
+        }
         
         describe("requests") {
             beforeSuite { 

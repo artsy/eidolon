@@ -214,9 +214,9 @@ extension LoadingViewController {
         presentError("Bid Failed", message: "There was a problem placing your bid. Please speak to an Artsy representative.")
 
         if let error = error {
-            statusMessage.presentOnLongPress("Error: \(error.localizedDescription). \n \(error.artsyServerError())", title: "Bidding error", closure: { [weak self] (alertController) in
+            statusMessage.presentOnLongPress("Error: \(error.localizedDescription). \n \(error.artsyServerError())", title: "Bidding error") { [weak self] (alertController) in
                 self?.presentViewController(alertController, animated: true, completion: nil)
-            })
+            }
         }
     }
 

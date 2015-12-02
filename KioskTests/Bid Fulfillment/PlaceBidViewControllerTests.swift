@@ -7,7 +7,7 @@ import Nimble_Snapshots
 
 class PlaceBidViewControllerConfiguration: QuickConfiguration {
     override class func configure(configuration: Configuration) {
-        sharedExamples("a bid view controller view controller", closure: { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a bid view controller view controller") { (sharedExampleContext: SharedExampleContext) in
             var subject: PlaceBidViewController!
             var nav: FulfillmentNavigationController!
 
@@ -36,7 +36,7 @@ class PlaceBidViewControllerConfiguration: QuickConfiguration {
                     expect(subject) == snapshot()
                 }
             }
-        })
+        }
     }
 }
 
