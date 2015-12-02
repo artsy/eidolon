@@ -59,8 +59,8 @@ pod 'XNGMarkdownParser'
 
 # Swift pods
 pod 'SwiftyJSON'
-pod 'RxSwift', '~> 2.0.0-beta'
-pod 'RxCocoa', '~> 2.0.0-beta'
+pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'develop'
+pod 'RxCocoa', :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'develop'
 pod 'Moya/RxSwift'
 pod 'NSObject+Rx'
 pod 'Action'
@@ -72,6 +72,6 @@ target 'KioskTests' do
   pod 'Quick'
   pod 'Nimble'
   pod 'Forgeries'
-  pod 'RxBlocking', '~> 2.0.0-beta'
+  pod 'RxBlocking', :git => 'https://github.com/ReactiveX/RxSwift.git', :branch => 'develop'
 
 end

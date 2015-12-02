@@ -1,5 +1,5 @@
 PODS:
-  - Action (0.2.1):
+  - Action (0.3.0):
     - RxCocoa (~> 2.0.0-beta)
     - RxSwift (~> 2.0.0-beta)
   - Alamofire (3.1.2)
@@ -108,9 +108,9 @@ DEPENDENCIES:
   - ORStackView
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - RxBlocking (~> 2.0.0-beta)
-  - RxCocoa (~> 2.0.0-beta)
-  - RxSwift (~> 2.0.0-beta)
+  - RxBlocking (from `https://github.com/ReactiveX/RxSwift.git`, branch `develop`)
+  - RxCocoa (from `https://github.com/ReactiveX/RxSwift.git`, branch `develop`)
+  - RxSwift (from `https://github.com/ReactiveX/RxSwift.git`, branch `develop`)
   - SDWebImage (~> 3.7)
   - Stripe
   - SVProgressHUD
@@ -129,6 +129,15 @@ EXTERNAL SOURCES:
   Reachability:
     :branch: frameworks
     :git: https://github.com/ashfurrow/Reachability.git
+  RxBlocking:
+    :branch: develop
+    :git: https://github.com/ReactiveX/RxSwift.git
+  RxCocoa:
+    :branch: develop
+    :git: https://github.com/ReactiveX/RxSwift.git
+  RxSwift:
+    :branch: develop
+    :git: https://github.com/ReactiveX/RxSwift.git
   UIImageViewAligned:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
@@ -142,12 +151,21 @@ CHECKOUT OPTIONS:
   Reachability:
     :commit: 6db8c29565c319f59174dd63e4b1ac5b471d133a
     :git: https://github.com/ashfurrow/Reachability.git
+  RxBlocking:
+    :commit: 63127838ec6b830af52de8133727752c05415706
+    :git: https://github.com/ReactiveX/RxSwift.git
+  RxCocoa:
+    :commit: 63127838ec6b830af52de8133727752c05415706
+    :git: https://github.com/ReactiveX/RxSwift.git
+  RxSwift:
+    :commit: 63127838ec6b830af52de8133727752c05415706
+    :git: https://github.com/ReactiveX/RxSwift.git
   UIImageViewAligned:
     :commit: 6f8cb5669b219ef08c90c2e2e5a082cadfe7565b
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
-  Action: f1aacbed6c9a75bcc461b1b46725da72e9c69284
+  Action: da3ac4ae245c10f909fd07db34680a90beb4aa21
   Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
   ARAnalytics: 5468652928cee7100dd0e6b5162631409da37106
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
