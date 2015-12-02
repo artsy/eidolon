@@ -39,8 +39,8 @@ class KeypadViewModelTests: QuickSpec {
         it("adds digits") {
             waitUntil { done in
                 [1,3,3,7]
-                    .reduce(empty(), combine: { (signal, input) -> Observable<Void> in
-                        signal.then { subject.addDigitAction.execute(input) }
+                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                        observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribeCompleted {
                         expect(testHarness.intValue) == 1337
@@ -57,8 +57,8 @@ class KeypadViewModelTests: QuickSpec {
             waitUntil { done in
 
                 [1,3,3,3,3,3,3,3,3,3,3,3,7]
-                    .reduce(empty(), combine: { (signal, input) -> Observable<Void> in
-                        signal.then { subject.addDigitAction.execute(input) }
+                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                        observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribeCompleted {
                         expect(testHarness.intValue) == 1333333
@@ -73,8 +73,8 @@ class KeypadViewModelTests: QuickSpec {
         it("handles prepended zeros") {
             waitUntil { done in
                 [0,1,3,3,7]
-                    .reduce(empty(), combine: { (signal, input) -> Observable<Void> in
-                        signal.then { subject.addDigitAction.execute(input) }
+                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                        observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribeCompleted {
                         expect(testHarness.intValue) == 1337
@@ -108,8 +108,8 @@ class KeypadViewModelTests: QuickSpec {
         it("deletes") {
             waitUntil { done in
                 [1,3,3]
-                    .reduce(empty(), combine: { (signal, input) -> Observable<Void> in
-                        signal.then { subject.addDigitAction.execute(input) }
+                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                        observable.then { subject.addDigitAction.execute(input) }
                     })
                     .then {
                         subject.deleteAction.execute()

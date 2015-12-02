@@ -12,11 +12,11 @@ extension Observable {
     // OK, so the idea is that I have a Variable that exposes an Observable and I want
     // to switch to the latest without mapping.
     //
-    // viewModel.flatMap { saleArtworkViewModel in return saleArtworkViewModel.lotNumberSignal }
+    // viewModel.flatMap { saleArtworkViewModel in return saleArtworkViewModel.lotNumber }
     //
     // Becomes...
     //
-    // viewModel.flatMapTo(SaleArtworkViewModel.lotNumberSignal)
+    // viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
     //
     // Still not sure if this is a good idea.
 

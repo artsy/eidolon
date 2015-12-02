@@ -5,7 +5,7 @@ import Stripe
 
 class ManualCreditCardInputViewModel: NSObject {
 
-    /// MARK: - Things the user is entering (expecting to be bound to signals)
+    /// MARK: - Things the user is entering (expecting to be bound to s)
 
     var cardFullDigits = Variable("")
     var expirationMonth = Variable("")
@@ -30,10 +30,10 @@ class ManualCreditCardInputViewModel: NSObject {
     }
 
     var expiryDatesAreValid: Observable<Bool> {
-        let monthSignal = expirationMonth.map(isStringLengthIn(1..<3))
-        let yearSignal = expirationYear.map(isStringLengthOneOf([2,4]))
+        let month = expirationMonth.map(isStringLengthIn(1..<3))
+        let year = expirationYear.map(isStringLengthOneOf([2,4]))
 
-        return [monthSignal, yearSignal].combineLatestAnd()
+        return [month, year].combineLatestAnd()
     }
 
     var securityCodeIsValid: Observable<Bool> {
@@ -59,7 +59,7 @@ class ManualCreditCardInputViewModel: NSObject {
                 return empty()
             }
 
-            return me.registerCardSignal(newUser).doOnCompleted {
+            return me.registerCard(newUser).doOnCompleted {
                 me.finishedSubject?.onCompleted()
             }.map(void)
         }
@@ -77,7 +77,7 @@ class ManualCreditCardInputViewModel: NSObject {
 
     /// MARK: - Private Methods
 
-    private func registerCardSignal(newUser: NewUser) -> Observable<STPToken> {
+    private func registerCard(newUser: NewUser) -> Observable<STPToken> {
         let month = expirationMonth.value.toUIntWithDefault(0)
         let year = expirationYear.value.toUIntWithDefault(0)
 

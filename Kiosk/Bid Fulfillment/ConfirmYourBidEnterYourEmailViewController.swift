@@ -16,8 +16,8 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let emailTextSignal = emailTextField.rx_text
-        let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
+        let emailText = emailTextField.rx_text
+        let inputIsEmail = emailText.map(stringIsEmailAddress)
 
         let action = CocoaAction(enabledIf: inputIsEmail) { [weak self] _ in
             guard let me = self else { return empty() }
@@ -37,16 +37,16 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
         confirmButton.rx_action = action
 
-        let unbindSignal = action.executing.ignore(false)
+        let unbind = action.executing.ignore(false)
 
         let nav = self.fulfillmentNav()
 
         bidDetailsPreviewView.bidDetails = nav.bidDetails
 
-        emailTextSignal
+        emailText
             .asObservable()
             .mapToOptional()
-            .takeUntil(unbindSignal)
+            .takeUntil(unbind)
             .bindTo(nav.bidDetails.newUser.email)
             .addDisposableTo(rx_disposeBag)
 

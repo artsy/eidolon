@@ -339,7 +339,7 @@ class ArtsyProvider<Target where Target: MoyaTarget>: RxMoyaProvider<Target> {
         stubClosure: MoyaProvider<Target>.StubClosure = MoyaProvider.NeverStub,
         manager: Manager = Alamofire.Manager.sharedInstance,
         plugins: [Plugin<Target>] = [],
-        online: Observable<Bool> = connectedToInternetOrStubbingSignal()) {
+        online: Observable<Bool> = connectedToInternetOrStubbing()) {
 
             self.online = online
             super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins)

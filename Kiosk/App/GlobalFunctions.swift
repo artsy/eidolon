@@ -21,9 +21,9 @@ let logger = Logger(destination: logPath())
 
 private let reachabilityManager = ReachabilityManager()
 
-// A signal that completes when the app gets online (possibly completes immediately).
-func connectedToInternetOrStubbingSignal() -> Observable<Bool> {
-    let online = reachabilityManager.reachSignal
+// An observable that completes when the app gets online (possibly completes immediately).
+func connectedToInternetOrStubbing() -> Observable<Bool> {
+    let online = reachabilityManager.reach
     let stubbing = just(APIKeys.sharedKeys.stubResponses)
 
     return [online, stubbing].combineLatestOr()
@@ -43,9 +43,9 @@ func detectDevelopmentEnvironment() -> Bool {
 }
 
 private class ReachabilityManager: NSObject {
-    let _reachSignal = ReplaySubject<Bool>.create(bufferSize: 1)
-    var reachSignal: Observable<Bool> {
-        return _reachSignal.asObservable()
+    let _reach = ReplaySubject<Bool>.create(bufferSize: 1)
+    var reach: Observable<Bool> {
+        return _reach.asObservable()
     }
 
     private let reachability = Reachability.reachabilityForInternetConnection()
@@ -54,15 +54,15 @@ private class ReachabilityManager: NSObject {
         super.init()
 
         reachability.reachableBlock = { [weak self] _ in
-            self?._reachSignal.onNext(true)
+            self?._reach.onNext(true)
         }
 
         reachability.unreachableBlock = { [weak self] _ in
-            self?._reachSignal.onNext(true)
+            self?._reach.onNext(true)
         }
 
         reachability.startNotifier()
-        _reachSignal.onNext(reachability.isReachable())
+        _reach.onNext(reachability.isReachable())
     }
 }
 

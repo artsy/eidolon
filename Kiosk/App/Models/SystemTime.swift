@@ -7,7 +7,7 @@ class SystemTime {
 
     init () {}
 
-    func syncSignal() -> Observable<Void> {
+    func sync() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.SystemTime
 
         return XAppRequest(endpoint)

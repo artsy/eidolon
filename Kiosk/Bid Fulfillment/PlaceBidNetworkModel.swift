@@ -8,7 +8,7 @@ let OutbidDomain = "Outbid"
 protocol PlaceBidNetworkModelType {
     var fulfillmentController: FulfillmentController { get }
 
-    func bidSignal() -> Observable<String>
+    func bid() -> Observable<String>
 }
 
 class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
@@ -26,7 +26,7 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
         super.init()
     }
 
-    func bidSignal() -> Observable<String> {
+    func bid() -> Observable<String> {
         let bidDetails = fulfillmentController.bidDetails
         let saleArtwork = bidDetails.saleArtwork.value
 

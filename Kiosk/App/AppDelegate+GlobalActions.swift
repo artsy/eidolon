@@ -31,7 +31,7 @@ extension AppDelegate {
         helpButton.alignTop(nil, leading: nil, bottom: "-24", trailing: "-24", toView: window)
         window?.layoutIfNeeded()
 
-        helpIsVisisbleSignal.subscribeNext { visisble in
+        helpIsVisisble.subscribeNext { visisble in
             let image: UIImage? = visisble ?  UIImage(named: "xbtn_white")?.imageWithRenderingMode(.AlwaysOriginal) : nil
             let text: String? = visisble ? nil : "HELP"
 
@@ -59,36 +59,36 @@ extension AppDelegate {
 
     func showBuyersPremiumCommand(enabled: Observable<Bool> = just(true)) -> CocoaAction {
         return CocoaAction(enabledIf: enabled) { _ in
-            self.hideAllTheThingsSignal()
-                .then(self.showWebControllerSignal("https://m.artsy.net/auction/\(self.sale.id)/buyers-premium"))
+            self.hideAllTheThings()
+                .then(self.showWebController("https://m.artsy.net/auction/\(self.sale.id)/buyers-premium"))
                 .map(void)
         }
     }
 
     func registerToBidCommand(enabled: Observable<Bool> = just(true)) -> CocoaAction {
         return CocoaAction(enabledIf: enabled) { _ in
-            self.hideAllTheThingsSignal()
-                .then(self.showRegistrationSignal())
+            self.hideAllTheThings()
+                .then(self.showRegistration())
                 .map(void)
         }
     }
 
     func requestBidderDetailsCommand(enabled: Observable<Bool> = just(true)) -> CocoaAction {
         return CocoaAction(enabledIf: enabled) { _ in
-            self.hideHelpSignal()
-                .then(self.showBidderDetailsRetrievalSignal())
+            self.hideHelp()
+                .then(self.showBidderDetailsRetrieval())
         }
     }
 
     func helpButtonCommand() -> CocoaAction {
         return CocoaAction { _ in
-            let showHelpSignal = self.hideAllTheThingsSignal().then(self.showHelpSignal())
+            let showHelp = self.hideAllTheThings().then(self.showHelp())
 
-            return self.helpIsVisisbleSignal.take(1).flatMap { (visible: Bool) -> Observable<Void> in
+            return self.helpIsVisisble.take(1).flatMap { (visible: Bool) -> Observable<Void> in
                 if visible {
-                    return self.hideHelpSignal()
+                    return self.hideHelp()
                 } else {
-                    return showHelpSignal
+                    return showHelp
                 }
             }
         }
@@ -96,13 +96,13 @@ extension AppDelegate {
 
     func showPrivacyPolicyCommand() -> CocoaAction {
         return CocoaAction { _ in
-            self.hideAllTheThingsSignal().then(self.showWebControllerSignal("https://artsy.net/privacy"))
+            self.hideAllTheThings().then(self.showWebController("https://artsy.net/privacy"))
         }
     }
 
     func showConditionsOfSaleCommand() -> CocoaAction {
         return CocoaAction { _ in
-            self.hideAllTheThingsSignal().then(self.showWebControllerSignal("https://artsy.net/conditions-of-sale"))
+            self.hideAllTheThings().then(self.showWebController("https://artsy.net/conditions-of-sale"))
         }
     }
 }
@@ -111,23 +111,23 @@ extension AppDelegate {
 
 private extension AppDelegate {
 
-    // MARK: - Signals that do things
+    // MARK: - s that do things
 
     func ツ() -> Observable<Void>{
-        return hideAllTheThingsSignal()
+        return hideAllTheThings()
     }
 
-    func hideAllTheThingsSignal() -> Observable<Void> {
-        return self.closeFulfillmentViewControllerSignal().then(self.hideHelpSignal())
+    func hideAllTheThings() -> Observable<Void> {
+        return self.closeFulfillmentViewController().then(self.hideHelp())
     }
     
-    func showBidderDetailsRetrievalSignal() -> Observable<Void> {
+    func showBidderDetailsRetrieval() -> Observable<Void> {
         let appVC = self.appViewController
         let presentingViewController: UIViewController = (appVC.presentedViewController ?? appVC)
-        return presentingViewController.promptForBidderDetailsRetrievalSignal()
+        return presentingViewController.promptForBidderDetailsRetrieval()
     }
 
-    func showRegistrationSignal() -> Observable<Void> {
+    func showRegistration() -> Observable<Void> {
         return create { observer in
             ARAnalytics.event("Register To Bid Tapped")
 
@@ -152,7 +152,7 @@ private extension AppDelegate {
         }
     }
 
-    func showHelpSignal() -> Observable<Void> {
+    func showHelp() -> Observable<Void> {
         return create { observer in
             let helpViewController = HelpViewController()
             helpViewController.modalPresentationStyle = .Custom
@@ -168,8 +168,8 @@ private extension AppDelegate {
     }
 
     // TODO: Correct animation?
-    func closeFulfillmentViewControllerSignal() -> Observable<Void> {
-        let closeSignal: Observable<Void> = create { observer in
+    func closeFulfillmentViewController() -> Observable<Void> {
+        let close: Observable<Void> = create { observer in
             (self.appViewController.presentedViewController as? FulfillmentContainerViewController)?.closeFulfillmentModal() {
                 sendDispatchCompleted(observer)
             }
@@ -177,9 +177,9 @@ private extension AppDelegate {
             return NopDisposable.instance
         }
 
-        return fullfilmentVisibleSignal.flatMap { visible -> Observable<Void> in
+        return fullfilmentVisible.flatMap { visible -> Observable<Void> in
             if visible {
-                return closeSignal
+                return close
             } else {
                 return empty()
             }
@@ -187,8 +187,8 @@ private extension AppDelegate {
 
     }
 
-    func showWebControllerSignal(address: String) -> Observable<Void> {
-        return hideWebViewControllerSignal().then (
+    func showWebController(address: String) -> Observable<Void> {
+        return hideWebViewController().then (
             create { observer in
                 let webController = ModalWebViewController(url: NSURL(string: address)!)
 
@@ -207,7 +207,7 @@ private extension AppDelegate {
         )
     }
 
-    func hideHelpSignal() -> Observable<Void> {
+    func hideHelp() -> Observable<Void> {
         return create { observer in
             if let presentingViewController = self.helpViewController.value?.presentingViewController {
                 presentingViewController.dismissViewControllerAnimated(true) {
@@ -223,7 +223,7 @@ private extension AppDelegate {
         }
     }
 
-    func hideWebViewControllerSignal() -> Observable<Void> {
+    func hideWebViewController() -> Observable<Void> {
         return create { observer in
             if let webViewController = self.webViewController {
                 webViewController.presentingViewController?.dismissViewControllerAnimated(true) {
@@ -237,9 +237,9 @@ private extension AppDelegate {
         }
     }
 
-    // MARK: - Computed property signals
+    // MARK: - Computed property observables
 
-    var fullfilmentVisibleSignal: Observable<Bool> {
+    var fullfilmentVisible: Observable<Bool> {
         return deferred {
             return create { observer in
                 observer.onNext((self.appViewController.presentedViewController as? FulfillmentContainerViewController) != nil)
@@ -250,7 +250,7 @@ private extension AppDelegate {
         }
     }
 
-    var helpIsVisisbleSignal: Observable<Bool> {
+    var helpIsVisisble: Observable<Bool> {
         return helpViewController.asObservable().map { controller in
             return controller.hasValue
         }

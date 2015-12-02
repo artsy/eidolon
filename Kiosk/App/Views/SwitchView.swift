@@ -7,7 +7,7 @@ class SwitchView: UIView {
 
     private var _selectedIndex = Variable(0)
 
-    var selectedIndexSignal: Observable<Int> { return _selectedIndex.asObservable() }
+    var selectedIndex: Observable<Int> { return _selectedIndex.asObservable() }
 
     var shouldAnimate = true
     var animationDuration: NSTimeInterval = AnimationDuration.Short

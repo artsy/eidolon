@@ -28,7 +28,7 @@ class LoadingViewController: UIViewController {
         return LoadingViewModel(
             bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()),
             placingBid: self.placingBid,
-            actionsCompleteSignal: self.viewWillDisappear
+            actionsComplete: self.viewWillDisappear
         )
     }()
 

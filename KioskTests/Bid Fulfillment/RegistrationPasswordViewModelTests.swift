@@ -43,8 +43,8 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
     }
 
-    func testSubject(passwordSubject: Observable<String> = just(testPassword), invocationSignal: Observable<Void> = PublishSubject<Void>().asObservable(), finishedSubject: PublishSubject<Void> = PublishSubject<Void>()) -> RegistrationPasswordViewModel {
-        return RegistrationPasswordViewModel(passwordSignal: passwordSubject, execute: invocationSignal, completed: finishedSubject, email: testEmail)
+    func testSubject(passwordSubject: Observable<String> = just(testPassword), invocation: Observable<Void> = PublishSubject<Void>().asObservable(), finishedSubject: PublishSubject<Void> = PublishSubject<Void>()) -> RegistrationPasswordViewModel {
+        return RegistrationPasswordViewModel(password: passwordSubject, execute: invocation, completed: finishedSubject, email: testEmail)
     }
 
     override func spec() {
@@ -93,7 +93,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             expect(checked).toEventually( beTrue() )
         }
 
-        it("sends true on emailExistsSignal if email exists") {
+        it("sends true on emailExists if email exists") {
             var exists = false
 
             self.stubProvider(emailExists: true, emailCheck: {
@@ -103,7 +103,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             let subject = self.testSubject()
 
             subject
-                .emailExistsSignal
+                .emailExists
                 .subscribeNext { (object) in
                     exists = object
                 }
@@ -114,7 +114,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             expect(exists).toEventually( beTrue() )
         }
 
-        it("sends false on emailExistsSignal if email does not exist") {
+        it("sends false on emailExists if email does not exist") {
             var exists: Bool?
 
             self.stubProvider(emailExists: false, emailCheck: {
@@ -124,7 +124,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             let subject = self.testSubject()
 
             subject
-                .emailExistsSignal
+                .emailExists
                 .subscribeNext { (object) in
                     exists = object
                 }
@@ -174,12 +174,12 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             expect(errored).toEventually( beTrue() )
         }
 
-        it("executes command when manual signal sends") {
+        it("executes command when manual  sends") {
             self.stubProvider(emailExists: false, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let invocationSignal = PublishSubject<Void>()
+            let invocation = PublishSubject<Void>()
 
-            let subject = self.testSubject(invocationSignal: invocationSignal)
+            let subject = self.testSubject(invocation: invocation)
 
             var completed = false
 
@@ -192,13 +192,13 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 }
                 .addDisposableTo(disposeBag)
 
-            invocationSignal.onNext()
+            invocation.onNext()
             
             expect(completed).toEventually( beTrue() )
         }
 
         it("sends completed on finishedSubject when command is executed") {
-            let invocationSignal = PublishSubject<Void>()
+            let invocation = PublishSubject<Void>()
             let finishedSubject = PublishSubject<Void>()
 
             var completed = false
@@ -209,7 +209,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 }
                 .addDisposableTo(disposeBag)
 
-            let subject = self.testSubject(invocationSignal:invocationSignal, finishedSubject: finishedSubject)
+            let subject = self.testSubject(invocation:invocation, finishedSubject: finishedSubject)
 
             subject.action.execute()
 
@@ -227,9 +227,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             waitUntil { done in
                 subject
-                    .userForgotPasswordSignal()
+                    .userForgotPassword()
                     .subscribeCompleted {
-                        // do nothing – we subscribe just to force the signal to execute.
+                        // do nothing – we subscribe just to force the  to execute.
                         done()
                     }
                     .addDisposableTo(disposeBag)

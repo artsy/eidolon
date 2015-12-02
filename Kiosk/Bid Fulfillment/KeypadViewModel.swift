@@ -17,26 +17,26 @@ class KeypadViewModel: NSObject {
     
     lazy var deleteAction: CocoaAction = {
         return CocoaAction { [weak self] _ in
-            self?.deleteSignal() ?? empty()
+            self?.delete() ?? empty()
         }
     }()
 
     lazy var clearAction: CocoaAction = {
         return CocoaAction { [weak self] _ in
-            self?.clearSignal() ?? empty()
+            self?.clear() ?? empty()
         }
     }()
     
     lazy var addDigitAction: Action<Int, Void> = {
         let localSelf = self
         return Action<Int, Void> { [weak localSelf] input in
-            return localSelf?.addDigitSignal(input) ?? empty()
+            return localSelf?.addDigit(input) ?? empty()
         }
     }()
 }
 
 private extension KeypadViewModel {
-    func deleteSignal() -> Observable<Void> {
+    func delete() -> Observable<Void> {
         return create { [weak self] observer in
             if let strongSelf = self {
                 strongSelf.intValue.value = Int(strongSelf.intValue.value / 10)
@@ -50,7 +50,7 @@ private extension KeypadViewModel {
         }
     }
     
-    func clearSignal() -> Observable<Void> {
+    func clear() -> Observable<Void> {
         return create { [weak self] observer in
             self?.intValue.value = 0
             self?.stringValue.value = ""
@@ -59,7 +59,7 @@ private extension KeypadViewModel {
         }
     }
     
-    func addDigitSignal(input: Int) -> Observable<Void> {
+    func addDigit(input: Int) -> Observable<Void> {
         return create { [weak self] observer in
             if let strongSelf = self {
                 let newValue = (10 * strongSelf.intValue.value) + input

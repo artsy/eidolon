@@ -20,9 +20,9 @@ class SaleArtworkDetailsViewController: UIViewController {
         return storyboard.viewControllerWithID(.SaleArtworkDetail) as! SaleArtworkDetailsViewController
     }
 
-    lazy var artistInfoSignal: Observable<AnyObject> = {
-        let signal = XAppRequest(.Artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
-        return signal.shareReplay(1)
+    lazy var artistInfo: Observable<AnyObject> = {
+        let artistInfo = XAppRequest(.Artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
+        return artistInfo.shareReplay(1)
     }()
     
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!
@@ -127,7 +127,7 @@ class SaleArtworkDetailsViewController: UIViewController {
 
             saleArtwork
                 .viewModel
-                .lotNumberSignal()
+                .lotNumber()
                 .filterNil()
                 .bindTo(lotNumberLabel.rx_text)
                 .addDisposableTo(rx_disposeBag)
@@ -188,7 +188,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             }
             .addDisposableTo(rx_disposeBag)
 
-        let hasBidsSignal = saleArtwork
+        let hasBids = saleArtwork
             .rx_observe(Optional<NSNumber>.self, "highestBidCents")
             .map { observeredCents -> Bool in
                 guard let cents = observeredCents else { return false }
@@ -197,7 +197,7 @@ class SaleArtworkDetailsViewController: UIViewController {
 
         let currentBidLabel = label(.Serif, tag: .CurrentBidLabel)
 
-        hasBidsSignal
+        hasBids
             .flatMap { hasBids -> Observable<String> in
                 if hasBids {
                     return just("Current Bid:")
@@ -213,7 +213,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         let currentBidValueLabel = label(.Bold, tag: .CurrentBidValueLabel, fontSize: 27)
         saleArtwork
             .viewModel
-            .currentBidSignal()
+            .currentBid()
             .bindTo(currentBidValueLabel.rx_text)
             .addDisposableTo(rx_disposeBag)
         metadataStackView.addSubview(currentBidValueLabel, withTopMargin: "10", sideMargin: "0")
@@ -221,7 +221,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         let numberOfBidsPlacedLabel = label(.Serif, tag: .NumberOfBidsPlacedLabel)
         saleArtwork
             .viewModel
-            .numberOfBidsWithReserveSignal
+            .numberOfBidsWithReserve
             .bindTo(numberOfBidsPlacedLabel.rx_text)
             .addDisposableTo(rx_disposeBag)
         metadataStackView.addSubview(numberOfBidsPlacedLabel, withTopMargin: "10", sideMargin: "0")
@@ -239,7 +239,7 @@ class SaleArtworkDetailsViewController: UIViewController {
 
         saleArtwork
             .viewModel
-            .forSaleSignal()
+            .forSale()
             .subscribeNext { [weak bidButton] forSale in
                 let forSale = forSale
 
@@ -250,7 +250,7 @@ class SaleArtworkDetailsViewController: UIViewController {
 
         saleArtwork
             .viewModel
-            .forSaleSignal()
+            .forSale()
             .bindTo(bidButton.rx_enabled)
             .addDisposableTo(rx_disposeBag)
 
@@ -337,7 +337,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             case Body
         }
 
-        func label(type: LabelType, layoutSignal: Observable<Void>? = nil) -> UILabel {
+        func label(type: LabelType, layout: Observable<Void>? = nil) -> UILabel {
             let (label, fontSize) = { () -> (UILabel, CGFloat) in
                 switch type {
                 case .Header:
@@ -350,7 +350,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             label.font = label.font.fontWithSize(fontSize)
             label.lineBreakMode = .ByWordWrapping
 
-            layoutSignal?
+            layout?
                 .take(1)
                 .subscribeNext { [weak label] (_) in
                     if let label = label {
@@ -373,12 +373,12 @@ class SaleArtworkDetailsViewController: UIViewController {
         additionalDetailScrollView.stackView.addSubview(additionalInfoHeaderLabel, withTopMargin: "20", sideMargin: "40")
 
         if let blurb = saleArtwork.artwork.blurb {
-            let blurbLabel = label(.Body, layoutSignal: layoutSubviews)
+            let blurbLabel = label(.Body, layout: layoutSubviews)
             blurbLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( blurb )
             additionalDetailScrollView.stackView.addSubview(blurbLabel, withTopMargin: "22", sideMargin: "40")
         }
 
-        let additionalInfoLabel = label(.Body, layoutSignal: layoutSubviews)
+        let additionalInfoLabel = label(.Body, layout: layoutSubviews)
         additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( saleArtwork.artwork.additionalInfo )
         additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "40")
 
@@ -404,7 +404,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                     aboutArtistHeaderLabel.text = "About \(artist.name)"
                     me.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "40")
 
-                    let aboutAristLabel = label(.Body, layoutSignal: me.layoutSubviews)
+                    let aboutAristLabel = label(.Body, layout: me.layoutSubviews)
                     aboutAristLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString(blurb)
                     me.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "40")
                 }
@@ -423,7 +423,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             return just(imageRights)
 
         } else {
-            return artistInfoSignal.map{ json in
+            return artistInfo.map{ json in
                     return json["image_rights"] as? String
                 }
                 .filterNil()
@@ -439,7 +439,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         if let additionalInfo = artwork.additionalInfo {
             return just(additionalInfo)
         } else {
-            return artistInfoSignal.map{ json in
+            return artistInfo.map{ json in
                     return json["additional_information"] as? String
                 }
                 .filterNil()
@@ -457,11 +457,11 @@ class SaleArtworkDetailsViewController: UIViewController {
         if let blurb = artist.blurb {
             return just(blurb)
         } else {
-            let artistSignal = XAppRequest(.Artist(id: artist.id))
+            let retrieveArtist = XAppRequest(.Artist(id: artist.id))
                 .filterSuccessfulStatusCodes()
                 .mapJSON()
 
-            return artistSignal.map{ json in
+            return retrieveArtist.map{ json in
                     return json["blurb"] as? String
                 }
                 .filterNil()

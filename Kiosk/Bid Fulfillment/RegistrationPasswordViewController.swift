@@ -19,7 +19,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         let email = self.navigationController?.fulfillmentNav().bidDetails.newUser.email.value ?? ""
 
         return RegistrationPasswordViewModel(
-            passwordSignal: self.passwordTextField.rx_text.asObservable(),
+            password: self.passwordTextField.rx_text.asObservable(),
             execute: self.passwordTextField.rx_returnKey,
             completed: self.finished,
             email: email)
@@ -32,8 +32,8 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
 
         forgotPasswordButton.hidden = false
 
-        let passwordTextSignal = passwordTextField.rx_text
-        passwordTextSignal
+        let passwordText = passwordTextField.rx_text
+        passwordText
             .asObservable()
             .mapToOptional()
             .takeUntil(viewWillDisappear)
@@ -53,7 +53,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
 
 
         viewModel
-            .emailExistsSignal
+            .emailExists
             .not()
             .startWith(true)
             .bindTo(forgotPasswordButton.rx_hidden)
@@ -63,14 +63,14 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         forgotPasswordButton.rx_action = CocoaAction { [weak self] _ in
             return self?
                 .viewModel
-                .userForgotPasswordSignal()
+                .userForgotPassword()
                 .then {
                     self?.alertUserPasswordSent()
                 } ?? empty()
         }
 
         viewModel
-            .emailExistsSignal
+            .emailExists
             .map { emailExists in
                 if emailExists {
                     return "Enter your Artsy password"

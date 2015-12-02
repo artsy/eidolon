@@ -31,7 +31,7 @@ class CardHandlerTests: QuickSpec {
             expect(self.handler.sessionManager.accountToken()) == accountToken
         }
 
-        xit("sends a signal with a card if successful") {
+        xit("sends an observable with a card if successful") {
             var success = false
             self.handler
                 .cardStatus
@@ -44,7 +44,7 @@ class CardHandlerTests: QuickSpec {
             expect(success) == true
         }
 
-        xit("sends a signal with an error if failed") {
+        xit("sends an observable with an error if failed") {
             self.reader.fail = true
 
             var failed = false
@@ -59,7 +59,7 @@ class CardHandlerTests: QuickSpec {
             expect(failed) == true
         }
 
-        xit("passes messages along the card signal as things are moving") {
+        xit("passes messages along the card observable as things are moving") {
             var messageCount = 0
 
             self.handler!

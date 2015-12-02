@@ -11,13 +11,13 @@ class ArtsyProviderTests: QuickSpec {
             return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
         }
 
-        var fakeOnlineSignal: PublishSubject<Bool>!
+        var fakeOnline: PublishSubject<Bool>!
         var subject: ArtsyProvider<ArtsyAPI>!
         var defaults: NSUserDefaults!
 
         beforeEach {
-            fakeOnlineSignal = PublishSubject<Bool>()
-            subject = ArtsyProvider<ArtsyAPI>(endpointClosure: fakeEndpointsClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, online: fakeOnlineSignal.asObservable())
+            fakeOnline = PublishSubject<Bool>()
+            subject = ArtsyProvider<ArtsyAPI>(endpointClosure: fakeEndpointsClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, online: fakeOnline.asObservable())
 
             // We fake our defaults to avoid actually hitting the network
             defaults = NSUserDefaults()
@@ -36,7 +36,7 @@ class ArtsyProviderTests: QuickSpec {
             expect(called) == false
 
             // Fake getting online
-            fakeOnlineSignal.onNext(true)
+            fakeOnline.onNext(true)
 
             expect(called) == true
         }

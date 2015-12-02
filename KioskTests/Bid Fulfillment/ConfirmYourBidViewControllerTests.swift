@@ -20,7 +20,7 @@ class ConfirmYourBidViewControllerTests: QuickSpec {
 
         it("shows keypad buttons") {
             let keypadSubject = Variable("")
-            subject.numberSignal = keypadSubject.asObservable()
+            subject.number = keypadSubject.asObservable()
 
             subject.loadViewProgrammatically()
             keypadSubject.value = "3"
@@ -30,7 +30,7 @@ class ConfirmYourBidViewControllerTests: QuickSpec {
 
         pending("changes enter button to enabled") {
             let keypadSubject = Variable("")
-            subject.numberSignal = keypadSubject.asObservable()
+            subject.number = keypadSubject.asObservable()
 
             subject.loadViewProgrammatically()
 

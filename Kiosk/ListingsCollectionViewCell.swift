@@ -21,8 +21,8 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     var downloadImage: DownloadImageClosure?
     var cancelDownloadImage: CancelDownloadImageClosure?
 
-    lazy var moreInfoSignal: Observable<NSDate> = {
-        return [self.imageGestureSigal, self.infoGestureSignal].toObservable().merge()
+    lazy var moreInfo: Observable<NSDate> = {
+        return [self.imageGestureSigal, self.infoGesture].toObservable().merge()
     }()
     
     private lazy var imageGestureSigal: Observable<NSDate> = {
@@ -32,7 +32,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         return recognizer.rx_event.map { _ in NSDate() }
     }()
 
-    private lazy var infoGestureSignal: Observable<NSDate> = {
+    private lazy var infoGesture: Observable<NSDate> = {
         let recognizer = UITapGestureRecognizer()
         self.moreInfoLabel.addGestureRecognizer(recognizer)
         self.moreInfoLabel.userInteractionEnabled = true
@@ -78,7 +78,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         // Bind subviews
 
         // Start with things not expected to ever change. 
-        viewModel.flatMapTo(SaleArtworkViewModel.lotNumberSignal)
+        viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
             .replaceNilWith("")
             .bindTo(lotNumberLabel.rx_text)
             .addDisposableTo(rx_disposeBag)
@@ -105,16 +105,16 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         // Now do properties that _do_ change.
 
         viewModel.flatMap { (viewModel) -> Observable<String> in
-                return viewModel.currentBidSignal(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ")
+                return viewModel.currentBid(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ")
             }
             .bindTo(currentBidLabel.rx_text)
             .addDisposableTo(rx_disposeBag)
 
-        viewModel.flatMapTo(SaleArtworkViewModel.numberOfBidsSignal)
+        viewModel.flatMapTo(SaleArtworkViewModel.numberOfBids)
             .bindTo(numberOfBidsLabel.rx_text)
             .addDisposableTo(rx_disposeBag)
 
-        viewModel.flatMapTo(SaleArtworkViewModel.forSaleSignal)
+        viewModel.flatMapTo(SaleArtworkViewModel.forSale)
             .doOnNext { [weak bidButton] forSale in
                 // Button titles aren't KVO-able
                 bidButton?.setTitle((forSale ? "BID" : "SOLD"), forState: .Normal)

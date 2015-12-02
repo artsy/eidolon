@@ -17,12 +17,12 @@ class PlaceBidNetworkModelTests: QuickSpec {
             disposeBag = DisposeBag()
         }
 
-        it("maps good responses to signal completions") {
+        it("maps good responses to observable completions") {
             var completed = false
 
             waitUntil { done in
                 subject
-                    .bidSignal()
+                    .bid()
                     .subscribeCompleted {
                         completed = true
                         done()
@@ -36,7 +36,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
         it("maps good responses to bidder positions") {
             waitUntil { done in
                 subject
-                    .bidSignal()
+                    .bid()
                     .subscribeCompleted {
                         done()
                     }
@@ -68,7 +68,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
 
             waitUntil { done in
                 subject
-                    .bidSignal()
+                    .bid()
                     .subscribeCompleted {
                         done()
                     }
@@ -95,7 +95,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
                 var error: NSError?
                 waitUntil { done in
                     subject
-                        .bidSignal()
+                        .bid()
                         .subscribeError { receivedError in
                             error = receivedError as NSError
                             done()
@@ -110,7 +110,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
                 var errored = false
                 waitUntil { done in
                     subject
-                        .bidSignal()
+                        .bid()
                         .subscribeError { _ in
                             errored = true
                             done()

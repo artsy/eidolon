@@ -55,9 +55,9 @@ extension SaleArtworkViewModel {
         return saleArtwork.id
     }
 
-    // Signals representing values that change over time.
+    // Observables representing values that change over time.
 
-    func numberOfBidsSignal() -> Observable<String> {
+    func numberOfBids() -> Observable<String> {
         return saleArtwork.rx_observe(NSNumber.self, "bidCount").map { optionalBidCount -> String in
             guard let bidCount = optionalBidCount else {
                 return kNoBidsString
@@ -68,7 +68,7 @@ extension SaleArtworkViewModel {
     }
 
     // The language used here is very specific – see https://github.com/artsy/eidolon/pull/325#issuecomment-64121996 for details
-    var numberOfBidsWithReserveSignal: Observable<String> {
+    var numberOfBidsWithReserve: Observable<String> {
 
         // Ignoring highestBidCents; only there to trigger on bid update.
         let highestBidString = saleArtwork.rx_observe(NSNumber.self, "highestBidCents").map { "\($0)" }
@@ -81,7 +81,7 @@ extension SaleArtworkViewModel {
             }
         }
 
-        return [numberOfBidsSignal(), reserveStatus, highestBidString].combineLatest { strings -> String in
+        return [numberOfBids(), reserveStatus, highestBidString].combineLatest { strings -> String in
 
             let numberOfBidsString = strings[0]
             let reserveStatus = ReserveStatus.initOrDefault(strings[1])
@@ -102,7 +102,7 @@ extension SaleArtworkViewModel {
         }
     }
 
-    func lotNumberSignal() -> Observable<String?> {
+    func lotNumber() -> Observable<String?> {
         return saleArtwork.rx_observe(NSNumber.self, "lotNumber").map { lotNumber  in
             if let lotNumber = lotNumber as? Int {
                 return "Lot \(lotNumber)"
@@ -112,14 +112,14 @@ extension SaleArtworkViewModel {
         }
     }
 
-    func forSaleSignal() -> Observable<Bool> {
+    func forSale() -> Observable<Bool> {
         return saleArtwork.artwork.rx_observe(String.self, "soldStatus").filterNil().map { status in
             return Artwork.SoldStatus.fromString(status) == .NotSold
         }
 
     }
 
-    func currentBidSignal(prefix prefix: String = "", missingPrefix: String = "") -> Observable<String> {
+    func currentBid(prefix prefix: String = "", missingPrefix: String = "") -> Observable<String> {
         return saleArtwork.rx_observe(Optional<NSNumber>.self, "highestBidCents").map { [weak self] highestBidCents in
             if let currentBidCents = highestBidCents as? Int {
                 return "\(prefix)\(NSNumberFormatter.currencyStringForCents(currentBidCents))"
@@ -130,13 +130,13 @@ extension SaleArtworkViewModel {
     }
 
     func currentBidOrOpeningBid() -> Observable<String> {
-        let signals = [
+        let s = [
             saleArtwork.rx_observe(NSNumber.self, "bidCount"),
             saleArtwork.rx_observe(NSNumber.self, "openingBidCents"),
             saleArtwork.rx_observe(NSNumber.self, "highestBidCents")
         ]
 
-        return signals.combineLatest { numbers -> Int in
+        return s.combineLatest { numbers -> Int in
             let bidCount = (numbers[0] ?? 0) as Int
             let openingBid = numbers[1] as Int?
             let highestBid = numbers[2] as Int?

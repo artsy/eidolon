@@ -21,8 +21,8 @@ class ConfirmYourBidViewController: UIViewController {
         return self._viewWillDisappear.asObserver()
     }
 
-    // Need takeUntil because we bind this signal eventually to bidDetails, making us stick around longer than we should!
-    lazy var numberSignal: Observable<String> = { self.keypadContainer.stringValue.takeUntil(self.viewWillDisappear) }()
+    // Need takeUntil because we bind this observable eventually to bidDetails, making us stick around longer than we should!
+    lazy var number: Observable<String> = { self.keypadContainer.stringValue.takeUntil(self.viewWillDisappear) }()
     
     lazy var provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider
 
@@ -39,22 +39,22 @@ class ConfirmYourBidViewController: UIViewController {
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
 
-        numberSignal
+        number
             .bindTo(_number)
             .addDisposableTo(rx_disposeBag)
 
-        numberSignal
+        number
             .map(toPhoneNumberString)
             .bindTo(numberAmountTextField.rx_text)
             .addDisposableTo(rx_disposeBag)
 
         let nav = self.fulfillmentNav()
 
-        let optionalNumberSignal = numberSignal.mapToOptional()
+        let optionalNumber = number.mapToOptional()
 
         // We don't know if it's a paddle number or a phone number yet, so bind both ¯\_(ツ)_/¯
         [nav.bidDetails.paddleNumber, nav.bidDetails.newUser.phoneNumber].forEach { variable in
-            optionalNumberSignal
+            optionalNumber
                 .bindTo(variable)
                 .addDisposableTo(rx_disposeBag)
         }
@@ -65,9 +65,9 @@ class ConfirmYourBidViewController: UIViewController {
 
         let auctionID = nav.auctionID
         
-        let numberIsZeroLengthSignal = numberSignal.map(isZeroLengthString)
+        let numberIsZeroLength = number.map(isZeroLengthString)
 
-        enterButton.rx_action = CocoaAction(enabledIf: numberIsZeroLengthSignal.not(), workFactory: { [weak self] _ in
+        enterButton.rx_action = CocoaAction(enabledIf: numberIsZeroLength.not(), workFactory: { [weak self] _ in
             guard let me = self else { return empty() }
 
             let endpoint = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me._number.value))
