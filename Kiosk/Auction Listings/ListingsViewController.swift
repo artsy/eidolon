@@ -92,7 +92,7 @@ class ListingsViewController: UIViewController {
                 collectionView.reloadData()
             }
             .dispatchAsyncMainScheduler()
-            .subscribeNext { [weak self] collectionView -> Void in
+            .subscribeNext { [weak self] collectionView in
                 // Make sure we're on screen and not in a test or something.
                 guard let _ = self?.view.window else { return }
 
@@ -210,7 +210,7 @@ private extension ListingsViewController {
             internalNav.bidDetails.saleArtwork = saleArtwork
         }
 
-        appDelegate().appViewController.presentViewController(containerController, animated: false, completion: { () -> Void in
+        appDelegate().appViewController.presentViewController(containerController, animated: false, completion: {
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         })
     }

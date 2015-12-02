@@ -60,7 +60,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             disposeBag = DisposeBag()
         }
 
-        afterEach { () -> () in
+        afterEach {
             Provider.sharedProvider = Provider.StubbingProvider()
         }
 
@@ -82,7 +82,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("checks for an email when executing the command") {
             var checked = false
 
-            self.stubProvider(emailExists: false, emailCheck: { () -> () in
+            self.stubProvider(emailExists: false, emailCheck: {
                 checked = true
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
@@ -96,7 +96,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("sends true on emailExistsSignal if email exists") {
             var exists = false
 
-            self.stubProvider(emailExists: true, emailCheck: { () -> () in
+            self.stubProvider(emailExists: true, emailCheck: {
                 exists = true
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
@@ -104,7 +104,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             subject
                 .emailExistsSignal
-                .subscribeNext { (object) -> Void in
+                .subscribeNext { (object) in
                     exists = object
                 }
                 .addDisposableTo(disposeBag)
@@ -117,7 +117,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("sends false on emailExistsSignal if email does not exist") {
             var exists: Bool?
 
-            self.stubProvider(emailExists: false, emailCheck: { () -> () in
+            self.stubProvider(emailExists: false, emailCheck: {
                 exists = true
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
@@ -125,7 +125,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             subject
                 .emailExistsSignal
-                .subscribeNext { (object) -> Void in
+                .subscribeNext { (object) in
                     exists = object
                 }
                 .addDisposableTo(disposeBag)
@@ -164,7 +164,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             subject
                 .action
                 .errors
-                .subscribeNext { _ -> Void in
+                .subscribeNext { _ in
                     errored = true
                 }
                 .addDisposableTo(disposeBag)
@@ -187,7 +187,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .action
                 .executing
                 .take(1)
-                .subscribeNext { _ -> Void in
+                .subscribeNext { _ in
                     completed = true
                 }
                 .addDisposableTo(disposeBag)
@@ -204,7 +204,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             var completed = false
 
             finishedSubject
-                .subscribeCompleted { () -> Void in
+                .subscribeCompleted {
                     completed = true
                 }
                 .addDisposableTo(disposeBag)

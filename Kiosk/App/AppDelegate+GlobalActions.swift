@@ -226,7 +226,7 @@ private extension AppDelegate {
     func hideWebViewControllerSignal() -> Observable<Void> {
         return create { observer in
             if let webViewController = self.webViewController {
-                webViewController.presentingViewController?.dismissViewControllerAnimated(true) { () -> Void in
+                webViewController.presentingViewController?.dismissViewControllerAnimated(true) {
                     sendDispatchCompleted(observer)
                 }
             } else {

@@ -19,7 +19,7 @@ class StripeManager: NSObject {
                 return NopDisposable.instance
             }
 
-            me.stripeClient.createTokenWithCard(card) { (token, error) -> Void in
+            me.stripeClient.createTokenWithCard(card) { (token, error) in
                 if (token as STPToken?).hasValue {
                     observer.onNext(token)
                     observer.onCompleted()

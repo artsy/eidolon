@@ -14,7 +14,7 @@ class AuctionWebViewController: WebViewController {
     }
 
     func exit() {
-        let passwordVC = PasswordAlertViewController.alertView { [weak self] () -> () in
+        let passwordVC = PasswordAlertViewController.alertView { [weak self] in
             self?.navigationController?.popViewControllerAnimated(true)
             return
         }

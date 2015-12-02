@@ -42,7 +42,7 @@ class KeypadViewModelTests: QuickSpec {
                     .reduce(empty(), combine: { (signal, input) -> Observable<Void> in
                         signal.then { subject.addDigitAction.execute(input) }
                     })
-                    .subscribeCompleted { () -> Void in
+                    .subscribeCompleted {
                         expect(testHarness.intValue) == 1337
                         expect(testHarness.stringValue) == "1337"
 
@@ -60,7 +60,7 @@ class KeypadViewModelTests: QuickSpec {
                     .reduce(empty(), combine: { (signal, input) -> Observable<Void> in
                         signal.then { subject.addDigitAction.execute(input) }
                     })
-                    .subscribeCompleted { () -> Void in
+                    .subscribeCompleted {
                         expect(testHarness.intValue) == 1333333
                         expect(testHarness.stringValue) == "1333333333337"
 
@@ -76,7 +76,7 @@ class KeypadViewModelTests: QuickSpec {
                     .reduce(empty(), combine: { (signal, input) -> Observable<Void> in
                         signal.then { subject.addDigitAction.execute(input) }
                     })
-                    .subscribeCompleted { () -> Void in
+                    .subscribeCompleted {
                         expect(testHarness.intValue) == 1337
                         expect(testHarness.stringValue) == "01337"
                         
@@ -95,7 +95,7 @@ class KeypadViewModelTests: QuickSpec {
                     .then {
                         subject.clearAction.execute()
                     }
-                    .subscribeCompleted { () -> Void in // TODO: project-wide find/replace to get rid of this.
+                    .subscribeCompleted {
                         expect(testHarness.intValue) == 0
                         expect(testHarness.stringValue) == ""
                         
@@ -113,7 +113,7 @@ class KeypadViewModelTests: QuickSpec {
                     })
                     .then {
                         subject.deleteAction.execute()
-                    }.subscribeCompleted { () -> Void in
+                    }.subscribeCompleted {
                         expect(testHarness.intValue) == 13
                         expect(testHarness.stringValue) == "13"
 

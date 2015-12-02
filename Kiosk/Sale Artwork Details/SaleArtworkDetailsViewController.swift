@@ -299,7 +299,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                 imageView.backgroundColor = .artsyLightGrey()
             }
 
-            imageView.sd_setImageWithURL(image.fullsizeURL(), placeholderImage: thumbnailImage, completed: { (image, _, _, _) -> Void in
+            imageView.sd_setImageWithURL(image.fullsizeURL(), placeholderImage: thumbnailImage, completed: { (image, _, _, _) in
                 // If the image was successfully downloaded, make sure we aren't still displaying grey.
                 if image != nil {
                     imageView.backgroundColor = .clearColor()
@@ -352,7 +352,7 @@ class SaleArtworkDetailsViewController: UIViewController {
 
             layoutSignal?
                 .take(1)
-                .subscribeNext { [weak label] (_) -> Void in
+                .subscribeNext { [weak label] (_) in
                     if let label = label {
                         label.preferredMaxLayoutWidth = CGRectGetWidth(label.frame)
                     }

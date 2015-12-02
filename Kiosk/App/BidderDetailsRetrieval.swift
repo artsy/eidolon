@@ -26,11 +26,11 @@ extension UIViewController {
                 return XAppRequest(endpoint, provider: Provider.sharedProvider).filterSuccessfulStatusCodes().map(void)
             }
             .throttle(1, MainScheduler.sharedInstance)
-            .doOnNext { _ -> Void in
+            .doOnNext { _ in
                 SVProgressHUD.dismiss()
                 self.presentViewController(UIAlertController.successfulBidderDetailsAlertController(), animated: true, completion: nil)
             }
-            .doOnError { _ -> Void in
+            .doOnError { _ in
                 SVProgressHUD.dismiss()
                 self.presentViewController(UIAlertController.failedBidderDetailsAlertController(), animated: true, completion: nil)
             }

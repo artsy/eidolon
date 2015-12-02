@@ -91,7 +91,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             nav.auctionID = "AUCTION"
             let provider: RxMoyaProvider<ArtsyAPI> = subject.providerForPIN("12341234", number: "1234")
 
-            waitUntil{ done -> Void in
+            waitUntil{ done in
                 provider
                     .request(.Me)
                     .subscribeCompleted {

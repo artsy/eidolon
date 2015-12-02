@@ -45,7 +45,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         viewModel
             .action
             .errors
-            .subscribeNext { [weak self] _ -> Void in
+            .subscribeNext { [weak self] _ in
                 self?.showAuthenticationError()
                 return
             }

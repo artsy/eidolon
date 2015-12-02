@@ -12,7 +12,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
         var subject: ManualCreditCardInputViewModel!
         var disposeBag: DisposeBag!
 
-        beforeEach { () -> () in // TODO: Get rid of all of these, and also { () -> Void in
+        beforeEach {
             Stripe.setDefaultPublishableKey("some key")
 
             bidDetails = testBidDetails()
@@ -28,7 +28,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             Stripe.setDefaultPublishableKey(nil)
         }
         
-        it("initializer assigns bid details") { () -> () in
+        it("initializer assigns bid details") {
             expect(subject.bidDetails) == bidDetails
         }
 
@@ -52,7 +52,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             var moved = false
 
             subject.moveToYear
-                .subscribeNext { _ -> Void in
+                .subscribeNext { _ in
                     moved = true
                 }
                 .addDisposableTo(disposeBag)
@@ -66,7 +66,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             var moved = false
 
             subject.moveToYear
-                .subscribeNext { _ -> Void in
+                .subscribeNext { _ in
                     moved = true
                 }
                 .addDisposableTo(disposeBag)
@@ -77,8 +77,8 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             expect(moved) == false
         }
 
-        describe("expiry date") { () -> () in
-            describe("with a valid year") { () -> Void in
+        describe("expiry date") {
+            describe("with a valid year") {
                 beforeEach {
                     subject.expirationYear.value = "2022"
                 }
@@ -131,7 +131,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             }
         }
 
-        describe("credit card registration") { () -> () in
+        describe("credit card registration") {
             it("enables command with a valid credit card and valid expiry dates") {
                 testStripeManager.isValidCreditCard = true
                 subject.cardFullDigits.value = ""
@@ -168,7 +168,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                     subject.billingZip.value = "10001"
                 }
 
-                describe("successful registration") { () -> Void in
+                describe("successful registration") {
                     it("registers with stripe") {
                         var registered = false
                         testStripeManager.registrationClosure = {
@@ -204,7 +204,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
 
                         subject
                             .finishedSubject?
-                            .subscribeCompleted { () -> Void in
+                            .subscribeCompleted {
                                 finished = true
                             }
                             .addDisposableTo(disposeBag)
@@ -213,7 +213,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                             subject
                                 .registerButtonCommand()
                                 .execute()
-                                .subscribeCompleted { () -> Void in
+                                .subscribeCompleted {
                                     done()
                                 }
                                 .addDisposableTo(disposeBag)
@@ -225,8 +225,8 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                     }
                 }
 
-                describe("unsuccessful registration") { () -> Void in
-                    beforeEach { () -> () in
+                describe("unsuccessful registration") {
+                    beforeEach {
                         testStripeManager.shouldSucceed = false
                     }
 
@@ -236,7 +236,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
 
                         subject
                             .finishedSubject?
-                            .subscribeCompleted { () -> Void in
+                            .subscribeCompleted {
                                 finished = true
                             }
                             .addDisposableTo(disposeBag)
@@ -245,7 +245,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                             let command = subject.registerButtonCommand()
                             command
                                 .errors
-                                .subscribeNext{ _ -> Void in
+                                .subscribeNext{ _ in
                                     done()
                                 }
                                 .addDisposableTo(disposeBag)

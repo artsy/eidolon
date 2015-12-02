@@ -76,7 +76,7 @@ extension AppViewController {
             return
         }
         
-        let passwordVC = PasswordAlertViewController.alertView { [weak self] () -> () in
+        let passwordVC = PasswordAlertViewController.alertView { [weak self] in
             self?.performSegue(.ShowAdminOptions)
             return
         }

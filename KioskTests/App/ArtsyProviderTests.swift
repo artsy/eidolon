@@ -29,7 +29,7 @@ class ArtsyProviderTests: QuickSpec {
             var called = false
 
             let disposeBag = DisposeBag()
-            XAppRequest(.Ping, provider: subject, defaults: defaults).subscribeNext { _ -> Void in
+            XAppRequest(.Ping, provider: subject, defaults: defaults).subscribeNext { _ in
                 called = true
             }.addDisposableTo(disposeBag)
 

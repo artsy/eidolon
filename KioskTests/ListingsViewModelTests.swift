@@ -20,7 +20,7 @@ class ListingsViewModelTests: QuickSpec {
 
         var disposeBag: DisposeBag!
 
-        beforeEach { () -> () in
+        beforeEach {
             bidCount = initialBidCount
 
             saleArtworksCount = nil
@@ -43,7 +43,7 @@ class ListingsViewModelTests: QuickSpec {
             disposeBag = DisposeBag()
         }
 
-        afterEach { () -> () in
+        afterEach {
             // Reset for other tests
             Provider.sharedProvider = Provider.StubbingProvider()
 
@@ -56,7 +56,7 @@ class ListingsViewModelTests: QuickSpec {
 
             subject = ListingsViewModel(selectedIndexSignal: just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
-            kioskWaitUntil { done -> Void in
+            kioskWaitUntil { done in
                 subject.updatedContentsSignal.take(1).subscribeCompleted {
                     done()
                 }.addDisposableTo(disposeBag)
@@ -69,10 +69,10 @@ class ListingsViewModelTests: QuickSpec {
             subject = ListingsViewModel(selectedIndexSignal: just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, syncInterval: 1, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
             // Verify that initial value is correct
-            waitUntil(timeout: 5) { done -> Void in
+            waitUntil(timeout: 5) { done in
                 subject.updatedContentsSignal.take(1).flatMap { _ in
                     return subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).numberOfBidsSignal().take(1)
-                }.subscribeNext { string -> Void in
+                }.subscribeNext { string in
                     expect(string) == "\(initialBidCount) bids placed"
                     done()
                 }.addDisposableTo(disposeBag)
@@ -81,9 +81,9 @@ class ListingsViewModelTests: QuickSpec {
             // Simulate update from API, wait for sync to happen
             bidCount = finalBidCount
 
-            waitUntil(timeout: 5) { done -> Void in
+            waitUntil(timeout: 5) { done in
                 // We skip 1 to avoid getting the existing value, and wait for the updated one when the subject syncs.
-                subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).numberOfBidsSignal().skip(1).subscribeNext { string -> Void in
+                subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).numberOfBidsSignal().skip(1).subscribeNext { string in
                     expect(string) == "\(finalBidCount) bids placed"
                     done()
                 }.addDisposableTo(disposeBag)
@@ -96,7 +96,7 @@ class ListingsViewModelTests: QuickSpec {
             saleArtworksCount = 2
 
             // Verify that initial value is correct
-            waitUntil(timeout: 5) { done -> Void in
+            waitUntil(timeout: 5) { done in
                 subject.updatedContentsSignal.take(1).subscribeCompleted {
                     expect(subject.numberOfSaleArtworks) == 2
                     done()
@@ -107,7 +107,7 @@ class ListingsViewModelTests: QuickSpec {
             saleArtworksCount = 5
 
             // Verify that initial value is correct
-            waitUntil(timeout: 5) { done -> Void in
+            waitUntil(timeout: 5) { done in
                 subject.updatedContentsSignal.skip(1).take(1).subscribeCompleted {
                     expect(subject.numberOfSaleArtworks) == 5
                     done()
@@ -135,7 +135,7 @@ class ListingsViewModelTests: QuickSpec {
             var subsequentFirstLotID: String?
 
             // First we get our initial sync
-            kioskWaitUntil { done -> Void in
+            kioskWaitUntil { done in
                 subject.updatedContentsSignal.take(1).subscribeCompleted {
                     initialFirstLotID = subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).saleArtworkID
                     done()
@@ -144,7 +144,7 @@ class ListingsViewModelTests: QuickSpec {
 
             // Now we reverse the lot numbers
             reverseIDs = true
-            kioskWaitUntil { done -> Void in
+            kioskWaitUntil { done in
                 subject.updatedContentsSignal.skip(1).take(1).subscribeCompleted {
                     subsequentFirstLotID = subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).saleArtworkID
                     done()

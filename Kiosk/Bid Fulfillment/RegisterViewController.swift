@@ -50,7 +50,7 @@ class RegisterViewController: UIViewController {
         flowView
             .highlightedIndex
             .distinctUntilChanged()
-            .subscribeNext { [weak self] (index) -> Void in
+            .subscribeNext { [weak self] (index) in
                 if let _ = self?.fulfillmentNav() {
                     let registrationIndex = RegistrationIndex.fromInt(index)
 

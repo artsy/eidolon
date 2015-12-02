@@ -21,7 +21,7 @@ class LoggerTests: QuickSpec {
             expect(fileContents).to(contain(testString))
         }
 
-        afterEach { () -> () in
+        afterEach {
             try! NSFileManager.defaultManager().removeItemAtURL(logPath())
             return
         }

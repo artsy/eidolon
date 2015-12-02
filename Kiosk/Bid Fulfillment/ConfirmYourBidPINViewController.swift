@@ -63,7 +63,7 @@ class ConfirmYourBidPINViewController: UIViewController {
                     // This looks for credit cards on the users account, and sends them on the signal
                     return self?
                         .checkForCreditCard()
-                        .doOnNext { (cards) -> Void in
+                        .doOnNext { (cards) in
 
                             // If the cards list doesn't exist, or its empty, then perform the segue to collect one.
                             // Otherwise, proceed directly to the loading view controller to place the bid.

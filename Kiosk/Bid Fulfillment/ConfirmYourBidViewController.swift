@@ -75,7 +75,7 @@ class ConfirmYourBidViewController: UIViewController {
             return XAppRequest(endpoint, provider: me.provider)
                 .filterStatusCode(400)
                 .map(void)
-                .doOnError { (error) -> Void in
+                .doOnError { (error) in
                     guard let me = self else { return }
 
                     // Due to AlamoFire restrictions we can't stop HTTP redirects

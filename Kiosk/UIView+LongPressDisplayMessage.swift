@@ -17,7 +17,7 @@ extension UIView {
 
         recognizer
             .rx_event
-            .subscribeNext { _ -> Void in
+            .subscribeNext { _ in
                 closure(alertController: alertController(message, title: title))
             }
             .addDisposableTo(rx_disposeBag)

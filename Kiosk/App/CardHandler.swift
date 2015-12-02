@@ -45,11 +45,11 @@ class CardHandler: NSObject, CFTReaderDelegate {
             self.card = card;
             _cardStatus.onNext("Got Card")
 
-            card.tokenizeCardWithSuccess({ [weak self] () -> Void in
+            card.tokenizeCardWithSuccess({ [weak self] in
                 self?._cardStatus.onCompleted()
                 logger.log("Card was tokenized")
 
-            }, failure: { [weak self] (error) -> Void in
+            }, failure: { [weak self] (error) in
                 self?._cardStatus.onNext("Card Flight Error: \(error)");
                 logger.log("Card was not tokenizable")
             })

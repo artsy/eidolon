@@ -59,7 +59,7 @@ class ManualCreditCardInputViewModel: NSObject {
                 return empty()
             }
 
-            return me.registerCardSignal(newUser).doOnCompleted { () -> Void in
+            return me.registerCardSignal(newUser).doOnCompleted {
                 me.finishedSubject?.onCompleted()
             }.map(void)
         })

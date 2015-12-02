@@ -58,7 +58,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             guard let me = self else { return empty() }
 
             return me.xAuthSignal()
-                .map { accessTokenDict -> Void in
+                .map { accessTokenDict in
                     guard let accessToken = accessTokenDict["access_token"] as? String else {
                         throw NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
                     }

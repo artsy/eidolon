@@ -23,7 +23,7 @@ class SystemTimeTests: QuickSpec {
                 let time = SystemTime()
                 time
                     .syncSignal()
-                    .subscribeNext { (_) -> Void in
+                    .subscribeNext { (_) in
                         expect(time.inSync()) == true
                         return
                     }
@@ -34,7 +34,7 @@ class SystemTimeTests: QuickSpec {
                 let time = SystemTime()
                 time
                     .syncSignal()
-                    .subscribeNext { (_) -> Void in
+                    .subscribeNext { (_) in
                         let currentYear = yearFromDate(NSDate())
                         let timeYear = yearFromDate(time.date())
 

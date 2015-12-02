@@ -2,9 +2,9 @@ import RxSwift
 
 extension Observable where Element: Equatable {
     func ignore(value: Element) -> Observable<Element> {
-        return filter({ (e) -> Bool in
+        return filter { (e) -> Bool in
             return value != e
-        })
+        }
     }
 }
 
@@ -63,7 +63,7 @@ extension Observable where Element: OptionalType {
 
 extension Observable {
     func doOnNext(closure: Element -> Void) -> Observable<Element> {
-        return doOn { (event: Event) -> Void in
+        return doOn { (event: Event) in
             switch event {
             case .Next(let value):
                 closure(value)
@@ -73,7 +73,7 @@ extension Observable {
     }
 
     func doOnCompleted(closure: () -> Void) -> Observable<Element> {
-        return doOn { (event: Event) -> Void in
+        return doOn { (event: Event) in
             switch event {
             case .Completed:
                 closure()
@@ -83,7 +83,7 @@ extension Observable {
     }
 
     func doOnError(closure: ErrorType -> Void) -> Observable<Element> {
-        return doOn { (event: Event) -> Void in
+        return doOn { (event: Event) in
             switch event {
             case .Error(let error):
                 closure(error)
