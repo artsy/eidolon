@@ -130,13 +130,13 @@ extension SaleArtworkViewModel {
     }
 
     func currentBidOrOpeningBid() -> Observable<String> {
-        let s = [
+        let observables = [
             saleArtwork.rx_observe(NSNumber.self, "bidCount"),
             saleArtwork.rx_observe(NSNumber.self, "openingBidCents"),
             saleArtwork.rx_observe(NSNumber.self, "highestBidCents")
         ]
 
-        return s.combineLatest { numbers -> Int in
+        return observables.combineLatest { numbers -> Int in
             let bidCount = (numbers[0] ?? 0) as Int
             let openingBid = numbers[1] as Int?
             let highestBid = numbers[2] as Int?

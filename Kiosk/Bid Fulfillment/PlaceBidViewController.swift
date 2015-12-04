@@ -8,7 +8,7 @@ import Action
 
 class PlaceBidViewController: UIViewController {
 
-    var _bidDollars = Variable(0)
+    private var _bidDollars = Variable(0)
     var hasAlreadyPlacedABid: Bool = false
 
     @IBOutlet var bidAmountTextField: TextField!
