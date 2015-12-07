@@ -120,7 +120,7 @@ extension SaleArtworkViewModel {
     }
 
     func currentBid(prefix prefix: String = "", missingPrefix: String = "") -> Observable<String> {
-        return saleArtwork.rx_observe(Optional<NSNumber>.self, "highestBidCents").map { [weak self] highestBidCents in
+        return saleArtwork.rx_observe(NSNumber.self, "highestBidCents").map { [weak self] highestBidCents in
             if let currentBidCents = highestBidCents as? Int {
                 return "\(prefix)\(NSNumberFormatter.currencyStringForCents(currentBidCents))"
             } else {

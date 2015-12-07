@@ -44,7 +44,7 @@ class HelpViewController: UIViewController {
             .appViewController
             .sale
             .value
-            .rx_observe(Optional<String>.self, "buyersPremium")
+            .rx_observe(String.self, "buyersPremium")
             .map { $0.hasValue }
     }()
     
