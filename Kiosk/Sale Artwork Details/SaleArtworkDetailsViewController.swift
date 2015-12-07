@@ -189,10 +189,10 @@ class SaleArtworkDetailsViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
 
         let hasBids = saleArtwork
-            .rx_observe(Optional<NSNumber>.self, "highestBidCents")
+            .rx_observe(NSNumber.self, "highestBidCents")
             .map { observeredCents -> Bool in
                 guard let cents = observeredCents else { return false }
-                return (cents != nil) && ((cents as? Int ?? 0) > 0)
+                return (cents as Int ?? 0) > 0
             }
 
         let currentBidLabel = label(.Serif, tag: .CurrentBidLabel)
