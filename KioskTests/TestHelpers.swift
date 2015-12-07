@@ -4,6 +4,9 @@ import Nimble
 @testable
 import Kiosk
 import Moya
+import RxBlocking
+import RxSwift
+import Action
 
 private enum DefaultsKeys: String {
     case TokenKey = "TokenKey"
@@ -66,7 +69,7 @@ func testArtwork() -> Artwork {
         "aspect_ratio" : 1.508,
         "tile_base_url" : "http://example.com",
         "tile_size" : 1]
-    ]]) as! Artwork
+    ]])
 }
 
 func testSaleArtwork() -> SaleArtwork {
@@ -90,8 +93,8 @@ class StubFulfillmentController: FulfillmentController {
 
     var auctionID: String! = ""
     var xAccessToken: String?
-    var loggedInProvider: ReactiveCocoaMoyaProvider<ArtsyAPI>? = Provider.StubbingProvider()
-    var loggedInOrDefaultProvider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.StubbingProvider()
+    var loggedInProvider: RxMoyaProvider<ArtsyAPI>? = Provider.StubbingProvider()
+    var loggedInOrDefaultProvider: RxMoyaProvider<ArtsyAPI> = Provider.StubbingProvider()
 }
 
 /// Nimble is currently having issues with nondeterministic async expectations.
@@ -100,3 +103,100 @@ class StubFulfillmentController: FulfillmentController {
 func kioskWaitUntil(action: (() -> Void) -> Void) {
     waitUntil(timeout: 10, action: action)
 }
+
+
+// TODO: Move these into a separate pod?
+// This is handy so we can write expect(o) == 1 instead of expect(o.value) == 1 or whatever.
+public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Observable<T>> {
+    return MatcherFunc { actualExpression, failureMessage in
+
+        failureMessage.postfixMessage = "equal <\(expectedValue)>"
+        let actualValue = try actualExpression.evaluate()?.toBlocking().first()
+
+        let matches = actualValue == expectedValue
+        return matches
+    }
+}
+
+public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Variable<T>> {
+    return MatcherFunc { actualExpression, failureMessage in
+
+        failureMessage.postfixMessage = "equal <\(expectedValue)>"
+        let actualValue = try actualExpression.evaluate()?.value
+
+        let matches = actualValue == expectedValue && expectedValue != nil
+        return matches
+    }
+}
+
+public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Observable<Optional<T>>> {
+    return MatcherFunc { actualExpression, failureMessage in
+
+        failureMessage.postfixMessage = "equal <\(expectedValue)>"
+        let actualValue = try actualExpression.evaluate()?.toBlocking().first()
+
+        switch actualValue {
+        case .None:
+            return expectedValue == nil
+        case .Some(let wrapped):
+            return wrapped == expectedValue
+        }
+    }
+}
+
+public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Variable<Optional<T>>> {
+    return MatcherFunc { actualExpression, failureMessage in
+
+        failureMessage.postfixMessage = "equal <\(expectedValue)>"
+        let actualValue = try actualExpression.evaluate()?.value
+
+        switch actualValue {
+        case .None:
+            return expectedValue == nil
+        case .Some(let wrapped):
+            return wrapped == expectedValue
+        }
+    }
+}
+
+public func ==<T: Equatable>(lhs: Expectation<Observable<T>>, rhs: T?) {
+    lhs.to(equalFirst(rhs))
+}
+
+public func ==<T: Equatable>(lhs: Expectation<Variable<T>>, rhs: T?) {
+    lhs.to(equalFirst(rhs))
+}
+
+public func ==<T: Equatable>(lhs: Expectation<Observable<Optional<T>>>, rhs: T?) {
+    lhs.to(equalFirst(rhs))
+}
+
+public func ==<T: Equatable>(lhs: Expectation<Variable<Optional<T>>>, rhs: T?) {
+    lhs.to(equalFirst(rhs))
+}
+
+
+// TODO: Move into Action pod?
+
+enum TestError: String {
+    case Default
+}
+
+extension TestError: ErrorType { }
+
+func emptyAction() -> CocoaAction {
+    return CocoaAction { _ in empty() }
+}
+
+func neverAction() -> CocoaAction {
+    return CocoaAction { _ in never() }
+}
+
+func errorAction(error: ErrorType = TestError.Default) -> CocoaAction {
+    return CocoaAction { _ in failWith(error) }
+}
+
+func disabledAction() -> CocoaAction {
+    return CocoaAction(enabledIf: just(false)) { _ in empty() }
+}
+

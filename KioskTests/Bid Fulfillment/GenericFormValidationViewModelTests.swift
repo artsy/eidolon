@@ -1,25 +1,31 @@
 import Quick
 import Nimble
-import ReactiveCocoa
+import RxSwift
 @testable
 import Kiosk
 
 class GenericFormValidationViewModelTests: QuickSpec {
     override func spec() {
-        let validSubject = RACSignal.`return`(true).replay()
+        var validSubject: Observable<Bool>!
+        var disposeBag: DisposeBag!
 
-        it("executes command when manual signal sends") {
+        beforeEach {
+            validSubject = just(true)
+            disposeBag = DisposeBag()
+        }
+
+        it("executes command when manual  sends") {
             var completed = false
 
-            let invocationSignal = RACSubject()
+            let invocation = PublishSubject<Void>()
 
-            let subject = GenericFormValidationViewModel(isValidSignal: validSubject, manualInvocationSignal: invocationSignal, finishedSubject: RACSubject())
+            let subject = GenericFormValidationViewModel(isValid: validSubject, manualInvocation: invocation, finishedSubject: PublishSubject<Void>())
 
-            subject.command.executing.take(1).subscribeNext { _ -> Void in
+            subject.command.executing.take(1).subscribeNext { _ in
                 completed = true
-            }
+            }.addDisposableTo(disposeBag)
 
-            invocationSignal.sendNext(nil)
+            invocation.onNext()
 
             expect(completed).toEventually( beTrue() )
         }
@@ -27,33 +33,33 @@ class GenericFormValidationViewModelTests: QuickSpec {
         it("sends completed on finishedSubject when command is executed") {
             var completed = false
 
-            let invocationSignal = RACSubject()
-            let finishedSubject = RACSubject()
+            let invocation = PublishSubject<Void>()
+            let finishedSubject = PublishSubject<Void>()
 
-            finishedSubject.subscribeCompleted { () -> Void in
+            finishedSubject.subscribeCompleted {
                 completed = true
-            }
+            }.addDisposableTo(disposeBag)
 
-            let subject = GenericFormValidationViewModel(isValidSignal: validSubject, manualInvocationSignal: invocationSignal, finishedSubject: finishedSubject)
+            let subject = GenericFormValidationViewModel(isValid: validSubject, manualInvocation: invocation, finishedSubject: finishedSubject)
 
-            subject.command.execute(nil)
+            subject.command.execute()
 
             expect(completed).toEventually( beTrue() )
         }
 
-        it("uses the isValidSignal for the command enabledness") {
-            let validSubject = RACSubject()
+        it("uses the isValid for the command enabledness") {
+            let validSubject = PublishSubject<Bool>()
 
-            let subject = GenericFormValidationViewModel(isValidSignal: validSubject, manualInvocationSignal: RACSignal.empty(), finishedSubject: RACSubject())
+            let subject = GenericFormValidationViewModel(isValid: validSubject, manualInvocation: empty(), finishedSubject: PublishSubject<Void>())
 
-            validSubject.sendNext(false)
-            expect((subject.command.enabled.first() as! Bool)).toEventually( beFalse() )
+            validSubject.onNext(false)
+            expect(subject.command.enabled).toEventually( equalFirst(false) )
 
-            validSubject.sendNext(true)
-            expect((subject.command.enabled.first() as! Bool)).toEventually( beTrue() )
+            validSubject.onNext(true)
+            expect(subject.command.enabled).toEventually( equalFirst(true) )
 
-            validSubject.sendNext(false)
-            expect((subject.command.enabled.first() as! Bool)).toEventually( beFalse() )
+            validSubject.onNext(false)
+            expect(subject.command.enabled).toEventually( equalFirst(false) )
         }
     }
 }

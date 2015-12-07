@@ -1,5 +1,5 @@
 import UIKit
-import ReactiveCocoa
+import RxSwift
 
 private func alertController(message: String, title: String) -> UIAlertController {
     let alertController =  UIAlertController(title: title, message: message, preferredStyle: .Alert)
@@ -15,9 +15,12 @@ extension UIView {
     func presentOnLongPress(message: String, title: String, closure: PresentAlertClosure) {
         let recognizer = UILongPressGestureRecognizer()
 
-        recognizer.rac_gestureSignal().subscribeNext { _ -> Void in
-            closure(alertController: alertController(message, title: title))
-        }
+        recognizer
+            .rx_event
+            .subscribeNext { _ in
+                closure(alertController: alertController(message, title: title))
+            }
+            .addDisposableTo(rx_disposeBag)
 
         userInteractionEnabled = true
         addGestureRecognizer(recognizer)

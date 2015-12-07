@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class Location: JSONAble {
+final class Location: NSObject, JSONAbleType {
     let address: String
     let address2: String
     let city: String
@@ -18,7 +18,7 @@ class Location: JSONAble {
         self.postalCode = postalCode
     }
 
-    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
+    static func fromJSON(json: [String: AnyObject]) -> Location {
         let json = JSON(json)
 
         let address =  json["address"].stringValue

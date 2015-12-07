@@ -1,6 +1,7 @@
 import UIKit
 import Moya
-import ReactiveCocoa
+import RxSwift
+import Action
 
 class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
@@ -10,8 +11,13 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBOutlet var useArtsyBidderButton: UIButton!
     @IBOutlet var confirmCredentialsButton: Button!
 
+    private let _viewWillDisappear = PublishSubject<Void>()
+    var viewWillDisappear: Observable<Void> {
+        return self._viewWillDisappear.asObserver()
+    }
+
     var createNewAccount = false
-    lazy var provider: ReactiveCocoaMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    lazy var provider: RxMoyaProvider<ArtsyAPI> = Provider.sharedProvider
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
@@ -29,47 +35,57 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         let nav = self.fulfillmentNav()
         bidDetailsPreviewView.bidDetails = nav.bidDetails
 
-        emailTextField.text = nav.bidDetails.newUser.email ?? ""
+        emailTextField.text = nav.bidDetails.newUser.email.value ?? ""
         
-        let emailTextSignal = emailTextField.rac_textSignal().takeUntil(viewWillDisappearSignal())
-        let passwordTextSignal = passwordTextField.rac_textSignal().takeUntil(viewWillDisappearSignal())
-        RAC(nav.bidDetails.newUser, "email") <~ emailTextSignal
-        RAC(nav.bidDetails.newUser, "password") <~ passwordTextSignal
+        let emailText = emailTextField.rx_text.takeUntil(viewWillDisappear)
+        let passwordText = passwordTextField.rx_text.takeUntil(viewWillDisappear)
 
-        let inputIsEmail = emailTextSignal.map(stringIsEmailAddress)
-        let passwordIsLongEnough = passwordTextSignal.map(isZeroLengthString).not()
-        let formIsValid = RACSignal.combineLatest([inputIsEmail, passwordIsLongEnough]).and()
+        emailText
+            .mapToOptional()
+            .bindTo(nav.bidDetails.newUser.email)
+            .addDisposableTo(rx_disposeBag)
 
-        confirmCredentialsButton.rac_command = RACCommand(enabled: formIsValid) { [weak self] _ in
-            guard let me = self else { return RACSignal.empty() }
+        passwordText
+            .mapToOptional()
+            .bindTo(nav.bidDetails.newUser.password)
+            .addDisposableTo(rx_disposeBag)
 
-            return me.xAuthSignal().`try` { (accessTokenDict, errorPointer) -> Bool in
-                if let accessToken = accessTokenDict["access_token"] as? String {
-                    self?.fulfillmentNav().xAccessToken = accessToken
-                    return true
-                } else {
-                    errorPointer.memory = NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
-                    return false
-                }
+        let inputIsEmail = emailText.map(stringIsEmailAddress)
+        let passwordIsLongEnough = passwordText.map(isZeroLengthString).not()
+        let formIsValid = [inputIsEmail, passwordIsLongEnough].combineLatestAnd()
 
-            }.andThen {
-                return self?.fulfillmentNav().updateUserCredentials()
+        confirmCredentialsButton.rx_action = CocoaAction(enabledIf: formIsValid) { [weak self] _ -> Observable<Void> in
+            guard let me = self else { return empty() }
 
-            }.andThen {
-                return self?.creditCardSignal().doNext { (cards) -> Void in
-                    if (self == nil) { return }
-
-                    if cards.count > 0 {
-                        self!.performSegue(.EmailLoginConfirmedHighestBidder)
-                    } else {
-                        self!.performSegue(.ArtsyUserHasNotRegisteredCard)
+            return me.xAuth()
+                .map { accessTokenDict in
+                    guard let accessToken = accessTokenDict["access_token"] as? String else {
+                        throw NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
                     }
-                }
 
-            }.doError { [weak self] (error) -> Void in
-                logger.log("Error logging in: \(error.localizedDescription)")
-                logger.log("Error Logging in, likely bad auth creds, email = \(self?.emailTextField.text)")
-                self?.showAuthenticationError()
+                    self?.fulfillmentNav().xAccessToken = accessToken
+                    return Void()
+                }
+                .then {
+                    return self?.fulfillmentNav().updateUserCredentials()
+                }.then {
+                    return self?
+                        .creditCard()
+                        .doOnNext { cards in
+                            guard let me = self else { return }
+
+                            if cards.count > 0 {
+                                me.performSegue(.EmailLoginConfirmedHighestBidder)
+                            } else {
+                                me.performSegue(.ArtsyUserHasNotRegisteredCard)
+                            }
+                        }
+                        .map(void)
+
+                }.doOnError { [weak self] error in
+                    logger.log("Error logging in: \((error as NSError).localizedDescription)")
+                    logger.log("Error Logging in, likely bad auth creds, email = \(self?.emailTextField.text)")
+                    self?.showAuthenticationError()
             }
         }
     }
@@ -83,14 +99,19 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         }
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        _viewWillDisappear.onNext()
+    }
+
     func showAuthenticationError() {
         confirmCredentialsButton.flashError("Wrong login info")
         passwordTextField.flashForError()
-        fulfillmentNav().bidDetails.newUser.password = ""
+        fulfillmentNav().bidDetails.newUser.password.value = ""
         passwordTextField.text = ""
     }
 
-    func xAuthSignal() -> RACSignal {
+    func xAuth() -> Observable<AnyObject> {
         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
         return provider.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
     }
@@ -98,23 +119,32 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBAction func forgotPasswordTapped(sender: AnyObject) {
         let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .Alert)
 
-        let submitAction = UIAlertAction(title: "Send", style: .Default) { [weak alertController] (_) in
-            let emailTextField = alertController!.textFields![0]
-            self.sendForgotPasswordRequest(emailTextField.text ?? "")
-            return
-        }
+        let submitAction = UIAlertAction.Action("Send", style: .Default)
+        let email = Variable("")
+        submitAction.rx_action = CocoaAction(enabledIf: email.map(stringIsEmailAddress), workFactory: { () -> Observable<Void> in
+            let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email.value)
 
-        submitAction.enabled = false
-        submitAction.enabled = stringIsEmailAddress(emailTextField.text).boolValue
+            return XAppRequest(endpoint)
+                .filterSuccessfulStatusCodes()
+                .doOnNext { _ in
+                    logger.log("Sent forgot password request")
+                }
+                .map(void)
+        })
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
 
-        alertController.addTextFieldWithConfigurationHandler { (textField) in
+        alertController.addTextFieldWithConfigurationHandler { textField in
             textField.placeholder = "email@domain.com"
             textField.text = self.emailTextField.text
 
+            textField
+                .rx_text
+                .bindTo(email)
+                .addDisposableTo(textField.rx_disposeBag)
+
             NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
-                submitAction.enabled = stringIsEmailAddress(textField.text).boolValue
+                submitAction.enabled = stringIsEmailAddress(textField.text ?? "").boolValue
             }
         }
 
@@ -124,14 +154,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         self.presentViewController(alertController, animated: true) {}
     }
 
-    func sendForgotPasswordRequest(email: String) {
-        let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email)
-        XAppRequest(endpoint).filterSuccessfulStatusCodes().subscribeNext { (json) -> Void in
-            logger.log("Sent forgot password request")
-        }
-    }
-
-    func creditCardSignal() -> RACSignal {
+    func creditCard() -> Observable<[Card]> {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
         let authProvider = self.fulfillmentNav().loggedInProvider!
         return authProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)

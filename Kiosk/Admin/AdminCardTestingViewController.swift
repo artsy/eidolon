@@ -1,5 +1,5 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 import Keys
 
 class AdminCardTestingViewController: UIViewController {
@@ -21,27 +21,29 @@ class AdminCardTestingViewController: UIViewController {
             cardHandler = CardHandler(apiKey: self.keys.cardflightProductionAPIClientKey(), accountToken: self.keys.cardflightProductionMerchantAccountToken())
         }
 
-        cardHandler.cardSwipedSignal.subscribeNext({ (message) -> Void in
-                self.log("\(message)")
-                return
+        cardHandler.cardStatus
+            .subscribe { (event) in
+                switch event {
+                case .Next(let message):
+                    self.log("\(message)")
+                case .Error(let error):
+                    self.log("\n====Error====\n\(error)\nThe card reader may have become disconnected.\n\n")
+                    if self.cardHandler.card != nil {
+                        self.log("==\n\(self.cardHandler.card!)\n\n")
+                    }
+                case .Completed:
+                    guard let card = self.cardHandler.card else {
+                        // Restarts the card reader
+                        self.cardHandler.startSearching()
+                        return
+                    }
 
-            }, error: { (error) -> Void in
-
-                self.log("\n====Error====\n\(error)\nThe card reader may have become disconnected.\n\n")
-                if self.cardHandler.card != nil {
-                    self.log("==\n\(self.cardHandler.card!)\n\n")
-                }
-
-
-            }, completed: {
-
-                if let card = self.cardHandler.card {
                     let cardDetails = "Card: \(card.name) - \(card.last4) \n \(card.cardToken)"
                     self.log(cardDetails)
                 }
+            }
+            .addDisposableTo(rx_disposeBag)
 
-                self.cardHandler.startSearching()
-        })
 
         cardHandler.startSearching()
     }

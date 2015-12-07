@@ -1,13 +1,13 @@
 import Quick
 import Nimble
-import ReactiveCocoa
+import RxSwift
 @testable
 import Kiosk
 import Nimble_Snapshots
 
 class PlaceBidViewControllerConfiguration: QuickConfiguration {
     override class func configure(configuration: Configuration) {
-        sharedExamples("a bid view controller view controller", closure: { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a bid view controller view controller") { (sharedExampleContext: SharedExampleContext) in
             var subject: PlaceBidViewController!
             var nav: FulfillmentNavigationController!
 
@@ -36,7 +36,7 @@ class PlaceBidViewControllerConfiguration: QuickConfiguration {
                     expect(subject) == snapshot()
                 }
             }
-        })
+        }
     }
 }
 
@@ -66,7 +66,7 @@ class PlaceBidViewControllerTests: QuickSpec {
         it("looks right with a custom saleArtwork") {
             let nav = FulfillmentNavigationController(rootViewController: subject)
 
-            let artwork = Artwork.fromJSON(artworkJSON) as! Artwork
+            let artwork = Artwork.fromJSON(artworkJSON)
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             saleArtwork.minimumNextBidCents = 10000
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
@@ -84,7 +84,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             beforeEach {
                 nav = FulfillmentNavigationController(rootViewController:subject)
 
-                let artwork = Artwork.fromJSON(artworkJSON) as! Artwork
+                let artwork = Artwork.fromJSON(artworkJSON)
                 let saleArtwork = SaleArtwork(id: "", artwork: artwork)
                 saleArtwork.minimumNextBidCents = 10000
                 saleArtwork.openingBidCents = 10000
@@ -119,7 +119,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             beforeEach {
                 nav = FulfillmentNavigationController(rootViewController:subject)
 
-                let artwork = Artwork.fromJSON(artworkJSON) as! Artwork
+                let artwork = Artwork.fromJSON(artworkJSON)
                 let saleArtwork = SaleArtwork(id: "", artwork: artwork)
                 saleArtwork.minimumNextBidCents = 25000
                 saleArtwork.openingBidCents = 10000
@@ -141,43 +141,43 @@ class PlaceBidViewControllerTests: QuickSpec {
         }
 
         it("reacts to keypad inputs with currency") {
-            let customKeySubject = RACSubject()
-            subject.bidDollarsSignal = customKeySubject;
+            let customKeySubject = PublishSubject<Int>()
+            subject.bidDollars = customKeySubject.asObservable()
             subject.loadViewProgrammatically()
 
-            customKeySubject.sendNext(2344);
+            customKeySubject.onNext(2344);
             expect(subject.bidAmountTextField.text) == "2,344"
         }
 
         it("bid button is only enabled when bid is greater than min next bid") {
-            let customKeySubject = RACSubject()
+            let customKeySubject = PublishSubject<Int>()
             let nav = FulfillmentNavigationController(rootViewController:subject)
 
-            let artwork = Artwork.fromJSON(artworkJSON) as! Artwork
+            let artwork = Artwork.fromJSON(artworkJSON)
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             saleArtwork.minimumNextBidCents = 100
 
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
 
-            subject.bidDollarsSignal = customKeySubject;
+            subject.bidDollars = customKeySubject.asObservable()
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 
             expect(subject.bidButton.enabled) == false
 
-            customKeySubject.sendNext(200)
+            customKeySubject.onNext(200)
             expect(subject.bidButton.enabled) == true
         }
 
         it("passes the bid amount to the nav controller") {
             let nav = FulfillmentNavigationController(rootViewController:subject)
 
-            let customKeySubject = RACSubject()
-            subject.bidDollarsSignal = customKeySubject;
+            let customKeySubject = PublishSubject<Int>()
+            subject.bidDollars = customKeySubject.asObservable()
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 
-            customKeySubject.sendNext(33);
+            customKeySubject.onNext(33);
 
             expect(nav.bidDetails.bidAmountCents) == 3300
         }

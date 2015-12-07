@@ -2,19 +2,26 @@ import Quick
 import Nimble
 @testable
 import Kiosk
-import ReactiveCocoa
+import RxSwift
 import Nimble_Snapshots
+import Action
 import Moya
 
 class RegistrationPasswordViewControllerTests: QuickSpec {
 
     func testSubject(emailExists emailExists: Bool = false) -> RegistrationPasswordViewController {
 
-        class TestViewModel: RegistrationPasswordViewModel {
-            init (emailExists: Bool = false) {
-                super.init(passwordSignal: RACSignal.empty(), manualInvocationSignal: RACSignal.empty(), finishedSubject: RACSubject(), email: "")
+        class TestViewModel: RegistrationPasswordViewModelType {
 
-                emailExistsSignal = RACSignal.`return`(emailExists).replay()
+            var emailExists: Observable<Bool>
+            var action: CocoaAction! = emptyAction()
+
+            init (emailExists: Bool = false) {
+                self.emailExists = just(emailExists)
+            }
+
+            func userForgotPassword() -> Observable<Void> {
+                return empty()
             }
         }
 

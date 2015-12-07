@@ -1,64 +1,85 @@
 import Foundation
 import ARAnalytics
-import ReactiveCocoa
+import RxSwift
+
+protocol LoadingViewModelType {
+
+    var createdNewBidder: Variable<Bool> { get }
+    var bidIsResolved: Variable<Bool> { get }
+    var isHighestBidder: Variable<Bool> { get }
+    var reserveNotMet: Variable<Bool> { get }
+    var bidDetails: BidDetails { get }
+
+    func performActions() -> Observable<Void>
+}
 
 /// Encapsulates activities of the LoadingViewController.
-class LoadingViewModel: NSObject {
+class LoadingViewModel: NSObject, LoadingViewModelType {
     let placingBid: Bool
-    let bidderNetworkModel: BidderNetworkModel
+    let bidderNetworkModel: BidderNetworkModelType
 
-    lazy var placeBidNetworkModel: PlaceBidNetworkModel = {
+    lazy var placeBidNetworkModel: PlaceBidNetworkModelType = {
         return PlaceBidNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
-    lazy var bidCheckingModel: BidCheckingNetworkModel = { 
+    lazy var bidCheckingModel: BidCheckingNetworkModelType = {
         return BidCheckingNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
 
-    dynamic var createdNewBidder = false
-    dynamic var bidIsResolved = false
-    dynamic var isHighestBidder = false
-    dynamic var reserveNotMet = false
+    let createdNewBidder = Variable(false)
+    let bidIsResolved = Variable(false)
+    let isHighestBidder = Variable(false)
+    let reserveNotMet = Variable(false)
+
     var bidDetails: BidDetails {
         return bidderNetworkModel.fulfillmentController.bidDetails
     }
 
-    init(bidNetworkModel: BidderNetworkModel, placingBid: Bool, actionsCompleteSignal: RACSignal) {
+    init(bidNetworkModel: BidderNetworkModelType, placingBid: Bool, actionsComplete: Observable<Void>) {
         self.bidderNetworkModel = bidNetworkModel
         self.placingBid = placingBid
 
         super.init()
 
-        RAC(self, "createdNewBidder") <~ bidderNetworkModel.createdNewUser.takeUntil(actionsCompleteSignal)
-        RAC(self, "bidIsResolved") <~ RACObserve(bidCheckingModel, "bidIsResolved").takeUntil(actionsCompleteSignal)
-        RAC(self, "isHighestBidder") <~ RACObserve(bidCheckingModel, "isHighestBidder").takeUntil(actionsCompleteSignal)
-        RAC(self, "reserveNotMet") <~ RACObserve(bidCheckingModel, "reserveNotMet").takeUntil(actionsCompleteSignal)
+        // Set up bindings.
+        [
+            (bidderNetworkModel.createdNewUser, createdNewBidder),
+            (bidCheckingModel.bidIsResolved.asObservable(), bidIsResolved),
+            (bidCheckingModel.isHighestBidder.asObservable(), isHighestBidder),
+            (bidCheckingModel.reserveNotMet.asObservable(), reserveNotMet)
+        ].forEach { pair in
+            pair.0
+                .takeUntil(actionsComplete)
+                .bindTo(pair.1)
+                .addDisposableTo(rx_disposeBag)
+        }
     }
 
     /// Encapsulates essential activities of the LoadingViewController, including:
     /// - Registering new users
     /// - Placing bids for users
     /// - Polling for bid results
-    func performActions() -> RACSignal {
-        return bidderNetworkModel.createOrGetBidder().then { [weak self] () -> RACSignal in
-            if self?.placingBid == false {
-                ARAnalytics.event("Registered New User Only")
-                return RACSignal.empty()
-            }
+    func performActions() -> Observable<Void> {
+        return bidderNetworkModel
+            .createOrGetBidder()
+            .map(void)
+            .flatMap { [weak self] _ -> Observable<String> in
+                guard let me = self else { return empty() }
+                guard me.placingBid else {
+                    ARAnalytics.event("Registered New User Only")
+                    return empty()
+                }
 
-            if let strongSelf = self {
-                ARAnalytics.event("Started Placing Bid", withProperties: ["id": self?.bidDetails.saleArtwork?.artwork.id ?? ""])
-                return strongSelf.placeBidNetworkModel.bidSignal().ignore(nil)
-            } else {
-                return RACSignal.empty()
-            }
+                ARAnalytics.event("Started Placing Bid", withProperties: ["id": me.bidDetails.saleArtwork?.artwork.id ?? ""])
 
-        }.flattenMap { [weak self] (position) in
-
-            if self == nil || self?.placingBid == false {
-                return RACSignal.empty()
+                return me
+                    .placeBidNetworkModel
+                    .bid()
             }
-            
-            return self!.bidCheckingModel.waitForBidResolution(position as! String)
-        }
+            .flatMap { [weak self] position -> Observable<Void> in
+                guard let me = self else { return empty() }
+                guard me.placingBid else { return empty() }
+
+                return me.bidCheckingModel.waitForBidResolution(position).map(void)
+            }
     }
 }

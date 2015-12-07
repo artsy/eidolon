@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-class Image: JSONAble {
+final class Image: NSObject, JSONAbleType {
     let id: String
     let imageFormatString: String
     let imageVersions: [String]
@@ -29,7 +29,7 @@ class Image: JSONAble {
         self.isDefault = isDefault
     }
 
-    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+    static func fromJSON(json:[String: AnyObject]) -> Image {
         let json = JSON(json)
 
         let id = json["id"].stringValue

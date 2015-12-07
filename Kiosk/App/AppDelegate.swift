@@ -1,14 +1,14 @@
 import UIKit
 import ARAnalytics
 import SDWebImage
-import ReactiveCocoa
+import RxSwift
 import Keys
 import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    dynamic weak var helpViewController: HelpViewController?
+    let helpViewController = Variable<HelpViewController?>(nil)
     var helpButton: UIButton!
 
     weak var webViewController: UIViewController?

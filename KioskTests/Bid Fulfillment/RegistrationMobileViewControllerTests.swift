@@ -2,7 +2,7 @@ import Quick
 import Nimble
 @testable
 import Kiosk
-import ReactiveCocoa
+import RxSwift
 import Nimble_Snapshots
 import Moya
 
@@ -17,7 +17,7 @@ class RegistrationMobileViewControllerTests: QuickSpec {
         it("looks right with existing mobile") {
             let subject = RegistrationMobileViewController.instantiateFromStoryboard(fulfillmentStoryboard)
             subject.bidDetails = BidDetails.stubbedBidDetails()
-            subject.bidDetails.newUser.phoneNumber = "1234567890"
+            subject.bidDetails.newUser.phoneNumber.value = "1234567890"
             expect(subject).to( haveValidSnapshot() )
         }
 

@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-class Artwork: JSONAble {
+final class Artwork: NSObject, JSONAbleType {
 
     enum SoldStatus {
         case NotSold
@@ -39,9 +39,7 @@ class Artwork: JSONAble {
     dynamic var images: [Image]?
 
     lazy var defaultImage: Image? = {
-        let defaultImages = self.images?.filter({ (image) -> Bool in
-            image.isDefault
-        })
+        let defaultImages = self.images?.filter { $0.isDefault }
 
         return defaultImages?.first ?? self.images?.first
     }()
@@ -56,7 +54,7 @@ class Artwork: JSONAble {
         self.soldStatus = sold
     }
 
-    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
+    static func fromJSON(json: [String: AnyObject]) -> Artwork {
         let json = JSON(json)
 
         let id = json["id"].stringValue
@@ -74,7 +72,7 @@ class Artwork: JSONAble {
         artwork.blurb = json["blurb"].string
 
         if let artistDictionary = json["artist"].object as? [String: AnyObject] {
-            artwork.artists = [Artist.fromJSON(artistDictionary) as! Artist]
+            artwork.artists = [Artist.fromJSON(artistDictionary)]
         }
 
         if let imageDicts = json["images"].object as? Array<Dictionary<String, AnyObject>> {
@@ -82,7 +80,7 @@ class Artwork: JSONAble {
             artwork.images = imageDicts.filter { dict -> Bool in
                 let imageVersions = (dict["image_versions"] as? [String]) ?? []
                 return imageVersions.count > 0
-            }.map { return Image.fromJSON($0) as! Image }
+            }.map { return Image.fromJSON($0) }
         }
 
         if let dimensions = json["dimensions"].dictionary {

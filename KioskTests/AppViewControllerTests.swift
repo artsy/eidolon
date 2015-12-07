@@ -1,7 +1,7 @@
 import Quick
 import Nimble
 import Nimble_Snapshots
-import ReactiveCocoa
+import RxSwift
 @testable
 import Kiosk
 
@@ -17,37 +17,36 @@ class AppViewControllerTests: QuickSpec {
 
         describe("view") {
             var subject: AppViewController!
-            var fakeReachabilitySignal: RACSubject!
+            var fakeReachability: Variable<Bool>!
 
             beforeEach {
                 subject = AppViewController.instantiateFromStoryboard(auctionStoryboard)
-                fakeReachabilitySignal = RACSubject()
+                fakeReachability = Variable(true)
                 
-                subject.reachabilitySignal = fakeReachabilitySignal
-                subject.apiPingerSignal = RACSignal.`return`(true).take(1)
+                subject.reachability = fakeReachability.asObservable()
+                subject.apiPinger = just(true).take(1)
             }
 
-            it("shows the offlineBlockingView when offline signal is true"){
+            it("shows the offlineBlockingView when offline  is true"){
                 subject.loadViewProgrammatically()
                 
                 subject.offlineBlockingView.hidden = false
                 
-                fakeReachabilitySignal.sendNext(true)
+                fakeReachability.value = true
                 expect(subject.offlineBlockingView.hidden) == true
             }
 
-            it("hides the offlineBlockingView when offline signal is false"){
+            it("hides the offlineBlockingView when offline  is false"){
                 subject.loadViewProgrammatically()
 
-                fakeReachabilitySignal.sendNext(true)
+                fakeReachability.value = true
                 expect(subject.offlineBlockingView.hidden) == true
                 
                 
-                fakeReachabilitySignal.sendNext(false)
+                fakeReachability.value = false
                 expect(subject.offlineBlockingView.hidden) == false
                 
             }
-
         }
     }
 }

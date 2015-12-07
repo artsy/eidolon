@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class BuyersPremium: JSONAble {
+final class BuyersPremium: NSObject, JSONAbleType {
     let id: String
     let name: String
 
@@ -10,7 +10,7 @@ class BuyersPremium: JSONAble {
         self.name = name
     }
 
-    override class func fromJSON(json: [String: AnyObject]) -> JSONAble {
+    static func fromJSON(json: [String: AnyObject]) -> BuyersPremium {
         let json = JSON(json)
         let id = json["id"].stringValue
         let name = json["name"].stringValue

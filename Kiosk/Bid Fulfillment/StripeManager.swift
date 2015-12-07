@@ -1,11 +1,11 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 import Stripe
 
 class StripeManager: NSObject {
     var stripeClient = STPAPIClient.sharedClient()
 
-    func registerCard(digits: String, month: UInt, year: UInt, securityCode: String, postalCode: String) -> RACSignal {
+    func registerCard(digits: String, month: UInt, year: UInt, securityCode: String, postalCode: String) -> Observable<STPToken> {
         let card = STPCard()
         card.number = digits
         card.expMonth = month
@@ -13,23 +13,26 @@ class StripeManager: NSObject {
         card.cvc = securityCode
         card.addressZip = postalCode
 
-        return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
-            self?.stripeClient.createTokenWithCard(card) { (token, error) -> Void in
+        return create { [weak self] observer in
+            guard let me = self else {
+                observer.onCompleted()
+                return NopDisposable.instance
+            }
+
+            me.stripeClient.createTokenWithCard(card) { (token, error) in
                 if (token as STPToken?).hasValue {
-                    subscriber.sendNext(token)
-                    subscriber.sendCompleted()
+                    observer.onNext(token)
+                    observer.onCompleted()
                 } else {
-                    subscriber.sendError(error)
+                    observer.onError(error)
                 }
             }
 
-            return nil
+            return NopDisposable.instance
         }
     }
 
-    func stringIsCreditCard(object: AnyObject!) -> AnyObject! {
-        let cardNumber = object as! String
-
+    func stringIsCreditCard(cardNumber: String) -> Bool {
         return STPCard.validateCardNumber(cardNumber)
     }
 }

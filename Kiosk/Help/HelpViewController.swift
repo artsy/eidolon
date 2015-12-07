@@ -2,7 +2,9 @@ import UIKit
 import ORStackView
 import Artsy_UILabels
 import Artsy_UIButtons
-import ReactiveCocoa
+import Action
+import RxSwift
+import RxCocoa
 
 class HelpViewController: UIViewController {
     var positionConstraints: [NSLayoutConstraint]?
@@ -17,28 +19,33 @@ class HelpViewController: UIViewController {
     private let headerMargin: Float = 25.0
     private let inbetweenMargin: Float = 10.0
     
-    var showBuyersPremiumCommand = { () -> RACCommand in
+    var showBuyersPremiumCommand = { () -> CocoaAction in
         appDelegate().showBuyersPremiumCommand()
     }
     
-    var registerToBidCommand = { (enabledSignal: RACSignal) -> RACCommand in
-        appDelegate().registerToBidCommand(enabledSignal)
+    var registerToBidCommand = { (enabled: Observable<Bool>) -> CocoaAction in
+        appDelegate().registerToBidCommand(enabled)
     }
     
-    var requestBidderDetailsCommand = { (enabledSignal: RACSignal) -> RACCommand in
-        appDelegate().requestBidderDetailsCommand(enabledSignal)
+    var requestBidderDetailsCommand = { (enabled: Observable<Bool>) -> CocoaAction in
+        appDelegate().requestBidderDetailsCommand(enabled)
     }
     
-    var showPrivacyPolicyCommand = { () -> RACCommand in
+    var showPrivacyPolicyCommand = { () -> CocoaAction in
         appDelegate().showPrivacyPolicyCommand()
     }
     
-    var showConditionsOfSaleCommand = { () -> RACCommand in
+    var showConditionsOfSaleCommand = { () -> CocoaAction in
         appDelegate().showConditionsOfSaleCommand()
     }
     
-    lazy var hasBuyersPremiumSignal: RACSignal = {
-        RACObserve(appDelegate().appViewController, "sale.buyersPremium").notNil()
+    lazy var hasBuyersPremium: Observable<Bool> = {
+        return appDelegate()
+            .appViewController
+            .sale
+            .value
+            .rx_observe(String.self, "buyersPremium")
+            .map { $0.hasValue }
     }()
     
     class var width: Float {
@@ -86,7 +93,7 @@ private extension HelpViewController {
         bidExplainLabel.makeSubstringsBold(["mobile number", "bidder number", "PIN"])
         
         let registerButton = blackButton(.RegisterButton, title: "Register")
-        registerButton.rac_command = registerToBidCommand(connectedToInternetOrStubbingSignal())
+        registerButton.rx_action = registerToBidCommand(connectedToInternetOrStubbing())
         
         let bidderDetailsLabel = titleLabel(.BidderDetailsLabel, title: "What Are Bidder Details?")
         
@@ -94,16 +101,16 @@ private extension HelpViewController {
         bidderDetailsExplainLabel.makeSubstringsBold(["bidder number", "PIN"])
         
         let sendDetailsButton = blackButton(.BidderDetailsButton, title: "Send me my details")
-        sendDetailsButton.rac_command = requestBidderDetailsCommand(connectedToInternetOrStubbingSignal())
+        sendDetailsButton.rx_action = requestBidderDetailsCommand(connectedToInternetOrStubbing())
         
         let conditionsButton = serifButton(.ConditionsOfSaleButton, title: "Conditions of Sale")
-        conditionsButton.rac_command = showConditionsOfSaleCommand()
+        conditionsButton.rx_action = showConditionsOfSaleCommand()
         
         buyersPremiumButton = serifButton(.BuyersPremiumButton, title: "Buyers Premium")
-        buyersPremiumButton.rac_command = showBuyersPremiumCommand()
+        buyersPremiumButton.rx_action = showBuyersPremiumCommand()
         
         let privacyButton = serifButton(.PrivacyPolicyButton, title: "Privacy Policy")
-        privacyButton.rac_command = showPrivacyPolicyCommand()
+        privacyButton.rx_action = showPrivacyPolicyCommand()
         
         // Add subviews
         view.addSubview(stackView)
@@ -120,14 +127,15 @@ private extension HelpViewController {
         stackView.addSubview(conditionsButton, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         stackView.addSubview(privacyButton, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
         
-        hasBuyersPremiumSignal.subscribeNext { [weak self] in
-            let hasBuyersPremium = $0 as! Bool
-            if hasBuyersPremium {
-                self?.stackView.addSubview(self!.buyersPremiumButton, withTopMargin: "\(self!.inbetweenMargin)", sideMargin: "\(self!.sideMargin)")
-            } else {
-                self?.stackView.removeSubview(self!.buyersPremiumButton)
+        hasBuyersPremium
+            .subscribeNext { [weak self] hasBuyersPremium in
+                if hasBuyersPremium {
+                    self?.stackView.addSubview(self!.buyersPremiumButton, withTopMargin: "\(self!.inbetweenMargin)", sideMargin: "\(self!.sideMargin)")
+                } else {
+                    self?.stackView.removeSubview(self!.buyersPremiumButton)
+                }
             }
-        }
+            .addDisposableTo(rx_disposeBag)
     }
     
     func blackButton(tag: SubviewTag, title: String) -> ARBlackFlatButton {

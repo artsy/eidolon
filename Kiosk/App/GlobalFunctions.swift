@@ -1,4 +1,4 @@
-import ReactiveCocoa
+import RxSwift
 import Reachability
 import Moya
 
@@ -21,19 +21,16 @@ let logger = Logger(destination: logPath())
 
 private let reachabilityManager = ReachabilityManager()
 
-// A signal that completes when the app gets online (possibly completes immediately).
-func connectedToInternetOrStubbingSignal() -> RACSignal {
-    let online = reachabilityManager.reachSignal
-    let stubbing = RACSignal.`return`(APIKeys.sharedKeys.stubResponses)
+// An observable that completes when the app gets online (possibly completes immediately).
+func connectedToInternetOrStubbing() -> Observable<Bool> {
+    let online = reachabilityManager.reach
+    let stubbing = just(APIKeys.sharedKeys.stubResponses)
 
-    return RACSignal.combineLatest([online, stubbing]).or()
+    return [online, stubbing].combineLatestOr()
 }
 
-func responseIsOK(object: AnyObject!) -> AnyObject {
-    if let response = object as? MoyaResponse {
-        return response.statusCode == 200
-    }
-    return false
+func responseIsOK(response: MoyaResponse) -> Bool {
+    return response.statusCode == 200
 }
 
 
@@ -46,23 +43,34 @@ func detectDevelopmentEnvironment() -> Bool {
 }
 
 private class ReachabilityManager: NSObject {
-    let reachSignal: RACSignal = RACReplaySubject(capacity: 1)
+    let _reach = ReplaySubject<Bool>.create(bufferSize: 1)
+    var reach: Observable<Bool> {
+        return _reach.asObservable()
+    }
 
     private let reachability = Reachability.reachabilityForInternetConnection()
 
     override init() {
         super.init()
 
-        reachability.reachableBlock = { (_) in
-            return (self.reachSignal as! RACSubject).sendNext(true)
+        reachability.reachableBlock = { [weak self] _ in
+            self?._reach.onNext(true)
         }
 
-        reachability.unreachableBlock = { (_) in
-            return (self.reachSignal as! RACSubject).sendNext(false)
+        reachability.unreachableBlock = { [weak self] _ in
+            self?._reach.onNext(true)
         }
 
         reachability.startNotifier()
-        (reachSignal as! RACSubject).sendNext(reachability.isReachable())
+        _reach.onNext(reachability.isReachable())
     }
 }
 
+func bindingErrorToInterface(error: ErrorType) {
+    let error = "Binding error to UI: \(error)"
+    #if DEBUG
+        fatalError(error)
+    #else
+        print(error)
+    #endif
+}

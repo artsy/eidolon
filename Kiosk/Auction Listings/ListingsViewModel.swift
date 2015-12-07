@@ -1,20 +1,23 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 
 typealias ShowDetailsClosure = (SaleArtwork) -> Void
 typealias PresentModalClosure = (SaleArtwork) -> Void
 
 protocol ListingsViewModelType {
+
     var auctionID: String { get }
     var syncInterval: NSTimeInterval { get }
     var pageSize: Int { get }
-    var schedule: (RACSignal, RACScheduler) -> RACSignal { get }
-    var logSync: (AnyObject!) -> Void { get }
+    var logSync: (NSDate) -> Void { get }
     var numberOfSaleArtworks: Int { get }
 
-    var showSpinnerSignal: RACSignal! { get }
-    var gridSelectedSignal: RACSignal! { get }
-    var updatedContentsSignal: RACSignal! { get }
+    var showSpinner: Observable<Bool>! { get }
+    var gridSelected: Observable<Bool>! { get }
+    var updatedContents: Observable<NSDate> { get }
+
+    var scheduleOnBackground: (observable: Observable<AnyObject>) -> Observable<AnyObject> { get }
+    var scheduleOnForeground: (observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> { get }
 
     func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel
     func showDetailsForSaleArtworkAtIndexPath(indexPath: NSIndexPath)
@@ -22,38 +25,47 @@ protocol ListingsViewModelType {
     func imageAspectRatioForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> CGFloat?
 }
 
+// Cheating here, should be in the instance but there's only ever one instance, so ¯\_(ツ)_/¯
+private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueuePriority: .Default)
+
 class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // These are private to the view model – should not be accessed directly
-    private dynamic var saleArtworks = Array<SaleArtwork>()
-    private dynamic var sortedSaleArtworks = Array<SaleArtwork>()
+    private var saleArtworks = Variable(Array<SaleArtwork>())
+    private var sortedSaleArtworks = Variable<Array<SaleArtwork>>([])
 
     let auctionID: String
     let pageSize: Int
     let syncInterval: NSTimeInterval
-    let logSync: (AnyObject!) -> Void
-    var schedule: (RACSignal, RACScheduler) -> RACSignal
+    let logSync: (NSDate) -> Void
+    var scheduleOnBackground: (observable: Observable<AnyObject>) -> Observable<AnyObject>
+    var scheduleOnForeground: (observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]>
 
     var numberOfSaleArtworks: Int {
-        return saleArtworks.count
+        return sortedSaleArtworks.value.count
     }
 
-    var showSpinnerSignal: RACSignal!
-    var gridSelectedSignal: RACSignal!
-    var updatedContentsSignal: RACSignal! {
-        return RACObserve(self, "sortedSaleArtworks").distinctUntilChanged().mapArrayLengthExistenceToBool().ignore(false).map { _ -> AnyObject! in NSDate() }
+    var showSpinner: Observable<Bool>!
+    var gridSelected: Observable<Bool>!
+    var updatedContents: Observable<NSDate> {
+        return sortedSaleArtworks
+            .asObservable()
+            .map { $0.count > 0 }
+            .ignore(false)
+            .map { _ in NSDate() }
     }
 
     let showDetails: ShowDetailsClosure
     let presentModal: PresentModalClosure
 
-    init(selectedIndexSignal: RACSignal,
+    init(selectedIndex: Observable<Int>,
          showDetails: ShowDetailsClosure,
          presentModal: PresentModalClosure,
          pageSize: Int = 10,
          syncInterval: NSTimeInterval = SyncInterval,
-         logSync: (AnyObject!) -> Void = ListingsViewModel.DefaultLogging,
-         schedule: (signal: RACSignal, scheduler: RACScheduler) -> RACSignal = ListingsViewModel.DefaultScheduler,
+         logSync:(NSDate) -> Void = ListingsViewModel.DefaultLogging,
+         scheduleOnBackground: (observable: Observable<AnyObject>) -> Observable<AnyObject> = ListingsViewModel.DefaultScheduler(onBackground: true),
+         scheduleOnForeground: (observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = ListingsViewModel.DefaultScheduler(onBackground: false),
          auctionID: String = AppSetup.sharedState.auctionID) {
 
         self.auctionID = auctionID
@@ -62,151 +74,161 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         self.pageSize = pageSize
         self.syncInterval = syncInterval
         self.logSync = logSync
-        self.schedule = schedule
+        self.scheduleOnBackground = scheduleOnBackground
+        self.scheduleOnForeground = scheduleOnForeground
 
         super.init()
 
-        setup(selectedIndexSignal)
+        setup(selectedIndex)
     }
 
     // MARK: Private Methods
 
-    private func setup(selectedIndexSignal: RACSignal) {
-        RAC(self, "saleArtworks") <~ recurringListingsRequestSignal().takeUntil(self.rac_willDeallocSignal())
+    private func setup(selectedIndex: Observable<Int>) {
 
-        showSpinnerSignal = RACObserve(self, "saleArtworks").mapArrayLengthExistenceToBool().not()
-        gridSelectedSignal = selectedIndexSignal.map { return ListingsViewModel.SwitchValues(rawValue: $0 as! Int) == .Some(.Grid) }
+        recurringListingsRequest()
+            .takeUntil(rx_deallocated)
+            .bindTo(saleArtworks)
+            .addDisposableTo(rx_disposeBag)
 
-        let sortedSaleArtworksSignal = RACSignal.combineLatest([RACObserve(self, "saleArtworks").distinctUntilChanged(), selectedIndexSignal]).map {
-            let tuple = $0 as! RACTuple
-            let saleArtworks = tuple.first as! [SaleArtwork]
-            let selectedIndex = tuple.second as! Int
-
-            if let switchValue = ListingsViewModel.SwitchValues(rawValue: selectedIndex) {
-                return switchValue.sortSaleArtworks(saleArtworks)
-            } else {
-                // Necessary for compiler – won't execute
-                return saleArtworks
-            }
+        showSpinner = sortedSaleArtworks.map { sortedSaleArtworks in
+            return sortedSaleArtworks.count == 0
         }
 
-        RAC(self, "sortedSaleArtworks") <~ sortedSaleArtworksSignal
+        gridSelected = selectedIndex.map { ListingsViewModel.SwitchValues(rawValue: $0) == .Some(.Grid) }
+
+        let distinctSaleArtworks = saleArtworks
+            .asObservable()
+            .distinctUntilChanged { (lhs, rhs) -> Bool in
+                return lhs == rhs
+            }
+            .mapReplace(0) // To use in combineLatest, we must have an array of identically-typed observables. 
+
+        [selectedIndex, distinctSaleArtworks]
+            .combineLatest { ints in
+                // We use distinctSaleArtworks to trigger an update, but ints[1] is unused.
+                return ints[0]
+            }
+            .startWith(0)
+            .map { selectedIndex in
+                return ListingsViewModel.SwitchValues(rawValue: selectedIndex)
+            }
+            .filterNil()
+            .map { [weak self] switchValue -> [SaleArtwork] in
+                guard let me = self else { return [] }
+                return switchValue.sortSaleArtworks(me.saleArtworks.value)
+            }
+            .bindTo(sortedSaleArtworks)
+            .addDisposableTo(rx_disposeBag)
+
     }
 
-    private func listingsRequestSignalForPage(page: Int) -> RACSignal {
+    private func listingsRequestForPage(page: Int) -> Observable<AnyObject> {
         return XAppRequest(.AuctionListings(id: auctionID, page: page, pageSize: self.pageSize)).filterSuccessfulStatusCodes().mapJSON()
     }
 
     // Repeatedly calls itself with page+1 until the count of the returned array is < pageSize.
-    private func retrieveAllListingsRequestSignal(page: Int) -> RACSignal {
+    private func retrieveAllListingsRequest(page: Int) -> Observable<AnyObject> {
+        return create { [weak self] observer in
+            guard let me = self else { return NopDisposable.instance }
 
-        return RACSignal.createSignal { [weak self] (subscriber) -> RACDisposable! in
-            self?.listingsRequestSignalForPage(page).subscribeNext { (object) -> () in
-                if let array = object as? Array<AnyObject> {
+            return me.listingsRequestForPage(page).subscribeNext { object in
+                guard let array = object as? Array<AnyObject> else { return }
+                guard let me = self else { return }
 
-                    var nextPageSignal = RACSignal.empty()
+                // This'll either be the next page request or empty.
+                let nextPage: Observable<AnyObject>
 
-                    if array.count >= (self?.pageSize ?? 0) {
-                        // Infer we have more results to retrieve
-                        nextPageSignal = self?.retrieveAllListingsRequestSignal(page+1) ?? RACSignal.empty()
-                    }
-
-                    RACSignal.`return`(object).concat(nextPageSignal).subscribe(subscriber)
+                // We must have more results to retrieve
+                if array.count >= me.pageSize {
+                    nextPage = me.retrieveAllListingsRequest(page+1)
+                } else {
+                    nextPage = empty()
                 }
-            }
 
-            return nil
+                just(object)
+                    .concat(nextPage)
+                    .subscribe(observer)
+            }
         }
     }
 
     // Fetches all pages of the auction
-    private func allListingsRequestSignal() -> RACSignal {
-        return schedule(schedule(retrieveAllListingsRequestSignal(1), RACScheduler(priority: RACSchedulerPriorityDefault)).collect().map({ (object) -> AnyObject! in
-            // object is an array of arrays (thanks to collect()). We need to flatten it.
+    private func allListingsRequest() -> Observable<[SaleArtwork]> {
+        let backgroundJSONParsing = scheduleOnBackground(observable: retrieveAllListingsRequest(1)).reduce([AnyObject]())
+            { (memo, object) in
+                guard let array = object as? Array<AnyObject> else { return memo }
+                return memo + array
+            }
+            .mapToObjectArray(SaleArtwork)
+            .logServerError("Sale artworks failed to retrieve+parse")
+            .catchErrorJustReturn([])
 
-            let array = object as? Array<Array<AnyObject>>
-            return (array ?? []).reduce(Array<AnyObject>(), combine: +)
-        }).mapToObjectArray(SaleArtwork.self).`catch`({ (error) -> RACSignal! in
-
-            logger.log("Sale Artworks: Error handling thing: \(error.artsyServerError())")
-
-            return RACSignal.empty()
-        }), RACScheduler.mainThreadScheduler())
+        return scheduleOnForeground(observable: backgroundJSONParsing)
     }
 
-    private func recurringListingsRequestSignal() -> RACSignal {
-        let recurringSignal = RACSignal.interval(syncInterval, onScheduler: RACScheduler.mainThreadScheduler()).startWith(NSDate()).takeUntil(rac_willDeallocSignal())
+    private func recurringListingsRequest() -> Observable<Array<SaleArtwork>> {
+        let recurring = interval(syncInterval, MainScheduler.sharedInstance)
+            .map { _ in NSDate() }
+            .startWith(NSDate())
+            .takeUntil(rx_deallocating)
 
-        return recurringSignal.doNext(logSync).map { [weak self] _ -> AnyObject! in
-                return self?.allListingsRequestSignal() ?? RACSignal.empty()
-            }.switchToLatest().map { [weak self] (newSaleArtworks) -> AnyObject! in
-                guard self != nil else { return [] } // Now safe to use self!
 
-                let currentSaleArtworks = self!.saleArtworks
+        return recurring
+            .doOnNext(logSync)
+            .flatMap { [weak self] _ in
+                return self?.allListingsRequest() ?? empty()
+            }
+            .map { [weak self] newSaleArtworks -> [SaleArtwork] in
+                guard let me = self else { return [] }
 
-                func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) -> Bool {
-                    assert(currentSaleArtworks.count == newSaleArtworks.count, "Arrays' counts must be equal.")
-                    // Updating the currentSaleArtworks is easy. Both are already sorted as they came from the API (by lot #).
-                    // Because we assume that their length is the same, we just do a linear scan through and
-                    // copy values from the new to the existing.
-
-                    let saleArtworksCount = currentSaleArtworks.count
-
-                    for var i = 0; i < saleArtworksCount; i++ {
-                        if currentSaleArtworks[i].id == newSaleArtworks[i].id {
-                            currentSaleArtworks[i].updateWithValues(newSaleArtworks[i])
-                        } else {
-                            // Failure: the list was the same size but had different artworks.
-                            return false
-                        }
-                    }
-
-                    return true
-                }
+                let currentSaleArtworks = me.saleArtworks.value
 
                 // So we want to do here is pretty simple – if the existing and new arrays are of the same length,
                 // then update the individual values in the current array and return the existing value.
                 // If the array's length has changed, then we pass through the new array
-                if let newSaleArtworks = newSaleArtworks as? Array<SaleArtwork> {
-                    if newSaleArtworks.count == currentSaleArtworks.count {
-                        if update(currentSaleArtworks, newSaleArtworks: newSaleArtworks) {
-                            return currentSaleArtworks
-                        }
+                if newSaleArtworks.count == currentSaleArtworks.count {
+                    if update(currentSaleArtworks, newSaleArtworks: newSaleArtworks) {
+                        return currentSaleArtworks
                     }
                 }
 
                 return newSaleArtworks
-        }
+            }
     }
 
     // MARK: Private class methods
 
-    private class func DefaultLogging(date: AnyObject!) {
+    private class func DefaultLogging(date: NSDate) {
         #if (arch(i386) || arch(x86_64)) && os(iOS)
             logger.log("Syncing on \(date)")
         #endif
     }
 
-    private class func DefaultScheduler(signal: RACSignal, _ scheduler: RACScheduler) -> RACSignal {
-        return signal.deliverOn(scheduler)
+    private class func DefaultScheduler<T>(onBackground background: Bool)(observable: Observable<T>) -> Observable<T> {
+        if background {
+            return observable.observeOn(backgroundScheduler)
+        } else {
+            return observable.observeOn(MainScheduler.sharedInstance)
+        }
     }
 
     // MARK: Public methods
 
     func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel {
-        return sortedSaleArtworks[indexPath.item].viewModel
+        return sortedSaleArtworks.value[indexPath.item].viewModel
     }
 
     func imageAspectRatioForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> CGFloat? {
-        return sortedSaleArtworks[indexPath.item].artwork.defaultImage?.aspectRatio
+        return sortedSaleArtworks.value[indexPath.item].artwork.defaultImage?.aspectRatio
     }
 
     func showDetailsForSaleArtworkAtIndexPath(indexPath: NSIndexPath) {
-        showDetails(sortedSaleArtworks[indexPath.item])
+        showDetails(sortedSaleArtworks.value[indexPath.item])
     }
 
     func presentModalForSaleArtworkAtIndexPath(indexPath: NSIndexPath) {
-        presentModal(sortedSaleArtworks[indexPath.item])
+        presentModal(sortedSaleArtworks.value[indexPath.item])
     }
 
     // MARK: - Switch Values
@@ -265,8 +287,24 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
 // MARK: - Sorting Functions
 
+protocol IntOrZeroable {
+    var intOrZero: Int { get }
+}
+
+extension NSNumber: IntOrZeroable {
+    var intOrZero: Int {
+        return self as Int
+    }
+}
+
+extension Optional where Wrapped: IntOrZeroable {
+    var intOrZero: Int {
+        return self.value?.intOrZero ?? 0
+    }
+}
+
 func leastBidsSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
-    return (lhs.bidCount ?? 0) < (rhs.bidCount ?? 0)
+    return (lhs.bidCount.intOrZero) < (rhs.bidCount.intOrZero)
 }
 
 func mostBidsSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
@@ -274,7 +312,7 @@ func mostBidsSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
 }
 
 func lowestCurrentBidSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
-    return (lhs.highestBidCents ?? 0) < (rhs.highestBidCents ?? 0)
+    return (lhs.highestBidCents.intOrZero) < (rhs.highestBidCents.intOrZero)
 }
 
 func highestCurrentBidSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
@@ -287,4 +325,24 @@ func alphabeticalSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
 
 func sortById(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
     return lhs.id.caseInsensitiveCompare(rhs.id) == .OrderedAscending
+}
+
+private func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) -> Bool {
+    assert(currentSaleArtworks.count == newSaleArtworks.count, "Arrays' counts must be equal.")
+    // Updating the currentSaleArtworks is easy. Both are already sorted as they came from the API (by lot #).
+    // Because we assume that their length is the same, we just do a linear scan through and
+    // copy values from the new to the existing.
+
+    let saleArtworksCount = currentSaleArtworks.count
+
+    for var i = 0; i < saleArtworksCount; i++ {
+        if currentSaleArtworks[i].id == newSaleArtworks[i].id {
+            currentSaleArtworks[i].updateWithValues(newSaleArtworks[i])
+        } else {
+            // Failure: the list was the same size but had different artworks.
+            return false
+        }
+    }
+
+    return true
 }

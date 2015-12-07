@@ -2,87 +2,89 @@ import Quick
 import Nimble
 @testable
 import Kiosk
-import ReactiveCocoa
+import RxSwift
 
 class LoadingViewModelTests: QuickSpec {
     override func spec() {
         var stubbedNetworkModel: StubBidderNetworkModel!
         var subject: LoadingViewModel!
+        var disposeBag: DisposeBag!
 
         beforeEach {
             // The subject's reference to its network model is unowned, so we must take responsibility for it.
             stubbedNetworkModel = StubBidderNetworkModel()
+            disposeBag = DisposeBag()
         }
 
         it("loads placeBidNetworkModel") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsCompleteSignal: RACSignal.never())
-            expect(subject.placeBidNetworkModel.fulfillmentController as AnyObject) === subject.bidderNetworkModel.fulfillmentController
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsComplete: never())
+            expect(subject.placeBidNetworkModel.fulfillmentController as AnyObject) === subject.bidderNetworkModel.fulfillmentController as AnyObject
         }
 
         it("loads bidCheckingModel") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsCompleteSignal: RACSignal.never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsComplete: never())
             expect(subject.bidCheckingModel.fulfillmentController as AnyObject) === subject.bidderNetworkModel.fulfillmentController
         }
 
         it("initializes with bidNetworkModel") {
             let networkModel = StubBidderNetworkModel()
-            subject = LoadingViewModel(bidNetworkModel: networkModel, placingBid: false, actionsCompleteSignal: RACSignal.never())
+            subject = LoadingViewModel(bidNetworkModel: networkModel, placingBid: false, actionsComplete: never())
 
-            expect(subject.bidderNetworkModel) == networkModel
+            expect(subject.bidderNetworkModel.fulfillmentController as AnyObject) === networkModel.fulfillmentController as AnyObject
         }
 
         it("initializes with placingBid = false") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsCompleteSignal: RACSignal.never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsComplete: never())
 
             expect(subject.placingBid) == false
         }
 
         it("initializes with placingBid = true") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: RACSignal.never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
 
             expect(subject.placingBid) == true
         }
 
         it("binds createdNewBidder") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: RACSignal.never())
-            stubbedNetworkModel.createdNewBidderSubject.sendNext(true)
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
+            stubbedNetworkModel.createdNewBidderSubject.onNext(true)
 
             expect(subject.createdNewBidder) == true
         }
 
         it("binds bidIsResolved") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: RACSignal.never())
-            subject.bidCheckingModel.bidIsResolved = true
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
+            subject.bidCheckingModel.bidIsResolved.value = true
 
             expect(subject.bidIsResolved) == true
         }
 
         it("binds isHighestBidder") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: RACSignal.never())
-            subject.bidCheckingModel.isHighestBidder = true
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
+            subject.bidCheckingModel.isHighestBidder.value = true
 
             expect(subject.isHighestBidder) == true
         }
 
         it("binds reserveNotMet") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: RACSignal.never())
-            subject.bidCheckingModel.reserveNotMet = true
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
+            subject.bidCheckingModel.reserveNotMet.value = true
 
             expect(subject.reserveNotMet) == true
         }
 
         it("infers bidDetals") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: RACSignal.never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
             expect(subject.bidDetails) === subject.bidderNetworkModel.fulfillmentController.bidDetails
         }
 
         it("creates a new bidder if necessary") {
-            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsCompleteSignal: RACSignal.never())
+            subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsComplete: never())
             kioskWaitUntil { (done) in
-                subject.performActions().subscribeCompleted { done() }
+                subject.performActions().subscribeCompleted { done() }.addDisposableTo(disposeBag)
             }
 
-            expect(subject.createdNewBidder = true)
+            expect(subject.createdNewBidder) == true
         }
 
         describe("stubbed auxillary network models") {
@@ -93,25 +95,24 @@ class LoadingViewModelTests: QuickSpec {
                 stubPlaceBidNetworkModel = StubPlaceBidNetworkModel()
                 stubBidCheckingNetworkModel = StubBidCheckingNetworkModel()
 
-                subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsCompleteSignal: RACSignal.never())
+                subject = LoadingViewModel(bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: never())
 
                 subject.placeBidNetworkModel = stubPlaceBidNetworkModel
                 subject.bidCheckingModel = stubBidCheckingNetworkModel
             }
 
             it("places a bid if necessary") {
-                kioskWaitUntil { (done) -> Void in
-                    subject.performActions().subscribeCompleted { done() }
+                kioskWaitUntil { done in
+                    subject.performActions().subscribeCompleted { done() }.addDisposableTo(disposeBag)
                     return
                 }
 
-                expect(stubPlaceBidNetworkModel.bid) == true
+                expect(stubPlaceBidNetworkModel.hasBid) == true
             }
 
             it("waits for bid resolution if bid was placed") {
-                kioskWaitUntil { (done) -> Void in
-                    subject.performActions().subscribeCompleted { done() }
-                    return
+                kioskWaitUntil { done in
+                    subject.performActions().subscribeCompleted { done() }.addDisposableTo(disposeBag)
                 }
 
                 expect(stubBidCheckingNetworkModel.checked) == true
@@ -122,49 +123,46 @@ class LoadingViewModelTests: QuickSpec {
 
 let bidderID = "some-bidder-id"
 
-class StubBidderNetworkModel: BidderNetworkModel {
-    var createdNewBidderSubject = RACSubject()
-    // Our superclass' reference is unowned, so we need to retain it.
+class StubBidderNetworkModel: BidderNetworkModelType {
+    var createdNewBidderSubject = PublishSubject<Bool>()
+    
+
     let _stubbedFulfillmentController = StubFulfillmentController()
+    var fulfillmentController: FulfillmentController { return self._stubbedFulfillmentController }
 
-    init() {
-        super.init(fulfillmentController: _stubbedFulfillmentController)
-    }
 
-    override func createOrGetBidder() -> RACSignal {
-        createdNewBidderSubject.sendNext(true)
-        return RACSignal.empty()
-    }
+    var createdNewUser: Observable<Bool> { return createdNewBidderSubject.asObservable().startWith(false) }
 
-    override var createdNewUser: RACSignal {
-        return createdNewBidderSubject.startWith(false)
+    func createOrGetBidder() -> Observable<Void> {
+        createdNewBidderSubject.onNext(true)
+        return just()
     }
 }
 
-class StubPlaceBidNetworkModel: PlaceBidNetworkModel {
-    var bid = false
+class StubPlaceBidNetworkModel: PlaceBidNetworkModelType {
+    var hasBid = false
 
-    init() {
-        super.init(fulfillmentController: StubFulfillmentController())
-    }
+    let fulfillmentController: FulfillmentController = StubFulfillmentController()
 
-    override func bidSignal() -> RACSignal {
-        bid = true
+    func bid() -> Observable<String> {
+        hasBid = true
 
-        return RACSignal.`return`(bidderID)
+        return just(bidderID)
     }
 }
 
-class StubBidCheckingNetworkModel: BidCheckingNetworkModel {
+class StubBidCheckingNetworkModel: BidCheckingNetworkModelType {
     var checked = false
 
-    init() {
-        super.init(fulfillmentController: StubFulfillmentController())
-    }
+    var bidIsResolved = Variable(false)
+    var isHighestBidder = Variable(false)
+    var reserveNotMet = Variable(false)
 
-    override func waitForBidResolution(_: String) -> RACSignal {
+    let fulfillmentController: FulfillmentController = StubFulfillmentController()
+
+    func waitForBidResolution (bidderPositionId: String) -> Observable<Void> {
         checked = true
 
-        return RACSignal.empty()
+        return empty()
     }
 }

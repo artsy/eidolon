@@ -46,29 +46,32 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         moreInfoLabel.constrainHeight("44")
         moreInfoLabel.alignAttribute(.Bottom, toAttribute: .Bottom, ofView: contentView, predicate: "12")
 
-        RACObserve(lotNumberLabel, "text").subscribeNext { (text) -> Void in
-            switch text as! String? {
-            case .Some(let text) where text.isEmpty:
-                fallthrough
-            case .None:
-                lotNumberTopConstraint.constant = 0
-                artistNameTopConstraint.constant = 20
-            default:
-                lotNumberTopConstraint.constant = 20
-                artistNameTopConstraint.constant = 10
+        viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
+            .subscribeNext { (lotNumber)in
+                switch lotNumber {
+                case .Some(let text) where text.isEmpty:
+                    fallthrough
+                case .None:
+                    lotNumberTopConstraint.constant = 0
+                    artistNameTopConstraint.constant = 20
+                default:
+                    lotNumberTopConstraint.constant = 20
+                    artistNameTopConstraint.constant = 10
+                }
             }
-        }
-        
+            .addDisposableTo(rx_disposeBag)
+
         // Bind subviews
-        viewModelSignal.subscribeNext { [weak self] (viewModel) -> Void in
-            let viewModel = viewModel as! SaleArtworkViewModel
-            if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
-                self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
+
+        viewModel.subscribeNext { [weak self] viewModel in
+                if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
+                    self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
+                }
+                let imageHeight = heightForImageWithAspectRatio(viewModel.thumbnailAspectRatio)
+                self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
+                self?.layoutIfNeeded()
             }
-            let imageHeight = heightForImageWithAspectRatio(viewModel.thumbnailAspectRatio)
-            self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
-            self?.layoutIfNeeded()
-        }
+            .addDisposableTo(rx_disposeBag)
     }
 
     override func layoutSubviews() {

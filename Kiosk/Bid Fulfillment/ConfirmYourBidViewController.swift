@@ -1,11 +1,12 @@
 import UIKit
 import ECPhoneNumberFormatter
 import Moya
-import ReactiveCocoa
+import RxSwift
+import Action
 
 class ConfirmYourBidViewController: UIViewController {
 
-    private dynamic var number: String = ""
+    private var _number = Variable("")
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
@@ -15,8 +16,13 @@ class ConfirmYourBidViewController: UIViewController {
     @IBOutlet var enterButton: UIButton!
     @IBOutlet var useArtsyLoginButton: UIButton!
 
-    // Need takeUntil because we bind this signal eventually to bidDetails, making us stick around longer than we should!
-    lazy var numberSignal: RACSignal = { self.keypadContainer.stringValueSignal.takeUntil(self.viewWillDisappearSignal()) }()
+    private let _viewWillDisappear = PublishSubject<Void>()
+    var viewWillDisappear: Observable<Void> {
+        return self._viewWillDisappear.asObserver()
+    }
+
+    // Need takeUntil because we bind this observable eventually to bidDetails, making us stick around longer than we should!
+    lazy var number: Observable<String> = { self.keypadContainer.stringValue.takeUntil(self.viewWillDisappear) }()
     
     lazy var provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider
 
@@ -33,16 +39,25 @@ class ConfirmYourBidViewController: UIViewController {
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
 
-        RAC(self, "number") <~ numberSignal
+        number
+            .bindTo(_number)
+            .addDisposableTo(rx_disposeBag)
 
-        RAC(numberAmountTextField, "text") <~ numberSignal.map(toPhoneNumberString)
+        number
+            .map(toPhoneNumberString)
+            .bindTo(numberAmountTextField.rx_text)
+            .addDisposableTo(rx_disposeBag)
 
         let nav = self.fulfillmentNav()
 
-        RAC(nav.bidDetails.newUser, "phoneNumber") <~ numberSignal
-        RAC(nav.bidDetails, "paddleNumber") <~ numberSignal
-        
-        bidDetailsPreviewView.bidDetails = nav.bidDetails
+        let optionalNumber = number.mapToOptional()
+
+        // We don't know if it's a paddle number or a phone number yet, so bind both ¯\_(ツ)_/¯
+        [nav.bidDetails.paddleNumber, nav.bidDetails.newUser.phoneNumber].forEach { variable in
+            optionalNumber
+                .bindTo(variable)
+                .addDisposableTo(rx_disposeBag)
+        }
 
         // Does a bidder exist for this phone number?
         //   if so forward to PIN input VC
@@ -50,33 +65,42 @@ class ConfirmYourBidViewController: UIViewController {
 
         let auctionID = nav.auctionID
         
-        let numberIsZeroLengthSignal = numberSignal.map(isZeroLengthString)
-        enterButton.rac_command = RACCommand(enabled: numberIsZeroLengthSignal.not()) { [weak self] _ in
-            guard let me = self else { return RACSignal.empty() }
+        let numberIsZeroLength = number.map(isZeroLengthString)
 
-            let endpoint: ArtsyAPI = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me.number))
-            return XAppRequest(endpoint, provider:me.provider).filterStatusCode(400).doError { (error) -> Void in
-                guard let me = self else { return }
+        enterButton.rx_action = CocoaAction(enabledIf: numberIsZeroLength.not(), workFactory: { [weak self] _ in
+            guard let me = self else { return empty() }
 
-                // Due to AlamoFire restrictions we can't stop HTTP redirects
-                // so to figure out if we got 302'd we have to introspect the
-                // error to see if it's the original URL to know if the
-                // request succeeded.
+            let endpoint = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me._number.value))
 
-                let moyaResponse = error.userInfo["data"] as? MoyaResponse
-                let responseURL = moyaResponse?.response?.URL?.absoluteString
+            return XAppRequest(endpoint, provider: me.provider)
+                .filterStatusCode(400)
+                .map(void)
+                .doOnError { (error) in
+                    guard let me = self else { return }
 
-                if let responseURL = responseURL {
-                    if (responseURL as NSString).containsString("v1/bidder/") {
+                    // Due to AlamoFire restrictions we can't stop HTTP redirects
+                    // so to figure out if we got 302'd we have to introspect the
+                    // error to see if it's the original URL to know if the
+                    // request succeeded.
+
+                    let moyaResponse = (error as NSError).userInfo["data"] as? MoyaResponse
+
+                    if let responseURL = moyaResponse?.response?.URL?.absoluteString
+                        where responseURL.containsString("v1/bidder/") {
+
                         me.performSegue(.ConfirmyourBidBidderFound)
-                        return
+                    } else {
+                        me.performSegue(.ConfirmyourBidBidderNotFound)
                     }
                 }
 
-                me.performSegue(.ConfirmyourBidBidderNotFound)
-                return
-            }
-        }
+        })
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        _viewWillDisappear.onNext()
     }
 
     func toOpeningBidString(cents:AnyObject!) -> AnyObject! {
@@ -86,12 +110,11 @@ class ConfirmYourBidViewController: UIViewController {
         return ""
     }
 
-    func toPhoneNumberString(number:AnyObject!) -> AnyObject! {
-        let numberString = number as! String
-        if numberString.characters.count >= 7 {
-            return self.phoneNumberFormatter.stringForObjectValue(numberString)
+    func toPhoneNumberString(number: String) -> String {
+        if number.characters.count >= 7 {
+            return phoneNumberFormatter.stringForObjectValue(number) ?? number
         } else {
-            return numberString
+            return number
         }
     }
 }

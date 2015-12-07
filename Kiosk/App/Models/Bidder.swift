@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class Bidder: JSONAble {
+final class Bidder: NSObject, JSONAbleType {
     let id: String
     let saleID: String
     var pin: String?
@@ -12,7 +12,7 @@ class Bidder: JSONAble {
         self.pin = pin
     }
 
-    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+    static func fromJSON(json:[String: AnyObject]) -> Bidder {
         let json = JSON(json)
 
         let id = json["id"].stringValue

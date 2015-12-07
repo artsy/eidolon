@@ -1,5 +1,5 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 
 private let kNoBidsString = "0 bids placed"
 
@@ -55,30 +55,36 @@ extension SaleArtworkViewModel {
         return saleArtwork.id
     }
 
-    // Signals representing values that change over time.
+    // Observables representing values that change over time.
 
-    var numberOfBidsSignal: RACSignal {
-        return RACObserve(saleArtwork, "bidCount").map { (optionalBidCount) -> AnyObject! in
-            // Technically, the bidCount is Int?, but the `as?` cast could fail (it never will, but the compiler doesn't know that)
-            // So we need to unwrap it as an optional optional. Yo dawg.
-            let bidCount = optionalBidCount as! Int?
-
-            if let bidCount = bidCount {
-                let suffix = bidCount == 1 ? "" : "s"
-                return "\(bidCount) bid\(suffix) placed"
-            } else {
+    func numberOfBids() -> Observable<String> {
+        return saleArtwork.rx_observe(NSNumber.self, "bidCount").map { optionalBidCount -> String in
+            guard let bidCount = optionalBidCount else {
                 return kNoBidsString
             }
+            let suffix = bidCount == 1 ? "" : "s"
+            return "\(bidCount) bid\(suffix) placed"
         }
     }
 
     // The language used here is very specific – see https://github.com/artsy/eidolon/pull/325#issuecomment-64121996 for details
-    var numberOfBidsWithReserveSignal: RACSignal {
-        return RACSignal.combineLatest([numberOfBidsSignal, RACObserve(saleArtwork, "reserveStatus"), RACObserve(saleArtwork, "highestBidCents")]).map { (object) -> AnyObject! in
-            let tuple = object as! RACTuple // Ignoring highestBidCents; only there to trigger on bid update.
+    var numberOfBidsWithReserve: Observable<String> {
 
-            let numberOfBidsString = tuple.first as! String
-            let reserveStatus = ReserveStatus.initOrDefault(tuple.second as? String)
+        // Ignoring highestBidCents; only there to trigger on bid update.
+        let highestBidString = saleArtwork.rx_observe(NSNumber.self, "highestBidCents").map { "\($0)" }
+        let reserveStatus = saleArtwork.rx_observe(String.self, "reserveStatus").map { input -> String in
+            switch input {
+            case .Some(let reserveStatus):
+                return reserveStatus
+            default:
+                return ""
+            }
+        }
+
+        return [numberOfBids(), reserveStatus, highestBidString].combineLatest { strings -> String in
+
+            let numberOfBidsString = strings[0]
+            let reserveStatus = ReserveStatus.initOrDefault(strings[1])
 
             // if there is no reserve, just return the number of bids string.
             if reserveStatus == .NoReserve {
@@ -96,30 +102,57 @@ extension SaleArtworkViewModel {
         }
     }
 
-    var lotNumberSignal: RACSignal {
-        return RACObserve(saleArtwork, "lotNumber").map { (lotNumber) -> AnyObject! in
+    func lotNumber() -> Observable<String?> {
+        return saleArtwork.rx_observe(NSNumber.self, "lotNumber").map { lotNumber  in
             if let lotNumber = lotNumber as? Int {
                 return "Lot \(lotNumber)"
             } else {
-                return nil
+                return ""
             }
-        }.mapNilToEmptyString()
-    }
-
-    var forSaleSignal: RACSignal {
-        return RACObserve(saleArtwork, "artwork").map { (artwork) -> AnyObject! in
-            let artwork = artwork as! Artwork
-
-            return Artwork.SoldStatus.fromString(artwork.soldStatus) == .NotSold
         }
     }
 
-    func currentBidSignal(prefix prefix: String = "", missingPrefix: String = "") -> RACSignal {
-        return RACObserve(saleArtwork, "highestBidCents").map { [weak self] (highestBidCents) -> AnyObject! in
+    func forSale() -> Observable<Bool> {
+        return saleArtwork.artwork.rx_observe(String.self, "soldStatus").filterNil().map { status in
+            return Artwork.SoldStatus.fromString(status) == .NotSold
+        }
+
+    }
+
+    func currentBid(prefix prefix: String = "", missingPrefix: String = "") -> Observable<String> {
+        return saleArtwork.rx_observe(NSNumber.self, "highestBidCents").map { [weak self] highestBidCents in
             if let currentBidCents = highestBidCents as? Int {
                 return "\(prefix)\(NSNumberFormatter.currencyStringForCents(currentBidCents))"
             } else {
                 return "\(missingPrefix)\(NSNumberFormatter.currencyStringForCents(self?.saleArtwork.openingBidCents ?? 0))"
+            }
+        }
+    }
+
+    func currentBidOrOpeningBid() -> Observable<String> {
+        let observables = [
+            saleArtwork.rx_observe(NSNumber.self, "bidCount"),
+            saleArtwork.rx_observe(NSNumber.self, "openingBidCents"),
+            saleArtwork.rx_observe(NSNumber.self, "highestBidCents")
+        ]
+
+        return observables.combineLatest { numbers -> Int in
+            let bidCount = (numbers[0] ?? 0) as Int
+            let openingBid = numbers[1] as Int?
+            let highestBid = numbers[2] as Int?
+
+            return (bidCount > 0 ? highestBid : openingBid) ?? 0
+        }.map(centsToPresentableDollarsString)
+    }
+
+    func currentBidOrOpeningBidLabel() -> Observable<String> {
+        return saleArtwork.rx_observe(NSNumber.self, "bidCount").map { input in
+            guard let count = input as? Int else { return "" }
+
+            if count > 0 {
+                return "Current Bid:"
+            } else {
+                return "Opening Bid:"
             }
         }
     }

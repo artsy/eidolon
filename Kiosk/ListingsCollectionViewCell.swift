@@ -1,6 +1,8 @@
 import Foundation
 import Artsy_UILabels
-import ReactiveCocoa
+import RxSwift
+import RxCocoa
+import NSObject_Rx
 
 class ListingsCollectionViewCell: UICollectionViewCell {
     typealias DownloadImageClosure = (url: NSURL?, imageView: UIImageView) -> ()
@@ -19,32 +21,39 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     var downloadImage: DownloadImageClosure?
     var cancelDownloadImage: CancelDownloadImageClosure?
 
-    lazy var moreInfoSignal: RACSignal = {
-        // "Jump start" both the more info button signal and the image gesture signal with nil values,
-        // then skip the first "jump started" value.
-        RACSignal.combineLatest([self.infoGestureSignal.startWith(nil), self.imageGestureSigal.startWith(nil)]).mapReplace(nil).skip(1)
+    lazy var moreInfo: Observable<NSDate> = {
+        return [self.imageGestureSigal, self.infoGesture].toObservable().merge()
     }()
     
-    private lazy var imageGestureSigal: RACSignal = {
+    private lazy var imageGestureSigal: Observable<NSDate> = {
         let recognizer = UITapGestureRecognizer()
         self.artworkImageView.addGestureRecognizer(recognizer)
         self.artworkImageView.userInteractionEnabled = true
-        return recognizer.rac_gestureSignal()
+        return recognizer.rx_event.map { _ in NSDate() }
     }()
 
-    private lazy var infoGestureSignal: RACSignal = {
+    private lazy var infoGesture: Observable<NSDate> = {
         let recognizer = UITapGestureRecognizer()
         self.moreInfoLabel.addGestureRecognizer(recognizer)
         self.moreInfoLabel.userInteractionEnabled = true
-        return recognizer.rac_gestureSignal()
+        return recognizer.rx_event.map { _ in NSDate() }
     }()
 
-    lazy var viewModelSignal: RACSignal = {
-        return RACObserve(self, "viewModel").ignore(nil)
-    }()
-    
-    dynamic var viewModel: SaleArtworkViewModel!
-    dynamic var bidWasPressedSignal: RACSignal = RACSubject()
+    private var _preparingForReuse = PublishSubject<Void>()
+
+    var preparingForReuse: Observable<Void> {
+        return _preparingForReuse.asObservable()
+    }
+
+    var viewModel = PublishSubject<SaleArtworkViewModel>()
+    func setViewModel(newViewModel: SaleArtworkViewModel) {
+        self.viewModel.onNext(newViewModel)
+    }
+
+    private var _bidPressed = PublishSubject<NSDate>()
+    var bidPressed: Observable<NSDate> {
+        return _bidPressed.asObservable()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,6 +68,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         cancelDownloadImage?(imageView: artworkImageView)
+        _preparingForReuse.onNext()
     }
     
     func setup() {
@@ -68,53 +78,54 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         // Bind subviews
 
         // Start with things not expected to ever change. 
+        viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
+            .replaceNilWith("")
+            .bindTo(lotNumberLabel.rx_text)
+            .addDisposableTo(rx_disposeBag)
 
-        RAC(self, "lotNumberLabel.text") <~ viewModelSignal.map { (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).lotNumberSignal
-        }.switchToLatest()
-
-        viewModelSignal.subscribeNext { [weak self] (viewModel) -> Void in
-            if let imageView = self?.artworkImageView {
-                let url = (viewModel as? SaleArtworkViewModel)?.thumbnailURL
+        viewModel.map { (viewModel) -> NSURL? in
+                return viewModel.thumbnailURL
+            }.subscribeNext { [weak self] url in
+                guard let imageView = self?.artworkImageView else { return }
                 self?.downloadImage?(url: url, imageView: imageView)
-            }
-        }
-        
-        RAC(self, "artistNameLabel.text") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).artistName
-        }).mapNilToEmptyString()
-        
-        RAC(self, "artworkTitleLabel.attributedText") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).titleAndDateAttributedString
-        }).mapNilToEmptyAttributedString()
-        
-        RAC(self, "estimateLabel.text") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).estimateString
-        }).mapNilToEmptyString()
+            }.addDisposableTo(rx_disposeBag)
+
+        viewModel.map { $0.artistName ?? "" }
+            .bindTo(artistNameLabel.rx_text)
+            .addDisposableTo(rx_disposeBag)
+
+        viewModel.map { $0.titleAndDateAttributedString ?? NSAttributedString() }
+            .bindTo(artworkTitleLabel.rx_attributedText)
+            .addDisposableTo(rx_disposeBag)
+
+        viewModel.map { $0.estimateString }
+            .bindTo(estimateLabel.rx_text)
+            .addDisposableTo(rx_disposeBag)
 
         // Now do properties that _do_ change.
 
-        RAC(self, "currentBidLabel.text") <~ viewModelSignal.map({ (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).currentBidSignal(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ")
-        }).switchToLatest().mapNilToEmptyString()
-        
-        RAC(self, "numberOfBidsLabel.text") <~ viewModelSignal.map { (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).numberOfBidsSignal
-        }.switchToLatest().mapNilToEmptyString()
+        viewModel.flatMap { (viewModel) -> Observable<String> in
+                return viewModel.currentBid(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ")
+            }
+            .bindTo(currentBidLabel.rx_text)
+            .addDisposableTo(rx_disposeBag)
 
-        RAC(self.bidButton, "enabled") <~ viewModelSignal.map { (viewModel) -> AnyObject! in
-            return (viewModel as! SaleArtworkViewModel).forSaleSignal
-        }.switchToLatest().doNext { [weak bidButton] (forSale) -> Void in
-            // Button titles aren't KVO-able
-            let forSale = forSale as! Bool
+        viewModel.flatMapTo(SaleArtworkViewModel.numberOfBids)
+            .bindTo(numberOfBidsLabel.rx_text)
+            .addDisposableTo(rx_disposeBag)
 
-            let title = forSale ? "BID" : "SOLD"
-            bidButton?.setTitle(title, forState: .Normal)
-        }
+        viewModel.flatMapTo(SaleArtworkViewModel.forSale)
+            .doOnNext { [weak bidButton] forSale in
+                // Button titles aren't KVO-able
+                bidButton?.setTitle((forSale ? "BID" : "SOLD"), forState: .Normal)
+            }
+            .bindTo(bidButton.rx_enabled)
+            .addDisposableTo(rx_disposeBag)
 
-        bidButton.rac_signalForControlEvents(.TouchUpInside).subscribeNext { [weak self] (_) -> Void in
-            (self?.bidWasPressedSignal as! RACSubject).sendNext(nil)
-        }
+        bidButton.rx_tap.subscribeNext { [weak self] in
+                self?._bidPressed.onNext(NSDate())
+            }
+            .addDisposableTo(rx_disposeBag)
     }
 }
 

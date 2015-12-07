@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-class Card: JSONAble {
+final class Card: NSObject, JSONAbleType {
     let id: String
     let name: String
     let lastDigits: String
@@ -17,7 +17,7 @@ class Card: JSONAble {
         self.expirationYear = expirationYear
     }
 
-    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+    static func fromJSON(json:[String: AnyObject]) -> Card {
         let json = JSON(json)
 
         let id = json["id"].stringValue

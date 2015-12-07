@@ -1,7 +1,7 @@
 import UIKit
 import Artsy_UILabels
 import ARAnalytics
-import ReactiveCocoa
+import RxSwift
 
 class LoadingViewController: UIViewController {
 
@@ -19,11 +19,16 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var backToAuctionButton: SecondaryActionButton!
     @IBOutlet weak var placeHigherBidButton: ActionButton!
 
-    lazy var viewModel: LoadingViewModel = {
+    private let _viewWillDisappear = PublishSubject<Void>()
+    var viewWillDisappear: Observable<Void> {
+        return self._viewWillDisappear.asObserver()
+    }
+    
+    lazy var viewModel: LoadingViewModelType = {
         return LoadingViewModel(
             bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()),
             placingBid: self.placingBid,
-            actionsCompleteSignal: self.viewWillDisappearSignal()
+            actionsComplete: self.viewWillDisappear
         )
     }()
 
@@ -55,23 +60,47 @@ class LoadingViewController: UIViewController {
 
         // The view model will perform actions like registering a user if necessary,
         // placing a bid if requested, and polling for results.
-        viewModel.performActions().finally { [weak self] in
-            // Regardless of error or completion. hide the spinner.
-            self?.spinner.hidden = true
-        }.subscribeError({ [weak self] (error) -> Void in
-            logger.log("Bidder error \(error)")
-            self?.bidderError(error)
-        }, completed: { [weak self] () -> Void in
-            logger.log("Bid placement and polling completed")
-            self?.finishUp()
-        })
+        viewModel.performActions().subscribe(onNext: nil,
+            onError: { [weak self] error in
+                logger.log("Bidder error \(error)")
+                self?.bidderError(error as NSError)
+            },
+            onCompleted: { [weak self] in
+                logger.log("Bid placement and polling completed")
+                self?.finishUp()
+            },
+            onDisposed: { [weak self] in
+                // Regardless of error or completion. hide the spinner.
+                self?.spinner.hidden = true
+            })
+            .addDisposableTo(rx_disposeBag)
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        _viewWillDisappear.onNext()
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == .PushtoRegisterConfirmed {
+            let detailsVC = segue.destinationViewController as! YourBiddingDetailsViewController
+            detailsVC.confirmationImage = bidConfirmationImageView.image
+        }
+
+        if segue == .PlaceaHigherBidAfterNotBeingHighestBidder {
+            let placeBidVC = segue.destinationViewController as! PlaceBidViewController
+            placeBidVC.hasAlreadyPlacedABid = true
+        }
+    }
+}
+
+extension LoadingViewController {
+
     func finishUp() {
-        let reserveNotMet = viewModel.reserveNotMet
-        let isHighestBidder = viewModel.isHighestBidder
-        let bidIsResolved = viewModel.bidIsResolved
-        let createdNewBidder = viewModel.createdNewBidder
+        let reserveNotMet = viewModel.reserveNotMet.value
+        let isHighestBidder = viewModel.isHighestBidder.value
+        let bidIsResolved = viewModel.bidIsResolved.value
+        let createdNewBidder = viewModel.createdNewBidder.value
 
         logger.log("Bidding process result: reserveNotMet \(reserveNotMet), isHighestBidder \(isHighestBidder), bidIsResolved \(bidIsResolved), createdNewbidder \(createdNewBidder)")
 
@@ -114,10 +143,12 @@ class LoadingViewController: UIViewController {
         titleLabel.text = "Registration Complete"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
         fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
-        RACSignal.interval(1, onScheduler: RACScheduler.mainThreadScheduler()).take(1).subscribeCompleted { [weak self] () -> Void in
-            self?.performSegue(.PushtoRegisterConfirmed)
-            return
-        }
+        interval(1, MainScheduler.sharedInstance)
+            .take(1)
+            .subscribeCompleted { [weak self] in
+                self?.performSegue(.PushtoRegisterConfirmed)
+            }
+            .addDisposableTo(rx_disposeBag)
     }
 
     func handleUpdate() {
@@ -144,9 +175,9 @@ class LoadingViewController: UIViewController {
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
 
-        recognizer.rac_gestureSignal().subscribeNext { [weak self] _ -> Void in
+        recognizer.rx_event.subscribeNext { [weak self] _ in
             self?.closeSelf()
-        }
+        }.addDisposableTo(rx_disposeBag)
 
         bidConfirmationImageView.userInteractionEnabled = true
         bidConfirmationImageView.addGestureRecognizer(recognizer)
@@ -165,10 +196,10 @@ class LoadingViewController: UIViewController {
 
     // MARK: - Error Handling
 
-    func bidderError(error: NSError?) {
+    func bidderError(error: NSError) {
         if placingBid {
             // If you are bidding, we show a bidding error regardless of whether or not you're also registering.
-            if error?.domain == OutbidDomain {
+            if error.domain == OutbidDomain {
                 handleLowestBidder()
             } else {
                 bidPlacementFailed(error)
@@ -183,9 +214,9 @@ class LoadingViewController: UIViewController {
         presentError("Bid Failed", message: "There was a problem placing your bid. Please speak to an Artsy representative.")
 
         if let error = error {
-            statusMessage.presentOnLongPress("Error: \(error.localizedDescription). \n \(error.artsyServerError())", title: "Bidding error", closure: { [weak self] (alertController) -> Void in
+            statusMessage.presentOnLongPress("Error: \(error.localizedDescription). \n \(error.artsyServerError())", title: "Bidding error") { [weak self] (alertController) in
                 self?.presentViewController(alertController, animated: true, completion: nil)
-            })
+            }
         }
     }
 
@@ -197,25 +228,13 @@ class LoadingViewController: UIViewController {
         backToAuctionButton.hidden = false
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue == .PushtoRegisterConfirmed {
-            let detailsVC = segue.destinationViewController as! YourBiddingDetailsViewController
-            detailsVC.confirmationImage = bidConfirmationImageView.image
-        }
-
-        if segue == .PlaceaHigherBidAfterNotBeingHighestBidder {
-            let placeBidVC = segue.destinationViewController as! PlaceBidViewController
-            placeBidVC.hasAlreadyPlacedABid = true
-        }
-    }
-
     @IBAction func placeHigherBidTapped(sender: AnyObject) {
-        self.fulfillmentNav().bidDetails.bidAmountCents = 0
+        self.fulfillmentNav().bidDetails.bidAmountCents.value = 0
         self.performSegue(.PlaceaHigherBidAfterNotBeingHighestBidder)
     }
 
     @IBAction func backToAuctionTapped(sender: AnyObject) {
-        if viewModel.createdNewBidder {
+        if viewModel.createdNewBidder.value {
             self.performSegue(.PushtoRegisterConfirmed)
         } else {
             closeSelf()

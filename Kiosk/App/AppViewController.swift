@@ -1,5 +1,6 @@
 import UIKit
-import ReactiveCocoa
+import RxSwift
+import Action
 
 class AppViewController: UIViewController, UINavigationControllerDelegate {
     var allowAnimations = true
@@ -11,14 +12,15 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
 
     let _apiPinger = APIPingManager()
     
-    lazy var reachabilitySignal: RACSignal = { [weak self] in
-        return RACSignal.combineLatest([connectedToInternetOrStubbingSignal(), self!.apiPingerSignal]).and()
-    }()
-    lazy var apiPingerSignal: RACSignal = { [weak self] in
-        self?._apiPinger.letOnlineSignal ?? RACSignal.empty()
+    lazy var reachability: Observable<Bool> = {
+        [connectedToInternetOrStubbing(), self.apiPinger].combineLatestAnd()
     }()
 
-    var registerToBidCommand = { () -> RACCommand in
+    lazy var apiPinger: Observable<Bool> = {
+        self._apiPinger.letOnline
+    }()
+
+    var registerToBidCommand = { () -> CocoaAction in
         appDelegate().registerToBidCommand()
     }
 
@@ -26,19 +28,28 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
         return storyboard.viewControllerWithID(.AppViewController) as! AppViewController
     }
 
-    dynamic var sale = Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0, state: "")
+    var sale = Variable(Sale(id: "", name: "", isAuction: true, startDate: NSDate(), endDate: NSDate(), artworkCount: 0, state: ""))
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        registerToBidButton.rac_command = registerToBidCommand()
+        registerToBidButton.rx_action = registerToBidCommand()
 
         countdownManager.setFonts()
 
-        RAC(offlineBlockingView, "hidden") <~ reachabilitySignal
+        reachability
+            .bindTo(offlineBlockingView.rx_hidden)
+            .addDisposableTo(rx_disposeBag)
 
-        RAC(self, "sale") <~ auctionRequestSignal(auctionID)
-        RAC(self, "countdownManager.sale") <~ RACObserve(self, "sale")
+        auctionRequest(auctionID)
+            .bindTo(sale)
+            .addDisposableTo(rx_disposeBag)
+
+        sale
+            .asObservable()
+            .mapToOptional()
+            .bindTo(countdownManager.sale)
+            .addDisposableTo(rx_disposeBag)
 
         for controller in childViewControllers {
             if let nav = controller as? UINavigationController {
@@ -65,20 +76,22 @@ extension AppViewController {
             return
         }
         
-        let passwordVC = PasswordAlertViewController.alertView { [weak self] () -> () in
+        let passwordVC = PasswordAlertViewController.alertView { [weak self] in
             self?.performSegue(.ShowAdminOptions)
             return
         }
         self.presentViewController(passwordVC, animated: true) {}
     }
 
-    func auctionRequestSignal(auctionID: String) -> RACSignal {
+    func auctionRequest(auctionID: String) -> Observable<Sale> {
         let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
 
-        return XAppRequest(auctionEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(Sale.self).`catch`({ (error) -> RACSignal! in
-
-            logger.log("Sale Artworks: Error handling thing: \(error.artsyServerError())")
-            return RACSignal.empty()
-        })
+        return XAppRequest(auctionEndpoint)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .mapToObject(Sale)
+            .logError()
+            .retry()
+            .throttle(1, MainScheduler.sharedInstance)
     }
 }

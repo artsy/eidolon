@@ -1,5 +1,5 @@
 import UIKit
-import ReactiveCocoa
+import RxSwift
 
 class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     let presenting: Bool
@@ -23,13 +23,15 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! as! HelpViewController
             
             let dismissTapGestureRecognizer = UITapGestureRecognizer()
-            dismissTapGestureRecognizer.rac_gestureSignal().subscribeNext{ [weak toView] (sender) -> Void in
-                let dismissTapGestureRecognizer = sender as! UITapGestureRecognizer
-                let pointInContainer = dismissTapGestureRecognizer.locationInView(toView)
-                if toView?.pointInside(pointInContainer, withEvent: nil) == false {
-                    appDelegate().helpButtonCommand().execute(dismissTapGestureRecognizer)
+            dismissTapGestureRecognizer
+                .rx_event
+                .subscribeNext{ [weak toView] sender in
+                    let pointInContainer = sender.locationInView(toView)
+                    if toView?.pointInside(pointInContainer, withEvent: nil) == false {
+                        appDelegate().helpButtonCommand().execute()
+                    }
                 }
-            }
+            .addDisposableTo(rx_disposeBag)
             toViewController.dismissTapGestureRecognizer = dismissTapGestureRecognizer
             containerView.addGestureRecognizer(dismissTapGestureRecognizer)
 

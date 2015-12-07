@@ -2,7 +2,7 @@ import UIKit
 import ISO8601DateFormatter
 import SwiftyJSON
 
-class Sale: JSONAble {
+final class Sale: NSObject, JSONAbleType {
     dynamic let id: String
     dynamic let isAuction: Bool
     dynamic let startDate: NSDate
@@ -23,7 +23,7 @@ class Sale: JSONAble {
         self.auctionState = state
     }
 
-    override class func fromJSON(json:[String: AnyObject]) -> JSONAble {
+    static func fromJSON(json:[String: AnyObject]) -> Sale {
         let json = JSON(json)
         let formatter = ISO8601DateFormatter()
 
@@ -38,7 +38,7 @@ class Sale: JSONAble {
         let sale = Sale(id: id, name:name, isAuction: isAuction, startDate: startDate, endDate: endDate, artworkCount: artworkCount, state: state)
 
         if let buyersPremiumDict = json["buyers_premium"].object as? [String: AnyObject] {
-            sale.buyersPremium = BuyersPremium.fromJSON(buyersPremiumDict) as? BuyersPremium
+            sale.buyersPremium = BuyersPremium.fromJSON(buyersPremiumDict)
         }
 
         return sale

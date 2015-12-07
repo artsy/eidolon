@@ -1,16 +1,22 @@
 import Foundation
-import ReactiveCocoa
+import RxSwift
 import Moya
 import SwiftyJSON
 
 let OutbidDomain = "Outbid"
 
-class PlaceBidNetworkModel: NSObject {
+protocol PlaceBidNetworkModelType {
+    var fulfillmentController: FulfillmentController { get }
+
+    func bid() -> Observable<String>
+}
+
+class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
 
     unowned let fulfillmentController: FulfillmentController
     var bidderPosition: BidderPosition?
 
-    var provider: ReactiveCocoaMoyaProvider<ArtsyAPI>! {
+    var provider: RxMoyaProvider<ArtsyAPI>! {
         return self.fulfillmentController.loggedInProvider
     }
 
@@ -20,41 +26,45 @@ class PlaceBidNetworkModel: NSObject {
         super.init()
     }
 
-    func bidSignal() -> RACSignal {
+    func bid() -> Observable<String> {
         let bidDetails = fulfillmentController.bidDetails
+        let saleArtwork = bidDetails.saleArtwork.value
 
-        let saleArtwork = bidDetails.saleArtwork
-        let cents = String(bidDetails.bidAmountCents! as Int)
-        return bidOnSaleArtwork(saleArtwork!, bidAmountCents: cents)
+        assert(saleArtwork.hasValue, "Sale artwork is nil at bidding stage.")
+
+        let cents = (bidDetails.bidAmountCents.value as? Int) ?? 0
+        return bidOnSaleArtwork(saleArtwork!, bidAmountCents: String(cents))
     }
 
-    private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> RACSignal {
+    private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> Observable<String> {
         let bidEndpoint: ArtsyAPI = ArtsyAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
 
-        let request = provider.request(bidEndpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(BidderPosition.self)
+        let request = provider
+            .request(bidEndpoint)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .mapToObject(BidderPosition)
 
-        return request.map { [weak self] position in
-            self?.bidderPosition = position as? BidderPosition
-            return position?.id
-        }.`catch` { error -> RACSignal! in
-            // We've received an error. We're going to check to see if it's type is "param_error", which indicates we were outbid.
-            let data = error.userInfo["data"]
+        return request
+            .map { [weak self] position in
+                self?.bidderPosition = position
+                return position.id
+            }.catchError { error -> Observable<String> in
+                // We've received an error. We're going to check to see if it's type is "param_error", which indicates we were outbid.
 
-            return RACSignal.`return`(data).mapJSON().tryMap{ (object, errorPointer) -> AnyObject! in
-                if let type = JSON(object)["type"].string where type == "param_error" {
-                    errorPointer.memory = NSError(domain: OutbidDomain, code: 0, userInfo: [NSUnderlyingErrorKey: error])
-                } else {
-                    errorPointer.memory = error
+                guard let response = (error as NSError).userInfo["data"] as? MoyaResponse else {
+                    throw error
                 }
 
-                // Return nil, causing this signal to error again. This time, it may have a new error, though.
-                return nil
-            }
+                let json = JSON(data: response.data)
 
-        }.doError { (error) in
-            logger.log("Bidding on Sale Artwork failed.")
-            logger.log("Error: \(error.localizedDescription). \n \(error.artsyServerError())")
-        }
+                if let type = json["type"].string where type == "param_error" {
+                    throw NSError(domain: OutbidDomain, code: 0, userInfo: [NSUnderlyingErrorKey: error as NSError])
+                } else {
+                    throw error
+                }
+            }
+            .logError()
     }
 
 }

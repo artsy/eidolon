@@ -11,7 +11,7 @@ class BidderTests: QuickSpec {
             let saleID = "asdkhaskda"
             let data:[String: AnyObject] =  ["id":id , "sale" : ["id": saleID]]
 
-            let bidder = Bidder.fromJSON(data) as! Bidder
+            let bidder = Bidder.fromJSON(data)
 
             expect(bidder.id) == id
             expect(bidder.saleID) == saleID

@@ -2,6 +2,7 @@ import Quick
 import Nimble
 @testable
 import Kiosk
+import RxSwift
 
 class CardHandlerTests: QuickSpec {
     var handler: CardHandler!
@@ -11,6 +12,8 @@ class CardHandlerTests: QuickSpec {
         let apiKey = "jhfbsdhbfsd"
         let accountToken = "dxcvxfvdfgvxcv"
 
+        var disposeBag: DisposeBag!
+
         beforeEach {
             let manager = CFTSessionManager()
             self.reader = LocalCardReader()
@@ -19,6 +22,8 @@ class CardHandlerTests: QuickSpec {
 
             self.handler.reader = self.reader!
             self.handler.sessionManager = manager
+
+            disposeBag = DisposeBag()
         }
 
         pending("sets up the Cardflight API + Token") {
@@ -26,34 +31,43 @@ class CardHandlerTests: QuickSpec {
             expect(self.handler.sessionManager.accountToken()) == accountToken
         }
 
-        xit("sends a signal with a card if successful") {
+        xit("sends an observable with a card if successful") {
             var success = false
-            self.handler.cardSwipedSignal.subscribeCompleted({ input -> Void in
-                success = true
-            })
+            self.handler
+                .cardStatus
+                .subscribeCompleted { input in
+                    success = true
+                }
+                .addDisposableTo(disposeBag)
 
             self.handler.startSearching()
             expect(success) == true
         }
 
-        xit("sends a signal with a error if failed") {
+        xit("sends an observable with an error if failed") {
             self.reader.fail = true
 
-            var success = false
-            self.handler.cardSwipedSignal.subscribeError({ input -> Void in
-                success = true
-            })
+            var failed = false
+            self.handler
+                .cardStatus
+                .subscribeError { _ in
+                    failed = true
+                }
+                .addDisposableTo(disposeBag)
 
             self.handler!.startSearching()
-            expect(success) == true
+            expect(failed) == true
         }
 
-        xit("passes messages along the card signal as things are moving") {
+        xit("passes messages along the card observable as things are moving") {
             var messageCount = 0
 
-            self.handler!.cardSwipedSignal.subscribeNext({ (message) -> Void in
-                messageCount = messageCount + 1
-            })
+            self.handler!
+                .cardStatus
+                .subscribeNext { (message) in
+                    messageCount = messageCount + 1
+                }
+                .addDisposableTo(disposeBag)
 
             self.handler!.readerIsAttached()
             self.handler!.readerIsConnecting()

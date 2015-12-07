@@ -2,7 +2,7 @@ import Quick
 import Nimble
 @testable
 import Kiosk
-import ReactiveCocoa
+import RxSwift
 import Keys
 import Moya
 
@@ -17,14 +17,19 @@ func beInTheFuture() -> MatcherFunc<NSDate> {
 var defaults = NSUserDefaults()
 
 class ArtsyAPISpec: QuickSpec {
-
     override func spec() {
 
-        func newXAppRequest() -> RACSignal {
+        func newXAppRequest() -> Observable<MoyaResponse> {
             return XAppRequest(ArtsyAPI.Auctions, defaults: defaults)
         }
 
-        describe("keys", {
+        var disposeBag: DisposeBag!
+
+        beforeEach {
+            disposeBag = DisposeBag()
+        }
+
+        describe("keys") {
             it("stubs responses for invalid keys") {
                 let invalidKeys = APIKeys(key: "", secret: "")
                 expect(invalidKeys.stubResponses).to(beTruthy())
@@ -34,7 +39,7 @@ class ArtsyAPISpec: QuickSpec {
                 let validKeys = APIKeys(key: "key", secret: "secret")
                 expect(validKeys.stubResponses).to(beFalsy())
             }
-        })
+        }
         
         describe("requests") {
             beforeSuite { 
@@ -55,9 +60,9 @@ class ArtsyAPISpec: QuickSpec {
                 var called = false
 
                 // Make any XApp request, doesn't matter which, but make sure to subscribe so it actually fires
-                newXAppRequest().subscribeNext({ (object) -> Void in
+                newXAppRequest().subscribeNext { (object) in
                     called = true
-                })
+                }.addDisposableTo(disposeBag)
                 
                 expect(called).to(beTruthy())
             }
@@ -65,9 +70,9 @@ class ArtsyAPISpec: QuickSpec {
             it("gets XApp token if it doesn't exist yet") {
                 setDefaultsKeys(defaults, key: nil, expiry: nil)
                 
-                newXAppRequest().subscribeNext({ (object) -> Void in
+                newXAppRequest().subscribeNext { (object) in
                     // nop
-                })
+                }.addDisposableTo(disposeBag)
                 
                 let past = NSDate(timeIntervalSinceNow: -1000)
                 expect(getDefaultsKeys(defaults).key).to(equal("STUBBED TOKEN!"))
@@ -79,9 +84,9 @@ class ArtsyAPISpec: QuickSpec {
                 let past = NSDate(timeIntervalSinceNow: -1000)
                 setDefaultsKeys(defaults, key: "some expired key", expiry: past)
                 
-                newXAppRequest().subscribeNext({ (object) -> Void in
+                newXAppRequest().subscribeNext { (object) in
                     // nop
-                })
+                }.addDisposableTo(disposeBag)
                 
                 expect(getDefaultsKeys(defaults).key).to(equal("STUBBED TOKEN!"))
                 expect(getDefaultsKeys(defaults).expiry).toNot(beNil())

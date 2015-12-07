@@ -1,6 +1,6 @@
 import Quick
 import Nimble
-import ReactiveCocoa
+import RxSwift
 import Moya
 @testable
 import Kiosk
@@ -16,12 +16,12 @@ class BidderNetworkModelTests: QuickSpec {
         }
 
         it("matches hasBeenRegistered is false") {
-            expect(subject.createdNewUser.first() as? Bool) == false
+            expect(subject.createdNewUser) == false
         }
 
         it("matches hasBeenRegistered is true") {
-            fulfillmentController.bidDetails.newUser.hasBeenRegistered = true
-            expect(subject.createdNewUser.first() as? Bool) == true
+            fulfillmentController.bidDetails.newUser.hasBeenRegistered.value = true
+            expect(subject.createdNewUser) == true
         }
     }
 }

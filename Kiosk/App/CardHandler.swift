@@ -1,9 +1,14 @@
 import UIKit
-import ReactiveCocoa
+import RxSwift
 
 class CardHandler: NSObject, CFTReaderDelegate {
 
-    let cardSwipedSignal = RACSubject()
+    private let _cardStatus = PublishSubject<String>()
+
+    var cardStatus: Observable<String> {
+        return _cardStatus.asObservable()
+    }
+
     var card: CFTCard?
     
     let APIKey: String
@@ -25,9 +30,9 @@ class CardHandler: NSObject, CFTReaderDelegate {
         sessionManager.setLogging(true)
 
         reader = CFTReader(reader: 1)
-        reader.delegate = self;
+        reader.delegate = self
         reader.swipeHasTimeout(false)
-        cardSwipedSignal.sendNext("Started searching");
+        _cardStatus.onNext("Started searching")
     }
 
     func end() {
@@ -38,19 +43,19 @@ class CardHandler: NSObject, CFTReaderDelegate {
     func readerCardResponse(card: CFTCard?, withError error: NSError?) {
         if let card = card {
             self.card = card;
-            cardSwipedSignal.sendNext("Got Card")
+            _cardStatus.onNext("Got Card")
 
-            card.tokenizeCardWithSuccess({ [weak self] () -> Void in
-                self?.cardSwipedSignal.sendCompleted()
+            card.tokenizeCardWithSuccess({ [weak self] in
+                self?._cardStatus.onCompleted()
                 logger.log("Card was tokenized")
 
-            }, failure: { [weak self] (error) -> Void in
-                self?.cardSwipedSignal.sendNext("Card Flight Error: \(error)");
+            }, failure: { [weak self] (error) in
+                self?._cardStatus.onNext("Card Flight Error: \(error)");
                 logger.log("Card was not tokenizable")
             })
             
         } else if let error = error {
-            self.cardSwipedSignal.sendNext("response Error \(error)");
+            self._cardStatus.onNext("response Error \(error)");
             logger.log("CardReader got a response it cannot handle")
 
 
@@ -65,38 +70,37 @@ class CardHandler: NSObject, CFTReaderDelegate {
     // handle other delegate call backs with the status messages
 
     func readerIsAttached() {
-        cardSwipedSignal.sendNext("Reader is attatched");
+        _cardStatus.onNext("Reader is attatched");
     }
 
     func readerIsConnecting() {
-        cardSwipedSignal.sendNext("Reader is connecting");
+        _cardStatus.onNext("Reader is connecting");
     }
 
     func readerIsDisconnected() {
-        cardSwipedSignal.sendNext("Reader is disconnected");
+        _cardStatus.onNext("Reader is disconnected");
         logger.log("Card Reader Disconnected")
     }
 
     func readerSwipeDidCancel() {
-        cardSwipedSignal.sendNext("Reader did cancel");
+        _cardStatus.onNext("Reader did cancel");
         logger.log("Card Reader was Cancelled")
     }
 
     func readerGenericResponse(cardData: String!) {
-        cardSwipedSignal.sendNext("Reader received non-card data: \(cardData) ");
-        reader.beginSwipe();
+        _cardStatus.onNext("Reader received non-card data: \(cardData) ");
+        reader.beginSwipe()
     }
 
     func readerIsConnected(isConnected: Bool, withError error: NSError!) {
         if isConnected {
-            cardSwipedSignal.sendNext("Reader is connected");
-            reader.beginSwipe();
-
+            _cardStatus.onNext("Reader is connected")
+            reader.beginSwipe()
         } else {
             if (error != nil) {
-                cardSwipedSignal.sendNext("Reader is disconnected: \(error.localizedDescription)");
+                _cardStatus.onNext("Reader is disconnected: \(error.localizedDescription)");
             } else {
-                cardSwipedSignal.sendNext("Reader is disconnected");
+                _cardStatus.onNext("Reader is disconnected");
             }
         }
     }

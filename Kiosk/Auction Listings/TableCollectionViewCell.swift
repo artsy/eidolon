@@ -1,4 +1,5 @@
 import UIKit
+import RxCocoa
 
 class TableCollectionViewCell: ListingsCollectionViewCell {
     private lazy var infoView: UIView = {
@@ -53,10 +54,12 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         bidButton.alignCenterYWithView(artworkImageView, predicate: "0")
         bidButton.constrainWidth("127")
 
-        // Replaces the signal defined in the superclass, normally used to emit taps to a "More Info" label, which we don't have.
+        // Replaces the observable defined in the superclass, normally used to emit taps to a "More Info" label, which we don't have.
         let recognizer = UITapGestureRecognizer()
         contentView.addGestureRecognizer(recognizer)
-        self.moreInfoSignal = recognizer.rac_gestureSignal()
+        self.moreInfo = recognizer.rx_event.map { _ -> NSDate in
+            return NSDate()
+        }
     }
 
     override func layoutSubviews() {
