@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow? = UIWindow(frame:CGRectMake(0, 0, UIScreen.mainScreen().bounds.height, UIScreen.mainScreen().bounds.width))
 
+    private(set) var provider = Provider.DefaultProvider()
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
 
         // Disable sleep timer
@@ -22,8 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Set up network layer
         if StubResponses.stubResponses() {
-            Provider.sharedProvider = Provider.StubbingProvider()
+            provider = Provider.StubbingProvider()
         }
+
 
         // I couldn't figure how to swizzle this out like we do in objc.
         if let _ = NSClassFromString("XCTest") { return true }
@@ -38,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let auctionStoryboard = UIStoryboard.auction()
         window?.rootViewController = auctionStoryboard.instantiateInitialViewController()
+        // TODO: DI provider into listings VC before the following line
         window?.makeKeyAndVisible()
 
         let keys = EidolonKeys()

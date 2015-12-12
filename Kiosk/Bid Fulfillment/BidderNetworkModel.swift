@@ -13,12 +13,14 @@ class BidderNetworkModel: NSObject, BidderNetworkModelType {
     // MARK: - Getters
 
     unowned let fulfillmentController: FulfillmentController
+    let provider: Provider
 
     var createdNewUser: Observable<Bool> {
         return self.fulfillmentController.bidDetails.newUser.hasBeenRegistered.asObservable()
     }
 
-    init(fulfillmentController: FulfillmentController) {
+    init(provider: Provider, fulfillmentController: FulfillmentController) {
+        self.provider = provider
         self.fulfillmentController = fulfillmentController
     }
 
@@ -40,7 +42,7 @@ private extension BidderNetworkModel {
     // MARK: - Chained observables
 
     func checkUserEmailExists(email: String) -> Observable<Bool> {
-        let request = Provider.sharedProvider.request(.FindExistingEmailRegistration(email: email))
+        let request = provider.request(.FindExistingEmailRegistration(email: email))
 
         return request.map { response in
             return response.statusCode != 404
@@ -67,8 +69,7 @@ private extension BidderNetworkModel {
         let newUser = fulfillmentController.bidDetails.newUser
         let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email.value!, password: newUser.password.value!, phone: newUser.phoneNumber.value!, postCode: newUser.zipCode.value ?? "", name: newUser.name.value ?? "")
 
-        return Provider.sharedProvider
-            .request(endpoint)
+        return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .map(void)
             .doOnError { error in
@@ -80,11 +81,13 @@ private extension BidderNetworkModel {
     }
 
     func updateProviderIfNecessary() -> Observable<Void> {
-        if fulfillmentController.loggedInProvider.hasValue {
-            return empty()
-        } else {
-            return updateProvider()
-        }
+//        TODO: implement this
+        return empty()
+//        if fulfillmentController.loggedInProvider.hasValue {
+//            return empty()
+//        } else {
+//            return updateProvider()
+//        }
     }
 
     func updateUser() -> Observable<Void> {
@@ -92,9 +95,7 @@ private extension BidderNetworkModel {
         let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email.value!, phone: newUser.phoneNumber.value!, postCode: newUser.zipCode.value ?? "", name: newUser.name.value ?? "")
         return updateProviderIfNecessary()
             .then { [weak self] in
-                self?.fulfillmentController
-                    .loggedInProvider!
-                    .request(endpoint)
+                self?.provider.request(endpoint)
                     .filterSuccessfulStatusCodes()
                     .mapJSON()
                     .logNext()
@@ -113,9 +114,7 @@ private extension BidderNetworkModel {
         let swiped = fulfillmentController.bidDetails.newUser.swipedCreditCard
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(stripeToken: token, swiped: swiped)
 
-        return fulfillmentController
-            .loggedInProvider!
-            .request(endpoint)
+        return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .map(void)
             .doOnCompleted { [weak self] in
@@ -143,9 +142,7 @@ private extension BidderNetworkModel {
 
     func checkForBidderOnAuction(auctionID: String) -> Observable<Bool> {
         let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)
-        let request = fulfillmentController
-            .loggedInProvider!
-            .request(endpoint)
+        let request = provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .mapToObjectArray(Bidder)
@@ -164,9 +161,7 @@ private extension BidderNetworkModel {
 
     func registerToAuction() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: fulfillmentController.auctionID)
-        let register = fulfillmentController
-            .loggedInProvider!
-            .request(endpoint)
+        let register = provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .mapToObject(Bidder)
@@ -183,9 +178,7 @@ private extension BidderNetworkModel {
     func generateAPIN() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.CreatePINForBidder(bidderID: fulfillmentController.bidDetails.bidderID.value!)
 
-        return fulfillmentController
-            .loggedInProvider!
-            .request(endpoint)
+        return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .doOnNext { [weak self] json in
@@ -198,9 +191,7 @@ private extension BidderNetworkModel {
 
     func getMyPaddleNumber() -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
-        return fulfillmentController
-            .loggedInProvider!
-            .request(endpoint)
+        return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .mapToObject(User.self)
@@ -211,20 +202,19 @@ private extension BidderNetworkModel {
             .map(void)
     }
 
-    func updateProvider() -> Observable<Void> {
+    func updateProvider() -> Observable<Provider> {
         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: fulfillmentController.bidDetails.newUser.email.value!, password: fulfillmentController.bidDetails.newUser.password.value!)
 
-        return fulfillmentController
-            .loggedInOrDefaultProvider
-            .request(endpoint)
+        return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
-            .doOnNext { [weak self] accessTokenDict in
-                if let accessToken = accessTokenDict["access_token"] as? String {
-                    self?.fulfillmentController.xAccessToken = accessToken
+            .flatMap { accessTokenDict -> Observable<Provider> in
+                guard let accessToken = accessTokenDict["access_token"] as? String else {
+                    return failWith(EidolonError.CouldNotParseJSON)
                 }
+
+                return just(Provider.AuthorizedProvider(accessToken))
             }
             .logServerError("Getting Access Token failed.")
-            .map(void)
     }
 }

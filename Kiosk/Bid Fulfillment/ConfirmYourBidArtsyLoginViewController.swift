@@ -17,7 +17,8 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     }
 
     var createNewAccount = false
-    lazy var provider: RxMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    // TODO: Inject this
+    var provider: Provider!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
@@ -63,11 +64,13 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
                         throw NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
                     }
 
-                    self?.fulfillmentNav().xAccessToken = accessToken
+                    // TODO: This should be re-setting self.provider to be a logged-in provider or something
+//                    self?.fulfillmentNav().xAccessToken = accessToken
                     return Void()
                 }
                 .then {
-                    return self?.fulfillmentNav().updateUserCredentials()
+                    // TODO: self! is bad
+                    return self?.fulfillmentNav().updateUserCredentials(self!.provider)
                 }.then {
                     return self?
                         .creditCard()
@@ -124,7 +127,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         submitAction.rx_action = CocoaAction(enabledIf: email.map(stringIsEmailAddress), workFactory: { () -> Observable<Void> in
             let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email.value)
 
-            return XAppRequest(endpoint)
+            return self.provider.request(endpoint)
                 .filterSuccessfulStatusCodes()
                 .doOnNext { _ in
                     logger.log("Sent forgot password request")
@@ -156,8 +159,11 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     func creditCard() -> Observable<[Card]> {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
-        let authProvider = self.fulfillmentNav().loggedInProvider!
-        return authProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
+        return provider
+            .request(endpoint)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .mapToObjectArray(Card.self)
     }
 
     @IBAction func useBidderTapped(sender: AnyObject) {

@@ -15,6 +15,8 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
     private let password = Variable("")
 
     var action: CocoaAction!
+    // TODO: Inject this
+    var provider: Provider!
 
     let email: String
     let emailExists: Observable<Bool>
@@ -24,8 +26,7 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
     init(password: Observable<String>, execute: Observable<Void>, completed: PublishSubject<Void>, email: String) {
         self.email = email
 
-        let checkEmail = Provider
-            .sharedProvider
+        let checkEmail = provider
             .request(ArtsyAPI.FindExistingEmailRegistration(email: email))
             .map(responseIsOK)
             .shareReplay(1)
@@ -45,8 +46,7 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
                 .flatMap { exists -> Observable<Void> in
                     if exists {
                         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: email, password: password.value ?? "")
-                        return Provider
-                            .sharedProvider
+                        return self.provider
                             .request(endpoint)
                             .filterSuccessfulStatusCodes()
                             .map(void)
@@ -71,7 +71,7 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
 
     func userForgotPassword() -> Observable<Void> {
         let endpoint = ArtsyAPI.LostPasswordNotification(email: email)
-        return XAppRequest(endpoint)
+        return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .map(void)
             .doOnNext { _ in

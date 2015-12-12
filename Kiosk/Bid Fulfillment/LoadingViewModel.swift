@@ -19,12 +19,13 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
     let bidderNetworkModel: BidderNetworkModelType
 
     lazy var placeBidNetworkModel: PlaceBidNetworkModelType = {
-        return PlaceBidNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
+        return PlaceBidNetworkModel(provider: self.provider, fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
     lazy var bidCheckingModel: BidCheckingNetworkModelType = {
-        return BidCheckingNetworkModel(fulfillmentController: self.bidderNetworkModel.fulfillmentController)
+        return BidCheckingNetworkModel(provider: self.provider, fulfillmentController: self.bidderNetworkModel.fulfillmentController)
     }()
 
+    let provider: Provider
     let createdNewBidder = Variable(false)
     let bidIsResolved = Variable(false)
     let isHighestBidder = Variable(false)
@@ -34,7 +35,8 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
         return bidderNetworkModel.fulfillmentController.bidDetails
     }
 
-    init(bidNetworkModel: BidderNetworkModelType, placingBid: Bool, actionsComplete: Observable<Void>) {
+    init(provider: Provider, bidNetworkModel: BidderNetworkModelType, placingBid: Bool, actionsComplete: Observable<Void>) {
+        self.provider = provider
         self.bidderNetworkModel = bidNetworkModel
         self.placingBid = placingBid
 

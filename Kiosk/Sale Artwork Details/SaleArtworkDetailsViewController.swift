@@ -458,7 +458,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         if let blurb = artist.blurb {
             return just(blurb)
         } else {
-            let retrieveArtist = XAppRequest(.Artist(id: artist.id))
+            let retrieveArtist = provider.request(.Artist(id: artist.id))
                 .filterSuccessfulStatusCodes()
                 .mapJSON()
 

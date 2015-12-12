@@ -13,6 +13,8 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidEnterEmail) as! ConfirmYourBidEnterYourEmailViewController
     }
 
+    var provider: Provider!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,15 +26,16 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
             let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: me.emailTextField.text ?? "")
 
-            return XAppRequest(endpoint)
+            return self?.provider.request(endpoint)
                 .filterStatusCode(200)
                 .doOnNext { _ in
                     me.performSegue(.ExistingArtsyUserFound)
                 }
                 .doOnError { error in
 
-                self?.performSegue(.EmailNotFoundonArtsy)
-            }.map(void)
+                    self?.performSegue(.EmailNotFoundonArtsy)
+                }
+                .map(void) ?? empty()
         }
 
         confirmButton.rx_action = action

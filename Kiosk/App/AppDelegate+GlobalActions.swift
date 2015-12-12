@@ -124,7 +124,7 @@ private extension AppDelegate {
     func showBidderDetailsRetrieval() -> Observable<Void> {
         let appVC = self.appViewController
         let presentingViewController: UIViewController = (appVC.presentedViewController ?? appVC)
-        return presentingViewController.promptForBidderDetailsRetrieval()
+        return presentingViewController.promptForBidderDetailsRetrieval(self.provider)
     }
 
     func showRegistration() -> Observable<Void> {

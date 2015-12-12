@@ -13,8 +13,9 @@ class ConfirmYourBidPINViewController: UIViewController {
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
     lazy var pin: Observable<String> = { self.keypadContainer.stringValue }()
-    
-    lazy var provider: RxMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+
+    // TODO: Inject this
+    var provider: Provider!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidPIN) as! ConfirmYourBidPINViewController
@@ -98,7 +99,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         self.presentViewController(alertController, animated: true) {}
 
-        XAppRequest(endpoint, provider: Provider.sharedProvider)
+        provider.request(endpoint, provider: Provider.sharedProvider)
             .filterSuccessfulStatusCodes()
             .subscribeNext { _ in
 
@@ -108,16 +109,18 @@ class ConfirmYourBidPINViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
     }
 
-    func providerForPIN(pin: String, number: String) -> RxMoyaProvider<ArtsyAPI> {
+    func providerForPIN(pin: String, number: String) -> Provider {
         let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
             // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
-            let endpoint = Provider.sharedProvider.endpointClosure(target)
+            let endpoint = Provider.endpointsClosure(target)
 
             let auctionID = self.fulfillmentNav().auctionID
             return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number, "sale_id": auctionID])
         }
 
-        return RxMoyaProvider(endpointClosure: newEndpointsClosure, requestClosure: endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
+        let provider = RxMoyaProvider(endpointClosure: newEndpointsClosure, requestClosure: Provider.endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
+
+        return Provider(provider: provider)
 
     }
 
@@ -127,10 +130,9 @@ class ConfirmYourBidPINViewController: UIViewController {
         keypadContainer.resetAction.execute()
     }
 
-    func checkForCreditCard() -> Observable<[Card]> {
+    func checkForCreditCard(loggedInProvider: Provider) -> Observable<[Card]> {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
-        let authProvider = self.fulfillmentNav().loggedInProvider!
-        return authProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
+        return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
     }
 }
 

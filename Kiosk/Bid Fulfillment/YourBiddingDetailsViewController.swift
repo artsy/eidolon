@@ -4,6 +4,7 @@ import Artsy_UIButtons
 
 class YourBiddingDetailsViewController: UIViewController {
 
+    var provider: Provider!
     @IBOutlet dynamic var bidderNumberLabel: UILabel!
     @IBOutlet dynamic var pinNumberLabel: UILabel!
 
@@ -48,6 +49,7 @@ class YourBiddingDetailsViewController: UIViewController {
         fulfillmentContainer()?.closeFulfillmentModal()
     }
 
+    // TODO: Put this in an extension (Is it only for tests???)
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> YourBiddingDetailsViewController {
         return storyboard.viewControllerWithID(.YourBidderDetails) as! YourBiddingDetailsViewController
     }

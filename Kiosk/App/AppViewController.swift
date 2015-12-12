@@ -41,9 +41,10 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
             .bindTo(offlineBlockingView.rx_hidden)
             .addDisposableTo(rx_disposeBag)
 
-        auctionRequest(auctionID)
-            .bindTo(sale)
-            .addDisposableTo(rx_disposeBag)
+        // TODO:
+//        auctionRequest(auctionID)
+//            .bindTo(sale)
+//            .addDisposableTo(rx_disposeBag)
 
         sale
             .asObservable()
@@ -83,10 +84,10 @@ extension AppViewController {
         self.presentViewController(passwordVC, animated: true) {}
     }
 
-    func auctionRequest(auctionID: String) -> Observable<Sale> {
+    func auctionRequest(provider: Provider, auctionID: String) -> Observable<Sale> {
         let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
 
-        return XAppRequest(auctionEndpoint)
+        return provider.request(auctionEndpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .mapToObject(Sale)

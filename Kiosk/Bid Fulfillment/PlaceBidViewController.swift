@@ -8,6 +8,9 @@ import Action
 
 class PlaceBidViewController: UIViewController {
 
+    // TODO: Can we abstract this into a superclass or something??
+    var provider: Provider!
+
     private var _bidDollars = Variable(0)
     var hasAlreadyPlacedABid: Bool = false
 
@@ -226,6 +229,7 @@ class PlaceBidViewController: UIViewController {
 
         if segue == .PlaceAnotherBid {
             let nextViewController = segue.destinationViewController as! LoadingViewController
+            nextViewController.provider = provider
             nextViewController.placingBid = true
         }
     }

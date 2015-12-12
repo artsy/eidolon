@@ -23,8 +23,9 @@ class ConfirmYourBidViewController: UIViewController {
 
     // Need takeUntil because we bind this observable eventually to bidDetails, making us stick around longer than we should!
     lazy var number: Observable<String> = { self.keypadContainer.stringValue.takeUntil(self.viewWillDisappear) }()
-    
-    lazy var provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider
+
+    // TODO: This needs to be injected
+    var provider: Provider!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBid) as! ConfirmYourBidViewController
@@ -72,7 +73,7 @@ class ConfirmYourBidViewController: UIViewController {
 
             let endpoint = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me._number.value))
 
-            return XAppRequest(endpoint, provider: me.provider)
+            return provider.request(endpoint, provider: me.provider)
                 .filterStatusCode(400)
                 .map(void)
                 .doOnError { (error) in

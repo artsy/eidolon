@@ -4,9 +4,9 @@ import SVProgressHUD
 import Action
 
 extension UIViewController {
-    func promptForBidderDetailsRetrieval() -> Observable<Void> {
+    func promptForBidderDetailsRetrieval(provider: Provider) -> Observable<Void> {
         return deferred { () -> Observable<Void> in
-            let alertController = self.emailPromptAlertController()
+            let alertController = self.emailPromptAlertController(provider)
 
             self.presentViewController(alertController, animated: true) { }
             
@@ -14,7 +14,7 @@ extension UIViewController {
         }
     }
     
-    func retrieveBidderDetails(email: String) -> Observable<Void> {
+    func retrieveBidderDetails(provider: Provider, email: String) -> Observable<Void> {
         return just(email)
             .take(1)
             .doOnNext { _ in
@@ -23,7 +23,7 @@ extension UIViewController {
             .flatMap { email -> Observable<Void> in
                 let endpoint = ArtsyAPI.BidderDetailsNotification(auctionID: appDelegate().appViewController.sale.value.id, identifier: email)
 
-                return XAppRequest(endpoint, provider: Provider.sharedProvider).filterSuccessfulStatusCodes().map(void)
+                return provider.request(endpoint).filterSuccessfulStatusCodes().map(void)
             }
             .throttle(1, MainScheduler.sharedInstance)
             .doOnNext { _ in
@@ -36,14 +36,14 @@ extension UIViewController {
             }
     }
 
-    func emailPromptAlertController() -> UIAlertController {
+    func emailPromptAlertController(provider: Provider) -> UIAlertController {
         let alertController = UIAlertController(title: "Send Bidder Details", message: "Enter your email address or phone number registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
 
         let ok = UIAlertAction.Action("OK", style: .Default)
         let action = CocoaAction { _ -> Observable<Void> in
             let text = (alertController.textFields?.first)?.text ?? ""
 
-            return self.retrieveBidderDetails(text)
+            return self.retrieveBidderDetails(provider, email: text)
         }
         ok.rx_action = action
         let cancel = UIAlertAction.Action("Cancel", style: .Cancel)

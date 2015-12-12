@@ -6,6 +6,8 @@ class APIPingManager: NSObject {
 
     let syncInterval: NSTimeInterval = 2
     var letOnline: Observable<Bool>!
+    // TODO: Inject this
+    var provider: Provider!
 
     override init() {
         super.init()
@@ -18,6 +20,6 @@ class APIPingManager: NSObject {
     }
 
     private func ping() -> Observable<Bool> {
-        return XAppRequest(ArtsyAPI.Ping).map(responseIsOK)
+        return provider.request(ArtsyAPI.Ping).map(responseIsOK)
     }
 }

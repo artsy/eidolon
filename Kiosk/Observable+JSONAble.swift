@@ -4,6 +4,7 @@ import RxSwift
 
 enum EidolonError: String {
     case CouldNotParseJSON
+    case NotLoggedIn
 }
 
 extension EidolonError: ErrorType { }

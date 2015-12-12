@@ -25,6 +25,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
     private var pollRequests = 0
 
     // inputs
+    let provider: Provider
     unowned let fulfillmentController: FulfillmentController
 
     // outputs
@@ -34,7 +35,8 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     private var mostRecentSaleArtwork: SaleArtwork?
 
-    init(fulfillmentController: FulfillmentController) {
+    init(provider: Provider, fulfillmentController: FulfillmentController) {
+        self.provider = provider
         self.fulfillmentController = fulfillmentController
     }
 
@@ -128,8 +130,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
         let auctionID = fulfillmentController.bidDetails.saleArtwork!.auctionID!
 
         let endpoint: ArtsyAPI = ArtsyAPI.MyBidPositionsForAuctionArtwork(auctionID: auctionID, artworkID: artworkID)
-        return fulfillmentController
-            .loggedInProvider!
+        return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
@@ -142,8 +143,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
         let auctionID = fulfillmentController.bidDetails.saleArtwork!.auctionID!
 
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionInfoForArtwork(auctionID: auctionID, artworkID: artworkID)
-        return fulfillmentController
-            .loggedInProvider!
+        return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
@@ -152,8 +152,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
     
     private func getUpdatedBidderPosition(bidderPositionId: String) -> Observable<BidderPosition> {
         let endpoint: ArtsyAPI = ArtsyAPI.MyBidPosition(id: bidderPositionId)
-        return fulfillmentController
-            .loggedInProvider!
+        return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()

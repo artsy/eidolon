@@ -5,6 +5,7 @@ import RxSwift
 
 class LoadingViewController: UIViewController {
 
+    var provider: Provider!
     @IBOutlet weak var titleLabel: ARSerifLabel!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
@@ -26,6 +27,7 @@ class LoadingViewController: UIViewController {
     
     lazy var viewModel: LoadingViewModelType = {
         return LoadingViewModel(
+            provider: self.provider,
             bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()),
             placingBid: self.placingBid,
             actionsComplete: self.viewWillDisappear
@@ -85,11 +87,13 @@ class LoadingViewController: UIViewController {
         if segue == .PushtoRegisterConfirmed {
             let detailsVC = segue.destinationViewController as! YourBiddingDetailsViewController
             detailsVC.confirmationImage = bidConfirmationImageView.image
+            detailsVC.provider = provider
         }
 
         if segue == .PlaceaHigherBidAfterNotBeingHighestBidder {
             let placeBidVC = segue.destinationViewController as! PlaceBidViewController
             placeBidVC.hasAlreadyPlacedABid = true
+            placeBidVC.provider = provider
         }
     }
 }

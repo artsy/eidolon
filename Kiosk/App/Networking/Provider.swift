@@ -4,15 +4,6 @@ import Moya
 import RxSwift
 import Alamofire
 
-// (Endpoint<Target>, NSURLRequest -> Void) -> Void
-private func endpointResolver() -> MoyaProvider<ArtsyAPI>.RequestClosure {
-    return { (endpoint, closure) in
-        let request: NSMutableURLRequest = endpoint.urlRequest.mutableCopy() as! NSMutableURLRequest
-        request.HTTPShouldHandleCookies = false
-        closure(request)
-    }
-}
-
 class OnlineProvider<Target where Target: MoyaTarget>: RxMoyaProvider<Target> {
 
     let online: Observable<Bool>
@@ -29,26 +20,49 @@ class OnlineProvider<Target where Target: MoyaTarget>: RxMoyaProvider<Target> {
     }
 }
 
-struct Provider {
+enum Provider {
+    case Default(provider: OnlineProvider<ArtsyAPI>)
+    case Authorized(provider: OnlineProvider<ArtsyAPI>, xAccessToken: String)
 
-    private let provider: OnlineProvider<ArtsyAPI>
+    init(provider: OnlineProvider<ArtsyAPI>) {
+        self = .Default(provider: provider)
+    }
 
-    init(provider: OnlineProvider<ArtsyAPI> = Provider.DefaultProvider()) {
-        self.provider = provider
+    init(provider: OnlineProvider<ArtsyAPI>, xAccessToken: String) {
+        self = .Authorized(provider: provider, xAccessToken: xAccessToken)
     }
 }
 
+private extension Provider {
+    var provider: OnlineProvider<ArtsyAPI> {
+        switch self {
+        case .Default(let provider):
+            return provider
+        case .Authorized(let provider, _):
+            return provider
+        }
+    }
+}
+
+// TODO: Delineate private/internal access of these functions
 extension Provider {
 
-    static func DefaultProvider() -> OnlineProvider<ArtsyAPI> {
-        return OnlineProvider(endpointClosure: endpointsClosure,
-            requestClosure: endpointResolver(),
+    static func DefaultProvider() -> Provider {
+        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure,
+            requestClosure: Provider.endpointResolver(),
             stubClosure: APIKeysBasedStubBehaviour,
-            plugins: Provider.plugins)
+            plugins: Provider.plugins))
     }
 
-    static func StubbingProvider() -> OnlineProvider<ArtsyAPI> {
-        return OnlineProvider(endpointClosure: endpointsClosure, requestClosure: endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
+    static func AuthorizedProvider(xAccessToken: String) -> Provider {
+        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure,
+            requestClosure: Provider.endpointResolver(),
+            stubClosure: APIKeysBasedStubBehaviour,
+            plugins: Provider.plugins), xAccessToken: xAccessToken)
+    }
+
+    static func StubbingProvider() -> Provider {
+        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure, requestClosure: Provider.endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: just(true)))
     }
 
     /// Request to fetch and store new XApp token if the current token is missing or expired.
@@ -87,6 +101,10 @@ extension Provider {
     /// Request to fetch a given target. Ensures that valid XApp tokens exist before making request
     func request(token: ArtsyAPI, defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) -> Observable<MoyaResponse> {
 
+        if case .Default = self where token.requiresAuthorization {
+            return failWith(EidolonError.NotLoggedIn)
+        }
+
         return provider.online
             .ignore(false)  // Wait unti we're online
             .take(1)        // Take 1 to make sure we only invoke the API once.
@@ -98,8 +116,9 @@ extension Provider {
     }
 }
 
-private extension Provider {
-    private static var endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
+// Static methods
+extension Provider {
+    static var endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
         var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
         // Sign all non-XApp token requests
 
@@ -130,5 +149,14 @@ private extension Provider {
                 default: return false
                 }
         })]
+    }
+
+    // (Endpoint<Target>, NSURLRequest -> Void) -> Void
+    static func endpointResolver() -> MoyaProvider<ArtsyAPI>.RequestClosure {
+        return { (endpoint, closure) in
+            let request: NSMutableURLRequest = endpoint.urlRequest.mutableCopy() as! NSMutableURLRequest
+            request.HTTPShouldHandleCookies = false
+            closure(request)
+        }
     }
 }

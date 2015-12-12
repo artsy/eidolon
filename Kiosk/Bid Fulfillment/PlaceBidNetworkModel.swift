@@ -16,11 +16,10 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
     unowned let fulfillmentController: FulfillmentController
     var bidderPosition: BidderPosition?
 
-    var provider: RxMoyaProvider<ArtsyAPI>! {
-        return self.fulfillmentController.loggedInProvider
-    }
+    let provider: Provider
 
-    init(fulfillmentController: FulfillmentController) {
+    init(provider: Provider, fulfillmentController: FulfillmentController) {
+        self.provider = provider
         self.fulfillmentController = fulfillmentController
 
         super.init()

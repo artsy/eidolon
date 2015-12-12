@@ -319,6 +319,16 @@ extension ArtsyAPI : MoyaTarget {
     }
 }
 
+// Custom stuff
+extension ArtsyAPI {
+    var requiresAuthorization: Bool {
+        // TODO: Implement
+        switch self {
+        default: return false
+        }
+    }
+}
+
 // MARK: - Provider support
 
 func stubbedResponse(filename: String) -> NSData! {
