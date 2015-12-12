@@ -11,6 +11,7 @@ class SaleArtworkDetailsViewController: UIViewController {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
     var saleArtwork: SaleArtwork!
+    var provider: Provider!
     
     var showBuyersPremiumCommand = { () -> CocoaAction in
         appDelegate().showBuyersPremiumCommand()
@@ -21,7 +22,7 @@ class SaleArtworkDetailsViewController: UIViewController {
     }
 
     lazy var artistInfo: Observable<AnyObject> = {
-        let artistInfo = XAppRequest(.Artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
+        let artistInfo = self.provider.request(.Artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
         return artistInfo.shareReplay(1)
     }()
     

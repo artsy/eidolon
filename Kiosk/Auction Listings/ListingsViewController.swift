@@ -24,8 +24,11 @@ class ListingsViewController: UIViewController {
         imageView.sd_cancelCurrentImageLoad()
     }
 
+    let provider = Provider()
+    // TODO: Provider creation here should be DI'd from app delegate
+
     lazy var viewModel: ListingsViewModelType = {
-        return ListingsViewModel(selectedIndex: self.switchView.selectedIndex, showDetails: self.showDetailsForSaleArtwork, presentModal: self.presentModalForSaleArtwork)
+        return ListingsViewModel(provider: self.provider, selectedIndex: self.switchView.selectedIndex, showDetails: self.showDetailsForSaleArtwork, presentModal: self.presentModalForSaleArtwork)
     }()
 
     var cellIdentifier = Variable(MasonryCellIdentifier)
@@ -124,6 +127,7 @@ class ListingsViewController: UIViewController {
             let saleArtwork = sender as! SaleArtwork!
             let detailsViewController = segue.destinationViewController as! SaleArtworkDetailsViewController
             detailsViewController.saleArtwork = saleArtwork
+            detailsViewController.provider = provider
             ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork.artwork.id])
         }
     }
