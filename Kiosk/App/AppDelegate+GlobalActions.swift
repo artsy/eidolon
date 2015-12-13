@@ -69,7 +69,6 @@ extension AppDelegate {
         return CocoaAction(enabledIf: enabled) { _ in
             self.hideAllTheThings()
                 .then(self.showRegistration())
-                .map(void)
         }
     }
 
@@ -138,6 +137,7 @@ private extension AppDelegate {
             if let internalNav: FulfillmentNavigationController = containerController.internalNavigationController() {
                 let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as! RegisterViewController
                 registerVC.placingBid = false
+                registerVC.provider = self.provider
                 internalNav.auctionID = self.appViewController.auctionID
                 internalNav.viewControllers = [registerVC]
             }

@@ -68,6 +68,7 @@ private extension Provider {
                 guard case Event.Next(let element) = event else { return }
 
                 let formatter = ISO8601DateFormatter()
+                // These two lines set the defaults values injected into appToken
                 appToken.token = element.0
                 appToken.expiry = formatter.dateFromString(element.1)
             }

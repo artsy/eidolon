@@ -10,23 +10,24 @@ class ListingsCountdownManager: NSObject {
     let sale = Variable<Sale?>(nil)
 
     let time = SystemTime()
-    var provider: Provider!
+    var provider: Provider! {
+        didSet {
+            time.sync(provider)
+                .dispatchAsyncMainScheduler()
+                .take(1)
+                .subscribeNext { [weak self] (_) in
+                    self?.startTimer()
+                    self?.setLabelsHidden(false)
+                }
+                .addDisposableTo(rx_disposeBag)
+        }
+    }
 
     private var _timer: NSTimer? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
         formatter.minimumIntegerDigits = 2
-
-        time
-            .sync(provider)
-            .dispatchAsyncMainScheduler()
-            .take(1)
-            .subscribeNext { [weak self] (_) in
-                self?.startTimer()
-                self?.setLabelsHidden(false)
-            }
-            .addDisposableTo(rx_disposeBag)
     }
 
     /// Immediately invalidates the timer. No further updates will be made to the UI after this method is called.
