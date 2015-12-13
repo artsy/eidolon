@@ -9,7 +9,7 @@ enum BidCheckingError: String {
 extension BidCheckingError: ErrorType { }
 
 protocol BidCheckingNetworkModelType {
-    var fulfillmentController: FulfillmentController { get }
+    var bidDetails: BidDetails { get }
 
     var bidIsResolved: Variable<Bool> { get }
     var isHighestBidder: Variable<Bool> { get }
@@ -26,7 +26,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     // inputs
     let provider: Provider
-    unowned let fulfillmentController: FulfillmentController
+    let bidDetails: BidDetails
 
     // outputs
     var bidIsResolved = Variable(false)
@@ -35,9 +35,9 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     private var mostRecentSaleArtwork: SaleArtwork?
 
-    init(provider: Provider, fulfillmentController: FulfillmentController) {
+    init(provider: Provider, bidDetails: BidDetails) {
         self.provider = provider
-        self.fulfillmentController = fulfillmentController
+        self.bidDetails = bidDetails
     }
 
     func waitForBidResolution (bidderPositionId: String) -> Observable<Void> {
@@ -53,7 +53,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
                         // This is an updated model – hooray!
                         me.mostRecentSaleArtwork = saleArtwork
-                        me.fulfillmentController.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
+                        me.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
                         me.reserveNotMet.value = ReserveStatus.initOrDefault(saleArtwork.reserveStatus).reserveNotMet
 
                         return just()
@@ -126,8 +126,8 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
     }
 
     private func getMyBidderPositions() -> Observable<[BidderPosition]> {
-        let artworkID = fulfillmentController.bidDetails.saleArtwork!.artwork.id;
-        let auctionID = fulfillmentController.bidDetails.saleArtwork!.auctionID!
+        let artworkID = bidDetails.saleArtwork!.artwork.id;
+        let auctionID = bidDetails.saleArtwork!.auctionID!
 
         let endpoint: ArtsyAPI = ArtsyAPI.MyBidPositionsForAuctionArtwork(auctionID: auctionID, artworkID: artworkID)
         return provider
@@ -139,8 +139,8 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     private func getUpdatedSaleArtwork() -> Observable<SaleArtwork> {
 
-        let artworkID = fulfillmentController.bidDetails.saleArtwork!.artwork.id;
-        let auctionID = fulfillmentController.bidDetails.saleArtwork!.auctionID!
+        let artworkID = bidDetails.saleArtwork!.artwork.id;
+        let auctionID = bidDetails.saleArtwork!.auctionID!
 
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionInfoForArtwork(auctionID: auctionID, artworkID: artworkID)
         return provider

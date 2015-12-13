@@ -6,27 +6,27 @@ import SwiftyJSON
 let OutbidDomain = "Outbid"
 
 protocol PlaceBidNetworkModelType {
-    var fulfillmentController: FulfillmentController { get }
+    var bidDetails: BidDetails { get }
 
     func bid() -> Observable<String>
 }
 
 class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
 
-    unowned let fulfillmentController: FulfillmentController
+    // TODO: Turn this into a Variable<BidderPosition> (?)
     var bidderPosition: BidderPosition?
 
     let provider: Provider
+    let bidDetails: BidDetails
 
-    init(provider: Provider, fulfillmentController: FulfillmentController) {
+    init(provider: Provider, bidDetails: BidDetails) {
         self.provider = provider
-        self.fulfillmentController = fulfillmentController
+        self.bidDetails = bidDetails
 
         super.init()
     }
 
     func bid() -> Observable<String> {
-        let bidDetails = fulfillmentController.bidDetails
         let saleArtwork = bidDetails.saleArtwork.value
 
         assert(saleArtwork.hasValue, "Sale artwork is nil at bidding stage.")

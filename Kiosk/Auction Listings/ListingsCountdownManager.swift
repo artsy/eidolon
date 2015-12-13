@@ -10,6 +10,8 @@ class ListingsCountdownManager: NSObject {
     let sale = Variable<Sale?>(nil)
 
     let time = SystemTime()
+    // TODO: inject this somehow
+    var provider: Provider!
 
     private var _timer: NSTimer? = nil
 
@@ -18,7 +20,7 @@ class ListingsCountdownManager: NSObject {
         formatter.minimumIntegerDigits = 2
 
         time
-            .sync()
+            .sync(provider)
             .dispatchAsyncMainScheduler()
             .take(1)
             .subscribeNext { [weak self] (_) in

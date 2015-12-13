@@ -73,7 +73,7 @@ class ConfirmYourBidViewController: UIViewController {
 
             let endpoint = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me._number.value))
 
-            return provider.request(endpoint, provider: me.provider)
+            return me.provider.request(endpoint)
                 .filterStatusCode(400)
                 .map(void)
                 .doOnError { (error) in

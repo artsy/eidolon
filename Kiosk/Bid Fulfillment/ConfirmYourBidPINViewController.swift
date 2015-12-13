@@ -56,14 +56,15 @@ class ConfirmYourBidPINViewController: UIViewController {
                 .map(void)
                 .doOnNext { _ in
                     // If the request to ArtsyAPI.Me succeeds, we have logged in and can use this provider.
-                    self?.fulfillmentNav().loggedInProvider = loggedInProvider
+//                    TODO: What now isntead of this?
+//                    self?.fulfillmentNav().loggedInProvider = loggedInProvider
                 }.then {
                     // We want to put the data we've collected up to the server.
-                    self?.fulfillmentNav().updateUserCredentials()
+                    self?.fulfillmentNav().updateUserCredentials(loggedInProvider)
                 }.then {
                     // This looks for credit cards on the users account, and sends them on the observable
                     return self?
-                        .checkForCreditCard()
+                        .checkForCreditCard(loggedInProvider)
                         .doOnNext { (cards) in
 
                             // If the cards list doesn't exist, or its empty, then perform the segue to collect one.
@@ -99,7 +100,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         self.presentViewController(alertController, animated: true) {}
 
-        provider.request(endpoint, provider: Provider.sharedProvider)
+        provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .subscribeNext { _ in
 
@@ -118,7 +119,7 @@ class ConfirmYourBidPINViewController: UIViewController {
             return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number, "sale_id": auctionID])
         }
 
-        let provider = RxMoyaProvider(endpointClosure: newEndpointsClosure, requestClosure: Provider.endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
+        let provider = OnlineProvider(endpointClosure: newEndpointsClosure, requestClosure: Provider.endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
 
         return Provider(provider: provider)
 

@@ -19,10 +19,10 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
     let bidderNetworkModel: BidderNetworkModelType
 
     lazy var placeBidNetworkModel: PlaceBidNetworkModelType = {
-        return PlaceBidNetworkModel(provider: self.provider, fulfillmentController: self.bidderNetworkModel.fulfillmentController)
+        return PlaceBidNetworkModel(provider: self.provider, bidDetails: self.bidderNetworkModel.bidDetails)
     }()
     lazy var bidCheckingModel: BidCheckingNetworkModelType = {
-        return BidCheckingNetworkModel(provider: self.provider, fulfillmentController: self.bidderNetworkModel.fulfillmentController)
+        return BidCheckingNetworkModel(provider: self.provider, bidDetails: self.bidderNetworkModel.bidDetails)
     }()
 
     let provider: Provider
@@ -32,7 +32,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
     let reserveNotMet = Variable(false)
 
     var bidDetails: BidDetails {
-        return bidderNetworkModel.fulfillmentController.bidDetails
+        return bidderNetworkModel.bidDetails
     }
 
     init(provider: Provider, bidNetworkModel: BidderNetworkModelType, placingBid: Bool, actionsComplete: Observable<Void>) {

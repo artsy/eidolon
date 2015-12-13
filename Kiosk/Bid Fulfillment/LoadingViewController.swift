@@ -28,7 +28,7 @@ class LoadingViewController: UIViewController {
     lazy var viewModel: LoadingViewModelType = {
         return LoadingViewModel(
             provider: self.provider,
-            bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()),
+            bidNetworkModel: BidderNetworkModel(provider: self.provider, bidDetails: self.fulfillmentNav().bidDetails),
             placingBid: self.placingBid,
             actionsComplete: self.viewWillDisappear
         )
