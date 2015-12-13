@@ -17,7 +17,6 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     }
 
     var createNewAccount = false
-    // TODO: Inject this
     var provider: Provider!
     var loggedInProvider: Provider?
 
@@ -98,7 +97,6 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         if segue == .EmailLoginConfirmedHighestBidder {
             let viewController = segue.destinationViewController as! LoadingViewController
             viewController.provider = loggedInProvider
-
         } else if segue == .ArtsyUserHasNotRegisteredCard {
             let viewController = segue.destinationViewController as! RegisterViewController
             viewController.provider = provider

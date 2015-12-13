@@ -76,7 +76,6 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
                 logger.log("Polling \(self.pollRequests) of \(self.maxPollRequests) for updated sale artwork")
 
-                // TODO: handle the case where the user was already the highest bidder
                 if let processedAt = bidderPositionObject.processedAt {
                     logger.log("BidPosition finished processing at \(processedAt), proceeding...")
                     return just()

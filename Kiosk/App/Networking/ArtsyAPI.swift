@@ -322,8 +322,19 @@ extension ArtsyAPI : MoyaTarget {
 // Custom stuff
 extension ArtsyAPI {
     var requiresAuthorization: Bool {
-        // TODO: Implement
         switch self {
+        case .MyCreditCards: fallthrough
+        case .CreatePINForBidder: fallthrough
+        case .FindBidderRegistration: fallthrough
+        case .RegisterToBid: fallthrough
+        case .MyBiddersForAuction: fallthrough
+        case .MyBidPositionsForAuctionArtwork: fallthrough
+        case .MyBidPosition: fallthrough
+        case .PlaceABid: fallthrough
+        case .UpdateMe: fallthrough
+        case .RegisterCard: fallthrough
+        case .Me: return true
+
         default: return false
         }
     }

@@ -14,7 +14,6 @@ class ConfirmYourBidPINViewController: UIViewController {
 
     lazy var pin: Observable<String> = { self.keypadContainer.stringValue }()
 
-    // TODO: Inject this
     var provider: Provider!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {

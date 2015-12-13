@@ -167,7 +167,6 @@ private extension AppDelegate {
         }
     }
 
-    // TODO: Correct animation?
     func closeFulfillmentViewController() -> Observable<Void> {
         let close: Observable<Void> = create { observer in
             (self.appViewController.presentedViewController as? FulfillmentContainerViewController)?.closeFulfillmentModal() {

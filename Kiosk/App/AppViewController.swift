@@ -40,6 +40,7 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
         registerToBidButton.rx_action = registerToBidCommand()
 
         countdownManager.setFonts()
+        countdownManager.provider = provider
 
         reachability
             .bindTo(offlineBlockingView.rx_hidden)

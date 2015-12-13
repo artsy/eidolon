@@ -10,7 +10,6 @@ class ListingsCountdownManager: NSObject {
     let sale = Variable<Sale?>(nil)
 
     let time = SystemTime()
-    // TODO: inject this somehow
     var provider: Provider!
 
     private var _timer: NSTimer? = nil

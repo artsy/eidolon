@@ -6,8 +6,7 @@ import Artsy_UIButtons
 class ChooseAuctionViewController: UIViewController {
 
     var auctions: [Sale]!
-    // TODO: Inject this
-    var provider: Provider!
+    let provider = appDelegate().provider
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -87,6 +87,10 @@ class RegisterViewController: UIViewController {
                 }
                 .addDisposableTo(rx_disposeBag)
         }
+
+        if let viewController = controller as? RegistrationPasswordViewController {
+            viewController.provider = provider
+        }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

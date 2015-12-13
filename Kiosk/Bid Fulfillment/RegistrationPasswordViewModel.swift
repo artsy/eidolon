@@ -15,15 +15,15 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
     private let password = Variable("")
 
     var action: CocoaAction!
-    // TODO: Inject this
-    var provider: Provider!
+    let provider: Provider
 
     let email: String
     let emailExists: Observable<Bool>
 
     let disposeBag = DisposeBag()
 
-    init(password: Observable<String>, execute: Observable<Void>, completed: PublishSubject<Void>, email: String) {
+    init(provider: Provider, password: Observable<String>, execute: Observable<Void>, completed: PublishSubject<Void>, email: String) {
+        self.provider = provider
         self.email = email
 
         let checkEmail = provider
@@ -46,7 +46,7 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
                 .flatMap { exists -> Observable<Void> in
                     if exists {
                         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: email, password: password.value ?? "")
-                        return self.provider
+                        return provider
                             .request(endpoint)
                             .filterSuccessfulStatusCodes()
                             .map(void)

@@ -103,6 +103,22 @@ class ConfirmYourBidViewController: UIViewController {
         _viewWillDisappear.onNext()
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == .ConfirmyourBidBidderFound {
+            let nextViewController = segue.destinationViewController as! ConfirmYourBidViewController
+            nextViewController.provider = provider
+        } else if segue == .ConfirmyourBidBidderNotFound {
+            let viewController = segue.destinationViewController as! ConfirmYourBidEnterYourEmailViewController
+            viewController.provider = provider
+        } else if segue == .ConfirmyourBidArtsyLogin {
+            let viewController = segue.destinationViewController as! ConfirmYourBidArtsyLoginViewController
+            viewController.provider = provider
+        } else if segue == .ConfirmyourBidBidderFound {
+            let viewController = segue.destinationViewController as! ConfirmYourBidPINViewController
+            viewController.provider = provider
+        }
+    }
+
     func toOpeningBidString(cents:AnyObject!) -> AnyObject! {
         if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
             return "Enter \(dollars) or more"
