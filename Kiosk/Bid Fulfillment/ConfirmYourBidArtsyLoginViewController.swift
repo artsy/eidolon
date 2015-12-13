@@ -19,6 +19,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     var createNewAccount = false
     // TODO: Inject this
     var provider: Provider!
+    var loggedInProvider: Provider?
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
@@ -64,16 +65,14 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
                         throw NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
                     }
 
-                    // TODO: This should be re-setting self.provider to be a logged-in provider or something
-//                    self?.fulfillmentNav().xAccessToken = accessToken
+                    self?.loggedInProvider = Provider.AuthorizedProvider(accessToken)
+
                     return Void()
                 }
                 .then {
-                    // TODO: self! is bad
-                    return self?.fulfillmentNav().updateUserCredentials(self!.provider)
+                    return me.fulfillmentNav().updateUserCredentials(self!.provider)
                 }.then {
-                    return self?
-                        .creditCard()
+                    return me.creditCard()
                         .doOnNext { cards in
                             guard let me = self else { return }
 
@@ -92,7 +91,20 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             }
         }
     }
-    
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+
+        if segue == .EmailLoginConfirmedHighestBidder {
+            let viewController = segue.destinationViewController as! LoadingViewController
+            viewController.provider = loggedInProvider
+
+        } else if segue == .ArtsyUserHasNotRegisteredCard {
+            let viewController = segue.destinationViewController as! RegisterViewController
+            viewController.provider = provider
+        }
+    }
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if emailTextField.text.isNilOrEmpty {

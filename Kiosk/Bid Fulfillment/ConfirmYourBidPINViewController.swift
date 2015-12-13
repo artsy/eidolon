@@ -54,11 +54,7 @@ class ConfirmYourBidPINViewController: UIViewController {
                 .request(ArtsyAPI.Me)
                 .filterSuccessfulStatusCodes()
                 .map(void)
-                .doOnNext { _ in
-                    // If the request to ArtsyAPI.Me succeeds, we have logged in and can use this provider.
-//                    TODO: What now isntead of this?
-//                    self?.fulfillmentNav().loggedInProvider = loggedInProvider
-                }.then {
+                .then {
                     // We want to put the data we've collected up to the server.
                     self?.fulfillmentNav().updateUserCredentials(loggedInProvider)
                 }.then {

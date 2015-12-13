@@ -13,9 +13,6 @@ protocol PlaceBidNetworkModelType {
 
 class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
 
-    // TODO: Turn this into a Variable<BidderPosition> (?)
-    var bidderPosition: BidderPosition?
-
     let provider: Provider
     let bidDetails: BidDetails
 
@@ -45,8 +42,7 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
             .mapToObject(BidderPosition)
 
         return request
-            .map { [weak self] position in
-                self?.bidderPosition = position
+            .map { position in
                 return position.id
             }.catchError { error -> Observable<String> in
                 // We've received an error. We're going to check to see if it's type is "param_error", which indicates we were outbid.

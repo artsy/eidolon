@@ -10,7 +10,11 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet var offlineBlockingView: UIView!
     @IBOutlet weak var registerToBidButton: ActionButton!
 
-    let _apiPinger = APIPingManager()
+    var provider: Provider!
+
+    lazy var _apiPinger: APIPingManager = {
+        return APIPingManager(provider: self.provider)
+    }()
     
     lazy var reachability: Observable<Bool> = {
         [connectedToInternetOrStubbing(), self.apiPinger].combineLatestAnd()
@@ -41,10 +45,9 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
             .bindTo(offlineBlockingView.rx_hidden)
             .addDisposableTo(rx_disposeBag)
 
-        // TODO:
-//        auctionRequest(auctionID)
-//            .bindTo(sale)
-//            .addDisposableTo(rx_disposeBag)
+        auctionRequest(provider, auctionID: auctionID)
+            .bindTo(sale)
+            .addDisposableTo(rx_disposeBag)
 
         sale
             .asObservable()
@@ -57,6 +60,14 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
                 nav.delegate = self
             }
         }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // This is the embed segue
+        guard let navigtionController = segue.destinationViewController as? UINavigationController else { return }
+        guard let listingsViewController = navigtionController.topViewController as? ListingsViewController else { return }
+
+        listingsViewController.provider = provider
     }
 
     deinit {

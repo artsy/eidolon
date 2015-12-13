@@ -43,18 +43,15 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
     func waitForBidResolution (bidderPositionId: String) -> Observable<Void> {
         return self
             .pollForUpdatedBidderPosition(bidderPositionId)
-            .then { [weak self] in
-                guard let me = self else { return empty() }
+            .then {
 
-                return me
-                    .getUpdatedSaleArtwork()
-                    .flatMap { [weak self] saleArtwork -> Observable<Void> in
-                        guard let me = self else { return empty() }
+                return self.getUpdatedSaleArtwork()
+                    .flatMap { saleArtwork -> Observable<Void> in
 
                         // This is an updated model – hooray!
-                        me.mostRecentSaleArtwork = saleArtwork
-                        me.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
-                        me.reserveNotMet.value = ReserveStatus.initOrDefault(saleArtwork.reserveStatus).reserveNotMet
+                        self.mostRecentSaleArtwork = saleArtwork
+                        self.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
+                        self.reserveNotMet.value = ReserveStatus.initOrDefault(saleArtwork.reserveStatus).reserveNotMet
 
                         return just()
                     }
@@ -62,12 +59,8 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
                         logger.log("Bidder position was processed but corresponding saleArtwork was not found")
                     }
                     .catchErrorJustReturn()
-                    .flatMap { [weak self] _ -> Observable<Void> in
-                        // TODO: adjust logic to use parameter instead of instance variable
-
-                        guard let me = self else { return empty() }
-
-                        return me.checkForMaxBid()
+                    .flatMap { _ -> Observable<Void> in
+                        return self.checkForMaxBid()
                 }
             } .doOnNext { _ in
                 self.bidIsResolved.value = true
@@ -78,10 +71,10 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
     
     private func pollForUpdatedBidderPosition(bidderPositionId: String) -> Observable<Void> {
         let updatedBidderPosition = getUpdatedBidderPosition(bidderPositionId)
-            .flatMap { [weak self] bidderPositionObject -> Observable<Void> in
-                self?.pollRequests++
+            .flatMap { bidderPositionObject -> Observable<Void> in
+                self.pollRequests++
 
-                logger.log("Polling \(self?.pollRequests) of \(self?.maxPollRequests) for updated sale artwork")
+                logger.log("Polling \(self.pollRequests) of \(self.maxPollRequests) for updated sale artwork")
 
                 // TODO: handle the case where the user was already the highest bidder
                 if let processedAt = bidderPositionObject.processedAt {
@@ -90,17 +83,17 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
                 } else {
                     // The backend hasn't finished processing the bid yet
 
-                    guard (self?.pollRequests ?? 0) < (self?.maxPollRequests ?? 0) else {
+                    guard self.pollRequests < self.maxPollRequests else {
                         // We have exceeded our max number of polls, fail.
                         throw BidCheckingError.PollingExceeded
                     }
 
                     // We didn't get an updated value, so let's try again.
-                    return interval(self?.pollInterval ?? 1, MainScheduler.sharedInstance)
+                    return interval(self.pollInterval, MainScheduler.sharedInstance)
                         .take(1)
                         .map(void)
                         .then {
-                            return self?.pollForUpdatedBidderPosition(bidderPositionId)
+                            return self.pollForUpdatedBidderPosition(bidderPositionId)
                     }
                 }
         }
@@ -113,12 +106,11 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     private func checkForMaxBid() -> Observable<Void> {
         return getMyBidderPositions()
-            .doOnNext{ [weak self] newBidderPositions in
-                guard let me = self else { return }
+            .doOnNext{ newBidderPositions in
 
-                if let topBidID = me.mostRecentSaleArtwork?.saleHighestBid?.id {
+                if let topBidID = self.mostRecentSaleArtwork?.saleHighestBid?.id {
                     for position in newBidderPositions where position.highestBid?.id == topBidID {
-                        me.isHighestBidder.value = true
+                        self.isHighestBidder.value = true
                     }
                 }
             }

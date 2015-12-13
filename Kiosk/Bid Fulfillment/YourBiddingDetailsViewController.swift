@@ -49,7 +49,6 @@ class YourBiddingDetailsViewController: UIViewController {
         fulfillmentContainer()?.closeFulfillmentModal()
     }
 
-    // TODO: Put this in an extension (Is it only for tests???)
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> YourBiddingDetailsViewController {
         return storyboard.viewControllerWithID(.YourBidderDetails) as! YourBiddingDetailsViewController
     }

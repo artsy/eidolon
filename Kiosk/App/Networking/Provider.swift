@@ -44,29 +44,10 @@ private extension Provider {
     }
 }
 
-// TODO: Delineate private/internal access of these functions
-extension Provider {
-
-    static func DefaultProvider() -> Provider {
-        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure,
-            requestClosure: Provider.endpointResolver(),
-            stubClosure: APIKeysBasedStubBehaviour,
-            plugins: Provider.plugins))
-    }
-
-    static func AuthorizedProvider(xAccessToken: String) -> Provider {
-        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure,
-            requestClosure: Provider.endpointResolver(),
-            stubClosure: APIKeysBasedStubBehaviour,
-            plugins: Provider.plugins), xAccessToken: xAccessToken)
-    }
-
-    static func StubbingProvider() -> Provider {
-        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure, requestClosure: Provider.endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: just(true)))
-    }
+private extension Provider {
 
     /// Request to fetch and store new XApp token if the current token is missing or expired.
-    private func XAppTokenRequest(defaults: NSUserDefaults) -> Observable<String?> {
+    func XAppTokenRequest(defaults: NSUserDefaults) -> Observable<String?> {
 
         var appToken = XAppToken(defaults: defaults)
 
@@ -97,6 +78,10 @@ extension Provider {
 
         return newTokenRequest
     }
+}
+
+// "Public" interface
+extension Provider {
 
     /// Request to fetch a given target. Ensures that valid XApp tokens exist before making request
     func request(token: ArtsyAPI, defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) -> Observable<MoyaResponse> {
@@ -108,16 +93,34 @@ extension Provider {
         return provider.online
             .ignore(false)  // Wait unti we're online
             .take(1)        // Take 1 to make sure we only invoke the API once.
-            .flatMap { _ in // Turn the online state into a network request
-                // TODO: self reference necessary?
-                return self.XAppTokenRequest(defaults).map { _ in self.provider.request(token) }
-                    .switchLatest() // Subscribe to the network request
+            .flatMap { _ -> Observable<MoyaResponse> in // Turn the online state into a network request
+                let actualRequest = self.provider.request(token)
+                return self.XAppTokenRequest(defaults).flatMap { _ in actualRequest }
         }
     }
 }
 
 // Static methods
 extension Provider {
+
+    static func DefaultProvider() -> Provider {
+        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure,
+            requestClosure: Provider.endpointResolver(),
+            stubClosure: APIKeysBasedStubBehaviour,
+            plugins: Provider.plugins))
+    }
+
+    static func AuthorizedProvider(xAccessToken: String) -> Provider {
+        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure,
+            requestClosure: Provider.endpointResolver(),
+            stubClosure: APIKeysBasedStubBehaviour,
+            plugins: Provider.plugins), xAccessToken: xAccessToken)
+    }
+
+    static func StubbingProvider() -> Provider {
+        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure, requestClosure: Provider.endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: just(true)))
+    }
+
     static var endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
         var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
         // Sign all non-XApp token requests

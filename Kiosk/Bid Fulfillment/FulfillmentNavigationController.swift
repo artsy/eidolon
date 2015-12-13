@@ -20,36 +20,9 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
 
     var provider: Provider!
 
-//    /// Otherwise we're fine with a legit auth token
-//    var xAccessToken: String? {
-//        didSet(oldToken) {
-//            guard let accessToken = self.xAccessToken else { return }
-//
-//            let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-//                // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
-//                let endpoint = Provider.sharedProvider.endpointClosure(target)
-//
-//                return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": accessToken])
-//            }
-//
-//            loggedInProvider = RxMoyaProvider(endpointClosure: newEndpointsClosure, requestClosure: endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
-//        }
-//    }
-//
-//    var loggedInProvider: RxMoyaProvider<ArtsyAPI>?
-//
-//    var loggedInOrDefaultProvider: RxMoyaProvider<ArtsyAPI> {
-//        if let loggedInProvider = loggedInProvider {
-//            return loggedInProvider
-//        }
-//
-//        return Provider.sharedProvider
-//    }
-
     // MARK: - Everything else
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // TODO: Review to make sure this works. 
 
         if let destination = segue.destinationViewController as? PlaceBidViewController {
             destination.provider = provider
@@ -57,7 +30,6 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
     }
 
     func reset() {
-//        loggedInProvider = nil
         let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         let cookies = storage.cookies
         cookies?.forEach { storage.deleteCookie($0) }

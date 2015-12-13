@@ -2,15 +2,14 @@ import Foundation
 import Moya
 import RxSwift
 
-class APIPingManager: NSObject {
+class APIPingManager {
 
     let syncInterval: NSTimeInterval = 2
     var letOnline: Observable<Bool>!
-    // TODO: Inject this
-    var provider: Provider!
+    var provider: Provider
 
-    override init() {
-        super.init()
+    init(provider: Provider) {
+        self.provider = provider
 
         letOnline = interval(syncInterval, MainScheduler.sharedInstance)
             .flatMap { [weak self] _ in

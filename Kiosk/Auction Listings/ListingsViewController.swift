@@ -27,7 +27,12 @@ class ListingsViewController: UIViewController {
     var provider: Provider!
 
     lazy var viewModel: ListingsViewModelType = {
-        return ListingsViewModel(provider: self.provider, selectedIndex: self.switchView.selectedIndex, showDetails: self.showDetailsForSaleArtwork, presentModal: self.presentModalForSaleArtwork)
+        return ListingsViewModel(provider:
+            self.provider,
+            selectedIndex: self.switchView.selectedIndex,
+            showDetails: applyUnowned(self, ListingsViewController.showDetailsForSaleArtwork),
+            presentModal: applyUnowned(self, ListingsViewController.presentModalForSaleArtwork)
+        )
     }()
 
     var cellIdentifier = Variable(MasonryCellIdentifier)
@@ -194,7 +199,6 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
 
 private extension ListingsViewController {
 
-    // TODO: These two methods have reference cycles. See: http://stackoverflow.com/a/34159122/516359
     func showDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
 
         ARAnalytics.event("Artwork Details Tapped", withProperties: ["id": saleArtwork.artwork.id])

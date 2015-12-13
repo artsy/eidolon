@@ -1848,9 +1848,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="A1R-R2-CSF"/>
-        <segue reference="ccv-le-Cu0"/>
         <segue reference="9X5-eM-AKF"/>
-        <segue reference="6qF-R8-kJy"/>
+        <segue reference="ccv-le-Cu0"/>
+        <segue reference="A1R-R2-CSF"/>
+        <segue reference="PK6-h9-FCm"/>
     </inferredMetricsTieBreakers>
 </document>

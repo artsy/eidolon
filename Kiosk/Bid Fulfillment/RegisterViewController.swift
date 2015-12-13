@@ -14,6 +14,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
     @IBOutlet var confirmButton: UIButton!
 
+    var provider: Provider!
+
     let coordinator = RegistrationCoordinator()
 
     dynamic var placingBid = true
@@ -92,6 +94,7 @@ class RegisterViewController: UIViewController {
         if segue == .ShowLoadingView {
             let nextViewController = segue.destinationViewController as! LoadingViewController
             nextViewController.placingBid = placingBid
+            nextViewController.provider = provider
         }
     }
 }

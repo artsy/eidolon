@@ -40,8 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.removeObjectForKey(XAppToken.DefaultsKeys.TokenExpiry.rawValue)
 
         let auctionStoryboard = UIStoryboard.auction()
-        window?.rootViewController = auctionStoryboard.instantiateInitialViewController()
-        // TODO: DI provider into listings VC before the following line
+        let appViewController = auctionStoryboard.instantiateInitialViewController() as? AppViewController
+        appViewController?.provider = provider
+        window?.rootViewController = appViewController
         window?.makeKeyAndVisible()
 
         let keys = EidolonKeys()

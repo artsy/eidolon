@@ -24,7 +24,6 @@ class ConfirmYourBidViewController: UIViewController {
     // Need takeUntil because we bind this observable eventually to bidDetails, making us stick around longer than we should!
     lazy var number: Observable<String> = { self.keypadContainer.stringValue.takeUntil(self.viewWillDisappear) }()
 
-    // TODO: This needs to be injected
     var provider: Provider!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidViewController {
