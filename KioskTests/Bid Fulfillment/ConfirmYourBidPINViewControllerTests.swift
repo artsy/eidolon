@@ -67,36 +67,6 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             expect(address).to( contain(pin) )
             expect(address).to( contain(number) )
         }
-
-        it("respects original endpoints closure") {
-            var externalClosureInvoked = false
-
-            let externalClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-                let endpoint = Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
-
-                externalClosureInvoked = true
-
-                return endpoint
-            }
-
-            let disposeBag = DisposeBag()
-            let subject = ConfirmYourBidPINViewController()
-            subject.provider = Networking(provider: OnlineProvider(endpointClosure: externalClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, online: just(true)))
-            let nav = FulfillmentNavigationController(rootViewController: subject)
-            nav.auctionID = "AUCTION"
-            let provider = subject.providerForPIN("12341234", number: "1234")
-
-            waitUntil{ done in
-                provider
-                    .request(.Me)
-                    .subscribeCompleted {
-                        done()
-                    }
-                    .addDisposableTo(disposeBag)
-            }
-
-            expect(externalClosureInvoked) == true
-        }
     }
 }
 

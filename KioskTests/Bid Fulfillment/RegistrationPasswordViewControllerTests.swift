@@ -59,6 +59,7 @@ class RegistrationPasswordViewControllerTests: QuickSpec {
         it("unbinds bidDetails on viewWillDisappear:") {
             let runLifecycleOfViewController = { (bidDetails: BidDetails) -> RegistrationPasswordViewController in
                 let subject = RegistrationPasswordViewController.instantiateFromStoryboard(fulfillmentStoryboard)
+                subject.provider = Networking.newStubbingNetworking()
                 subject.bidDetails = bidDetails
                 subject.loadViewProgrammatically()
                 subject.viewWillDisappear(false)

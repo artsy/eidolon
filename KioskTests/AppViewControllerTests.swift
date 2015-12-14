@@ -21,6 +21,7 @@ class AppViewControllerTests: QuickSpec {
 
             beforeEach {
                 subject = AppViewController.instantiateFromStoryboard(auctionStoryboard)
+                subject.provider = Networking.newStubbingNetworking()
                 fakeReachability = Variable(true)
                 
                 subject.reachability = fakeReachability.asObservable()
