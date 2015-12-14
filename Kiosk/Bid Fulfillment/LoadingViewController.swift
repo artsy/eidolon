@@ -5,7 +5,7 @@ import RxSwift
 
 class LoadingViewController: UIViewController {
 
-    var provider: NetworkingType!
+    var provider: Networking!
 
     @IBOutlet weak var titleLabel: ARSerifLabel!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!

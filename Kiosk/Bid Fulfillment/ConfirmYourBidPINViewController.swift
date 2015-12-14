@@ -14,7 +14,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 
     lazy var pin: Observable<String> = { self.keypadContainer.stringValue }()
 
-    var provider: NetworkingType!
+    var provider: Networking!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidPIN) as! ConfirmYourBidPINViewController
@@ -50,7 +50,7 @@ class ConfirmYourBidPINViewController: UIViewController {
             let loggedInProvider = me.providerForPIN(me._pin.value, number: phone)
 
             return loggedInProvider
-                .request(ArtsyAPI.Me)
+                .request(ArtsyAuthenticatedAPI.Me)
                 .filterSuccessfulStatusCodes()
                 .map(void)
                 .then {
@@ -105,8 +105,8 @@ class ConfirmYourBidPINViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
     }
 
-    func providerForPIN(pin: String, number: String) -> AuthorizedNetworkingType {
-        let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
+    func providerForPIN(pin: String, number: String) -> AuthorizedNetworking {
+        let newEndpointsClosure = { (target: ArtsyAuthenticatedAPI) -> Endpoint<ArtsyAuthenticatedAPI> in
             // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
             let endpoint = Networking.endpointsClosure()(target)
 
@@ -114,7 +114,7 @@ class ConfirmYourBidPINViewController: UIViewController {
             return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number, "sale_id": auctionID])
         }
 
-        let provider = OnlineProvider(endpointClosure: newEndpointsClosure, requestClosure: Networking.endpointResolver(), stubClosure: Networking.APIKeysBasedStubBehaviour, plugins: Networking.plugins)
+        let provider = OnlineProvider(endpointClosure: newEndpointsClosure, requestClosure: Networking.endpointResolver(), stubClosure: Networking.APIKeysBasedStubBehaviour, plugins: Networking.authenticatedPlugins)
 
         return AuthorizedNetworking(provider: provider)
 
@@ -126,8 +126,8 @@ class ConfirmYourBidPINViewController: UIViewController {
         keypadContainer.resetAction.execute()
     }
 
-    func checkForCreditCard(loggedInProvider: AuthorizedNetworkingType) -> Observable<[Card]> {
-        let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
+    func checkForCreditCard(loggedInProvider: AuthorizedNetworking) -> Observable<[Card]> {
+        let endpoint = ArtsyAuthenticatedAPI.MyCreditCards
         return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
     }
 }

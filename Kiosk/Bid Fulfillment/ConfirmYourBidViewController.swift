@@ -24,7 +24,7 @@ class ConfirmYourBidViewController: UIViewController {
     // Need takeUntil because we bind this observable eventually to bidDetails, making us stick around longer than we should!
     lazy var number: Observable<String> = { self.keypadContainer.stringValue.takeUntil(self.viewWillDisappear) }()
 
-    var provider: NetworkingType!
+    var provider: Networking!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBid) as! ConfirmYourBidViewController

@@ -11,7 +11,7 @@ class SaleArtworkDetailsViewController: UIViewController {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
     var saleArtwork: SaleArtwork!
-    var provider: NetworkingType!
+    var provider: Networking!
     
     var showBuyersPremiumCommand = { () -> CocoaAction in
         appDelegate().showBuyersPremiumCommand()

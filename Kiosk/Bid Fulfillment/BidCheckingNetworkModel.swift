@@ -15,7 +15,7 @@ protocol BidCheckingNetworkModelType {
     var isHighestBidder: Variable<Bool> { get }
     var reserveNotMet: Variable<Bool> { get }
 
-    func waitForBidResolution (bidderPositionId: String) -> Observable<Void>
+    func waitForBidResolution (bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<Void>
 }
 
 class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
@@ -25,7 +25,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
     private var pollRequests = 0
 
     // inputs
-    let provider: NetworkingType
+    let provider: Networking
     let bidDetails: BidDetails
 
     // outputs
@@ -35,14 +35,14 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     private var mostRecentSaleArtwork: SaleArtwork?
 
-    init(provider: NetworkingType, bidDetails: BidDetails) {
+    init(provider: Networking, bidDetails: BidDetails) {
         self.provider = provider
         self.bidDetails = bidDetails
     }
 
-    func waitForBidResolution (bidderPositionId: String) -> Observable<Void> {
+    func waitForBidResolution (bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<Void> {
         return self
-            .pollForUpdatedBidderPosition(bidderPositionId)
+            .pollForUpdatedBidderPosition(bidderPositionId, provider: provider)
             .then {
 
                 return self.getUpdatedSaleArtwork()
@@ -60,7 +60,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
                     }
                     .catchErrorJustReturn()
                     .flatMap { _ -> Observable<Void> in
-                        return self.checkForMaxBid()
+                        return self.checkForMaxBid(provider)
                 }
             } .doOnNext { _ in
                 self.bidIsResolved.value = true
@@ -69,8 +69,8 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
             }.catchErrorJustReturn()
     }
     
-    private func pollForUpdatedBidderPosition(bidderPositionId: String) -> Observable<Void> {
-        let updatedBidderPosition = getUpdatedBidderPosition(bidderPositionId)
+    private func pollForUpdatedBidderPosition(bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<Void> {
+        let updatedBidderPosition = getUpdatedBidderPosition(bidderPositionId, provider: provider)
             .flatMap { bidderPositionObject -> Observable<Void> in
                 self.pollRequests++
 
@@ -92,7 +92,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
                         .take(1)
                         .map(void)
                         .then {
-                            return self.pollForUpdatedBidderPosition(bidderPositionId)
+                            return self.pollForUpdatedBidderPosition(bidderPositionId, provider: provider)
                     }
                 }
         }
@@ -103,8 +103,8 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
             .then { updatedBidderPosition }
     }
 
-    private func checkForMaxBid() -> Observable<Void> {
-        return getMyBidderPositions()
+    private func checkForMaxBid(provider: AuthorizedNetworking) -> Observable<Void> {
+        return getMyBidderPositions(provider)
             .doOnNext{ newBidderPositions in
 
                 if let topBidID = self.mostRecentSaleArtwork?.saleHighestBid?.id {
@@ -116,11 +116,11 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
             .map(void)
     }
 
-    private func getMyBidderPositions() -> Observable<[BidderPosition]> {
+    private func getMyBidderPositions(provider: AuthorizedNetworking) -> Observable<[BidderPosition]> {
         let artworkID = bidDetails.saleArtwork!.artwork.id;
         let auctionID = bidDetails.saleArtwork!.auctionID!
 
-        let endpoint: ArtsyAPI = ArtsyAPI.MyBidPositionsForAuctionArtwork(auctionID: auctionID, artworkID: artworkID)
+        let endpoint = ArtsyAuthenticatedAPI.MyBidPositionsForAuctionArtwork(auctionID: auctionID, artworkID: artworkID)
         return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()
@@ -141,8 +141,8 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
             .mapToObject(SaleArtwork)
     }
     
-    private func getUpdatedBidderPosition(bidderPositionId: String) -> Observable<BidderPosition> {
-        let endpoint: ArtsyAPI = ArtsyAPI.MyBidPosition(id: bidderPositionId)
+    private func getUpdatedBidderPosition(bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<BidderPosition> {
+        let endpoint = ArtsyAuthenticatedAPI.MyBidPosition(id: bidderPositionId)
         return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()

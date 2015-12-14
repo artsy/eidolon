@@ -8,32 +8,32 @@ let OutbidDomain = "Outbid"
 protocol PlaceBidNetworkModelType {
     var bidDetails: BidDetails { get }
 
-    func bid() -> Observable<String>
+    func bid(provider: AuthorizedNetworking) -> Observable<String>
 }
 
 class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
 
-    let provider: NetworkingType
+    let provider: Networking
     let bidDetails: BidDetails
 
-    init(provider: NetworkingType, bidDetails: BidDetails) {
+    init(provider: Networking, bidDetails: BidDetails) {
         self.provider = provider
         self.bidDetails = bidDetails
 
         super.init()
     }
 
-    func bid() -> Observable<String> {
+    func bid(provider: AuthorizedNetworking) -> Observable<String> {
         let saleArtwork = bidDetails.saleArtwork.value
 
         assert(saleArtwork.hasValue, "Sale artwork is nil at bidding stage.")
 
         let cents = (bidDetails.bidAmountCents.value as? Int) ?? 0
-        return bidOnSaleArtwork(saleArtwork!, bidAmountCents: String(cents))
+        return bidOnSaleArtwork(saleArtwork!, bidAmountCents: String(cents), provider: provider)
     }
 
-    private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> Observable<String> {
-        let bidEndpoint: ArtsyAPI = ArtsyAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
+    private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String, provider: AuthorizedNetworking) -> Observable<String> {
+        let bidEndpoint = ArtsyAuthenticatedAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
 
         let request = provider
             .request(bidEndpoint)

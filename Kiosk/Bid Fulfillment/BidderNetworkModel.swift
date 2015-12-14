@@ -6,19 +6,19 @@ protocol BidderNetworkModelType {
     var createdNewUser: Observable<Bool> { get }
     var bidDetails: BidDetails { get }
 
-    func createOrGetBidder() -> Observable<AuthorizedNetworkingType>
+    func createOrGetBidder() -> Observable<AuthorizedNetworking>
 }
 
 class BidderNetworkModel: NSObject, BidderNetworkModelType {
 
     let bidDetails: BidDetails
-    let provider: NetworkingType
+    let provider: Networking
 
     var createdNewUser: Observable<Bool> {
         return self.bidDetails.newUser.hasBeenRegistered.asObservable()
     }
 
-    init(provider: NetworkingType, bidDetails: BidDetails) {
+    init(provider: Networking, bidDetails: BidDetails) {
         self.provider = provider
         self.bidDetails = bidDetails
     }
@@ -26,13 +26,13 @@ class BidderNetworkModel: NSObject, BidderNetworkModelType {
     // MARK: - Main observable
 
     /// Returns an authorized provider
-    func createOrGetBidder() -> Observable<AuthorizedNetworkingType> {
+    func createOrGetBidder() -> Observable<AuthorizedNetworking> {
         return createOrUpdateUser()
-            .flatMap { provider -> Observable<AuthorizedNetworkingType> in
-                return self.createOrUpdateBidder().mapReplace(provider)
+            .flatMap { provider -> Observable<AuthorizedNetworking> in
+                return self.createOrUpdateBidder(provider).mapReplace(provider)
             }
-            .flatMap { provider -> Observable<AuthorizedNetworkingType> in
-                self.getMyPaddleNumber().mapReplace(provider)
+            .flatMap { provider -> Observable<AuthorizedNetworking> in
+                self.getMyPaddleNumber(provider).mapReplace(provider)
             }
     }
 }
@@ -49,25 +49,25 @@ private extension BidderNetworkModel {
         }
     }
 
-    func createOrUpdateUser() -> Observable<AuthorizedNetworkingType> {
+    func createOrUpdateUser() -> Observable<AuthorizedNetworking> {
         // observable to test for user existence (does a user exist with this email?)
         let bool = self.checkUserEmailExists(bidDetails.newUser.email.value ?? "")
 
         // If the user exists, update their info to the API, otherwise create a new user.
         return bool
-            .flatMap { emailExists -> Observable<AuthorizedNetworkingType> in
+            .flatMap { emailExists -> Observable<AuthorizedNetworking> in
                 if emailExists {
                     return self.updateUser()
                 } else {
                     return self.createNewUser()
                 }
             }
-            .flatMap { provider -> Observable<AuthorizedNetworkingType> in
-                self.addCardToUser().mapReplace(provider) // After update/create observable finishes, add a CC to their account (if we've collected one)
+            .flatMap { provider -> Observable<AuthorizedNetworking> in
+                self.addCardToUser(provider).mapReplace(provider) // After update/create observable finishes, add a CC to their account (if we've collected one)
             }
     }
 
-    func createNewUser() -> Observable<AuthorizedNetworkingType> {
+    func createNewUser() -> Observable<AuthorizedNetworking> {
         let newUser = bidDetails.newUser
         let endpoint: ArtsyAPI = ArtsyAPI.CreateUser(email: newUser.email.value!, password: newUser.password.value!, phone: newUser.phoneNumber.value!, postCode: newUser.zipCode.value ?? "", name: newUser.name.value ?? "")
 
@@ -77,16 +77,16 @@ private extension BidderNetworkModel {
             .doOnError { error in
                 logger.log("Creating user failed.")
                 logger.log("Error: \((error as NSError).localizedDescription). \n \((error as NSError).artsyServerError())")
-        }.flatMap { _ -> Observable<AuthorizedNetworkingType> in
+        }.flatMap { _ -> Observable<AuthorizedNetworking> in
             self.newAuthorizedNetworking()
         }
     }
 
-    func updateUser() -> Observable<AuthorizedNetworkingType> {
+    func updateUser() -> Observable<AuthorizedNetworking> {
         let newUser = bidDetails.newUser
-        let endpoint: ArtsyAPI = ArtsyAPI.UpdateMe(email: newUser.email.value!, phone: newUser.phoneNumber.value!, postCode: newUser.zipCode.value ?? "", name: newUser.name.value ?? "")
+        let endpoint = ArtsyAuthenticatedAPI.UpdateMe(email: newUser.email.value!, phone: newUser.phoneNumber.value!, postCode: newUser.zipCode.value ?? "", name: newUser.name.value ?? "")
         return newAuthorizedNetworking()
-            .flatMap { (provider) -> Observable<AuthorizedNetworkingType> in
+            .flatMap { (provider) -> Observable<AuthorizedNetworking> in
                 provider.request(endpoint)
                     .mapJSON()
                     .logNext()
@@ -95,7 +95,7 @@ private extension BidderNetworkModel {
             .logServerError("Updating user failed.")
     }
 
-    func addCardToUser() -> Observable<Void> {
+    func addCardToUser(provider: AuthorizedNetworking) -> Observable<Void> {
         // If the user was asked to swipe a card, we'd have stored the token. 
         // If the token is not there, then the user must already have one on file. So we can skip this step.
         guard let token = bidDetails.newUser.creditCardToken.value else {
@@ -103,7 +103,7 @@ private extension BidderNetworkModel {
         }
 
         let swiped = bidDetails.newUser.swipedCreditCard
-        let endpoint: ArtsyAPI = ArtsyAPI.RegisterCard(stripeToken: token, swiped: swiped)
+        let endpoint = ArtsyAuthenticatedAPI.RegisterCard(stripeToken: token, swiped: swiped)
 
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
@@ -119,25 +119,25 @@ private extension BidderNetworkModel {
 
     // MARK: - Auction / Bidder observables
 
-    func createOrUpdateBidder() -> Observable<Void> {
+    func createOrUpdateBidder(provider: AuthorizedNetworking) -> Observable<Void> {
         guard let auctionID = bidDetails.saleArtwork?.auctionID else {
             return failWith(EidolonError.CouldNotParseJSON)
         }
 
-        let bool = self.checkForBidderOnAuction(auctionID)
+        let bool = self.checkForBidderOnAuction(auctionID, provider: provider)
 
         return bool.flatMap { exists -> Observable<Void> in
             if exists {
                 return empty()
             } else {
-                return self.registerToAuction(auctionID).then { [weak self] in self?.generateAPIN() }
+                return self.registerToAuction(auctionID, provider: provider).then { [weak self] in self?.generateAPIN(provider) }
             }
         }
     }
 
-    func checkForBidderOnAuction(auctionID: String) -> Observable<Bool> {
+    func checkForBidderOnAuction(auctionID: String, provider: AuthorizedNetworking) -> Observable<Bool> {
 
-        let endpoint: ArtsyAPI = ArtsyAPI.MyBiddersForAuction(auctionID: auctionID)
+        let endpoint = ArtsyAuthenticatedAPI.MyBiddersForAuction(auctionID: auctionID)
         let request = provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
@@ -155,8 +155,8 @@ private extension BidderNetworkModel {
         }.logServerError("Getting user bidders failed.")
     }
 
-    func registerToAuction(auctionID: String) -> Observable<Void> {
-        let endpoint: ArtsyAPI = ArtsyAPI.RegisterToBid(auctionID: auctionID)
+    func registerToAuction(auctionID: String, provider: AuthorizedNetworking) -> Observable<Void> {
+        let endpoint = ArtsyAuthenticatedAPI.RegisterToBid(auctionID: auctionID)
         let register = provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
@@ -171,8 +171,8 @@ private extension BidderNetworkModel {
             .map(void)
     }
 
-    func generateAPIN() -> Observable<Void> {
-        let endpoint: ArtsyAPI = ArtsyAPI.CreatePINForBidder(bidderID: bidDetails.bidderID.value!)
+    func generateAPIN(provider: AuthorizedNetworking) -> Observable<Void> {
+        let endpoint = ArtsyAuthenticatedAPI.CreatePINForBidder(bidderID: bidDetails.bidderID.value!)
 
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
@@ -185,8 +185,8 @@ private extension BidderNetworkModel {
             .map(void)
     }
 
-    func getMyPaddleNumber() -> Observable<Void> {
-        let endpoint: ArtsyAPI = ArtsyAPI.Me
+    func getMyPaddleNumber(provider: AuthorizedNetworking) -> Observable<Void> {
+        let endpoint = ArtsyAuthenticatedAPI.Me
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
@@ -198,13 +198,13 @@ private extension BidderNetworkModel {
             .map(void)
     }
 
-    func newAuthorizedNetworking() -> Observable<AuthorizedNetworkingType> {
+    func newAuthorizedNetworking() -> Observable<AuthorizedNetworking> {
         let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: bidDetails.newUser.email.value!, password: bidDetails.newUser.password.value!)
 
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
-            .flatMap { accessTokenDict -> Observable<AuthorizedNetworkingType> in
+            .flatMap { accessTokenDict -> Observable<AuthorizedNetworking> in
                 guard let accessToken = accessTokenDict["access_token"] as? String else {
                     return failWith(EidolonError.CouldNotParseJSON)
                 }

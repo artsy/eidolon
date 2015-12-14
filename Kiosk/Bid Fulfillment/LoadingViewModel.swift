@@ -25,7 +25,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
         return BidCheckingNetworkModel(provider: self.provider, bidDetails: self.bidderNetworkModel.bidDetails)
     }()
 
-    let provider: NetworkingType
+    let provider: Networking
     let createdNewBidder = Variable(false)
     let bidIsResolved = Variable(false)
     let isHighestBidder = Variable(false)
@@ -35,7 +35,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
         return bidderNetworkModel.bidDetails
     }
 
-    init(provider: NetworkingType, bidNetworkModel: BidderNetworkModelType, placingBid: Bool, actionsComplete: Observable<Void>) {
+    init(provider: Networking, bidNetworkModel: BidderNetworkModelType, placingBid: Bool, actionsComplete: Observable<Void>) {
         self.provider = provider
         self.bidderNetworkModel = bidNetworkModel
         self.placingBid = placingBid
@@ -63,8 +63,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
     func performActions() -> Observable<Void> {
         return bidderNetworkModel
             .createOrGetBidder()
-            .map(void)
-            .flatMap { [weak self] _ -> Observable<String> in
+            .flatMap { [weak self] provider -> Observable<(String, AuthorizedNetworking)> in
                 guard let me = self else { return empty() }
                 guard me.placingBid else {
                     ARAnalytics.event("Registered New User Only")
@@ -75,13 +74,14 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
 
                 return me
                     .placeBidNetworkModel
-                    .bid()
+                    .bid(provider)
+                    .map { return ($0, provider) }
             }
-            .flatMap { [weak self] position -> Observable<Void> in
+            .flatMap { [weak self] tuple -> Observable<Void> in
                 guard let me = self else { return empty() }
                 guard me.placingBid else { return empty() }
 
-                return me.bidCheckingModel.waitForBidResolution(position).map(void)
+                return me.bidCheckingModel.waitForBidResolution(tuple.0, provider: tuple.1).map(void)
             }
     }
 }

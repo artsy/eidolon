@@ -17,7 +17,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     }
 
     var createNewAccount = false
-    var provider: NetworkingType!
+    var provider: Networking!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
@@ -58,7 +58,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             guard let me = self else { return empty() }
 
             return me.xAuth()
-                .flatMap { accessTokenDict -> Observable<AuthorizedNetworkingType> in
+                .flatMap { accessTokenDict -> Observable<AuthorizedNetworking> in
                     guard let accessToken = accessTokenDict["access_token"] as? String else {
                         throw NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
                     }
@@ -67,12 +67,12 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
                     return just(provider)
                 }
-                .flatMap { provider -> Observable<AuthorizedNetworkingType> in
+                .flatMap { provider -> Observable<AuthorizedNetworking> in
                     return me.fulfillmentNav()
                         .updateUserCredentials(provider)
                         .mapReplace(provider)
                 }.flatMap { provider -> Observable<Void> in
-                    return me.creditCard()
+                    return me.creditCard(provider)
                         .doOnNext { cards in
                             guard let me = self else { return }
 
@@ -168,8 +168,8 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         self.presentViewController(alertController, animated: true) {}
     }
 
-    func creditCard() -> Observable<[Card]> {
-        let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
+    func creditCard(provider: AuthorizedNetworking) -> Observable<[Card]> {
+        let endpoint = ArtsyAuthenticatedAPI.MyCreditCards
         return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()

@@ -3,6 +3,10 @@ import RxSwift
 import Moya
 import Alamofire
 
+protocol ArtsyAPIType {
+    var addXAuth: Bool { get }
+}
+
 enum ArtsyAPI {
     case XApp
     case XAuth(email: String, password: String)
@@ -11,13 +15,6 @@ enum ArtsyAPI {
     case SystemTime
     case Ping
 
-    case Me
-    
-    case MyCreditCards
-    case CreatePINForBidder(bidderID: String)
-    case FindBidderRegistration(auctionID: String, phone: String)
-    case RegisterToBid(auctionID: String)
-
     case Artwork(id: String)
     case Artist(id: String)
 
@@ -25,17 +22,10 @@ enum ArtsyAPI {
     case AuctionListings(id: String, page: Int, pageSize: Int)
     case AuctionInfo(auctionID: String)
     case AuctionInfoForArtwork(auctionID: String, artworkID: String)
+    case FindBidderRegistration(auctionID: String, phone: String)
     case ActiveAuctions
-    
-    case MyBiddersForAuction(auctionID: String)
-    case MyBidPositionsForAuctionArtwork(auctionID: String, artworkID: String)
-    case MyBidPosition(id: String)
-    case PlaceABid(auctionID: String, artworkID: String, maxBidCents: String)
 
-    case UpdateMe(email: String, phone: String, postCode: String, name: String)
     case CreateUser(email: String, password: String, phone: String, postCode: String, name: String)
-
-    case RegisterCard(stripeToken: String, swiped: Bool)
 
     case BidderDetailsNotification(auctionID: String, identifier: String)
     
@@ -43,7 +33,21 @@ enum ArtsyAPI {
     case FindExistingEmailRegistration(email: String)
 }
 
-extension ArtsyAPI : MoyaTarget {
+enum ArtsyAuthenticatedAPI {
+    case MyCreditCards
+    case CreatePINForBidder(bidderID: String)
+    case RegisterToBid(auctionID: String)
+    case MyBiddersForAuction(auctionID: String)
+    case MyBidPositionsForAuctionArtwork(auctionID: String, artworkID: String)
+    case MyBidPosition(id: String)
+    case PlaceABid(auctionID: String, artworkID: String, maxBidCents: String)
+
+    case UpdateMe(email: String, phone: String, postCode: String, name: String)
+    case RegisterCard(stripeToken: String, swiped: Bool)
+    case Me
+}
+
+extension ArtsyAPI : MoyaTarget, ArtsyAPIType {
      var path: String {
         switch self {
 
@@ -71,50 +75,20 @@ extension ArtsyAPI : MoyaTarget {
         case Ping:
             return "/api/v1/system/ping"
 
-        case RegisterToBid:
+        case FindBidderRegistration:
             return "/api/v1/bidder"
-
-        case MyCreditCards:
-            return "/api/v1/me/credit_cards"
-
-        case CreatePINForBidder(let bidderID):
-            return "/api/v1/bidder/\(bidderID)/pin"
 
         case ActiveAuctions:
             return "/api/v1/sales"
 
-        case Me:
-            return "/api/v1/me"
-
-        case UpdateMe:
-            return "/api/v1/me"
-
         case CreateUser:
             return "/api/v1/user"
-
-        case MyBiddersForAuction:
-            return "/api/v1/me/bidders"
-
-        case MyBidPositionsForAuctionArtwork:
-            return "/api/v1/me/bidder_positions"
-
-        case MyBidPosition(let id):
-            return "/api/v1/me/bidder_position/\(id)"
 
         case Artwork(let id):
             return "/api/v1/artwork/\(id)"
 
         case Artist(let id):
             return "/api/v1/artist/\(id)"
-
-        case FindBidderRegistration:
-            return "/api/v1/bidder"
-            
-        case PlaceABid:
-            return "/api/v1/me/bidder_position"
-
-        case RegisterCard:
-            return "/api/v1/me/credit_cards"
 
         case TrustToken:
             return "/api/v1/me/trust_token"
@@ -153,19 +127,6 @@ extension ArtsyAPI : MoyaTarget {
         case Auctions:
             return ["is_auction": "true"]
 
-        case RegisterToBid(let auctionID):
-            return ["sale_id": auctionID]
-
-        case MyBiddersForAuction(let auctionID):
-            return ["sale_id": auctionID]
-
-        case PlaceABid(let auctionID, let artworkID, let maxBidCents):
-            return [
-                "sale_id": auctionID,
-                "artwork_id":  artworkID,
-                "max_bid_amount_cents": maxBidCents
-            ]
-
         case TrustToken(let number, let auctionID):
             return ["number": number, "auction_pin": auctionID]
 
@@ -176,18 +137,6 @@ extension ArtsyAPI : MoyaTarget {
                 "location": [ "postal_code": postCode ]
             ]
 
-        case UpdateMe(let email, let phone,let postCode, let name):
-            return [
-                "email": email, "phone": phone,
-                "name": name, "location": [ "postal_code": postCode ]
-            ]
-
-        case RegisterCard(let token, let swiped):
-            return ["provider": "stripe", "token": token, "created_by_trusted_client": swiped]
-
-        case FindBidderRegistration(let auctionID, let phone):
-            return ["sale_id": auctionID, "number": phone]
-
         case BidderDetailsNotification(let auctionID, let identifier):
             return ["sale_id": auctionID, "identifier": identifier]
 
@@ -197,14 +146,14 @@ extension ArtsyAPI : MoyaTarget {
         case FindExistingEmailRegistration(let email):
             return ["email": email]
 
+        case FindBidderRegistration(let auctionID, let phone):
+            return ["sale_id": auctionID, "number": phone]
+
         case AuctionListings(_, let page, let pageSize):
             return ["size": pageSize, "page": page]
 
         case ActiveAuctions:
             return ["is_auction": true, "live": true]
-
-        case MyBidPositionsForAuctionArtwork(let auctionID, let artworkID):
-            return ["sale_id": auctionID, "artwork_id": artworkID]
             
         default:
             return nil
@@ -214,16 +163,11 @@ extension ArtsyAPI : MoyaTarget {
     var method: Moya.Method {
         switch self {
         case .LostPasswordNotification,
-             .CreateUser,
-             .PlaceABid,
-             .RegisterCard,
-             .RegisterToBid,
-             .CreatePINForBidder:
+        .CreateUser:
             return .POST
         case .FindExistingEmailRegistration:
             return .HEAD
-        case .UpdateMe,
-             .BidderDetailsNotification:
+        case .BidderDetailsNotification:
             return .PUT
         default:
             return .GET
@@ -251,11 +195,142 @@ extension ArtsyAPI : MoyaTarget {
         case SystemTime:
             return stubbedResponse("SystemTime")
 
-        case CreatePINForBidder:
-            return stubbedResponse("CreatePINForBidder")
-
         case ActiveAuctions:
             return stubbedResponse("ActiveAuctions")
+
+        case CreateUser:
+            return stubbedResponse("Me")
+
+        case Artwork:
+            return stubbedResponse("Artwork")
+
+        case Artist:
+            return stubbedResponse("Artist")
+
+        case AuctionInfo:
+            return stubbedResponse("AuctionInfo")
+
+        // This API returns a 302, so stubbed response isn't valid
+        case FindBidderRegistration:
+            return stubbedResponse("Me")
+
+        case BidderDetailsNotification:
+            return stubbedResponse("RegisterToBid")
+
+        case LostPasswordNotification:
+            return stubbedResponse("ForgotPassword")
+
+        case FindExistingEmailRegistration:
+            return stubbedResponse("ForgotPassword")
+
+        case AuctionInfoForArtwork:
+            return stubbedResponse("AuctionInfoForArtwork")
+
+        case Ping:
+            return stubbedResponse("Ping")
+
+        }
+    }
+
+    var addXAuth: Bool {
+        switch self {
+        case .XApp: return false
+        case .XAuth: return false
+        default: return true
+        }
+    }
+}
+
+extension ArtsyAuthenticatedAPI: MoyaTarget, ArtsyAPIType {
+    var path: String {
+        switch self {
+
+        case RegisterToBid:
+            return "/api/v1/bidder"
+
+        case MyCreditCards:
+            return "/api/v1/me/credit_cards"
+
+        case CreatePINForBidder(let bidderID):
+            return "/api/v1/bidder/\(bidderID)/pin"
+
+        case Me:
+            return "/api/v1/me"
+
+        case UpdateMe:
+            return "/api/v1/me"
+
+        case MyBiddersForAuction:
+            return "/api/v1/me/bidders"
+
+        case MyBidPositionsForAuctionArtwork:
+            return "/api/v1/me/bidder_positions"
+
+        case MyBidPosition(let id):
+            return "/api/v1/me/bidder_position/\(id)"
+
+        case PlaceABid:
+            return "/api/v1/me/bidder_position"
+
+        case RegisterCard:
+            return "/api/v1/me/credit_cards"
+        }
+    }
+
+    var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
+    var baseURL: NSURL { return NSURL(string: base)! }
+
+    var parameters: [String: AnyObject]? {
+        switch self {
+
+        case RegisterToBid(let auctionID):
+            return ["sale_id": auctionID]
+
+        case MyBiddersForAuction(let auctionID):
+            return ["sale_id": auctionID]
+
+        case PlaceABid(let auctionID, let artworkID, let maxBidCents):
+            return [
+                "sale_id": auctionID,
+                "artwork_id":  artworkID,
+                "max_bid_amount_cents": maxBidCents
+            ]
+
+        case UpdateMe(let email, let phone,let postCode, let name):
+            return [
+                "email": email, "phone": phone,
+                "name": name, "location": [ "postal_code": postCode ]
+            ]
+
+        case RegisterCard(let token, let swiped):
+            return ["provider": "stripe", "token": token, "created_by_trusted_client": swiped]
+
+        case MyBidPositionsForAuctionArtwork(let auctionID, let artworkID):
+            return ["sale_id": auctionID, "artwork_id": artworkID]
+
+        default:
+            return nil
+        }
+    }
+
+    var method: Moya.Method {
+        switch self {
+        case .PlaceABid,
+        .RegisterCard,
+        .RegisterToBid,
+        .CreatePINForBidder:
+            return .POST
+        case .UpdateMe:
+            return .PUT
+        default:
+            return .GET
+        }
+    }
+
+    var sampleData: NSData {
+        switch self {
+        case CreatePINForBidder:
+            return stubbedResponse("CreatePINForBidder")
 
         case MyCreditCards:
             return stubbedResponse("MyCreditCards")
@@ -272,71 +347,23 @@ extension ArtsyAPI : MoyaTarget {
         case UpdateMe:
             return stubbedResponse("Me")
 
-        case CreateUser:
-            return stubbedResponse("Me")
-            
-        // This API returns a 302, so stubbed response isn't valid
-        case FindBidderRegistration:
-            return stubbedResponse("Me")
-
         case PlaceABid:
             return stubbedResponse("CreateABid")
 
-        case Artwork:
-            return stubbedResponse("Artwork")
-
-        case Artist:
-            return stubbedResponse("Artist")
-
-        case AuctionInfo:
-            return stubbedResponse("AuctionInfo")
-
         case RegisterCard:
             return stubbedResponse("RegisterCard")
-
-        case BidderDetailsNotification:
-            return stubbedResponse("RegisterToBid")
-
-        case LostPasswordNotification:
-            return stubbedResponse("ForgotPassword")
-
-        case FindExistingEmailRegistration:
-            return stubbedResponse("ForgotPassword")
-
-        case AuctionInfoForArtwork:
-            return stubbedResponse("AuctionInfoForArtwork")
 
         case MyBidPositionsForAuctionArtwork:
             return stubbedResponse("MyBidPositionsForAuctionArtwork")
             
         case MyBidPosition:
             return stubbedResponse("MyBidPosition")
-
-        case Ping:
-            return stubbedResponse("Ping")
-
+            
         }
     }
-}
 
-// Custom stuff
-extension ArtsyAPI {
-    var requiresAuthorization: Bool {
-        switch self {
-        case .MyCreditCards: fallthrough
-        case .CreatePINForBidder: fallthrough
-        case .FindBidderRegistration: fallthrough
-        case .RegisterToBid: fallthrough
-        case .MyBiddersForAuction: fallthrough
-        case .MyBidPositionsForAuctionArtwork: fallthrough
-        case .MyBidPosition: fallthrough
-        case .PlaceABid: fallthrough
-        case .UpdateMe: fallthrough
-        case .RegisterCard: fallthrough
-        case .Me: return true
-
-        default: return false
-        }
+    var addXAuth: Bool {
+        return true
     }
 }
 

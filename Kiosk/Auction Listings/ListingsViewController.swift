@@ -24,7 +24,7 @@ class ListingsViewController: UIViewController {
         imageView.sd_cancelCurrentImageLoad()
     }
 
-    var provider: NetworkingType!
+    var provider: Networking!
 
     lazy var viewModel: ListingsViewModelType = {
         return ListingsViewModel(provider:

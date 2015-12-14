@@ -14,7 +14,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
     @IBOutlet var confirmButton: UIButton!
 
-    var provider: NetworkingType!
+    var provider: Networking!
 
     let coordinator = RegistrationCoordinator()
 
