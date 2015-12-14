@@ -13,7 +13,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidEnterEmail) as! ConfirmYourBidEnterYourEmailViewController
     }
 
-    var provider: Provider!
+    var provider: ProviderType!
 
     override func viewDidLoad() {
         super.viewDidLoad()

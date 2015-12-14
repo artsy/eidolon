@@ -17,8 +17,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     }
 
     var createNewAccount = false
-    var provider: Provider!
-    var loggedInProvider: Provider?
+    var provider: ProviderType!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
@@ -59,18 +58,20 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             guard let me = self else { return empty() }
 
             return me.xAuth()
-                .map { accessTokenDict in
+                .flatMap { accessTokenDict -> Observable<AuthorizedProviderType> in
                     guard let accessToken = accessTokenDict["access_token"] as? String else {
                         throw NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
                     }
 
-                    self?.loggedInProvider = Provider.AuthorizedProvider(accessToken)
+                    let provider = Provider.newAuthorizedProvider(accessToken)
 
-                    return Void()
+                    return just(provider)
                 }
-                .then {
-                    return me.fulfillmentNav().updateUserCredentials(self!.provider)
-                }.then {
+                .flatMap { provider -> Observable<AuthorizedProviderType> in
+                    return me.fulfillmentNav()
+                        .updateUserCredentials(provider)
+                        .mapReplace(provider)
+                }.flatMap { provider -> Observable<Void> in
                     return me.creditCard()
                         .doOnNext { cards in
                             guard let me = self else { return }
@@ -96,7 +97,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
         if segue == .EmailLoginConfirmedHighestBidder {
             let viewController = segue.destinationViewController as! LoadingViewController
-            viewController.provider = loggedInProvider
+            viewController.provider = provider
         } else if segue == .ArtsyUserHasNotRegisteredCard {
             let viewController = segue.destinationViewController as! RegisterViewController
             viewController.provider = provider

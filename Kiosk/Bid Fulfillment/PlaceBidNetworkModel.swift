@@ -13,10 +13,10 @@ protocol PlaceBidNetworkModelType {
 
 class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
 
-    let provider: Provider
+    let provider: ProviderType
     let bidDetails: BidDetails
 
-    init(provider: Provider, bidDetails: BidDetails) {
+    init(provider: ProviderType, bidDetails: BidDetails) {
         self.provider = provider
         self.bidDetails = bidDetails
 

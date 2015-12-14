@@ -6,9 +6,9 @@ class APIPingManager {
 
     let syncInterval: NSTimeInterval = 2
     var letOnline: Observable<Bool>!
-    var provider: Provider
+    var provider: ProviderType
 
-    init(provider: Provider) {
+    init(provider: ProviderType) {
         self.provider = provider
 
         letOnline = interval(syncInterval, MainScheduler.sharedInstance)

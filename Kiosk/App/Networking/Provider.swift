@@ -20,31 +20,29 @@ class OnlineProvider<Target where Target: MoyaTarget>: RxMoyaProvider<Target> {
     }
 }
 
-enum Provider {
-    case Default(provider: OnlineProvider<ArtsyAPI>)
-    case Authorized(provider: OnlineProvider<ArtsyAPI>, xAccessToken: String)
-
-    init(provider: OnlineProvider<ArtsyAPI>) {
-        self = .Default(provider: provider)
-    }
-
-    init(provider: OnlineProvider<ArtsyAPI>, xAccessToken: String) {
-        self = .Authorized(provider: provider, xAccessToken: xAccessToken)
-    }
+protocol ProviderType {
+    var provider: OnlineProvider<ArtsyAPI> { get }
+    var providersAuthorization: Bool { get }
 }
 
-private extension Provider {
-    var provider: OnlineProvider<ArtsyAPI> {
-        switch self {
-        case .Default(let provider):
-            return provider
-        case .Authorized(let provider, _):
-            return provider
-        }
-    }
+protocol AuthorizedProviderType: ProviderType {
 }
 
-private extension Provider {
+extension AuthorizedProviderType {
+    var providersAuthorization: Bool { return true }
+}
+
+
+struct Provider: ProviderType {
+    let provider: OnlineProvider<ArtsyAPI>
+    var providersAuthorization: Bool { return false }
+}
+
+struct AuthorizedProvider: AuthorizedProviderType {
+    let provider: OnlineProvider<ArtsyAPI>
+}
+
+private extension ProviderType {
 
     /// Request to fetch and store new XApp token if the current token is missing or expired.
     func XAppTokenRequest(defaults: NSUserDefaults) -> Observable<String?> {
@@ -82,12 +80,12 @@ private extension Provider {
 }
 
 // "Public" interface
-extension Provider {
+extension ProviderType {
 
     /// Request to fetch a given target. Ensures that valid XApp tokens exist before making request
     func request(token: ArtsyAPI, defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) -> Observable<MoyaResponse> {
 
-        if case .Default = self where token.requiresAuthorization {
+        if self.providersAuthorization && token.requiresAuthorization {
             return failWith(EidolonError.NotLoggedIn)
         }
 
@@ -104,26 +102,30 @@ extension Provider {
 // Static methods
 extension Provider {
 
-    static func DefaultProvider() -> Provider {
-        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure,
+    private static func newProvider(xAccessToken: String? = nil) -> OnlineProvider<ArtsyAPI> {
+        return OnlineProvider(endpointClosure: endpointsClosure(xAccessToken),
             requestClosure: Provider.endpointResolver(),
             stubClosure: APIKeysBasedStubBehaviour,
-            plugins: Provider.plugins))
+            plugins: Provider.plugins)
     }
 
-    static func AuthorizedProvider(xAccessToken: String) -> Provider {
-        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure,
-            requestClosure: Provider.endpointResolver(),
-            stubClosure: APIKeysBasedStubBehaviour,
-            plugins: Provider.plugins), xAccessToken: xAccessToken)
+    static func newDefaultProvider() -> Provider {
+        return Provider(provider: newProvider())
+    }
+
+    static func newAuthorizedProvider(xAccessToken: String) -> AuthorizedProviderType {
+        return AuthorizedProvider(provider: newProvider(xAccessToken))
     }
 
     static func StubbingProvider() -> Provider {
-        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure, requestClosure: Provider.endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: just(true)))
+        return Provider(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Provider.endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: just(true)))
     }
 
-    static var endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
+    static func endpointsClosure(xAccessToken: String? = nil)(target: ArtsyAPI) -> Endpoint<ArtsyAPI> {
         var endpoint: Endpoint<ArtsyAPI> = Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+        if let xAccessToken = xAccessToken {
+            endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": xAccessToken])
+        }
         // Sign all non-XApp token requests
 
         switch target {

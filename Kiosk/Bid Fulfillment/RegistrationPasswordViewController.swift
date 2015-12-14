@@ -12,7 +12,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
 
     let finished = PublishSubject<Void>()
 
-    var provider: Provider!
+    var provider: ProviderType!
 
     private let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {

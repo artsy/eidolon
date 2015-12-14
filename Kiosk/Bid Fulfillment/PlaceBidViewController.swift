@@ -8,7 +8,7 @@ import Action
 
 class PlaceBidViewController: UIViewController {
 
-    var provider: Provider!
+    var provider: ProviderType!
 
     private var _bidDollars = Variable(0)
     var hasAlreadyPlacedABid: Bool = false

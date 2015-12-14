@@ -14,7 +14,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 
     lazy var pin: Observable<String> = { self.keypadContainer.stringValue }()
 
-    var provider: Provider!
+    var provider: ProviderType!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidPIN) as! ConfirmYourBidPINViewController
@@ -105,10 +105,10 @@ class ConfirmYourBidPINViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
     }
 
-    func providerForPIN(pin: String, number: String) -> Provider {
+    func providerForPIN(pin: String, number: String) -> AuthorizedProviderType {
         let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
             // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
-            let endpoint = Provider.endpointsClosure(target)
+            let endpoint = Provider.endpointsClosure()(target: target)
 
             let auctionID = self.fulfillmentNav().auctionID
             return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number, "sale_id": auctionID])
@@ -116,7 +116,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         let provider = OnlineProvider(endpointClosure: newEndpointsClosure, requestClosure: Provider.endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
 
-        return Provider(provider: provider)
+        return AuthorizedProvider(provider: provider)
 
     }
 
@@ -126,7 +126,7 @@ class ConfirmYourBidPINViewController: UIViewController {
         keypadContainer.resetAction.execute()
     }
 
-    func checkForCreditCard(loggedInProvider: Provider) -> Observable<[Card]> {
+    func checkForCreditCard(loggedInProvider: AuthorizedProviderType) -> Observable<[Card]> {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
         return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
     }

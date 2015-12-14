@@ -7,7 +7,7 @@ class SystemTime {
 
     init () {}
 
-    func sync(provider: Provider) -> Observable<Void> {
+    func sync(provider: ProviderType) -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.SystemTime
 
         return provider.request(endpoint)

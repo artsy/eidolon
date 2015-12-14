@@ -10,7 +10,7 @@ class ListingsCountdownManager: NSObject {
     let sale = Variable<Sale?>(nil)
 
     let time = SystemTime()
-    var provider: Provider! {
+    var provider: ProviderType! {
         didSet {
             time.sync(provider)
                 .dispatchAsyncMainScheduler()
