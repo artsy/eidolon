@@ -22,11 +22,9 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
 
     // MARK: - Everything else
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
-        if let destination = segue.destinationViewController as? PlaceBidViewController {
-            destination.provider = provider
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.delegate = self
     }
 
     func reset() {
@@ -55,6 +53,14 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
             }
             .logError("error, the authentication for admin is likely wrong: ")
             .map(void)
+    }
+}
+
+extension FulfillmentNavigationController: UINavigationControllerDelegate {
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        guard let viewController = viewController as? PlaceBidViewController else { return }
+
+        viewController.provider = provider
     }
 }
 

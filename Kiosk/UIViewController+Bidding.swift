@@ -2,7 +2,7 @@ import UIKit
 import ARAnalytics
 
 extension UIViewController {
-    func bid(auctionID: String, saleArtwork: SaleArtwork, allowAnimations: Bool) {
+    func bid(auctionID: String, saleArtwork: SaleArtwork, allowAnimations: Bool, provider: Provider) {
         ARAnalytics.event("Bid Button Tapped", withProperties: ["id": saleArtwork.artwork.id])
         
         let storyboard = UIStoryboard.fulfillment()
@@ -12,11 +12,11 @@ extension UIViewController {
         if let internalNav:FulfillmentNavigationController = containerController.internalNavigationController() {
             internalNav.auctionID = auctionID
             internalNav.bidDetails.saleArtwork = saleArtwork
+            internalNav.provider = provider
         }
 
         // Present the VC, then once it's ready trigger it's own showing animations
-        // TODO: This is messy. Clean up somehow – responder chain?
-        navigationController?.parentViewController?.presentViewController(containerController, animated: false) {
+        appDelegate().appViewController.presentViewController(containerController, animated: false) {
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         }
     }

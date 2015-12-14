@@ -206,22 +206,7 @@ private extension ListingsViewController {
     }
 
     func presentModalForSaleArtwork(saleArtwork: SaleArtwork) {
-
-        ARAnalytics.event("Bid Button Tapped", withProperties: ["id": saleArtwork.artwork.id])
-
-        let storyboard = UIStoryboard.fulfillment()
-        let containerController = storyboard.instantiateInitialViewController() as! FulfillmentContainerViewController
-        containerController.allowAnimations = allowAnimations
-
-        if let internalNav: FulfillmentNavigationController = containerController.internalNavigationController() {
-            internalNav.auctionID = viewModel.auctionID
-            internalNav.bidDetails.saleArtwork = saleArtwork
-            internalNav.provider = provider
-        }
-
-        appDelegate().appViewController.presentViewController(containerController, animated: false, completion: {
-            containerController.viewDidAppearAnimation(containerController.allowAnimations)
-        })
+        bid(viewModel.auctionID, saleArtwork: saleArtwork, allowAnimations: self.allowAnimations, provider: provider)
     }
     
     // MARK: Class methods

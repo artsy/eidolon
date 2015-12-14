@@ -234,7 +234,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             .subscribeNext { [weak self] _ in
                 guard let me = self else { return }
 
-                me.bid(me.auctionID, saleArtwork: me.saleArtwork, allowAnimations: me.allowAnimations)
+                me.bid(me.auctionID, saleArtwork: me.saleArtwork, allowAnimations: me.allowAnimations, provider: me.provider)
             }
             .addDisposableTo(rx_disposeBag)
 

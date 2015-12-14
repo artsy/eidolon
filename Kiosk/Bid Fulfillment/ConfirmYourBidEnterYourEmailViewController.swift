@@ -63,6 +63,15 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     
         self.emailTextField.becomeFirstResponder()
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+
+        if segue == .EmailNotFoundonArtsy {
+            let viewController = segue.destinationViewController as! RegisterViewController
+            viewController.provider = provider
+        }
+    }
 }
 
 private extension ConfirmYourBidEnterYourEmailViewController {
