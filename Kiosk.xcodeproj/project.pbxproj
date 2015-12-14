@@ -55,7 +55,7 @@
 		5E8610681A5C429C00456E41 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE31A5C429C00456E41 /* APIKeys.swift */; };
 		5E8610691A5C429C00456E41 /* ArtsyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE41A5C429C00456E41 /* ArtsyAPI.swift */; };
 		5E86106B1A5C429C00456E41 /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE61A5C429C00456E41 /* UserCredentials.swift */; };
-		5E86106C1A5C429C00456E41 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE71A5C429C00456E41 /* Provider.swift */; };
+		5E86106C1A5C429C00456E41 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE71A5C429C00456E41 /* Networking.swift */; };
 		5E86106D1A5C429C00456E41 /* XAppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE81A5C429C00456E41 /* XAppToken.swift */; };
 		5E86106E1A5C429C00456E41 /* NSErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE91A5C429C00456E41 /* NSErrorExtensions.swift */; };
 		5E86106F1A5C429C00456E41 /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FEA1A5C429C00456E41 /* OfflineViewController.swift */; };
@@ -284,7 +284,7 @@
 		5E860FE31A5C429C00456E41 /* APIKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		5E860FE41A5C429C00456E41 /* ArtsyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPI.swift; sourceTree = "<group>"; };
 		5E860FE61A5C429C00456E41 /* UserCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
-		5E860FE71A5C429C00456E41 /* Provider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		5E860FE71A5C429C00456E41 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		5E860FE81A5C429C00456E41 /* XAppToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppToken.swift; sourceTree = "<group>"; };
 		5E860FE91A5C429C00456E41 /* NSErrorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSErrorExtensions.swift; sourceTree = "<group>"; };
 		5E860FEA1A5C429C00456E41 /* OfflineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
@@ -536,7 +536,7 @@
 				5E860FE41A5C429C00456E41 /* ArtsyAPI.swift */,
 				5EFA08251BCDB051007E8EC1 /* NetworkLogger.swift */,
 				5E860FE61A5C429C00456E41 /* UserCredentials.swift */,
-				5E860FE71A5C429C00456E41 /* Provider.swift */,
+				5E860FE71A5C429C00456E41 /* Networking.swift */,
 				5E860FE81A5C429C00456E41 /* XAppToken.swift */,
 			);
 			path = Networking;
@@ -1172,7 +1172,7 @@
 				5E8610771A5C429C00456E41 /* SimulatorOnlyView.swift in Sources */,
 				5E8610941A5C429C00456E41 /* RegistrationCoordinator.swift in Sources */,
 				5E8610A51A5C429C00456E41 /* SaleArtworkZoomViewController.swift in Sources */,
-				5E86106C1A5C429C00456E41 /* Provider.swift in Sources */,
+				5E86106C1A5C429C00456E41 /* Networking.swift in Sources */,
 				5E8610A41A5C429C00456E41 /* SaleArtworkDetailsViewController.swift in Sources */,
 				5E8610831A5C429C00456E41 /* BidderNetworkModel.swift in Sources */,
 				5E86107C1A5C429C00456E41 /* ListingsCountdownManager.swift in Sources */,

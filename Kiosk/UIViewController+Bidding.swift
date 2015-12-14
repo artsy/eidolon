@@ -2,7 +2,7 @@ import UIKit
 import ARAnalytics
 
 extension UIViewController {
-    func bid(auctionID: String, saleArtwork: SaleArtwork, allowAnimations: Bool, provider: ProviderType) {
+    func bid(auctionID: String, saleArtwork: SaleArtwork, allowAnimations: Bool, provider: NetworkingType) {
         ARAnalytics.event("Bid Button Tapped", withProperties: ["id": saleArtwork.artwork.id])
         
         let storyboard = UIStoryboard.fulfillment()

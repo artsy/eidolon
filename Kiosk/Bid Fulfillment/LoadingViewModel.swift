@@ -25,7 +25,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
         return BidCheckingNetworkModel(provider: self.provider, bidDetails: self.bidderNetworkModel.bidDetails)
     }()
 
-    let provider: ProviderType
+    let provider: NetworkingType
     let createdNewBidder = Variable(false)
     let bidIsResolved = Variable(false)
     let isHighestBidder = Variable(false)
@@ -35,7 +35,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
         return bidderNetworkModel.bidDetails
     }
 
-    init(provider: ProviderType, bidNetworkModel: BidderNetworkModelType, placingBid: Bool, actionsComplete: Observable<Void>) {
+    init(provider: NetworkingType, bidNetworkModel: BidderNetworkModelType, placingBid: Bool, actionsComplete: Observable<Void>) {
         self.provider = provider
         self.bidderNetworkModel = bidNetworkModel
         self.placingBid = placingBid

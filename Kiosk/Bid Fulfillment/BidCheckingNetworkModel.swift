@@ -25,7 +25,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
     private var pollRequests = 0
 
     // inputs
-    let provider: ProviderType
+    let provider: NetworkingType
     let bidDetails: BidDetails
 
     // outputs
@@ -35,7 +35,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     private var mostRecentSaleArtwork: SaleArtwork?
 
-    init(provider: ProviderType, bidDetails: BidDetails) {
+    init(provider: NetworkingType, bidDetails: BidDetails) {
         self.provider = provider
         self.bidDetails = bidDetails
     }

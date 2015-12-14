@@ -4,7 +4,7 @@ import SVProgressHUD
 import Action
 
 extension UIViewController {
-    func promptForBidderDetailsRetrieval(provider: Provider) -> Observable<Void> {
+    func promptForBidderDetailsRetrieval(provider: NetworkingType) -> Observable<Void> {
         return deferred { () -> Observable<Void> in
             let alertController = self.emailPromptAlertController(provider)
 
@@ -14,7 +14,7 @@ extension UIViewController {
         }
     }
     
-    func retrieveBidderDetails(provider: Provider, email: String) -> Observable<Void> {
+    func retrieveBidderDetails(provider: NetworkingType, email: String) -> Observable<Void> {
         return just(email)
             .take(1)
             .doOnNext { _ in
@@ -36,7 +36,7 @@ extension UIViewController {
             }
     }
 
-    func emailPromptAlertController(provider: Provider) -> UIAlertController {
+    func emailPromptAlertController(provider: NetworkingType) -> UIAlertController {
         let alertController = UIAlertController(title: "Send Bidder Details", message: "Enter your email address or phone number registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
 
         let ok = UIAlertAction.Action("OK", style: .Default)

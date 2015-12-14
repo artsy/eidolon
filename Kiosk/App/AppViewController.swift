@@ -10,7 +10,7 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet var offlineBlockingView: UIView!
     @IBOutlet weak var registerToBidButton: ActionButton!
 
-    var provider: ProviderType!
+    var provider: NetworkingType!
 
     lazy var _apiPinger: APIPingManager = {
         return APIPingManager(provider: self.provider)
@@ -96,7 +96,7 @@ extension AppViewController {
         self.presentViewController(passwordVC, animated: true) {}
     }
 
-    func auctionRequest(provider: ProviderType, auctionID: String) -> Observable<Sale> {
+    func auctionRequest(provider: NetworkingType, auctionID: String) -> Observable<Sale> {
         let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
 
         return provider.request(auctionEndpoint)

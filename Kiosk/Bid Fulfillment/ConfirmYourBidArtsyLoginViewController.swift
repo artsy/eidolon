@@ -17,7 +17,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     }
 
     var createNewAccount = false
-    var provider: ProviderType!
+    var provider: NetworkingType!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
@@ -58,16 +58,16 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             guard let me = self else { return empty() }
 
             return me.xAuth()
-                .flatMap { accessTokenDict -> Observable<AuthorizedProviderType> in
+                .flatMap { accessTokenDict -> Observable<AuthorizedNetworkingType> in
                     guard let accessToken = accessTokenDict["access_token"] as? String else {
                         throw NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
                     }
 
-                    let provider = Provider.newAuthorizedProvider(accessToken)
+                    let provider = Networking.newAuthorizedNetworking(accessToken)
 
                     return just(provider)
                 }
-                .flatMap { provider -> Observable<AuthorizedProviderType> in
+                .flatMap { provider -> Observable<AuthorizedNetworkingType> in
                     return me.fulfillmentNav()
                         .updateUserCredentials(provider)
                         .mapReplace(provider)

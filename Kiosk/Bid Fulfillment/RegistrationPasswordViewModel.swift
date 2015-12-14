@@ -15,14 +15,14 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
     private let password = Variable("")
 
     var action: CocoaAction!
-    let provider: ProviderType
+    let provider: NetworkingType
 
     let email: String
     let emailExists: Observable<Bool>
 
     let disposeBag = DisposeBag()
 
-    init(provider: ProviderType, password: Observable<String>, execute: Observable<Void>, completed: PublishSubject<Void>, email: String) {
+    init(provider: NetworkingType, password: Observable<String>, execute: Observable<Void>, completed: PublishSubject<Void>, email: String) {
         self.provider = provider
         self.email = email
 

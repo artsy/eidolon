@@ -18,7 +18,7 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
     var auctionID: String!
     var user: User!
 
-    var provider: ProviderType!
+    var provider: NetworkingType!
 
     // MARK: - Everything else
 
@@ -33,7 +33,7 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
         cookies?.forEach { storage.deleteCookie($0) }
     }
 
-    func updateUserCredentials(loggedInProvider: AuthorizedProviderType) -> Observable<Void> {
+    func updateUserCredentials(loggedInProvider: AuthorizedNetworkingType) -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.Me
         let request = loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(User)
 

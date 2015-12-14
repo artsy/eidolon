@@ -57,9 +57,9 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     let showDetails: ShowDetailsClosure
     let presentModal: PresentModalClosure
-    let provider: ProviderType
+    let provider: NetworkingType
 
-    init(provider: ProviderType,
+    init(provider: NetworkingType,
          selectedIndex: Observable<Int>,
          showDetails: ShowDetailsClosure,
          presentModal: PresentModalClosure,

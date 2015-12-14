@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow? = UIWindow(frame:CGRectMake(0, 0, UIScreen.mainScreen().bounds.height, UIScreen.mainScreen().bounds.width))
 
-    private(set) var provider = Provider.newDefaultProvider()
+    private(set) var provider = Networking.newDefaultNetworking()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
 
@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Set up network layer
         if StubResponses.stubResponses() {
-            provider = Provider.StubbingProvider()
+            provider = Networking.StubbingNetworking()
         }
 
 

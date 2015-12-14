@@ -14,7 +14,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 
     lazy var pin: Observable<String> = { self.keypadContainer.stringValue }()
 
-    var provider: ProviderType!
+    var provider: NetworkingType!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidPIN) as! ConfirmYourBidPINViewController
@@ -105,18 +105,18 @@ class ConfirmYourBidPINViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
     }
 
-    func providerForPIN(pin: String, number: String) -> AuthorizedProviderType {
+    func providerForPIN(pin: String, number: String) -> AuthorizedNetworkingType {
         let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
             // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
-            let endpoint = Provider.endpointsClosure()(target: target)
+            let endpoint = Networking.endpointsClosure()(target)
 
             let auctionID = self.fulfillmentNav().auctionID
             return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number, "sale_id": auctionID])
         }
 
-        let provider = OnlineProvider(endpointClosure: newEndpointsClosure, requestClosure: Provider.endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
+        let provider = OnlineProvider(endpointClosure: newEndpointsClosure, requestClosure: Networking.endpointResolver(), stubClosure: Networking.APIKeysBasedStubBehaviour, plugins: Networking.plugins)
 
-        return AuthorizedProvider(provider: provider)
+        return AuthorizedNetworking(provider: provider)
 
     }
 
@@ -126,7 +126,7 @@ class ConfirmYourBidPINViewController: UIViewController {
         keypadContainer.resetAction.execute()
     }
 
-    func checkForCreditCard(loggedInProvider: AuthorizedProviderType) -> Observable<[Card]> {
+    func checkForCreditCard(loggedInProvider: AuthorizedNetworkingType) -> Observable<[Card]> {
         let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
         return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
     }
