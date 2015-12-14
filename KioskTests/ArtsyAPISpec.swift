@@ -14,16 +14,19 @@ func beInTheFuture() -> MatcherFunc<NSDate> {
     }
 }
 
-var defaults = NSUserDefaults()
-
 class ArtsyAPISpec: QuickSpec {
     override func spec() {
+        var defaults: NSUserDefaults!
 
         func newXAppRequest() -> Observable<MoyaResponse> {
-            return XAppRequest(ArtsyAPI.Auctions, defaults: defaults)
+            return Networking.newStubbingNetworking().request(ArtsyAPI.Auctions)
         }
 
         var disposeBag: DisposeBag!
+
+        beforeEach {
+            defaults = NSUserDefaults()
+        }
 
         beforeEach {
             disposeBag = DisposeBag()
@@ -45,13 +48,11 @@ class ArtsyAPISpec: QuickSpec {
             beforeSuite { 
                 // Force provider to stub responses
                 APIKeys.sharedKeys = APIKeys(key: "", secret: "")
-                Provider.sharedProvider = Provider.StubbingProvider()
             }
             
             afterSuite {
                 // Reset provider
                 APIKeys.sharedKeys = APIKeys()
-                Provider.sharedProvider = Provider.DefaultProvider()
             }
             
             it("returns some data") {

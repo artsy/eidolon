@@ -110,8 +110,12 @@ extension NetworkingType {
         return AuthorizedNetworking(provider: newProvider(authenticatedPlugins, xAccessToken: xAccessToken))
     }
 
-    static func StubbingNetworking() -> Networking {
+    static func newStubbingNetworking() -> Networking {
         return Networking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: just(true)))
+    }
+
+    static func newAuthorizedStubbingNetworking() -> AuthorizedNetworking {
+        return AuthorizedNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: just(true)))
     }
 
     static func endpointsClosure<T where T: MoyaTarget, T: ArtsyAPIType>(xAccessToken: String? = nil)(_ target: T) -> Endpoint<T> {

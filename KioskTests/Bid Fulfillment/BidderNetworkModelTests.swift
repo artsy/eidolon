@@ -12,7 +12,7 @@ class BidderNetworkModelTests: QuickSpec {
 
         beforeEach {
             fulfillmentController = StubFulfillmentController()
-            subject = BidderNetworkModel(fulfillmentController: fulfillmentController)
+            subject = BidderNetworkModel(provider: Networking.newStubbingNetworking(), bidDetails: testBidDetails())
         }
 
         it("matches hasBeenRegistered is false") {

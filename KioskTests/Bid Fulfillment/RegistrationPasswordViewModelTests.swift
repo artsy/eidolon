@@ -12,7 +12,7 @@ let testEmail = "test@example.com"
 class RegistrationPasswordViewModelTests: QuickSpec {
 
     typealias Check = (() -> ())?
-    func stubProvider(emailExists emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) {
+    func stubProvider(emailExists emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) -> Networking {
         let endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
 
             switch target {
@@ -40,19 +40,14 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             }
         }
 
-        Provider.sharedProvider = ArtsyProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
+        return Networking(provider: OnlineProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true)))
     }
 
-    func testSubject(passwordSubject: Observable<String> = just(testPassword), invocation: Observable<Void> = PublishSubject<Void>().asObservable(), finishedSubject: PublishSubject<Void> = PublishSubject<Void>()) -> RegistrationPasswordViewModel {
-        return RegistrationPasswordViewModel(password: passwordSubject, execute: invocation, completed: finishedSubject, email: testEmail)
+    func testSubject(provider: Networking = Networking.newStubbingNetworking(), passwordSubject: Observable<String> = just(testPassword), invocation: Observable<Void> = PublishSubject<Void>().asObservable(), finishedSubject: PublishSubject<Void> = PublishSubject<Void>()) -> RegistrationPasswordViewModel {
+        return RegistrationPasswordViewModel(provider: provider, password: passwordSubject, execute: invocation, completed: finishedSubject, email: testEmail)
     }
 
     override func spec() {
-
-        // Just so providers form individual tests don't bleed into one another
-        setupProviderForSuite(Provider.StubbingProvider())
-
-        defaults = NSUserDefaults.standardUserDefaults()
 
         var disposeBag: DisposeBag!
 
@@ -60,14 +55,10 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             disposeBag = DisposeBag()
         }
 
-        afterEach {
-            Provider.sharedProvider = Provider.StubbingProvider()
-        }
-
         it("enables the command only when the password is valid") {
             let passwordSubject = PublishSubject<String>()
 
-            let subject = self.testSubject(passwordSubject.asObservable())
+            let subject = self.testSubject(passwordSubject: passwordSubject.asObservable())
 
             passwordSubject.onNext("nope")
             expect(try! subject.action.enabled.toBlocking().first()).toEventually( beFalse() )
@@ -236,7 +227,6 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             }
 
             expect(sent).toEventually( beTrue() )
-            Provider.sharedProvider = Provider.StubbingProvider()
         }
     }
 }

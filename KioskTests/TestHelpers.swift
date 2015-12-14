@@ -30,16 +30,6 @@ func setDefaultsKeys(defaults: NSUserDefaults, key: String?, expiry: NSDate?) {
     defaults.setObject(expiry, forKey: DefaultsKeys.TokenExpiry.rawValue)
 }
 
-func setupProviderForSuite(provider: ArtsyProvider<ArtsyAPI>) {
-    beforeSuite {
-        Provider.sharedProvider = provider
-    }
-
-    afterSuite {
-        Provider.sharedProvider = Provider.DefaultProvider()
-    }
-}
-
 func yearFromDate(date: NSDate) -> Int {
     let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
     return calendar.components(.Year, fromDate: date).year
@@ -93,8 +83,6 @@ class StubFulfillmentController: FulfillmentController {
 
     var auctionID: String! = ""
     var xAccessToken: String?
-    var loggedInProvider: RxMoyaProvider<ArtsyAPI>? = Provider.StubbingProvider()
-    var loggedInOrDefaultProvider: RxMoyaProvider<ArtsyAPI> = Provider.StubbingProvider()
 }
 
 /// Nimble is currently having issues with nondeterministic async expectations.

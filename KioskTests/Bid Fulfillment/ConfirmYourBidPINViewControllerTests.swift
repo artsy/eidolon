@@ -9,10 +9,6 @@ import Nimble_Snapshots
 class ConfirmYourBidPINViewControllerTests: QuickSpec {
     override func spec() {
 
-        afterEach {
-            Provider.sharedProvider = Provider.StubbingProvider()
-        }
-
         it("looks right by default") {
             let subject = testConfirmYourBidPINViewController()
             subject.loadViewProgrammatically()
@@ -61,10 +57,10 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             let nav = FulfillmentNavigationController(rootViewController:subject)
             nav.auctionID = auctionID
 
-            let provider: RxMoyaProvider<ArtsyAPI> = subject.providerForPIN(pin, number: number)
-            let endpoint = provider.endpointClosure(ArtsyAPI.Me)
+            let provider = subject.providerForPIN(pin, number: number)
+            let endpoint = provider.provider.endpointClosure(ArtsyAuthenticatedAPI.Me)
             var request: NSURLRequest!
-            provider.requestClosure(endpoint) { request = $0 }
+            provider.provider.requestClosure(endpoint) { request = $0 }
 
             let address = request.URL!.absoluteString
             expect(address).to( contain(auctionID) )
@@ -83,13 +79,12 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
                 return endpoint
             }
 
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: externalClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, online: just(true))
-
             let disposeBag = DisposeBag()
             let subject = ConfirmYourBidPINViewController()
+            subject.provider = Networking(provider: OnlineProvider(endpointClosure: externalClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, online: just(true)))
             let nav = FulfillmentNavigationController(rootViewController: subject)
             nav.auctionID = "AUCTION"
-            let provider: RxMoyaProvider<ArtsyAPI> = subject.providerForPIN("12341234", number: "1234")
+            let provider = subject.providerForPIN("12341234", number: "1234")
 
             waitUntil{ done in
                 provider
@@ -106,5 +101,7 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
 }
 
 func testConfirmYourBidPINViewController() -> ConfirmYourBidPINViewController {
-    return ConfirmYourBidPINViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as! ConfirmYourBidPINViewController
+    let controller = ConfirmYourBidPINViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as! ConfirmYourBidPINViewController
+    controller.provider = Networking.newStubbingNetworking()
+    return controller
 }

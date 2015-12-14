@@ -11,18 +11,19 @@ class SystemTimeTests: QuickSpec {
     override func spec() {
 
         var disposeBag: DisposeBag!
+        var networking: Networking!
 
         beforeEach {
+            networking = Networking.newStubbingNetworking()
             disposeBag = DisposeBag()
         }
 
         describe("in sync") {
-            setupProviderForSuite(Provider.StubbingProvider())
 
             it("returns true") {
                 let time = SystemTime()
                 time
-                    .sync()
+                    .sync(networking)
                     .subscribeNext { (_) in
                         expect(time.inSync()) == true
                         return
@@ -33,7 +34,7 @@ class SystemTimeTests: QuickSpec {
             it("returns a date in the future") {
                 let time = SystemTime()
                 time
-                    .sync()
+                    .sync(networking)
                     .subscribeNext { (_) in
                         let currentYear = yearFromDate(NSDate())
                         let timeYear = yearFromDate(time.date())

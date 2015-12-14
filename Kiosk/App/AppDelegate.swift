@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Set up network layer
         if StubResponses.stubResponses() {
-            provider = Networking.StubbingNetworking()
+            provider = Networking.newStubbingNetworking()
         }
 
 
