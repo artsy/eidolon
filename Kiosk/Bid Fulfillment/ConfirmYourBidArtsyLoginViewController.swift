@@ -33,7 +33,8 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         useArtsyBidderButton.setAttributedTitle(attrTitle, forState:useArtsyBidderButton.state)
 
         let nav = self.fulfillmentNav()
-        bidDetailsPreviewView.bidDetails = nav.bidDetails
+        let bidDetails = nav.bidDetails
+        bidDetailsPreviewView.bidDetails = bidDetails
 
         emailTextField.text = nav.bidDetails.newUser.email.value ?? ""
         
@@ -54,19 +55,12 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         let passwordIsLongEnough = passwordText.map(isZeroLengthString).not()
         let formIsValid = [inputIsEmail, passwordIsLongEnough].combineLatestAnd()
 
+        let provider = self.provider
+
         confirmCredentialsButton.rx_action = CocoaAction(enabledIf: formIsValid) { [weak self] _ -> Observable<Void> in
             guard let me = self else { return empty() }
 
-            return me.xAuth()
-                .flatMap { accessTokenDict -> Observable<AuthorizedNetworking> in
-                    guard let accessToken = accessTokenDict["access_token"] as? String else {
-                        throw NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
-                    }
-
-                    let provider = Networking.newAuthorizedNetworking(accessToken)
-
-                    return just(provider)
-                }
+            return bidDetails.authenticatedNetworking(provider)
                 .flatMap { provider -> Observable<AuthorizedNetworking> in
                     return me.fulfillmentNav()
                         .updateUserCredentials(provider)
@@ -123,11 +117,6 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         passwordTextField.flashForError()
         fulfillmentNav().bidDetails.newUser.password.value = ""
         passwordTextField.text = ""
-    }
-
-    func xAuth() -> Observable<AnyObject> {
-        let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
-        return provider.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
     }
     
     @IBAction func forgotPasswordTapped(sender: AnyObject) {

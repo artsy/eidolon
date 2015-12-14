@@ -38,48 +38,74 @@ class ConfirmYourBidPINViewController: UIViewController {
         
         let pinExists = pin.map { $0.isNotEmpty }
 
-        bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
+        let bidDetails = fulfillmentNav().bidDetails
+        let provider = self.provider
 
+        bidDetailsPreviewView.bidDetails = bidDetails
         /// verify if we can connect with number & pin
 
         confirmButton.rx_action = CocoaAction(enabledIf: pinExists) { [weak self] _ in
             guard let me = self else { return empty() }
 
-            let phone = me.fulfillmentNav().bidDetails.newUser.phoneNumber.value ?? ""
+            var loggedInProvider: AuthorizedNetworking!
 
-            let loggedInProvider = me.providerForPIN(me._pin.value, number: phone)
-
-            return loggedInProvider
-                .request(ArtsyAuthenticatedAPI.Me)
-                .filterSuccessfulStatusCodes()
-                .map(void)
-                .then {
-                    // We want to put the data we've collected up to the server.
-                    self?.fulfillmentNav().updateUserCredentials(loggedInProvider)
-                }.then {
-                    // This looks for credit cards on the users account, and sends them on the observable
-                    return self?
+            return bidDetails.authenticatedNetworking(provider)
+                .doOnNext { provider in
+                    loggedInProvider = provider
+                }
+                .flatMap { provider -> Observable<AuthorizedNetworking> in
+                    return provider
+                        .request(ArtsyAuthenticatedAPI.Me)
+                        .filterSuccessfulStatusCodes()
+                        .mapReplace(provider)
+                }
+                .flatMap { provider -> Observable<AuthorizedNetworking> in
+                    return me
+                        .fulfillmentNav()
+                        .updateUserCredentials(loggedInProvider)
+                        .mapReplace(provider)
+                }
+                .flatMap { provider -> Observable<AuthorizedNetworking> in
+                    return me
+                        .fulfillmentNav()
+                        .updateUserCredentials(loggedInProvider)
+                        .mapReplace(provider)
+                }
+                .flatMap { provider -> Observable<AuthorizedNetworking> in
+                    return me
                         .checkForCreditCard(loggedInProvider)
-                        .doOnNext { (cards) in
-
+                        .doOnNext { cards in
                             // If the cards list doesn't exist, or its empty, then perform the segue to collect one.
                             // Otherwise, proceed directly to the loading view controller to place the bid.
                             if cards.isEmpty {
-                                self?.performSegue(.ArtsyUserviaPINHasNotRegisteredCard)
+                                me.performSegue(.ArtsyUserviaPINHasNotRegisteredCard)
                             } else {
-                                self?.performSegue(.PINConfirmedhasCard)
+                                me.performSegue(.PINConfirmedhasCard)
                             }
                         }
-                        .map(void)
+                        .mapReplace(provider)
                 }
-                .doOnError { [weak self] error in
+                .map(void)
+                .doOnError { error in
                     if let response = (error as NSError).userInfo["data"] as? MoyaResponse {
                         let responseBody = NSString(data: response.data, encoding: NSUTF8StringEncoding)
                         print("Error authenticating(\(response.statusCode)): \(responseBody)")
                     }
 
-                    self?.showAuthenticationError()
+                    me.showAuthenticationError()
                 }
+        }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+
+        if segue == .ArtsyUserviaPINHasNotRegisteredCard {
+            let viewController = segue.destinationViewController as! RegisterViewController
+            viewController.provider = provider
+        } else if segue == .PINConfirmedhasCard {
+            let viewController = segue.destinationViewController as! LoadingViewController
+            viewController.provider = provider
         }
     }
 
@@ -103,21 +129,6 @@ class ConfirmYourBidPINViewController: UIViewController {
                 logger.log("Sent forgot PIN request")
             }
             .addDisposableTo(rx_disposeBag)
-    }
-
-    func providerForPIN(pin: String, number: String) -> AuthorizedNetworking {
-        let newEndpointsClosure = { (target: ArtsyAuthenticatedAPI) -> Endpoint<ArtsyAuthenticatedAPI> in
-            // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
-            let endpoint = Networking.endpointsClosure()(target)
-
-            let auctionID = self.fulfillmentNav().auctionID
-            return endpoint.endpointByAddingParameters(["auction_pin": pin, "number": number, "sale_id": auctionID])
-        }
-
-        let provider = OnlineProvider(endpointClosure: newEndpointsClosure, requestClosure: Networking.endpointResolver(), stubClosure: Networking.APIKeysBasedStubBehaviour, plugins: Networking.authenticatedPlugins)
-
-        return AuthorizedNetworking(provider: provider)
-
     }
 
     func showAuthenticationError() {

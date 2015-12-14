@@ -135,6 +135,7 @@ private extension AppDelegate {
             containerController.allowAnimations = self.appViewController.allowAnimations
 
             if let internalNav: FulfillmentNavigationController = containerController.internalNavigationController() {
+                internalNav.auctionID = self.appViewController.auctionID
                 let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as! RegisterViewController
                 registerVC.placingBid = false
                 registerVC.provider = self.provider

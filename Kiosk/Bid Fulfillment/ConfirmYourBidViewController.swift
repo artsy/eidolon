@@ -105,7 +105,7 @@ class ConfirmYourBidViewController: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == .ConfirmyourBidBidderFound {
-            let nextViewController = segue.destinationViewController as! ConfirmYourBidViewController
+            let nextViewController = segue.destinationViewController as! ConfirmYourBidPINViewController
             nextViewController.provider = provider
         } else if segue == .ConfirmyourBidBidderNotFound {
             let viewController = segue.destinationViewController as! ConfirmYourBidEnterYourEmailViewController

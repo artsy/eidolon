@@ -14,7 +14,9 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
     // MARK: - FulfillmentController bits
 
     /// The the collection of details necessary to eventually create a bid
-    var bidDetails = BidDetails(saleArtwork:nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents:nil)
+    lazy var bidDetails: BidDetails = {
+        return BidDetails(saleArtwork:nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents:nil, auctionID: self.auctionID)
+    }()
     var auctionID: String!
     var user: User!
 
@@ -46,7 +48,6 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
                 let newUser = me.bidDetails.newUser
 
                 newUser.email.value = me.user.email
-                newUser.password.value = "----"
                 newUser.phoneNumber.value = me.user.phoneNumber
                 newUser.zipCode.value = me.user.location?.postalCode
                 newUser.name.value = me.user.name

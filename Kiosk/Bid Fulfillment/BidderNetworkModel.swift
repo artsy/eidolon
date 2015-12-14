@@ -78,14 +78,15 @@ private extension BidderNetworkModel {
                 logger.log("Creating user failed.")
                 logger.log("Error: \((error as NSError).localizedDescription). \n \((error as NSError).artsyServerError())")
         }.flatMap { _ -> Observable<AuthorizedNetworking> in
-            self.newAuthorizedNetworking()
+            self.bidDetails.authenticatedNetworking(self.provider)
         }
     }
 
     func updateUser() -> Observable<AuthorizedNetworking> {
         let newUser = bidDetails.newUser
         let endpoint = ArtsyAuthenticatedAPI.UpdateMe(email: newUser.email.value!, phone: newUser.phoneNumber.value!, postCode: newUser.zipCode.value ?? "", name: newUser.name.value ?? "")
-        return newAuthorizedNetworking()
+
+        return bidDetails.authenticatedNetworking(provider)
             .flatMap { (provider) -> Observable<AuthorizedNetworking> in
                 provider.request(endpoint)
                     .mapJSON()
@@ -120,17 +121,13 @@ private extension BidderNetworkModel {
     // MARK: - Auction / Bidder observables
 
     func createOrUpdateBidder(provider: AuthorizedNetworking) -> Observable<Void> {
-        guard let auctionID = bidDetails.saleArtwork?.auctionID else {
-            return failWith(EidolonError.CouldNotParseJSON)
-        }
-
-        let bool = self.checkForBidderOnAuction(auctionID, provider: provider)
+        let bool = self.checkForBidderOnAuction(bidDetails.auctionID, provider: provider)
 
         return bool.flatMap { exists -> Observable<Void> in
             if exists {
                 return empty()
             } else {
-                return self.registerToAuction(auctionID, provider: provider).then { [weak self] in self?.generateAPIN(provider) }
+                return self.registerToAuction(self.bidDetails.auctionID, provider: provider).then { [weak self] in self?.generateAPIN(provider) }
             }
         }
     }
@@ -196,21 +193,5 @@ private extension BidderNetworkModel {
             }
             .logServerError("Getting Bidder ID failed.")
             .map(void)
-    }
-
-    func newAuthorizedNetworking() -> Observable<AuthorizedNetworking> {
-        let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: bidDetails.newUser.email.value!, password: bidDetails.newUser.password.value!)
-
-        return provider.request(endpoint)
-            .filterSuccessfulStatusCodes()
-            .mapJSON()
-            .flatMap { accessTokenDict -> Observable<AuthorizedNetworking> in
-                guard let accessToken = accessTokenDict["access_token"] as? String else {
-                    return failWith(EidolonError.CouldNotParseJSON)
-                }
-
-                return just(Networking.newAuthorizedNetworking(accessToken))
-            }
-            .logServerError("Getting Access Token failed.")
     }
 }

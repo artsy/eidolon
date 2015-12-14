@@ -169,7 +169,7 @@ extension NetworkingType {
 }
 
 private func newProvider<T where T: MoyaTarget, T: ArtsyAPIType>(plugins: [Plugin<T>], xAccessToken: String? = nil) -> OnlineProvider<T> {
-    return OnlineProvider(endpointClosure: Networking.endpointsClosure(),
+    return OnlineProvider(endpointClosure: Networking.endpointsClosure(xAccessToken),
         requestClosure: Networking.endpointResolver(),
         stubClosure: Networking.APIKeysBasedStubBehaviour,
         plugins: plugins)
