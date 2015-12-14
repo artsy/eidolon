@@ -48,25 +48,6 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             customKeySubject.onNext("222");
             expect(subject.pinTextField.text) == "222"
         }
-
-        it("adds the correct auth params to a PIN'd request") {
-            let auctionID = "AUCTION"
-            let pin = "PIN"
-            let number = "NUMBER"
-            let subject = ConfirmYourBidPINViewController()
-            let nav = FulfillmentNavigationController(rootViewController:subject)
-            nav.auctionID = auctionID
-
-            let provider = subject.providerForPIN(pin, number: number)
-            let endpoint = provider.provider.endpointClosure(ArtsyAuthenticatedAPI.Me)
-            var request: NSURLRequest!
-            provider.provider.requestClosure(endpoint) { request = $0 }
-
-            let address = request.URL!.absoluteString
-            expect(address).to( contain(auctionID) )
-            expect(address).to( contain(pin) )
-            expect(address).to( contain(number) )
-        }
     }
 }
 

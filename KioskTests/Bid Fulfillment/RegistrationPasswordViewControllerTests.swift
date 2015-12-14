@@ -26,7 +26,7 @@ class RegistrationPasswordViewControllerTests: QuickSpec {
         }
 
         let subject = RegistrationPasswordViewController.instantiateFromStoryboard(fulfillmentStoryboard)
-        subject.bidDetails = BidDetails.stubbedBidDetails()
+        subject.bidDetails = testBidDetails()
         subject.viewModel = TestViewModel(emailExists: emailExists)
         return subject
     }

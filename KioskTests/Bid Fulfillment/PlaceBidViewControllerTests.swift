@@ -65,11 +65,12 @@ class PlaceBidViewControllerTests: QuickSpec {
 
         it("looks right with a custom saleArtwork") {
             let nav = FulfillmentNavigationController(rootViewController: subject)
+            nav.auctionID = testAuctionID
 
             let artwork = Artwork.fromJSON(artworkJSON)
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             saleArtwork.minimumNextBidCents = 10000
-            nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+            nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil, auctionID: testAuctionID)
 
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
@@ -83,6 +84,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             beforeEach {
                 nav = FulfillmentNavigationController(rootViewController:subject)
+                nav.auctionID = testAuctionID
 
                 let artwork = Artwork.fromJSON(artworkJSON)
                 let saleArtwork = SaleArtwork(id: "", artwork: artwork)
@@ -91,7 +93,7 @@ class PlaceBidViewControllerTests: QuickSpec {
                 saleArtwork.highestBidCents = nil
                 saleArtwork.bidCount = 0
 
-                nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil, auctionID: testAuctionID)
             }
 
             itBehavesLike("a bid view controller view controller") {["subject": subject, "nav": nav]}
@@ -118,6 +120,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             beforeEach {
                 nav = FulfillmentNavigationController(rootViewController:subject)
+                nav.auctionID = testAuctionID
 
                 let artwork = Artwork.fromJSON(artworkJSON)
                 let saleArtwork = SaleArtwork(id: "", artwork: artwork)
@@ -126,7 +129,7 @@ class PlaceBidViewControllerTests: QuickSpec {
                 saleArtwork.highestBidCents = 20000
                 saleArtwork.bidCount = 1
 
-                nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil, auctionID: testAuctionID)
             }
 
             itBehavesLike("a bid view controller view controller") {["subject": subject, "nav": nav]}
@@ -152,12 +155,13 @@ class PlaceBidViewControllerTests: QuickSpec {
         it("bid button is only enabled when bid is greater than min next bid") {
             let customKeySubject = PublishSubject<Int>()
             let nav = FulfillmentNavigationController(rootViewController:subject)
+            nav.auctionID = testAuctionID
 
             let artwork = Artwork.fromJSON(artworkJSON)
             let saleArtwork = SaleArtwork(id: "", artwork: artwork)
             saleArtwork.minimumNextBidCents = 100
 
-            nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+            nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil, auctionID: testAuctionID)
 
             subject.bidDollars = customKeySubject.asObservable()
             nav.loadViewProgrammatically()
@@ -171,6 +175,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
         it("passes the bid amount to the nav controller") {
             let nav = FulfillmentNavigationController(rootViewController:subject)
+            nav.auctionID = testAuctionID
 
             let customKeySubject = PublishSubject<Int>()
             subject.bidDollars = customKeySubject.asObservable()

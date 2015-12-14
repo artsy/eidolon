@@ -10,13 +10,13 @@ class RegistrationMobileViewControllerTests: QuickSpec {
     override func spec() {
         it("looks right by default") {
             let subject = RegistrationMobileViewController.instantiateFromStoryboard(fulfillmentStoryboard)
-            subject.bidDetails = BidDetails.stubbedBidDetails()
+            subject.bidDetails = testBidDetails()
             expect(subject).to( haveValidSnapshot() )
         }
 
         it("looks right with existing mobile") {
             let subject = RegistrationMobileViewController.instantiateFromStoryboard(fulfillmentStoryboard)
-            subject.bidDetails = BidDetails.stubbedBidDetails()
+            subject.bidDetails = testBidDetails()
             subject.bidDetails.newUser.phoneNumber.value = "1234567890"
             expect(subject).to( haveValidSnapshot() )
         }

@@ -16,7 +16,7 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
             }
 
             it("looks right by default") {
-                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil, auctionID: testAuctionID)
                 bidDetails.newUser = NewUser()
 
                 subject.details = bidDetails
@@ -26,7 +26,7 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
             }
 
             it("handles partial data") {
-                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil, auctionID: testAuctionID)
                 bidDetails.newUser = NewUser()
 
                 bidDetails.newUser.phoneNumber.value = "132131231"
@@ -39,7 +39,7 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
             }
 
             it("handles highlighted index") {
-                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil, auctionID: testAuctionID)
                 bidDetails.newUser = NewUser()
 
                 bidDetails.newUser.phoneNumber.value = "132131231"
@@ -54,7 +54,7 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
 
 
             it("handles full data") {
-                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+                let bidDetails  = BidDetails(saleArtwork: nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil, auctionID: testAuctionID)
                 bidDetails.newUser = NewUser()
 
                 bidDetails.newUser.phoneNumber.value = "132131231"

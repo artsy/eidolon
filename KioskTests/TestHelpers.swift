@@ -62,19 +62,21 @@ func testArtwork() -> Artwork {
     ]])
 }
 
+let testAuctionID = "AUCTION"
+
 func testSaleArtwork() -> SaleArtwork {
     let saleArtwork = SaleArtwork(id: "12312313", artwork: testArtwork())
-    saleArtwork.auctionID = "AUCTION"
+    saleArtwork.auctionID = testAuctionID
     return saleArtwork
 }
 
 func testBidDetails() -> BidDetails {
-    return BidDetails(saleArtwork: testSaleArtwork(), paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil)
+    return BidDetails(saleArtwork: testSaleArtwork(), paddleNumber: "1111", bidderPIN: "2222", bidAmountCents: 123456, auctionID: testAuctionID)
 }
 
 class StubFulfillmentController: FulfillmentController {
     lazy var bidDetails: BidDetails = { () -> BidDetails in
-        let bidDetails = BidDetails.stubbedBidDetails()
+        let bidDetails = testBidDetails()
         bidDetails.setImage = { (_, imageView) -> () in
             imageView.image = loadingViewControllerTestImage
         }

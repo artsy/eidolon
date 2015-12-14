@@ -147,7 +147,6 @@
 		5E86110A1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610CD1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift */; };
 		5E86110B1A5C43EF00456E41 /* LoadingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610CE1A5C43EF00456E41 /* LoadingViewControllerTests.swift */; };
 		5E86110C1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610CF1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift */; };
-		5E86110D1A5C43EF00456E41 /* BidDetailsTestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610D01A5C43EF00456E41 /* BidDetailsTestExtensions.swift */; };
 		5E86110E1A5C43EF00456E41 /* CardHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610D11A5C43EF00456E41 /* CardHandlerTests.swift */; };
 		5E86110F1A5C43EF00456E41 /* KioskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610D21A5C43EF00456E41 /* KioskTests.swift */; };
 		5E8611101A5C43EF00456E41 /* ListingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610D31A5C43EF00456E41 /* ListingsViewControllerTests.swift */; };
@@ -379,7 +378,6 @@
 		5E8610CD1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		5E8610CE1A5C43EF00456E41 /* LoadingViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewControllerTests.swift; sourceTree = "<group>"; };
 		5E8610CF1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; };
-		5E8610D01A5C43EF00456E41 /* BidDetailsTestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetailsTestExtensions.swift; sourceTree = "<group>"; };
 		5E8610D11A5C43EF00456E41 /* CardHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHandlerTests.swift; sourceTree = "<group>"; };
 		5E8610D21A5C43EF00456E41 /* KioskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KioskTests.swift; sourceTree = "<group>"; };
 		5E8610D31A5C43EF00456E41 /* ListingsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsViewControllerTests.swift; sourceTree = "<group>"; };
@@ -803,7 +801,6 @@
 				5E82BD361AF2C8FF00CB02DD /* UILabelExtensionsTests.swift */,
 				5E8610C71A5C43EF00456E41 /* artwork.jpg */,
 				5E8610C81A5C43EF00456E41 /* Bid Fulfillment */,
-				5E8610D01A5C43EF00456E41 /* BidDetailsTestExtensions.swift */,
 				5E8610D11A5C43EF00456E41 /* CardHandlerTests.swift */,
 				5E8610D21A5C43EF00456E41 /* KioskTests.swift */,
 				5E8610D31A5C43EF00456E41 /* ListingsViewControllerTests.swift */,
@@ -1264,7 +1261,6 @@
 				5E8611111A5C43EF00456E41 /* ArtistTests.swift in Sources */,
 				5E43C38C1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift in Sources */,
 				5E8611091A5C43EF00456E41 /* ConfirmYourBidViewControllerTests.swift in Sources */,
-				5E86110D1A5C43EF00456E41 /* BidDetailsTestExtensions.swift in Sources */,
 				5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */,
 				5E43C3921AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift in Sources */,
 				5E82BD371AF2C8FF00CB02DD /* UILabelExtensionsTests.swift in Sources */,
