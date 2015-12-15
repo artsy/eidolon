@@ -58,7 +58,7 @@ private class ReachabilityManager: NSObject {
         }
 
         reachability.unreachableBlock = { [weak self] _ in
-            self?._reach.onNext(true)
+            self?._reach.onNext(false)
         }
 
         reachability.startNotifier()
