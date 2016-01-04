@@ -10,11 +10,13 @@ class PlaceBidNetworkModelTests: QuickSpec {
         var fulfillmentController: StubFulfillmentController!
         var subject: PlaceBidNetworkModel!
         var disposeBag: DisposeBag!
+        var authorizedNetworking: AuthorizedNetworking!
 
         beforeEach {
             fulfillmentController = StubFulfillmentController()
-            subject = PlaceBidNetworkModel(provider: Networking.newStubbingNetworking(), bidDetails: fulfillmentController.bidDetails)
+            subject = PlaceBidNetworkModel(bidDetails: fulfillmentController.bidDetails)
             disposeBag = DisposeBag()
+            authorizedNetworking = Networking.newAuthorizedStubbingNetworking()
         }
 
         it("maps good responses to observable completions") {
@@ -22,7 +24,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
 
             waitUntil { done in
                 subject
-                    .bid(Networking.newAuthorizedStubbingNetworking())
+                    .bid(authorizedNetworking)
                     .subscribeCompleted {
                         completed = true
                         done()
@@ -33,11 +35,11 @@ class PlaceBidNetworkModelTests: QuickSpec {
             expect(completed).to( beTrue() )
         }
 
-        it("maps good responses to bidder positions") {
+        fit("maps good responses to bidder positions") {
             var bidderPositionID: String?
             waitUntil { done in
                 subject
-                    .bid(Networking.newAuthorizedStubbingNetworking())
+                    .bid(authorizedNetworking)
                     .subscribeNext { id in
                         bidderPositionID = id
                         done()
