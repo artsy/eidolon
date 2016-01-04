@@ -53,7 +53,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
                         self.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
                         self.reserveNotMet.value = ReserveStatus.initOrDefault(saleArtwork.reserveStatus).reserveNotMet
 
-                        return just()
+                        return .just()
                     }
                     .doOnError { _ in
                         logger.log("Bidder position was processed but corresponding saleArtwork was not found")
@@ -78,7 +78,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
                 if let processedAt = bidderPositionObject.processedAt {
                     logger.log("BidPosition finished processing at \(processedAt), proceeding...")
-                    return just()
+                    return .just()
                 } else {
                     // The backend hasn't finished processing the bid yet
 
@@ -88,7 +88,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
                     }
 
                     // We didn't get an updated value, so let's try again.
-                    return interval(self.pollInterval, MainScheduler.sharedInstance)
+                    return Observable<Int>.interval(self.pollInterval, scheduler: MainScheduler.instance)
                         .take(1)
                         .map(void)
                         .then {
@@ -97,7 +97,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
                 }
         }
         
-        return interval(pollInterval, MainScheduler.sharedInstance)
+        return Observable<Int>.interval(pollInterval, scheduler: MainScheduler.instance)
             .take(1)
             .map(void)
             .then { updatedBidderPosition }

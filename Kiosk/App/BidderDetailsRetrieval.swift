@@ -5,17 +5,17 @@ import Action
 
 extension UIViewController {
     func promptForBidderDetailsRetrieval(provider: Networking) -> Observable<Void> {
-        return deferred { () -> Observable<Void> in
+        return Observable.deferred { () -> Observable<Void> in
             let alertController = self.emailPromptAlertController(provider)
 
             self.presentViewController(alertController, animated: true) { }
             
-            return empty()
+            return .empty()
         }
     }
     
     func retrieveBidderDetails(provider: Networking, email: String) -> Observable<Void> {
-        return just(email)
+        return Observable.just(email)
             .take(1)
             .doOnNext { _ in
                 SVProgressHUD.show()
@@ -25,7 +25,7 @@ extension UIViewController {
 
                 return provider.request(endpoint).filterSuccessfulStatusCodes().map(void)
             }
-            .throttle(1, MainScheduler.sharedInstance)
+            .throttle(1, scheduler: MainScheduler.instance)
             .doOnNext { _ in
                 SVProgressHUD.dismiss()
                 self.presentViewController(UIAlertController.successfulBidderDetailsAlertController(), animated: true, completion: nil)

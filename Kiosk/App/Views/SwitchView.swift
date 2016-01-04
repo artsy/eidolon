@@ -153,7 +153,7 @@ private extension SwitchView {
             let multiplier = CGFloat(index) / CGFloat(self.buttons.count)
             
             self.removeConstraint(self.selectionConstraint)
-            // It's illegal to have a multiplier of zero, so if we're at index zero, we just stick to the left side.
+            // It's illegal to have a multiplier of zero, so if we're at index zero, we .just stick to the left side.
             if multiplier == 0 {
                 self.selectionConstraint = self.selectionIndicator.alignLeadingEdgeWithView(self, predicate: nil).last! as! NSLayoutConstraint
             } else {

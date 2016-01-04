@@ -148,7 +148,7 @@ extension LoadingViewController {
         titleLabel.text = "Registration Complete"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
         fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
-        interval(1, MainScheduler.sharedInstance)
+        Observable<Int>.interval(1, scheduler: MainScheduler.instance)
             .take(1)
             .subscribeCompleted { [weak self] in
                 self?.performSegue(.PushtoRegisterConfirmed)
@@ -210,7 +210,7 @@ extension LoadingViewController {
                 bidPlacementFailed(error)
             }
         } else {
-            // If you're not placing a bid, you're here because you're just registering.
+            // If you're not placing a bid, you're here because you're .just registering.
             handleRegistrationFailed(error)
         }
     }

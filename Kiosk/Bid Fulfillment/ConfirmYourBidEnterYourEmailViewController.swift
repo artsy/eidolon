@@ -22,7 +22,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
         let inputIsEmail = emailText.map(stringIsEmailAddress)
 
         let action = CocoaAction(enabledIf: inputIsEmail) { [weak self] _ in
-            guard let me = self else { return empty() }
+            guard let me = self else { return .empty() }
 
             let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: me.emailTextField.text ?? "")
 
@@ -35,7 +35,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
                     self?.performSegue(.EmailNotFoundonArtsy)
                 }
-                .map(void) ?? empty()
+                .map(void) ?? .empty()
         }
 
         confirmButton.rx_action = action

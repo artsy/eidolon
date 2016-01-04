@@ -45,7 +45,7 @@ class ConfirmYourBidPINViewController: UIViewController {
         /// verify if we can connect with number & pin
 
         confirmButton.rx_action = CocoaAction(enabledIf: pinExists) { [weak self] _ in
-            guard let me = self else { return empty() }
+            guard let me = self else { return .empty() }
 
             var loggedInProvider: AuthorizedNetworking!
 
@@ -75,7 +75,7 @@ class ConfirmYourBidPINViewController: UIViewController {
                     return me
                         .checkForCreditCard(loggedInProvider)
                         .doOnNext { cards in
-                            // If the cards list doesn't exist, or its empty, then perform the segue to collect one.
+                            // If the cards list doesn't exist, or its .empty, then perform the segue to collect one.
                             // Otherwise, proceed directly to the loading view controller to place the bid.
                             if cards.isEmpty {
                                 me.performSegue(.ArtsyUserviaPINHasNotRegisteredCard)
@@ -87,7 +87,7 @@ class ConfirmYourBidPINViewController: UIViewController {
                 }
                 .map(void)
                 .doOnError { error in
-                    if let response = (error as NSError).userInfo["data"] as? MoyaResponse {
+                    if let response = (error as NSError).userInfo["data"] as? Response {
                         let responseBody = NSString(data: response.data, encoding: NSUTF8StringEncoding)
                         print("Error authenticating(\(response.statusCode)): \(responseBody)")
                     }

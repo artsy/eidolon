@@ -9,7 +9,7 @@ class GenericFormValidationViewModel {
     init(isValid: Observable<Bool>, manualInvocation: Observable<Void>, finishedSubject: PublishSubject<Void>) {
 
         command = CocoaAction(enabledIf: isValid) { _ in
-            return create { observer in
+            return Observable.create { observer in
                 
                 finishedSubject.onCompleted()
                 observer.onCompleted()

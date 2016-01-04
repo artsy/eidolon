@@ -24,12 +24,12 @@ private let reachabilityManager = ReachabilityManager()
 // An observable that completes when the app gets online (possibly completes immediately).
 func connectedToInternetOrStubbing() -> Observable<Bool> {
     let online = reachabilityManager.reach
-    let stubbing = just(APIKeys.sharedKeys.stubResponses)
+    let stubbing = Observable.just(APIKeys.sharedKeys.stubResponses)
 
     return [online, stubbing].combineLatestOr()
 }
 
-func responseIsOK(response: MoyaResponse) -> Bool {
+func responseIsOK(response: Response) -> Bool {
     return response.statusCode == 200
 }
 

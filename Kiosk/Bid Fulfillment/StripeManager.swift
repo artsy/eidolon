@@ -13,7 +13,7 @@ class StripeManager: NSObject {
         card.cvc = securityCode
         card.addressZip = postalCode
 
-        return create { [weak self] observer in
+        return Observable.create { [weak self] observer in
             guard let me = self else {
                 observer.onCompleted()
                 return NopDisposable.instance

@@ -201,9 +201,9 @@ class SaleArtworkDetailsViewController: UIViewController {
         hasBids
             .flatMap { hasBids -> Observable<String> in
                 if hasBids {
-                    return just("Current Bid:")
+                    return .just("Current Bid:")
                 } else {
-                    return just("Starting Bid:")
+                    return .just("Starting Bid:")
                 }
             }
             .bindTo(currentBidLabel.rx_text)
@@ -421,7 +421,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         let artwork = saleArtwork.artwork
 
         if let imageRights = artwork.imageRights {
-            return just(imageRights)
+            return .just(imageRights)
 
         } else {
             return artistInfo.map{ json in
@@ -438,7 +438,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         let artwork = saleArtwork.artwork
 
         if let additionalInfo = artwork.additionalInfo {
-            return just(additionalInfo)
+            return .just(additionalInfo)
         } else {
             return artistInfo.map{ json in
                     return json["additional_information"] as? String
@@ -452,11 +452,11 @@ class SaleArtworkDetailsViewController: UIViewController {
 
     private func retrieveArtistBlurb() -> Observable<String> {
         guard let artist = artist() else {
-            return empty()
+            return .empty()
         }
 
         if let blurb = artist.blurb {
-            return just(blurb)
+            return .just(blurb)
         } else {
             let retrieveArtist = provider.request(.Artist(id: artist.id))
                 .filterSuccessfulStatusCodes()

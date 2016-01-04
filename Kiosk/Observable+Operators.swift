@@ -43,9 +43,9 @@ extension Observable where Element: OptionalType {
     func filterNil() -> Observable<Element.Wrapped> {
         return flatMap { (element) -> Observable<Element.Wrapped> in
             if let value = element.value {
-                return just(value)
+                return .just(value)
             } else {
-                return empty()
+                return .empty()
             }
         }
     }
@@ -53,9 +53,9 @@ extension Observable where Element: OptionalType {
     func replaceNilWith(nilValue: Element.Wrapped) -> Observable<Element.Wrapped> {
         return flatMap { (element) -> Observable<Element.Wrapped> in
             if let value = element.value {
-                return just(value)
+                return .just(value)
             } else {
-                return just(nilValue)
+                return .just(nilValue)
             }
         }
     }
@@ -93,7 +93,7 @@ extension Observable {
     }
 }
 
-private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueuePriority: .Default)
+private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Default)
 
 extension Observable {
     func mapReplace<T>(value: T) -> Observable<T> {
@@ -103,7 +103,7 @@ extension Observable {
     }
 
     func dispatchAsyncMainScheduler() -> Observable<E> {
-        return self.observeOn(backgroundScheduler).observeOn(MainScheduler.sharedInstance)
+        return self.observeOn(backgroundScheduler).observeOn(MainScheduler.instance)
     }
 }
 
@@ -116,10 +116,10 @@ extension Observable where Element: BooleanType {
     }
 }
 
-extension CollectionType where Generator.Element: ObservableConvertibleType, Generator.Element.E: BooleanType {
+extension CollectionType where Generator.Element: ObservableType, Generator.Element.E: BooleanType {
 
     func combineLatestAnd() -> Observable<Bool> {
-        return combineLatest { bools in
+        return combineLatest { bools -> Bool in
             bools.reduce(true, combine: { (memo, element) in
                 return memo && element.boolValue
             })
@@ -138,12 +138,12 @@ extension CollectionType where Generator.Element: ObservableConvertibleType, Gen
 extension ObservableType {
 
     func then(closure: () -> Observable<E>?) -> Observable<E> {
-        return then(closure() ?? empty())
+        return then(closure() ?? .empty())
     }
 
     func then(@autoclosure(escaping) closure: () -> Observable<E>) -> Observable<E> {
-        let next = deferred {
-            return closure() ?? empty()
+        let next = Observable.deferred {
+            return closure() ?? .empty()
         }
 
         return self

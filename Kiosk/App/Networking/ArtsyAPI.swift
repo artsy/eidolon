@@ -47,7 +47,7 @@ enum ArtsyAuthenticatedAPI {
     case Me
 }
 
-extension ArtsyAPI : MoyaTarget, ArtsyAPIType {
+extension ArtsyAPI : TargetType, ArtsyAPIType {
      var path: String {
         switch self {
 
@@ -241,7 +241,7 @@ extension ArtsyAPI : MoyaTarget, ArtsyAPIType {
     }
 }
 
-extension ArtsyAuthenticatedAPI: MoyaTarget, ArtsyAPIType {
+extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
     var path: String {
         switch self {
 
@@ -383,6 +383,6 @@ private extension String {
     }
 }
 
-func url(route: MoyaTarget) -> String {
+func url(route: TargetType) -> String {
     return route.baseURL.URLByAppendingPathComponent(route.path).absoluteString
 }

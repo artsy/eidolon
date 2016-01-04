@@ -30,8 +30,8 @@ class ManualCreditCardInputViewModel: NSObject {
     }
 
     var expiryDatesAreValid: Observable<Bool> {
-        let month = expirationMonth.map(isStringLengthIn(1..<3))
-        let year = expirationYear.map(isStringLengthOneOf([2,4]))
+        let month = expirationMonth.asObservable().map(isStringLengthIn(1..<3))
+        let year = expirationYear.asObservable().map(isStringLengthOneOf([2,4]))
 
         return [month, year].combineLatestAnd()
     }
@@ -56,7 +56,7 @@ class ManualCreditCardInputViewModel: NSObject {
 
         return CocoaAction(enabledIf: enabled) { [weak self] _ in
             guard let me = self else {
-                return empty()
+                return .empty()
             }
 
             return me.registerCard(newUser).doOnCompleted {

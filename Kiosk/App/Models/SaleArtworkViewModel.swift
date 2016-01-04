@@ -86,7 +86,7 @@ extension SaleArtworkViewModel {
             let numberOfBidsString = strings[0]
             let reserveStatus = ReserveStatus.initOrDefault(strings[1])
 
-            // if there is no reserve, just return the number of bids string.
+            // if there is no reserve, .just return the number of bids string.
             if reserveStatus == .NoReserve {
                 return numberOfBidsString
             } else {

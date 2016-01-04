@@ -64,10 +64,10 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
         return bidderNetworkModel
             .createOrGetBidder()
             .flatMap { [weak self] provider -> Observable<(String, AuthorizedNetworking)> in
-                guard let me = self else { return empty() }
+                guard let me = self else { return .empty() }
                 guard me.placingBid else {
                     ARAnalytics.event("Registered New User Only")
-                    return empty()
+                    return .empty()
                 }
 
                 ARAnalytics.event("Started Placing Bid", withProperties: ["id": me.bidDetails.saleArtwork?.artwork.id ?? ""])
@@ -78,8 +78,8 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
                     .map { return ($0, provider) }
             }
             .flatMap { [weak self] tuple -> Observable<Void> in
-                guard let me = self else { return empty() }
-                guard me.placingBid else { return empty() }
+                guard let me = self else { return .empty() }
+                guard me.placingBid else { return .empty() }
 
                 return me.bidCheckingModel.waitForBidResolution(tuple.0, provider: tuple.1).map(void)
             }
