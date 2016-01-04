@@ -18,14 +18,16 @@ class ArtsyAPISpec: QuickSpec {
     override func spec() {
         var defaults: NSUserDefaults!
 
-        func newXAppRequest() -> Observable<MoyaResponse> {
-            return Networking.newStubbingNetworking().request(ArtsyAPI.Auctions)
-        }
-
         var disposeBag: DisposeBag!
+        var networking: Networking!
+
+        func newXAppRequest() -> Observable<MoyaResponse> {
+            return networking.request(ArtsyAPI.Auctions)
+        }
 
         beforeEach {
             defaults = NSUserDefaults()
+            networking = Networking.newStubbingNetworking()
         }
 
         beforeEach {
