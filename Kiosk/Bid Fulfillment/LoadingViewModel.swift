@@ -19,7 +19,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
     let bidderNetworkModel: BidderNetworkModelType
 
     lazy var placeBidNetworkModel: PlaceBidNetworkModelType = {
-        return PlaceBidNetworkModel(provider: self.provider, bidDetails: self.bidderNetworkModel.bidDetails)
+        return PlaceBidNetworkModel(bidDetails: self.bidderNetworkModel.bidDetails)
     }()
     lazy var bidCheckingModel: BidCheckingNetworkModelType = {
         return BidCheckingNetworkModel(provider: self.provider, bidDetails: self.bidderNetworkModel.bidDetails)

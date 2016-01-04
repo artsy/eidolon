@@ -13,11 +13,9 @@ protocol PlaceBidNetworkModelType {
 
 class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
 
-    let provider: Networking
     let bidDetails: BidDetails
 
-    init(provider: Networking, bidDetails: BidDetails) {
-        self.provider = provider
+    init(bidDetails: BidDetails) {
         self.bidDetails = bidDetails
 
         super.init()
@@ -26,7 +24,7 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
     func bid(provider: AuthorizedNetworking) -> Observable<String> {
         let saleArtwork = bidDetails.saleArtwork.value
 
-        assert(saleArtwork.hasValue, "Sale artwork is nil at bidding stage.")
+        assert(saleArtwork.hasValue, "Sale artwork cannot nil at bidding stage.")
 
         let cents = (bidDetails.bidAmountCents.value as? Int) ?? 0
         return bidOnSaleArtwork(saleArtwork!, bidAmountCents: String(cents), provider: provider)

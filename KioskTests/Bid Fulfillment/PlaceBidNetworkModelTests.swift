@@ -35,7 +35,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
             expect(completed).to( beTrue() )
         }
 
-        fit("maps good responses to bidder positions") {
+        it("maps good responses to bidder positions") {
             var bidderPositionID: String?
             waitUntil { done in
                 subject
