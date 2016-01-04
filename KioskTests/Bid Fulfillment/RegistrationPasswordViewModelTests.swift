@@ -12,7 +12,10 @@ let testEmail = "test@example.com"
 class RegistrationPasswordViewModelTests: QuickSpec {
 
     typealias Check = (() -> ())?
+
+    @warn_unused_result
     func stubProvider(emailExists emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) -> Networking {
+
         let endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
 
             switch target {
@@ -73,11 +76,11 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("checks for an email when executing the command") {
             var checked = false
 
-            self.stubProvider(emailExists: false, emailCheck: {
+            let networking = self.stubProvider(emailExists: false, emailCheck: {
                 checked = true
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let subject = self.testSubject()
+            let subject = self.testSubject(networking)
 
             subject.action.execute()
 
@@ -87,11 +90,11 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("sends true on emailExists if email exists") {
             var exists = false
 
-            self.stubProvider(emailExists: true, emailCheck: {
+            let networking = self.stubProvider(emailExists: true, emailCheck: {
                 exists = true
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let subject = self.testSubject()
+            let subject = self.testSubject(networking)
 
             subject
                 .emailExists
@@ -108,11 +111,11 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("sends false on emailExists if email does not exist") {
             var exists: Bool?
 
-            self.stubProvider(emailExists: false, emailCheck: {
+            let networking = self.stubProvider(emailExists: false, emailCheck: {
                 exists = true
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let subject = self.testSubject()
+            let subject = self.testSubject(networking)
 
             subject
                 .emailExists
@@ -131,13 +134,13 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             var checked = false
             var authed = false
 
-            self.stubProvider(emailExists: true, emailCheck: {
+            let networking = self.stubProvider(emailExists: true, emailCheck: {
                 checked = true
             }, loginSucceeds: true, loginCheck: {
                 authed = true
             }, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let subject = self.testSubject()
+            let subject = self.testSubject(networking)
 
             subject.action.execute()
             
@@ -146,9 +149,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         }
 
         it("sends an error on the command if the authorization fails") {
-            self.stubProvider(emailExists: true, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
+            let networking = self.stubProvider(emailExists: true, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let subject = self.testSubject()
+            let subject = self.testSubject(networking)
 
             var errored = false
 
@@ -166,11 +169,11 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         }
 
         it("executes command when manual  sends") {
-            self.stubProvider(emailExists: false, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
+            let networking = self.stubProvider(emailExists: false, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
             let invocation = PublishSubject<Void>()
 
-            let subject = self.testSubject(invocation: invocation)
+            let subject = self.testSubject(networking, invocation: invocation)
 
             var completed = false
 
@@ -210,17 +213,17 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("handles password reminders") {
             var sent = false
 
-            self.stubProvider(emailExists: true, emailCheck: nil, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: {
+            let networking = self.stubProvider(emailExists: true, emailCheck: nil, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: {
                 sent = true
             })
 
-            let subject = self.testSubject()
+            let subject = self.testSubject(networking)
 
             waitUntil { done in
                 subject
                     .userForgotPassword()
                     .subscribeCompleted {
-                        // do nothing – we subscribe just to force the  to execute.
+                        // do nothing – we subscribe just to force the observable to execute.
                         done()
                     }
                     .addDisposableTo(disposeBag)
