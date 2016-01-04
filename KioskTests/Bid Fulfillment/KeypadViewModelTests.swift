@@ -23,10 +23,12 @@ class KeypadViewModelTests: QuickSpec {
 
             subject
                 .stringValue
+                .asObservable()
                 .bindTo(testHarness.stringValue)
                 .addDisposableTo(disposeBag)
             subject
                 .intValue
+                .asObservable()
                 .bindTo(testHarness.intValue)
                 .addDisposableTo(disposeBag)
         }
@@ -39,7 +41,7 @@ class KeypadViewModelTests: QuickSpec {
         it("adds digits") {
             waitUntil { done in
                 [1,3,3,7]
-                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                    .reduce(Observable.empty(), combine: { (observable, input) -> Observable<Void> in
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribeCompleted {
@@ -57,7 +59,7 @@ class KeypadViewModelTests: QuickSpec {
             waitUntil { done in
 
                 [1,3,3,3,3,3,3,3,3,3,3,3,7]
-                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                    .reduce(Observable.empty(), combine: { (observable, input) -> Observable<Void> in
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribeCompleted {
@@ -73,7 +75,7 @@ class KeypadViewModelTests: QuickSpec {
         it("handles prepended zeros") {
             waitUntil { done in
                 [0,1,3,3,7]
-                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                    .reduce(Observable.empty(), combine: { (observable, input) -> Observable<Void> in
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribeCompleted {
@@ -88,7 +90,7 @@ class KeypadViewModelTests: QuickSpec {
         
         it("clears") {
             waitUntil { done in
-                empty()
+                Observable.empty()
                     .then {
                         subject.addDigitAction.execute(1).map(void)
                     }
@@ -108,7 +110,7 @@ class KeypadViewModelTests: QuickSpec {
         it("deletes") {
             waitUntil { done in
                 [1,3,3]
-                    .reduce(empty(), combine: { (observable, input) -> Observable<Void> in
+                    .reduce(Observable.empty(), combine: { (observable, input) -> Observable<Void> in
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .then {

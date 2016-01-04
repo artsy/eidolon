@@ -59,7 +59,7 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
                 executed = false
                 testViewModel.testRegisterButtonCommand = CocoaAction { _ in
                     executed = true
-                    return empty()
+                    return Observable.empty()
                 }
 
                 subject.loadViewProgrammatically()
@@ -112,10 +112,10 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
 class ManualCreditCardInputTestViewModel: ManualCreditCardInputViewModel {
     var CCIsValid = false
     var moveToYearSubject = PublishSubject<Void>()
-    var testRegisterButtonCommand = CocoaAction(enabledIf: just(false)) { _ in empty() }
+    var testRegisterButtonCommand = CocoaAction(enabledIf: Observable.just(false)) { _ in Observable.empty() }
 
     override var creditCardNumberIsValid: Observable<Bool> {
-        return just(CCIsValid)
+        return Observable.just(CCIsValid)
     }
 
     override var moveToYear: Observable<Void> {

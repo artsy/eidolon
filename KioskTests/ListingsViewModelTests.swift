@@ -39,7 +39,7 @@ class ListingsViewModelTests: QuickSpec {
                 }
             }
 
-            provider = Networking(provider: OnlineProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true)))
+            provider = Networking(provider: OnlineProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: Observable.just(true)))
 
             disposeBag = DisposeBag()
         }
@@ -52,7 +52,7 @@ class ListingsViewModelTests: QuickSpec {
 
         it("paginates to the second page to retrieve all three sale artworks") {
 
-            subject = ListingsViewModel(provider: provider, selectedIndex: just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
+            subject = ListingsViewModel(provider: provider, selectedIndex: Observable.just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
             kioskWaitUntil { done in
                 subject.updatedContents.take(1).subscribeCompleted {
@@ -64,7 +64,7 @@ class ListingsViewModelTests: QuickSpec {
         }
 
         it("updates with new values in existing sale artworks") {
-            subject = ListingsViewModel(provider: provider, selectedIndex: just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, syncInterval: 1, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
+            subject = ListingsViewModel(provider: provider, selectedIndex: Observable.just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, syncInterval: 1, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
             // Verify that initial value is correct
             waitUntil(timeout: 5) { done in
@@ -89,7 +89,7 @@ class ListingsViewModelTests: QuickSpec {
         }
 
         it("updates with new sale artworks when lengths differ") {
-            let subject = ListingsViewModel(provider: provider, selectedIndex: just(0), showDetails: { _ in }, presentModal: { _ in }, syncInterval: 1, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
+            let subject = ListingsViewModel(provider: provider, selectedIndex: Observable.just(0), showDetails: { _ in }, presentModal: { _ in }, syncInterval: 1, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
             saleArtworksCount = 2
 
@@ -125,9 +125,9 @@ class ListingsViewModelTests: QuickSpec {
                 }
             }
 
-            let provider = Networking(provider: OnlineProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true)))
+            let provider = Networking(provider: OnlineProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: Observable.just(true)))
 
-            subject = ListingsViewModel(provider: provider, selectedIndex: just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 4, syncInterval: 1, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
+            subject = ListingsViewModel(provider: provider, selectedIndex: Observable.just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 4, syncInterval: 1, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
             var initialFirstLotID: String?
             var subsequentFirstLotID: String?

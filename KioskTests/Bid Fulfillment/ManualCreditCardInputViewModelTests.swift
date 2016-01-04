@@ -285,7 +285,7 @@ class ManualCreditCardInputViewModelTestsStripeManager: StripeManager {
     }
 
     override func registerCard(digits: String, month: UInt, year: UInt, securityCode: String, postalCode: String) -> Observable<STPToken> {
-        return create { observer in
+        return Observable.create { observer in
             self.registrationClosure?()
 
             if self.shouldSucceed {

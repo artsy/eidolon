@@ -30,14 +30,14 @@ class HelpViewControllerTests: QuickSpec {
         beforeEach {
             subject = HelpViewController()
             // Default to no buyers premium
-            subject.hasBuyersPremium = just(false).take(1)
+            subject.hasBuyersPremium = Observable.just(false).take(1)
         }
         
         itBehavesLike("a help view controller") { ["subject": subject] }
         
         describe("with a buyers premium") {
             beforeEach {
-                subject.hasBuyersPremium = just(true).take(1)
+                subject.hasBuyersPremium = Observable.just(true).take(1)
             }
             
             itBehavesLike("a help view controller") { ["subject": subject] }

@@ -120,12 +120,12 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
     var logSync: (NSDate) -> Void = { _ in}
     var numberOfSaleArtworks = 10
 
-    var showSpinner: Observable<Bool>! = just(false)
+    var showSpinner: Observable<Bool>! = Observable.just(false)
     var gridSelected: Observable<Bool>! {
         return _gridSelected.asObservable()
     }
     var updatedContents: Observable<NSDate> {
-        return just(NSDate())
+        return Observable.just(NSDate())
     }
 
     var scheduleOnBackground: (observable: Observable<AnyObject>) -> Observable<AnyObject> = { observable in observable }
