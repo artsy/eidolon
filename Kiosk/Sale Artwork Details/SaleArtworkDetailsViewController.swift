@@ -11,6 +11,7 @@ class SaleArtworkDetailsViewController: UIViewController {
     var allowAnimations = true
     var auctionID = AppSetup.sharedState.auctionID
     var saleArtwork: SaleArtwork!
+    var provider: Networking!
     
     var showBuyersPremiumCommand = { () -> CocoaAction in
         appDelegate().showBuyersPremiumCommand()
@@ -21,7 +22,7 @@ class SaleArtworkDetailsViewController: UIViewController {
     }
 
     lazy var artistInfo: Observable<AnyObject> = {
-        let artistInfo = XAppRequest(.Artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
+        let artistInfo = self.provider.request(.Artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
         return artistInfo.shareReplay(1)
     }()
     
@@ -233,7 +234,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             .subscribeNext { [weak self] _ in
                 guard let me = self else { return }
 
-                me.bid(me.auctionID, saleArtwork: me.saleArtwork, allowAnimations: me.allowAnimations)
+                me.bid(me.auctionID, saleArtwork: me.saleArtwork, allowAnimations: me.allowAnimations, provider: me.provider)
             }
             .addDisposableTo(rx_disposeBag)
 
@@ -457,7 +458,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         if let blurb = artist.blurb {
             return just(blurb)
         } else {
-            let retrieveArtist = XAppRequest(.Artist(id: artist.id))
+            let retrieveArtist = provider.request(.Artist(id: artist.id))
                 .filterSuccessfulStatusCodes()
                 .mapJSON()
 

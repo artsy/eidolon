@@ -57,8 +57,10 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     let showDetails: ShowDetailsClosure
     let presentModal: PresentModalClosure
+    let provider: Networking
 
-    init(selectedIndex: Observable<Int>,
+    init(provider: Networking,
+         selectedIndex: Observable<Int>,
          showDetails: ShowDetailsClosure,
          presentModal: PresentModalClosure,
          pageSize: Int = 10,
@@ -68,6 +70,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
          scheduleOnForeground: (observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = ListingsViewModel.DefaultScheduler(onBackground: false),
          auctionID: String = AppSetup.sharedState.auctionID) {
 
+        self.provider = provider
         self.auctionID = auctionID
         self.showDetails = showDetails
         self.presentModal = presentModal
@@ -124,7 +127,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     }
 
     private func listingsRequestForPage(page: Int) -> Observable<AnyObject> {
-        return XAppRequest(.AuctionListings(id: auctionID, page: page, pageSize: self.pageSize)).filterSuccessfulStatusCodes().mapJSON()
+        return provider.request(.AuctionListings(id: auctionID, page: page, pageSize: self.pageSize)).filterSuccessfulStatusCodes().mapJSON()
     }
 
     // Repeatedly calls itself with page+1 until the count of the returned array is < pageSize.

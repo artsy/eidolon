@@ -8,6 +8,8 @@ import Action
 
 class PlaceBidViewController: UIViewController {
 
+    var provider: Networking!
+
     private var _bidDollars = Variable(0)
     var hasAlreadyPlacedABid: Bool = false
 
@@ -226,7 +228,11 @@ class PlaceBidViewController: UIViewController {
 
         if segue == .PlaceAnotherBid {
             let nextViewController = segue.destinationViewController as! LoadingViewController
+            nextViewController.provider = provider
             nextViewController.placingBid = true
+        } else if segue == .ConfirmBid {
+            let viewController = segue.destinationViewController as! ConfirmYourBidViewController
+            viewController.provider = provider
         }
     }
 }

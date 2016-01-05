@@ -24,8 +24,15 @@ class ListingsViewController: UIViewController {
         imageView.sd_cancelCurrentImageLoad()
     }
 
+    var provider: Networking!
+
     lazy var viewModel: ListingsViewModelType = {
-        return ListingsViewModel(selectedIndex: self.switchView.selectedIndex, showDetails: self.showDetailsForSaleArtwork, presentModal: self.presentModalForSaleArtwork)
+        return ListingsViewModel(provider:
+            self.provider,
+            selectedIndex: self.switchView.selectedIndex,
+            showDetails: applyUnowned(self, ListingsViewController.showDetailsForSaleArtwork),
+            presentModal: applyUnowned(self, ListingsViewController.presentModalForSaleArtwork)
+        )
     }()
 
     var cellIdentifier = Variable(MasonryCellIdentifier)
@@ -124,6 +131,7 @@ class ListingsViewController: UIViewController {
             let saleArtwork = sender as! SaleArtwork!
             let detailsViewController = segue.destinationViewController as! SaleArtworkDetailsViewController
             detailsViewController.saleArtwork = saleArtwork
+            detailsViewController.provider = provider
             ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork.artwork.id])
         }
     }
@@ -198,21 +206,7 @@ private extension ListingsViewController {
     }
 
     func presentModalForSaleArtwork(saleArtwork: SaleArtwork) {
-
-        ARAnalytics.event("Bid Button Tapped", withProperties: ["id": saleArtwork.artwork.id])
-
-        let storyboard = UIStoryboard.fulfillment()
-        let containerController = storyboard.instantiateInitialViewController() as! FulfillmentContainerViewController
-        containerController.allowAnimations = allowAnimations
-
-        if let internalNav: FulfillmentNavigationController = containerController.internalNavigationController() {
-            internalNav.auctionID = viewModel.auctionID
-            internalNav.bidDetails.saleArtwork = saleArtwork
-        }
-
-        appDelegate().appViewController.presentViewController(containerController, animated: false, completion: {
-            containerController.viewDidAppearAnimation(containerController.allowAnimations)
-        })
+        bid(viewModel.auctionID, saleArtwork: saleArtwork, allowAnimations: self.allowAnimations, provider: provider)
     }
     
     // MARK: Class methods

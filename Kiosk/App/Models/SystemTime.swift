@@ -7,10 +7,10 @@ class SystemTime {
 
     init () {}
 
-    func sync() -> Observable<Void> {
+    func sync(provider: Networking) -> Observable<Void> {
         let endpoint: ArtsyAPI = ArtsyAPI.SystemTime
 
-        return XAppRequest(endpoint)
+        return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .doOnNext { [weak self] response in

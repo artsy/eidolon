@@ -23,8 +23,8 @@ class ConfirmYourBidViewController: UIViewController {
 
     // Need takeUntil because we bind this observable eventually to bidDetails, making us stick around longer than we should!
     lazy var number: Observable<String> = { self.keypadContainer.stringValue.takeUntil(self.viewWillDisappear) }()
-    
-    lazy var provider: ArtsyProvider<ArtsyAPI> = Provider.sharedProvider
+
+    var provider: Networking!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBid) as! ConfirmYourBidViewController
@@ -72,7 +72,7 @@ class ConfirmYourBidViewController: UIViewController {
 
             let endpoint = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me._number.value))
 
-            return XAppRequest(endpoint, provider: me.provider)
+            return me.provider.request(endpoint)
                 .filterStatusCode(400)
                 .map(void)
                 .doOnError { (error) in
@@ -101,6 +101,22 @@ class ConfirmYourBidViewController: UIViewController {
         super.viewWillDisappear(animated)
 
         _viewWillDisappear.onNext()
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == .ConfirmyourBidBidderFound {
+            let nextViewController = segue.destinationViewController as! ConfirmYourBidPINViewController
+            nextViewController.provider = provider
+        } else if segue == .ConfirmyourBidBidderNotFound {
+            let viewController = segue.destinationViewController as! ConfirmYourBidEnterYourEmailViewController
+            viewController.provider = provider
+        } else if segue == .ConfirmyourBidArtsyLogin {
+            let viewController = segue.destinationViewController as! ConfirmYourBidArtsyLoginViewController
+            viewController.provider = provider
+        } else if segue == .ConfirmyourBidBidderFound {
+            let viewController = segue.destinationViewController as! ConfirmYourBidPINViewController
+            viewController.provider = provider
+        }
     }
 
     func toOpeningBidString(cents:AnyObject!) -> AnyObject! {

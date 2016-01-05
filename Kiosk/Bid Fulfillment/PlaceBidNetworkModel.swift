@@ -6,38 +6,32 @@ import SwiftyJSON
 let OutbidDomain = "Outbid"
 
 protocol PlaceBidNetworkModelType {
-    var fulfillmentController: FulfillmentController { get }
+    var bidDetails: BidDetails { get }
 
-    func bid() -> Observable<String>
+    func bid(provider: AuthorizedNetworking) -> Observable<String>
 }
 
 class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
 
-    unowned let fulfillmentController: FulfillmentController
-    var bidderPosition: BidderPosition?
+    let bidDetails: BidDetails
 
-    var provider: RxMoyaProvider<ArtsyAPI>! {
-        return self.fulfillmentController.loggedInProvider
-    }
-
-    init(fulfillmentController: FulfillmentController) {
-        self.fulfillmentController = fulfillmentController
+    init(bidDetails: BidDetails) {
+        self.bidDetails = bidDetails
 
         super.init()
     }
 
-    func bid() -> Observable<String> {
-        let bidDetails = fulfillmentController.bidDetails
+    func bid(provider: AuthorizedNetworking) -> Observable<String> {
         let saleArtwork = bidDetails.saleArtwork.value
 
-        assert(saleArtwork.hasValue, "Sale artwork is nil at bidding stage.")
+        assert(saleArtwork.hasValue, "Sale artwork cannot nil at bidding stage.")
 
         let cents = (bidDetails.bidAmountCents.value as? Int) ?? 0
-        return bidOnSaleArtwork(saleArtwork!, bidAmountCents: String(cents))
+        return bidOnSaleArtwork(saleArtwork!, bidAmountCents: String(cents), provider: provider)
     }
 
-    private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String) -> Observable<String> {
-        let bidEndpoint: ArtsyAPI = ArtsyAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
+    private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String, provider: AuthorizedNetworking) -> Observable<String> {
+        let bidEndpoint = ArtsyAuthenticatedAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
 
         let request = provider
             .request(bidEndpoint)
@@ -46,8 +40,7 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
             .mapToObject(BidderPosition)
 
         return request
-            .map { [weak self] position in
-                self?.bidderPosition = position
+            .map { position in
                 return position.id
             }.catchError { error -> Observable<String> in
                 // We've received an error. We're going to check to see if it's type is "param_error", which indicates we were outbid.

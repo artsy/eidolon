@@ -7,12 +7,12 @@ import Kiosk
 
 class BidderNetworkModelTests: QuickSpec {
     override func spec() {
-        var fulfillmentController: StubFulfillmentController!
+        var bidDetails: BidDetails!
         var subject: BidderNetworkModel!
 
         beforeEach {
-            fulfillmentController = StubFulfillmentController()
-            subject = BidderNetworkModel(fulfillmentController: fulfillmentController)
+            bidDetails = testBidDetails()
+            subject = BidderNetworkModel(provider: Networking.newStubbingNetworking(), bidDetails: bidDetails)
         }
 
         it("matches hasBeenRegistered is false") {
@@ -20,8 +20,8 @@ class BidderNetworkModelTests: QuickSpec {
         }
 
         it("matches hasBeenRegistered is true") {
-            fulfillmentController.bidDetails.newUser.hasBeenRegistered.value = true
-            expect(subject.createdNewUser) == true
+            bidDetails.newUser.hasBeenRegistered.value = true
+            expect(try! subject.createdNewUser.toBlocking().first()) == true
         }
     }
 }

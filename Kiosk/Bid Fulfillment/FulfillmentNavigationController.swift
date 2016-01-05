@@ -7,9 +7,6 @@ import RxSwift
 protocol FulfillmentController: class {
     var bidDetails: BidDetails { get set }
     var auctionID: String! { get set }
-    var xAccessToken: String? { get set }
-    var loggedInProvider: RxMoyaProvider<ArtsyAPI>? { get }
-    var loggedInOrDefaultProvider: RxMoyaProvider<ArtsyAPI> { get }
 }
 
 class FulfillmentNavigationController: UINavigationController, FulfillmentController {
@@ -17,48 +14,30 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
     // MARK: - FulfillmentController bits
 
     /// The the collection of details necessary to eventually create a bid
-    var bidDetails = BidDetails(saleArtwork:nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents:nil)
+    lazy var bidDetails: BidDetails = {
+        return BidDetails(saleArtwork:nil, paddleNumber: nil, bidderPIN: nil, bidAmountCents:nil, auctionID: self.auctionID)
+    }()
     var auctionID: String!
     var user: User!
 
-    /// Otherwise we're fine with a legit auth token
-    var xAccessToken: String? {
-        didSet(oldToken) {
-            guard let accessToken = self.xAccessToken else { return }
-
-            let newEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-                // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
-                let endpoint = Provider.sharedProvider.endpointClosure(target)
-
-                return endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": accessToken])
-            }
-
-            loggedInProvider = RxMoyaProvider(endpointClosure: newEndpointsClosure, requestClosure: endpointResolver(), stubClosure: Provider.APIKeysBasedStubBehaviour, plugins: Provider.plugins)
-        }
-    }
-
-    var loggedInProvider: RxMoyaProvider<ArtsyAPI>?
-
-    var loggedInOrDefaultProvider: RxMoyaProvider<ArtsyAPI> {
-        if let loggedInProvider = loggedInProvider {
-            return loggedInProvider
-        }
-
-        return Provider.sharedProvider
-    }
+    var provider: Networking!
 
     // MARK: - Everything else
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.delegate = self
+    }
+
     func reset() {
-        loggedInProvider = nil
         let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         let cookies = storage.cookies
         cookies?.forEach { storage.deleteCookie($0) }
     }
 
-    func updateUserCredentials() -> Observable<Void> {
-        let endpoint: ArtsyAPI = ArtsyAPI.Me
-        let request = loggedInProvider!.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(User)
+    func updateUserCredentials(loggedInProvider: AuthorizedNetworking) -> Observable<Void> {
+        let endpoint = ArtsyAuthenticatedAPI.Me
+        let request = loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(User)
 
         return request
             .doOnNext { [weak self] fullUser in
@@ -69,13 +48,20 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
                 let newUser = me.bidDetails.newUser
 
                 newUser.email.value = me.user.email
-                newUser.password.value = "----"
                 newUser.phoneNumber.value = me.user.phoneNumber
                 newUser.zipCode.value = me.user.location?.postalCode
                 newUser.name.value = me.user.name
             }
             .logError("error, the authentication for admin is likely wrong: ")
             .map(void)
+    }
+}
+
+extension FulfillmentNavigationController: UINavigationControllerDelegate {
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        guard let viewController = viewController as? PlaceBidViewController else { return }
+
+        viewController.provider = provider
     }
 }
 

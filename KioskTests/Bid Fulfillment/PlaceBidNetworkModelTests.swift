@@ -10,11 +10,13 @@ class PlaceBidNetworkModelTests: QuickSpec {
         var fulfillmentController: StubFulfillmentController!
         var subject: PlaceBidNetworkModel!
         var disposeBag: DisposeBag!
+        var authorizedNetworking: AuthorizedNetworking!
 
         beforeEach {
             fulfillmentController = StubFulfillmentController()
-            subject = PlaceBidNetworkModel(fulfillmentController: fulfillmentController)
+            subject = PlaceBidNetworkModel(bidDetails: fulfillmentController.bidDetails)
             disposeBag = DisposeBag()
+            authorizedNetworking = Networking.newAuthorizedStubbingNetworking()
         }
 
         it("maps good responses to observable completions") {
@@ -22,7 +24,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
 
             waitUntil { done in
                 subject
-                    .bid()
+                    .bid(authorizedNetworking)
                     .subscribeCompleted {
                         completed = true
                         done()
@@ -34,17 +36,19 @@ class PlaceBidNetworkModelTests: QuickSpec {
         }
 
         it("maps good responses to bidder positions") {
+            var bidderPositionID: String?
             waitUntil { done in
                 subject
-                    .bid()
-                    .subscribeCompleted {
+                    .bid(authorizedNetworking)
+                    .subscribeNext { id in
+                        bidderPositionID = id
                         done()
                     }
                     .addDisposableTo(disposeBag)
             }
 
             // ID retrieved from CreateABid.json
-            expect(subject.bidderPosition?.id) == "5437dd107261692daa170000"
+            expect(bidderPositionID) == "5437dd107261692daa170000"
         }
 
         it("maps bid details into a proper request") {
@@ -52,7 +56,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
             var artworkID: String?
             var bidCents: String?
 
-            let provider = RxMoyaProvider(endpointClosure: { target -> (Endpoint<ArtsyAPI>) in
+            let provider = OnlineProvider(endpointClosure: { target -> (Endpoint<ArtsyAuthenticatedAPI>) in
                 if case .PlaceABid(let receivedAuctionID, let receivedArtworkID, let receivedBidCents) = target {
                     auctionID = receivedAuctionID
                     artworkID = receivedArtworkID
@@ -61,14 +65,13 @@ class PlaceBidNetworkModelTests: QuickSpec {
 
                 let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString
                 return Endpoint(URL: url, sampleResponseClosure: {.NetworkResponse(200, stubbedResponse("CreateABid"))}, method: target.method, parameters: target.parameters)
-                }, stubClosure: MoyaProvider.ImmediatelyStub)
+                }, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
 
-            fulfillmentController.loggedInProvider = provider
 
 
             waitUntil { done in
                 subject
-                    .bid()
+                    .bid(AuthorizedNetworking(provider: provider))
                     .subscribeCompleted {
                         done()
                     }
@@ -77,25 +80,26 @@ class PlaceBidNetworkModelTests: QuickSpec {
 
             expect(auctionID) == fulfillmentController.bidDetails.saleArtwork?.auctionID
             expect(artworkID) == fulfillmentController.bidDetails.saleArtwork?.artwork.id
-            expect(Int(bidCents!)) == Int(fulfillmentController.bidDetails.bidAmountCents.value!)
+            expect(Int(bidCents!)) == Int(fulfillmentController.bidDetails.bidAmountCents.value ?? 0)
         }
 
         describe("failing network responses") {
+            var networking: AuthorizedNetworking!
 
             beforeEach {
-                let provider = RxMoyaProvider(endpointClosure: { target -> (Endpoint<ArtsyAPI>) in
+                let provider = OnlineProvider(endpointClosure: { target -> (Endpoint<ArtsyAuthenticatedAPI>) in
                     let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString
                     return Endpoint(URL: url, sampleResponseClosure: {.NetworkResponse(400, stubbedResponse("CreateABidFail"))}, method: target.method, parameters: target.parameters)
-                }, stubClosure: MoyaProvider.ImmediatelyStub)
+                    }, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
 
-                fulfillmentController.loggedInProvider = provider
+                networking = AuthorizedNetworking(provider: provider)
             }
 
             it("maps failures due to outbidding to correct error types") {
                 var error: NSError?
                 waitUntil { done in
                     subject
-                        .bid()
+                        .bid(networking)
                         .subscribeError { receivedError in
                             error = receivedError as NSError
                             done()
@@ -110,7 +114,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
                 var errored = false
                 waitUntil { done in
                     subject
-                        .bid()
+                        .bid(networking)
                         .subscribeError { _ in
                             errored = true
                             done()

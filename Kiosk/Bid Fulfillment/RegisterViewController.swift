@@ -14,6 +14,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
     @IBOutlet var confirmButton: UIButton!
 
+    var provider: Networking!
+
     let coordinator = RegistrationCoordinator()
 
     dynamic var placingBid = true
@@ -85,6 +87,10 @@ class RegisterViewController: UIViewController {
                 }
                 .addDisposableTo(rx_disposeBag)
         }
+
+        if let viewController = controller as? RegistrationPasswordViewController {
+            viewController.provider = provider
+        }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -92,6 +98,7 @@ class RegisterViewController: UIViewController {
         if segue == .ShowLoadingView {
             let nextViewController = segue.destinationViewController as! LoadingViewController
             nextViewController.placingBid = placingBid
+            nextViewController.provider = provider
         }
     }
 }

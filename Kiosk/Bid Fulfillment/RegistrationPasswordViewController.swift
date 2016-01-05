@@ -4,11 +4,15 @@ import Moya
 import Action
 
 class RegistrationPasswordViewController: UIViewController, RegistrationSubController {
+    
     @IBOutlet var passwordTextField: TextField!
     @IBOutlet var confirmButton: ActionButton!
     @IBOutlet var subtitleLabel: UILabel!
     @IBOutlet var forgotPasswordButton: UIButton!
+
     let finished = PublishSubject<Void>()
+
+    var provider: Networking!
 
     private let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
@@ -19,6 +23,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         let email = self.navigationController?.fulfillmentNav().bidDetails.newUser.email.value ?? ""
 
         return RegistrationPasswordViewModel(
+            provider: self.provider,
             password: self.passwordTextField.rx_text.asObservable(),
             execute: self.passwordTextField.rx_returnKey,
             completed: self.finished,

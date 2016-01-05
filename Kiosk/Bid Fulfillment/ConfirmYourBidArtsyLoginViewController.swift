@@ -17,7 +17,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     }
 
     var createNewAccount = false
-    lazy var provider: RxMoyaProvider<ArtsyAPI> = Provider.sharedProvider
+    var provider: Networking!
 
     class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
@@ -33,7 +33,8 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         useArtsyBidderButton.setAttributedTitle(attrTitle, forState:useArtsyBidderButton.state)
 
         let nav = self.fulfillmentNav()
-        bidDetailsPreviewView.bidDetails = nav.bidDetails
+        let bidDetails = nav.bidDetails
+        bidDetailsPreviewView.bidDetails = bidDetails
 
         emailTextField.text = nav.bidDetails.newUser.email.value ?? ""
         
@@ -54,23 +55,18 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         let passwordIsLongEnough = passwordText.map(isZeroLengthString).not()
         let formIsValid = [inputIsEmail, passwordIsLongEnough].combineLatestAnd()
 
+        let provider = self.provider
+
         confirmCredentialsButton.rx_action = CocoaAction(enabledIf: formIsValid) { [weak self] _ -> Observable<Void> in
             guard let me = self else { return empty() }
 
-            return me.xAuth()
-                .map { accessTokenDict in
-                    guard let accessToken = accessTokenDict["access_token"] as? String else {
-                        throw NSError(domain: "eidolon", code: 123, userInfo: [NSLocalizedDescriptionKey : "Error fetching access_token"])
-                    }
-
-                    self?.fulfillmentNav().xAccessToken = accessToken
-                    return Void()
-                }
-                .then {
-                    return self?.fulfillmentNav().updateUserCredentials()
-                }.then {
-                    return self?
-                        .creditCard()
+            return bidDetails.authenticatedNetworking(provider)
+                .flatMap { provider -> Observable<AuthorizedNetworking> in
+                    return me.fulfillmentNav()
+                        .updateUserCredentials(provider)
+                        .mapReplace(provider)
+                }.flatMap { provider -> Observable<Void> in
+                    return me.creditCard(provider)
                         .doOnNext { cards in
                             guard let me = self else { return }
 
@@ -89,7 +85,19 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             }
         }
     }
-    
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+
+        if segue == .EmailLoginConfirmedHighestBidder {
+            let viewController = segue.destinationViewController as! LoadingViewController
+            viewController.provider = provider
+        } else if segue == .ArtsyUserHasNotRegisteredCard {
+            let viewController = segue.destinationViewController as! RegisterViewController
+            viewController.provider = provider
+        }
+    }
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if emailTextField.text.isNilOrEmpty {
@@ -110,11 +118,6 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         fulfillmentNav().bidDetails.newUser.password.value = ""
         passwordTextField.text = ""
     }
-
-    func xAuth() -> Observable<AnyObject> {
-        let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: emailTextField.text ?? "", password: passwordTextField.text ?? "")
-        return provider.request(endpoint).filterSuccessfulStatusCodes().mapJSON()
-    }
     
     @IBAction func forgotPasswordTapped(sender: AnyObject) {
         let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .Alert)
@@ -124,7 +127,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         submitAction.rx_action = CocoaAction(enabledIf: email.map(stringIsEmailAddress), workFactory: { () -> Observable<Void> in
             let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email.value)
 
-            return XAppRequest(endpoint)
+            return self.provider.request(endpoint)
                 .filterSuccessfulStatusCodes()
                 .doOnNext { _ in
                     logger.log("Sent forgot password request")
@@ -154,10 +157,13 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         self.presentViewController(alertController, animated: true) {}
     }
 
-    func creditCard() -> Observable<[Card]> {
-        let endpoint: ArtsyAPI = ArtsyAPI.MyCreditCards
-        let authProvider = self.fulfillmentNav().loggedInProvider!
-        return authProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
+    func creditCard(provider: AuthorizedNetworking) -> Observable<[Card]> {
+        let endpoint = ArtsyAuthenticatedAPI.MyCreditCards
+        return provider
+            .request(endpoint)
+            .filterSuccessfulStatusCodes()
+            .mapJSON()
+            .mapToObjectArray(Card.self)
     }
 
     @IBAction func useBidderTapped(sender: AnyObject) {

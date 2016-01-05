@@ -9,10 +9,6 @@ import Nimble_Snapshots
 class ConfirmYourBidPINViewControllerTests: QuickSpec {
     override func spec() {
 
-        afterEach {
-            Provider.sharedProvider = Provider.StubbingProvider()
-        }
-
         it("looks right by default") {
             let subject = testConfirmYourBidPINViewController()
             subject.loadViewProgrammatically()
@@ -52,59 +48,11 @@ class ConfirmYourBidPINViewControllerTests: QuickSpec {
             customKeySubject.onNext("222");
             expect(subject.pinTextField.text) == "222"
         }
-
-        it("adds the correct auth params to a PIN'd request") {
-            let auctionID = "AUCTION"
-            let pin = "PIN"
-            let number = "NUMBER"
-            let subject = ConfirmYourBidPINViewController()
-            let nav = FulfillmentNavigationController(rootViewController:subject)
-            nav.auctionID = auctionID
-
-            let provider: RxMoyaProvider<ArtsyAPI> = subject.providerForPIN(pin, number: number)
-            let endpoint = provider.endpointClosure(ArtsyAPI.Me)
-            var request: NSURLRequest!
-            provider.requestClosure(endpoint) { request = $0 }
-
-            let address = request.URL!.absoluteString
-            expect(address).to( contain(auctionID) )
-            expect(address).to( contain(pin) )
-            expect(address).to( contain(number) )
-        }
-
-        it("respects original endpoints closure") {
-            var externalClosureInvoked = false
-
-            let externalClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-                let endpoint = Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
-
-                externalClosureInvoked = true
-
-                return endpoint
-            }
-
-            Provider.sharedProvider = ArtsyProvider(endpointClosure: externalClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, online: just(true))
-
-            let disposeBag = DisposeBag()
-            let subject = ConfirmYourBidPINViewController()
-            let nav = FulfillmentNavigationController(rootViewController: subject)
-            nav.auctionID = "AUCTION"
-            let provider: RxMoyaProvider<ArtsyAPI> = subject.providerForPIN("12341234", number: "1234")
-
-            waitUntil{ done in
-                provider
-                    .request(.Me)
-                    .subscribeCompleted {
-                        done()
-                    }
-                    .addDisposableTo(disposeBag)
-            }
-
-            expect(externalClosureInvoked) == true
-        }
     }
 }
 
 func testConfirmYourBidPINViewController() -> ConfirmYourBidPINViewController {
-    return ConfirmYourBidPINViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as! ConfirmYourBidPINViewController
+    let controller = ConfirmYourBidPINViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as! ConfirmYourBidPINViewController
+    controller.provider = Networking.newStubbingNetworking()
+    return controller
 }

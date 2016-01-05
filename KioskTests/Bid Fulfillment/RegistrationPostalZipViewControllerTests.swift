@@ -8,13 +8,13 @@ class RegistrationPostalViewControllerTests: QuickSpec {
     override func spec() {
         it("looks right by default") {
             let subject = RegistrationPostalZipViewController.instantiateFromStoryboard(fulfillmentStoryboard)
-            subject.bidDetails = BidDetails.stubbedBidDetails()
+            subject.bidDetails = testBidDetails()
             expect(subject).to( haveValidSnapshot() )
         }
 
         it("looks right with existing postal code") {
             let subject = RegistrationPostalZipViewController.instantiateFromStoryboard(fulfillmentStoryboard)
-            subject.bidDetails = BidDetails.stubbedBidDetails()
+            subject.bidDetails = testBidDetails()
             subject.bidDetails.newUser.zipCode.value = "A1A1A1"
             expect(subject).to( haveValidSnapshot() )
         }

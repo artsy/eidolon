@@ -4,6 +4,7 @@ import Artsy_UIButtons
 
 class YourBiddingDetailsViewController: UIViewController {
 
+    var provider: Networking!
     @IBOutlet dynamic var bidderNumberLabel: UILabel!
     @IBOutlet dynamic var pinNumberLabel: UILabel!
 

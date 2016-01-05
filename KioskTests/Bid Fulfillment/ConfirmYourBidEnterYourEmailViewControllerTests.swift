@@ -30,6 +30,7 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
         it("confirm button is disabled when no email") {
             let subject = testConfirmYourBidEnterYourEmailViewController()
             let nav = FulfillmentNavigationController(rootViewController:subject)
+            nav.auctionID = testAuctionID
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 

@@ -5,6 +5,8 @@ import RxSwift
 
 class LoadingViewController: UIViewController {
 
+    var provider: Networking!
+
     @IBOutlet weak var titleLabel: ARSerifLabel!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
@@ -26,7 +28,8 @@ class LoadingViewController: UIViewController {
     
     lazy var viewModel: LoadingViewModelType = {
         return LoadingViewModel(
-            bidNetworkModel: BidderNetworkModel(fulfillmentController: self.fulfillmentNav()),
+            provider: self.provider,
+            bidNetworkModel: BidderNetworkModel(provider: self.provider, bidDetails: self.fulfillmentNav().bidDetails),
             placingBid: self.placingBid,
             actionsComplete: self.viewWillDisappear
         )
@@ -85,11 +88,13 @@ class LoadingViewController: UIViewController {
         if segue == .PushtoRegisterConfirmed {
             let detailsVC = segue.destinationViewController as! YourBiddingDetailsViewController
             detailsVC.confirmationImage = bidConfirmationImageView.image
+            detailsVC.provider = provider
         }
 
         if segue == .PlaceaHigherBidAfterNotBeingHighestBidder {
             let placeBidVC = segue.destinationViewController as! PlaceBidViewController
             placeBidVC.hasAlreadyPlacedABid = true
+            placeBidVC.provider = provider
         }
     }
 }
@@ -206,26 +211,32 @@ extension LoadingViewController {
             }
         } else {
             // If you're not placing a bid, you're here because you're just registering.
-            presentError("Registration Failed", message: "There was a problem registering for the auction. Please speak to an Artsy representative.")
+            handleRegistrationFailed(error)
         }
     }
 
-    func bidPlacementFailed(error: NSError? = nil) {
-        presentError("Bid Failed", message: "There was a problem placing your bid. Please speak to an Artsy representative.")
-
-        if let error = error {
-            statusMessage.presentOnLongPress("Error: \(error.localizedDescription). \n \(error.artsyServerError())", title: "Bidding error") { [weak self] (alertController) in
-                self?.presentViewController(alertController, animated: true, completion: nil)
-            }
-        }
+    func handleRegistrationFailed(error: NSError) {
+        handleErrorWithTitle("Registration Failed",
+            message: "There was a problem registering for the auction. Please speak to an Artsy representative.",
+            error: error)
     }
 
-    func presentError(title: String, message: String) {
+    func bidPlacementFailed(error: NSError) {
+        handleErrorWithTitle("Bid Failed",
+            message: "There was a problem placing your bid. Please speak to an Artsy representative.",
+            error: error)
+    }
+
+    func handleErrorWithTitle(title: String, message: String, error: NSError) {
         titleLabel.textColor = .artsyRed()
         titleLabel.text = title
         statusMessage.text = message
         statusMessage.hidden = false
         backToAuctionButton.hidden = false
+
+        statusMessage.presentOnLongPress("Error: \(error.localizedDescription). \n \(error.artsyServerError())", title: title) { [weak self] alertController in
+            self?.presentViewController(alertController, animated: true, completion: nil)
+        }
     }
 
     @IBAction func placeHigherBidTapped(sender: AnyObject) {

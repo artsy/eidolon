@@ -2,13 +2,14 @@ import Foundation
 import Moya
 import RxSwift
 
-class APIPingManager: NSObject {
+class APIPingManager {
 
     let syncInterval: NSTimeInterval = 2
     var letOnline: Observable<Bool>!
+    var provider: Networking
 
-    override init() {
-        super.init()
+    init(provider: Networking) {
+        self.provider = provider
 
         letOnline = interval(syncInterval, MainScheduler.sharedInstance)
             .flatMap { [weak self] _ in
@@ -18,6 +19,6 @@ class APIPingManager: NSObject {
     }
 
     private func ping() -> Observable<Bool> {
-        return XAppRequest(ArtsyAPI.Ping).map(responseIsOK)
+        return provider.request(ArtsyAPI.Ping).map(responseIsOK)
     }
 }

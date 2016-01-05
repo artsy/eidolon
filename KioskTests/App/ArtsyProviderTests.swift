@@ -12,12 +12,12 @@ class ArtsyProviderTests: QuickSpec {
         }
 
         var fakeOnline: PublishSubject<Bool>!
-        var subject: ArtsyProvider<ArtsyAPI>!
+        var subject: Networking!
         var defaults: NSUserDefaults!
 
         beforeEach {
             fakeOnline = PublishSubject<Bool>()
-            subject = ArtsyProvider<ArtsyAPI>(endpointClosure: fakeEndpointsClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, online: fakeOnline.asObservable())
+            subject = Networking(provider: OnlineProvider<ArtsyAPI>(endpointClosure: fakeEndpointsClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, online: fakeOnline.asObservable()))
 
             // We fake our defaults to avoid actually hitting the network
             defaults = NSUserDefaults()
@@ -29,7 +29,7 @@ class ArtsyProviderTests: QuickSpec {
             var called = false
 
             let disposeBag = DisposeBag()
-            XAppRequest(.Ping, provider: subject, defaults: defaults).subscribeNext { _ in
+            subject.request(ArtsyAPI.Ping, defaults: defaults).subscribeNext { _ in
                 called = true
             }.addDisposableTo(disposeBag)
 

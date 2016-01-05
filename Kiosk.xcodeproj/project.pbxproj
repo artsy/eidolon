@@ -55,7 +55,7 @@
 		5E8610681A5C429C00456E41 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE31A5C429C00456E41 /* APIKeys.swift */; };
 		5E8610691A5C429C00456E41 /* ArtsyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE41A5C429C00456E41 /* ArtsyAPI.swift */; };
 		5E86106B1A5C429C00456E41 /* UserCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE61A5C429C00456E41 /* UserCredentials.swift */; };
-		5E86106C1A5C429C00456E41 /* XAppAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE71A5C429C00456E41 /* XAppAuthentication.swift */; };
+		5E86106C1A5C429C00456E41 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE71A5C429C00456E41 /* Networking.swift */; };
 		5E86106D1A5C429C00456E41 /* XAppToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE81A5C429C00456E41 /* XAppToken.swift */; };
 		5E86106E1A5C429C00456E41 /* NSErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FE91A5C429C00456E41 /* NSErrorExtensions.swift */; };
 		5E86106F1A5C429C00456E41 /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FEA1A5C429C00456E41 /* OfflineViewController.swift */; };
@@ -147,7 +147,6 @@
 		5E86110A1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610CD1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift */; };
 		5E86110B1A5C43EF00456E41 /* LoadingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610CE1A5C43EF00456E41 /* LoadingViewControllerTests.swift */; };
 		5E86110C1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610CF1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift */; };
-		5E86110D1A5C43EF00456E41 /* BidDetailsTestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610D01A5C43EF00456E41 /* BidDetailsTestExtensions.swift */; };
 		5E86110E1A5C43EF00456E41 /* CardHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610D11A5C43EF00456E41 /* CardHandlerTests.swift */; };
 		5E86110F1A5C43EF00456E41 /* KioskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610D21A5C43EF00456E41 /* KioskTests.swift */; };
 		5E8611101A5C43EF00456E41 /* ListingsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610D31A5C43EF00456E41 /* ListingsViewControllerTests.swift */; };
@@ -284,7 +283,7 @@
 		5E860FE31A5C429C00456E41 /* APIKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		5E860FE41A5C429C00456E41 /* ArtsyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtsyAPI.swift; sourceTree = "<group>"; };
 		5E860FE61A5C429C00456E41 /* UserCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCredentials.swift; sourceTree = "<group>"; };
-		5E860FE71A5C429C00456E41 /* XAppAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppAuthentication.swift; sourceTree = "<group>"; };
+		5E860FE71A5C429C00456E41 /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		5E860FE81A5C429C00456E41 /* XAppToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppToken.swift; sourceTree = "<group>"; };
 		5E860FE91A5C429C00456E41 /* NSErrorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSErrorExtensions.swift; sourceTree = "<group>"; };
 		5E860FEA1A5C429C00456E41 /* OfflineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
@@ -379,7 +378,6 @@
 		5E8610CD1A5C43EF00456E41 /* FulfillmentContainerViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		5E8610CE1A5C43EF00456E41 /* LoadingViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewControllerTests.swift; sourceTree = "<group>"; };
 		5E8610CF1A5C43EF00456E41 /* PlaceBidViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceBidViewControllerTests.swift; sourceTree = "<group>"; };
-		5E8610D01A5C43EF00456E41 /* BidDetailsTestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetailsTestExtensions.swift; sourceTree = "<group>"; };
 		5E8610D11A5C43EF00456E41 /* CardHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHandlerTests.swift; sourceTree = "<group>"; };
 		5E8610D21A5C43EF00456E41 /* KioskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KioskTests.swift; sourceTree = "<group>"; };
 		5E8610D31A5C43EF00456E41 /* ListingsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsViewControllerTests.swift; sourceTree = "<group>"; };
@@ -536,7 +534,7 @@
 				5E860FE41A5C429C00456E41 /* ArtsyAPI.swift */,
 				5EFA08251BCDB051007E8EC1 /* NetworkLogger.swift */,
 				5E860FE61A5C429C00456E41 /* UserCredentials.swift */,
-				5E860FE71A5C429C00456E41 /* XAppAuthentication.swift */,
+				5E860FE71A5C429C00456E41 /* Networking.swift */,
 				5E860FE81A5C429C00456E41 /* XAppToken.swift */,
 			);
 			path = Networking;
@@ -803,7 +801,6 @@
 				5E82BD361AF2C8FF00CB02DD /* UILabelExtensionsTests.swift */,
 				5E8610C71A5C43EF00456E41 /* artwork.jpg */,
 				5E8610C81A5C43EF00456E41 /* Bid Fulfillment */,
-				5E8610D01A5C43EF00456E41 /* BidDetailsTestExtensions.swift */,
 				5E8610D11A5C43EF00456E41 /* CardHandlerTests.swift */,
 				5E8610D21A5C43EF00456E41 /* KioskTests.swift */,
 				5E8610D31A5C43EF00456E41 /* ListingsViewControllerTests.swift */,
@@ -1172,7 +1169,7 @@
 				5E8610771A5C429C00456E41 /* SimulatorOnlyView.swift in Sources */,
 				5E8610941A5C429C00456E41 /* RegistrationCoordinator.swift in Sources */,
 				5E8610A51A5C429C00456E41 /* SaleArtworkZoomViewController.swift in Sources */,
-				5E86106C1A5C429C00456E41 /* XAppAuthentication.swift in Sources */,
+				5E86106C1A5C429C00456E41 /* Networking.swift in Sources */,
 				5E8610A41A5C429C00456E41 /* SaleArtworkDetailsViewController.swift in Sources */,
 				5E8610831A5C429C00456E41 /* BidderNetworkModel.swift in Sources */,
 				5E86107C1A5C429C00456E41 /* ListingsCountdownManager.swift in Sources */,
@@ -1264,7 +1261,6 @@
 				5E8611111A5C43EF00456E41 /* ArtistTests.swift in Sources */,
 				5E43C38C1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift in Sources */,
 				5E8611091A5C43EF00456E41 /* ConfirmYourBidViewControllerTests.swift in Sources */,
-				5E86110D1A5C43EF00456E41 /* BidDetailsTestExtensions.swift in Sources */,
 				5EDD04D21AA69D2700B30AE9 /* KeypadViewModelTests.swift in Sources */,
 				5E43C3921AE191D400A5A3B6 /* RegistrationPasswordViewControllerTests.swift in Sources */,
 				5E82BD371AF2C8FF00CB02DD /* UILabelExtensionsTests.swift in Sources */,

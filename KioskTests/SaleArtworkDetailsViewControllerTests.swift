@@ -27,8 +27,6 @@ class SaleArtworkDetailsViewControllerTests: QuickSpec {
         var subject: SaleArtworkDetailsViewController!
 
         beforeEach {
-            Provider.sharedProvider = Provider.StubbingProvider()
-
             subject = testSaleArtworkViewController()
             subject.allowAnimations = false
 
@@ -70,6 +68,7 @@ func testSaleArtworkViewController(storyboard: UIStoryboard = auctionStoryboard,
     let subject = SaleArtworkDetailsViewController.instantiateFromStoryboard(storyboard)
     subject.saleArtwork = saleArtwork
     subject.buyersPremium = { nil }
+    subject.provider = Networking.newStubbingNetworking()
 
     return subject
 }

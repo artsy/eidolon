@@ -10,7 +10,11 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet var offlineBlockingView: UIView!
     @IBOutlet weak var registerToBidButton: ActionButton!
 
-    let _apiPinger = APIPingManager()
+    var provider: Networking!
+
+    lazy var _apiPinger: APIPingManager = {
+        return APIPingManager(provider: self.provider)
+    }()
     
     lazy var reachability: Observable<Bool> = {
         [connectedToInternetOrStubbing(), self.apiPinger].combineLatestAnd()
@@ -36,12 +40,13 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
         registerToBidButton.rx_action = registerToBidCommand()
 
         countdownManager.setFonts()
+        countdownManager.provider = provider
 
         reachability
             .bindTo(offlineBlockingView.rx_hidden)
             .addDisposableTo(rx_disposeBag)
 
-        auctionRequest(auctionID)
+        auctionRequest(provider, auctionID: auctionID)
             .bindTo(sale)
             .addDisposableTo(rx_disposeBag)
 
@@ -56,6 +61,14 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
                 nav.delegate = self
             }
         }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // This is the embed segue
+        guard let navigtionController = segue.destinationViewController as? UINavigationController else { return }
+        guard let listingsViewController = navigtionController.topViewController as? ListingsViewController else { return }
+
+        listingsViewController.provider = provider
     }
 
     deinit {
@@ -83,10 +96,10 @@ extension AppViewController {
         self.presentViewController(passwordVC, animated: true) {}
     }
 
-    func auctionRequest(auctionID: String) -> Observable<Sale> {
+    func auctionRequest(provider: Networking, auctionID: String) -> Observable<Sale> {
         let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
 
-        return XAppRequest(auctionEndpoint)
+        return provider.request(auctionEndpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .mapToObject(Sale)

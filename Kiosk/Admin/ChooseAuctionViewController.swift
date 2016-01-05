@@ -6,6 +6,7 @@ import Artsy_UIButtons
 class ChooseAuctionViewController: UIViewController {
 
     var auctions: [Sale]!
+    let provider = appDelegate().provider
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +16,7 @@ class ChooseAuctionViewController: UIViewController {
 
         let endpoint: ArtsyAPI = ArtsyAPI.ActiveAuctions
 
-        XAppRequest(endpoint)
+        provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .mapToObjectArray(Sale.self)

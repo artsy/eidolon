@@ -9,13 +9,13 @@ enum BidCheckingError: String {
 extension BidCheckingError: ErrorType { }
 
 protocol BidCheckingNetworkModelType {
-    var fulfillmentController: FulfillmentController { get }
+    var bidDetails: BidDetails { get }
 
     var bidIsResolved: Variable<Bool> { get }
     var isHighestBidder: Variable<Bool> { get }
     var reserveNotMet: Variable<Bool> { get }
 
-    func waitForBidResolution (bidderPositionId: String) -> Observable<Void>
+    func waitForBidResolution (bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<Void>
 }
 
 class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
@@ -25,7 +25,8 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
     private var pollRequests = 0
 
     // inputs
-    unowned let fulfillmentController: FulfillmentController
+    let provider: Networking
+    let bidDetails: BidDetails
 
     // outputs
     var bidIsResolved = Variable(false)
@@ -34,25 +35,23 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     private var mostRecentSaleArtwork: SaleArtwork?
 
-    init(fulfillmentController: FulfillmentController) {
-        self.fulfillmentController = fulfillmentController
+    init(provider: Networking, bidDetails: BidDetails) {
+        self.provider = provider
+        self.bidDetails = bidDetails
     }
 
-    func waitForBidResolution (bidderPositionId: String) -> Observable<Void> {
+    func waitForBidResolution (bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<Void> {
         return self
-            .pollForUpdatedBidderPosition(bidderPositionId)
-            .then { [weak self] in
-                guard let me = self else { return empty() }
+            .pollForUpdatedBidderPosition(bidderPositionId, provider: provider)
+            .then {
 
-                return me
-                    .getUpdatedSaleArtwork()
-                    .flatMap { [weak self] saleArtwork -> Observable<Void> in
-                        guard let me = self else { return empty() }
+                return self.getUpdatedSaleArtwork()
+                    .flatMap { saleArtwork -> Observable<Void> in
 
                         // This is an updated model – hooray!
-                        me.mostRecentSaleArtwork = saleArtwork
-                        me.fulfillmentController.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
-                        me.reserveNotMet.value = ReserveStatus.initOrDefault(saleArtwork.reserveStatus).reserveNotMet
+                        self.mostRecentSaleArtwork = saleArtwork
+                        self.bidDetails.saleArtwork?.updateWithValues(saleArtwork)
+                        self.reserveNotMet.value = ReserveStatus.initOrDefault(saleArtwork.reserveStatus).reserveNotMet
 
                         return just()
                     }
@@ -60,12 +59,8 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
                         logger.log("Bidder position was processed but corresponding saleArtwork was not found")
                     }
                     .catchErrorJustReturn()
-                    .flatMap { [weak self] _ -> Observable<Void> in
-                        // TODO: adjust logic to use parameter instead of instance variable
-
-                        guard let me = self else { return empty() }
-
-                        return me.checkForMaxBid()
+                    .flatMap { _ -> Observable<Void> in
+                        return self.checkForMaxBid(provider)
                 }
             } .doOnNext { _ in
                 self.bidIsResolved.value = true
@@ -74,31 +69,30 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
             }.catchErrorJustReturn()
     }
     
-    private func pollForUpdatedBidderPosition(bidderPositionId: String) -> Observable<Void> {
-        let updatedBidderPosition = getUpdatedBidderPosition(bidderPositionId)
-            .flatMap { [weak self] bidderPositionObject -> Observable<Void> in
-                self?.pollRequests++
+    private func pollForUpdatedBidderPosition(bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<Void> {
+        let updatedBidderPosition = getUpdatedBidderPosition(bidderPositionId, provider: provider)
+            .flatMap { bidderPositionObject -> Observable<Void> in
+                self.pollRequests++
 
-                logger.log("Polling \(self?.pollRequests) of \(self?.maxPollRequests) for updated sale artwork")
+                logger.log("Polling \(self.pollRequests) of \(self.maxPollRequests) for updated sale artwork")
 
-                // TODO: handle the case where the user was already the highest bidder
                 if let processedAt = bidderPositionObject.processedAt {
                     logger.log("BidPosition finished processing at \(processedAt), proceeding...")
                     return just()
                 } else {
                     // The backend hasn't finished processing the bid yet
 
-                    guard (self?.pollRequests ?? 0) < (self?.maxPollRequests ?? 0) else {
+                    guard self.pollRequests < self.maxPollRequests else {
                         // We have exceeded our max number of polls, fail.
                         throw BidCheckingError.PollingExceeded
                     }
 
                     // We didn't get an updated value, so let's try again.
-                    return interval(self?.pollInterval ?? 1, MainScheduler.sharedInstance)
+                    return interval(self.pollInterval, MainScheduler.sharedInstance)
                         .take(1)
                         .map(void)
                         .then {
-                            return self?.pollForUpdatedBidderPosition(bidderPositionId)
+                            return self.pollForUpdatedBidderPosition(bidderPositionId, provider: provider)
                     }
                 }
         }
@@ -109,27 +103,25 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
             .then { updatedBidderPosition }
     }
 
-    private func checkForMaxBid() -> Observable<Void> {
-        return getMyBidderPositions()
-            .doOnNext{ [weak self] newBidderPositions in
-                guard let me = self else { return }
+    private func checkForMaxBid(provider: AuthorizedNetworking) -> Observable<Void> {
+        return getMyBidderPositions(provider)
+            .doOnNext{ newBidderPositions in
 
-                if let topBidID = me.mostRecentSaleArtwork?.saleHighestBid?.id {
+                if let topBidID = self.mostRecentSaleArtwork?.saleHighestBid?.id {
                     for position in newBidderPositions where position.highestBid?.id == topBidID {
-                        me.isHighestBidder.value = true
+                        self.isHighestBidder.value = true
                     }
                 }
             }
             .map(void)
     }
 
-    private func getMyBidderPositions() -> Observable<[BidderPosition]> {
-        let artworkID = fulfillmentController.bidDetails.saleArtwork!.artwork.id;
-        let auctionID = fulfillmentController.bidDetails.saleArtwork!.auctionID!
+    private func getMyBidderPositions(provider: AuthorizedNetworking) -> Observable<[BidderPosition]> {
+        let artworkID = bidDetails.saleArtwork!.artwork.id;
+        let auctionID = bidDetails.saleArtwork!.auctionID!
 
-        let endpoint: ArtsyAPI = ArtsyAPI.MyBidPositionsForAuctionArtwork(auctionID: auctionID, artworkID: artworkID)
-        return fulfillmentController
-            .loggedInProvider!
+        let endpoint = ArtsyAuthenticatedAPI.MyBidPositionsForAuctionArtwork(auctionID: auctionID, artworkID: artworkID)
+        return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
@@ -138,22 +130,20 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     private func getUpdatedSaleArtwork() -> Observable<SaleArtwork> {
 
-        let artworkID = fulfillmentController.bidDetails.saleArtwork!.artwork.id;
-        let auctionID = fulfillmentController.bidDetails.saleArtwork!.auctionID!
+        let artworkID = bidDetails.saleArtwork!.artwork.id;
+        let auctionID = bidDetails.saleArtwork!.auctionID!
 
         let endpoint: ArtsyAPI = ArtsyAPI.AuctionInfoForArtwork(auctionID: auctionID, artworkID: artworkID)
-        return fulfillmentController
-            .loggedInProvider!
+        return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .mapToObject(SaleArtwork)
     }
     
-    private func getUpdatedBidderPosition(bidderPositionId: String) -> Observable<BidderPosition> {
-        let endpoint: ArtsyAPI = ArtsyAPI.MyBidPosition(id: bidderPositionId)
-        return fulfillmentController
-            .loggedInProvider!
+    private func getUpdatedBidderPosition(bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<BidderPosition> {
+        let endpoint = ArtsyAuthenticatedAPI.MyBidPosition(id: bidderPositionId)
+        return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()

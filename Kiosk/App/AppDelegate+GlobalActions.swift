@@ -69,7 +69,6 @@ extension AppDelegate {
         return CocoaAction(enabledIf: enabled) { _ in
             self.hideAllTheThings()
                 .then(self.showRegistration())
-                .map(void)
         }
     }
 
@@ -124,7 +123,7 @@ private extension AppDelegate {
     func showBidderDetailsRetrieval() -> Observable<Void> {
         let appVC = self.appViewController
         let presentingViewController: UIViewController = (appVC.presentedViewController ?? appVC)
-        return presentingViewController.promptForBidderDetailsRetrieval()
+        return presentingViewController.promptForBidderDetailsRetrieval(self.provider)
     }
 
     func showRegistration() -> Observable<Void> {
@@ -136,8 +135,10 @@ private extension AppDelegate {
             containerController.allowAnimations = self.appViewController.allowAnimations
 
             if let internalNav: FulfillmentNavigationController = containerController.internalNavigationController() {
+                internalNav.auctionID = self.appViewController.auctionID
                 let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as! RegisterViewController
                 registerVC.placingBid = false
+                registerVC.provider = self.provider
                 internalNav.auctionID = self.appViewController.auctionID
                 internalNav.viewControllers = [registerVC]
             }
@@ -167,7 +168,6 @@ private extension AppDelegate {
         }
     }
 
-    // TODO: Correct animation?
     func closeFulfillmentViewController() -> Observable<Void> {
         let close: Observable<Void> = create { observer in
             (self.appViewController.presentedViewController as? FulfillmentContainerViewController)?.closeFulfillmentModal() {
