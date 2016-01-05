@@ -333,7 +333,7 @@ func sortById(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
 private func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) -> Bool {
     assert(currentSaleArtworks.count == newSaleArtworks.count, "Arrays' counts must be equal.")
     // Updating the currentSaleArtworks is easy. Both are already sorted as they came from the API (by lot #).
-    // Because we assume that their length is the same, we .just do a linear scan through and
+    // Because we assume that their length is the same, we just do a linear scan through and
     // copy values from the new to the existing.
 
     let saleArtworksCount = currentSaleArtworks.count
