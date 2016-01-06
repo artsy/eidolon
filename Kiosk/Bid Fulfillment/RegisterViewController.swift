@@ -33,7 +33,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
         coordinator.storyboard = self.storyboard!
-        let registerIndex = coordinator.currentIndex
+        let registerIndex = coordinator.currentIndex.asObservable()
         let indexIsConfirmed = registerIndex.map { return ($0 == RegistrationIndex.ConfirmVC.toInt()) }
 
         indexIsConfirmed
@@ -51,6 +51,7 @@ class RegisterViewController: UIViewController {
 
         flowView
             .highlightedIndex
+            .asObservable()
             .distinctUntilChanged()
             .subscribeNext { [weak self] (index) in
                 if let _ = self?.fulfillmentNav() {

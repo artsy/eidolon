@@ -58,7 +58,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         let provider = self.provider
 
         confirmCredentialsButton.rx_action = CocoaAction(enabledIf: formIsValid) { [weak self] _ -> Observable<Void> in
-            guard let me = self else { return empty() }
+            guard let me = self else { return .empty() }
 
             return bidDetails.authenticatedNetworking(provider)
                 .flatMap { provider -> Observable<AuthorizedNetworking> in
@@ -124,7 +124,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
         let submitAction = UIAlertAction.Action("Send", style: .Default)
         let email = Variable("")
-        submitAction.rx_action = CocoaAction(enabledIf: email.map(stringIsEmailAddress), workFactory: { () -> Observable<Void> in
+        submitAction.rx_action = CocoaAction(enabledIf: email.asObservable().map(stringIsEmailAddress), workFactory: { () -> Observable<Void> in
             let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email.value)
 
             return self.provider.request(endpoint)

@@ -71,7 +71,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
                 .userForgotPassword()
                 .then {
                     self?.alertUserPasswordSent()
-                } ?? empty()
+                } ?? .empty()
         }
 
         viewModel
@@ -95,7 +95,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
     }
 
     func alertUserPasswordSent() -> Observable<Void> {
-        return create { observer in
+        return Observable.create { observer in
 
             let alertController = UIAlertController(title: "Forgot Password", message: "We have sent you your password.", preferredStyle: .Alert)
 

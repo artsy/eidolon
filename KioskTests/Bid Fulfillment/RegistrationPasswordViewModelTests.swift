@@ -43,10 +43,10 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             }
         }
 
-        return Networking(provider: OnlineProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true)))
+        return Networking(provider: OnlineProvider(endpointClosure: endpointsClosure, stubClosure: MoyaProvider.ImmediatelyStub, online: Observable.just(true)))
     }
 
-    func testSubject(provider: Networking = Networking.newStubbingNetworking(), passwordSubject: Observable<String> = just(testPassword), invocation: Observable<Void> = PublishSubject<Void>().asObservable(), finishedSubject: PublishSubject<Void> = PublishSubject<Void>()) -> RegistrationPasswordViewModel {
+    func testSubject(provider: Networking = Networking.newStubbingNetworking(), passwordSubject: Observable<String> = Observable.just(testPassword), invocation: Observable<Void> = PublishSubject<Void>().asObservable(), finishedSubject: PublishSubject<Void> = PublishSubject<Void>()) -> RegistrationPasswordViewModel {
         return RegistrationPasswordViewModel(provider: provider, password: passwordSubject, execute: invocation, completed: finishedSubject, email: testEmail)
     }
 

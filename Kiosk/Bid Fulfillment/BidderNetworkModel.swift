@@ -100,7 +100,7 @@ private extension BidderNetworkModel {
         // If the user was asked to swipe a card, we'd have stored the token. 
         // If the token is not there, then the user must already have one on file. So we can skip this step.
         guard let token = bidDetails.newUser.creditCardToken.value else {
-            return empty()
+            return .empty()
         }
 
         let swiped = bidDetails.newUser.swipedCreditCard
@@ -125,7 +125,7 @@ private extension BidderNetworkModel {
 
         return bool.flatMap { exists -> Observable<Void> in
             if exists {
-                return empty()
+                return .empty()
             } else {
                 return self.registerToAuction(self.bidDetails.auctionID, provider: provider).then { [weak self] in self?.generateAPIN(provider) }
             }

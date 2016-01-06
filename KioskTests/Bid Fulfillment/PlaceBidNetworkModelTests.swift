@@ -65,7 +65,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
 
                 let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString
                 return Endpoint(URL: url, sampleResponseClosure: {.NetworkResponse(200, stubbedResponse("CreateABid"))}, method: target.method, parameters: target.parameters)
-                }, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
+                }, stubClosure: MoyaProvider.ImmediatelyStub, online: Observable.just(true))
 
 
 
@@ -90,7 +90,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
                 let provider = OnlineProvider(endpointClosure: { target -> (Endpoint<ArtsyAuthenticatedAPI>) in
                     let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString
                     return Endpoint(URL: url, sampleResponseClosure: {.NetworkResponse(400, stubbedResponse("CreateABidFail"))}, method: target.method, parameters: target.parameters)
-                    }, stubClosure: MoyaProvider.ImmediatelyStub, online: just(true))
+                    }, stubClosure: MoyaProvider.ImmediatelyStub, online: Observable.just(true))
 
                 networking = AuthorizedNetworking(provider: provider)
             }

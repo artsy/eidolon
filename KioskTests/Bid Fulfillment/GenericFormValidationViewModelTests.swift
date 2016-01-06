@@ -10,7 +10,7 @@ class GenericFormValidationViewModelTests: QuickSpec {
         var disposeBag: DisposeBag!
 
         beforeEach {
-            validSubject = just(true)
+            validSubject = Observable.just(true)
             disposeBag = DisposeBag()
         }
 
@@ -50,7 +50,7 @@ class GenericFormValidationViewModelTests: QuickSpec {
         it("uses the isValid for the command enabledness") {
             let validSubject = PublishSubject<Bool>()
 
-            let subject = GenericFormValidationViewModel(isValid: validSubject, manualInvocation: empty(), finishedSubject: PublishSubject<Void>())
+            let subject = GenericFormValidationViewModel(isValid: validSubject, manualInvocation: Observable.empty(), finishedSubject: PublishSubject<Void>())
 
             validSubject.onNext(false)
             expect(subject.command.enabled).toEventually( equalFirst(false) )

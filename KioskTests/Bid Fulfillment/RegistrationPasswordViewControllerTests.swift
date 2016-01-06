@@ -17,11 +17,11 @@ class RegistrationPasswordViewControllerTests: QuickSpec {
             var action: CocoaAction! = emptyAction()
 
             init (emailExists: Bool = false) {
-                self.emailExists = just(emailExists)
+                self.emailExists = Observable.just(emailExists)
             }
 
             func userForgotPassword() -> Observable<Void> {
-                return empty()
+                return Observable.empty()
             }
         }
 

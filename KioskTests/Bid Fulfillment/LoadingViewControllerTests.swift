@@ -183,12 +183,12 @@ class StubLoadingViewModel: LoadingViewModelType {
     func performActions() -> Observable<Void> {
         if completes {
             if errors {
-                return failWith(NSError(domain: "", code: 0, userInfo: nil) as ErrorType)
+                return Observable.error(NSError(domain: "", code: 0, userInfo: nil) as ErrorType)
             } else {
-                return empty()
+                return Observable.empty()
             }
         } else {
-            return never()
+            return Observable.never()
         }
     }
 }

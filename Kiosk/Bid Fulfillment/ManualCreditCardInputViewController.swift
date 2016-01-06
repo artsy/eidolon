@@ -38,26 +38,31 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         // We show the enter credit card number, then the date switching the views around
         viewModel
             .cardFullDigits
+            .asObservable()
             .bindTo(cardNumberTextField.rx_text)
             .addDisposableTo(rx_disposeBag)
 
         viewModel
             .expirationYear
+            .asObservable()
             .bindTo(expirationYearTextField.rx_text)
             .addDisposableTo(rx_disposeBag)
 
         viewModel
             .expirationMonth
+            .asObservable()
             .bindTo(expirationMonthTextField.rx_text)
             .addDisposableTo(rx_disposeBag)
 
         viewModel
             .securityCode
+            .asObservable()
             .bindTo(securitycodeTextField.rx_text)
             .addDisposableTo(rx_disposeBag)
 
         viewModel
             .billingZip
+            .asObservable()
             .bindTo(billingZipTextField.rx_text)
             .addDisposableTo(rx_disposeBag)
 

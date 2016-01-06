@@ -44,7 +44,7 @@ import Moya
 
             let provider = OnlineProvider(endpointClosure: newEndpointsClosure, requestClosure: Networking.endpointResolver(), stubClosure: Networking.APIKeysBasedStubBehaviour, plugins: Networking.authenticatedPlugins)
 
-            return just(AuthorizedNetworking(provider: provider))
+            return .just(AuthorizedNetworking(provider: provider))
 
         } else {
             let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: newUser.email.value ?? "", password: newUser.password.value ?? "")
@@ -54,10 +54,10 @@ import Moya
                 .mapJSON()
                 .flatMap { accessTokenDict -> Observable<AuthorizedNetworking> in
                     guard let accessToken = accessTokenDict["access_token"] as? String else {
-                        return failWith(EidolonError.CouldNotParseJSON)
+                        return Observable.error(EidolonError.CouldNotParseJSON)
                     }
 
-                    return just(Networking.newAuthorizedNetworking(accessToken))
+                    return .just(Networking.newAuthorizedNetworking(accessToken))
                 }
                 .logServerError("Getting Access Token failed.")
         }

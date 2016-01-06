@@ -40,7 +40,7 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
         // Action takes nothing, is enabled if the password is valid, and does the following:
         // Check if the email exists, it tries to log in.
         // If it doesn't exist, then it does nothing.
-        let action = CocoaAction(enabledIf: password.map(isStringLengthAtLeast(6))) { _ in
+        let action = CocoaAction(enabledIf: password.asObservable().map(isStringLengthAtLeast(6))) { _ in
 
             return self.emailExists
                 .flatMap { exists -> Observable<Void> in
@@ -52,7 +52,7 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
                             .map(void)
                     } else {
                         // Return a non-empty observable, so that the action sends something on its elements observable.
-                        return just()
+                        return .just()
                     }
                 }
                 .doOnCompleted {

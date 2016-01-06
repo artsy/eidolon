@@ -68,7 +68,7 @@ class ConfirmYourBidViewController: UIViewController {
         let numberIsZeroLength = number.map(isZeroLengthString)
 
         enterButton.rx_action = CocoaAction(enabledIf: numberIsZeroLength.not(), workFactory: { [weak self] _ in
-            guard let me = self else { return empty() }
+            guard let me = self else { return .empty() }
 
             let endpoint = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me._number.value))
 
@@ -83,9 +83,9 @@ class ConfirmYourBidViewController: UIViewController {
                     // error to see if it's the original URL to know if the
                     // request succeeded.
 
-                    let moyaResponse = (error as NSError).userInfo["data"] as? MoyaResponse
+                    let response = (error as NSError).userInfo["data"] as? Moya.Response
 
-                    if let responseURL = moyaResponse?.response?.URL?.absoluteString
+                    if let responseURL = response?.response?.URL?.absoluteString
                         where responseURL.containsString("v1/bidder/") {
 
                         me.performSegue(.ConfirmyourBidBidderFound)

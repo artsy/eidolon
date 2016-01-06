@@ -21,7 +21,7 @@ class ArtsyAPISpec: QuickSpec {
         var disposeBag: DisposeBag!
         var networking: Networking!
 
-        func newXAppRequest() -> Observable<MoyaResponse> {
+        func newXAppRequest() -> Observable<Moya.Response> {
             return networking.request(ArtsyAPI.Auctions)
         }
 

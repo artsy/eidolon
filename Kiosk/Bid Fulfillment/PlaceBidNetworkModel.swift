@@ -42,12 +42,12 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
         return request
             .map { position in
                 return position.id
-            }.catchError { error -> Observable<String> in
+            }.catchError { e -> Observable<String> in
                 // We've received an error. We're going to check to see if it's type is "param_error", which indicates we were outbid.
 
-                guard let response = (error as NSError).userInfo["data"] as? MoyaResponse else {
-                    throw error
-                }
+                guard let error = e as? Moya.Error else { throw e }
+                guard case .StatusCode(let response) = error else { throw e }
+
 
                 let json = JSON(data: response.data)
 

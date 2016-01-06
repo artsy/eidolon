@@ -17,27 +17,27 @@ class KeypadViewModel: NSObject {
     
     lazy var deleteAction: CocoaAction = {
         return CocoaAction { [weak self] _ in
-            self?.delete() ?? empty()
+            self?.delete() ?? .empty()
         }
     }()
 
     lazy var clearAction: CocoaAction = {
         return CocoaAction { [weak self] _ in
-            self?.clear() ?? empty()
+            self?.clear() ?? .empty()
         }
     }()
     
     lazy var addDigitAction: Action<Int, Void> = {
         let localSelf = self
         return Action<Int, Void> { [weak localSelf] input in
-            return localSelf?.addDigit(input) ?? empty()
+            return localSelf?.addDigit(input) ?? .empty()
         }
     }()
 }
 
 private extension KeypadViewModel {
     func delete() -> Observable<Void> {
-        return create { [weak self] observer in
+        return Observable.create { [weak self] observer in
             if let strongSelf = self {
                 strongSelf.intValue.value = Int(strongSelf.intValue.value / 10)
                 if strongSelf.stringValue.value.isNotEmpty {
@@ -51,7 +51,7 @@ private extension KeypadViewModel {
     }
     
     func clear() -> Observable<Void> {
-        return create { [weak self] observer in
+        return Observable.create { [weak self] observer in
             self?.intValue.value = 0
             self?.stringValue.value = ""
             observer.onCompleted()
@@ -60,7 +60,7 @@ private extension KeypadViewModel {
     }
     
     func addDigit(input: Int) -> Observable<Void> {
-        return create { [weak self] observer in
+        return Observable.create { [weak self] observer in
             if let strongSelf = self {
                 let newValue = (10 * strongSelf.intValue.value) + input
                 if (newValue < KeypadViewModelMaxIntegerValue) {

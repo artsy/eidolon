@@ -26,7 +26,7 @@ protocol ListingsViewModelType {
 }
 
 // Cheating here, should be in the instance but there's only ever one instance, so ¯\_(ツ)_/¯
-private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueuePriority: .Default)
+private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Default)
 
 class ListingsViewModel: NSObject, ListingsViewModelType {
 
@@ -94,7 +94,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
             .bindTo(saleArtworks)
             .addDisposableTo(rx_disposeBag)
 
-        showSpinner = sortedSaleArtworks.map { sortedSaleArtworks in
+        showSpinner = sortedSaleArtworks.asObservable().map { sortedSaleArtworks in
             return sortedSaleArtworks.count == 0
         }
 
@@ -132,24 +132,24 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // Repeatedly calls itself with page+1 until the count of the returned array is < pageSize.
     private func retrieveAllListingsRequest(page: Int) -> Observable<AnyObject> {
-        return create { [weak self] observer in
+        return Observable.create { [weak self] observer in
             guard let me = self else { return NopDisposable.instance }
 
             return me.listingsRequestForPage(page).subscribeNext { object in
                 guard let array = object as? Array<AnyObject> else { return }
                 guard let me = self else { return }
 
-                // This'll either be the next page request or empty.
+                // This'll either be the next page request or .empty.
                 let nextPage: Observable<AnyObject>
 
                 // We must have more results to retrieve
                 if array.count >= me.pageSize {
                     nextPage = me.retrieveAllListingsRequest(page+1)
                 } else {
-                    nextPage = empty()
+                    nextPage = .empty()
                 }
 
-                just(object)
+                Observable.just(object)
                     .concat(nextPage)
                     .subscribe(observer)
             }
@@ -171,7 +171,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     }
 
     private func recurringListingsRequest() -> Observable<Array<SaleArtwork>> {
-        let recurring = interval(syncInterval, MainScheduler.sharedInstance)
+        let recurring = Observable<Int>.interval(syncInterval, scheduler: MainScheduler.instance)
             .map { _ in NSDate() }
             .startWith(NSDate())
             .takeUntil(rx_deallocating)
@@ -180,7 +180,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         return recurring
             .doOnNext(logSync)
             .flatMap { [weak self] _ in
-                return self?.allListingsRequest() ?? empty()
+                return self?.allListingsRequest() ?? .empty()
             }
             .map { [weak self] newSaleArtworks -> [SaleArtwork] in
                 guard let me = self else { return [] }
@@ -212,7 +212,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         if background {
             return observable.observeOn(backgroundScheduler)
         } else {
-            return observable.observeOn(MainScheduler.sharedInstance)
+            return observable.observeOn(MainScheduler.instance)
         }
     }
 

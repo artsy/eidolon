@@ -25,7 +25,7 @@ class AppViewControllerTests: QuickSpec {
                 fakeReachability = Variable(true)
                 
                 subject.reachability = fakeReachability.asObservable()
-                subject.apiPinger = just(true).take(1)
+                subject.apiPinger = Observable.just(true).take(1)
             }
 
             it("shows the offlineBlockingView when offline  is true"){

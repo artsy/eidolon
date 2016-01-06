@@ -175,18 +175,18 @@ enum TestError: String {
 extension TestError: ErrorType { }
 
 func emptyAction() -> CocoaAction {
-    return CocoaAction { _ in empty() }
+    return CocoaAction { _ in Observable.empty() }
 }
 
 func neverAction() -> CocoaAction {
-    return CocoaAction { _ in never() }
+    return CocoaAction { _ in Observable.never() }
 }
 
 func errorAction(error: ErrorType = TestError.Default) -> CocoaAction {
-    return CocoaAction { _ in failWith(error) }
+    return CocoaAction { _ in Observable.error(error) }
 }
 
 func disabledAction() -> CocoaAction {
-    return CocoaAction(enabledIf: just(false)) { _ in empty() }
+    return CocoaAction(enabledIf: Observable.just(false)) { _ in Observable.empty() }
 }
 
