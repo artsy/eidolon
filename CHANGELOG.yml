@@ -1,7 +1,11 @@
 upcoming:
-- Updates under the hood
 
 releases:
+- version: 5.0.0
+  date: January 06 2016
+  notes:
+  - Updates under the hood
+
 - version: 4.1.0
   date: November 11 2015
   notes:
@@ -310,6 +314,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
