@@ -22,7 +22,7 @@ class OnlineProvider<Target where Target: TargetType>: RxMoyaProvider<Target> {
     override func request(token: Target) -> Observable<Moya.Response> {
         let actualRequest = super.request(token)
         return online
-            .ignore(false)  // Wait unti we're online
+            .ignore(false)  // Wait until we're online
             .take(1)        // Take 1 to make sure we only invoke the API once.
             .flatMap { _ in // Turn the online state into a network request
                 return actualRequest
