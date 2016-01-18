@@ -1,10 +1,6 @@
 osx_image: xcode7.1
 language: objective-c
 
-cache:
-  directories:
-  - vendor/bundle
-
 env:
   global:
   - FASTLANE_SKIP_UPDATE_CHECK=true
