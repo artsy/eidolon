@@ -21,10 +21,10 @@ class StripeManager: NSObject {
 
             me.stripeClient.createTokenWithCard(card) { (token, error) in
                 if (token as STPToken?).hasValue {
-                    observer.onNext(token)
+                    observer.onNext(token!)
                     observer.onCompleted()
                 } else {
-                    observer.onError(error)
+                    observer.onError(error!)
                 }
             }
 
