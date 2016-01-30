@@ -27,10 +27,7 @@ lane :oss do
     'StripeProductionPublishableKey']
 
     commands = keys.map { |key|
-      command = "bundle exec pod keys set #{key} '-'"
-      if key == keys.first
-        command += " Eidolon"
-      end
+      command = "bundle exec pod keys set #{key} '-' Eidolon"
 
       command
     }.join(' ; ')
