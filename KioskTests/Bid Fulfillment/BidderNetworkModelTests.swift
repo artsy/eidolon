@@ -29,7 +29,7 @@ class BidderNetworkModelTests: QuickSpec {
             expect(try! subject.createdNewUser.toBlocking().first()) == true
         }
 
-        fit("sends a value even if not adding a card") {
+        it("sends a value even if not adding a card") {
             waitUntil { done in
                 subject
                     .createOrGetBidder()
