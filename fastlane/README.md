@@ -46,6 +46,6 @@ Updates the storyboard identifier Swift values.
 
 ----
 
-Generate this documentation by running `fastlane docs`
-More information about fastlane can be found on [https://fastlane.tools](https://fastlane.tools).
-The documentation of fastlane can be found on [GitHub](https://github.com/KrauseFx/fastlane)
+This README.md is auto-generated and will be re-generated every time to run [fastlane](https://fastlane.tools).  
+More information about fastlane can be found on [https://fastlane.tools](https://fastlane.tools).  
+The documentation of fastlane can be found on [GitHub](https://github.com/fastlane/fastlane).
