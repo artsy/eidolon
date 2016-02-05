@@ -147,7 +147,19 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 subject.cardFullDigits.value = ""
                 subject.expirationMonth.value = "02"
                 subject.expirationYear.value = "2017"
-                expect(subject.registerButtonCommand().enabled) == false
+
+                var enabled: Bool?
+                waitUntil { done in
+                    subject.registerButtonCommand()
+                        .enabled
+                        .subscribeNext { enabledValue in
+                            enabled = enabledValue
+                            done()
+                        }
+                        .addDisposableTo(disposeBag)
+                }
+
+                expect(enabled) == false
             }
 
             it("disables command with invalid expiry date") {
@@ -280,7 +292,7 @@ class ManualCreditCardInputViewModelTestsStripeManager: StripeManager {
     var token: STPToken?
     var shouldSucceed = true
 
-    override func stringIsCreditCard(cardNumber: String) -> Bool {
+    override func stringIsCreditCard(_: String) -> Bool {
         return isValidCreditCard
     }
 
