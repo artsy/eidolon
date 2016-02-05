@@ -67,6 +67,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
                 guard let me = self else { return .empty() }
                 guard me.placingBid else {
                     ARAnalytics.event("Registered New User Only")
+                    // Skipping all further actions, since we're not placing a bid.
                     return .empty()
                 }
 
