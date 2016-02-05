@@ -54,3 +54,19 @@ extension Optional where Wrapped: Occupiable {
         return !isNilOrEmpty
     }
 }
+
+// TODO: PR this into Moya
+import Moya
+
+extension Moya.Error {
+    var response: Moya.Response? {
+        switch self {
+        case .ImageMapping(let response): return response
+        case .JSONMapping(let response): return response
+        case .StringMapping(let response): return response
+        case .StatusCode(let response): return response
+        case .Data(let response): return response
+        case .Underlying: return nil
+        }
+    }
+}

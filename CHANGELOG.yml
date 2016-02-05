@@ -1,10 +1,11 @@
 upcoming:
+- Fixes problem authenticating with bidder/phone numbers [ash]
 
 releases:
 - version: 5.0.0
   date: January 06 2016
   notes:
-  - Updates under the hood
+  - Updates under the hood [ash]
 
 - version: 4.1.0
   date: November 11 2015

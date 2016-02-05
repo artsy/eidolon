@@ -298,6 +298,25 @@
                                 <animations/>
                                 <color key="backgroundColor" red="0.80967282458563539" green="0.80967282458563539" blue="0.80967282458563539" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nd0-iI-21D" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="600" width="255" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F53-tK-j9i" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                        <rect key="frame" x="25" y="8" width="199" height="57"/>
+                                        <animations/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Next Increment">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dev_nextIncrementPressed:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="Xb2-wt-DL7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1848,9 +1867,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eZu-3X-lXX"/>
         <segue reference="9X5-eM-AKF"/>
-        <segue reference="NOJ-G3-crU"/>
-        <segue reference="gjD-og-8Iv"/>
+        <segue reference="hvW-mC-OYp"/>
+        <segue reference="ccv-le-Cu0"/>
+        <segue reference="TrF-tJ-vaM"/>
     </inferredMetricsTieBreakers>
 </document>

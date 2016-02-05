@@ -75,7 +75,7 @@ class ConfirmYourBidViewController: UIViewController {
             return me.provider.request(endpoint)
                 .filterStatusCode(400)
                 .map(void)
-                .doOnError { (error) in
+                .doOnError { error in
                     guard let me = self else { return }
 
                     // Due to AlamoFire restrictions we can't stop HTTP redirects
@@ -83,7 +83,11 @@ class ConfirmYourBidViewController: UIViewController {
                     // error to see if it's the original URL to know if the
                     // request succeeded.
 
-                    let response = (error as NSError).userInfo["data"] as? Moya.Response
+                    var response: Moya.Response?
+
+                    if case .StatusCode(let receivedResponse)? = error as? Moya.Error {
+                        response = receivedResponse
+                    }
 
                     if let responseURL = response?.response?.URL?.absoluteString
                         where responseURL.containsString("v1/bidder/") {

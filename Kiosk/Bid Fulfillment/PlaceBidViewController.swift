@@ -278,3 +278,12 @@ func toNextBidString(cents: Int) -> String {
     }
     return "Enter \(dollars) or more"
 }
+
+typealias DeveloperOnly = PlaceBidViewController
+extension DeveloperOnly {
+    @IBAction func dev_nextIncrementPressed(sender: AnyObject) {
+        let bidDetails = (self.navigationController as? FulfillmentNavigationController)?.bidDetails
+        bidDetails?.bidAmountCents.value = bidDetails?.saleArtwork?.minimumNextBidCents
+        performSegue(SegueIdentifier.ConfirmBid)
+    }
+}
