@@ -1,8 +1,12 @@
 upcoming:
-- Fixes problem placing bids [ash]
-- Fixes inability to cancel after agreeing to place a higher bid [ash]
 
 releases:
+- version: 5.0.2
+  date: February 05 2016
+  notes:
+  - Fixes problem placing bids [ash]
+  - Fixes inability to cancel after agreeing to place a higher bid [ash]
+
 - version: 5.0.1
   date: February 05 2016
   notes:
@@ -321,6 +325,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
