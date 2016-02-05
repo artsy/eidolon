@@ -142,6 +142,7 @@ extension LoadingViewController {
 
         let title = reserveNotMet ? "NO, THANKS" : (createdNewBidder ? "CONTINUE" : "BACK TO AUCTION")
         backToAuctionButton.setTitle(title, forState: .Normal)
+        fulfillmentContainer()?.cancelButton.hidden = false
     }
 
     func handleRegistered() {

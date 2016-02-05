@@ -1,4 +1,6 @@
 upcoming:
+- Fixes problem placing bids [ash]
+- Fixes inability to cancel after agreeing to place a higher bid [ash]
 
 releases:
 - version: 5.0.1

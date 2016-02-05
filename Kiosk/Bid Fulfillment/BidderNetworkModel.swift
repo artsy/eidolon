@@ -100,7 +100,7 @@ private extension BidderNetworkModel {
         // If the user was asked to swipe a card, we'd have stored the token. 
         // If the token is not there, then the user must already have one on file. So we can skip this step.
         guard let token = bidDetails.newUser.creditCardToken.value else {
-            return .empty()
+            return .just()
         }
 
         let swiped = bidDetails.newUser.swipedCreditCard
@@ -110,7 +110,7 @@ private extension BidderNetworkModel {
             .filterSuccessfulStatusCodes()
             .map(void)
             .doOnCompleted { [weak self] in
-                // Adding the credit card succeeded, so we shoudl clear the newUser.creditCardToken so that we don't
+                // Adding the credit card succeeded, so we should clear the newUser.creditCardToken so that we don't
                 // inadvertently try to re-add their card token if they need to increase their bid.
 
                 self?.bidDetails.newUser.creditCardToken.value = nil
@@ -125,7 +125,7 @@ private extension BidderNetworkModel {
 
         return bool.flatMap { exists -> Observable<Void> in
             if exists {
-                return .empty()
+                return .just()
             } else {
                 return self.registerToAuction(self.bidDetails.auctionID, provider: provider).then { [weak self] in self?.generateAPIN(provider) }
             }
