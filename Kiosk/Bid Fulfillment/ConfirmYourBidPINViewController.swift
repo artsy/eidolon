@@ -13,6 +13,7 @@ class ConfirmYourBidPINViewController: UIViewController {
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
     lazy var pin: Observable<String> = { self.keypadContainer.stringValue }()
+    lazy var viewModel: AdminCCBypassNetworkModelType = AdminCCBypassNetworkModel()
 
     var provider: Networking!
 
@@ -65,9 +66,20 @@ class ConfirmYourBidPINViewController: UIViewController {
                         .updateUserCredentials(loggedInProvider)
                         .mapReplace(provider)
                 }
-                .flatMap { provider -> Observable<AuthorizedNetworking> in
+                .flatMap { provider -> Observable<BypassResults> in
                     return me
-                        .checkForCreditCard(loggedInProvider)
+                        .viewModel
+                        .checkForAdminCCBypass(bidDetails.auctionID, authorizedNetworking: provider)
+                }
+                .flatMap { results -> Observable<Void> in
+                    // Check if we should bypass the CC requirement and move directly onto the next step.
+                    guard results.bypassCCRequirement == false else {
+                        me.performSegue(.PINConfirmedhasCard)
+                        return .empty()
+                    }
+
+                    return me
+                        .checkForCreditCard(results.authorizedNetworking)
                         .doOnNext { cards in
                             // If the cards list doesn't exist, or its .empty, then perform the segue to collect one.
                             // Otherwise, proceed directly to the loading view controller to place the bid.
@@ -77,9 +89,8 @@ class ConfirmYourBidPINViewController: UIViewController {
                                 me.performSegue(.PINConfirmedhasCard)
                             }
                         }
-                        .mapReplace(provider)
+                        .map(void)
                 }
-                .map(void)
                 .doOnError { error in
                     if let response = (error as? Moya.Error)?.response {
                         let responseBody = NSString(data: response.data, encoding: NSUTF8StringEncoding)
