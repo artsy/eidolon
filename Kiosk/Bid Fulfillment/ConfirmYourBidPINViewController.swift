@@ -67,12 +67,6 @@ class ConfirmYourBidPINViewController: UIViewController {
                 }
                 .flatMap { provider -> Observable<AuthorizedNetworking> in
                     return me
-                        .fulfillmentNav()
-                        .updateUserCredentials(loggedInProvider)
-                        .mapReplace(provider)
-                }
-                .flatMap { provider -> Observable<AuthorizedNetworking> in
-                    return me
                         .checkForCreditCard(loggedInProvider)
                         .doOnNext { cards in
                             // If the cards list doesn't exist, or its .empty, then perform the segue to collect one.
