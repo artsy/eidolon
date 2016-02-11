@@ -1,7 +1,11 @@
 upcoming:
-- Fixes a problem caused when manually-registered bidders were prompted for their password [ash]
 
 releases:
+- version: 5.1.0
+  date: February 11 2016
+  notes:
+  - Fixes a problem caused when manually-registered bidders were prompted for their password [ash]
+
 - version: 5.0.2
   date: February 05 2016
   notes:
@@ -326,6 +330,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
