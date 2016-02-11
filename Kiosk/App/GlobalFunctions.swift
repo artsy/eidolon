@@ -54,11 +54,15 @@ private class ReachabilityManager: NSObject {
         super.init()
 
         reachability.reachableBlock = { [weak self] _ in
-            self?._reach.onNext(true)
+            dispatch_async(dispatch_get_main_queue()) {
+                self?._reach.onNext(true)
+            }
         }
 
         reachability.unreachableBlock = { [weak self] _ in
-            self?._reach.onNext(false)
+            dispatch_async(dispatch_get_main_queue()) {
+                self?._reach.onNext(false)
+            }
         }
 
         reachability.startNotifier()

@@ -13,6 +13,7 @@ class ConfirmYourBidPINViewController: UIViewController {
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
     lazy var pin: Observable<String> = { self.keypadContainer.stringValue }()
+    lazy var networkModel: AdminCCBypassNetworkModelType = AdminCCBypassNetworkModel()
 
     var provider: Networking!
 
@@ -65,27 +66,26 @@ class ConfirmYourBidPINViewController: UIViewController {
                         .updateUserCredentials(loggedInProvider)
                         .mapReplace(provider)
                 }
-                .flatMap { provider -> Observable<AuthorizedNetworking> in
+                .flatMap { provider -> Observable<Void> in
                     return me
-                        .fulfillmentNav()
-                        .updateUserCredentials(loggedInProvider)
-                        .mapReplace(provider)
-                }
-                .flatMap { provider -> Observable<AuthorizedNetworking> in
-                    return me
-                        .checkForCreditCard(loggedInProvider)
-                        .doOnNext { cards in
-                            // If the cards list doesn't exist, or its .empty, then perform the segue to collect one.
-                            // Otherwise, proceed directly to the loading view controller to place the bid.
-                            if cards.isEmpty {
-                                me.performSegue(.ArtsyUserviaPINHasNotRegisteredCard)
-                            } else {
+                        .networkModel
+                        .checkForAdminCCBypass(bidDetails.auctionID, authorizedNetworking: provider)
+                        .flatMap { result -> Observable<Void> in
+
+                            switch result {
+                            case .SkipCCRequiment:
+                                // We should bypass the CC requirement and move directly onto placing the bid.
                                 me.performSegue(.PINConfirmedhasCard)
+                                return .empty()
+                            case .RequireCC:
+                                // We must check for a CC, and collect one if necessary.
+                                return me
+                                    .checkForCreditCard(provider)
+                                    .doOnNext(me.gotCards)
+                                    .map(void)
                             }
                         }
-                        .mapReplace(provider)
                 }
-                .map(void)
                 .doOnError { error in
                     if let response = (error as? Moya.Error)?.response {
                         let responseBody = NSString(data: response.data, encoding: NSUTF8StringEncoding)
@@ -140,6 +140,16 @@ class ConfirmYourBidPINViewController: UIViewController {
     func checkForCreditCard(loggedInProvider: AuthorizedNetworking) -> Observable<[Card]> {
         let endpoint = ArtsyAuthenticatedAPI.MyCreditCards
         return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
+    }
+
+    func gotCards(cards: [Card]) {
+        // If the cards list doesn't exist, or its .empty, then perform the segue to collect one.
+        // Otherwise, proceed directly to the loading view controller to place the bid.
+        if cards.isEmpty {
+            performSegue(.ArtsyUserviaPINHasNotRegisteredCard)
+        } else {
+            performSegue(.PINConfirmedhasCard)
+        }
     }
 }
 

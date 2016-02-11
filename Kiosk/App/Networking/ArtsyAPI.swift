@@ -40,6 +40,7 @@ enum ArtsyAuthenticatedAPI {
     case MyBiddersForAuction(auctionID: String)
     case MyBidPositionsForAuctionArtwork(auctionID: String, artworkID: String)
     case MyBidPosition(id: String)
+    case FindMyBidderRegistration(auctionID: String)
     case PlaceABid(auctionID: String, artworkID: String, maxBidCents: String)
 
     case UpdateMe(email: String, phone: String, postCode: String, name: String)
@@ -269,6 +270,9 @@ extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
         case MyBidPosition(let id):
             return "/api/v1/me/bidder_position/\(id)"
 
+        case FindMyBidderRegistration:
+            return "/api/v1/me/bidders"
+
         case PlaceABid:
             return "/api/v1/me/bidder_position"
 
@@ -295,6 +299,9 @@ extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
                 "artwork_id":  artworkID,
                 "max_bid_amount_cents": maxBidCents
             ]
+
+        case FindMyBidderRegistration(let auctionID):
+            return ["sale_id": auctionID]
 
         case UpdateMe(let email, let phone,let postCode, let name):
             return [
@@ -349,6 +356,9 @@ extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
 
         case PlaceABid:
             return stubbedResponse("CreateABid")
+
+        case FindMyBidderRegistration:
+            return stubbedResponse("FindMyBidderRegistration")
 
         case RegisterCard:
             return stubbedResponse("RegisterCard")

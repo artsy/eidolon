@@ -156,6 +156,7 @@ extension NetworkingType {
 
             switch target {
             case .MyBidPosition: return true
+            case .FindMyBidderRegistration: return true
             default: return false
             }
         })
