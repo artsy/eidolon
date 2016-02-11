@@ -15,76 +15,58 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
             disposeBag = DisposeBag()
         }
 
-        it("returns the authenticated provider") {
-            let networking = Networking.newAuthorizedStubbingNetworking()
-
-            var receivedResults: BypassResults?
-            waitUntil { done in
-                subject
-                    .checkForAdminCCBypass("the-fun-sale", authorizedNetworking: networking)
-                    .subscribeNext { results in
-                        receivedResults = results
-                        done()
-                    }
-                    .addDisposableTo(disposeBag)
-            }
-
-            // We need to use their providers because Nimble doesn't like comparing struct instances.
-            expect(receivedResults?.authorizedNetworking.provider) === networking.provider
-        }
-
         it("handles unregistered bidders") {
             let networking = networkingForBidderCreatedByAdmin(nil) // nil indicates not registered to bid.
 
-            var receivedResults: BypassResults?
+            var receivedResult: BypassResult?
             waitUntil { done in
                 subject
                     .checkForAdminCCBypass("the-fun-sale", authorizedNetworking: networking)
-                    .subscribeNext { results in
-                        receivedResults = results
+                    .subscribeNext { result in
+                        receivedResult = result
                         done()
                     }
                     .addDisposableTo(disposeBag)
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
-            expect(receivedResults?.bypassCCRequirement) == false
+            expect(receivedResult) == .RequireCC
         }
 
         it("handles bidders created by admins") {
             let networking = networkingForBidderCreatedByAdmin(true)
 
-            var receivedResults: BypassResults?
+            var receivedResult: BypassResult?
             waitUntil { done in
                 subject
                     .checkForAdminCCBypass("the-fun-sale", authorizedNetworking: networking)
-                    .subscribeNext { results in
-                        receivedResults = results
+                    .subscribeNext { result in
+                        receivedResult = result
                         done()
                     }
                     .addDisposableTo(disposeBag)
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
-            expect(receivedResults?.bypassCCRequirement) == true
+            expect(receivedResult) == .SkipCCRequiment
         }
 
         it("handles bidders not created by admins") {
             let networking = networkingForBidderCreatedByAdmin(false)
 
-            var receivedResults: BypassResults?
+            var receivedResult: BypassResult?
             waitUntil { done in
                 subject
                     .checkForAdminCCBypass("the-fun-sale", authorizedNetworking: networking)
-                    .subscribeNext { results in
-                        receivedResults = results
+                    .subscribeNext { result in
+                        receivedResult = result
                         done()
                     }
                     .addDisposableTo(disposeBag)
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
-            expect(receivedResults?.bypassCCRequirement) == false
+            expect(receivedResult) == .RequireCC
         }
     }
 }
