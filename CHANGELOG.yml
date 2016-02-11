@@ -1,4 +1,5 @@
 upcoming:
+- Fixes a problem caused when manually-registered bidders were prompted for their password [ash]
 
 releases:
 - version: 5.0.2
