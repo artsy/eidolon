@@ -4,7 +4,7 @@ import Moya
 
 enum BypassResult {
     case RequireCC
-    case SkipCCRequiment
+    case SkipCCRequirement
 }
 
 protocol AdminCCBypassNetworkModelType {
@@ -31,7 +31,7 @@ class AdminCCBypassNetworkModel: AdminCCBypassNetworkModelType {
                 guard let bidder = bidder else { return .RequireCC }
 
                 switch bidder.createdByAdmin {
-                case true: return .SkipCCRequiment
+                case true: return .SkipCCRequirement
                 case false: return .RequireCC
                 }
             }

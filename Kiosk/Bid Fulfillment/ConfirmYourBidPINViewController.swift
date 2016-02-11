@@ -73,7 +73,7 @@ class ConfirmYourBidPINViewController: UIViewController {
                         .flatMap { result -> Observable<Void> in
 
                             switch result {
-                            case .SkipCCRequiment:
+                            case .SkipCCRequirement:
                                 // We should bypass the CC requirement and move directly onto placing the bid.
                                 me.performSegue(.PINConfirmedhasCard)
                                 return .empty()

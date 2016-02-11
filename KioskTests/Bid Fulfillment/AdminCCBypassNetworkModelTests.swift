@@ -48,7 +48,7 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
-            expect(receivedResult) == .SkipCCRequiment
+            expect(receivedResult) == .SkipCCRequirement
         }
 
         it("handles bidders not created by admins") {
