@@ -1,7 +1,11 @@
 upcoming:
-- Fixes display issue with D*Face artwork image [ash]
 
 releases:
+- version: 5.1.1
+  date: February 16 2016
+  notes:
+  - Fixes display issue with D*Face artwork image [ash]
+
 - version: 5.1.0
   date: February 11 2016
   notes:
@@ -331,6 +335,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
