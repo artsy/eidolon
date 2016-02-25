@@ -18,20 +18,7 @@ Downloading the Code
 (Note: if you're an Artsy employee, you'll need to follow [these directions](docs/artsy_dev.md) instead.)
 
 You'll need a few things before we get started. Make sure you have Xcode installed from 
-the App Store or wherever. Then run the following two commands to install Xcode's
-command line tools and `bundler`, if you don't have that yet.
-
-```sh
-[sudo] gem install bundler
-xcode-select --install
-```
-
-The following commands will set up Eidolon with the expectation that you don't 
-have API access and will use blanks for API keys. 
-
-```sh
-git clone https://github.com/artsy/eidolon.git
-cd eidolon
+the App Store or w
 bundle install
 bundle exec fastlane oss
 ```
