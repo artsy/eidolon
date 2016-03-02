@@ -13,17 +13,17 @@ end
 
 desc "Set all the API keys required for distribution"
 lane :oss do
-  keys = ['ArtsyAPIClientSecret', 
-    'ArtsyAPIClientKey', 
-    'HockeyProductionSecret', 
-    'HockeyBetaSecret', 
-    'MixpanelProductionAPIClientKey', 
-    'MixpanelStagingAPIClientKey', 
-    'CardflightStagingAPIClientKey', 
-    'CardflightStagingMerchantAccountToken', 
-    'StripeStagingPublishableKey', 
-    'CardflightProductionAPIClientKey', 
-    'CardflightProductionMerchantAccountToken', 
+  keys = ['ArtsyAPIClientSecret',
+    'ArtsyAPIClientKey',
+    'HockeyProductionSecret',
+    'HockeyBetaSecret',
+    'MixpanelProductionAPIClientKey',
+    'MixpanelStagingAPIClientKey',
+    'CardflightStagingAPIClientKey',
+    'CardflightStagingMerchantAccountToken',
+    'StripeStagingPublishableKey',
+    'CardflightProductionAPIClientKey',
+    'CardflightProductionMerchantAccountToken',
     'StripeProductionPublishableKey']
 
     commands = keys.map { |key|

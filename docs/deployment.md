@@ -2,14 +2,14 @@
 
 **Note**: These docs omit `bundle exec` in front of the commands.
 
-We deploy using [Fastlane](https://github.com/KrauseFx/fastlane). You'll need the following environment variables set up. 
+We deploy using [Fastlane](https://github.com/KrauseFx/fastlane). You'll need the following environment variables set up.
 
 ```
 export HOCKEY_API_TOKEN='THE_SECRET_TOKEN_YOU_GOT_FROM_1PASSWORD'
 export SLACK_URL='https://hooks.slack.com/services/REST_OF_THE_URL_FROM_1PASSWORD'
 ```
 
-They're in the Artsy Engineering 1Password vault. Just add them to your `.zshenv` (or equivalent file). 
+They're in the Artsy Engineering 1Password vault. Just add them to your `.zshenv` (or equivalent file).
 
 The changelog needs to be valid YAML, with an array of changelog entries to deploy.
 
@@ -23,10 +23,10 @@ Fastlane will take care of the rest. You can check out the specifics of what it 
 To make a deploy, run the following:
 
 ```sh
-fastlane deploy version:A.B.C
+bundle exec fastlane deploy version:A.B.C
 ```
 
-The first time you deploy, you'll be asked to sign in to the developer portal through Fastlane. The password is in 1Password, too. 
+The first time you deploy, you'll be asked to sign in to the developer portal through Fastlane. The password is in 1Password, too.
 
 Once the deploy is finished, a message with release notes will be posted to Slack.
 

@@ -20,6 +20,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
 
     var downloadImage: DownloadImageClosure?
     var cancelDownloadImage: CancelDownloadImageClosure?
+    var reuseBag: DisposeBag?
 
     lazy var moreInfo: Observable<NSDate> = {
         return [self.imageGestureSigal, self.infoGesture].toObservable().merge()
@@ -67,8 +68,10 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        reuseBag = nil
         cancelDownloadImage?(imageView: artworkImageView)
         _preparingForReuse.onNext()
+
     }
     
     func setup() {
@@ -76,31 +79,33 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         contentView.translatesAutoresizingMaskIntoConstraints = false
 
         // Bind subviews
+        reuseBag = DisposeBag()
+        guard let reuseBag = reuseBag else { return }
 
         // Start with things not expected to ever change. 
         viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
             .replaceNilWith("")
             .bindTo(lotNumberLabel.rx_text)
-            .addDisposableTo(rx_disposeBag)
+            .addDisposableTo(reuseBag)
 
         viewModel.map { (viewModel) -> NSURL? in
                 return viewModel.thumbnailURL
             }.subscribeNext { [weak self] url in
                 guard let imageView = self?.artworkImageView else { return }
                 self?.downloadImage?(url: url, imageView: imageView)
-            }.addDisposableTo(rx_disposeBag)
+            }.addDisposableTo(reuseBag)
 
         viewModel.map { $0.artistName ?? "" }
             .bindTo(artistNameLabel.rx_text)
-            .addDisposableTo(rx_disposeBag)
+            .addDisposableTo(reuseBag)
 
         viewModel.map { $0.titleAndDateAttributedString ?? NSAttributedString() }
             .bindTo(artworkTitleLabel.rx_attributedText)
-            .addDisposableTo(rx_disposeBag)
+            .addDisposableTo(reuseBag)
 
         viewModel.map { $0.estimateString }
             .bindTo(estimateLabel.rx_text)
-            .addDisposableTo(rx_disposeBag)
+            .addDisposableTo(reuseBag)
 
         // Now do properties that _do_ change.
 
@@ -108,11 +113,11 @@ class ListingsCollectionViewCell: UICollectionViewCell {
                 return viewModel.currentBid(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ")
             }
             .bindTo(currentBidLabel.rx_text)
-            .addDisposableTo(rx_disposeBag)
+            .addDisposableTo(reuseBag)
 
         viewModel.flatMapTo(SaleArtworkViewModel.numberOfBids)
             .bindTo(numberOfBidsLabel.rx_text)
-            .addDisposableTo(rx_disposeBag)
+            .addDisposableTo(reuseBag)
 
         viewModel.flatMapTo(SaleArtworkViewModel.forSale)
             .doOnNext { [weak bidButton] forSale in
@@ -120,12 +125,12 @@ class ListingsCollectionViewCell: UICollectionViewCell {
                 bidButton?.setTitle((forSale ? "BID" : "SOLD"), forState: .Normal)
             }
             .bindTo(bidButton.rx_enabled)
-            .addDisposableTo(rx_disposeBag)
+            .addDisposableTo(reuseBag)
 
         bidButton.rx_tap.subscribeNext { [weak self] in
                 self?._bidPressed.onNext(NSDate())
             }
-            .addDisposableTo(rx_disposeBag)
+            .addDisposableTo(reuseBag)
     }
 }
 
