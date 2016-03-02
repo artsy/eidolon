@@ -58,28 +58,33 @@ class ListingsCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupSubscriptions()
         setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setupSubscriptions()
         setup()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        reuseBag = nil
         cancelDownloadImage?(imageView: artworkImageView)
         _preparingForReuse.onNext()
-
+        setupSubscriptions()
     }
-    
+
     func setup() {
         // Necessary to use Autolayout
         contentView.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func setupSubscriptions() {
 
         // Bind subviews
         reuseBag = DisposeBag()
+
         guard let reuseBag = reuseBag else { return }
 
         // Start with things not expected to ever change. 

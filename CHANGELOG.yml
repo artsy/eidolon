@@ -1,11 +1,8 @@
 upcoming:
+  - Hopefully a fix WRT reloading lots. [orta]
+  - Hopefully a fix for the last fix. [orta]
 
 releases:
-- version: 5.1.2
-  date: March 01 2016
-  notes:
-  - Hopefully a fix WRT reloading lots.
-
 - version: 5.1.2
   date: March 1 2016
   notes:
