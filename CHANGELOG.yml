@@ -2,9 +2,10 @@ upcoming:
 
 releases:
 - version: 5.1.2
-  date: March 01 2016
+  date: March 02 2016
   notes:
-  - Hopefully a fix WRT reloading lots.
+  - Hopefully a fix WRT reloading lots. [orta]
+  - Hopefully a fix for the last fix. [orta]
 
 - version: 5.1.2
   date: March 1 2016
@@ -345,6 +346,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
