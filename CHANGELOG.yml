@@ -1,7 +1,11 @@
 upcoming:
-- Fixes crash when logging in with phone/email. [ash]
 
 releases:
+- version: 5.1.3
+  date: April 15 2016
+  notes:
+  - Fixes crash when logging in with phone/email. [ash]
+
 - version: 5.1.2
   date: March 02 2016
   notes:
@@ -347,6 +351,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
