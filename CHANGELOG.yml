@@ -1,4 +1,5 @@
 upcoming:
+- Fixes crash when logging in with phone/email. [ash]
 
 releases:
 - version: 5.1.2

@@ -70,6 +70,9 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
         if segue == .EmailNotFoundonArtsy {
             let viewController = segue.destinationViewController as! RegisterViewController
             viewController.provider = provider
+        } else if segue == .ExistingArtsyUserFound {
+            let viewController = segue.destinationViewController as! ConfirmYourBidArtsyLoginViewController
+            viewController.provider = provider
         }
     }
 }
