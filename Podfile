@@ -70,7 +70,7 @@ target 'KioskTests' do
   pod 'FBSnapshotTestCase'
   pod 'Nimble-Snapshots'
   pod 'Quick'
-  pod 'Nimble'
+  pod 'Nimble', :git => 'https://github.com/morganchen12/Nimble.git', :branch => 'nil-literal-compare'
   pod 'Forgeries'
   pod 'RxBlocking'
 
