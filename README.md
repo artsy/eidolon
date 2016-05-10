@@ -1,8 +1,6 @@
 Eidolon
 =======
 
-[![Build Status](https://travis-ci.org/artsy/eidolon.svg?branch=master)](https://travis-ci.org/artsy/eidolon)
-
 The [Artsy](https://www.artsy.net/) Auction Kiosk App.
 
 Project Status
@@ -10,6 +8,18 @@ Project Status
 
 <img src ="https://raw.githubusercontent.com/artsy/eidolon/master/docs/eidolon_preview.jpg">
 Featured [in Vogue](http://www.vogue.com/slideshow/13261562/choice-works-auction-at-sothebys-acria-unframed-party/#5)
+
+### Meta
+
+* __State:__ production
+* __Point People:__ [@ashfurrow](https://github.com/ashfurrow), [@orta](https://github.com/orta)
+* __CI :__ [![Build Status](https://travis-ci.org/artsy/eidolon.svg?branch=master)](https://travis-ci.org/artsy/eidolon)
+
+This is a core [Artsy Mobile](https://github.com/artsy/mobile) OSS project, along with [Eigen](https://github.com/artsy/eigen), [Energy](https://github.com/artsy/energy), [Emission](https://github.com/artsy/emission) and [Emergence](https://github.com/artsy/emergence).
+
+Don't know what Artsy is? [Check this](https://github.com/artsy/mobile/blob/master/what_is_artsy.md) overview, or read our objc.io on [team culture](https://www.objc.io/issues/22-scale/artsy/).
+
+Want to know more about Eigen? Read the [mobile](http://artsy.github.io/blog/categories/mobile/) blog posts, or [eidolon's](http://artsy.github.io/blog/categories/eidolon/) specifically.
 
 
 Downloading the Code
