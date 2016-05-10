@@ -153,7 +153,7 @@ class ListingsViewModelTests: QuickSpec {
             expect(subsequentFirstLotID).toNot( beEmpty() )
 
             // Now that the IDs have changed, check that they're not equal.
-            expect(initialFirstLotID) != subsequentFirstLotID
+            expect(initialFirstLotID) != subsequentFirstLotID!
         }
     }
 }
