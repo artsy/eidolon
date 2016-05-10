@@ -67,10 +67,10 @@ pod 'Action'
 
 target 'KioskTests' do
 
-  pod 'FBSnapshotTestCase'
+  pod 'FBSnapshotTestCase', git: 'https://github.com/orta/ios-snapshot-test-case.git'
   pod 'Nimble-Snapshots'
   pod 'Quick'
-  pod 'Nimble'
+  pod 'Nimble', :git => 'https://github.com/morganchen12/Nimble.git', :branch => 'nil-literal-compare'
   pod 'Forgeries'
   pod 'RxBlocking'
 

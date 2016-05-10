@@ -77,9 +77,9 @@ class PlaceBidNetworkModelTests: QuickSpec {
                     }
                     .addDisposableTo(disposeBag)
             }
-
-            expect(auctionID) == fulfillmentController.bidDetails.saleArtwork?.auctionID
-            expect(artworkID) == fulfillmentController.bidDetails.saleArtwork?.artwork.id
+            
+            expect(auctionID) == (fulfillmentController.bidDetails.saleArtwork?.auctionID)!
+            expect(artworkID) == fulfillmentController.bidDetails.saleArtwork!.artwork.id
             expect(Int(bidCents!)) == Int(fulfillmentController.bidDetails.bidAmountCents.value ?? 0)
         }
 
