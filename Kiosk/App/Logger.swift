@@ -12,14 +12,15 @@ class Logger {
     lazy private var fileHandle: NSFileHandle? = {
         if let path = self.destination.path {
             NSFileManager.defaultManager().createFileAtPath(path, contents: nil, attributes: nil)
-            var error: NSError?
 
-            if let fileHandle = try? NSFileHandle(forWritingToURL: self.destination) {
+            do {
+                let fileHandle = try NSFileHandle(forWritingToURL: self.destination)
                 print("Successfully logging to: \(path)")
                 return fileHandle
-            } else {
+            } catch let error as NSError {
                 print("Serious error in logging: could not open path to log file. \(error).")
             }
+
         } else {
             print("Serious error in logging: specified destination (\(self.destination)) does not appear to have a path component.")
         }
