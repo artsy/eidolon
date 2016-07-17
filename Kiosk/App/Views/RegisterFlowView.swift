@@ -10,16 +10,16 @@ class RegisterFlowView: ORStackView {
 
     var details: BidDetails? {
         didSet {
-            self.update()
+            update()
         }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = .whiteColor()
-        self.bottomMarginHeight = CGFloat(NSNotFound)
-        self.updateConstraints()
+        backgroundColor = .whiteColor()
+        bottomMarginHeight = CGFloat(NSNotFound)
+        updateConstraints()
     }
 
     private struct SubViewParams {
@@ -41,7 +41,7 @@ class RegisterFlowView: ORStackView {
 
         removeAllSubviews()
         for (i, subViewParam) in subViewParams.enumerate() {
-            let itemView = ItemView(frame: self.bounds)
+            let itemView = ItemView(frame: bounds)
             itemView.createTitleViewWithTitle(subViewParam.title)
 
             addSubview(itemView, withTopMargin: "10", sideMargin: "0")
@@ -50,7 +50,7 @@ class RegisterFlowView: ORStackView {
                 itemView.createInfoLabel(value)
 
                 let button = itemView.createJumpToButtonAtIndex(i)
-                button.addTarget(self, action: #selector(RegisterFlowView.pressed(_:)), forControlEvents: .TouchUpInside)
+                button.addTarget(self, action: #selector(pressed(_:)), forControlEvents: .TouchUpInside)
 
                 itemView.constrainHeight("44")
             } else {
@@ -66,7 +66,7 @@ class RegisterFlowView: ORStackView {
         spacer.setContentHuggingPriority(12, forAxis: .Horizontal)
         addSubview(spacer, withTopMargin: "0", sideMargin: "0")
 
-        self.bottomMarginHeight = 0
+        bottomMarginHeight = 0
     }
 
     func pressed(sender: UIButton!) {
@@ -82,23 +82,23 @@ class RegisterFlowView: ORStackView {
         }
 
         func createTitleViewWithTitle(title: String)  {
-            let label = UILabel(frame:self.bounds)
+            let label = UILabel(frame: bounds)
             label.font = UIFont.sansSerifFontWithSize(16)
             label.text = title.uppercaseString
             titleLabel = label
 
-            self.addSubview(label)
+            addSubview(label)
             label.constrainWidthToView(self, predicate: "0")
             label.alignLeadingEdgeWithView(self, predicate: "0")
             label.alignTopEdgeWithView(self, predicate: "0")
         }
 
         func createInfoLabel(info: String) {
-            let label = UILabel(frame:self.bounds)
+            let label = UILabel(frame: bounds)
             label.font = UIFont.serifFontWithSize(16)
             label.text = info
 
-            self.addSubview(label)
+            addSubview(label)
             label.constrainWidthToView(self, predicate: "-52")
             label.alignLeadingEdgeWithView(self, predicate: "0")
             label.constrainTopSpaceToView(titleLabel!, predicate: "8")
@@ -111,7 +111,7 @@ class RegisterFlowView: ORStackView {
             button.userInteractionEnabled = true
             button.enabled = true
 
-            self.addSubview(button)
+            addSubview(button)
             button.alignTopEdgeWithView(self, predicate: "0")
             button.alignTrailingEdgeWithView(self, predicate: "0")
             button.constrainWidth("36")
