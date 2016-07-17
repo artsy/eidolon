@@ -32,7 +32,7 @@ class OnlineProvider<Target where Target: TargetType>: RxMoyaProvider<Target> {
 }
 
 protocol NetworkingType {
-    typealias T: TargetType, ArtsyAPIType
+    associatedtype T: TargetType, ArtsyAPIType
     var provider: OnlineProvider<T> { get }
 }
 

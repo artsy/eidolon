@@ -72,7 +72,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
     private func pollForUpdatedBidderPosition(bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<Void> {
         let updatedBidderPosition = getUpdatedBidderPosition(bidderPositionId, provider: provider)
             .flatMap { bidderPositionObject -> Observable<Void> in
-                self.pollRequests++
+                self.pollRequests += 1
 
                 logger.log("Polling \(self.pollRequests) of \(self.maxPollRequests) for updated sale artwork")
 

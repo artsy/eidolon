@@ -50,7 +50,7 @@ class RegisterFlowView: ORStackView {
                 itemView.createInfoLabel(value)
 
                 let button = itemView.createJumpToButtonAtIndex(i)
-                button.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+                button.addTarget(self, action: #selector(RegisterFlowView.pressed(_:)), forControlEvents: .TouchUpInside)
 
                 itemView.constrainHeight("44")
             } else {

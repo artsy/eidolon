@@ -31,8 +31,8 @@ class TextField: UITextField {
     }
 
     func setupEvents () {
-        addTarget(self, action: "editingDidBegin:", forControlEvents: .EditingDidBegin)
-        addTarget(self, action: "editingDidFinish:", forControlEvents: .EditingDidEnd)
+        addTarget(self, action: #selector(TextField.editingDidBegin(_:)), forControlEvents: .EditingDidBegin)
+        addTarget(self, action: #selector(TextField.editingDidFinish(_:)), forControlEvents: .EditingDidEnd)
     }
 
     func editingDidBegin (sender: AnyObject) {
@@ -105,7 +105,7 @@ class SecureTextField: TextField {
 
     override func setupEvents () {
         super.setupEvents()
-        addTarget(self, action: "editingDidChange:", forControlEvents: .EditingChanged)
+        addTarget(self, action: #selector(SecureTextField.editingDidChange(_:)), forControlEvents: .EditingChanged)
     }
 
     override func editingDidBegin (sender: AnyObject) {
@@ -130,7 +130,7 @@ class SecureTextField: TextField {
         let dots = NSMutableString();
         while (index < text.characters.count) {
             dots.appendString("•");
-            index++;
+            index += 1;
         }
         return dots as String;
     }
