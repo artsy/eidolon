@@ -1,7 +1,7 @@
 import Foundation
 import RxSwift
 
-private let kNoBidsString = "0 bids placed"
+private let kNoBidsString = ""
 
 class SaleArtworkViewModel: NSObject {
     private let saleArtwork: SaleArtwork
@@ -59,9 +59,10 @@ extension SaleArtworkViewModel {
 
     func numberOfBids() -> Observable<String> {
         return saleArtwork.rx_observe(NSNumber.self, "bidCount").map { optionalBidCount -> String in
-            guard let bidCount = optionalBidCount else {
+            guard let bidCount = optionalBidCount where bidCount.intValue > 0 else {
                 return kNoBidsString
             }
+            
             let suffix = bidCount == 1 ? "" : "s"
             return "\(bidCount) bid\(suffix) placed"
         }
