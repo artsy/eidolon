@@ -39,7 +39,7 @@ class ModalWebViewController: WebViewController {
         closeButton.setTitle("CLOSE", forState:.Normal)
         closeButton.constrainWidth("140", height: "72")
         closeButton.alignTop("0", leading:"0", bottom:nil, trailing:nil, toView:view)
-        closeButton.addTarget(self, action:"closeTapped:", forControlEvents:.TouchUpInside)
+        closeButton.addTarget(self, action:#selector(closeTapped(_:)), forControlEvents:.TouchUpInside)
 
         var height = modalHeight
         if let nav = navigationController {

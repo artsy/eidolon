@@ -90,11 +90,11 @@ private extension SwitchView {
         
         let widthPredicateMultiplier = "*\(widthMultiplier())"
         
-        for var i = 0; i < buttons.count; i++ {
+        for i in 0 ..< buttons.count {
             let button = buttons[i]
             
             self.addSubview(button)
-            button.addTarget(self, action: "selectedButton:", forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(SwitchView.selectedButton(_:)), forControlEvents: .TouchUpInside)
             
             button.constrainWidthToView(self, predicate: widthPredicateMultiplier)
             

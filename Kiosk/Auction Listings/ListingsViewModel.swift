@@ -338,7 +338,7 @@ private func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleAr
 
     let saleArtworksCount = currentSaleArtworks.count
 
-    for var i = 0; i < saleArtworksCount; i++ {
+    for i in 0 ..< saleArtworksCount {
         if currentSaleArtworks[i].id == newSaleArtworks[i].id {
             currentSaleArtworks[i].updateWithValues(newSaleArtworks[i])
         } else {
