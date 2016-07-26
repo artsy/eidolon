@@ -67,7 +67,7 @@ pod 'Action'
 
 target 'KioskTests' do
 
-  pod 'FBSnapshotTestCase'
+  pod 'FBSnapshotTestCase', '2.1.2'
   pod 'Nimble-Snapshots'
   pod 'Quick'
   pod 'Nimble'
