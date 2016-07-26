@@ -67,7 +67,7 @@ pod 'Action'
 
 target 'KioskTests' do
 
-  pod 'FBSnapshotTestCase', '2.1.2'
+  pod 'FBSnapshotTestCase', :git => 'https://github.com/facebook/ios-snapshot-test-case', :commit => '1639f694a2100cdeadf2f8fa14225cdd3759e75b'
   pod 'Nimble-Snapshots'
   pod 'Quick'
   pod 'Nimble'
