@@ -8,12 +8,23 @@ func testConfirmYourBidEnterYourEmailViewController() -> ConfirmYourBidEnterYour
     return ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as! ConfirmYourBidEnterYourEmailViewController
 }
 
+let window = UIWindow()
+
 class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
     override func spec() {
 
+        beforeSuite {
+            window.makeKeyAndVisible()
+        }
+
         it("looks right by default") {
             let subject = testConfirmYourBidEnterYourEmailViewController()
-            expect(subject).to(haveValidSnapshot())
+            _ = subject.view
+            subject.loadViewProgrammatically()
+            // Highlighting of the text field as it becomes first responder is inconsistent without this line.
+            subject.view.drawViewHierarchyInRect(CGRect.zero, afterScreenUpdates: true)
+
+            expect(subject).to(haveValidSnapshot(usesDrawRect: true))
         }
 
         it("passes the email to the nav's bid details object") {

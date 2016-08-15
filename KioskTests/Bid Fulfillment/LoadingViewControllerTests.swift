@@ -25,7 +25,7 @@ class LoadingViewControllerTests: QuickSpec {
                 stubViewModel.completes = false
                 subject.viewModel = stubViewModel
 
-                expect(subject).to(haveValidSnapshot())
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("registering a user") {
@@ -48,7 +48,7 @@ class LoadingViewControllerTests: QuickSpec {
                 stubViewModel.errors = true
                 subject.viewModel = stubViewModel
 
-                expect(subject).to(haveValidSnapshot())
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("correctly registering a user") {
@@ -58,7 +58,7 @@ class LoadingViewControllerTests: QuickSpec {
                 stubViewModel.errors = true
                 subject.viewModel = stubViewModel
 
-                expect(subject).to(haveValidSnapshot())
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
         }
 
@@ -72,7 +72,7 @@ class LoadingViewControllerTests: QuickSpec {
                 stubViewModel.isHighestBidder.value = true
                 subject.viewModel = stubViewModel
 
-                expect(subject).to(haveValidSnapshot())
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("dismisses by tapping green checkmark when bidding was a success") {
@@ -106,7 +106,7 @@ class LoadingViewControllerTests: QuickSpec {
                 stubViewModel.isHighestBidder.value = false
                 subject.viewModel = stubViewModel
 
-                expect(subject).to(haveValidSnapshot())
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("placing bid error due to outbid") {
@@ -120,7 +120,7 @@ class LoadingViewControllerTests: QuickSpec {
                 let error = NSError(domain: OutbidDomain, code: 0, userInfo: nil)
                 subject.bidderError(error)
 
-                expect(subject).to(haveValidSnapshot())
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("placing bid succeeded but not resolved") {
@@ -130,7 +130,7 @@ class LoadingViewControllerTests: QuickSpec {
                 stubViewModel.bidIsResolved.value = false
                 subject.viewModel = stubViewModel
 
-                expect(subject).to(haveValidSnapshot())
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("registering user success") {
@@ -141,7 +141,7 @@ class LoadingViewControllerTests: QuickSpec {
                 stubViewModel.bidIsResolved.value = true
                 subject.viewModel = stubViewModel
 
-                expect(subject).to(haveValidSnapshot())
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("registering user not resolved") {
@@ -151,7 +151,7 @@ class LoadingViewControllerTests: QuickSpec {
                 stubViewModel.bidIsResolved.value = true
                 subject.viewModel = stubViewModel
 
-                expect(subject).to(haveValidSnapshot())
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
         }
     }
