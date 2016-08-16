@@ -26,7 +26,11 @@ install:
 before_script:
   - export LANG=en_US.UTF-8
 
-script: set -o pipefail && xcodebuild -destination "OS=9.1,name=iPad Air 2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | second_curtain | xcpretty --color --test
+script: 
+  # See https://discuss.circleci.com/t/xcode-exit-code-65/4284/13 
+  - xcrun instruments -w '547B1B63-3F66-4E5B-8001-F78F2F1CDEA7' || true
+  - sleep 15
+  - set -o pipefail && xcodebuild -destination "OS=9.1,name=iPad Air 2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | second_curtain | xcpretty --color --test
 
 after_success:
   - sleep 5
