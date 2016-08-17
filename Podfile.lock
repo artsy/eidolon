@@ -2,7 +2,7 @@ PODS:
   - Action (1.1.0):
     - RxCocoa (~> 2.0.0)
     - RxSwift (~> 2.0.0)
-  - Alamofire (3.1.4)
+  - Alamofire (3.4.1)
   - ARAnalytics/CoreIOS (3.8.0)
   - ARAnalytics/HockeyApp (3.8.0):
     - ARAnalytics/CoreIOS
@@ -62,9 +62,9 @@ PODS:
     - RxSwift (~> 2.0.0)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
-  - Quick (0.9.0)
+  - Quick (0.9.3)
   - Reachability (3.1.1)
-  - Result (1.0.1)
+  - Result (1.0.2)
   - RxBlocking (2.0.0):
     - RxSwift (~> 2.0)
   - RxCocoa (2.0.0):
@@ -77,7 +77,7 @@ PODS:
     - Stripe/Core (= 3.1.0)
   - Stripe/Core (3.1.0)
   - SVProgressHUD (1.1.3)
-  - SwiftyJSON (2.3.1)
+  - SwiftyJSON (2.3.2)
   - UIImageViewAligned (0.0.1)
   - UIView+BooleanAnimations (1.0.2)
   - XNGMarkdownParser (0.3.0):
@@ -155,7 +155,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Action: 25745dd09111b2a4bdf6164b2338b2104ea5696f
-  Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   ARAnalytics: 5468652928cee7100dd0e6b5162631409da37106
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: a747cff42142ca04d1dc5cee516186f10b6c0949
@@ -181,16 +181,16 @@ SPEC CHECKSUMS:
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   NSObject+Rx: 552d0a5bb78087b0faf9f8a066148577f1231426
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
-  Quick: 332eb1da73125a2106dd637424c803f2ae97e4a9
+  Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
   Reachability: 5b69def55ffa04d6f9425a6da1f47338b60557b2
-  Result: caef80340451e1f07492fa1e89117f83613bce24
+  Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   RxBlocking: a95a10ed54eb5d116f6c9a87047ff671e181d07b
   RxCocoa: b0ebd70b4f7450bdb3c8987b122f8fd568dc1e2f
   RxSwift: d83246efa6f16c50c143bec134649d045498f601
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
-  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e
