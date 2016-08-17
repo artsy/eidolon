@@ -58,19 +58,28 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             disposeBag = DisposeBag()
         }
 
-        it("enables the command only when the password is valid") {
-            let passwordSubject = PublishSubject<String>()
+        it("enables the command when the password is valid") {
+            let passwordSubject = Variable<String>("validpassword")
 
             let subject = self.testSubject(passwordSubject: passwordSubject.asObservable())
 
-            passwordSubject.onNext("nope")
-            expect(try! subject.action.enabled.toBlocking().first()).toEventually( beFalse() )
+            expect(try! subject.action.enabled.toBlocking().first()).to( beTrue() )
+        }
 
-            passwordSubject.onNext("validpassword")
-            expect(try! subject.action.enabled.toBlocking().first()).toEventually( beTrue() )
+        it("disables the command when the password is too short") {
+            let passwordSubject = Variable<String>("nope")
 
-            passwordSubject.onNext("")
-            expect(try! subject.action.enabled.toBlocking().first()).toEventually( beFalse() )
+            let subject = self.testSubject(passwordSubject: passwordSubject.asObservable())
+
+            expect(try! subject.action.enabled.toBlocking().first()).to( beFalse() )
+        }
+
+        it("disables the command when the password is empty") {
+            let passwordSubject = Variable<String>("")
+
+            let subject = self.testSubject(passwordSubject: passwordSubject.asObservable())
+
+            expect(try! subject.action.enabled.toBlocking().first()).to( beFalse() )
         }
 
         it("checks for an email when executing the command") {
