@@ -17,7 +17,7 @@ before_install:
   - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
   - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
   - chmod 600 ~/.netrc
-  - xcrun instruments -w "iPad Air 2 (9.1 Simulator)" || echo "(Pre)Launched the simulator."
+  - xcrun instruments -w "40906E79-B473-4911-9FC4-150A2BA47E0E" || echo "(Pre)Launched the simulator."
 
 install:
   - bundle install
