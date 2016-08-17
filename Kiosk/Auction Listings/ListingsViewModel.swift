@@ -208,11 +208,13 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         #endif
     }
 
-    private class func DefaultScheduler<T>(onBackground background: Bool)(observable: Observable<T>) -> Observable<T> {
-        if background {
-            return observable.observeOn(backgroundScheduler)
-        } else {
-            return observable.observeOn(MainScheduler.instance)
+    private class func DefaultScheduler<T>(onBackground background: Bool) -> (observable: Observable<T>) -> Observable<T> {
+        return { observable in
+            if background {
+                return observable.observeOn(backgroundScheduler)
+            } else {
+                return observable.observeOn(MainScheduler.instance)
+            }
         }
     }
 
@@ -338,7 +340,7 @@ private func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleAr
 
     let saleArtworksCount = currentSaleArtworks.count
 
-    for var i = 0; i < saleArtworksCount; i++ {
+    for i in 0 ..< saleArtworksCount {
         if currentSaleArtworks[i].id == newSaleArtworks[i].id {
             currentSaleArtworks[i].updateWithValues(newSaleArtworks[i])
         } else {

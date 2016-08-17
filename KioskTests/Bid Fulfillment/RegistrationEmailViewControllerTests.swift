@@ -9,14 +9,14 @@ class RegistrationEmailViewControllerTests: QuickSpec {
         it("looks right by default") {
             let subject = RegistrationEmailViewController.instantiateFromStoryboard(fulfillmentStoryboard)
             subject.bidDetails = testBidDetails()
-            expect(subject).to( haveValidSnapshot() )
+            expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
         }
 
         it("looks right with existing email") {
             let subject = RegistrationEmailViewController.instantiateFromStoryboard(fulfillmentStoryboard)
             subject.bidDetails = testBidDetails()
             subject.bidDetails.newUser.email.value = "test@example.com"
-            expect(subject).to( haveValidSnapshot() )
+            expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
         }
 
         it("unbinds bidDetails on viewWillDisappear:") {

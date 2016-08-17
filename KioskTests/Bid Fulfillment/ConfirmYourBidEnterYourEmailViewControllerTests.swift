@@ -8,12 +8,24 @@ func testConfirmYourBidEnterYourEmailViewController() -> ConfirmYourBidEnterYour
     return ConfirmYourBidEnterYourEmailViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as! ConfirmYourBidEnterYourEmailViewController
 }
 
+let window = UIWindow()
+
 class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
     override func spec() {
 
+        beforeSuite {
+            // Required for all snapshot test cases, otherwise it blows up: https://github.com/facebook/ios-snapshot-test-case/blob/fbb2d277cda66350487a88e318cd5a3457738ddd/FBSnapshotTestCase/Categories/UIApplication%2BStrictKeyWindow.m#L18-L23
+            window.makeKeyAndVisible()
+        }
+
         it("looks right by default") {
             let subject = testConfirmYourBidEnterYourEmailViewController()
-            expect(subject).to(haveValidSnapshot())
+            _ = subject.view
+            subject.loadViewProgrammatically()
+            // Highlighting of the text field (as it becomes first responder) is inconsistent without this line.
+            subject.view.drawViewHierarchyInRect(CGRect.zero, afterScreenUpdates: true)
+
+            expect(subject).to(haveValidSnapshot(usesDrawRect: true))
         }
 
         it("passes the email to the nav's bid details object") {

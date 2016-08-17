@@ -32,7 +32,7 @@ class OnlineProvider<Target where Target: TargetType>: RxMoyaProvider<Target> {
 }
 
 protocol NetworkingType {
-    typealias T: TargetType, ArtsyAPIType
+    associatedtype T: TargetType, ArtsyAPIType
     var provider: OnlineProvider<T> { get }
 }
 
@@ -118,22 +118,24 @@ extension NetworkingType {
         return AuthorizedNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: .just(true)))
     }
 
-    static func endpointsClosure<T where T: TargetType, T: ArtsyAPIType>(xAccessToken: String? = nil)(_ target: T) -> Endpoint<T> {
-        var endpoint: Endpoint<T> = Endpoint<T>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+    static func endpointsClosure<T where T: TargetType, T: ArtsyAPIType>(xAccessToken: String? = nil) -> (T) -> Endpoint<T> {
+        return { target in
+            var endpoint: Endpoint<T> = Endpoint<T>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
 
-        // If we were given an xAccessToken, add it
-        if let xAccessToken = xAccessToken {
-            endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": xAccessToken])
-        }
+            // If we were given an xAccessToken, add it
+            if let xAccessToken = xAccessToken {
+                endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": xAccessToken])
+            }
 
-        // Sign all non-XApp, non-XAuth token requests
-        if target.addXAuth {
-            return endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
-        } else {
-            return endpoint
+            // Sign all non-XApp, non-XAuth token requests
+            if target.addXAuth {
+                return endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
+            } else {
+                return endpoint
+            }
         }
     }
-
+    
     static func APIKeysBasedStubBehaviour<T>(_: T) -> Moya.StubBehavior {
         return APIKeys.sharedKeys.stubResponses ? .Immediate : .Never
     }

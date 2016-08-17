@@ -28,7 +28,7 @@ extension Observable {
 }
 
 protocol OptionalType {
-    typealias Wrapped
+    associatedtype Wrapped
 
     var value: Wrapped? { get }
 }

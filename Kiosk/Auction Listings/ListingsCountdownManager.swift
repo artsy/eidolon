@@ -61,7 +61,7 @@ class ListingsCountdownManager: NSObject {
     }
 
     func startTimer() {
-        let timer = NSTimer(timeInterval: 0.49, target: self, selector: "tick:", userInfo: nil, repeats: true)
+        let timer = NSTimer(timeInterval: 0.49, target: self, selector: #selector(ListingsCountdownManager.tick(_:)), userInfo: nil, repeats: true)
         NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
 
         _timer = timer

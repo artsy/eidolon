@@ -33,7 +33,7 @@ class NetworkLogger: PluginType {
             }
         case .Failure(let error):
             // Otherwise, log everything.
-            logger.log("Received networking error: \(error.nsError)")
+            logger.log("Received networking error: \(error)")
         }
     }
 }

@@ -5,10 +5,10 @@ class AuctionWebViewController: WebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: "")
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         
         let exitImage = UIImage(named: "toolbar_close")
-        let backwardBarItem = UIBarButtonItem(image: exitImage, style: .Plain, target: self, action: "exit");
+        let backwardBarItem = UIBarButtonItem(image: exitImage, style: .Plain, target: self, action: #selector(exit));
         let allItems = self.toolbarItems! + [flexibleSpace, backwardBarItem]
         toolbarItems = allItems
     }

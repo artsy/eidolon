@@ -9,14 +9,19 @@ class ConfirmYourBidArtsyLoginViewControllerTests: QuickSpec {
 
         it("looks right by default") {
             let subject = ConfirmYourBidArtsyLoginViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav()
-            expect(subject).to(haveValidSnapshot())
+            subject.loadViewProgrammatically()
+
+            // Highlighting of the text field (as it becomes first responder) is inconsistent without this line.
+            subject.view.drawViewHierarchyInRect(CGRect.zero, afterScreenUpdates: true)
+
+            expect(subject).to(haveValidSnapshot(usesDrawRect: true))
         }
 
-        it("looks right with an invalid password") {
+        pending("looks right with an invalid password") {
             // TODO:
         }
 
-        it("looks right with a valid password") {
+        pending("looks right with a valid password") {
             // TODO:
         }
     }
