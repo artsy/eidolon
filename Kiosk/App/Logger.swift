@@ -36,7 +36,7 @@ class Logger {
         fileHandle?.closeFile()
     }
 
-    func log(message: String, function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__) {
+    func log(message: String, function: String = #function, file: String = #file, line: Int = #line) {
         let logMessage = stringRepresentation(message, function: function, file: file, line: line)
 
         printToConsole(logMessage)

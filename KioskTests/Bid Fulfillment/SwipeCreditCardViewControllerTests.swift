@@ -54,7 +54,7 @@ class SwipeCreditCardViewControllerTests: QuickSpec {
                 subject.keys = stubKeys
             }
 
-            it("sets up the CardHandler for staging") {
+            it("sets up the CardHandler") {
                 expect(subject.cardHandler.APIKey) == stubKeys.cardflightStagingAPIClientKey()
                 expect(subject.cardHandler.APIToken) == stubKeys.cardflightStagingMerchantAccountToken()
             }
@@ -72,7 +72,7 @@ class SwipeCreditCardViewControllerTests: QuickSpec {
                 subject.keys = stubKeys
             }
 
-            it("sets up the CardHandler for staging") {
+            it("sets up the CardHandler") {
                 expect(subject.cardHandler.APIKey) == stubKeys.cardflightProductionAPIClientKey()
                 expect(subject.cardHandler.APIToken) == stubKeys.cardflightProductionMerchantAccountToken()
             }

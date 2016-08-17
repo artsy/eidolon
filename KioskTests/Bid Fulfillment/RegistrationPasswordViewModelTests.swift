@@ -58,19 +58,28 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             disposeBag = DisposeBag()
         }
 
-        it("enables the command only when the password is valid") {
-            let passwordSubject = PublishSubject<String>()
+        it("enables the command when the password is valid") {
+            let passwordSubject = Variable<String>("validpassword")
 
             let subject = self.testSubject(passwordSubject: passwordSubject.asObservable())
 
-            passwordSubject.onNext("nope")
-            expect(try! subject.action.enabled.toBlocking().first()).toEventually( beFalse() )
+            expect(try! subject.action.enabled.toBlocking().first()).to( beTrue() )
+        }
 
-            passwordSubject.onNext("validpassword")
-            expect(try! subject.action.enabled.toBlocking().first()).toEventually( beTrue() )
+        it("disables the command when the password is too short") {
+            let passwordSubject = Variable<String>("nope")
 
-            passwordSubject.onNext("")
-            expect(try! subject.action.enabled.toBlocking().first()).toEventually( beFalse() )
+            let subject = self.testSubject(passwordSubject: passwordSubject.asObservable())
+
+            expect(try! subject.action.enabled.toBlocking().first()).to( beFalse() )
+        }
+
+        it("disables the command when the password is empty") {
+            let passwordSubject = Variable<String>("")
+
+            let subject = self.testSubject(passwordSubject: passwordSubject.asObservable())
+
+            expect(try! subject.action.enabled.toBlocking().first()).to( beFalse() )
         }
 
         it("checks for an email when executing the command") {
@@ -81,10 +90,15 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
             let subject = self.testSubject(networking)
+            let disposeBag = DisposeBag()
 
-            subject.action.execute()
+            waitUntil { done in
+                subject.action.execute().subscribeCompleted {
+                    done()
+                }.addDisposableTo(disposeBag)
+            }
 
-            expect(checked).toEventually( beTrue() )
+            expect(checked).to( beTrue() )
         }
 
         it("sends true on emailExists if email exists") {
@@ -95,6 +109,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
             let subject = self.testSubject(networking)
+            let disposeBag = DisposeBag()
 
             subject
                 .emailExists
@@ -103,9 +118,13 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 }
                 .addDisposableTo(disposeBag)
 
-            subject.action.execute()
+            waitUntil { done in
+                subject.action.execute().subscribeCompleted {
+                    done()
+                }.addDisposableTo(disposeBag)
+            }
             
-            expect(exists).toEventually( beTrue() )
+            expect(exists).to( beTrue() )
         }
 
         it("sends false on emailExists if email does not exist") {
@@ -116,6 +135,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
             let subject = self.testSubject(networking)
+            let disposeBag = DisposeBag()
 
             subject
                 .emailExists
@@ -124,10 +144,14 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 }
                 .addDisposableTo(disposeBag)
 
-            subject.action.execute()
+            waitUntil { done in
+                subject.action.execute().subscribeCompleted {
+                    done()
+                }.addDisposableTo(disposeBag)
+            }
 
-            expect(exists).toEventuallyNot( beNil() )
-            expect(exists).toEventually( beFalse() )
+            expect(exists).toNot( beNil() )
+            expect(exists).to( beFalse() )
         }
 
         it("checks for authorization if the email exists") {
@@ -141,17 +165,24 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             }, passwordRequestSucceeds: true, passwordCheck: nil)
 
             let subject = self.testSubject(networking)
+            let disposeBag = DisposeBag()
 
-            subject.action.execute()
+
+            waitUntil { done in
+                subject.action.execute().subscribeCompleted {
+                    done()
+                }.addDisposableTo(disposeBag)
+            }
             
-            expect(checked).toEventually( beTrue() )
-            expect(authed).toEventually( beTrue() )
+            expect(checked).to( beTrue() )
+            expect(authed).to( beTrue() )
         }
 
         it("sends an error on the command if the authorization fails") {
             let networking = self.stubProvider(emailExists: true, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
             let subject = self.testSubject(networking)
+            let disposeBag = DisposeBag()
 
             var errored = false
 
@@ -163,9 +194,13 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 }
                 .addDisposableTo(disposeBag)
 
-            subject.action.execute()
+            waitUntil { done in
+                subject.action.execute().subscribeError { _ in
+                    done()
+                }.addDisposableTo(disposeBag)
+            }
 
-            expect(errored).toEventually( beTrue() )
+            expect(errored).to( beTrue() )
         }
 
         it("executes command when manual  sends") {
@@ -174,6 +209,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             let invocation = PublishSubject<Void>()
 
             let subject = self.testSubject(networking, invocation: invocation)
+            let disposeBag = DisposeBag()
 
             var completed = false
 
@@ -188,7 +224,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             invocation.onNext()
             
-            expect(completed).toEventually( beTrue() )
+            expect(completed).to( beTrue() )
         }
 
         it("sends completed on finishedSubject when command is executed") {
@@ -204,10 +240,15 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .addDisposableTo(disposeBag)
 
             let subject = self.testSubject(invocation:invocation, finishedSubject: finishedSubject)
+            let disposeBag = DisposeBag()
+            
+            waitUntil { done in
+                subject.action.execute().subscribeCompleted {
+                    done()
+                }.addDisposableTo(disposeBag)
+            }
 
-            subject.action.execute()
-
-            expect(completed).toEventually( beTrue() )
+            expect(completed).to( beTrue() )
         }
 
         it("handles password reminders") {
@@ -218,6 +259,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             })
 
             let subject = self.testSubject(networking)
+            let disposeBag = DisposeBag()
 
             waitUntil { done in
                 subject
@@ -229,7 +271,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                     .addDisposableTo(disposeBag)
             }
 
-            expect(sent).toEventually( beTrue() )
+            expect(sent).to( beTrue() )
         }
     }
 }

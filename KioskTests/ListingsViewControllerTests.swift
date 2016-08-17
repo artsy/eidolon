@@ -21,37 +21,37 @@ class ListingsViewControllerConfiguration: QuickConfiguration {
 
             it("grid") {
                 subject.switchView[0]?.sendActionsForControlEvents(.TouchUpInside)
-                expect(subject) == snapshot()
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
             
             it("least bids") {
                 subject.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
                 viewModel._gridSelected.value = false
-                expect(subject) == snapshot()
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("most bids") {
                 subject.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
                 viewModel._gridSelected.value = false
-                expect(subject) == snapshot()
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("highest bid") {
                 subject.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
                 viewModel._gridSelected.value = false
-                expect(subject) == snapshot()
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("lowest bid") {
                 subject.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
                 viewModel._gridSelected.value = false
-                expect(subject) == snapshot()
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("alphabetical") {
                 subject.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
                 viewModel._gridSelected.value = false
-                expect(subject) == snapshot()
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
         }
     }

@@ -1,4 +1,4 @@
-osx_image: xcode7.1
+osx_image: xcode7.3
 language: objective-c
 
 cache:
@@ -17,7 +17,9 @@ before_install:
   - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
   - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
   - chmod 600 ~/.netrc
-  - xcrun instruments -w "iPad Air 2 (9.1 Simulator)" || echo "(Pre)Launched the simulator."
+  # See https://discuss.circleci.com/t/xcode-exit-code-65/4284/13 
+  - xcrun instruments -w "40906E79-B473-4911-9FC4-150A2BA47E0E" || echo "(Pre)Launched the simulator."
+  - sleep 15
 
 install:
   - bundle install
@@ -26,7 +28,7 @@ install:
 before_script:
   - export LANG=en_US.UTF-8
 
-script: set -o pipefail && xcodebuild -destination "OS=9.1,name=iPad Air 2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | second_curtain | xcpretty --color --test
+script:  set -o pipefail && xcodebuild -destination "OS=9.1,name=iPad Air 2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | second_curtain | xcpretty --color --test
 
 after_success:
   - sleep 5

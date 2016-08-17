@@ -20,20 +20,28 @@ func isZeroLengthString(string: String) -> Bool {
     return string.isEmpty
 }
 
-func isStringLengthIn(range: Range<Int>)(string: String) -> Bool {
-    return range.contains(string.characters.count)
+func isStringLengthIn(range: Range<Int>) -> (String) -> Bool {
+    return { string in
+        return range.contains(string.characters.count)
+    }
 }
 
-func isStringOfLength(length: Int)(string: String) -> Bool {
-    return string.characters.count == length
+func isStringOfLength(length: Int) -> (String) -> Bool {
+    return { string in
+        return string.characters.count == length
+    }
 }
 
-func isStringLengthAtLeast(length: Int)(string: String) -> Bool {
-    return string.characters.count >= length
+func isStringLengthAtLeast(length: Int) -> (String) -> Bool {
+    return { string in
+        return string.characters.count >= length
+    }
 }
 
-func isStringLengthOneOf(lengths: [Int])(string: String) -> Bool {
-    return lengths.contains(string.characters.count)
+func isStringLengthOneOf(lengths: [Int]) -> (String) -> Bool {
+    return { string in
+        return lengths.contains(string.characters.count)
+    }
 }
 
 // Useful for mapping an Observable<Whatever> into an Observable<Void> to hide details.
