@@ -1,7 +1,11 @@
 upcoming:
-- Fixes problem with some tall sale artwork images. [ash]
 
 releases:
+- version: 5.1.4
+  date: September 08 2016
+  notes:
+  - Fixes problem with some tall sale artwork images. [ash]
+
 - version: 5.1.3
   date: April 15 2016
   notes:
@@ -352,6 +356,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
