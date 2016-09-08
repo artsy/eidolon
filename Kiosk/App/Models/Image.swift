@@ -60,10 +60,9 @@ final class Image: NSObject, JSONAbleType {
 
     func thumbnailURL() -> NSURL? {
         let preferredVersions = { () -> Array<String> in
-            // This is a hack for https://www.artsy.net/artwork/d-star-face-work-on-paper-number-5
-            // It's a very tall image and the "medium" version looks terribad.
+            // For very tall images, the "medium" version looks terribad.
             // In the long-term, we have an issue to fix this for good: https://github.com/artsy/eidolon/issues/396
-            if self.id == "56ba2884139b211c61000204" {
+            if ["57be35d7a09a6711ab004fa5", "57be1fb4cd530e65fe000862"].contains(self.id) {
                 return ["large", "larger"]
             } else {
                 return ["medium", "large", "larger"]
