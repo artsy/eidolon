@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B9F6AC41D9E230F00A44C26 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9F6AC31D9E230F00A44C26 /* main.swift */; };
+		3B9F6AC61D9E243C00A44C26 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9F6AC51D9E243C00A44C26 /* TestAppDelegate.swift */; };
 		3FCE6D8A07CA1FA29F4A37DC /* Pods_KioskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */; };
 		5E0A4E3E1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A4E3D1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift */; };
 		5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E64E1A65630200F8CBDD /* Logger.swift */; };
@@ -238,6 +240,8 @@
 
 /* Begin PBXFileReference section */
 		3AC6D95F6020DA76AECC315F /* Pods_KioskTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KioskTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B9F6AC31D9E230F00A44C26 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		3B9F6AC51D9E243C00A44C26 /* TestAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		5E0A4E3D1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+LongPressDisplayMessage.swift"; path = "Kiosk/UIView+LongPressDisplayMessage.swift"; sourceTree = SOURCE_ROOT; };
 		5E19E64E1A65630200F8CBDD /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
@@ -506,6 +510,8 @@
 				5E860FF11A5C429C00456E41 /* Views */,
 				5EF71E791AE98F080069A266 /* STPCard+Validation.h */,
 				5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */,
+				3B9F6AC31D9E230F00A44C26 /* main.swift */,
+				3B9F6AC51D9E243C00A44C26 /* TestAppDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1176,6 +1182,7 @@
 				5E86109F1A5C429C00456E41 /* YourBiddingDetailsViewController.swift in Sources */,
 				5EF71E7D1AE996F50069A266 /* SwiftExtensions.swift in Sources */,
 				5E8610991A5C429C00456E41 /* RegistrationEmailViewController.swift in Sources */,
+				3B9F6AC61D9E243C00A44C26 /* TestAppDelegate.swift in Sources */,
 				5E8610771A5C429C00456E41 /* SimulatorOnlyView.swift in Sources */,
 				5E8610941A5C429C00456E41 /* RegistrationCoordinator.swift in Sources */,
 				5E8610A51A5C429C00456E41 /* SaleArtworkZoomViewController.swift in Sources */,
@@ -1228,6 +1235,7 @@
 				5E86106E1A5C429C00456E41 /* NSErrorExtensions.swift in Sources */,
 				5E86108B1A5C429C00456E41 /* FulfillmentContainerViewController.swift in Sources */,
 				5E86109C1A5C429C00456E41 /* RegistrationPostalZipViewController.swift in Sources */,
+				3B9F6AC41D9E230F00A44C26 /* main.swift in Sources */,
 				5E86105C1A5C429C00456E41 /* Bid.swift in Sources */,
 				5E8610911A5C429C00456E41 /* ManualCreditCardInputViewController.swift in Sources */,
 				5E86104D1A5C429C00456E41 /* AdminPanelViewController.swift in Sources */,
