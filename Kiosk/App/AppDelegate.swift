@@ -5,7 +5,6 @@ import RxSwift
 import Keys
 import Stripe
 
-@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let helpViewController = Variable<HelpViewController?>(nil)
@@ -26,10 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if StubResponses.stubResponses() {
             provider = Networking.newStubbingNetworking()
         }
-
-
-        // I couldn't figure how to swizzle this out like we do in objc.
-        if let _ = NSClassFromString("XCTest") { return true }
 
         // Clear possible old contents from cache and defaults. 
         let imageCache = SDImageCache.sharedImageCache()
