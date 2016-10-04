@@ -1,8 +1,8 @@
 PODS:
-  - Action (1.1.0):
-    - RxCocoa (~> 2.0.0)
-    - RxSwift (~> 2.0.0)
-  - Alamofire (3.4.1)
+  - Action (2.0.0-beta.1):
+    - RxCocoa
+    - RxSwift
+  - Alamofire (4.0.1)
   - ARAnalytics/CoreIOS (3.8.0)
   - ARAnalytics/HockeyApp (3.8.0):
     - ARAnalytics/CoreIOS
@@ -35,20 +35,22 @@ PODS:
     - FBSnapshotTestCase/Core
   - FLKAutoLayout (0.1.1)
   - fmemopen (0.0.1)
-  - Forgeries (0.1.0)
+  - Forgeries (1.0.0):
+    - Forgeries/Core (= 1.0.0)
+  - Forgeries/Core (1.0.0)
   - HockeySDK-Source (3.8.1)
   - ISO8601DateFormatter (0.7)
   - Keys (1.0.0)
   - Mixpanel (2.8.3):
     - Mixpanel/Mixpanel (= 2.8.3)
   - Mixpanel/Mixpanel (2.8.3)
-  - Moya/Core (5.3.0):
-    - Alamofire (~> 3.0)
-    - Result (~> 1.0)
-  - Moya/RxSwift (5.3.0):
+  - Moya/Core (8.0.0-beta.2):
+    - Alamofire (~> 4.0.0)
+    - Result
+  - Moya/RxSwift (8.0.0-beta.2):
     - Moya/Core
-    - RxSwift (= 2.0.0)
-  - Nimble (4.1.0)
+    - RxSwift
+  - Nimble (5.0.0)
   - Nimble-Snapshots (4.1.0):
     - FBSnapshotTestCase (~> 2.0)
     - Nimble
@@ -58,18 +60,18 @@ PODS:
     - NJKWebViewProgress/ProgressView (= 0.2.3)
   - NJKWebViewProgress/Core (0.2.3)
   - NJKWebViewProgress/ProgressView (0.2.3)
-  - NSObject+Rx (1.2.0):
-    - RxSwift (~> 2.0.0)
+  - NSObject+Rx (2.0.0):
+    - RxSwift
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
-  - Quick (0.9.3)
+  - Quick (0.10.0)
   - Reachability (3.1.1)
-  - Result (1.0.2)
-  - RxBlocking (2.0.0):
-    - RxSwift (~> 2.0)
-  - RxCocoa (2.0.0):
-    - RxSwift (~> 2.0)
-  - RxSwift (2.0.0)
+  - Result (3.0.0)
+  - RxBlocking (3.0.0-beta.2):
+    - RxSwift (~> 3.0.0-beta.2)
+  - RxCocoa (3.0.0-beta.2):
+    - RxSwift (~> 3.0.0-beta.2)
+  - RxSwift (3.0.0-beta.2)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
@@ -77,14 +79,14 @@ PODS:
     - Stripe/Core (= 3.1.0)
   - Stripe/Core (3.1.0)
   - SVProgressHUD (1.1.3)
-  - SwiftyJSON (2.3.2)
+  - SwiftyJSON (3.1.0)
   - UIImageViewAligned (0.0.1)
   - UIView+BooleanAnimations (1.0.2)
   - XNGMarkdownParser (0.3.0):
     - fmemopen
 
 DEPENDENCIES:
-  - Action
+  - Action (= 2.0.0-beta.1)
   - ARAnalytics/HockeyApp
   - ARAnalytics/Mixpanel
   - ARCollectionViewMasonryLayout (~> 2.0.0)
@@ -102,16 +104,16 @@ DEPENDENCIES:
   - Forgeries
   - ISO8601DateFormatter (= 0.7)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Moya/RxSwift
+  - Moya/RxSwift (= 8.0.0-beta.2)
   - Nimble
   - Nimble-Snapshots
   - NSObject+Rx
   - ORStackView
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
-  - RxBlocking
-  - RxCocoa
-  - RxSwift
+  - RxBlocking (= 3.0.0-beta.2)
+  - RxCocoa (= 3.0.0-beta.2)
+  - RxSwift (= 3.0.0-beta.2)
   - SDWebImage (~> 3.7)
   - Stripe
   - SVProgressHUD
@@ -154,8 +156,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
-  Action: 25745dd09111b2a4bdf6164b2338b2104ea5696f
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Action: 13a8e52481834751caf428bcf6c527e3db2aefc7
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   ARAnalytics: 5468652928cee7100dd0e6b5162631409da37106
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: a747cff42142ca04d1dc5cee516186f10b6c0949
@@ -170,27 +172,27 @@ SPEC CHECKSUMS:
   FBSnapshotTestCase: 366ecd378511d7716c79991cd8067d1eed23578d
   FLKAutoLayout: 95b12c5cd9652100235140b68652f063f7437851
   fmemopen: dc31f7d3004644b33deee95e047305d23f8cfdd4
-  Forgeries: ce03936ada2a8d33d3711d7bb7123be505b83430
+  Forgeries: 64ced144ea8341d89a7eec9d1d7986f0f1366250
   HockeySDK-Source: d03f7d267d78980af33fb63ddea5199f5bf84049
   ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
-  Moya: dfd9310f3dfb198927976dad445ead477ca6c2a3
-  Nimble: 97a0a4cae5124c117115634b2d055d8c97d0af19
+  Moya: 920d40f738e6f4ece84010cec701bb9693be8251
+  Nimble: 56fc9f5020effa2206de22c3dd910f4fb011b92f
   Nimble-Snapshots: 2da4d2ec829b458d6886c06812c52493fce284c9
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
-  NSObject+Rx: 552d0a5bb78087b0faf9f8a066148577f1231426
+  NSObject+Rx: 2a9cd801d9c847e6d2486cbad8d7701b67834e70
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
-  Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
+  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
   Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
-  Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
-  RxBlocking: a95a10ed54eb5d116f6c9a87047ff671e181d07b
-  RxCocoa: b0ebd70b4f7450bdb3c8987b122f8fd568dc1e2f
-  RxSwift: d83246efa6f16c50c143bec134649d045498f601
+  Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
+  RxBlocking: 75dad8ed874b732da94780fdf7cf48eabf0d5d2b
+  RxCocoa: 1dd105d8a4e18034ccd7bd6d136445363ce67c8e
+  RxSwift: 0ea939d7d97cb70657190ffde8dc2a9b455778fc
   SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e
