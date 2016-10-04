@@ -59,11 +59,11 @@ pod 'XNGMarkdownParser'
 
 # Swift pods
 pod 'SwiftyJSON'
-pod 'RxSwift'
-pod 'RxCocoa'
-pod 'Moya/RxSwift'
+pod 'RxSwift', '3.0.0-beta.2'
+pod 'RxCocoa', '3.0.0-beta.2'
+pod 'Moya/RxSwift', '8.0.0-beta.2'
 pod 'NSObject+Rx'
-pod 'Action'
+pod 'Action', '2.0.0-beta.1'
 
 target 'KioskTests' do
 
@@ -73,6 +73,6 @@ target 'KioskTests' do
   pod 'Quick'
   pod 'Nimble'
   pod 'Forgeries'
-  pod 'RxBlocking'
+  pod 'RxBlocking', '3.0.0-beta.2'
 
 end
