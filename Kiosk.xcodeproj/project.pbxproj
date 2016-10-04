@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AEA9736F27FF8E8CD5C6F0F /* Pods_Kiosk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E087BDDF167E52F60049D0C4 /* Pods_Kiosk.framework */; };
 		5E0A4E3E1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A4E3D1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift */; };
 		5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E64E1A65630200F8CBDD /* Logger.swift */; };
 		5E19E6521A656CCF00F8CBDD /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E19E6511A656CCF00F8CBDD /* LoggerTests.swift */; };
@@ -236,6 +237,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		105ED099C82E240D7547D3A6 /* Pods-Kiosk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiosk.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kiosk/Pods-Kiosk.release.xcconfig"; sourceTree = "<group>"; };
 		276814418ACEF21BC773CB08 /* Pods-KioskTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5E0A4E3D1B41C9C800CB2BEA /* UIView+LongPressDisplayMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+LongPressDisplayMessage.swift"; path = "Kiosk/UIView+LongPressDisplayMessage.swift"; sourceTree = SOURCE_ROOT; };
 		5E19E64E1A65630200F8CBDD /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -440,7 +442,9 @@
 		5EFFE24F1B978C3C006BF64C /* ListingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingsViewModelTests.swift; sourceTree = "<group>"; };
 		620BB28AC1DE3936837D2731 /* Pods-KioskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KioskTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests.release.xcconfig"; sourceTree = "<group>"; };
 		94D0A1FE57C6B14D52392DF4 /* Pods_KioskTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KioskTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D18FBF2740DA862421FE723 /* Pods-Kiosk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiosk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiosk/Pods-Kiosk.debug.xcconfig"; sourceTree = "<group>"; };
 		B5DFB9BD12B5173B74D620D7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E087BDDF167E52F60049D0C4 /* Pods_Kiosk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kiosk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E70556721BC40BFB0064ABF8 /* MyBidPosition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyBidPosition.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -449,6 +453,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AEA9736F27FF8E8CD5C6F0F /* Pods_Kiosk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,6 +883,7 @@
 			children = (
 				B5DFB9BD12B5173B74D620D7 /* Pods.framework */,
 				94D0A1FE57C6B14D52392DF4 /* Pods_KioskTests.framework */,
+				E087BDDF167E52F60049D0C4 /* Pods_Kiosk.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -887,6 +893,8 @@
 			children = (
 				276814418ACEF21BC773CB08 /* Pods-KioskTests.debug.xcconfig */,
 				620BB28AC1DE3936837D2731 /* Pods-KioskTests.release.xcconfig */,
+				9D18FBF2740DA862421FE723 /* Pods-Kiosk.debug.xcconfig */,
+				105ED099C82E240D7547D3A6 /* Pods-Kiosk.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -898,9 +906,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5EB0B70C1A5C3E6800B7CBF2 /* Build configuration list for PBXNativeTarget "Kiosk" */;
 			buildPhases = (
+				0B78B80EF75AFBA025C46BD5 /* [CP] Check Pods Manifest.lock */,
 				5EB0B6E91A5C3E6800B7CBF2 /* Sources */,
 				5EB0B6EA1A5C3E6800B7CBF2 /* Frameworks */,
 				5EB0B6EB1A5C3E6800B7CBF2 /* Resources */,
+				34A5B24DE77329AC1D3FCEE3 /* [CP] Embed Pods Frameworks */,
+				DFF2EE1CB701147444967391 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1046,6 +1057,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0B78B80EF75AFBA025C46BD5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		0F1DDDE620287465CADB7C17 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1076,6 +1102,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		34A5B24DE77329AC1D3FCEE3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kiosk/Pods-Kiosk-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4D2169D120D205285B5A661F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1089,6 +1130,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KioskTests/Pods-KioskTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DFF2EE1CB701147444967391 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kiosk/Pods-Kiosk-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1284,6 +1340,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1328,6 +1385,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1362,6 +1420,7 @@
 		};
 		5EB0B70D1A5C3E6800B7CBF2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D18FBF2740DA862421FE723 /* Pods-Kiosk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1387,6 +1446,7 @@
 		};
 		5EB0B70E1A5C3E6800B7CBF2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 105ED099C82E240D7547D3A6 /* Pods-Kiosk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

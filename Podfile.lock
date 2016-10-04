@@ -3,23 +3,24 @@ PODS:
     - RxCocoa
     - RxSwift
   - Alamofire (4.0.1)
-  - ARAnalytics/CoreIOS (3.8.0)
-  - ARAnalytics/HockeyApp (3.8.0):
+  - ARAnalytics/CoreIOS (4.0.0)
+  - ARAnalytics/HockeyApp (4.0.0):
     - ARAnalytics/CoreIOS
     - HockeySDK-Source
-  - ARAnalytics/Mixpanel (3.8.0):
+  - ARAnalytics/Mixpanel (4.0.0):
     - ARAnalytics/CoreIOS
     - Mixpanel
   - ARCollectionViewMasonryLayout (2.0.0)
   - ARTiledImageView (1.1.1):
     - SDWebImage
-  - Artsy+UIColors (1.0.0):
-    - EDColor (~> 0.4)
+  - Artsy+UIColors (3.0.1)
   - Artsy+UIFonts (1.1.0)
-  - Artsy+UILabels (1.3.1):
-    - Artsy+UIColors
-  - Artsy-UIButtons (1.4.0):
-    - Artsy+UIColors
+  - Artsy+UILabels (2.0.2):
+    - Artsy+UIColors (~> 3.0)
+    - Artsy+UIFonts
+  - Artsy-UIButtons (2.0.1):
+    - Artsy+UIColors (~> 3.0)
+    - Artsy+UIFonts
     - UIView+BooleanAnimations
   - CardFlight (3.0):
     - CardFlight/AudioJack (= 3.0)
@@ -27,7 +28,6 @@ PODS:
   - DZNWebViewController (2.0):
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
-  - EDColor (0.4.0)
   - FBSnapshotTestCase (2.1.0):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.0)
   - FBSnapshotTestCase/Core (2.1.0)
@@ -38,11 +38,11 @@ PODS:
   - Forgeries (1.0.0):
     - Forgeries/Core (= 1.0.0)
   - Forgeries/Core (1.0.0)
-  - HockeySDK-Source (3.8.1)
+  - HockeySDK-Source (4.1.1)
   - Keys (1.0.0)
-  - Mixpanel (2.8.3):
-    - Mixpanel/Mixpanel (= 2.8.3)
-  - Mixpanel/Mixpanel (2.8.3)
+  - Mixpanel (3.0.4):
+    - Mixpanel/Mixpanel (= 3.0.4)
+  - Mixpanel/Mixpanel (3.0.4)
   - Moya/Core (8.0.0-beta.2):
     - Alamofire (~> 4.0.0)
     - Result
@@ -150,24 +150,23 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Action: 13a8e52481834751caf428bcf6c527e3db2aefc7
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
-  ARAnalytics: 5468652928cee7100dd0e6b5162631409da37106
+  ARAnalytics: d8a0eee8da481d146ca8af5a9ac632b5c4d17a81
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
-  Artsy+UIColors: 7a4c987885a8d8da3e22672a3232761f929dd2b6
+  Artsy+UIColors: 10a2d71e9ffe1015be43d4e084d13ff4337aab97
   Artsy+UIFonts: c51bb3b5cbf9c1a5fe198b4385d49133c5c71f5a
-  Artsy+UILabels: 43da757ee01bce8165ec83123eccccdf1fe8843c
-  Artsy-UIButtons: 6f67de2a5285f18acb5d0e2919d1b17188acbc27
+  Artsy+UILabels: 9b8e8b683488e22633625db9627cd79ab64b610f
+  Artsy-UIButtons: 26e6d1e0d2174773e9cf7693985d27faddd61743
   CardFlight: c27f6b57053ff7ee1918fd8130af289eef97195e
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
-  EDColor: 89d19a013279a5604d61650721c15f20fefaaf00
   FBSnapshotTestCase: 366ecd378511d7716c79991cd8067d1eed23578d
   FLKAutoLayout: 95b12c5cd9652100235140b68652f063f7437851
   fmemopen: dc31f7d3004644b33deee95e047305d23f8cfdd4
   Forgeries: 64ced144ea8341d89a7eec9d1d7986f0f1366250
-  HockeySDK-Source: d03f7d267d78980af33fb63ddea5199f5bf84049
+  HockeySDK-Source: a86f75afee838fc50826eb7a17875dea66844a37
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
+  Mixpanel: 4a2330c26556109d2f42b01e36a05eb9e2caf25e
   Moya: 920d40f738e6f4ece84010cec701bb9693be8251
   Nimble: 56fc9f5020effa2206de22c3dd910f4fb011b92f
   Nimble-Snapshots: 2da4d2ec829b458d6886c06812c52493fce284c9
@@ -188,6 +187,6 @@ SPEC CHECKSUMS:
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e
 
-PODFILE CHECKSUM: 17758583653f79ede3ea0297c1bd6da5d077cf51
+PODFILE CHECKSUM: baab7f8e9be67d7b89c9de732d1b94fd83a28c1b
 
 COCOAPODS: 1.1.0.rc.2
