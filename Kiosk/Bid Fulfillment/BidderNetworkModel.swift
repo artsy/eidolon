@@ -41,7 +41,7 @@ private extension BidderNetworkModel {
 
     // MARK: - Chained observables
 
-    func checkUserEmailExists(email: String) -> Observable<Bool> {
+    func checkUserEmailExists(_ email: String) -> Observable<Bool> {
         let request = provider.request(.FindExistingEmailRegistration(email: email))
 
         return request.map { response in
@@ -152,7 +152,7 @@ private extension BidderNetworkModel {
         }.logServerError("Getting user bidders failed.")
     }
 
-    func registerToAuction(auctionID: String, provider: AuthorizedNetworking) -> Observable<Void> {
+    func register(toAuction auctionID: String, provider: AuthorizedNetworking) -> Observable<Void> {
         let endpoint = ArtsyAuthenticatedAPI.RegisterToBid(auctionID: auctionID)
         let register = provider.request(endpoint)
             .filterSuccessfulStatusCodes()
@@ -183,7 +183,7 @@ private extension BidderNetworkModel {
     }
 
     func getMyPaddleNumber(provider: AuthorizedNetworking) -> Observable<Void> {
-        let endpoint = ArtsyAuthenticatedAPI.Me
+        let endpoint = ArtsyAuthenticatedAPI.me
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()

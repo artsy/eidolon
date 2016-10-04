@@ -14,7 +14,7 @@ class ChooseAuctionViewController: UIViewController {
         stackScrollView.bottomMarginHeight = CGFloat(NSNotFound)
         stackScrollView.updateConstraints()
 
-        let endpoint: ArtsyAPI = ArtsyAPI.ActiveAuctions
+        let endpoint: ArtsyAPI = ArtsyAPI.activeAuctions
 
         provider.request(endpoint)
             .filterSuccessfulStatusCodes()
@@ -48,7 +48,7 @@ class ChooseAuctionViewController: UIViewController {
     }
 
     @IBOutlet weak var stackScrollView: ORStackView!
-    @IBAction func backButtonTapped(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+    @IBAction func backButtonTapped(_ sender: AnyObject) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

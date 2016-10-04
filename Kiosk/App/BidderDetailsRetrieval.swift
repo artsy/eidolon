@@ -37,7 +37,7 @@ extension UIViewController {
     }
 
     func emailPromptAlertController(provider: Networking) -> UIAlertController {
-        let alertController = UIAlertController(title: "Send Bidder Details", message: "Enter your email address or phone number registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Send Bidder Details", message: "Enter your email address or phone number registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .alert)
 
         let ok = UIAlertAction.Action("OK", style: .Default)
         let action = CocoaAction { _ -> Observable<Void> in
@@ -48,7 +48,7 @@ extension UIViewController {
         ok.rx_action = action
         let cancel = UIAlertAction.Action("Cancel", style: .Cancel)
 
-        alertController.addTextFieldWithConfigurationHandler(nil)
+        alertController.addTextField(configurationHandler: nil)
         alertController.addAction(ok)
         alertController.addAction(cancel)
 
@@ -58,14 +58,14 @@ extension UIViewController {
 
 extension UIAlertController {
     class func successfulBidderDetailsAlertController() -> UIAlertController {
-        let alertController = self.init(title: "Your details have been sent", message: nil, preferredStyle: .Alert)
+        let alertController = self.init(title: "Your details have been sent", message: nil, preferredStyle: .alert)
         alertController.addAction(UIAlertAction.Action("OK", style: .Default))
         
         return alertController
     }
     
     class func failedBidderDetailsAlertController() -> UIAlertController {
-        let alertController = self.init(title: "Incorrect Email", message: "Email was not recognized. You may not be registered to bid yet.", preferredStyle: .Alert)
+        let alertController = self.init(title: "Incorrect Email", message: "Email was not recognized. You may not be registered to bid yet.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction.Action("Cancel", style: .Cancel))
         
         let retryAction = UIAlertAction.Action("Retry", style: .Default)

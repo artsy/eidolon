@@ -71,7 +71,7 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
     }
 }
 
-private func networkingForBidderCreatedByAdmin(createdByAdmin: Bool?) -> AuthorizedNetworking {
+private func networkingForBidder(createdByAdmin: Bool?) -> AuthorizedNetworking {
     let sampleData: NSData
 
     if let createdByAdmin = createdByAdmin {

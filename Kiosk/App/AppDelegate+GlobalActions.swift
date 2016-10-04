@@ -5,7 +5,7 @@ import RxSwift
 import Action
 
 func appDelegate() -> AppDelegate {
-    return UIApplication.sharedApplication().delegate as! AppDelegate
+    return UIApplication.shared.delegate as! AppDelegate
 }
 
 extension AppDelegate {
@@ -25,10 +25,10 @@ extension AppDelegate {
 
     func setupHelpButton() {
         helpButton = MenuButton()
-        helpButton.setTitle("Help", forState: .Normal)
+        helpButton.setTitle("Help", for: .normal)
         helpButton.rx_action = helpButtonCommand()
         window?.addSubview(helpButton)
-        helpButton.alignTop(nil, leading: nil, bottom: "-24", trailing: "-24", toView: window)
+        helpButton.alignTop(nil, leading: nil, bottom: "-24", trailing: "-24", to: window)
         window?.layoutIfNeeded()
 
         helpIsVisisble.subscribeNext { visisble in
@@ -47,8 +47,8 @@ extension AppDelegate {
         }.addDisposableTo(rx_disposeBag)
     }
 
-    func setHelpButtonHidden(hidden: Bool) {
-        helpButton.hidden = hidden
+    func setHelpButtonHidden(_ hidden: Bool) {
+        helpButton.isHidden = hidden
     }
 }
 
@@ -122,7 +122,7 @@ private extension AppDelegate {
     
     func showBidderDetailsRetrieval() -> Observable<Void> {
         let appVC = self.appViewController
-        let presentingViewController: UIViewController = (appVC.presentedViewController ?? appVC)
+        let presentingViewController: UIViewController = (appVC!.presentedViewController ?? appVC!)
         return presentingViewController.promptForBidderDetailsRetrieval(self.provider)
     }
 
@@ -260,11 +260,11 @@ private extension AppDelegate {
 // MARK: - Help transtion animation
 
 extension AppDelegate: UIViewControllerTransitioningDelegate {
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return HelpAnimator(presenting: true)
     }
     
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return HelpAnimator()
     }
 }

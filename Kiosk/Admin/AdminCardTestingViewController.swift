@@ -48,18 +48,18 @@ class AdminCardTestingViewController: UIViewController {
         cardHandler.startSearching()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         cardHandler.end()
     }
 
-    func log(string: String) {
+    func log(_ string: String) {
         self.logTextView.text = "\(self.logTextView.text)\n\(string)"
 
     }
 
-    @IBAction func backTapped(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func backTapped(_ sender: AnyObject) {
+        navigationController?.popViewController(animated: true)
     }
 
 

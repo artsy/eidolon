@@ -5,8 +5,8 @@ import Moya
 @testable
 import Kiosk
 
-let testScheduleOnBackground: (observable: Observable<AnyObject>) -> Observable<AnyObject> = { observable in observable }
-let testScheduleOnForeground: (observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { observable in observable }
+let testScheduleOnBackground: (_ observable: Observable<AnyObject>) -> Observable<AnyObject> = { observable in observable }
+let testScheduleOnForeground: (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { observable in observable }
 
 class ListingsViewModelTests: QuickSpec {
     override func spec() {
@@ -159,7 +159,7 @@ class ListingsViewModelTests: QuickSpec {
 }
 
 
-func listingsDataForPage(page: Int, bidCount: Int, modelCount: Int?, reverseIDs: Bool = false) -> NSData {
+func listingsData(forPage page: Int, bidCount: Int, modelCount: Int?, reverseIDs: Bool = false) -> NSData {
     let count = modelCount ?? (page == 1 ? 2 : 1)
 
     let models = Array<Int>(1...count).map { index -> NSDictionary in

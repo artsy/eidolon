@@ -20,7 +20,7 @@ extension Observable {
     //
     // Still not sure if this is a good idea.
 
-    func flatMapTo<R>(selector: Element -> () -> Observable<R>) -> Observable<R> {
+    func flatMapTo<R>(_ selector: (Element) -> () -> Observable<R>) -> Observable<R> {
         return self.map { (s) -> Observable<R> in
             return selector(s)()
         }.switchLatest()
@@ -50,7 +50,7 @@ extension Observable where Element: OptionalType {
         }
     }
 
-    func replaceNilWith(nilValue: Element.Wrapped) -> Observable<Element.Wrapped> {
+    func replaceNil(with nilValue: Element.Wrapped) -> Observable<Element.Wrapped> {
         return flatMap { (element) -> Observable<Element.Wrapped> in
             if let value = element.value {
                 return .just(value)
@@ -61,8 +61,9 @@ extension Observable where Element: OptionalType {
     }
 }
 
+// TODO: Added in new RxSwift?
 extension Observable {
-    func doOnNext(closure: Element -> Void) -> Observable<Element> {
+    func doOnNext(_ closure: (Element) -> Void) -> Observable<Element> {
         return doOn { (event: Event) in
             switch event {
             case .Next(let value):
@@ -72,7 +73,7 @@ extension Observable {
         }
     }
 
-    func doOnCompleted(closure: () -> Void) -> Observable<Element> {
+    func doOnCompleted(_ closure: () -> Void) -> Observable<Element> {
         return doOn { (event: Event) in
             switch event {
             case .Completed:
@@ -82,7 +83,7 @@ extension Observable {
         }
     }
 
-    func doOnError(closure: ErrorType -> Void) -> Observable<Element> {
+    func doOnError(_ closure: (ErrorType) -> Void) -> Observable<Element> {
         return doOn { (event: Event) in
             switch event {
             case .Error(let error):
@@ -96,7 +97,7 @@ extension Observable {
 private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Default)
 
 extension Observable {
-    func mapReplace<T>(value: T) -> Observable<T> {
+    func mapReplace<T>(with value: T) -> Observable<T> {
         return map { _ -> T in
             return value
         }
@@ -116,7 +117,7 @@ extension Observable where Element: BooleanType {
     }
 }
 
-extension CollectionType where Generator.Element: ObservableType, Generator.Element.E: BooleanType {
+extension Collection where Iterator.Element: ObservableType, Iterator.Element.E: Bool {
 
     func combineLatestAnd() -> Observable<Bool> {
         return combineLatest { bools -> Bool in
@@ -137,11 +138,11 @@ extension CollectionType where Generator.Element: ObservableType, Generator.Elem
 
 extension ObservableType {
 
-    func then(closure: () -> Observable<E>?) -> Observable<E> {
+    func then(_ closure: () -> Observable<E>?) -> Observable<E> {
         return then(closure() ?? .empty())
     }
 
-    func then(@autoclosure(escaping) closure: () -> Observable<E>) -> Observable<E> {
+    func then(@autoclosure(escaping) _ closure: () -> Observable<E>) -> Observable<E> {
         let next = Observable.deferred {
             return closure() ?? .empty()
         }
@@ -158,7 +159,7 @@ extension Observable {
     }
 }
 
-func sendDispatchCompleted<T>(observer: AnyObserver<T>) {
+func sendDispatchCompleted<T>(to observer: AnyObserver<T>) {
     dispatch_async(dispatch_get_main_queue()) {
         observer.onCompleted()
     }

@@ -29,7 +29,7 @@ final class Image: NSObject, JSONAbleType {
         self.isDefault = isDefault
     }
 
-    static func fromJSON(json:[String: AnyObject]) -> Image {
+    static func fromJSON(_ json:[String: AnyObject]) -> Image {
         let json = JSON(json)
 
         let id = json["id"].stringValue
@@ -58,7 +58,7 @@ final class Image: NSObject, JSONAbleType {
         return Image(id: id, imageFormatString: imageFormatString, imageVersions: imageVersions, imageSize: imageSize, aspectRatio: aspectRatio, baseURL: baseURL, tileSize: tileSize, maxTiledHeight: maxTiledHeight, maxTiledWidth: maxTiledWidth, maxLevel: maxLevel, isDefault: isDefault)
     }
 
-    func thumbnailURL() -> NSURL? {
+    func thumbnailURL() -> URL? {
         let preferredVersions = { () -> Array<String> in
             // For very tall images, the "medium" version looks terribad.
             // In the long-term, we have an issue to fix this for good: https://github.com/artsy/eidolon/issues/396
@@ -72,14 +72,14 @@ final class Image: NSObject, JSONAbleType {
         return urlFromPreferenceList(preferredVersions)
     }
 
-    func fullsizeURL() -> NSURL? {
+    func fullsizeURL() -> URL? {
         return urlFromPreferenceList(["larger", "large", "medium"])
     }
 
-    private func urlFromPreferenceList(preferenceList: Array<String>) -> NSURL? {
+    fileprivate func urlFromPreferenceList(_ preferenceList: Array<String>) -> URL? {
         if let format = preferenceList.filter({ self.imageVersions.contains($0) }).first {
-            let path = NSString(string: self.imageFormatString).stringByReplacingOccurrencesOfString(":version", withString: format)
-            return NSURL(string: path)
+            let path = NSString(string: self.imageFormatString).replacingOccurrences(of: ":version", with: format)
+            return URL(string: path)
         }
         return nil
     }

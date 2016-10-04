@@ -6,56 +6,56 @@ class Button: ARFlatButton {
 
     override func setup() {
         super.setup()
-        setTitleShadowColor(.clearColor(), forState: .Normal)
-        setTitleShadowColor(.clearColor(), forState: .Highlighted)
-        setTitleShadowColor(.clearColor(), forState: .Disabled)
+        setTitleShadowColor(.clear(), for: UIControlState())
+        setTitleShadowColor(.clear(), for: .highlighted)
+        setTitleShadowColor(.clear(), for: .disabled)
         shouldDimWhenDisabled = false;
     }
 }
 
 class ActionButton: Button {
 
-    override func intrinsicContentSize() -> CGSize {
-        return CGSizeMake(UIViewNoIntrinsicMetric, ButtonHeight)
+    override var intrinsicContentSize : CGSize {
+        return CGSize(width: UIViewNoIntrinsicMetric, height: ButtonHeight)
     }
 
     override func setup() {
         super.setup()
 
-        setBorderColor(.blackColor(), forState: .Normal, animated: false)
-        setBorderColor(.artsyPurple(), forState: .Highlighted, animated: false)
-        setBorderColor(.artsyMediumGrey(), forState: .Disabled, animated: false)
+        setBorderColor(.black(), for: UIControlState(), animated: false)
+        setBorderColor(.artsyPurple(), for: .highlighted, animated: false)
+        setBorderColor(.artsyMediumGrey(), for: .disabled, animated: false)
 
-        setBackgroundColor(.blackColor(), forState: .Normal, animated: false)
-        setBackgroundColor(.artsyPurple(), forState: .Highlighted, animated: false)
-        setBackgroundColor(.whiteColor(), forState: .Disabled, animated: false)
+        setBackgroundColor(.black(), for: UIControlState(), animated: false)
+        setBackgroundColor(.artsyPurple(), for: .highlighted, animated: false)
+        setBackgroundColor(.white(), for: .disabled, animated: false)
 
-        setTitleColor(.whiteColor(), forState:.Normal)
-        setTitleColor(.whiteColor(), forState:.Highlighted)
-        setTitleColor(.artsyHeavyGrey(), forState:.Disabled)
+        setTitleColor(.white(), for:UIControlState())
+        setTitleColor(.white(), for:.highlighted)
+        setTitleColor(.artsyHeavyGrey(), for:.disabled)
     }
 }
 
 class SecondaryActionButton: Button {
 
-    override func intrinsicContentSize() -> CGSize {
-        return CGSizeMake(UIViewNoIntrinsicMetric, ButtonHeight)
+    override var intrinsicContentSize : CGSize {
+        return CGSize(width: UIViewNoIntrinsicMetric, height: ButtonHeight)
     }
 
     override func setup() {
         super.setup()
 
-        setBorderColor(.artsyMediumGrey(), forState: .Normal, animated: false)
-        setBorderColor(.artsyPurple(), forState: .Highlighted, animated: false)
-        setBorderColor(.artsyLightGrey(), forState: .Disabled, animated: false)
+        setBorderColor(.artsyMediumGrey(), for: UIControlState(), animated: false)
+        setBorderColor(.artsyPurple(), for: .highlighted, animated: false)
+        setBorderColor(.artsyLightGrey(), for: .disabled, animated: false)
 
-        setBackgroundColor(.whiteColor(), forState: .Normal, animated: false)
-        setBackgroundColor(.artsyPurple(), forState: .Highlighted, animated: false)
-        setBackgroundColor(.whiteColor(), forState: .Disabled, animated: false)
+        setBackgroundColor(.white(), for: UIControlState(), animated: false)
+        setBackgroundColor(.artsyPurple(), for: .highlighted, animated: false)
+        setBackgroundColor(.white(), for: .disabled, animated: false)
 
-        setTitleColor(.blackColor(), forState:.Normal)
-        setTitleColor(.whiteColor(), forState:.Highlighted)
-        setTitleColor(.artsyHeavyGrey(), forState:.Disabled)
+        setTitleColor(.black(), for:UIControlState())
+        setTitleColor(.white(), for:.highlighted)
+        setTitleColor(.artsyHeavyGrey(), for:.disabled)
     }
 }
 
@@ -66,15 +66,15 @@ class KeypadButton: Button {
         super.setup()
         shouldAnimateStateChange = false;
         layer.borderWidth = 0
-        setBackgroundColor(.blackColor(), forState: .Highlighted, animated: false)
-        setBackgroundColor(.whiteColor(), forState: .Normal, animated: false)
+        setBackgroundColor(.black(), for: .highlighted, animated: false)
+        setBackgroundColor(.white(), for: UIControlState(), animated: false)
     }
 }
 
 class LargeKeypadButton: KeypadButton {
     override func setup() {
         super.setup()
-        self.titleLabel!.font = UIFont.sansSerifFontWithSize(20)
+        self.titleLabel!.font = UIFont.sansSerifFont(withSize: 20)
     }
 }
 
@@ -82,17 +82,17 @@ class MenuButton: ARMenuButton {
     override func setup() {
         super.setup()
         if let titleLabel = titleLabel {
-            titleLabel.font = titleLabel.font.fontWithSize(12)
+            titleLabel.font = titleLabel.font.withSize(12)
         }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        if let titleLabel = titleLabel { self.bringSubviewToFront(titleLabel) }
-        if let imageView = imageView { self.bringSubviewToFront(imageView) }
+        if let titleLabel = titleLabel { self.bringSubview(toFront: titleLabel) }
+        if let imageView = imageView { self.bringSubview(toFront: imageView) }
     }
 
-    override func intrinsicContentSize() -> CGSize {
+    override var intrinsicContentSize : CGSize {
         return CGSize(width: 45, height: 45)
     }
 }

@@ -13,8 +13,8 @@ class ManualCreditCardInputViewModel: NSObject {
     var securityCode = Variable("")
     var billingZip = Variable("")
 
-    private(set) var bidDetails: BidDetails!
-    private(set) var finishedSubject: PublishSubject<Void>?
+    fileprivate(set) var bidDetails: BidDetails!
+    fileprivate(set) var finishedSubject: PublishSubject<Void>?
 
     /// Mark: - Public members
 
@@ -66,18 +66,18 @@ class ManualCreditCardInputViewModel: NSObject {
 
     }
 
-    func isEntryValid(entry: String) -> Bool {
+    func isEntryValid(_ entry: String) -> Bool {
         // Allow delete
         if (entry.isEmpty) { return true }
 
         // the API doesn't accept chars
-        let notNumberChars = NSCharacterSet.decimalDigitCharacterSet().invertedSet;
-        return entry.stringByTrimmingCharactersInSet(notNumberChars).isNotEmpty
+        let notNumberChars = CharacterSet.decimalDigits.inverted;
+        return entry.trimmingCharacters(in: notNumberChars).isNotEmpty
     }
 
     /// MARK: - Private Methods
 
-    private func registerCard(newUser: NewUser) -> Observable<STPToken> {
+    fileprivate func registerCard(newUser: NewUser) -> Observable<STPToken> {
         let month = expirationMonth.value.toUIntWithDefault(0)
         let year = expirationYear.value.toUIntWithDefault(0)
 

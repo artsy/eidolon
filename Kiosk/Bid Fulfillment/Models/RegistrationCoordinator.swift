@@ -2,32 +2,32 @@ import UIKit
 import RxSwift
 
 enum RegistrationIndex {
-    case MobileVC
-    case EmailVC
-    case PasswordVC
-    case CreditCardVC
-    case ZipCodeVC
-    case ConfirmVC
+    case mobileVC
+    case emailVC
+    case passwordVC
+    case creditCardVC
+    case zipCodeVC
+    case confirmVC
     
     func toInt() -> Int {
         switch (self) {
-            case MobileVC: return 0
-            case EmailVC: return 1
-            case PasswordVC: return 1
-            case ZipCodeVC: return 2
-            case CreditCardVC: return 3
-            case ConfirmVC: return 4
+            case .mobileVC: return 0
+            case .emailVC: return 1
+            case .passwordVC: return 1
+            case .zipCodeVC: return 2
+            case .creditCardVC: return 3
+            case .confirmVC: return 4
         }
     }
 
-    static func fromInt(index:Int) -> RegistrationIndex {
+    static func fromInt(_ index:Int) -> RegistrationIndex {
         switch (index) {
-            case 0: return .MobileVC
-            case 1: return .EmailVC
-            case 1: return .PasswordVC
-            case 2: return .ZipCodeVC
-            case 3: return .CreditCardVC
-            default : return .ConfirmVC
+            case 0: return .mobileVC
+            case 1: return .emailVC
+            case 1: return .passwordVC
+            case 2: return .zipCodeVC
+            case 3: return .creditCardVC
+            default : return .confirmVC
         }
     }
 }
@@ -37,60 +37,60 @@ class RegistrationCoordinator: NSObject {
     let currentIndex = Variable(0)
     var storyboard: UIStoryboard!
 
-    func viewControllerForIndex(index: RegistrationIndex) -> UIViewController {
+    func viewControllerForIndex(_ index: RegistrationIndex) -> UIViewController {
         currentIndex.value = index.toInt()
         
         switch index {
 
-        case .MobileVC:
+        case .mobileVC:
             return storyboard.viewControllerWithID(.RegisterMobile)
 
-        case .EmailVC:
+        case .emailVC:
             return storyboard.viewControllerWithID(.RegisterEmail)
 
-        case .PasswordVC:
+        case .passwordVC:
             return storyboard.viewControllerWithID(.RegisterPassword)
 
-        case .ZipCodeVC:
+        case .zipCodeVC:
             return storyboard.viewControllerWithID(.RegisterPostalorZip)
 
-        case .CreditCardVC:
+        case .creditCardVC:
             if AppSetup.sharedState.disableCardReader {
                 return storyboard.viewControllerWithID(.ManualCardDetailsInput)
             } else {
                 return storyboard.viewControllerWithID(.RegisterCreditCard)
             }
 
-        case .ConfirmVC:
+        case .confirmVC:
             return storyboard.viewControllerWithID(.RegisterConfirm)
         }
     }
 
-    func nextViewControllerForBidDetails(details: BidDetails) -> UIViewController {
+    func nextViewControllerForBidDetails(_ details: BidDetails) -> UIViewController {
         if notSet(details.newUser.phoneNumber.value) {
-            return viewControllerForIndex(.MobileVC)
+            return viewControllerForIndex(.mobileVC)
         }
 
         if notSet(details.newUser.email.value) {
-            return viewControllerForIndex(.EmailVC)
+            return viewControllerForIndex(.emailVC)
         }
 
         if notSet(details.newUser.password.value) {
-            return viewControllerForIndex(.PasswordVC)
+            return viewControllerForIndex(.passwordVC)
         }
 
         if notSet(details.newUser.zipCode.value) && AppSetup.sharedState.needsZipCode {
-            return viewControllerForIndex(.ZipCodeVC)
+            return viewControllerForIndex(.zipCodeVC)
         }
 
         if notSet(details.newUser.creditCardToken.value) {
-            return viewControllerForIndex(.CreditCardVC)
+            return viewControllerForIndex(.creditCardVC)
         }
 
-        return viewControllerForIndex(.ConfirmVC)
+        return viewControllerForIndex(.confirmVC)
     }
 }
 
-private func notSet(string: String?) -> Bool {
+private func notSet(_ string: String?) -> Bool {
     return string?.isEmpty ?? true
 }

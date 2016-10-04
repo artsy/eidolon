@@ -9,7 +9,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     @IBOutlet var confirmButton: UIButton!
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidEnterYourEmailViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidEnterYourEmailViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidEnterEmail) as! ConfirmYourBidEnterYourEmailViewController
     }
 
@@ -58,20 +58,20 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
         }.addDisposableTo(rx_disposeBag)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
         self.emailTextField.becomeFirstResponder()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
 
         if segue == .EmailNotFoundonArtsy {
-            let viewController = segue.destinationViewController as! RegisterViewController
+            let viewController = segue.destination as! RegisterViewController
             viewController.provider = provider
         } else if segue == .ExistingArtsyUserFound {
-            let viewController = segue.destinationViewController as! ConfirmYourBidArtsyLoginViewController
+            let viewController = segue.destination as! ConfirmYourBidArtsyLoginViewController
             viewController.provider = provider
         }
     }
@@ -79,11 +79,11 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
 private extension ConfirmYourBidEnterYourEmailViewController {
 
-    @IBAction func dev_emailFound(sender: AnyObject) {
+    @IBAction func dev_emailFound(_ sender: AnyObject) {
         performSegue(.ExistingArtsyUserFound)
     }
 
-    @IBAction func dev_emailNotFound(sender: AnyObject) {
+    @IBAction func dev_emailNotFound(_ sender: AnyObject) {
         performSegue(.EmailNotFoundonArtsy)
     }
 

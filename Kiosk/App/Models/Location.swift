@@ -18,7 +18,7 @@ final class Location: NSObject, JSONAbleType {
         self.postalCode = postalCode
     }
 
-    static func fromJSON(json: [String: AnyObject]) -> Location {
+    static func fromJSON(_ json: [String: AnyObject]) -> Location {
         let json = JSON(json)
 
         let address =  json["address"].stringValue

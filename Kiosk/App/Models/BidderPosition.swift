@@ -6,16 +6,16 @@ final class BidderPosition: NSObject, JSONAbleType {
     let id: String
     let highestBid: Bid?
     let maxBidAmountCents: Int
-    let processedAt: NSDate?
+    let processedAt: Date?
 
-    init(id: String, highestBid:Bid?, maxBidAmountCents: Int, processedAt: NSDate?) {
+    init(id: String, highestBid:Bid?, maxBidAmountCents: Int, processedAt: Date?) {
         self.id = id
         self.highestBid = highestBid
         self.maxBidAmountCents = maxBidAmountCents
         self.processedAt = processedAt
     }
 
-    static func fromJSON(source:[String: AnyObject]) -> BidderPosition {
+    static func fromJSON(_ source:[String: AnyObject]) -> BidderPosition {
         let json = JSON(source)
         let formatter = ISO8601DateFormatter()
 

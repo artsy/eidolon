@@ -10,7 +10,7 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
         return GenericFormValidationViewModel(isValid: zipCodeIsValid, manualInvocation: self.zipCodeTextField.rx_returnKey, finishedSubject: self.finished)
     }()
 
-    private let _viewWillDisappear = PublishSubject<Void>()
+    fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
         return self._viewWillDisappear.asObserver()
     }
@@ -35,13 +35,13 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
         zipCodeTextField.becomeFirstResponder()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         _viewWillDisappear.onNext()
     }
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationPostalZipViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> RegistrationPostalZipViewController {
         return storyboard.viewControllerWithID(.RegisterPostalorZip) as! RegistrationPostalZipViewController
     }
 }

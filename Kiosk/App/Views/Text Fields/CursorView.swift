@@ -25,8 +25,8 @@ class CursorView: UIView {
     }
 
     func setupCursorLayer() {
-        cursorLayer.frame = CGRectMake(CGRectGetWidth(layer.frame)/2 - 1, 0, 2, CGRectGetHeight(layer.frame))
-        cursorLayer.backgroundColor = UIColor.blackColor().CGColor
+        cursorLayer.frame = CGRect(x: layer.frame.width/2 - 1, y: 0, width: 2, height: layer.frame.height)
+        cursorLayer.backgroundColor = UIColor.black.cgColor
         cursorLayer.opacity = 0.0
     }
 
@@ -34,7 +34,7 @@ class CursorView: UIView {
         animate(Float.infinity)
     }
 
-    private func animate(times: Float) {
+    fileprivate func animate(_ times: Float) {
         let fade = CABasicAnimation()
         fade.duration = 0.5
         fade.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
@@ -42,7 +42,7 @@ class CursorView: UIView {
         fade.autoreverses = true
         fade.fromValue = 0.0
         fade.toValue = 1.0
-        cursorLayer.addAnimation(fade, forKey: "opacity")
+        cursorLayer.add(fade, forKey: "opacity")
     }
 
     func stopAnimating() {

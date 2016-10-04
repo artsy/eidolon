@@ -5,7 +5,7 @@ import Result
 /// Logs network activity (outgoing requests and incoming responses).
 class NetworkLogger: PluginType {
 
-    typealias Comparison = TargetType -> Bool
+    typealias Comparison = (TargetType) -> Bool
 
     let whitelist: Comparison
     let blacklist: Comparison
@@ -15,13 +15,13 @@ class NetworkLogger: PluginType {
         self.blacklist = blacklist
     }
 
-    func willSendRequest(request: RequestType, target: TargetType) {
+    func willSendRequest(_ request: RequestType, target: TargetType) {
         // If the target is in the blacklist, don't log it.
         guard blacklist(target) == false else { return }
         logger.log("Sending request: \(request.request?.URL?.absoluteString ?? String())")
     }
 
-    func didReceiveResponse(result: Result<Moya.Response, Moya.Error>, target: TargetType) {
+    func didReceiveResponse(_ result: Result<Moya.Response, Moya.Error>, target: TargetType) {
         // If the target is in the blacklist, don't log it.
         guard blacklist(target) == false else { return }
 

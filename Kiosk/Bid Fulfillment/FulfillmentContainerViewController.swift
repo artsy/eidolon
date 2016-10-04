@@ -9,7 +9,7 @@ class FulfillmentContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+        modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
 
         contentView.alpha = 0
         backgroundView.alpha = 0
@@ -21,21 +21,21 @@ class FulfillmentContainerViewController: UIViewController {
 
     // This is mostly a placeholder for a more complex animation in the future
 
-    func viewDidAppearAnimation(animated: Bool) {
-        self.contentView.frame = CGRectOffset(self.contentView.frame, 0, 100)
+    func viewDidAppearAnimation(_ animated: Bool) {
+        self.contentView.frame = self.contentView.frame.offsetBy(dx: 0, dy: 100)
         UIView.animateTwoStepIf(animated, duration: 0.3, {
             self.backgroundView.alpha = 1
 
         }, midway: {
             self.contentView.alpha = 1
             self.cancelButton.alpha = 1
-            self.contentView.frame = CGRectOffset(self.contentView.frame, 0, -100)
+            self.contentView.frame = self.contentView.frame.offsetBy(dx: 0, dy: -100)
         }) { (complete) in
 
         }
     }
 
-    @IBAction func closeModalTapped(sender: AnyObject) {
+    @IBAction func closeModalTapped(_ sender: AnyObject) {
         closeFulfillmentModal()
     }
 
@@ -47,7 +47,7 @@ class FulfillmentContainerViewController: UIViewController {
 
             }) { (completed:Bool) in
                 let presentingVC = self.presentingViewController!
-                presentingVC.dismissViewControllerAnimated(false, completion: nil)
+                presentingVC.dismiss(animated: false, completion: nil)
                 completion?()
         }
     }
@@ -58,7 +58,7 @@ class FulfillmentContainerViewController: UIViewController {
         return self.childViewControllers.first as? FulfillmentNavigationController
     }
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> FulfillmentContainerViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> FulfillmentContainerViewController {
         return storyboard.viewControllerWithID(.FulfillmentContainer) as! FulfillmentContainerViewController
     }
 }

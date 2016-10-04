@@ -3,7 +3,7 @@ import RxSwift
 import Stripe
 
 class StripeManager: NSObject {
-    var stripeClient = STPAPIClient.sharedClient()
+    var stripeClient = STPAPIClient.shared()
 
     func registerCard(digits: String, month: UInt, year: UInt, securityCode: String, postalCode: String) -> Observable<STPToken> {
         let card = STPCard()
@@ -32,25 +32,25 @@ class StripeManager: NSObject {
         }
     }
 
-    func stringIsCreditCard(cardNumber: String) -> Bool {
-        return STPCard.validateCardNumber(cardNumber)
+    func stringIsCreditCard(_ cardNumber: String) -> Bool {
+        return STPCard.validateNumber(cardNumber)
     }
 }
 
 extension STPCardBrand {
     var name: String? {
         switch self {
-        case .Visa:
+        case .visa:
             return "Visa"
-        case .Amex:
+        case .amex:
             return "American Express"
-        case .MasterCard:
+        case .masterCard:
             return "MasterCard"
-        case .Discover:
+        case .discover:
             return "Discover"
         case .JCB:
             return "JCB"
-        case .DinersClub:
+        case .dinersClub:
             return "Diners Club"
         default:
             return nil

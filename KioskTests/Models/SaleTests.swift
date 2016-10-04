@@ -5,8 +5,8 @@ import Kiosk
 import ISO8601DateFormatter
 
 class SaleTests: QuickSpec {
-    func stringFromDate(date: NSDate) -> String {
-        return ISO8601DateFormatter().stringFromDate(date)
+    func stringFromDate(_ date: Date) -> String {
+        return ISO8601DateFormatter().string(from: date)
     }
 
     override func spec() {

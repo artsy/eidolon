@@ -3,22 +3,22 @@ import UIKit
 let MasonryCollectionViewCellWidth: CGFloat = 254
 
 class MasonryCollectionViewCell: ListingsCollectionViewCell {
-    private lazy var bidView: UIView = {
+    fileprivate lazy var bidView: UIView = {
         let view = UIView()
         for subview in [self.currentBidLabel, self.numberOfBidsLabel] {
             view.addSubview(subview)
-            subview.alignTopEdgeWithView(view, predicate:"13")
-            subview.alignBottomEdgeWithView(view, predicate:"0")
+            subview.alignTopEdge(with: view, predicate:"13")
+            subview.alignBottomEdge(with: view, predicate:"0")
             subview.constrainHeight("18")
         }
-        self.currentBidLabel.alignLeadingEdgeWithView(view, predicate: "0")
-        self.numberOfBidsLabel.alignTrailingEdgeWithView(view, predicate: "0")
+        self.currentBidLabel.alignLeadingEdge(with: view, predicate: "0")
+        self.numberOfBidsLabel.alignTrailingEdge(with: view, predicate: "0")
         return view
     }()
     
-    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.lotNumberLabel, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.bidView, self.bidButton, self.moreInfoLabel]
+    fileprivate lazy var cellSubviews: [UIView] = [self.artworkImageView, self.lotNumberLabel, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.bidView, self.bidButton, self.moreInfoLabel]
 
-    private var artworkImageViewHeightConstraint: NSLayoutConstraint?
+    fileprivate var artworkImageViewHeightConstraint: NSLayoutConstraint?
     
     override func setup() {
         super.setup()
@@ -28,23 +28,23 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         // Add subviews
         for subview in cellSubviews {
             self.contentView.addSubview(subview)
-            subview.alignLeading("0", trailing: "0", toView: self.contentView)
+            subview.alignLeading("0", trailing: "0", to: self.contentView)
         }
         
         // Constrain subviews
-        artworkImageView.alignTop("0", bottom: nil, toView: contentView)
-        let lotNumberTopConstraint = lotNumberLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkImageView, predicate: "20").first as! NSLayoutConstraint
-        let artistNameTopConstraint = artistNameLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: lotNumberLabel, predicate: "10").first as! NSLayoutConstraint
+        artworkImageView.alignTop("0", bottom: nil, to: contentView)
+        let lotNumberTopConstraint = lotNumberLabel.alignAttribute(.top, to: .bottom, of: artworkImageView, predicate: "20").first as! NSLayoutConstraint
+        let artistNameTopConstraint = artistNameLabel.alignAttribute(.top, to: .bottom, of: lotNumberLabel, predicate: "10").first as! NSLayoutConstraint
         artistNameLabel.constrainHeight("20")
-        artworkTitleLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artistNameLabel, predicate: "10")
+        artworkTitleLabel.alignAttribute(.top, to: .bottom, of: artistNameLabel, predicate: "10")
         artworkTitleLabel.constrainHeight("16")
-        estimateLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkTitleLabel, predicate: "10")
+        estimateLabel.alignAttribute(.top, to: .bottom, of: artworkTitleLabel, predicate: "10")
         estimateLabel.constrainHeight("16")
-        bidView.alignAttribute(.Top, toAttribute: .Bottom, ofView: estimateLabel, predicate: "13")
-        bidButton.alignAttribute(.Top, toAttribute: .Bottom, ofView: currentBidLabel, predicate: "13")
-        moreInfoLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: bidButton, predicate: "0")
+        bidView.alignAttribute(.top, to: .bottom, of: estimateLabel, predicate: "13")
+        bidButton.alignAttribute(.top, to: .bottom, of: currentBidLabel, predicate: "13")
+        moreInfoLabel.alignAttribute(.top, to: .bottom, of: bidButton, predicate: "0")
         moreInfoLabel.constrainHeight("44")
-        moreInfoLabel.alignAttribute(.Bottom, toAttribute: .Bottom, ofView: contentView, predicate: "12")
+        moreInfoLabel.alignAttribute(.bottom, to: .bottom, of: contentView, predicate: "12")
 
         viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
             .subscribeNext { (lotNumber)in
@@ -76,12 +76,12 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        bidView.drawTopDottedBorderWithColor(.artsyMediumGrey())
+        bidView.drawTopDottedBorder(with: .artsyMediumGrey())
     }
 }
 
 extension MasonryCollectionViewCell {
-    class func heightForCellWithImageAspectRatio(aspectRatio: CGFloat?) -> CGFloat {
+    class func heightForCellWithImageAspectRatio(_ aspectRatio: CGFloat?) -> CGFloat {
         let imageHeight = heightForImageWithAspectRatio(aspectRatio)
         let remainingHeight =
             20 + // padding
@@ -101,7 +101,7 @@ extension MasonryCollectionViewCell {
     }
 }
 
-private func heightForImageWithAspectRatio(aspectRatio: CGFloat?) -> CGFloat {
+private func heightForImage(withAspectRatio aspectRatio: CGFloat?) -> CGFloat {
     if let ratio = aspectRatio {
         if ratio != 0 {
             return CGFloat(MasonryCollectionViewCellWidth) / ratio

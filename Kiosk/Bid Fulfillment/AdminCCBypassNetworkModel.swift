@@ -3,13 +3,13 @@ import RxSwift
 import Moya
 
 enum BypassResult {
-    case RequireCC
-    case SkipCCRequirement
+    case requireCC
+    case skipCCRequirement
 }
 
 protocol AdminCCBypassNetworkModelType {
 
-    func checkForAdminCCBypass(saleID: String, authorizedNetworking: AuthorizedNetworking) -> Observable<BypassResult>
+    func checkForAdminCCBypass(_ saleID: String, authorizedNetworking: AuthorizedNetworking) -> Observable<BypassResult>
 }
 
 class AdminCCBypassNetworkModel: AdminCCBypassNetworkModelType {

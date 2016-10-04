@@ -7,22 +7,22 @@ typealias PresentModalClosure = (SaleArtwork) -> Void
 protocol ListingsViewModelType {
 
     var auctionID: String { get }
-    var syncInterval: NSTimeInterval { get }
+    var syncInterval: TimeInterval { get }
     var pageSize: Int { get }
-    var logSync: (NSDate) -> Void { get }
+    var logSync: (Date) -> Void { get }
     var numberOfSaleArtworks: Int { get }
 
     var showSpinner: Observable<Bool>! { get }
     var gridSelected: Observable<Bool>! { get }
     var updatedContents: Observable<NSDate> { get }
 
-    var scheduleOnBackground: (observable: Observable<AnyObject>) -> Observable<AnyObject> { get }
-    var scheduleOnForeground: (observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> { get }
+    var scheduleOnBackground: (_ observable: Observable<AnyObject>) -> Observable<AnyObject> { get }
+    var scheduleOnForeground: (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> { get }
 
-    func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel
-    func showDetailsForSaleArtworkAtIndexPath(indexPath: NSIndexPath)
-    func presentModalForSaleArtworkAtIndexPath(indexPath: NSIndexPath)
-    func imageAspectRatioForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> CGFloat?
+    func saleArtworkViewModelAtIndexPath(_ indexPath: IndexPath) -> SaleArtworkViewModel
+    func showDetailsForSaleArtworkAtIndexPath(_ indexPath: IndexPath)
+    func presentModalForSaleArtworkAtIndexPath(_ indexPath: IndexPath)
+    func imageAspectRatioForSaleArtworkAtIndexPath(_ indexPath: IndexPath) -> CGFloat?
 }
 
 // Cheating here, should be in the instance but there's only ever one instance, so ¯\_(ツ)_/¯
@@ -31,15 +31,15 @@ private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQ
 class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // These are private to the view model – should not be accessed directly
-    private var saleArtworks = Variable(Array<SaleArtwork>())
-    private var sortedSaleArtworks = Variable<Array<SaleArtwork>>([])
+    fileprivate var saleArtworks = Variable(Array<SaleArtwork>())
+    fileprivate var sortedSaleArtworks = Variable<Array<SaleArtwork>>([])
 
     let auctionID: String
     let pageSize: Int
-    let syncInterval: NSTimeInterval
-    let logSync: (NSDate) -> Void
-    var scheduleOnBackground: (observable: Observable<AnyObject>) -> Observable<AnyObject>
-    var scheduleOnForeground: (observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]>
+    let syncInterval: TimeInterval
+    let logSync: (Date) -> Void
+    var scheduleOnBackground: (_ observable: Observable<AnyObject>) -> Observable<AnyObject>
+    var scheduleOnForeground: (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]>
 
     var numberOfSaleArtworks: Int {
         return sortedSaleArtworks.value.count
@@ -64,10 +64,10 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
          showDetails: ShowDetailsClosure,
          presentModal: PresentModalClosure,
          pageSize: Int = 10,
-         syncInterval: NSTimeInterval = SyncInterval,
-         logSync:(NSDate) -> Void = ListingsViewModel.DefaultLogging,
-         scheduleOnBackground: (observable: Observable<AnyObject>) -> Observable<AnyObject> = ListingsViewModel.DefaultScheduler(onBackground: true),
-         scheduleOnForeground: (observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = ListingsViewModel.DefaultScheduler(onBackground: false),
+         syncInterval: TimeInterval = SyncInterval,
+         logSync:(Date) -> Void = ListingsViewModel.DefaultLogging,
+         scheduleOnBackground: (_ observable: Observable<AnyObject>) -> Observable<AnyObject> = ListingsViewModel.DefaultScheduler(onBackground: true),
+         scheduleOnForeground: (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = ListingsViewModel.DefaultScheduler(onBackground: false),
          auctionID: String = AppSetup.sharedState.auctionID) {
 
         self.provider = provider
@@ -87,7 +87,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // MARK: Private Methods
 
-    private func setup(selectedIndex: Observable<Int>) {
+    fileprivate func setup(_ selectedIndex: Observable<Int>) {
 
         recurringListingsRequest()
             .takeUntil(rx_deallocated)
@@ -126,12 +126,12 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     }
 
-    private func listingsRequestForPage(page: Int) -> Observable<AnyObject> {
+    fileprivate func listingsRequest(forPage page: Int) -> Observable<AnyObject> {
         return provider.request(.AuctionListings(id: auctionID, page: page, pageSize: self.pageSize)).filterSuccessfulStatusCodes().mapJSON()
     }
 
     // Repeatedly calls itself with page+1 until the count of the returned array is < pageSize.
-    private func retrieveAllListingsRequest(page: Int) -> Observable<AnyObject> {
+    fileprivate func retrieveAllListingsRequest(_ page: Int) -> Observable<AnyObject> {
         return Observable.create { [weak self] observer in
             guard let me = self else { return NopDisposable.instance }
 
@@ -157,7 +157,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     }
 
     // Fetches all pages of the auction
-    private func allListingsRequest() -> Observable<[SaleArtwork]> {
+    fileprivate func allListingsRequest() -> Observable<[SaleArtwork]> {
         let backgroundJSONParsing = scheduleOnBackground(observable: retrieveAllListingsRequest(1)).reduce([AnyObject]())
             { (memo, object) in
                 guard let array = object as? Array<AnyObject> else { return memo }
@@ -170,10 +170,10 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         return scheduleOnForeground(observable: backgroundJSONParsing)
     }
 
-    private func recurringListingsRequest() -> Observable<Array<SaleArtwork>> {
+    fileprivate func recurringListingsRequest() -> Observable<Array<SaleArtwork>> {
         let recurring = Observable<Int>.interval(syncInterval, scheduler: MainScheduler.instance)
-            .map { _ in NSDate() }
-            .startWith(NSDate())
+            .map { _ in Date() }
+            .startWith(Date())
             .takeUntil(rx_deallocating)
 
 
@@ -202,13 +202,13 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // MARK: Private class methods
 
-    private class func DefaultLogging(date: NSDate) {
+    fileprivate class func DefaultLogging(_ date: Date) {
         #if (arch(i386) || arch(x86_64)) && os(iOS)
             logger.log("Syncing on \(date)")
         #endif
     }
 
-    private class func DefaultScheduler<T>(onBackground background: Bool) -> (observable: Observable<T>) -> Observable<T> {
+    fileprivate class func DefaultScheduler<T>(onBackground background: Bool) -> (_ observable: Observable<T>) -> Observable<T> {
         return { observable in
             if background {
                 return observable.observeOn(backgroundScheduler)
@@ -220,72 +220,72 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // MARK: Public methods
 
-    func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel {
+    func saleArtworkViewModel(atIndexPath indexPath: IndexPath) -> SaleArtworkViewModel {
         return sortedSaleArtworks.value[indexPath.item].viewModel
     }
 
-    func imageAspectRatioForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> CGFloat? {
+    func imageAspectRatioForSaleArtwork(atIndexPath indexPath: IndexPath) -> CGFloat? {
         return sortedSaleArtworks.value[indexPath.item].artwork.defaultImage?.aspectRatio
     }
 
-    func showDetailsForSaleArtworkAtIndexPath(indexPath: NSIndexPath) {
+    func showDetailsForSaleArtwork(atIndexPath indexPath: IndexPath) {
         showDetails(sortedSaleArtworks.value[indexPath.item])
     }
 
-    func presentModalForSaleArtworkAtIndexPath(indexPath: NSIndexPath) {
+    func presentModalForSaleArtwork(atIndexPath indexPath: IndexPath) {
         presentModal(sortedSaleArtworks.value[indexPath.item])
     }
 
     // MARK: - Switch Values
 
     enum SwitchValues: Int {
-        case Grid = 0
-        case LeastBids
-        case MostBids
-        case HighestCurrentBid
-        case LowestCurrentBid
-        case Alphabetical
+        case grid = 0
+        case leastBids
+        case mostBids
+        case highestCurrentBid
+        case lowestCurrentBid
+        case alphabetical
 
         var name: String {
             switch self {
-            case .Grid:
+            case .grid:
                 return "Grid"
-            case .LeastBids:
+            case .leastBids:
                 return "Least Bids"
-            case .MostBids:
+            case .mostBids:
                 return "Most Bids"
-            case .HighestCurrentBid:
+            case .highestCurrentBid:
                 return "Highest Bid"
-            case .LowestCurrentBid:
+            case .lowestCurrentBid:
                 return "Lowest Bid"
-            case .Alphabetical:
+            case .alphabetical:
                 return "A–Z"
             }
         }
 
-        func sortSaleArtworks(saleArtworks: [SaleArtwork]) -> [SaleArtwork] {
+        func sortSaleArtworks(_ saleArtworks: [SaleArtwork]) -> [SaleArtwork] {
             switch self {
-            case Grid:
+            case .grid:
                 return saleArtworks
-            case LeastBids:
-                return saleArtworks.sort(leastBidsSort)
-            case MostBids:
-                return saleArtworks.sort(mostBidsSort)
-            case HighestCurrentBid:
-                return saleArtworks.sort(highestCurrentBidSort)
-            case LowestCurrentBid:
-                return saleArtworks.sort(lowestCurrentBidSort)
-            case Alphabetical:
-                return saleArtworks.sort(alphabeticalSort)
+            case .leastBids:
+                return saleArtworks.sorted(by: leastBidsSort)
+            case .mostBids:
+                return saleArtworks.sorted(by: mostBidsSort)
+            case .highestCurrentBid:
+                return saleArtworks.sorted(by: highestCurrentBidSort)
+            case .lowestCurrentBid:
+                return saleArtworks.sorted(by: lowestCurrentBidSort)
+            case .alphabetical:
+                return saleArtworks.sorted(by: alphabeticalSort)
             }
         }
 
         static func allSwitchValues() -> [SwitchValues] {
-            return [Grid, LeastBids, MostBids, HighestCurrentBid, LowestCurrentBid, Alphabetical]
+            return [grid, leastBids, mostBids, highestCurrentBid, lowestCurrentBid, alphabetical]
         }
 
         static func allSwitchValueNames() -> [String] {
-            return allSwitchValues().map{$0.name.uppercaseString}
+            return allSwitchValues().map{$0.name.uppercased()}
         }
     }
 }
@@ -308,31 +308,31 @@ extension Optional where Wrapped: IntOrZeroable {
     }
 }
 
-func leastBidsSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
+func leastBidsSort(_ lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
     return (lhs.bidCount.intOrZero) < (rhs.bidCount.intOrZero)
 }
 
-func mostBidsSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
+func mostBidsSort(_ lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
     return !leastBidsSort(lhs, rhs)
 }
 
-func lowestCurrentBidSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
+func lowestCurrentBidSort(_ lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
     return (lhs.highestBidCents.intOrZero) < (rhs.highestBidCents.intOrZero)
 }
 
-func highestCurrentBidSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
+func highestCurrentBidSort(_ lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
     return !lowestCurrentBidSort(lhs, rhs)
 }
 
-func alphabeticalSort(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
-    return lhs.artwork.sortableArtistID().caseInsensitiveCompare(rhs.artwork.sortableArtistID()) == .OrderedAscending
+func alphabeticalSort(_ lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
+    return lhs.artwork.sortableArtistID().caseInsensitiveCompare(rhs.artwork.sortableArtistID()) == .orderedAscending
 }
 
-func sortById(lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
-    return lhs.id.caseInsensitiveCompare(rhs.id) == .OrderedAscending
+func sortById(_ lhs: SaleArtwork, _ rhs: SaleArtwork) -> Bool {
+    return lhs.id.caseInsensitiveCompare(rhs.id) == .orderedAscending
 }
 
-private func update(currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) -> Bool {
+private func update(_ currentSaleArtworks: [SaleArtwork], newSaleArtworks: [SaleArtwork]) -> Bool {
     assert(currentSaleArtworks.count == newSaleArtworks.count, "Arrays' counts must be equal.")
     // Updating the currentSaleArtworks is easy. Both are already sorted as they came from the API (by lot #).
     // Because we assume that their length is the same, we just do a linear scan through and

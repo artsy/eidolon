@@ -1,9 +1,9 @@
 import Foundation
 
-private extension NSDate {
+private extension Date {
     var isInPast: Bool {
-        let now = NSDate()
-        return self.compare(now) == NSComparisonResult.OrderedAscending
+        let now = Date()
+        return self.compare(now) == ComparisonResult.orderedAscending
     }
 }
 
@@ -15,14 +15,14 @@ struct XAppToken {
 
     // MARK: - Initializers
 
-    let defaults: NSUserDefaults
+    let defaults: UserDefaults
 
-    init(defaults: NSUserDefaults) {
+    init(defaults: UserDefaults) {
         self.defaults = defaults
     }
 
     init() {
-        self.defaults = NSUserDefaults.standardUserDefaults()
+        self.defaults = UserDefaults.standard
     }
 
 
@@ -30,20 +30,20 @@ struct XAppToken {
     
     var token: String? {
         get {
-            let key = defaults.stringForKey(DefaultsKeys.TokenKey.rawValue)
+            let key = defaults.string(forKey: DefaultsKeys.TokenKey.rawValue)
             return key
         }
         set(newToken) {
-            defaults.setObject(newToken, forKey: DefaultsKeys.TokenKey.rawValue)
+            defaults.set(newToken, forKey: DefaultsKeys.TokenKey.rawValue)
         }
     }
     
-    var expiry: NSDate? {
+    var expiry: Date? {
         get {
-            return defaults.objectForKey(DefaultsKeys.TokenExpiry.rawValue) as? NSDate
+            return defaults.object(forKey: DefaultsKeys.TokenExpiry.rawValue) as? Date
         }
         set(newExpiry) {
-            defaults.setObject(newExpiry, forKey: DefaultsKeys.TokenExpiry.rawValue)
+            defaults.set(newExpiry, forKey: DefaultsKeys.TokenExpiry.rawValue)
         }
     }
     

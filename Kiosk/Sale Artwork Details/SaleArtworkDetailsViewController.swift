@@ -17,7 +17,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         appDelegate().showBuyersPremiumCommand()
     }
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> SaleArtworkDetailsViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> SaleArtworkDetailsViewController {
         return storyboard.viewControllerWithID(.SaleArtworkDetail) as! SaleArtworkDetailsViewController
     }
 
@@ -48,71 +48,71 @@ class SaleArtworkDetailsViewController: UIViewController {
         // works if we defer recalculating their geometry to the next runloop.
         // This wasn't an issue with RAC's rac_signalForSelector because that invoked the signal _after_ this method completed.
         // So that's what I've done here.
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             self.layoutSubviews.onNext()
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         viewWillAppear.onCompleted()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue == .ZoomIntoArtwork {
-            let nextViewController = segue.destinationViewController as! SaleArtworkZoomViewController
+            let nextViewController = segue.destination as! SaleArtworkZoomViewController
             nextViewController.saleArtwork = saleArtwork
         }
     }
 
     enum MetadataStackViewTag: Int {
-        case LotNumberLabel = 1
-        case ArtistNameLabel
-        case ArtworkNameLabel
-        case ArtworkMediumLabel
-        case ArtworkDimensionsLabel
-        case ImageRightsLabel
-        case EstimateTopBorder
-        case EstimateLabel
-        case EstimateBottomBorder
-        case CurrentBidLabel
-        case CurrentBidValueLabel
-        case NumberOfBidsPlacedLabel
-        case BidButton
-        case BuyersPremium
+        case lotNumberLabel = 1
+        case artistNameLabel
+        case artworkNameLabel
+        case artworkMediumLabel
+        case artworkDimensionsLabel
+        case imageRightsLabel
+        case estimateTopBorder
+        case estimateLabel
+        case estimateBottomBorder
+        case currentBidLabel
+        case currentBidValueLabel
+        case numberOfBidsPlacedLabel
+        case bidButton
+        case buyersPremium
     }
 
-    @IBAction func backWasPressed(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func backWasPressed(_ sender: AnyObject) {
+        navigationController?.popViewController(animated: true)
     }
 
-    private func setupMetadataView() {
+    fileprivate func setupMetadataView() {
         enum LabelType {
-            case Serif
-            case SansSerif
-            case ItalicsSerif
-            case Bold
+            case serif
+            case sansSerif
+            case italicsSerif
+            case bold
         }
 
-        func label(type: LabelType, tag: MetadataStackViewTag, fontSize: CGFloat = 16.0) -> UILabel {
+        func label(_ type: LabelType, tag: MetadataStackViewTag, fontSize: CGFloat = 16.0) -> UILabel {
             let label: UILabel = { () -> UILabel in
                 switch type {
-                case .Serif:
+                case .serif:
                     return ARSerifLabel()
-                case .SansSerif:
+                case .sansSerif:
                     return ARSansSerifLabel()
-                case .ItalicsSerif:
+                case .italicsSerif:
                     return ARItalicsSerifLabel()
-                case .Bold:
+                case .bold:
                     let label = ARSerifLabel()
-                    label.font = UIFont.sansSerifFontWithSize(label.font.pointSize)
+                    label.font = UIFont.sansSerifFont(withSize: label.font.pointSize)
                     return label
                 }
             }()
 
-            label.lineBreakMode = .ByWordWrapping
-            label.font = label.font.fontWithSize(fontSize)
+            label.lineBreakMode = .byWordWrapping
+            label.font = label.font.withSize(fontSize)
             label.tag = tag.rawValue
             label.preferredMaxLayoutWidth = 276
 
@@ -122,8 +122,8 @@ class SaleArtworkDetailsViewController: UIViewController {
         let hasLotNumber = (saleArtwork.lotNumber != nil)
 
         if let _ = saleArtwork.lotNumber {
-            let lotNumberLabel = label(.SansSerif, tag: .LotNumberLabel)
-            lotNumberLabel.font = lotNumberLabel.font.fontWithSize(12)
+            let lotNumberLabel = label(.sansSerif, tag: .lotNumberLabel)
+            lotNumberLabel.font = lotNumberLabel.font.withSize(12)
             metadataStackView.addSubview(lotNumberLabel, withTopMargin: "0", sideMargin: "0")
 
             saleArtwork
@@ -135,26 +135,26 @@ class SaleArtworkDetailsViewController: UIViewController {
         }
 
         if let artist = artist() {
-            let artistNameLabel = label(.SansSerif, tag: .ArtistNameLabel)
+            let artistNameLabel = label(.sansSerif, tag: .artistNameLabel)
             artistNameLabel.text = artist.name
             metadataStackView.addSubview(artistNameLabel, withTopMargin: hasLotNumber ? "10" : "0", sideMargin: "0")
         }
 
-        let artworkNameLabel = label(.ItalicsSerif, tag: .ArtworkNameLabel)
+        let artworkNameLabel = label(.italicsSerif, tag: .artworkNameLabel)
         artworkNameLabel.text = "\(saleArtwork.artwork.title), \(saleArtwork.artwork.date)"
         metadataStackView.addSubview(artworkNameLabel, withTopMargin: "10", sideMargin: "0")
 
         if let medium = saleArtwork.artwork.medium {
             if medium.isNotEmpty {
-                let mediumLabel = label(.Serif, tag: .ArtworkMediumLabel)
+                let mediumLabel = label(.serif, tag: .artworkMediumLabel)
                 mediumLabel.text = medium
                 metadataStackView.addSubview(mediumLabel, withTopMargin: "22", sideMargin: "0")
             }
         }
 
         if saleArtwork.artwork.dimensions.count > 0 {
-            let dimensionsLabel = label(.Serif, tag: .ArtworkDimensionsLabel)
-            dimensionsLabel.text = (saleArtwork.artwork.dimensions as NSArray).componentsJoinedByString("\n")
+            let dimensionsLabel = label(.serif, tag: .artworkDimensionsLabel)
+            dimensionsLabel.text = (saleArtwork.artwork.dimensions as NSArray).componentsJoined(by: "\n")
             metadataStackView.addSubview(dimensionsLabel, withTopMargin: "5", sideMargin: "0")
         }
 
@@ -170,16 +170,16 @@ class SaleArtworkDetailsViewController: UIViewController {
 
         let estimateTopBorder = UIView()
         estimateTopBorder.constrainHeight("1")
-        estimateTopBorder.tag = MetadataStackViewTag.EstimateTopBorder.rawValue
+        estimateTopBorder.tag = MetadataStackViewTag.estimateTopBorder.rawValue
         metadataStackView.addSubview(estimateTopBorder, withTopMargin: "22", sideMargin: "0")
 
-        let estimateLabel = label(.Serif, tag: .EstimateLabel)
+        let estimateLabel = label(.serif, tag: .estimateLabel)
         estimateLabel.text = saleArtwork.viewModel.estimateString
         metadataStackView.addSubview(estimateLabel, withTopMargin: "15", sideMargin: "0")
 
         let estimateBottomBorder = UIView()
         estimateBottomBorder.constrainHeight("1")
-        estimateBottomBorder.tag = MetadataStackViewTag.EstimateBottomBorder.rawValue
+        estimateBottomBorder.tag = MetadataStackViewTag.estimateBottomBorder.rawValue
         metadataStackView.addSubview(estimateBottomBorder, withTopMargin: "10", sideMargin: "0")
 
         viewWillAppear
@@ -196,7 +196,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                 return (cents as Int ?? 0) > 0
             }
 
-        let currentBidLabel = label(.Serif, tag: .CurrentBidLabel)
+        let currentBidLabel = label(.serif, tag: .currentBidLabel)
 
         hasBids
             .flatMap { hasBids -> Observable<String> in
@@ -211,7 +211,7 @@ class SaleArtworkDetailsViewController: UIViewController {
 
         metadataStackView.addSubview(currentBidLabel, withTopMargin: "22", sideMargin: "0")
 
-        let currentBidValueLabel = label(.Bold, tag: .CurrentBidValueLabel, fontSize: 27)
+        let currentBidValueLabel = label(.bold, tag: .currentBidValueLabel, fontSize: 27)
         saleArtwork
             .viewModel
             .currentBid()
@@ -219,7 +219,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
         metadataStackView.addSubview(currentBidValueLabel, withTopMargin: "10", sideMargin: "0")
 
-        let numberOfBidsPlacedLabel = label(.Serif, tag: .NumberOfBidsPlacedLabel)
+        let numberOfBidsPlacedLabel = label(.serif, tag: .numberOfBidsPlacedLabel)
         saleArtwork
             .viewModel
             .numberOfBidsWithReserve
@@ -255,34 +255,34 @@ class SaleArtworkDetailsViewController: UIViewController {
             .bindTo(bidButton.rx_enabled)
             .addDisposableTo(rx_disposeBag)
 
-        bidButton.tag = MetadataStackViewTag.BidButton.rawValue
+        bidButton.tag = MetadataStackViewTag.bidButton.rawValue
         metadataStackView.addSubview(bidButton, withTopMargin: "40", sideMargin: "0")
 
         if let _ = buyersPremium() {
             let buyersPremiumView = UIView()
-            buyersPremiumView.tag = MetadataStackViewTag.BuyersPremium.rawValue
+            buyersPremiumView.tag = MetadataStackViewTag.buyersPremium.rawValue
 
             let buyersPremiumLabel = ARSerifLabel()
-            buyersPremiumLabel.font = buyersPremiumLabel.font.fontWithSize(16)
+            buyersPremiumLabel.font = buyersPremiumLabel.font.withSize(16)
             buyersPremiumLabel.text = "This work has a "
             buyersPremiumLabel.textColor = .artsyHeavyGrey()
 
             let buyersPremiumButton = ARButton()
             let title = "buyers premium"
-            let attributes: [String: AnyObject] = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue, NSFontAttributeName: buyersPremiumLabel.font ];
+            let attributes: [String: AnyObject] = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue as AnyObject, NSFontAttributeName: buyersPremiumLabel.font ];
             let attributedTitle = NSAttributedString(string: title, attributes: attributes)
-            buyersPremiumButton.setTitle(title, forState: .Normal)
+            buyersPremiumButton.setTitle(title, for: UIControlState())
             buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
-            buyersPremiumButton.setTitleColor(.artsyHeavyGrey(), forState: .Normal)
+            buyersPremiumButton.setTitleColor(.artsyHeavyGrey(), for: UIControlState())
 
             buyersPremiumButton.rx_action = showBuyersPremiumCommand()
 
             buyersPremiumView.addSubview(buyersPremiumLabel)
             buyersPremiumView.addSubview(buyersPremiumButton)
 
-            buyersPremiumLabel.alignTop("0", leading: "0", bottom: "0", trailing: nil, toView: buyersPremiumView)
-            buyersPremiumLabel.alignBaselineWithView(buyersPremiumButton, predicate: nil)
-            buyersPremiumButton.alignAttribute(.Left, toAttribute: .Right, ofView: buyersPremiumLabel, predicate: "0")
+            buyersPremiumLabel.alignTop("0", leading: "0", bottom: "0", trailing: nil, to: buyersPremiumView)
+            buyersPremiumLabel.alignBaseline(with: buyersPremiumButton, predicate: nil)
+            buyersPremiumButton.alignAttribute(.left, to: .right, of: buyersPremiumLabel, predicate: "0")
 
             metadataStackView.addSubview(buyersPremiumView, withTopMargin: "30", sideMargin: "0")
         }
@@ -290,20 +290,20 @@ class SaleArtworkDetailsViewController: UIViewController {
         metadataStackView.bottomMarginHeight = CGFloat(NSNotFound)
     }
 
-    private func setupImageView(imageView: UIImageView) {
+    fileprivate func setupImageView(_ imageView: UIImageView) {
         if let image = saleArtwork.artwork.defaultImage {
 
             // We'll try to retrieve the thumbnail image from the cache. If we don't have it, we'll set the background colour to grey to indicate that we're downloading it.
-            let key = SDWebImageManager.sharedManager().cacheKeyForURL(image.thumbnailURL())
-            let thumbnailImage = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(key)
+            let key = SDWebImageManager.shared().cacheKey(for: image.thumbnailURL() as URL!)
+            let thumbnailImage = SDImageCache.shared().imageFromDiskCache(forKey: key)
             if thumbnailImage == nil {
                 imageView.backgroundColor = .artsyLightGrey()
             }
 
-            imageView.sd_setImageWithURL(image.fullsizeURL(), placeholderImage: thumbnailImage) { (image, _, _, _) in
+            imageView.sd_setImage(with: image.fullsizeURL(), placeholderImage: thumbnailImage) { (image, _, _, _) in
                 // If the image was successfully downloaded, make sure we aren't still displaying grey.
                 if image != nil {
-                    imageView.backgroundColor = .clearColor()
+                    imageView.backgroundColor = .clear()
                 }
             }
 
@@ -317,8 +317,8 @@ class SaleArtworkDetailsViewController: UIViewController {
             }()
             imageView.constrainHeight( "\(heightConstraintNumber)" )
 
-            imageView.contentMode = .ScaleAspectFit
-            imageView.userInteractionEnabled = true
+            imageView.contentMode = .scaleAspectFit
+            imageView.isUserInteractionEnabled = true
 
             let recognizer = UITapGestureRecognizer()
             imageView.addGestureRecognizer(recognizer)
@@ -332,24 +332,24 @@ class SaleArtworkDetailsViewController: UIViewController {
         }
     }
 
-    private func setupAdditionalDetailStackView() {
+    fileprivate func setupAdditionalDetailStackView() {
         enum LabelType {
-            case Header
-            case Body
+            case header
+            case body
         }
 
-        func label(type: LabelType, layout: Observable<Void>? = nil) -> UILabel {
+        func label(_ type: LabelType, layout: Observable<Void>? = nil) -> UILabel {
             let (label, fontSize) = { () -> (UILabel, CGFloat) in
                 switch type {
-                case .Header:
+                case .header:
                     return (ARSansSerifLabel(), 14)
-                case .Body:
+                case .body:
                     return (ARSerifLabel(), 16)
                 }
             }()
 
-            label.font = label.font.fontWithSize(fontSize)
-            label.lineBreakMode = .ByWordWrapping
+            label.font = label.font.withSize(fontSize)
+            label.lineBreakMode = .byWordWrapping
 
             layout?
                 .take(1)
@@ -413,11 +413,11 @@ class SaleArtworkDetailsViewController: UIViewController {
         }
     }
 
-    private func artist() -> Artist? {
+    fileprivate func artist() -> Artist? {
         return saleArtwork.artwork.artists?.first
     }
 
-    private func retrieveImageRights() -> Observable<String> {
+    fileprivate func retrieveImageRights() -> Observable<String> {
         let artwork = saleArtwork.artwork
 
         if let imageRights = artwork.imageRights {
@@ -434,7 +434,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         }
     }
 
-    private func retrieveAdditionalInfo() -> Observable<String> {
+    fileprivate func retrieveAdditionalInfo() -> Observable<String> {
         let artwork = saleArtwork.artwork
 
         if let additionalInfo = artwork.additionalInfo {
@@ -450,7 +450,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         }
     }
 
-    private func retrieveArtistBlurb() -> Observable<String> {
+    fileprivate func retrieveArtistBlurb() -> Observable<String> {
         guard let artist = artist() else {
             return .empty()
         }

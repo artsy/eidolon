@@ -6,7 +6,7 @@ import Nimble_Snapshots
 import SDWebImage
 
 class SaleArtworkDetailsViewControllerConfiguration: QuickConfiguration {
-    override class func configure(configuration: Configuration) {
+    override class func configure(_ configuration: Configuration) {
         sharedExamples("a sale artwork details view controller") { (sharedExampleContext: SharedExampleContext) in
             var subject: SaleArtworkDetailsViewController!
 
@@ -22,7 +22,7 @@ class SaleArtworkDetailsViewControllerConfiguration: QuickConfiguration {
 }
 
 class SaleArtworkDetailsViewControllerTests: QuickSpec {
-    let imageCache = SDImageCache.sharedImageCache()
+    let imageCache = SDImageCache.shared()
     override func spec() {
         var subject: SaleArtworkDetailsViewController!
 

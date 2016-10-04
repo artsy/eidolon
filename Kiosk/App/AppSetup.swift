@@ -16,14 +16,14 @@ class AppSetup {
     }
 
     init() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let auction = defaults.stringForKey("KioskAuctionID") {
+        let defaults = UserDefaults.standard
+        if let auction = defaults.string(forKey: "KioskAuctionID") {
             auctionID = auction
         }
 
-        useStaging = defaults.boolForKey("KioskUseStaging")
-        showDebugButtons = defaults.boolForKey("KioskShowDebugButtons")
-        disableCardReader = defaults.boolForKey("KioskDisableCardReader")
+        useStaging = defaults.bool(forKey: "KioskUseStaging")
+        showDebugButtons = defaults.bool(forKey: "KioskShowDebugButtons")
+        disableCardReader = defaults.bool(forKey: "KioskDisableCardReader")
 
         if let _ = NSClassFromString("XCTest") { isTesting = true }
     }

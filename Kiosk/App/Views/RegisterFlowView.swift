@@ -22,12 +22,12 @@ class RegisterFlowView: ORStackView {
         updateConstraints()
     }
 
-    private struct SubViewParams {
+    fileprivate struct SubViewParams {
         let title: String
-        let getters: Array<NewUser -> String?>
+        let getters: Array<(NewUser) -> String?>
     }
 
-    private lazy var subViewParams: Array<SubViewParams> = {
+    fileprivate lazy var subViewParams: Array<SubViewParams> = {
         return [
             [SubViewParams(title: "Mobile", getters: [{ $0.phoneNumber.value }])],
             [SubViewParams(title: "Email", getters: [{ $0.email.value }])],
@@ -40,7 +40,7 @@ class RegisterFlowView: ORStackView {
         let user = details!.newUser
 
         removeAllSubviews()
-        for (i, subViewParam) in subViewParams.enumerate() {
+        for (i, subViewParam) in subViewParams.enumerated() {
             let itemView = ItemView(frame: bounds)
             itemView.createTitleViewWithTitle(subViewParam.title)
 
@@ -69,7 +69,7 @@ class RegisterFlowView: ORStackView {
         bottomMarginHeight = 0
     }
 
-    func pressed(sender: UIButton!) {
+    func pressed(_ sender: UIButton!) {
         highlightedIndex.value = sender.tag
     }
 
@@ -81,39 +81,39 @@ class RegisterFlowView: ORStackView {
             titleLabel?.textColor = .artsyPurple()
         }
 
-        func createTitleViewWithTitle(title: String)  {
+        func createTitleViewWithTitle(_ title: String)  {
             let label = UILabel(frame: bounds)
-            label.font = UIFont.sansSerifFontWithSize(16)
-            label.text = title.uppercaseString
+            label.font = UIFont.sansSerifFont(withSize: 16)
+            label.text = title.uppercased()
             titleLabel = label
 
             addSubview(label)
-            label.constrainWidthToView(self, predicate: "0")
-            label.alignLeadingEdgeWithView(self, predicate: "0")
-            label.alignTopEdgeWithView(self, predicate: "0")
+            label.constrainWidth(to: self, predicate: "0")
+            label.alignLeadingEdge(with: self, predicate: "0")
+            label.alignTopEdge(with: self, predicate: "0")
         }
 
-        func createInfoLabel(info: String) {
+        func createInfoLabel(_ info: String) {
             let label = UILabel(frame: bounds)
-            label.font = UIFont.serifFontWithSize(16)
+            label.font = UIFont.serifFont(withSize: 16)
             label.text = info
 
             addSubview(label)
-            label.constrainWidthToView(self, predicate: "-52")
-            label.alignLeadingEdgeWithView(self, predicate: "0")
-            label.constrainTopSpaceToView(titleLabel!, predicate: "8")
+            label.constrainWidth(to: self, predicate: "-52")
+            label.alignLeadingEdge(with: self, predicate: "0")
+            label.constrainTopSpace(to: titleLabel!, predicate: "8")
         }
 
-        func createJumpToButtonAtIndex(index: NSInteger) -> UIButton {
-            let button = UIButton(type: .Custom)
+        func createJumpToButtonAtIndex(_ index: NSInteger) -> UIButton {
+            let button = UIButton(type: .custom)
             button.tag = index
-            button.setImage(UIImage(named: "edit_button"), forState: .Normal)
-            button.userInteractionEnabled = true
-            button.enabled = true
+            button.setImage(UIImage(named: "edit_button"), for: UIControlState())
+            button.isUserInteractionEnabled = true
+            button.isEnabled = true
 
             addSubview(button)
-            button.alignTopEdgeWithView(self, predicate: "0")
-            button.alignTrailingEdgeWithView(self, predicate: "0")
+            button.alignTopEdge(with: self, predicate: "0")
+            button.alignTrailingEdge(with: self, predicate: "0")
             button.constrainWidth("36")
             button.constrainHeight("36")
             

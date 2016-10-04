@@ -3,27 +3,27 @@ import UIKit
 
 class PasswordAlertViewController: UIAlertController {
 
-    class func alertView(completion: () -> ()) -> PasswordAlertViewController {
-        let alertController = PasswordAlertViewController(title: "Exit Kiosk", message: nil, preferredStyle: .Alert)
-        let exitAction = UIAlertAction(title: "Exit", style: .Default) { (_) in
+    class func alertView(completion: @escaping () -> ()) -> PasswordAlertViewController {
+        let alertController = PasswordAlertViewController(title: "Exit Kiosk", message: nil, preferredStyle: .alert)
+        let exitAction = UIAlertAction(title: "Exit", style: .default) { (_) in
             completion()
             return
         }
 
         if detectDevelopmentEnvironment() {
-            exitAction.enabled = true
+            exitAction.isEnabled = true
         } else {
-            exitAction.enabled = false
+            exitAction.isEnabled = false
         }
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
 
-        alertController.addTextFieldWithConfigurationHandler { (textField) in
+        alertController.addTextField { (textField) in
             textField.placeholder = "Exit Password"
 
-            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+            NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { (notification) in
                 // compiler crashes when using weak
-                exitAction.enabled = textField.text == "Genome401"
+                exitAction.isEnabled = textField.text == "Genome401"
             }
         }
 

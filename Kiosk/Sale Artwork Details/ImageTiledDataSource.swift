@@ -9,7 +9,7 @@ class TiledImageDataSourceWithImage: ARWebTiledImageDataSource {
         super.init()
 
         tileFormat = "jpg";
-        tileBaseURL = NSURL(string: image.baseURL)
+        tileBaseURL = URL(string: image.baseURL)
         tileSize = image.tileSize
         maxTiledHeight = image.maxTiledHeight
         maxTiledWidth = image.maxTiledWidth

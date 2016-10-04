@@ -10,7 +10,7 @@ class PlaceBidViewController: UIViewController {
 
     var provider: Networking!
 
-    private var _bidDollars = Variable(0)
+    fileprivate var _bidDollars = Variable(0)
     var hasAlreadyPlacedABid: Bool = false
 
     @IBOutlet var bidAmountTextField: TextField!
@@ -44,11 +44,11 @@ class PlaceBidViewController: UIViewController {
     lazy var bidDollars: Observable<Int> = { self.keypadContainer.intValue }()
     var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> PlaceBidViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> PlaceBidViewController {
         return storyboard.viewControllerWithID(.PlaceYourBid) as! PlaceBidViewController
     }
 
-    private let _viewWillDisappear = PublishSubject<Void>()
+    fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
         return self._viewWillDisappear.asObserver()
     }
@@ -60,8 +60,8 @@ class PlaceBidViewController: UIViewController {
             self.fulfillmentNav().reset()
         }
 
-        currentBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
-        yourBidTitleLabel.font = UIFont.serifSemiBoldFontWithSize(17)
+        currentBidTitleLabel.font = UIFont.serifSemiBoldFont(withSize: 17)
+        yourBidTitleLabel.font = UIFont.serifSemiBoldFont(withSize: 17)
 
         conditionsOfSaleButton.rx_action = showConditionsOfSaleCommand()
         privacyPolictyButton.rx_action = showPrivacyPolicyCommand()
@@ -117,19 +117,19 @@ class PlaceBidViewController: UIViewController {
 
 
                 enum LabelTags: Int {
-                    case LotNumber = 1
-                    case ArtistName
-                    case ArtworkTitle
-                    case ArtworkPrice
-                    case BuyersPremium
-                    case Gobbler
+                    case lotNumber = 1
+                    case artistName
+                    case artworkTitle
+                    case artworkPrice
+                    case buyersPremium
+                    case gobbler
                 }
 
                 let lotNumber = nav.bidDetails.saleArtwork?.lotNumber
 
                 if let _ = lotNumber {
                     let lotNumberLabel = smallSansSerifLabel()
-                    lotNumberLabel.tag = LabelTags.LotNumber.rawValue
+                    lotNumberLabel.tag = LabelTags.lotNumber.rawValue
                     detailsStackView.addSubview(lotNumberLabel, withTopMargin: "10", sideMargin: "0")
                     saleArtwork.viewModel
                         .lotNumber()
@@ -141,44 +141,44 @@ class PlaceBidViewController: UIViewController {
                 }
 
                 let artistNameLabel = sansSerifLabel()
-                artistNameLabel.tag = LabelTags.ArtistName.rawValue
+                artistNameLabel.tag = LabelTags.artistName.rawValue
                 detailsStackView.addSubview(artistNameLabel, withTopMargin: "15", sideMargin: "0")
 
                 let artworkTitleLabel = serifLabel()
-                artworkTitleLabel.tag = LabelTags.ArtworkTitle.rawValue
+                artworkTitleLabel.tag = LabelTags.artworkTitle.rawValue
                 detailsStackView.addSubview(artworkTitleLabel, withTopMargin: "15", sideMargin: "0")
 
                 let artworkPriceLabel = serifLabel()
-                artworkPriceLabel.tag = LabelTags.ArtworkPrice.rawValue
+                artworkPriceLabel.tag = LabelTags.artworkPrice.rawValue
                 detailsStackView.addSubview(artworkPriceLabel, withTopMargin: "15", sideMargin: "0")
 
                 if let _ = buyersPremium() {
                     let buyersPremiumView = UIView()
-                    buyersPremiumView.tag = LabelTags.BuyersPremium.rawValue
+                    buyersPremiumView.tag = LabelTags.buyersPremium.rawValue
 
                     let buyersPremiumLabel = ARSerifLabel()
-                    buyersPremiumLabel.font = buyersPremiumLabel.font.fontWithSize(16)
+                    buyersPremiumLabel.font = buyersPremiumLabel.font.withSize(16)
                     buyersPremiumLabel.text = "This work has a "
                     buyersPremiumLabel.textColor = .artsyHeavyGrey()
 
                     let buyersPremiumButton = ARUnderlineButton()
                     buyersPremiumButton.titleLabel?.font = buyersPremiumLabel.font
-                    buyersPremiumButton.setTitle("buyers premium", forState: .Normal)
-                    buyersPremiumButton.setTitleColor(.artsyHeavyGrey(), forState: .Normal)
+                    buyersPremiumButton.setTitle("buyers premium", for: UIControlState())
+                    buyersPremiumButton.setTitleColor(.artsyHeavyGrey(), for: UIControlState())
                     buyersPremiumButton.rx_action = showBuyersPremiumCommand()
 
                     buyersPremiumView.addSubview(buyersPremiumLabel)
                     buyersPremiumView.addSubview(buyersPremiumButton)
 
-                    buyersPremiumLabel.alignTop("0", leading: "0", bottom: "0", trailing: nil, toView: buyersPremiumView)
-                    buyersPremiumLabel.alignBaselineWithView(buyersPremiumButton, predicate: nil)
-                    buyersPremiumButton.alignAttribute(.Left, toAttribute: .Right, ofView: buyersPremiumLabel, predicate: "0")
+                    buyersPremiumLabel.alignTop("0", leading: "0", bottom: "0", trailing: nil, to: buyersPremiumView)
+                    buyersPremiumLabel.alignBaseline(with: buyersPremiumButton, predicate: nil)
+                    buyersPremiumButton.alignAttribute(.left, to: .right, of: buyersPremiumLabel, predicate: "0")
                     
                     detailsStackView.addSubview(buyersPremiumView, withTopMargin: "15", sideMargin: "0")
                 }
 
                 let gobbler = WhitespaceGobbler()
-                gobbler.tag = LabelTags.Gobbler.rawValue
+                gobbler.tag = LabelTags.gobbler.rawValue
                 detailsStackView.addSubview(gobbler, withTopMargin: "0")
 
                 if let artist = saleArtwork.artwork.artists?.first {
@@ -205,7 +205,7 @@ class PlaceBidViewController: UIViewController {
                     .addDisposableTo(rx_disposeBag)
 
                 if let url = saleArtwork.artwork.defaultImage?.thumbnailURL() {
-                    self.artworkImageView.sd_setImageWithURL(url)
+                    self.artworkImageView.sd_setImage(with: url as URL!)
                 } else {
                     self.artworkImageView.image = nil
                 }
@@ -213,25 +213,25 @@ class PlaceBidViewController: UIViewController {
         }
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         _viewWillDisappear.onNext()
     }
 
-    @IBAction func bidButtonTapped(sender: AnyObject) {
+    @IBAction func bidButtonTapped(_ sender: AnyObject) {
         let identifier = hasAlreadyPlacedABid ? SegueIdentifier.PlaceAnotherBid : SegueIdentifier.ConfirmBid
         performSegue(identifier)
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue == .PlaceAnotherBid {
-            let nextViewController = segue.destinationViewController as! LoadingViewController
+            let nextViewController = segue.destination as! LoadingViewController
             nextViewController.provider = provider
             nextViewController.placingBid = true
         } else if segue == .ConfirmBid {
-            let viewController = segue.destinationViewController as! ConfirmYourBidViewController
+            let viewController = segue.destination as! ConfirmYourBidViewController
             viewController.provider = provider
         }
     }
@@ -240,7 +240,7 @@ class PlaceBidViewController: UIViewController {
 private extension PlaceBidViewController {
     func smallSansSerifLabel() -> UILabel {
         let label = sansSerifLabel()
-        label.font = label.font.fontWithSize(12)
+        label.font = label.font.withSize(12)
         return label
     }
 
@@ -253,7 +253,7 @@ private extension PlaceBidViewController {
     func serifLabel() -> UILabel {
         let label = ARSerifLabel()
         label.numberOfLines = 1
-        label.font = label.font.fontWithSize(16)
+        label.font = label.font.withSize(16)
         return label
     }
 }
@@ -261,19 +261,19 @@ private extension PlaceBidViewController {
 
 /// These are for RAC only
 
-func dollarsToCurrencyString(dollars: Int) -> String {
+func dollarsToCurrencyString(_ dollars: Int) -> String {
     if dollars == 0 {
         return ""
     }
 
-    let formatter = NSNumberFormatter()
-    formatter.locale = NSLocale(localeIdentifier: "en_US")
-    formatter.numberStyle = .DecimalStyle
-    return formatter.stringFromNumber(dollars) ?? ""
+    let formatter = NumberFormatter()
+    formatter.locale = Locale(identifier: "en_US")
+    formatter.numberStyle = .decimal
+    return formatter.string(from: NSNumber(dollars)) ?? ""
 }
 
-func toNextBidString(cents: Int) -> String {
-    guard let dollars = NSNumberFormatter.currencyStringForCents(cents)  else {
+func toNextBidString(_ cents: Int) -> String {
+    guard let dollars = NumberFormatter.currencyString(forCents: cents as NSNumber!)  else {
         return ""
     }
     return "Enter \(dollars) or more"
@@ -281,7 +281,7 @@ func toNextBidString(cents: Int) -> String {
 
 typealias DeveloperOnly = PlaceBidViewController
 extension DeveloperOnly {
-    @IBAction func dev_nextIncrementPressed(sender: AnyObject) {
+    @IBAction func dev_nextIncrementPressed(_ sender: AnyObject) {
         let bidDetails = (self.navigationController as? FulfillmentNavigationController)?.bidDetails
         bidDetails?.bidAmountCents.value = bidDetails?.saleArtwork?.minimumNextBidCents
         performSegue(SegueIdentifier.ConfirmBid)

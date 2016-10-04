@@ -6,7 +6,7 @@ import Action
 
 class ConfirmYourBidViewController: UIViewController {
 
-    private var _number = Variable("")
+    fileprivate var _number = Variable("")
     let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
@@ -16,7 +16,7 @@ class ConfirmYourBidViewController: UIViewController {
     @IBOutlet var enterButton: UIButton!
     @IBOutlet var useArtsyLoginButton: UIButton!
 
-    private let _viewWillDisappear = PublishSubject<Void>()
+    fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
         return self._viewWillDisappear.asObserver()
     }
@@ -26,18 +26,18 @@ class ConfirmYourBidViewController: UIViewController {
 
     var provider: Networking!
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBid) as! ConfirmYourBidViewController
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let titleString = useArtsyLoginButton.titleForState(useArtsyLoginButton.state)! ?? ""
-        let attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
-            NSFontAttributeName: useArtsyLoginButton.titleLabel!.font];
+        let titleString = useArtsyLoginButton.title(for: useArtsyLoginButton.state)! ?? ""
+        let attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,
+            NSFontAttributeName: useArtsyLoginButton.titleLabel!.font] as [String : Any];
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
-        useArtsyLoginButton.setAttributedTitle(attrTitle, forState:useArtsyLoginButton.state)
+        useArtsyLoginButton.setAttributedTitle(attrTitle, for:useArtsyLoginButton.state)
 
         number
             .bindTo(_number)
@@ -90,7 +90,7 @@ class ConfirmYourBidViewController: UIViewController {
                     }
 
                     if let responseURL = response?.response?.URL?.absoluteString
-                        where responseURL.containsString("v1/bidder/") {
+                        , responseURL.containsString("v1/bidder/") {
 
                         me.performSegue(.ConfirmyourBidBidderFound)
                     } else {
@@ -101,38 +101,38 @@ class ConfirmYourBidViewController: UIViewController {
         })
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         _viewWillDisappear.onNext()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue == .ConfirmyourBidBidderFound {
-            let nextViewController = segue.destinationViewController as! ConfirmYourBidPINViewController
+            let nextViewController = segue.destination as! ConfirmYourBidPINViewController
             nextViewController.provider = provider
         } else if segue == .ConfirmyourBidBidderNotFound {
-            let viewController = segue.destinationViewController as! ConfirmYourBidEnterYourEmailViewController
+            let viewController = segue.destination as! ConfirmYourBidEnterYourEmailViewController
             viewController.provider = provider
         } else if segue == .ConfirmyourBidArtsyLogin {
-            let viewController = segue.destinationViewController as! ConfirmYourBidArtsyLoginViewController
+            let viewController = segue.destination as! ConfirmYourBidArtsyLoginViewController
             viewController.provider = provider
         } else if segue == .ConfirmyourBidBidderFound {
-            let viewController = segue.destinationViewController as! ConfirmYourBidPINViewController
+            let viewController = segue.destination as! ConfirmYourBidPINViewController
             viewController.provider = provider
         }
     }
 
-    func toOpeningBidString(cents:AnyObject!) -> AnyObject! {
-        if let dollars = NSNumberFormatter.currencyStringForCents(cents as? Int) {
-            return "Enter \(dollars) or more"
+    func toOpeningBidString(_ cents:AnyObject!) -> AnyObject! {
+        if let dollars = NumberFormatter.currencyString(forCents: cents as? Int as NSNumber!) {
+            return "Enter \(dollars) or more" as AnyObject!
         }
-        return ""
+        return "" as AnyObject!
     }
 
-    func toPhoneNumberString(number: String) -> String {
+    func toPhoneNumberString(_ number: String) -> String {
         if number.characters.count >= 7 {
-            return phoneNumberFormatter.stringForObjectValue(number) ?? number
+            return phoneNumberFormatter.string(for: number) ?? number
         } else {
             return number
         }
@@ -142,11 +142,11 @@ class ConfirmYourBidViewController: UIViewController {
 private extension ConfirmYourBidViewController {
 
 
-    @IBAction func dev_noPhoneNumberFoundTapped(sender: AnyObject) {
+    @IBAction func dev_noPhoneNumberFoundTapped(_ sender: AnyObject) {
         self.performSegue(.ConfirmyourBidArtsyLogin )
     }
 
-    @IBAction func dev_phoneNumberFoundTapped(sender: AnyObject) {
+    @IBAction func dev_phoneNumberFoundTapped(_ sender: AnyObject) {
         self.performSegue(.ConfirmyourBidBidderFound)
     }
 

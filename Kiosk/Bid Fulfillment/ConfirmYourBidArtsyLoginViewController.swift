@@ -11,7 +11,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBOutlet var useArtsyBidderButton: UIButton!
     @IBOutlet var confirmCredentialsButton: Button!
 
-    private let _viewWillDisappear = PublishSubject<Void>()
+    fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
         return self._viewWillDisappear.asObserver()
     }
@@ -19,18 +19,18 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     var createNewAccount = false
     var provider: Networking!
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let titleString = useArtsyBidderButton.titleForState(useArtsyBidderButton.state)! ?? ""
-        let attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
-            NSFontAttributeName: useArtsyBidderButton.titleLabel!.font];
+        let titleString = useArtsyBidderButton.title(for: useArtsyBidderButton.state)! ?? ""
+        let attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,
+            NSFontAttributeName: useArtsyBidderButton.titleLabel!.font] as [String : Any];
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
-        useArtsyBidderButton.setAttributedTitle(attrTitle, forState:useArtsyBidderButton.state)
+        useArtsyBidderButton.setAttributedTitle(attrTitle, for:useArtsyBidderButton.state)
 
         let nav = self.fulfillmentNav()
         let bidDetails = nav.bidDetails
@@ -86,19 +86,19 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
 
         if segue == .EmailLoginConfirmedHighestBidder {
-            let viewController = segue.destinationViewController as! LoadingViewController
+            let viewController = segue.destination as! LoadingViewController
             viewController.provider = provider
         } else if segue == .ArtsyUserHasNotRegisteredCard {
-            let viewController = segue.destinationViewController as! RegisterViewController
+            let viewController = segue.destination as! RegisterViewController
             viewController.provider = provider
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if emailTextField.text.isNilOrEmpty {
             emailTextField.becomeFirstResponder()
@@ -107,7 +107,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         }
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         _viewWillDisappear.onNext()
     }
@@ -119,8 +119,8 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         passwordTextField.text = ""
     }
     
-    @IBAction func forgotPasswordTapped(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .Alert)
+    @IBAction func forgotPasswordTapped(_ sender: AnyObject) {
+        let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .alert)
 
         let submitAction = UIAlertAction.Action("Send", style: .Default)
         let email = Variable("")
@@ -135,9 +135,9 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
                 .map(void)
         })
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
 
-        alertController.addTextFieldWithConfigurationHandler { textField in
+        alertController.addTextField { textField in
             textField.placeholder = "email@domain.com"
             textField.text = self.emailTextField.text
 
@@ -146,7 +146,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
                 .bindTo(email)
                 .addDisposableTo(textField.rx_disposeBag)
 
-            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+            NotificationCenter.defaultCenter().addObserverForName(NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.mainQueue()) { (notification) in
                 submitAction.enabled = stringIsEmailAddress(textField.text ?? "").boolValue
             }
         }
@@ -154,11 +154,11 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         alertController.addAction(submitAction)
         alertController.addAction(cancelAction)
 
-        self.presentViewController(alertController, animated: true) {}
+        self.present(alertController, animated: true) {}
     }
 
-    func creditCard(provider: AuthorizedNetworking) -> Observable<[Card]> {
-        let endpoint = ArtsyAuthenticatedAPI.MyCreditCards
+    func creditCard(_ provider: AuthorizedNetworking) -> Observable<[Card]> {
+        let endpoint = ArtsyAuthenticatedAPI.myCreditCards
         return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()
@@ -166,9 +166,9 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             .mapToObjectArray(Card.self)
     }
 
-    @IBAction func useBidderTapped(sender: AnyObject) {
+    @IBAction func useBidderTapped(_ sender: AnyObject) {
         for controller in navigationController!.viewControllers {
-            if controller.isKindOfClass(ConfirmYourBidViewController.self) {
+            if controller.isKind(of: ConfirmYourBidViewController.self) {
                 navigationController!.popToViewController(controller, animated:true);
                 break;
             }
@@ -178,11 +178,11 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
 private extension  ConfirmYourBidArtsyLoginViewController {
 
-    @IBAction func dev_hasCardTapped(sender: AnyObject) {
+    @IBAction func dev_hasCardTapped(_ sender: AnyObject) {
         self.performSegue(.EmailLoginConfirmedHighestBidder)
     }
 
-    @IBAction func dev_noCardFoundTapped(sender: AnyObject) {
+    @IBAction func dev_noCardFoundTapped(_ sender: AnyObject) {
         self.performSegue(.ArtsyUserHasNotRegisteredCard)
     }
 

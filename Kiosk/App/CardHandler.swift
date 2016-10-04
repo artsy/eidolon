@@ -3,7 +3,7 @@ import RxSwift
 
 class CardHandler: NSObject, CFTReaderDelegate {
 
-    private let _cardStatus = PublishSubject<String>()
+    fileprivate let _cardStatus = PublishSubject<String>()
 
     var cardStatus: Observable<String> {
         return _cardStatus.asObservable()
@@ -40,7 +40,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
         reader = nil
     }
 
-    func readerCardResponse(card: CFTCard?, withError error: NSError?) {
+    func readerCardResponse(_ card: CFTCard?, withError error: NSError?) {
         if let card = card {
             self.card = card;
             _cardStatus.onNext("Got Card")
@@ -63,7 +63,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
         }
     }
 
-    func transactionResult(charge: CFTCharge!, withError error: NSError!) {
+    func transactionResult(_ charge: CFTCharge!, withError error: NSError!) {
         logger.log("Unexcepted call to transactionResult callback: \(charge)\n\(error)")
     }
 
@@ -87,12 +87,12 @@ class CardHandler: NSObject, CFTReaderDelegate {
         logger.log("Card Reader was Cancelled")
     }
 
-    func readerGenericResponse(cardData: String!) {
+    func readerGenericResponse(_ cardData: String!) {
         _cardStatus.onNext("Reader received non-card data: \(cardData) ");
         reader.beginSwipe()
     }
 
-    func readerIsConnected(isConnected: Bool, withError error: NSError!) {
+    func readerIsConnected(_ isConnected: Bool, withError error: NSError!) {
         if isConnected {
             _cardStatus.onNext("Reader is connected")
             reader.beginSwipe()

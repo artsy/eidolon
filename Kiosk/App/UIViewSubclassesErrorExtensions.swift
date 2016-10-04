@@ -2,20 +2,20 @@ import UIKit
 
 extension Button {
 
-    func flashError(message:String) {
-        let originalTitle = self.titleForState(.Normal)
+    func flashError(_ message:String) {
+        let originalTitle = self.title(for: UIControlState())
 
-        setTitleColor(.whiteColor(), forState: .Disabled)
-        setBackgroundColor(.artsyRed(), forState: .Disabled, animated: true)
-        setBorderColor(.artsyRed(), forState: .Disabled, animated: true)
+        setTitleColor(.white(), for: .disabled)
+        setBackgroundColor(.artsyRed(), for: .disabled, animated: true)
+        setBorderColor(.artsyRed(), for: .disabled, animated: true)
 
-        setTitle(message.uppercaseString, forState: .Disabled)
+        setTitle(message.uppercased(), for: .disabled)
 
         delayToMainThread(2) {
-            self.setTitleColor(.artsyMediumGrey(), forState: .Disabled)
-            self.setBackgroundColor(.whiteColor(), forState: .Disabled, animated: true)
-            self.setTitle(originalTitle, forState: .Disabled)
-            self.setBorderColor(.artsyMediumGrey(), forState: .Disabled, animated: true)
+            self.setTitleColor(.artsyMediumGrey(), for: .disabled)
+            self.setBackgroundColor(.white(), for: .disabled, animated: true)
+            self.setTitle(originalTitle, for: .disabled)
+            self.setBorderColor(.artsyMediumGrey(), for: .disabled, animated: true)
         }
     }
 }

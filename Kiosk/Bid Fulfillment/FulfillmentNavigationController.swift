@@ -30,13 +30,13 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
     }
 
     func reset() {
-        let storage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        let storage = HTTPCookieStorage.shared
         let cookies = storage.cookies
         cookies?.forEach { storage.deleteCookie($0) }
     }
 
     func updateUserCredentials(loggedInProvider: AuthorizedNetworking) -> Observable<Void> {
-        let endpoint = ArtsyAuthenticatedAPI.Me
+        let endpoint = ArtsyAuthenticatedAPI.me
         let request = loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(User)
 
         return request
@@ -58,7 +58,7 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
 }
 
 extension FulfillmentNavigationController: UINavigationControllerDelegate {
-    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         guard let viewController = viewController as? PlaceBidViewController else { return }
 
         viewController.provider = provider

@@ -13,8 +13,8 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
     typealias Check = (() -> ())?
 
-    @warn_unused_result
-    func stubProvider(emailExists emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) -> Networking {
+    
+    func stubProvider(emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) -> Networking {
 
         let endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
 

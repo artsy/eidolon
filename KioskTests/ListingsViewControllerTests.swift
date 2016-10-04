@@ -8,7 +8,7 @@ import Foundation
 import Moya
 
 class ListingsViewControllerConfiguration: QuickConfiguration {
-    override class func configure(configuration: Configuration) {
+    override class func configure(_ configuration: Configuration) {
         sharedExamples("a listings controller") { (sharedExampleContext: SharedExampleContext) in
             var subject: ListingsViewController!
             var viewModel: ListingsViewControllerTestsStubbedViewModel!
@@ -117,7 +117,7 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
     var auctionID = "los-angeles-modern-auctions-march-2015"
     var syncInterval = SyncInterval
     var pageSize = 10
-    var logSync: (NSDate) -> Void = { _ in}
+    var logSync: (Date) -> Void = { _ in}
     var numberOfSaleArtworks = 10
 
     var showSpinner: Observable<Bool>! = Observable.just(false)
@@ -128,10 +128,10 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
         return Observable.just(NSDate())
     }
 
-    var scheduleOnBackground: (observable: Observable<AnyObject>) -> Observable<AnyObject> = { observable in observable }
-    var scheduleOnForeground: (observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { observable in observable }
+    var scheduleOnBackground: (_ observable: Observable<AnyObject>) -> Observable<AnyObject> = { observable in observable }
+    var scheduleOnForeground: (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { observable in observable }
 
-    func saleArtworkViewModelAtIndexPath(indexPath: NSIndexPath) -> SaleArtworkViewModel {
+    func saleArtworkViewModelAtIndexPath(_ indexPath: NSIndexPath) -> SaleArtworkViewModel {
         let saleArtwork = testSaleArtwork()
 
         saleArtwork.lotNumber = lotNumber
@@ -144,10 +144,10 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
         return saleArtwork.viewModel
     }
 
-    func showDetailsForSaleArtworkAtIndexPath(indexPath: NSIndexPath) { }
+    func showDetailsForSaleArtworkAtIndexPath(_ indexPath: IndexPath) { }
 
-    func presentModalForSaleArtworkAtIndexPath(indexPath: NSIndexPath) { }
-    func imageAspectRatioForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> CGFloat? { return nil }
+    func presentModalForSaleArtworkAtIndexPath(_ indexPath: IndexPath) { }
+    func imageAspectRatioForSaleArtworkAtIndexPath(_ indexPath: IndexPath) -> CGFloat? { return nil }
 
     // Testing values
     var lotNumber: Int?

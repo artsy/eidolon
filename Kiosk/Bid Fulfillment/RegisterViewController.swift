@@ -20,7 +20,7 @@ class RegisterViewController: UIViewController {
 
     dynamic var placingBid = true
 
-    private let _viewWillDisappear = PublishSubject<Void>()
+    fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
         return self._viewWillDisappear.asObserver()
     }
@@ -66,7 +66,7 @@ class RegisterViewController: UIViewController {
         goToNextVC()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         _viewWillDisappear.onNext()
     }
@@ -76,7 +76,7 @@ class RegisterViewController: UIViewController {
         goToViewController(nextVC)
     }
 
-    func goToViewController(controller: UIViewController) {
+    func goToViewController(_ controller: UIViewController) {
         self.internalNavController()!.viewControllers = [controller]
 
         if let subscribableVC = controller as? RegistrationSubController {
@@ -94,10 +94,10 @@ class RegisterViewController: UIViewController {
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue == .ShowLoadingView {
-            let nextViewController = segue.destinationViewController as! LoadingViewController
+            let nextViewController = segue.destination as! LoadingViewController
             nextViewController.placingBid = placingBid
             nextViewController.provider = provider
         }

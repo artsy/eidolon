@@ -6,7 +6,7 @@ class ConfirmYourBidPasswordViewController: UIViewController {
 
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPasswordViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidPasswordViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBid) as! ConfirmYourBidPasswordViewController
     }
 
@@ -16,7 +16,7 @@ class ConfirmYourBidPasswordViewController: UIViewController {
         bidDetailsPreviewView.bidDetails = fulfillmentNav().bidDetails
     }
     
-    @IBAction func dev_noPhoneNumberFoundTapped(sender: AnyObject) {
+    @IBAction func dev_noPhoneNumberFoundTapped(_ sender: AnyObject) {
 
     }
 

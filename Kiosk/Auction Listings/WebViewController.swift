@@ -5,9 +5,9 @@ let modalHeight: CGFloat = 660
 class WebViewController: DZNWebViewController {
     var showToolbar = true
 
-    convenience init(url: NSURL) {
+    convenience override init(url: URL) {
         self.init()
-        self.URL = url
+        self.url = url
     }
 
     override func viewDidLoad() {
@@ -19,7 +19,7 @@ class WebViewController: DZNWebViewController {
         self.navigationItem.rightBarButtonItem = nil
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated:false)
         navigationController?.setToolbarHidden(!showToolbar, animated:false)
@@ -34,28 +34,28 @@ class ModalWebViewController: WebViewController {
 
         closeButton = UIButton()
         view.addSubview(closeButton)
-        closeButton.titleLabel?.font = UIFont.sansSerifFontWithSize(14)
-        closeButton.setTitleColor(.artsyMediumGrey(), forState:.Normal)
-        closeButton.setTitle("CLOSE", forState:.Normal)
+        closeButton.titleLabel?.font = UIFont.sansSerifFont(withSize: 14)
+        closeButton.setTitleColor(.artsyMediumGrey(), for:UIControlState())
+        closeButton.setTitle("CLOSE", for:UIControlState())
         closeButton.constrainWidth("140", height: "72")
-        closeButton.alignTop("0", leading:"0", bottom:nil, trailing:nil, toView:view)
-        closeButton.addTarget(self, action:#selector(closeTapped(_:)), forControlEvents:.TouchUpInside)
+        closeButton.alignTop("0", leading:"0", bottom:nil, trailing:nil, to:view)
+        closeButton.addTarget(self, action:#selector(closeTapped(_:)), for:.touchUpInside)
 
         var height = modalHeight
         if let nav = navigationController {
-            if !nav.navigationBarHidden { height -= CGRectGetHeight(nav.navigationBar.frame) }
-            if !nav.toolbarHidden { height -= CGRectGetHeight(nav.toolbar.frame) }
+            if !nav.isNavigationBarHidden { height -= nav.navigationBar.frame.height }
+            if !nav.isToolbarHidden { height -= nav.toolbar.frame.height }
         }
-        preferredContentSize = CGSizeMake(815, height)
+        preferredContentSize = CGSize(width: 815, height: height)
     }
 
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.view.superview?.layer.cornerRadius = 0;
     }
 
-    func closeTapped(sender: AnyObject) {
-        presentingViewController?.dismissViewControllerAnimated(true, completion:nil)
+    func closeTapped(_ sender: AnyObject) {
+        presentingViewController?.dismiss(animated: true, completion:nil)
     }
 }

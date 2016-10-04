@@ -1,20 +1,20 @@
 import Foundation
 
 class Logger {
-    let destination: NSURL
-    lazy private var dateFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.locale = NSLocale.currentLocale()
+    let destination: URL
+    lazy fileprivate var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
 
         return formatter
     }()
-    lazy private var fileHandle: NSFileHandle? = {
+    lazy fileprivate var fileHandle: FileHandle? = {
         if let path = self.destination.path {
-            NSFileManager.defaultManager().createFileAtPath(path, contents: nil, attributes: nil)
+            FileManager.default.createFile(atPath: path, contents: nil, attributes: nil)
 
             do {
-                let fileHandle = try NSFileHandle(forWritingToURL: self.destination)
+                let fileHandle = try FileHandle(forWritingTo: self.destination)
                 print("Successfully logging to: \(path)")
                 return fileHandle
             } catch let error as NSError {
@@ -28,7 +28,7 @@ class Logger {
         return nil
     }()
 
-    init(destination: NSURL) {
+    init(destination: URL) {
         self.destination = destination
     }
 
@@ -36,7 +36,7 @@ class Logger {
         fileHandle?.closeFile()
     }
 
-    func log(message: String, function: String = #function, file: String = #file, line: Int = #line) {
+    func log(_ message: String, function: String = #function, file: String = #file, line: Int = #line) {
         let logMessage = stringRepresentation(message, function: function, file: file, line: line)
 
         printToConsole(logMessage)
@@ -45,20 +45,20 @@ class Logger {
 }
 
 private extension Logger {
-    func stringRepresentation(message: String, function: String, file: String, line: Int) -> String {
-        let dateString = dateFormatter.stringFromDate(NSDate())
+    func stringRepresentation(_ message: String, function: String, file: String, line: Int) -> String {
+        let dateString = dateFormatter.string(from: Date())
 
-        let file = NSURL(fileURLWithPath: file).lastPathComponent ?? "(Unknown File)"
+        let file = URL(fileURLWithPath: file).lastPathComponent ?? "(Unknown File)"
         return "\(dateString) [\(file):\(line)] \(function): \(message)\n"
     }
 
-    func printToConsole(logMessage: String) {
+    func printToConsole(_ logMessage: String) {
         print(logMessage)
     }
 
-    func printToDestination(logMessage: String) {
-        if let data = logMessage.dataUsingEncoding(NSUTF8StringEncoding) {
-            fileHandle?.writeData(data)
+    func printToDestination(_ logMessage: String) {
+        if let data = logMessage.data(using: String.Encoding.utf8) {
+            fileHandle?.write(data)
         } else {
             print("Serious error in logging: could not encode logged string into data.")
         }

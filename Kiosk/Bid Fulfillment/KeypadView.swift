@@ -16,11 +16,11 @@ class KeypadView: UIView {
 
     var keyAction: Action<Int, Void>?
 
-    @IBOutlet private var keys: [Button]!
-    @IBOutlet private var leftButton: Button!
-    @IBOutlet private var rightButton: Button!
+    @IBOutlet fileprivate var keys: [Button]!
+    @IBOutlet fileprivate var leftButton: Button!
+    @IBOutlet fileprivate var rightButton: Button!
     
-    @IBAction func keypadButtonTapped(sender: UIButton) {
+    @IBAction func keypadButtonTapped(_ sender: UIButton) {
         keyAction?.execute(sender.tag)
     }
 }

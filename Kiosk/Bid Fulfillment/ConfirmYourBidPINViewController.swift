@@ -5,7 +5,7 @@ import Action
 
 class ConfirmYourBidPINViewController: UIViewController {
 
-    private var _pin = Variable("")
+    fileprivate var _pin = Variable("")
 
     @IBOutlet var keypadContainer: KeypadContainerView!
     @IBOutlet var pinTextField: TextField!
@@ -17,7 +17,8 @@ class ConfirmYourBidPINViewController: UIViewController {
 
     var provider: Networking!
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
+    // TODO: These all need to be changed.
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
         return storyboard.viewControllerWithID(.ConfirmYourBidPIN) as! ConfirmYourBidPINViewController
     }
 
@@ -97,29 +98,29 @@ class ConfirmYourBidPINViewController: UIViewController {
         }
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
 
         if segue == .ArtsyUserviaPINHasNotRegisteredCard {
-            let viewController = segue.destinationViewController as! RegisterViewController
+            let viewController = segue.destination as! RegisterViewController
             viewController.provider = provider
         } else if segue == .PINConfirmedhasCard {
-            let viewController = segue.destinationViewController as! LoadingViewController
+            let viewController = segue.destination as! LoadingViewController
             viewController.provider = provider
         }
     }
 
-    @IBAction func forgotPINTapped(sender: AnyObject) {
+    @IBAction func forgotPINTapped(_ sender: AnyObject) {
         let auctionID = fulfillmentNav().auctionID
         let number = fulfillmentNav().bidDetails.newUser.phoneNumber.value ?? ""
         let endpoint: ArtsyAPI = ArtsyAPI.BidderDetailsNotification(auctionID: auctionID, identifier: number)
 
-        let alertController = UIAlertController(title: "Forgot PIN", message: "We have sent your bidder details to your device.", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Forgot PIN", message: "We have sent your bidder details to your device.", preferredStyle: .alert)
 
-        let cancelAction = UIAlertAction(title: "Back", style: .Cancel) { (_) in }
+        let cancelAction = UIAlertAction(title: "Back", style: .cancel) { (_) in }
         alertController.addAction(cancelAction)
 
-        self.presentViewController(alertController, animated: true) {}
+        self.present(alertController, animated: true) {}
 
         provider.request(endpoint)
             .filterSuccessfulStatusCodes()
@@ -138,11 +139,11 @@ class ConfirmYourBidPINViewController: UIViewController {
     }
 
     func checkForCreditCard(loggedInProvider: AuthorizedNetworking) -> Observable<[Card]> {
-        let endpoint = ArtsyAuthenticatedAPI.MyCreditCards
+        let endpoint = ArtsyAuthenticatedAPI.myCreditCards
         return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
     }
 
-    func gotCards(cards: [Card]) {
+    func got(cards: [Card]) {
         // If the cards list doesn't exist, or its .empty, then perform the segue to collect one.
         // Otherwise, proceed directly to the loading view controller to place the bid.
         if cards.isEmpty {
@@ -154,7 +155,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 }
 
 private extension ConfirmYourBidPINViewController {
-    @IBAction func dev_loggedInTapped(sender: AnyObject) {
+    @IBAction func dev_loggedInTapped(_ sender: AnyObject) {
         self.performSegue(.PINConfirmedhasCard)
     }
 }

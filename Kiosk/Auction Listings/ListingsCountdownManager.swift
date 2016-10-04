@@ -5,7 +5,7 @@ class ListingsCountdownManager: NSObject {
    
     @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var countdownContainerView: UIView!
-    let formatter = NSNumberFormatter()
+    let formatter = NumberFormatter()
 
     let sale = Variable<Sale?>(nil)
 
@@ -23,7 +23,7 @@ class ListingsCountdownManager: NSObject {
         }
     }
 
-    private var _timer: NSTimer? = nil
+    fileprivate var _timer: Timer? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,17 +38,17 @@ class ListingsCountdownManager: NSObject {
     func setFonts() {
         (countdownContainerView.subviews).forEach{ (view) -> () in
             if let label = view as? UILabel {
-                label.font = UIFont.serifFontWithSize(15)
+                label.font = UIFont.serifFont(withSize: 15)
             }
         }
-        countdownLabel.font = UIFont.sansSerifFontWithSize(20)
+        countdownLabel.font = UIFont.sansSerifFont(withSize: 20)
     }
 
-    func setLabelsHidden(hidden: Bool) {
-        countdownContainerView.hidden = hidden
+    func setLabelsHidden(_ hidden: Bool) {
+        countdownContainerView.isHidden = hidden
     }
 
-    func setLabelsHiddenIfSynced(hidden: Bool) {
+    func setLabelsHiddenIfSynced(_ hidden: Bool) {
         if time.inSync() {
             setLabelsHidden(hidden)
         }
@@ -56,27 +56,27 @@ class ListingsCountdownManager: NSObject {
 
     func hideDenomenatorLabels() {
         for subview in countdownContainerView.subviews {
-            subview.hidden = subview != countdownLabel
+            subview.isHidden = subview != countdownLabel
         }
     }
 
     func startTimer() {
-        let timer = NSTimer(timeInterval: 0.49, target: self, selector: #selector(ListingsCountdownManager.tick(_:)), userInfo: nil, repeats: true)
-        NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+        let timer = Timer(timeInterval: 0.49, target: self, selector: #selector(ListingsCountdownManager.tick(_:)), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
 
         _timer = timer
 
         self.tick(timer)
     }
     
-    func tick(timer: NSTimer) {
+    func tick(_ timer: Timer) {
         guard let sale = sale.value else { return }
         guard time.inSync() else { return }
         guard sale.id != "" else { return }
 
         if sale.isActive(time) {
             let now = time.date()
-            let components = NSCalendar.currentCalendar().components([.Hour, .Minute, .Second], fromDate: now, toDate: sale.endDate, options: [])
+            let components = Calendar.currentCalendar().components([.Hour, .Minute, .Second], fromDate: now, toDate: sale.endDate, options: [])
 
             self.countdownLabel.text = "\(formatter.stringFromNumber(components.hour)!) : \(formatter.stringFromNumber(components.minute)!) : \(formatter.stringFromNumber(components.second)!)"
 

@@ -16,7 +16,7 @@ extension UIViewController {
         }
 
         // Present the VC, then once it's ready trigger it's own showing animations
-        appDelegate().appViewController.presentViewController(containerController, animated: false) {
+        appDelegate().appViewController.present(containerController, animated: false) {
             containerController.viewDidAppearAnimation(containerController.allowAnimations)
         }
     }

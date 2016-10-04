@@ -12,7 +12,7 @@ final class GenericError: NSObject, JSONAbleType {
         self.type = type
     }
     
-    static func fromJSON(json:[String: AnyObject]) -> GenericError {
+    static func fromJSON(_ json:[String: AnyObject]) -> GenericError {
         let json = JSON(json)
         
         let type = json["type"].stringValue

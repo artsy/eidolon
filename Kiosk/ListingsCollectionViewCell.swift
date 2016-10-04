@@ -5,8 +5,8 @@ import RxCocoa
 import NSObject_Rx
 
 class ListingsCollectionViewCell: UICollectionViewCell {
-    typealias DownloadImageClosure = (url: NSURL?, imageView: UIImageView) -> ()
-    typealias CancelDownloadImageClosure = (imageView: UIImageView) -> ()
+    typealias DownloadImageClosure = (_ url: URL?, _ imageView: UIImageView) -> ()
+    typealias CancelDownloadImageClosure = (_ imageView: UIImageView) -> ()
 
     dynamic let lotNumberLabel = ListingsCollectionViewCell._sansSerifLabel()
     dynamic let artworkImageView = ListingsCollectionViewCell._artworkImageView()
@@ -26,32 +26,32 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         return [self.imageGestureSigal, self.infoGesture].toObservable().merge()
     }()
     
-    private lazy var imageGestureSigal: Observable<NSDate> = {
+    fileprivate lazy var imageGestureSigal: Observable<NSDate> = {
         let recognizer = UITapGestureRecognizer()
         self.artworkImageView.addGestureRecognizer(recognizer)
         self.artworkImageView.userInteractionEnabled = true
         return recognizer.rx_event.map { _ in NSDate() }
     }()
 
-    private lazy var infoGesture: Observable<NSDate> = {
+    fileprivate lazy var infoGesture: Observable<NSDate> = {
         let recognizer = UITapGestureRecognizer()
         self.moreInfoLabel.addGestureRecognizer(recognizer)
         self.moreInfoLabel.userInteractionEnabled = true
         return recognizer.rx_event.map { _ in NSDate() }
     }()
 
-    private var _preparingForReuse = PublishSubject<Void>()
+    fileprivate var _preparingForReuse = PublishSubject<Void>()
 
     var preparingForReuse: Observable<Void> {
         return _preparingForReuse.asObservable()
     }
 
     var viewModel = PublishSubject<SaleArtworkViewModel>()
-    func setViewModel(newViewModel: SaleArtworkViewModel) {
+    func setViewModel(_ newViewModel: SaleArtworkViewModel) {
         self.viewModel.onNext(newViewModel)
     }
 
-    private var _bidPressed = PublishSubject<NSDate>()
+    fileprivate var _bidPressed = PublishSubject<Date>()
     var bidPressed: Observable<NSDate> {
         return _bidPressed.asObservable()
     }
@@ -70,7 +70,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        cancelDownloadImage?(imageView: artworkImageView)
+        cancelDownloadImage?(artworkImageView)
         _preparingForReuse.onNext()
         setupSubscriptions()
     }
@@ -93,7 +93,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
             .bindTo(lotNumberLabel.rx_text)
             .addDisposableTo(reuseBag)
 
-        viewModel.map { (viewModel) -> NSURL? in
+        viewModel.map { (viewModel) -> URL? in
                 return viewModel.thumbnailURL
             }.subscribeNext { [weak self] url in
                 guard let imageView = self?.artworkImageView else { return }
@@ -133,7 +133,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
             .addDisposableTo(reuseBag)
 
         bidButton.rx_tap.subscribeNext { [weak self] in
-                self?._bidPressed.onNext(NSDate())
+                self?._bidPressed.onNext(Date())
             }
             .addDisposableTo(reuseBag)
     }
@@ -150,54 +150,54 @@ private extension ListingsCollectionViewCell {
 
     class func _rightAlignedNormalLabel() -> UILabel {
         let label = _normalLabel()
-        label.textAlignment = .Right
+        label.textAlignment = .right
         label.numberOfLines = 1
         return label
     }
     
     class func _normalLabel() -> UILabel {
         let label = ARSerifLabel()
-        label.font = label.font.fontWithSize(16)
+        label.font = label.font.withSize(16)
         label.numberOfLines = 1
         return label
     }
     
     class func _sansSerifLabel() -> UILabel {
         let label = ARSansSerifLabel()
-        label.font = label.font.fontWithSize(12)
+        label.font = label.font.withSize(12)
         label.numberOfLines = 1
         return label
     }
     
     class func _italicsLabel() -> UILabel {
         let label = ARItalicsSerifLabel()
-        label.font = label.font.fontWithSize(16)
+        label.font = label.font.withSize(16)
         label.numberOfLines = 1
         return label
     }
     
     class func _largeLabel() -> UILabel {
         let label = _normalLabel()
-        label.font = label.font.fontWithSize(20)
+        label.font = label.font.withSize(20)
         return label
     }
     
     class func _bidButton() -> ActionButton {
         let button = ActionButton()
-        button.setTitle("BID", forState: .Normal)
+        button.setTitle("BID", for: UIControlState())
         return button
     }
 
     class func _boldLabel() -> UILabel {
         let label = _normalLabel()
-        label.font = UIFont.serifBoldFontWithSize(label.font.pointSize)
+        label.font = UIFont.serifBoldFont(withSize: label.font.pointSize)
         label.numberOfLines = 1
         return label
     }
     
     class func _infoLabel() -> UILabel {
         let label = ARSansSerifLabelWithChevron()
-        label.tintColor = .blackColor()
+        label.tintColor = .black()
         label.text = "MORE INFO"
         return label
     }

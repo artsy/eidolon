@@ -44,11 +44,11 @@ class PlaceBidViewControllerTests: QuickSpec {
     override func spec() {
         var subject: PlaceBidViewController!
         let artworkJSON: [String: AnyObject] = [
-            "id":"artwork_id",
-            "title" : "The Artwork Title",
-            "date": "23rd Nov",
-            "blurb" : "Something about the artwork",
-            "price": "$33,990",
+            "id":"artwork_id" as AnyObject,
+            "title" : "The Artwork Title" as AnyObject,
+            "date": "23rd Nov" as AnyObject,
+            "blurb" : "Something about the artwork" as AnyObject,
+            "price": "$33,990" as AnyObject,
             "artist": ["id": "artist_id", "name": "Artist Name"]
         ]
 

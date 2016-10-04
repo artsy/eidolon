@@ -16,21 +16,21 @@ class SaleArtworkZoomViewController: UIViewController {
         tiledView.decelerationRate = UIScrollViewDecelerationRateFast
         tiledView.showsHorizontalScrollIndicator = false
         tiledView.showsVerticalScrollIndicator = false
-        tiledView.contentMode = .ScaleAspectFit
+        tiledView.contentMode = .scaleAspectFit
         tiledView.dataSource = dataSource
-        tiledView.backgroundImageURL = image.fullsizeURL()
+        tiledView.backgroundImageURL = image.fullsizeURL() as URL!
 
-        view.insertSubview(tiledView, atIndex:0)
+        view.insertSubview(tiledView, at:0)
         tiledImageView = tiledView
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        tiledImageView.zoomToFit(false)
+        tiledImageView.zoom(toFit: false)
     }
 
-    @IBAction func backButtonTapped(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+    @IBAction func backButtonTapped(_ sender: AnyObject) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

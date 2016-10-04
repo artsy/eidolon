@@ -12,7 +12,7 @@ protocol RegistrationPasswordViewModelType {
 
 class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
 
-    private let password = Variable("")
+    fileprivate let password = Variable("")
 
     var action: CocoaAction!
     let provider: Networking
@@ -70,7 +70,7 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
     }
 
     func userForgotPassword() -> Observable<Void> {
-        let endpoint = ArtsyAPI.LostPasswordNotification(email: email)
+        let endpoint = ArtsyAPI.lostPasswordNotification(email: email)
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .map(void)

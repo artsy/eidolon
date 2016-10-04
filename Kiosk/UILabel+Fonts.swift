@@ -8,9 +8,9 @@ extension UILabel {
     func makeSubstringBold(text: String) {
         let attributedText = self.attributedText!.mutableCopy() as! NSMutableAttributedString
 
-        let range: NSRange! = (self.text ?? NSString()).rangeOfString(text)
+        let range: NSRange! = (self.text ?? NSString() as String).range(of: text)
         if range.location != NSNotFound {
-            attributedText.setAttributes([NSFontAttributeName: UIFont.serifSemiBoldFontWithSize(self.font.pointSize)], range: range)
+            attributedText.setAttributes([NSFontAttributeName: UIFont.serifSemiBoldFont(withSize: self.font.pointSize)], range: range)
         }
 
         self.attributedText = attributedText
@@ -23,15 +23,15 @@ extension UILabel {
     func makeSubstringItalic(text: String) {
         let attributedText = self.attributedText!.mutableCopy() as! NSMutableAttributedString
 
-        let range: NSRange! = (self.text ?? NSString()).rangeOfString(text)
+        let range: NSRange! = (self.text ?? NSString() as String).range(of: text)
         if range.location != NSNotFound {
-            attributedText.setAttributes([NSFontAttributeName: UIFont.serifItalicFontWithSize(self.font.pointSize)], range: range)
+            attributedText.setAttributes([NSFontAttributeName: UIFont.serifItalicFont(withSize: self.font.pointSize)], range: range)
         }
 
         self.attributedText = attributedText
     }
 
-    func setLineHeight(lineHeight: Int) {
+    func setLineHeight(_ lineHeight: Int) {
         let displayText = text ?? ""
         let attributedString = NSMutableAttributedString(string: displayText)
         let paragraphStyle = NSMutableParagraphStyle()
@@ -43,7 +43,7 @@ extension UILabel {
     }
 
     func makeTransparent() {
-        opaque = false
-        backgroundColor = .clearColor()
+        isOpaque = false
+        backgroundColor = .clear()
     }
 }

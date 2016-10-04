@@ -5,15 +5,15 @@ import SwiftyJSON
 final class Sale: NSObject, JSONAbleType {
     dynamic let id: String
     dynamic let isAuction: Bool
-    dynamic let startDate: NSDate
-    dynamic let endDate: NSDate
+    dynamic let startDate: Date
+    dynamic let endDate: Date
     dynamic let name: String
     dynamic var artworkCount: Int
     dynamic let auctionState: String
 
     dynamic var buyersPremium: BuyersPremium?
 
-    init(id: String, name: String, isAuction: Bool, startDate: NSDate, endDate: NSDate, artworkCount: Int, state: String) {
+    init(id: String, name: String, isAuction: Bool, startDate: Date, endDate: Date, artworkCount: Int, state: String) {
         self.id = id
         self.name = name
         self.isAuction = isAuction
@@ -23,7 +23,7 @@ final class Sale: NSObject, JSONAbleType {
         self.auctionState = state
     }
 
-    static func fromJSON(json:[String: AnyObject]) -> Sale {
+    static func fromJSON(_ json:[String: AnyObject]) -> Sale {
         let json = JSON(json)
         let formatter = ISO8601DateFormatter()
 
@@ -44,8 +44,8 @@ final class Sale: NSObject, JSONAbleType {
         return sale
     }
 
-    func isActive(systemTime:SystemTime) -> Bool {
+    func isActive(_ systemTime:SystemTime) -> Bool {
         let now = systemTime.date()
-        return now.earlierDate(startDate) == startDate && now.laterDate(endDate) == endDate
+        return (now as NSDate).earlierDate(startDate) == startDate && (now as NSDate).laterDate(endDate) == endDate
     }
 }

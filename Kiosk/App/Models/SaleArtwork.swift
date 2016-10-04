@@ -10,7 +10,7 @@ enum ReserveStatus: String {
         return self == .ReserveNotMet
     }
 
-    static func initOrDefault (rawValue: String?) -> ReserveStatus {
+    static func initOrDefault (_ rawValue: String?) -> ReserveStatus {
         return ReserveStatus(rawValue: rawValue ?? "") ?? .NoReserve
     }
 }
@@ -52,7 +52,7 @@ final class SaleArtwork: NSObject, JSONAbleType {
         return SaleArtworkViewModel(saleArtwork: self)
     }()
 
-    static func fromJSON(json: [String: AnyObject]) -> SaleArtwork {
+    static func fromJSON(_ json: [String: AnyObject]) -> SaleArtwork {
         let json = JSON(json)
         let id = json["id"].stringValue
         let artworkDict = json["artwork"].object as! [String: AnyObject]
@@ -79,7 +79,7 @@ final class SaleArtwork: NSObject, JSONAbleType {
         return saleArtwork
     }
     
-    func updateWithValues(newSaleArtwork: SaleArtwork) {
+    func updateWithValues(_ newSaleArtwork: SaleArtwork) {
         saleHighestBid = newSaleArtwork.saleHighestBid
         auctionID = newSaleArtwork.auctionID
         openingBidCents = newSaleArtwork.openingBidCents
@@ -96,9 +96,9 @@ final class SaleArtwork: NSObject, JSONAbleType {
     }
 }
 
-func createDollarFormatter() -> NSNumberFormatter {
-    let formatter = NSNumberFormatter()
-    formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+func createDollarFormatter() -> NumberFormatter {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = NumberFormatter.Style.currency
 
     // This is always dollars, so let's make sure that's how it shows up
     // regardless of locale.

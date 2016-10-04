@@ -6,7 +6,7 @@ enum BidCheckingError: String {
     case PollingExceeded
 }
 
-extension BidCheckingError: ErrorType { }
+extension BidCheckingError: Error { }
 
 protocol BidCheckingNetworkModelType {
     var bidDetails: BidDetails { get }
@@ -20,9 +20,9 @@ protocol BidCheckingNetworkModelType {
 
 class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
-    private var pollInterval = NSTimeInterval(1)
-    private var maxPollRequests = 20
-    private var pollRequests = 0
+    fileprivate var pollInterval = TimeInterval(1)
+    fileprivate var maxPollRequests = 20
+    fileprivate var pollRequests = 0
 
     // inputs
     let provider: Networking
@@ -33,7 +33,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
     var isHighestBidder = Variable(false)
     var reserveNotMet = Variable(false)
 
-    private var mostRecentSaleArtwork: SaleArtwork?
+    fileprivate var mostRecentSaleArtwork: SaleArtwork?
 
     init(provider: Networking, bidDetails: BidDetails) {
         self.provider = provider
@@ -69,7 +69,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
             }.catchErrorJustReturn()
     }
     
-    private func pollForUpdatedBidderPosition(bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<Void> {
+    fileprivate func poll(forUpdatedBidderPosition bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<Void> {
         let updatedBidderPosition = getUpdatedBidderPosition(bidderPositionId, provider: provider)
             .flatMap { bidderPositionObject -> Observable<Void> in
                 self.pollRequests += 1
@@ -103,7 +103,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
             .then { updatedBidderPosition }
     }
 
-    private func checkForMaxBid(provider: AuthorizedNetworking) -> Observable<Void> {
+    fileprivate func checkForMaxBid(provider: AuthorizedNetworking) -> Observable<Void> {
         return getMyBidderPositions(provider)
             .doOnNext{ newBidderPositions in
 
@@ -116,11 +116,11 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
             .map(void)
     }
 
-    private func getMyBidderPositions(provider: AuthorizedNetworking) -> Observable<[BidderPosition]> {
+    fileprivate func getMyBidderPositions(provider: AuthorizedNetworking) -> Observable<[BidderPosition]> {
         let artworkID = bidDetails.saleArtwork!.artwork.id;
         let auctionID = bidDetails.saleArtwork!.auctionID!
 
-        let endpoint = ArtsyAuthenticatedAPI.MyBidPositionsForAuctionArtwork(auctionID: auctionID, artworkID: artworkID)
+        let endpoint = ArtsyAuthenticatedAPI.myBidPositionsForAuctionArtwork(auctionID: auctionID, artworkID: artworkID)
         return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()
@@ -128,12 +128,12 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
             .mapToObjectArray(BidderPosition)
     }
 
-    private func getUpdatedSaleArtwork() -> Observable<SaleArtwork> {
+    fileprivate func getUpdatedSaleArtwork() -> Observable<SaleArtwork> {
 
         let artworkID = bidDetails.saleArtwork!.artwork.id;
         let auctionID = bidDetails.saleArtwork!.auctionID!
 
-        let endpoint: ArtsyAPI = ArtsyAPI.AuctionInfoForArtwork(auctionID: auctionID, artworkID: artworkID)
+        let endpoint: ArtsyAPI = ArtsyAPI.auctionInfoForArtwork(auctionID: auctionID, artworkID: artworkID)
         return provider
             .request(endpoint)
             .filterSuccessfulStatusCodes()
@@ -141,7 +141,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
             .mapToObject(SaleArtwork)
     }
     
-    private func getUpdatedBidderPosition(bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<BidderPosition> {
+    fileprivate func getUpdatedBidderPosition(bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<BidderPosition> {
         let endpoint = ArtsyAuthenticatedAPI.MyBidPosition(id: bidderPositionId)
         return provider
             .request(endpoint)

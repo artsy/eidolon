@@ -8,7 +8,7 @@ let OutbidDomain = "Outbid"
 protocol PlaceBidNetworkModelType {
     var bidDetails: BidDetails { get }
 
-    func bid(provider: AuthorizedNetworking) -> Observable<String>
+    func bid(_ provider: AuthorizedNetworking) -> Observable<String>
 }
 
 class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
@@ -21,7 +21,7 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
         super.init()
     }
 
-    func bid(provider: AuthorizedNetworking) -> Observable<String> {
+    func bid(_ provider: AuthorizedNetworking) -> Observable<String> {
         let saleArtwork = bidDetails.saleArtwork.value
 
         assert(saleArtwork.hasValue, "Sale artwork cannot nil at bidding stage.")
@@ -30,7 +30,7 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
         return bidOnSaleArtwork(saleArtwork!, bidAmountCents: String(cents), provider: provider)
     }
 
-    private func bidOnSaleArtwork(saleArtwork: SaleArtwork, bidAmountCents: String, provider: AuthorizedNetworking) -> Observable<String> {
+    fileprivate func bidOnSaleArtwork(_ saleArtwork: SaleArtwork, bidAmountCents: String, provider: AuthorizedNetworking) -> Observable<String> {
         let bidEndpoint = ArtsyAuthenticatedAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
 
         let request = provider
@@ -51,7 +51,7 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
 
                 let json = JSON(data: response.data)
 
-                if let type = json["type"].string where type == "param_error" {
+                if let type = json["type"].string , type == "param_error" {
                     throw NSError(domain: OutbidDomain, code: 0, userInfo: [NSUnderlyingErrorKey: error as NSError])
                 } else {
                     throw error

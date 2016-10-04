@@ -45,11 +45,11 @@ class YourBiddingDetailsViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
     }
 
-    @IBAction func confirmButtonTapped(sender: AnyObject) {
+    @IBAction func confirmButtonTapped(_ sender: AnyObject) {
         fulfillmentContainer()?.closeFulfillmentModal()
     }
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> YourBiddingDetailsViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> YourBiddingDetailsViewController {
         return storyboard.viewControllerWithID(.YourBidderDetails) as! YourBiddingDetailsViewController
     }
 }

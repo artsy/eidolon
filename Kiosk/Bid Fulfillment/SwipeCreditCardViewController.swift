@@ -15,7 +15,7 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
 
     @IBOutlet weak var titleLabel: ARSerifLabel!
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> SwipeCreditCardViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> SwipeCreditCardViewController {
         return storyboard.viewControllerWithID(.RegisterCreditCard) as! SwipeCreditCardViewController
     }
 
@@ -35,7 +35,7 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
         }
     }()
     
-    private let _viewWillDisappear = PublishSubject<Void>()
+    fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
         return self._viewWillDisappear.asObserver()
     }
@@ -108,24 +108,24 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
         bidDetails.newUser.swipedCreditCard = true
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         _viewWillDisappear.onNext()
     }
 
-    func setInProgress(show: Bool) {
+    func setInProgress(_ show: Bool) {
         illustrationImageView.alpha = show ? 0.1 : 1
-        processingLabel.hidden = !show
-        spinner.hidden = !show
+        processingLabel.isHidden = !show
+        spinner.isHidden = !show
     }
 
     // Used only for development, in private extension for testing.
-    private lazy var stripeManager = StripeManager()
+    fileprivate lazy var stripeManager = StripeManager()
 }
 
 private extension SwipeCreditCardViewController {
-    func applyCardWithSuccess(success: Bool) {
+    func applyCardWithSuccess(_ success: Bool) {
         let cardFullDigits = success ? "4242424242424242" : "4000000000000002"
 
         stripeManager.registerCard(cardFullDigits, month: 04, year: 2018, securityCode: "123", postalCode: "10013")
@@ -144,11 +144,11 @@ private extension SwipeCreditCardViewController {
             .addDisposableTo(rx_disposeBag)
     }
 
-    @IBAction func dev_creditCardOKTapped(sender: AnyObject) {
+    @IBAction func dev_creditCardOKTapped(_ sender: AnyObject) {
         applyCardWithSuccess(true)
     }
 
-    @IBAction func dev_creditCardFailTapped(sender: AnyObject) {
+    @IBAction func dev_creditCardFailTapped(_ sender: AnyObject) {
         applyCardWithSuccess(false)
     }
 }

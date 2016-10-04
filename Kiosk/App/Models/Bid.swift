@@ -10,7 +10,7 @@ final class Bid: NSObject, JSONAbleType {
         self.amountCents = amountCents
     }
 
-    static func fromJSON(json:[String: AnyObject]) -> Bid {
+    static func fromJSON(_ json:[String: AnyObject]) -> Bid {
         let json = JSON(json)
 
         let id = json["id"].stringValue

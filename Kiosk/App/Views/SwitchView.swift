@@ -5,40 +5,40 @@ let SwitchViewBorderWidth: CGFloat = 2
 
 class SwitchView: UIView {
 
-    private var _selectedIndex = Variable(0)
+    fileprivate var _selectedIndex = Variable(0)
 
     var selectedIndex: Observable<Int> { return _selectedIndex.asObservable() }
 
     var shouldAnimate = true
-    var animationDuration: NSTimeInterval = AnimationDuration.Short
+    var animationDuration: TimeInterval = AnimationDuration.Short
     
-    private let buttons: Array<UIButton>
-    private let selectionIndicator: UIView
-    private let topSelectionIndicator: UIView
-    private let bottomSelectionIndicator: UIView
+    fileprivate let buttons: Array<UIButton>
+    fileprivate let selectionIndicator: UIView
+    fileprivate let topSelectionIndicator: UIView
+    fileprivate let bottomSelectionIndicator: UIView
 
-    private let topBar = CALayer()
-    private let bottomBar = CALayer()
+    fileprivate let topBar = CALayer()
+    fileprivate let bottomBar = CALayer()
 
     var selectionConstraint: NSLayoutConstraint!
     
     init(buttonTitles: Array<String>) {
         buttons = buttonTitles.map { (buttonTitle: String) -> UIButton in
-            let button = UIButton(type: .Custom)
+            let button = UIButton(type: .custom)
             
-            button.setTitle(buttonTitle, forState: .Normal)
-            button.setTitle(buttonTitle, forState: .Disabled)
+            button.setTitle(buttonTitle, for: UIControlState())
+            button.setTitle(buttonTitle, for: .disabled)
             
             if let titleLabel = button.titleLabel {
-                titleLabel.font = UIFont.sansSerifFontWithSize(13)
-                titleLabel.backgroundColor = .whiteColor()
-                titleLabel.opaque = true
+                titleLabel.font = UIFont.sansSerifFont(withSize: 13)
+                titleLabel.backgroundColor = .white()
+                titleLabel.isOpaque = true
             }
             
-            button.backgroundColor = .whiteColor()
-            button.setTitleColor(.blackColor(), forState: .Disabled)
-            button.setTitleColor(.blackColor(), forState: .Selected)
-            button.setTitleColor(.artsyMediumGrey(), forState: .Normal)
+            button.backgroundColor = .white()
+            button.setTitleColor(.black(), for: .disabled)
+            button.setTitleColor(.black(), for: .selected)
+            button.setTitleColor(.artsyMediumGrey(), for: UIControlState())
             
             return button
         }
@@ -46,16 +46,16 @@ class SwitchView: UIView {
         topSelectionIndicator = UIView()
         bottomSelectionIndicator = UIView()
         
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         
         setup()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        var rect = CGRectMake(0, 0, CGRectGetWidth(layer.bounds), SwitchViewBorderWidth)
+        var rect = CGRect(x: 0, y: 0, width: layer.bounds.width, height: SwitchViewBorderWidth)
         topBar.frame = rect
-        rect.origin.y = CGRectGetHeight(layer.bounds) - SwitchViewBorderWidth
+        rect.origin.y = layer.bounds.height - SwitchViewBorderWidth
         bottomBar.frame = rect
     }
 
@@ -63,12 +63,12 @@ class SwitchView: UIView {
         self.init(buttonTitles: [])
     }
     
-    override func intrinsicContentSize() -> CGSize {
+    override var intrinsicContentSize : CGSize {
         return CGSize(width: UIViewNoIntrinsicMetric, height: 46)
     }
     
-    func selectedButton(button: UIButton!) {
-        let index = buttons.indexOf(button)!
+    func selectedButton(_ button: UIButton!) {
+        let index = buttons.index(of: button)!
         setSelectedIndex(index, animated: shouldAnimate)
     }
     
@@ -85,7 +85,7 @@ class SwitchView: UIView {
 private extension SwitchView {
     func setup() {
         if let firstButton = buttons.first {
-            firstButton.enabled = false
+            firstButton.isEnabled = false
         }
         
         let widthPredicateMultiplier = "*\(widthMultiplier())"
@@ -94,60 +94,60 @@ private extension SwitchView {
             let button = buttons[i]
             
             self.addSubview(button)
-            button.addTarget(self, action: #selector(SwitchView.selectedButton(_:)), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(SwitchView.selectedButton(_:)), for: .touchUpInside)
             
-            button.constrainWidthToView(self, predicate: widthPredicateMultiplier)
+            button.constrainWidth(to: self, predicate: widthPredicateMultiplier)
             
             if (i == 0) {
-                button.alignLeadingEdgeWithView(self, predicate: nil)
+                button.alignLeadingEdge(with: self, predicate: nil)
             } else {
-                button.constrainLeadingSpaceToView(buttons[i-1], predicate: nil)
+                button.constrainLeadingSpace(to: buttons[i-1], predicate: nil)
             }
             
-            button.alignTop("\(SwitchViewBorderWidth)", bottom: "\(-SwitchViewBorderWidth)", toView: self)
+            button.alignTop("\(SwitchViewBorderWidth)", bottom: "\(-SwitchViewBorderWidth)", to: self)
         }
 
-        topBar.backgroundColor = UIColor.artsyMediumGrey().CGColor
-        bottomBar.backgroundColor = UIColor.artsyMediumGrey().CGColor
+        topBar.backgroundColor = UIColor.artsyMediumGrey().cgColor
+        bottomBar.backgroundColor = UIColor.artsyMediumGrey().cgColor
         layer.addSublayer(topBar)
         layer.addSublayer(bottomBar)
 
         selectionIndicator.addSubview(topSelectionIndicator)
         selectionIndicator.addSubview(bottomSelectionIndicator)
         
-        topSelectionIndicator.backgroundColor = .blackColor()
-        bottomSelectionIndicator.backgroundColor = .blackColor()
+        topSelectionIndicator.backgroundColor = .black()
+        bottomSelectionIndicator.backgroundColor = .black()
         
-        topSelectionIndicator.alignTop("0", leading: "0", bottom: nil, trailing: "0", toView: selectionIndicator)
-        bottomSelectionIndicator.alignTop(nil, leading: "0", bottom: "0", trailing: "0", toView: selectionIndicator)
+        topSelectionIndicator.alignTop("0", leading: "0", bottom: nil, trailing: "0", to: selectionIndicator)
+        bottomSelectionIndicator.alignTop(nil, leading: "0", bottom: "0", trailing: "0", to: selectionIndicator)
         
         topSelectionIndicator.constrainHeight("\(SwitchViewBorderWidth)")
         bottomSelectionIndicator.constrainHeight("\(SwitchViewBorderWidth)")
 
         addSubview(selectionIndicator)
-        selectionIndicator.constrainWidthToView(self, predicate: widthPredicateMultiplier)
-        selectionIndicator.alignTop("0", bottom: "0", toView: self)
+        selectionIndicator.constrainWidth(to: self, predicate: widthPredicateMultiplier)
+        selectionIndicator.alignTop("0", bottom: "0", to: self)
         
-        selectionConstraint = selectionIndicator.alignLeadingEdgeWithView(self, predicate: nil).last! as! NSLayoutConstraint
+        selectionConstraint = selectionIndicator.alignLeadingEdge(with: self, predicate: nil).last! as! NSLayoutConstraint
     }
     
     func widthMultiplier() -> Float {
         return 1.0 / Float(buttons.count)
     }
     
-    func setSelectedIndex(index: Int) {
+    func setSelectedIndex(_ index: Int) {
         setSelectedIndex(index, animated: false)
     }
     
-    func setSelectedIndex(index: Int, animated: Bool) {
-        UIView.animateIf(shouldAnimate && animated, duration: animationDuration, options: .CurveEaseOut) {
+    func setSelectedIndex(_ index: Int, animated: Bool) {
+        UIView.animateIf(shouldAnimate && animated, duration: animationDuration, options: .curveEaseOut) {
             let button = self.buttons[index]
             
             self.buttons.forEach { (button: UIButton) in
-                button.enabled = true
+                button.isEnabled = true
             }
             
-            button.enabled = false
+            button.isEnabled = false
             
             // Set the x-position of the selection indicator as a fraction of the total width of the switch view according to which button was pressed.
             let multiplier = CGFloat(index) / CGFloat(self.buttons.count)
@@ -155,9 +155,9 @@ private extension SwitchView {
             self.removeConstraint(self.selectionConstraint)
             // It's illegal to have a multiplier of zero, so if we're at index zero, we .just stick to the left side.
             if multiplier == 0 {
-                self.selectionConstraint = self.selectionIndicator.alignLeadingEdgeWithView(self, predicate: nil).last! as! NSLayoutConstraint
+                self.selectionConstraint = self.selectionIndicator.alignLeadingEdge(with: self, predicate: nil).last! as! NSLayoutConstraint
             } else {
-                self.selectionConstraint = NSLayoutConstraint(item: self.selectionIndicator, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Right, multiplier: multiplier, constant: 0)
+                self.selectionConstraint = NSLayoutConstraint(item: self.selectionIndicator, attribute: .left, relatedBy: .equal, toItem: self, attribute: .right, multiplier: multiplier, constant: 0)
             }
             self.addConstraint(self.selectionConstraint)
             self.layoutIfNeeded()

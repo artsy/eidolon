@@ -5,19 +5,19 @@ class AuctionWebViewController: WebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         
         let exitImage = UIImage(named: "toolbar_close")
-        let backwardBarItem = UIBarButtonItem(image: exitImage, style: .Plain, target: self, action: #selector(exit));
+        let backwardBarItem = UIBarButtonItem(image: exitImage, style: .plain, target: self, action: #selector(exit));
         let allItems = self.toolbarItems! + [flexibleSpace, backwardBarItem]
         toolbarItems = allItems
     }
 
     func exit() {
         let passwordVC = PasswordAlertViewController.alertView { [weak self] in
-            self?.navigationController?.popViewControllerAnimated(true)
+            self?.navigationController?.popViewController(animated: true)
             return
         }
-        self.presentViewController(passwordVC, animated: true) {}
+        self.present(passwordVC, animated: true) {}
     }
 }

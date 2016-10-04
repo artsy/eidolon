@@ -8,7 +8,7 @@ class OfflineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        offlineLabel.font = UIFont.serifFontWithSize(49)
-        subtitleLabel.font = UIFont.serifItalicFontWithSize(32)
+        offlineLabel.font = UIFont.serifFont(withSize: 49)
+        subtitleLabel.font = UIFont.serifItalicFont(withSize: 32)
     }
 }

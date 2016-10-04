@@ -15,7 +15,7 @@ class ListingsViewController: UIViewController {
 
     var downloadImage: ListingsCollectionViewCell.DownloadImageClosure = { (url, imageView) -> () in
         if let url = url {
-            imageView.sd_setImageWithURL(url)
+            imageView.sd_setImage(with: url as URL!)
         } else {
             imageView.image = nil
         }
@@ -52,7 +52,7 @@ class ListingsViewController: UIViewController {
         // Set up development environment.
 
         if AppSetup.sharedState.isTesting {
-            stagingFlag.hidden = true
+            stagingFlag.isHidden = true
         } else {
             if APIKeys.sharedKeys.stubResponses {
                 stagingFlag.image = UIImage(named: "StubbingFlag")
@@ -60,7 +60,7 @@ class ListingsViewController: UIViewController {
                 let flagImageName = AppSetup.sharedState.useStaging ? "StagingFlag" : "ProductionFlag"
                 stagingFlag.image = UIImage(named: flagImageName)
             } else {
-                stagingFlag.hidden = AppSetup.sharedState.useStaging == false
+                stagingFlag.isHidden = AppSetup.sharedState.useStaging == false
             }
         }
 
@@ -126,29 +126,29 @@ class ListingsViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue == .ShowSaleArtworkDetails {
             let saleArtwork = sender as! SaleArtwork!
-            let detailsViewController = segue.destinationViewController as! SaleArtworkDetailsViewController
+            let detailsViewController = segue.destination as! SaleArtworkDetailsViewController
             detailsViewController.saleArtwork = saleArtwork
             detailsViewController.provider = provider
-            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork.artwork.id])
+            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork?.artwork.id])
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         let switchHeightPredicate = "\(switchView.intrinsicContentSize().height)"
         
         switchView.constrainHeight(switchHeightPredicate)
-        switchView.alignTop("\(64+VerticalMargins)", leading: "\(HorizontalMargins)", bottom: nil, trailing: "-\(HorizontalMargins)", toView: view)
-        collectionView.constrainTopSpaceToView(switchView, predicate: "0")
-        collectionView.alignTop(nil, leading: "0", bottom: "0", trailing: "0", toView: view)
+        switchView.alignTop("\(64+VerticalMargins)", leading: "\(HorizontalMargins)", bottom: nil, trailing: "-\(HorizontalMargins)", to: view)
+        collectionView.constrainTopSpace(to: switchView, predicate: "0")
+        collectionView.alignTop(nil, leading: "0", bottom: "0", trailing: "0", to: view)
         collectionView.contentInset = UIEdgeInsetsMake(40, 0, 80, 0)
     }
 }
 
 extension ListingsViewController {
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> ListingsViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ListingsViewController {
         return storyboard.viewControllerWithID(.AuctionListings) as! ListingsViewController
     }
 }
@@ -157,11 +157,11 @@ extension ListingsViewController {
 
 extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, ARCollectionViewMasonryLayoutDelegate {
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfSaleArtworks
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier.value, forIndexPath: indexPath)
 
         if let listingsCell = cell as? ListingsCollectionViewCell {
@@ -190,7 +190,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
         return cell
     }
 
-    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAt indexPath: IndexPath!) -> CGFloat {
         return MasonryCollectionViewCell.heightForCellWithImageAspectRatio(viewModel.imageAspectRatioForSaleArtworkAtIndexPath(indexPath))
     }
 }
@@ -199,32 +199,32 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
 
 private extension ListingsViewController {
 
-    func showDetailsForSaleArtwork(saleArtwork: SaleArtwork) {
+    func showDetails(forSaleArtwork saleArtwork: SaleArtwork) {
 
         ARAnalytics.event("Artwork Details Tapped", withProperties: ["id": saleArtwork.artwork.id])
-        performSegueWithIdentifier(SegueIdentifier.ShowSaleArtworkDetails.rawValue, sender: saleArtwork)
+        self.performSegue(withIdentifier: SegueIdentifier.ShowSaleArtworkDetails.rawValue, sender: saleArtwork)
     }
 
-    func presentModalForSaleArtwork(saleArtwork: SaleArtwork) {
+    func presentModalForSaleArtwork(_ saleArtwork: SaleArtwork) {
         bid(viewModel.auctionID, saleArtwork: saleArtwork, allowAnimations: self.allowAnimations, provider: provider)
     }
     
     // MARK: Class methods
     
     class func masonryLayout() -> ARCollectionViewMasonryLayout {
-        let layout = ARCollectionViewMasonryLayout(direction: .Vertical)
-        layout.itemMargins = CGSizeMake(65, 20)
-        layout.dimensionLength = CGFloat(MasonryCollectionViewCellWidth)
-        layout.rank = 3
-        layout.contentInset = UIEdgeInsetsMake(0.0, 0.0, CGFloat(VerticalMargins), 0.0)
+        let layout = ARCollectionViewMasonryLayout(direction: .vertical)
+        layout?.itemMargins = CGSize(width: 65, height: 20)
+        layout?.dimensionLength = CGFloat(MasonryCollectionViewCellWidth)
+        layout?.rank = 3
+        layout?.contentInset = UIEdgeInsetsMake(0.0, 0.0, CGFloat(VerticalMargins), 0.0)
         
-        return layout
+        return layout!
     }
     
     class func tableLayout(width: CGFloat) -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         TableCollectionViewCell.Width = width
-        layout.itemSize = CGSizeMake(width, TableCollectionViewCell.Height)
+        layout.itemSize = CGSize(width: width, height: TableCollectionViewCell.Height)
         layout.minimumLineSpacing = 0.0
         
         return layout
@@ -235,14 +235,14 @@ private extension ListingsViewController {
 
 extension UICollectionView {
 
-    class func listingsCollectionViewWithDelegateDatasource(delegateDatasource: ListingsViewController) -> UICollectionView {
-        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: ListingsViewController.masonryLayout())
-        collectionView.backgroundColor = .clearColor()
+    class func listingsCollectionViewWithDelegateDatasource(_ delegateDatasource: ListingsViewController) -> UICollectionView {
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: ListingsViewController.masonryLayout())
+        collectionView.backgroundColor = .clear()
         collectionView.dataSource = delegateDatasource
         collectionView.delegate = delegateDatasource
         collectionView.alwaysBounceVertical = true
-        collectionView.registerClass(MasonryCollectionViewCell.self, forCellWithReuseIdentifier: MasonryCellIdentifier)
-        collectionView.registerClass(TableCollectionViewCell.self, forCellWithReuseIdentifier: TableCellIdentifier)
+        collectionView.register(MasonryCollectionViewCell.self, forCellWithReuseIdentifier: MasonryCellIdentifier)
+        collectionView.register(TableCollectionViewCell.self, forCellWithReuseIdentifier: TableCellIdentifier)
         collectionView.allowsSelection = false
         return collectionView
     }

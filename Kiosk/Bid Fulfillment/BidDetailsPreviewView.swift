@@ -20,7 +20,7 @@ class BidDetailsPreviewView: UIView {
     dynamic let currentBidPriceLabel = ARSerifLabel()
 
     override func awakeFromNib() {
-        self.backgroundColor = .whiteColor()
+        self.backgroundColor = .white()
 
         artistNameLabel.numberOfLines = 1
         artworkTitleLabel.numberOfLines = 1
@@ -28,10 +28,10 @@ class BidDetailsPreviewView: UIView {
 
         artworkImageView.alignRight = true
         artworkImageView.alignBottom = true
-        artworkImageView.contentMode = .ScaleAspectFit
+        artworkImageView.contentMode = .scaleAspectFit
 
-        artistNameLabel.font = UIFont.sansSerifFontWithSize(14)
-        currentBidPriceLabel.font = UIFont.serifBoldFontWithSize(14)
+        artistNameLabel.font = UIFont.sansSerifFont(withSize: 14)
+        currentBidPriceLabel.font = UIFont.serifBoldFont(withSize: 14)
 
         let artwork = _bidDetails
             .asObservable()
@@ -91,19 +91,19 @@ class BidDetailsPreviewView: UIView {
         
         self.constrainHeight("60")
         
-        artworkImageView.alignTop("0", leading: "0", bottom: "0", trailing: nil, toView: self)
+        artworkImageView.alignTop("0", leading: "0", bottom: "0", trailing: nil, to: self)
         artworkImageView.constrainWidth("84")
         artworkImageView.constrainHeight("60")
 
-        artistNameLabel.alignAttribute(.Top, toAttribute: .Top, ofView: self, predicate: "0")
+        artistNameLabel.alignAttribute(.top, to: .top, of: self, predicate: "0")
         artistNameLabel.constrainHeight("16")
-        artworkTitleLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artistNameLabel, predicate: "8")
+        artworkTitleLabel.alignAttribute(.top, to: .bottom, of: artistNameLabel, predicate: "8")
         artworkTitleLabel.constrainHeight("16")
-        currentBidPriceLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkTitleLabel, predicate: "4")
+        currentBidPriceLabel.alignAttribute(.top, to: .bottom, of: artworkTitleLabel, predicate: "4")
         currentBidPriceLabel.constrainHeight("16")
         
-        UIView.alignAttribute(.Leading, ofViews: [artistNameLabel, artworkTitleLabel, currentBidPriceLabel], toAttribute:.Trailing, ofViews: [artworkImageView, artworkImageView, artworkImageView], predicate: "20")
-        UIView.alignAttribute(.Trailing, ofViews: [artistNameLabel, artworkTitleLabel, currentBidPriceLabel], toAttribute:.Trailing, ofViews: [self, self, self], predicate: "0")
+        UIView.alignAttribute(.leading, ofViews: [artistNameLabel, artworkTitleLabel, currentBidPriceLabel], to:.trailing, ofViews: [artworkImageView, artworkImageView, artworkImageView], predicate: "20")
+        UIView.alignAttribute(.trailing, ofViews: [artistNameLabel, artworkTitleLabel, currentBidPriceLabel], to:.trailing, ofViews: [self, self, self], predicate: "0")
 
     }
 

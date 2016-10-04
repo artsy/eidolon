@@ -4,20 +4,20 @@ class AdminLogViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.text = try? NSString(contentsOfURL: logPath(), encoding: NSASCIIStringEncoding) as String
+        textView.text = try? NSString(contentsOf: logPath(), encoding: String.Encoding.ascii.rawValue) as String
     }
 
     @IBOutlet weak var textView: UITextView!
-    @IBAction func backButtonTapped(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+    @IBAction func backButtonTapped(_ sender: AnyObject) {
+        self.navigationController?.popViewController(animated: true)
     }
 
-    func logPath() -> NSURL {
-        let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!
-        return docs.URLByAppendingPathComponent("logger.txt")
+    func logPath() -> URL {
+        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+        return docs.appendingPathComponent("logger.txt")
     }
 
-    @IBAction func scrollTapped(sender: AnyObject) {
+    @IBAction func scrollTapped(_ sender: AnyObject) {
         textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count - 1, 1))
     }
 }

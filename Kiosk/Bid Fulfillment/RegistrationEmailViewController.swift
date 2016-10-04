@@ -13,7 +13,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
     }()
 
 
-    private let _viewWillDisappear = PublishSubject<Void>()
+    fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
         return self._viewWillDisappear.asObserver()
     }
@@ -36,13 +36,13 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
         emailTextField.becomeFirstResponder()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         _viewWillDisappear.onNext()
     }
 
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
         // Allow delete
         if (string.isEmpty) { return true }
@@ -51,7 +51,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
         return string != " "
     }
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationEmailViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> RegistrationEmailViewController {
         return storyboard.viewControllerWithID(.RegisterEmail) as! RegistrationEmailViewController
     }
 }

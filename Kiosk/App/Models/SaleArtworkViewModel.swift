@@ -4,7 +4,7 @@ import RxSwift
 private let kNoBidsString = ""
 
 class SaleArtworkViewModel: NSObject {
-    private let saleArtwork: SaleArtwork
+    fileprivate let saleArtwork: SaleArtwork
 
     init (saleArtwork: SaleArtwork) {
         self.saleArtwork = saleArtwork
@@ -20,23 +20,23 @@ extension SaleArtworkViewModel {
     var estimateString: String {
         // Default to estimateCents
         if let estimateCents = saleArtwork.estimateCents {
-            let dollars = NSNumberFormatter.currencyStringForCents(estimateCents)
+            let dollars = NumberFormatter.currencyString(forCents: estimateCents as NSNumber!)
             return "Estimate: \(dollars)"
         }
 
         // Try to extract non-nil low/high estimates. Return a default otherwise.
         switch (saleArtwork.lowEstimateCents, saleArtwork.highEstimateCents) {
-        case let (.Some(lowCents), .Some(highCents)):
-            let lowDollars = NSNumberFormatter.currencyStringForCents(lowCents)
-            let highDollars = NSNumberFormatter.currencyStringForCents(highCents)
+        case let (.some(lowCents), .some(highCents)):
+            let lowDollars = NumberFormatter.currencyString(forCents: lowCents as NSNumber!)
+            let highDollars = NumberFormatter.currencyString(forCents: highCents as NSNumber!)
             return "Estimate: \(lowDollars)–\(highDollars)"
         default:
             return "No Estimate"
         }
     }
 
-    var thumbnailURL: NSURL? {
-        return saleArtwork.artwork.defaultImage?.thumbnailURL()
+    var thumbnailURL: URL? {
+        return saleArtwork.artwork.defaultImage?.thumbnailURL() as URL?
     }
 
     var thumbnailAspectRatio: CGFloat? {
@@ -59,7 +59,7 @@ extension SaleArtworkViewModel {
 
     func numberOfBids() -> Observable<String> {
         return saleArtwork.rx_observe(NSNumber.self, "bidCount").map { optionalBidCount -> String in
-            guard let bidCount = optionalBidCount where bidCount.intValue > 0 else {
+            guard let bidCount = optionalBidCount , bidCount.intValue > 0 else {
                 return kNoBidsString
             }
             
@@ -120,7 +120,7 @@ extension SaleArtworkViewModel {
 
     }
 
-    func currentBid(prefix prefix: String = "", missingPrefix: String = "") -> Observable<String> {
+    func currentBid(prefix: String = "", missingPrefix: String = "") -> Observable<String> {
         return saleArtwork.rx_observe(NSNumber.self, "highestBidCents").map { [weak self] highestBidCents in
             if let currentBidCents = highestBidCents as? Int {
                 return "\(prefix)\(NSNumberFormatter.currencyStringForCents(currentBidCents))"

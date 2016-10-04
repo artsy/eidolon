@@ -58,7 +58,7 @@ class ImageTests: QuickSpec {
         }
     }
 
-    func imageForVersion(version:String) -> Image {
+    func image(forVersion version:String) -> Image {
         return Image.fromJSON([
             "id": "",
             "image_url":"http://image.com/:version.jpg",

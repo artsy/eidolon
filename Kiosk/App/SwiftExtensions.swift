@@ -1,9 +1,9 @@
 extension Optional {
     var hasValue: Bool {
         switch self {
-        case .None:
+        case .none:
             return false
-        case .Some(_):
+        case .some(_):
             return true
         }
     }
@@ -14,7 +14,7 @@ extension String {
         return UInt(self)
     }
 
-    func toUIntWithDefault(defaultValue: UInt) -> UInt {
+    func toUInt(withDefault defaultValue: UInt) -> UInt {
         return UInt(self) ?? defaultValue
     }
 }
@@ -43,9 +43,9 @@ extension Set: Occupiable { }
 extension Optional where Wrapped: Occupiable {
     var isNilOrEmpty: Bool {
         switch self {
-        case .None:
+        case .none:
             return true
-        case .Some(let value):
+        case .some(let value):
             return value.isEmpty
         }
     }

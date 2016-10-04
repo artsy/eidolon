@@ -10,7 +10,7 @@ final class BuyersPremium: NSObject, JSONAbleType {
         self.name = name
     }
 
-    static func fromJSON(json: [String: AnyObject]) -> BuyersPremium {
+    static func fromJSON(_ json: [String: AnyObject]) -> BuyersPremium {
         let json = JSON(json)
         let id = json["id"].stringValue
         let name = json["name"].stringValue

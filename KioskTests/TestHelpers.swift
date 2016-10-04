@@ -13,26 +13,26 @@ private enum DefaultsKeys: String {
     case TokenExpiry = "TokenExpiry"
 }
 
-func clearDefaultsKeys(defaults: NSUserDefaults) {
-    defaults.removeObjectForKey(DefaultsKeys.TokenKey.rawValue)
-    defaults.removeObjectForKey(DefaultsKeys.TokenExpiry.rawValue)
+func clearDefaultsKeys(_ defaults: UserDefaults) {
+    defaults.removeObject(forKey: DefaultsKeys.TokenKey.rawValue)
+    defaults.removeObject(forKey: DefaultsKeys.TokenExpiry.rawValue)
 }
 
-func getDefaultsKeys(defaults: NSUserDefaults) -> (key: String?, expiry: NSDate?) {
-    let key = defaults.objectForKey(DefaultsKeys.TokenKey.rawValue) as! String?
-    let expiry = defaults.objectForKey(DefaultsKeys.TokenExpiry.rawValue) as! NSDate?
+func getDefaultsKeys(_ defaults: UserDefaults) -> (key: String?, expiry: Date?) {
+    let key = defaults.object(forKey: DefaultsKeys.TokenKey.rawValue) as! String?
+    let expiry = defaults.object(forKey: DefaultsKeys.TokenExpiry.rawValue) as! Date?
     
     return (key: key, expiry: expiry)
 }
 
-func setDefaultsKeys(defaults: NSUserDefaults, key: String?, expiry: NSDate?) {
-    defaults.setObject(key, forKey: DefaultsKeys.TokenKey.rawValue)
-    defaults.setObject(expiry, forKey: DefaultsKeys.TokenExpiry.rawValue)
+func setDefaultsKeys(_ defaults: UserDefaults, key: String?, expiry: Date?) {
+    defaults.set(key, forKey: DefaultsKeys.TokenKey.rawValue)
+    defaults.set(expiry, forKey: DefaultsKeys.TokenExpiry.rawValue)
 }
 
-func yearFromDate(date: NSDate) -> Int {
-    let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-    return calendar.components(.Year, fromDate: date).year
+func yearFromDate(_ date: Date) -> Int {
+    let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+    return (calendar as NSCalendar).components(.year, from: date).year!
 }
 
 @objc class TestClass: NSObject { }
@@ -40,7 +40,7 @@ func yearFromDate(date: NSDate) -> Int {
 // Necessary since UIImage(named:) doesn't work correctly in the test bundle
 extension UIImage {
     class func testImage(named name: String, ofType type: String) -> UIImage! {
-        let bundle = NSBundle(forClass: TestClass().dynamicType)
+        let bundle = Bundle(for: type(of: TestClass()))
         let path = bundle.pathForResource(name, ofType: type)
         return UIImage(contentsOfFile: path!)
     }
@@ -90,14 +90,14 @@ class StubFulfillmentController: FulfillmentController {
 /// Nimble is currently having issues with nondeterministic async expectations.
 /// This will have to do for now 😢
 /// See: https://github.com/Quick/Nimble/issues/177
-func kioskWaitUntil(action: (() -> Void) -> Void) {
+func kioskWaitUntil(_ action: (() -> Void) -> Void) {
     waitUntil(timeout: 10, action: action)
 }
 
 
 // TODO: Move these into a separate pod?
 // This is handy so we can write expect(o) == 1 instead of expect(o.value) == 1 or whatever.
-public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Observable<T>> {
+public func equalFirst<T: Equatable>(_ expectedValue: T?) -> MatcherFunc<Observable<T>> {
     return MatcherFunc { actualExpression, failureMessage in
 
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
@@ -108,7 +108,7 @@ public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Observabl
     }
 }
 
-public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Variable<T>> {
+public func equalFirst<T: Equatable>(_ expectedValue: T?) -> MatcherFunc<Variable<T>> {
     return MatcherFunc { actualExpression, failureMessage in
 
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
@@ -119,7 +119,7 @@ public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Variable<
     }
 }
 
-public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Observable<Optional<T>>> {
+public func equalFirst<T: Equatable>(_ expectedValue: T?) -> MatcherFunc<Observable<Optional<T>>> {
     return MatcherFunc { actualExpression, failureMessage in
 
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
@@ -134,7 +134,7 @@ public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Observabl
     }
 }
 
-public func equalFirst<T: Equatable>(expectedValue: T?) -> MatcherFunc<Variable<Optional<T>>> {
+public func equalFirst<T: Equatable>(_ expectedValue: T?) -> MatcherFunc<Variable<Optional<T>>> {
     return MatcherFunc { actualExpression, failureMessage in
 
         failureMessage.postfixMessage = "equal <\(expectedValue)>"
@@ -172,7 +172,7 @@ enum TestError: String {
     case Default
 }
 
-extension TestError: ErrorType { }
+extension TestError: Error { }
 
 func emptyAction() -> CocoaAction {
     return CocoaAction { _ in Observable.empty() }
@@ -182,7 +182,7 @@ func neverAction() -> CocoaAction {
     return CocoaAction { _ in Observable.never() }
 }
 
-func errorAction(error: ErrorType = TestError.Default) -> CocoaAction {
+func errorAction(_ error: ErrorType = TestError.Default) -> CocoaAction {
     return CocoaAction { _ in Observable.error(error) }
 }
 

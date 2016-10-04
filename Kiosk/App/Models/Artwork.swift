@@ -4,15 +4,15 @@ import SwiftyJSON
 final class Artwork: NSObject, JSONAbleType {
 
     enum SoldStatus {
-        case NotSold
-        case Sold
+        case notSold
+        case sold
 
-        static func fromString(string: String) -> SoldStatus {
-            switch string.lowercaseString {
+        static func fromString(_ string: String) -> SoldStatus {
+            switch string.lowercased() {
             case "sold":
-                return .Sold
+                return .sold
             default:
-                return .NotSold
+                return .notSold
             }
         }
     }
@@ -54,7 +54,7 @@ final class Artwork: NSObject, JSONAbleType {
         self.soldStatus = sold
     }
 
-    static func fromJSON(json: [String: AnyObject]) -> Artwork {
+    static func fromJSON(_ json: [String: AnyObject]) -> Artwork {
         let json = JSON(json)
 
         let id = json["id"].stringValue
@@ -96,7 +96,7 @@ final class Artwork: NSObject, JSONAbleType {
         return artwork
     }
 
-    func updateWithValues(newArtwork: Artwork) {
+    func updateWithValues(_ newArtwork: Artwork) {
         // soldStatus is the only value we expect to change at runtime.
         soldStatus = newArtwork.soldStatus
     }
@@ -106,7 +106,7 @@ final class Artwork: NSObject, JSONAbleType {
     }
 }
 
-private func titleAndDateAttributedString(title: String, dateString: String) -> NSAttributedString {
+private func titleAndDateAttributedString(_ title: String, dateString: String) -> NSAttributedString {
     let workTitle = title.isEmpty ? "Untitled" : title
     let workFont = UIFont.serifItalicFontWithSize(16)
     let attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSFontAttributeName : workFont ])

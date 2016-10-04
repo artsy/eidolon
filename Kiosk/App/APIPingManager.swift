@@ -4,7 +4,7 @@ import RxSwift
 
 class APIPingManager {
 
-    let syncInterval: NSTimeInterval = 2
+    let syncInterval: TimeInterval = 2
     var letOnline: Observable<Bool>!
     var provider: Networking
 
@@ -18,7 +18,7 @@ class APIPingManager {
             .startWith(true)
     }
 
-    private func ping() -> Observable<Bool> {
+    fileprivate func ping() -> Observable<Bool> {
         return provider.request(ArtsyAPI.Ping).map(responseIsOK)
     }
 }

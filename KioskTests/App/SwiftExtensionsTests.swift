@@ -27,7 +27,7 @@ class AnyOccupiable: NSObject, Occupiable {
 
 class SwiftExtensionsConfiguration: QuickConfiguration {
 
-    override class func configure(configuration: Configuration) {
+    override class func configure(_ configuration: Configuration) {
         sharedExamples("an Occupiable") { (sharedExampleContext: SharedExampleContext) in
             var empty: AnyOccupiable?
             var nonEmpty: AnyOccupiable?

@@ -12,12 +12,12 @@ class WhitespaceGobbler: UIView {
     convenience init() {
         self.init(frame: CGRect.zero)
 
-        setContentHuggingPriority(50, forAxis: .Vertical)
-        setContentHuggingPriority(50, forAxis: .Horizontal)
-        backgroundColor = .clearColor()
+        setContentHuggingPriority(50, for: .vertical)
+        setContentHuggingPriority(50, for: .horizontal)
+        backgroundColor = .clear()
     }
 
-    override func intrinsicContentSize() -> CGSize {
+    override var intrinsicContentSize : CGSize {
         return CGSize.zero
     }
 }

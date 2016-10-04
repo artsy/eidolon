@@ -3,12 +3,12 @@ import ISO8601DateFormatter
 import RxSwift
 
 class SystemTime {
-    var systemTimeInterval: NSTimeInterval? = nil
+    var systemTimeInterval: TimeInterval? = nil
 
     init () {}
 
-    func sync(provider: Networking) -> Observable<Void> {
-        let endpoint: ArtsyAPI = ArtsyAPI.SystemTime
+    func sync(_ provider: Networking) -> Observable<Void> {
+        let endpoint: ArtsyAPI = ArtsyAPI.systemTime
 
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
@@ -27,10 +27,10 @@ class SystemTime {
         return systemTimeInterval != nil
     }
 
-    func date() -> NSDate {
-        let now = NSDate()
+    func date() -> Date {
+        let now = Date()
         if let systemTimeInterval = systemTimeInterval {
-            return now.dateByAddingTimeInterval(-systemTimeInterval)
+            return now.addingTimeInterval(-systemTimeInterval)
         } else {
             return now
         }

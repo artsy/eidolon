@@ -8,14 +8,14 @@ enum EidolonError: String {
     case MissingData
 }
 
-extension EidolonError: ErrorType { }
+extension EidolonError: Error { }
 
 extension Observable {
 
     typealias Dictionary = [String: AnyObject]
 
     /// Get given JSONified data, pass back objects
-    func mapToObject<B: JSONAbleType>(classType: B.Type) -> Observable<B> {
+    func mapTo<B: JSONAbleType>(object classType: B.Type) -> Observable<B> {
         return self.map { json in
             guard let dict = json as? Dictionary else {
                 throw EidolonError.CouldNotParseJSON
@@ -26,7 +26,7 @@ extension Observable {
     }
 
     /// Get given JSONified data, pass back objects as an array
-    func mapToObjectArray<B: JSONAbleType>(classType: B.Type) -> Observable<[B]> {
+    func mapTo<B: JSONAbleType>(arrayOf classType: B.Type) -> Observable<[B]> {
         return self.map { json in
             guard let array = json as? [AnyObject] else {
                 throw EidolonError.CouldNotParseJSON

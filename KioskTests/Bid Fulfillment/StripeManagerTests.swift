@@ -74,7 +74,7 @@ class TestSTPAPIClient: STPAPIClient {
         ]
     ])
 
-    override func createTokenWithCard(card: STPCard!, completion: STPCompletionBlock!) {
+    override func createToken(with card: STPCard!, completion: STPCompletionBlock!) {
         if succeed {
             completion(token, nil)
         } else {

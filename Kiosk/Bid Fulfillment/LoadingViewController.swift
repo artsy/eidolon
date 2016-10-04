@@ -21,7 +21,7 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var backToAuctionButton: SecondaryActionButton!
     @IBOutlet weak var placeHigherBidButton: ActionButton!
 
-    private let _viewWillDisappear = PublishSubject<Void>()
+    fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
         return self._viewWillDisappear.asObserver()
     }
@@ -47,19 +47,19 @@ class LoadingViewController: UIViewController {
         if placingBid  {
             bidDetailsPreviewView.bidDetails = viewModel.bidDetails
         } else {
-            bidDetailsPreviewView.hidden = true
+            bidDetailsPreviewView.isHidden = true
         }
 
-        statusMessage.hidden = true
-        backToAuctionButton.hidden = true
-        placeHigherBidButton.hidden = true
+        statusMessage.isHidden = true
+        backToAuctionButton.isHidden = true
+        placeHigherBidButton.isHidden = true
 
         spinner.animate(animate)
 
         titleLabel.text = placingBid ? "Placing bid..." : "Registering..."
 
         // Either finishUp() or bidderError() are responsible for providing a way back to the auction.
-        fulfillmentContainer()?.cancelButton.hidden = true
+        fulfillmentContainer()?.cancelButton.isHidden = true
 
         // The view model will perform actions like registering a user if necessary,
         // placing a bid if requested, and polling for results.
@@ -79,20 +79,20 @@ class LoadingViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         _viewWillDisappear.onNext()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue == .PushtoRegisterConfirmed {
-            let detailsVC = segue.destinationViewController as! YourBiddingDetailsViewController
+            let detailsVC = segue.destination as! YourBiddingDetailsViewController
             detailsVC.confirmationImage = bidConfirmationImageView.image
             detailsVC.provider = provider
         }
 
         if segue == .PlaceaHigherBidAfterNotBeingHighestBidder {
-            let placeBidVC = segue.destinationViewController as! PlaceBidViewController
+            let placeBidVC = segue.destination as! PlaceBidViewController
             placeBidVC.hasAlreadyPlacedABid = true
             placeBidVC.provider = provider
         }
@@ -142,13 +142,13 @@ extension LoadingViewController {
 
         let title = reserveNotMet ? "NO, THANKS" : (createdNewBidder ? "CONTINUE" : "BACK TO AUCTION")
         backToAuctionButton.setTitle(title, forState: .Normal)
-        fulfillmentContainer()?.cancelButton.hidden = false
+        fulfillmentContainer()?.cancelButton.isHidden = false
     }
 
     func handleRegistered() {
         titleLabel.text = "Registration Complete"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
-        fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", for: UIControlState())
         Observable<Int>.interval(1, scheduler: MainScheduler.instance)
             .take(1)
             .subscribeCompleted { [weak self] in
@@ -160,7 +160,7 @@ extension LoadingViewController {
     func handleUpdate() {
         titleLabel.text = "Updated your Information"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
-        fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", for: UIControlState())
     }
 
     func handleUnknownBidder() {
@@ -170,14 +170,14 @@ extension LoadingViewController {
 
     func handleReserveNotMet() {
         titleLabel.text = "Reserve Not Met"
-        statusMessage.hidden = false
+        statusMessage.isHidden = false
         statusMessage.text = "Your bid is still below this lot's reserve. Please place a higher bid."
         bidConfirmationImageView.image = UIImage(named: "BidNotHighestBidder")
     }
 
     func handleHighestBidder() {
         titleLabel.text = "High Bid!"
-        statusMessage.hidden = false
+        statusMessage.isHidden = false
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
 
@@ -185,24 +185,24 @@ extension LoadingViewController {
             self?.closeSelf()
         }.addDisposableTo(rx_disposeBag)
 
-        bidConfirmationImageView.userInteractionEnabled = true
+        bidConfirmationImageView.isUserInteractionEnabled = true
         bidConfirmationImageView.addGestureRecognizer(recognizer)
 
-        fulfillmentContainer()?.cancelButton.setTitle("DONE", forState: .Normal)
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", for: UIControlState())
     }
 
     func handleLowestBidder() {
         titleLabel.text = "Higher bid needed"
         titleLabel.textColor = .artsyRed()
-        statusMessage.hidden = false
+        statusMessage.isHidden = false
         statusMessage.text = "Another bidder has placed a higher maximum bid. Place a higher bid to secure the lot."
         bidConfirmationImageView.image = UIImage(named: "BidNotHighestBidder")
-        placeHigherBidButton.hidden = false
+        placeHigherBidButton.isHidden = false
     }
 
     // MARK: - Error Handling
 
-    func bidderError(error: NSError) {
+    func bidderError(_ error: NSError) {
         if placingBid {
             // If you are bidding, we show a bidding error regardless of whether or not you're also registering.
             if error.domain == OutbidDomain {
@@ -228,24 +228,24 @@ extension LoadingViewController {
             error: error)
     }
 
-    func handleErrorWithTitle(title: String, message: String, error: NSError) {
+    func handleError(withTitle title: String, message: String, error: NSError) {
         titleLabel.textColor = .artsyRed()
         titleLabel.text = title
         statusMessage.text = message
-        statusMessage.hidden = false
-        backToAuctionButton.hidden = false
+        statusMessage.isHidden = false
+        backToAuctionButton.isHidden = false
 
         statusMessage.presentOnLongPress("Error: \(error.localizedDescription). \n \(error.artsyServerError())", title: title) { [weak self] alertController in
-            self?.presentViewController(alertController, animated: true, completion: nil)
+            self?.present(alertController, animated: true, completion: nil)
         }
     }
 
-    @IBAction func placeHigherBidTapped(sender: AnyObject) {
+    @IBAction func placeHigherBidTapped(_ sender: AnyObject) {
         self.fulfillmentNav().bidDetails.bidAmountCents.value = 0
         self.performSegue(.PlaceaHigherBidAfterNotBeingHighestBidder)
     }
 
-    @IBAction func backToAuctionTapped(sender: AnyObject) {
+    @IBAction func backToAuctionTapped(_ sender: AnyObject) {
         if viewModel.createdNewBidder.value {
             self.performSegue(.PushtoRegisterConfirmed)
         } else {

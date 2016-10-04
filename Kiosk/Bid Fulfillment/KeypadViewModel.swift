@@ -59,7 +59,7 @@ private extension KeypadViewModel {
         }
     }
     
-    func addDigit(input: Int) -> Observable<Void> {
+    func addDigit(_ input: Int) -> Observable<Void> {
         return Observable.create { [weak self] observer in
             if let strongSelf = self {
                 let newValue = (10 * strongSelf.intValue.value) + input

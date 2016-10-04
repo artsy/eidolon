@@ -11,7 +11,7 @@ struct APIKeys {
 
     // MARK: Shared Keys
 
-    private struct SharedKeys {
+    fileprivate struct SharedKeys {
         static var instance = APIKeys()
     }
 

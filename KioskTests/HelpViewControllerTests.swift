@@ -6,7 +6,7 @@ import RxSwift
 import Kiosk
 
 class HelpViewControllerConfiguration: QuickConfiguration {
-    override class func configure(configuration: Configuration) {
+    override class func configure(_ configuration: Configuration) {
         sharedExamples("a help view controller") { (sharedExampleContext: SharedExampleContext) in
             var subject: HelpViewController!
             

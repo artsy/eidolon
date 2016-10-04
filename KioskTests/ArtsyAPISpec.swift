@@ -16,7 +16,7 @@ func beInTheFuture() -> MatcherFunc<NSDate> {
 
 class ArtsyAPISpec: QuickSpec {
     override func spec() {
-        var defaults: NSUserDefaults!
+        var defaults: UserDefaults!
 
         var disposeBag: DisposeBag!
         var networking: Networking!

@@ -3,18 +3,14 @@ import Reachability
 import Moya
 
 // Ideally a Pod. For now a file.
-func delayToMainThread(delay:Double, closure:()->()) {
-    dispatch_after (
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(delay * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(), closure)
+func delayToMainThread(_ delay:Double, closure:@escaping ()->()) {
+    DispatchQueue.main.asyncAfter (
+        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }
 
-func logPath() -> NSURL {
-    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!
-    return docs.URLByAppendingPathComponent("logger.txt")
+func logPath() -> URL {
+    let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+    return docs.appendingPathComponent("logger.txt")
 }
 
 let logger = Logger(destination: logPath())
@@ -29,7 +25,7 @@ func connectedToInternetOrStubbing() -> Observable<Bool> {
     return [online, stubbing].combineLatestOr()
 }
 
-func responseIsOK(response: Response) -> Bool {
+func responseIsOK(_ response: Response) -> Bool {
     return response.statusCode == 200
 }
 
@@ -48,29 +44,29 @@ private class ReachabilityManager: NSObject {
         return _reach.asObservable()
     }
 
-    private let reachability = Reachability.reachabilityForInternetConnection()
+    fileprivate let reachability = Reachability.forInternetConnection()
 
     override init() {
         super.init()
 
-        reachability.reachableBlock = { [weak self] _ in
-            dispatch_async(dispatch_get_main_queue()) {
+        reachability?.reachableBlock = { [weak self] _ in
+            DispatchQueue.main.async {
                 self?._reach.onNext(true)
             }
         }
 
-        reachability.unreachableBlock = { [weak self] _ in
-            dispatch_async(dispatch_get_main_queue()) {
+        reachability?.unreachableBlock = { [weak self] _ in
+            DispatchQueue.main.async {
                 self?._reach.onNext(false)
             }
         }
 
-        reachability.startNotifier()
+        reachability?.startNotifier()
         _reach.onNext(reachability.isReachable())
     }
 }
 
-func bindingErrorToInterface(error: ErrorType) {
+func bindingErrorToInterface(_ error: Error) {
     let error = "Binding error to UI: \(error)"
     #if DEBUG
         fatalError(error)
@@ -80,7 +76,7 @@ func bindingErrorToInterface(error: ErrorType) {
 }
 
 // Applies an instance method to the instance with an unowned reference.
-func applyUnowned<Type: AnyObject, Parameters, ReturnValue>(instance: Type, _ function: (Type -> Parameters -> ReturnValue)) -> (Parameters -> ReturnValue) {
+func applyUnowned<Type: AnyObject, Parameters, ReturnValue>(_ instance: Type, _ function: @escaping ((Type) -> (Parameters) -> ReturnValue)) -> ((Parameters) -> ReturnValue) {
     return { [unowned instance] parameters -> ReturnValue in
         return function(instance)(parameters)
     }

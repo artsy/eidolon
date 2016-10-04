@@ -14,7 +14,7 @@ class ArtworkTests: QuickSpec {
         let artistName = "Artist 1"
 
         let artistDict = ["id" : artistID, "name": artistName]
-        let data:[String: AnyObject] =  ["id":id , "title" : title, "date":date, "blurb":blurb, "artist":artistDict]
+        let data: [String: AnyObject] =  ["id":id as AnyObject , "title" : title as AnyObject, "date":date as AnyObject, "blurb":blurb as AnyObject, "artist":artistDict as AnyObject]
 
         var artwork: Artwork!
 

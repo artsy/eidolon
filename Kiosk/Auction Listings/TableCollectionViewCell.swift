@@ -2,23 +2,23 @@ import UIKit
 import RxCocoa
 
 class TableCollectionViewCell: ListingsCollectionViewCell {
-    private lazy var infoView: UIView = {
+    fileprivate lazy var infoView: UIView = {
         let view = UIView()
         view.addSubview(self.lotNumberLabel)
         view.addSubview(self.artistNameLabel)
         view.addSubview(self.artworkTitleLabel)
 
-        self.lotNumberLabel.alignTop("0", bottom: nil, toView: view)
-        self.lotNumberLabel.alignLeading("0", trailing: "0", toView: view)
-        self.artistNameLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: self.lotNumberLabel, predicate: "5")
-        self.artistNameLabel.alignLeading("0", trailing: "0", toView: view)
-        self.artworkTitleLabel.alignLeading("0", trailing: "0", toView: view)
-        self.artworkTitleLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: self.artistNameLabel, predicate: "0")
-        self.artworkTitleLabel.alignTop(nil, bottom: "0", toView: view)
+        self.lotNumberLabel.alignTop("0", bottom: nil, to: view)
+        self.lotNumberLabel.alignLeading("0", trailing: "0", to: view)
+        self.artistNameLabel.alignAttribute(.top, to: .bottom, of: self.lotNumberLabel, predicate: "5")
+        self.artistNameLabel.alignLeading("0", trailing: "0", to: view)
+        self.artworkTitleLabel.alignLeading("0", trailing: "0", to: view)
+        self.artworkTitleLabel.alignAttribute(.top, to: .bottom, of: self.artistNameLabel, predicate: "0")
+        self.artworkTitleLabel.alignTop(nil, bottom: "0", to: view)
         return view
     }()
 
-    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.infoView, self.currentBidLabel, self.numberOfBidsLabel, self.bidButton]
+    fileprivate lazy var cellSubviews: [UIView] = [self.artworkImageView, self.infoView, self.currentBidLabel, self.numberOfBidsLabel, self.bidButton]
     
     override func setup() {
         super.setup()
@@ -26,50 +26,50 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         contentView.constrainWidth("\(TableCollectionViewCell.Width)")
         
         // Configure subviews
-        numberOfBidsLabel.textAlignment = .Center
-        artworkImageView.contentMode = .ScaleAspectFill
+        numberOfBidsLabel.textAlignment = .center
+        artworkImageView.contentMode = .scaleAspectFill
         artworkImageView.clipsToBounds = true
         
         // Add subviews
         cellSubviews.forEach{ self.contentView.addSubview($0) }
         
         // Constrain subviews
-        artworkImageView.alignAttribute(.Width, toAttribute: .Height, ofView: artworkImageView, predicate: nil)
-        artworkImageView.alignTop("14", leading: "0", bottom: "-14", trailing: nil, toView: contentView)
+        artworkImageView.alignAttribute(.width, to: .height, of: artworkImageView, predicate: nil)
+        artworkImageView.alignTop("14", leading: "0", bottom: "-14", trailing: nil, to: contentView)
         artworkImageView.constrainHeight("56")
 
-        infoView.alignAttribute(.Left, toAttribute: .Right, ofView: artworkImageView, predicate: "28")
-        infoView.alignCenterYWithView(artworkImageView, predicate: "0")
+        infoView.alignAttribute(.left, to: .right, of: artworkImageView, predicate: "28")
+        infoView.alignCenterY(with: artworkImageView, predicate: "0")
         infoView.constrainWidth("300")
 
-        currentBidLabel.alignAttribute(.Left, toAttribute: .Right, ofView: infoView, predicate: "33")
-        currentBidLabel.alignCenterYWithView(artworkImageView, predicate: "0")
+        currentBidLabel.alignAttribute(.left, to: .right, of: infoView, predicate: "33")
+        currentBidLabel.alignCenterY(with: artworkImageView, predicate: "0")
         currentBidLabel.constrainWidth("180")
 
-        numberOfBidsLabel.alignAttribute(.Left, toAttribute: .Right, ofView: currentBidLabel, predicate: "33")
-        numberOfBidsLabel.alignCenterYWithView(artworkImageView, predicate: "0")
-        numberOfBidsLabel.alignAttribute(.Right, toAttribute: .Left, ofView: bidButton, predicate: "-33")
+        numberOfBidsLabel.alignAttribute(.left, to: .right, of: currentBidLabel, predicate: "33")
+        numberOfBidsLabel.alignCenterY(with: artworkImageView, predicate: "0")
+        numberOfBidsLabel.alignAttribute(.right, to: .left, of: bidButton, predicate: "-33")
         
-        bidButton.alignBottom(nil, trailing: "0", toView: contentView)
-        bidButton.alignCenterYWithView(artworkImageView, predicate: "0")
+        bidButton.alignBottom(nil, trailing: "0", to: contentView)
+        bidButton.alignCenterY(with: artworkImageView, predicate: "0")
         bidButton.constrainWidth("127")
 
         // Replaces the observable defined in the superclass, normally used to emit taps to a "More Info" label, which we don't have.
         let recognizer = UITapGestureRecognizer()
         contentView.addGestureRecognizer(recognizer)
-        self.moreInfo = recognizer.rx_event.map { _ -> NSDate in
-            return NSDate()
+        self.moreInfo = recognizer.rx_event.map { _ -> Date in
+            return Date()
         }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.drawBottomSolidBorderWithColor(.artsyMediumGrey())
+        contentView.drawBottomSolidBorder(with: .artsyMediumGrey())
     }
 }
 
 extension TableCollectionViewCell {
-    private struct SharedDimensions {
+    fileprivate struct SharedDimensions {
         var width: CGFloat = 0
         var height: CGFloat = 84
         

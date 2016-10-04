@@ -14,7 +14,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
 
     var provider: Networking!
 
-    private let _viewWillDisappear = PublishSubject<Void>()
+    fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
         return self._viewWillDisappear.asObserver()
     }
@@ -35,7 +35,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        forgotPasswordButton.hidden = false
+        forgotPasswordButton.isHidden = false
 
         let passwordText = passwordTextField.rx_text
         passwordText
@@ -89,7 +89,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         passwordTextField.becomeFirstResponder()
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         _viewWillDisappear.onNext()
     }
@@ -119,7 +119,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         passwordTextField.text = ""
     }
 
-    class func instantiateFromStoryboard(storyboard: UIStoryboard) -> RegistrationPasswordViewController {
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> RegistrationPasswordViewController {
         return storyboard.viewControllerWithID(.RegisterPassword) as! RegistrationPasswordViewController
     }
 }

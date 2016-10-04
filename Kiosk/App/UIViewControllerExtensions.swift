@@ -11,8 +11,8 @@ extension UIViewController {
 
     /// Short hand syntax for performing a segue with a known hardcoded identity
 
-    func performSegue(identifier:SegueIdentifier) {
-        performSegueWithIdentifier(identifier.rawValue, sender: self)
+    func performSegue(_ identifier:SegueIdentifier) {
+        self.performSegue(withIdentifier: identifier.rawValue, sender: self)
     }
 
     func fulfillmentNav() -> FulfillmentNavigationController {
@@ -20,12 +20,12 @@ extension UIViewController {
     }
 
     func fulfillmentContainer() -> FulfillmentContainerViewController? {
-        return fulfillmentNav().parentViewController as? FulfillmentContainerViewController
+        return fulfillmentNav().parent as? FulfillmentContainerViewController
     }
 
-    func findChildViewControllerOfType(klass: AnyClass) -> UIViewController? {
+    func findChildViewControllerOfType(_ klass: AnyClass) -> UIViewController? {
         for child in childViewControllers {
-            if child.isKindOfClass(klass) {
+            if child.isKind(of: klass) {
                 return child
             }
         }

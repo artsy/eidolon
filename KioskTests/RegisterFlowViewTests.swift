@@ -7,7 +7,7 @@ import Nimble_Snapshots
 private let frame = CGRect(x: 0, y: 0, width: 180, height: 320)
 
 class RegisterFlowViewConfiguration: QuickConfiguration {
-    override class func configure(configuration: Configuration) {
+    override class func configure(_ configuration: Configuration) {
         sharedExamples("a register flow view") { (sharedExampleContext: SharedExampleContext) in
             var subject: RegisterFlowView!
 

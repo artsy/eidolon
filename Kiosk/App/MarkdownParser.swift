@@ -7,10 +7,10 @@ class MarkdownParser: XNGMarkdownParser {
     override init() {
         super.init()
 
-        paragraphFont = UIFont.serifFontWithSize(16)
-        linkFontName = UIFont.serifItalicFontWithSize(16).fontName
-        boldFontName = UIFont.serifBoldFontWithSize(16).fontName
-        italicFontName = UIFont.serifItalicFontWithSize(16).fontName
+        paragraphFont = UIFont.serifFont(withSize: 16)
+        linkFontName = UIFont.serifItalicFont(withSize: 16).fontName
+        boldFontName = UIFont.serifBoldFont(withSize: 16).fontName
+        italicFontName = UIFont.serifItalicFont(withSize: 16).fontName
         shouldParseLinks = false
 
         let paragraphStyle = NSMutableParagraphStyle()
@@ -18,7 +18,7 @@ class MarkdownParser: XNGMarkdownParser {
 
         topAttributes = [
             NSParagraphStyleAttributeName: paragraphStyle,
-            NSForegroundColorAttributeName: UIColor.blackColor()
+            NSForegroundColorAttributeName: UIColor.black
         ]
     }
 }
