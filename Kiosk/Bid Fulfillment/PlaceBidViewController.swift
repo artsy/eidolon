@@ -45,7 +45,7 @@ class PlaceBidViewController: UIViewController {
     var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> PlaceBidViewController {
-        return storyboard.viewControllerWithID(.PlaceYourBid) as! PlaceBidViewController
+        return storyboard.viewController(withID: .PlaceYourBid) as! PlaceBidViewController
     }
 
     fileprivate let _viewWillDisappear = PublishSubject<Void>()
@@ -192,7 +192,7 @@ class PlaceBidViewController: UIViewController {
                 saleArtwork
                     .artwork
                     .rx_observe(NSAttributedString.self, "titleAndDate")
-                    .takeUntil(rx_deallocating)
+                    .takeUntil(rx.deallocated)
                     .bindTo(artworkTitleLabel.rx_attributedText)
                     .addDisposableTo(rx_disposeBag)
 
@@ -200,7 +200,7 @@ class PlaceBidViewController: UIViewController {
                     .artwork
                     .rx_observe(String.self, "price")
                     .filterNil()
-                    .takeUntil(rx_deallocating)
+                    .takeUntil(rx.deallocated)
                     .bindTo(artworkPriceLabel.rx_text)
                     .addDisposableTo(rx_disposeBag)
 

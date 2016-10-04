@@ -1,5 +1,6 @@
 import UIKit
 import ORStackView
+import FLKAutoLayout
 import Artsy_UIFonts
 import Artsy_UIButtons
 
@@ -10,7 +11,7 @@ class ChooseAuctionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        stackScrollView.backgroundColor = .whiteColor()
+        stackScrollView.backgroundColor = .white
         stackScrollView.bottomMarginHeight = CGFloat(NSNotFound)
         stackScrollView.updateConstraints()
 
@@ -19,7 +20,7 @@ class ChooseAuctionViewController: UIViewController {
         provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
-            .mapToObjectArray(Sale.self)
+            .mapTo(arrayOf: Sale.self)
             .subscribeNext { activeSales in
                 self.auctions = activeSales
 
@@ -28,10 +29,10 @@ class ChooseAuctionViewController: UIViewController {
                     let title = " \(sale.name) - #\(sale.auctionState) - \(sale.artworkCount)"
 
                     let button = ARFlatButton()
-                    button.setTitle(title, forState: .Normal)
-                    button.setTitleColor(.blackColor(), forState: .Normal)
+                    button.setTitle(title, forState: .normal)
+                    button.setTitleColor(.blackColor(), forState: .normal)
                     button.tag = i
-                    button.rx_tap.subscribeNext { (_) in
+                    button.rx.tap.subscribeNext { (_) in
                         let defaults = NSUserDefaults.standardUserDefaults()
                         defaults.setObject(sale.id, forKey: "KioskAuctionID")
                         defaults.synchronize()

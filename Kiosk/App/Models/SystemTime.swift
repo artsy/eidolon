@@ -1,5 +1,4 @@
 import Foundation
-import ISO8601DateFormatter
 import RxSwift
 
 class SystemTime {
@@ -17,8 +16,10 @@ class SystemTime {
                 guard let dictionary = response as? NSDictionary else { return }
                 let formatter = ISO8601DateFormatter()
 
-                let artsyDate = formatter.dateFromString(dictionary["iso8601"] as! String?)
-                self?.systemTimeInterval = NSDate().timeIntervalSinceDate(artsyDate)
+                let timestamp: String = (dictionary["iso8601"] as? String) ?? ""
+                if let artsyDate = formatter.date(from: timestamp) {
+                    self?.systemTimeInterval = NSDate().timeIntervalSince(artsyDate)
+                }
 
             }.logError().map(void)
     }

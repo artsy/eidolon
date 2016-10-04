@@ -42,7 +42,7 @@ private extension KeypadViewModel {
                 strongSelf.intValue.value = Int(strongSelf.intValue.value / 10)
                 if strongSelf.stringValue.value.isNotEmpty {
                     let string = strongSelf.stringValue.value
-                    strongSelf.stringValue.value = string.substringToIndex(string.endIndex.predecessor())
+                    strongSelf.stringValue.value = string.substring(to: string.endIndex.predecessor())
                 }
             }
             observer.onCompleted()

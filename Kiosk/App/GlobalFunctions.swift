@@ -62,11 +62,11 @@ private class ReachabilityManager: NSObject {
         }
 
         reachability?.startNotifier()
-        _reach.onNext(reachability.isReachable())
+        _reach.onNext(reachability?.isReachable() ?? false)
     }
 }
 
-func bindingErrorToInterface(_ error: Error) {
+func bindingErrorToInterface(_ error: Swift.Error) {
     let error = "Binding error to UI: \(error)"
     #if DEBUG
         fatalError(error)

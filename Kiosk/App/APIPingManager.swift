@@ -19,6 +19,6 @@ class APIPingManager {
     }
 
     fileprivate func ping() -> Observable<Bool> {
-        return provider.request(ArtsyAPI.Ping).map(responseIsOK)
+        return provider.request(ArtsyAPI.ping).map(responseIsOK)
     }
 }

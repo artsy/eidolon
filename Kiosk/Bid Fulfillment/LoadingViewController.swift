@@ -74,7 +74,7 @@ class LoadingViewController: UIViewController {
             },
             onDisposed: { [weak self] in
                 // Regardless of error or completion. hide the spinner.
-                self?.spinner.hidden = true
+                self?.spinner.isHidden = true
             })
             .addDisposableTo(rx_disposeBag)
     }
@@ -135,13 +135,13 @@ extension LoadingViewController {
         }
 
         let showPlaceHigherButton = placingBid && (!isHighestBidder || reserveNotMet)
-        placeHigherBidButton.hidden = !showPlaceHigherButton
+        placeHigherBidButton.isHidden = !showPlaceHigherButton
 
         let showAuctionButton = showPlaceHigherButton || isHighestBidder || (!placingBid && !createdNewBidder)
-        backToAuctionButton.hidden = !showAuctionButton
+        backToAuctionButton.isHidden = !showAuctionButton
 
         let title = reserveNotMet ? "NO, THANKS" : (createdNewBidder ? "CONTINUE" : "BACK TO AUCTION")
-        backToAuctionButton.setTitle(title, forState: .Normal)
+        backToAuctionButton.setTitle(title, for: .normal)
         fulfillmentContainer()?.cancelButton.isHidden = false
     }
 
@@ -181,7 +181,7 @@ extension LoadingViewController {
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
 
-        recognizer.rx_event.subscribeNext { [weak self] _ in
+        recognizer.rx.event.subscribeNext { [weak self] _ in
             self?.closeSelf()
         }.addDisposableTo(rx_disposeBag)
 
@@ -208,22 +208,22 @@ extension LoadingViewController {
             if error.domain == OutbidDomain {
                 handleLowestBidder()
             } else {
-                bidPlacementFailed(error)
+                bidPlacementFailed(error: error)
             }
         } else {
             // If you're not placing a bid, you're here because you're .just registering.
-            handleRegistrationFailed(error)
+            handleRegistrationFailed(error: error)
         }
     }
 
     func handleRegistrationFailed(error: NSError) {
-        handleErrorWithTitle("Registration Failed",
+        handleError(withTitle: "Registration Failed",
             message: "There was a problem registering for the auction. Please speak to an Artsy representative.",
             error: error)
     }
 
     func bidPlacementFailed(error: NSError) {
-        handleErrorWithTitle("Bid Failed",
+        handleError(withTitle: "Bid Failed",
             message: "There was a problem placing your bid. Please speak to an Artsy representative.",
             error: error)
     }

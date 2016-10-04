@@ -27,7 +27,7 @@ class ConfirmYourBidViewController: UIViewController {
     var provider: Networking!
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidViewController {
-        return storyboard.viewControllerWithID(.ConfirmYourBid) as! ConfirmYourBidViewController
+        return storyboard.viewController(withID: .ConfirmYourBid) as! ConfirmYourBidViewController
     }
 
     override func viewDidLoad() {

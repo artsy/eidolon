@@ -18,11 +18,11 @@ class SaleArtworkDetailsViewController: UIViewController {
     }
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> SaleArtworkDetailsViewController {
-        return storyboard.viewControllerWithID(.SaleArtworkDetail) as! SaleArtworkDetailsViewController
+        return storyboard.viewController(withID: .SaleArtworkDetail) as! SaleArtworkDetailsViewController
     }
 
-    lazy var artistInfo: Observable<AnyObject> = {
-        let artistInfo = self.provider.request(.Artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
+    lazy var artistInfo: Observable<Any> = {
+        let artistInfo = self.provider.request(.artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
         return artistInfo.shareReplay(1)
     }()
     
@@ -130,7 +130,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                 .viewModel
                 .lotNumber()
                 .filterNil()
-                .bindTo(lotNumberLabel.rx_text)
+                .bindTo(lotNumberLabel.rx.text)
                 .addDisposableTo(rx_disposeBag)
         }
 
@@ -355,7 +355,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                 .take(1)
                 .subscribeNext { [weak label] (_) in
                     if let label = label {
-                        label.preferredMaxLayoutWidth = CGRectGetWidth(label.frame)
+                        label.preferredMaxLayoutWidth = label.frame.width
                     }
                 }
                 .addDisposableTo(rx_disposeBag)

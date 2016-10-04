@@ -136,7 +136,7 @@ private extension AppDelegate {
 
             if let internalNav: FulfillmentNavigationController = containerController.internalNavigationController() {
                 internalNav.auctionID = self.appViewController.auctionID
-                let registerVC = storyboard.viewControllerWithID(.RegisterAnAccount) as! RegisterViewController
+                let registerVC = storyboard.viewController(withID: .RegisterAnAccount) as! RegisterViewController
                 registerVC.placingBid = false
                 registerVC.provider = self.provider
                 internalNav.auctionID = self.appViewController.auctionID

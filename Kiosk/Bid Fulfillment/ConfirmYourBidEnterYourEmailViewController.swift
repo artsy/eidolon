@@ -10,7 +10,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidEnterYourEmailViewController {
-        return storyboard.viewControllerWithID(.ConfirmYourBidEnterEmail) as! ConfirmYourBidEnterYourEmailViewController
+        return storyboard.viewController(withID: .ConfirmYourBidEnterEmail) as! ConfirmYourBidEnterYourEmailViewController
     }
 
     var provider: Networking!
@@ -18,13 +18,13 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let emailText = emailTextField.rx_text
+        let emailText = emailTextField.rx.textInput.text
         let inputIsEmail = emailText.map(stringIsEmailAddress)
 
         let action = CocoaAction(enabledIf: inputIsEmail) { [weak self] _ in
             guard let me = self else { return .empty() }
 
-            let endpoint: ArtsyAPI = ArtsyAPI.FindExistingEmailRegistration(email: me.emailTextField.text ?? "")
+            let endpoint: ArtsyAPI = ArtsyAPI.findExistingEmailRegistration(email: me.emailTextField.text ?? "")
 
             return self?.provider.request(endpoint)
                 .filterStatusCode(200)
@@ -40,7 +40,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
         confirmButton.rx_action = action
 
-        let unbind = action.executing.ignore(false)
+        let unbind = action.executing.ignore(value: false)
 
         let nav = self.fulfillmentNav()
 

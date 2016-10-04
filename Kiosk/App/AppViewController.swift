@@ -29,7 +29,7 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
     }
 
     class func instantiate(from storyboard: UIStoryboard) -> AppViewController {
-        return storyboard.viewControllerWithID(.AppViewController) as! AppViewController
+        return storyboard.viewController(withID: .AppViewController) as! AppViewController
     }
 
     var sale = Variable(Sale(id: "", name: "", isAuction: true, startDate: Date(), endDate: Date(), artworkCount: 0, state: ""))

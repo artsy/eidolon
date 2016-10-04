@@ -19,7 +19,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 
     // TODO: These all need to be changed.
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidPINViewController {
-        return storyboard.viewControllerWithID(.ConfirmYourBidPIN) as! ConfirmYourBidPINViewController
+        return storyboard.viewController(withID: .ConfirmYourBidPIN) as! ConfirmYourBidPINViewController
     }
 
     override func viewDidLoad() {

@@ -43,26 +43,26 @@ class RegistrationCoordinator: NSObject {
         switch index {
 
         case .mobileVC:
-            return storyboard.viewControllerWithID(.RegisterMobile)
+            return storyboard.viewController(withID: .RegisterMobile)
 
         case .emailVC:
-            return storyboard.viewControllerWithID(.RegisterEmail)
+            return storyboard.viewController(withID: .RegisterEmail)
 
         case .passwordVC:
-            return storyboard.viewControllerWithID(.RegisterPassword)
+            return storyboard.viewController(withID: .RegisterPassword)
 
         case .zipCodeVC:
-            return storyboard.viewControllerWithID(.RegisterPostalorZip)
+            return storyboard.viewController(withID: .RegisterPostalorZip)
 
         case .creditCardVC:
             if AppSetup.sharedState.disableCardReader {
-                return storyboard.viewControllerWithID(.ManualCardDetailsInput)
+                return storyboard.viewController(withID: .ManualCardDetailsInput)
             } else {
-                return storyboard.viewControllerWithID(.RegisterCreditCard)
+                return storyboard.viewController(withID: .RegisterCreditCard)
             }
 
         case .confirmVC:
-            return storyboard.viewControllerWithID(.RegisterConfirm)
+            return storyboard.viewController(withID: .RegisterConfirm)
         }
     }
 

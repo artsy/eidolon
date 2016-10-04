@@ -59,6 +59,6 @@ class FulfillmentContainerViewController: UIViewController {
     }
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> FulfillmentContainerViewController {
-        return storyboard.viewControllerWithID(.FulfillmentContainer) as! FulfillmentContainerViewController
+        return storyboard.viewController(withID: .FulfillmentContainer) as! FulfillmentContainerViewController
     }
 }

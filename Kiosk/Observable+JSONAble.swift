@@ -3,12 +3,12 @@ import Moya
 import RxSwift
 
 enum EidolonError: String {
-    case CouldNotParseJSON
-    case NotLoggedIn
-    case MissingData
+    case couldNotParseJSON
+    case notLoggedIn
+    case missingData
 }
 
-extension EidolonError: Error { }
+extension EidolonError: Swift.Error { }
 
 extension Observable {
 
@@ -18,7 +18,7 @@ extension Observable {
     func mapTo<B: JSONAbleType>(object classType: B.Type) -> Observable<B> {
         return self.map { json in
             guard let dict = json as? Dictionary else {
-                throw EidolonError.CouldNotParseJSON
+                throw EidolonError.couldNotParseJSON
             }
 
             return B.fromJSON(dict)
@@ -29,11 +29,11 @@ extension Observable {
     func mapTo<B: JSONAbleType>(arrayOf classType: B.Type) -> Observable<[B]> {
         return self.map { json in
             guard let array = json as? [AnyObject] else {
-                throw EidolonError.CouldNotParseJSON
+                throw EidolonError.couldNotParseJSON
             }
 
             guard let dicts = array as? [Dictionary] else {
-                throw EidolonError.CouldNotParseJSON
+                throw EidolonError.couldNotParseJSON
             }
 
             return dicts.map { B.fromJSON($0) }

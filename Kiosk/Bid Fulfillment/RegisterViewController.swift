@@ -34,7 +34,7 @@ class RegisterViewController: UIViewController {
 
         coordinator.storyboard = self.storyboard!
         let registerIndex = coordinator.currentIndex.asObservable()
-        let indexIsConfirmed = registerIndex.map { return ($0 == RegistrationIndex.ConfirmVC.toInt()) }
+        let indexIsConfirmed = registerIndex.map { return ($0 == RegistrationIndex.confirmVC.toInt()) }
 
         indexIsConfirmed
             .not()

@@ -120,6 +120,6 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
     }
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> RegistrationPasswordViewController {
-        return storyboard.viewControllerWithID(.RegisterPassword) as! RegistrationPasswordViewController
+        return storyboard.viewController(withID: .RegisterPassword) as! RegistrationPasswordViewController
     }
 }

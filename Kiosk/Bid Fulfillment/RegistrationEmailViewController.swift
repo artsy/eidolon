@@ -8,7 +8,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
     var finished = PublishSubject<Void>()
 
     lazy var viewModel: GenericFormValidationViewModel = {
-        let emailIsValid = self.emailTextField.rx_text.map(stringIsEmailAddress)
+        let emailIsValid = self.emailTextField.rx.textInput.text.map(stringIsEmailAddress)
         return GenericFormValidationViewModel(isValid: emailIsValid, manualInvocation: self.emailTextField.rx_returnKey, finishedSubject: self.finished)
     }()
 
@@ -24,7 +24,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
         super.viewDidLoad()
 
         emailTextField.text = bidDetails.newUser.email.value
-        emailTextField.rx_text
+        emailTextField.rx.textInput.text
             .asObservable()
             .mapToOptional()
             .takeUntil(viewWillDisappear)
@@ -52,6 +52,6 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
     }
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> RegistrationEmailViewController {
-        return storyboard.viewControllerWithID(.RegisterEmail) as! RegistrationEmailViewController
+        return storyboard.viewController(withID: .RegisterEmail) as! RegistrationEmailViewController
     }
 }

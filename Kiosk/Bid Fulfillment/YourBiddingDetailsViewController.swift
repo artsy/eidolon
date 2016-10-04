@@ -1,6 +1,7 @@
 import UIKit
 import Artsy_UILabels
 import Artsy_UIButtons
+import RxCocoa
 
 class YourBiddingDetailsViewController: UIViewController {
 
@@ -28,20 +29,20 @@ class YourBiddingDetailsViewController: UIViewController {
             confirmationImageView.image = image
         }
 
-        bodyLabel?.makeSubstringsBold(["Bidder Number", "PIN"])
+        bodyLabel?.makeSubstringsBold(text: ["Bidder Number", "PIN"])
 
         bidDetails
             .paddleNumber
             .asObservable()
             .filterNil()
-            .bindTo(bidderNumberLabel.rx_text)
+            .bindTo(bidderNumberLabel.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         bidDetails
             .bidderPIN
             .asObservable()
             .filterNil()
-            .bindTo(pinNumberLabel.rx_text)
+            .bindTo(pinNumberLabel.rx.text)
             .addDisposableTo(rx_disposeBag)
     }
 
@@ -50,6 +51,6 @@ class YourBiddingDetailsViewController: UIViewController {
     }
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> YourBiddingDetailsViewController {
-        return storyboard.viewControllerWithID(.YourBidderDetails) as! YourBiddingDetailsViewController
+        return storyboard.viewController(withID: .YourBidderDetails) as! YourBiddingDetailsViewController
     }
 }

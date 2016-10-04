@@ -16,17 +16,17 @@ protocol ListingsViewModelType {
     var gridSelected: Observable<Bool>! { get }
     var updatedContents: Observable<NSDate> { get }
 
-    var scheduleOnBackground: (_ observable: Observable<AnyObject>) -> Observable<AnyObject> { get }
+    var scheduleOnBackground: (_ observable: Observable<Any>) -> Observable<Any> { get }
     var scheduleOnForeground: (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> { get }
 
-    func saleArtworkViewModelAtIndexPath(_ indexPath: IndexPath) -> SaleArtworkViewModel
-    func showDetailsForSaleArtworkAtIndexPath(_ indexPath: IndexPath)
-    func presentModalForSaleArtworkAtIndexPath(_ indexPath: IndexPath)
-    func imageAspectRatioForSaleArtworkAtIndexPath(_ indexPath: IndexPath) -> CGFloat?
+    func saleArtworkViewModel(atIndexPath indexPath: IndexPath) -> SaleArtworkViewModel
+    func showDetailsForSaleArtwork(atIndexPath indexPath: IndexPath)
+    func presentModalForSaleArtwork(atIndexPath indexPath: IndexPath)
+    func imageAspectRatioForSaleArtwork(atIndexPath indexPath: IndexPath) -> CGFloat?
 }
 
 // Cheating here, should be in the instance but there's only ever one instance, so ¯\_(ツ)_/¯
-private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Default)
+private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .default)
 
 class ListingsViewModel: NSObject, ListingsViewModelType {
 
@@ -38,7 +38,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     let pageSize: Int
     let syncInterval: TimeInterval
     let logSync: (Date) -> Void
-    var scheduleOnBackground: (_ observable: Observable<AnyObject>) -> Observable<AnyObject>
+    var scheduleOnBackground: (_ observable: Observable<Any>) -> Observable<Any>
     var scheduleOnForeground: (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]>
 
     var numberOfSaleArtworks: Int {
@@ -51,7 +51,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         return sortedSaleArtworks
             .asObservable()
             .map { $0.count > 0 }
-            .ignore(false)
+            .ignore(value: false)
             .map { _ in NSDate() }
     }
 
@@ -61,13 +61,13 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     init(provider: Networking,
          selectedIndex: Observable<Int>,
-         showDetails: ShowDetailsClosure,
-         presentModal: PresentModalClosure,
+         showDetails: @escaping ShowDetailsClosure,
+         presentModal: @escaping PresentModalClosure,
          pageSize: Int = 10,
          syncInterval: TimeInterval = SyncInterval,
-         logSync:(Date) -> Void = ListingsViewModel.DefaultLogging,
-         scheduleOnBackground: (_ observable: Observable<AnyObject>) -> Observable<AnyObject> = ListingsViewModel.DefaultScheduler(onBackground: true),
-         scheduleOnForeground: (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = ListingsViewModel.DefaultScheduler(onBackground: false),
+         logSync:@escaping (Date) -> Void = ListingsViewModel.DefaultLogging,
+         scheduleOnBackground: @escaping (_ observable: Observable<Any>) -> Observable<Any> = ListingsViewModel.DefaultScheduler(onBackground: true),
+         scheduleOnForeground: @escaping (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = ListingsViewModel.DefaultScheduler(onBackground: false),
          auctionID: String = AppSetup.sharedState.auctionID) {
 
         self.provider = provider
@@ -90,7 +90,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     fileprivate func setup(_ selectedIndex: Observable<Int>) {
 
         recurringListingsRequest()
-            .takeUntil(rx_deallocated)
+            .takeUntil(rx.deallocated)
             .bindTo(saleArtworks)
             .addDisposableTo(rx_disposeBag)
 
@@ -98,14 +98,14 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
             return sortedSaleArtworks.count == 0
         }
 
-        gridSelected = selectedIndex.map { ListingsViewModel.SwitchValues(rawValue: $0) == .Some(.Grid) }
+        gridSelected = selectedIndex.map { ListingsViewModel.SwitchValues(rawValue: $0) == .some(.grid) }
 
         let distinctSaleArtworks = saleArtworks
             .asObservable()
             .distinctUntilChanged { (lhs, rhs) -> Bool in
                 return lhs == rhs
             }
-            .mapReplace(0) // To use in combineLatest, we must have an array of identically-typed observables. 
+            .mapReplace(with: 0) // To use in combineLatest, we must have an array of identically-typed observables. 
 
         [selectedIndex, distinctSaleArtworks]
             .combineLatest { ints in
@@ -126,21 +126,21 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     }
 
-    fileprivate func listingsRequest(forPage page: Int) -> Observable<AnyObject> {
-        return provider.request(.AuctionListings(id: auctionID, page: page, pageSize: self.pageSize)).filterSuccessfulStatusCodes().mapJSON()
+    fileprivate func listingsRequest(forPage page: Int) -> Observable<Any> {
+        return provider.request(.auctionListings(id: auctionID, page: page, pageSize: self.pageSize)).filterSuccessfulStatusCodes().mapJSON()
     }
 
     // Repeatedly calls itself with page+1 until the count of the returned array is < pageSize.
-    fileprivate func retrieveAllListingsRequest(_ page: Int) -> Observable<AnyObject> {
+    fileprivate func retrieveAllListingsRequest(_ page: Int) -> Observable<Any> {
         return Observable.create { [weak self] observer in
             guard let me = self else { return NopDisposable.instance }
 
-            return me.listingsRequestForPage(page).subscribeNext { object in
+            return me.listingsRequest(forPage: page).subscribeNext { object in
                 guard let array = object as? Array<AnyObject> else { return }
                 guard let me = self else { return }
 
                 // This'll either be the next page request or .empty.
-                let nextPage: Observable<AnyObject>
+                let nextPage: Observable<Any>
 
                 // We must have more results to retrieve
                 if array.count >= me.pageSize {
@@ -149,7 +149,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
                     nextPage = .empty()
                 }
 
-                Observable.just(object)
+                Observable<Any>.just(object)
                     .concat(nextPage)
                     .subscribe(observer)
             }
@@ -158,23 +158,23 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     // Fetches all pages of the auction
     fileprivate func allListingsRequest() -> Observable<[SaleArtwork]> {
-        let backgroundJSONParsing = scheduleOnBackground(observable: retrieveAllListingsRequest(1)).reduce([AnyObject]())
+        let backgroundJSONParsing = scheduleOnBackground(retrieveAllListingsRequest(1)).reduce([Any]())
             { (memo, object) in
-                guard let array = object as? Array<AnyObject> else { return memo }
+                guard let array = object as? Array<Any> else { return memo }
                 return memo + array
             }
-            .mapToObjectArray(SaleArtwork)
-            .logServerError("Sale artworks failed to retrieve+parse")
+            .mapTo(arrayOf: SaleArtwork.self)
+            .logServerError(message: "Sale artworks failed to retrieve+parse")
             .catchErrorJustReturn([])
 
-        return scheduleOnForeground(observable: backgroundJSONParsing)
+        return scheduleOnForeground(backgroundJSONParsing)
     }
 
     fileprivate func recurringListingsRequest() -> Observable<Array<SaleArtwork>> {
         let recurring = Observable<Int>.interval(syncInterval, scheduler: MainScheduler.instance)
             .map { _ in Date() }
             .startWith(Date())
-            .takeUntil(rx_deallocating)
+            .takeUntil(rx.deallocated)
 
 
         return recurring

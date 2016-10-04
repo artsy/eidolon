@@ -20,7 +20,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     var provider: Networking!
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
-        return storyboard.viewControllerWithID(.ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
+        return storyboard.viewController(withID: .ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
     }
 
     override func viewDidLoad() {

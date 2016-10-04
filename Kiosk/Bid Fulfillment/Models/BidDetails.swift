@@ -53,8 +53,8 @@ import Moya
                 .filterSuccessfulStatusCodes()
                 .mapJSON()
                 .flatMap { accessTokenDict -> Observable<AuthorizedNetworking> in
-                    guard let accessToken = accessTokenDict["access_token"] as? String else {
-                        return Observable.error(EidolonError.CouldNotParseJSON)
+                    guard let accessToken = (accessTokenDict as AnyObject)["access_token"] as? String else {
+                        return Observable.error(EidolonError.couldNotParseJSON)
                     }
 
                     return .just(Networking.newAuthorizedNetworking(accessToken))

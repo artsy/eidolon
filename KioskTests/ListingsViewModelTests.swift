@@ -5,7 +5,7 @@ import Moya
 @testable
 import Kiosk
 
-let testScheduleOnBackground: (_ observable: Observable<AnyObject>) -> Observable<AnyObject> = { observable in observable }
+let testScheduleOnBackground: (_ observable: Observable<Any>) -> Observable<Any> = { observable in observable }
 let testScheduleOnForeground: (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { observable in observable }
 
 class ListingsViewModelTests: QuickSpec {

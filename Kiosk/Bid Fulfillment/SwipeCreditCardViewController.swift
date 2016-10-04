@@ -16,7 +16,7 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
     @IBOutlet weak var titleLabel: ARSerifLabel!
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> SwipeCreditCardViewController {
-        return storyboard.viewControllerWithID(.RegisterCreditCard) as! SwipeCreditCardViewController
+        return storyboard.viewController(withID: .RegisterCreditCard) as! SwipeCreditCardViewController
     }
 
     let cardName = Variable("")
@@ -128,7 +128,7 @@ private extension SwipeCreditCardViewController {
     func applyCardWithSuccess(_ success: Bool) {
         let cardFullDigits = success ? "4242424242424242" : "4000000000000002"
 
-        stripeManager.registerCard(cardFullDigits, month: 04, year: 2018, securityCode: "123", postalCode: "10013")
+        stripeManager.registerCard(digits: cardFullDigits, month: 04, year: 2018, securityCode: "123", postalCode: "10013")
             .subscribeNext() { [weak self] token in
 
                 self?.cardName.value = "Kiosk Staging CC Test"

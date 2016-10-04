@@ -49,8 +49,8 @@ enum ArtsyAuthenticatedAPI {
 }
 
 extension ArtsyAPI : TargetType, ArtsyAPIType {
-    public var parameters: [String : Any]? {
-        <#code#>
+    public var task: Task {
+        return .request
     }
 
      var path: String {
@@ -113,7 +113,7 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
     var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
     var baseURL: URL { return URL(string: base)! }
 
-    var parameters: [String: AnyObject]? {
+    var parameters: [String: Any]? {
         switch self {
 
         case .xAuth(let email, let password):
@@ -139,7 +139,7 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
             return [
                 "email": email as AnyObject, "password": password as AnyObject,
                 "phone": phone as AnyObject, "name": name as AnyObject,
-                "location": [ "postal_code": postCode ]
+                "location": [ "postal_code": postCode ] as AnyObject
             ]
 
         case .bidderDetailsNotification(let auctionID, let identifier):
@@ -247,8 +247,8 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
 }
 
 extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
-    public var parameters: [String : Any]? {
-        <#code#>
+    public var task: Task {
+        return .request
     }
 
     var path: String {
@@ -292,7 +292,7 @@ extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
     var base: String { return AppSetup.sharedState.useStaging ? "https://stagingapi.artsy.net" : "https://api.artsy.net" }
     var baseURL: URL { return URL(string: base)! }
 
-    var parameters: [String: AnyObject]? {
+    var parameters: [String: Any]? {
         switch self {
 
         case .registerToBid(let auctionID):
@@ -402,5 +402,5 @@ private extension String {
 }
 
 func url(_ route: TargetType) -> String {
-    return route.baseURL.URLByAppendingPathComponent(route.path).absoluteString
+    return route.baseURL.appendingPathComponent(route.path).absoluteString
 }

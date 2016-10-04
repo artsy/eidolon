@@ -53,6 +53,6 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
     }
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> RegistrationMobileViewController {
-        return storyboard.viewControllerWithID(.RegisterMobile) as! RegistrationMobileViewController
+        return storyboard.viewController(withID: .RegisterMobile) as! RegistrationMobileViewController
     }
 }

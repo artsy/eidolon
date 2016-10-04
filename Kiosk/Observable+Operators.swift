@@ -108,8 +108,15 @@ extension Observable {
     }
 }
 
+protocol BooleanType {
+    var boolValue: Bool { get }
+}
+extension Bool: BooleanType {
+    var boolValue: Bool { return self }
+}
+
 // Maps true to false and vice versa
-extension Observable where Element: Bool {
+extension Observable where Element: BooleanType {
     func not() -> Observable<Bool> {
         return self.map { input in
             return !input.boolValue
@@ -117,11 +124,11 @@ extension Observable where Element: Bool {
     }
 }
 
-extension Collection where Iterator.Element: ObservableType, Iterator.Element.E: Bool {
+extension Collection where Iterator.Element: ObservableType, Iterator.Element.E: BooleanType {
 
     func combineLatestAnd() -> Observable<Bool> {
         return combineLatest { bools -> Bool in
-            bools.reduce(true, combine: { (memo, element) in
+            bools.reduce(true, { (memo, element) in
                 return memo && element.boolValue
             })
         }
@@ -129,7 +136,7 @@ extension Collection where Iterator.Element: ObservableType, Iterator.Element.E:
 
     func combineLatestOr() -> Observable<Bool> {
         return combineLatest { bools in
-            bools.reduce(false, combine: { (memo, element) in
+            bools.reduce(false, { (memo, element) in
                 return memo || element.boolValue
             })
         }

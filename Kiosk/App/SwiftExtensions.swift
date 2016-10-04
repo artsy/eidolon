@@ -61,12 +61,25 @@ import Moya
 extension Moya.Error {
     var response: Moya.Response? {
         switch self {
-        case .ImageMapping(let response): return response
-        case .JSONMapping(let response): return response
-        case .StringMapping(let response): return response
-        case .StatusCode(let response): return response
-        case .Data(let response): return response
-        case .Underlying: return nil
+        case .imageMapping(let response): return response
+        case .jsonMapping(let response): return response
+        case .stringMapping(let response): return response
+        case .statusCode(let response): return response
+        case .data(let response): return response
+        case .underlying: return nil
         }
     }
 }
+
+//// TODO: This extension shouldn't be necessary.
+//import ORStackView
+//extension ORStackView {
+//    var bottomMarginHeight: CGFloat {
+//        get {
+//            return self.lastMarginHeight
+//        }
+//        set {
+//            self.lastMarginHeight = newValue
+//        }
+//    }
+//}

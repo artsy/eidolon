@@ -39,7 +39,6 @@ PODS:
     - Forgeries/Core (= 1.0.0)
   - Forgeries/Core (1.0.0)
   - HockeySDK-Source (3.8.1)
-  - ISO8601DateFormatter (0.7)
   - Keys (1.0.0)
   - Mixpanel (2.8.3):
     - Mixpanel/Mixpanel (= 2.8.3)
@@ -62,7 +61,7 @@ PODS:
   - NJKWebViewProgress/ProgressView (0.2.3)
   - NSObject+Rx (2.0.0):
     - RxSwift
-  - ORStackView (3.0.0):
+  - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
   - Quick (0.10.0)
   - Reachability (3.1.1)
@@ -99,15 +98,14 @@ DEPENDENCIES:
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase (from `https://github.com/facebook/ios-snapshot-test-case`, commit `1639f694a2100cdeadf2f8fa14225cdd3759e75b`)
-  - FLKAutoLayout
+  - FLKAutoLayout (= 0.1.1)
   - Forgeries
-  - ISO8601DateFormatter (= 0.7)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Moya/RxSwift (= 8.0.0-beta.2)
   - Nimble
   - Nimble-Snapshots
   - NSObject+Rx
-  - ORStackView
+  - ORStackView (= 2.0)
   - Quick
   - Reachability (from `https://github.com/ashfurrow/Reachability.git`, branch `frameworks`)
   - RxBlocking (= 3.0.0-beta.2)
@@ -168,7 +166,6 @@ SPEC CHECKSUMS:
   fmemopen: dc31f7d3004644b33deee95e047305d23f8cfdd4
   Forgeries: 64ced144ea8341d89a7eec9d1d7986f0f1366250
   HockeySDK-Source: d03f7d267d78980af33fb63ddea5199f5bf84049
-  ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
   Moya: 920d40f738e6f4ece84010cec701bb9693be8251
@@ -176,7 +173,7 @@ SPEC CHECKSUMS:
   Nimble-Snapshots: 2da4d2ec829b458d6886c06812c52493fce284c9
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   NSObject+Rx: 2a9cd801d9c847e6d2486cbad8d7701b67834e70
-  ORStackView: 5836e207304ed62db4177b707f19245454943705
+  ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
   Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
   Reachability: 5b69def55ffa04d6f9425a6da1f47338b60557b2
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
@@ -191,6 +188,6 @@ SPEC CHECKSUMS:
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e
 
-PODFILE CHECKSUM: da7de32d81a4e283f5f6cc3e3e9761774eef0dd1
+PODFILE CHECKSUM: 17758583653f79ede3ea0297c1bd6da5d077cf51
 
 COCOAPODS: 1.1.0.rc.2

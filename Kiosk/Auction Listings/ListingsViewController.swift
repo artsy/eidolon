@@ -30,7 +30,7 @@ class ListingsViewController: UIViewController {
         return ListingsViewModel(provider:
             self.provider,
             selectedIndex: self.switchView.selectedIndex,
-            showDetails: applyUnowned(self, ListingsViewController.showDetailsForSaleArtwork),
+            showDetails: applyUnowned(self, ListingsViewController.showDetails),
             presentModal: applyUnowned(self, ListingsViewController.presentModalForSaleArtwork)
         )
     }()
@@ -116,7 +116,7 @@ class ListingsViewController: UIViewController {
                 case true:
                     return ListingsViewController.masonryLayout()
                 default:
-                    return ListingsViewController.tableLayout(width: (self?.switchView.frame ?? CGRectZero).width)
+                    return ListingsViewController.tableLayout(width: (self?.switchView.frame ?? CGRect.zero).width)
                 }
             }
             .subscribeNext { [weak self] layout in
@@ -149,7 +149,7 @@ class ListingsViewController: UIViewController {
 
 extension ListingsViewController {
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ListingsViewController {
-        return storyboard.viewControllerWithID(.AuctionListings) as! ListingsViewController
+        return storyboard.viewController(withID: .AuctionListings) as! ListingsViewController
     }
 }
 
@@ -169,20 +169,20 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
             listingsCell.downloadImage = downloadImage
             listingsCell.cancelDownloadImage = cancelDownloadImage
 
-            listingsCell.setViewModel(viewModel.saleArtworkViewModelAtIndexPath(indexPath))
+            listingsCell.setViewModel(viewModel.saleArtworkViewModel(atIndexPath: indexPath))
 
             let bid = listingsCell.bidPressed.takeUntil(listingsCell.preparingForReuse)
             let moreInfo = listingsCell.moreInfo.takeUntil(listingsCell.preparingForReuse)
 
             bid
                 .subscribeNext { [weak self] _ in
-                    self?.viewModel.presentModalForSaleArtworkAtIndexPath(indexPath)
+                    self?.viewModel.presentModalForSaleArtwork(atIndexPath: indexPath)
                 }
                 .addDisposableTo(rx_disposeBag)
 
             moreInfo
-                .subscribeNext{ [weak self] _ in
-                    self?.viewModel.showDetailsForSaleArtworkAtIndexPath(indexPath)
+                .subscribeNext { [weak self] _ in
+                    self?.viewModel.showDetailsForSaleArtwork(atIndexPath: indexPath)
                 }
                 .addDisposableTo(rx_disposeBag)
         }
@@ -191,7 +191,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func collectionView(_ collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAt indexPath: IndexPath!) -> CGFloat {
-        return MasonryCollectionViewCell.heightForCellWithImageAspectRatio(viewModel.imageAspectRatioForSaleArtworkAtIndexPath(indexPath))
+        return MasonryCollectionViewCell.heightForCellWithImageAspectRatio(viewModel.imageAspectRatioForSaleArtwork(atIndexPath: indexPath))
     }
 }
 
@@ -237,7 +237,7 @@ extension UICollectionView {
 
     class func listingsCollectionViewWithDelegateDatasource(_ delegateDatasource: ListingsViewController) -> UICollectionView {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: ListingsViewController.masonryLayout())
-        collectionView.backgroundColor = .clear()
+        collectionView.backgroundColor = .clear
         collectionView.dataSource = delegateDatasource
         collectionView.delegate = delegateDatasource
         collectionView.alwaysBounceVertical = true

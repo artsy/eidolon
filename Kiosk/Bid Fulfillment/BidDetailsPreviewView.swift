@@ -20,7 +20,7 @@ class BidDetailsPreviewView: UIView {
     dynamic let currentBidPriceLabel = ARSerifLabel()
 
     override func awakeFromNib() {
-        self.backgroundColor = .white()
+        self.backgroundColor = .white
 
         artistNameLabel.numberOfLines = 1
         artworkTitleLabel.numberOfLines = 1
@@ -44,7 +44,7 @@ class BidDetailsPreviewView: UIView {
         artwork
             .subscribeNext { [weak self] artwork in
                 if let url = artwork?.defaultImage?.thumbnailURL() {
-                    self?.bidDetails?.setImage(url: url, imageView: self!.artworkImageView)
+                    self?.bidDetails?.setImage(url, self!.artworkImageView)
                 } else {
                     self?.artworkImageView.image = nil
                 }
@@ -58,7 +58,7 @@ class BidDetailsPreviewView: UIView {
             .map { name in
                 return name ?? ""
             }
-            .bindTo(artistNameLabel.rx_text)
+            .bindTo(artistNameLabel.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         artwork
@@ -70,7 +70,7 @@ class BidDetailsPreviewView: UIView {
                 return artwork.titleAndDate
             }
             .mapToOptional()
-            .bindTo(artworkTitleLabel.rx_attributedText)
+            .bindTo(artworkTitleLabel.rx.attributedText)
             .addDisposableTo(rx_disposeBag)
 
         _bidDetails
@@ -80,9 +80,9 @@ class BidDetailsPreviewView: UIView {
             .map { bidDetails in
                 guard let cents = bidDetails.bidAmountCents.value else { return "" }
 
-                return "Your bid: " + NSNumberFormatter.currencyStringForCents(cents)
+                return "Your bid: " + NumberFormatter.currencyString(forCents: cents)
             }
-            .bindTo(currentBidPriceLabel.rx_text)
+            .bindTo(currentBidPriceLabel.rx.text)
             .addDisposableTo(rx_disposeBag)
         
         for subview in [artworkImageView, artistNameLabel, artworkTitleLabel, currentBidPriceLabel] {

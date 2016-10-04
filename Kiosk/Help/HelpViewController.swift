@@ -24,11 +24,11 @@ class HelpViewController: UIViewController {
     }
     
     var registerToBidCommand = { (enabled: Observable<Bool>) -> CocoaAction in
-        appDelegate().registerToBidCommand(enabled)
+        appDelegate().registerToBidCommand(enabled: enabled)
     }
     
     var requestBidderDetailsCommand = { (enabled: Observable<Bool>) -> CocoaAction in
-        appDelegate().requestBidderDetailsCommand(enabled)
+        appDelegate().requestBidderDetailsCommand(enabled: enabled)
     }
     
     var showPrivacyPolicyCommand = { () -> CocoaAction in
@@ -95,7 +95,7 @@ private extension HelpViewController {
         let registerButton = blackButton(.registerButton, title: "Register")
         registerButton.rx_action = registerToBidCommand(connectedToInternetOrStubbing())
         
-        let bidderDetailsLabel = titleLabel(.bidderDetailsLabel, title: "What Are Bidder Details?")
+        let bidderDetailsLabel = titleLabel(tag: .bidderDetailsLabel, title: "What Are Bidder Details?")
         
         let bidderDetailsExplainLabel = wrappingSerifLabel(.bidderDetailsExplainLabel, text: "The bidder number is how you can identify yourself to bid and see your place in bid history. The PIN is a four digit number that authenticates your bid.")
         bidderDetailsExplainLabel.makeSubstringsBold(["bidder number", "PIN"])

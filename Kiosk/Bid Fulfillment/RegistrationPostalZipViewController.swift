@@ -42,6 +42,6 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
     }
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> RegistrationPostalZipViewController {
-        return storyboard.viewControllerWithID(.RegisterPostalorZip) as! RegistrationPostalZipViewController
+        return storyboard.viewController(withID: .RegisterPostalorZip) as! RegistrationPostalZipViewController
     }
 }

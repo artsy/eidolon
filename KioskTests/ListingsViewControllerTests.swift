@@ -128,7 +128,7 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
         return Observable.just(NSDate())
     }
 
-    var scheduleOnBackground: (_ observable: Observable<AnyObject>) -> Observable<AnyObject> = { observable in observable }
+    var scheduleOnBackground: (_ observable: Observable<Any>) -> Observable<Any> = { observable in observable }
     var scheduleOnForeground: (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { observable in observable }
 
     func saleArtworkViewModelAtIndexPath(_ indexPath: NSIndexPath) -> SaleArtworkViewModel {

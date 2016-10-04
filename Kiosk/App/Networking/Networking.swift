@@ -1,5 +1,4 @@
 import Foundation
-import ISO8601DateFormatter
 import Moya
 import RxSwift
 import Alamofire
@@ -8,15 +7,16 @@ class OnlineProvider<Target>: RxMoyaProvider<Target> where Target: TargetType {
 
     fileprivate let online: Observable<Bool>
 
-    init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = MoyaProvider.DefaultEndpointMapping,
-        requestClosure: @escaping MoyaProvider<Target>.RequestClosure = MoyaProvider.DefaultRequestMapping,
-        stubClosure: @escaping MoyaProvider<Target>.StubClosure = MoyaProvider.NeverStub,
-        manager: Manager = Alamofire.Manager.sharedInstance,
+    init(endpointClosure: @escaping EndpointClosure = MoyaProvider.DefaultEndpointMapping,
+        requestClosure: @escaping RequestClosure = MoyaProvider.DefaultRequestMapping,
+        stubClosure: @escaping StubClosure = MoyaProvider.NeverStub,
+        manager: Manager = RxMoyaProvider<Target>.DefaultAlamofireManager(),
         plugins: [PluginType] = [],
+        trackInflights: Bool = false,
         online: Observable<Bool> = connectedToInternetOrStubbing()) {
 
-            self.online = online
-            super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins)
+        self.online = online
+        super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins, trackInflights: trackInflights)
     }
 
     override func request(_ token: Target) -> Observable<Moya.Response> {
@@ -66,13 +66,13 @@ private extension Networking {
 
                 return (token: dictionary["xapp_token"] as? String, expiry: dictionary["expires_in"] as? String)
             }
-            .do { event in
-                guard case Event.next(let element) = event else { return }
+            .doOn { event in
+                guard case RxSwift.Event.next(let element) = event else { return }
 
-                let formatter = ISO8601DateFormatter.ISO8601DateFormatter()
+                let formatter = ISO8601DateFormatter()
                 // These two lines set the defaults values injected into appToken
                 appToken.token = element.0
-                appToken.expiry = formatter.dateFromString(element.1)
+                appToken.expiry = formatter.date(from: element.1 ?? "")
             }
             .map { (token, expiry) -> String? in
                 return token

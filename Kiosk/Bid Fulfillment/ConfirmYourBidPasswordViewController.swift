@@ -7,7 +7,7 @@ class ConfirmYourBidPasswordViewController: UIViewController {
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidPasswordViewController {
-        return storyboard.viewControllerWithID(.ConfirmYourBid) as! ConfirmYourBidPasswordViewController
+        return storyboard.viewController(withID: .ConfirmYourBid) as! ConfirmYourBidPasswordViewController
     }
 
     override func viewDidLoad() {

@@ -5,7 +5,7 @@ extension Button {
     func flashError(_ message:String) {
         let originalTitle = self.title(for: UIControlState())
 
-        setTitleColor(.white(), for: .disabled)
+        setTitleColor(.white, for: .disabled)
         setBackgroundColor(.artsyRed(), for: .disabled, animated: true)
         setBorderColor(.artsyRed(), for: .disabled, animated: true)
 
@@ -13,7 +13,7 @@ extension Button {
 
         delayToMainThread(2) {
             self.setTitleColor(.artsyMediumGrey(), for: .disabled)
-            self.setBackgroundColor(.white(), for: .disabled, animated: true)
+            self.setBackgroundColor(.white, for: .disabled, animated: true)
             self.setTitle(originalTitle, for: .disabled)
             self.setBorderColor(.artsyMediumGrey(), for: .disabled, animated: true)
         }
