@@ -27,7 +27,7 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
         self.email = email
 
         let checkEmail = provider
-            .request(ArtsyAPI.FindExistingEmailRegistration(email: email))
+            .request(ArtsyAPI.findExistingEmailRegistration(email: email))
             .map(responseIsOK)
             .shareReplay(1)
 
@@ -40,19 +40,19 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
         // Action takes nothing, is enabled if the password is valid, and does the following:
         // Check if the email exists, it tries to log in.
         // If it doesn't exist, then it does nothing.
-        let action = CocoaAction(enabledIf: password.asObservable().map(isStringLengthAtLeast(6))) { _ in
+        let action = CocoaAction(enabledIf: password.asObservable().map(isStringLengthAtLeast(length: 6))) { _ in
 
             return self.emailExists
                 .flatMap { exists -> Observable<Void> in
                     if exists {
-                        let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: email, password: password.value ?? "")
+                        let endpoint: ArtsyAPI = ArtsyAPI.xAuth(email: email, password: password.value )
                         return provider
                             .request(endpoint)
                             .filterSuccessfulStatusCodes()
                             .map(void)
                     } else {
                         // Return a non-empty observable, so that the action sends something on its elements observable.
-                        return .just()
+                        return .just(Void())
                     }
                 }
                 .doOnCompleted {
@@ -63,7 +63,7 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
         self.action = action
 
         execute
-            .subscribeNext { _ in
+            .subscribe { _ in
                 action.execute(Void())
             }
             .addDisposableTo(disposeBag)

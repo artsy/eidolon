@@ -94,7 +94,7 @@ class ListingsViewController: UIViewController {
         // Reload collection view when there is new content.
         viewModel
             .updatedContents
-            .mapReplace(collectionView)
+            .mapReplace(with: collectionView)
             .doOnNext { collectionView in
                 collectionView.reloadData()
             }
@@ -104,7 +104,7 @@ class ListingsViewController: UIViewController {
                 guard let _ = self?.view.window else { return }
 
                 // Need to dispatchAsyncMainScheduler, since the changes in the CV's model aren't imediate, so we may scroll to a cell that doesn't exist yet.
-                collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: .Top, animated: false)
+                collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
             }
             .addDisposableTo(rx_disposeBag)
 
@@ -116,7 +116,7 @@ class ListingsViewController: UIViewController {
                 case true:
                     return ListingsViewController.masonryLayout()
                 default:
-                    return ListingsViewController.tableLayout(CGRectGetWidth(self?.switchView.frame ?? CGRectZero))
+                    return ListingsViewController.tableLayout(width: (self?.switchView.frame ?? CGRectZero).width)
                 }
             }
             .subscribeNext { [weak self] layout in
@@ -137,7 +137,7 @@ class ListingsViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        let switchHeightPredicate = "\(switchView.intrinsicContentSize().height)"
+        let switchHeightPredicate = "\(switchView.intrinsicContentSize.height)"
         
         switchView.constrainHeight(switchHeightPredicate)
         switchView.alignTop("\(64+VerticalMargins)", leading: "\(HorizontalMargins)", bottom: nil, trailing: "-\(HorizontalMargins)", to: view)
@@ -162,7 +162,7 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier.value, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier.value, for: indexPath)
 
         if let listingsCell = cell as? ListingsCollectionViewCell {
 
@@ -206,7 +206,7 @@ private extension ListingsViewController {
     }
 
     func presentModalForSaleArtwork(_ saleArtwork: SaleArtwork) {
-        bid(viewModel.auctionID, saleArtwork: saleArtwork, allowAnimations: self.allowAnimations, provider: provider)
+        bid(auctionID: viewModel.auctionID, saleArtwork: saleArtwork, allowAnimations: self.allowAnimations, provider: provider)
     }
     
     // MARK: Class methods

@@ -15,7 +15,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
     let APIToken: String
 
     var reader: CFTReader!
-    lazy var sessionManager = CFTSessionManager.sharedInstance()
+    lazy var sessionManager = CFTSessionManager.sharedInstance()!
 
     init(apiKey: String, accountToken: String){
         APIKey = apiKey
@@ -40,12 +40,12 @@ class CardHandler: NSObject, CFTReaderDelegate {
         reader = nil
     }
 
-    func readerCardResponse(_ card: CFTCard?, withError error: NSError?) {
+    func readerCardResponse(_ card: CFTCard?, withError error: Error?) {
         if let card = card {
             self.card = card;
             _cardStatus.onNext("Got Card")
 
-            card.tokenizeCardWithSuccess({ [weak self] in
+            card.tokenizeCard(success: { [weak self] in
                 self?._cardStatus.onCompleted()
                 logger.log("Card was tokenized")
 
@@ -63,7 +63,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
         }
     }
 
-    func transactionResult(_ charge: CFTCharge!, withError error: NSError!) {
+    func transactionResult(_ charge: CFTCharge!, withError error: Error!) {
         logger.log("Unexcepted call to transactionResult callback: \(charge)\n\(error)")
     }
 
@@ -92,7 +92,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
         reader.beginSwipe()
     }
 
-    func readerIsConnected(_ isConnected: Bool, withError error: NSError!) {
+    func readerIsConnected(_ isConnected: Bool, withError error: Error!) {
         if isConnected {
             _cardStatus.onNext("Reader is connected")
             reader.beginSwipe()

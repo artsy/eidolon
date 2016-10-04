@@ -49,6 +49,10 @@ enum ArtsyAuthenticatedAPI {
 }
 
 extension ArtsyAPI : TargetType, ArtsyAPIType {
+    public var parameters: [String : Any]? {
+        <#code#>
+    }
+
      var path: String {
         switch self {
 
@@ -118,7 +122,7 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
                 "client_secret": APIKeys.sharedKeys.secret as AnyObject? ?? "" as AnyObject,
                 "email": email as AnyObject,
                 "password":  password as AnyObject,
-                "grant_type": "credentials"
+                "grant_type": "credentials" as AnyObject
             ]
 
         case .xApp:
@@ -243,6 +247,10 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
 }
 
 extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
+    public var parameters: [String : Any]? {
+        <#code#>
+    }
+
     var path: String {
         switch self {
 

@@ -8,9 +8,9 @@ class OnlineProvider<Target>: RxMoyaProvider<Target> where Target: TargetType {
 
     fileprivate let online: Observable<Bool>
 
-    init(endpointClosure: MoyaProvider<Target>.EndpointClosure = MoyaProvider.DefaultEndpointMapping,
-        requestClosure: MoyaProvider<Target>.RequestClosure = MoyaProvider.DefaultRequestMapping,
-        stubClosure: MoyaProvider<Target>.StubClosure = MoyaProvider.NeverStub,
+    init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = MoyaProvider.DefaultEndpointMapping,
+        requestClosure: @escaping MoyaProvider<Target>.RequestClosure = MoyaProvider.DefaultRequestMapping,
+        stubClosure: @escaping MoyaProvider<Target>.StubClosure = MoyaProvider.NeverStub,
         manager: Manager = Alamofire.Manager.sharedInstance,
         plugins: [PluginType] = [],
         online: Observable<Bool> = connectedToInternetOrStubbing()) {
@@ -22,7 +22,7 @@ class OnlineProvider<Target>: RxMoyaProvider<Target> where Target: TargetType {
     override func request(_ token: Target) -> Observable<Moya.Response> {
         let actualRequest = super.request(token)
         return online
-            .ignore(false)  // Wait until we're online
+            .ignore(value: false)  // Wait until we're online
             .take(1)        // Take 1 to make sure we only invoke the API once.
             .flatMap { _ in // Turn the online state into a network request
                 return actualRequest
@@ -49,7 +49,7 @@ struct AuthorizedNetworking: NetworkingType {
 private extension Networking {
 
     /// Request to fetch and store new XApp token if the current token is missing or expired.
-    func XAppTokenRequest(_ defaults: NSUserDefaults) -> Observable<String?> {
+    func XAppTokenRequest(_ defaults: UserDefaults) -> Observable<String?> {
 
         var appToken = XAppToken(defaults: defaults)
 
@@ -58,7 +58,7 @@ private extension Networking {
             return Observable.just(appToken.token)
         }
 
-        let newTokenRequest = self.provider.request(ArtsyAPI.XApp)
+        let newTokenRequest = self.provider.request(ArtsyAPI.xApp)
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .map { element -> (token: String?, expiry: String?) in
@@ -66,10 +66,10 @@ private extension Networking {
 
                 return (token: dictionary["xapp_token"] as? String, expiry: dictionary["expires_in"] as? String)
             }
-            .doOn { event in
-                guard case Event.Next(let element) = event else { return }
+            .do { event in
+                guard case Event.next(let element) = event else { return }
 
-                let formatter = ISO8601DateFormatter()
+                let formatter = ISO8601DateFormatter.ISO8601DateFormatter()
                 // These two lines set the defaults values injected into appToken
                 appToken.token = element.0
                 appToken.expiry = formatter.dateFromString(element.1)
@@ -86,7 +86,7 @@ private extension Networking {
 // "Public" interfaces
 extension Networking {
     /// Request to fetch a given target. Ensures that valid XApp tokens exist before making request
-    func request(_ token: ArtsyAPI, defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) -> Observable<Moya.Response> {
+    func request(_ token: ArtsyAPI, defaults: UserDefaults = UserDefaults.standard) -> Observable<Moya.Response> {
 
         let actualRequest = self.provider.request(token)
         return self.XAppTokenRequest(defaults).flatMap { _ in actualRequest }
@@ -94,7 +94,7 @@ extension Networking {
 }
 
 extension AuthorizedNetworking {
-    func request(_ token: ArtsyAuthenticatedAPI, defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) -> Observable<Moya.Response> {
+    func request(_ token: ArtsyAuthenticatedAPI, defaults: UserDefaults = UserDefaults.standard) -> Observable<Moya.Response> {
         return self.provider.request(token)
     }
 }
@@ -120,7 +120,7 @@ extension NetworkingType {
 
     static func endpointsClosure<T>(_ xAccessToken: String? = nil) -> (T) -> Endpoint<T> where T: TargetType, T: ArtsyAPIType {
         return { target in
-            var endpoint: Endpoint<T> = Endpoint<T>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+            var endpoint: Endpoint<T> = Endpoint<T>(URL: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
 
             // If we were given an xAccessToken, add it
             if let xAccessToken = xAccessToken {
@@ -137,7 +137,7 @@ extension NetworkingType {
     }
     
     static func APIKeysBasedStubBehaviour<T>(_: T) -> Moya.StubBehavior {
-        return APIKeys.sharedKeys.stubResponses ? .Immediate : .Never
+        return APIKeys.sharedKeys.stubResponses ? .immediate : .never
     }
 
     static var plugins: [PluginType] {
@@ -146,7 +146,7 @@ extension NetworkingType {
                 guard let target = target as? ArtsyAPI else { return false }
 
                 switch target {
-                case .Ping: return true
+                case .ping: return true
                 default: return false
                 }
             })
@@ -157,8 +157,8 @@ extension NetworkingType {
             guard let target = target as? ArtsyAuthenticatedAPI else { return false }
 
             switch target {
-            case .MyBidPosition: return true
-            case .FindMyBidderRegistration: return true
+            case .myBidPosition: return true
+            case .findMyBidderRegistration: return true
             default: return false
             }
         })
@@ -168,9 +168,9 @@ extension NetworkingType {
     // (Endpoint<Target>, NSURLRequest -> Void) -> Void
     static func endpointResolver<T>() -> MoyaProvider<T>.RequestClosure where T: TargetType {
         return { (endpoint, closure) in
-            let request: NSMutableURLRequest = endpoint.urlRequest.mutableCopy() as! NSMutableURLRequest
-            request.HTTPShouldHandleCookies = false
-            closure(request)
+            var request = endpoint.urlRequest!
+            request.httpShouldHandleCookies = false
+            closure(.success(request))
         }
     }
 }

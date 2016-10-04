@@ -10,19 +10,15 @@ class Logger {
         return formatter
     }()
     lazy fileprivate var fileHandle: FileHandle? = {
-        if let path = self.destination.path {
-            FileManager.default.createFile(atPath: path, contents: nil, attributes: nil)
+        let path = self.destination.path
+        FileManager.default.createFile(atPath: path, contents: nil, attributes: nil)
 
-            do {
-                let fileHandle = try FileHandle(forWritingTo: self.destination)
-                print("Successfully logging to: \(path)")
-                return fileHandle
-            } catch let error as NSError {
-                print("Serious error in logging: could not open path to log file. \(error).")
-            }
-
-        } else {
-            print("Serious error in logging: specified destination (\(self.destination)) does not appear to have a path component.")
+        do {
+            let fileHandle = try FileHandle(forWritingTo: self.destination)
+            print("Successfully logging to: \(path)")
+            return fileHandle
+        } catch let error as NSError {
+            print("Serious error in logging: could not open path to log file. \(error).")
         }
 
         return nil
@@ -48,7 +44,7 @@ private extension Logger {
     func stringRepresentation(_ message: String, function: String, file: String, line: Int) -> String {
         let dateString = dateFormatter.string(from: Date())
 
-        let file = URL(fileURLWithPath: file).lastPathComponent ?? "(Unknown File)"
+        let file = URL(fileURLWithPath: file).lastPathComponent 
         return "\(dateString) [\(file):\(line)] \(function): \(message)\n"
     }
 

@@ -20,7 +20,7 @@ extension Observable {
     //
     // Still not sure if this is a good idea.
 
-    func flatMapTo<R>(_ selector: (Element) -> () -> Observable<R>) -> Observable<R> {
+    func flatMapTo<R>(_ selector: @escaping (Element) -> () -> Observable<R>) -> Observable<R> {
         return self.map { (s) -> Observable<R> in
             return selector(s)()
         }.switchLatest()
@@ -63,30 +63,30 @@ extension Observable where Element: OptionalType {
 
 // TODO: Added in new RxSwift?
 extension Observable {
-    func doOnNext(_ closure: (Element) -> Void) -> Observable<Element> {
+    func doOnNext(_ closure: @escaping (Element) -> Void) -> Observable<Element> {
         return doOn { (event: Event) in
             switch event {
-            case .Next(let value):
+            case .next(let value):
                 closure(value)
             default: break
             }
         }
     }
 
-    func doOnCompleted(_ closure: () -> Void) -> Observable<Element> {
+    func doOnCompleted(_ closure: @escaping () -> Void) -> Observable<Element> {
         return doOn { (event: Event) in
             switch event {
-            case .Completed:
+            case .completed:
                 closure()
             default: break
             }
         }
     }
 
-    func doOnError(_ closure: (ErrorType) -> Void) -> Observable<Element> {
+    func doOnError(_ closure: @escaping (Error) -> Void) -> Observable<Element> {
         return doOn { (event: Event) in
             switch event {
-            case .Error(let error):
+            case .error(let error):
                 closure(error)
             default: break
             }
@@ -94,7 +94,7 @@ extension Observable {
     }
 }
 
-private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .Default)
+private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .default)
 
 extension Observable {
     func mapReplace<T>(with value: T) -> Observable<T> {
@@ -109,7 +109,7 @@ extension Observable {
 }
 
 // Maps true to false and vice versa
-extension Observable where Element: BooleanType {
+extension Observable where Element: Bool {
     func not() -> Observable<Bool> {
         return self.map { input in
             return !input.boolValue
@@ -138,13 +138,13 @@ extension Collection where Iterator.Element: ObservableType, Iterator.Element.E:
 
 extension ObservableType {
 
-    func then(_ closure: () -> Observable<E>?) -> Observable<E> {
+    func then(_ closure: @escaping () -> Observable<E>?) -> Observable<E> {
         return then(closure() ?? .empty())
     }
 
-    func then(@autoclosure(escaping) _ closure: () -> Observable<E>) -> Observable<E> {
+    func then( _ closure: @autoclosure @escaping () -> Observable<E>) -> Observable<E> {
         let next = Observable.deferred {
-            return closure() ?? .empty()
+            return closure() 
         }
 
         return self
@@ -160,7 +160,7 @@ extension Observable {
 }
 
 func sendDispatchCompleted<T>(to observer: AnyObserver<T>) {
-    dispatch_async(dispatch_get_main_queue()) {
+    DispatchQueue.main.async {
         observer.onCompleted()
     }
 }

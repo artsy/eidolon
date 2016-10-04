@@ -3,7 +3,7 @@ import RxSwift
 import Moya
 
 @objc class BidDetails: NSObject {
-    typealias DownloadImageClosure = (url: NSURL, imageView: UIImageView) -> ()
+    typealias DownloadImageClosure = (_ url: URL, _ imageView: UIImageView) -> ()
 
     let auctionID: String
 
@@ -16,7 +16,7 @@ import Moya
     var bidderID = Variable<String?>(nil)
 
     var setImage: DownloadImageClosure = { (url, imageView) -> () in
-        imageView.sd_setImageWithURL(url)
+        imageView.sd_setImage(with: url)
     }
 
     init(saleArtwork: SaleArtwork?, paddleNumber: String?, bidderPIN: String?, bidAmountCents: Int?, auctionID: String) {
@@ -24,7 +24,7 @@ import Moya
         self.saleArtwork = saleArtwork
         self.paddleNumber.value = paddleNumber
         self.bidderPIN.value = bidderPIN
-        self.bidAmountCents.value = bidAmountCents
+        self.bidAmountCents.value = bidAmountCents as NSNumber?
     }
 
     /// Creates a new authenticated networking provider based on either:
@@ -47,7 +47,7 @@ import Moya
             return .just(AuthorizedNetworking(provider: provider))
 
         } else {
-            let endpoint: ArtsyAPI = ArtsyAPI.XAuth(email: newUser.email.value ?? "", password: newUser.password.value ?? "")
+            let endpoint: ArtsyAPI = ArtsyAPI.xAuth(email: newUser.email.value ?? "", password: newUser.password.value ?? "")
 
             return provider.request(endpoint)
                 .filterSuccessfulStatusCodes()
@@ -59,7 +59,7 @@ import Moya
 
                     return .just(Networking.newAuthorizedNetworking(accessToken))
                 }
-                .logServerError("Getting Access Token failed.")
+                .logServerError(message: "Getting Access Token failed.")
         }
     }
 }
