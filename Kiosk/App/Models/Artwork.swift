@@ -21,7 +21,9 @@ final class Artwork: NSObject, JSONAbleType {
 
     let dateString: String
     dynamic let title: String
-    dynamic let titleAndDate: NSAttributedString
+    var titleAndDate: NSAttributedString {
+        return titleAndDateAttributedString(self.title, dateString: self.date)
+    }
     dynamic let price: String
     dynamic let date: String
 
@@ -44,11 +46,10 @@ final class Artwork: NSObject, JSONAbleType {
         return defaultImages?.first ?? self.images?.first
     }()
 
-    init(id: String, dateString: String, title: String, titleAndDate: NSAttributedString, price: String, date: String, sold: String) {
+    init(id: String, dateString: String, title: String, price: String, date: String, sold: String) {
         self.id = id
         self.dateString = dateString
         self.title = title
-        self.titleAndDate = titleAndDate
         self.price = price
         self.date = date
         self.soldStatus = sold
@@ -63,9 +64,8 @@ final class Artwork: NSObject, JSONAbleType {
         let price = json["price"].stringValue
         let date = json["date"].stringValue
         let sold = json["sold"].stringValue
-        let titleAndDate = titleAndDateAttributedString(title, dateString: dateString)
         
-        let artwork = Artwork(id: id, dateString: dateString, title: title, titleAndDate:titleAndDate, price: price, date: date, sold: sold)
+        let artwork = Artwork(id: id, dateString: dateString, title: title, price: price, date: date, sold: sold)
 
         artwork.additionalInfo = json["additional_information"].string
         artwork.medium = json["medium"].string
@@ -108,12 +108,13 @@ final class Artwork: NSObject, JSONAbleType {
 
 private func titleAndDateAttributedString(_ title: String, dateString: String) -> NSAttributedString {
     let workTitle = title.isEmpty ? "Untitled" : title
-    let workFont = UIFont.serifItalicFont(withSize: 16)
-    let attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSFontAttributeName : workFont ])
+
+    let workFont = UIFont.serifItalicFont(withSize: 16)!
+    let attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSFontAttributeName : workFont])
     
     if dateString.isNotEmpty {
-        let dateFont = UIFont.serifFont(withSize: 16)
-        let dateString = NSMutableAttributedString(string: ", " + dateString, attributes: [ NSFontAttributeName : dateFont ])
+        let dateFont = UIFont.serifFont(withSize: 16)!
+        let dateString = NSAttributedString(string: ", " + dateString, attributes: [NSFontAttributeName : dateFont])
         attributedString.append(dateString)
     }
     

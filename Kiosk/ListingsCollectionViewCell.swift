@@ -105,8 +105,10 @@ class ListingsCollectionViewCell: UICollectionViewCell {
             .bindTo(artistNameLabel.rx.text)
             .addDisposableTo(reuseBag)
 
-        viewModel.map { $0.titleAndDateAttributedString ?? NSAttributedString() }
-            .bindTo(artworkTitleLabel.rx.attributedText)
+        viewModel.map { $0.titleAndDateAttributedString }
+            .subscribe(onNext: { [weak self] (attributedString) in
+                self?.artworkTitleLabel.attributedText = attributedString
+            })
             .addDisposableTo(reuseBag)
 
         viewModel.map { $0.estimateString }

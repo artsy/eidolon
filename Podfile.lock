@@ -3,11 +3,11 @@ PODS:
     - RxCocoa
     - RxSwift
   - Alamofire (4.0.1)
-  - ARAnalytics/CoreIOS (4.0.0)
-  - ARAnalytics/HockeyApp (4.0.0):
+  - ARAnalytics/CoreIOS (4.0.1)
+  - ARAnalytics/HockeyApp (4.0.1):
     - ARAnalytics/CoreIOS
     - HockeySDK-Source
-  - ARAnalytics/Mixpanel (4.0.0):
+  - ARAnalytics/Mixpanel (4.0.1):
     - ARAnalytics/CoreIOS
     - Mixpanel
   - ARCollectionViewMasonryLayout (2.0.0)
@@ -38,7 +38,7 @@ PODS:
   - Forgeries (1.0.0):
     - Forgeries/Core (= 1.0.0)
   - Forgeries/Core (1.0.0)
-  - HockeySDK-Source (4.1.1)
+  - HockeySDK-Source (4.1.2)
   - Keys (1.0.0)
   - Mixpanel (3.0.4):
     - Mixpanel/Mixpanel (= 3.0.4)
@@ -144,7 +144,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Action: 13a8e52481834751caf428bcf6c527e3db2aefc7
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
-  ARAnalytics: d8a0eee8da481d146ca8af5a9ac632b5c4d17a81
+  ARAnalytics: 85e7bb999e2a40cea7d2394e71e8ecbafa50f2d0
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
   Artsy+UIColors: 10a2d71e9ffe1015be43d4e084d13ff4337aab97
@@ -158,7 +158,7 @@ SPEC CHECKSUMS:
   FLKAutoLayout: 95b12c5cd9652100235140b68652f063f7437851
   fmemopen: dc31f7d3004644b33deee95e047305d23f8cfdd4
   Forgeries: 64ced144ea8341d89a7eec9d1d7986f0f1366250
-  HockeySDK-Source: a86f75afee838fc50826eb7a17875dea66844a37
+  HockeySDK-Source: 58d09800c495347a144e0bd7e7c7087c7831f617
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Mixpanel: 4a2330c26556109d2f42b01e36a05eb9e2caf25e
   Moya: 920d40f738e6f4ece84010cec701bb9693be8251

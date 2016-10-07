@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ARAnalytics.setup(withAnalytics: [
             ARHockeyAppBetaID: keys.hockeyBetaSecret(),
             ARHockeyAppLiveID: keys.hockeyProductionSecret(),
-            ARMixpanelToken: mixpanelToken
+//            ARMixpanelToken: mixpanelToken // TODO: Restore mixpanel
         ])
 
         setupHelpButton()

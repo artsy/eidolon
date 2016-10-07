@@ -47,7 +47,7 @@ extension SaleArtworkViewModel {
         return saleArtwork.artwork.artists?.first?.name
     }
 
-    var titleAndDateAttributedString: NSAttributedString? {
+    var titleAndDateAttributedString: NSAttributedString {
         return saleArtwork.artwork.titleAndDate
     }
 
