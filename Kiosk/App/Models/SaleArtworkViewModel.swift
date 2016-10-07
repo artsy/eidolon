@@ -20,15 +20,15 @@ extension SaleArtworkViewModel {
     var estimateString: String {
         // Default to estimateCents
         if let estimateCents = saleArtwork.estimateCents {
-            let dollars = NumberFormatter.currencyString(forCents: estimateCents as NSNumber!)
+            let dollars = NumberFormatter.currencyString(forDollarCents: estimateCents as NSNumber!) ?? ""
             return "Estimate: \(dollars)"
         }
 
         // Try to extract non-nil low/high estimates. Return a default otherwise.
         switch (saleArtwork.lowEstimateCents, saleArtwork.highEstimateCents) {
         case let (.some(lowCents), .some(highCents)):
-            let lowDollars = NumberFormatter.currencyString(forCents: lowCents as NSNumber!)
-            let highDollars = NumberFormatter.currencyString(forCents: highCents as NSNumber!)
+            let lowDollars = NumberFormatter.currencyString(forDollarCents: lowCents as NSNumber!) ?? ""
+            let highDollars = NumberFormatter.currencyString(forDollarCents: highCents as NSNumber!) ?? ""
             return "Estimate: \(lowDollars)–\(highDollars)"
         default:
             return "No Estimate"
@@ -123,9 +123,11 @@ extension SaleArtworkViewModel {
     func currentBid(prefix: String = "", missingPrefix: String = "") -> Observable<String> {
         return saleArtwork.rx.observe(NSNumber.self, "highestBidCents").map { [weak self] highestBidCents in
             if let currentBidCents = highestBidCents as? Int {
-                return "\(prefix)\(NumberFormatter.currencyString(forCents: currentBidCents as NSNumber!))"
+                let formatted = NumberFormatter.currencyString(forDollarCents: currentBidCents as NSNumber) ?? ""
+                return "\(prefix)\(formatted)"
             } else {
-                return "\(missingPrefix)\(NumberFormatter.currencyString(forCents: self?.saleArtwork.openingBidCents ?? 0))"
+                 let formatted = NumberFormatter.currencyString(forDollarCents: self?.saleArtwork.openingBidCents ?? 0) ?? ""
+                return "\(missingPrefix)\(formatted)"
             }
         }
     }

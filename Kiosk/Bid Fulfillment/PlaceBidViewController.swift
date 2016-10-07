@@ -278,7 +278,7 @@ func dollarsToCurrencyString(_ dollars: Int) -> String {
 }
 
 func toNextBidString(_ cents: Int) -> String {
-    guard let dollars = NumberFormatter.currencyString(forCents: cents as NSNumber!)  else {
+    guard let dollars = NumberFormatter.currencyString(forDollarCents: cents as NSNumber!)  else {
         return ""
     }
     return "Enter \(dollars) or more"

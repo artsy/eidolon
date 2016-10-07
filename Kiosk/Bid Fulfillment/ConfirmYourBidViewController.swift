@@ -124,7 +124,7 @@ class ConfirmYourBidViewController: UIViewController {
     }
 
     func toOpeningBidString(_ cents:AnyObject!) -> AnyObject! {
-        if let dollars = NumberFormatter.currencyString(forCents: cents as? Int as NSNumber!) {
+        if let dollars = NumberFormatter.currencyString(forDollarCents: cents as? Int as NSNumber!) {
             return "Enter \(dollars) or more" as AnyObject!
         }
         return "" as AnyObject!
