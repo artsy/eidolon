@@ -45,13 +45,13 @@ class AdminPanelViewController: UIViewController {
         }
 
         let environment = state.useStaging ? "PRODUCTION" : "STAGING"
-        environmentChangeButton.setTitle("USE \(environment)", for: UIControlState())
+        environmentChangeButton.setTitle("USE \(environment)", for: .normal)
 
         let buttonsTitle = state.showDebugButtons ? "HIDE" : "SHOW"
-        showAdminButtonsButton.setTitle(buttonsTitle, for: UIControlState())
+        showAdminButtonsButton.setTitle(buttonsTitle, for: .normal)
 
         let readStatus = state.disableCardReader ? "ENABLE" : "DISABLE"
-        toggleCardReaderButton.setTitle(readStatus, for: UIControlState())
+        toggleCardReaderButton.setTitle(readStatus, for: .normal)
     }
 
     @IBOutlet weak var environmentChangeButton: UIButton!

@@ -26,7 +26,7 @@ class SwitchView: UIView {
         buttons = buttonTitles.map { (buttonTitle: String) -> UIButton in
             let button = UIButton(type: .custom)
             
-            button.setTitle(buttonTitle, for: UIControlState())
+            button.setTitle(buttonTitle, for: .normal)
             button.setTitle(buttonTitle, for: .disabled)
             
             if let titleLabel = button.titleLabel {
@@ -38,7 +38,7 @@ class SwitchView: UIView {
             button.backgroundColor = .white
             button.setTitleColor(.black, for: .disabled)
             button.setTitleColor(.black, for: .selected)
-            button.setTitleColor(.artsyGrayMedium(), for: UIControlState())
+            button.setTitleColor(.artsyGrayMedium(), for: .normal)
             
             return button
         }

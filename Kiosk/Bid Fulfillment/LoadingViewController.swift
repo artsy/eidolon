@@ -148,7 +148,7 @@ extension LoadingViewController {
     func handleRegistered() {
         titleLabel.text = "Registration Complete"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
-        fulfillmentContainer()?.cancelButton.setTitle("DONE", for: UIControlState())
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", for: .normal)
         Observable<Int>.interval(1, scheduler: MainScheduler.instance)
             .take(1)
             .subscribeCompleted { [weak self] in
@@ -160,7 +160,7 @@ extension LoadingViewController {
     func handleUpdate() {
         titleLabel.text = "Updated your Information"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
-        fulfillmentContainer()?.cancelButton.setTitle("DONE", for: UIControlState())
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", for: .normal)
     }
 
     func handleUnknownBidder() {
@@ -188,7 +188,7 @@ extension LoadingViewController {
         bidConfirmationImageView.isUserInteractionEnabled = true
         bidConfirmationImageView.addGestureRecognizer(recognizer)
 
-        fulfillmentContainer()?.cancelButton.setTitle("DONE", for: UIControlState())
+        fulfillmentContainer()?.cancelButton.setTitle("DONE", for: .normal)
     }
 
     func handleLowestBidder() {

@@ -107,7 +107,7 @@ class RegisterFlowView: ORStackView {
         func createJumpToButtonAtIndex(_ index: NSInteger) -> UIButton {
             let button = UIButton(type: .custom)
             button.tag = index
-            button.setImage(UIImage(named: "edit_button"), for: UIControlState())
+            button.setImage(UIImage(named: "edit_button"), for: .normal)
             button.isUserInteractionEnabled = true
             button.isEnabled = true
 

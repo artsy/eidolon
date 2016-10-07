@@ -188,7 +188,7 @@ private extension ListingsCollectionViewCell {
     
     class func _bidButton() -> ActionButton {
         let button = ActionButton()
-        button.setTitle("BID", for: UIControlState())
+        button.setTitle("BID", for: .normal)
         return button
     }
 

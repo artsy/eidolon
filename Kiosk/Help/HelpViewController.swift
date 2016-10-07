@@ -140,7 +140,7 @@ private extension HelpViewController {
     
     func blackButton(tag: SubviewTag, title: String) -> ARBlackFlatButton {
         let button = ARBlackFlatButton()
-        button.setTitle(title, for: UIControlState())
+        button.setTitle(title, for: .normal)
         button.tag = tag.rawValue
         
         return button
@@ -148,8 +148,8 @@ private extension HelpViewController {
     
     func serifButton(tag: SubviewTag, title: String) -> ARUnderlineButton {
         let button = ARUnderlineButton()
-        button.setTitle(title, for: UIControlState())
-        button.setTitleColor(.artsyGrayBold(), for: UIControlState())
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.artsyGrayBold(), for: .normal)
         button.titleLabel?.font = UIFont.serifFont(withSize: 18)
         button.contentHorizontalAlignment = .left
         button.tag = tag.rawValue

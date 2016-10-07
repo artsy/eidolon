@@ -275,9 +275,9 @@ class SaleArtworkDetailsViewController: UIViewController {
             let title = "buyers premium"
             let attributes: [String: AnyObject] = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue as AnyObject, NSFontAttributeName: buyersPremiumLabel.font ];
             let attributedTitle = NSAttributedString(string: title, attributes: attributes)
-            buyersPremiumButton.setTitle(title, for: UIControlState())
+            buyersPremiumButton.setTitle(title, for: .normal)
             buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
-            buyersPremiumButton.setTitleColor(.artsyGrayBold(), for: UIControlState())
+            buyersPremiumButton.setTitleColor(.artsyGrayBold(), for: .normal)
 
             buyersPremiumButton.rx_action = showBuyersPremiumCommand()
 

@@ -166,8 +166,8 @@ class PlaceBidViewController: UIViewController {
 
                     let buyersPremiumButton = ARUnderlineButton()
                     buyersPremiumButton.titleLabel?.font = buyersPremiumLabel.font
-                    buyersPremiumButton.setTitle("buyers premium", for: UIControlState())
-                    buyersPremiumButton.setTitleColor(.artsyGrayBold(), for: UIControlState())
+                    buyersPremiumButton.setTitle("buyers premium", for: .normal)
+                    buyersPremiumButton.setTitleColor(.artsyGrayBold(), for: .normal)
                     buyersPremiumButton.rx_action = showBuyersPremiumCommand()
 
                     buyersPremiumView.addSubview(buyersPremiumLabel)

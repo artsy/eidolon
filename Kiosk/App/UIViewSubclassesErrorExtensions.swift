@@ -3,7 +3,7 @@ import UIKit
 extension Button {
 
     func flashError(_ message:String) {
-        let originalTitle = self.title(for: UIControlState())
+        let originalTitle = self.title(for: .normal)
 
         setTitleColor(.white, for: .disabled)
         setBackgroundColor(.artsyRedRegular(), for: .disabled, animated: true)
