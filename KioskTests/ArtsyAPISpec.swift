@@ -72,10 +72,13 @@ class ArtsyAPISpec: QuickSpec {
             
             it("gets XApp token if it doesn't exist yet") {
                 setDefaultsKeys(defaults, key: nil, expiry: nil)
-                
-                newXAppRequest().subscribeNext { (object) in
-                    // nop
-                }.addDisposableTo(disposeBag)
+
+                waitUntil { done in
+                    newXAppRequest().subscribeNext { (object) in
+                        // nop
+                        done()
+                    }.addDisposableTo(disposeBag)
+                }
                 
                 let past = Date(timeIntervalSinceNow: -1000)
                 expect(getDefaultsKeys(defaults).key).to(equal("STUBBED TOKEN!"))

@@ -24,12 +24,11 @@ final class Sale: NSObject, JSONAbleType {
 
     static func fromJSON(_ json:[String: Any]) -> Sale {
         let json = JSON(json)
-        let formatter = ISO8601DateFormatter()
 
         let id = json["id"].stringValue
         let isAuction = json["is_auction"].boolValue
-        let startDate = formatter.date(from: json["start_at"].stringValue)!
-        let endDate = formatter.date(from: json["end_at"].stringValue)!
+        let startDate = KioskDateFormatter.fromString(json["start_at"].stringValue)!
+        let endDate = KioskDateFormatter.fromString(json["end_at"].stringValue)!
         let name = json["name"].stringValue
         let artworkCount = json["eligible_sale_artworks_count"].intValue
         let state = json["auction_state"].stringValue

@@ -14,11 +14,10 @@ class SystemTime {
             .mapJSON()
             .doOnNext { [weak self] response in
                 guard let dictionary = response as? NSDictionary else { return }
-                let formatter = ISO8601DateFormatter()
 
                 let timestamp: String = (dictionary["iso8601"] as? String) ?? ""
-                if let artsyDate = formatter.date(from: timestamp) {
-                    self?.systemTimeInterval = NSDate().timeIntervalSince(artsyDate)
+                if let artsyDate = KioskDateFormatter.fromString(timestamp) {
+                    self?.systemTimeInterval = Date().timeIntervalSince(artsyDate)
                 }
 
             }.logError().map(void)

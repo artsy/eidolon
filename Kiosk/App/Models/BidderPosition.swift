@@ -16,11 +16,10 @@ final class BidderPosition: NSObject, JSONAbleType {
 
     static func fromJSON(_ source:[String: Any]) -> BidderPosition {
         let json = JSON(source)
-        let formatter = ISO8601DateFormatter()
 
         let id = json["id"].stringValue
         let maxBidAmount = json["max_bid_amount_cents"].intValue
-        let processedAt = formatter.date(from: json["processed_at"].stringValue)
+        let processedAt = KioskDateFormatter.fromString(json["processed_at"].stringValue)
 
         var bid: Bid?
         if let bidDictionary = json["highest_bid"].object as? [String: AnyObject] {

@@ -106,9 +106,8 @@ class ListingsCollectionViewCell: UICollectionViewCell {
             .addDisposableTo(reuseBag)
 
         viewModel.map { $0.titleAndDateAttributedString }
-            .subscribe(onNext: { [weak self] (attributedString) in
-                self?.artworkTitleLabel.attributedText = attributedString
-            })
+            .mapToOptional()
+            .bindTo(artworkTitleLabel.rx.attributedText)
             .addDisposableTo(reuseBag)
 
         viewModel.map { $0.estimateString }

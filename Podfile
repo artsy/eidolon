@@ -57,6 +57,7 @@ target 'Kiosk' do
   pod 'UIView+BooleanAnimations'
   pod 'ARTiledImageView'
   pod 'XNGMarkdownParser'
+  pod 'ISO8601DateFormatter'
 
   # Swift pods
   pod 'SwiftyJSON'

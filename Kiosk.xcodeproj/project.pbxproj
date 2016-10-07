@@ -188,6 +188,7 @@
 		5E8611491A5C442C00456E41 /* XApp.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E8610451A5C429C00456E41 /* XApp.json */; };
 		5E86114A1A5C442C00456E41 /* XAuth.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E8610461A5C429C00456E41 /* XAuth.json */; };
 		5E87BBA81C03C39F00D46BB5 /* Observable+JSONAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87BBA71C03C39F00D46BB5 /* Observable+JSONAble.swift */; };
+		5E88FB001DA833A7001E12E0 /* KioskDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E88FAFF1DA833A7001E12E0 /* KioskDateFormatter.m */; };
 		5E8FABE81A5C49D800F6B913 /* StubResponses.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FED1A5C429C00456E41 /* StubResponses.m */; };
 		5E9F8AD41A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */; };
 		5EA1F7291BFBC84E00F90655 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */; };
@@ -401,6 +402,8 @@
 		5E8611001A5C43EF00456E41 /* TextFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTests.swift; sourceTree = "<group>"; };
 		5E8611011A5C43EF00456E41 /* XAppTokenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAppTokenSpec.swift; sourceTree = "<group>"; };
 		5E87BBA71C03C39F00D46BB5 /* Observable+JSONAble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+JSONAble.swift"; sourceTree = "<group>"; };
+		5E88FAFE1DA833A7001E12E0 /* KioskDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KioskDateFormatter.h; sourceTree = "<group>"; };
+		5E88FAFF1DA833A7001E12E0 /* KioskDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KioskDateFormatter.m; sourceTree = "<group>"; };
 		5E8B22F41DA445CE008D1EB4 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
 		5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
@@ -508,6 +511,8 @@
 				5E860FF11A5C429C00456E41 /* Views */,
 				5EF71E791AE98F080069A266 /* STPCard+Validation.h */,
 				5EF71E7A1AE98F080069A266 /* STPCard+Validation.m */,
+				5E88FAFE1DA833A7001E12E0 /* KioskDateFormatter.h */,
+				5E88FAFF1DA833A7001E12E0 /* KioskDateFormatter.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1167,6 +1172,7 @@
 				5EBA94591BF2B11400DE3045 /* Observable+Operators.swift in Sources */,
 				5E8610901A5C429C00456E41 /* LoadingViewController.swift in Sources */,
 				5E8610841A5C429C00456E41 /* BidDetailsPreviewView.swift in Sources */,
+				5E88FB001DA833A7001E12E0 /* KioskDateFormatter.m in Sources */,
 				5E8610791A5C429C00456E41 /* SwitchView.swift in Sources */,
 				5E8610611A5C429C00456E41 /* Image.swift in Sources */,
 				5E8610661A5C429C00456E41 /* SystemTime.swift in Sources */,

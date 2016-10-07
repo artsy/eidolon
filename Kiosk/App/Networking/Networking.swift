@@ -69,10 +69,9 @@ private extension Networking {
             .doOn { event in
                 guard case RxSwift.Event.next(let element) = event else { return }
 
-                let formatter = ISO8601DateFormatter()
                 // These two lines set the defaults values injected into appToken
                 appToken.token = element.0
-                appToken.expiry = formatter.date(from: element.1 ?? "")
+                appToken.expiry = KioskDateFormatter.fromString(element.1 ?? "")
             }
             .map { (token, expiry) -> String? in
                 return token

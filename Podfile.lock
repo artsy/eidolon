@@ -39,6 +39,7 @@ PODS:
     - Forgeries/Core (= 1.0.0)
   - Forgeries/Core (1.0.0)
   - HockeySDK-Source (4.1.2)
+  - ISO8601DateFormatter (0.8)
   - Keys (1.0.0)
   - Mixpanel (3.0.4):
     - Mixpanel/Mixpanel (= 3.0.4)
@@ -100,6 +101,7 @@ DEPENDENCIES:
   - FBSnapshotTestCase
   - FLKAutoLayout (= 0.1.1)
   - Forgeries
+  - ISO8601DateFormatter
   - Keys (from `Pods/CocoaPodsKeys`)
   - Moya/RxSwift (= 8.0.0-beta.2)
   - Nimble
@@ -159,6 +161,7 @@ SPEC CHECKSUMS:
   fmemopen: dc31f7d3004644b33deee95e047305d23f8cfdd4
   Forgeries: 64ced144ea8341d89a7eec9d1d7986f0f1366250
   HockeySDK-Source: 58d09800c495347a144e0bd7e7c7087c7831f617
+  ISO8601DateFormatter: 4551b6ce4f83185425f583b0b3feb3c7b59b942c
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Mixpanel: 4a2330c26556109d2f42b01e36a05eb9e2caf25e
   Moya: 920d40f738e6f4ece84010cec701bb9693be8251
@@ -181,6 +184,6 @@ SPEC CHECKSUMS:
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e
 
-PODFILE CHECKSUM: ed9e7da6227ef668413ca6fe137faa2a4f1a1173
+PODFILE CHECKSUM: 8857e47286c312236f36121cf3291303c46c6dc7
 
 COCOAPODS: 1.1.0.rc.2
