@@ -57,14 +57,14 @@ class TableCollectionViewCell: ListingsCollectionViewCell {
         // Replaces the observable defined in the superclass, normally used to emit taps to a "More Info" label, which we don't have.
         let recognizer = UITapGestureRecognizer()
         contentView.addGestureRecognizer(recognizer)
-        self.moreInfo = recognizer.rx_event.map { _ -> Date in
+        self.moreInfo = recognizer.rx.event.map { _ -> Date in
             return Date()
         }
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.drawBottomSolidBorder(with: .artsyMediumGrey())
+        contentView.drawBottomSolidBorder(with: .artsyGrayMedium())
     }
 }
 

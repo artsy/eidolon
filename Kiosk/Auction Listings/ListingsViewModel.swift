@@ -133,7 +133,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     // Repeatedly calls itself with page+1 until the count of the returned array is < pageSize.
     fileprivate func retrieveAllListingsRequest(_ page: Int) -> Observable<Any> {
         return Observable.create { [weak self] observer in
-            guard let me = self else { return NopDisposable.instance }
+            guard let me = self else { return Disposables.create() }
 
             return me.listingsRequest(forPage: page).subscribeNext { object in
                 guard let array = object as? Array<AnyObject> else { return }

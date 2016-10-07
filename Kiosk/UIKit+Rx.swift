@@ -8,12 +8,12 @@ extension UIView {
             MainScheduler.ensureExecutingOnScheduler()
 
             switch event {
-            case .Next(let value):
-                self?.hidden = value
-            case .Error(let error):
+            case .next(let value):
+                self?.isHidden = value
+            case .error(let error):
                 bindingErrorToInterface(error)
                 break
-            case .Completed:
+            case .completed:
                 break
             }
         }
@@ -22,6 +22,6 @@ extension UIView {
 
 extension UITextField {
     var rx_returnKey: Observable<Void> {
-        return rx_controlEvent(.EditingDidEndOnExit).takeUntil(rx.deallocated)
+        return self.rx.controlEvent(.editingDidEndOnExit).takeUntil(rx.deallocated)
     }
 }

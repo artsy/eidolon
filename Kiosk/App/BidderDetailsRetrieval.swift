@@ -6,9 +6,9 @@ import Action
 extension UIViewController {
     func promptForBidderDetailsRetrieval(provider: Networking) -> Observable<Void> {
         return Observable.deferred { () -> Observable<Void> in
-            let alertController = self.emailPromptAlertController(provider)
+            let alertController = self.emailPromptAlertController(provider: provider)
 
-            self.presentViewController(alertController, animated: true) { }
+            self.present(alertController, animated: true) { }
             
             return .empty()
         }
@@ -21,32 +21,32 @@ extension UIViewController {
                 SVProgressHUD.show()
             }
             .flatMap { email -> Observable<Void> in
-                let endpoint = ArtsyAPI.BidderDetailsNotification(auctionID: appDelegate().appViewController.sale.value.id, identifier: email)
+                let endpoint = ArtsyAPI.bidderDetailsNotification(auctionID: appDelegate().appViewController.sale.value.id, identifier: email)
 
                 return provider.request(endpoint).filterSuccessfulStatusCodes().map(void)
             }
             .throttle(1, scheduler: MainScheduler.instance)
             .doOnNext { _ in
                 SVProgressHUD.dismiss()
-                self.presentViewController(UIAlertController.successfulBidderDetailsAlertController(), animated: true, completion: nil)
+                self.present(UIAlertController.successfulBidderDetailsAlertController(), animated: true, completion: nil)
             }
             .doOnError { _ in
                 SVProgressHUD.dismiss()
-                self.presentViewController(UIAlertController.failedBidderDetailsAlertController(), animated: true, completion: nil)
+                self.present(UIAlertController.failedBidderDetailsAlertController(), animated: true, completion: nil)
             }
     }
 
     func emailPromptAlertController(provider: Networking) -> UIAlertController {
         let alertController = UIAlertController(title: "Send Bidder Details", message: "Enter your email address or phone number registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .alert)
 
-        let ok = UIAlertAction.Action("OK", style: .Default)
+        let ok = UIAlertAction.Action("OK", style: .default)
         let action = CocoaAction { _ -> Observable<Void> in
             let text = (alertController.textFields?.first)?.text ?? ""
 
-            return self.retrieveBidderDetails(provider, email: text)
+            return self.retrieveBidderDetails(provider: provider, email: text)
         }
         ok.rx_action = action
-        let cancel = UIAlertAction.Action("Cancel", style: .Cancel)
+        let cancel = UIAlertAction.Action("Cancel", style: .cancel)
 
         alertController.addTextField(configurationHandler: nil)
         alertController.addAction(ok)
@@ -59,16 +59,16 @@ extension UIViewController {
 extension UIAlertController {
     class func successfulBidderDetailsAlertController() -> UIAlertController {
         let alertController = self.init(title: "Your details have been sent", message: nil, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.Action("OK", style: .Default))
+        alertController.addAction(UIAlertAction.Action("OK", style: .default))
         
         return alertController
     }
     
     class func failedBidderDetailsAlertController() -> UIAlertController {
         let alertController = self.init(title: "Incorrect Email", message: "Email was not recognized. You may not be registered to bid yet.", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.Action("Cancel", style: .Cancel))
+        alertController.addAction(UIAlertAction.Action("Cancel", style: .cancel))
         
-        let retryAction = UIAlertAction.Action("Retry", style: .Default)
+        let retryAction = UIAlertAction.Action("Retry", style: .default)
         retryAction.rx_action = appDelegate().requestBidderDetailsCommand()
         
         alertController.addAction(retryAction)

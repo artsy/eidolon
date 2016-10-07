@@ -58,7 +58,7 @@ extension SaleArtworkViewModel {
     // Observables representing values that change over time.
 
     func numberOfBids() -> Observable<String> {
-        return saleArtwork.rx_observe(NSNumber.self, "bidCount").map { optionalBidCount -> String in
+        return saleArtwork.rx.observe(NSNumber.self, "bidCount").map { optionalBidCount -> String in
             guard let bidCount = optionalBidCount , bidCount.intValue > 0 else {
                 return kNoBidsString
             }
@@ -72,10 +72,10 @@ extension SaleArtworkViewModel {
     var numberOfBidsWithReserve: Observable<String> {
 
         // Ignoring highestBidCents; only there to trigger on bid update.
-        let highestBidString = saleArtwork.rx_observe(NSNumber.self, "highestBidCents").map { "\($0)" }
-        let reserveStatus = saleArtwork.rx_observe(String.self, "reserveStatus").map { input -> String in
+        let highestBidString = saleArtwork.rx.observe(NSNumber.self, "highestBidCents").map { "\($0)" }
+        let reserveStatus = saleArtwork.rx.observe(String.self, "reserveStatus").map { input -> String in
             switch input {
-            case .Some(let reserveStatus):
+            case .some(let reserveStatus):
                 return reserveStatus
             default:
                 return ""
@@ -104,7 +104,7 @@ extension SaleArtworkViewModel {
     }
 
     func lotNumber() -> Observable<String?> {
-        return saleArtwork.rx_observe(NSNumber.self, "lotNumber").map { lotNumber  in
+        return saleArtwork.rx.observe(NSNumber.self, "lotNumber").map { lotNumber  in
             if let lotNumber = lotNumber as? Int {
                 return "Lot \(lotNumber)"
             } else {
@@ -114,27 +114,27 @@ extension SaleArtworkViewModel {
     }
 
     func forSale() -> Observable<Bool> {
-        return saleArtwork.artwork.rx_observe(String.self, "soldStatus").filterNil().map { status in
+        return saleArtwork.artwork.rx.observe(String.self, "soldStatus").filterNil().map { status in
             return Artwork.SoldStatus.fromString(status) == .NotSold
         }
 
     }
 
     func currentBid(prefix: String = "", missingPrefix: String = "") -> Observable<String> {
-        return saleArtwork.rx_observe(NSNumber.self, "highestBidCents").map { [weak self] highestBidCents in
+        return saleArtwork.rx.observe(NSNumber.self, "highestBidCents").map { [weak self] highestBidCents in
             if let currentBidCents = highestBidCents as? Int {
-                return "\(prefix)\(NSNumberFormatter.currencyStringForCents(currentBidCents))"
+                return "\(prefix)\(NumberFormatter.currencyStringForCents(currentBidCents as NSNumber!))"
             } else {
-                return "\(missingPrefix)\(NSNumberFormatter.currencyStringForCents(self?.saleArtwork.openingBidCents ?? 0))"
+                return "\(missingPrefix)\(NumberFormatter.currencyString(forCents: self?.saleArtwork.openingBidCents ?? 0))"
             }
         }
     }
 
     func currentBidOrOpeningBid() -> Observable<String> {
         let observables = [
-            saleArtwork.rx_observe(NSNumber.self, "bidCount"),
-            saleArtwork.rx_observe(NSNumber.self, "openingBidCents"),
-            saleArtwork.rx_observe(NSNumber.self, "highestBidCents")
+            saleArtwork.rx.observe(NSNumber.self, "bidCount"),
+            saleArtwork.rx.observe(NSNumber.self, "openingBidCents"),
+            saleArtwork.rx.observe(NSNumber.self, "highestBidCents")
         ]
 
         return observables.combineLatest { numbers -> Int in
@@ -147,7 +147,7 @@ extension SaleArtworkViewModel {
     }
 
     func currentBidOrOpeningBidLabel() -> Observable<String> {
-        return saleArtwork.rx_observe(NSNumber.self, "bidCount").map { input in
+        return saleArtwork.rx.observe(NSNumber.self, "bidCount").map { input in
             guard let count = input as? Int else { return "" }
 
             if count > 0 {

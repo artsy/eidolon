@@ -38,7 +38,7 @@ class SwitchView: UIView {
             button.backgroundColor = .white
             button.setTitleColor(.black, for: .disabled)
             button.setTitleColor(.black, for: .selected)
-            button.setTitleColor(.artsyMediumGrey(), for: UIControlState())
+            button.setTitleColor(.artsyGrayMedium(), for: UIControlState())
             
             return button
         }
@@ -107,8 +107,8 @@ private extension SwitchView {
             button.alignTop("\(SwitchViewBorderWidth)", bottom: "\(-SwitchViewBorderWidth)", to: self)
         }
 
-        topBar.backgroundColor = UIColor.artsyMediumGrey().cgColor
-        bottomBar.backgroundColor = UIColor.artsyMediumGrey().cgColor
+        topBar.backgroundColor = UIColor.artsyGrayMedium().cgColor
+        bottomBar.backgroundColor = UIColor.artsyGrayMedium().cgColor
         layer.addSublayer(topBar)
         layer.addSublayer(bottomBar)
 

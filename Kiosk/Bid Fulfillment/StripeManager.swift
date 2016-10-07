@@ -16,19 +16,19 @@ class StripeManager: NSObject {
         return Observable.create { [weak self] observer in
             guard let me = self else {
                 observer.onCompleted()
-                return NopDisposable.instance
+                return Disposables.create()
             }
 
-            me.stripeClient.createTokenWithCard(card) { (token, error) in
+            me.stripeClient?.createToken(with: card) { (token, error) in
                 if (token as STPToken?).hasValue {
-                    observer.onNext(token)
+                    observer.onNext(token!)
                     observer.onCompleted()
                 } else {
-                    observer.onError(error)
+                    observer.onError(error!)
                 }
             }
 
-            return NopDisposable.instance
+            return Disposables.create()
         }
     }
 

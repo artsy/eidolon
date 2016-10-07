@@ -24,7 +24,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
 
         return RegistrationPasswordViewModel(
             provider: self.provider,
-            password: self.passwordTextField.rx_text.asObservable(),
+            password: self.passwordTextField.rx.text.asObservable(),
             execute: self.passwordTextField.rx_returnKey,
             completed: self.finished,
             email: email)
@@ -37,7 +37,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
 
         forgotPasswordButton.isHidden = false
 
-        let passwordText = passwordTextField.rx_text
+        let passwordText = passwordTextField.rx.text
         passwordText
             .asObservable()
             .mapToOptional()
@@ -83,7 +83,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
                     return "Create a password"
                 }
             }
-            .bindTo(subtitleLabel.rx_text)
+            .bindTo(subtitleLabel.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         passwordTextField.becomeFirstResponder()
@@ -97,17 +97,17 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
     func alertUserPasswordSent() -> Observable<Void> {
         return Observable.create { observer in
 
-            let alertController = UIAlertController(title: "Forgot Password", message: "We have sent you your password.", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Forgot Password", message: "We have sent you your password.", preferredStyle: .alert)
 
-            let okAction = UIAlertAction(title: "OK", style: .Default) { (_) in }
+            let okAction = UIAlertAction(title: "OK", style: .default) { (_) in }
 
             alertController.addAction(okAction)
 
-            self.presentViewController(alertController, animated: true) {
+            self.present(alertController, animated: true) {
                 observer.onCompleted()
             }
 
-            return NopDisposable.instance
+            return Disposables.create()
         }
     }
     

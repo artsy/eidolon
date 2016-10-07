@@ -30,7 +30,7 @@ class ConfirmYourBidPINViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
 
         pin
-            .bindTo(pinTextField.rx_text)
+            .bindTo(pinTextField.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         pin
@@ -51,21 +51,21 @@ class ConfirmYourBidPINViewController: UIViewController {
 
             var loggedInProvider: AuthorizedNetworking!
 
-            return bidDetails.authenticatedNetworking(provider)
+            return bidDetails.authenticatedNetworking(provider: provider!)
                 .doOnNext { provider in
                     loggedInProvider = provider
                 }
                 .flatMap { provider -> Observable<AuthorizedNetworking> in
                     return provider
-                        .request(ArtsyAuthenticatedAPI.Me)
+                        .request(ArtsyAuthenticatedAPI.me)
                         .filterSuccessfulStatusCodes()
-                        .mapReplace(provider)
+                        .mapReplace(with: provider)
                 }
                 .flatMap { provider -> Observable<AuthorizedNetworking> in
                     return me
                         .fulfillmentNav()
-                        .updateUserCredentials(loggedInProvider)
-                        .mapReplace(provider)
+                        .updateUserCredentials(loggedInProvider: loggedInProvider)
+                        .mapReplace(with: provider)
                 }
                 .flatMap { provider -> Observable<Void> in
                     return me
@@ -74,14 +74,14 @@ class ConfirmYourBidPINViewController: UIViewController {
                         .flatMap { result -> Observable<Void> in
 
                             switch result {
-                            case .SkipCCRequirement:
+                            case .skipCCRequirement:
                                 // We should bypass the CC requirement and move directly onto placing the bid.
                                 me.performSegue(.PINConfirmedhasCard)
                                 return .empty()
-                            case .RequireCC:
+                            case .requireCC:
                                 // We must check for a CC, and collect one if necessary.
                                 return me
-                                    .checkForCreditCard(provider)
+                                    .checkForCreditCard(loggedInProvider: provider)
                                     .doOnNext(me.gotCards)
                                     .map(void)
                             }
@@ -89,7 +89,7 @@ class ConfirmYourBidPINViewController: UIViewController {
                 }
                 .doOnError { error in
                     if let response = (error as? Moya.Error)?.response {
-                        let responseBody = NSString(data: response.data, encoding: NSUTF8StringEncoding)
+                        let responseBody = NSString(data: response.data, encoding: String.Encoding.utf8.rawValue)
                         print("Error authenticating(\(response.statusCode)): \(responseBody)")
                     }
 
@@ -111,9 +111,9 @@ class ConfirmYourBidPINViewController: UIViewController {
     }
 
     @IBAction func forgotPINTapped(_ sender: AnyObject) {
-        let auctionID = fulfillmentNav().auctionID
+        let auctionID = fulfillmentNav().auctionID ?? ""
         let number = fulfillmentNav().bidDetails.newUser.phoneNumber.value ?? ""
-        let endpoint: ArtsyAPI = ArtsyAPI.BidderDetailsNotification(auctionID: auctionID, identifier: number)
+        let endpoint: ArtsyAPI = ArtsyAPI.bidderDetailsNotification(auctionID: auctionID, identifier: number)
 
         let alertController = UIAlertController(title: "Forgot PIN", message: "We have sent your bidder details to your device.", preferredStyle: .alert)
 

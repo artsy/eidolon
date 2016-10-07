@@ -42,11 +42,11 @@ private extension KeypadViewModel {
                 strongSelf.intValue.value = Int(strongSelf.intValue.value / 10)
                 if strongSelf.stringValue.value.isNotEmpty {
                     let string = strongSelf.stringValue.value
-                    strongSelf.stringValue.value = string.substring(to: string.endIndex.predecessor())
+                    strongSelf.stringValue.value = string.substring(to: string.index(before: string.endIndex))
                 }
             }
             observer.onCompleted()
-            return NopDisposable.instance
+            return Disposables.create()
         }
     }
     
@@ -55,7 +55,7 @@ private extension KeypadViewModel {
             self?.intValue.value = 0
             self?.stringValue.value = ""
             observer.onCompleted()
-            return NopDisposable.instance
+            return Disposables.create()
         }
     }
     
@@ -69,7 +69,7 @@ private extension KeypadViewModel {
                 strongSelf.stringValue.value = "\(strongSelf.stringValue.value)\(input)"
             }
             observer.onCompleted()
-            return NopDisposable.instance
+            return Disposables.create()
         }
     }
 }

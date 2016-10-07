@@ -130,6 +130,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                 .viewModel
                 .lotNumber()
                 .filterNil()
+                .mapToOptional()
                 .bindTo(lotNumberLabel.rx.text)
                 .addDisposableTo(rx_disposeBag)
         }
@@ -162,7 +163,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             .filter { imageRights -> Bool in
                 return imageRights.isNotEmpty
             }.subscribeNext { [weak self] imageRights in
-                let rightsLabel = label(.Serif, tag: .ImageRightsLabel)
+                let rightsLabel = label(.serif, tag: .imageRightsLabel)
                 rightsLabel.text = imageRights
                 self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
             }
@@ -190,10 +191,10 @@ class SaleArtworkDetailsViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
 
         let hasBids = saleArtwork
-            .rx_observe(NSNumber.self, "highestBidCents")
+            .rx.observe(NSNumber.self, "highestBidCents")
             .map { observeredCents -> Bool in
                 guard let cents = observeredCents else { return false }
-                return (cents as Int ?? 0) > 0
+                return (cents as Int) > 0
             }
 
         let currentBidLabel = label(.serif, tag: .currentBidLabel)
@@ -206,7 +207,8 @@ class SaleArtworkDetailsViewController: UIViewController {
                     return .just("Starting Bid:")
                 }
             }
-            .bindTo(currentBidLabel.rx_text)
+            .mapToOptional()
+            .bindTo(currentBidLabel.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         metadataStackView.addSubview(currentBidLabel, withTopMargin: "22", sideMargin: "0")
@@ -215,7 +217,8 @@ class SaleArtworkDetailsViewController: UIViewController {
         saleArtwork
             .viewModel
             .currentBid()
-            .bindTo(currentBidValueLabel.rx_text)
+            .mapToOptional()
+            .bindTo(currentBidValueLabel.rx.text)
             .addDisposableTo(rx_disposeBag)
         metadataStackView.addSubview(currentBidValueLabel, withTopMargin: "10", sideMargin: "0")
 
@@ -223,18 +226,19 @@ class SaleArtworkDetailsViewController: UIViewController {
         saleArtwork
             .viewModel
             .numberOfBidsWithReserve
-            .bindTo(numberOfBidsPlacedLabel.rx_text)
+            .mapToOptional()
+            .bindTo(numberOfBidsPlacedLabel.rx.text)
             .addDisposableTo(rx_disposeBag)
         metadataStackView.addSubview(numberOfBidsPlacedLabel, withTopMargin: "10", sideMargin: "0")
 
         let bidButton = ActionButton()
         bidButton
-            .rx_tap
+            .rx.tap
             .asObservable()
             .subscribeNext { [weak self] _ in
                 guard let me = self else { return }
 
-                me.bid(me.auctionID, saleArtwork: me.saleArtwork, allowAnimations: me.allowAnimations, provider: me.provider)
+                me.bid(auctionID: me.auctionID, saleArtwork: me.saleArtwork, allowAnimations: me.allowAnimations, provider: me.provider)
             }
             .addDisposableTo(rx_disposeBag)
 
@@ -245,14 +249,14 @@ class SaleArtworkDetailsViewController: UIViewController {
                 let forSale = forSale
 
                 let title = forSale ? "BID" : "SOLD"
-                bidButton?.setTitle(title, forState: .Normal)
+                bidButton?.setTitle(title, for: .normal)
             }
             .addDisposableTo(rx_disposeBag)
 
         saleArtwork
             .viewModel
             .forSale()
-            .bindTo(bidButton.rx_enabled)
+            .bindTo(bidButton.rx.enabled)
             .addDisposableTo(rx_disposeBag)
 
         bidButton.tag = MetadataStackViewTag.bidButton.rawValue
@@ -265,7 +269,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             let buyersPremiumLabel = ARSerifLabel()
             buyersPremiumLabel.font = buyersPremiumLabel.font.withSize(16)
             buyersPremiumLabel.text = "This work has a "
-            buyersPremiumLabel.textColor = .artsyHeavyGrey()
+            buyersPremiumLabel.textColor = .artsyGrayBold()
 
             let buyersPremiumButton = ARButton()
             let title = "buyers premium"
@@ -273,7 +277,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             let attributedTitle = NSAttributedString(string: title, attributes: attributes)
             buyersPremiumButton.setTitle(title, for: UIControlState())
             buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
-            buyersPremiumButton.setTitleColor(.artsyHeavyGrey(), for: UIControlState())
+            buyersPremiumButton.setTitleColor(.artsyGrayBold(), for: UIControlState())
 
             buyersPremiumButton.rx_action = showBuyersPremiumCommand()
 
@@ -297,15 +301,16 @@ class SaleArtworkDetailsViewController: UIViewController {
             let key = SDWebImageManager.shared().cacheKey(for: image.thumbnailURL() as URL!)
             let thumbnailImage = SDImageCache.shared().imageFromDiskCache(forKey: key)
             if thumbnailImage == nil {
-                imageView.backgroundColor = .artsyLightGrey()
+                imageView.backgroundColor = .artsyGrayLight()
             }
 
-            imageView.sd_setImage(with: image.fullsizeURL(), placeholderImage: thumbnailImage) { (image, _, _, _) in
+            imageView.sd_setImage(with: image.fullsizeURL(), placeholderImage: thumbnailImage, completed: { (image, _, _, _) in
                 // If the image was successfully downloaded, make sure we aren't still displaying grey.
                 if image != nil {
                     imageView.backgroundColor = .clear()
                 }
-            }
+            })
+
 
             let heightConstraintNumber = { () -> CGFloat in
                 if let aspectRatio = image.aspectRatio {
@@ -323,7 +328,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             let recognizer = UITapGestureRecognizer()
             imageView.addGestureRecognizer(recognizer)
             recognizer
-                .rx_event
+                .rx.event
                 .asObservable()
                 .subscribeNext() { [weak self] _ in
                      self?.performSegue(.ZoomIntoArtwork)
@@ -369,25 +374,25 @@ class SaleArtworkDetailsViewController: UIViewController {
         additionalDetailScrollView.stackView.addSubview(imageView, withTopMargin: "0", sideMargin: "40")
         setupImageView(imageView)
 
-        let additionalInfoHeaderLabel = label(.Header)
+        let additionalInfoHeaderLabel = label(.header)
         additionalInfoHeaderLabel.text = "Additional Information"
         additionalDetailScrollView.stackView.addSubview(additionalInfoHeaderLabel, withTopMargin: "20", sideMargin: "40")
 
         if let blurb = saleArtwork.artwork.blurb {
-            let blurbLabel = label(.Body, layout: layoutSubviews)
-            blurbLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( blurb )
+            let blurbLabel = label(.body, layout: layoutSubviews)
+            blurbLabel.attributedText = MarkdownParser().attributedString( fromMarkdownString: blurb )
             additionalDetailScrollView.stackView.addSubview(blurbLabel, withTopMargin: "22", sideMargin: "40")
         }
 
-        let additionalInfoLabel = label(.Body, layout: layoutSubviews)
-        additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString( saleArtwork.artwork.additionalInfo )
+        let additionalInfoLabel = label(.body, layout: layoutSubviews)
+        additionalInfoLabel.attributedText = MarkdownParser().attributedString( fromMarkdownString: saleArtwork.artwork.additionalInfo )
         additionalDetailScrollView.stackView.addSubview(additionalInfoLabel, withTopMargin: "22", sideMargin: "40")
 
         retrieveAdditionalInfo()
             .filter { info in
                 return info.isNotEmpty
             }.subscribeNext { [weak self] info in
-                additionalInfoLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString(info)
+                additionalInfoLabel.attributedText = MarkdownParser().attributedString(fromMarkdownString: info)
                 self?.view.setNeedsLayout()
                 self?.view.layoutIfNeeded()
             }
@@ -401,12 +406,12 @@ class SaleArtworkDetailsViewController: UIViewController {
                 .subscribeNext { [weak self] blurb in
                     guard let me = self else { return }
 
-                    let aboutArtistHeaderLabel = label(.Header)
+                    let aboutArtistHeaderLabel = label(.header)
                     aboutArtistHeaderLabel.text = "About \(artist.name)"
                     me.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "40")
 
-                    let aboutAristLabel = label(.Body, layout: me.layoutSubviews)
-                    aboutAristLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString(blurb)
+                    let aboutAristLabel = label(.body, layout: me.layoutSubviews)
+                    aboutAristLabel.attributedText = MarkdownParser().attributedString(fromMarkdownString: blurb)
                     me.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "40")
                 }
                 .addDisposableTo(rx_disposeBag)
@@ -425,7 +430,7 @@ class SaleArtworkDetailsViewController: UIViewController {
 
         } else {
             return artistInfo.map{ json in
-                    return json["image_rights"] as? String
+                    return (json as AnyObject)["image_rights"] as? String
                 }
                 .filterNil()
                 .doOnNext { imageRights in
@@ -441,7 +446,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             return .just(additionalInfo)
         } else {
             return artistInfo.map{ json in
-                    return json["additional_information"] as? String
+                    return (json as AnyObject)["additional_information"] as? String
                 }
                 .filterNil()
                 .doOnNext{ info in
@@ -458,12 +463,12 @@ class SaleArtworkDetailsViewController: UIViewController {
         if let blurb = artist.blurb {
             return .just(blurb)
         } else {
-            let retrieveArtist = provider.request(.Artist(id: artist.id))
+            let retrieveArtist = provider.request(.artist(id: artist.id))
                 .filterSuccessfulStatusCodes()
                 .mapJSON()
 
             return retrieveArtist.map{ json in
-                    return json["blurb"] as? String
+                    return (json as AnyObject)["blurb"] as? String
                 }
                 .filterNil()
                 .doOnNext{ blurb in

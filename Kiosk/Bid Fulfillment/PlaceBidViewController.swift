@@ -72,7 +72,7 @@ class PlaceBidViewController: UIViewController {
 
         bidDollars
             .map(dollarsToCurrencyString)
-            .bindTo(bidAmountTextField.rx_text)
+            .bindTo(bidAmountTextField.rx.text)
             .addDisposableTo(rx_disposeBag)
 
 
@@ -86,25 +86,27 @@ class PlaceBidViewController: UIViewController {
             if let saleArtwork = nav.bidDetails.saleArtwork {
                 
                 let minimumNextBid = saleArtwork
-                    .rx_observe(NSNumber.self, "minimumNextBidCents")
+                    .rx.observe(NSNumber.self, "minimumNextBidCents")
                     .filterNil()
                     .map { $0 as Int }
 
                 saleArtwork.viewModel
                     .currentBidOrOpeningBidLabel()
-                    .bindTo(currentBidTitleLabel.rx_text)
+                    .mapToOptional()
+                    .bindTo(currentBidTitleLabel.rx.text)
                     .addDisposableTo(rx_disposeBag)
 
                 saleArtwork.viewModel
                     .currentBidOrOpeningBid()
-                    .bindTo(currentBidAmountLabel.rx_text)
+                    .mapToOptional()
+                    .bindTo(currentBidAmountLabel.rx.text)
                     .addDisposableTo(rx_disposeBag)
 
 
                 minimumNextBid
                     .map { $0 as Int }
                     .map(toNextBidString)
-                    .bindTo(nextBidAmountLabel.rx_text)
+                    .bindTo(nextBidAmountLabel.rx.text)
                     .addDisposableTo(rx_disposeBag)
 
 
@@ -112,7 +114,8 @@ class PlaceBidViewController: UIViewController {
                     .combineLatest { ints in
                         return (ints[0]) * 100 >= (ints[1])
                     }
-                    .bindTo(bidButton.rx_enabled)
+                    .mapToOptional()
+                    .bindTo(bidButton.rx.enabled)
                     .addDisposableTo(rx_disposeBag)
 
 
@@ -135,7 +138,7 @@ class PlaceBidViewController: UIViewController {
                         .lotNumber()
                         .filterNil()
                         .takeUntil(viewWillDisappear)
-                        .bindTo(lotNumberLabel.rx_text)
+                        .bindTo(lotNumberLabel.rx.text)
                         .addDisposableTo(rx_disposeBag)
 
                 }
@@ -159,12 +162,12 @@ class PlaceBidViewController: UIViewController {
                     let buyersPremiumLabel = ARSerifLabel()
                     buyersPremiumLabel.font = buyersPremiumLabel.font.withSize(16)
                     buyersPremiumLabel.text = "This work has a "
-                    buyersPremiumLabel.textColor = .artsyHeavyGrey()
+                    buyersPremiumLabel.textColor = .artsyGrayBold()
 
                     let buyersPremiumButton = ARUnderlineButton()
                     buyersPremiumButton.titleLabel?.font = buyersPremiumLabel.font
                     buyersPremiumButton.setTitle("buyers premium", for: UIControlState())
-                    buyersPremiumButton.setTitleColor(.artsyHeavyGrey(), for: UIControlState())
+                    buyersPremiumButton.setTitleColor(.artsyGrayBold(), for: UIControlState())
                     buyersPremiumButton.rx_action = showBuyersPremiumCommand()
 
                     buyersPremiumView.addSubview(buyersPremiumLabel)
@@ -183,25 +186,27 @@ class PlaceBidViewController: UIViewController {
 
                 if let artist = saleArtwork.artwork.artists?.first {
                     artist
-                        .rx_observe(String.self, "name")
+                        .rx.observe(String.self, "name")
                         .filterNil()
-                        .bindTo(artistNameLabel.rx_text)
+                        .mapToOptional()
+                        .bindTo(artistNameLabel.rx.text)
                         .addDisposableTo(rx_disposeBag)
                 }
 
                 saleArtwork
                     .artwork
-                    .rx_observe(NSAttributedString.self, "titleAndDate")
+                    .rx.observe(NSAttributedString.self, "titleAndDate")
                     .takeUntil(rx.deallocated)
-                    .bindTo(artworkTitleLabel.rx_attributedText)
+                    .bindTo(artworkTitleLabel.rx.attributedText)
                     .addDisposableTo(rx_disposeBag)
 
                 saleArtwork
                     .artwork
-                    .rx_observe(String.self, "price")
+                    .rx.observe(String.self, "price")
                     .filterNil()
+                    .mapToOptional()
                     .takeUntil(rx.deallocated)
-                    .bindTo(artworkPriceLabel.rx_text)
+                    .bindTo(artworkPriceLabel.rx.text)
                     .addDisposableTo(rx_disposeBag)
 
                 if let url = saleArtwork.artwork.defaultImage?.thumbnailURL() {

@@ -23,16 +23,16 @@ class ActionButton: Button {
         super.setup()
 
         setBorderColor(.black, for: UIControlState(), animated: false)
-        setBorderColor(.artsyPurple(), for: .highlighted, animated: false)
-        setBorderColor(.artsyMediumGrey(), for: .disabled, animated: false)
+        setBorderColor(.artsyPurpleRegular(), for: .highlighted, animated: false)
+        setBorderColor(.artsyGrayMedium(), for: .disabled, animated: false)
 
         setBackgroundColor(.black, for: UIControlState(), animated: false)
-        setBackgroundColor(.artsyPurple(), for: .highlighted, animated: false)
+        setBackgroundColor(.artsyPurpleRegular(), for: .highlighted, animated: false)
         setBackgroundColor(.white, for: .disabled, animated: false)
 
         setTitleColor(.white, for:UIControlState())
         setTitleColor(.white, for:.highlighted)
-        setTitleColor(.artsyHeavyGrey(), for:.disabled)
+        setTitleColor(UIColor.artsyGrayBold(), for:.disabled)
     }
 }
 
@@ -44,18 +44,18 @@ class SecondaryActionButton: Button {
 
     override func setup() {
         super.setup()
-
-        setBorderColor(.artsyMediumGrey(), for: UIControlState(), animated: false)
-        setBorderColor(.artsyPurple(), for: .highlighted, animated: false)
-        setBorderColor(.artsyLightGrey(), for: .disabled, animated: false)
+        
+        setBorderColor(.artsyGrayMedium(), for: UIControlState(), animated: false)
+        setBorderColor(.artsyPurpleRegular(), for: .highlighted, animated: false)
+        setBorderColor(.artsyGrayLight(), for: .disabled, animated: false)
 
         setBackgroundColor(.white, for: UIControlState(), animated: false)
-        setBackgroundColor(.artsyPurple(), for: .highlighted, animated: false)
+        setBackgroundColor(.artsyPurpleRegular(), for: .highlighted, animated: false)
         setBackgroundColor(.white, for: .disabled, animated: false)
 
         setTitleColor(.black, for:UIControlState())
         setTitleColor(.white, for:.highlighted)
-        setTitleColor(.artsyHeavyGrey(), for:.disabled)
+        setTitleColor(.artsyGrayBold(), for:.disabled)
     }
 }
 

@@ -17,22 +17,22 @@ class AdminCCBypassNetworkModel: AdminCCBypassNetworkModelType {
     /// Returns an Observable of (Bool, AuthorizedNetworking)
     /// The Bool represents if the Credit Card requirement should be waived.
     /// THe AuthorizedNetworking is the same instance that's passed in, which is a convenience for chaining observables.
-    func checkForAdminCCBypass(saleID: String, authorizedNetworking: AuthorizedNetworking) -> Observable<BypassResult> {
+    func checkForAdminCCBypass(_ saleID: String, authorizedNetworking: AuthorizedNetworking) -> Observable<BypassResult> {
 
         return authorizedNetworking
-            .request(ArtsyAuthenticatedAPI.FindMyBidderRegistration(auctionID: saleID))
+            .request(ArtsyAuthenticatedAPI.findMyBidderRegistration(auctionID: saleID))
             .filterSuccessfulStatusCodes()
             .mapJSON()
-            .mapToObjectArray(Bidder)
+            .mapTo(arrayOf: Bidder.self)
             .map { bidders in
                 return bidders.first
             }
             .map { bidder -> BypassResult in
-                guard let bidder = bidder else { return .RequireCC }
+                guard let bidder = bidder else { return .requireCC }
 
                 switch bidder.createdByAdmin {
-                case true: return .SkipCCRequirement
-                case false: return .RequireCC
+                case true: return .skipCCRequirement
+                case false: return .requireCC
                 }
             }
             .logError()

@@ -1,5 +1,4 @@
 import UIKit
-import ISO8601DateFormatter
 import SwiftyJSON
 
 final class Sale: NSObject, JSONAbleType {
@@ -29,8 +28,8 @@ final class Sale: NSObject, JSONAbleType {
 
         let id = json["id"].stringValue
         let isAuction = json["is_auction"].boolValue
-        let startDate = formatter.dateFromString(json["start_at"].stringValue)
-        let endDate = formatter.dateFromString(json["end_at"].stringValue)
+        let startDate = formatter.date(from: json["start_at"].stringValue)!
+        let endDate = formatter.date(from: json["end_at"].stringValue)!
         let name = json["name"].stringValue
         let artworkCount = json["eligible_sale_artworks_count"].intValue
         let state = json["auction_state"].stringValue

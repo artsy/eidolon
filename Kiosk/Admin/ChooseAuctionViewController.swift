@@ -29,12 +29,12 @@ class ChooseAuctionViewController: UIViewController {
                     let title = " \(sale.name) - #\(sale.auctionState) - \(sale.artworkCount)"
 
                     let button = ARFlatButton()
-                    button.setTitle(title, forState: .normal)
-                    button.setTitleColor(.blackColor(), forState: .normal)
+                    button.setTitle(title, for: .normal)
+                    button.setTitleColor(.black, for: .normal)
                     button.tag = i
                     button.rx.tap.subscribeNext { (_) in
-                        let defaults = NSUserDefaults.standardUserDefaults()
-                        defaults.setObject(sale.id, forKey: "KioskAuctionID")
+                        let defaults = UserDefaults.standard
+                        defaults.set(sale.id, forKey: "KioskAuctionID")
                         defaults.synchronize()
                         exit(1)
                         }
@@ -50,6 +50,6 @@ class ChooseAuctionViewController: UIViewController {
 
     @IBOutlet weak var stackScrollView: ORStackView!
     @IBAction func backButtonTapped(_ sender: AnyObject) {
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
 }

@@ -24,10 +24,10 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             
             let dismissTapGestureRecognizer = UITapGestureRecognizer()
             dismissTapGestureRecognizer
-                .rx_event
+                .rx.event
                 .subscribeNext{ [weak toView] sender in
-                    let pointInContainer = sender.locationInView(toView)
-                    if toView?.pointInside(pointInContainer, withEvent: nil) == false {
+                    let pointInContainer = sender.location(in: toView)
+                    if toView?.point(inside: pointInContainer, with: nil) == false {
                         appDelegate().helpButtonCommand().execute()
                     }
                 }
@@ -37,7 +37,7 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
             fromView.isUserInteractionEnabled = false
             
-            containerView.backgroundColor = .black()
+            containerView.backgroundColor = .black
             
             containerView.addSubview(fromView)
             containerView.addSubview(toView)

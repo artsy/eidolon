@@ -76,9 +76,10 @@ class ListingsCountdownManager: NSObject {
 
         if sale.isActive(time) {
             let now = time.date()
-            let components = Calendar.currentCalendar().components([.Hour, .Minute, .Second], fromDate: now, toDate: sale.endDate, options: [])
 
-            self.countdownLabel.text = "\(formatter.stringFromNumber(components.hour)!) : \(formatter.stringFromNumber(components.minute)!) : \(formatter.stringFromNumber(components.second)!)"
+            let components = Calendar.current.dateComponents([.hour, .minute, .second], from: now, to: sale.endDate)
+
+            self.countdownLabel.text = "\(formatter.string(from: (components.hour ?? 0) as NSNumber)) : \(formatter.string(from: (components.minute ?? 0) as NSNumber)) : \(formatter.string(from: (components.second ?? 0) as NSNumber))"
 
         } else {
             self.countdownLabel.text = "CLOSED"

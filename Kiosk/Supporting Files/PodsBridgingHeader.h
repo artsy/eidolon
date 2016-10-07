@@ -1,7 +1,7 @@
 #import <Artsy_UIColors/UIColor+ArtsyColors.h>
 #import <Artsy_UIColors/UIColor+DebugColours.h>
 
-#import <Artsy_UILabels/ARLabelSubclasses.h>
+//#import <Artsy_UILabels/ARLabelSubclasses.h>
 #import <Artsy_UILabels/NSNumberFormatter+ARCurrency.h>
 #import <Artsy_UIButtons/ARButtonSubclasses.h>
 
@@ -9,7 +9,6 @@
 
 #import <ARCollectionVIewMasonryLayout/ARCollectionViewMasonryLayout.h>
 
-#import <ISO8601DateFormatter/ISO8601DateFormatter.h>
 #import <ECPhoneNumberFormatter/ECPhoneNumberFormatter.h>
 
 #import <ARAnalytics/ARAnalytics.h>

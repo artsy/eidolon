@@ -38,8 +38,8 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
         emailTextField.text = nav.bidDetails.newUser.email.value ?? ""
         
-        let emailText = emailTextField.rx_text.takeUntil(viewWillDisappear)
-        let passwordText = passwordTextField.rx_text.takeUntil(viewWillDisappear)
+        let emailText = emailTextField.rx.text.takeUntil(viewWillDisappear)
+        let passwordText = passwordTextField.rx.text.takeUntil(viewWillDisappear)
 
         emailText
             .mapToOptional()
@@ -52,7 +52,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
 
         let inputIsEmail = emailText.map(stringIsEmailAddress)
-        let passwordIsLongEnough = passwordText.map(isZeroLengthString).not()
+        let passwordIsLongEnough = passwordText.map(isZeroLength).not()
         let formIsValid = [inputIsEmail, passwordIsLongEnough].combineLatestAnd()
 
         let provider = self.provider
@@ -60,11 +60,11 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         confirmCredentialsButton.rx_action = CocoaAction(enabledIf: formIsValid) { [weak self] _ -> Observable<Void> in
             guard let me = self else { return .empty() }
 
-            return bidDetails.authenticatedNetworking(provider)
+            return bidDetails.authenticatedNetworking(provider: provider!)
                 .flatMap { provider -> Observable<AuthorizedNetworking> in
                     return me.fulfillmentNav()
-                        .updateUserCredentials(provider)
-                        .mapReplace(provider)
+                        .updateUserCredentials(loggedInProvider: provider)
+                        .mapReplace(with: provider)
                 }.flatMap { provider -> Observable<Void> in
                     return me.creditCard(provider)
                         .doOnNext { cards in
@@ -122,10 +122,10 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBAction func forgotPasswordTapped(_ sender: AnyObject) {
         let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .alert)
 
-        let submitAction = UIAlertAction.Action("Send", style: .Default)
+        let submitAction = UIAlertAction.Action("Send", style: .default)
         let email = Variable("")
         submitAction.rx_action = CocoaAction(enabledIf: email.asObservable().map(stringIsEmailAddress), workFactory: { () -> Observable<Void> in
-            let endpoint: ArtsyAPI = ArtsyAPI.LostPasswordNotification(email: email.value)
+            let endpoint: ArtsyAPI = ArtsyAPI.lostPasswordNotification(email: email.value)
 
             return self.provider.request(endpoint)
                 .filterSuccessfulStatusCodes()
@@ -142,12 +142,12 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             textField.text = self.emailTextField.text
 
             textField
-                .rx_text
+                .rx.text
                 .bindTo(email)
                 .addDisposableTo(textField.rx_disposeBag)
 
-            NotificationCenter.defaultCenter().addObserverForName(NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.mainQueue()) { (notification) in
-                submitAction.enabled = stringIsEmailAddress(textField.text ?? "").boolValue
+            NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { (notification) in
+                submitAction.isEnabled = stringIsEmailAddress(textField.text ?? "").boolValue
             }
         }
 
@@ -163,7 +163,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             .request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
-            .mapToObjectArray(Card.self)
+            .mapTo(arrayOf: Card.self)
     }
 
     @IBAction func useBidderTapped(_ sender: AnyObject) {

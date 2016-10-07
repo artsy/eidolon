@@ -84,7 +84,7 @@ final class Artwork: NSObject, JSONAbleType {
         }
 
         if let dimensions = json["dimensions"].dictionary {
-            artwork.dimensions = ["in", "cm"].reduce([String](), combine: { (array, key) -> [String] in
+            artwork.dimensions = ["in", "cm"].reduce([String](), { (array, key) -> [String] in
                 if let dimension = dimensions[key]?.string {
                     return array + [dimension]
                 } else {
@@ -108,13 +108,13 @@ final class Artwork: NSObject, JSONAbleType {
 
 private func titleAndDateAttributedString(_ title: String, dateString: String) -> NSAttributedString {
     let workTitle = title.isEmpty ? "Untitled" : title
-    let workFont = UIFont.serifItalicFontWithSize(16)
+    let workFont = UIFont.serifItalicFont(withSize: 16)
     let attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSFontAttributeName : workFont ])
     
     if dateString.isNotEmpty {
-        let dateFont = UIFont.serifFontWithSize(16)
+        let dateFont = UIFont.serifFont(withSize: 16)
         let dateString = NSMutableAttributedString(string: ", " + dateString, attributes: [ NSFontAttributeName : dateFont ])
-        attributedString.appendAttributedString(dateString)
+        attributedString.append(dateString)
     }
     
     return attributedString.copy() as! NSAttributedString

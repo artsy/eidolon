@@ -39,36 +39,36 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         viewModel
             .cardFullDigits
             .asObservable()
-            .bindTo(cardNumberTextField.rx_text)
+            .bindTo(cardNumberTextField.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         viewModel
             .expirationYear
             .asObservable()
-            .bindTo(expirationYearTextField.rx_text)
+            .bindTo(expirationYearTextField.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         viewModel
             .expirationMonth
             .asObservable()
-            .bindTo(expirationMonthTextField.rx_text)
+            .bindTo(expirationMonthTextField.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         viewModel
             .securityCode
             .asObservable()
-            .bindTo(securitycodeTextField.rx_text)
+            .bindTo(securitycodeTextField.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         viewModel
             .billingZip
             .asObservable()
-            .bindTo(billingZipTextField.rx_text)
+            .bindTo(billingZipTextField.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         viewModel
             .creditCardNumberIsValid
-            .bindTo(cardConfirmButton.rx_enabled)
+            .bindTo(cardConfirmButton.rx.enabled)
             .addDisposableTo(rx_disposeBag)
 
         let action = viewModel.registerButtonCommand()
@@ -77,7 +77,7 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         action
             .errors // Based on errors
             .take(1) // On the first error, then forever
-            .mapReplace(false) // Replace the error with false
+            .mapReplace(with: false) // Replace the error with false
             .startWith(true) // But begin with true
             .bindTo(billingZipErrorLabel.rx_hidden) // show the error label
             .addDisposableTo(rx_disposeBag)

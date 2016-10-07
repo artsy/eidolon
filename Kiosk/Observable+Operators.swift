@@ -50,6 +50,12 @@ extension Observable where Element: OptionalType {
         }
     }
 
+    func filterNilKeepOptional() -> Observable<Element> {
+        return self.filter { (element) -> Bool in
+            return element != nil
+        }
+    }
+
     func replaceNil(with nilValue: Element.Wrapped) -> Observable<Element.Wrapped> {
         return flatMap { (element) -> Observable<Element.Wrapped> in
             if let value = element.value {

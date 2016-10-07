@@ -49,9 +49,9 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
             .subscribeNext { (lotNumber)in
                 switch lotNumber {
-                case .Some(let text) where text.isEmpty:
+                case .some(let text) where text.isEmpty:
                     fallthrough
-                case .None:
+                case .none:
                     lotNumberTopConstraint.constant = 0
                     artistNameTopConstraint.constant = 20
                 default:
@@ -67,7 +67,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
                 if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
                     self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
                 }
-                let imageHeight = heightForImageWithAspectRatio(viewModel.thumbnailAspectRatio)
+                let imageHeight = heightForImage(withAspectRatio: viewModel.thumbnailAspectRatio)
                 self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
                 self?.layoutIfNeeded()
             }
@@ -76,13 +76,13 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        bidView.drawTopDottedBorder(with: .artsyMediumGrey())
+        bidView.drawTopDottedBorder(with: .artsyGrayMedium())
     }
 }
 
 extension MasonryCollectionViewCell {
     class func heightForCellWithImageAspectRatio(_ aspectRatio: CGFloat?) -> CGFloat {
-        let imageHeight = heightForImageWithAspectRatio(aspectRatio)
+        let imageHeight = heightForImage(withAspectRatio: aspectRatio)
         let remainingHeight =
             20 + // padding
             20 + // artist name

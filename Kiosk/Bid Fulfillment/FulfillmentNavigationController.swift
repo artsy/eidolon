@@ -37,7 +37,7 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
 
     func updateUserCredentials(loggedInProvider: AuthorizedNetworking) -> Observable<Void> {
         let endpoint = ArtsyAuthenticatedAPI.me
-        let request = loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObject(User)
+        let request = loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapTo(object: User.self)
 
         return request
             .doOnNext { [weak self] fullUser in
@@ -52,7 +52,7 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
                 newUser.zipCode.value = me.user.location?.postalCode
                 newUser.name.value = me.user.name
             }
-            .logError("error, the authentication for admin is likely wrong: ")
+            .logError(prefix: "error, the authentication for admin is likely wrong: ")
             .map(void)
     }
 }

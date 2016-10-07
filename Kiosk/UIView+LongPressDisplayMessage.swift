@@ -16,9 +16,9 @@ extension UIView {
         let recognizer = UILongPressGestureRecognizer()
 
         recognizer
-            .rx_event
+            .rx.event
             .subscribeNext { _ in
-                closure(alertController: alertController(message, title: title))
+                closure(alertController(message, title: title))
             }
             .addDisposableTo(rx_disposeBag)
 

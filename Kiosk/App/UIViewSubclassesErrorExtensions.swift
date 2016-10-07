@@ -6,16 +6,16 @@ extension Button {
         let originalTitle = self.title(for: UIControlState())
 
         setTitleColor(.white, for: .disabled)
-        setBackgroundColor(.artsyRed(), for: .disabled, animated: true)
-        setBorderColor(.artsyRed(), for: .disabled, animated: true)
+        setBackgroundColor(.artsyRedRegular(), for: .disabled, animated: true)
+        setBorderColor(.artsyRedRegular(), for: .disabled, animated: true)
 
         setTitle(message.uppercased(), for: .disabled)
 
         delayToMainThread(2) {
-            self.setTitleColor(.artsyMediumGrey(), for: .disabled)
+            self.setTitleColor(.artsyGrayMedium(), for: .disabled)
             self.setBackgroundColor(.white, for: .disabled, animated: true)
             self.setTitle(originalTitle, for: .disabled)
-            self.setBorderColor(.artsyMediumGrey(), for: .disabled, animated: true)
+            self.setBorderColor(.artsyGrayMedium(), for: .disabled, animated: true)
         }
     }
 }
@@ -23,9 +23,9 @@ extension Button {
 extension TextField {
 
     func flashForError() {
-        self.setBorderColor(.artsyRed())
+        self.setBorderColor(.artsyRedRegular())
         delayToMainThread(2) {
-            self.setBorderColor(.artsyPurple())
+            self.setBorderColor(.artsyPurpleRegular())
         }
     }
 }

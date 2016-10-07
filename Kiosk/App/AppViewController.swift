@@ -97,12 +97,12 @@ extension AppViewController {
     }
 
     func auctionRequest(_ provider: Networking, auctionID: String) -> Observable<Sale> {
-        let auctionEndpoint: ArtsyAPI = ArtsyAPI.AuctionInfo(auctionID: auctionID)
+        let auctionEndpoint: ArtsyAPI = ArtsyAPI.auctionInfo(auctionID: auctionID)
 
         return provider.request(auctionEndpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
-            .mapToObject(Sale)
+            .mapTo(object: Sale.self)
             .logError()
             .retry()
             .throttle(1, scheduler: MainScheduler.instance)

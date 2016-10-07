@@ -31,13 +31,13 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
     }
 
     fileprivate func bidOnSaleArtwork(_ saleArtwork: SaleArtwork, bidAmountCents: String, provider: AuthorizedNetworking) -> Observable<String> {
-        let bidEndpoint = ArtsyAuthenticatedAPI.PlaceABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
+        let bidEndpoint = ArtsyAuthenticatedAPI.placeABid(auctionID: saleArtwork.auctionID!, artworkID: saleArtwork.artwork.id, maxBidCents: bidAmountCents)
 
         let request = provider
             .request(bidEndpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
-            .mapToObject(BidderPosition)
+            .mapTo(object: BidderPosition.self)
 
         return request
             .map { position in
@@ -46,7 +46,7 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
                 // We've received an error. We're going to check to see if it's type is "param_error", which indicates we were outbid.
 
                 guard let error = e as? Moya.Error else { throw e }
-                guard case .StatusCode(let response) = error else { throw e }
+                guard case .statusCode(let response) = error else { throw e }
 
 
                 let json = JSON(data: response.data)

@@ -1,5 +1,4 @@
 import Foundation
-import ISO8601DateFormatter
 import SwiftyJSON
 
 final class BidderPosition: NSObject, JSONAbleType {
@@ -21,7 +20,7 @@ final class BidderPosition: NSObject, JSONAbleType {
 
         let id = json["id"].stringValue
         let maxBidAmount = json["max_bid_amount_cents"].intValue
-        let processedAt = formatter.dateFromString(json["processed_at"].stringValue)
+        let processedAt = formatter.date(from: json["processed_at"].stringValue)
 
         var bid: Bid?
         if let bidDictionary = json["highest_bid"].object as? [String: AnyObject] {

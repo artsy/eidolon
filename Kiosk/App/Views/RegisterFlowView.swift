@@ -17,7 +17,7 @@ class RegisterFlowView: ORStackView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .whiteColor()
+        backgroundColor = .white
         bottomMarginHeight = CGFloat(NSNotFound)
         updateConstraints()
     }
@@ -50,7 +50,7 @@ class RegisterFlowView: ORStackView {
                 itemView.createInfoLabel(value)
 
                 let button = itemView.createJumpToButtonAtIndex(i)
-                button.addTarget(self, action: #selector(pressed(_:)), forControlEvents: .TouchUpInside)
+                button.addTarget(self, action: #selector(pressed(_:)), for: .touchUpInside)
 
                 itemView.constrainHeight("44")
             } else {
@@ -63,7 +63,7 @@ class RegisterFlowView: ORStackView {
         }
 
         let spacer = UIView(frame: bounds)
-        spacer.setContentHuggingPriority(12, forAxis: .Horizontal)
+        spacer.setContentHuggingPriority(12, for: .horizontal)
         addSubview(spacer, withTopMargin: "0", sideMargin: "0")
 
         bottomMarginHeight = 0
@@ -78,7 +78,7 @@ class RegisterFlowView: ORStackView {
         var titleLabel: UILabel?
 
         func highlight() {
-            titleLabel?.textColor = .artsyPurple()
+            titleLabel?.textColor = .artsyPurpleRegular()
         }
 
         func createTitleViewWithTitle(_ title: String)  {

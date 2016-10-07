@@ -17,7 +17,7 @@ extension AppDelegate {
     }
 
     internal var appViewController: AppViewController! {
-        let nav = self.window?.rootViewController?.findChildViewControllerOfType(UINavigationController) as? UINavigationController
+        let nav = self.window?.rootViewController?.findChildViewControllerOfType(UINavigationController.self) as? UINavigationController
         return nav?.delegate as? AppViewController
     }
 
@@ -32,17 +32,17 @@ extension AppDelegate {
         window?.layoutIfNeeded()
 
         helpIsVisisble.subscribeNext { visisble in
-            let image: UIImage? = visisble ?  UIImage(named: "xbtn_white")?.imageWithRenderingMode(.AlwaysOriginal) : nil
+            let image: UIImage? = visisble ?  UIImage(named: "xbtn_white")?.withRenderingMode(.alwaysOriginal) : nil
             let text: String? = visisble ? nil : "HELP"
 
-            self.helpButton.setTitle(text, forState: .Normal)
-            self.helpButton.setImage(image, forState: .Normal)
+            self.helpButton.setTitle(text, for: .normal)
+            self.helpButton.setImage(image, for: .normal)
 
             let transition = CATransition()
             transition.duration = AnimationDuration.Normal
             transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             transition.type = kCATransitionFade
-            self.helpButton.layer.addAnimation(transition, forKey: "fade")
+            self.helpButton.layer.add(transition, forKey: "fade")
 
         }.addDisposableTo(rx_disposeBag)
     }
@@ -60,7 +60,7 @@ extension AppDelegate {
     func showBuyersPremiumCommand(enabled: Observable<Bool> = .just(true)) -> CocoaAction {
         return CocoaAction(enabledIf: enabled) { _ in
             self.hideAllTheThings()
-                .then(self.showWebController("https://m.artsy.net/auction/\(self.sale.id)/buyers-premium"))
+                .then(self.showWebController(address: "https://m.artsy.net/auction/\(self.sale.id)/buyers-premium"))
                 .map(void)
         }
     }
@@ -95,13 +95,13 @@ extension AppDelegate {
 
     func showPrivacyPolicyCommand() -> CocoaAction {
         return CocoaAction { _ in
-            self.hideAllTheThings().then(self.showWebController("https://artsy.net/privacy"))
+            self.hideAllTheThings().then(self.showWebController(address: "https://artsy.net/privacy"))
         }
     }
 
     func showConditionsOfSaleCommand() -> CocoaAction {
         return CocoaAction { _ in
-            self.hideAllTheThings().then(self.showWebController("https://artsy.net/conditions-of-sale"))
+            self.hideAllTheThings().then(self.showWebController(address: "https://artsy.net/conditions-of-sale"))
         }
     }
 }
@@ -123,7 +123,7 @@ private extension AppDelegate {
     func showBidderDetailsRetrieval() -> Observable<Void> {
         let appVC = self.appViewController
         let presentingViewController: UIViewController = (appVC!.presentedViewController ?? appVC!)
-        return presentingViewController.promptForBidderDetailsRetrieval(self.provider)
+        return presentingViewController.promptForBidderDetailsRetrieval(provider: self.provider)
     }
 
     func showRegistration() -> Observable<Void> {
@@ -143,38 +143,38 @@ private extension AppDelegate {
                 internalNav.viewControllers = [registerVC]
             }
 
-            self.appViewController.presentViewController(containerController, animated: false) {
+            self.appViewController.present(containerController, animated: false) {
                 containerController.viewDidAppearAnimation(containerController.allowAnimations)
 
-                sendDispatchCompleted(observer)
+                sendDispatchCompleted(to: observer)
             }
 
-            return NopDisposable.instance
+            return Disposables.create()
         }
     }
 
     func showHelp() -> Observable<Void> {
         return Observable.create { observer in
             let helpViewController = HelpViewController()
-            helpViewController.modalPresentationStyle = .Custom
+            helpViewController.modalPresentationStyle = .custom
             helpViewController.transitioningDelegate = self
 
-            self.window?.rootViewController?.presentViewController(helpViewController, animated: true, completion: {
+            self.window?.rootViewController?.present(helpViewController, animated: true, completion: {
                 self.helpViewController.value = helpViewController
-                sendDispatchCompleted(observer)
+                sendDispatchCompleted(to: observer)
             })
 
-            return NopDisposable.instance
+            return Disposables.create()
         }
     }
 
     func closeFulfillmentViewController() -> Observable<Void> {
         let close: Observable<Void> = Observable.create { observer in
             (self.appViewController.presentedViewController as? FulfillmentContainerViewController)?.closeFulfillmentModal() {
-                sendDispatchCompleted(observer)
+                sendDispatchCompleted(to: observer)
             }
 
-            return NopDisposable.instance
+            return Disposables.create()
         }
 
         return fullfilmentVisible.flatMap { visible -> Observable<Void> in
@@ -190,19 +190,19 @@ private extension AppDelegate {
     func showWebController(address: String) -> Observable<Void> {
         return hideWebViewController().then (
             Observable.create { observer in
-                let webController = ModalWebViewController(url: NSURL(string: address)!)
+                let webController = ModalWebViewController(url: NSURL(string: address)! as URL)
 
                 let nav = UINavigationController(rootViewController: webController)
-                nav.modalPresentationStyle = .FormSheet
+                nav.modalPresentationStyle = .formSheet
 
                 ARAnalytics.event("Show Web View", withProperties: ["url" : address])
-                self.window?.rootViewController?.presentViewController(nav, animated: true) {
-                    sendDispatchCompleted(observer)
+                self.window?.rootViewController?.present(nav, animated: true) {
+                    sendDispatchCompleted(to: observer)
                 }
 
                 self.webViewController = nav
 
-                return NopDisposable.instance
+                return Disposables.create()
             }
         )
     }
@@ -210,30 +210,30 @@ private extension AppDelegate {
     func hideHelp() -> Observable<Void> {
         return Observable.create { observer in
             if let presentingViewController = self.helpViewController.value?.presentingViewController {
-                presentingViewController.dismissViewControllerAnimated(true) {
+                presentingViewController.dismiss(animated: true) {
                     self.helpViewController.value = nil
-                    sendDispatchCompleted(observer)
+                    sendDispatchCompleted(to: observer)
                 }
             } else {
                 observer.onCompleted()
             }
 
 
-            return NopDisposable.instance
+            return Disposables.create()
         }
     }
 
     func hideWebViewController() -> Observable<Void> {
         return Observable.create { observer in
             if let webViewController = self.webViewController {
-                webViewController.presentingViewController?.dismissViewControllerAnimated(true) {
-                    sendDispatchCompleted(observer)
+                webViewController.presentingViewController?.dismiss(animated: true) {
+                    sendDispatchCompleted(to: observer)
                 }
             } else {
                 observer.onCompleted()
             }
 
-            return NopDisposable.instance
+            return Disposables.create()
         }
     }
 
@@ -245,7 +245,7 @@ private extension AppDelegate {
                 observer.onNext((self.appViewController.presentedViewController as? FulfillmentContainerViewController) != nil)
                 observer.onCompleted()
 
-                return NopDisposable.instance
+                return Disposables.create()
             }
         }
     }

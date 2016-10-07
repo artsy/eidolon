@@ -2,6 +2,7 @@ import UIKit
 import Artsy_UILabels
 import Artsy_UIButtons
 import RxCocoa
+import RxSwift
 
 class YourBiddingDetailsViewController: UIViewController {
 
@@ -34,14 +35,14 @@ class YourBiddingDetailsViewController: UIViewController {
         bidDetails
             .paddleNumber
             .asObservable()
-            .filterNil()
+            .filterNilKeepOptional()
             .bindTo(bidderNumberLabel.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         bidDetails
             .bidderPIN
             .asObservable()
-            .filterNil()
+            .filterNilKeepOptional()
             .bindTo(pinNumberLabel.rx.text)
             .addDisposableTo(rx_disposeBag)
     }

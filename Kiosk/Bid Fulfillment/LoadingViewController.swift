@@ -193,7 +193,8 @@ extension LoadingViewController {
 
     func handleLowestBidder() {
         titleLabel.text = "Higher bid needed"
-        titleLabel.textColor = .artsyRed()
+        
+        titleLabel.textColor = .artsyRedRegular()
         statusMessage.isHidden = false
         statusMessage.text = "Another bidder has placed a higher maximum bid. Place a higher bid to secure the lot."
         bidConfirmationImageView.image = UIImage(named: "BidNotHighestBidder")
@@ -229,7 +230,7 @@ extension LoadingViewController {
     }
 
     func handleError(withTitle title: String, message: String, error: NSError) {
-        titleLabel.textColor = .artsyRed()
+        titleLabel.textColor = .artsyRedRegular()
         titleLabel.text = title
         statusMessage.text = message
         statusMessage.isHidden = false

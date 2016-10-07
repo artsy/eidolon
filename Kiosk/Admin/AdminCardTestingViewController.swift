@@ -24,14 +24,14 @@ class AdminCardTestingViewController: UIViewController {
         cardHandler.cardStatus
             .subscribe { (event) in
                 switch event {
-                case .Next(let message):
+                case .next(let message):
                     self.log("\(message)")
-                case .Error(let error):
+                case .error(let error):
                     self.log("\n====Error====\n\(error)\nThe card reader may have become disconnected.\n\n")
                     if self.cardHandler.card != nil {
                         self.log("==\n\(self.cardHandler.card!)\n\n")
                     }
-                case .Completed:
+                case .completed:
                     guard let card = self.cardHandler.card else {
                         // Restarts the card reader
                         self.cardHandler.startSearching()

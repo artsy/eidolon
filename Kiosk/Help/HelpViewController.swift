@@ -44,7 +44,7 @@ class HelpViewController: UIViewController {
             .appViewController
             .sale
             .value
-            .rx_observe(String.self, "buyersPremium")
+            .rx.observe(String.self, "buyersPremium")
             .map { $0.hasValue }
     }()
     
@@ -58,7 +58,7 @@ class HelpViewController: UIViewController {
         super.viewDidLoad()
         
         // Configure view
-        view.backgroundColor = .white()
+        view.backgroundColor = .white
         
         addSubviews()
     }
@@ -83,38 +83,38 @@ private extension HelpViewController {
         assistanceLabel.text = "Assistance"
         assistanceLabel.tag = SubviewTag.assistanceLabel.rawValue
         
-        let stuckLabel = titleLabel(.stuckLabel, title: "Stuck in the process?")
+        let stuckLabel = titleLabel(tag: .stuckLabel, title: "Stuck in the process?")
         
-        let stuckExplainLabel = wrappingSerifLabel(.stuckExplainLabel, text: "Find the nearest Artsy representative and they will assist you.")
+        let stuckExplainLabel = wrappingSerifLabel(tag: .stuckExplainLabel, text: "Find the nearest Artsy representative and they will assist you.")
         
-        let bidLabel = titleLabel(.bidLabel, title: "How do I place a bid?")
+        let bidLabel = titleLabel(tag: .bidLabel, title: "How do I place a bid?")
         
-        let bidExplainLabel = wrappingSerifLabel(.bidExplainLabel, text: "Enter the amount you would like to bid. You will confirm this bid in the next step. Enter your mobile number or bidder number and PIN that you received when you registered.")
-        bidExplainLabel.makeSubstringsBold(["mobile number", "bidder number", "PIN"])
+        let bidExplainLabel = wrappingSerifLabel(tag: .bidExplainLabel, text: "Enter the amount you would like to bid. You will confirm this bid in the next step. Enter your mobile number or bidder number and PIN that you received when you registered.")
+        bidExplainLabel.makeSubstringsBold(text: ["mobile number", "bidder number", "PIN"])
         
-        let registerButton = blackButton(.registerButton, title: "Register")
+        let registerButton = blackButton(tag: .registerButton, title: "Register")
         registerButton.rx_action = registerToBidCommand(connectedToInternetOrStubbing())
         
         let bidderDetailsLabel = titleLabel(tag: .bidderDetailsLabel, title: "What Are Bidder Details?")
         
-        let bidderDetailsExplainLabel = wrappingSerifLabel(.bidderDetailsExplainLabel, text: "The bidder number is how you can identify yourself to bid and see your place in bid history. The PIN is a four digit number that authenticates your bid.")
-        bidderDetailsExplainLabel.makeSubstringsBold(["bidder number", "PIN"])
+        let bidderDetailsExplainLabel = wrappingSerifLabel(tag: .bidderDetailsExplainLabel, text: "The bidder number is how you can identify yourself to bid and see your place in bid history. The PIN is a four digit number that authenticates your bid.")
+        bidderDetailsExplainLabel.makeSubstringsBold(text: ["bidder number", "PIN"])
         
-        let sendDetailsButton = blackButton(.bidderDetailsButton, title: "Send me my details")
+        let sendDetailsButton = blackButton(tag: .bidderDetailsButton, title: "Send me my details")
         sendDetailsButton.rx_action = requestBidderDetailsCommand(connectedToInternetOrStubbing())
         
-        let conditionsButton = serifButton(.conditionsOfSaleButton, title: "Conditions of Sale")
+        let conditionsButton = serifButton(tag: .conditionsOfSaleButton, title: "Conditions of Sale")
         conditionsButton.rx_action = showConditionsOfSaleCommand()
         
-        buyersPremiumButton = serifButton(.buyersPremiumButton, title: "Buyers Premium")
+        buyersPremiumButton = serifButton(tag: .buyersPremiumButton, title: "Buyers Premium")
         buyersPremiumButton.rx_action = showBuyersPremiumCommand()
         
-        let privacyButton = serifButton(.privacyPolicyButton, title: "Privacy Policy")
+        let privacyButton = serifButton(tag: .privacyPolicyButton, title: "Privacy Policy")
         privacyButton.rx_action = showPrivacyPolicyCommand()
         
         // Add subviews
         view.addSubview(stackView)
-        stackView.alignTop("0", leading: "0", bottom: nil, trailing: "0", toView: view)
+        stackView.alignTop("0", leading: "0", bottom: nil, trailing: "0", to: view)
         stackView.addSubview(assistanceLabel, withTopMargin: "\(topMargin)", sideMargin: "\(sideMargin)")
         stackView.addSubview(stuckLabel, withTopMargin: "\(headerMargin)", sideMargin: "\(sideMargin)")
         stackView.addSubview(stuckExplainLabel, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(sideMargin)")
@@ -149,7 +149,7 @@ private extension HelpViewController {
     func serifButton(tag: SubviewTag, title: String) -> ARUnderlineButton {
         let button = ARUnderlineButton()
         button.setTitle(title, for: UIControlState())
-        button.setTitleColor(.artsyHeavyGrey(), for: UIControlState())
+        button.setTitleColor(.artsyGrayBold(), for: UIControlState())
         button.titleLabel?.font = UIFont.serifFont(withSize: 18)
         button.contentHorizontalAlignment = .left
         button.tag = tag.rawValue

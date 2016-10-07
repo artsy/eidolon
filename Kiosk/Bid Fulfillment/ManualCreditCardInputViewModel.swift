@@ -30,18 +30,18 @@ class ManualCreditCardInputViewModel: NSObject {
     }
 
     var expiryDatesAreValid: Observable<Bool> {
-        let month = expirationMonth.asObservable().map(isStringLengthIn(1..<3))
-        let year = expirationYear.asObservable().map(isStringLengthOneOf([2,4]))
+        let month = expirationMonth.asObservable().map(isStringLength(in: 1..<3))
+        let year = expirationYear.asObservable().map(isStringLength(oneOf: [2,4]))
 
         return [month, year].combineLatestAnd()
     }
 
     var securityCodeIsValid: Observable<Bool> {
-        return securityCode.asObservable().map(isStringLengthIn(3..<5))
+        return securityCode.asObservable().map(isStringLength(in: 3..<5))
     }
 
     var billingZipIsValid: Observable<Bool> {
-        return billingZip.asObservable().map(isStringLengthIn(4..<8))
+        return billingZip.asObservable().map(isStringLength(in: 4..<8))
     }
 
     var moveToYear: Observable<Void> {
@@ -59,7 +59,7 @@ class ManualCreditCardInputViewModel: NSObject {
                 return .empty()
             }
 
-            return me.registerCard(newUser).doOnCompleted {
+            return me.registerCard(newUser: newUser).doOnCompleted {
                 me.finishedSubject?.onCompleted()
             }.map(void)
         }
@@ -78,10 +78,10 @@ class ManualCreditCardInputViewModel: NSObject {
     /// MARK: - Private Methods
 
     fileprivate func registerCard(newUser: NewUser) -> Observable<STPToken> {
-        let month = expirationMonth.value.toUIntWithDefault(0)
-        let year = expirationYear.value.toUIntWithDefault(0)
+        let month = expirationMonth.value.toUInt(withDefault: 0)
+        let year = expirationYear.value.toUInt(withDefault: 0)
 
-        return stripeManager.registerCard(cardFullDigits.value, month: month, year: year, securityCode: securityCode.value, postalCode: billingZip.value).doOnNext { token in
+        return stripeManager.registerCard(digits: cardFullDigits.value, month: month, year: year, securityCode: securityCode.value, postalCode: billingZip.value).doOnNext { token in
 
             newUser.creditCardName.value = token.card.name
             newUser.creditCardType.value = token.card.brand.name

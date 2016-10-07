@@ -82,7 +82,7 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
                 guard let me = self else { return .empty() }
                 guard me.placingBid else { return .empty() }
 
-                return me.bidCheckingModel.waitForBidResolution(tuple.0, provider: tuple.1).map(void)
+                return me.bidCheckingModel.waitForBidResolution(bidderPositionId: tuple.0, provider: tuple.1).map(void)
             }
     }
 }

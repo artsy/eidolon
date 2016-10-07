@@ -45,7 +45,7 @@ class ConfirmYourBidViewController: UIViewController {
 
         number
             .map(toPhoneNumberString)
-            .bindTo(numberAmountTextField.rx_text)
+            .bindTo(numberAmountTextField.rx.text)
             .addDisposableTo(rx_disposeBag)
 
         let nav = self.fulfillmentNav()
@@ -65,12 +65,12 @@ class ConfirmYourBidViewController: UIViewController {
 
         let auctionID = nav.auctionID
         
-        let numberIsZeroLength = number.map(isZeroLengthString)
+        let numberIsZeroLength = number.map(isZeroLength)
 
         enterButton.rx_action = CocoaAction(enabledIf: numberIsZeroLength.not(), workFactory: { [weak self] _ in
             guard let me = self else { return .empty() }
 
-            let endpoint = ArtsyAPI.FindBidderRegistration(auctionID: auctionID, phone: String(me._number.value))
+            let endpoint = ArtsyAPI.findBidderRegistration(auctionID: auctionID, phone: String(me._number.value))
 
             return me.provider.request(endpoint)
                 .filterStatusCode(400)

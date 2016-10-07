@@ -65,16 +65,16 @@ final class SaleArtwork: NSObject, JSONAbleType {
         }
 
         saleArtwork.auctionID = json["sale_id"].string
-        saleArtwork.openingBidCents = json["opening_bid_cents"].int
-        saleArtwork.minimumNextBidCents = json["minimum_next_bid_cents"].int
+        saleArtwork.openingBidCents = json["opening_bid_cents"].int as NSNumber?
+        saleArtwork.minimumNextBidCents = json["minimum_next_bid_cents"].int as NSNumber?
 
-        saleArtwork.highestBidCents = json["highest_bid_amount_cents"].int
+        saleArtwork.highestBidCents = json["highest_bid_amount_cents"].int as NSNumber?
         saleArtwork.estimateCents = json["estimate_cents"].int
         saleArtwork.lowEstimateCents = json["low_estimate_cents"].int
         saleArtwork.highEstimateCents = json["high_estimate_cents"].int
-        saleArtwork.bidCount = json["bidder_positions_count"].int
+        saleArtwork.bidCount = json["bidder_positions_count"].int as NSNumber?
         saleArtwork.reserveStatus = json["reserve_status"].string
-        saleArtwork.lotNumber = json["lot_number"].int
+        saleArtwork.lotNumber = json["lot_number"].int as NSNumber?
 
         return saleArtwork
     }

@@ -14,7 +14,7 @@ class GenericFormValidationViewModel {
                 finishedSubject.onCompleted()
                 observer.onCompleted()
 
-                return NopDisposable.instance
+                return Disposables.create()
             }
         }
 
