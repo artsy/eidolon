@@ -26,7 +26,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let titleString = useArtsyBidderButton.title(for: useArtsyBidderButton.state)! ?? ""
+        let titleString = useArtsyBidderButton.title(for: useArtsyBidderButton.state) ?? ""
         let attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,
             NSFontAttributeName: useArtsyBidderButton.titleLabel!.font] as [String : Any];
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)

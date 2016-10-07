@@ -22,7 +22,7 @@ final class Sale: NSObject, JSONAbleType {
         self.auctionState = state
     }
 
-    static func fromJSON(_ json:[String: AnyObject]) -> Sale {
+    static func fromJSON(_ json:[String: Any]) -> Sale {
         let json = JSON(json)
         let formatter = ISO8601DateFormatter()
 

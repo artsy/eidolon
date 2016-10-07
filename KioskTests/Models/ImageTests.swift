@@ -13,7 +13,7 @@ class ImageTests: QuickSpec {
         it("converts from JSON") {
 
             let imageFormats = ["big", "small", "patch"]
-            let data:[String: AnyObject] = [ "id": id, "image_url": url, "image_versions": imageFormats, "original_width": size.width, "original_height": size.height]
+            let data:[String: Any] = [ "id": id as AnyObject, "image_url": url, "image_versions": imageFormats, "original_width": size.width, "original_height": size.height]
 
             let image = Image.fromJSON(data)
 
@@ -24,23 +24,23 @@ class ImageTests: QuickSpec {
         }
 
         it("generates a thumbnail url") {
-            var image = self.imageForVersion("large")
-            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
+            var image = self.image(forVersion: "large")
+            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL.self))
 
-            image = self.imageForVersion("medium")
-            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
+            image = self.image(forVersion: "medium")
+            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL.self))
 
-            image = self.imageForVersion("larger")
-            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL))
+            image = self.image(forVersion: "larger")
+            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL.self))
         }
 
         it("handles unknown image formats"){
-            let image = self.imageForVersion("unknown")
+            let image = self.image(forVersion: "unknown")
             expect(image.thumbnailURL()).to(beNil())
         }
 
         it("handles incorrect image_versions JSON") {
-            let data:[String: AnyObject] = [ "id": id, "image_url": url, "image_versions": "something invalid"]
+            let data:[String: Any] = [ "id": id, "image_url": url, "image_versions": "something invalid"]
 
             expect(Image.fromJSON(data)).toNot( throwError() )
         }

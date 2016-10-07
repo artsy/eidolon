@@ -19,27 +19,27 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         let endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
 
             switch target {
-            case ArtsyAPI.FindExistingEmailRegistration(let email):
+            case ArtsyAPI.findExistingEmailRegistration(let email):
                 emailCheck?()
                 expect(email) == testEmail
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(emailExists ? 200 : 404, NSData())}, method: target.method, parameters: target.parameters)
-            case ArtsyAPI.LostPasswordNotification(let email):
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(emailExists ? 200 : 404, Data())}, method: target.method, parameters: target.parameters)
+            case ArtsyAPI.lostPasswordNotification(let email):
                 passwordCheck?()
                 expect(email) == testEmail
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(passwordRequestSucceeds ? 200 : 404, NSData())}, method: target.method, parameters: target.parameters)
-            case ArtsyAPI.XAuth(let email, let password):
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(passwordRequestSucceeds ? 200 : 404, Data())}, method: target.method, parameters: target.parameters)
+            case ArtsyAPI.xAuth(let email, let password):
                 loginCheck?()
                 expect(email) == testEmail
                 expect(password) == testPassword
                 // Fail auth (wrong password maybe)
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(loginSucceeds ? 200 : 403, NSData())}, method: target.method, parameters: target.parameters)
-            case .XApp:
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(loginSucceeds ? 200 : 403, Data())}, method: target.method, parameters: target.parameters)
+            case .xApp:
                 // Any XApp requests are incidental; ignore.
                 return MoyaProvider<ArtsyAPI>.DefaultEndpointMapping(target)
             default:
                 // Fail on all other cases
                 fail("Unexpected network call")
-                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, NSData())}, method: target.method, parameters: target.parameters)
+                return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(200, Data())}, method: target.method, parameters: target.parameters)
             }
         }
 
@@ -89,7 +89,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 checked = true
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let subject = self.testSubject(networking)
+            let subject = self.testSubject(provider: networking)
             let disposeBag = DisposeBag()
 
             waitUntil { done in
@@ -108,7 +108,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 exists = true
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let subject = self.testSubject(networking)
+            let subject = self.testSubject(provider: networking)
             let disposeBag = DisposeBag()
 
             subject
@@ -134,7 +134,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 exists = true
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let subject = self.testSubject(networking)
+            let subject = self.testSubject(provider: networking)
             let disposeBag = DisposeBag()
 
             subject
@@ -164,7 +164,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 authed = true
             }, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let subject = self.testSubject(networking)
+            let subject = self.testSubject(provider: networking)
             let disposeBag = DisposeBag()
 
 
@@ -181,7 +181,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
         it("sends an error on the command if the authorization fails") {
             let networking = self.stubProvider(emailExists: true, emailCheck: nil, loginSucceeds: false, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
-            let subject = self.testSubject(networking)
+            let subject = self.testSubject(provider: networking)
             let disposeBag = DisposeBag()
 
             var errored = false
@@ -208,7 +208,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             let invocation = PublishSubject<Void>()
 
-            let subject = self.testSubject(networking, invocation: invocation)
+            let subject = self.testSubject(provider: networking, invocation: invocation)
             let disposeBag = DisposeBag()
 
             var completed = false
@@ -258,7 +258,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 sent = true
             })
 
-            let subject = self.testSubject(networking)
+            let subject = self.testSubject(provider: networking)
             let disposeBag = DisposeBag()
 
             waitUntil { done in

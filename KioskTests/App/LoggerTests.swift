@@ -3,9 +3,9 @@ import Nimble
 @testable
 import Kiosk
 
-func logPath() -> NSURL {
-    let docs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
-    return docs!.URLByAppendingPathComponent("logger.txt")
+func logPath() -> URL {
+    let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
+    return docs!.appendingPathComponent("logger.txt")
 }
 
 class LoggerTests: QuickSpec {
@@ -16,13 +16,13 @@ class LoggerTests: QuickSpec {
 
             logger.log(testString)
 
-            let fileContents = try! NSString(contentsOfURL: logPath(), encoding: NSUTF8StringEncoding)
+            let fileContents = try! String(contentsOf: logPath(), encoding: .utf8)
 
             expect(fileContents).to(contain(testString))
         }
 
         afterEach {
-            try! NSFileManager.defaultManager().removeItemAtURL(logPath())
+            try! FileManager.default.removeItem(at: logPath())
             return
         }
     }

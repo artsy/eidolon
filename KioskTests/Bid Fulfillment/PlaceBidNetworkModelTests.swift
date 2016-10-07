@@ -57,14 +57,14 @@ class PlaceBidNetworkModelTests: QuickSpec {
             var bidCents: String?
 
             let provider = OnlineProvider(endpointClosure: { target -> (Endpoint<ArtsyAuthenticatedAPI>) in
-                if case .PlaceABid(let receivedAuctionID, let receivedArtworkID, let receivedBidCents) = target {
+                if case .placeABid(let receivedAuctionID, let receivedArtworkID, let receivedBidCents) = target {
                     auctionID = receivedAuctionID
                     artworkID = receivedArtworkID
                     bidCents = receivedBidCents
                 }
 
-                let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString
-                return Endpoint(URL: url, sampleResponseClosure: {.NetworkResponse(200, stubbedResponse("CreateABid"))}, method: target.method, parameters: target.parameters)
+                let url = target.baseURL.appendingPathComponent(target.path).absoluteString
+                return Endpoint(URL: url, sampleResponseClosure: {.networkResponse(200, stubbedResponse("CreateABid"))}, method: target.method, parameters: target.parameters)
                 }, stubClosure: MoyaProvider.ImmediatelyStub, online: Observable.just(true))
 
 
@@ -88,8 +88,8 @@ class PlaceBidNetworkModelTests: QuickSpec {
 
             beforeEach {
                 let provider = OnlineProvider(endpointClosure: { target -> (Endpoint<ArtsyAuthenticatedAPI>) in
-                    let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString
-                    return Endpoint(URL: url, sampleResponseClosure: {.NetworkResponse(400, stubbedResponse("CreateABidFail"))}, method: target.method, parameters: target.parameters)
+                    let url = target.baseURL.appendingPathComponent(target.path).absoluteString
+                    return Endpoint(URL: url, sampleResponseClosure: {.networkResponse(400, stubbedResponse("CreateABidFail"))}, method: target.method, parameters: target.parameters)
                     }, stubClosure: MoyaProvider.ImmediatelyStub, online: Observable.just(true))
 
                 networking = AuthorizedNetworking(provider: provider)

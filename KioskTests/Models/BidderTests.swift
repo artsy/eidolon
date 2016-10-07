@@ -9,7 +9,7 @@ class BidderTests: QuickSpec {
         it("converts from JSON") {
             let id = "324ddf445"
             let saleID = "asdkhaskda"
-            let data:[String: AnyObject] =  ["id":id , "sale" : ["id": saleID]]
+            let data:[String: Any] =  ["id":id , "sale" : ["id": saleID]]
 
             let bidder = Bidder.fromJSON(data)
 

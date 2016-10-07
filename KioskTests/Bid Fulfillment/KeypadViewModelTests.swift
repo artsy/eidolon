@@ -41,7 +41,7 @@ class KeypadViewModelTests: QuickSpec {
         it("adds digits") {
             waitUntil { done in
                 [1,3,3,7]
-                    .reduce(Observable.empty(), combine: { (observable, input) -> Observable<Void> in
+                    .reduce(Observable.empty(), { (observable, input) -> Observable<Void> in
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribeCompleted {
@@ -59,7 +59,7 @@ class KeypadViewModelTests: QuickSpec {
             waitUntil { done in
 
                 [1,3,3,3,3,3,3,3,3,3,3,3,7]
-                    .reduce(Observable.empty(), combine: { (observable, input) -> Observable<Void> in
+                    .reduce(Observable.empty(), { (observable, input) -> Observable<Void> in
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribeCompleted {
@@ -75,7 +75,7 @@ class KeypadViewModelTests: QuickSpec {
         it("handles prepended zeros") {
             waitUntil { done in
                 [0,1,3,3,7]
-                    .reduce(Observable.empty(), combine: { (observable, input) -> Observable<Void> in
+                    .reduce(Observable.empty(), { (observable, input) -> Observable<Void> in
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribeCompleted {
@@ -110,7 +110,7 @@ class KeypadViewModelTests: QuickSpec {
         it("deletes") {
             waitUntil { done in
                 [1,3,3]
-                    .reduce(Observable.empty(), combine: { (observable, input) -> Observable<Void> in
+                    .reduce(Observable.empty(), { (observable, input) -> Observable<Void> in
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .then {

@@ -14,7 +14,7 @@ final class Bidder: NSObject, JSONAbleType {
         self.pin = pin
     }
 
-    static func fromJSON(_ json:[String: AnyObject]) -> Bidder {
+    static func fromJSON(_ json:[String: Any]) -> Bidder {
         let json = JSON(json)
 
         let id = json["id"].stringValue

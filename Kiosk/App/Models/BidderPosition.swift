@@ -14,7 +14,7 @@ final class BidderPosition: NSObject, JSONAbleType {
         self.processedAt = processedAt
     }
 
-    static func fromJSON(_ source:[String: AnyObject]) -> BidderPosition {
+    static func fromJSON(_ source:[String: Any]) -> BidderPosition {
         let json = JSON(source)
         let formatter = ISO8601DateFormatter()
 

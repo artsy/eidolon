@@ -36,7 +36,7 @@ class SystemTimeTests: QuickSpec {
                 time
                     .sync(networking)
                     .subscribeNext { (_) in
-                        let currentYear = yearFromDate(NSDate())
+                        let currentYear = yearFromDate(Date())
                         let timeYear = yearFromDate(time.date())
 
                         expect(timeYear) > currentYear
@@ -55,7 +55,7 @@ class SystemTimeTests: QuickSpec {
 
             it("returns current time") {
                 let time = SystemTime()
-                let currentYear = yearFromDate(NSDate())
+                let currentYear = yearFromDate(Date())
                 let timeYear = yearFromDate(time.date())
 
                 expect(timeYear) == currentYear

@@ -8,7 +8,7 @@ class BidTests: QuickSpec {
         it("converts from JSON") {
             let id = "saf32sadasd"
             let amount = 100000
-            let data:[String: AnyObject] =  ["id":id , "amount_cents" : amount ]
+            let data:[String: Any] =  ["id":id as AnyObject , "amount_cents" : amount ]
 
             let bid = Bid.fromJSON(data)
 

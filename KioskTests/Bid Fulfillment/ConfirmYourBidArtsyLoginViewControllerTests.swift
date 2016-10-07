@@ -12,7 +12,7 @@ class ConfirmYourBidArtsyLoginViewControllerTests: QuickSpec {
             subject.loadViewProgrammatically()
 
             // Highlighting of the text field (as it becomes first responder) is inconsistent without this line.
-            subject.view.drawViewHierarchyInRect(CGRect.zero, afterScreenUpdates: true)
+            subject.view.drawHierarchy(in: CGRect.zero, afterScreenUpdates: true)
 
             expect(subject).to(haveValidSnapshot(usesDrawRect: true))
         }

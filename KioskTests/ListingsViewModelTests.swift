@@ -28,14 +28,14 @@ class ListingsViewModelTests: QuickSpec {
 
             let endpointsClosure: MoyaProvider<ArtsyAPI>.EndpointClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
                 switch target {
-                case ArtsyAPI.AuctionListings:
+                case ArtsyAPI.auctionListings:
                     if let page = target.parameters!["page"] as? Int {
-                        return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, listingsDataForPage(page, bidCount: bidCount, modelCount: saleArtworksCount))}, method: target.method, parameters: target.parameters)
+                        return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(200, listingsData(forPage: page, bidCount: bidCount, modelCount: saleArtworksCount))}, method: target.method, parameters: target.parameters)
                     } else {
-                        return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+                        return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
                     }
                 default:
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
                 }
             }
 
@@ -54,7 +54,7 @@ class ListingsViewModelTests: QuickSpec {
 
             subject = ListingsViewModel(provider: provider, selectedIndex: Observable.just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
-            kioskWaitUntil { done in
+            waitUntil { done in
                 subject.updatedContents.take(1).subscribeCompleted {
                     done()
                 }.addDisposableTo(disposeBag)
@@ -69,7 +69,7 @@ class ListingsViewModelTests: QuickSpec {
             // Verify that initial value is correct
             waitUntil(timeout: 5) { done in
                 subject.updatedContents.take(1).flatMap { _ in
-                    return subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).numberOfBids().take(1)
+                    return subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).numberOfBids().take(1)
                 }.subscribeNext { string in
                     expect(string) == "\(initialBidCount) bids placed"
                     done()
@@ -81,7 +81,7 @@ class ListingsViewModelTests: QuickSpec {
 
             waitUntil(timeout: 5) { done in
                 // We skip 1 to avoid getting the existing value, and wait for the updated one when the subject syncs.
-                subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).numberOfBids().skip(1).subscribeNext { string in
+                subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).numberOfBids().skip(1).subscribeNext { string in
                     expect(string) == "\(finalBidCount) bids placed"
                     done()
                 }.addDisposableTo(disposeBag)
@@ -118,10 +118,10 @@ class ListingsViewModelTests: QuickSpec {
 
             let endpointsClosure: MoyaProvider<ArtsyAPI>.EndpointClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
                 switch target {
-                case ArtsyAPI.AuctionListings:
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, listingsDataForPage(1, bidCount: 0, modelCount: 3, reverseIDs: reverseIDs))}, method: target.method, parameters: target.parameters)
+                case ArtsyAPI.auctionListings:
+                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(200, listingsData(forPage: 1, bidCount: 0, modelCount: 3, reverseIDs: reverseIDs))}, method: target.method, parameters: target.parameters)
                 default:
-                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+                    return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
                 }
             }
 
@@ -133,18 +133,18 @@ class ListingsViewModelTests: QuickSpec {
             var subsequentFirstLotID: String?
 
             // First we get our initial sync
-            kioskWaitUntil { done in
+            waitUntil { done in
                 subject.updatedContents.take(1).subscribeCompleted {
-                    initialFirstLotID = subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).saleArtworkID
+                    initialFirstLotID = subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).saleArtworkID
                     done()
                 }.addDisposableTo(disposeBag)
             }
 
             // Now we reverse the lot numbers
             reverseIDs = true
-            kioskWaitUntil { done in
+            waitUntil { done in
                 subject.updatedContents.skip(1).take(1).subscribeCompleted {
-                    subsequentFirstLotID = subject.saleArtworkViewModelAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)).saleArtworkID
+                    subsequentFirstLotID = subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).saleArtworkID
                     done()
                 }.addDisposableTo(disposeBag)
             }
@@ -159,7 +159,7 @@ class ListingsViewModelTests: QuickSpec {
 }
 
 
-func listingsData(forPage page: Int, bidCount: Int, modelCount: Int?, reverseIDs: Bool = false) -> NSData {
+func listingsData(forPage page: Int, bidCount: Int, modelCount: Int?, reverseIDs: Bool = false) -> Data {
     let count = modelCount ?? (page == 1 ? 2 : 1)
 
     let models = Array<Int>(1...count).map { index -> NSDictionary in
@@ -177,5 +177,5 @@ func listingsData(forPage page: Int, bidCount: Int, modelCount: Int?, reverseIDs
         ]
     }
 
-    return try! NSJSONSerialization.dataWithJSONObject(models, options: [])
+    return try! JSONSerialization.data(withJSONObject: models, options: [])
 }

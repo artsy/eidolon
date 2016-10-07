@@ -41,7 +41,7 @@ func yearFromDate(_ date: Date) -> Int {
 extension UIImage {
     class func testImage(named name: String, ofType type: String) -> UIImage! {
         let bundle = Bundle(for: type(of: TestClass()))
-        let path = bundle.pathForResource(name, ofType: type)
+        let path = bundle.path(forResource: name, ofType: type)
         return UIImage(contentsOfFile: path!)
     }
 }
@@ -87,14 +87,6 @@ class StubFulfillmentController: FulfillmentController {
     var xAccessToken: String?
 }
 
-/// Nimble is currently having issues with nondeterministic async expectations.
-/// This will have to do for now 😢
-/// See: https://github.com/Quick/Nimble/issues/177
-func kioskWaitUntil(_ action: (() -> Void) -> Void) {
-    waitUntil(timeout: 10, action: action)
-}
-
-
 // TODO: Move these into a separate pod?
 // This is handy so we can write expect(o) == 1 instead of expect(o.value) == 1 or whatever.
 public func equalFirst<T: Equatable>(_ expectedValue: T?) -> MatcherFunc<Observable<T>> {
@@ -126,9 +118,9 @@ public func equalFirst<T: Equatable>(_ expectedValue: T?) -> MatcherFunc<Observa
         let actualValue = try actualExpression.evaluate()?.toBlocking().first()
 
         switch actualValue {
-        case .None:
+        case .none:
             return expectedValue == nil
-        case .Some(let wrapped):
+        case .some(let wrapped):
             return wrapped == expectedValue
         }
     }
@@ -141,9 +133,9 @@ public func equalFirst<T: Equatable>(_ expectedValue: T?) -> MatcherFunc<Variabl
         let actualValue = try actualExpression.evaluate()?.value
 
         switch actualValue {
-        case .None:
+        case .none:
             return expectedValue == nil
-        case .Some(let wrapped):
+        case .some(let wrapped):
             return wrapped == expectedValue
         }
     }
@@ -172,7 +164,7 @@ enum TestError: String {
     case Default
 }
 
-extension TestError: Error { }
+extension TestError: Swift.Error { }
 
 func emptyAction() -> CocoaAction {
     return CocoaAction { _ in Observable.empty() }
@@ -182,7 +174,7 @@ func neverAction() -> CocoaAction {
     return CocoaAction { _ in Observable.never() }
 }
 
-func errorAction(_ error: ErrorType = TestError.Default) -> CocoaAction {
+func errorAction(_ error: Swift.Error = TestError.Default) -> CocoaAction {
     return CocoaAction { _ in Observable.error(error) }
 }
 

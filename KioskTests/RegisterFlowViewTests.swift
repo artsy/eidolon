@@ -8,7 +8,7 @@ private let frame = CGRect(x: 0, y: 0, width: 180, height: 320)
 
 class RegisterFlowViewConfiguration: QuickConfiguration {
     override class func configure(_ configuration: Configuration) {
-        sharedExamples("a register flow view") { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a register flow view") { (sharedExampleContext: @escaping SharedExampleContext) in
             var subject: RegisterFlowView!
 
             beforeEach {
@@ -21,7 +21,7 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
 
                 subject.details = bidDetails
 
-                subject.snapshotViewAfterScreenUpdates(true)
+                subject.snapshotView(afterScreenUpdates: true)
                 expect(subject).to( haveValidSnapshot() )
             }
 
@@ -34,7 +34,7 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
 
                 subject.details = bidDetails
 
-                subject.snapshotViewAfterScreenUpdates(true)
+                subject.snapshotView(afterScreenUpdates: true)
                 expect(subject).to( haveValidSnapshot() )
             }
 
@@ -48,7 +48,7 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
                 subject.highlightedIndex.value = 2
                 subject.details = bidDetails
 
-                subject.snapshotViewAfterScreenUpdates(true)
+                subject.snapshotView(afterScreenUpdates: true)
                 expect(subject).to( haveValidSnapshot() )
             }
 
@@ -63,7 +63,7 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
                 bidDetails.newUser.zipCode.value = "90210"
                 subject.details = bidDetails
 
-                subject.snapshotViewAfterScreenUpdates(true)
+                subject.snapshotView(afterScreenUpdates: true)
                 expect(subject).to( haveValidSnapshot() )
             }
         }
@@ -81,7 +81,7 @@ class RegisterFlowViewTests: QuickSpec {
             subject.constrainWidth("180")
             subject.constrainHeight("320")
             subject.appSetup = appSetup
-            subject.backgroundColor = .whiteColor()
+            subject.backgroundColor = .white
         }
 
         describe("requiring zip code") {

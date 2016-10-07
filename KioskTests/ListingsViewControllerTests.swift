@@ -9,7 +9,7 @@ import Moya
 
 class ListingsViewControllerConfiguration: QuickConfiguration {
     override class func configure(_ configuration: Configuration) {
-        sharedExamples("a listings controller") { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a listings controller") { (sharedExampleContext: @escaping SharedExampleContext) in
             var subject: ListingsViewController!
             var viewModel: ListingsViewControllerTestsStubbedViewModel!
 
@@ -20,36 +20,36 @@ class ListingsViewControllerConfiguration: QuickConfiguration {
             }
 
             it("grid") {
-                subject.switchView[0]?.sendActionsForControlEvents(.TouchUpInside)
+                subject.switchView[0]?.sendActions(for: .touchUpInside)
                 expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
             
             it("least bids") {
-                subject.switchView[1]?.sendActionsForControlEvents(.TouchUpInside)
+                subject.switchView[1]?.sendActions(for: .touchUpInside)
                 viewModel._gridSelected.value = false
                 expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("most bids") {
-                subject.switchView[2]?.sendActionsForControlEvents(.TouchUpInside)
+                subject.switchView[2]?.sendActions(for: .touchUpInside)
                 viewModel._gridSelected.value = false
                 expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("highest bid") {
-                subject.switchView[3]?.sendActionsForControlEvents(.TouchUpInside)
+                subject.switchView[3]?.sendActions(for: .touchUpInside)
                 viewModel._gridSelected.value = false
                 expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("lowest bid") {
-                subject.switchView[4]?.sendActionsForControlEvents(.TouchUpInside)
+                subject.switchView[4]?.sendActions(for: .touchUpInside)
                 viewModel._gridSelected.value = false
                 expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
             it("alphabetical") {
-                subject.switchView[5]?.sendActionsForControlEvents(.TouchUpInside)
+                subject.switchView[5]?.sendActions(for: .touchUpInside)
                 viewModel._gridSelected.value = false
                 expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
@@ -131,23 +131,23 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
     var scheduleOnBackground: (_ observable: Observable<Any>) -> Observable<Any> = { observable in observable }
     var scheduleOnForeground: (_ observable: Observable<[SaleArtwork]>) -> Observable<[SaleArtwork]> = { observable in observable }
 
-    func saleArtworkViewModelAtIndexPath(_ indexPath: NSIndexPath) -> SaleArtworkViewModel {
+    func saleArtworkViewModel(atIndexPath indexPath: IndexPath) -> SaleArtworkViewModel {
         let saleArtwork = testSaleArtwork()
 
-        saleArtwork.lotNumber = lotNumber
+        saleArtwork.lotNumber = lotNumber as NSNumber?
         if let soldStatus = soldStatus {
             saleArtwork.artwork.soldStatus = soldStatus
         }
 
-        saleArtwork.openingBidCents = 1_000_00 * (indexPath.item + 1)
+        saleArtwork.openingBidCents = (1_000_00 * (indexPath.item + 1)) as NSNumber
 
         return saleArtwork.viewModel
     }
 
-    func showDetailsForSaleArtworkAtIndexPath(_ indexPath: IndexPath) { }
+    func showDetailsForSaleArtwork(atIndexPath indexPath: IndexPath) { }
 
-    func presentModalForSaleArtworkAtIndexPath(_ indexPath: IndexPath) { }
-    func imageAspectRatioForSaleArtworkAtIndexPath(_ indexPath: IndexPath) -> CGFloat? { return nil }
+    func presentModalForSaleArtwork(atIndexPath indexPath: IndexPath) { }
+    func imageAspectRatioForSaleArtwork(atIndexPath indexPath: IndexPath) -> CGFloat? { return nil }
 
     // Testing values
     var lotNumber: Int?

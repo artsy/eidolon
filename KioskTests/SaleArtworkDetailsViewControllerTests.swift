@@ -7,7 +7,7 @@ import SDWebImage
 
 class SaleArtworkDetailsViewControllerConfiguration: QuickConfiguration {
     override class func configure(_ configuration: Configuration) {
-        sharedExamples("a sale artwork details view controller") { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a sale artwork details view controller") { (sharedExampleContext: @escaping SharedExampleContext) in
             var subject: SaleArtworkDetailsViewController!
 
             beforeEach{
@@ -31,7 +31,7 @@ class SaleArtworkDetailsViewControllerTests: QuickSpec {
             subject.allowAnimations = false
 
             let image = UIImage.testImage(named: "artwork", ofType: "jpg")
-            self.imageCache.storeImage(image, forKey: "http://example.com/large.jpg")
+            self.imageCache?.store(image, forKey: "http://example.com/large.jpg")
         }
 
         describe("without lot numbers") {

@@ -54,7 +54,7 @@ final class Artwork: NSObject, JSONAbleType {
         self.soldStatus = sold
     }
 
-    static func fromJSON(_ json: [String: AnyObject]) -> Artwork {
+    static func fromJSON(_ json: [String: Any]) -> Artwork {
         let json = JSON(json)
 
         let id = json["id"].stringValue

@@ -9,7 +9,7 @@ class SwitchViewSpec: QuickSpec {
         it("looks correct configured with two buttons") {
             let titles = ["First title", "Second Title"]
             let switchView = SwitchView(buttonTitles: titles)
-            switchView.frame = CGRect(origin: CGPointZero, size: CGSize(width: 400, height: switchView.intrinsicContentSize().height))
+            switchView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: 400, height: switchView.intrinsicContentSize.height))
             
             expect(switchView).to(haveValidSnapshot(named:"default"))
         }

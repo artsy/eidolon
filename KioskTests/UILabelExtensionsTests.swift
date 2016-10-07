@@ -7,18 +7,18 @@ class UILabelExtensionsTests: QuickSpec {
     override func spec() {
         it("makes labels non-opaque") {
             let subject = UILabel()
-            subject.opaque = true
+            subject.isOpaque = true
             subject.makeTransparent()
 
-            expect(subject.opaque) == false
+            expect(subject.isOpaque) == false
         }
 
         it("makes labels with clear backgrounds") {
             let subject = UILabel()
-            subject.backgroundColor = .redColor()
+            subject.backgroundColor = .red
             subject.makeTransparent()
 
-            expect(subject.backgroundColor) == .clearColor()
+            expect(subject.backgroundColor) == .clear
         }
     }
 }

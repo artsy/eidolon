@@ -21,7 +21,7 @@ final class User: NSObject, JSONAbleType {
         self.location = location
     }
     
-    static func fromJSON(_ json: [String: AnyObject]) -> User {
+    static func fromJSON(_ json: [String: Any]) -> User {
         let json = JSON(json)
         
         let id = json["id"].stringValue

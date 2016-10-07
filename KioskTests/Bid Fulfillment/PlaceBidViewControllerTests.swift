@@ -6,8 +6,8 @@ import Kiosk
 import Nimble_Snapshots
 
 class PlaceBidViewControllerConfiguration: QuickConfiguration {
-    override class func configure(configuration: Configuration) {
-        sharedExamples("a bid view controller view controller") { (sharedExampleContext: SharedExampleContext) in
+    override class func configure(_ configuration: Configuration) {
+        sharedExamples("a bid view controller view controller") { (sharedExampleContext: @escaping SharedExampleContext) in
             var subject: PlaceBidViewController!
             var nav: FulfillmentNavigationController!
 
@@ -43,7 +43,7 @@ class PlaceBidViewControllerConfiguration: QuickConfiguration {
 class PlaceBidViewControllerTests: QuickSpec {
     override func spec() {
         var subject: PlaceBidViewController!
-        let artworkJSON: [String: AnyObject] = [
+        let artworkJSON: [String: Any] = [
             "id":"artwork_id" as AnyObject,
             "title" : "The Artwork Title" as AnyObject,
             "date": "23rd Nov" as AnyObject,
@@ -167,10 +167,10 @@ class PlaceBidViewControllerTests: QuickSpec {
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 
-            expect(subject.bidButton.enabled) == false
+            expect(subject.bidButton.isEnabled) == false
 
             customKeySubject.onNext(200)
-            expect(subject.bidButton.enabled) == true
+            expect(subject.bidButton.isEnabled) == true
         }
 
         it("passes the bid amount to the nav controller") {

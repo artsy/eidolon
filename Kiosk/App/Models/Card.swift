@@ -17,7 +17,7 @@ final class Card: NSObject, JSONAbleType {
         self.expirationYear = expirationYear
     }
 
-    static func fromJSON(_ json:[String: AnyObject]) -> Card {
+    static func fromJSON(_ json:[String: Any]) -> Card {
         let json = JSON(json)
 
         let id = json["id"].stringValue

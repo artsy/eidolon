@@ -6,11 +6,11 @@ import RxSwift
 import Keys
 import Moya
 
-func beInTheFuture() -> MatcherFunc<NSDate> {
+func beInTheFuture() -> MatcherFunc<Date> {
     return MatcherFunc { actualExpression, failureMessage in
         let instance = try! actualExpression.evaluate()!
-        let now = NSDate()
-        return instance.compare(now) == NSComparisonResult.OrderedDescending
+        let now = Date()
+        return instance.compare(now) == ComparisonResult.orderedDescending
     }
 }
 
@@ -22,11 +22,11 @@ class ArtsyAPISpec: QuickSpec {
         var networking: Networking!
 
         func newXAppRequest() -> Observable<Moya.Response> {
-            return networking.request(ArtsyAPI.Auctions)
+            return networking.request(ArtsyAPI.auctions)
         }
 
         beforeEach {
-            defaults = NSUserDefaults()
+            defaults = UserDefaults()
             networking = Networking.newStubbingNetworking()
         }
 
@@ -77,14 +77,14 @@ class ArtsyAPISpec: QuickSpec {
                     // nop
                 }.addDisposableTo(disposeBag)
                 
-                let past = NSDate(timeIntervalSinceNow: -1000)
+                let past = Date(timeIntervalSinceNow: -1000)
                 expect(getDefaultsKeys(defaults).key).to(equal("STUBBED TOKEN!"))
                 expect(getDefaultsKeys(defaults).expiry).toNot(beNil())
                 expect(getDefaultsKeys(defaults).expiry ?? past).to(beInTheFuture())
             }
             
             it("gets XApp token if it has expired") {
-                let past = NSDate(timeIntervalSinceNow: -1000)
+                let past = Date(timeIntervalSinceNow: -1000)
                 setDefaultsKeys(defaults, key: "some expired key", expiry: past)
                 
                 newXAppRequest().subscribeNext { (object) in

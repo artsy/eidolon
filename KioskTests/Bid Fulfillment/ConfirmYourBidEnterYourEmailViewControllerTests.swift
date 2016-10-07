@@ -23,7 +23,7 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
             _ = subject.view
             subject.loadViewProgrammatically()
             // Highlighting of the text field (as it becomes first responder) is inconsistent without this line.
-            subject.view.drawViewHierarchyInRect(CGRect.zero, afterScreenUpdates: true)
+            subject.view.drawHierarchy(in: CGRect.zero, afterScreenUpdates: true)
 
             expect(subject).to(haveValidSnapshot(usesDrawRect: true))
         }
@@ -34,7 +34,7 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
             subject.loadViewProgrammatically()
 
             subject.emailTextField.text = "email"
-            subject.emailTextField.sendActionsForControlEvents(.EditingChanged)
+            subject.emailTextField.sendActions(for: .editingChanged)
 
             expect(nav.bidDetails.newUser.email) == "email"
         }
@@ -46,7 +46,7 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
             nav.loadViewProgrammatically()
             subject.loadViewProgrammatically()
 
-            expect(subject.confirmButton.enabled) == false
+            expect(subject.confirmButton.isEnabled) == false
         }
 
         pending("enables the enter button when an email + password is entered") {
@@ -55,9 +55,9 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
             subject.loadViewProgrammatically()
 
             subject.emailTextField.text = "email@address.com"
-            subject.emailTextField.sendActionsForControlEvents(.EditingChanged)
+            subject.emailTextField.sendActions(for: .editingChanged)
 
-            expect(subject.confirmButton.enabled) == true
+            expect(subject.confirmButton.isEnabled) == true
         }
 
     }

@@ -12,9 +12,9 @@ class BidderPositionTests: QuickSpec {
 
             let bidID = "saf32sadasd"
             let bidAmount = 100000
-            let bidData:[String: AnyObject] = ["id": bidID, "amount_cents" : bidAmount ]
+            let bidData:[String: Any] = ["id": bidID as AnyObject, "amount_cents" : bidAmount ]
 
-            let data:[String: AnyObject] =  ["id":id , "max_bid_amount_cents" : maxBidAmountCents, "highest_bid":bidData]
+            let data:[String: Any] =  ["id":id as AnyObject , "max_bid_amount_cents" : maxBidAmountCents, "highest_bid":bidData]
 
             let position = BidderPosition.fromJSON(data)
 

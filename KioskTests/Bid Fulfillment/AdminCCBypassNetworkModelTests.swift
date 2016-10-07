@@ -16,7 +16,7 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
         }
 
         it("handles unregistered bidders") {
-            let networking = networkingForBidderCreatedByAdmin(nil) // nil indicates not registered to bid.
+            let networking = networkingForBidder(createdByAdmin: nil) // nil indicates not registered to bid.
 
             var receivedResult: BypassResult?
             waitUntil { done in
@@ -30,11 +30,11 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
-            expect(receivedResult) == .RequireCC
+            expect(receivedResult) == .requireCC
         }
 
         it("handles bidders created by admins") {
-            let networking = networkingForBidderCreatedByAdmin(true)
+            let networking = networkingForBidder(createdByAdmin: true)
 
             var receivedResult: BypassResult?
             waitUntil { done in
@@ -48,11 +48,11 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
-            expect(receivedResult) == .SkipCCRequirement
+            expect(receivedResult) == .skipCCRequirement
         }
 
         it("handles bidders not created by admins") {
-            let networking = networkingForBidderCreatedByAdmin(false)
+            let networking = networkingForBidder(createdByAdmin: false)
 
             var receivedResult: BypassResult?
             waitUntil { done in
@@ -66,13 +66,13 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
-            expect(receivedResult) == .RequireCC
+            expect(receivedResult) == .requireCC
         }
     }
 }
 
 private func networkingForBidder(createdByAdmin: Bool?) -> AuthorizedNetworking {
-    let sampleData: NSData
+    let sampleData: Data
 
     if let createdByAdmin = createdByAdmin {
         let dictionary = [
@@ -80,16 +80,16 @@ private func networkingForBidder(createdByAdmin: Bool?) -> AuthorizedNetworking 
             "saleID" : "the-best-sale-in-the-world",
             "created_by_admin": createdByAdmin,
             "ping": "1234"
-        ]
+        ] as [String : Any]
 
-        sampleData = try! NSJSONSerialization.dataWithJSONObject([dictionary], options: [])
+        sampleData = try! JSONSerialization.data(withJSONObject: [dictionary], options: [])
     } else {
         // nil represents no bidder, so we'll return an empty array.
-        sampleData = try! NSJSONSerialization.dataWithJSONObject([], options: [])
+        sampleData = try! JSONSerialization.data(withJSONObject: [], options: [])
     }
 
     let provider = OnlineProvider<ArtsyAuthenticatedAPI>(endpointClosure: { target in
-            return Endpoint(URL: "oaishdf", sampleResponseClosure: {.NetworkResponse(200, sampleData)})
+            return Endpoint(URL: "oaishdf", sampleResponseClosure: {.networkResponse(200, sampleData)})
         },
         stubClosure: MoyaProvider.ImmediatelyStub,
         online: .just(true))

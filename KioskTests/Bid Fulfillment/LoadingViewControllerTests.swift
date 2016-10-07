@@ -160,7 +160,7 @@ class LoadingViewControllerTests: QuickSpec {
 let loadingViewControllerTestImage = UIImage.testImage(named: "artwork", ofType: "jpg")
 
 func testLoadingViewController() -> LoadingViewController {
-    let controller = UIStoryboard.fulfillment().viewControllerWithID(.LoadingBidsorRegistering).wrapInFulfillmentNav() as! LoadingViewController
+    let controller = UIStoryboard.fulfillment().viewController(withID: .LoadingBidsorRegistering).wrapInFulfillmentNav() as! LoadingViewController
     return controller
 }
 
@@ -183,7 +183,7 @@ class StubLoadingViewModel: LoadingViewModelType {
     func performActions() -> Observable<Void> {
         if completes {
             if errors {
-                return Observable.error(NSError(domain: "", code: 0, userInfo: nil) as ErrorType)
+                return Observable.error(NSError(domain: "", code: 0, userInfo: nil) as Swift.Error)
             } else {
                 return Observable.empty()
             }

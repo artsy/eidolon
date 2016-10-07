@@ -10,9 +10,9 @@ class TextFieldTests: QuickSpec {
         pending("TextField") {
             var textField: TextField?
             beforeEach {
-                let window = UIWindow(frame:UIScreen.mainScreen().bounds)
+                let window = UIWindow(frame:UIScreen.main.bounds)
                 let vc = UIViewController()
-                textField = TextField(frame: CGRectMake(0, 0, 255, 44))
+                textField = TextField(frame: CGRect(x: 0, y: 0, width: 255, height: 44))
                 textField!.shouldAnimateStateChange = false
                 vc.view.addSubview(textField!)
                 window.rootViewController = vc
@@ -34,12 +34,12 @@ class TextFieldTests: QuickSpec {
         pending("SecureTextField") {
             var textField: SecureTextField?
             beforeEach {
-                let window = UIWindow(frame:UIScreen.mainScreen().bounds)
+                let window = UIWindow(frame:UIScreen.main.bounds)
                 let vc = UIViewController()
-                textField = SecureTextField(frame: CGRectMake(0, 0, 255, 44))
+                textField = SecureTextField(frame: CGRect(x: 0, y: 0, width: 255, height: 44))
                 textField!.shouldAnimateStateChange = false
                 textField!.text = ""
-                textField!.font = UIFont.serifFontWithSize(textField!.font!.pointSize)
+                textField!.font = UIFont.serifFont(withSize: textField!.font!.pointSize)
                 vc.view.addSubview(textField!)
                 window.rootViewController = vc
                 window.makeKeyAndVisible()

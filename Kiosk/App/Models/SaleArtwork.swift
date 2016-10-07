@@ -52,7 +52,7 @@ final class SaleArtwork: NSObject, JSONAbleType {
         return SaleArtworkViewModel(saleArtwork: self)
     }()
 
-    static func fromJSON(_ json: [String: AnyObject]) -> SaleArtwork {
+    static func fromJSON(_ json: [String: Any]) -> SaleArtwork {
         let json = JSON(json)
         let id = json["id"].stringValue
         let artworkDict = json["artwork"].object as! [String: AnyObject]

@@ -29,7 +29,7 @@ final class Image: NSObject, JSONAbleType {
         self.isDefault = isDefault
     }
 
-    static func fromJSON(_ json:[String: AnyObject]) -> Image {
+    static func fromJSON(_ json:[String: Any]) -> Image {
         let json = JSON(json)
 
         let id = json["id"].stringValue

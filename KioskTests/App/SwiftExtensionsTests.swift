@@ -28,7 +28,7 @@ class AnyOccupiable: NSObject, Occupiable {
 class SwiftExtensionsConfiguration: QuickConfiguration {
 
     override class func configure(_ configuration: Configuration) {
-        sharedExamples("an Occupiable") { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("an Occupiable") { (sharedExampleContext: @escaping SharedExampleContext) in
             var empty: AnyOccupiable?
             var nonEmpty: AnyOccupiable?
 
@@ -98,7 +98,7 @@ class SwiftExtensionsTests: QuickSpec {
 
             it("uses a default if no conversion is available") {
                 let input = "not a number"
-                expect(input.toUIntWithDefault(4)) == 4
+                expect(input.toUInt(withDefault: 4)) == 4
             }
         }
 

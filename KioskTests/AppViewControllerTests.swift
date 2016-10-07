@@ -9,9 +9,9 @@ class AppViewControllerTests: QuickSpec {
     override func spec() {
 
         it("looks right offline") {
-            let subject = UIStoryboard.auction().viewControllerWithID(.NoInternetConnection) as UIViewController
+            let subject = UIStoryboard.auction().viewController(withID: .NoInternetConnection) as UIViewController
             subject.loadViewProgrammatically()
-            subject.view.backgroundColor = UIColor.blackColor()
+            subject.view.backgroundColor = UIColor.black
             expect(subject).to(haveValidSnapshot())
         }
 
@@ -20,7 +20,7 @@ class AppViewControllerTests: QuickSpec {
             var fakeReachability: Variable<Bool>!
 
             beforeEach {
-                subject = AppViewController.instantiateFromStoryboard(auctionStoryboard)
+                subject = AppViewController.instantiate(from: auctionStoryboard)
                 subject.provider = Networking.newStubbingNetworking()
                 fakeReachability = Variable(true)
                 
@@ -31,21 +31,21 @@ class AppViewControllerTests: QuickSpec {
             it("shows the offlineBlockingView when offline  is true"){
                 subject.loadViewProgrammatically()
                 
-                subject.offlineBlockingView.hidden = false
+                subject.offlineBlockingView.isHidden = false
                 
                 fakeReachability.value = true
-                expect(subject.offlineBlockingView.hidden) == true
+                expect(subject.offlineBlockingView.isHidden) == true
             }
 
             it("hides the offlineBlockingView when offline  is false"){
                 subject.loadViewProgrammatically()
 
                 fakeReachability.value = true
-                expect(subject.offlineBlockingView.hidden) == true
+                expect(subject.offlineBlockingView.isHidden) == true
                 
                 
                 fakeReachability.value = false
-                expect(subject.offlineBlockingView.hidden) == false
+                expect(subject.offlineBlockingView.isHidden) == false
                 
             }
         }

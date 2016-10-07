@@ -7,7 +7,7 @@ import Kiosk
 
 class HelpViewControllerConfiguration: QuickConfiguration {
     override class func configure(_ configuration: Configuration) {
-        sharedExamples("a help view controller") { (sharedExampleContext: SharedExampleContext) in
+        sharedExamples("a help view controller") { (sharedExampleContext: @escaping SharedExampleContext) in
             var subject: HelpViewController!
             
             beforeEach {
