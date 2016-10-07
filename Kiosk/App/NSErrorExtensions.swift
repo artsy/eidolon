@@ -9,7 +9,7 @@ extension NSError {
             return "\(error.message) - \(error.detail) + \(error.detail)" as NSString
         } else if let response = userInfo["data"] as? Response {
             let stringData = NSString(data: response.data, encoding: String.Encoding.utf8.rawValue)
-            return "Status Code: \(response.statusCode), Data Length: \(response.data.length), String Data: \(stringData)" as NSString
+            return "Status Code: \(response.statusCode), Data Length: \(response.data.count), String Data: \(stringData)" as NSString
         }
 
         return "\(userInfo)" as NSString

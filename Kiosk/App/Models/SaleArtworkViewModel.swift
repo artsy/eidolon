@@ -115,7 +115,7 @@ extension SaleArtworkViewModel {
 
     func forSale() -> Observable<Bool> {
         return saleArtwork.artwork.rx.observe(String.self, "soldStatus").filterNil().map { status in
-            return Artwork.SoldStatus.fromString(status) == .NotSold
+            return Artwork.SoldStatus.fromString(status) == .notSold
         }
 
     }
@@ -123,7 +123,7 @@ extension SaleArtworkViewModel {
     func currentBid(prefix: String = "", missingPrefix: String = "") -> Observable<String> {
         return saleArtwork.rx.observe(NSNumber.self, "highestBidCents").map { [weak self] highestBidCents in
             if let currentBidCents = highestBidCents as? Int {
-                return "\(prefix)\(NumberFormatter.currencyStringForCents(currentBidCents as NSNumber!))"
+                return "\(prefix)\(NumberFormatter.currencyString(forCents: currentBidCents as NSNumber!))"
             } else {
                 return "\(missingPrefix)\(NumberFormatter.currencyString(forCents: self?.saleArtwork.openingBidCents ?? 0))"
             }

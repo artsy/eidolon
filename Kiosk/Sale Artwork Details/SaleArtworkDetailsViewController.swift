@@ -304,13 +304,12 @@ class SaleArtworkDetailsViewController: UIViewController {
                 imageView.backgroundColor = .artsyGrayLight()
             }
 
-            imageView.sd_setImage(with: image.fullsizeURL(), placeholderImage: thumbnailImage, completed: { (image, _, _, _) in
+            imageView.sd_setImage(with: image.fullsizeURL(), placeholderImage: thumbnailImage, options: [], completed: { (image, _, _, _) in
                 // If the image was successfully downloaded, make sure we aren't still displaying grey.
                 if image != nil {
-                    imageView.backgroundColor = .clear()
+                    imageView.backgroundColor = .clear
                 }
             })
-
 
             let heightConstraintNumber = { () -> CGFloat in
                 if let aspectRatio = image.aspectRatio {

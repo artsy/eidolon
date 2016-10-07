@@ -63,7 +63,7 @@ class ConfirmYourBidViewController: UIViewController {
         //   if so forward to PIN input VC
         //   else send to enter email
 
-        let auctionID = nav.auctionID
+        let auctionID = nav.auctionID ?? ""
         
         let numberIsZeroLength = number.map(isZeroLength)
 
@@ -85,12 +85,12 @@ class ConfirmYourBidViewController: UIViewController {
 
                     var response: Moya.Response?
 
-                    if case .StatusCode(let receivedResponse)? = error as? Moya.Error {
+                    if case .statusCode(let receivedResponse)? = error as? Moya.Error {
                         response = receivedResponse
                     }
 
-                    if let responseURL = response?.response?.URL?.absoluteString
-                        , responseURL.containsString("v1/bidder/") {
+                    if let responseURL = response?.response?.url?.absoluteString
+                        , responseURL.contains("v1/bidder/") {
 
                         me.performSegue(.ConfirmyourBidBidderFound)
                     } else {

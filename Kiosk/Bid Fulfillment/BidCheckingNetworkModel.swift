@@ -60,7 +60,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
                     }
                     .catchErrorJustReturn()
                     .flatMap { _ -> Observable<Void> in
-                        return self.checkForMaxBid(provider)
+                        return self.checkForMaxBid(provider: provider)
                 }
             } .doOnNext { _ in
                 self.bidIsResolved.value = true

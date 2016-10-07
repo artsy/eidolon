@@ -130,9 +130,8 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         viewModel.flatMapTo(SaleArtworkViewModel.forSale)
             .doOnNext { [weak bidButton] forSale in
                 // Button titles aren't KVO-able
-                bidButton?.setTitle((forSale ? "BID" : "SOLD"), forState: .Normal)
+                bidButton?.setTitle((forSale ? "BID" : "SOLD"), for: .normal)
             }
-            .mapToOptional()
             .bindTo(bidButton.rx.enabled)
             .addDisposableTo(reuseBag)
 

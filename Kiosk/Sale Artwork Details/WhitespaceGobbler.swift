@@ -14,7 +14,7 @@ class WhitespaceGobbler: UIView {
 
         setContentHuggingPriority(50, for: .vertical)
         setContentHuggingPriority(50, for: .horizontal)
-        backgroundColor = .clear()
+        backgroundColor = .clear
     }
 
     override var intrinsicContentSize : CGSize {

@@ -82,7 +82,7 @@ class ConfirmYourBidPINViewController: UIViewController {
                                 // We must check for a CC, and collect one if necessary.
                                 return me
                                     .checkForCreditCard(loggedInProvider: provider)
-                                    .doOnNext(me.gotCards)
+                                    .doOnNext(me.got)
                                     .map(void)
                             }
                         }
@@ -140,7 +140,7 @@ class ConfirmYourBidPINViewController: UIViewController {
 
     func checkForCreditCard(loggedInProvider: AuthorizedNetworking) -> Observable<[Card]> {
         let endpoint = ArtsyAuthenticatedAPI.myCreditCards
-        return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapToObjectArray(Card.self)
+        return loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapTo(arrayOf: Card.self)
     }
 
     func got(cards: [Card]) {

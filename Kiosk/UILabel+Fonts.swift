@@ -7,9 +7,10 @@ extension UILabel {
 
     func makeSubstringBold(text: String) {
         let attributedText = self.attributedText!.mutableCopy() as! NSMutableAttributedString
+        let nsString = text as NSString
 
-        let range: Range! = (self.text ?? NSString() as String).range(of: text)
-        if range.location != NSNotFound {
+        // From http://stackoverflow.com/a/27041376/516359
+        nsString.enumerateSubstrings(in: NSMakeRange(0, nsString.length), options: []) { (_, range, _, _) in
             attributedText.setAttributes([NSFontAttributeName: UIFont.serifSemiBoldFont(withSize: self.font.pointSize)], range: range)
         }
 
@@ -22,9 +23,10 @@ extension UILabel {
 
     func makeSubstringItalic(text: String) {
         let attributedText = self.attributedText!.mutableCopy() as! NSMutableAttributedString
+        let nsString = text as NSString
 
-        let range: Range! = (self.text ?? NSString() as String).range(of: text)
-        if range.location != NSNotFound {
+        // From http://stackoverflow.com/a/27041376/516359
+        nsString.enumerateSubstrings(in: NSMakeRange(0, nsString.length), options: []) { (_, range, _, _) in
             attributedText.setAttributes([NSFontAttributeName: UIFont.serifItalicFont(withSize: self.font.pointSize)], range: range)
         }
 

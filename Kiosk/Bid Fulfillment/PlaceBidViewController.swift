@@ -80,6 +80,9 @@ class PlaceBidViewController: UIViewController {
             bidDollars
                 .map { $0 * 100 }
                 .takeUntil(viewWillDisappear)
+                .map { bid in
+                    return bid as NSNumber?
+                }
                 .bindTo(nav.bidDetails.bidAmountCents)
                 .addDisposableTo(rx_disposeBag)
 
@@ -109,12 +112,9 @@ class PlaceBidViewController: UIViewController {
                     .bindTo(nextBidAmountLabel.rx.text)
                     .addDisposableTo(rx_disposeBag)
 
-
-                [bidDollars, minimumNextBid]
-                    .combineLatest { ints in
+                Observable.combineLatest([bidDollars, minimumNextBid], { ints  in
                         return (ints[0]) * 100 >= (ints[1])
-                    }
-                    .mapToOptional()
+                    })
                     .bindTo(bidButton.rx.enabled)
                     .addDisposableTo(rx_disposeBag)
 
@@ -136,7 +136,7 @@ class PlaceBidViewController: UIViewController {
                     detailsStackView.addSubview(lotNumberLabel, withTopMargin: "10", sideMargin: "0")
                     saleArtwork.viewModel
                         .lotNumber()
-                        .filterNil()
+                        .filterNilKeepOptional()
                         .takeUntil(viewWillDisappear)
                         .bindTo(lotNumberLabel.rx.text)
                         .addDisposableTo(rx_disposeBag)
@@ -274,7 +274,7 @@ func dollarsToCurrencyString(_ dollars: Int) -> String {
     let formatter = NumberFormatter()
     formatter.locale = Locale(identifier: "en_US")
     formatter.numberStyle = .decimal
-    return formatter.string(from: NSNumber(dollars)) ?? ""
+    return formatter.string(from: dollars as NSNumber) ?? ""
 }
 
 func toNextBidString(_ cents: Int) -> String {
