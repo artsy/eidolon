@@ -1,7 +1,11 @@
 upcoming:
-- Updates certificate. [ash]
 
 releases:
+- version: 5.2.0
+  date: October 07 2016
+  notes:
+  - Updates certificate. [ash]
+
 - version: 5.1.4
   date: September 08 2016
   notes:
@@ -357,6 +361,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
