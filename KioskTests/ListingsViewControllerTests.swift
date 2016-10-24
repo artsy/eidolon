@@ -149,7 +149,7 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
 
     func presentModalForSaleArtworkAtIndexPath(indexPath: NSIndexPath) { }
     func imageAspectRatioForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> CGFloat? { return nil }
-    func hasEstiamteForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> Bool {
+    func hasEstimateForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> Bool {
         return hasEstimate;
     }
 

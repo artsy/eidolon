@@ -17,8 +17,6 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         self.numberOfBidsLabel.alignTrailingEdgeWithView(view, predicate: "0")
         return view
     }()
-    
-    private lazy var cellSubviews: [UIView] = [self.stackView]
 
     private var artworkImageViewHeightConstraint: NSLayoutConstraint?
 
