@@ -18,20 +18,19 @@ extension SaleArtworkViewModel {
     // MARK: Computed values we don't expect to ever change.
 
     var estimateString: String {
-        // Default to estimateCents
-        if let estimateCents = saleArtwork.estimateCents {
+        switch (saleArtwork.estimateCents, saleArtwork.lowEstimateCents, saleArtwork.highEstimateCents) {
+        // Default to estimateCents.
+        case (.Some(let estimateCents), _, _):
             let dollars = NSNumberFormatter.currencyStringForCents(estimateCents)
             return "Estimate: \(dollars)"
-        }
 
-        // Try to extract non-nil low/high estimates. Return a default otherwise.
-        switch (saleArtwork.lowEstimateCents, saleArtwork.highEstimateCents) {
-        case let (.Some(lowCents), .Some(highCents)):
+        // Try to extract non-nil low/high estimates.
+        case (_, .Some(let lowCents), .Some(let highCents)):
             let lowDollars = NSNumberFormatter.currencyStringForCents(lowCents)
             let highDollars = NSNumberFormatter.currencyStringForCents(highCents)
             return "Estimate: \(lowDollars)–\(highDollars)"
-        default:
-            return "No Estimate"
+
+        default: return ""
         }
     }
 

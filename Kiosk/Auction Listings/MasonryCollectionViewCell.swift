@@ -1,4 +1,6 @@
 import UIKit
+import RxSwift
+import ORStackView
 
 let MasonryCollectionViewCellWidth: CGFloat = 254
 
@@ -15,54 +17,59 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         self.numberOfBidsLabel.alignTrailingEdgeWithView(view, predicate: "0")
         return view
     }()
-    
-    private lazy var cellSubviews: [UIView] = [self.artworkImageView, self.lotNumberLabel, self.artistNameLabel, self.artworkTitleLabel, self.estimateLabel, self.bidView, self.bidButton, self.moreInfoLabel]
 
     private var artworkImageViewHeightConstraint: NSLayoutConstraint?
+
+    private let stackView = ORTagBasedAutoStackView()
     
     override func setup() {
         super.setup()
         
         contentView.constrainWidth("\(MasonryCollectionViewCellWidth)")
-        
-        // Add subviews
-        for subview in cellSubviews {
-            self.contentView.addSubview(subview)
-            subview.alignLeading("0", trailing: "0", toView: self.contentView)
+        contentView.addSubview(stackView)
+        stackView.alignToView(contentView)
+
+        let whitespaceGobbler = WhitespaceGobbler()
+
+        let stackViewSubviews = [artworkImageView, lotNumberLabel, artistNameLabel, artworkTitleLabel, estimateLabel, bidView, bidButton, moreInfoLabel, whitespaceGobbler]
+        for (index, subview) in stackViewSubviews.enumerate() {
+            subview.tag = index
         }
-        
-        // Constrain subviews
-        artworkImageView.alignTop("0", bottom: nil, toView: contentView)
-        let lotNumberTopConstraint = lotNumberLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkImageView, predicate: "20").first as! NSLayoutConstraint
-        let artistNameTopConstraint = artistNameLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: lotNumberLabel, predicate: "10").first as! NSLayoutConstraint
+
+        stackView.addSubview(artworkImageView, withTopMargin: "0", sideMargin: "0")
+        stackView.addSubview(lotNumberLabel, withTopMargin: "20", sideMargin: "0")
+        stackView.addSubview(artistNameLabel, withTopMargin: "20", sideMargin: "0")
+        stackView.addSubview(artworkTitleLabel, withTopMargin: "10", sideMargin: "0")
+        stackView.addSubview(estimateLabel, withTopMargin: "10", sideMargin: "0")
+        stackView.addSubview(bidView, withTopMargin: "13", sideMargin: "0")
+        stackView.addSubview(bidButton, withTopMargin: "13", sideMargin: "0")
+        stackView.addSubview(moreInfoLabel, withTopMargin: "0", sideMargin: "0")
+        stackView.addSubview(whitespaceGobbler, withTopMargin: "0", sideMargin: "0")
+
         artistNameLabel.constrainHeight("20")
-        artworkTitleLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artistNameLabel, predicate: "10")
         artworkTitleLabel.constrainHeight("16")
-        estimateLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: artworkTitleLabel, predicate: "10")
         estimateLabel.constrainHeight("16")
-        bidView.alignAttribute(.Top, toAttribute: .Bottom, ofView: estimateLabel, predicate: "13")
-        bidButton.alignAttribute(.Top, toAttribute: .Bottom, ofView: currentBidLabel, predicate: "13")
-        moreInfoLabel.alignAttribute(.Top, toAttribute: .Bottom, ofView: bidButton, predicate: "0")
+
         moreInfoLabel.constrainHeight("44")
-        moreInfoLabel.alignAttribute(.Bottom, toAttribute: .Bottom, ofView: contentView, predicate: "12")
 
         viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
-            .subscribeNext { (lotNumber)in
-                switch lotNumber {
-                case .Some(let text) where text.isEmpty:
-                    fallthrough
-                case .None:
-                    lotNumberTopConstraint.constant = 0
-                    artistNameTopConstraint.constant = 20
-                default:
-                    lotNumberTopConstraint.constant = 20
-                    artistNameTopConstraint.constant = 10
-                }
-            }
+            .map { $0.isNilOrEmpty }
+            .subscribeNext(removeLabelWhenEmpty(lotNumberLabel, topMargin: "20"))
             .addDisposableTo(rx_disposeBag)
 
-        // Bind subviews
+        viewModel
+            .map { $0.estimateString }
+            .map { $0.isEmpty }
+            .subscribeNext(removeLabelWhenEmpty(estimateLabel, topMargin: "10"))
+            .addDisposableTo(rx_disposeBag)
 
+        viewModel
+            .map { $0.artistName }
+            .map { $0.isNilOrEmpty }
+            .subscribeNext(removeLabelWhenEmpty(artistNameLabel, topMargin: "20"))
+            .addDisposableTo(rx_disposeBag)
+
+        // Binds the imageView to always be the correct aspect ratio
         viewModel.subscribeNext { [weak self] viewModel in
                 if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
                     self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
@@ -78,26 +85,38 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         super.layoutSubviews()
         bidView.drawTopDottedBorderWithColor(.artsyMediumGrey())
     }
+
+    func removeLabelWhenEmpty(label: UIView, topMargin: String) -> (Bool) -> Void {
+        return { [weak self] isEmpty in
+            guard let `self` = self else { return }
+            if isEmpty {
+                self.stackView.removeSubview(label)
+            } else {
+                self.stackView.addSubview(label, withTopMargin: topMargin, sideMargin: "0")
+            }
+        }
+    }
 }
 
 extension MasonryCollectionViewCell {
-    class func heightForCellWithImageAspectRatio(aspectRatio: CGFloat?) -> CGFloat {
+    class func heightForCellWithImageAspectRatio(aspectRatio: CGFloat?, hasEstimate: Bool) -> CGFloat {
         let imageHeight = heightForImageWithAspectRatio(aspectRatio)
+        let estimateHeight =
+            16 + // estimate
+            13   // padding
         let remainingHeight =
             20 + // padding
             20 + // artist name
             10 + // padding
             16 + // artwork name
             10 + // padding
-            16 + // estimate
-            13 + // padding
             13 + // padding
             16 + // bid
             13 + // padding
             44 + // more info button
             12   // padding
         
-        return imageHeight + ButtonHeight + CGFloat(remainingHeight)
+        return imageHeight + ButtonHeight + CGFloat(remainingHeight) + CGFloat(hasEstimate ? estimateHeight : 0)
     }
 }
 

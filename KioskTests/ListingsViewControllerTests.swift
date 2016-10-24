@@ -119,6 +119,7 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
     var pageSize = 10
     var logSync: (NSDate) -> Void = { _ in}
     var numberOfSaleArtworks = 10
+    var hasEstimate = false
 
     var showSpinner: Observable<Bool>! = Observable.just(false)
     var gridSelected: Observable<Bool>! {
@@ -148,6 +149,9 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
 
     func presentModalForSaleArtworkAtIndexPath(indexPath: NSIndexPath) { }
     func imageAspectRatioForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> CGFloat? { return nil }
+    func hasEstimateForSaleArtworkAtIndexPath(indexPath: NSIndexPath) -> Bool {
+        return hasEstimate;
+    }
 
     // Testing values
     var lotNumber: Int?
