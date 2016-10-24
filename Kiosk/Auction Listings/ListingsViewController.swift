@@ -191,7 +191,9 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: ARCollectionViewMasonryLayout!, variableDimensionForItemAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return MasonryCollectionViewCell.heightForCellWithImageAspectRatio(viewModel.imageAspectRatioForSaleArtworkAtIndexPath(indexPath))
+        let aspectRatio = viewModel.imageAspectRatioForSaleArtworkAtIndexPath(indexPath)
+        let hasEstimate = viewModel.hasEstiamteForSaleArtworkAtIndexPath(indexPath)
+        return MasonryCollectionViewCell.heightForCellWithImageAspectRatio(aspectRatio, hasEstimate: hasEstimate)
     }
 }
 

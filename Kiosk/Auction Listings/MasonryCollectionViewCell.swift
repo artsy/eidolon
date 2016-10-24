@@ -1,4 +1,5 @@
 import UIKit
+import RxSwift
 
 let MasonryCollectionViewCellWidth: CGFloat = 254
 
@@ -81,23 +82,24 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
 }
 
 extension MasonryCollectionViewCell {
-    class func heightForCellWithImageAspectRatio(aspectRatio: CGFloat?) -> CGFloat {
+    class func heightForCellWithImageAspectRatio(aspectRatio: CGFloat?, hasEstimate: Bool) -> CGFloat {
         let imageHeight = heightForImageWithAspectRatio(aspectRatio)
+        let estimateHeight =
+            16 + // estimate
+            13   // padding
         let remainingHeight =
             20 + // padding
             20 + // artist name
             10 + // padding
             16 + // artwork name
             10 + // padding
-            16 + // estimate
-            13 + // padding
             13 + // padding
             16 + // bid
             13 + // padding
             44 + // more info button
             12   // padding
         
-        return imageHeight + ButtonHeight + CGFloat(remainingHeight)
+        return imageHeight + ButtonHeight + CGFloat(remainingHeight) + CGFloat(hasEstimate ? estimateHeight : 0)
     }
 }
 

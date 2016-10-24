@@ -28,7 +28,7 @@ class SaleArtworkTests: QuickSpec {
 
         describe("estimates") {
             it("gives no estimtates when no estimates present") {
-                expect(saleArtwork.viewModel.estimateString) == "No Estimate"
+                expect(saleArtwork.viewModel.estimateString) == ""
             }
             
             it("gives estimtate range when low and high are present") {
@@ -51,12 +51,12 @@ class SaleArtworkTests: QuickSpec {
             
             it("gives no estimate if only high is present") {
                 saleArtwork.highEstimateCents = 100_00
-                expect(saleArtwork.viewModel.estimateString) == "No Estimate"
+                expect(saleArtwork.viewModel.estimateString) == ""
             }
 
             it("gives no estimate if only low is present") {
                 saleArtwork.lowEstimateCents = 100_00
-                expect(saleArtwork.viewModel.estimateString) == "No Estimate"
+                expect(saleArtwork.viewModel.estimateString) == ""
             }
 
             it("indicates that an artwork is not for sale") {
