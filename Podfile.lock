@@ -182,7 +182,7 @@ SPEC CHECKSUMS:
   NSObject+Rx: 552d0a5bb78087b0faf9f8a066148577f1231426
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
   Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
-  Reachability: 2fc2badcac191cd1a15044bc7fe45aa96c499ece
+  Reachability: 5b69def55ffa04d6f9425a6da1f47338b60557b2
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   RxBlocking: a95a10ed54eb5d116f6c9a87047ff671e181d07b
   RxCocoa: b0ebd70b4f7450bdb3c8987b122f8fd568dc1e2f
