@@ -174,14 +174,19 @@ class SaleArtworkDetailsViewController: UIViewController {
         estimateTopBorder.tag = MetadataStackViewTag.estimateTopBorder.rawValue
         metadataStackView.addSubview(estimateTopBorder, withTopMargin: "22", sideMargin: "0")
 
-        let estimateLabel = label(.serif, tag: .estimateLabel)
-        estimateLabel.text = saleArtwork.viewModel.estimateString
-        metadataStackView.addSubview(estimateLabel, withTopMargin: "15", sideMargin: "0")
+        var estimateBottomBorder: UIView?
 
-        let estimateBottomBorder = UIView()
-        estimateBottomBorder.constrainHeight("1")
-        estimateBottomBorder.tag = MetadataStackViewTag.estimateBottomBorder.rawValue
-        metadataStackView.addSubview(estimateBottomBorder, withTopMargin: "10", sideMargin: "0")
+        let estimateString = saleArtwork.viewModel.estimateString
+        if estimateString.isNotEmpty {
+            let estimateLabel = label(.serif, tag: .estimateLabel)
+            estimateLabel.text = estimateString
+            metadataStackView.addSubview(estimateLabel, withTopMargin: "15", sideMargin: "0")
+
+            estimateBottomBorder = UIView()
+            _ = estimateBottomBorder?.constrainHeight("1")
+            estimateBottomBorder?.tag = MetadataStackViewTag.estimateBottomBorder.rawValue
+            metadataStackView.addSubview(estimateBottomBorder, withTopMargin: "10", sideMargin: "0")
+        }
 
         viewWillAppear
             .subscribe(onCompleted: { [weak estimateTopBorder, weak estimateBottomBorder] in

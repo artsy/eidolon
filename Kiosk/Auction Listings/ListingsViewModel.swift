@@ -23,6 +23,7 @@ protocol ListingsViewModelType {
     func showDetailsForSaleArtwork(atIndexPath indexPath: IndexPath)
     func presentModalForSaleArtwork(atIndexPath indexPath: IndexPath)
     func imageAspectRatioForSaleArtwork(atIndexPath indexPath: IndexPath) -> CGFloat?
+    func hasEstimateForSaleArtwork(atIndexPath indexPath: IndexPath) -> Bool
 }
 
 // Cheating here, should be in the instance but there's only ever one instance, so ¯\_(ツ)_/¯
@@ -226,6 +227,15 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
     func imageAspectRatioForSaleArtwork(atIndexPath indexPath: IndexPath) -> CGFloat? {
         return sortedSaleArtworks.value[indexPath.item].artwork.defaultImage?.aspectRatio
+    }
+
+    func hasEstimateForSaleArtwork(atIndexPath indexPath: IndexPath) -> Bool {
+        let saleArtwork = sortedSaleArtworks.value[indexPath.item]
+        switch (saleArtwork.estimateCents, saleArtwork.lowEstimateCents, saleArtwork.highEstimateCents) {
+        case (.some, _, _): return true
+        case (_, .some, .some): return true
+        default: return false
+        }
     }
 
     func showDetailsForSaleArtwork(atIndexPath indexPath: IndexPath) {
