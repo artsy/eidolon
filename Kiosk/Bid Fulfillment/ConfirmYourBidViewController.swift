@@ -50,6 +50,8 @@ class ConfirmYourBidViewController: UIViewController {
 
         let nav = self.fulfillmentNav()
 
+        bidDetailsPreviewView.bidDetails = nav.bidDetails
+
         let optionalNumber = number.mapToOptional()
 
         // We don't know if it's a paddle number or a phone number yet, so bind both ¯\_(ツ)_/¯
