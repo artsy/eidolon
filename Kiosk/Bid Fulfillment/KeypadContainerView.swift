@@ -2,6 +2,7 @@ import UIKit
 import Foundation
 import RxSwift
 import Action
+import FLKAutoLayout
 
 //@IBDesignable
 class KeypadContainerView: UIView {
@@ -26,7 +27,7 @@ class KeypadContainerView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         keypad = Bundle(for: type(of: self)).loadNibNamed("KeypadView", owner: self, options: nil)?.first as? KeypadView
         keypad.leftAction = viewModel.deleteAction
         keypad.rightAction = viewModel.clearAction
@@ -38,5 +39,7 @@ class KeypadContainerView: UIView {
         resetAction = viewModel.clearAction
         
         self.addSubview(keypad)
+
+        keypad.align(to: self)
     }
 }

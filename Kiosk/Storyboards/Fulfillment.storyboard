@@ -85,7 +85,7 @@
         <scene sceneID="wG8-BK-Gy6">
             <objects>
                 <navigationController modalPresentationStyle="formSheet" navigationBarHidden="YES" id="w8O-U4-lhE" customClass="FulfillmentNavigationController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PvK-mZ-4Jp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PvK-mZ-4Jp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -109,42 +109,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="815" height="660"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eOX-N9-Jb7" customClass="ORTagBasedAutoStackView">
-                                <frame key="frameInset" minX="65" minY="380" width="364" height="247"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOX-N9-Jb7" customClass="ORTagBasedAutoStackView">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="364" id="UL4-gx-Cbr"/>
+                                    <constraint firstAttribute="height" constant="247" id="nXR-rS-zkM"/>
+                                </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Bid:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y81-nV-kZl">
-                                <frame key="frameInset" minX="495" minY="96" width="93" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Bid:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y81-nV-kZl">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="YTn-hw-G5D"/>
+                                    <constraint firstAttribute="width" constant="93" id="qtx-0r-of1"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Bid:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sft-xL-TDA">
-                                <frame key="frameInset" minX="495" minY="150" width="70" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Bid:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sft-xL-TDA">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="3tC-Uu-bZy"/>
+                                    <constraint firstAttribute="height" constant="21" id="gdo-Y0-dTp"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Semibold" family="Adobe Garamond Pro" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$9,000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GS2-EK-4Nx">
-                                <frame key="frameInset" minX="620" minY="86" width="130" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$9,000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GS2-EK-4Nx">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="Qjg-LN-ICy"/>
+                                    <constraint firstAttribute="width" constant="130" id="tUh-uq-xdJ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="26"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Place Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpc-fW-Rbb" customClass="ARSerifLabel">
-                                <frame key="frameInset" minX="65" minY="80" width="315" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpc-fW-Rbb" customClass="ARSerifLabel">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="R8Q-ME-wyR"/>
+                                    <constraint firstAttribute="width" constant="315" id="ilL-dO-Fu9"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="38"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-U2-hie" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <frame key="frameInset" minX="495" minY="554" width="255" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-U2-hie" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="R4e-aV-laq"/>
+                                    <constraint firstAttribute="width" constant="255" id="R9Z-jy-D7b"/>
+                                </constraints>
                                 <state key="normal" title="BID">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -156,82 +168,71 @@
                                     <action selector="bidButtonTapped:" destination="ljx-1e-Xv5" eventType="touchUpInside" id="3JS-oA-Iuv"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j5m-yL-j50" customClass="UIImageViewAligned">
-                                <frame key="frameInset" minX="65" minY="190" width="364" height="182"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j5m-yL-j50" customClass="UIImageViewAligned">
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" image="YES" keyboardKey="YES"/>
                                 </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="364" id="Vm4-gD-KFN"/>
+                                    <constraint firstAttribute="height" constant="182" id="Yxc-H6-2nc"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="alignLeft" value="YES"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="alignBottom" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter $9,500 or more " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVu-PR-0oJ">
-                                <frame key="frameInset" minX="535" minY="196" width="225" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter $9,500 or more " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVu-PR-0oJ">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="225" id="5Rn-uB-ZCW"/>
+                                    <constraint firstAttribute="height" constant="21" id="kP3-FS-tu0"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UKQ-z8-PIR" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
-                                <frame key="frameInset" minX="580" minY="138" width="180" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UKQ-z8-PIR" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="JFk-UH-8dP"/>
+                                    <constraint firstAttribute="height" constant="44" id="tXT-Im-gdd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybr-6E-470" customClass="CursorView" customModule="Kiosk" customModuleProvider="target">
-                                <frame key="frameInset" minX="742" minY="146" width="18" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybr-6E-470" customClass="CursorView" customModule="Kiosk" customModuleProvider="target">
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7QN-tC-1xV"/>
+                                    <constraint firstAttribute="width" constant="18" id="L4R-To-UmK"/>
+                                </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTG-in-woi">
-                                <frame key="frameInset" minX="588" minY="138" width="27" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTG-in-woi">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="2th-Mf-LhF"/>
+                                    <constraint firstAttribute="width" constant="27" id="qun-gv-k7E"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="26"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="by bidding you accept the" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nc-B4-Sow">
-                                <frame key="frameInset" minX="483" minY="617" width="153" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="13"/>
-                                <color key="textColor" red="0.52999997138977051" green="0.52999997138977051" blue="0.52999997138977051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="and" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ic1-FX-iJp">
-                                <frame key="frameInset" minX="483" minY="633" width="23" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="13"/>
-                                <color key="textColor" red="0.52999997138977051" green="0.52999997138977051" blue="0.52999997138977051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXj-no-bvA">
-                                <frame key="frameInset" minX="617" minY="612" width="145" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="12"/>
-                                <state key="normal" title="CONDITIONS OF SALE">
-                                    <color key="titleColor" red="0.52999997138977051" green="0.52999997138977051" blue="0.52999997138977051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bld-wj-1c6">
-                                <frame key="frameInset" minX="506" minY="628" width="114" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bld-wj-1c6">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="J7U-qx-I7e"/>
+                                    <constraint firstAttribute="height" constant="32" id="SqT-XU-mv5"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="12"/>
                                 <state key="normal" title="PRIVACY POLICY">
                                     <color key="titleColor" red="0.52999997138977051" green="0.52999997138977051" blue="0.52999997138977051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A3C-Vo-Qhd" customClass="KeypadContainerView" customModule="Kiosk" customModuleProvider="target">
-                                <frame key="frameInset" minX="495" minY="252" width="255" height="282"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3C-Vo-Qhd" customClass="KeypadContainerView" customModule="Kiosk" customModuleProvider="target">
                                 <color key="backgroundColor" red="0.80967282458563539" green="0.80967282458563539" blue="0.80967282458563539" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="255" id="StA-GG-cJE"/>
+                                    <constraint firstAttribute="height" constant="282" id="UnZ-1A-ZoR"/>
+                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nd0-iI-21D" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
-                                <frame key="frameInset" minY="600" width="255" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nd0-iI-21D" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F53-tK-j9i" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                         <frame key="frameInset" minX="25" minY="8" width="199" height="57"/>
@@ -247,9 +248,80 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="255" id="jG6-0Q-Yhb"/>
+                                    <constraint firstAttribute="height" constant="60" id="wv3-df-MWz"/>
+                                </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ic1-FX-iJp">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="JTC-RL-C5T"/>
+                                    <constraint firstAttribute="width" constant="23" id="ZC6-Db-yQY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="13"/>
+                                <color key="textColor" red="0.52999997138977051" green="0.52999997138977051" blue="0.52999997138977051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXj-no-bvA">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="urH-yI-4ni"/>
+                                    <constraint firstAttribute="width" constant="145" id="wok-x7-rX9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="12"/>
+                                <state key="normal" title="CONDITIONS OF SALE">
+                                    <color key="titleColor" red="0.52999997138977051" green="0.52999997138977051" blue="0.52999997138977051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by bidding you accept the" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nc-B4-Sow">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="h3v-Ry-79Q"/>
+                                    <constraint firstAttribute="width" constant="153" id="nL5-0l-egD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="13"/>
+                                <color key="textColor" red="0.52999997138977051" green="0.52999997138977051" blue="0.52999997138977051" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XXj-no-bvA" firstAttribute="leading" secondItem="ic1-FX-iJp" secondAttribute="trailing" constant="111" id="0qb-MQ-D9b"/>
+                            <constraint firstItem="4Nc-B4-Sow" firstAttribute="top" secondItem="dT1-U2-hie" secondAttribute="bottom" constant="10" id="3Xf-EB-5zu"/>
+                            <constraint firstItem="rpc-fW-Rbb" firstAttribute="leading" secondItem="se7-qy-Xk6" secondAttribute="leadingMargin" constant="45" id="5L4-Pl-iEV"/>
+                            <constraint firstItem="Nd0-iI-21D" firstAttribute="leading" secondItem="se7-qy-Xk6" secondAttribute="leading" id="5xW-BX-K49"/>
+                            <constraint firstItem="d88-y7-TWI" firstAttribute="top" secondItem="Nd0-iI-21D" secondAttribute="bottom" id="7Ol-iP-j9R"/>
+                            <constraint firstItem="uVu-PR-0oJ" firstAttribute="leading" secondItem="j5m-yL-j50" secondAttribute="trailing" constant="106" id="8ZE-o5-BLX"/>
+                            <constraint firstItem="ic1-FX-iJp" firstAttribute="leading" secondItem="4Nc-B4-Sow" secondAttribute="leading" id="9V5-lV-cUq"/>
+                            <constraint firstItem="UKQ-z8-PIR" firstAttribute="top" secondItem="GS2-EK-4Nx" secondAttribute="bottom" constant="10" id="Bb8-ER-cpC"/>
+                            <constraint firstItem="sft-xL-TDA" firstAttribute="top" secondItem="Y81-nV-kZl" secondAttribute="bottom" constant="33" id="DUV-3e-uwW"/>
+                            <constraint firstItem="uVu-PR-0oJ" firstAttribute="top" secondItem="bTG-in-woi" secondAttribute="bottom" constant="13" id="F0h-TW-BRC"/>
+                            <constraint firstItem="Bld-wj-1c6" firstAttribute="leading" secondItem="ic1-FX-iJp" secondAttribute="trailing" id="Hir-oH-lvd"/>
+                            <constraint firstItem="A3C-Vo-Qhd" firstAttribute="top" secondItem="uVu-PR-0oJ" secondAttribute="bottom" constant="39" id="MbT-P3-cxX"/>
+                            <constraint firstItem="rpc-fW-Rbb" firstAttribute="top" secondItem="8rn-bF-UEg" secondAttribute="bottom" constant="60" id="OmP-gY-kS7"/>
+                            <constraint firstItem="Bld-wj-1c6" firstAttribute="top" secondItem="dT1-U2-hie" secondAttribute="bottom" constant="20" id="P7e-aM-KwC"/>
+                            <constraint firstItem="4Nc-B4-Sow" firstAttribute="leading" secondItem="eOX-N9-Jb7" secondAttribute="trailing" constant="66" id="QhH-qU-Z6T"/>
+                            <constraint firstItem="XXj-no-bvA" firstAttribute="top" secondItem="dT1-U2-hie" secondAttribute="bottom" constant="4" id="RLb-5D-kSe"/>
+                            <constraint firstItem="Bld-wj-1c6" firstAttribute="top" secondItem="dT1-U2-hie" secondAttribute="bottom" constant="20" id="WBh-KN-edb"/>
+                            <constraint firstItem="ic1-FX-iJp" firstAttribute="top" secondItem="dT1-U2-hie" secondAttribute="bottom" constant="26" id="WOh-83-LlM"/>
+                            <constraint firstItem="sft-xL-TDA" firstAttribute="leading" secondItem="se7-qy-Xk6" secondAttribute="leadingMargin" constant="475" id="WSu-Jf-qcG"/>
+                            <constraint firstItem="j5m-yL-j50" firstAttribute="top" secondItem="rpc-fW-Rbb" secondAttribute="bottom" constant="70" id="ZsX-uz-RjY"/>
+                            <constraint firstItem="A3C-Vo-Qhd" firstAttribute="leading" secondItem="j5m-yL-j50" secondAttribute="trailing" constant="66" id="a6i-Kv-X1X"/>
+                            <constraint firstItem="j5m-yL-j50" firstAttribute="leading" secondItem="se7-qy-Xk6" secondAttribute="leadingMargin" constant="45" id="bVp-P7-UMU"/>
+                            <constraint firstItem="GS2-EK-4Nx" firstAttribute="top" secondItem="8rn-bF-UEg" secondAttribute="bottom" constant="66" id="dLr-be-pfA"/>
+                            <constraint firstItem="Nd0-iI-21D" firstAttribute="leading" secondItem="se7-qy-Xk6" secondAttribute="leading" id="ihf-ej-ebw"/>
+                            <constraint firstItem="UKQ-z8-PIR" firstAttribute="leading" secondItem="sft-xL-TDA" secondAttribute="trailing" constant="15" id="jHt-15-jed"/>
+                            <constraint firstItem="bTG-in-woi" firstAttribute="top" secondItem="8rn-bF-UEg" secondAttribute="bottom" constant="118" id="ljo-L0-0kz"/>
+                            <constraint firstItem="Y81-nV-kZl" firstAttribute="top" secondItem="8rn-bF-UEg" secondAttribute="bottom" constant="76" id="lpS-d6-bu6"/>
+                            <constraint firstItem="GS2-EK-4Nx" firstAttribute="leading" secondItem="Y81-nV-kZl" secondAttribute="trailing" constant="32" id="mWf-wm-Tgl"/>
+                            <constraint firstItem="Y81-nV-kZl" firstAttribute="leading" secondItem="rpc-fW-Rbb" secondAttribute="trailing" constant="115" id="mpr-Q0-fJb"/>
+                            <constraint firstItem="dT1-U2-hie" firstAttribute="top" secondItem="A3C-Vo-Qhd" secondAttribute="bottom" constant="20" id="mrC-b7-UDM"/>
+                            <constraint firstItem="ybr-6E-470" firstAttribute="top" secondItem="GS2-EK-4Nx" secondAttribute="bottom" constant="18" id="nKA-Oi-0iR"/>
+                            <constraint firstItem="dT1-U2-hie" firstAttribute="leading" secondItem="eOX-N9-Jb7" secondAttribute="trailing" constant="66" id="sYO-82-Y8A"/>
+                            <constraint firstItem="bTG-in-woi" firstAttribute="leading" secondItem="sft-xL-TDA" secondAttribute="trailing" constant="23" id="uaw-Ex-zFf"/>
+                            <constraint firstItem="ybr-6E-470" firstAttribute="leading" secondItem="bTG-in-woi" secondAttribute="trailing" constant="127" id="wmD-3G-GAc"/>
+                            <constraint firstItem="eOX-N9-Jb7" firstAttribute="leading" secondItem="se7-qy-Xk6" secondAttribute="leadingMargin" constant="45" id="yhl-pO-z9L"/>
+                            <constraint firstItem="eOX-N9-Jb7" firstAttribute="top" secondItem="j5m-yL-j50" secondAttribute="bottom" constant="8" id="yzs-sM-7RF"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AXh-zM-wkr"/>
                     <connections>
@@ -952,7 +1024,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="B8h-mi-lOQ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GfH-jN-lKt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GfH-jN-lKt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
