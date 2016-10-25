@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Stripe.setDefaultPublishableKey(keys.stripeProductionPublishableKey())
         }
 
-        let mixpanelToken = AppSetup.sharedState.useStaging ? keys.mixpanelStagingAPIClientKey() : keys.mixpanelProductionAPIClientKey()
+//        let mixpanelToken = AppSetup.sharedState.useStaging ? keys.mixpanelStagingAPIClientKey() : keys.mixpanelProductionAPIClientKey()
 
         ARAnalytics.setup(withAnalytics: [
             ARHockeyAppBetaID: keys.hockeyBetaSecret(),

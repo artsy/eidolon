@@ -9,7 +9,7 @@ class AdminLogViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     @IBAction func backButtonTapped(_ sender: AnyObject) {
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
 
     func logPath() -> URL {

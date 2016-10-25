@@ -44,12 +44,12 @@ class KeypadViewModelTests: QuickSpec {
                     .reduce(Observable.empty(), { (observable, input) -> Observable<Void> in
                         observable.then { subject.addDigitAction.execute(input) }
                     })
-                    .subscribeCompleted {
+                    .subscribe(onCompleted: {
                         expect(testHarness.intValue) == 1337
                         expect(testHarness.stringValue) == "1337"
 
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
 
@@ -62,12 +62,12 @@ class KeypadViewModelTests: QuickSpec {
                     .reduce(Observable.empty(), { (observable, input) -> Observable<Void> in
                         observable.then { subject.addDigitAction.execute(input) }
                     })
-                    .subscribeCompleted {
+                    .subscribe(onCompleted: {
                         expect(testHarness.intValue) == 1333333
                         expect(testHarness.stringValue) == "1333333333337"
 
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
         }
@@ -78,12 +78,12 @@ class KeypadViewModelTests: QuickSpec {
                     .reduce(Observable.empty(), { (observable, input) -> Observable<Void> in
                         observable.then { subject.addDigitAction.execute(input) }
                     })
-                    .subscribeCompleted {
+                    .subscribe(onCompleted: {
                         expect(testHarness.intValue) == 1337
                         expect(testHarness.stringValue) == "01337"
                         
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
         }
@@ -97,12 +97,12 @@ class KeypadViewModelTests: QuickSpec {
                     .then {
                         subject.clearAction.execute()
                     }
-                    .subscribeCompleted {
+                    .subscribe(onCompleted: {
                         expect(testHarness.intValue) == 0
                         expect(testHarness.stringValue) == ""
                         
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
         }
@@ -115,12 +115,12 @@ class KeypadViewModelTests: QuickSpec {
                     })
                     .then {
                         subject.deleteAction.execute()
-                    }.subscribeCompleted {
+                    }.subscribe(onCompleted: {
                         expect(testHarness.intValue) == 13
                         expect(testHarness.stringValue) == "13"
 
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
         }

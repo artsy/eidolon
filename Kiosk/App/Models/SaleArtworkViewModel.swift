@@ -82,7 +82,7 @@ extension SaleArtworkViewModel {
             }
         }
 
-        return [numberOfBids(), reserveStatus, highestBidString].combineLatest { strings -> String in
+        return Observable.combineLatest([numberOfBids(), reserveStatus, highestBidString]) { strings -> String in
 
             let numberOfBidsString = strings[0]
             let reserveStatus = ReserveStatus.initOrDefault(strings[1])
@@ -139,7 +139,7 @@ extension SaleArtworkViewModel {
             saleArtwork.rx.observe(NSNumber.self, "highestBidCents")
         ]
 
-        return observables.combineLatest { numbers -> Int in
+        return Observable.combineLatest(observables) { numbers -> Int in
             let bidCount = (numbers[0] ?? 0) as Int
             let openingBid = numbers[1] as Int?
             let highestBid = numbers[2] as Int?

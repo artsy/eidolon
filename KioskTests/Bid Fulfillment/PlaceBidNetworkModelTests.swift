@@ -25,10 +25,10 @@ class PlaceBidNetworkModelTests: QuickSpec {
             waitUntil { done in
                 subject
                     .bid(authorizedNetworking)
-                    .subscribeCompleted {
+                    .subscribe(onCompleted: {
                         completed = true
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
 
@@ -72,9 +72,9 @@ class PlaceBidNetworkModelTests: QuickSpec {
             waitUntil { done in
                 subject
                     .bid(AuthorizedNetworking(provider: provider))
-                    .subscribeCompleted {
+                    .subscribe(onCompleted: {
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
 
@@ -100,10 +100,10 @@ class PlaceBidNetworkModelTests: QuickSpec {
                 waitUntil { done in
                     subject
                         .bid(networking)
-                        .subscribeError { receivedError in
+                        .subscribe(onError: { receivedError in
                             error = receivedError as NSError
                             done()
-                        }
+                        })
                         .addDisposableTo(disposeBag)
                 }
 
@@ -115,10 +115,10 @@ class PlaceBidNetworkModelTests: QuickSpec {
                 waitUntil { done in
                     subject
                         .bid(networking)
-                        .subscribeError { _ in
+                        .subscribe(onError: { _ in
                             errored = true
                             done()
-                        }
+                        })
                         .addDisposableTo(disposeBag)
                 }
 

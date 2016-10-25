@@ -107,8 +107,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
             }
             .mapReplace(with: 0) // To use in combineLatest, we must have an array of identically-typed observables. 
 
-        [selectedIndex, distinctSaleArtworks]
-            .combineLatest { ints in
+        Observable.combineLatest([selectedIndex, distinctSaleArtworks]) { ints in
                 // We use distinctSaleArtworks to trigger an update, but ints[1] is unused.
                 return ints[0]
             }
@@ -149,7 +148,8 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
                     nextPage = .empty()
                 }
 
-                Observable<Any>.just(object)
+                // TODO: Anything with this disposable?
+                _ = Observable<Any>.just(object)
                     .concat(nextPage)
                     .subscribe(observer)
             })

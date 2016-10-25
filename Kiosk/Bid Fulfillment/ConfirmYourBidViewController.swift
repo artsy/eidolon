@@ -33,7 +33,7 @@ class ConfirmYourBidViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let titleString = useArtsyLoginButton.title(for: useArtsyLoginButton.state)! ?? ""
+        let titleString = useArtsyLoginButton.title(for: useArtsyLoginButton.state)! 
         let attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,
             NSFontAttributeName: useArtsyLoginButton.titleLabel!.font] as [String : Any];
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)

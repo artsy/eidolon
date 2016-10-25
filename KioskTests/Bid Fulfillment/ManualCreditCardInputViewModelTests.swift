@@ -216,18 +216,18 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
 
                         subject
                             .finishedSubject?
-                            .subscribeCompleted {
+                            .subscribe(onCompleted: {
                                 finished = true
-                            }
+                            })
                             .addDisposableTo(disposeBag)
 
                         waitUntil { done in
                             subject
                                 .registerButtonCommand()
                                 .execute()
-                                .subscribeCompleted {
+                                .subscribe(onCompleted: {
                                     done()
-                                }
+                                })
                                 .addDisposableTo(disposeBag)
 
                             return
@@ -248,9 +248,9 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
 
                         subject
                             .finishedSubject?
-                            .subscribeCompleted {
+                            .subscribe(onCompleted: {
                                 finished = true
-                            }
+                            })
                             .addDisposableTo(disposeBag)
 
                         waitUntil { done in
@@ -310,7 +310,7 @@ class ManualCreditCardInputViewModelTestsStripeManager: StripeManager {
                 observer.onError(TestError.Default)
             }
 
-            return NopDisposable.instance
+            return Disposables.create()
         }
     }
 }

@@ -93,9 +93,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             let disposeBag = DisposeBag()
 
             waitUntil { done in
-                subject.action.execute().subscribeCompleted {
+                subject.action.execute().subscribe(onCompleted: {
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
 
             expect(checked).to( beTrue() )
@@ -119,9 +119,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .addDisposableTo(disposeBag)
 
             waitUntil { done in
-                subject.action.execute().subscribeCompleted {
+                subject.action.execute().subscribe(onCompleted: {
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
             
             expect(exists).to( beTrue() )
@@ -145,9 +145,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .addDisposableTo(disposeBag)
 
             waitUntil { done in
-                subject.action.execute().subscribeCompleted {
+                subject.action.execute().subscribe(onCompleted: {
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
 
             expect(exists).toNot( beNil() )
@@ -169,9 +169,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
 
             waitUntil { done in
-                subject.action.execute().subscribeCompleted {
+                subject.action.execute().subscribe(onCompleted: {
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
             
             expect(checked).to( beTrue() )
@@ -195,9 +195,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .addDisposableTo(disposeBag)
 
             waitUntil { done in
-                subject.action.execute().subscribeError { _ in
+                subject.action.execute().subscribe(onError: { _ in
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
 
             expect(errored).to( beTrue() )
@@ -234,18 +234,18 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             var completed = false
 
             finishedSubject
-                .subscribeCompleted {
+                .subscribe(onCompleted: {
                     completed = true
-                }
+                })
                 .addDisposableTo(disposeBag)
 
             let subject = self.testSubject(invocation:invocation, finishedSubject: finishedSubject)
             let disposeBag = DisposeBag()
             
             waitUntil { done in
-                subject.action.execute().subscribeCompleted {
+                subject.action.execute().subscribe(onCompleted: {
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
 
             expect(completed).to( beTrue() )
@@ -264,10 +264,10 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             waitUntil { done in
                 subject
                     .userForgotPassword()
-                    .subscribeCompleted {
+                    .subscribe(onCompleted: {
                         // do nothing – we subscribe just to force the observable to execute.
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
 

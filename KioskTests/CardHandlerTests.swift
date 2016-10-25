@@ -35,9 +35,9 @@ class CardHandlerTests: QuickSpec {
             var success = false
             self.handler
                 .cardStatus
-                .subscribeCompleted { input in
+                .subscribe(onCompleted: { input in
                     success = true
-                }
+                })
                 .addDisposableTo(disposeBag)
 
             self.handler.startSearching()
@@ -50,9 +50,9 @@ class CardHandlerTests: QuickSpec {
             var failed = false
             self.handler
                 .cardStatus
-                .subscribeError { _ in
+                .subscribe(onError: { _ in
                     failed = true
-                }
+                })
                 .addDisposableTo(disposeBag)
 
             self.handler!.startSearching()

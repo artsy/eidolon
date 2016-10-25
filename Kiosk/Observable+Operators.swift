@@ -121,15 +121,15 @@ extension Observable where Element: BooleanType {
 extension Collection where Iterator.Element: ObservableType, Iterator.Element.E: BooleanType {
 
     func combineLatestAnd() -> Observable<Bool> {
-        return combineLatest { bools -> Bool in
-            bools.reduce(true, { (memo, element) in
+        return Observable.combineLatest(self) { bools -> Bool in
+            return bools.reduce(true, { (memo, element) in
                 return memo && element.boolValue
             })
         }
     }
 
     func combineLatestOr() -> Observable<Bool> {
-        return combineLatest { bools in
+        return Observable.combineLatest(self) { bools in
             bools.reduce(false, { (memo, element) in
                 return memo || element.boolValue
             })

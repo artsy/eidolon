@@ -31,7 +31,7 @@ class RegistrationMobileViewControllerTests: QuickSpec {
             }
 
             let bidDetails = testBidDetails()
-            runLifecycleOfViewController(bidDetails)
+            _ = runLifecycleOfViewController(bidDetails)
 
             expect { runLifecycleOfViewController(bidDetails) }.toNot( raiseException() )
         }

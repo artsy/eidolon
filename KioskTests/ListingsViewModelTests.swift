@@ -55,9 +55,9 @@ class ListingsViewModelTests: QuickSpec {
             subject = ListingsViewModel(provider: provider, selectedIndex: Observable.just(0), showDetails: { _ in }, presentModal: { _ in }, pageSize: 2, logSync: { _ in}, scheduleOnBackground: testScheduleOnBackground, scheduleOnForeground: testScheduleOnForeground)
 
             waitUntil { done in
-                subject.updatedContents.take(1).subscribeCompleted {
+                subject.updatedContents.take(1).subscribe(onCompleted: {
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
 
             expect(subject.numberOfSaleArtworks) == 3
@@ -95,10 +95,10 @@ class ListingsViewModelTests: QuickSpec {
 
             // Verify that initial value is correct
             waitUntil(timeout: 5) { done in
-                subject.updatedContents.take(1).subscribeCompleted {
+                subject.updatedContents.take(1).subscribe(onCompleted: {
                     expect(subject.numberOfSaleArtworks) == 2
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
 
             // Simulate update from API, wait for sync to happen
@@ -106,10 +106,10 @@ class ListingsViewModelTests: QuickSpec {
 
             // Verify that initial value is correct
             waitUntil(timeout: 5) { done in
-                subject.updatedContents.skip(1).take(1).subscribeCompleted {
+                subject.updatedContents.skip(1).take(1).subscribe(onCompleted: {
                     expect(subject.numberOfSaleArtworks) == 5
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
         }
 
@@ -134,19 +134,19 @@ class ListingsViewModelTests: QuickSpec {
 
             // First we get our initial sync
             waitUntil { done in
-                subject.updatedContents.take(1).subscribeCompleted {
+                subject.updatedContents.take(1).subscribe(onCompleted: {
                     initialFirstLotID = subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).saleArtworkID
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
 
             // Now we reverse the lot numbers
             reverseIDs = true
             waitUntil { done in
-                subject.updatedContents.skip(1).take(1).subscribeCompleted {
+                subject.updatedContents.skip(1).take(1).subscribe(onCompleted: {
                     subsequentFirstLotID = subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).saleArtworkID
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
 
             expect(initialFirstLotID).toNot( beEmpty() )

@@ -59,8 +59,6 @@ class AdminCardTestingViewController: UIViewController {
     }
 
     @IBAction func backTapped(_ sender: AnyObject) {
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
-
-
 }

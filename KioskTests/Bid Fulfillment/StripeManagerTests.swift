@@ -38,10 +38,10 @@ class StripeManagerTests: QuickSpec {
         it("sends the correct token upon success") {
             var completed = false
             waitUntil { done in
-                subject.registerCard(digits: "", month: 0, year: 0, securityCode: "", postalCode: "").subscribeCompleted {
+                subject.registerCard(digits: "", month: 0, year: 0, securityCode: "", postalCode: "").subscribe(onCompleted: {
                     completed = true
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
 
             expect(completed) == true
@@ -52,10 +52,10 @@ class StripeManagerTests: QuickSpec {
             
             var errored = false
             waitUntil { done in
-                subject.registerCard(digits: "", month: 0, year: 0, securityCode: "", postalCode: "").subscribeError { _ in
+                subject.registerCard(digits: "", month: 0, year: 0, securityCode: "", postalCode: "").subscribe(onError: { _ in
                     errored = true
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
 
             expect(errored) == true

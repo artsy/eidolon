@@ -151,9 +151,9 @@ extension LoadingViewController {
         fulfillmentContainer()?.cancelButton.setTitle("DONE", for: .normal)
         Observable<Int>.interval(1, scheduler: MainScheduler.instance)
             .take(1)
-            .subscribeCompleted { [weak self] in
+            .subscribe(onCompleted: { [weak self] in
                 self?.performSegue(.PushtoRegisterConfirmed)
-            }
+            })
             .addDisposableTo(rx_disposeBag)
     }
 

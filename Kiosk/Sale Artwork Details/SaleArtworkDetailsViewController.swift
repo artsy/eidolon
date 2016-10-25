@@ -84,7 +84,7 @@ class SaleArtworkDetailsViewController: UIViewController {
     }
 
     @IBAction func backWasPressed(_ sender: AnyObject) {
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
 
     fileprivate func setupMetadataView() {
@@ -184,10 +184,10 @@ class SaleArtworkDetailsViewController: UIViewController {
         metadataStackView.addSubview(estimateBottomBorder, withTopMargin: "10", sideMargin: "0")
 
         viewWillAppear
-            .subscribeCompleted { [weak estimateTopBorder, weak estimateBottomBorder] in
+            .subscribe(onCompleted: { [weak estimateTopBorder, weak estimateBottomBorder] in
                 estimateTopBorder?.drawDottedBorders()
                 estimateBottomBorder?.drawDottedBorders()
-            }
+            })
             .addDisposableTo(rx_disposeBag)
 
         let hasBids = saleArtwork

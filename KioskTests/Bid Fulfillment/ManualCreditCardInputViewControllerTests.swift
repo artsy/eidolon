@@ -29,7 +29,7 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
             }
 
             let bidDetails = testBidDetails()
-            runLifecycleOfViewController(bidDetails)
+            _ = runLifecycleOfViewController(bidDetails)
 
             expect { runLifecycleOfViewController(bidDetails) }.toNot( raiseException() )
         }
@@ -75,11 +75,11 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
                     testViewModel
                         .testRegisterButtonCommand
                         .execute()
-                        .subscribeCompleted { (_) in
+                        .subscribe(onCompleted: { (_) in
 
                             expect(executed) == true
                             done()
-                        }
+                        })
                         .addDisposableTo(disposeBag)
                     
                     return
@@ -98,9 +98,9 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
                 testViewModel
                     .testRegisterButtonCommand
                     .execute()
-                    .subscribeError { (_) in
+                    .subscribe(onError: { (_) in
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
 
