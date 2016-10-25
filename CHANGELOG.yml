@@ -1,3 +1,7 @@
+- Updates app to iOS 10. [ash]
+- Updates project to Xcode 8 / Swift 3. [ash]
+- Enables compiler optimizations. [ash]
+
 upcoming:
 
 releases:
@@ -356,15 +360,3 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
-
-
-
-
-
-
-
-
-
-
-
-
