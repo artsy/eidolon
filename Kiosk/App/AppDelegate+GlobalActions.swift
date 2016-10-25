@@ -211,8 +211,10 @@ private extension AppDelegate {
         return Observable.create { observer in
             if let presentingViewController = self.helpViewController.value?.presentingViewController {
                 presentingViewController.dismiss(animated: true) {
-                    self.helpViewController.value = nil
-                    sendDispatchCompleted(to: observer)
+                    DispatchQueue.main.async {
+                        observer.onCompleted()
+                        self.helpViewController.value = nil
+                    }
                 }
             } else {
                 observer.onCompleted()
