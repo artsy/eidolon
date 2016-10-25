@@ -71,7 +71,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             let subject = self.testSubject(passwordSubject: passwordSubject.asObservable())
 
-            expect(try! subject.action.enabled.toBlocking().first()).to( beFalse() )
+            expect(try! subject.action.enabled.toBlocking().first()).toEventually( beFalse() )
         }
 
         it("disables the command when the password is empty") {
@@ -79,7 +79,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             let subject = self.testSubject(passwordSubject: passwordSubject.asObservable())
 
-            expect(try! subject.action.enabled.toBlocking().first()).to( beFalse() )
+            expect(try! subject.action.enabled.toBlocking().first()).toEventually( beFalse() )
         }
 
         it("checks for an email when executing the command") {
@@ -213,14 +213,17 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             var completed = false
 
-            subject
-                .action
-                .executing
-                .take(1)
-                .subscribe(onNext: { _ in
-                    completed = true
-                })
-                .addDisposableTo(disposeBag)
+            waitUntil { done in
+                subject
+                    .action
+                    .executing
+                    .take(1)
+                    .subscribe(onNext: { _ in
+                        completed = true
+                        done()
+                    })
+                    .addDisposableTo(disposeBag)
+            }
 
             invocation.onNext()
             

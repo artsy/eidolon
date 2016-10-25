@@ -25,13 +25,13 @@ class ImageTests: QuickSpec {
 
         it("generates a thumbnail url") {
             var image = self.image(forVersion: "large")
-            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL.self))
+            expect(image.thumbnailURL()).toNot( beNil() )
 
             image = self.image(forVersion: "medium")
-            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL.self))
+            expect(image.thumbnailURL()).toNot( beNil() )
 
             image = self.image(forVersion: "larger")
-            expect(image.thumbnailURL()).to(beAnInstanceOf(NSURL.self))
+            expect(image.thumbnailURL()).toNot( beNil() )
         }
 
         it("handles unknown image formats"){
