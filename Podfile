@@ -63,7 +63,7 @@ target 'Kiosk' do
   pod 'SwiftyJSON'
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'Moya/RxSwift', '8.0.0-beta.3'
+  pod 'Moya/RxSwift', '= 8.0.0-beta.3'
   pod 'NSObject+Rx'
   pod 'Action'
 
