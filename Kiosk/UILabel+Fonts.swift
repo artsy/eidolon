@@ -1,32 +1,30 @@
 import UIKit
 
 extension UILabel {
-    func makeSubstringsBold(text: [String]) {
-        text.forEach { self.makeSubstringBold(text: $0) }
+    func makeSubstringsBold(_ text: [String]) {
+        text.forEach { self.makeSubstringBold($0) }
     }
 
-    func makeSubstringBold(text: String) {
+    func makeSubstringBold(_ boldText: String) {
         let attributedText = self.attributedText!.mutableCopy() as! NSMutableAttributedString
-        let nsString = text as NSString
 
-        // From http://stackoverflow.com/a/27041376/516359
-        nsString.enumerateSubstrings(in: NSMakeRange(0, nsString.length), options: []) { (_, range, _, _) in
+        let range = ((self.text ?? "") as NSString).range(of: boldText)
+        if range.location != NSNotFound {
             attributedText.setAttributes([NSFontAttributeName: UIFont.serifSemiBoldFont(withSize: self.font.pointSize)], range: range)
         }
 
         self.attributedText = attributedText
     }
 
-    func makeSubstringsItalic(text: [String]) {
-        text.forEach { self.makeSubstringItalic(text: $0) }
+    func makeSubstringsItalic(_ text: [String]) {
+        text.forEach { self.makeSubstringItalic($0) }
     }
 
-    func makeSubstringItalic(text: String) {
+    func makeSubstringItalic(_ italicText: String) {
         let attributedText = self.attributedText!.mutableCopy() as! NSMutableAttributedString
-        let nsString = text as NSString
 
-        // From http://stackoverflow.com/a/27041376/516359
-        nsString.enumerateSubstrings(in: NSMakeRange(0, nsString.length), options: []) { (_, range, _, _) in
+        let range = ((self.text ?? "") as NSString).range(of: italicText)
+        if range.location != NSNotFound {
             attributedText.setAttributes([NSFontAttributeName: UIFont.serifItalicFont(withSize: self.font.pointSize)], range: range)
         }
 
@@ -35,7 +33,7 @@ extension UILabel {
 
     func setLineHeight(_ lineHeight: Int) {
         let displayText = text ?? ""
-        let attributedString = NSMutableAttributedString(string: displayText)
+        let attributedString = self.attributedText!.mutableCopy() as! NSMutableAttributedString
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = CGFloat(lineHeight)
         paragraphStyle.alignment = textAlignment

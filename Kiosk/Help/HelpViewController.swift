@@ -90,7 +90,7 @@ private extension HelpViewController {
         let bidLabel = titleLabel(tag: .bidLabel, title: "How do I place a bid?")
         
         let bidExplainLabel = wrappingSerifLabel(tag: .bidExplainLabel, text: "Enter the amount you would like to bid. You will confirm this bid in the next step. Enter your mobile number or bidder number and PIN that you received when you registered.")
-        bidExplainLabel.makeSubstringsBold(text: ["mobile number", "bidder number", "PIN"])
+        bidExplainLabel.makeSubstringsBold(["mobile number", "bidder number", "PIN"])
         
         var registerButton = blackButton(tag: .registerButton, title: "Register")
         registerButton.rx.action = registerToBidCommand(connectedToInternetOrStubbing())
@@ -98,7 +98,7 @@ private extension HelpViewController {
         let bidderDetailsLabel = titleLabel(tag: .bidderDetailsLabel, title: "What Are Bidder Details?")
         
         let bidderDetailsExplainLabel = wrappingSerifLabel(tag: .bidderDetailsExplainLabel, text: "The bidder number is how you can identify yourself to bid and see your place in bid history. The PIN is a four digit number that authenticates your bid.")
-        bidderDetailsExplainLabel.makeSubstringsBold(text: ["bidder number", "PIN"])
+        bidderDetailsExplainLabel.makeSubstringsBold(["bidder number", "PIN"])
         
         var sendDetailsButton = blackButton(tag: .bidderDetailsButton, title: "Send me my details")
         sendDetailsButton.rx.action = requestBidderDetailsCommand(connectedToInternetOrStubbing())

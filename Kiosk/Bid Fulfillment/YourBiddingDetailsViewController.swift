@@ -30,7 +30,7 @@ class YourBiddingDetailsViewController: UIViewController {
             confirmationImageView.image = image
         }
 
-        bodyLabel?.makeSubstringsBold(text: ["Bidder Number", "PIN"])
+        bodyLabel?.makeSubstringsBold(["Bidder Number", "PIN"])
 
         bidDetails
             .paddleNumber
