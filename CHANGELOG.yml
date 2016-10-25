@@ -1,4 +1,5 @@
 upcoming:
+- Removes "No Estimate" when estimates are missing. [ash]
 
 releases:
 - version: 5.2.0
