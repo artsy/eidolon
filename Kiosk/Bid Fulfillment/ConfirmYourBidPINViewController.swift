@@ -46,7 +46,7 @@ class ConfirmYourBidPINViewController: UIViewController {
         bidDetailsPreviewView.bidDetails = bidDetails
         /// verify if we can connect with number & pin
 
-        confirmButton.rx_action = CocoaAction(enabledIf: pinExists) { [weak self] _ in
+        confirmButton.rx.action = CocoaAction(enabledIf: pinExists) { [weak self] _ in
             guard let me = self else { return .empty() }
 
             var loggedInProvider: AuthorizedNetworking!

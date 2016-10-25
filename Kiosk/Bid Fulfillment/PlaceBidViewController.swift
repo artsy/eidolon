@@ -63,8 +63,8 @@ class PlaceBidViewController: UIViewController {
         currentBidTitleLabel.font = UIFont.serifSemiBoldFont(withSize: 17)
         yourBidTitleLabel.font = UIFont.serifSemiBoldFont(withSize: 17)
 
-        conditionsOfSaleButton.rx_action = showConditionsOfSaleCommand()
-        privacyPolictyButton.rx_action = showPrivacyPolicyCommand()
+        conditionsOfSaleButton.rx.action = showConditionsOfSaleCommand()
+        privacyPolictyButton.rx.action = showPrivacyPolicyCommand()
 
         bidDollars
             .bindTo(_bidDollars)
@@ -115,7 +115,7 @@ class PlaceBidViewController: UIViewController {
                 Observable.combineLatest([bidDollars, minimumNextBid], { ints  in
                         return (ints[0]) * 100 >= (ints[1])
                     })
-                    .bindTo(bidButton.rx.enabled)
+                    .bindTo(bidButton.rx.isEnabled)
                     .addDisposableTo(rx_disposeBag)
 
 
@@ -164,11 +164,11 @@ class PlaceBidViewController: UIViewController {
                     buyersPremiumLabel.text = "This work has a "
                     buyersPremiumLabel.textColor = .artsyGrayBold()
 
-                    let buyersPremiumButton = ARUnderlineButton()
+                    var buyersPremiumButton = ARUnderlineButton()
                     buyersPremiumButton.titleLabel?.font = buyersPremiumLabel.font
                     buyersPremiumButton.setTitle("buyers premium", for: .normal)
                     buyersPremiumButton.setTitleColor(.artsyGrayBold(), for: .normal)
-                    buyersPremiumButton.rx_action = showBuyersPremiumCommand()
+                    buyersPremiumButton.rx.action = showBuyersPremiumCommand()
 
                     buyersPremiumView.addSubview(buyersPremiumLabel)
                     buyersPremiumView.addSubview(buyersPremiumButton)

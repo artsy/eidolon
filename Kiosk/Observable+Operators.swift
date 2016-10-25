@@ -88,7 +88,7 @@ extension Observable {
     }
 }
 
-private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .default)
+private let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
 
 extension Observable {
     func mapReplace<T>(with value: T) -> Observable<T> {

@@ -42,22 +42,20 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         let passwordText = passwordTextField.rx.text.takeUntil(viewWillDisappear)
 
         emailText
-            .mapToOptional()
             .bindTo(nav.bidDetails.newUser.email)
             .addDisposableTo(rx_disposeBag)
 
         passwordText
-            .mapToOptional()
             .bindTo(nav.bidDetails.newUser.password)
             .addDisposableTo(rx_disposeBag)
 
-        let inputIsEmail = emailText.map(stringIsEmailAddress)
-        let passwordIsLongEnough = passwordText.map(isZeroLength).not()
+        let inputIsEmail = emailText.asObservable().replaceNil(with: "").map(stringIsEmailAddress)
+        let passwordIsLongEnough = passwordText.asObservable().replaceNil(with: "").map(isZeroLength).not()
         let formIsValid = [inputIsEmail, passwordIsLongEnough].combineLatestAnd()
 
         let provider = self.provider
 
-        confirmCredentialsButton.rx_action = CocoaAction(enabledIf: formIsValid) { [weak self] _ -> Observable<Void> in
+        confirmCredentialsButton.rx.action = CocoaAction(enabledIf: formIsValid) { [weak self] _ -> Observable<Void> in
             guard let me = self else { return .empty() }
 
             return bidDetails.authenticatedNetworking(provider: provider!)
@@ -122,9 +120,9 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
     @IBAction func forgotPasswordTapped(_ sender: AnyObject) {
         let alertController = UIAlertController(title: "Forgot Password", message: "Please enter your email address and we'll send you a reset link.", preferredStyle: .alert)
 
-        let submitAction = UIAlertAction.Action("Send", style: .default)
+        var submitAction = UIAlertAction.Action("Send", style: .default)
         let email = Variable("")
-        submitAction.rx_action = CocoaAction(enabledIf: email.asObservable().map(stringIsEmailAddress), workFactory: { () -> Observable<Void> in
+        submitAction.rx.action = CocoaAction(enabledIf: email.asObservable().map(stringIsEmailAddress), workFactory: { () -> Observable<Void> in
             let endpoint: ArtsyAPI = ArtsyAPI.lostPasswordNotification(email: email.value)
 
             return self.provider.request(endpoint)
@@ -143,6 +141,8 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
             textField
                 .rx.text
+                .asObservable()
+                .replaceNil(with: "")
                 .bindTo(email)
                 .addDisposableTo(textField.rx_disposeBag)
 

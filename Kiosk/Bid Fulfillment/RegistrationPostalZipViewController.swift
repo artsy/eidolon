@@ -6,7 +6,7 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
     let finished = PublishSubject<Void>()
 
     lazy var viewModel: GenericFormValidationViewModel = {
-        let zipCodeIsValid = self.zipCodeTextField.rx.text.map(isZeroLength).not()
+        let zipCodeIsValid = self.zipCodeTextField.rx.text.asObservable().replaceNil(with: "").map(isZeroLength).not()
         return GenericFormValidationViewModel(isValid: zipCodeIsValid, manualInvocation: self.zipCodeTextField.rx_returnKey, finishedSubject: self.finished)
     }()
 
@@ -25,12 +25,11 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
         zipCodeTextField
             .rx.text
             .asObservable()
-            .mapToOptional()
             .takeUntil(viewWillDisappear)
             .bindTo(bidDetails.newUser.zipCode)
             .addDisposableTo(rx_disposeBag)
 
-        confirmButton.rx_action = viewModel.command
+        confirmButton.rx.action = viewModel.command
 
         zipCodeTextField.becomeFirstResponder()
     }

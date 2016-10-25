@@ -18,7 +18,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let emailText = emailTextField.rx.textInput.text
+        let emailText = emailTextField.rx.textInput.text.asObservable().replaceNil(with: "")
         let inputIsEmail = emailText.map(stringIsEmailAddress)
 
         let action = CocoaAction(enabledIf: inputIsEmail) { [weak self] _ in
@@ -38,7 +38,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
                 .map(void) ?? .empty()
         }
 
-        confirmButton.rx_action = action
+        confirmButton.rx.action = action
 
         let unbind = action.executing.ignore(value: false)
 

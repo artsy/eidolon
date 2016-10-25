@@ -24,7 +24,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
 
         return RegistrationPasswordViewModel(
             provider: self.provider,
-            password: self.passwordTextField.rx.text.asObservable(),
+            password: self.passwordTextField.rx.text.asObservable().replaceNil(with: ""),
             execute: self.passwordTextField.rx_returnKey,
             completed: self.finished,
             email: email)
@@ -40,12 +40,11 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         let passwordText = passwordTextField.rx.text
         passwordText
             .asObservable()
-            .mapToOptional()
             .takeUntil(viewWillDisappear)
             .bindTo(bidDetails.newUser.password)
             .addDisposableTo(rx_disposeBag)
 
-        confirmButton.rx_action = viewModel.action
+        confirmButton.rx.action = viewModel.action
 
         viewModel
             .action
@@ -65,7 +64,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
             .addDisposableTo(rx_disposeBag)
 
 
-        forgotPasswordButton.rx_action = CocoaAction { [weak self] _ in
+        forgotPasswordButton.rx.action = CocoaAction { [weak self] _ in
             return self?
                 .viewModel
                 .userForgotPassword()

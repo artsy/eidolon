@@ -68,11 +68,11 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
 
         viewModel
             .creditCardNumberIsValid
-            .bindTo(cardConfirmButton.rx.enabled)
+            .bindTo(cardConfirmButton.rx.isEnabled)
             .addDisposableTo(rx_disposeBag)
 
         let action = viewModel.registerButtonCommand()
-        billingZipConfirmButton.rx_action = action
+        billingZipConfirmButton.rx.action = action
 
         action
             .errors // Based on errors

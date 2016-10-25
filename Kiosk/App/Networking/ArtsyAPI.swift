@@ -169,13 +169,13 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
         switch self {
         case .lostPasswordNotification,
         .createUser:
-            return .POST
+            return .post
         case .findExistingEmailRegistration:
-            return .HEAD
+            return .head
         case .bidderDetailsNotification:
-            return .PUT
+            return .put
         default:
-            return .GET
+            return .get
         }
     }
 
@@ -334,11 +334,11 @@ extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
         .registerCard,
         .registerToBid,
         .createPINForBidder:
-            return .POST
+            return .post
         case .updateMe:
-            return .PUT
+            return .put
         default:
-            return .GET
+            return .get
         }
     }
 

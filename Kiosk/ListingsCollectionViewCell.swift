@@ -133,7 +133,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
                 // Button titles aren't KVO-able
                 bidButton?.setTitle((forSale ? "BID" : "SOLD"), for: .normal)
             }
-            .bindTo(bidButton.rx.enabled)
+            .bindTo(bidButton.rx.isEnabled)
             .addDisposableTo(reuseBag)
 
         bidButton.rx.tap.subscribe(onNext: { [weak self] in

@@ -39,13 +39,13 @@ extension UIViewController {
     func emailPromptAlertController(provider: Networking) -> UIAlertController {
         let alertController = UIAlertController(title: "Send Bidder Details", message: "Enter your email address or phone number registered with Artsy and we will send your bidder number and PIN.", preferredStyle: .alert)
 
-        let ok = UIAlertAction.Action("OK", style: .default)
+        var ok = UIAlertAction.Action("OK", style: .default)
         let action = CocoaAction { _ -> Observable<Void> in
             let text = (alertController.textFields?.first)?.text ?? ""
 
             return self.retrieveBidderDetails(provider: provider, email: text)
         }
-        ok.rx_action = action
+        ok.rx.action = action
         let cancel = UIAlertAction.Action("Cancel", style: .cancel)
 
         alertController.addTextField(configurationHandler: nil)
@@ -68,8 +68,8 @@ extension UIAlertController {
         let alertController = self.init(title: "Incorrect Email", message: "Email was not recognized. You may not be registered to bid yet.", preferredStyle: .alert)
         alertController.addAction(UIAlertAction.Action("Cancel", style: .cancel))
         
-        let retryAction = UIAlertAction.Action("Retry", style: .default)
-        retryAction.rx_action = appDelegate().requestBidderDetailsCommand()
+        var retryAction = UIAlertAction.Action("Retry", style: .default)
+        retryAction.rx.action = appDelegate().requestBidderDetailsCommand()
         
         alertController.addAction(retryAction)
         

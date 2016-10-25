@@ -8,7 +8,7 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
     let finished = PublishSubject<Void>()
 
     lazy var viewModel: GenericFormValidationViewModel = {
-        let numberIsValid = self.numberTextField.rx.text.map(isZeroLength).not()
+        let numberIsValid = self.numberTextField.rx.text.asObservable().replaceNil(with: "").map(isZeroLength).not()
         return GenericFormValidationViewModel(isValid: numberIsValid, manualInvocation: self.numberTextField.rx_returnKey, finishedSubject: self.finished)
     }()
 
@@ -26,12 +26,11 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
         numberTextField
             .rx.text
             .asObservable()
-            .mapToOptional()
             .takeUntil(viewWillDisappear)
             .bindTo(bidDetails.newUser.phoneNumber)
             .addDisposableTo(rx_disposeBag)
 
-        confirmButton.rx_action = viewModel.command
+        confirmButton.rx.action = viewModel.command
 
         numberTextField.becomeFirstResponder()
     }

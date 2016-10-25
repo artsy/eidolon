@@ -26,7 +26,7 @@ protocol ListingsViewModelType {
 }
 
 // Cheating here, should be in the instance but there's only ever one instance, so ¯\_(ツ)_/¯
-private let backgroundScheduler = SerialDispatchQueueScheduler(globalConcurrentQueueQOS: .default)
+private let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
 
 class ListingsViewModel: NSObject, ListingsViewModelType {
 

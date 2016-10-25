@@ -5,12 +5,12 @@ import Action
 class KeypadView: UIView {
     var leftAction: CocoaAction? {
         didSet {
-            self.leftButton.rx_action = leftAction
+            self.leftButton.rx.action = leftAction
         }
     }
     var rightAction: CocoaAction? {
         didSet {
-            self.rightButton.rx_action = rightAction
+            self.rightButton.rx.action = rightAction
         }
     }
 

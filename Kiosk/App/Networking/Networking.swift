@@ -121,12 +121,12 @@ extension NetworkingType {
 
             // If we were given an xAccessToken, add it
             if let xAccessToken = xAccessToken {
-                endpoint = endpoint.endpointByAddingHTTPHeaderFields(["X-Access-Token": xAccessToken])
+                endpoint = endpoint.adding(httpHeaderFields: ["X-Access-Token": xAccessToken])
             }
 
             // Sign all non-XApp, non-XAuth token requests
             if target.addXAuth {
-                return endpoint.endpointByAddingHTTPHeaderFields(["X-Xapp-Token": XAppToken().token ?? ""])
+                return endpoint.adding(httpHeaderFields:["X-Xapp-Token": XAppToken().token ?? ""])
             } else {
                 return endpoint
             }

@@ -37,7 +37,7 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        registerToBidButton.rx_action = registerToBidCommand()
+        registerToBidButton.rx.action = registerToBidCommand()
 
         countdownManager.setFonts()
         countdownManager.provider = provider

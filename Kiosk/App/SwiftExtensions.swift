@@ -54,32 +54,3 @@ extension Optional where Wrapped: Occupiable {
         return !isNilOrEmpty
     }
 }
-
-// TODO: PR this into Moya
-import Moya
-
-extension Moya.Error {
-    var response: Moya.Response? {
-        switch self {
-        case .imageMapping(let response): return response
-        case .jsonMapping(let response): return response
-        case .stringMapping(let response): return response
-        case .statusCode(let response): return response
-        case .data(let response): return response
-        case .underlying: return nil
-        }
-    }
-}
-
-//// TODO: This extension shouldn't be necessary.
-//import ORStackView
-//extension ORStackView {
-//    var bottomMarginHeight: CGFloat {
-//        get {
-//            return self.lastMarginHeight
-//        }
-//        set {
-//            self.lastMarginHeight = newValue
-//        }
-//    }
-//}

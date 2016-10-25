@@ -92,25 +92,25 @@ private extension HelpViewController {
         let bidExplainLabel = wrappingSerifLabel(tag: .bidExplainLabel, text: "Enter the amount you would like to bid. You will confirm this bid in the next step. Enter your mobile number or bidder number and PIN that you received when you registered.")
         bidExplainLabel.makeSubstringsBold(text: ["mobile number", "bidder number", "PIN"])
         
-        let registerButton = blackButton(tag: .registerButton, title: "Register")
-        registerButton.rx_action = registerToBidCommand(connectedToInternetOrStubbing())
+        var registerButton = blackButton(tag: .registerButton, title: "Register")
+        registerButton.rx.action = registerToBidCommand(connectedToInternetOrStubbing())
         
         let bidderDetailsLabel = titleLabel(tag: .bidderDetailsLabel, title: "What Are Bidder Details?")
         
         let bidderDetailsExplainLabel = wrappingSerifLabel(tag: .bidderDetailsExplainLabel, text: "The bidder number is how you can identify yourself to bid and see your place in bid history. The PIN is a four digit number that authenticates your bid.")
         bidderDetailsExplainLabel.makeSubstringsBold(text: ["bidder number", "PIN"])
         
-        let sendDetailsButton = blackButton(tag: .bidderDetailsButton, title: "Send me my details")
-        sendDetailsButton.rx_action = requestBidderDetailsCommand(connectedToInternetOrStubbing())
+        var sendDetailsButton = blackButton(tag: .bidderDetailsButton, title: "Send me my details")
+        sendDetailsButton.rx.action = requestBidderDetailsCommand(connectedToInternetOrStubbing())
         
-        let conditionsButton = serifButton(tag: .conditionsOfSaleButton, title: "Conditions of Sale")
-        conditionsButton.rx_action = showConditionsOfSaleCommand()
+        var conditionsButton = serifButton(tag: .conditionsOfSaleButton, title: "Conditions of Sale")
+        conditionsButton.rx.action = showConditionsOfSaleCommand()
         
         buyersPremiumButton = serifButton(tag: .buyersPremiumButton, title: "Buyers Premium")
-        buyersPremiumButton.rx_action = showBuyersPremiumCommand()
+        buyersPremiumButton.rx.action = showBuyersPremiumCommand()
         
-        let privacyButton = serifButton(tag: .privacyPolicyButton, title: "Privacy Policy")
-        privacyButton.rx_action = showPrivacyPolicyCommand()
+        var privacyButton = serifButton(tag: .privacyPolicyButton, title: "Privacy Policy")
+        privacyButton.rx.action = showPrivacyPolicyCommand()
         
         // Add subviews
         view.addSubview(stackView)

@@ -67,7 +67,7 @@ class ConfirmYourBidViewController: UIViewController {
         
         let numberIsZeroLength = number.map(isZeroLength)
 
-        enterButton.rx_action = CocoaAction(enabledIf: numberIsZeroLength.not(), workFactory: { [weak self] _ in
+        enterButton.rx.action = CocoaAction(enabledIf: numberIsZeroLength.not(), workFactory: { [weak self] _ in
             guard let me = self else { return .empty() }
 
             let endpoint = ArtsyAPI.findBidderRegistration(auctionID: auctionID, phone: String(me._number.value))

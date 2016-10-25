@@ -26,7 +26,7 @@ extension AppDelegate {
     func setupHelpButton() {
         helpButton = MenuButton()
         helpButton.setTitle("Help", for: .normal)
-        helpButton.rx_action = helpButtonCommand()
+        helpButton.rx.action = helpButtonCommand()
         window?.addSubview(helpButton)
         helpButton.alignTop(nil, leading: nil, bottom: "-24", trailing: "-24", to: window)
         window?.layoutIfNeeded()

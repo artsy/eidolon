@@ -256,7 +256,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         saleArtwork
             .viewModel
             .forSale()
-            .bindTo(bidButton.rx.enabled)
+            .bindTo(bidButton.rx.isEnabled)
             .addDisposableTo(rx_disposeBag)
 
         bidButton.tag = MetadataStackViewTag.bidButton.rawValue
@@ -271,7 +271,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             buyersPremiumLabel.text = "This work has a "
             buyersPremiumLabel.textColor = .artsyGrayBold()
 
-            let buyersPremiumButton = ARButton()
+            var buyersPremiumButton = ARButton()
             let title = "buyers premium"
             let attributes: [String: AnyObject] = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue as AnyObject, NSFontAttributeName: buyersPremiumLabel.font ];
             let attributedTitle = NSAttributedString(string: title, attributes: attributes)
@@ -279,7 +279,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
             buyersPremiumButton.setTitleColor(.artsyGrayBold(), for: .normal)
 
-            buyersPremiumButton.rx_action = showBuyersPremiumCommand()
+            buyersPremiumButton.rx.action = showBuyersPremiumCommand()
 
             buyersPremiumView.addSubview(buyersPremiumLabel)
             buyersPremiumView.addSubview(buyersPremiumButton)

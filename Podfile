@@ -61,11 +61,11 @@ target 'Kiosk' do
 
   # Swift pods
   pod 'SwiftyJSON'
-  pod 'RxSwift', '3.0.0-beta.2'
-  pod 'RxCocoa', '3.0.0-beta.2'
-  pod 'Moya/RxSwift', '8.0.0-beta.2'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'Moya/RxSwift', '8.0.0-beta.3'
   pod 'NSObject+Rx'
-  pod 'Action', '2.0.0-beta.1'
+  pod 'Action'
 
   target 'KioskTests' do
     inherit! :search_paths
@@ -75,7 +75,7 @@ target 'Kiosk' do
     pod 'Quick'
     pod 'Nimble'
     pod 'Forgeries'
-    pod 'RxBlocking', '3.0.0-beta.2'
+    pod 'RxBlocking'
 
   end
 end
