@@ -22,10 +22,10 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
             waitUntil { done in
                 subject
                     .checkForAdminCCBypass("the-fun-sale", authorizedNetworking: networking)
-                    .subscribeNext { result in
+                    .subscribe(onNext: { result in
                         receivedResult = result
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
 
@@ -40,10 +40,10 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
             waitUntil { done in
                 subject
                     .checkForAdminCCBypass("the-fun-sale", authorizedNetworking: networking)
-                    .subscribeNext { result in
+                    .subscribe(onNext: { result in
                         receivedResult = result
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
 
@@ -58,10 +58,10 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
             waitUntil { done in
                 subject
                     .checkForAdminCCBypass("the-fun-sale", authorizedNetworking: networking)
-                    .subscribeNext { result in
+                    .subscribe(onNext: { result in
                         receivedResult = result
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
 

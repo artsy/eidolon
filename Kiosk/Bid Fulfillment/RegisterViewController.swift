@@ -53,14 +53,14 @@ class RegisterViewController: UIViewController {
             .highlightedIndex
             .asObservable()
             .distinctUntilChanged()
-            .subscribeNext { [weak self] (index) in
+            .subscribe(onNext: { [weak self] (index) in
                 if let _ = self?.fulfillmentNav() {
                     let registrationIndex = RegistrationIndex.fromInt(index)
 
                     let nextVC = self?.coordinator.viewControllerForIndex(registrationIndex)
                     self?.goToViewController(nextVC!)
                 }
-            }
+            })
             .addDisposableTo(rx_disposeBag)
 
         goToNextVC()
@@ -82,10 +82,10 @@ class RegisterViewController: UIViewController {
         if let subscribableVC = controller as? RegistrationSubController {
             subscribableVC
                 .finished
-                .subscribeCompleted { [weak self] in
+                .subscribe(onCompleted: { [weak self] in
                     self?.goToNextVC()
                     self?.flowView.update()
-                }
+                })
                 .addDisposableTo(rx_disposeBag)
         }
 

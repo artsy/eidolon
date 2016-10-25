@@ -19,9 +19,9 @@ class GenericFormValidationViewModel {
         }
 
         manualInvocation
-            .subscribeNext { [weak self] _ in
+            .subscribe(onNext: { [weak self] _ in
                 self?.command.execute()
-            }
+            })
             .addDisposableTo(disposeBag)
     }
 }

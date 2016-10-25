@@ -26,12 +26,12 @@ class StripeManagerTests: QuickSpec {
 
         it("sends the correct token upon success") {
             waitUntil { done in
-                subject.registerCard(digits: "", month: 0, year: 0, securityCode: "", postalCode: "").subscribeNext { (object) in
+                subject.registerCard(digits: "", month: 0, year: 0, securityCode: "", postalCode: "").subscribe(onNext: { (object) in
                     let token = object
 
                     expect(token.tokenId) == "12345"
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
         }
 

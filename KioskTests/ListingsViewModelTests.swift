@@ -70,10 +70,10 @@ class ListingsViewModelTests: QuickSpec {
             waitUntil(timeout: 5) { done in
                 subject.updatedContents.take(1).flatMap { _ in
                     return subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).numberOfBids().take(1)
-                }.subscribeNext { string in
+                }.subscribe(onNext: { string in
                     expect(string) == "\(initialBidCount) bids placed"
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
 
             // Simulate update from API, wait for sync to happen
@@ -81,10 +81,10 @@ class ListingsViewModelTests: QuickSpec {
 
             waitUntil(timeout: 5) { done in
                 // We skip 1 to avoid getting the existing value, and wait for the updated one when the subject syncs.
-                subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).numberOfBids().skip(1).subscribeNext { string in
+                subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).numberOfBids().skip(1).subscribe(onNext: { string in
                     expect(string) == "\(finalBidCount) bids placed"
                     done()
-                }.addDisposableTo(disposeBag)
+                }).addDisposableTo(disposeBag)
             }
         }
 

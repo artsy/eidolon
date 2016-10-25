@@ -181,9 +181,9 @@ extension LoadingViewController {
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
 
-        recognizer.rx.event.subscribeNext { [weak self] _ in
+        recognizer.rx.event.subscribe(onNext: { [weak self] _ in
             self?.closeSelf()
-        }.addDisposableTo(rx_disposeBag)
+        }).addDisposableTo(rx_disposeBag)
 
         bidConfirmationImageView.isUserInteractionEnabled = true
         bidConfirmationImageView.addGestureRecognizer(recognizer)

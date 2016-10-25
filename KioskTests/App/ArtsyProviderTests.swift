@@ -29,9 +29,9 @@ class ArtsyProviderTests: QuickSpec {
             var called = false
 
             let disposeBag = DisposeBag()
-            subject.request(ArtsyAPI.ping, defaults: defaults).subscribeNext { _ in
+            subject.request(ArtsyAPI.ping, defaults: defaults).subscribe(onNext: { _ in
                 called = true
-            }.addDisposableTo(disposeBag)
+            }).addDisposableTo(disposeBag)
 
             expect(called) == false
 

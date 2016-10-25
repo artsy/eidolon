@@ -64,9 +64,9 @@ class CardHandlerTests: QuickSpec {
 
             self.handler!
                 .cardStatus
-                .subscribeNext { (message) in
+                .subscribe(onNext: { (message) in
                     messageCount = messageCount + 1
-                }
+                })
                 .addDisposableTo(disposeBag)
 
             self.handler!.readerIsAttached()

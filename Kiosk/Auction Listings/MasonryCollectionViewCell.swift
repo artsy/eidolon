@@ -47,7 +47,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         moreInfoLabel.alignAttribute(.bottom, to: .bottom, of: contentView, predicate: "12")
 
         viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
-            .subscribeNext { (lotNumber)in
+            .subscribe(onNext: { (lotNumber)in
                 switch lotNumber {
                 case .some(let text) where text.isEmpty:
                     fallthrough
@@ -58,19 +58,19 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
                     lotNumberTopConstraint.constant = 20
                     artistNameTopConstraint.constant = 10
                 }
-            }
+            })
             .addDisposableTo(rx_disposeBag)
 
         // Bind subviews
 
-        viewModel.subscribeNext { [weak self] viewModel in
+        viewModel.subscribe(onNext: { [weak self] viewModel in
                 if let artworkImageViewHeightConstraint = self?.artworkImageViewHeightConstraint {
                     self?.artworkImageView.removeConstraint(artworkImageViewHeightConstraint)
                 }
                 let imageHeight = heightForImage(withAspectRatio: viewModel.thumbnailAspectRatio)
                 self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
                 self?.layoutIfNeeded()
-            }
+            })
             .addDisposableTo(rx_disposeBag)
     }
 

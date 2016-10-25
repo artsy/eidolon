@@ -40,10 +40,10 @@ class PlaceBidNetworkModelTests: QuickSpec {
             waitUntil { done in
                 subject
                     .bid(authorizedNetworking)
-                    .subscribeNext { id in
+                    .subscribe(onNext: { id in
                         bidderPositionID = id
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
 

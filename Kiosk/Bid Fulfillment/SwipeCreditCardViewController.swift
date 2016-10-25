@@ -129,7 +129,7 @@ private extension SwipeCreditCardViewController {
         let cardFullDigits = success ? "4242424242424242" : "4000000000000002"
 
         stripeManager.registerCard(digits: cardFullDigits, month: 04, year: 2018, securityCode: "123", postalCode: "10013")
-            .subscribeNext() { [weak self] token in
+            .subscribe(onNext: { [weak self] token in
 
                 self?.cardName.value = "Kiosk Staging CC Test"
                 self?.cardToken.value = token.tokenId
@@ -140,7 +140,7 @@ private extension SwipeCreditCardViewController {
                 }
 
                 self?.finished.onCompleted()
-            }
+            })
             .addDisposableTo(rx_disposeBag)
     }
 

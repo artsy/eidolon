@@ -31,7 +31,7 @@ extension AppDelegate {
         helpButton.alignTop(nil, leading: nil, bottom: "-24", trailing: "-24", to: window)
         window?.layoutIfNeeded()
 
-        helpIsVisisble.subscribeNext { visisble in
+        helpIsVisisble.subscribe(onNext: { visisble in
             let image: UIImage? = visisble ?  UIImage(named: "xbtn_white")?.withRenderingMode(.alwaysOriginal) : nil
             let text: String? = visisble ? nil : "HELP"
 
@@ -44,7 +44,7 @@ extension AppDelegate {
             transition.type = kCATransitionFade
             self.helpButton.layer.add(transition, forKey: "fade")
 
-        }.addDisposableTo(rx_disposeBag)
+        }).addDisposableTo(rx_disposeBag)
     }
 
     func setHelpButtonHidden(_ hidden: Bool) {

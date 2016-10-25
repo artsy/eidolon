@@ -90,9 +90,9 @@ class SaleArtworkTests: QuickSpec {
                     var reserveStatus = ""
                     saleArtwork.reserveStatus = ReserveStatus.ReserveNotMet.rawValue
 
-                    saleArtwork.viewModel.numberOfBidsWithReserve.subscribeNext { (newReserveStatus) in
+                    saleArtwork.viewModel.numberOfBidsWithReserve.subscribe(onNext: { (newReserveStatus) in
                         reserveStatus = newReserveStatus
-                    }.addDisposableTo(disposeBag)
+                    }).addDisposableTo(disposeBag)
 
                     expect(reserveStatus) == "(1 bid placed, Reserve not met)"
                 }
@@ -100,9 +100,9 @@ class SaleArtworkTests: QuickSpec {
 
                 it("sends new status when reserve status changes") {
                     var invocations = 0
-                    saleArtwork.viewModel.numberOfBidsWithReserve.subscribeNext { (newReserveStatus) in
+                    saleArtwork.viewModel.numberOfBidsWithReserve.subscribe(onNext: { (newReserveStatus) in
                         invocations += 1
-                    }.addDisposableTo(disposeBag)
+                    }).addDisposableTo(disposeBag)
                     
                     saleArtwork.reserveStatus = ReserveStatus.ReserveNotMet.rawValue
 
@@ -113,9 +113,9 @@ class SaleArtworkTests: QuickSpec {
                 it("updates reserve status when number of bids changes") {
 
                     var reserveStatus = ""
-                    saleArtwork.viewModel.numberOfBidsWithReserve.subscribeNext { (newReserveStatus) in
+                    saleArtwork.viewModel.numberOfBidsWithReserve.subscribe(onNext: { (newReserveStatus) in
                         reserveStatus = newReserveStatus
-                    }.addDisposableTo(disposeBag)
+                    }).addDisposableTo(disposeBag)
 
                     saleArtwork.bidCount = 2
 
@@ -124,9 +124,9 @@ class SaleArtworkTests: QuickSpec {
 
                 it("sends new status when number of bids changes") {
                     var invocations = 0
-                    saleArtwork.viewModel.numberOfBidsWithReserve.subscribeNext { (newReserveStatus) in
+                    saleArtwork.viewModel.numberOfBidsWithReserve.subscribe(onNext: { (newReserveStatus) in
                         invocations += 1
-                    }.addDisposableTo(disposeBag)
+                    }).addDisposableTo(disposeBag)
 
                     saleArtwork.bidCount = 2
 
@@ -136,9 +136,9 @@ class SaleArtworkTests: QuickSpec {
 
                 it("sends new status when highest bid changes") {
                     var invocations = 0
-                    saleArtwork.viewModel.numberOfBidsWithReserve.subscribeNext { (newReserveStatus) in
+                    saleArtwork.viewModel.numberOfBidsWithReserve.subscribe(onNext: { (newReserveStatus) in
                         invocations += 1
-                    }.addDisposableTo(disposeBag)
+                    }).addDisposableTo(disposeBag)
 
                     saleArtwork.highestBidCents = 1_00
 

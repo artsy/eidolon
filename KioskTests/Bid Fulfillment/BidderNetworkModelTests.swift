@@ -33,9 +33,9 @@ class BidderNetworkModelTests: QuickSpec {
             waitUntil { done in
                 subject
                     .createOrGetBidder()
-                    .subscribeNext { _ in
+                    .subscribe(onNext: { _ in
                         done()
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
         }

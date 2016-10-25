@@ -17,9 +17,9 @@ extension UIView {
 
         recognizer
             .rx.event
-            .subscribeNext { _ in
+            .subscribe(onNext: { _ in
                 closure(alertController(message, title: title))
-            }
+            })
             .addDisposableTo(rx_disposeBag)
 
         isUserInteractionEnabled = true

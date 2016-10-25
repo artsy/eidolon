@@ -96,10 +96,10 @@ class ListingsCollectionViewCell: UICollectionViewCell {
 
         viewModel.map { (viewModel) -> URL? in
                 return viewModel.thumbnailURL
-            }.subscribeNext { [weak self] url in
+            }.subscribe(onNext: { [weak self] url in
                 guard let imageView = self?.artworkImageView else { return }
                 self?.downloadImage?(url, imageView)
-            }.addDisposableTo(reuseBag)
+            }).addDisposableTo(reuseBag)
 
         viewModel.map { $0.artistName ?? "" }
             .bindTo(artistNameLabel.rx.text)
@@ -136,9 +136,9 @@ class ListingsCollectionViewCell: UICollectionViewCell {
             .bindTo(bidButton.rx.enabled)
             .addDisposableTo(reuseBag)
 
-        bidButton.rx.tap.subscribeNext { [weak self] in
+        bidButton.rx.tap.subscribe(onNext: { [weak self] in
                 self?._bidPressed.onNext(Date())
-            }
+            })
             .addDisposableTo(reuseBag)
     }
 }

@@ -31,6 +31,6 @@ class SaleArtworkZoomViewController: UIViewController {
     }
 
     @IBAction func backButtonTapped(_ sender: AnyObject) {
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
 }

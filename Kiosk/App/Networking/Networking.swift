@@ -66,13 +66,11 @@ private extension Networking {
 
                 return (token: dictionary["xapp_token"] as? String, expiry: dictionary["expires_in"] as? String)
             }
-            .doOn { event in
-                guard case RxSwift.Event.next(let element) = event else { return }
-
+            .do(onNext: { element in
                 // These two lines set the defaults values injected into appToken
                 appToken.token = element.0
                 appToken.expiry = KioskDateFormatter.fromString(element.1 ?? "")
-            }
+            })
             .map { (token, expiry) -> String? in
                 return token
             }

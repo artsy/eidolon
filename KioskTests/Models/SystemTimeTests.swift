@@ -24,10 +24,10 @@ class SystemTimeTests: QuickSpec {
                 let time = SystemTime()
                 time
                     .sync(networking)
-                    .subscribeNext { (_) in
+                    .subscribe(onNext: { (_) in
                         expect(time.inSync()) == true
                         return
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
 
@@ -35,14 +35,14 @@ class SystemTimeTests: QuickSpec {
                 let time = SystemTime()
                 time
                     .sync(networking)
-                    .subscribeNext { (_) in
+                    .subscribe(onNext: { (_) in
                         let currentYear = yearFromDate(Date())
                         let timeYear = yearFromDate(time.date())
 
                         expect(timeYear) > currentYear
                         expect(timeYear) == 2422
 
-                    }
+                    })
                     .addDisposableTo(disposeBag)
             }
         }

@@ -50,10 +50,10 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         viewModel
             .action
             .errors
-            .subscribeNext { [weak self] _ in
+            .subscribe(onNext: { [weak self] _ in
                 self?.showAuthenticationError()
                 return
-            }
+            })
             .addDisposableTo(rx_disposeBag)
 
 

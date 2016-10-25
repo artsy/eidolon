@@ -162,11 +162,11 @@ class SaleArtworkDetailsViewController: UIViewController {
         retrieveImageRights()
             .filter { imageRights -> Bool in
                 return imageRights.isNotEmpty
-            }.subscribeNext { [weak self] imageRights in
+            }.subscribe(onNext: { [weak self] imageRights in
                 let rightsLabel = label(.serif, tag: .imageRightsLabel)
                 rightsLabel.text = imageRights
                 self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
-            }
+            })
             .addDisposableTo(rx_disposeBag)
 
         let estimateTopBorder = UIView()
@@ -235,22 +235,22 @@ class SaleArtworkDetailsViewController: UIViewController {
         bidButton
             .rx.tap
             .asObservable()
-            .subscribeNext { [weak self] _ in
+            .subscribe(onNext: { [weak self] _ in
                 guard let me = self else { return }
 
                 me.bid(auctionID: me.auctionID, saleArtwork: me.saleArtwork, allowAnimations: me.allowAnimations, provider: me.provider)
-            }
+            })
             .addDisposableTo(rx_disposeBag)
 
         saleArtwork
             .viewModel
             .forSale()
-            .subscribeNext { [weak bidButton] forSale in
+            .subscribe(onNext: { [weak bidButton] forSale in
                 let forSale = forSale
 
                 let title = forSale ? "BID" : "SOLD"
                 bidButton?.setTitle(title, for: .normal)
-            }
+            })
             .addDisposableTo(rx_disposeBag)
 
         saleArtwork
@@ -329,9 +329,9 @@ class SaleArtworkDetailsViewController: UIViewController {
             recognizer
                 .rx.event
                 .asObservable()
-                .subscribeNext() { [weak self] _ in
+                .subscribe(onNext: { [weak self] _ in
                      self?.performSegue(.ZoomIntoArtwork)
-                }
+                })
                 .addDisposableTo(rx_disposeBag)
         }
     }
@@ -357,11 +357,11 @@ class SaleArtworkDetailsViewController: UIViewController {
 
             layout?
                 .take(1)
-                .subscribeNext { [weak label] (_) in
+                .subscribe(onNext: { [weak label] (_) in
                     if let label = label {
                         label.preferredMaxLayoutWidth = label.frame.width
                     }
-                }
+                })
                 .addDisposableTo(rx_disposeBag)
 
             return label
@@ -390,11 +390,11 @@ class SaleArtworkDetailsViewController: UIViewController {
         retrieveAdditionalInfo()
             .filter { info in
                 return info.isNotEmpty
-            }.subscribeNext { [weak self] info in
+            }.subscribe(onNext: { [weak self] info in
                 additionalInfoLabel.attributedText = MarkdownParser().attributedString(fromMarkdownString: info)
                 self?.view.setNeedsLayout()
                 self?.view.layoutIfNeeded()
-            }
+            })
             .addDisposableTo(rx_disposeBag)
 
         if let artist = artist() {
@@ -402,7 +402,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                 .filter { blurb in
                     return blurb.isNotEmpty
                 }
-                .subscribeNext { [weak self] blurb in
+                .subscribe(onNext: { [weak self] blurb in
                     guard let me = self else { return }
 
                     let aboutArtistHeaderLabel = label(.header)
@@ -412,7 +412,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                     let aboutAristLabel = label(.body, layout: me.layoutSubviews)
                     aboutAristLabel.attributedText = MarkdownParser().attributedString(fromMarkdownString: blurb)
                     me.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "40")
-                }
+                })
                 .addDisposableTo(rx_disposeBag)
         }
     }

@@ -15,10 +15,10 @@ class ListingsCountdownManager: NSObject {
             time.sync(provider)
                 .dispatchAsyncMainScheduler()
                 .take(1)
-                .subscribeNext { [weak self] (_) in
+                .subscribe(onNext: { [weak self] (_) in
                     self?.startTimer()
                     self?.setLabelsHidden(false)
-                }
+                })
                 .addDisposableTo(rx_disposeBag)
         }
     }

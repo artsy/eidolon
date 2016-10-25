@@ -42,13 +42,13 @@ class BidDetailsPreviewView: UIView {
             .take(1)
 
         artwork
-            .subscribeNext { [weak self] artwork in
+            .subscribe(onNext: { [weak self] artwork in
                 if let url = artwork?.defaultImage?.thumbnailURL() {
                     self?.bidDetails?.setImage(url, self!.artworkImageView)
                 } else {
                     self?.artworkImageView.image = nil
                 }
-            }
+            })
             .addDisposableTo(rx_disposeBag)
 
         artwork
@@ -80,7 +80,7 @@ class BidDetailsPreviewView: UIView {
             .map { bidDetails in
                 guard let cents = bidDetails.bidAmountCents.value else { return "" }
 
-                return "Your bid: " + NumberFormatter.currencyString(forDollarCents: cents) ?? ""
+                return "Your bid: " + NumberFormatter.currencyString(forDollarCents: cents) 
             }
             .bindTo(currentBidPriceLabel.rx.text)
             .addDisposableTo(rx_disposeBag)

@@ -70,33 +70,21 @@ extension Observable where Element: OptionalType {
 // TODO: Added in new RxSwift?
 extension Observable {
     func doOnNext(_ closure: @escaping (Element) -> Void) -> Observable<Element> {
-        return doOn { (event: Event) in
-            switch event {
-            case .next(let value):
-                closure(value)
-            default: break
-            }
-        }
+        return self.do(onNext: { (element) in
+            closure(element)
+        })
     }
 
     func doOnCompleted(_ closure: @escaping () -> Void) -> Observable<Element> {
-        return doOn { (event: Event) in
-            switch event {
-            case .completed:
-                closure()
-            default: break
-            }
-        }
+        return self.do(onCompleted: {
+            closure()
+        })
     }
 
     func doOnError(_ closure: @escaping (Error) -> Void) -> Observable<Element> {
-        return doOn { (event: Event) in
-            switch event {
-            case .error(let error):
-                closure(error)
-            default: break
-            }
-        }
+        return self.do(onError: { (error) in
+            closure(error)
+        })
     }
 }
 

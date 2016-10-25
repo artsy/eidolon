@@ -21,7 +21,7 @@ class ChooseAuctionViewController: UIViewController {
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .mapTo(arrayOf: Sale.self)
-            .subscribeNext { activeSales in
+            .subscribe(onNext: { activeSales in
                 self.auctions = activeSales
 
                 for i in 0 ..< self.auctions.count {
@@ -32,18 +32,18 @@ class ChooseAuctionViewController: UIViewController {
                     button.setTitle(title, for: .normal)
                     button.setTitleColor(.black, for: .normal)
                     button.tag = i
-                    button.rx.tap.subscribeNext { (_) in
+                    button.rx.tap.subscribe(onNext: { (_) in
                         let defaults = UserDefaults.standard
                         defaults.set(sale.id, forKey: "KioskAuctionID")
                         defaults.synchronize()
                         exit(1)
-                        }
+                        })
                         .addDisposableTo(self.rx_disposeBag)
 
                     self.stackScrollView.addSubview(button, withTopMargin: "12", sideMargin: "0")
                     button.constrainHeight("50")
                 }
-            }
+            })
             .addDisposableTo(rx_disposeBag)
         
     }

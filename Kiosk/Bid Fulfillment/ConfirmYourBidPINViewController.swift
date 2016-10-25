@@ -124,11 +124,11 @@ class ConfirmYourBidPINViewController: UIViewController {
 
         provider.request(endpoint)
             .filterSuccessfulStatusCodes()
-            .subscribeNext { _ in
+            .subscribe(onNext: { _ in
 
                 // Necessary to subscribe to the actual observable. This should be in a CocoaAction of the button, instead.
                 logger.log("Sent forgot PIN request")
-            }
+            })
             .addDisposableTo(rx_disposeBag)
     }
 

@@ -113,9 +113,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             subject
                 .emailExists
-                .subscribeNext { (object) in
+                .subscribe(onNext: { (object) in
                     exists = object
-                }
+                })
                 .addDisposableTo(disposeBag)
 
             waitUntil { done in
@@ -139,9 +139,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
             subject
                 .emailExists
-                .subscribeNext { (object) in
+                .subscribe(onNext: { (object) in
                     exists = object
-                }
+                })
                 .addDisposableTo(disposeBag)
 
             waitUntil { done in
@@ -189,9 +189,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             subject
                 .action
                 .errors
-                .subscribeNext { _ in
+                .subscribe(onNext: { _ in
                     errored = true
-                }
+                })
                 .addDisposableTo(disposeBag)
 
             waitUntil { done in
@@ -217,9 +217,9 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .action
                 .executing
                 .take(1)
-                .subscribeNext { _ in
+                .subscribe(onNext: { _ in
                     completed = true
-                }
+                })
                 .addDisposableTo(disposeBag)
 
             invocation.onNext()

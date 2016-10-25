@@ -135,7 +135,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
         return Observable.create { [weak self] observer in
             guard let me = self else { return Disposables.create() }
 
-            return me.listingsRequest(forPage: page).subscribeNext { object in
+            return me.listingsRequest(forPage: page).subscribe(onNext: { object in
                 guard let array = object as? Array<AnyObject> else { return }
                 guard let me = self else { return }
 
@@ -152,7 +152,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
                 Observable<Any>.just(object)
                     .concat(nextPage)
                     .subscribe(observer)
-            }
+            })
         }
     }
 

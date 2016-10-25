@@ -82,9 +82,9 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
             .bindTo(billingZipErrorLabel.rx_hidden) // show the error label
             .addDisposableTo(rx_disposeBag)
 
-        viewModel.moveToYear.take(1).subscribeNext { [weak self] _ in
+        viewModel.moveToYear.take(1).subscribe(onNext: { [weak self] _ in
             self?.expirationYearTextField.becomeFirstResponder()
-        }.addDisposableTo(rx_disposeBag)
+        }).addDisposableTo(rx_disposeBag)
 
         cardNumberTextField.becomeFirstResponder()
     }

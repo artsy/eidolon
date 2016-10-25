@@ -99,13 +99,13 @@ class ListingsViewController: UIViewController {
                 collectionView.reloadData()
             }
             .dispatchAsyncMainScheduler()
-            .subscribeNext { [weak self] collectionView in
+            .subscribe(onNext: { [weak self] collectionView in
                 // Make sure we're on screen and not in a test or something.
                 guard let _ = self?.view.window else { return }
 
                 // Need to dispatchAsyncMainScheduler, since the changes in the CV's model aren't imediate, so we may scroll to a cell that doesn't exist yet.
                 collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
-            }
+            })
             .addDisposableTo(rx_disposeBag)
 
         // Respond to changes in layout, driven by switch selection.
@@ -119,10 +119,10 @@ class ListingsViewController: UIViewController {
                     return ListingsViewController.tableLayout(width: (self?.switchView.frame ?? CGRect.zero).width)
                 }
             }
-            .subscribeNext { [weak self] layout in
+            .subscribe(onNext: { [weak self] layout in
                 // Need to explicitly call animated: false and reload to avoid animation
                 self?.collectionView.setCollectionViewLayout(layout, animated: false)
-            }
+            })
             .addDisposableTo(rx_disposeBag)
     }
     
@@ -175,15 +175,15 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
             let moreInfo = listingsCell.moreInfo.takeUntil(listingsCell.preparingForReuse)
 
             bid
-                .subscribeNext { [weak self] _ in
+                .subscribe(onNext: { [weak self] _ in
                     self?.viewModel.presentModalForSaleArtwork(atIndexPath: indexPath)
-                }
+                })
                 .addDisposableTo(rx_disposeBag)
 
             moreInfo
-                .subscribeNext { [weak self] _ in
+                .subscribe(onNext: { [weak self] _ in
                     self?.viewModel.showDetailsForSaleArtwork(atIndexPath: indexPath)
-                }
+                })
                 .addDisposableTo(rx_disposeBag)
         }
         

@@ -25,12 +25,12 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             let dismissTapGestureRecognizer = UITapGestureRecognizer()
             dismissTapGestureRecognizer
                 .rx.event
-                .subscribeNext{ [weak toView] sender in
+                .subscribe(onNext:{ [weak toView] sender in
                     let pointInContainer = sender.location(in: toView)
                     if toView?.point(inside: pointInContainer, with: nil) == false {
                         appDelegate().helpButtonCommand().execute()
                     }
-                }
+                })
             .addDisposableTo(rx_disposeBag)
             toViewController.dismissTapGestureRecognizer = dismissTapGestureRecognizer
             containerView.addGestureRecognizer(dismissTapGestureRecognizer)

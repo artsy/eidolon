@@ -52,9 +52,9 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             var moved = false
 
             subject.moveToYear
-                .subscribeNext { _ in
+                .subscribe(onNext: { _ in
                     moved = true
-                }
+                })
                 .addDisposableTo(disposeBag)
 
             subject.expirationMonth.value = "12"
@@ -66,9 +66,9 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
             var moved = false
 
             subject.moveToYear
-                .subscribeNext { _ in
+                .subscribe(onNext: { _ in
                     moved = true
-                }
+                })
                 .addDisposableTo(disposeBag)
 
 
@@ -152,10 +152,10 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 waitUntil { done in
                     subject.registerButtonCommand()
                         .enabled
-                        .subscribeNext { enabledValue in
+                        .subscribe(onNext: { enabledValue in
                             enabled = enabledValue
                             done()
-                        }
+                        })
                         .addDisposableTo(disposeBag)
                 }
 
@@ -257,9 +257,9 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                             let command = subject.registerButtonCommand()
                             command
                                 .errors
-                                .subscribeNext{ _ in
+                                .subscribe(onNext: { _ in
                                     done()
-                                }
+                                })
                                 .addDisposableTo(disposeBag)
 
                             command.execute()

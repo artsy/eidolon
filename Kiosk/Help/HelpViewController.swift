@@ -128,13 +128,13 @@ private extension HelpViewController {
         stackView.addSubview(privacyButton, withTopMargin: "\(inbetweenMargin)", sideMargin: "\(self.sideMargin)")
         
         hasBuyersPremium
-            .subscribeNext { [weak self] hasBuyersPremium in
+            .subscribe(onNext: { [weak self] hasBuyersPremium in
                 if hasBuyersPremium {
                     self?.stackView.addSubview(self!.buyersPremiumButton, withTopMargin: "\(self!.inbetweenMargin)", sideMargin: "\(self!.sideMargin)")
                 } else {
                     self?.stackView.removeSubview(self!.buyersPremiumButton)
                 }
-            }
+            })
             .addDisposableTo(rx_disposeBag)
     }
     
