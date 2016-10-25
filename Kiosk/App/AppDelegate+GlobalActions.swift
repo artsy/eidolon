@@ -54,6 +54,7 @@ extension AppDelegate {
 
 // MARK: - ReactiveCocoa extensions
 
+fileprivate var retainedAction: CocoaAction?
 extension AppDelegate {
     // In this extension, I'm omitting [weak self] because the app delegate will outlive everyone.
 
@@ -93,16 +94,32 @@ extension AppDelegate {
         }
     }
 
-    func showPrivacyPolicyCommand() -> CocoaAction {
-        return CocoaAction { _ in
-            self.hideAllTheThings().then(self.showWebController(address: "https://artsy.net/privacy"))
+    /// This is a hack around the fact that the command might dismiss the view controller whose UI owns the command itself.
+    /// So we store the CocoaAction in a variable private to this file to retain it. Once the action is complete, then we
+    /// release our reference to the CocoaAction. This ensures that the action isn't cancelled while it's executing.
+    func ensureAction(action: CocoaAction) -> CocoaAction {
+        retainedAction = action
+        let action = CocoaAction { input -> Observable<Void> in
+            return retainedAction?
+                .execute(input)
+                .doOnCompleted {
+                    retainedAction = nil
+                } ?? Observable.just(Void())
         }
+
+        return action
+    }
+
+    func showPrivacyPolicyCommand() -> CocoaAction {
+        return ensureAction(action: CocoaAction { _ in
+            self.hideAllTheThings().then(self.showWebController(address: "https://artsy.net/privacy"))
+        })
     }
 
     func showConditionsOfSaleCommand() -> CocoaAction {
-        return CocoaAction { _ in
+        return ensureAction(action: CocoaAction { _ in
             self.hideAllTheThings().then(self.showWebController(address: "https://artsy.net/conditions-of-sale"))
-        }
+        })
     }
 }
 
@@ -215,6 +232,7 @@ private extension AppDelegate {
                         observer.onCompleted()
                         self.helpViewController.value = nil
                     }
+                    sendDispatchCompleted(to: observer)
                 }
             } else {
                 observer.onCompleted()
