@@ -337,37 +337,37 @@ class SaleArtworkDetailsViewController: UIViewController {
         }
     }
 
+    private enum LabelType {
+        case Header
+        case Body
+    }
+
+    private func label(type: LabelType, layout: Observable<Void>? = nil) -> UILabel {
+        let (label, fontSize) = { () -> (UILabel, CGFloat) in
+            switch type {
+            case .Header:
+                return (ARSansSerifLabel(), 14)
+            case .Body:
+                return (ARSerifLabel(), 16)
+            }
+        }()
+
+        label.font = label.font.fontWithSize(fontSize)
+        label.lineBreakMode = .ByWordWrapping
+
+        layout?
+            .take(1)
+            .subscribeNext { [weak label] (_) in
+                if let label = label {
+                    label.preferredMaxLayoutWidth = CGRectGetWidth(label.frame)
+                }
+            }
+            .addDisposableTo(rx_disposeBag)
+
+        return label
+    }
+
     private func setupAdditionalDetailStackView() {
-        enum LabelType {
-            case Header
-            case Body
-        }
-
-        func label(type: LabelType, layout: Observable<Void>? = nil) -> UILabel {
-            let (label, fontSize) = { () -> (UILabel, CGFloat) in
-                switch type {
-                case .Header:
-                    return (ARSansSerifLabel(), 14)
-                case .Body:
-                    return (ARSerifLabel(), 16)
-                }
-            }()
-
-            label.font = label.font.fontWithSize(fontSize)
-            label.lineBreakMode = .ByWordWrapping
-
-            layout?
-                .take(1)
-                .subscribeNext { [weak label] (_) in
-                    if let label = label {
-                        label.preferredMaxLayoutWidth = CGRectGetWidth(label.frame)
-                    }
-                }
-                .addDisposableTo(rx_disposeBag)
-
-            return label
-        }
-
         additionalDetailScrollView.stackView.bottomMarginHeight = 40
 
         let imageView = UIImageView()
@@ -406,11 +406,11 @@ class SaleArtworkDetailsViewController: UIViewController {
                 .subscribeNext { [weak self] blurb in
                     guard let me = self else { return }
 
-                    let aboutArtistHeaderLabel = label(.Header)
+                    let aboutArtistHeaderLabel = me.label(.Header)
                     aboutArtistHeaderLabel.text = "About \(artist.name)"
                     me.additionalDetailScrollView.stackView.addSubview(aboutArtistHeaderLabel, withTopMargin: "22", sideMargin: "40")
 
-                    let aboutAristLabel = label(.Body, layout: me.layoutSubviews)
+                    let aboutAristLabel = me.label(.Body, layout: me.layoutSubviews)
                     aboutAristLabel.attributedText = MarkdownParser().attributedStringFromMarkdownString(blurb)
                     me.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "40")
                 }

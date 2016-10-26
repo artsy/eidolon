@@ -83,10 +83,10 @@ class ManualCreditCardInputViewModel: NSObject {
 
         return stripeManager.registerCard(cardFullDigits.value, month: month, year: year, securityCode: securityCode.value, postalCode: billingZip.value).doOnNext { token in
 
-            newUser.creditCardName.value = token.card.name
-            newUser.creditCardType.value = token.card.brand.name
+            newUser.creditCardName.value = token.card!.name
+            newUser.creditCardType.value = token.card!.brand.name
             newUser.creditCardToken.value = token.tokenId
-            newUser.creditCardDigit.value = token.card.last4
+            newUser.creditCardDigit.value = token.card!.last4()
         }
     }
 
