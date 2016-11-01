@@ -24,7 +24,7 @@ before_install:
 install:
   - bundle install
   - bundle exec pod --version
-  - bundle exec pod repo update
+  - bundle exec pod repo update --silent
   - bundle exec fastlane oss
 
 before_script:
