@@ -15,6 +15,7 @@ class APIPingManager {
             .flatMap { [weak self] _ in
                 return self?.ping() ?? .empty()
             }
+            .retry() // Retry because ping may fail when disconnected and error.
             .startWith(true)
     }
 
