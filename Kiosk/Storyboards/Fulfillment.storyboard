@@ -212,7 +212,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybr-6E-470" customClass="CursorView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="732" y="126" width="18" height="30"/>
+                                <rect key="frame" x="732" y="125" width="18" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7QN-tC-1xV"/>
@@ -336,10 +336,10 @@
                             <constraint firstItem="GS2-EK-4Nx" firstAttribute="leading" secondItem="Y81-nV-kZl" secondAttribute="trailing" constant="32" id="mWf-wm-Tgl"/>
                             <constraint firstItem="Y81-nV-kZl" firstAttribute="leading" secondItem="rpc-fW-Rbb" secondAttribute="trailing" constant="115" id="mpr-Q0-fJb"/>
                             <constraint firstItem="dT1-U2-hie" firstAttribute="top" secondItem="A3C-Vo-Qhd" secondAttribute="bottom" constant="20" id="mrC-b7-UDM"/>
-                            <constraint firstItem="ybr-6E-470" firstAttribute="top" secondItem="GS2-EK-4Nx" secondAttribute="bottom" constant="18" id="nKA-Oi-0iR"/>
                             <constraint firstItem="dT1-U2-hie" firstAttribute="leading" secondItem="eOX-N9-Jb7" secondAttribute="trailing" constant="66" id="sYO-82-Y8A"/>
                             <constraint firstItem="bTG-in-woi" firstAttribute="leading" secondItem="sft-xL-TDA" secondAttribute="trailing" constant="13" id="uaw-Ex-zFf"/>
                             <constraint firstItem="ybr-6E-470" firstAttribute="leading" secondItem="bTG-in-woi" secondAttribute="trailing" constant="127" id="wmD-3G-GAc"/>
+                            <constraint firstItem="ybr-6E-470" firstAttribute="centerY" secondItem="UKQ-z8-PIR" secondAttribute="centerY" id="yQo-ve-Cc0"/>
                             <constraint firstItem="eOX-N9-Jb7" firstAttribute="leading" secondItem="se7-qy-Xk6" secondAttribute="leadingMargin" constant="45" id="yhl-pO-z9L"/>
                             <constraint firstItem="eOX-N9-Jb7" firstAttribute="top" secondItem="j5m-yL-j50" secondAttribute="bottom" constant="8" id="yzs-sM-7RF"/>
                         </constraints>
@@ -703,7 +703,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XER-jS-BL4" customClass="CursorView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="740" y="186" width="2" height="32"/>
+                                <rect key="frame" x="740" y="165" width="2" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="2" id="WoS-6K-wzF"/>
@@ -757,9 +757,9 @@
                             <constraint firstItem="j5y-rZ-EtN" firstAttribute="top" secondItem="wUI-V6-mkQ" secondAttribute="bottom" constant="20" id="dAS-tv-9Hb"/>
                             <constraint firstItem="j5y-rZ-EtN" firstAttribute="leading" secondItem="3Z7-af-FHL" secondAttribute="trailing" constant="246" id="fcI-aD-6ik"/>
                             <constraint firstItem="Pfn-Rj-RYO" firstAttribute="top" secondItem="Lt9-iY-FNp" secondAttribute="bottom" constant="15" id="gHw-Xx-Z3S"/>
-                            <constraint firstItem="XER-jS-BL4" firstAttribute="top" secondItem="PY1-Lf-UOn" secondAttribute="topMargin" constant="186" id="hVZ-mT-LlA"/>
                             <constraint firstItem="3Z7-af-FHL" firstAttribute="top" secondItem="0Od-3T-sgv" secondAttribute="bottom" constant="300" id="mw0-wa-J9R"/>
                             <constraint firstItem="wUI-V6-mkQ" firstAttribute="top" secondItem="Fop-9s-JEM" secondAttribute="bottom" constant="29" id="qrZ-YQ-W4w"/>
+                            <constraint firstItem="XER-jS-BL4" firstAttribute="centerY" secondItem="Fop-9s-JEM" secondAttribute="centerY" id="si9-zD-nSr"/>
                             <constraint firstItem="z2W-8h-N8L" firstAttribute="leading" secondItem="PY1-Lf-UOn" secondAttribute="leadingMargin" constant="45" id="sn9-lT-5eA"/>
                             <constraint firstItem="Pfn-Rj-RYO" firstAttribute="leading" secondItem="PY1-Lf-UOn" secondAttribute="leadingMargin" constant="45" id="uIy-Va-huN"/>
                             <constraint firstItem="bbd-XN-mf0" firstAttribute="leading" secondItem="PY1-Lf-UOn" secondAttribute="leadingMargin" constant="475" id="v2Z-Y2-WgY"/>
@@ -1198,7 +1198,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="B8h-mi-lOQ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GfH-jN-lKt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GfH-jN-lKt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2143,6 +2143,6 @@
         <segue reference="eZu-3X-lXX"/>
         <segue reference="9X5-eM-AKF"/>
         <segue reference="hvW-mC-OYp"/>
-        <segue reference="NOJ-G3-crU"/>
+        <segue reference="ccv-le-Cu0"/>
     </inferredMetricsTieBreakers>
 </document>
