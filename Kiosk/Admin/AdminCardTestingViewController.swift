@@ -54,7 +54,7 @@ class AdminCardTestingViewController: UIViewController {
     }
 
     func log(_ string: String) {
-        self.logTextView.text = "\(self.logTextView.text)\n\(string)"
+        self.logTextView.text = "\(self.logTextView.text ?? "")\n\(string)"
 
     }
 
