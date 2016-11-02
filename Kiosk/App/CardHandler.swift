@@ -29,7 +29,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
     func startSearching() {
         sessionManager.setLogging(true)
 
-        reader = CFTReader(reader: CFTReaderType.SHUTTLE)
+        reader = CFTReader(reader: 1)
         reader.delegate = self
         reader.swipeHasTimeout(false)
         _cardStatus.onNext("Started searching")
