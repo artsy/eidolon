@@ -4,10 +4,12 @@ language: objective-c
 cache:
   directories:
   - vendor/bundle
+  - ~/.cocoapods/repos/
 
 env:
   global:
   - FASTLANE_SKIP_UPDATE_CHECK=true
+  - BUNDLE_PATH=vendor/bundle
   - secure: "Mf1cI1+LHjKuguQIrMQVp+U9CH8dj9IRiZsYUe9Gx15smntDBgh2fLLRWPOomW2wAur7uOohZBWzQ/whx83KPgXZwSJTW3S0nbdEEeQNMdfNnNXifm3f0pm9bgrzYMvga9C3SRjq5O/+zAD4xqP9TGtYum3oPHf0lpMlopXZgyo="
   - secure: "g9UrNEkmXCOWAEfOIS43b0YnOY1d9V2fO6AuAUsrkstK8FoaVoPyqO1oZS/6AWYIpDjssynWGzlhGsQaCX6/Zkd/L5tjEfK0KwomrYf46Sh4/V4CTYWzaMbWnuau/J9G/l1BLCfqFIGyUJdR7CbGWxz5cNBiRKIyhKcwJ70Sjt4="
   - secure: "glqnDo2eK21EF+YJ45rZsj6BXbEVme2Mh8RbJTXXWwWchUTBT+7NR7EX4YbaFY1nkODTV5LOvRcnptGiT3SJlJN6BGnl41xMLtoJQexdZIwC7D82dJ0KETKo2e8kLUpH/nFC1dxjhLjMEklyci9gE5pzs/aLRGvYvxA90MQK9c4="
