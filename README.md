@@ -52,9 +52,9 @@ Getting Started
 ---------------
 
 Now that we have the code [downloaded](#downloading-the-code), we can run the
-app using [Xcode 7](https://developer.apple.com/xcode/download/). Make sure to
+app using [Xcode 8](https://developer.apple.com/xcode/download/). Make sure to
 open the `Kiosk.xcworkspace` workspace, and not the `Kiosk.xcodeproj` project.
-Currently, the project is compatible with Xcode 7 only, as it's Swift 2.
+Currently, the project is compatible with Xcode 8 and later only, as it's Swift 3.
 
 Artsy has licensed fonts for use in this app, but due to the terms of that
 license, they are not available for open source distribution. This has [required](http://artsy.github.io/blog/2014/06/20/artsys-first-closed-source-pod/)
