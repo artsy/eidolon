@@ -13,12 +13,12 @@ PODS:
   - ARCollectionViewMasonryLayout (2.0.0)
   - ARTiledImageView (1.1.1):
     - SDWebImage
-  - Artsy+UIColors (3.0.1)
-  - Artsy+UIFonts (1.1.0)
-  - Artsy+UILabels (2.0.2):
-    - Artsy+UIColors (~> 3.0)
+  - Artsy+UIColors (3.1.0)
+  - Artsy+UIFonts (1.1.1)
+  - Artsy+UILabels (2.1.1):
+    - Artsy+UIColors (~> 3.1)
     - Artsy+UIFonts
-  - Artsy-UIButtons (2.0.1):
+  - Artsy-UIButtons (2.0.3):
     - Artsy+UIColors (~> 3.0)
     - Artsy+UIFonts
     - UIView+BooleanAnimations
@@ -149,10 +149,10 @@ SPEC CHECKSUMS:
   ARAnalytics: 85e7bb999e2a40cea7d2394e71e8ecbafa50f2d0
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
-  Artsy+UIColors: 10a2d71e9ffe1015be43d4e084d13ff4337aab97
-  Artsy+UIFonts: c51bb3b5cbf9c1a5fe198b4385d49133c5c71f5a
-  Artsy+UILabels: 9b8e8b683488e22633625db9627cd79ab64b610f
-  Artsy-UIButtons: 26e6d1e0d2174773e9cf7693985d27faddd61743
+  Artsy+UIColors: 31c03c4146f5e6618a9b950f37dfe02dd9ac09a6
+  Artsy+UIFonts: 155b972733a24bb12f152fb6d25e2610c1cb93e0
+  Artsy+UILabels: cc4325166487edadaff36345310fa9a66b9b33b9
+  Artsy-UIButtons: 0c87d8a112e6b1d688b153c2a7a8f155e2f1a18f
   CardFlight: c27f6b57053ff7ee1918fd8130af289eef97195e
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
