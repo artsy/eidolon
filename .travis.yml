@@ -4,7 +4,6 @@ language: objective-c
 cache:
   directories:
   - vendor/bundle
-  - ~/.cocoapods/repos/
 
 env:
   global:
@@ -26,7 +25,6 @@ before_install:
 install:
   - bundle install
   - bundle exec pod --version
-  - bundle exec pod repo update --silent
   - bundle exec fastlane oss
 
 before_script:
