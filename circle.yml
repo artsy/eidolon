@@ -20,4 +20,4 @@ dependencies:
     - bundle exec fastlane oss
 test:
   override:
-    - set -o pipefail && xcodebuild -destination "OS=10.0,name=iPad Air 2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | second_curtain | xcpretty --color --test
+    - set -o pipefail && xcodebuild -destination "platform=iOS Simulator,OS=10.1,name=iPad Air 2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | bundle exec second_curtain | xcpretty --color --test
