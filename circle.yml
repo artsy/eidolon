@@ -8,6 +8,7 @@ machine:
 dependencies:
   cache_directories:
     - vendor/bundle
+    - ~/.cocoapods/repos
   override:
     - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
     
