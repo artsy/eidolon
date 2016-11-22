@@ -1,13 +1,25 @@
 machine:
   xcode:
-    version: "6.3.1"
+    version: "8.1.0"
+  environment:
+    FASTLANE_SKIP_UPDATE_CHECK: true
+    BUNDLE_PATH: vendor/bundle
+    UPLOAD_IOS_SNAPSHOT_BUCKET_NAME: eidolon-ci
 dependencies:
+  cache_directories:
+    - vendor/bundle
   override:
     - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
     - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
     - chmod 600 ~/.netrc
+    
+    # See https://discuss.circleci.com/t/xcode-exit-code-65/4284/13 
+    - xcrun instruments || echo "(Pre)Launched the simulator."
+    - sleep 15
+    
     - bundle install
+    - bundle exec pod --version
     - bundle exec fastlane oss
 test:
   override:
-    - bundle exec fastlane test
+    - set -o pipefail && xcodebuild -destination "OS=10.0,name=iPad Air 2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" build test | second_curtain | xcpretty --color --test
