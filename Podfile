@@ -32,10 +32,10 @@ target 'Kiosk' do
   pod 'Artsy+UILabels'
   pod 'Artsy-UIButtons'
 
-  if ['orta', 'ash', 'artsy', 'Laura', 'alan', 'CI', 'distiller', 'travis'].include?(ENV['USER'])
-      pod 'Artsy+UIFonts', '~> 1.1.0'
+  if ENV['ARTSY_STAFF_MEMBER'] != nil || ENV['CI'] != nil
+      pod 'Artsy+UIFonts'
   else
-      pod 'Artsy+OSSUIFonts', '~> 1.1.0'
+      pod 'Artsy+OSSUIFonts'
   end
 
   pod 'ORStackView', '2.0'
