@@ -135,8 +135,9 @@ lane :storyboard_ids do
 end
 
 error do |lane, exception|
-  return unless lane == :deploy
-  puts "Unable to deploy, resetting git repository."
-  clean_build_artifacts
-  reset_git_repo
+  if lane == :deploy
+    puts "Unable to deploy, resetting git repository."
+    clean_build_artifacts
+    reset_git_repo
+  end
 end
