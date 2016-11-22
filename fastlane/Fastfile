@@ -11,8 +11,7 @@ lane :test do
   )
 end
 
-desc "Set all the API keys required for distribution"
-lane :oss do
+lane :oss_keys do
   keys = ['ArtsyAPIClientSecret',
     'ArtsyAPIClientKey',
     'HockeyProductionSecret',
@@ -26,15 +25,20 @@ lane :oss do
     'CardflightProductionMerchantAccountToken',
     'StripeProductionPublishableKey']
 
-    commands = keys.map { |key|
-      command = "bundle exec pod keys set #{key} '-' Eidolon"
+  commands = keys.map { |key|
+    command = "bundle exec pod keys set #{key} '-' Eidolon"
 
-      command
-    }.join(' ; ')
+    command
+  }.join(' ; ')
 
-    sh "cd .. ; #{commands}"
+  sh "cd .. ; #{commands}"
+end
 
-    cocoapods
+desc "Set all the API keys required for distribution"
+lane :oss do
+  oss_keys
+
+  cocoapods
 end
 
 desc "Release a new beta version on Hockey"

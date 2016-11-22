@@ -11,8 +11,7 @@ dependencies:
     - derived_data
   pre:
     - bundle install
-    - bundle exec pod --version
-    - bundle exec fastlane oss
+    - bundle exec fastlane oss_keys
   post:
     - set -o pipefail && xcodebuild -destination "id=30244F9E-BA58-403B-82B1-ACD9AE948EB6" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data build | xcpretty --color
 
