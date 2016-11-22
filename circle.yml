@@ -1,13 +1,21 @@
 machine:
   xcode:
-    version: "6.3.1"
+    version: "8.1.0"
+  environment:
+    FASTLANE_SKIP_UPDATE_CHECK: true
+    UPLOAD_IOS_SNAPSHOT_BUCKET_NAME: eidolon-ci
+
 dependencies:
-  override:
-    - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc'
-    - echo "machine github.com login $GITHUB_API_KEY" > ~/.netrc
-    - chmod 600 ~/.netrc
+  cache_directories:
+    - derived_data
+  pre:
     - bundle install
-    - bundle exec fastlane oss
+    - bundle exec fastlane oss_keys
+    # See https://discuss.circleci.com/t/xcode-exit-code-65/4284/13
+    - xcrun instruments -w "30244F9E-BA58-403B-82B1-ACD9AE948EB6" || echo "(Pre)Launched the simulator."
+  post:
+    - set -o pipefail && xcodebuild -destination "id=30244F9E-BA58-403B-82B1-ACD9AE948EB6" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data build | xcpretty --color
+
 test:
   override:
-    - bundle exec fastlane test
+    - set -o pipefail && xcodebuild -destination "id=30244F9E-BA58-403B-82B1-ACD9AE948EB6" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data test | bundle exec second_curtain | xcpretty --color --test
