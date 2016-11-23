@@ -10,6 +10,11 @@ sudo gem install fastlane
 fastlane test
 ```
 Run all iOS tests on an iPad
+### oss_keys
+```
+fastlane oss_keys
+```
+
 ### oss
 ```
 fastlane oss
