@@ -92,7 +92,7 @@ DEPENDENCIES:
   - ARCollectionViewMasonryLayout (~> 2.0.0)
   - ARTiledImageView
   - Artsy+UIColors
-  - Artsy+UIFonts (~> 1.1.0)
+  - Artsy+UIFonts
   - Artsy+UILabels
   - Artsy-UIButtons
   - CardFlight
@@ -184,6 +184,6 @@ SPEC CHECKSUMS:
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e
 
-PODFILE CHECKSUM: f3c52dbc529c82310d2a760c8b995bb447daa1fc
+PODFILE CHECKSUM: 71c8ade425efea588f1ff16599b8a3fc17aafb8c
 
 COCOAPODS: 1.1.1
