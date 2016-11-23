@@ -1,7 +1,11 @@
 upcoming:
-- New fonts. [ash]
 
 releases:
+- version: 5.5.0
+  date: November 23 2016
+  notes:
+  - New fonts. [ash]
+
 - version: 5.4.1
   date: November 14 2016
   notes:
@@ -379,6 +383,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
