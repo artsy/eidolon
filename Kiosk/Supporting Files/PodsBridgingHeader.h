@@ -14,14 +14,8 @@
 #import <ARAnalytics/ARAnalytics.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
-// Fonts can come from one of two Pods
-#if __has_include(<Artsy+UIFonts/UIFont+ArtsyFonts.h>)
+// Fonts can come from one of two Pods, but each has the same module/header name.
 #import <Artsy_UIFonts/UIFont+ArtsyFonts.h>
-#endif
-
-#if __has_include(<Artsy+OSSUIFonts/UIFont+OSSArtsyFonts.h>)
-#import <Artsy_OSSUIFonts/UIFont+OSSArtsyFonts.h>
-#endif
 
 #import "CardFlight.h"
 
