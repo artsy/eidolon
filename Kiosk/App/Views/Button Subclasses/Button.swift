@@ -59,6 +59,15 @@ class SecondaryActionButton: Button {
     }
 }
 
+class CancelModalButton: Button {
+    override func setup() {
+        super.setup()
+
+        setBorderColor(.clear, for: .normal, animated: false)
+        setBorderColor(.clear, for: .highlighted, animated: false)
+        setBorderColor(.clear, for: .disabled, animated: false)
+    }
+}
 
 class KeypadButton: Button {
 

@@ -26,6 +26,7 @@ class TextField: UITextField {
         layer.masksToBounds = true
         layer.borderWidth = 1
         tintColor = .black
+        font = UIFont.serifFont(withSize: self.font?.pointSize ?? 26)
         stateChangedAnimated(false)
         setupEvents()
     }
