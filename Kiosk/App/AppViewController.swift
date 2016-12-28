@@ -65,8 +65,8 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // This is the embed segue
-        guard let navigtionController = segue.destination as? UINavigationController else { return }
-        guard let listingsViewController = navigtionController.topViewController as? ListingsViewController else { return }
+        guard let navigationController = segue.destination as? UINavigationController else { return }
+        guard let listingsViewController = navigationController.topViewController as? ListingsViewController else { return }
 
         listingsViewController.provider = provider
     }
