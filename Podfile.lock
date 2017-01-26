@@ -1,8 +1,8 @@
 PODS:
-  - Action (2.0.0):
+  - Action (2.2.1):
     - RxCocoa (~> 3.0)
     - RxSwift (~> 3.0)
-  - Alamofire (4.0.1)
+  - Alamofire (4.2.0)
   - ARAnalytics/CoreIOS (4.0.1)
   - ARAnalytics/HockeyApp (4.0.1):
     - ARAnalytics/CoreIOS
@@ -22,9 +22,7 @@ PODS:
     - Artsy+OSSUIFonts
     - Artsy+UIColors (~> 3.0)
     - UIView+BooleanAnimations
-  - CardFlight (3.0):
-    - CardFlight/AudioJack (= 3.0)
-  - CardFlight/AudioJack (3.0)
+  - CardFlight (3.5.1)
   - DZNWebViewController (2.0):
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
@@ -34,24 +32,25 @@ PODS:
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
   - FLKAutoLayout (0.1.1)
-  - fmemopen (0.0.1)
   - Forgeries (1.0.0):
     - Forgeries/Core (= 1.0.0)
   - Forgeries/Core (1.0.0)
-  - HockeySDK-Source (4.1.2)
+  - HockeySDK-Source (4.1.3)
   - ISO8601DateFormatter (0.8)
   - Keys (1.0.0)
-  - Mixpanel (3.0.4):
-    - Mixpanel/Mixpanel (= 3.0.4)
-  - Mixpanel/Mixpanel (3.0.4)
-  - Moya/Core (8.0.0-beta.3):
-    - Alamofire (~> 4.0.0)
-    - Result
-  - Moya/RxSwift (8.0.0-beta.3):
+  - Mixpanel (3.0.9):
+    - Mixpanel/Mixpanel (= 3.0.9)
+  - Mixpanel/Mixpanel (3.0.9)
+  - Moya/Core (8.0.1):
+    - Alamofire (~> 4.2.0)
+    - Result (~> 3.1.0)
+  - Moya/RxSwift (8.0.1):
     - Moya/Core
-    - RxSwift
-  - Nimble (5.1.1)
-  - Nimble-Snapshots (4.2.0):
+    - RxSwift (~> 3.1.0)
+  - Nimble (6.0.0)
+  - Nimble-Snapshots (4.4.0):
+    - Nimble-Snapshots/Core (= 4.4.0)
+  - Nimble-Snapshots/Core (4.4.0):
     - FBSnapshotTestCase (~> 2.0)
     - Nimble
     - Quick
@@ -64,26 +63,23 @@ PODS:
     - RxSwift
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
-  - Quick (0.10.0)
+  - Quick (1.0.0)
   - Reachability (3.1.1)
-  - Result (3.0.0)
-  - RxBlocking (3.0.0):
-    - RxSwift (~> 3.0)
-  - RxCocoa (3.0.0):
-    - RxSwift (~> 3.0)
-  - RxSwift (3.0.0)
-  - SDWebImage (3.7.1):
-    - SDWebImage/Core (= 3.7.1)
-  - SDWebImage/Core (3.7.1)
-  - Stripe (3.1.0):
-    - Stripe/Core (= 3.1.0)
-  - Stripe/Core (3.1.0)
-  - SVProgressHUD (1.1.3)
-  - SwiftyJSON (3.1.0)
+  - Result (3.1.0)
+  - RxBlocking (3.1.0):
+    - RxSwift (~> 3.1)
+  - RxCocoa (3.1.0):
+    - RxSwift (~> 3.1)
+  - RxSwift (3.1.0)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
+  - Stripe (9.3.0)
+  - SVProgressHUD (2.1.2)
+  - SwiftyJSON (3.1.4)
   - UIImageViewAligned (0.0.1)
   - UIView+BooleanAnimations (1.0.2)
-  - XNGMarkdownParser (0.3.0):
-    - fmemopen
+  - XNGMarkdownParser (0.3.2)
 
 DEPENDENCIES:
   - Action
@@ -103,7 +99,7 @@ DEPENDENCIES:
   - Forgeries
   - ISO8601DateFormatter
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Moya/RxSwift (= 8.0.0-beta.3)
+  - Moya/RxSwift
   - Nimble
   - Nimble-Snapshots
   - NSObject+Rx
@@ -144,8 +140,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
 
 SPEC CHECKSUMS:
-  Action: 0bc7f713038917e2d8b7a0cc71278a79c1db06c1
-  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Action: 93c6c9eec95eb76428b2d49a6d260466c2f71b7e
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   ARAnalytics: 85e7bb999e2a40cea7d2394e71e8ecbafa50f2d0
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
@@ -153,37 +149,36 @@ SPEC CHECKSUMS:
   Artsy+UIColors: 31c03c4146f5e6618a9b950f37dfe02dd9ac09a6
   Artsy+UILabels: c5bef562052f74bc2f0d523c0f1a289c59c7fbed
   Artsy-UIButtons: 0c87d8a112e6b1d688b153c2a7a8f155e2f1a18f
-  CardFlight: c27f6b57053ff7ee1918fd8130af289eef97195e
+  CardFlight: e438f8c42d6636bc6ffe3312ecc9398b89e7aed4
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
   FBSnapshotTestCase: '094f9f314decbabe373b87cc339bea235a63e07a'
   FLKAutoLayout: 95b12c5cd9652100235140b68652f063f7437851
-  fmemopen: dc31f7d3004644b33deee95e047305d23f8cfdd4
   Forgeries: 64ced144ea8341d89a7eec9d1d7986f0f1366250
-  HockeySDK-Source: 58d09800c495347a144e0bd7e7c7087c7831f617
+  HockeySDK-Source: 05f045d91770f3fef32bf150d049dca3b054d883
   ISO8601DateFormatter: 4551b6ce4f83185425f583b0b3feb3c7b59b942c
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Mixpanel: 4a2330c26556109d2f42b01e36a05eb9e2caf25e
-  Moya: f83c7f81eaa28cb0151549dfcf1f3fda4440bb50
-  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
-  Nimble-Snapshots: 4826e3ee211d2c7af27645e35d68b9e9917882e7
+  Mixpanel: 106bad33d5b9a05312316a01938f17b6baa2d99f
+  Moya: f2e10a04fcb27fec154cb2afa4e536e8b46dac04
+  Nimble: 8fb9b4b34c535b2f32f52c6b9852d6f02d48610b
+  Nimble-Snapshots: e743439f26c2fa99d8f7e0d7c01c99bcb40aa6f2
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   NSObject+Rx: 2a9cd801d9c847e6d2486cbad8d7701b67834e70
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
-  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
+  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
   Reachability: 5b69def55ffa04d6f9425a6da1f47338b60557b2
-  Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
-  RxBlocking: 0132c660340d8b8f34b65b2e099167ea6134eecf
-  RxCocoa: 0a2f3ae381cf16f4021a4cee7a4420f83058a965
-  RxSwift: a930cd662f5b4a7ca9dc3518585dba91dadf497c
-  SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
-  Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
-  SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
-  SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
+  Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
+  RxBlocking: cd73ef6a5f8c39cede9488178c46aa0c3c3ed17f
+  RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
+  RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
+  SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
+  Stripe: 0f41a33a6fa3ac76ee668d7df3e2680c28b8ab1a
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
-  XNGMarkdownParser: 562999edfa0e0913dc345f0931bdd78be59f826e
+  XNGMarkdownParser: aed98c14f0c0eb20064184ddf9bac26c482722b2
 
-PODFILE CHECKSUM: 71c8ade425efea588f1ff16599b8a3fc17aafb8c
+PODFILE CHECKSUM: a1e702f9ca30ef663aaecab351934324c2b8409e
 
 COCOAPODS: 1.1.1

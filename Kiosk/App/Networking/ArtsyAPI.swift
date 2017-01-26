@@ -49,6 +49,11 @@ enum ArtsyAuthenticatedAPI {
 }
 
 extension ArtsyAPI : TargetType, ArtsyAPIType {
+
+    public var parameterEncoding: ParameterEncoding {
+        return JSONEncoding.default
+    }
+
     public var task: Task {
         return .request
     }
@@ -247,6 +252,11 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
 }
 
 extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
+
+    public var parameterEncoding: ParameterEncoding {
+        return JSONEncoding.default
+    }
+
     public var task: Task {
         return .request
     }

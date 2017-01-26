@@ -7,10 +7,10 @@ class OnlineProvider<Target>: RxMoyaProvider<Target> where Target: TargetType {
 
     fileprivate let online: Observable<Bool>
 
-    init(endpointClosure: @escaping EndpointClosure = MoyaProvider.DefaultEndpointMapping,
-        requestClosure: @escaping RequestClosure = MoyaProvider.DefaultRequestMapping,
-        stubClosure: @escaping StubClosure = MoyaProvider.NeverStub,
-        manager: Manager = RxMoyaProvider<Target>.DefaultAlamofireManager(),
+    init(endpointClosure: @escaping EndpointClosure = MoyaProvider.defaultEndpointMapping,
+        requestClosure: @escaping RequestClosure = MoyaProvider.defaultRequestMapping,
+        stubClosure: @escaping StubClosure = MoyaProvider.neverStub,
+        manager: Manager = RxMoyaProvider<Target>.defaultAlamofireManager(),
         plugins: [PluginType] = [],
         trackInflights: Bool = false,
         online: Observable<Bool> = connectedToInternetOrStubbing()) {
@@ -108,16 +108,16 @@ extension NetworkingType {
     }
 
     static func newStubbingNetworking() -> Networking {
-        return Networking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: .just(true)))
+        return Networking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.immediatelyStub, online: .just(true)))
     }
 
     static func newAuthorizedStubbingNetworking() -> AuthorizedNetworking {
-        return AuthorizedNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.ImmediatelyStub, online: .just(true)))
+        return AuthorizedNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.immediatelyStub, online: .just(true)))
     }
 
     static func endpointsClosure<T>(_ xAccessToken: String? = nil) -> (T) -> Endpoint<T> where T: TargetType, T: ArtsyAPIType {
         return { target in
-            var endpoint: Endpoint<T> = Endpoint<T>(URL: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+            var endpoint: Endpoint<T> = Endpoint<T>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
 
             // If we were given an xAccessToken, add it
             if let xAccessToken = xAccessToken {

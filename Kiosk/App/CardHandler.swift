@@ -23,13 +23,13 @@ class CardHandler: NSObject, CFTReaderDelegate {
 
         super.init()
 
-        sessionManager.setApiToken(APIKey, accountToken: APIToken)
+        sessionManager.setApiToken(APIKey, accountToken: APIToken, completed: nil)
     }
 
     func startSearching() {
         sessionManager.setLogging(true)
 
-        reader = CFTReader(reader: 1)
+        reader = CFTReader(reader: CFTReaderType(rawValue: 1)!)
         reader.delegate = self
         reader.swipeHasTimeout(false)
         _cardStatus.onNext("Started searching")

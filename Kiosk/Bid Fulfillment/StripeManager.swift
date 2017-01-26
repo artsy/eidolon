@@ -6,7 +6,7 @@ class StripeManager: NSObject {
     var stripeClient = STPAPIClient.shared()
 
     func registerCard(digits: String, month: UInt, year: UInt, securityCode: String, postalCode: String) -> Observable<STPToken> {
-        let card = STPCard()
+        let card = STPCardParams()
         card.number = digits
         card.expMonth = month
         card.expYear = year
@@ -19,7 +19,7 @@ class StripeManager: NSObject {
                 return Disposables.create()
             }
 
-            me.stripeClient?.createToken(with: card) { (token, error) in
+            me.stripeClient.createToken(withCard: card) { (token, error) in
                 if (token as STPToken?).hasValue {
                     observer.onNext(token!)
                     observer.onCompleted()
