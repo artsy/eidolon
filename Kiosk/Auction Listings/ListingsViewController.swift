@@ -132,7 +132,7 @@ class ListingsViewController: UIViewController {
             let detailsViewController = segue.destination as! SaleArtworkDetailsViewController
             detailsViewController.saleArtwork = saleArtwork
             detailsViewController.provider = provider
-            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork?.artwork.id])
+            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork?.artwork.id as Any])
         }
     }
 

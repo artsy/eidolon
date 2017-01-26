@@ -29,9 +29,9 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
     lazy var appSetup = AppSetup.sharedState
     lazy var cardHandler: CardHandler = {
         if self.appSetup.useStaging {
-            return CardHandler(apiKey: self.keys.cardflightStagingAPIClientKey(), accountToken: self.keys.cardflightStagingMerchantAccountToken())
+            return CardHandler(apiKey: self.keys.cardflightStagingAPIClientKey, accountToken: self.keys.cardflightStagingMerchantAccountToken)
         } else {
-            return CardHandler(apiKey: self.keys.cardflightProductionAPIClientKey(), accountToken: self.keys.cardflightProductionMerchantAccountToken())
+            return CardHandler(apiKey: self.keys.cardflightProductionAPIClientKey, accountToken: self.keys.cardflightProductionMerchantAccountToken)
         }
     }()
     

@@ -39,7 +39,7 @@ struct APIKeys {
     }
 
     init(keys: EidolonKeys) {
-        self.init(key: keys.artsyAPIClientKey() ?? "", secret: keys.artsyAPIClientSecret() ?? "")
+        self.init(key: keys.artsyAPIClientKey , secret: keys.artsyAPIClientSecret )
     }
 
     init() {
