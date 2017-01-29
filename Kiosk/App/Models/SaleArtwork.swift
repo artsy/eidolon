@@ -15,14 +15,11 @@ enum ReserveStatus: String {
     }
 }
 
-struct SaleNumberFormatter {
-    static let dollarFormatter = createDollarFormatter()
-}
-
 final class SaleArtwork: NSObject, JSONAbleType {
 
     let id: String
     let artwork: Artwork
+    let currencySymbol: String
 
     var auctionID: String?
 
@@ -43,9 +40,10 @@ final class SaleArtwork: NSObject, JSONAbleType {
     dynamic var reserveStatus: String?
     dynamic var lotNumber: NSNumber?
 
-    init(id: String, artwork: Artwork) {
+    init(id: String, artwork: Artwork, currencySymbol: String) {
         self.id = id
         self.artwork = artwork
+        self.currencySymbol = currencySymbol
     }
 
     lazy var viewModel: SaleArtworkViewModel = {
@@ -55,10 +53,12 @@ final class SaleArtwork: NSObject, JSONAbleType {
     static func fromJSON(_ json: [String: Any]) -> SaleArtwork {
         let json = JSON(json)
         let id = json["id"].stringValue
+        let currencySymbol = json["symbol"].stringValue
+
         let artworkDict = json["artwork"].object as! [String: AnyObject]
         let artwork = Artwork.fromJSON(artworkDict)
 
-        let saleArtwork = SaleArtwork(id: id, artwork: artwork) as SaleArtwork
+        let saleArtwork = SaleArtwork(id: id, artwork: artwork, currencySymbol: currencySymbol) as SaleArtwork
 
         if let highestBidDict = json["highest_bid"].object as? [String: AnyObject] {
             saleArtwork.saleHighestBid = Bid.fromJSON(highestBidDict)
@@ -94,19 +94,6 @@ final class SaleArtwork: NSObject, JSONAbleType {
 
         artwork.updateWithValues(newSaleArtwork.artwork)
     }
-}
-
-func createDollarFormatter() -> NumberFormatter {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = NumberFormatter.Style.currency
-
-    // This is always dollars, so let's make sure that's how it shows up
-    // regardless of locale.
-
-    formatter.currencyGroupingSeparator = ","
-    formatter.currencySymbol = "$"
-    formatter.maximumFractionDigits = 0
-    return formatter
 }
 
 func ==(lhs: SaleArtwork, rhs: SaleArtwork) -> Bool {
