@@ -89,7 +89,7 @@
         <scene sceneID="wG8-BK-Gy6">
             <objects>
                 <navigationController modalPresentationStyle="formSheet" navigationBarHidden="YES" id="w8O-U4-lhE" customClass="FulfillmentNavigationController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PvK-mZ-4Jp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PvK-mZ-4Jp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -142,10 +142,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$9,000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GS2-EK-4Nx" customClass="ARSerifLabel">
-                                <rect key="frame" x="620" y="66" width="130" height="42"/>
+                                <rect key="frame" x="590" y="66" width="160" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="Qjg-LN-ICy"/>
-                                    <constraint firstAttribute="width" constant="130" id="tUh-uq-xdJ"/>
+                                    <constraint firstAttribute="width" constant="160" id="tUh-uq-xdJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="26"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -202,7 +202,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UKQ-z8-PIR" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="9,999,999" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UKQ-z8-PIR" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
                                 <rect key="frame" x="570" y="118" width="180" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="JFk-UH-8dP"/>
@@ -220,10 +220,10 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTG-in-woi">
-                                <rect key="frame" x="578" y="118" width="27" height="45"/>
+                                <rect key="frame" x="578" y="118" width="54" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="2th-Mf-LhF"/>
-                                    <constraint firstAttribute="width" constant="27" id="qun-gv-k7E"/>
+                                    <constraint firstAttribute="width" constant="54" id="qun-gv-k7E"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="26"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -333,12 +333,12 @@
                             <constraint firstItem="UKQ-z8-PIR" firstAttribute="leading" secondItem="sft-xL-TDA" secondAttribute="trailing" constant="5" id="jHt-15-jed"/>
                             <constraint firstItem="bTG-in-woi" firstAttribute="top" secondItem="8rn-bF-UEg" secondAttribute="bottom" constant="118" id="ljo-L0-0kz"/>
                             <constraint firstItem="Y81-nV-kZl" firstAttribute="top" secondItem="8rn-bF-UEg" secondAttribute="bottom" constant="76" id="lpS-d6-bu6"/>
-                            <constraint firstItem="GS2-EK-4Nx" firstAttribute="leading" secondItem="Y81-nV-kZl" secondAttribute="trailing" constant="32" id="mWf-wm-Tgl"/>
+                            <constraint firstItem="GS2-EK-4Nx" firstAttribute="leading" secondItem="Y81-nV-kZl" secondAttribute="trailing" constant="2" id="mWf-wm-Tgl"/>
                             <constraint firstItem="Y81-nV-kZl" firstAttribute="leading" secondItem="rpc-fW-Rbb" secondAttribute="trailing" constant="115" id="mpr-Q0-fJb"/>
                             <constraint firstItem="dT1-U2-hie" firstAttribute="top" secondItem="A3C-Vo-Qhd" secondAttribute="bottom" constant="20" id="mrC-b7-UDM"/>
                             <constraint firstItem="dT1-U2-hie" firstAttribute="leading" secondItem="eOX-N9-Jb7" secondAttribute="trailing" constant="66" id="sYO-82-Y8A"/>
                             <constraint firstItem="bTG-in-woi" firstAttribute="leading" secondItem="sft-xL-TDA" secondAttribute="trailing" constant="13" id="uaw-Ex-zFf"/>
-                            <constraint firstItem="ybr-6E-470" firstAttribute="leading" secondItem="bTG-in-woi" secondAttribute="trailing" constant="127" id="wmD-3G-GAc"/>
+                            <constraint firstItem="ybr-6E-470" firstAttribute="leading" secondItem="bTG-in-woi" secondAttribute="trailing" constant="100" id="wmD-3G-GAc"/>
                             <constraint firstItem="ybr-6E-470" firstAttribute="centerY" secondItem="UKQ-z8-PIR" secondAttribute="centerY" id="yQo-ve-Cc0"/>
                             <constraint firstItem="eOX-N9-Jb7" firstAttribute="leading" secondItem="se7-qy-Xk6" secondAttribute="leadingMargin" constant="45" id="yhl-pO-z9L"/>
                             <constraint firstItem="eOX-N9-Jb7" firstAttribute="top" secondItem="j5m-yL-j50" secondAttribute="bottom" constant="8" id="yzs-sM-7RF"/>
@@ -1199,7 +1199,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="B8h-mi-lOQ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GfH-jN-lKt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GfH-jN-lKt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
