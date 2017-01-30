@@ -9,7 +9,7 @@ dependencies:
   cache_directories:
     - derived_data
   pre:
-    - bundle install
+    - bundle install --path=vendor/bundle --jobs 4 --retry 3
     - bundle exec fastlane oss_keys
     # See https://discuss.circleci.com/t/xcode-exit-code-65/4284/13
     - xcrun instruments -w "30244F9E-BA58-403B-82B1-ACD9AE948EB6" || echo "(Pre)Launched the simulator."
