@@ -57,9 +57,9 @@ GEM
       netrc (= 0.7.8)
     cocoapods-try (1.1.0)
     colored (1.2)
-    commander (4.4.0)
+    commander (4.4.3)
       highline (~> 1.7.2)
-    credentials_manager (0.16.2)
+    credentials_manager (0.16.4)
       colored
       commander (>= 4.3.5)
       highline (>= 1.7.1)

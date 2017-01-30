@@ -65,7 +65,7 @@ func testArtwork() -> Artwork {
 let testAuctionID = "AUCTION"
 
 func testSaleArtwork() -> SaleArtwork {
-    let saleArtwork = SaleArtwork(id: "12312313", artwork: testArtwork())
+    let saleArtwork = SaleArtwork(id: "12312313", artwork: testArtwork(), currencySymbol: "£")
     saleArtwork.auctionID = testAuctionID
     return saleArtwork
 }

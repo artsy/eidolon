@@ -12,14 +12,14 @@ class SaleArtworkTests: QuickSpec {
 
         beforeEach {
             let artwork = Artwork.fromJSON([:])
-            saleArtwork = SaleArtwork(id: "id", artwork: artwork)
+            saleArtwork = SaleArtwork(id: "id", artwork: artwork, currencySymbol: "£")
             disposeBag = DisposeBag()
         }
 
         it("updates the soldStatus") {
             let newArtwork = Artwork.fromJSON([:])
             newArtwork.soldStatus = "sold"
-            let newSaleArtwork = SaleArtwork(id: "id", artwork: newArtwork)
+            let newSaleArtwork = SaleArtwork(id: "id", artwork: newArtwork, currencySymbol: "£")
 
             saleArtwork.updateWithValues(newSaleArtwork)
 
@@ -34,19 +34,19 @@ class SaleArtworkTests: QuickSpec {
             it("gives estimtate range when low and high are present") {
                 saleArtwork.lowEstimateCents = 100_00
                 saleArtwork.highEstimateCents = 200_00
-                expect(saleArtwork.viewModel.estimateString) == "Estimate: $100–$200"
+                expect(saleArtwork.viewModel.estimateString) == "Estimate: £100–£200"
             }
 
             it("gives estimate if present") {
                 saleArtwork.estimateCents = 200_00
-                expect(saleArtwork.viewModel.estimateString) == "Estimate: $200"
+                expect(saleArtwork.viewModel.estimateString) == "Estimate: £200"
             }
 
             it("give estimate if estimate both and low/high are present") {
                 saleArtwork.highEstimateCents = 300_00
                 saleArtwork.lowEstimateCents = 100_00
                 saleArtwork.estimateCents = 200_00
-                expect(saleArtwork.viewModel.estimateString) == "Estimate: $200"
+                expect(saleArtwork.viewModel.estimateString) == "Estimate: £200"
             }
             
             it("gives no estimate if only high is present") {
