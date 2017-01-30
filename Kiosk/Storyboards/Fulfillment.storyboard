@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="O1R-5R-23t">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -89,7 +89,7 @@
         <scene sceneID="wG8-BK-Gy6">
             <objects>
                 <navigationController modalPresentationStyle="formSheet" navigationBarHidden="YES" id="w8O-U4-lhE" customClass="FulfillmentNavigationController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PvK-mZ-4Jp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PvK-mZ-4Jp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -219,7 +219,7 @@
                                     <constraint firstAttribute="width" constant="18" id="L4R-To-UmK"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTG-in-woi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTG-in-woi">
                                 <rect key="frame" x="578" y="118" width="27" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="2th-Mf-LhF"/>
@@ -350,6 +350,7 @@
                         <outlet property="bidAmountTextField" destination="UKQ-z8-PIR" id="mV3-4R-CLm"/>
                         <outlet property="bidButton" destination="dT1-U2-hie" id="b1u-df-a4J"/>
                         <outlet property="conditionsOfSaleButton" destination="XXj-no-bvA" id="aJF-Bo-QIO"/>
+                        <outlet property="currencySymbolLabel" destination="bTG-in-woi" id="rLb-PR-9yd"/>
                         <outlet property="currentBidAmountLabel" destination="GS2-EK-4Nx" id="DlC-TX-tjz"/>
                         <outlet property="currentBidTitleLabel" destination="Y81-nV-kZl" id="ndR-mW-Tct"/>
                         <outlet property="cursor" destination="ybr-6E-470" id="rlk-8V-1J2"/>
@@ -1198,7 +1199,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="B8h-mi-lOQ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GfH-jN-lKt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GfH-jN-lKt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2140,9 +2141,9 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eZu-3X-lXX"/>
         <segue reference="9X5-eM-AKF"/>
         <segue reference="hvW-mC-OYp"/>
         <segue reference="ccv-le-Cu0"/>
+        <segue reference="eZu-3X-lXX"/>
     </inferredMetricsTieBreakers>
 </document>
