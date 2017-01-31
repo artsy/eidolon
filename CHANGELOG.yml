@@ -1,7 +1,11 @@
 upcoming:
-- Adds support for multiple currencies. [ash]
 
 releases:
+- version: 5.6.0
+  date: January 30 2017
+  notes:
+  - Adds support for multiple currencies. [ash]
+
 - version: 5.5.1
   date: December 06 2016
   notes:
@@ -389,6 +393,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
