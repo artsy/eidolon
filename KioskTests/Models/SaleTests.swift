@@ -23,7 +23,7 @@ class SaleTests: QuickSpec {
             expect(sale.id) == id
             expect(sale.isAuction) == isAuction
             expect(yearFromDate(sale.startDate)) == 2014
-            expect(yearFromDate(sale.endDate)) == 2015
+            expect(yearFromDate(sale.endDate!)) == 2015
             expect(sale.name) == name
         }
         

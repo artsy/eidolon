@@ -1,5 +1,6 @@
 upcoming:
 - Underlying infrastructure work and library updates. [AYastrebov]
+- Fixes problem with the app crashing when switching auctions. [ash]
 
 releases:
 - version: 5.6.0

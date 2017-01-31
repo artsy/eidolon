@@ -74,10 +74,10 @@ class ListingsCountdownManager: NSObject {
         guard time.inSync() else { return }
         guard sale.id != "" else { return }
 
-        if sale.isActive(time) {
+        if sale.isActive(time), let endDate = sale.endDate {
             let now = time.date()
 
-            let components = Calendar.current.dateComponents([.hour, .minute, .second], from: now, to: sale.endDate)
+            let components = Calendar.current.dateComponents([.hour, .minute, .second], from: now, to: endDate)
 
             self.countdownLabel.text = "\(formatter.string(from: (components.hour ?? 0) as NSNumber)!) : \(formatter.string(from: (components.minute ?? 0) as NSNumber)!) : \(formatter.string(from: (components.second ?? 0) as NSNumber)!)"
 
