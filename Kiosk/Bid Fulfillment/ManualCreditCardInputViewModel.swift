@@ -77,7 +77,7 @@ class ManualCreditCardInputViewModel: NSObject {
 
     /// MARK: - Private Methods
 
-    fileprivate func registerCard(newUser: NewUser) -> Observable<STPToken> {
+    fileprivate func registerCard(newUser: NewUser) -> Observable<Tokenable> {
         let month = expirationMonth.value.toUInt(withDefault: 0)
         let year = expirationYear.value.toUInt(withDefault: 0)
 

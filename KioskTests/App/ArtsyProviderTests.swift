@@ -8,7 +8,7 @@ import Moya
 class ArtsyProviderTests: QuickSpec {
     override func spec() {
         let fakeEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-            return Endpoint<ArtsyAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+            return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
         }
 
         var fakeOnline: PublishSubject<Bool>!
@@ -17,7 +17,7 @@ class ArtsyProviderTests: QuickSpec {
 
         beforeEach {
             fakeOnline = PublishSubject<Bool>()
-            subject = Networking(provider: OnlineProvider<ArtsyAPI>(endpointClosure: fakeEndpointsClosure, stubClosure: MoyaProvider<ArtsyAPI>.ImmediatelyStub, online: fakeOnline.asObservable()))
+            subject = Networking(provider: OnlineProvider<ArtsyAPI>(endpointClosure: fakeEndpointsClosure, stubClosure: MoyaProvider<ArtsyAPI>.immediatelyStub, online: fakeOnline.asObservable()))
 
             // We fake our defaults to avoid actually hitting the network
             defaults = UserDefaults()
