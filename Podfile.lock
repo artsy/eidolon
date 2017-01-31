@@ -47,7 +47,7 @@ PODS:
   - Moya/RxSwift (8.0.1):
     - Moya/Core
     - RxSwift (~> 3.1.0)
-  - Nimble (6.0.0)
+  - Nimble (6.0.1)
   - Nimble-Snapshots (4.4.0):
     - Nimble-Snapshots/Core (= 4.4.0)
   - Nimble-Snapshots/Core (4.4.0):
@@ -160,7 +160,7 @@ SPEC CHECKSUMS:
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Mixpanel: 106bad33d5b9a05312316a01938f17b6baa2d99f
   Moya: f2e10a04fcb27fec154cb2afa4e536e8b46dac04
-  Nimble: 8fb9b4b34c535b2f32f52c6b9852d6f02d48610b
+  Nimble: 1527fd1bd2b4cf0636251a36bc8ab37e81da8347
   Nimble-Snapshots: e743439f26c2fa99d8f7e0d7c01c99bcb40aa6f2
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   NSObject+Rx: 2a9cd801d9c847e6d2486cbad8d7701b67834e70
@@ -181,4 +181,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a1e702f9ca30ef663aaecab351934324c2b8409e
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

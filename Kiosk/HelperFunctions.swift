@@ -8,8 +8,20 @@ func stringIsEmailAddress(_ text: String) -> Bool {
     return testPredicate.evaluate(with: text)
 }
 
-func centsToPresentableDollarsString(_ cents: Int) -> String {
-    guard let dollars = NumberFormatter.currencyString(forDollarCents: cents as NSNumber!) else {
+fileprivate func createFormatter(_ currencySymbol: String) -> NumberFormatter {
+    let newFormatter = NumberFormatter()
+    newFormatter.locale = Locale.current
+    newFormatter.currencySymbol = currencySymbol
+    newFormatter.numberStyle = .currency
+    newFormatter.maximumFractionDigits = 0
+    newFormatter.alwaysShowsDecimalSeparator = false
+    return newFormatter
+}
+
+func centsToPresentableDollarsString(_ cents: Int, currencySymbol: String) -> String {
+    let formatter = createFormatter(currencySymbol)
+
+    guard let dollars = formatter.string(from: NSDecimalNumber(mantissa: UInt64(cents), exponent: -2, isNegative: false)) else {
         return ""
     }
 

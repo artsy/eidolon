@@ -68,7 +68,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             nav.auctionID = testAuctionID
 
             let artwork = Artwork.fromJSON(artworkJSON)
-            let saleArtwork = SaleArtwork(id: "", artwork: artwork)
+            let saleArtwork = SaleArtwork(id: "", artwork: artwork, currencySymbol: "£")
             saleArtwork.minimumNextBidCents = 10000
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil, auctionID: testAuctionID)
 
@@ -87,7 +87,7 @@ class PlaceBidViewControllerTests: QuickSpec {
                 nav.auctionID = testAuctionID
 
                 let artwork = Artwork.fromJSON(artworkJSON)
-                let saleArtwork = SaleArtwork(id: "", artwork: artwork)
+                let saleArtwork = SaleArtwork(id: "", artwork: artwork, currencySymbol: "£")
                 saleArtwork.minimumNextBidCents = 10000
                 saleArtwork.openingBidCents = 10000
                 saleArtwork.highestBidCents = nil
@@ -110,8 +110,8 @@ class PlaceBidViewControllerTests: QuickSpec {
                 subject.loadViewProgrammatically()
 
                 expect(subject.currentBidTitleLabel.text).to(equal("Opening Bid:"))
-                expect(subject.currentBidAmountLabel.text).to(equal("$100"))
-                expect(subject.nextBidAmountLabel.text).to(equal("Enter $100 or more"))
+                expect(subject.currentBidAmountLabel.text).to(equal("£100"))
+                expect(subject.nextBidAmountLabel.text).to(equal("Enter £100 or more"))
             }
         }
 
@@ -123,7 +123,7 @@ class PlaceBidViewControllerTests: QuickSpec {
                 nav.auctionID = testAuctionID
 
                 let artwork = Artwork.fromJSON(artworkJSON)
-                let saleArtwork = SaleArtwork(id: "", artwork: artwork)
+                let saleArtwork = SaleArtwork(id: "", artwork: artwork, currencySymbol: "£")
                 saleArtwork.minimumNextBidCents = 25000
                 saleArtwork.openingBidCents = 10000
                 saleArtwork.highestBidCents = 20000
@@ -138,8 +138,8 @@ class PlaceBidViewControllerTests: QuickSpec {
                 subject.loadViewProgrammatically()
 
                 expect(subject.currentBidTitleLabel.text).to(equal("Current Bid:"))
-                expect(subject.currentBidAmountLabel.text).to(equal("$200"))
-                expect(subject.nextBidAmountLabel.text).to(equal("Enter $250 or more"))
+                expect(subject.currentBidAmountLabel.text).to(equal("£200"))
+                expect(subject.nextBidAmountLabel.text).to(equal("Enter £250 or more"))
             }
         }
 
@@ -158,7 +158,7 @@ class PlaceBidViewControllerTests: QuickSpec {
             nav.auctionID = testAuctionID
 
             let artwork = Artwork.fromJSON(artworkJSON)
-            let saleArtwork = SaleArtwork(id: "", artwork: artwork)
+            let saleArtwork = SaleArtwork(id: "", artwork: artwork, currencySymbol: "£")
             saleArtwork.minimumNextBidCents = 100
 
             nav.bidDetails = BidDetails(saleArtwork: saleArtwork, paddleNumber: nil, bidderPIN: nil, bidAmountCents: nil, auctionID: testAuctionID)

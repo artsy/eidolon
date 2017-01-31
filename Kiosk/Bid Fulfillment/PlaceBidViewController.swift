@@ -24,6 +24,7 @@ class PlaceBidViewController: UIViewController {
 
     @IBOutlet var artworkImageView: UIImageView!
     @IBOutlet weak var detailsStackView: ORTagBasedAutoStackView!
+    @IBOutlet weak var currencySymbolLabel: UILabel!
 
     @IBOutlet var bidButton: Button!
     @IBOutlet weak var conditionsOfSaleButton: UIButton!
@@ -77,6 +78,8 @@ class PlaceBidViewController: UIViewController {
 
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
+            currencySymbolLabel.text = nav.bidDetails.saleArtwork?.currencySymbol ?? ""
+
             bidDollars
                 .map { $0 * 100 }
                 .takeUntil(viewWillDisappear)
@@ -108,7 +111,7 @@ class PlaceBidViewController: UIViewController {
 
                 minimumNextBid
                     .map { $0 as Int }
-                    .map(toNextBidString)
+                    .map(toNextBidString(currencySymbol: saleArtwork.currencySymbol))
                     .bindTo(nextBidAmountLabel.rx.text)
                     .addDisposableTo(rx_disposeBag)
 
@@ -277,11 +280,11 @@ func dollarsToCurrencyString(_ dollars: Int) -> String {
     return formatter.string(from: dollars as NSNumber) ?? ""
 }
 
-func toNextBidString(_ cents: Int) -> String {
-    guard let dollars = NumberFormatter.currencyString(forDollarCents: cents as NSNumber!)  else {
-        return ""
+func toNextBidString(currencySymbol: String) -> (Int) -> String {
+    return { cents in
+        let dollars = centsToPresentableDollarsString(cents, currencySymbol: currencySymbol)
+        return "Enter \(dollars) or more"
     }
-    return "Enter \(dollars) or more"
 }
 
 typealias DeveloperOnly = PlaceBidViewController
