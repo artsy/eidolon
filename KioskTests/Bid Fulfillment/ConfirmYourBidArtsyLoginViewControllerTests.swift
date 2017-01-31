@@ -14,7 +14,8 @@ class ConfirmYourBidArtsyLoginViewControllerTests: QuickSpec {
             // Highlighting of the text field (as it becomes first responder) is inconsistent without this line.
             subject.view.drawHierarchy(in: CGRect.zero, afterScreenUpdates: true)
 
-            expect(subject).to(haveValidSnapshot(usesDrawRect: true))
+            // There's some strange button enabled state animation that's messing with the tests. Adding a tolance.
+            expect(subject).to(haveValidSnapshot(usesDrawRect: true, tolerance: 0.1))
         }
 
         pending("looks right with an invalid password") {

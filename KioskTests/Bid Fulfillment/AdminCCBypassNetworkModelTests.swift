@@ -89,9 +89,9 @@ private func networkingForBidder(createdByAdmin: Bool?) -> AuthorizedNetworking 
     }
 
     let provider = OnlineProvider<ArtsyAuthenticatedAPI>(endpointClosure: { target in
-            return Endpoint(URL: "oaishdf", sampleResponseClosure: {.networkResponse(200, sampleData)})
+            return Endpoint(url: "oaishdf", sampleResponseClosure: {.networkResponse(200, sampleData)})
         },
-        stubClosure: MoyaProvider.ImmediatelyStub,
+        stubClosure: MoyaProvider.immediatelyStub,
         online: .just(true))
 
     let networking = AuthorizedNetworking(provider: provider)

@@ -25,7 +25,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
         }
 
         afterEach {
-            Stripe.setDefaultPublishableKey(nil)
+            Stripe.setDefaultPublishableKey("")
         }
         
         it("initializer assigns bid details") {
@@ -193,14 +193,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                     }
 
                     it("sets user state after successful registration") {
-                        testStripeManager.token = STPToken(attributeDictionary: [
-                            "id": "12345",
-                            "card": [
-                                "brand": "American Express",
-                                "name": "Simon Suyez",
-                                "last4": "0001"
-                            ]
-                            ])
+                        testStripeManager.token = TestToken()
 
                         subject.registerButtonCommand().execute()
 
@@ -285,18 +278,27 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
     }
 }
 
+class TestToken: Tokenable {
+    var tokenId = "12345"
+    var card: STPCard? {
+        let card = STPCard(id: "12345", brand: .amex, last4: "0001", expMonth: 01, expYear: 99, funding: .credit)
+        card.name = "Simon Suyez"
+        return card
+    }
+}
+
 class ManualCreditCardInputViewModelTestsStripeManager: StripeManager {
     var isValidCreditCard = false
 
     var registrationClosure: (() -> ())?
-    var token: STPToken?
+    var token: Tokenable?
     var shouldSucceed = true
 
     override func stringIsCreditCard(_: String) -> Bool {
         return isValidCreditCard
     }
 
-    override func registerCard(digits: String, month: UInt, year: UInt, securityCode: String, postalCode: String) -> Observable<STPToken> {
+    override func registerCard(digits: String, month: UInt, year: UInt, securityCode: String, postalCode: String) -> Observable<Tokenable> {
         return Observable.create { observer in
             self.registrationClosure?()
 

@@ -111,11 +111,11 @@ class TestKeys: EidolonKeys {
         self.secret = secret
     }
     
-    override func artsyAPIClientKey() -> String! {
+    override var artsyAPIClientKey: String {
         return key
     }
     
-    override func artsyAPIClientSecret() -> String! {
+    override var artsyAPIClientSecret: String {
         return secret
     }
 }

@@ -21,7 +21,7 @@ class StripeManagerTests: QuickSpec {
         }
 
         afterEach {
-            Stripe.setDefaultPublishableKey(nil)
+            Stripe.setDefaultPublishableKey("")
         }
 
         it("sends the correct token upon success") {
@@ -63,22 +63,15 @@ class StripeManagerTests: QuickSpec {
     }
 }
 
-class TestSTPAPIClient: STPAPIClient {
+class TestSTPAPIClient: Clientable {
     var succeed = true
-    var token = STPToken(attributeDictionary: [
-        "id": "12345",
-        "card": [
-            "brand": "American Express",
-            "name": "Simon Suyez",
-            "last4": "0001"
-        ]
-    ])
+    var token = TestToken()
 
-    override func createToken(with card: STPCard!, completion: STPCompletionBlock!) {
+    func createToken(withCard card: STPCardParams, completion: ((Tokenable?, Error?) -> Void)?) {
         if succeed {
-            completion(token, nil)
+            completion?(token, nil)
         } else {
-            completion(nil, TestError.Default as NSError)
+            completion?(nil, TestError.Default)
         }
     }
 }

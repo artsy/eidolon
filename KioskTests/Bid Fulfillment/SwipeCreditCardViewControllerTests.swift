@@ -5,19 +5,19 @@ import Keys
 import Kiosk
 
 class StubKeys: EidolonKeys {
-    override func cardflightProductionAPIClientKey() -> String! {
+    override var cardflightProductionAPIClientKey: String {
         return "PRODUCTIONAPIKEY"
     }
 
-    override func cardflightProductionMerchantAccountToken() -> String! {
+    override var cardflightProductionMerchantAccountToken: String {
         return "PRODUCTIONACCOUNTTOKEN"
     }
 
-    override func cardflightStagingAPIClientKey() -> String! {
+    override var cardflightStagingAPIClientKey: String {
         return "STAGINGAPIKEY"
     }
 
-    override func cardflightStagingMerchantAccountToken() -> String! {
+    override var cardflightStagingMerchantAccountToken: String {
         return "STAGINGACCOUNTTOKEN"
     }
 }
@@ -55,8 +55,8 @@ class SwipeCreditCardViewControllerTests: QuickSpec {
             }
 
             it("sets up the CardHandler") {
-                expect(subject.cardHandler.APIKey) == stubKeys.cardflightStagingAPIClientKey()
-                expect(subject.cardHandler.APIToken) == stubKeys.cardflightStagingMerchantAccountToken()
+                expect(subject.cardHandler.APIKey) == stubKeys.cardflightStagingAPIClientKey
+                expect(subject.cardHandler.APIToken) == stubKeys.cardflightStagingMerchantAccountToken
             }
         }
 
@@ -73,8 +73,8 @@ class SwipeCreditCardViewControllerTests: QuickSpec {
             }
 
             it("sets up the CardHandler") {
-                expect(subject.cardHandler.APIKey) == stubKeys.cardflightProductionAPIClientKey()
-                expect(subject.cardHandler.APIToken) == stubKeys.cardflightProductionMerchantAccountToken()
+                expect(subject.cardHandler.APIKey) == stubKeys.cardflightProductionAPIClientKey
+                expect(subject.cardHandler.APIToken) == stubKeys.cardflightProductionMerchantAccountToken
             }
         }
     }
