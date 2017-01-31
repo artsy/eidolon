@@ -1,8 +1,12 @@
 upcoming:
-- Underlying infrastructure work and library updates. [AYastrebov]
-- Fixes problem with the app crashing when switching auctions. [ash]
 
 releases:
+- version: 5.6.1
+  date: January 31 2017
+  notes:
+  - Underlying infrastructure work and library updates. [AYastrebov]
+  - Fixes problem with the app crashing when switching auctions. [ash]
+
 - version: 5.6.0
   date: January 30 2017
   notes:
@@ -395,6 +399,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
