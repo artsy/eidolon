@@ -27,7 +27,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
             let endpoint: ArtsyAPI = ArtsyAPI.findExistingEmailRegistration(email: me.emailTextField.text ?? "")
 
             return self?.provider.request(endpoint)
-                .filterStatusCode(200)
+                .filter(statusCode: 200)
                 .doOnNext { _ in
                     me.performSegue(.ExistingArtsyUserFound)
                 }

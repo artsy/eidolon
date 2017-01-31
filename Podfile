@@ -52,7 +52,7 @@ target 'Kiosk' do
   pod 'ECPhoneNumberFormatter'
   pod 'UIImageViewAligned', :git => 'https://github.com/ashfurrow/UIImageViewAligned.git'
   pod 'DZNWebViewController', :git => 'https://github.com/orta/DZNWebViewController.git'
-  pod 'Reachability', :git => 'https://github.com/ashfurrow/Reachability.git', :branch => 'frameworks'
+  pod 'ReachabilitySwift'
 
   pod 'UIView+BooleanAnimations'
   pod 'ARTiledImageView'
@@ -63,7 +63,7 @@ target 'Kiosk' do
   pod 'SwiftyJSON'
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'Moya/RxSwift', '= 8.0.0-beta.3'
+  pod 'Moya/RxSwift'
   pod 'NSObject+Rx'
   pod 'Action'
 

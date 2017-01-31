@@ -29,9 +29,9 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
     lazy var appSetup = AppSetup.sharedState
     lazy var cardHandler: CardHandler = {
         if self.appSetup.useStaging {
-            return CardHandler(apiKey: self.keys.cardflightStagingAPIClientKey(), accountToken: self.keys.cardflightStagingMerchantAccountToken())
+            return CardHandler(apiKey: self.keys.cardflightStagingAPIClientKey, accountToken: self.keys.cardflightStagingMerchantAccountToken)
         } else {
-            return CardHandler(apiKey: self.keys.cardflightProductionAPIClientKey(), accountToken: self.keys.cardflightProductionMerchantAccountToken())
+            return CardHandler(apiKey: self.keys.cardflightProductionAPIClientKey, accountToken: self.keys.cardflightProductionMerchantAccountToken)
         }
     }()
     
@@ -133,10 +133,10 @@ private extension SwipeCreditCardViewController {
 
                 self?.cardName.value = "Kiosk Staging CC Test"
                 self?.cardToken.value = token.tokenId
-                self?.cardLastDigits.value = token.card.last4
+                self?.cardLastDigits.value = token.card!.last4()
 
                 if let newUser = self?.navigationController?.fulfillmentNav().bidDetails.newUser {
-                    newUser.name.value = token.card.brand.name
+                    newUser.name.value = token.card?.brand.name
                 }
 
                 self?.finished.onCompleted()

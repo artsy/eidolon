@@ -3,12 +3,19 @@
 @implementation STPCard (Validation)
 
 + (BOOL)validateCardNumber:(NSString *)cardNumber {
-    STPCard *card = [[STPCard alloc] init];
-    card.number = cardNumber;
 
-    __autoreleasing NSString *cardNumberCopy = [cardNumber copy];
+    STPCardValidationState validationState =
+    [STPCardValidator validationStateForNumber:cardNumber validatingCardBrand:NO];
 
-    return [card validateNumber:&cardNumberCopy error:nil];
+    switch (validationState) {
+        case STPCardValidationStateValid:
+            return YES;
+            break;
+
+        default:
+            return NO;
+            break;
+    }
 }
 
 @end

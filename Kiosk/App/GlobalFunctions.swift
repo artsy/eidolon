@@ -1,5 +1,5 @@
 import RxSwift
-import Reachability
+import ReachabilitySwift
 import Moya
 
 // Ideally a Pod. For now a file.
@@ -19,8 +19,12 @@ private let reachabilityManager = ReachabilityManager()
 
 // An observable that completes when the app gets online (possibly completes immediately).
 func connectedToInternetOrStubbing() -> Observable<Bool> {
-    let online = reachabilityManager.reach
+
     let stubbing = Observable.just(APIKeys.sharedKeys.stubResponses)
+
+    guard let online = reachabilityManager?.reach else {
+        return stubbing
+    }
 
     return [online, stubbing].combineLatestOr()
 }
@@ -38,31 +42,40 @@ func detectDevelopmentEnvironment() -> Bool {
     return developmentEnvironment
 }
 
-private class ReachabilityManager: NSObject {
+private class ReachabilityManager {
+
+    private let reachability: Reachability
+
     let _reach = ReplaySubject<Bool>.create(bufferSize: 1)
     var reach: Observable<Bool> {
         return _reach.asObservable()
     }
 
-    fileprivate let reachability = Reachability.forInternetConnection()
+    init?() {
+        guard let r = Reachability() else {
+            return nil
+        }
+        self.reachability = r
 
-    override init() {
-        super.init()
-
-        reachability?.reachableBlock = { [weak self] _ in
-            DispatchQueue.main.async {
-                self?._reach.onNext(true)
-            }
+        do {
+            try self.reachability.startNotifier()
+        } catch {
+            return nil
         }
 
-        reachability?.unreachableBlock = { [weak self] _ in
-            DispatchQueue.main.async {
-                self?._reach.onNext(false)
-            }
+        self._reach.onNext(self.reachability.isReachable)
+
+        self.reachability.whenReachable = { _ in
+            DispatchQueue.main.async { self._reach.onNext(true) }
         }
 
-        reachability?.startNotifier()
-        _reach.onNext(reachability?.isReachable() ?? false)
+        self.reachability.whenUnreachable = { _ in
+            DispatchQueue.main.async { self._reach.onNext(false) }
+        }
+    }
+
+    deinit {
+        reachability.stopNotifier()
     }
 }
 

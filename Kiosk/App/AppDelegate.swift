@@ -48,16 +48,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let keys = EidolonKeys()
 
         if AppSetup.sharedState.useStaging {
-            Stripe.setDefaultPublishableKey(keys.stripeStagingPublishableKey())
+            Stripe.setDefaultPublishableKey(keys.stripeStagingPublishableKey)
         } else {
-            Stripe.setDefaultPublishableKey(keys.stripeProductionPublishableKey())
+            Stripe.setDefaultPublishableKey(keys.stripeProductionPublishableKey)
         }
 
 //        let mixpanelToken = AppSetup.sharedState.useStaging ? keys.mixpanelStagingAPIClientKey() : keys.mixpanelProductionAPIClientKey()
 
         ARAnalytics.setup(withAnalytics: [
-            ARHockeyAppBetaID: keys.hockeyBetaSecret(),
-            ARHockeyAppLiveID: keys.hockeyProductionSecret(),
+            ARHockeyAppBetaID: keys.hockeyBetaSecret,
+            ARHockeyAppLiveID: keys.hockeyProductionSecret,
 //            ARMixpanelToken: mixpanelToken // TODO: Restore mixpanel
         ])
 
