@@ -13,14 +13,14 @@ PODS:
   - ARCollectionViewMasonryLayout (2.0.0)
   - ARTiledImageView (1.1.1):
     - SDWebImage
-  - Artsy+OSSUIFonts (2.0.2)
   - Artsy+UIColors (3.1.0)
+  - Artsy+UIFonts (1.1.1)
   - Artsy+UILabels (2.1.2):
-    - Artsy+OSSUIFonts
     - Artsy+UIColors (~> 3.0)
+    - Artsy+UIFonts
   - Artsy-UIButtons (2.0.3):
-    - Artsy+OSSUIFonts
     - Artsy+UIColors (~> 3.0)
+    - Artsy+UIFonts
     - UIView+BooleanAnimations
   - CardFlight (3.5.1)
   - DZNWebViewController (2.0):
@@ -87,8 +87,8 @@ DEPENDENCIES:
   - ARAnalytics/Mixpanel
   - ARCollectionViewMasonryLayout (~> 2.0.0)
   - ARTiledImageView
-  - Artsy+OSSUIFonts
   - Artsy+UIColors
+  - Artsy+UIFonts
   - Artsy+UILabels
   - Artsy-UIButtons
   - CardFlight
@@ -139,14 +139,14 @@ SPEC CHECKSUMS:
   ARAnalytics: 85e7bb999e2a40cea7d2394e71e8ecbafa50f2d0
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
-  Artsy+OSSUIFonts: 10b588a6bcef1129959f9002266f1bc0c939be18
   Artsy+UIColors: 31c03c4146f5e6618a9b950f37dfe02dd9ac09a6
+  Artsy+UIFonts: 155b972733a24bb12f152fb6d25e2610c1cb93e0
   Artsy+UILabels: c5bef562052f74bc2f0d523c0f1a289c59c7fbed
   Artsy-UIButtons: 0c87d8a112e6b1d688b153c2a7a8f155e2f1a18f
   CardFlight: e438f8c42d6636bc6ffe3312ecc9398b89e7aed4
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
-  FBSnapshotTestCase: '094f9f314decbabe373b87cc339bea235a63e07a'
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   FLKAutoLayout: 95b12c5cd9652100235140b68652f063f7437851
   Forgeries: 64ced144ea8341d89a7eec9d1d7986f0f1366250
   HockeySDK-Source: 05f045d91770f3fef32bf150d049dca3b054d883
@@ -165,7 +165,7 @@ SPEC CHECKSUMS:
   RxBlocking: cd73ef6a5f8c39cede9488178c46aa0c3c3ed17f
   RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
   RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
-  SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   Stripe: 0f41a33a6fa3ac76ee668d7df3e2680c28b8ab1a
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
