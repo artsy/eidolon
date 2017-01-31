@@ -3,39 +3,6 @@ import Moya
 import RxSwift
 import Alamofire
 
-class OnlineProvider<Target>: RxMoyaProvider<Target> where Target: TargetType {
-
-    fileprivate let online: Observable<Bool>
-
-    init(endpointClosure: @escaping EndpointClosure = MoyaProvider.DefaultEndpointMapping,
-        requestClosure: @escaping RequestClosure = MoyaProvider.DefaultRequestMapping,
-        stubClosure: @escaping StubClosure = MoyaProvider.NeverStub,
-        manager: Manager = RxMoyaProvider<Target>.DefaultAlamofireManager(),
-        plugins: [PluginType] = [],
-        trackInflights: Bool = false,
-        online: Observable<Bool> = connectedToInternetOrStubbing()) {
-
-        self.online = online
-        super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins, trackInflights: trackInflights)
-    }
-
-    override func request(_ token: Target) -> Observable<Moya.Response> {
-        let actualRequest = super.request(token)
-        return online
-            .ignore(value: false)  // Wait until we're online
-            .take(1)        // Take 1 to make sure we only invoke the API once.
-            .flatMap { _ in // Turn the online state into a network request
-                return actualRequest
-            }
-
-    }
-}
-
-protocol NetworkingType {
-    associatedtype T: TargetType, ArtsyAPIType
-    var provider: OnlineProvider<T> { get }
-}
-
 struct Networking: NetworkingType {
     typealias T = ArtsyAPI
     let provider: OnlineProvider<ArtsyAPI>
