@@ -10,10 +10,10 @@ protocol Tokenable {
 extension STPToken: Tokenable { }
 
 protocol Clientable {
-    func createToken(withCard card: STPCardParams, completion: ((Tokenable?, Error?) -> Void)?)
+    func kiosk_createToken(withCard card: STPCardParams, completion: ((Tokenable?, Error?) -> Void)?)
 }
 extension STPAPIClient: Clientable {
-    func createToken(withCard card: STPCardParams, completion: ((Tokenable?, Error?) -> Void)?) {
+    func kiosk_createToken(withCard card: STPCardParams, completion: ((Tokenable?, Error?) -> Void)?) {
         self.createToken(withCard: card) { (token, error) in
             completion?(token, error)
         }
@@ -37,7 +37,7 @@ class StripeManager: NSObject {
                 return Disposables.create()
             }
 
-            me.stripeClient.createToken(withCard: card) { (token, error) in
+            me.stripeClient.kiosk_createToken(withCard: card) { (token, error) in
                 if let token = token {
                     observer.onNext(token)
                     observer.onCompleted()
