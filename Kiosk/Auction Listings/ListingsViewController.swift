@@ -122,6 +122,7 @@ class ListingsViewController: UIViewController {
             .subscribe(onNext: { [weak self] layout in
                 // Need to explicitly call animated: false and reload to avoid animation
                 self?.collectionView.setCollectionViewLayout(layout, animated: false)
+                self?.collectionView.reloadData()
             })
             .addDisposableTo(rx_disposeBag)
     }
