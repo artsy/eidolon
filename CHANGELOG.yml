@@ -1,4 +1,6 @@
 upcoming:
+- Fixes problem switching between grid and table layouts. [ash]
+- Fixes crash on testing credit card authorization. [ash]
 
 releases:
 - version: 5.6.1

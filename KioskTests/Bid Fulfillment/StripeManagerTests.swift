@@ -67,7 +67,7 @@ class TestSTPAPIClient: Clientable {
     var succeed = true
     var token = TestToken()
 
-    func createToken(withCard card: STPCardParams, completion: ((Tokenable?, Error?) -> Void)?) {
+    func kiosk_createToken(withCard card: STPCardParams, completion: ((Tokenable?, Error?) -> Void)?) {
         if succeed {
             completion?(token, nil)
         } else {
