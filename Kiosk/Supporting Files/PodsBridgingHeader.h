@@ -7,7 +7,7 @@
 
 #import <Artsy_UILabels/UIView+ARDrawing.h>
 
-#import <ARCollectionVIewMasonryLayout/ARCollectionViewMasonryLayout.h>
+#import <ARCollectionViewMasonryLayout/ARCollectionViewMasonryLayout.h>
 
 #import <ECPhoneNumberFormatter/ECPhoneNumberFormatter.h>
 
