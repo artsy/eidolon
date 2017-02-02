@@ -1,8 +1,12 @@
 upcoming:
-- Fixes problem switching between grid and table layouts. [ash]
-- Fixes crash on testing credit card authorization. [ash]
 
 releases:
+- version: 5.6.2
+  date: February 01 2017
+  notes:
+  - Fixes problem switching between grid and table layouts. [ash]
+  - Fixes crash on testing credit card authorization. [ash]
+
 - version: 5.6.1
   date: January 31 2017
   notes:
@@ -401,6 +405,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
