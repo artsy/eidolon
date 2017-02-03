@@ -3,9 +3,9 @@ import SwiftyJSON
 
 final class Bid: NSObject, JSONAbleType {
     let id: String
-    let amountCents: Int
+    let amountCents: Currency
 
-    init(id: String, amountCents: Int) {
+    init(id: String, amountCents: Currency) {
         self.id = id
         self.amountCents = amountCents
     }
@@ -14,7 +14,7 @@ final class Bid: NSObject, JSONAbleType {
         let json = JSON(json)
 
         let id = json["id"].stringValue
-        let amount = json["amount_cents"].int
+        let amount = json["amount_cents"].uInt64
         return Bid(id: id, amountCents: amount!)
     }
 }

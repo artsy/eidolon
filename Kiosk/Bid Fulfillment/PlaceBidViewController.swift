@@ -10,7 +10,7 @@ class PlaceBidViewController: UIViewController {
 
     var provider: Networking!
 
-    fileprivate var _bidDollars = Variable(0)
+    fileprivate var _bidDollars = Variable<Currency>(0)
     var hasAlreadyPlacedABid: Bool = false
 
     @IBOutlet var bidAmountTextField: TextField!
@@ -42,7 +42,7 @@ class PlaceBidViewController: UIViewController {
         appDelegate().showConditionsOfSaleCommand()
     }
     
-    lazy var bidDollars: Observable<Int> = { self.keypadContainer.intValue }()
+    lazy var bidDollars: Observable<Currency> = { self.keypadContainer.currencyValue }()
     var buyersPremium: () -> (BuyersPremium?) = { appDelegate().sale.buyersPremium }
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> PlaceBidViewController {
@@ -71,14 +71,15 @@ class PlaceBidViewController: UIViewController {
             .bindTo(_bidDollars)
             .addDisposableTo(rx_disposeBag)
 
-        bidDollars
-            .map(dollarsToCurrencyString)
-            .bindTo(bidAmountTextField.rx.text)
-            .addDisposableTo(rx_disposeBag)
-
-
         if let nav = self.navigationController as? FulfillmentNavigationController {
-            currencySymbolLabel.text = nav.bidDetails.saleArtwork?.currencySymbol ?? ""
+            let currencySymbol = nav.bidDetails.saleArtwork?.currencySymbol ?? ""
+
+            currencySymbolLabel.text = currencySymbol
+
+            bidDollars
+                .map(dollarsToCurrencyString(currencySymbol: currencySymbol))
+                .bindTo(bidAmountTextField.rx.text)
+                .addDisposableTo(rx_disposeBag)
 
             bidDollars
                 .map { $0 * 100 }
@@ -94,7 +95,7 @@ class PlaceBidViewController: UIViewController {
                 let minimumNextBid = saleArtwork
                     .rx.observe(NSNumber.self, "minimumNextBidCents")
                     .filterNil()
-                    .map { $0 as Int }
+                    .map { $0 as Currency }
 
                 saleArtwork.viewModel
                     .currentBidOrOpeningBidLabel()
@@ -110,7 +111,7 @@ class PlaceBidViewController: UIViewController {
 
 
                 minimumNextBid
-                    .map { $0 as Int }
+                    .map { $0 as Currency }
                     .map(toNextBidString(currencySymbol: saleArtwork.currencySymbol))
                     .bindTo(nextBidAmountLabel.rx.text)
                     .addDisposableTo(rx_disposeBag)
@@ -267,20 +268,22 @@ private extension PlaceBidViewController {
 }
 
 
-/// These are for RAC only
+/// These are for RxSwift only
 
-func dollarsToCurrencyString(_ dollars: Int) -> String {
-    if dollars == 0 {
-        return ""
+func dollarsToCurrencyString(currencySymbol: String) -> (Currency) -> String {
+    return { dollars in
+        if dollars == 0 {
+            return ""
+        }
+
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.numberStyle = .decimal
+        return formatter.string(from: dollars as NSNumber) ?? ""
     }
-
-    let formatter = NumberFormatter()
-    formatter.locale = Locale(identifier: "en_US")
-    formatter.numberStyle = .decimal
-    return formatter.string(from: dollars as NSNumber) ?? ""
 }
 
-func toNextBidString(currencySymbol: String) -> (Int) -> String {
+func toNextBidString(currencySymbol: String) -> (Currency) -> String {
     return { cents in
         let dollars = centsToPresentableDollarsString(cents, currencySymbol: currencySymbol)
         return "Enter \(dollars) or more"
