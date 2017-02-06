@@ -80,3 +80,8 @@ auction kiosk app, and we are not expecting to have significant community
 contributions back to it. We are developing this project in the open because
 it is not part of our core IP, and open source is [part of our job](http://code.dblock.org/2011/07/15/open-source-is-simply-part-of-my-teams-job-description.html). However, if you notice something that is wrong or could be
 improved, don't hesitate to send us a pull request.
+
+License
+-------
+
+MIT License. See [LICENSE](LICENSE).
