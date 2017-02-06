@@ -84,6 +84,4 @@ improved, don't hesitate to send us a pull request.
 License
 -------
 
-Copyright (c) 2014-2017 Art.sy, Inc.
-
 MIT License. See [LICENSE](LICENSE).
