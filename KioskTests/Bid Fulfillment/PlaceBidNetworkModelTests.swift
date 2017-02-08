@@ -80,7 +80,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
 
             expect(auctionID) == fulfillmentController.bidDetails.saleArtwork?.auctionID
             expect(artworkID) == fulfillmentController.bidDetails.saleArtwork?.artwork.id
-            expect(Currency(bidCents!)) == Currency(fulfillmentController.bidDetails.bidAmountCents.value ?? 0)
+            expect(Currency(bidCents!)) == Currency(fulfillmentController.bidDetails.bidAmountCents.value!)
         }
 
         describe("failing network responses") {
