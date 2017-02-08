@@ -19,7 +19,7 @@ import Moya
         imageView.sd_setImage(with: url)
     }
 
-    init(saleArtwork: SaleArtwork?, paddleNumber: String?, bidderPIN: String?, bidAmountCents: Int?, auctionID: String) {
+    init(saleArtwork: SaleArtwork?, paddleNumber: String?, bidderPIN: String?, bidAmountCents: Currency?, auctionID: String) {
         self.auctionID = auctionID
         self.saleArtwork = saleArtwork
         self.paddleNumber.value = paddleNumber

@@ -7,7 +7,7 @@ import Kiosk
 class KeypadViewModelTestClass: NSObject {
     // Start with invalid data
     var stringValue = Variable("something invalid")
-    var intValue = Variable(-1)
+    var currencyValue = Variable<Currency>(0)
 }
 
 class KeypadViewModelTests: QuickSpec {
@@ -27,14 +27,14 @@ class KeypadViewModelTests: QuickSpec {
                 .bindTo(testHarness.stringValue)
                 .addDisposableTo(disposeBag)
             subject
-                .intValue
+                .currencyValue
                 .asObservable()
-                .bindTo(testHarness.intValue)
+                .bindTo(testHarness.currencyValue)
                 .addDisposableTo(disposeBag)
         }
         
         it("it has default values") {
-            expect(testHarness.intValue) == 0
+            expect(testHarness.currencyValue) == 0
             expect(testHarness.stringValue) == ""
         }
         
@@ -45,7 +45,7 @@ class KeypadViewModelTests: QuickSpec {
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribe(onCompleted: {
-                        expect(testHarness.intValue) == 1337
+                        expect(testHarness.currencyValue) == 1337
                         expect(testHarness.stringValue) == "1337"
 
                         done()
@@ -63,7 +63,7 @@ class KeypadViewModelTests: QuickSpec {
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribe(onCompleted: {
-                        expect(testHarness.intValue) == 1333333
+                        expect(testHarness.currencyValue) == 1333333
                         expect(testHarness.stringValue) == "1333333333337"
 
                         done()
@@ -79,7 +79,7 @@ class KeypadViewModelTests: QuickSpec {
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribe(onCompleted: {
-                        expect(testHarness.intValue) == 1337
+                        expect(testHarness.currencyValue) == 1337
                         expect(testHarness.stringValue) == "01337"
                         
                         done()
@@ -98,7 +98,7 @@ class KeypadViewModelTests: QuickSpec {
                         subject.clearAction.execute()
                     }
                     .subscribe(onCompleted: {
-                        expect(testHarness.intValue) == 0
+                        expect(testHarness.currencyValue) == 0
                         expect(testHarness.stringValue) == ""
                         
                         done()
@@ -116,7 +116,7 @@ class KeypadViewModelTests: QuickSpec {
                     .then {
                         subject.deleteAction.execute()
                     }.subscribe(onCompleted: {
-                        expect(testHarness.intValue) == 13
+                        expect(testHarness.currencyValue) == 13
                         expect(testHarness.stringValue) == "13"
 
                         done()

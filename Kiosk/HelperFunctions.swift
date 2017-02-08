@@ -1,5 +1,7 @@
 import Foundation
 
+typealias Currency = UInt64
+
 // Collection of stanardised mapping funtions for Rx work
 
 func stringIsEmailAddress(_ text: String) -> Bool {
@@ -18,10 +20,10 @@ fileprivate func createFormatter(_ currencySymbol: String) -> NumberFormatter {
     return newFormatter
 }
 
-func centsToPresentableDollarsString(_ cents: Int, currencySymbol: String) -> String {
+func centsToPresentableDollarsString(_ cents: Currency, currencySymbol: String) -> String {
     let formatter = createFormatter(currencySymbol)
 
-    guard let dollars = formatter.string(from: NSDecimalNumber(mantissa: UInt64(cents), exponent: -2, isNegative: false)) else {
+    guard let dollars = formatter.string(from: NSDecimalNumber(mantissa: cents, exponent: -2, isNegative: false)) else {
         return ""
     }
 

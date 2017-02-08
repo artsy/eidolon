@@ -33,9 +33,9 @@ final class SaleArtwork: NSObject, JSONAbleType {
     var minimumNextBidCents: NSNumber?
     
     dynamic var highestBidCents: NSNumber?
-    var estimateCents: Int?
-    var lowEstimateCents: Int?
-    var highEstimateCents: Int?
+    var estimateCents: Currency?
+    var lowEstimateCents: Currency?
+    var highEstimateCents: Currency?
 
     dynamic var reserveStatus: String?
     dynamic var lotNumber: NSNumber?
@@ -69,9 +69,9 @@ final class SaleArtwork: NSObject, JSONAbleType {
         saleArtwork.minimumNextBidCents = json["minimum_next_bid_cents"].int as NSNumber?
 
         saleArtwork.highestBidCents = json["highest_bid_amount_cents"].int as NSNumber?
-        saleArtwork.estimateCents = json["estimate_cents"].int
-        saleArtwork.lowEstimateCents = json["low_estimate_cents"].int
-        saleArtwork.highEstimateCents = json["high_estimate_cents"].int
+        saleArtwork.estimateCents = json["estimate_cents"].uInt64
+        saleArtwork.lowEstimateCents = json["low_estimate_cents"].uInt64
+        saleArtwork.highEstimateCents = json["high_estimate_cents"].uInt64
         saleArtwork.bidCount = json["bidder_positions_count"].int as NSNumber?
         saleArtwork.reserveStatus = json["reserve_status"].string
         saleArtwork.lotNumber = json["lot_number"].int as NSNumber?

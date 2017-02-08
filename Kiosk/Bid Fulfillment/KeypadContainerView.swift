@@ -10,7 +10,7 @@ class KeypadContainerView: UIView {
     fileprivate let viewModel = KeypadViewModel()
     
     var stringValue: Observable<String>!
-    var intValue: Observable<Int>!
+    var currencyValue: Observable<Currency>!
     var deleteAction: CocoaAction!
     var resetAction: CocoaAction!
 
@@ -33,7 +33,7 @@ class KeypadContainerView: UIView {
         keypad.rightAction = viewModel.clearAction
         keypad.keyAction = viewModel.addDigitAction
         
-        intValue = viewModel.intValue.asObservable()
+        currencyValue = viewModel.currencyValue.asObservable()
         stringValue = viewModel.stringValue.asObservable()
         deleteAction = viewModel.deleteAction
         resetAction = viewModel.clearAction
