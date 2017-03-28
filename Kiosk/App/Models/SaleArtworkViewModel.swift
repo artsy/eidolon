@@ -103,10 +103,10 @@ extension SaleArtworkViewModel {
         }
     }
 
-    func lotNumber() -> Observable<String?> {
-        return saleArtwork.rx.observe(NSNumber.self, "lotNumber").map { lotNumber  in
-            if let lotNumber = lotNumber as? Int {
-                return "Lot \(lotNumber)"
+    func lotLabel() -> Observable<String?> {
+        return saleArtwork.rx.observe(NSString.self, "lotLabel").map { lotLabel in
+            if let lotLabel = lotLabel {
+                return "Lot \(lotLabel)"
             } else {
                 return ""
             }

@@ -75,7 +75,7 @@ class ListingsViewControllerTests: QuickSpec {
             describe("with lot numbers") {
                 beforeEach {
                     let viewModel = ListingsViewControllerTestsStubbedViewModel()
-                    viewModel.lotNumber = 13
+                    viewModel.lotLabel = "13"
                     subject.viewModel = viewModel
                 }
 
@@ -135,7 +135,7 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
     func saleArtworkViewModel(atIndexPath indexPath: IndexPath) -> SaleArtworkViewModel {
         let saleArtwork = testSaleArtwork()
 
-        saleArtwork.lotNumber = lotNumber as NSNumber?
+        saleArtwork.lotLabel = lotLabel
         if let soldStatus = soldStatus {
             saleArtwork.artwork.soldStatus = soldStatus
         }
@@ -155,7 +155,7 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
     }
 
     // Testing values
-    var lotNumber: Int?
+    var lotLabel: NSString?
     var soldStatus: String?
     var _gridSelected = Variable(true)
 }

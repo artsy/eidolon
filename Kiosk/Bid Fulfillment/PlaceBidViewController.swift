@@ -132,14 +132,14 @@ class PlaceBidViewController: UIViewController {
                     case gobbler
                 }
 
-                let lotNumber = nav.bidDetails.saleArtwork?.lotNumber
+                let lotLabel = nav.bidDetails.saleArtwork?.lotLabel
 
-                if let _ = lotNumber {
+                if let _ = lotLabel {
                     let lotNumberLabel = smallSansSerifLabel()
                     lotNumberLabel.tag = LabelTags.lotNumber.rawValue
                     detailsStackView.addSubview(lotNumberLabel, withTopMargin: "10", sideMargin: "0")
                     saleArtwork.viewModel
-                        .lotNumber()
+                        .lotLabel()
                         .filterNilKeepOptional()
                         .takeUntil(viewWillDisappear)
                         .bindTo(lotNumberLabel.rx.text)
