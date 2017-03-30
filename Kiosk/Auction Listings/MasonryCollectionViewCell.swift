@@ -53,7 +53,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
 
         moreInfoLabel.constrainHeight("44")
 
-        viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
+        viewModel.flatMapTo(SaleArtworkViewModel.lotLabel)
             .map { $0.isNilOrEmpty }
             .subscribe(onNext: removeLabelWhenEmpty(label: lotNumberLabel, topMargin: "20"))
             .addDisposableTo(rx_disposeBag)

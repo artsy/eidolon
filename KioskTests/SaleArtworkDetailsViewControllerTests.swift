@@ -40,7 +40,7 @@ class SaleArtworkDetailsViewControllerTests: QuickSpec {
 
         describe("with lot numbers") {
             beforeEach {
-                subject.saleArtwork.lotNumber = 13
+                subject.saleArtwork.lotLabel = "13"
             }
 
             itBehavesLike("a sale artwork details view controller") { ["subject": subject] }

@@ -1,5 +1,6 @@
 upcoming:
 - Adds support for higher currency lot values. [ash]
+- Adds support for non-numeric lot numbers. [ash]
 
 releases:
 - version: 5.6.2

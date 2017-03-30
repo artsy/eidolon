@@ -119,16 +119,16 @@ class SaleArtworkDetailsViewController: UIViewController {
             return label
         }
 
-        let hasLotNumber = (saleArtwork.lotNumber != nil)
+        let hasLotNumber = (saleArtwork.lotLabel != nil)
 
-        if let _ = saleArtwork.lotNumber {
+        if let _ = saleArtwork.lotLabel {
             let lotNumberLabel = label(.sansSerif, tag: .lotNumberLabel)
             lotNumberLabel.font = lotNumberLabel.font.withSize(12)
             metadataStackView.addSubview(lotNumberLabel, withTopMargin: "0", sideMargin: "0")
 
             saleArtwork
                 .viewModel
-                .lotNumber()
+                .lotLabel()
                 .filterNil()
                 .mapToOptional()
                 .bindTo(lotNumberLabel.rx.text)

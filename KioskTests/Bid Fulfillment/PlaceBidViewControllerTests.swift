@@ -18,7 +18,7 @@ class PlaceBidViewControllerConfiguration: QuickConfiguration {
 
             describe("with lot number") {
                 beforeEach {
-                    nav.bidDetails.saleArtwork?.lotNumber = 13
+                    nav.bidDetails.saleArtwork?.lotLabel = "13"
                     return
                 }
 

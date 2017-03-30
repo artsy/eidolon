@@ -88,7 +88,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         guard let reuseBag = reuseBag else { return }
 
         // Start with things not expected to ever change. 
-        viewModel.flatMapTo(SaleArtworkViewModel.lotNumber)
+        viewModel.flatMapTo(SaleArtworkViewModel.lotLabel)
             .replaceNil(with: "")
             .mapToOptional()
             .bindTo(lotNumberLabel.rx.text)
