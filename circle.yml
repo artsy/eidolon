@@ -1,6 +1,6 @@
 machine:
   xcode:
-    version: "8.1.0"
+    version: "8.2.0"
   environment:
     FASTLANE_SKIP_UPDATE_CHECK: true
     UPLOAD_IOS_SNAPSHOT_BUCKET_NAME: eidolon-ci
