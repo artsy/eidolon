@@ -58,7 +58,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
                     .doOnError { _ in
                         logger.log("Bidder position was processed but corresponding saleArtwork was not found")
                     }
-                    .catchErrorJustReturn()
+                    .catchErrorJustReturn(Void())
                     .flatMap { _ -> Observable<Void> in
                         return self.checkForMaxBid(provider: provider)
                 }

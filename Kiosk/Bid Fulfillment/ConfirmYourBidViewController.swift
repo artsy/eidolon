@@ -87,7 +87,7 @@ class ConfirmYourBidViewController: UIViewController {
 
                     var response: Moya.Response?
 
-                    if case .statusCode(let receivedResponse)? = error as? Moya.Error {
+                    if case .statusCode(let receivedResponse)? = error as? MoyaError {
                         response = receivedResponse
                     }
 

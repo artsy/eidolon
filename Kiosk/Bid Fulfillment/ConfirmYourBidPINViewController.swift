@@ -88,7 +88,7 @@ class ConfirmYourBidPINViewController: UIViewController {
                         }
                 }
                 .doOnError { error in
-                    if let response = (error as? Moya.Error)?.response {
+                    if let response = (error as? MoyaError)?.response {
                         let responseBody = NSString(data: response.data, encoding: String.Encoding.utf8.rawValue)
                         print("Error authenticating(\(response.statusCode)): \(responseBody)")
                     }
