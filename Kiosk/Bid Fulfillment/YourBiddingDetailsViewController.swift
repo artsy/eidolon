@@ -7,9 +7,12 @@ import RxSwift
 class YourBiddingDetailsViewController: UIViewController {
 
     var provider: Networking!
+
     @IBOutlet dynamic var bidderNumberLabel: UILabel!
     @IBOutlet dynamic var pinNumberLabel: UILabel!
 
+    @IBOutlet weak var bidderNumberTitleLabel: UILabel!
+    @IBOutlet weak var bidderPinTitleLabel: UILabel!
     @IBOutlet weak var confirmationImageView: UIImageView!
     @IBOutlet weak var subtitleLabel: ARSerifLabel!
     @IBOutlet weak var bodyLabel: ARSerifLabel!
@@ -21,6 +24,8 @@ class YourBiddingDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        [bidderNumberTitleLabel, bidderPinTitleLabel].forEach { $0?.backgroundColor = .clear }
 
         [notificationLabel, bidderNumberLabel, pinNumberLabel].forEach { $0.makeTransparent() }
         notificationLabel.setLineHeight(5)

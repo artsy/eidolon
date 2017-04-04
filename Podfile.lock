@@ -2,7 +2,7 @@ PODS:
   - Action (2.2.1):
     - RxCocoa (~> 3.0)
     - RxSwift (~> 3.0)
-  - Alamofire (4.2.0)
+  - Alamofire (4.4.0)
   - ARAnalytics/CoreIOS (4.0.1)
   - ARAnalytics/HockeyApp (4.0.1):
     - ARAnalytics/CoreIOS
@@ -41,12 +41,12 @@ PODS:
   - Mixpanel (3.0.9):
     - Mixpanel/Mixpanel (= 3.0.9)
   - Mixpanel/Mixpanel (3.0.9)
-  - Moya/Core (8.0.1):
-    - Alamofire (~> 4.2.0)
-    - Result (~> 3.1.0)
-  - Moya/RxSwift (8.0.1):
+  - Moya/Core (8.0.3):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - Moya/RxSwift (8.0.3):
     - Moya/Core
-    - RxSwift (~> 3.1.0)
+    - RxSwift (~> 3.0)
   - Nimble (6.0.1)
   - Nimble-Snapshots (4.4.0):
     - Nimble-Snapshots/Core (= 4.4.0)
@@ -65,7 +65,7 @@ PODS:
     - FLKAutoLayout (~> 0.1)
   - Quick (1.0.0)
   - ReachabilitySwift (3)
-  - Result (3.1.0)
+  - Result (3.2.1)
   - RxBlocking (3.1.0):
     - RxSwift (~> 3.1)
   - RxCocoa (3.1.0):
@@ -135,7 +135,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Action: 93c6c9eec95eb76428b2d49a6d260466c2f71b7e
-  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   ARAnalytics: 85e7bb999e2a40cea7d2394e71e8ecbafa50f2d0
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
@@ -153,7 +153,7 @@ SPEC CHECKSUMS:
   ISO8601DateFormatter: 4551b6ce4f83185425f583b0b3feb3c7b59b942c
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Mixpanel: 106bad33d5b9a05312316a01938f17b6baa2d99f
-  Moya: f2e10a04fcb27fec154cb2afa4e536e8b46dac04
+  Moya: d3721622e3cc0cc2f038d69a258686f0b66e7252
   Nimble: 1527fd1bd2b4cf0636251a36bc8ab37e81da8347
   Nimble-Snapshots: e743439f26c2fa99d8f7e0d7c01c99bcb40aa6f2
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
@@ -161,7 +161,7 @@ SPEC CHECKSUMS:
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
+  Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
   RxBlocking: cd73ef6a5f8c39cede9488178c46aa0c3c3ed17f
   RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
   RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
