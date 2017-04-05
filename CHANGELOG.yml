@@ -1,4 +1,5 @@
 upcoming:
+- Fixed a crash when tapping the bid button. [ash]
 
 releases:
 - version: 5.7.0

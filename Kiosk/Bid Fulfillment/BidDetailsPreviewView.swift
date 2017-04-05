@@ -81,7 +81,7 @@ class BidDetailsPreviewView: UIView {
                 guard let cents = bidDetails.bidAmountCents.value else { return "" }
                 guard let currencySymbol = bidDetails.saleArtwork?.currencySymbol else { return "" }
 
-                return "Your bid: " + centsToPresentableDollarsString(cents as Currency, currencySymbol: currencySymbol)
+                return "Your bid: " + centsToPresentableDollarsString(cents.currencyValue, currencySymbol: currencySymbol)
             }
             .bindTo(currentBidPriceLabel.rx.text)
             .addDisposableTo(rx_disposeBag)

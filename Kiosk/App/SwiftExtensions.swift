@@ -54,3 +54,9 @@ extension Optional where Wrapped: Occupiable {
         return !isNilOrEmpty
     }
 }
+
+extension NSNumber {
+    var currencyValue: Currency {
+        return uint64Value
+    }
+}
