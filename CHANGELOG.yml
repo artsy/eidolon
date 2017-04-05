@@ -1,7 +1,11 @@
 upcoming:
-- Fixed a crash when tapping the bid button. [ash]
 
 releases:
+- version: 5.7.1
+  date: April 05 2017
+  notes:
+  - Fixed a crash when tapping the bid button. [ash]
+
 - version: 5.7.0
   date: April 04 2017
   notes:
@@ -413,6 +417,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
