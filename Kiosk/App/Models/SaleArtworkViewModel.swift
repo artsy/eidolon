@@ -143,11 +143,11 @@ extension SaleArtworkViewModel {
         let currencySymbol = saleArtwork.currencySymbol
 
         return Observable.combineLatest(observables) { numbers -> Currency in
-            let bidCount = (numbers[0] ?? 0) as Int
-            let openingBid = numbers[1] as Currency?
-            let highestBid = numbers[2] as Currency?
+            let bidCount = (numbers[0] ?? 0) as! Int
+            let openingBid = numbers[1]?.currencyValue
+            let highestBid = numbers[2]?.currencyValue
 
-            return (bidCount > 0 ? highestBid : openingBid) ?? 0
+            return (bidCount > 0 ? highestBid : openingBid) ?? 0 
             }
             .map { centsToPresentableDollarsString($0, currencySymbol: currencySymbol) }
     }

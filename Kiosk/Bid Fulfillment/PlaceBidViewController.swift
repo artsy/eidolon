@@ -95,7 +95,7 @@ class PlaceBidViewController: UIViewController {
                 let minimumNextBid = saleArtwork
                     .rx.observe(NSNumber.self, "minimumNextBidCents")
                     .filterNil()
-                    .map { $0 as Currency }
+                    .map { $0.currencyValue }
 
                 saleArtwork.viewModel
                     .currentBidOrOpeningBidLabel()
@@ -111,7 +111,6 @@ class PlaceBidViewController: UIViewController {
 
 
                 minimumNextBid
-                    .map { $0 as Currency }
                     .map(toNextBidString(currencySymbol: saleArtwork.currencySymbol))
                     .bindTo(nextBidAmountLabel.rx.text)
                     .addDisposableTo(rx_disposeBag)
