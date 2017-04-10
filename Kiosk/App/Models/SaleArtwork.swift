@@ -40,6 +40,8 @@ final class SaleArtwork: NSObject, JSONAbleType {
     dynamic var reserveStatus: String?
     dynamic var lotLabel: NSString?
 
+    dynamic var available: NSNumber?
+
     init(id: String, artwork: Artwork, currencySymbol: String) {
         self.id = id
         self.artwork = artwork
@@ -75,6 +77,7 @@ final class SaleArtwork: NSObject, JSONAbleType {
         saleArtwork.bidCount = json["bidder_positions_count"].int as NSNumber?
         saleArtwork.reserveStatus = json["reserve_status"].string
         saleArtwork.lotLabel = json["lot_label"].string as NSString?
+        saleArtwork.available = (artwork.soldStatus == "for sale") as NSNumber
 
         return saleArtwork
     }
@@ -93,6 +96,8 @@ final class SaleArtwork: NSObject, JSONAbleType {
         lotLabel = newSaleArtwork.lotLabel ?? lotLabel
 
         artwork.updateWithValues(newSaleArtwork.artwork)
+
+        available = (artwork.soldStatus == "for sale") as NSNumber
     }
 }
 
