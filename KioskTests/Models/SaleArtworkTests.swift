@@ -3,6 +3,7 @@ import Nimble
 @testable
 import Kiosk
 import RxSwift
+import RxBlocking
 
 class SaleArtworkTests: QuickSpec {
     override func spec() {
@@ -18,12 +19,12 @@ class SaleArtworkTests: QuickSpec {
 
         it("updates the soldStatus") {
             let newArtwork = Artwork.fromJSON([:])
-            newArtwork.soldStatus = "sold"
+            newArtwork.soldStatus = true
             let newSaleArtwork = SaleArtwork(id: "id", artwork: newArtwork, currencySymbol: "£")
 
             saleArtwork.updateWithValues(newSaleArtwork)
 
-            expect(newSaleArtwork.artwork.soldStatus) == "sold"
+            expect(newSaleArtwork.artwork.soldStatus) == true
         }
 
         describe("estimates") {
@@ -60,13 +61,13 @@ class SaleArtworkTests: QuickSpec {
             }
 
             it("indicates that an artwork is not for sale") {
-                saleArtwork.artwork.soldStatus = "sold"
-                expect(saleArtwork.viewModel.forSale()).toEventually( equalFirst(false) )
+                saleArtwork.artwork.soldStatus = true
+                expect(try! saleArtwork.viewModel.forSale().toBlocking().first()) == false
             }
 
             it("indicates that an artwork is for sale") {
-                saleArtwork.artwork.soldStatus = "anything else"
-                expect(saleArtwork.viewModel.forSale()).toEventually( equalFirst(true) )
+                saleArtwork.artwork.soldStatus = false
+                expect(try! saleArtwork.viewModel.forSale().toBlocking().first()) == true
             }
         }
 

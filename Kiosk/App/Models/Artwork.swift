@@ -2,21 +2,6 @@ import Foundation
 import SwiftyJSON
 
 final class Artwork: NSObject, JSONAbleType {
-
-    enum SoldStatus {
-        case notSold
-        case sold
-
-        static func fromString(_ string: String) -> SoldStatus {
-            switch string.lowercased() {
-            case "sold":
-                return .sold
-            default:
-                return .notSold
-            }
-        }
-    }
-
     let id: String
 
     let dateString: String
@@ -27,7 +12,7 @@ final class Artwork: NSObject, JSONAbleType {
     dynamic let price: String
     dynamic let date: String
 
-    dynamic var soldStatus: String
+    dynamic var soldStatus: NSNumber
     dynamic var medium: String?
     dynamic var dimensions = [String]()
 
@@ -46,7 +31,7 @@ final class Artwork: NSObject, JSONAbleType {
         return defaultImages?.first ?? self.images?.first
     }()
 
-    init(id: String, dateString: String, title: String, price: String, date: String, sold: String) {
+    init(id: String, dateString: String, title: String, price: String, date: String, sold: NSNumber) {
         self.id = id
         self.dateString = dateString
         self.title = title
@@ -63,7 +48,7 @@ final class Artwork: NSObject, JSONAbleType {
         let dateString = json["date"].stringValue
         let price = json["price"].stringValue
         let date = json["date"].stringValue
-        let sold = json["sold"].stringValue
+        let sold = (json["sold"].bool ?? false) as NSNumber // Default to false if parsing fails.
         
         let artwork = Artwork(id: id, dateString: dateString, title: title, price: price, date: date, sold: sold)
 
