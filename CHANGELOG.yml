@@ -1,7 +1,11 @@
 upcoming:
-- Filters out sold artworks during the sale. [ash]
 
 releases:
+- version: 5.8.0
+  date: April 11 2017
+  notes:
+  - Filters out sold artworks during the sale. [ash]
+
 - version: 5.7.1
   date: April 05 2017
   notes:
@@ -418,6 +422,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
