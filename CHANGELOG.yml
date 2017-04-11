@@ -1,4 +1,5 @@
 upcoming:
+- Filters out sold artworks during the sale. [ash]
 
 releases:
 - version: 5.7.1

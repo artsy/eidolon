@@ -85,7 +85,7 @@ class ListingsViewControllerTests: QuickSpec {
             describe("with artworks not for sale") {
                 beforeEach {
                     let viewModel = ListingsViewControllerTestsStubbedViewModel()
-                    viewModel.soldStatus = "sold"
+                    viewModel.soldStatus = true
                     subject.viewModel = viewModel
                 }
 
@@ -137,7 +137,7 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
 
         saleArtwork.lotLabel = lotLabel
         if let soldStatus = soldStatus {
-            saleArtwork.artwork.soldStatus = soldStatus
+            saleArtwork.artwork.soldStatus = soldStatus as NSNumber
         }
 
         saleArtwork.openingBidCents = (1_000_00 * (indexPath.item + 1)) as NSNumber
@@ -156,6 +156,6 @@ class ListingsViewControllerTestsStubbedViewModel: NSObject, ListingsViewModelTy
 
     // Testing values
     var lotLabel: NSString?
-    var soldStatus: String?
+    var soldStatus: Bool?
     var _gridSelected = Variable(true)
 }

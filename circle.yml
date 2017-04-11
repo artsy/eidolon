@@ -1,6 +1,6 @@
 machine:
   xcode:
-    version: "8.1.0"
+    version: "8.3.0"
   environment:
     FASTLANE_SKIP_UPDATE_CHECK: true
     UPLOAD_IOS_SNAPSHOT_BUCKET_NAME: eidolon-ci
@@ -11,11 +11,9 @@ dependencies:
   pre:
     - bundle install --path=vendor/bundle --jobs 4 --retry 3
     - bundle exec fastlane oss_keys
-    # See https://discuss.circleci.com/t/xcode-exit-code-65/4284/13
-    - xcrun instruments -w "93389280-6FDB-45D5-BF91-8890B50BEAC6" || echo "(Pre)Launched the simulator."
   post:
-    - set -o pipefail && xcodebuild -destination "id=93389280-6FDB-45D5-BF91-8890B50BEAC6" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data build | xcpretty --color
+    - set -o pipefail && xcodebuild -destination "name=iPad Air 2,OS=10.3" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data build | xcpretty --color
 
 test:
   override:
-    - set -o pipefail && xcodebuild -destination "id=93389280-6FDB-45D5-BF91-8890B50BEAC6" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data test | bundle exec second_curtain | xcpretty --color --test
+    - set -o pipefail && xcodebuild -destination "name=iPad Air 2,OS=10.3" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data test | bundle exec second_curtain | xcpretty --color --test

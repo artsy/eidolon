@@ -73,11 +73,11 @@ class ArtworkTests: QuickSpec {
 
         it("updates the soldStatus") {
             let newArtwork = Artwork.fromJSON(data)
-            newArtwork.soldStatus = "sold"
+            newArtwork.soldStatus = true
 
             artwork.updateWithValues(newArtwork)
 
-            expect(artwork.soldStatus) == "sold"
+            expect(artwork.soldStatus) == true
         }
     }
 }

@@ -114,8 +114,8 @@ extension SaleArtworkViewModel {
     }
 
     func forSale() -> Observable<Bool> {
-        return saleArtwork.artwork.rx.observe(String.self, "soldStatus").filterNil().map { status in
-            return Artwork.SoldStatus.fromString(status) == .notSold
+        return saleArtwork.artwork.rx.observe(NSNumber.self, "soldStatus").filterNil().map { sold in
+            return !sold.boolValue
         }
 
     }
