@@ -12,7 +12,6 @@ class ChooseAuctionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         stackScrollView.backgroundColor = .white
-        stackScrollView.bottomMarginHeight = CGFloat(NSNotFound)
         stackScrollView.updateConstraints()
 
         let endpoint: ArtsyAPI = ArtsyAPI.activeAuctions
@@ -40,7 +39,7 @@ class ChooseAuctionViewController: UIViewController {
                         })
                         .addDisposableTo(self.rx_disposeBag)
 
-                    self.stackScrollView.addSubview(button, withTopMargin: "12", sideMargin: "0")
+                    self.stackScrollView.stackView.addSubview(button, withTopMargin: "12", sideMargin: "0")
                     button.constrainHeight("50")
                 }
             })
@@ -48,7 +47,7 @@ class ChooseAuctionViewController: UIViewController {
         
     }
 
-    @IBOutlet weak var stackScrollView: ORStackView!
+    @IBOutlet weak var stackScrollView: ORStackScrollView!
     @IBAction func backButtonTapped(_ sender: AnyObject) {
         _ = self.navigationController?.popViewController(animated: true)
     }
