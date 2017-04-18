@@ -1,7 +1,11 @@
 upcoming:
-- List of sales in admin interface now scrolls. [ash]
 
 releases:
+- version: 5.8.1
+  date: April 18 2017
+  notes:
+  - List of sales in admin interface now scrolls. [ash]
+
 - version: 5.8.0
   date: April 11 2017
   notes:
@@ -423,6 +427,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
