@@ -11,6 +11,8 @@ export SLACK_URL='https://hooks.slack.com/services/REST_OF_THE_URL_FROM_1PASSWOR
 
 They're in the Artsy Engineering 1Password vault. Just add them to your `.zshenv` (or equivalent file).
 
+Make sure Xcode Accounts has the it@ account in it.
+
 The changelog needs to be valid YAML, with an array of changelog entries to deploy.
 
 ```yaml
