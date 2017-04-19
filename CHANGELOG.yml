@@ -1,4 +1,7 @@
 upcoming:
+- Admin sale selection view shoulds more than ten sales now. [ash]
+- Currency symbol is now displayed in the correct font. [ash]
+- Fixes a problem with starting bids displaying instead of current bids. [ash]
 
 releases:
 - version: 5.8.1
