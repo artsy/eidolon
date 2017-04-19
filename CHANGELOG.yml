@@ -1,9 +1,13 @@
 upcoming:
-- Admin sale selection view shoulds more than ten sales now. [ash]
-- Currency symbol is now displayed in the correct font. [ash]
-- Fixes a problem with starting bids displaying instead of current bids. [ash]
 
 releases:
+- version: 5.8.2
+  date: April 19 2017
+  notes:
+  - Admin sale selection view shoulds more than ten sales now. [ash]
+  - Currency symbol is now displayed in the correct font. [ash]
+  - Fixes a problem with starting bids displaying instead of current bids. [ash]
+
 - version: 5.8.1
   date: April 18 2017
   notes:
@@ -430,6 +434,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
