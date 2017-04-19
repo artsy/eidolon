@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="O1R-5R-23t">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -89,7 +89,7 @@
         <scene sceneID="wG8-BK-Gy6">
             <objects>
                 <navigationController modalPresentationStyle="formSheet" navigationBarHidden="YES" id="w8O-U4-lhE" customClass="FulfillmentNavigationController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PvK-mZ-4Jp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PvK-mZ-4Jp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -219,10 +219,10 @@
                                     <constraint firstAttribute="width" constant="18" id="L4R-To-UmK"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTG-in-woi">
-                                <rect key="frame" x="578" y="118" width="54" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTG-in-woi" customClass="ARSansSerifLabel">
+                                <rect key="frame" x="578" y="119" width="54" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="2th-Mf-LhF"/>
+                                    <constraint firstAttribute="height" constant="42" id="2th-Mf-LhF"/>
                                     <constraint firstAttribute="width" constant="54" id="qun-gv-k7E"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="26"/>
@@ -315,7 +315,7 @@
                             <constraint firstItem="ic1-FX-iJp" firstAttribute="leading" secondItem="4Nc-B4-Sow" secondAttribute="leading" id="9V5-lV-cUq"/>
                             <constraint firstItem="UKQ-z8-PIR" firstAttribute="top" secondItem="GS2-EK-4Nx" secondAttribute="bottom" constant="10" id="Bb8-ER-cpC"/>
                             <constraint firstItem="sft-xL-TDA" firstAttribute="top" secondItem="Y81-nV-kZl" secondAttribute="bottom" constant="33" id="DUV-3e-uwW"/>
-                            <constraint firstItem="uVu-PR-0oJ" firstAttribute="top" secondItem="bTG-in-woi" secondAttribute="bottom" constant="13" id="F0h-TW-BRC"/>
+                            <constraint firstItem="uVu-PR-0oJ" firstAttribute="top" secondItem="bTG-in-woi" secondAttribute="bottom" constant="15" id="F0h-TW-BRC"/>
                             <constraint firstItem="Bld-wj-1c6" firstAttribute="leading" secondItem="ic1-FX-iJp" secondAttribute="trailing" id="Hir-oH-lvd"/>
                             <constraint firstItem="A3C-Vo-Qhd" firstAttribute="top" secondItem="uVu-PR-0oJ" secondAttribute="bottom" constant="39" id="MbT-P3-cxX"/>
                             <constraint firstItem="rpc-fW-Rbb" firstAttribute="top" secondItem="8rn-bF-UEg" secondAttribute="bottom" constant="60" id="OmP-gY-kS7"/>
@@ -331,7 +331,7 @@
                             <constraint firstItem="GS2-EK-4Nx" firstAttribute="top" secondItem="8rn-bF-UEg" secondAttribute="bottom" constant="66" id="dLr-be-pfA"/>
                             <constraint firstItem="Nd0-iI-21D" firstAttribute="leading" secondItem="se7-qy-Xk6" secondAttribute="leading" id="ihf-ej-ebw"/>
                             <constraint firstItem="UKQ-z8-PIR" firstAttribute="leading" secondItem="sft-xL-TDA" secondAttribute="trailing" constant="5" id="jHt-15-jed"/>
-                            <constraint firstItem="bTG-in-woi" firstAttribute="top" secondItem="8rn-bF-UEg" secondAttribute="bottom" constant="118" id="ljo-L0-0kz"/>
+                            <constraint firstItem="bTG-in-woi" firstAttribute="top" secondItem="8rn-bF-UEg" secondAttribute="bottom" constant="119" id="ljo-L0-0kz"/>
                             <constraint firstItem="Y81-nV-kZl" firstAttribute="top" secondItem="8rn-bF-UEg" secondAttribute="bottom" constant="76" id="lpS-d6-bu6"/>
                             <constraint firstItem="GS2-EK-4Nx" firstAttribute="leading" secondItem="Y81-nV-kZl" secondAttribute="trailing" constant="2" id="mWf-wm-Tgl"/>
                             <constraint firstItem="Y81-nV-kZl" firstAttribute="leading" secondItem="rpc-fW-Rbb" secondAttribute="trailing" constant="115" id="mpr-Q0-fJb"/>
@@ -1201,7 +1201,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="B8h-mi-lOQ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GfH-jN-lKt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GfH-jN-lKt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

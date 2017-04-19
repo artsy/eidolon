@@ -26,7 +26,7 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
 
         assert(saleArtwork.hasValue, "Sale artwork cannot nil at bidding stage.")
 
-        let cents = (bidDetails.bidAmountCents.value as? Currency) ?? 0
+        let cents = (bidDetails.bidAmountCents.value?.currencyValue) ?? 0
         return bidOnSaleArtwork(saleArtwork!, bidAmountCents: String(cents), provider: provider)
     }
 
