@@ -1,7 +1,11 @@
 upcoming:
-- Fixed a problem with newer card readers. [ash]
 
 releases:
+- version: 5.8.3
+  date: May 05 2017
+  notes:
+  - Fixed a problem with newer card readers. [ash]
+
 - version: 5.8.2
   date: April 19 2017
   notes:
@@ -435,6 +439,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
