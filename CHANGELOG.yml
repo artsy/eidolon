@@ -1,4 +1,5 @@
 upcoming:
+- Fixed a problem with newer card readers. [ash]
 
 releases:
 - version: 5.8.2
