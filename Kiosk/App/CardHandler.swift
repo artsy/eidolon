@@ -29,7 +29,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
     func startSearching() {
         sessionManager.setLogging(true)
 
-        reader = CFTReader(reader: CFTReaderType(rawValue: 1)!)
+        reader = CFTReader(reader: 0)
         reader.delegate = self
         reader.swipeHasTimeout(false)
         _cardStatus.onNext("Started searching")
@@ -50,7 +50,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
                 logger.log("Card was tokenized")
 
             }, failure: { [weak self] (error) in
-                self?._cardStatus.onNext("Card Flight Error: \(error)");
+                self?._cardStatus.onNext("Card Flight Error: \(String(describing: error))");
                 logger.log("Card was not tokenizable")
             })
             
@@ -88,7 +88,7 @@ class CardHandler: NSObject, CFTReaderDelegate {
     }
 
     func readerGenericResponse(_ cardData: String!) {
-        _cardStatus.onNext("Reader received non-card data: \(cardData) ");
+        _cardStatus.onNext("Reader received non-card data: \(cardData ?? "") ");
         reader.beginSwipe()
     }
 

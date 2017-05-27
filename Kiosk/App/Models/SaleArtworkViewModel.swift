@@ -123,7 +123,7 @@ extension SaleArtworkViewModel {
     func currentBid(prefix: String = "", missingPrefix: String = "") -> Observable<String> {
         let currencySymbol = saleArtwork.currencySymbol
         return saleArtwork.rx.observe(NSNumber.self, "highestBidCents").map { [weak self] highestBidCents in
-            if let currentBidCents = highestBidCents as? Currency {
+            if let currentBidCents = highestBidCents?.currencyValue {
                 let formatted = centsToPresentableDollarsString(currentBidCents, currencySymbol: currencySymbol)
                 return "\(prefix)\(formatted)"
             } else {

@@ -163,7 +163,7 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
             return ["size": pageSize as AnyObject, "page": page as AnyObject]
 
         case .activeAuctions:
-            return ["is_auction": true as AnyObject, "live": true as AnyObject]
+            return ["is_auction": true as AnyObject, "live": true as AnyObject, "size": 100]
             
         default:
             return nil
