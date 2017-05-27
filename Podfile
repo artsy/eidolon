@@ -8,8 +8,7 @@ plugin 'cocoapods-keys', {
     'ArtsyAPIClientKey',
     'HockeyProductionSecret',
     'HockeyBetaSecret',
-    'MixpanelProductionAPIClientKey',
-    'MixpanelStagingAPIClientKey',
+    'SegmentWriteKey',
     'CardflightProductionAPIClientKey',
     'CardflightProductionMerchantAccountToken',
     'StripeProductionPublishableKey',
@@ -44,7 +43,7 @@ target 'Kiosk' do
   pod 'SDWebImage', '~> 3.7'
   pod 'SVProgressHUD'
 
-  pod 'ARAnalytics/Mixpanel'
+  pod 'ARAnalytics/Segmentio'
   pod 'ARAnalytics/HockeyApp'
 
   pod 'CardFlight'

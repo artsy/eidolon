@@ -3,13 +3,14 @@ PODS:
     - RxCocoa (~> 3.0)
     - RxSwift (~> 3.0)
   - Alamofire (4.4.0)
+  - Analytics (3.6.0)
   - ARAnalytics/CoreIOS (4.0.1)
   - ARAnalytics/HockeyApp (4.0.1):
     - ARAnalytics/CoreIOS
     - HockeySDK-Source
-  - ARAnalytics/Mixpanel (4.0.1):
+  - ARAnalytics/Segmentio (4.0.1):
+    - Analytics (>= 3)
     - ARAnalytics/CoreIOS
-    - Mixpanel
   - ARCollectionViewMasonryLayout (2.0.0)
   - ARTiledImageView (1.1.1):
     - SDWebImage
@@ -35,12 +36,9 @@ PODS:
   - Forgeries (1.0.0):
     - Forgeries/Core (= 1.0.0)
   - Forgeries/Core (1.0.0)
-  - HockeySDK-Source (4.1.3)
+  - HockeySDK-Source (4.1.5)
   - ISO8601DateFormatter (0.8)
   - Keys (1.0.0)
-  - Mixpanel (3.0.9):
-    - Mixpanel/Mixpanel (= 3.0.9)
-  - Mixpanel/Mixpanel (3.0.9)
   - Moya/Core (8.0.3):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
@@ -84,7 +82,7 @@ PODS:
 DEPENDENCIES:
   - Action
   - ARAnalytics/HockeyApp
-  - ARAnalytics/Mixpanel
+  - ARAnalytics/Segmentio
   - ARCollectionViewMasonryLayout (~> 2.0.0)
   - ARTiledImageView
   - Artsy+UIColors
@@ -136,6 +134,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Action: 9a3d372fb15b057cce7d069a5e1ece8da12483d4
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Analytics: 15be3e651d22cc811f44df65698538236676437b
   ARAnalytics: 85e7bb999e2a40cea7d2394e71e8ecbafa50f2d0
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
@@ -146,13 +145,12 @@ SPEC CHECKSUMS:
   CardFlight: e438f8c42d6636bc6ffe3312ecc9398b89e7aed4
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
-  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  FBSnapshotTestCase: '094f9f314decbabe373b87cc339bea235a63e07a'
   FLKAutoLayout: 95b12c5cd9652100235140b68652f063f7437851
   Forgeries: 64ced144ea8341d89a7eec9d1d7986f0f1366250
-  HockeySDK-Source: 05f045d91770f3fef32bf150d049dca3b054d883
+  HockeySDK-Source: ab4eef2ac5c07c45db5844ae724bf6f06199b214
   ISO8601DateFormatter: 4551b6ce4f83185425f583b0b3feb3c7b59b942c
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Mixpanel: 106bad33d5b9a05312316a01938f17b6baa2d99f
   Moya: d3721622e3cc0cc2f038d69a258686f0b66e7252
   Nimble: 1527fd1bd2b4cf0636251a36bc8ab37e81da8347
   Nimble-Snapshots: e743439f26c2fa99d8f7e0d7c01c99bcb40aa6f2
@@ -165,7 +163,7 @@ SPEC CHECKSUMS:
   RxBlocking: cd73ef6a5f8c39cede9488178c46aa0c3c3ed17f
   RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
   RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
   Stripe: 0f41a33a6fa3ac76ee668d7df3e2680c28b8ab1a
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
@@ -173,6 +171,6 @@ SPEC CHECKSUMS:
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: aed98c14f0c0eb20064184ddf9bac26c482722b2
 
-PODFILE CHECKSUM: 07bca6bd5af15b2e2489501eef79ddf11fe0a1e1
+PODFILE CHECKSUM: 6648eb5420cdad3deaf73db5a393ff5da565d7ca
 
 COCOAPODS: 1.2.0
