@@ -123,16 +123,16 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
 
         case .xAuth(let email, let password):
             return [
-                "client_id": APIKeys.sharedKeys.key as AnyObject? ?? "" as AnyObject,
-                "client_secret": APIKeys.sharedKeys.secret as AnyObject? ?? "" as AnyObject,
+                "client_id": APIKeys.sharedKeys.key,
+                "client_secret": APIKeys.sharedKeys.secret,
                 "email": email as AnyObject,
                 "password":  password as AnyObject,
                 "grant_type": "credentials" as AnyObject
             ]
 
         case .xApp:
-            return ["client_id": APIKeys.sharedKeys.key as AnyObject? ?? "" as AnyObject,
-                "client_secret": APIKeys.sharedKeys.secret as AnyObject? ?? "" as AnyObject]
+            return ["client_id": APIKeys.sharedKeys.key,
+                "client_secret": APIKeys.sharedKeys.secret]
 
         case .auctions:
             return ["is_auction": "true" as AnyObject]
