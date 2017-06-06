@@ -1433,7 +1433,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9D18FBF2740DA862421FE723 /* Pods-Kiosk.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1459,7 +1458,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 105ED099C82E240D7547D3A6 /* Pods-Kiosk.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1486,7 +1484,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 276814418ACEF21BC773CB08 /* Pods-KioskTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1512,7 +1509,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 620BB28AC1DE3936837D2731 /* Pods-KioskTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
