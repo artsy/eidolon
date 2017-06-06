@@ -308,7 +308,7 @@ protocol IntOrZeroable {
 
 extension NSNumber: IntOrZeroable {
     var intOrZero: Int {
-        return self as Int
+        return (self as? Int) ?? 0
     }
 }
 

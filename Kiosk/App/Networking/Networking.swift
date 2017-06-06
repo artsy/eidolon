@@ -172,7 +172,7 @@ extension NetworkingType {
     }
 }
 
-private func newProvider<T>(_ plugins: [PluginType], xAccessToken: String? = nil) -> OnlineProvider<T> where T: TargetType, T: ArtsyAPIType {
+private func newProvider<T>(_ plugins: [PluginType], xAccessToken: String? = nil) -> OnlineProvider<T> where T: ArtsyAPIType {
     return OnlineProvider(endpointClosure: Networking.endpointsClosure(xAccessToken),
         requestClosure: Networking.endpointResolver(),
         stubClosure: Networking.APIKeysBasedStubBehaviour,

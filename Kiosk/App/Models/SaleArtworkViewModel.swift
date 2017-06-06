@@ -72,7 +72,7 @@ extension SaleArtworkViewModel {
     var numberOfBidsWithReserve: Observable<String> {
 
         // Ignoring highestBidCents; only there to trigger on bid update.
-        let highestBidString = saleArtwork.rx.observe(NSNumber.self, "highestBidCents").map { "\($0)" }
+        let highestBidString = saleArtwork.rx.observe(NSNumber.self, "highestBidCents").map { "\(String(describing: $0))" }
         let reserveStatus = saleArtwork.rx.observe(String.self, "reserveStatus").map { input -> String in
             switch input {
             case .some(let reserveStatus):

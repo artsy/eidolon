@@ -23,7 +23,7 @@ class Spinner: UIView {
     }
 
     func animateN(_ times: Float) {
-        let transformOffset = -1.01 * M_PI
+        let transformOffset = -1.01 * CGFloat.pi
         let transform = CATransform3DMakeRotation( CGFloat(transformOffset), 0, 0, 1);
         let rotationAnimation = CABasicAnimation(keyPath:"transform");
 
