@@ -198,8 +198,8 @@ class SaleArtworkDetailsViewController: UIViewController {
         let hasBids = saleArtwork
             .rx.observe(NSNumber.self, "highestBidCents")
             .map { observeredCents -> Bool in
-                guard let cents = observeredCents else { return false }
-                return (cents as! Int) > 0
+                guard let cents = observeredCents as? Int else { return false }
+                return cents > 0
             }
 
         let currentBidLabel = label(.serif, tag: .currentBidLabel)
