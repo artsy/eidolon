@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let webView = UIWebView(frame: CGRect.zero)
         let oldAgent = webView.stringByEvaluatingJavaScript(from: "navigator.userAgent")
         
-        let agentString = "\(oldAgent) Artsy-Mobile/\(version!) Eigen/\(build!) Kiosk Eidolon"
+        let agentString = "\(String(describing: oldAgent)) Artsy-Mobile/\(version!) Eigen/\(build!) Kiosk Eidolon"
 
         let defaults = UserDefaults.standard
         let userAgentDict = ["UserAgent": agentString]

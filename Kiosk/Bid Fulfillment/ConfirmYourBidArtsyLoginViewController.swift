@@ -78,7 +78,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
                 }.doOnError { [weak self] error in
                     logger.log("Error logging in: \((error as NSError).localizedDescription)")
-                    logger.log("Error Logging in, likely bad auth creds, email = \(self?.emailTextField.text)")
+                    logger.log("Error Logging in, likely bad auth creds, email = \(String(describing: self?.emailTextField.text))")
                     self?.showAuthenticationError()
             }
         }
