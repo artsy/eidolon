@@ -15,7 +15,7 @@ PODS:
   - ARTiledImageView (1.1.1):
     - SDWebImage
   - Artsy+UIColors (3.1.0)
-  - Artsy+UIFonts (1.1.1)
+  - Artsy+UIFonts (3.1.1)
   - Artsy+UILabels (2.1.2):
     - Artsy+UIColors (~> 3.0)
     - Artsy+UIFonts
@@ -145,7 +145,7 @@ SPEC CHECKSUMS:
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
   Artsy+UIColors: 31c03c4146f5e6618a9b950f37dfe02dd9ac09a6
-  Artsy+UIFonts: 155b972733a24bb12f152fb6d25e2610c1cb93e0
+  Artsy+UIFonts: e66afb5c40100e2fc5bba28feb7487e252f2d06f
   Artsy+UILabels: c5bef562052f74bc2f0d523c0f1a289c59c7fbed
   Artsy-UIButtons: 0c87d8a112e6b1d688b153c2a7a8f155e2f1a18f
   CardFlight: 7b34237b6098c231d7a0066c3e38610ca3a98112
@@ -179,4 +179,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 0a5c7dfb255f05090568633982a8b17307d4fd2f
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1
