@@ -1,6 +1,8 @@
 upcoming:
 - Enables Segment analytics. [ash]
 - Updates CardFlight SDK. Again. [ash]
+- Updates CocoaPods. [ash]
+- Updates Font pod. [ash]
 
 releases:
 - version: 5.8.3
