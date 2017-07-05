@@ -3,6 +3,7 @@ upcoming:
 - Updates CardFlight SDK. Again. [ash]
 - Updates CocoaPods. [ash]
 - Updates Font pod. [ash]
+- Updates to latest head of Moya. [ash]
 
 releases:
 - version: 5.8.3
