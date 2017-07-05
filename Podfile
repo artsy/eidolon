@@ -64,7 +64,7 @@ target 'Kiosk' do
   pod 'SwiftyJSON'
   pod 'RxSwift'
   pod 'RxCocoa'
-  pod 'Moya/RxSwift'
+  pod 'Moya/RxSwift', git: 'https://github.com/Moya/Moya.git', branch: 'feature/rx_reactive'
   pod 'NSObject+Rx'
   pod 'Action'
 
