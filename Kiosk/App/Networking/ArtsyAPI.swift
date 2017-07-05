@@ -50,6 +50,10 @@ enum ArtsyAuthenticatedAPI {
 
 extension ArtsyAPI : TargetType, ArtsyAPIType {
 
+    var headers: [String : String]? {
+        return nil
+    }
+
     public var parameterEncoding: ParameterEncoding {
         return JSONEncoding.default
     }
@@ -252,6 +256,10 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
 }
 
 extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
+
+    var headers: [String : String]? {
+        return nil
+    }
 
     public var parameterEncoding: ParameterEncoding {
         return JSONEncoding.default

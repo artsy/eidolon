@@ -65,7 +65,7 @@ target 'Kiosk' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxOptional'
-  pod 'Moya/RxSwift'
+  pod 'Moya/RxSwift', '~> 9.0'
   pod 'NSObject+Rx'
   pod 'Action'
 
