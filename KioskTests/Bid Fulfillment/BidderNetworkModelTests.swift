@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+import RxNimble
 import RxSwift
 import Moya
 @testable
