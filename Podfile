@@ -75,6 +75,7 @@ target 'Kiosk' do
     pod 'Nimble-Snapshots'
     pod 'Quick'
     pod 'Nimble'
+    pod 'RxNimble'
     pod 'Forgeries'
     pod 'RxBlocking'
 

@@ -1,5 +1,6 @@
 import Quick
 import Nimble
+import RxNimble
 @testable
 import Kiosk
 import RxSwift
