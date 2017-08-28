@@ -1,5 +1,6 @@
 import UIKit
 import RxSwift
+import RxOptional
 import Moya
 import Action
 
@@ -24,7 +25,7 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
 
         return RegistrationPasswordViewModel(
             provider: self.provider,
-            password: self.passwordTextField.rx.text.asObservable().replaceNil(with: ""),
+            password: self.passwordTextField.rx.text.asObservable().replaceNilWith(""),
             execute: self.passwordTextField.rx_returnKey,
             completed: self.finished,
             email: email)

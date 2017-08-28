@@ -1,6 +1,7 @@
 import Foundation
 import Artsy_UILabels
 import RxSwift
+import RxOptional
 import RxCocoa
 import NSObject_Rx
 
@@ -89,7 +90,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
 
         // Start with things not expected to ever change. 
         viewModel.flatMapTo(SaleArtworkViewModel.lotLabel)
-            .replaceNil(with: "")
+            .replaceNilWith("")
             .mapToOptional()
             .bindTo(lotNumberLabel.rx.text)
             .addDisposableTo(reuseBag)

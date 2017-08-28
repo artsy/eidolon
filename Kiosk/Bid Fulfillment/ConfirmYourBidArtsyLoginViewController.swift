@@ -1,6 +1,7 @@
 import UIKit
 import Moya
 import RxSwift
+import RxOptional
 import Action
 
 class ConfirmYourBidArtsyLoginViewController: UIViewController {
@@ -49,8 +50,8 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             .bindTo(nav.bidDetails.newUser.password)
             .addDisposableTo(rx_disposeBag)
 
-        let inputIsEmail = emailText.asObservable().replaceNil(with: "").map(stringIsEmailAddress)
-        let passwordIsLongEnough = passwordText.asObservable().replaceNil(with: "").map(isZeroLength).not()
+        let inputIsEmail = emailText.asObservable().replaceNilWith("").map(stringIsEmailAddress)
+        let passwordIsLongEnough = passwordText.asObservable().replaceNilWith("").map(isZeroLength).not()
         let formIsValid = [inputIsEmail, passwordIsLongEnough].combineLatestAnd()
 
         let provider = self.provider
@@ -142,7 +143,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             textField
                 .rx.text
                 .asObservable()
-                .replaceNil(with: "")
+                .replaceNilWith("")
                 .bindTo(email)
                 .addDisposableTo(textField.rx_disposeBag)
 

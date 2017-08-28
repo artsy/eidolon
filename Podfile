@@ -64,6 +64,7 @@ target 'Kiosk' do
   pod 'SwiftyJSON'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxOptional'
   pod 'Moya/RxSwift'
   pod 'NSObject+Rx'
   pod 'Action'

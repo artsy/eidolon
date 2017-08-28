@@ -3,6 +3,7 @@ import Artsy_UILabels
 import Artsy_UIButtons
 import RxCocoa
 import RxSwift
+import RxOptional
 
 class YourBiddingDetailsViewController: UIViewController {
 

@@ -1,4 +1,5 @@
 import RxSwift
+import RxOptional
 
 class RegistrationPostalZipViewController: UIViewController, RegistrationSubController {
     @IBOutlet var zipCodeTextField: TextField!
@@ -6,7 +7,7 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
     let finished = PublishSubject<Void>()
 
     lazy var viewModel: GenericFormValidationViewModel = {
-        let zipCodeIsValid = self.zipCodeTextField.rx.text.asObservable().replaceNil(with: "").map(isZeroLength).not()
+        let zipCodeIsValid = self.zipCodeTextField.rx.text.asObservable().replaceNilWith("").map(isZeroLength).not()
         return GenericFormValidationViewModel(isValid: zipCodeIsValid, manualInvocation: self.zipCodeTextField.rx_returnKey, finishedSubject: self.finished)
     }()
 
