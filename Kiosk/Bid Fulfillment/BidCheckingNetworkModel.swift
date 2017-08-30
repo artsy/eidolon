@@ -55,18 +55,18 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
                         return .just(Void())
                     }
-                    .doOnError { _ in
+                    .do(onError: { _ in
                         logger.log("Bidder position was processed but corresponding saleArtwork was not found")
-                    }
+                    })
                     .catchErrorJustReturn(Void())
                     .flatMap { _ -> Observable<Void> in
                         return self.checkForMaxBid(provider: provider)
                 }
-            } .doOnNext { _ in
+            }.do(onNext: { _ in
                 self.bidIsResolved.value = true
                 
                 // If polling fails, we can still show bid confirmation. Do not error.
-            }.catchErrorJustReturn()
+            }).catchErrorJustReturn()
     }
     
     fileprivate func poll(forUpdatedBidderPosition bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<Void> {
@@ -105,14 +105,14 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
 
     fileprivate func checkForMaxBid(provider: AuthorizedNetworking) -> Observable<Void> {
         return getMyBidderPositions(provider: provider)
-            .doOnNext{ newBidderPositions in
+            .do(onNext: { newBidderPositions in
 
                 if let topBidID = self.mostRecentSaleArtwork?.saleHighestBid?.id {
                     for position in newBidderPositions where position.highestBid?.id == topBidID {
                         self.isHighestBidder.value = true
                     }
                 }
-            }
+            })
             .map(void)
     }
 

@@ -1,5 +1,6 @@
 import UIKit
 import RxSwift
+import RxOptional
 
 class RegistrationEmailViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
 
@@ -8,7 +9,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
     var finished = PublishSubject<Void>()
 
     lazy var viewModel: GenericFormValidationViewModel = {
-        let emailIsValid = self.emailTextField.rx.textInput.text.asObservable().replaceNil(with: "").map(stringIsEmailAddress)
+        let emailIsValid = self.emailTextField.rx.textInput.text.asObservable().replaceNilWith("").map(stringIsEmailAddress)
         return GenericFormValidationViewModel(isValid: emailIsValid, manualInvocation: self.emailTextField.rx_returnKey, finishedSubject: self.finished)
     }()
 

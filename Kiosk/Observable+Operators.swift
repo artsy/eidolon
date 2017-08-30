@@ -27,67 +27,6 @@ extension Observable {
     }
 }
 
-protocol OptionalType {
-    associatedtype Wrapped
-
-    var value: Wrapped? { get }
-}
-
-extension Optional: OptionalType {
-    var value: Wrapped? {
-        return self
-    }
-}
-
-extension Observable where Element: OptionalType {
-    func filterNil() -> Observable<Element.Wrapped> {
-        return flatMap { (element) -> Observable<Element.Wrapped> in
-            if let value = element.value {
-                return .just(value)
-            } else {
-                return .empty()
-            }
-        }
-    }
-
-    func filterNilKeepOptional() -> Observable<Element> {
-        return self.filter { (element) -> Bool in
-            return element.value != nil
-        }
-    }
-
-    func replaceNil(with nilValue: Element.Wrapped) -> Observable<Element.Wrapped> {
-        return flatMap { (element) -> Observable<Element.Wrapped> in
-            if let value = element.value {
-                return .just(value)
-            } else {
-                return .just(nilValue)
-            }
-        }
-    }
-}
-
-// TODO: Added in new RxSwift?
-extension Observable {
-    func doOnNext(_ closure: @escaping (Element) -> Void) -> Observable<Element> {
-        return self.do(onNext: { (element) in
-            closure(element)
-        })
-    }
-
-    func doOnCompleted(_ closure: @escaping () -> Void) -> Observable<Element> {
-        return self.do(onCompleted: {
-            closure()
-        })
-    }
-
-    func doOnError(_ closure: @escaping (Error) -> Void) -> Observable<Element> {
-        return self.do(onError: { (error) in
-            closure(error)
-        })
-    }
-}
-
 private let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
 
 extension Observable {

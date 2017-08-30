@@ -55,9 +55,9 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
                         return .just(Void())
                     }
                 }
-                .doOnCompleted {
+                .do(onCompleted: {
                     completed.onCompleted()
-                }
+                })
         }
 
         self.action = action
@@ -74,8 +74,8 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .map(void)
-            .doOnNext { _ in
+            .do(onNext: { _ in
                 logger.log("Sent forgot password request")
-            }
+            })
     }
 }

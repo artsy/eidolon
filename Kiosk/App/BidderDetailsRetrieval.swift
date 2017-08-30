@@ -17,23 +17,22 @@ extension UIViewController {
     func retrieveBidderDetails(provider: Networking, email: String) -> Observable<Void> {
         return Observable.just(email)
             .take(1)
-            .doOnNext { _ in
+            .do(onNext: { _ in
                 SVProgressHUD.show()
-            }
+            })
             .flatMap { email -> Observable<Void> in
                 let endpoint = ArtsyAPI.bidderDetailsNotification(auctionID: appDelegate().appViewController.sale.value.id, identifier: email)
 
                 return provider.request(endpoint).filterSuccessfulStatusCodes().map(void)
             }
             .throttle(1, scheduler: MainScheduler.instance)
-            .doOnNext { _ in
+            .do(onNext: { _ in
                 SVProgressHUD.dismiss()
                 self.present(UIAlertController.successfulBidderDetailsAlertController(), animated: true, completion: nil)
-            }
-            .doOnError { _ in
+            }, onError: { _ in
                 SVProgressHUD.dismiss()
                 self.present(UIAlertController.failedBidderDetailsAlertController(), animated: true, completion: nil)
-            }
+            })
     }
 
     func emailPromptAlertController(provider: Networking) -> UIAlertController {

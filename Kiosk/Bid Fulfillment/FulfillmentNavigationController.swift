@@ -40,7 +40,7 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
         let request = loggedInProvider.request(endpoint).filterSuccessfulStatusCodes().mapJSON().mapTo(object: User.self)
 
         return request
-            .doOnNext { [weak self] fullUser in
+            .do(onNext: { [weak self] fullUser in
                 guard let me = self else { return }
 
                 me.user = fullUser
@@ -51,7 +51,7 @@ class FulfillmentNavigationController: UINavigationController, FulfillmentContro
                 newUser.phoneNumber.value = me.user.phoneNumber
                 newUser.zipCode.value = me.user.location?.postalCode
                 newUser.name.value = me.user.name
-            }
+            })
             .logError(prefix: "error, the authentication for admin is likely wrong: ")
             .map(void)
     }

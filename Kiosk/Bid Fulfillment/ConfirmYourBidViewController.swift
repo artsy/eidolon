@@ -77,7 +77,7 @@ class ConfirmYourBidViewController: UIViewController {
             return me.provider.request(endpoint)
                 .filter(statusCode: 400)
                 .map(void)
-                .doOnError { error in
+                .do(onError: { error in
                     guard let me = self else { return }
 
                     // Due to AlamoFire restrictions we can't stop HTTP redirects
@@ -98,8 +98,7 @@ class ConfirmYourBidViewController: UIViewController {
                     } else {
                         me.performSegue(.ConfirmyourBidBidderNotFound)
                     }
-                }
-
+                })
         })
     }
 

@@ -59,9 +59,9 @@ class ManualCreditCardInputViewModel: NSObject {
                 return .empty()
             }
 
-            return me.registerCard(newUser: newUser).doOnCompleted {
+            return me.registerCard(newUser: newUser).do(onCompleted: {
                 me.finishedSubject?.onCompleted()
-            }.map(void)
+            }).map(void)
         }
 
     }
@@ -81,13 +81,13 @@ class ManualCreditCardInputViewModel: NSObject {
         let month = expirationMonth.value.toUInt(withDefault: 0)
         let year = expirationYear.value.toUInt(withDefault: 0)
 
-        return stripeManager.registerCard(digits: cardFullDigits.value, month: month, year: year, securityCode: securityCode.value, postalCode: billingZip.value).doOnNext { token in
+        return stripeManager.registerCard(digits: cardFullDigits.value, month: month, year: year, securityCode: securityCode.value, postalCode: billingZip.value).do(onNext: { token in
 
             newUser.creditCardName.value = token.card?.name
             newUser.creditCardType.value = token.card?.brand.name
             newUser.creditCardToken.value = token.tokenId
             newUser.creditCardDigit.value = token.card?.last4()
-        }
+        })
     }
 
     // Only set for testing purposes, otherwise ignore.

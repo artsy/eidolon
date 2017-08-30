@@ -95,9 +95,9 @@ class ListingsViewController: UIViewController {
         viewModel
             .updatedContents
             .mapReplace(with: collectionView)
-            .doOnNext { collectionView in
+            .do(onNext: { collectionView in
                 collectionView.reloadData()
-            }
+            })
             .dispatchAsyncMainScheduler()
             .subscribe(onNext: { [weak self] collectionView in
                 // Make sure we're on screen and not in a test or something.

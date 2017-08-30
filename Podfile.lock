@@ -72,6 +72,9 @@ PODS:
     - Nimble (~> 6.0)
     - RxBlocking (~> 3.0)
     - RxSwift (~> 3.0)
+  - RxOptional (3.2.0):
+    - RxCocoa
+    - RxSwift
   - RxSwift (3.1.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
@@ -112,6 +115,7 @@ DEPENDENCIES:
   - RxBlocking
   - RxCocoa
   - RxNimble
+  - RxOptional
   - RxSwift
   - SDWebImage (~> 3.7)
   - Stripe
@@ -174,6 +178,7 @@ SPEC CHECKSUMS:
   RxBlocking: cd73ef6a5f8c39cede9488178c46aa0c3c3ed17f
   RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
   RxNimble: 50a9da5852b298b2ec632cb00b79fa20be9f31b8
+  RxOptional: d2d6a68064bc16b4801332c40663967f481b0234
   RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
   SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
   Stripe: 0f41a33a6fa3ac76ee668d7df3e2680c28b8ab1a
@@ -183,6 +188,6 @@ SPEC CHECKSUMS:
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: aed98c14f0c0eb20064184ddf9bac26c482722b2
 
-PODFILE CHECKSUM: b8b41c512b6c47804dc56fcd2417472abc3cf3f0
+PODFILE CHECKSUM: df9251168a54b50f97a66fb3e48399dfc0a08ab7
 
 COCOAPODS: 1.2.1

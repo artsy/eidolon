@@ -12,7 +12,7 @@ class SystemTime {
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
-            .doOnNext { [weak self] response in
+            .do(onNext: { [weak self] response in
                 guard let dictionary = response as? NSDictionary else { return }
 
                 let timestamp: String = (dictionary["iso8601"] as? String) ?? ""
@@ -20,7 +20,9 @@ class SystemTime {
                     self?.systemTimeInterval = Date().timeIntervalSince(artsyDate)
                 }
 
-            }.logError().map(void)
+            })
+            .logError()
+            .map(void)
     }
 
     func inSync() -> Bool {

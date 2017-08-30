@@ -1,6 +1,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxOptional
 import Action
 
 class ConfirmYourBidEnterYourEmailViewController: UIViewController {
@@ -18,7 +19,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let emailText = emailTextField.rx.textInput.text.asObservable().replaceNil(with: "")
+        let emailText = emailTextField.rx.textInput.text.asObservable().replaceNilWith("")
         let inputIsEmail = emailText.map(stringIsEmailAddress)
 
         let action = CocoaAction(enabledIf: inputIsEmail) { [weak self] _ in
@@ -28,13 +29,12 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
             return self?.provider.request(endpoint)
                 .filter(statusCode: 200)
-                .doOnNext { _ in
+                .do(onNext: { _ in
                     me.performSegue(.ExistingArtsyUserFound)
-                }
-                .doOnError { error in
+                }, onError: { error in
 
                     self?.performSegue(.EmailNotFoundonArtsy)
-                }
+                })
                 .map(void) ?? .empty()
         }
 

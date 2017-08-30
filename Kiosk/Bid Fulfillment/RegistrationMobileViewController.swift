@@ -1,5 +1,6 @@
 import UIKit
 import RxSwift
+import RxOptional
 
 class RegistrationMobileViewController: UIViewController, RegistrationSubController, UITextFieldDelegate {
     
@@ -8,7 +9,7 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
     let finished = PublishSubject<Void>()
 
     lazy var viewModel: GenericFormValidationViewModel = {
-        let numberIsValid = self.numberTextField.rx.text.asObservable().replaceNil(with: "").map(isZeroLength).not()
+        let numberIsValid = self.numberTextField.rx.text.asObservable().replaceNilWith("").map(isZeroLength).not()
         return GenericFormValidationViewModel(isValid: numberIsValid, manualInvocation: self.numberTextField.rx_returnKey, finishedSubject: self.finished)
     }()
 

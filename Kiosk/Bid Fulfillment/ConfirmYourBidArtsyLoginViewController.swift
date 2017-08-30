@@ -1,6 +1,7 @@
 import UIKit
 import Moya
 import RxSwift
+import RxOptional
 import Action
 
 class ConfirmYourBidArtsyLoginViewController: UIViewController {
@@ -49,8 +50,8 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             .bindTo(nav.bidDetails.newUser.password)
             .addDisposableTo(rx_disposeBag)
 
-        let inputIsEmail = emailText.asObservable().replaceNil(with: "").map(stringIsEmailAddress)
-        let passwordIsLongEnough = passwordText.asObservable().replaceNil(with: "").map(isZeroLength).not()
+        let inputIsEmail = emailText.asObservable().replaceNilWith("").map(stringIsEmailAddress)
+        let passwordIsLongEnough = passwordText.asObservable().replaceNilWith("").map(isZeroLength).not()
         let formIsValid = [inputIsEmail, passwordIsLongEnough].combineLatestAnd()
 
         let provider = self.provider
@@ -65,7 +66,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
                         .mapReplace(with: provider)
                 }.flatMap { provider -> Observable<Void> in
                     return me.creditCard(provider)
-                        .doOnNext { cards in
+                        .do(onNext: { cards in
                             guard let me = self else { return }
 
                             if cards.count > 0 {
@@ -73,14 +74,14 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
                             } else {
                                 me.performSegue(.ArtsyUserHasNotRegisteredCard)
                             }
-                        }
+                        })
                         .map(void)
 
-                }.doOnError { [weak self] error in
+                }.do(onError: { [weak self] error in
                     logger.log("Error logging in: \((error as NSError).localizedDescription)")
                     logger.log("Error Logging in, likely bad auth creds, email = \(String(describing: self?.emailTextField.text))")
                     self?.showAuthenticationError()
-            }
+                })
         }
     }
 
@@ -127,9 +128,9 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
             return self.provider.request(endpoint)
                 .filterSuccessfulStatusCodes()
-                .doOnNext { _ in
+                .do(onNext: { _ in
                     logger.log("Sent forgot password request")
-                }
+                })
                 .map(void)
         })
 
@@ -142,7 +143,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
             textField
                 .rx.text
                 .asObservable()
-                .replaceNil(with: "")
+                .replaceNilWith("")
                 .bindTo(email)
                 .addDisposableTo(textField.rx_disposeBag)
 

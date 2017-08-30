@@ -74,12 +74,12 @@ private extension BidderNetworkModel {
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .map(void)
-            .doOnError { error in
+            .do(onError: { error in
                 logger.log("Creating user failed.")
                 logger.log("Error: \((error as NSError).localizedDescription). \n \((error as NSError).artsyServerError())")
-        }.flatMap { _ -> Observable<AuthorizedNetworking> in
-            self.bidDetails.authenticatedNetworking(provider: self.provider)
-        }
+            }).flatMap { _ -> Observable<AuthorizedNetworking> in
+                self.bidDetails.authenticatedNetworking(provider: self.provider)
+            }
     }
 
     func updateUser() -> Observable<AuthorizedNetworking> {
@@ -109,12 +109,12 @@ private extension BidderNetworkModel {
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .map(void)
-            .doOnCompleted { [weak self] in
+            .do(onCompleted: { [weak self] in
                 // Adding the credit card succeeded, so we should clear the newUser.creditCardToken so that we don't
                 // inadvertently try to re-add their card token if they need to increase their bid.
 
                 self?.bidDetails.newUser.creditCardToken.value = nil
-            }
+            })
             .logServerError(message: "Adding Card to User failed")
     }
 
@@ -160,10 +160,10 @@ private extension BidderNetworkModel {
             .mapTo(object: Bidder.self)
 
         return 
-            register.doOnNext{ [weak self] bidder in
+            register.do(onNext: { [weak self] bidder in
                 self?.bidDetails.bidderID.value = bidder.id
                 self?.bidDetails.newUser.hasBeenRegistered.value = true
-            }
+            })
             .logServerError(message: "Registering for Auction Failed.")
             .map(void)
     }
@@ -174,10 +174,10 @@ private extension BidderNetworkModel {
         return provider.request(endpoint)
             .filterSuccessfulStatusCodes()
             .mapJSON()
-            .doOnNext { [weak self] json in
+            .do(onNext: { [weak self] json in
                 let pin = (json as AnyObject)["pin"] as? String
                 self?.bidDetails.bidderPIN.value = pin
-            }
+            })
             .logServerError(message: "Generating a PIN for bidder has failed.")
             .map(void)
     }
@@ -188,9 +188,9 @@ private extension BidderNetworkModel {
             .filterSuccessfulStatusCodes()
             .mapJSON()
             .mapTo(object: User.self)
-            .doOnNext { [weak self] user in
+            .do(onNext: { [weak self] user in
                 self?.bidDetails.paddleNumber.value =  user.paddleNumber
-            }
+            })
             .logServerError(message: "Getting Bidder ID failed.")
             .map(void)
     }

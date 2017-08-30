@@ -179,7 +179,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
 
         return recurring
-            .doOnNext(logSync)
+            .do(onNext: logSync)
             .flatMap { [weak self] _ in
                 return self?.allListingsRequest() ?? .empty()
             }
