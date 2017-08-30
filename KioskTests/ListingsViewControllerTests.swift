@@ -19,39 +19,44 @@ class ListingsViewControllerConfiguration: QuickConfiguration {
                 subject.loadViewProgrammatically()
             }
 
+            /*
+            Note that we use a tolerance of 1% to account for antialiasing issues that differ
+            from machine to machine.
+            */
+
             it("grid") {
                 subject.switchView[0]?.sendActions(for: .touchUpInside)
-                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true, tolerance: 0.01) )
             }
             
             it("least bids") {
                 subject.switchView[1]?.sendActions(for: .touchUpInside)
                 viewModel._gridSelected.value = false
-                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true, tolerance: 0.01) )
             }
 
             it("most bids") {
                 subject.switchView[2]?.sendActions(for: .touchUpInside)
                 viewModel._gridSelected.value = false
-                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true, tolerance: 0.01) )
             }
 
             it("highest bid") {
                 subject.switchView[3]?.sendActions(for: .touchUpInside)
                 viewModel._gridSelected.value = false
-                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true, tolerance: 0.01) )
             }
 
             it("lowest bid") {
                 subject.switchView[4]?.sendActions(for: .touchUpInside)
                 viewModel._gridSelected.value = false
-                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true, tolerance: 0.01) )
             }
 
             it("alphabetical") {
                 subject.switchView[5]?.sendActions(for: .touchUpInside)
                 viewModel._gridSelected.value = false
-                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true, tolerance: 0.01) )
             }
         }
     }
