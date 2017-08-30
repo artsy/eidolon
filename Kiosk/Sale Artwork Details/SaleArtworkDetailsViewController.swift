@@ -437,9 +437,9 @@ class SaleArtworkDetailsViewController: UIViewController {
                     return (json as AnyObject)["image_rights"] as? String
                 }
                 .filterNil()
-                .doOnNext { imageRights in
+                .do(onNext: { imageRights in
                     artwork.imageRights = imageRights
-                }
+                })
         }
     }
 
@@ -453,9 +453,9 @@ class SaleArtworkDetailsViewController: UIViewController {
                     return (json as AnyObject)["additional_information"] as? String
                 }
                 .filterNil()
-                .doOnNext{ info in
+                .do(onNext: { info in
                     artwork.additionalInfo = info
-                }
+                })
         }
     }
 
@@ -475,9 +475,9 @@ class SaleArtworkDetailsViewController: UIViewController {
                     return (json as AnyObject)["blurb"] as? String
                 }
                 .filterNil()
-                .doOnNext{ blurb in
+                .do(onNext: { blurb in
                     artist.blurb = blurb
-                }
+                })
         }
     }
 }

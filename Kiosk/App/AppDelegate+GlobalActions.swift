@@ -102,9 +102,9 @@ extension AppDelegate {
         let action = CocoaAction { input -> Observable<Void> in
             return retainedAction?
                 .execute(input)
-                .doOnCompleted {
+                .do(onCompleted: {
                     retainedAction = nil
-                } ?? Observable.just(Void())
+                }) ?? Observable.just(Void())
         }
 
         return action

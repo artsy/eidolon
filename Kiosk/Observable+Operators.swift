@@ -27,27 +27,6 @@ extension Observable {
     }
 }
 
-// TODO: Move to do(onNext), etc, in RxSwift 3.
-extension Observable {
-    func doOnNext(_ closure: @escaping (Element) -> Void) -> Observable<Element> {
-        return self.do(onNext: { (element) in
-            closure(element)
-        })
-    }
-
-    func doOnCompleted(_ closure: @escaping () -> Void) -> Observable<Element> {
-        return self.do(onCompleted: {
-            closure()
-        })
-    }
-
-    func doOnError(_ closure: @escaping (Error) -> Void) -> Observable<Element> {
-        return self.do(onError: { (error) in
-            closure(error)
-        })
-    }
-}
-
 private let backgroundScheduler = SerialDispatchQueueScheduler(qos: .default)
 
 extension Observable {

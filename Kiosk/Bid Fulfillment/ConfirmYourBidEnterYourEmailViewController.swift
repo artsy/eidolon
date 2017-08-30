@@ -29,13 +29,12 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
 
             return self?.provider.request(endpoint)
                 .filter(statusCode: 200)
-                .doOnNext { _ in
+                .do(onNext: { _ in
                     me.performSegue(.ExistingArtsyUserFound)
-                }
-                .doOnError { error in
+                }, onError: { error in
 
                     self?.performSegue(.EmailNotFoundonArtsy)
-                }
+                })
                 .map(void) ?? .empty()
         }
 

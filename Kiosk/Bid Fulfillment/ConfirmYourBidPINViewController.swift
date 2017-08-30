@@ -52,9 +52,9 @@ class ConfirmYourBidPINViewController: UIViewController {
             var loggedInProvider: AuthorizedNetworking!
 
             return bidDetails.authenticatedNetworking(provider: provider!)
-                .doOnNext { provider in
+                .do(onNext: { provider in
                     loggedInProvider = provider
-                }
+                })
                 .flatMap { provider -> Observable<AuthorizedNetworking> in
                     return provider
                         .request(ArtsyAuthenticatedAPI.me)
@@ -82,19 +82,19 @@ class ConfirmYourBidPINViewController: UIViewController {
                                 // We must check for a CC, and collect one if necessary.
                                 return me
                                     .checkForCreditCard(loggedInProvider: provider)
-                                    .doOnNext(me.got)
+                                    .do(onNext: me.got)
                                     .map(void)
                             }
                         }
                 }
-                .doOnError { error in
+                .do(onError: { error in
                     if let response = (error as? MoyaError)?.response {
                         let responseBody = NSString(data: response.data, encoding: String.Encoding.utf8.rawValue)
                         print("Error authenticating(\(response.statusCode)): \(String(describing: responseBody))")
                     }
 
                     me.showAuthenticationError()
-                }
+                })
         }
     }
 
