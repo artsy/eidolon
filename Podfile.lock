@@ -2,7 +2,7 @@ PODS:
   - Action (2.2.2):
     - RxCocoa (~> 3.0)
     - RxSwift (~> 3.0)
-  - Alamofire (4.4.0)
+  - Alamofire (4.5.1)
   - Analytics (3.6.0)
   - ARAnalytics/CoreIOS (4.0.1)
   - ARAnalytics/HockeyApp (4.0.1):
@@ -14,14 +14,14 @@ PODS:
   - ARCollectionViewMasonryLayout (2.0.0)
   - ARTiledImageView (1.1.1):
     - SDWebImage
+  - Artsy+OSSUIFonts (2.0.2)
   - Artsy+UIColors (3.1.0)
-  - Artsy+UIFonts (3.1.1)
   - Artsy+UILabels (2.1.2):
+    - Artsy+OSSUIFonts
     - Artsy+UIColors (~> 3.0)
-    - Artsy+UIFonts
   - Artsy-UIButtons (2.0.3):
+    - Artsy+OSSUIFonts
     - Artsy+UIColors (~> 3.0)
-    - Artsy+UIFonts
     - UIView+BooleanAnimations
   - CardFlight (3.6.1)
   - DZNWebViewController (2.0):
@@ -39,12 +39,12 @@ PODS:
   - HockeySDK-Source (4.1.5)
   - ISO8601DateFormatter (0.8)
   - Keys (1.0.0)
-  - Moya/Core (8.0.3):
+  - Moya/Core (9.0.0):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
-  - Moya/RxSwift (8.0.3):
+  - Moya/RxSwift (9.0.0):
     - Moya/Core
-    - RxSwift (~> 3.0)
+    - RxSwift (~> 3.3)
   - Nimble (6.0.1)
   - Nimble-Snapshots (4.4.0):
     - Nimble-Snapshots/Core (= 4.4.0)
@@ -63,7 +63,7 @@ PODS:
     - FLKAutoLayout (~> 0.1)
   - Quick (1.0.0)
   - ReachabilitySwift (3)
-  - Result (3.2.1)
+  - Result (3.2.3)
   - RxBlocking (3.1.0):
     - RxSwift (~> 3.1)
   - RxCocoa (3.1.0):
@@ -75,7 +75,7 @@ PODS:
   - RxOptional (3.2.0):
     - RxCocoa
     - RxSwift
-  - RxSwift (3.1.0)
+  - RxSwift (3.5.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -92,8 +92,8 @@ DEPENDENCIES:
   - ARAnalytics/Segmentio
   - ARCollectionViewMasonryLayout (~> 2.0.0)
   - ARTiledImageView
+  - Artsy+OSSUIFonts
   - Artsy+UIColors
-  - Artsy+UIFonts
   - Artsy+UILabels
   - Artsy-UIButtons
   - CardFlight
@@ -105,7 +105,7 @@ DEPENDENCIES:
   - HockeySDK-Source (from `https://github.com/bitstadium/HockeySDK-iOS.git`)
   - ISO8601DateFormatter
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Moya/RxSwift
+  - Moya/RxSwift (~> 9.0)
   - Nimble
   - Nimble-Snapshots
   - NSObject+Rx
@@ -148,13 +148,13 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Action: 9a3d372fb15b057cce7d069a5e1ece8da12483d4
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Analytics: 15be3e651d22cc811f44df65698538236676437b
   ARAnalytics: 85e7bb999e2a40cea7d2394e71e8ecbafa50f2d0
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
+  Artsy+OSSUIFonts: 10b588a6bcef1129959f9002266f1bc0c939be18
   Artsy+UIColors: 31c03c4146f5e6618a9b950f37dfe02dd9ac09a6
-  Artsy+UIFonts: e66afb5c40100e2fc5bba28feb7487e252f2d06f
   Artsy+UILabels: c5bef562052f74bc2f0d523c0f1a289c59c7fbed
   Artsy-UIButtons: 0c87d8a112e6b1d688b153c2a7a8f155e2f1a18f
   CardFlight: 7b34237b6098c231d7a0066c3e38610ca3a98112
@@ -166,7 +166,7 @@ SPEC CHECKSUMS:
   HockeySDK-Source: ab4eef2ac5c07c45db5844ae724bf6f06199b214
   ISO8601DateFormatter: 4551b6ce4f83185425f583b0b3feb3c7b59b942c
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Moya: d3721622e3cc0cc2f038d69a258686f0b66e7252
+  Moya: cf5e6ee93af526532f92614004b8ad2ea60fd845
   Nimble: 1527fd1bd2b4cf0636251a36bc8ab37e81da8347
   Nimble-Snapshots: e743439f26c2fa99d8f7e0d7c01c99bcb40aa6f2
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
@@ -174,12 +174,12 @@ SPEC CHECKSUMS:
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
+  Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
   RxBlocking: cd73ef6a5f8c39cede9488178c46aa0c3c3ed17f
   RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
   RxNimble: 50a9da5852b298b2ec632cb00b79fa20be9f31b8
   RxOptional: d2d6a68064bc16b4801332c40663967f481b0234
-  RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
+  RxSwift: 18ee9d78b45edb3b0b7e79916b47a116e6dbc842
   SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
   Stripe: 0f41a33a6fa3ac76ee668d7df3e2680c28b8ab1a
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
@@ -188,6 +188,6 @@ SPEC CHECKSUMS:
   UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: aed98c14f0c0eb20064184ddf9bac26c482722b2
 
-PODFILE CHECKSUM: df9251168a54b50f97a66fb3e48399dfc0a08ab7
+PODFILE CHECKSUM: 98c27bc5aa70e4bb9cda2f64af20bfee93a4118a
 
 COCOAPODS: 1.2.1

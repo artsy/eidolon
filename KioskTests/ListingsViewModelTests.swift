@@ -30,12 +30,12 @@ class ListingsViewModelTests: QuickSpec {
                 switch target {
                 case ArtsyAPI.auctionListings:
                     if let page = target.parameters!["page"] as? Int {
-                        return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, listingsData(forPage: page, bidCount: bidCount, modelCount: saleArtworksCount))}, method: target.method, parameters: target.parameters)
+                        return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, listingsData(forPage: page, bidCount: bidCount, modelCount: saleArtworksCount))}, method: target.method, task: target.task)
                     } else {
-                        return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+                        return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
                     }
                 default:
-                    return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+                    return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
                 }
             }
 
@@ -119,9 +119,9 @@ class ListingsViewModelTests: QuickSpec {
             let endpointsClosure: MoyaProvider<ArtsyAPI>.EndpointClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
                 switch target {
                 case ArtsyAPI.auctionListings:
-                    return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, listingsData(forPage: 1, bidCount: 0, modelCount: 3, reverseIDs: reverseIDs))}, method: target.method, parameters: target.parameters)
+                    return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, listingsData(forPage: 1, bidCount: 0, modelCount: 3, reverseIDs: reverseIDs))}, method: target.method, task: target.task)
                 default:
-                    return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+                    return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
                 }
             }
 

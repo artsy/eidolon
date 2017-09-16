@@ -3,24 +3,25 @@ import Moya
 import RxSwift
 import Alamofire
 
-class OnlineProvider<Target>: RxMoyaProvider<Target> where Target: TargetType {
+class OnlineProvider<Target> where Target: Moya.TargetType {
 
     fileprivate let online: Observable<Bool>
+    fileprivate let provider: MoyaProvider<Target>
 
-    init(endpointClosure: @escaping EndpointClosure = MoyaProvider.defaultEndpointMapping,
-        requestClosure: @escaping RequestClosure = MoyaProvider.defaultRequestMapping,
-        stubClosure: @escaping StubClosure = MoyaProvider.neverStub,
-        manager: Manager = RxMoyaProvider<Target>.defaultAlamofireManager(),
+    init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = MoyaProvider.defaultEndpointMapping,
+        requestClosure: @escaping MoyaProvider<Target>.RequestClosure = MoyaProvider.defaultRequestMapping,
+        stubClosure: @escaping MoyaProvider<Target>.StubClosure = MoyaProvider.neverStub,
+        manager: Manager = MoyaProvider<Target>.defaultAlamofireManager(),
         plugins: [PluginType] = [],
         trackInflights: Bool = false,
         online: Observable<Bool> = connectedToInternetOrStubbing()) {
 
         self.online = online
-        super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins, trackInflights: trackInflights)
+        self.provider = MoyaProvider(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, manager: manager, plugins: plugins, trackInflights: trackInflights)
     }
 
-    override func request(_ token: Target) -> Observable<Moya.Response> {
-        let actualRequest = super.request(token)
+    func request(_ token: Target) -> Observable<Moya.Response> {
+        let actualRequest = provider.rx.request(token)
         return online
             .ignore(value: false)  // Wait until we're online
             .take(1)        // Take 1 to make sure we only invoke the API once.
@@ -117,16 +118,16 @@ extension NetworkingType {
 
     static func endpointsClosure<T>(_ xAccessToken: String? = nil) -> (T) -> Endpoint<T> where T: TargetType, T: ArtsyAPIType {
         return { target in
-            var endpoint: Endpoint<T> = Endpoint<T>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters)
+            var endpoint: Endpoint<T> = Endpoint<T>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
 
             // If we were given an xAccessToken, add it
             if let xAccessToken = xAccessToken {
-                endpoint = endpoint.adding(httpHeaderFields: ["X-Access-Token": xAccessToken])
+                endpoint = endpoint.adding(newHTTPHeaderFields: ["X-Access-Token": xAccessToken])
             }
 
             // Sign all non-XApp, non-XAuth token requests
             if target.addXAuth {
-                return endpoint.adding(httpHeaderFields:["X-Xapp-Token": XAppToken().token ?? ""])
+                return endpoint.adding(newHTTPHeaderFields:["X-Xapp-Token": XAppToken().token ?? ""])
             } else {
                 return endpoint
             }

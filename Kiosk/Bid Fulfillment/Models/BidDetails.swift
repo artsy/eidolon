@@ -39,7 +39,7 @@ import Moya
                 // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
                 let endpoint = Networking.endpointsClosure()(target)
 
-                return endpoint.adding(newParameters: ["auction_pin": pin, "number": number, "sale_id": auctionID])
+                return endpoint.adding(newHTTPHeaderFields: ["auction_pin": pin, "number": number, "sale_id": auctionID])
             }
 
             let provider = OnlineProvider(endpointClosure: newEndpointsClosure, requestClosure: Networking.endpointResolver(), stubClosure: Networking.APIKeysBasedStubBehaviour, plugins: Networking.authenticatedPlugins)
