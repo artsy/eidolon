@@ -54,15 +54,14 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
         return nil
     }
 
-    public var parameterEncoding: ParameterEncoding {
-        return JSONEncoding.default
+    var task: Task {
+        if let requestParameters = parameters {
+            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
+        }
+        return .requestPlain
     }
 
-    public var task: Task {
-        return .request
-    }
-
-     var path: String {
+    var path: String {
         switch self {
 
         case .xApp:
@@ -73,7 +72,7 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
 
         case .auctionInfo(let id):
             return "/api/v1/sale/\(id)"
-            
+
         case .auctions:
             return "/api/v1/sales"
 
@@ -261,12 +260,11 @@ extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
         return nil
     }
 
-    public var parameterEncoding: ParameterEncoding {
-        return JSONEncoding.default
-    }
-
-    public var task: Task {
-        return .request
+    var task: Task {
+        if let requestParameters = parameters {
+            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
+        }
+        return .requestPlain
     }
 
     var path: String {
