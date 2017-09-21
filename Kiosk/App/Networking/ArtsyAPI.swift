@@ -56,7 +56,7 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
 
     var task: Task {
         if let requestParameters = parameters {
-            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
+            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
         }
         return .requestPlain
     }

@@ -1,5 +1,6 @@
 upcoming:
 - Moves to dependencies for common RxSwift operators. [ash]
+- Fixes parameter encoding bug. [ash]
 
 releases:
 - version: 5.9.0
