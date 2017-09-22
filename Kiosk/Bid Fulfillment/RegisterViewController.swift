@@ -33,35 +33,20 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
         coordinator.storyboard = self.storyboard!
-        let registerIndex = coordinator.currentIndex.asObservable()
-        let indexIsConfirmed = registerIndex.map { return ($0 == RegistrationIndex.confirmVC.toInt()) }
+        let indexIsConfirmed = coordinator.currentIndex.map { return ($0 == RegistrationIndex.confirmVC.toInt()) }
 
         indexIsConfirmed
             .not()
             .bindTo(confirmButton.rx_hidden)
             .addDisposableTo(rx_disposeBag)
 
-        registerIndex
+        coordinator.currentIndex
             .bindTo(flowView.highlightedIndex)
             .addDisposableTo(rx_disposeBag)
 
         let details = self.fulfillmentNav().bidDetails
         flowView.details = details
         bidDetailsPreviewView.bidDetails = details
-
-        flowView
-            .highlightedIndex
-            .asObservable()
-            .distinctUntilChanged()
-            .subscribe(onNext: { [weak self] (index) in
-                if let _ = self?.fulfillmentNav() {
-                    let registrationIndex = RegistrationIndex.fromInt(index)
-
-                    let nextVC = self?.coordinator.viewControllerForIndex(registrationIndex)
-                    self?.goToViewController(nextVC!)
-                }
-            })
-            .addDisposableTo(rx_disposeBag)
 
         goToNextVC()
     }

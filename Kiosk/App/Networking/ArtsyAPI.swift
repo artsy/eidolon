@@ -55,8 +55,15 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
     }
 
     var task: Task {
+        let encoding: ParameterEncoding
+        switch self.method {
+        case .post:
+            encoding = JSONEncoding.default
+        default:
+            encoding = URLEncoding.default
+        }
         if let requestParameters = parameters {
-            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
+            return .requestParameters(parameters: requestParameters, encoding: encoding)
         }
         return .requestPlain
     }
@@ -261,10 +268,15 @@ extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
     }
 
     var task: Task {
-        if let requestParameters = parameters {
-            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
+        let requestParameters = parameters ?? [:]
+        let encoding: ParameterEncoding
+        switch self.method {
+        case .post:
+            encoding = JSONEncoding.default
+        default:
+            encoding = URLEncoding.default
         }
-        return .requestPlain
+        return .requestParameters(parameters: requestParameters, encoding: encoding)
     }
 
     var path: String {
