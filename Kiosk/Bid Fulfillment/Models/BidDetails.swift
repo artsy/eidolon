@@ -39,7 +39,18 @@ import Moya
                 // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
                 let endpoint = Networking.endpointsClosure()(target)
 
-                return endpoint.adding(newHTTPHeaderFields: ["auction_pin": pin, "number": number, "sale_id": auctionID])
+                let task: Task
+                switch target.task {
+                case .requestParameters(parameters: var params, encoding: let encoding):
+                    params["auction_pin"] = pin
+                    params["number"] = number
+                    params["sale_id"] = auctionID
+                    task = .requestParameters(parameters: params, encoding: encoding)
+                default:
+                    task = target.task
+                }
+
+                return endpoint.changing(newTask: task)
             }
 
             let provider = OnlineProvider(endpointClosure: newEndpointsClosure, requestClosure: Networking.endpointResolver(), stubClosure: Networking.APIKeysBasedStubBehaviour, plugins: Networking.authenticatedPlugins)
@@ -61,5 +72,11 @@ import Moya
                 }
                 .logServerError(message: "Getting Access Token failed.")
         }
+    }
+}
+
+extension Endpoint {
+    func changing(newTask: Task) -> Endpoint {
+        return Endpoint(url: url, sampleResponseClosure: sampleResponseClosure, method: method, task: newTask, httpHeaderFields: httpHeaderFields)
     }
 }
