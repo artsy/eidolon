@@ -56,9 +56,8 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
 
     var task: Task {
         let encoding: ParameterEncoding
-        switch self {
-        case .lostPasswordNotification,
-             .createUser:
+        switch self.method {
+        case .post:
             encoding = JSONEncoding.default
         default:
             encoding = URLEncoding.default
@@ -271,11 +270,8 @@ extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
     var task: Task {
         let requestParameters = parameters ?? [:]
         let encoding: ParameterEncoding
-        switch self {
-        case .placeABid,
-             .registerCard,
-             .registerToBid,
-             .createPINForBidder:
+        switch self.method {
+        case .post:
             encoding = JSONEncoding.default
         default:
             encoding = URLEncoding.default
