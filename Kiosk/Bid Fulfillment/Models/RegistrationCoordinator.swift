@@ -34,11 +34,14 @@ enum RegistrationIndex {
 
 class RegistrationCoordinator: NSObject {
 
-    let currentIndex = Variable(0)
+    fileprivate let _currentIndex = Variable(0)
+    var currentIndex: Observable<Int> {
+        return _currentIndex.asObservable().distinctUntilChanged()
+    }
     var storyboard: UIStoryboard!
 
     func viewControllerForIndex(_ index: RegistrationIndex) -> UIViewController {
-        currentIndex.value = index.toInt()
+        _currentIndex.value = index.toInt()
         
         switch index {
 
