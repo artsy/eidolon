@@ -29,7 +29,7 @@ class AppSetup {
     }
 
     var needsZipCode: Bool {
-        // If we're swiping with the card reaer, we don't need to collect a zip code.
+        // If we're swiping with the card reader, we don't need to collect a zip code.
         return false
     }
 }
