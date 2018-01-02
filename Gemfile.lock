@@ -138,7 +138,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_magick (4.5.1)
-    mini_portile2 (2.1.0)
+    mini_portile2 (2.3.0)
     minitest (5.10.2)
     molinillo (0.5.7)
     multi_json (1.12.1)
@@ -148,8 +148,8 @@ GEM
     nanaimo (0.2.3)
     nap (1.1.0)
     netrc (0.7.8)
-    nokogiri (1.7.0.1)
-      mini_portile2 (~> 2.1.0)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
     os (0.9.6)
     osx_keychain (1.0.1)
       RubyInline (~> 3)
@@ -208,4 +208,4 @@ DEPENDENCIES
   second_curtain
 
 BUNDLED WITH
-   1.15.1
+   1.16.1
