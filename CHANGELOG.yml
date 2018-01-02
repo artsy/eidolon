@@ -1,4 +1,5 @@
 upcoming:
+- Updates Artsy Font library. [ash]
 - Moves to dependencies for common RxSwift operators. [ash]
 - Fixes parameter encoding bug. [ash]
 
