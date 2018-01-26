@@ -1,9 +1,19 @@
 fastlane documentation
 ================
 # Installation
+
+Make sure you have the latest version of the Xcode command line tools installed:
+
 ```
-sudo gem install fastlane
+xcode-select --install
 ```
+
+Install _fastlane_ using
+```
+[sudo] gem install fastlane -NV
+```
+or alternatively using `brew cask install fastlane`
+
 # Available Actions
 ### test
 ```
