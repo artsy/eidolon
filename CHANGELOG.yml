@@ -1,9 +1,13 @@
 upcoming:
-- Moves to dependencies for common RxSwift operators. [ash]
-- Fixes parameter encoding bug. [ash]
-- Fixes Stripe config. [ash]
 
 releases:
+- version: 5.9.1
+  date: January 26 2018
+  notes:
+  - Moves to dependencies for common RxSwift operators. [ash]
+  - Fixes parameter encoding bug. [ash]
+  - Fixes Stripe config. [ash]
+
 - version: 5.9.0
   date: July 06 2017
   notes:
@@ -450,6 +454,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
