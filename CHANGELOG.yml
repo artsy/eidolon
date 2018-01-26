@@ -1,7 +1,11 @@
 upcoming:
-- Updates Artsy Font library. [ash]
 
 releases:
+- version: 5.9.2
+  date: January 26 2018
+  notes:
+  - Updates Artsy Font library. [ash]
+
 - version: 5.9.1
   date: January 26 2018
   notes:
@@ -455,6 +459,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
