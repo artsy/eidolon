@@ -18,7 +18,7 @@ class RegisterViewController: UIViewController {
 
     let coordinator = RegistrationCoordinator()
 
-    dynamic var placingBid = true
+    @objc dynamic var placingBid = true
 
     fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {

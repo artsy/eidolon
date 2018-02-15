@@ -36,11 +36,11 @@ class TextField: UITextField {
         addTarget(self, action: #selector(TextField.editingDidFinish(_:)), for: .editingDidEnd)
     }
 
-    func editingDidBegin (_ sender: AnyObject) {
+    @objc func editingDidBegin (_ sender: AnyObject) {
         stateChangedAnimated(shouldAnimateStateChange)
     }
 
-    func editingDidFinish(_ sender: AnyObject) {
+    @objc func editingDidFinish(_ sender: AnyObject) {
         stateChangedAnimated(shouldAnimateStateChange)
     }
 
@@ -115,7 +115,7 @@ class SecureTextField: TextField {
         actualText = text
     }
 
-    func editingDidChange(_ sender: AnyObject) {
+    @objc func editingDidChange(_ sender: AnyObject) {
         actualText = text;
     }
 

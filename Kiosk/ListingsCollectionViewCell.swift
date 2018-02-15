@@ -9,15 +9,15 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     typealias DownloadImageClosure = (_ url: URL?, _ imageView: UIImageView) -> ()
     typealias CancelDownloadImageClosure = (_ imageView: UIImageView) -> ()
 
-    dynamic let lotNumberLabel = ListingsCollectionViewCell._sansSerifLabel()
-    dynamic let artworkImageView = ListingsCollectionViewCell._artworkImageView()
-    dynamic let artistNameLabel = ListingsCollectionViewCell._largeLabel()
-    dynamic let artworkTitleLabel = ListingsCollectionViewCell._italicsLabel()
-    dynamic let estimateLabel = ListingsCollectionViewCell._normalLabel()
-    dynamic let currentBidLabel = ListingsCollectionViewCell._boldLabel()
-    dynamic let numberOfBidsLabel = ListingsCollectionViewCell._rightAlignedNormalLabel()
-    dynamic let bidButton = ListingsCollectionViewCell._bidButton()
-    dynamic let moreInfoLabel = ListingsCollectionViewCell._infoLabel()
+    @objc dynamic let lotNumberLabel = ListingsCollectionViewCell._sansSerifLabel()
+    @objc dynamic let artworkImageView = ListingsCollectionViewCell._artworkImageView()
+    @objc dynamic let artistNameLabel = ListingsCollectionViewCell._largeLabel()
+    @objc dynamic let artworkTitleLabel = ListingsCollectionViewCell._italicsLabel()
+    @objc dynamic let estimateLabel = ListingsCollectionViewCell._normalLabel()
+    @objc dynamic let currentBidLabel = ListingsCollectionViewCell._boldLabel()
+    @objc dynamic let numberOfBidsLabel = ListingsCollectionViewCell._rightAlignedNormalLabel()
+    @objc dynamic let bidButton = ListingsCollectionViewCell._bidButton()
+    @objc dynamic let moreInfoLabel = ListingsCollectionViewCell._infoLabel()
 
     var downloadImage: DownloadImageClosure?
     var cancelDownloadImage: CancelDownloadImageClosure?

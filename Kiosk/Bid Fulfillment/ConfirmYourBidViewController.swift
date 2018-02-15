@@ -33,9 +33,10 @@ class ConfirmYourBidViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let titleString = useArtsyLoginButton.title(for: useArtsyLoginButton.state)! 
-        let attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,
-            NSFontAttributeName: useArtsyLoginButton.titleLabel!.font] as [String : Any];
+        let titleString = useArtsyLoginButton.title(for: useArtsyLoginButton.state)!
+        // TODO: Same, what's with this raw value nonsense?
+        let attributes = [NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue,
+            NSAttributedStringKey.font: useArtsyLoginButton.titleLabel!.font] as! [String : Any];
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, for:useArtsyLoginButton.state)
 

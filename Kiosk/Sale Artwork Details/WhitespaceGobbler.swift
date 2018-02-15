@@ -12,8 +12,8 @@ class WhitespaceGobbler: UIView {
     convenience init() {
         self.init(frame: CGRect.zero)
 
-        setContentHuggingPriority(50, for: .vertical)
-        setContentHuggingPriority(50, for: .horizontal)
+        setContentHuggingPriority(UILayoutPriority(rawValue: 50), for: .vertical)
+        setContentHuggingPriority(UILayoutPriority(rawValue: 50), for: .horizontal)
         backgroundColor = .clear
     }
 

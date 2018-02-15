@@ -17,8 +17,8 @@ class MarkdownParser: XNGMarkdownParser {
         paragraphStyle.minimumLineHeight = 16
 
         topAttributes = [
-            NSParagraphStyleAttributeName: paragraphStyle,
-            NSForegroundColorAttributeName: UIColor.black
+            NSAttributedStringKey.paragraphStyle: paragraphStyle,
+            NSAttributedStringKey.foregroundColor: UIColor.black
         ]
     }
 }

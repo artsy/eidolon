@@ -5,25 +5,25 @@ final class Artwork: NSObject, JSONAbleType {
     let id: String
 
     let dateString: String
-    dynamic let title: String
+    @objc dynamic let title: String
     var titleAndDate: NSAttributedString {
         return titleAndDateAttributedString(self.title, dateString: self.date)
     }
-    dynamic let price: String
-    dynamic let date: String
+    @objc dynamic let price: String
+    @objc dynamic let date: String
 
-    dynamic var soldStatus: NSNumber
-    dynamic var medium: String?
-    dynamic var dimensions = [String]()
+    @objc dynamic var soldStatus: NSNumber
+    @objc dynamic var medium: String?
+    @objc dynamic var dimensions = [String]()
 
-    dynamic var imageRights: String?
-    dynamic var additionalInfo: String?
-    dynamic var blurb: String?
+    @objc dynamic var imageRights: String?
+    @objc dynamic var additionalInfo: String?
+    @objc dynamic var blurb: String?
 
-    dynamic var artists: [Artist]?
-    dynamic var culturalMarker: String?
+    @objc dynamic var artists: [Artist]?
+    @objc dynamic var culturalMarker: String?
 
-    dynamic var images: [Image]?
+    @objc dynamic var images: [Image]?
 
     lazy var defaultImage: Image? = {
         let defaultImages = self.images?.filter { $0.isDefault }
@@ -95,11 +95,11 @@ private func titleAndDateAttributedString(_ title: String, dateString: String) -
     let workTitle = title.isEmpty ? "Untitled" : title
 
     let workFont = UIFont.serifItalicFont(withSize: 16)!
-    let attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSFontAttributeName : workFont])
+    let attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSAttributedStringKey.font : workFont])
     
     if dateString.isNotEmpty {
         let dateFont = UIFont.serifFont(withSize: 16)!
-        let dateString = NSAttributedString(string: ", " + dateString, attributes: [NSFontAttributeName : dateFont])
+        let dateString = NSAttributedString(string: ", " + dateString, attributes: [NSAttributedStringKey.font : dateFont])
         attributedString.append(dateString)
     }
     

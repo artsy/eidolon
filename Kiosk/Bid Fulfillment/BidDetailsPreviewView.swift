@@ -14,10 +14,10 @@ class BidDetailsPreviewView: UIView {
         }
     }
 
-    dynamic let artworkImageView = UIImageViewAligned()
-    dynamic let artistNameLabel = ARSansSerifLabel()
-    dynamic let artworkTitleLabel = ARSerifLabel()
-    dynamic let currentBidPriceLabel = ARSerifLabel()
+    @objc dynamic let artworkImageView = UIImageViewAligned()
+    @objc dynamic let artistNameLabel = ARSansSerifLabel()
+    @objc dynamic let artworkTitleLabel = ARSerifLabel()
+    @objc dynamic let currentBidPriceLabel = ARSerifLabel()
 
     override func awakeFromNib() {
         self.backgroundColor = .white

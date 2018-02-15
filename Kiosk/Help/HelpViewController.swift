@@ -167,7 +167,7 @@ private extension HelpViewController {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 4
         
-        label.attributedText = NSAttributedString(string: text, attributes: [NSParagraphStyleAttributeName: paragraphStyle])
+        label.attributedText = NSAttributedString(string: text, attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
         
         return label
     }

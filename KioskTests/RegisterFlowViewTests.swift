@@ -85,14 +85,14 @@ class RegisterFlowViewTests: QuickSpec {
         }
 
         describe("requiring zip code") {
-            itBehavesLike("a register flow view") { () -> (NSDictionary) in
+            itBehavesLike("a register flow view") { () -> [String: Any] in
                 appSetup.disableCardReader = true
                 return ["subject": subject]
             }
         }
 
         describe("not requiring zip code") {
-            itBehavesLike("a register flow view") { () -> (NSDictionary) in
+            itBehavesLike("a register flow view") { () -> [String: Any] in
                 appSetup.disableCardReader = false
                 return ["subject": subject]
             }

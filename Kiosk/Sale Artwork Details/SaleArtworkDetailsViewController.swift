@@ -278,7 +278,8 @@ class SaleArtworkDetailsViewController: UIViewController {
 
             var buyersPremiumButton = ARButton()
             let title = "buyers premium"
-            let attributes: [String: AnyObject] = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue as AnyObject, NSFontAttributeName: buyersPremiumLabel.font ];
+            // TODO: Remove rawValue
+            let attributes: [String: AnyObject] = [ NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue as AnyObject, NSAttributedStringKey.font.rawValue: buyersPremiumLabel.font ];
             let attributedTitle = NSAttributedString(string: title, attributes: attributes)
             buyersPremiumButton.setTitle(title, for: .normal)
             buyersPremiumButton.titleLabel?.attributedText = attributedTitle;

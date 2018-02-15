@@ -24,7 +24,7 @@ final class SaleArtwork: NSObject, JSONAbleType {
     var auctionID: String?
 
     var saleHighestBid: Bid?
-    dynamic var bidCount: NSNumber?
+    @objc dynamic var bidCount: NSNumber?
 
     var userBidderPosition: BidderPosition?
     var positions: [String]?
@@ -32,13 +32,13 @@ final class SaleArtwork: NSObject, JSONAbleType {
     var openingBidCents: NSNumber?
     var minimumNextBidCents: NSNumber?
     
-    dynamic var highestBidCents: NSNumber?
+    @objc dynamic var highestBidCents: NSNumber?
     var estimateCents: Currency?
     var lowEstimateCents: Currency?
     var highEstimateCents: Currency?
 
-    dynamic var reserveStatus: String?
-    dynamic var lotLabel: NSString?
+    @objc dynamic var reserveStatus: String?
+    @objc dynamic var lotLabel: NSString?
 
     init(id: String, artwork: Artwork, currencySymbol: String) {
         self.id = id

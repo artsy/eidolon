@@ -67,7 +67,7 @@ class SwitchView: UIView {
         return CGSize(width: UIViewNoIntrinsicMetric, height: 46)
     }
     
-    func selectedButton(_ button: UIButton!) {
+    @objc func selectedButton(_ button: UIButton!) {
         let index = buttons.index(of: button)!
         setSelectedIndex(index, animated: shouldAnimate)
     }

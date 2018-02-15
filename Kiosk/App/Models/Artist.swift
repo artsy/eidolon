@@ -4,7 +4,7 @@ import SwiftyJSON
 final class Artist: NSObject, JSONAbleType {
 
     let id: String
-    dynamic var name: String
+    @objc dynamic var name: String
     let sortableID: String?
 
     var blurb: String?

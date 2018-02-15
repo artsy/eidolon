@@ -40,7 +40,7 @@ func yearFromDate(_ date: Date) -> Int {
 // Necessary since UIImage(named:) doesn't work correctly in the test bundle
 extension UIImage {
     class func testImage(named name: String, ofType type: String) -> UIImage! {
-        let bundle = Bundle(for: type(of: TestClass()))
+        let bundle = Bundle(for: Swift.type(of: TestClass()))
         let path = bundle.path(forResource: name, ofType: type)
         return UIImage(contentsOfFile: path!)
     }
