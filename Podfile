@@ -48,7 +48,7 @@ target 'Kiosk' do
   pod 'ARAnalytics/Segmentio'
   pod 'ARAnalytics/HockeyApp'
 
-  pod 'CardFlight'
+  pod 'CardFlight', '~> 3.0'
   pod 'Stripe'
   pod 'ECPhoneNumberFormatter'
   pod 'UIImageViewAligned', :git => 'https://github.com/ashfurrow/UIImageViewAligned.git'
