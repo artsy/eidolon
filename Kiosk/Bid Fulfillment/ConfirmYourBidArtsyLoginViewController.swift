@@ -28,10 +28,11 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         super.viewDidLoad()
 
         let titleString = useArtsyBidderButton.title(for: useArtsyBidderButton.state) ?? ""
-        // TODO: gotta be a better way to do this.
-        let attributes = [NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue,
-            NSAttributedStringKey.font: useArtsyBidderButton.titleLabel!.font] as! [String : Any];
-        let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
+        let attributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle,
+            NSAttributedStringKey.font: useArtsyBidderButton.titleLabel!.font
+        ]
+        let attrTitle = NSAttributedString(string: titleString, attributes: attributes)
         useArtsyBidderButton.setAttributedTitle(attrTitle, for:useArtsyBidderButton.state)
 
         let nav = self.fulfillmentNav()
@@ -109,7 +110,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        _viewWillDisappear.onNext()
+        _viewWillDisappear.onNext(Void())
     }
 
     func showAuthenticationError() {

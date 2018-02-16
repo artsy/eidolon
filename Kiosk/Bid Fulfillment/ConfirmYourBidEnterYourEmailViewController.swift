@@ -54,7 +54,7 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
             .addDisposableTo(rx_disposeBag)
 
         emailTextField.rx_returnKey.subscribe(onNext: { _ in
-            action.execute()
+            action.execute(Void())
         }).addDisposableTo(rx_disposeBag)
     }
 

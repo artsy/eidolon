@@ -97,7 +97,7 @@ class KeypadViewModelTests: QuickSpec {
                         subject.addDigitAction.execute(1).map(void)
                     }
                     .then {
-                        subject.clearAction.execute()
+                        subject.clearAction.execute(Void())
                     }
                     .subscribe(onCompleted: {
                         expect(testHarness.currencyValue) == 0
@@ -116,7 +116,7 @@ class KeypadViewModelTests: QuickSpec {
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .then {
-                        subject.deleteAction.execute()
+                        subject.deleteAction.execute(Void())
                     }.subscribe(onCompleted: {
                         expect(testHarness.currencyValue) == 13
                         expect(testHarness.stringValue) == "13"

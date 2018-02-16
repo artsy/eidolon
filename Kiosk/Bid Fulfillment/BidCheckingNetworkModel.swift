@@ -66,7 +66,7 @@ class BidCheckingNetworkModel: NSObject, BidCheckingNetworkModelType {
                 self.bidIsResolved.value = true
                 
                 // If polling fails, we can still show bid confirmation. Do not error.
-            }).catchErrorJustReturn()
+            }).catchErrorJustReturn(Void())
     }
     
     fileprivate func poll(forUpdatedBidderPosition bidderPositionId: String, provider: AuthorizedNetworking) -> Observable<Void> {

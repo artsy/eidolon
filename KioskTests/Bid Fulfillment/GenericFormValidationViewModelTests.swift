@@ -26,7 +26,7 @@ class GenericFormValidationViewModelTests: QuickSpec {
                 completed = true
             }).addDisposableTo(disposeBag)
 
-            invocation.onNext()
+            invocation.onNext(Void())
 
             expect(completed).toEventually( beTrue() )
         }

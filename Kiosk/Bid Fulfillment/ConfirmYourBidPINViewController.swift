@@ -135,7 +135,7 @@ class ConfirmYourBidPINViewController: UIViewController {
     func showAuthenticationError() {
         confirmButton.flashError("Wrong PIN")
         pinTextField.flashForError()
-        keypadContainer.resetAction.execute()
+        keypadContainer.resetAction.execute(Void())
     }
 
     func checkForCreditCard(loggedInProvider: AuthorizedNetworking) -> Observable<[Card]> {

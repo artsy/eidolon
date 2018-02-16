@@ -224,7 +224,7 @@ class PlaceBidViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        _viewWillDisappear.onNext()
+        _viewWillDisappear.onNext(Void())
     }
 
     @IBAction func bidButtonTapped(_ sender: AnyObject) {

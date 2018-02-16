@@ -72,7 +72,7 @@ class ListingsCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         cancelDownloadImage?(artworkImageView)
-        _preparingForReuse.onNext()
+        _preparingForReuse.onNext(Void())
         setupSubscriptions()
     }
 

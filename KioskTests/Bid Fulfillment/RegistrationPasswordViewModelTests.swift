@@ -225,7 +225,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                     .addDisposableTo(disposeBag)
             }
 
-            invocation.onNext()
+            invocation.onNext(Void())
             
             expect(completed).to( beTrue() )
         }

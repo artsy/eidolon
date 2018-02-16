@@ -34,9 +34,10 @@ class ConfirmYourBidViewController: UIViewController {
         super.viewDidLoad()
 
         let titleString = useArtsyLoginButton.title(for: useArtsyLoginButton.state)!
-        // TODO: Same, what's with this raw value nonsense?
-        let attributes = [NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue,
-            NSAttributedStringKey.font: useArtsyLoginButton.titleLabel!.font] as! [String : Any];
+        let attributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+            NSAttributedStringKey.font: useArtsyLoginButton.titleLabel!.font
+        ]
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, for:useArtsyLoginButton.state)
 
@@ -106,7 +107,7 @@ class ConfirmYourBidViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        _viewWillDisappear.onNext()
+        _viewWillDisappear.onNext(Void())
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

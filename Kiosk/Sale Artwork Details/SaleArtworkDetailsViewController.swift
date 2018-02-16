@@ -49,7 +49,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         // This wasn't an issue with RAC's rac_signalForSelector because that invoked the signal _after_ this method completed.
         // So that's what I've done here.
         DispatchQueue.main.async {
-            self.layoutSubviews.onNext()
+            self.layoutSubviews.onNext(Void())
         }
     }
 
@@ -278,8 +278,10 @@ class SaleArtworkDetailsViewController: UIViewController {
 
             var buyersPremiumButton = ARButton()
             let title = "buyers premium"
-            // TODO: Remove rawValue
-            let attributes: [String: AnyObject] = [ NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue as AnyObject, NSAttributedStringKey.font.rawValue: buyersPremiumLabel.font ];
+            let attributes: [NSAttributedStringKey: Any] = [
+                NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle,
+                NSAttributedStringKey.font: buyersPremiumLabel.font
+            ]
             let attributedTitle = NSAttributedString(string: title, attributes: attributes)
             buyersPremiumButton.setTitle(title, for: .normal)
             buyersPremiumButton.titleLabel?.attributedText = attributedTitle;

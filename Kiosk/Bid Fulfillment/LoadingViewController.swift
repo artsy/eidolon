@@ -81,7 +81,7 @@ class LoadingViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        _viewWillDisappear.onNext()
+        _viewWillDisappear.onNext(Void())
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
