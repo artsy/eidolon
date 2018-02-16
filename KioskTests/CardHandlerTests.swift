@@ -35,7 +35,7 @@ class CardHandlerTests: QuickSpec {
             var success = false
             self.handler
                 .cardStatus
-                .subscribe(onCompleted: { input in
+                .subscribe(onCompleted: {
                     success = true
                 })
                 .addDisposableTo(disposeBag)

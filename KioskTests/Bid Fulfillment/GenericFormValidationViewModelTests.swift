@@ -43,7 +43,7 @@ class GenericFormValidationViewModelTests: QuickSpec {
 
             let subject = GenericFormValidationViewModel(isValid: validSubject, manualInvocation: invocation, finishedSubject: finishedSubject)
 
-            subject.command.execute()
+            subject.command.execute(Void())
 
             expect(completed).toEventually( beTrue() )
         }

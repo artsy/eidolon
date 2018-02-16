@@ -188,7 +188,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                             registered = true
                         }
 
-                        subject.registerButtonCommand().execute()
+                        subject.registerButtonCommand().execute(Void())
 
                         expect(registered).toEventually( beTrue() )
                     }
@@ -196,7 +196,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                     it("sets user state after successful registration") {
                         testStripeManager.token = TestToken()
 
-                        subject.registerButtonCommand().execute()
+                        subject.registerButtonCommand().execute(Void())
 
                         expect(subject.bidDetails.newUser.creditCardName).toEventually( equalFirst("Simon Suyez") )
                         expect(subject.bidDetails.newUser.creditCardType).toEventually( equalFirst("American Express") )
@@ -218,7 +218,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                         waitUntil { done in
                             subject
                                 .registerButtonCommand()
-                                .execute()
+                                .execute(Void())
                                 .subscribe(onCompleted: {
                                     done()
                                 })
@@ -256,7 +256,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                                 })
                                 .addDisposableTo(disposeBag)
 
-                            command.execute()
+                            command.execute(Void())
                         }
 
                         expect(finished) == false

@@ -74,9 +74,8 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
                 waitUntil { done in
                     testViewModel
                         .testRegisterButtonCommand
-                        .execute()
-                        .subscribe(onCompleted: { (_) in
-
+                        .execute(Void())
+                        .subscribe(onCompleted: {
                             expect(executed) == true
                             done()
                         })
@@ -97,7 +96,7 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
             waitUntil { done in
                 testViewModel
                     .testRegisterButtonCommand
-                    .execute()
+                    .execute(Void())
                     .subscribe(onError: { (_) in
                         done()
                     })

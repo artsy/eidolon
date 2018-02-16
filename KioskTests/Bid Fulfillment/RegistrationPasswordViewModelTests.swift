@@ -93,7 +93,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             let disposeBag = DisposeBag()
 
             waitUntil { done in
-                subject.action.execute().subscribe(onCompleted: {
+                subject.action.execute(Void()).subscribe(onCompleted: {
                     done()
                 }).addDisposableTo(disposeBag)
             }
@@ -119,7 +119,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .addDisposableTo(disposeBag)
 
             waitUntil { done in
-                subject.action.execute().subscribe(onCompleted: {
+                subject.action.execute(Void()).subscribe(onCompleted: {
                     done()
                 }).addDisposableTo(disposeBag)
             }
@@ -145,7 +145,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .addDisposableTo(disposeBag)
 
             waitUntil { done in
-                subject.action.execute().subscribe(onCompleted: {
+                subject.action.execute(Void()).subscribe(onCompleted: {
                     done()
                 }).addDisposableTo(disposeBag)
             }
@@ -169,7 +169,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
 
 
             waitUntil { done in
-                subject.action.execute().subscribe(onCompleted: {
+                subject.action.execute(Void()).subscribe(onCompleted: {
                     done()
                 }).addDisposableTo(disposeBag)
             }
@@ -195,7 +195,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .addDisposableTo(disposeBag)
 
             waitUntil { done in
-                subject.action.execute().subscribe(onError: { _ in
+                subject.action.execute(Void()).subscribe(onError: { _ in
                     done()
                 }).addDisposableTo(disposeBag)
             }
@@ -246,7 +246,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             let disposeBag = DisposeBag()
             
             waitUntil { done in
-                subject.action.execute().subscribe(onCompleted: {
+                subject.action.execute(Void()).subscribe(onCompleted: {
                     done()
                 }).addDisposableTo(disposeBag)
             }
