@@ -6,8 +6,8 @@ import RxSwift
 import Keys
 import Moya
 
-func beInTheFuture() -> MatcherFunc<Date> {
-    return MatcherFunc { actualExpression, failureMessage in
+func beInTheFuture() -> Predicate<Date> {
+    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         let instance = try! actualExpression.evaluate()!
         let now = Date()
         return instance.compare(now) == ComparisonResult.orderedDescending
