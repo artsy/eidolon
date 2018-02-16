@@ -92,28 +92,28 @@ class ListingsCollectionViewCell: UICollectionViewCell {
         viewModel.flatMapTo(SaleArtworkViewModel.lotLabel)
             .replaceNilWith("")
             .mapToOptional()
-            .bindTo(lotNumberLabel.rx.text)
-            .addDisposableTo(reuseBag)
+            .bind(to: lotNumberLabel.rx.text)
+            .disposed(by: reuseBag)
 
         viewModel.map { (viewModel) -> URL? in
                 return viewModel.thumbnailURL
             }.subscribe(onNext: { [weak self] url in
                 guard let imageView = self?.artworkImageView else { return }
                 self?.downloadImage?(url, imageView)
-            }).addDisposableTo(reuseBag)
+            }).disposed(by: reuseBag)
 
         viewModel.map { $0.artistName ?? "" }
-            .bindTo(artistNameLabel.rx.text)
-            .addDisposableTo(reuseBag)
+            .bind(to: artistNameLabel.rx.text)
+            .disposed(by: reuseBag)
 
         viewModel.map { $0.titleAndDateAttributedString }
             .mapToOptional()
-            .bindTo(artworkTitleLabel.rx.attributedText)
-            .addDisposableTo(reuseBag)
+            .bind(to: artworkTitleLabel.rx.attributedText)
+            .disposed(by: reuseBag)
 
         viewModel.map { $0.estimateString }
-            .bindTo(estimateLabel.rx.text)
-            .addDisposableTo(reuseBag)
+            .bind(to: estimateLabel.rx.text)
+            .disposed(by: reuseBag)
 
         // Now do properties that _do_ change.
 
@@ -121,27 +121,27 @@ class ListingsCollectionViewCell: UICollectionViewCell {
                 return viewModel.currentBid(prefix: "Current Bid: ", missingPrefix: "Starting Bid: ")
             }
             .mapToOptional()
-            .bindTo(currentBidLabel.rx.text)
-            .addDisposableTo(reuseBag)
+            .bind(to: currentBidLabel.rx.text)
+            .disposed(by: reuseBag)
 
         viewModel.flatMapTo(SaleArtworkViewModel.numberOfBids)
             .mapToOptional()
-            .bindTo(numberOfBidsLabel.rx.text)
-            .addDisposableTo(reuseBag)
+            .bind(to: numberOfBidsLabel.rx.text)
+            .disposed(by: reuseBag)
 
         viewModel.flatMapTo(SaleArtworkViewModel.forSale)
             .map { forSale  in (forSale ? "BID" : "SOLD") }
-            .bindTo(bidButton.rx.title())
-            .addDisposableTo(reuseBag)
+            .bind(to: bidButton.rx.title())
+            .disposed(by: reuseBag)
 
         viewModel.flatMapTo(SaleArtworkViewModel.forSale)
-            .bindTo(bidButton.rx.isEnabled)
-            .addDisposableTo(reuseBag)
+            .bind(to: bidButton.rx.isEnabled)
+            .disposed(by: reuseBag)
 
         bidButton.rx.tap.subscribe(onNext: { [weak self] in
                 self?._bidPressed.onNext(Date())
             })
-            .addDisposableTo(reuseBag)
+            .disposed(by: reuseBag)
     }
 }
 

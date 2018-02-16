@@ -1,5 +1,5 @@
 import RxSwift
-import ReachabilitySwift
+import Reachability
 import Moya
 
 // Ideally a Pod. For now a file.

@@ -37,7 +37,7 @@ class BidderNetworkModelTests: QuickSpec {
                     .subscribe(onNext: { _ in
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
     }

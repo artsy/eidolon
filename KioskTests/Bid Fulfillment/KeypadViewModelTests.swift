@@ -26,13 +26,13 @@ class KeypadViewModelTests: QuickSpec {
 //            subject
 //                .stringValue
 //                .asObservable()
-//                .bindTo(testHarness.stringValue)
-//                .addDisposableTo(disposeBag)
+//                .bind(to: testHarness.stringValue)
+//                .disposed(by: disposeBag)
 //            subject
 //                .currencyValue
 //                .asObservable()
-//                .bindTo(testHarness.currencyValue)
-//                .addDisposableTo(disposeBag)
+//                .bind(to: testHarness.currencyValue)
+//                .disposed(by: disposeBag)
         }
         
         it("it has default values") {
@@ -52,7 +52,7 @@ class KeypadViewModelTests: QuickSpec {
 
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
         }
@@ -70,7 +70,7 @@ class KeypadViewModelTests: QuickSpec {
 
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
         
@@ -86,7 +86,7 @@ class KeypadViewModelTests: QuickSpec {
                         
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
         
@@ -105,7 +105,7 @@ class KeypadViewModelTests: QuickSpec {
                         
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
         
@@ -123,7 +123,7 @@ class KeypadViewModelTests: QuickSpec {
 
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
     }

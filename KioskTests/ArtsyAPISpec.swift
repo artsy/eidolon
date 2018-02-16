@@ -65,7 +65,7 @@ class ArtsyAPISpec: QuickSpec {
                 // Make any XApp request, doesn't matter which, but make sure to subscribe so it actually fires
                 newXAppRequest().subscribe(onNext: { (object) in
                     called = true
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
                 
                 expect(called).to(beTruthy())
             }
@@ -77,7 +77,7 @@ class ArtsyAPISpec: QuickSpec {
                     newXAppRequest().subscribe(onNext: { (object) in
                         // nop
                         done()
-                    }).addDisposableTo(disposeBag)
+                    }).disposed(by: disposeBag)
                 }
                 
                 let past = Date(timeIntervalSinceNow: -1000)
@@ -92,7 +92,7 @@ class ArtsyAPISpec: QuickSpec {
                 
                 newXAppRequest().subscribe(onNext: { (object) in
                     // nop
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
                 
                 expect(getDefaultsKeys(defaults).key).to(equal("STUBBED TOKEN!"))
                 expect(getDefaultsKeys(defaults).expiry).toNot(beNil())

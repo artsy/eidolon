@@ -26,7 +26,7 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
                         receivedResult = result
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
@@ -44,7 +44,7 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
                         receivedResult = result
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
@@ -62,7 +62,7 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
                         receivedResult = result
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.

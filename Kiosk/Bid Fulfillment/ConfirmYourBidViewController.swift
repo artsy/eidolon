@@ -42,13 +42,13 @@ class ConfirmYourBidViewController: UIViewController {
         useArtsyLoginButton.setAttributedTitle(attrTitle, for:useArtsyLoginButton.state)
 
         number
-            .bindTo(_number)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: _number)
+            .disposed(by: rx.disposeBag)
 
         number
             .map(toPhoneNumberString)
-            .bindTo(numberAmountTextField.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: numberAmountTextField.rx.text)
+            .disposed(by: rx.disposeBag)
 
         let nav = self.fulfillmentNav()
 
@@ -59,8 +59,8 @@ class ConfirmYourBidViewController: UIViewController {
         // We don't know if it's a paddle number or a phone number yet, so bind both ¯\_(ツ)_/¯
         [nav.bidDetails.paddleNumber, nav.bidDetails.newUser.phoneNumber].forEach { variable in
             optionalNumber
-                .bindTo(variable)
-                .addDisposableTo(rx_disposeBag)
+                .bind(to: variable)
+                .disposed(by: rx.disposeBag)
         }
 
         // Does a bidder exist for this phone number?

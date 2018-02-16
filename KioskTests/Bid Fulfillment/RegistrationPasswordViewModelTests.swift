@@ -16,30 +16,30 @@ class RegistrationPasswordViewModelTests: QuickSpec {
     
     func stubProvider(emailExists: Bool, emailCheck: Check, loginSucceeds: Bool, loginCheck: Check, passwordRequestSucceeds: Bool, passwordCheck: Check) -> Networking {
 
-        let endpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
+        let endpointsClosure = { (target: ArtsyAPI) -> Endpoint in
 
             switch target {
             case ArtsyAPI.findExistingEmailRegistration(let email):
                 emailCheck?()
                 expect(email) == testEmail
-                return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(emailExists ? 200 : 404, Data())}, method: target.method, task: target.task)
+                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(emailExists ? 200 : 404, Data())}, method: target.method, task: target.task)
             case ArtsyAPI.lostPasswordNotification(let email):
                 passwordCheck?()
                 expect(email) == testEmail
-                return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(passwordRequestSucceeds ? 200 : 404, Data())}, method: target.method, task: target.task)
+                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(passwordRequestSucceeds ? 200 : 404, Data())}, method: target.method, task: target.task)
             case ArtsyAPI.xAuth(let email, let password):
                 loginCheck?()
                 expect(email) == testEmail
                 expect(password) == testPassword
                 // Fail auth (wrong password maybe)
-                return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(loginSucceeds ? 200 : 403, Data())}, method: target.method, task: target.task)
+                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(loginSucceeds ? 200 : 403, Data())}, method: target.method, task: target.task)
             case .xApp:
                 // Any XApp requests are incidental; ignore.
                 return MoyaProvider<ArtsyAPI>.defaultEndpointMapping(for: target)
             default:
                 // Fail on all other cases
                 fail("Unexpected network call")
-                return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, Data())}, method: target.method, task: target.task)
+                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, Data())}, method: target.method, task: target.task)
             }
         }
 
@@ -95,7 +95,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             waitUntil { done in
                 subject.action.execute(Void()).subscribe(onCompleted: {
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
 
             expect(checked).to( beTrue() )
@@ -116,12 +116,12 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .subscribe(onNext: { (object) in
                     exists = object
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
             waitUntil { done in
                 subject.action.execute(Void()).subscribe(onCompleted: {
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
             
             expect(exists).to( beTrue() )
@@ -142,12 +142,12 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .subscribe(onNext: { (object) in
                     exists = object
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
             waitUntil { done in
                 subject.action.execute(Void()).subscribe(onCompleted: {
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
 
             expect(exists).toNot( beNil() )
@@ -171,7 +171,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             waitUntil { done in
                 subject.action.execute(Void()).subscribe(onCompleted: {
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
             
             expect(checked).to( beTrue() )
@@ -192,12 +192,12 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .subscribe(onNext: { _ in
                     errored = true
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
             waitUntil { done in
                 subject.action.execute(Void()).subscribe(onError: { _ in
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
 
             expect(errored).to( beTrue() )
@@ -222,7 +222,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                         completed = true
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             invocation.onNext(Void())
@@ -240,7 +240,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                 .subscribe(onCompleted: {
                     completed = true
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
             let subject = self.testSubject(invocation:invocation, finishedSubject: finishedSubject)
             let disposeBag = DisposeBag()
@@ -248,7 +248,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             waitUntil { done in
                 subject.action.execute(Void()).subscribe(onCompleted: {
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
 
             expect(completed).to( beTrue() )
@@ -271,7 +271,7 @@ class RegistrationPasswordViewModelTests: QuickSpec {
                         // do nothing – we subscribe just to force the observable to execute.
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             expect(sent).to( beTrue() )

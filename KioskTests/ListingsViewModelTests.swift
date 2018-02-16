@@ -26,16 +26,16 @@ class ListingsViewModelTests: QuickSpec {
 
             saleArtworksCount = nil
 
-            let endpointsClosure: MoyaProvider<ArtsyAPI>.EndpointClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
+            let endpointsClosure: MoyaProvider<ArtsyAPI>.EndpointClosure = { (target: ArtsyAPI) -> Endpoint in
                 switch target {
                 case ArtsyAPI.auctionListings:
                     if let page = target.parameters!["page"] as? Int {
-                        return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, listingsData(forPage: page, bidCount: bidCount, modelCount: saleArtworksCount))}, method: target.method, task: target.task)
+                        return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, listingsData(forPage: page, bidCount: bidCount, modelCount: saleArtworksCount))}, method: target.method, task: target.task)
                     } else {
-                        return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
+                        return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
                     }
                 default:
-                    return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
+                    return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
                 }
             }
 
@@ -57,7 +57,7 @@ class ListingsViewModelTests: QuickSpec {
             waitUntil { done in
                 subject.updatedContents.take(1).subscribe(onCompleted: {
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
 
             expect(subject.numberOfSaleArtworks) == 3
@@ -73,7 +73,7 @@ class ListingsViewModelTests: QuickSpec {
                 }.subscribe(onNext: { string in
                     expect(string) == "\(initialBidCount) bids placed"
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
 
             // Simulate update from API, wait for sync to happen
@@ -84,7 +84,7 @@ class ListingsViewModelTests: QuickSpec {
                 subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).numberOfBids().skip(1).subscribe(onNext: { string in
                     expect(string) == "\(finalBidCount) bids placed"
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
         }
 
@@ -98,7 +98,7 @@ class ListingsViewModelTests: QuickSpec {
                 subject.updatedContents.take(1).subscribe(onCompleted: {
                     expect(subject.numberOfSaleArtworks) == 2
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
 
             // Simulate update from API, wait for sync to happen
@@ -109,19 +109,19 @@ class ListingsViewModelTests: QuickSpec {
                 subject.updatedContents.skip(1).take(1).subscribe(onCompleted: {
                     expect(subject.numberOfSaleArtworks) == 5
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
         }
 
         it("syncs correctly even if lot numbers have changed") {
             var reverseIDs = false
 
-            let endpointsClosure: MoyaProvider<ArtsyAPI>.EndpointClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
+            let endpointsClosure: MoyaProvider<ArtsyAPI>.EndpointClosure = { (target: ArtsyAPI) -> Endpoint in
                 switch target {
                 case ArtsyAPI.auctionListings:
-                    return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, listingsData(forPage: 1, bidCount: 0, modelCount: 3, reverseIDs: reverseIDs))}, method: target.method, task: target.task)
+                    return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, listingsData(forPage: 1, bidCount: 0, modelCount: 3, reverseIDs: reverseIDs))}, method: target.method, task: target.task)
                 default:
-                    return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
+                    return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
                 }
             }
 
@@ -137,7 +137,7 @@ class ListingsViewModelTests: QuickSpec {
                 subject.updatedContents.take(1).subscribe(onCompleted: {
                     initialFirstLotID = subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).saleArtworkID
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
 
             // Now we reverse the lot numbers
@@ -146,7 +146,7 @@ class ListingsViewModelTests: QuickSpec {
                 subject.updatedContents.skip(1).take(1).subscribe(onCompleted: {
                     subsequentFirstLotID = subject.saleArtworkViewModel(atIndexPath: IndexPath(item: 0, section: 0)).saleArtworkID
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
 
             expect(initialFirstLotID).toNot( beEmpty() )

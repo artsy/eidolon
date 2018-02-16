@@ -29,7 +29,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
                         completed = true
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             expect(completed).to( beTrue() )
@@ -44,7 +44,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
                         bidderPositionID = id
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             // ID retrieved from CreateABid.json
@@ -56,7 +56,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
             var artworkID: String?
             var bidCents: String?
 
-            let provider = OnlineProvider(endpointClosure: { target -> (Endpoint<ArtsyAuthenticatedAPI>) in
+            let provider = OnlineProvider(endpointClosure: { target -> (Endpoint) in
                 if case .placeABid(let receivedAuctionID, let receivedArtworkID, let receivedBidCents) = target {
                     auctionID = receivedAuctionID
                     artworkID = receivedArtworkID
@@ -75,7 +75,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
                     .subscribe(onCompleted: {
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             expect(auctionID) == fulfillmentController.bidDetails.saleArtwork?.auctionID
@@ -87,7 +87,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
             var networking: AuthorizedNetworking!
 
             beforeEach {
-                let provider = OnlineProvider(endpointClosure: { target -> (Endpoint<ArtsyAuthenticatedAPI>) in
+                let provider = OnlineProvider(endpointClosure: { target -> (Endpoint) in
                     let url = target.baseURL.appendingPathComponent(target.path).absoluteString
                     return Endpoint(url: url, sampleResponseClosure: {.networkResponse(400, stubbedResponse("CreateABidFail"))}, method: target.method, task: target.task)
                     }, stubClosure: MoyaProvider.immediatelyStub, online: Observable.just(true))
@@ -104,7 +104,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
                             error = receivedError as NSError
                             done()
                         })
-                        .addDisposableTo(disposeBag)
+                        .disposed(by: disposeBag)
                 }
 
                 expect(error?.domain) == OutbidDomain
@@ -119,7 +119,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
                             errored = true
                             done()
                         })
-                        .addDisposableTo(disposeBag)
+                        .disposed(by: disposeBag)
                 }
 
                 expect(errored).to( beTrue() )

@@ -79,7 +79,7 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
                             expect(executed) == true
                             done()
                         })
-                        .addDisposableTo(disposeBag)
+                        .disposed(by: disposeBag)
                     
                     return
                 }
@@ -100,7 +100,7 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
                     .subscribe(onError: { (_) in
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             expect(subject).to( haveValidSnapshot() )

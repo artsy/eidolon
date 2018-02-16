@@ -42,7 +42,7 @@ class AdminCardTestingViewController: UIViewController {
                     self.log(cardDetails)
                 }
             }
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
 
         cardHandler.startSearching()

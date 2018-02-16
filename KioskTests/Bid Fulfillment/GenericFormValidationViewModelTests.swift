@@ -24,7 +24,7 @@ class GenericFormValidationViewModelTests: QuickSpec {
 
             subject.command.executing.take(1).subscribe(onNext: { _ in
                 completed = true
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 
             invocation.onNext(Void())
 
@@ -39,7 +39,7 @@ class GenericFormValidationViewModelTests: QuickSpec {
 
             finishedSubject.subscribe(onCompleted: {
                 completed = true
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 
             let subject = GenericFormValidationViewModel(isValid: validSubject, manualInvocation: invocation, finishedSubject: finishedSubject)
 

@@ -82,7 +82,7 @@ class LoadingViewModelTests: QuickSpec {
         it("creates a new bidder if necessary") {
             subject = LoadingViewModel(provider: Networking.newStubbingNetworking(), bidNetworkModel: stubbedNetworkModel, placingBid: false, actionsComplete: Observable.never())
             waitUntil { (done) in
-                subject.performActions().subscribe(onCompleted: { done() }).addDisposableTo(disposeBag)
+                subject.performActions().subscribe(onCompleted: { done() }).disposed(by: disposeBag)
             }
 
             expect(subject.createdNewBidder) == true
@@ -104,7 +104,7 @@ class LoadingViewModelTests: QuickSpec {
 
             it("places a bid if necessary") {
                 waitUntil { done in
-                    subject.performActions().subscribe(onCompleted: { done() }).addDisposableTo(disposeBag)
+                    subject.performActions().subscribe(onCompleted: { done() }).disposed(by: disposeBag)
                     return
                 }
 
@@ -113,7 +113,7 @@ class LoadingViewModelTests: QuickSpec {
 
             it("waits for bid resolution if bid was placed") {
                 waitUntil { done in
-                    subject.performActions().subscribe(onCompleted: { done() }).addDisposableTo(disposeBag)
+                    subject.performActions().subscribe(onCompleted: { done() }).disposed(by: disposeBag)
                 }
 
                 expect(stubBidCheckingNetworkModel.checked) == true

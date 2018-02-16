@@ -31,7 +31,7 @@ class HelpAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                         appDelegate().helpButtonCommand().execute(Void())
                     }
                 })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
             toViewController.dismissTapGestureRecognizer = dismissTapGestureRecognizer
             containerView.addGestureRecognizer(dismissTapGestureRecognizer)
 

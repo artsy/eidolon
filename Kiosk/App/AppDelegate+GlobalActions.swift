@@ -44,7 +44,7 @@ extension AppDelegate {
             transition.type = kCATransitionFade
             self.helpButton.layer.add(transition, forKey: "fade")
 
-        }).addDisposableTo(rx_disposeBag)
+        }).disposed(by: rx.disposeBag)
     }
 
     func setHelpButtonHidden(_ hidden: Bool) {

@@ -42,8 +42,8 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
         passwordText
             .asObservable()
             .takeUntil(viewWillDisappear)
-            .bindTo(bidDetails.newUser.password)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: bidDetails.newUser.password)
+            .disposed(by: rx.disposeBag)
 
         confirmButton.rx.action = viewModel.action
 
@@ -54,15 +54,15 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
                 self?.showAuthenticationError()
                 return
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
 
         viewModel
             .emailExists
             .not()
             .startWith(true)
-            .bindTo(forgotPasswordButton.rx_hidden)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: forgotPasswordButton.rx_hidden)
+            .disposed(by: rx.disposeBag)
 
 
         forgotPasswordButton.rx.action = CocoaAction { [weak self] _ in
@@ -83,8 +83,8 @@ class RegistrationPasswordViewController: UIViewController, RegistrationSubContr
                     return "Create a password"
                 }
             }
-            .bindTo(subtitleLabel.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: subtitleLabel.rx.text)
+            .disposed(by: rx.disposeBag)
 
         passwordTextField.becomeFirstResponder()
     }

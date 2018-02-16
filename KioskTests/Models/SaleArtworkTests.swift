@@ -94,7 +94,7 @@ class SaleArtworkTests: QuickSpec {
 
                     saleArtwork.viewModel.numberOfBidsWithReserve.subscribe(onNext: { (newReserveStatus) in
                         reserveStatus = newReserveStatus
-                    }).addDisposableTo(disposeBag)
+                    }).disposed(by: disposeBag)
 
                     expect(reserveStatus) == "(1 bid placed, Reserve not met)"
                 }
@@ -104,7 +104,7 @@ class SaleArtworkTests: QuickSpec {
                     var invocations = 0
                     saleArtwork.viewModel.numberOfBidsWithReserve.subscribe(onNext: { (newReserveStatus) in
                         invocations += 1
-                    }).addDisposableTo(disposeBag)
+                    }).disposed(by: disposeBag)
                     
                     saleArtwork.reserveStatus = ReserveStatus.ReserveNotMet.rawValue
 
@@ -117,7 +117,7 @@ class SaleArtworkTests: QuickSpec {
                     var reserveStatus = ""
                     saleArtwork.viewModel.numberOfBidsWithReserve.subscribe(onNext: { (newReserveStatus) in
                         reserveStatus = newReserveStatus
-                    }).addDisposableTo(disposeBag)
+                    }).disposed(by: disposeBag)
 
                     saleArtwork.bidCount = 2
 
@@ -128,7 +128,7 @@ class SaleArtworkTests: QuickSpec {
                     var invocations = 0
                     saleArtwork.viewModel.numberOfBidsWithReserve.subscribe(onNext: { (newReserveStatus) in
                         invocations += 1
-                    }).addDisposableTo(disposeBag)
+                    }).disposed(by: disposeBag)
 
                     saleArtwork.bidCount = 2
 
@@ -140,7 +140,7 @@ class SaleArtworkTests: QuickSpec {
                     var invocations = 0
                     saleArtwork.viewModel.numberOfBidsWithReserve.subscribe(onNext: { (newReserveStatus) in
                         invocations += 1
-                    }).addDisposableTo(disposeBag)
+                    }).disposed(by: disposeBag)
 
                     saleArtwork.highestBidCents = 1_00
 

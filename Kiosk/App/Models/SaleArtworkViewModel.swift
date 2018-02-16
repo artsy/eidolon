@@ -127,7 +127,7 @@ extension SaleArtworkViewModel {
                 let formatted = centsToPresentableDollarsString(currentBidCents, currencySymbol: currencySymbol)
                 return "\(prefix)\(formatted)"
             } else {
-                let formatted = centsToPresentableDollarsString(Currency(self?.saleArtwork.openingBidCents ?? 0), currencySymbol: currencySymbol)
+                let formatted = centsToPresentableDollarsString(Currency(truncating: self?.saleArtwork.openingBidCents ?? 0), currencySymbol: currencySymbol)
                 return "\(missingPrefix)\(formatted)"
             }
         }

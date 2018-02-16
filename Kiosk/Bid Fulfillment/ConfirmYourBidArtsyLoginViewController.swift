@@ -45,12 +45,12 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
         let passwordText = passwordTextField.rx.text.takeUntil(viewWillDisappear)
 
         emailText
-            .bindTo(nav.bidDetails.newUser.email)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: nav.bidDetails.newUser.email)
+            .disposed(by: rx.disposeBag)
 
         passwordText
-            .bindTo(nav.bidDetails.newUser.password)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: nav.bidDetails.newUser.password)
+            .disposed(by: rx.disposeBag)
 
         let inputIsEmail = emailText.asObservable().replaceNilWith("").map(stringIsEmailAddress)
         let passwordIsLongEnough = passwordText.asObservable().replaceNilWith("").map(isZeroLength).not()
@@ -146,8 +146,8 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
                 .rx.text
                 .asObservable()
                 .replaceNilWith("")
-                .bindTo(email)
-                .addDisposableTo(textField.rx_disposeBag)
+                .bind(to: email)
+                .disposed(by: textField.rx.disposeBag)
 
             NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { (notification) in
                 submitAction.isEnabled = stringIsEmailAddress(textField.text ?? "").boolValue

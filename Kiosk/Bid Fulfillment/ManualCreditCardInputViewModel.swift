@@ -86,7 +86,7 @@ class ManualCreditCardInputViewModel: NSObject {
             newUser.creditCardName.value = token.card?.name
             newUser.creditCardType.value = token.card?.brand.name
             newUser.creditCardToken.value = token.tokenId
-            newUser.creditCardDigit.value = token.card?.last4()
+            newUser.creditCardDigit.value = token.card?.last4
         })
     }
 

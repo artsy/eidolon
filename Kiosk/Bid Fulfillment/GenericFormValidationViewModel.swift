@@ -22,6 +22,6 @@ class GenericFormValidationViewModel {
             .subscribe(onNext: { [weak self] _ in
                 self?.command.execute(Void())
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 }

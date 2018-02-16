@@ -38,7 +38,7 @@ class CardHandlerTests: QuickSpec {
                 .subscribe(onCompleted: {
                     success = true
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
             self.handler.startSearching()
             expect(success) == true
@@ -53,7 +53,7 @@ class CardHandlerTests: QuickSpec {
                 .subscribe(onError: { _ in
                     failed = true
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
             self.handler!.startSearching()
             expect(failed) == true
@@ -67,7 +67,7 @@ class CardHandlerTests: QuickSpec {
                 .subscribe(onNext: { (message) in
                     messageCount = messageCount + 1
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
             self.handler!.readerIsAttached()
             self.handler!.readerIsConnecting()

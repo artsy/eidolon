@@ -42,15 +42,15 @@ class YourBiddingDetailsViewController: UIViewController {
             .paddleNumber
             .asObservable()
             .filterNilKeepOptional()
-            .bindTo(bidderNumberLabel.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: bidderNumberLabel.rx.text)
+            .disposed(by: rx.disposeBag)
 
         bidDetails
             .bidderPIN
             .asObservable()
             .filterNilKeepOptional()
-            .bindTo(pinNumberLabel.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: pinNumberLabel.rx.text)
+            .disposed(by: rx.disposeBag)
     }
 
     @IBAction func confirmButtonTapped(_ sender: AnyObject) {

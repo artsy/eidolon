@@ -29,7 +29,7 @@ class StripeManager: NSObject {
         card.expMonth = month
         card.expYear = year
         card.cvc = securityCode
-        card.addressZip = postalCode
+        card.address.postalCode = postalCode
 
         return Observable.create { [weak self] observer in
             guard let me = self else {

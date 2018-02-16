@@ -51,8 +51,8 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
         ].forEach { pair in
             pair.0
                 .takeUntil(actionsComplete)
-                .bindTo(pair.1)
-                .addDisposableTo(rx_disposeBag)
+                .bind(to: pair.1)
+                .disposed(by: rx.disposeBag)
         }
     }
 

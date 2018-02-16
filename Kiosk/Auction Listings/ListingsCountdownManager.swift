@@ -19,7 +19,7 @@ class ListingsCountdownManager: NSObject {
                     self?.startTimer()
                     self?.setLabelsHidden(false)
                 })
-                .addDisposableTo(rx_disposeBag)
+                .disposed(by: rx.disposeBag)
         }
     }
 

@@ -28,7 +28,7 @@ class SystemTimeTests: QuickSpec {
                         expect(time.inSync()) == true
                         return
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             it("returns a date in the future") {
@@ -43,7 +43,7 @@ class SystemTimeTests: QuickSpec {
                         expect(timeYear) == 2422
 
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
 

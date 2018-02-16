@@ -49,7 +49,7 @@ class BidDetailsPreviewView: UIView {
                     self?.artworkImageView.image = nil
                 }
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         artwork
             .map { artwork in
@@ -58,8 +58,8 @@ class BidDetailsPreviewView: UIView {
             .map { name in
                 return name ?? ""
             }
-            .bindTo(artistNameLabel.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: artistNameLabel.rx.text)
+            .disposed(by: rx.disposeBag)
 
         artwork
             .map { artwork -> NSAttributedString in
@@ -70,8 +70,8 @@ class BidDetailsPreviewView: UIView {
                 return artwork.titleAndDate
             }
             .mapToOptional()
-            .bindTo(artworkTitleLabel.rx.attributedText)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: artworkTitleLabel.rx.attributedText)
+            .disposed(by: rx.disposeBag)
 
         _bidDetails
             .asObservable()
@@ -83,8 +83,8 @@ class BidDetailsPreviewView: UIView {
 
                 return "Your bid: " + centsToPresentableDollarsString(cents.currencyValue, currencySymbol: currencySymbol)
             }
-            .bindTo(currentBidPriceLabel.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: currentBidPriceLabel.rx.text)
+            .disposed(by: rx.disposeBag)
         
         for subview in [artworkImageView, artistNameLabel, artworkTitleLabel, currentBidPriceLabel] {
             self.addSubview(subview)

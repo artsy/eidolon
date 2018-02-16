@@ -31,7 +31,7 @@ class StripeManagerTests: QuickSpec {
 
                     expect(token.tokenId) == "12345"
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
         }
 
@@ -41,7 +41,7 @@ class StripeManagerTests: QuickSpec {
                 subject.registerCard(digits: "", month: 0, year: 0, securityCode: "", postalCode: "").subscribe(onCompleted: {
                     completed = true
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
 
             expect(completed) == true
@@ -55,7 +55,7 @@ class StripeManagerTests: QuickSpec {
                 subject.registerCard(digits: "", month: 0, year: 0, securityCode: "", postalCode: "").subscribe(onError: { _ in
                     errored = true
                     done()
-                }).addDisposableTo(disposeBag)
+                }).disposed(by: disposeBag)
             }
 
             expect(errored) == true

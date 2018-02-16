@@ -28,8 +28,8 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
         emailTextField.rx.textInput.text
             .asObservable()
             .takeUntil(viewWillDisappear)
-            .bindTo(bidDetails.newUser.email)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: bidDetails.newUser.email)
+            .disposed(by: rx.disposeBag)
 
         confirmButton.rx.action = viewModel.command
 

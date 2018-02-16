@@ -56,7 +56,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 .subscribe(onNext: { _ in
                     moved = true
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
             subject.expirationMonth.value = "12"
 
@@ -70,7 +70,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 .subscribe(onNext: { _ in
                     moved = true
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
 
             subject.expirationMonth.value = "2"
@@ -157,7 +157,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                             enabled = enabledValue
                             done()
                         })
-                        .addDisposableTo(disposeBag)
+                        .disposed(by: disposeBag)
                 }
 
                 expect(enabled) == false
@@ -213,7 +213,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                             .subscribe(onCompleted: {
                                 finished = true
                             })
-                            .addDisposableTo(disposeBag)
+                            .disposed(by: disposeBag)
 
                         waitUntil { done in
                             subject
@@ -222,7 +222,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                                 .subscribe(onCompleted: {
                                     done()
                                 })
-                                .addDisposableTo(disposeBag)
+                                .disposed(by: disposeBag)
 
                             return
                         }
@@ -245,7 +245,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                             .subscribe(onCompleted: {
                                 finished = true
                             })
-                            .addDisposableTo(disposeBag)
+                            .disposed(by: disposeBag)
 
                         waitUntil { done in
                             let command = subject.registerButtonCommand()
@@ -254,7 +254,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                                 .subscribe(onNext: { _ in
                                     done()
                                 })
-                                .addDisposableTo(disposeBag)
+                                .disposed(by: disposeBag)
 
                             command.execute(Void())
                         }

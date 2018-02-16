@@ -80,7 +80,7 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
                     self.finished.onCompleted()
                 },
                 onDisposed: nil)
-                .addDisposableTo(rx_disposeBag)
+                .disposed(by: rx.disposeBag)
 
         cardHandler.startSearching()
 
@@ -88,22 +88,22 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
             .asObservable()
             .takeUntil(viewWillDisappear)
             .mapToOptional()
-            .bindTo(bidDetails.newUser.creditCardName)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: bidDetails.newUser.creditCardName)
+            .disposed(by: rx.disposeBag)
 
         cardLastDigits
             .asObservable()
             .takeUntil(viewWillDisappear)
             .mapToOptional()
-            .bindTo(bidDetails.newUser.creditCardDigit)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: bidDetails.newUser.creditCardDigit)
+            .disposed(by: rx.disposeBag)
 
         cardToken
             .asObservable()
             .takeUntil(viewWillDisappear)
             .mapToOptional()
-            .bindTo(bidDetails.newUser.creditCardToken)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: bidDetails.newUser.creditCardToken)
+            .disposed(by: rx.disposeBag)
 
         bidDetails.newUser.swipedCreditCard = true
     }
@@ -133,7 +133,7 @@ private extension SwipeCreditCardViewController {
 
                 self?.cardName.value = "Kiosk Staging CC Test"
                 self?.cardToken.value = token.tokenId
-                self?.cardLastDigits.value = token.card!.last4()
+                self?.cardLastDigits.value = token.card!.last4
 
                 if let newUser = self?.navigationController?.fulfillmentNav().bidDetails.newUser {
                     newUser.name.value = token.card?.brand.name
@@ -141,7 +141,7 @@ private extension SwipeCreditCardViewController {
 
                 self?.finished.onCompleted()
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
     }
 
     @IBAction func dev_creditCardOKTapped(_ sender: AnyObject) {

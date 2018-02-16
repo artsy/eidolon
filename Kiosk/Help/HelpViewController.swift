@@ -135,7 +135,7 @@ private extension HelpViewController {
                     self?.stackView.removeSubview(self!.buyersPremiumButton)
                 }
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
     }
     
     func blackButton(tag: SubviewTag, title: String) -> ARBlackFlatButton {
