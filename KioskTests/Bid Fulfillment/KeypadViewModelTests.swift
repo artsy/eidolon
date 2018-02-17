@@ -36,8 +36,8 @@ class KeypadViewModelTests: QuickSpec {
         }
         
         it("it has default values") {
-            expect(testHarness.currencyValue) == 0
-            expect(testHarness.stringValue) == ""
+            expect(testHarness.currencyValue.asObservable()).first == 0
+            expect(testHarness.stringValue.asObservable()).first == ""
         }
         
         it("adds digits") {
@@ -47,8 +47,8 @@ class KeypadViewModelTests: QuickSpec {
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribe(onCompleted: {
-                        expect(testHarness.currencyValue) == 1337
-                        expect(testHarness.stringValue) == "1337"
+                        expect(testHarness.currencyValue.asObservable()).first == 1337
+                        expect(testHarness.stringValue.asObservable()).first == "1337"
 
                         done()
                     })
@@ -65,8 +65,8 @@ class KeypadViewModelTests: QuickSpec {
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribe(onCompleted: {
-                        expect(testHarness.currencyValue) == 1333333
-                        expect(testHarness.stringValue) == "1333333333337"
+                        expect(testHarness.currencyValue.asObservable()).first == 1333333
+                        expect(testHarness.stringValue.asObservable()).first == "1333333333337"
 
                         done()
                     })
@@ -81,8 +81,8 @@ class KeypadViewModelTests: QuickSpec {
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribe(onCompleted: {
-                        expect(testHarness.currencyValue) == 1337
-                        expect(testHarness.stringValue) == "01337"
+                        expect(testHarness.currencyValue.asObservable()).first == 1337
+                        expect(testHarness.stringValue.asObservable()).first == "01337"
                         
                         done()
                     })
@@ -100,8 +100,8 @@ class KeypadViewModelTests: QuickSpec {
                         subject.clearAction.execute(Void())
                     }
                     .subscribe(onCompleted: {
-                        expect(testHarness.currencyValue) == 0
-                        expect(testHarness.stringValue) == ""
+                        expect(testHarness.currencyValue.asObservable()).first == 0
+                        expect(testHarness.stringValue.asObservable()).first == ""
                         
                         done()
                     })
@@ -118,8 +118,8 @@ class KeypadViewModelTests: QuickSpec {
                     .then {
                         subject.deleteAction.execute(Void())
                     }.subscribe(onCompleted: {
-                        expect(testHarness.currencyValue) == 13
-                        expect(testHarness.stringValue) == "13"
+                        expect(testHarness.currencyValue.asObservable()).first == 13
+                        expect(testHarness.stringValue.asObservable()).first == "13"
 
                         done()
                     })

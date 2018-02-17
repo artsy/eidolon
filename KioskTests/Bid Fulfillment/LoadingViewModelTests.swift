@@ -50,28 +50,28 @@ class LoadingViewModelTests: QuickSpec {
             subject = LoadingViewModel(provider: Networking.newStubbingNetworking(), bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: Observable.never())
             stubbedNetworkModel.createdNewBidderSubject.onNext(true)
 
-            expect(subject.createdNewBidder) == true
+            expect(subject.createdNewBidder.asObservable()).first == true
         }
 
         it("binds bidIsResolved") {
             subject = LoadingViewModel(provider: Networking.newStubbingNetworking(), bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: Observable.never())
             subject.bidCheckingModel.bidIsResolved.value = true
 
-            expect(subject.bidIsResolved) == true
+            expect(subject.bidIsResolved.asObservable()).first == true
         }
 
         it("binds isHighestBidder") {
             subject = LoadingViewModel(provider: Networking.newStubbingNetworking(), bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: Observable.never())
             subject.bidCheckingModel.isHighestBidder.value = true
 
-            expect(subject.isHighestBidder) == true
+            expect(subject.isHighestBidder.asObservable()).first == true
         }
 
         it("binds reserveNotMet") {
             subject = LoadingViewModel(provider: Networking.newStubbingNetworking(), bidNetworkModel: stubbedNetworkModel, placingBid: true, actionsComplete: Observable.never())
             subject.bidCheckingModel.reserveNotMet.value = true
 
-            expect(subject.reserveNotMet) == true
+            expect(subject.reserveNotMet.asObservable()).first == true
         }
 
         it("infers bidDetals") {
@@ -85,7 +85,7 @@ class LoadingViewModelTests: QuickSpec {
                 subject.performActions().subscribe(onCompleted: { done() }).disposed(by: disposeBag)
             }
 
-            expect(subject.createdNewBidder) == true
+            expect(subject.createdNewBidder.asObservable()).first == true
         }
 
         describe("stubbed auxillary network models") {

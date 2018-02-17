@@ -56,7 +56,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
             var artworkID: String?
             var bidCents: String?
 
-            let provider = OnlineProvider(endpointClosure: { target -> (Endpoint) in
+            let provider = OnlineProvider<ArtsyAuthenticatedAPI>(endpointClosure: { target -> (Endpoint) in
                 if case .placeABid(let receivedAuctionID, let receivedArtworkID, let receivedBidCents) = target {
                     auctionID = receivedAuctionID
                     artworkID = receivedArtworkID
@@ -64,7 +64,7 @@ class PlaceBidNetworkModelTests: QuickSpec {
                 }
 
                 let url = target.baseURL.appendingPathComponent(target.path).absoluteString
-                return Endpoint(url: url, sampleResponseClosure: {.networkResponse(200, stubbedResponse("CreateABid"))}, method: target.method, task: target.task)
+                return Endpoint(url: url, sampleResponseClosure: {.networkResponse(200, stubbedResponse("CreateABid"))}, method: target.method, task: target.task, httpHeaderFields: nil)
                 }, stubClosure: MoyaProvider.immediatelyStub, online: Observable.just(true))
 
 
@@ -87,9 +87,9 @@ class PlaceBidNetworkModelTests: QuickSpec {
             var networking: AuthorizedNetworking!
 
             beforeEach {
-                let provider = OnlineProvider(endpointClosure: { target -> (Endpoint) in
+                let provider = OnlineProvider<ArtsyAuthenticatedAPI>(endpointClosure: { target -> (Endpoint) in
                     let url = target.baseURL.appendingPathComponent(target.path).absoluteString
-                    return Endpoint(url: url, sampleResponseClosure: {.networkResponse(400, stubbedResponse("CreateABidFail"))}, method: target.method, task: target.task)
+                    return Endpoint(url: url, sampleResponseClosure: {.networkResponse(400, stubbedResponse("CreateABidFail"))}, method: target.method, task: target.task, httpHeaderFields: nil)
                     }, stubClosure: MoyaProvider.immediatelyStub, online: Observable.just(true))
 
                 networking = AuthorizedNetworking(provider: provider)

@@ -8,7 +8,7 @@ import Moya
 class ArtsyProviderTests: QuickSpec {
     override func spec() {
         let fakeEndpointsClosure = { (target: ArtsyAPI) -> Endpoint in
-            return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
+            return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task, httpHeaderFields: nil)
         }
 
         var fakeOnline: PublishSubject<Bool>!

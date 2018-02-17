@@ -22,24 +22,24 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             case ArtsyAPI.findExistingEmailRegistration(let email):
                 emailCheck?()
                 expect(email) == testEmail
-                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(emailExists ? 200 : 404, Data())}, method: target.method, task: target.task)
+                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(emailExists ? 200 : 404, Data())}, method: target.method, task: target.task, httpHeaderFields: nil)
             case ArtsyAPI.lostPasswordNotification(let email):
                 passwordCheck?()
                 expect(email) == testEmail
-                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(passwordRequestSucceeds ? 200 : 404, Data())}, method: target.method, task: target.task)
+                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(passwordRequestSucceeds ? 200 : 404, Data())}, method: target.method, task: target.task, httpHeaderFields: nil)
             case ArtsyAPI.xAuth(let email, let password):
                 loginCheck?()
                 expect(email) == testEmail
                 expect(password) == testPassword
                 // Fail auth (wrong password maybe)
-                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(loginSucceeds ? 200 : 403, Data())}, method: target.method, task: target.task)
+                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(loginSucceeds ? 200 : 403, Data())}, method: target.method, task: target.task, httpHeaderFields: nil)
             case .xApp:
                 // Any XApp requests are incidental; ignore.
                 return MoyaProvider<ArtsyAPI>.defaultEndpointMapping(for: target)
             default:
                 // Fail on all other cases
                 fail("Unexpected network call")
-                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, Data())}, method: target.method, task: target.task)
+                return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, Data())}, method: target.method, task: target.task, httpHeaderFields: nil)
             }
         }
 

@@ -54,13 +54,13 @@ class GenericFormValidationViewModelTests: QuickSpec {
             let subject = GenericFormValidationViewModel(isValid: validSubject, manualInvocation: Observable.empty(), finishedSubject: PublishSubject<Void>())
 
             validSubject.onNext(false)
-            expect(subject.command.enabled).toEventually( equalFirst(false) )
+            expect(subject.command.enabled).first.toEventually( equal(false) )
 
             validSubject.onNext(true)
-            expect(subject.command.enabled).toEventually( equalFirst(true) )
+            expect(subject.command.enabled).first.toEventually( equal(true) )
 
             validSubject.onNext(false)
-            expect(subject.command.enabled).toEventually( equalFirst(false) )
+            expect(subject.command.enabled).first.toEventually( equal(false) )
         }
     }
 }
