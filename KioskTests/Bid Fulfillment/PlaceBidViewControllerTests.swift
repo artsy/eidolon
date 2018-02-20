@@ -1,6 +1,7 @@
 import Quick
 import Nimble
 import RxNimble
+import RxBlocking
 import RxSwift
 @testable
 import Kiosk
@@ -185,7 +186,7 @@ class PlaceBidViewControllerTests: QuickSpec {
 
             customKeySubject.onNext(33);
 
-            expect(nav.bidDetails.bidAmountCents) == 3300
+            expect(nav.bidDetails.bidAmountCents.asObservable().filterNil()).first.to( equal(3300) )
         }
     }
 }

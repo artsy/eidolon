@@ -23,7 +23,7 @@ class SaleArtworkDetailsViewController: UIViewController {
 
     lazy var artistInfo: Observable<Any> = {
         let artistInfo = self.provider.request(.artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
-        return artistInfo.shareReplay(1)
+        return artistInfo.share(replay: 1)
     }()
     
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!

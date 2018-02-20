@@ -42,7 +42,7 @@ private extension KeypadViewModel {
                 strongSelf.currencyValue.value = Currency(strongSelf.currencyValue.value / 10)
                 if strongSelf.stringValue.value.isNotEmpty {
                     let string = strongSelf.stringValue.value
-                    strongSelf.stringValue.value = string.substring(to: string.index(before: string.endIndex))
+                    strongSelf.stringValue.value = String(string[..<string.endIndex])
                 }
             }
             observer.onCompleted()
