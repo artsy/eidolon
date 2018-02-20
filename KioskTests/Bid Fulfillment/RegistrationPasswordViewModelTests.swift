@@ -131,7 +131,6 @@ class RegistrationPasswordViewModelTests: QuickSpec {
             var exists: Bool?
 
             let networking = self.stubProvider(emailExists: false, emailCheck: {
-                exists = true
             }, loginSucceeds: true, loginCheck: nil, passwordRequestSucceeds: true, passwordCheck: nil)
 
             let subject = self.testSubject(provider: networking)
