@@ -22,17 +22,16 @@ class KeypadViewModelTests: QuickSpec {
             testHarness = KeypadViewModelTestClass()
             disposeBag = DisposeBag()
 
-            // TODO: Uncomment these lines. They're causing linker errors and I need the test module to compile before I can figure out why.
-//            subject
-//                .stringValue
-//                .asObservable()
-//                .bind(to: testHarness.stringValue)
-//                .disposed(by: disposeBag)
-//            subject
-//                .currencyValue
-//                .asObservable()
-//                .bind(to: testHarness.currencyValue)
-//                .disposed(by: disposeBag)
+            subject
+                .stringValue
+                .asObservable()
+                .bind(to: testHarness.stringValue)
+                .disposed(by: disposeBag)
+            subject
+                .currencyValue
+                .asObservable()
+                .bind(to: testHarness.currencyValue)
+                .disposed(by: disposeBag)
         }
         
         it("it has default values") {
