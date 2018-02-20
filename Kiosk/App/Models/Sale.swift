@@ -1,16 +1,16 @@
 import UIKit
 import SwiftyJSON
 
-final class Sale: NSObject, JSONAbleType {
-    @objc dynamic let id: String
-    @objc dynamic let isAuction: Bool
-    @objc dynamic let startDate: Date
-    @objc dynamic let endDate: Date?
-    @objc dynamic let name: String
-    @objc dynamic var artworkCount: Int
-    @objc dynamic let auctionState: String
+@objcMembers final class Sale: NSObject, JSONAbleType {
+    dynamic let id: String
+    dynamic let isAuction: Bool
+    dynamic let startDate: Date
+    dynamic let endDate: Date?
+    dynamic let name: String
+    dynamic var artworkCount: Int
+    dynamic let auctionState: String
 
-    @objc dynamic var buyersPremium: BuyersPremium?
+    dynamic var buyersPremium: BuyersPremium?
 
     init(id: String, name: String, isAuction: Bool, startDate: Date, endDate: Date?, artworkCount: Int, state: String) {
         self.id = id

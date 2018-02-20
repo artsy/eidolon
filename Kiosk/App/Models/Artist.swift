@@ -1,10 +1,10 @@
 import Foundation
 import SwiftyJSON
 
-final class Artist: NSObject, JSONAbleType {
+@objcMembers final class Artist: NSObject, JSONAbleType {
 
     let id: String
-    @objc dynamic var name: String
+    dynamic var name: String
     let sortableID: String?
 
     var blurb: String?

@@ -15,7 +15,7 @@ enum ReserveStatus: String {
     }
 }
 
-final class SaleArtwork: NSObject, JSONAbleType {
+@objcMembers final class SaleArtwork: NSObject, JSONAbleType {
 
     let id: String
     let artwork: Artwork
@@ -24,7 +24,7 @@ final class SaleArtwork: NSObject, JSONAbleType {
     var auctionID: String?
 
     var saleHighestBid: Bid?
-    @objc dynamic var bidCount: NSNumber?
+    dynamic var bidCount: NSNumber?
 
     var userBidderPosition: BidderPosition?
     var positions: [String]?
@@ -32,13 +32,13 @@ final class SaleArtwork: NSObject, JSONAbleType {
     var openingBidCents: NSNumber?
     var minimumNextBidCents: NSNumber?
     
-    @objc dynamic var highestBidCents: NSNumber?
+    dynamic var highestBidCents: NSNumber?
     var estimateCents: Currency?
     var lowEstimateCents: Currency?
     var highEstimateCents: Currency?
 
-    @objc dynamic var reserveStatus: String?
-    @objc dynamic var lotLabel: NSString?
+    dynamic var reserveStatus: String?
+    dynamic var lotLabel: NSString?
 
     init(id: String, artwork: Artwork, currencySymbol: String) {
         self.id = id

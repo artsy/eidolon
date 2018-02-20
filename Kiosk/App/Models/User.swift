@@ -1,16 +1,15 @@
 import Foundation
 import SwiftyJSON
 
-final class User: NSObject, JSONAbleType {
+@objcMembers final class User: NSObject, JSONAbleType {
 
-    @objc dynamic let id: String
-    @objc dynamic let email: String
-    @objc dynamic let name: String
-    @objc dynamic let paddleNumber: String
-    @objc dynamic let phoneNumber: String
-    @objc dynamic var bidder: Bidder?
-    @objc dynamic var location: Location?
-
+    dynamic let id: String
+    dynamic let email: String
+    dynamic let name: String
+    dynamic let paddleNumber: String
+    dynamic let phoneNumber: String
+    dynamic var bidder: Bidder?
+    dynamic var location: Location?
 
     init(id: String, email: String, name: String, paddleNumber: String, phoneNumber: String, location: Location?) {
         self.id = id

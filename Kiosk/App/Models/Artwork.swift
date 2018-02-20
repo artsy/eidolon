@@ -1,29 +1,29 @@
 import Foundation
 import SwiftyJSON
 
-final class Artwork: NSObject, JSONAbleType {
+@objcMembers final class Artwork: NSObject, JSONAbleType {
     let id: String
 
     let dateString: String
-    @objc dynamic let title: String
+    dynamic let title: String
     var titleAndDate: NSAttributedString {
         return titleAndDateAttributedString(self.title, dateString: self.date)
     }
-    @objc dynamic let price: String
-    @objc dynamic let date: String
+    dynamic let price: String
+    dynamic let date: String
 
-    @objc dynamic var soldStatus: NSNumber
-    @objc dynamic var medium: String?
-    @objc dynamic var dimensions = [String]()
+    dynamic var soldStatus: NSNumber
+    dynamic var medium: String?
+    dynamic var dimensions = [String]()
 
-    @objc dynamic var imageRights: String?
-    @objc dynamic var additionalInfo: String?
-    @objc dynamic var blurb: String?
+    dynamic var imageRights: String?
+    dynamic var additionalInfo: String?
+    dynamic var blurb: String?
 
-    @objc dynamic var artists: [Artist]?
-    @objc dynamic var culturalMarker: String?
+    dynamic var artists: [Artist]?
+    dynamic var culturalMarker: String?
 
-    @objc dynamic var images: [Image]?
+    dynamic var images: [Image]?
 
     lazy var defaultImage: Image? = {
         let defaultImages = self.images?.filter { $0.isDefault }
