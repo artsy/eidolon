@@ -281,15 +281,16 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
     }
 }
 
+struct TestCreditCard: CreditCard {
+    var name: String?
+    var brandName: String?
+    var last4: String
+}
+
 class TestToken: Tokenable {
     var tokenId = "12345"
-    var card: STPCard? {
-        // TODO: This is gonna suck BUT we need to stop using STPCard type throughout the codebase and instead wrap it in a protocol. Sorry.
-//        let card = STPCard(id: "12345", brand: .amex, last4: "0001", expMonth: 01, expYear: 99, funding: .credit)
-//        card.name = "Simon Suyez"
-//        return card
-        let _ = 1
-        return nil // TODO: Replace this with, you know, a card.
+    var creditCard: CreditCard? {
+        return TestCreditCard(name: "Simon Suyez", brandName: "American Express", last4: "0001")
     }
 }
 

@@ -4,10 +4,14 @@ import Stripe
 
 protocol Tokenable {
     var tokenId: String { get }
-    var card: STPCard? { get }
+    var creditCard: CreditCard? { get }
 }
 
-extension STPToken: Tokenable { }
+extension STPToken: Tokenable {
+    var creditCard: CreditCard? {
+        return self.card
+    }
+}
 
 protocol Clientable {
     func kiosk_createToken(withCard card: STPCardParams, completion: ((Tokenable?, Error?) -> Void)?)

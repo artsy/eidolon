@@ -133,10 +133,10 @@ private extension SwipeCreditCardViewController {
 
                 self?.cardName.value = "Kiosk Staging CC Test"
                 self?.cardToken.value = token.tokenId
-                self?.cardLastDigits.value = token.card!.last4
+                self?.cardLastDigits.value = token.creditCard!.last4
 
                 if let newUser = self?.navigationController?.fulfillmentNav().bidDetails.newUser {
-                    newUser.name.value = token.card?.brand.name
+                    newUser.name.value = token.creditCard?.brandName
                 }
 
                 self?.finished.onCompleted()
