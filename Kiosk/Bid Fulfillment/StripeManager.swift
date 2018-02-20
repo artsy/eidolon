@@ -51,7 +51,7 @@ class StripeManager: NSObject {
     }
 
     func stringIsCreditCard(_ cardNumber: String) -> Bool {
-        return STPCard.validateNumber(cardNumber)
+        return validateCreditCardNumber(cardNumber)
     }
 }
 
