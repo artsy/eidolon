@@ -75,7 +75,7 @@ class SaleArtworkTests: QuickSpec {
         describe("reserve status") {
             it("gives default number of bids as an empty string") {
                 // highest bid, reserve status, and number of bids
-                expect(saleArtwork.viewModel.numberOfBidsWithReserve) == ""
+                expect(saleArtwork.viewModel.numberOfBidsWithReserve).first == ""
             }
 
             describe("with some bids") {
@@ -84,7 +84,7 @@ class SaleArtworkTests: QuickSpec {
                 }
 
                 it("gives default number of bids") {
-                    expect(saleArtwork.viewModel.numberOfBidsWithReserve) == "1 bid placed"
+                    expect(saleArtwork.viewModel.numberOfBidsWithReserve).first == "1 bid placed"
                 }
 
                 it("updates reserve status when reserve status changes") {
