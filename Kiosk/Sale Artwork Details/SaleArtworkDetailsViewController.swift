@@ -279,7 +279,7 @@ class SaleArtworkDetailsViewController: UIViewController {
             var buyersPremiumButton = ARButton()
             let title = "buyers premium"
             let attributes: [NSAttributedStringKey: Any] = [
-                NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle,
+                NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
                 NSAttributedStringKey.font: buyersPremiumLabel.font
             ]
             let attributedTitle = NSAttributedString(string: title, attributes: attributes)
