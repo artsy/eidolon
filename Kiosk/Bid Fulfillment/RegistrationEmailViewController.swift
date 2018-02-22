@@ -28,8 +28,8 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
         emailTextField.rx.textInput.text
             .asObservable()
             .takeUntil(viewWillDisappear)
-            .bindTo(bidDetails.newUser.email)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: bidDetails.newUser.email)
+            .disposed(by: rx.disposeBag)
 
         confirmButton.rx.action = viewModel.command
 
@@ -39,7 +39,7 @@ class RegistrationEmailViewController: UIViewController, RegistrationSubControll
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        _viewWillDisappear.onNext()
+        _viewWillDisappear.onNext(Void())
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

@@ -37,7 +37,7 @@ class ConfirmYourBidEnterYourEmailViewControllerTests: QuickSpec {
             subject.emailTextField.text = "email"
             subject.emailTextField.sendActions(for: .editingChanged)
 
-            expect(nav.bidDetails.newUser.email) == "email"
+            expect(nav.bidDetails.newUser.email.asObservable().filterNil()).first == "email"
         }
 
         it("confirm button is disabled when no email") {

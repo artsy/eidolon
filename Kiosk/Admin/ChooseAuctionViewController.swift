@@ -37,13 +37,13 @@ class ChooseAuctionViewController: UIViewController {
                         defaults.synchronize()
                         exit(1)
                         })
-                        .addDisposableTo(self.rx_disposeBag)
+                        .disposed(by: self.rx.disposeBag)
 
                     self.stackScrollView.stackView.addSubview(button, withTopMargin: "12", sideMargin: "0")
                     button.constrainHeight("50")
                 }
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
         
     }
 

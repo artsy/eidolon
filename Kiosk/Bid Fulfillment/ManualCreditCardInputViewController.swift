@@ -39,37 +39,37 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         viewModel
             .cardFullDigits
             .asObservable()
-            .bindTo(cardNumberTextField.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: cardNumberTextField.rx.text)
+            .disposed(by: rx.disposeBag)
 
         viewModel
             .expirationYear
             .asObservable()
-            .bindTo(expirationYearTextField.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: expirationYearTextField.rx.text)
+            .disposed(by: rx.disposeBag)
 
         viewModel
             .expirationMonth
             .asObservable()
-            .bindTo(expirationMonthTextField.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: expirationMonthTextField.rx.text)
+            .disposed(by: rx.disposeBag)
 
         viewModel
             .securityCode
             .asObservable()
-            .bindTo(securitycodeTextField.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: securitycodeTextField.rx.text)
+            .disposed(by: rx.disposeBag)
 
         viewModel
             .billingZip
             .asObservable()
-            .bindTo(billingZipTextField.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: billingZipTextField.rx.text)
+            .disposed(by: rx.disposeBag)
 
         viewModel
             .creditCardNumberIsValid
-            .bindTo(cardConfirmButton.rx.isEnabled)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: cardConfirmButton.rx.isEnabled)
+            .disposed(by: rx.disposeBag)
 
         let action = viewModel.registerButtonCommand()
         billingZipConfirmButton.rx.action = action
@@ -79,12 +79,12 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
             .take(1) // On the first error, then forever
             .mapReplace(with: false) // Replace the error with false
             .startWith(true) // But begin with true
-            .bindTo(billingZipErrorLabel.rx_hidden) // show the error label
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: billingZipErrorLabel.rx_hidden) // show the error label
+            .disposed(by: rx.disposeBag)
 
         viewModel.moveToYear.take(1).subscribe(onNext: { [weak self] _ in
             self?.expirationYearTextField.becomeFirstResponder()
-        }).addDisposableTo(rx_disposeBag)
+        }).disposed(by: rx.disposeBag)
 
         cardNumberTextField.becomeFirstResponder()
     }

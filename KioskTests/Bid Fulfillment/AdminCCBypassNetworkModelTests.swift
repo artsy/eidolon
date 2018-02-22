@@ -26,7 +26,7 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
                         receivedResult = result
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
@@ -44,7 +44,7 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
                         receivedResult = result
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
@@ -62,7 +62,7 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
                         receivedResult = result
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
@@ -89,7 +89,7 @@ private func networkingForBidder(createdByAdmin: Bool?) -> AuthorizedNetworking 
     }
 
     let provider = OnlineProvider<ArtsyAuthenticatedAPI>(endpointClosure: { target in
-            return Endpoint(url: "oaishdf", sampleResponseClosure: {.networkResponse(200, sampleData)}, task: target.task)
+        return Endpoint(url: "oaishdf", sampleResponseClosure: {.networkResponse(200, sampleData)}, method: .get, task: target.task, httpHeaderFields: nil)
         },
         stubClosure: MoyaProvider.immediatelyStub,
         online: .just(true))

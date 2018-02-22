@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-final class Sale: NSObject, JSONAbleType {
+@objcMembers final class Sale: NSObject, JSONAbleType {
     dynamic let id: String
     dynamic let isAuction: Bool
     dynamic let startDate: Date

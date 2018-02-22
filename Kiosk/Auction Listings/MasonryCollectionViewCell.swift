@@ -56,19 +56,19 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
         viewModel.flatMapTo(SaleArtworkViewModel.lotLabel)
             .map { $0.isNilOrEmpty }
             .subscribe(onNext: removeLabelWhenEmpty(label: lotNumberLabel, topMargin: "20"))
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         viewModel
             .map { $0.estimateString }
             .map { $0.isEmpty }
             .subscribe(onNext: removeLabelWhenEmpty(label: estimateLabel, topMargin: "10"))
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         viewModel
             .map { $0.artistName }
             .map { $0.isNilOrEmpty }
             .subscribe(onNext: removeLabelWhenEmpty(label: artistNameLabel, topMargin: "20"))
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // Binds the imageView to always be the correct aspect ratio
         viewModel.subscribe(onNext: { [weak self] viewModel in
@@ -79,7 +79,7 @@ class MasonryCollectionViewCell: ListingsCollectionViewCell {
                 self?.artworkImageViewHeightConstraint = self?.artworkImageView.constrainHeight("\(imageHeight)").first as? NSLayoutConstraint
                 self?.layoutIfNeeded()
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
     }
 
     override func layoutSubviews() {

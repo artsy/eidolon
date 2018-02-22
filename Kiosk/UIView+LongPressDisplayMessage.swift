@@ -20,7 +20,7 @@ extension UIView {
             .subscribe(onNext: { _ in
                 closure(alertController(message, title: title))
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         isUserInteractionEnabled = true
         addGestureRecognizer(recognizer)

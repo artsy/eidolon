@@ -26,17 +26,17 @@ class ConfirmYourBidPINViewController: UIViewController {
         super.viewDidLoad()
 
         pin
-            .bindTo(_pin)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: _pin)
+            .disposed(by: rx.disposeBag)
 
         pin
-            .bindTo(pinTextField.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: pinTextField.rx.text)
+            .disposed(by: rx.disposeBag)
 
         pin
             .mapToOptional()
-            .bindTo(fulfillmentNav().bidDetails.bidderPIN)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: fulfillmentNav().bidDetails.bidderPIN)
+            .disposed(by: rx.disposeBag)
         
         let pinExists = pin.map { $0.isNotEmpty }
 
@@ -129,13 +129,13 @@ class ConfirmYourBidPINViewController: UIViewController {
                 // Necessary to subscribe to the actual observable. This should be in a CocoaAction of the button, instead.
                 logger.log("Sent forgot PIN request")
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
     }
 
     func showAuthenticationError() {
         confirmButton.flashError("Wrong PIN")
         pinTextField.flashForError()
-        keypadContainer.resetAction.execute()
+        keypadContainer.resetAction.execute(Void())
     }
 
     func checkForCreditCard(loggedInProvider: AuthorizedNetworking) -> Observable<[Card]> {

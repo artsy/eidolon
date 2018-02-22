@@ -4,5 +4,5 @@
 #import "PodsBridgingHeader.h"
 
 #import "StubResponses.h"
-#import "STPCard+Validation.h"
+#import "CreditCardValidation.h"
 #import "KioskDateFormatter.h"

@@ -8,8 +8,8 @@ class OnlineProvider<Target> where Target: Moya.TargetType {
     fileprivate let online: Observable<Bool>
     fileprivate let provider: MoyaProvider<Target>
 
-    init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = MoyaProvider.defaultEndpointMapping,
-        requestClosure: @escaping MoyaProvider<Target>.RequestClosure = MoyaProvider.defaultRequestMapping,
+    init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = MoyaProvider<Target>.defaultEndpointMapping,
+        requestClosure: @escaping MoyaProvider<Target>.RequestClosure = MoyaProvider<Target>.defaultRequestMapping,
         stubClosure: @escaping MoyaProvider<Target>.StubClosure = MoyaProvider.neverStub,
         manager: Manager = MoyaProvider<Target>.defaultAlamofireManager(),
         plugins: [PluginType] = [],
@@ -116,9 +116,9 @@ extension NetworkingType {
         return AuthorizedNetworking(provider: OnlineProvider(endpointClosure: endpointsClosure(), requestClosure: Networking.endpointResolver(), stubClosure: MoyaProvider.immediatelyStub, online: .just(true)))
     }
 
-    static func endpointsClosure<T>(_ xAccessToken: String? = nil) -> (T) -> Endpoint<T> where T: TargetType, T: ArtsyAPIType {
+    static func endpointsClosure<T>(_ xAccessToken: String? = nil) -> (T) -> Endpoint where T: TargetType, T: ArtsyAPIType {
         return { target in
-            var endpoint: Endpoint<T> = Endpoint<T>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
+            var endpoint: Endpoint = Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task, httpHeaderFields: nil)
 
             // If we were given an xAccessToken, add it
             if let xAccessToken = xAccessToken {
@@ -163,12 +163,16 @@ extension NetworkingType {
         ]
     }
 
-    // (Endpoint<Target>, NSURLRequest -> Void) -> Void
-    static func endpointResolver<T>() -> MoyaProvider<T>.RequestClosure where T: TargetType {
+    // (Endpoint, NSURLRequest -> Void) -> Void
+    static func endpointResolver() -> MoyaProvider<T>.RequestClosure {
         return { (endpoint, closure) in
-            var request = endpoint.urlRequest!
-            request.httpShouldHandleCookies = false
-            closure(.success(request))
+            do {
+                var request = try endpoint.urlRequest()
+                request.httpShouldHandleCookies = false
+                closure(.success(request))
+            } catch let error {
+                closure(.failure(MoyaError.underlying(error, nil)))
+            }
         }
     }
 }

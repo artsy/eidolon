@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-final class Artwork: NSObject, JSONAbleType {
+@objcMembers final class Artwork: NSObject, JSONAbleType {
     let id: String
 
     let dateString: String
@@ -95,11 +95,11 @@ private func titleAndDateAttributedString(_ title: String, dateString: String) -
     let workTitle = title.isEmpty ? "Untitled" : title
 
     let workFont = UIFont.serifItalicFont(withSize: 16)!
-    let attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSFontAttributeName : workFont])
+    let attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSAttributedStringKey.font : workFont])
     
     if dateString.isNotEmpty {
         let dateFont = UIFont.serifFont(withSize: 16)!
-        let dateString = NSAttributedString(string: ", " + dateString, attributes: [NSFontAttributeName : dateFont])
+        let dateString = NSAttributedString(string: ", " + dateString, attributes: [NSAttributedStringKey.font : dateFont])
         attributedString.append(dateString)
     }
     

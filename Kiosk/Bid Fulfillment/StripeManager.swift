@@ -4,10 +4,14 @@ import Stripe
 
 protocol Tokenable {
     var tokenId: String { get }
-    var card: STPCard? { get }
+    var creditCard: CreditCard? { get }
 }
 
-extension STPToken: Tokenable { }
+extension STPToken: Tokenable {
+    var creditCard: CreditCard? {
+        return self.card
+    }
+}
 
 protocol Clientable {
     func kiosk_createToken(withCard card: STPCardParams, completion: ((Tokenable?, Error?) -> Void)?)
@@ -29,7 +33,7 @@ class StripeManager: NSObject {
         card.expMonth = month
         card.expYear = year
         card.cvc = securityCode
-        card.addressZip = postalCode
+        card.address.postalCode = postalCode
 
         return Observable.create { [weak self] observer in
             guard let me = self else {
@@ -51,7 +55,7 @@ class StripeManager: NSObject {
     }
 
     func stringIsCreditCard(_ cardNumber: String) -> Bool {
-        return STPCard.validateNumber(cardNumber)
+        return validateCreditCardNumber(cardNumber)
     }
 }
 

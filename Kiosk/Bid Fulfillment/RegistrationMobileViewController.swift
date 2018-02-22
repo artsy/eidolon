@@ -28,8 +28,8 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
             .rx.text
             .asObservable()
             .takeUntil(viewWillDisappear)
-            .bindTo(bidDetails.newUser.phoneNumber)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: bidDetails.newUser.phoneNumber)
+            .disposed(by: rx.disposeBag)
 
         confirmButton.rx.action = viewModel.command
 
@@ -39,7 +39,7 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        _viewWillDisappear.onNext()
+        _viewWillDisappear.onNext(Void())
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

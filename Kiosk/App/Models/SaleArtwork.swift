@@ -15,7 +15,7 @@ enum ReserveStatus: String {
     }
 }
 
-final class SaleArtwork: NSObject, JSONAbleType {
+@objcMembers final class SaleArtwork: NSObject, JSONAbleType {
 
     let id: String
     let artwork: Artwork

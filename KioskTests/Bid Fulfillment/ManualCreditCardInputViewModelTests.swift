@@ -1,6 +1,7 @@
 import Quick
 import Nimble
 import RxNimble
+import RxOptional
 import RxSwift
 @testable
 import Kiosk
@@ -34,19 +35,19 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
         }
 
         it("initializer assigns credit card details to empty strings") {
-            expect(subject.cardFullDigits) == ""
-            expect(subject.expirationMonth) == ""
-            expect(subject.expirationYear) == ""
+            expect(subject.cardFullDigits.asObservable()).first == ""
+            expect(subject.expirationMonth.asObservable()).first == ""
+            expect(subject.expirationYear.asObservable()).first == ""
         }
 
         it("has valid credit card when credit card is valid") {
             testStripeManager.isValidCreditCard = true
-            expect(subject.creditCardNumberIsValid) == true
+            expect(subject.creditCardNumberIsValid).first == true
         }
 
         it("has invalid credit card when credit card is invalid") {
             testStripeManager.isValidCreditCard = false
-            expect(subject.creditCardNumberIsValid) == false
+            expect(subject.creditCardNumberIsValid).first == false
         }
 
         it("moves to year when month reaches two digits") {
@@ -56,7 +57,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 .subscribe(onNext: { _ in
                     moved = true
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
             subject.expirationMonth.value = "12"
 
@@ -70,7 +71,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 .subscribe(onNext: { _ in
                     moved = true
                 })
-                .addDisposableTo(disposeBag)
+                .disposed(by: disposeBag)
 
 
             subject.expirationMonth.value = "2"
@@ -86,17 +87,17 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
 
                 it("is valid when month is two digits") {
                     subject.expirationMonth.value = "12"
-                    expect(subject.expiryDatesAreValid) == true
+                    expect(subject.expiryDatesAreValid).first == true
                 }
 
                 it("is valid when month is one digit") {
                     subject.expirationMonth.value = "1"
-                    expect(subject.expiryDatesAreValid) == true
+                    expect(subject.expiryDatesAreValid).first == true
                 }
 
                 it("is invalid when month is no digits") {
                     subject.expirationMonth.value = ""
-                    expect(subject.expiryDatesAreValid) == false
+                    expect(subject.expiryDatesAreValid).first == false
                 }
             }
 
@@ -107,27 +108,27 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
 
                 it("is valid when year is two digits") {
                     subject.expirationYear.value = "22"
-                    expect(subject.expiryDatesAreValid) == true
+                    expect(subject.expiryDatesAreValid).first == true
                 }
 
                 it("is valid when year is four digits") {
                     subject.expirationYear.value = "2022"
-                    expect(subject.expiryDatesAreValid) == true
+                    expect(subject.expiryDatesAreValid).first == true
                 }
 
                 it("is invalid when year is one digit") {
                     subject.expirationYear.value = "2"
-                    expect(subject.expiryDatesAreValid) == false
+                    expect(subject.expiryDatesAreValid).first == false
                 }
 
                 it("is invalid when year is no digits") {
                     subject.expirationYear.value = ""
-                    expect(subject.expiryDatesAreValid) == false
+                    expect(subject.expiryDatesAreValid).first == false
                 }
 
                 it("is invalid when year is five digits") {
                     subject.expirationYear.value = "22022"
-                    expect(subject.expiryDatesAreValid) == false
+                    expect(subject.expiryDatesAreValid).first == false
                 }
             }
         }
@@ -140,7 +141,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 subject.expirationYear.value = "2017"
                 subject.securityCode.value = "123"
                 subject.billingZip.value = "10003"
-                expect(subject.registerButtonCommand().enabled) == true
+                expect(subject.registerButtonCommand().enabled).first == true
             }
 
             it("disables command with invalid credit card") {
@@ -157,7 +158,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                             enabled = enabledValue
                             done()
                         })
-                        .addDisposableTo(disposeBag)
+                        .disposed(by: disposeBag)
                 }
 
                 expect(enabled) == false
@@ -168,7 +169,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                 subject.cardFullDigits.value = ""
                 subject.expirationMonth.value = "02"
                 subject.expirationYear.value = "207"
-                expect(subject.registerButtonCommand().enabled) == false
+                expect(subject.registerButtonCommand().enabled).first == false
             }
 
             describe("a valid card and expiry date") {
@@ -188,7 +189,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                             registered = true
                         }
 
-                        subject.registerButtonCommand().execute()
+                        subject.registerButtonCommand().execute(Void())
 
                         expect(registered).toEventually( beTrue() )
                     }
@@ -196,12 +197,13 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                     it("sets user state after successful registration") {
                         testStripeManager.token = TestToken()
 
-                        subject.registerButtonCommand().execute()
+                        subject.registerButtonCommand().execute(Void())
 
-                        expect(subject.bidDetails.newUser.creditCardName).toEventually( equalFirst("Simon Suyez") )
-                        expect(subject.bidDetails.newUser.creditCardType).toEventually( equalFirst("American Express") )
-                        expect(subject.bidDetails.newUser.creditCardToken).toEventually( equalFirst("12345") )
-                        expect(subject.bidDetails.newUser.creditCardDigit).toEventually( equalFirst("0001") )
+                        let newUser = subject.bidDetails.newUser
+                        expect(newUser.creditCardName.asObservable().filterNil()).first.toEventually( equal("Simon Suyez") )
+                        expect(newUser.creditCardType.asObservable().filterNil()).first.toEventually( equal("American Express") )
+                        expect(newUser.creditCardToken.asObservable().filterNil()).first.toEventually( equal("12345") )
+                        expect(newUser.creditCardDigit.asObservable().filterNil()).first.toEventually( equal("0001") )
                     }
 
 
@@ -213,16 +215,16 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                             .subscribe(onCompleted: {
                                 finished = true
                             })
-                            .addDisposableTo(disposeBag)
+                            .disposed(by: disposeBag)
 
                         waitUntil { done in
                             subject
                                 .registerButtonCommand()
-                                .execute()
+                                .execute(Void())
                                 .subscribe(onCompleted: {
                                     done()
                                 })
-                                .addDisposableTo(disposeBag)
+                                .disposed(by: disposeBag)
 
                             return
                         }
@@ -245,7 +247,7 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                             .subscribe(onCompleted: {
                                 finished = true
                             })
-                            .addDisposableTo(disposeBag)
+                            .disposed(by: disposeBag)
 
                         waitUntil { done in
                             let command = subject.registerButtonCommand()
@@ -254,9 +256,9 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
                                 .subscribe(onNext: { _ in
                                     done()
                                 })
-                                .addDisposableTo(disposeBag)
+                                .disposed(by: disposeBag)
 
-                            command.execute()
+                            command.execute(Void())
                         }
 
                         expect(finished) == false
@@ -279,12 +281,16 @@ class ManualCreditCardInputViewModelTests: QuickSpec {
     }
 }
 
+struct TestCreditCard: CreditCard {
+    var name: String?
+    var brandName: String?
+    var last4: String
+}
+
 class TestToken: Tokenable {
     var tokenId = "12345"
-    var card: STPCard? {
-        let card = STPCard(id: "12345", brand: .amex, last4: "0001", expMonth: 01, expYear: 99, funding: .credit)
-        card.name = "Simon Suyez"
-        return card
+    var creditCard: CreditCard? {
+        return TestCreditCard(name: "Simon Suyez", brandName: "American Express", last4: "0001")
     }
 }
 

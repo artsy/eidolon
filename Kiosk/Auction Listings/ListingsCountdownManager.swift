@@ -19,7 +19,7 @@ class ListingsCountdownManager: NSObject {
                     self?.startTimer()
                     self?.setLabelsHidden(false)
                 })
-                .addDisposableTo(rx_disposeBag)
+                .disposed(by: rx.disposeBag)
         }
     }
 
@@ -69,7 +69,7 @@ class ListingsCountdownManager: NSObject {
         self.tick(timer)
     }
     
-    func tick(_ timer: Timer) {
+    @objc func tick(_ timer: Timer) {
         guard let sale = sale.value else { return }
         guard time.inSync() else { return }
         guard sale.id != "" else { return }

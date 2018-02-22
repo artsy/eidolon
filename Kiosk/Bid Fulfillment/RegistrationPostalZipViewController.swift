@@ -27,8 +27,8 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
             .rx.text
             .asObservable()
             .takeUntil(viewWillDisappear)
-            .bindTo(bidDetails.newUser.zipCode)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: bidDetails.newUser.zipCode)
+            .disposed(by: rx.disposeBag)
 
         confirmButton.rx.action = viewModel.command
 
@@ -38,7 +38,7 @@ class RegistrationPostalZipViewController: UIViewController, RegistrationSubCont
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        _viewWillDisappear.onNext()
+        _viewWillDisappear.onNext(Void())
     }
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> RegistrationPostalZipViewController {

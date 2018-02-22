@@ -43,18 +43,18 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
         countdownManager.provider = provider
 
         reachability
-            .bindTo(offlineBlockingView.rx_hidden)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: offlineBlockingView.rx_hidden)
+            .disposed(by: rx.disposeBag)
 
         auctionRequest(provider, auctionID: auctionID)
-            .bindTo(sale)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: sale)
+            .disposed(by: rx.disposeBag)
 
         sale
             .asObservable()
             .mapToOptional()
-            .bindTo(countdownManager.sale)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: countdownManager.sale)
+            .disposed(by: rx.disposeBag)
 
         for controller in childViewControllers {
             if let nav = controller as? UINavigationController {

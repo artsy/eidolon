@@ -50,12 +50,12 @@ class ConfirmYourBidEnterYourEmailViewController: UIViewController {
             .asObservable()
             .mapToOptional()
             .takeUntil(unbind)
-            .bindTo(nav.bidDetails.newUser.email)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: nav.bidDetails.newUser.email)
+            .disposed(by: rx.disposeBag)
 
         emailTextField.rx_returnKey.subscribe(onNext: { _ in
-            action.execute()
-        }).addDisposableTo(rx_disposeBag)
+            action.execute(Void())
+        }).disposed(by: rx.disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {

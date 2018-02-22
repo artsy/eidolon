@@ -63,13 +63,13 @@ class RegisterFlowView: ORStackView {
         }
 
         let spacer = UIView(frame: bounds)
-        spacer.setContentHuggingPriority(12, for: .horizontal)
+        spacer.setContentHuggingPriority(UILayoutPriority(rawValue: 12), for: .horizontal)
         addSubview(spacer, withTopMargin: "0", sideMargin: "0")
 
         bottomMarginHeight = 0
     }
 
-    func pressed(_ sender: UIButton!) {
+    @objc func pressed(_ sender: UIButton!) {
         highlightedIndex.value = sender.tag
     }
 

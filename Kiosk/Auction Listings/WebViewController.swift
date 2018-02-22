@@ -55,7 +55,7 @@ class ModalWebViewController: WebViewController {
         navigationController?.view.superview?.layer.cornerRadius = 0;
     }
 
-    func closeTapped(_ sender: AnyObject) {
+    @objc func closeTapped(_ sender: AnyObject) {
         presentingViewController?.dismiss(animated: true, completion:nil)
     }
 }

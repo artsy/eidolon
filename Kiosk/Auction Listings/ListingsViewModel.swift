@@ -92,8 +92,8 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
 
         recurringListingsRequest()
             .takeUntil(rx.deallocated)
-            .bindTo(saleArtworks)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: saleArtworks)
+            .disposed(by: rx.disposeBag)
 
         showSpinner = sortedSaleArtworks.asObservable().map { sortedSaleArtworks in
             return sortedSaleArtworks.count == 0
@@ -121,8 +121,8 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
                 guard let me = self else { return [] }
                 return switchValue.sortSaleArtworks(me.saleArtworks.value)
             }
-            .bindTo(sortedSaleArtworks)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: sortedSaleArtworks)
+            .disposed(by: rx.disposeBag)
 
     }
 

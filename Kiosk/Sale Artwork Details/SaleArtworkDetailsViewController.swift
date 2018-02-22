@@ -23,7 +23,7 @@ class SaleArtworkDetailsViewController: UIViewController {
 
     lazy var artistInfo: Observable<Any> = {
         let artistInfo = self.provider.request(.artwork(id: self.saleArtwork.artwork.id)).filterSuccessfulStatusCodes().mapJSON()
-        return artistInfo.shareReplay(1)
+        return artistInfo.share(replay: 1)
     }()
     
     @IBOutlet weak var metadataStackView: ORTagBasedAutoStackView!
@@ -49,7 +49,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         // This wasn't an issue with RAC's rac_signalForSelector because that invoked the signal _after_ this method completed.
         // So that's what I've done here.
         DispatchQueue.main.async {
-            self.layoutSubviews.onNext()
+            self.layoutSubviews.onNext(Void())
         }
     }
 
@@ -131,8 +131,8 @@ class SaleArtworkDetailsViewController: UIViewController {
                 .lotLabel()
                 .filterNil()
                 .mapToOptional()
-                .bindTo(lotNumberLabel.rx.text)
-                .addDisposableTo(rx_disposeBag)
+                .bind(to: lotNumberLabel.rx.text)
+                .disposed(by: rx.disposeBag)
         }
 
         if let artist = artist() {
@@ -167,7 +167,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                 rightsLabel.text = imageRights
                 self?.metadataStackView.addSubview(rightsLabel, withTopMargin: "22", sideMargin: "0")
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         let estimateTopBorder = UIView()
         estimateTopBorder.constrainHeight("1")
@@ -193,7 +193,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                 estimateTopBorder?.drawDottedBorders()
                 estimateBottomBorder?.drawDottedBorders()
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         let hasBids = saleArtwork
             .rx.observe(NSNumber.self, "highestBidCents")
@@ -213,8 +213,8 @@ class SaleArtworkDetailsViewController: UIViewController {
                 }
             }
             .mapToOptional()
-            .bindTo(currentBidLabel.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: currentBidLabel.rx.text)
+            .disposed(by: rx.disposeBag)
 
         metadataStackView.addSubview(currentBidLabel, withTopMargin: "22", sideMargin: "0")
 
@@ -223,8 +223,8 @@ class SaleArtworkDetailsViewController: UIViewController {
             .viewModel
             .currentBid()
             .mapToOptional()
-            .bindTo(currentBidValueLabel.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: currentBidValueLabel.rx.text)
+            .disposed(by: rx.disposeBag)
         metadataStackView.addSubview(currentBidValueLabel, withTopMargin: "10", sideMargin: "0")
 
         let numberOfBidsPlacedLabel = label(.serif, tag: .numberOfBidsPlacedLabel)
@@ -232,8 +232,8 @@ class SaleArtworkDetailsViewController: UIViewController {
             .viewModel
             .numberOfBidsWithReserve
             .mapToOptional()
-            .bindTo(numberOfBidsPlacedLabel.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: numberOfBidsPlacedLabel.rx.text)
+            .disposed(by: rx.disposeBag)
         metadataStackView.addSubview(numberOfBidsPlacedLabel, withTopMargin: "10", sideMargin: "0")
 
         let bidButton = ActionButton()
@@ -245,7 +245,7 @@ class SaleArtworkDetailsViewController: UIViewController {
 
                 me.bid(auctionID: me.auctionID, saleArtwork: me.saleArtwork, allowAnimations: me.allowAnimations, provider: me.provider)
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         saleArtwork
             .viewModel
@@ -256,13 +256,13 @@ class SaleArtworkDetailsViewController: UIViewController {
                 let title = forSale ? "BID" : "SOLD"
                 bidButton?.setTitle(title, for: .normal)
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         saleArtwork
             .viewModel
             .forSale()
-            .bindTo(bidButton.rx.isEnabled)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: bidButton.rx.isEnabled)
+            .disposed(by: rx.disposeBag)
 
         bidButton.tag = MetadataStackViewTag.bidButton.rawValue
         metadataStackView.addSubview(bidButton, withTopMargin: "40", sideMargin: "0")
@@ -278,7 +278,10 @@ class SaleArtworkDetailsViewController: UIViewController {
 
             var buyersPremiumButton = ARButton()
             let title = "buyers premium"
-            let attributes: [String: AnyObject] = [ NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue as AnyObject, NSFontAttributeName: buyersPremiumLabel.font ];
+            let attributes: [NSAttributedStringKey: Any] = [
+                NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+                NSAttributedStringKey.font: buyersPremiumLabel.font
+            ]
             let attributedTitle = NSAttributedString(string: title, attributes: attributes)
             buyersPremiumButton.setTitle(title, for: .normal)
             buyersPremiumButton.titleLabel?.attributedText = attributedTitle;
@@ -337,7 +340,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                 .subscribe(onNext: { [weak self] _ in
                      self?.performSegue(.ZoomIntoArtwork)
                 })
-                .addDisposableTo(rx_disposeBag)
+                .disposed(by: rx.disposeBag)
         }
     }
 
@@ -367,7 +370,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                         label.preferredMaxLayoutWidth = label.frame.width
                     }
                 })
-                .addDisposableTo(rx_disposeBag)
+                .disposed(by: rx.disposeBag)
 
             return label
         }
@@ -400,7 +403,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                 self?.view.setNeedsLayout()
                 self?.view.layoutIfNeeded()
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         if let artist = artist() {
             retrieveArtistBlurb()
@@ -418,7 +421,7 @@ class SaleArtworkDetailsViewController: UIViewController {
                     aboutAristLabel.attributedText = MarkdownParser().attributedString(fromMarkdownString: blurb)
                     me.additionalDetailScrollView.stackView.addSubview(aboutAristLabel, withTopMargin: "22", sideMargin: "40")
                 })
-                .addDisposableTo(rx_disposeBag)
+                .disposed(by: rx.disposeBag)
         }
     }
 

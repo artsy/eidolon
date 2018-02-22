@@ -74,8 +74,8 @@ class ListingsViewController: UIViewController {
         viewModel
             .showSpinner
             .not()
-            .bindTo(loadingSpinner.rx_hidden)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: loadingSpinner.rx_hidden)
+            .disposed(by: rx.disposeBag)
 
         // Map switch selection to cell reuse identifier.
         viewModel
@@ -87,8 +87,8 @@ class ListingsViewController: UIViewController {
                     return TableCellIdentifier
                 }
             }
-            .bindTo(cellIdentifier)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: cellIdentifier)
+            .disposed(by: rx.disposeBag)
 
 
         // Reload collection view when there is new content.
@@ -106,7 +106,7 @@ class ListingsViewController: UIViewController {
                 // Need to dispatchAsyncMainScheduler, since the changes in the CV's model aren't imediate, so we may scroll to a cell that doesn't exist yet.
                 collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
 
         // Respond to changes in layout, driven by switch selection.
         viewModel
@@ -124,7 +124,7 @@ class ListingsViewController: UIViewController {
                 self?.collectionView.setCollectionViewLayout(layout, animated: false)
                 self?.collectionView.reloadData()
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -179,13 +179,13 @@ extension ListingsViewController: UICollectionViewDataSource, UICollectionViewDe
                 .subscribe(onNext: { [weak self] _ in
                     self?.viewModel.presentModalForSaleArtwork(atIndexPath: indexPath)
                 })
-                .addDisposableTo(rx_disposeBag)
+                .disposed(by: rx.disposeBag)
 
             moreInfo
                 .subscribe(onNext: { [weak self] _ in
                     self?.viewModel.showDetailsForSaleArtwork(atIndexPath: indexPath)
                 })
-                .addDisposableTo(rx_disposeBag)
+                .disposed(by: rx.disposeBag)
         }
         
         return cell

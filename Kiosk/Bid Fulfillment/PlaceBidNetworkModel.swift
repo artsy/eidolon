@@ -49,7 +49,7 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
                 guard case .statusCode(let response) = error else { throw e }
 
 
-                let json = JSON(data: response.data)
+                let json = try JSON(data: response.data)
 
                 if let type = json["type"].string , type == "param_error" {
                     throw NSError(domain: OutbidDomain, code: 0, userInfo: [NSUnderlyingErrorKey: error as NSError])

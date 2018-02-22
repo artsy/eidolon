@@ -76,12 +76,12 @@ class LoadingViewController: UIViewController {
                 // Regardless of error or completion. hide the spinner.
                 self?.spinner.isHidden = true
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        _viewWillDisappear.onNext()
+        _viewWillDisappear.onNext(Void())
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -154,7 +154,7 @@ extension LoadingViewController {
             .subscribe(onCompleted: { [weak self] in
                 self?.performSegue(.PushtoRegisterConfirmed)
             })
-            .addDisposableTo(rx_disposeBag)
+            .disposed(by: rx.disposeBag)
     }
 
     func handleUpdate() {
@@ -183,7 +183,7 @@ extension LoadingViewController {
 
         recognizer.rx.event.subscribe(onNext: { [weak self] _ in
             self?.closeSelf()
-        }).addDisposableTo(rx_disposeBag)
+        }).disposed(by: rx.disposeBag)
 
         bidConfirmationImageView.isUserInteractionEnabled = true
         bidConfirmationImageView.addGestureRecognizer(recognizer)

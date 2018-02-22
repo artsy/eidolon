@@ -33,20 +33,22 @@ class ConfirmYourBidViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let titleString = useArtsyLoginButton.title(for: useArtsyLoginButton.state)! 
-        let attributes = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,
-            NSFontAttributeName: useArtsyLoginButton.titleLabel!.font] as [String : Any];
+        let titleString = useArtsyLoginButton.title(for: useArtsyLoginButton.state)!
+        let attributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+            NSAttributedStringKey.font: useArtsyLoginButton.titleLabel!.font
+        ]
         let attrTitle = NSAttributedString(string: titleString, attributes:attributes)
         useArtsyLoginButton.setAttributedTitle(attrTitle, for:useArtsyLoginButton.state)
 
         number
-            .bindTo(_number)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: _number)
+            .disposed(by: rx.disposeBag)
 
         number
             .map(toPhoneNumberString)
-            .bindTo(numberAmountTextField.rx.text)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: numberAmountTextField.rx.text)
+            .disposed(by: rx.disposeBag)
 
         let nav = self.fulfillmentNav()
 
@@ -57,8 +59,8 @@ class ConfirmYourBidViewController: UIViewController {
         // We don't know if it's a paddle number or a phone number yet, so bind both ¯\_(ツ)_/¯
         [nav.bidDetails.paddleNumber, nav.bidDetails.newUser.phoneNumber].forEach { variable in
             optionalNumber
-                .bindTo(variable)
-                .addDisposableTo(rx_disposeBag)
+                .bind(to: variable)
+                .disposed(by: rx.disposeBag)
         }
 
         // Does a bidder exist for this phone number?
@@ -105,7 +107,7 @@ class ConfirmYourBidViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        _viewWillDisappear.onNext()
+        _viewWillDisappear.onNext(Void())
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -125,7 +127,7 @@ class ConfirmYourBidViewController: UIViewController {
     }
 
     func toPhoneNumberString(_ number: String) -> String {
-        if number.characters.count >= 7 {
+        if number.count >= 7 {
             return phoneNumberFormatter.string(for: number) ?? number
         } else {
             return number

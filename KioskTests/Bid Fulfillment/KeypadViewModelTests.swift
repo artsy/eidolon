@@ -25,18 +25,18 @@ class KeypadViewModelTests: QuickSpec {
             subject
                 .stringValue
                 .asObservable()
-                .bindTo(testHarness.stringValue)
-                .addDisposableTo(disposeBag)
+                .bind(to: testHarness.stringValue)
+                .disposed(by: disposeBag)
             subject
                 .currencyValue
                 .asObservable()
-                .bindTo(testHarness.currencyValue)
-                .addDisposableTo(disposeBag)
+                .bind(to: testHarness.currencyValue)
+                .disposed(by: disposeBag)
         }
         
         it("it has default values") {
-            expect(testHarness.currencyValue) == 0
-            expect(testHarness.stringValue) == ""
+            expect(testHarness.currencyValue.asObservable()).first == 0
+            expect(testHarness.stringValue.asObservable()).first == ""
         }
         
         it("adds digits") {
@@ -46,12 +46,12 @@ class KeypadViewModelTests: QuickSpec {
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribe(onCompleted: {
-                        expect(testHarness.currencyValue) == 1337
-                        expect(testHarness.stringValue) == "1337"
+                        expect(testHarness.currencyValue.asObservable()).first == 1337
+                        expect(testHarness.stringValue.asObservable()).first == "1337"
 
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
         }
@@ -64,12 +64,12 @@ class KeypadViewModelTests: QuickSpec {
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribe(onCompleted: {
-                        expect(testHarness.currencyValue) == 1333333
-                        expect(testHarness.stringValue) == "1333333333337"
+                        expect(testHarness.currencyValue.asObservable()).first == 1333333
+                        expect(testHarness.stringValue.asObservable()).first == "1333333333337"
 
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
         
@@ -80,12 +80,12 @@ class KeypadViewModelTests: QuickSpec {
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .subscribe(onCompleted: {
-                        expect(testHarness.currencyValue) == 1337
-                        expect(testHarness.stringValue) == "01337"
+                        expect(testHarness.currencyValue.asObservable()).first == 1337
+                        expect(testHarness.stringValue.asObservable()).first == "01337"
                         
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
         
@@ -96,15 +96,15 @@ class KeypadViewModelTests: QuickSpec {
                         subject.addDigitAction.execute(1).map(void)
                     }
                     .then {
-                        subject.clearAction.execute()
+                        subject.clearAction.execute(Void())
                     }
                     .subscribe(onCompleted: {
-                        expect(testHarness.currencyValue) == 0
-                        expect(testHarness.stringValue) == ""
+                        expect(testHarness.currencyValue.asObservable()).first == 0
+                        expect(testHarness.stringValue.asObservable()).first == ""
                         
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
         
@@ -115,14 +115,14 @@ class KeypadViewModelTests: QuickSpec {
                         observable.then { subject.addDigitAction.execute(input) }
                     })
                     .then {
-                        subject.deleteAction.execute()
+                        subject.deleteAction.execute(Void())
                     }.subscribe(onCompleted: {
-                        expect(testHarness.currencyValue) == 13
-                        expect(testHarness.stringValue) == "13"
+                        expect(testHarness.currencyValue.asObservable()).first == 13
+                        expect(testHarness.stringValue.asObservable()).first == "13"
 
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
     }

@@ -29,11 +29,11 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
         let checkEmail = provider
             .request(ArtsyAPI.findExistingEmailRegistration(email: email))
             .map(responseIsOK)
-            .shareReplay(1)
+            .share(replay: 1)
 
         emailExists = checkEmail
 
-        password.bindTo(self.password).addDisposableTo(disposeBag)
+        password.bind(to: self.password).disposed(by: disposeBag)
 
         let password = self.password
 
@@ -66,7 +66,7 @@ class RegistrationPasswordViewModel: RegistrationPasswordViewModelType {
             .subscribe { _ in
                 action.execute(Void())
             }
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
 
     func userForgotPassword() -> Observable<Void> {

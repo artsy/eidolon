@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-final class Artist: NSObject, JSONAbleType {
+@objcMembers final class Artist: NSObject, JSONAbleType {
 
     let id: String
     dynamic var name: String

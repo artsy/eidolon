@@ -68,8 +68,8 @@ class PlaceBidViewController: UIViewController {
         privacyPolictyButton.rx.action = showPrivacyPolicyCommand()
 
         bidDollars
-            .bindTo(_bidDollars)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: _bidDollars)
+            .disposed(by: rx.disposeBag)
 
         if let nav = self.navigationController as? FulfillmentNavigationController {
             let currencySymbol = nav.bidDetails.saleArtwork?.currencySymbol ?? ""
@@ -78,8 +78,8 @@ class PlaceBidViewController: UIViewController {
 
             bidDollars
                 .map(dollarsToCurrencyString(currencySymbol: currencySymbol))
-                .bindTo(bidAmountTextField.rx.text)
-                .addDisposableTo(rx_disposeBag)
+                .bind(to: bidAmountTextField.rx.text)
+                .disposed(by: rx.disposeBag)
 
             bidDollars
                 .map { $0 * 100 }
@@ -87,8 +87,8 @@ class PlaceBidViewController: UIViewController {
                 .map { bid in
                     return bid as NSNumber?
                 }
-                .bindTo(nav.bidDetails.bidAmountCents)
-                .addDisposableTo(rx_disposeBag)
+                .bind(to: nav.bidDetails.bidAmountCents)
+                .disposed(by: rx.disposeBag)
 
             if let saleArtwork = nav.bidDetails.saleArtwork {
                 
@@ -100,26 +100,26 @@ class PlaceBidViewController: UIViewController {
                 saleArtwork.viewModel
                     .currentBidOrOpeningBidLabel()
                     .mapToOptional()
-                    .bindTo(currentBidTitleLabel.rx.text)
-                    .addDisposableTo(rx_disposeBag)
+                    .bind(to: currentBidTitleLabel.rx.text)
+                    .disposed(by: rx.disposeBag)
 
                 saleArtwork.viewModel
                     .currentBidOrOpeningBid()
                     .mapToOptional()
-                    .bindTo(currentBidAmountLabel.rx.text)
-                    .addDisposableTo(rx_disposeBag)
+                    .bind(to: currentBidAmountLabel.rx.text)
+                    .disposed(by: rx.disposeBag)
 
 
                 minimumNextBid
                     .map(toNextBidString(currencySymbol: saleArtwork.currencySymbol))
-                    .bindTo(nextBidAmountLabel.rx.text)
-                    .addDisposableTo(rx_disposeBag)
+                    .bind(to: nextBidAmountLabel.rx.text)
+                    .disposed(by: rx.disposeBag)
 
                 Observable.combineLatest([bidDollars, minimumNextBid], { ints  in
                         return (ints[0]) * 100 >= (ints[1])
                     })
-                    .bindTo(bidButton.rx.isEnabled)
-                    .addDisposableTo(rx_disposeBag)
+                    .bind(to: bidButton.rx.isEnabled)
+                    .disposed(by: rx.disposeBag)
 
 
                 enum LabelTags: Int {
@@ -141,8 +141,8 @@ class PlaceBidViewController: UIViewController {
                         .lotLabel()
                         .filterNilKeepOptional()
                         .takeUntil(viewWillDisappear)
-                        .bindTo(lotNumberLabel.rx.text)
-                        .addDisposableTo(rx_disposeBag)
+                        .bind(to: lotNumberLabel.rx.text)
+                        .disposed(by: rx.disposeBag)
 
                 }
 
@@ -192,16 +192,16 @@ class PlaceBidViewController: UIViewController {
                         .rx.observe(String.self, "name")
                         .filterNil()
                         .mapToOptional()
-                        .bindTo(artistNameLabel.rx.text)
-                        .addDisposableTo(rx_disposeBag)
+                        .bind(to: artistNameLabel.rx.text)
+                        .disposed(by: rx.disposeBag)
                 }
 
                 saleArtwork
                     .artwork
                     .rx.observe(NSAttributedString.self, "titleAndDate")
                     .takeUntil(rx.deallocated)
-                    .bindTo(artworkTitleLabel.rx.attributedText)
-                    .addDisposableTo(rx_disposeBag)
+                    .bind(to: artworkTitleLabel.rx.attributedText)
+                    .disposed(by: rx.disposeBag)
 
                 saleArtwork
                     .artwork
@@ -209,8 +209,8 @@ class PlaceBidViewController: UIViewController {
                     .filterNil()
                     .mapToOptional()
                     .takeUntil(rx.deallocated)
-                    .bindTo(artworkPriceLabel.rx.text)
-                    .addDisposableTo(rx_disposeBag)
+                    .bind(to: artworkPriceLabel.rx.text)
+                    .disposed(by: rx.disposeBag)
 
                 if let url = saleArtwork.artwork.defaultImage?.thumbnailURL() {
                     self.artworkImageView.sd_setImage(with: url as URL!)
@@ -224,7 +224,7 @@ class PlaceBidViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        _viewWillDisappear.onNext()
+        _viewWillDisappear.onNext(Void())
     }
 
     @IBAction func bidButtonTapped(_ sender: AnyObject) {

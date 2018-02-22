@@ -22,7 +22,7 @@ class BidderNetworkModelTests: QuickSpec {
         }
 
         it("matches hasBeenRegistered is false") {
-            expect(subject.createdNewUser) == false
+            expect(subject.createdNewUser).first == false
         }
 
         it("matches hasBeenRegistered is true") {
@@ -37,7 +37,7 @@ class BidderNetworkModelTests: QuickSpec {
                     .subscribe(onNext: { _ in
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
         }
     }

@@ -48,7 +48,7 @@ target 'Kiosk' do
   pod 'ARAnalytics/Segmentio'
   pod 'ARAnalytics/HockeyApp'
 
-  pod 'CardFlight'
+  pod 'CardFlight', '~> 3.0'
   pod 'Stripe'
   pod 'ECPhoneNumberFormatter'
   pod 'UIImageViewAligned', :git => 'https://github.com/ashfurrow/UIImageViewAligned.git'
@@ -65,7 +65,7 @@ target 'Kiosk' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxOptional'
-  pod 'Moya/RxSwift', '~> 9.0'
+  pod 'Moya/RxSwift'
   pod 'NSObject+Rx'
   pod 'Action'
 

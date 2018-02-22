@@ -7,8 +7,8 @@ import Moya
 
 class ArtsyProviderTests: QuickSpec {
     override func spec() {
-        let fakeEndpointsClosure = { (target: ArtsyAPI) -> Endpoint<ArtsyAPI> in
-            return Endpoint<ArtsyAPI>(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task)
+        let fakeEndpointsClosure = { (target: ArtsyAPI) -> Endpoint in
+            return Endpoint(url: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task, httpHeaderFields: nil)
         }
 
         var fakeOnline: PublishSubject<Bool>!
@@ -31,7 +31,7 @@ class ArtsyProviderTests: QuickSpec {
             let disposeBag = DisposeBag()
             subject.request(ArtsyAPI.ping, defaults: defaults).subscribe(onNext: { _ in
                 called = true
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
 
             expect(called) == false
 

@@ -74,13 +74,12 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
                 waitUntil { done in
                     testViewModel
                         .testRegisterButtonCommand
-                        .execute()
-                        .subscribe(onCompleted: { (_) in
-
+                        .execute(Void())
+                        .subscribe(onCompleted: {
                             expect(executed) == true
                             done()
                         })
-                        .addDisposableTo(disposeBag)
+                        .disposed(by: disposeBag)
                     
                     return
                 }
@@ -97,11 +96,11 @@ class ManualCreditCardInputViewControllerTests: QuickSpec {
             waitUntil { done in
                 testViewModel
                     .testRegisterButtonCommand
-                    .execute()
+                    .execute(Void())
                     .subscribe(onError: { (_) in
                         done()
                     })
-                    .addDisposableTo(disposeBag)
+                    .disposed(by: disposeBag)
             }
 
             expect(subject).to( haveValidSnapshot() )

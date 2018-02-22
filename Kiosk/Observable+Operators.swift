@@ -88,7 +88,7 @@ extension ObservableType {
         }
 
         return self
-            .ignoreElements()
+            .filter { _ in false }
             .concat(next)
     }
 }

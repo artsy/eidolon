@@ -18,7 +18,7 @@ class RegisterViewController: UIViewController {
 
     let coordinator = RegistrationCoordinator()
 
-    dynamic var placingBid = true
+    @objc dynamic var placingBid = true
 
     fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
@@ -37,12 +37,12 @@ class RegisterViewController: UIViewController {
 
         indexIsConfirmed
             .not()
-            .bindTo(confirmButton.rx_hidden)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: confirmButton.rx_hidden)
+            .disposed(by: rx.disposeBag)
 
         coordinator.currentIndex
-            .bindTo(flowView.highlightedIndex)
-            .addDisposableTo(rx_disposeBag)
+            .bind(to: flowView.highlightedIndex)
+            .disposed(by: rx.disposeBag)
 
         let details = self.fulfillmentNav().bidDetails
         flowView.details = details
@@ -53,7 +53,7 @@ class RegisterViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        _viewWillDisappear.onNext()
+        _viewWillDisappear.onNext(Void())
     }
 
     func goToNextVC() {
@@ -71,7 +71,7 @@ class RegisterViewController: UIViewController {
                     self?.goToNextVC()
                     self?.flowView.update()
                 })
-                .addDisposableTo(rx_disposeBag)
+                .disposed(by: rx.disposeBag)
         }
 
         if let viewController = controller as? RegistrationPasswordViewController {

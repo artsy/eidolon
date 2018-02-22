@@ -1,5 +1,5 @@
 import RxSwift
-import ReachabilitySwift
+import Reachability
 import Moya
 
 // Ideally a Pod. For now a file.
@@ -63,7 +63,7 @@ private class ReachabilityManager {
             return nil
         }
 
-        self._reach.onNext(self.reachability.isReachable)
+        self._reach.onNext(self.reachability.connection != .none)
 
         self.reachability.whenReachable = { _ in
             DispatchQueue.main.async { self._reach.onNext(true) }

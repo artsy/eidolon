@@ -1,7 +1,7 @@
 import Foundation
 import SwiftyJSON
 
-final class User: NSObject, JSONAbleType {
+@objcMembers final class User: NSObject, JSONAbleType {
 
     dynamic let id: String
     dynamic let email: String
@@ -10,7 +10,6 @@ final class User: NSObject, JSONAbleType {
     dynamic let phoneNumber: String
     dynamic var bidder: Bidder?
     dynamic var location: Location?
-
 
     init(id: String, email: String, name: String, paddleNumber: String, phoneNumber: String, location: Location?) {
         self.id = id

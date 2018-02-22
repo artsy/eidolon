@@ -1,9 +1,6 @@
-#import "STPCard+Validation.h"
+#import "CreditCardValidation.h"
 
-@implementation STPCard (Validation)
-
-+ (BOOL)validateCardNumber:(NSString *)cardNumber {
-
+BOOL validateCreditCardNumber(NSString *cardNumber) {
     STPCardValidationState validationState =
     [STPCardValidator validationStateForNumber:cardNumber validatingCardBrand:NO];
 
@@ -11,11 +8,8 @@
         case STPCardValidationStateValid:
             return YES;
             break;
-
         default:
             return NO;
             break;
     }
 }
-
-@end

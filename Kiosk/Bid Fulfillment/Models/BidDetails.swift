@@ -35,7 +35,7 @@ import Moya
         let auctionID = saleArtwork?.auctionID ?? ""
 
         if let number = paddleNumber.value, let pin = bidderPIN.value {
-            let newEndpointsClosure = { (target: ArtsyAuthenticatedAPI) -> Endpoint<ArtsyAuthenticatedAPI> in
+            let newEndpointsClosure = { (target: ArtsyAuthenticatedAPI) -> Endpoint in
                 // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
                 let endpoint = Networking.endpointsClosure()(target)
 
