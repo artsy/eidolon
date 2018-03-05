@@ -38,7 +38,7 @@ class AdminCardTestingViewController: UIViewController {
                         return
                     }
 
-                    let cardDetails = "Card: \(card.name ?? "") - \(card.last4 ?? "") \n \(card.cardToken ?? "")"
+                    let cardDetails = "Card: \(card.cardInfo.cardholderName ?? "") - \(card.cardInfo.lastFour ?? "") \n \(card.token)"
                     self.log(cardDetails)
                 }
             }

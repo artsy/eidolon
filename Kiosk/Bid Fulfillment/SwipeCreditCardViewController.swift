@@ -66,13 +66,13 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
                     self.cardStatusLabel.text = "Card Status: completed"
 
                     if let card = self.cardHandler.card {
-                        self.cardName.value = card.name
-                        self.cardLastDigits.value = card.last4
+                        self.cardName.value = card.cardInfo.cardholderName ?? ""
+                        self.cardLastDigits.value = card.cardInfo.lastFour ?? ""
 
-                        self.cardToken.value = card.cardToken
+                        self.cardToken.value = card.token
 
                         if let newUser = self.navigationController?.fulfillmentNav().bidDetails.newUser {
-                            newUser.name.value = (newUser.name.value.isNilOrEmpty) ? card.name : newUser.name.value
+                            newUser.name.value = (newUser.name.value.isNilOrEmpty) ? card.cardInfo.cardholderName : newUser.name.value
                         }
                     }
                     
