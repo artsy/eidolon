@@ -1553,6 +1553,7 @@
 					"$(SRCROOT)/Pods/CardFlight/**",
 				);
 				INFOPLIST_FILE = "Kiosk/Supporting Files/Info.plist";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/BridgingHeader.h";

@@ -36,7 +36,7 @@ func responseIsOK(_ response: Response) -> Bool {
 
 func detectDevelopmentEnvironment() -> Bool {
     var developmentEnvironment = false
-    #if DEBUG || (arch(i386) || arch(x86_64)) && os(iOS)
+    #if DEBUG || (arch(i386) || arch(x86_64))
         developmentEnvironment = true
     #endif
     return developmentEnvironment
