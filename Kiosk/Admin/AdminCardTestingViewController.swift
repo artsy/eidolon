@@ -43,14 +43,16 @@ class AdminCardTestingViewController: UIViewController {
                 }
             }
             .disposed(by: rx.disposeBag)
-
-
-        cardHandler.startSearching()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         cardHandler.end()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        cardHandler.startSearching()
     }
 
     func log(_ string: String) {

@@ -4,7 +4,9 @@ import CardFlight
 
 class CardHandler: NSObject, CFTTransactionDelegate {
 
-    fileprivate let _cardStatus = PublishSubject<String>()
+    private let _cardStatus = PublishSubject<String>()
+    private var transaction: CFTTransaction?
+    private var cardReader: CFTCardReaderInfo?
 
     var cardStatus: Observable<String> {
         return _cardStatus.asObservable()
@@ -16,8 +18,8 @@ class CardHandler: NSObject, CFTTransactionDelegate {
         return credentials
     }
 
-    var transaction: CFTTransaction?
     var card: (cardInfo: CFTCardInfo, token: String)?
+
 
     let APIKey: String
     let APIToken: String
@@ -27,13 +29,18 @@ class CardHandler: NSObject, CFTTransactionDelegate {
         APIToken = accountToken
 
         super.init()
+
+        self.transaction = CFTTransaction(delegate: self)
+    }
+
+    deinit {
+        self.end()
     }
 
     func startSearching() {
-        self.transaction = CFTTransaction(delegate: self)
+        _cardStatus.onNext("Starting search...")
         let tokenizationParameters = CFTTokenizationParameters(customerId: nil, credentials: self.cardFlightCredentials)
-        transaction?.beginTokenizing(tokenizationParameters: tokenizationParameters)
-        _cardStatus.onNext("Started searching")
+        self.transaction?.beginTokenizing(tokenizationParameters: tokenizationParameters)
     }
 
     func end() {
@@ -51,6 +58,7 @@ class CardHandler: NSObject, CFTTransactionDelegate {
             _cardStatus.onNext("Transaction deferred")
         case .pendingCardInput:
             _cardStatus.onNext("Pending card input")
+            transaction.select(cardReaderInfo: cardReader, cardReaderModel: cardReader?.cardReaderModel ?? .unknown)
         case .pendingTransactionParameters:
             _cardStatus.onNext("Pending transaction parameters")
         case .unknown:
@@ -60,40 +68,52 @@ class CardHandler: NSObject, CFTTransactionDelegate {
         }
     }
 
-    public func transaction(_ transaction: CFTTransaction, didComplete historicalTransaction: CFTHistoricalTransaction) {
+    func transaction(_ transaction: CFTTransaction, didComplete historicalTransaction: CFTHistoricalTransaction) {
         if let cardInfo = historicalTransaction.cardInfo, let token = historicalTransaction.cardToken {
             self.card = (cardInfo: cardInfo, token: token)
             _cardStatus.onNext("Got Card")
-            self._cardStatus.onCompleted()
+            _cardStatus.onCompleted()
         } else {
             _cardStatus.onNext("Card Flight Error – could not retrieve card data.");
             if let error = historicalTransaction.error {
-                self._cardStatus.onNext("response Error \(error)");
+                _cardStatus.onNext("response Error \(error)");
                 logger.log("CardReader got a response it cannot handle")
             }
             startSearching()
         }
     }
 
-    public func transaction(_ transaction: CFTTransaction, didReceive cardReaderEvent: CFTCardReaderEvent, cardReaderInfo: CFTCardReaderInfo?) {
+    func transaction(_ transaction: CFTTransaction, didReceive cardReaderEvent: CFTCardReaderEvent, cardReaderInfo: CFTCardReaderInfo?) {
         _cardStatus.onNext(cardReaderEvent.statusMessage)
+    }
+
+    func transaction(_ transaction: CFTTransaction, didUpdate cardReaderArray: [CFTCardReaderInfo]) {
+        self.cardReader = cardReaderArray.first
+        _cardStatus.onNext("Received new card reader availability, number of readers: \(cardReaderArray.count)")
+    }
+
+    func transaction(_ transaction: CFTTransaction, didRequestProcessOption cardInfo: CFTCardInfo) {
+        logger.log("Received request for processing option, will process transaction.")
+        _cardStatus.onNext("Request for process option, automatically processing...")
+        transaction.select(processOption: .process)
+        // TODO: CardFlight docs says we're supposed to confirm with the user before proceeding with the transaction,
+        // but that's silly because we're only tokenizing and not not making an authorization or a charge.
+    }
+
+    func transaction(_ transaction: CFTTransaction, didRequestDisplay message: CFTMessage) {
+        let message = message.primary ?? message.secondary ?? "Unknown message"
+        logger.log("Received request to display message: \(message)")
+        _cardStatus.onNext("Received message for user: \(message)")
+        // TODO: Present message to user somehow
+        // TODO: We want to show the user the custom messages but not messages confirming the transaction (see above,
+        // it's not appropriate for tokenization). So we need to show the user _most_ messages but not messages
+        // confirming transactions (that don't exist).
     }
 }
 
 typealias UnhandledDelegateCallbacks = CardHandler
 /// We don't expect any of these functions to be called, but they are required for the delegate protocol.
 extension UnhandledDelegateCallbacks {
-    func transaction(_ transaction: CFTTransaction, didRequestDisplay message: CFTMessage) {
-        let message = message.primary ?? message.secondary ?? "Unknown message"
-        logger.log("Received request to display message: \(message)")
-        _cardStatus.onNext(message)
-    }
-
-    func transaction(_ transaction: CFTTransaction, didRequestProcessOption cardInfo: CFTCardInfo) {
-        logger.log("Received request for processing option, ignorning.")
-        _cardStatus.onNext("Ignoring request for process option")
-    }
-
     func transaction(_ transaction: CFTTransaction, didDefer transactionData: Data) {
         logger.log("Transaction has been deferred.")
         _cardStatus.onNext("Transaction deferred")
