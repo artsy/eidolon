@@ -37,12 +37,27 @@ class CardHandler: NSObject, CFTTransactionDelegate {
     }
 
     func end() {
-        // TODO: Cancel transaction
-
+        transaction?.select(processOption: CFTProcessOption.abort)
+        transaction = nil
     }
 
     func transaction(_ transaction: CFTTransaction, didUpdate state: CFTTransactionState, error: Error?) {
-        // TODO: Update _cardStatus
+        switch state {
+        case .completed:
+            _cardStatus.onNext("Transaction completed")
+        case .processing:
+            _cardStatus.onNext("Transaction processing")
+        case .deferred:
+            _cardStatus.onNext("Transaction deferred")
+        case .pendingCardInput:
+            _cardStatus.onNext("Pending card input")
+        case .pendingTransactionParameters:
+            _cardStatus.onNext("Pending transaction parameters")
+        case .unknown:
+            _cardStatus.onNext("Unknown transactionstate")
+        case .pendingProcessOption:
+            break
+        }
     }
 
     public func transaction(_ transaction: CFTTransaction, didComplete historicalTransaction: CFTHistoricalTransaction) {
@@ -60,59 +75,73 @@ class CardHandler: NSObject, CFTTransactionDelegate {
         }
     }
 
+    public func transaction(_ transaction: CFTTransaction, didReceive cardReaderEvent: CFTCardReaderEvent, cardReaderInfo: CFTCardReaderInfo?) {
+        _cardStatus.onNext(cardReaderEvent.statusMessage)
+    }
+}
+
+typealias UnhandledDelegateCallbacks = CardHandler
+/// We don't expect any of these functions to be called, but they are required for the delegate protocol.
+extension UnhandledDelegateCallbacks {
     func transaction(_ transaction: CFTTransaction, didRequestDisplay message: CFTMessage) {
-        // TODO
+        let message = message.primary ?? message.secondary ?? "Unknown message"
+        logger.log("Received request to display message: \(message)")
+        _cardStatus.onNext(message)
     }
 
     func transaction(_ transaction: CFTTransaction, didRequestProcessOption cardInfo: CFTCardInfo) {
-        // TODO:
+        logger.log("Received request for processing option, ignorning.")
+        _cardStatus.onNext("Ignoring request for process option")
     }
 
     func transaction(_ transaction: CFTTransaction, didDefer transactionData: Data) {
-        // TODO:
+        logger.log("Transaction has been deferred.")
+        _cardStatus.onNext("Transaction deferred")
     }
 
     public func transaction(_ transaction: CFTTransaction, didRequest cvm: CFTCVM) {
-        // Not required, we're not making chargers
+        logger.log("Transaction requested signature from user, ignoring.")
+        _cardStatus.onNext("Ignoring user signature request from CardFlight")
     }
+}
 
-    public func transaction(_ transaction: CFTTransaction, didReceive cardReaderEvent: CFTCardReaderEvent, cardReaderInfo: CFTCardReaderInfo?) {
-
+extension CFTCardReaderEvent {
+    var statusMessage: String {
+        switch self {
+        case .unknown:
+            return "Unknown card event"
+        case .disconnected:
+            return "Reader is disconnected"
+        case .connected:
+            return "Reader is connected"
+        case .connectionErrored:
+            return "Connection error occurred"
+        case .cardSwiped:
+            return "Card swiped"
+        case .cardSwipeErrored:
+            return "Card swipe error"
+        case .cardInserted:
+            return "Card inserted"
+        case .cardInsertErrored:
+            return "Card insertion error"
+        case .cardRemoved:
+            return "Card removed"
+        case .cardTapped:
+            return "Card tapped"
+        case .cardTapErrored:
+            return "Card tap error"
+        case .updateStarted:
+            return "Update started"
+        case .updateCompleted:
+            return "Updated completed"
+        case .audioRecordingPermissionNotGranted:
+            return "iOS audio permissions no granted"
+        case .fatalError:
+            return "Fatal error"
+        case .connecting:
+            return "connecting"
+        case .batteryStatusUpdated:
+            return "battery status updated"
+        }
     }
-
-//    func readerIsAttached() {
-//        _cardStatus.onNext("Reader is attatched");
-//    }
-//
-//    func readerIsConnecting() {
-//        _cardStatus.onNext("Reader is connecting");
-//    }
-//
-//    func readerIsDisconnected() {
-//        _cardStatus.onNext("Reader is disconnected");
-//        logger.log("Card Reader Disconnected")
-//    }
-//
-//    func readerSwipeDidCancel() {
-//        _cardStatus.onNext("Reader did cancel");
-//        logger.log("Card Reader was Cancelled")
-//    }
-//
-//    func readerGenericResponse(_ cardData: String!) {
-//        _cardStatus.onNext("Reader received non-card data: \(cardData ?? "") ");
-//        reader.beginSwipe()
-//    }
-//
-//    func readerIsConnected(_ isConnected: Bool, withError error: Error!) {
-//        if isConnected {
-//            _cardStatus.onNext("Reader is connected")
-//            reader.beginSwipe()
-//        } else {
-//            if (error != nil) {
-//                _cardStatus.onNext("Reader is disconnected: \(error.localizedDescription)");
-//            } else {
-//                _cardStatus.onNext("Reader is disconnected");
-//            }
-//        }
-//    }
 }
