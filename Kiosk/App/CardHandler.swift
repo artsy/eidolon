@@ -13,7 +13,7 @@ class CardHandler: NSObject, CFTTransactionDelegate {
     var cardStatus: Observable<String> {
         return _cardStatus.asObservable()
     }
-    // TODO: Surface these messages to the user in the Kiosk UI.
+
     var userMessages: Observable<String> {
         // User messages are things like "Swipe card", "processing", or "Swipe card again". Due to a problem with the
         // CardFlight SDK, the user is prompted to accept processing for card tokenization, which is provides a
