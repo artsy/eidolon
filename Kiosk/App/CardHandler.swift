@@ -120,8 +120,10 @@ extension UnhandledDelegateCallbacks {
     }
 
     public func transaction(_ transaction: CFTTransaction, didRequest cvm: CFTCVM) {
-        logger.log("Transaction requested signature from user, ignoring.")
-        _cardStatus.onNext("Ignoring user signature request from CardFlight")
+        if cvm == CFTCVM.signature {
+            logger.log("Transaction requested signature from user, which should not occur for tokenization.")
+            _cardStatus.onNext("Ignoring user signature request from CardFlight")
+        }
     }
 }
 
@@ -159,9 +161,9 @@ extension CFTCardReaderEvent {
         case .fatalError:
             return "Fatal error"
         case .connecting:
-            return "connecting"
+            return "Connecting"
         case .batteryStatusUpdated:
-            return "battery status updated"
+            return "Battery status updated"
         }
     }
 }
