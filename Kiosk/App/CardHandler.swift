@@ -5,11 +5,25 @@ import CardFlight
 class CardHandler: NSObject, CFTTransactionDelegate {
 
     private let _cardStatus = PublishSubject<String>()
-    private var transaction: CFTTransaction?
+    private let _userMessages = PublishSubject<String>()
     private var cardReader: CFTCardReaderInfo?
+
+    var transaction: CFTTransaction?
 
     var cardStatus: Observable<String> {
         return _cardStatus.asObservable()
+    }
+    // TODO: Surface these messages to the user in the Kiosk UI.
+    var userMessages: Observable<String> {
+        // User messages are things like "Swipe card", "processing", or "Swipe card again". Due to a problem with the
+        // CardFlight SDK, the user is prompted to access processing for card tokenization, which is provides a
+        // unfriendly user experience. So we auto-accept these requests and filter out confirmation messages, which
+        // don't apply to tokenization flows, until this issue is fixed: https://github.com/CardFlight/cardflight-v4-ios/issues/4
+        return _userMessages
+            .asObservable()
+            .filter { message -> Bool in
+                !message.hasSuffix("?")
+            }
     }
 
     var cardFlightCredentials: CFTCredentials {
@@ -95,19 +109,16 @@ class CardHandler: NSObject, CFTTransactionDelegate {
     func transaction(_ transaction: CFTTransaction, didRequestProcessOption cardInfo: CFTCardInfo) {
         logger.log("Received request for processing option, will process transaction.")
         _cardStatus.onNext("Request for process option, automatically processing...")
+        // We auto-accept the process option on the user's behalf because the prompt doesn't make sense in a
+        // tokenization flow. See comments in `userMessages` property above.
         transaction.select(processOption: .process)
-        // TODO: CardFlight docs says we're supposed to confirm with the user before proceeding with the transaction,
-        // but that's silly because we're only tokenizing and not not making an authorization or a charge.
     }
 
     func transaction(_ transaction: CFTTransaction, didRequestDisplay message: CFTMessage) {
-        let message = message.primary ?? message.secondary ?? "Unknown message"
+        let message = message.primary ?? message.secondary ?? ""
+        _userMessages.onNext(message)
         logger.log("Received request to display message: \(message)")
         _cardStatus.onNext("Received message for user: \(message)")
-        // TODO: Present message to user somehow
-        // TODO: We want to show the user the custom messages but not messages confirming the transaction (see above,
-        // it's not appropriate for tokenization). So we need to show the user _most_ messages but not messages
-        // confirming transactions (that don't exist).
     }
 }
 
