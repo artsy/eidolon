@@ -1151,6 +1151,7 @@
 				"${BUILT_PRODUCTS_DIR}/Artsy+UIFonts/Artsy_UIFonts.framework",
 				"${BUILT_PRODUCTS_DIR}/Artsy+UILabels/Artsy_UILabels.framework",
 				"${BUILT_PRODUCTS_DIR}/Artsy-UIButtons/Artsy_UIButtons.framework",
+				"${PODS_ROOT}/CardFlight-v4/CardFlight.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNWebViewController/DZNWebViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/ECPhoneNumberFormatter/ECPhoneNumberFormatter.framework",
 				"${BUILT_PRODUCTS_DIR}/FLKAutoLayout/FLKAutoLayout.framework",
@@ -1186,6 +1187,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Artsy_UIFonts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Artsy_UILabels.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Artsy_UIButtons.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CardFlight.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNWebViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ECPhoneNumberFormatter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLKAutoLayout.framework",
@@ -1551,6 +1553,7 @@
 					"$(SRCROOT)/Pods/CardFlight/**",
 				);
 				INFOPLIST_FILE = "Kiosk/Supporting Files/Info.plist";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = net.artsy.kiosk.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kiosk/Supporting Files/BridgingHeader.h";
