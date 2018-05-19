@@ -41,7 +41,7 @@ lane :oss do
 end
 
 lane :artsy_specs_update do
-  sh 'bundle exec pod repo update artsy'
+  sh 'bundle exec pod repo update artsy' if Dir.exist? "#{Dir.home}/.cocoapods/repos/artsy/"
 end
 
 desc "Release a new beta version on Hockey"
