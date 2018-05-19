@@ -36,12 +36,7 @@ end
 desc "Set all the API keys required for distribution"
 lane :oss do
   oss_keys
-  artsy_specs_update
-  cocoapods
-end
-
-lane :artsy_specs_update do
-  sh 'bundle exec pod repo update artsy'
+  cocoapods repo_update: true
 end
 
 desc "Release a new beta version on Hockey"
