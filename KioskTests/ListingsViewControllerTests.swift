@@ -14,8 +14,8 @@ class ListingsViewControllerConfiguration: QuickConfiguration {
             var viewModel: ListingsViewControllerTestsStubbedViewModel!
 
             beforeEach{
-                subject = sharedExampleContext()["subject"] as! ListingsViewController
-                viewModel = subject.viewModel as! ListingsViewControllerTestsStubbedViewModel
+                subject = sharedExampleContext()["subject"] as? ListingsViewController
+                viewModel = subject.viewModel as? ListingsViewControllerTestsStubbedViewModel
                 subject.loadViewProgrammatically()
             }
 
