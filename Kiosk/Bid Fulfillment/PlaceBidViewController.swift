@@ -213,7 +213,7 @@ class PlaceBidViewController: UIViewController {
                     .disposed(by: rx.disposeBag)
 
                 if let url = saleArtwork.artwork.defaultImage?.thumbnailURL() {
-                    self.artworkImageView.sd_setImage(with: url as URL!)
+                    self.artworkImageView.sd_setImage(with: url)
                 } else {
                     self.artworkImageView.image = nil
                 }

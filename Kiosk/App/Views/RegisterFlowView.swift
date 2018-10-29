@@ -46,7 +46,7 @@ class RegisterFlowView: ORStackView {
 
             addSubview(itemView, withTopMargin: "10", sideMargin: "0")
 
-            if let value = (subViewParam.getters.flatMap { $0(user) }.first) {
+            if let value = (subViewParam.getters.compactMap { $0(user) }.first) {
                 itemView.createInfoLabel(value)
 
                 let button = itemView.createJumpToButtonAtIndex(i)

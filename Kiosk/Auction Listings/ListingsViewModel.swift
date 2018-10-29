@@ -204,7 +204,7 @@ class ListingsViewModel: NSObject, ListingsViewModelType {
     // MARK: Private class methods
 
     fileprivate class func DefaultLogging(_ date: Date) {
-        #if (arch(i386) || arch(x86_64)) && os(iOS)
+        #if (targetEnvironment(simulator))
             logger.log("Syncing on \(date)")
         #endif
     }
