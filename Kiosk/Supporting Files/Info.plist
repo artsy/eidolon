@@ -29,11 +29,22 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Credit Card Reader</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Credit Card Reader</string>
-	<key>UIAppFonts</key>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+        <key>UIAppFonts</key>
 	<array>
 		<string>AGaramondPro-BoldItalic.otf</string>
 		<string>AGaramondPro-Bold.otf</string>
@@ -42,23 +53,5 @@
 		<string>AVG65lig.otf</string>
 		<string>AGaramondPro-Semibold.otf</string>
 	</array>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UIStatusBarHidden</key>
-	<true/>
-	<key>UISupportedExternalAccessoryProtocols</key>
-	<array>
-		<string>com.miura.shuttle</string>
-		<string>com.cardflight.bold</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 </dict>
 </plist>
