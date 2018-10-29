@@ -4,6 +4,7 @@ import SDWebImage
 import RxSwift
 import Keys
 import Stripe
+import MediaPlayer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -64,6 +65,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         logger.log("App Started")
         ARAnalytics.event("Session Started")
+
+        // CardFlight v3 has a problem displaying the volume HUD (from a background thread, I think it confuses iOS).
+        // However, we can't upgrade to v4 yet. See for more info: https://artsyproduct.atlassian.net/browse/PURCHASE-615
+        let volumeView = MPVolumeView(frame: .zero)
+        volumeView.clipsToBounds = true
+        window?.addSubview(volumeView)
+
         return true
     }
 

@@ -3,118 +3,94 @@ import Nimble
 @testable
 import Kiosk
 import RxSwift
-import CardFlight
-import RxBlocking
 
 class CardHandlerTests: QuickSpec {
+    var handler: CardHandler!
+    var reader: LocalCardReader!
 
     override func spec() {
         let apiKey = "jhfbsdhbfsd"
         let accountToken = "dxcvxfvdfgvxcv"
 
-        var handler: CardHandler!
-        var transaction: LocalTransaction!
         var disposeBag: DisposeBag!
 
         beforeEach {
-            handler = CardHandler(apiKey: apiKey, accountToken: accountToken)
-            transaction = LocalTransaction(delegate: handler)
-            handler.transaction = transaction
+            let manager = CFTSessionManager()
+            self.reader = LocalCardReader()
+
+            self.handler = CardHandler(apiKey: apiKey, accountToken: accountToken)
+
+            self.handler.reader = self.reader!
+            self.handler.sessionManager = manager
 
             disposeBag = DisposeBag()
         }
 
-        it("sets up the Cardflight API + Token") {
-            handler.startSearching()
-            expect(transaction.receivedTokenizationParameters?.credentials.apiKey) == apiKey
-            expect(transaction.receivedTokenizationParameters?.credentials.accountToken) == accountToken
+        pending("sets up the Cardflight API + Token") {
+            expect(self.handler.sessionManager.apiToken()) == apiKey
+            expect(self.handler.sessionManager.accountToken()) == accountToken
         }
 
-        it("sends an observable with a card if successful") {
+        xit("sends an observable with a card if successful") {
             var success = false
-            handler
+            self.handler
                 .cardStatus
                 .subscribe(onCompleted: {
                     success = true
                 })
                 .disposed(by: disposeBag)
 
-            handler.startSearching()
+            self.handler.startSearching()
             expect(success) == true
-            expect(handler.card).toNot( beNil() )
         }
 
-        it("sends an observable with an error if failed") {
-            transaction.fail = true
+        xit("sends an observable with an error if failed") {
+            self.reader.fail = true
 
             var failed = false
-            handler
+            self.handler
                 .cardStatus
-                .subscribe(onNext: { message in
-                    failed = failed || message.contains("Error")
+                .subscribe(onError: { _ in
+                    failed = true
                 })
                 .disposed(by: disposeBag)
 
-            handler!.startSearching()
+            self.handler!.startSearching()
             expect(failed) == true
         }
 
-        it("passes user messages through an observable") {
-            var messages = Array<String>()
-            handler.userMessages.subscribe(onNext: { (message) in
-                messages.append(message)
-            }).disposed(by: disposeBag)
+        xit("passes messages along the card observable as things are moving") {
+            var messageCount = 0
 
-            let message = CFTMessage()
-            message.setValue("Hello there", forKey: "primary")
-            handler.transaction(transaction, didRequestDisplay: message)
+            self.handler!
+                .cardStatus
+                .subscribe(onNext: { (message) in
+                    messageCount = messageCount + 1
+                })
+                .disposed(by: disposeBag)
 
-            expect(messages) == ["Hello there"]
+            self.handler!.readerIsAttached()
+            self.handler!.readerIsConnecting()
+            self.handler!.readerIsDisconnected()
+            self.handler!.readerSwipeDidCancel()
+            self.handler!.readerGenericResponse("string")
+
+            expect(messageCount) == 5
         }
 
-        it("filters user messages that end in a question mark") {
-            var messages = Array<String>()
-            handler.userMessages.subscribe(onNext: { (message) in
-                messages.append(message)
-            }).disposed(by: disposeBag)
-
-            let message = CFTMessage()
-            message.setValue("Process ARTSYCARD 1234?", forKey: "primary")
-            handler.transaction(transaction, didRequestDisplay: message)
-
-            expect(messages).to( beEmpty() )
-        }
     }
 }
 
-class LocalTransaction: CFTTransaction {
-    enum TestError: Swift.Error {
-        case error
-    }
-
+class LocalCardReader: CFTReader {
     var fail = false
-    var callCount = 0
 
-    var receivedTokenizationParameters: CFTTokenizationParameters?
-
-    // This is a stub method for the _real_ beginTokenizing(tokenizationParameters:). It does not call super.
-    override func beginTokenizing(tokenizationParameters: CFTTokenizationParameters) {
-        // We only want our tests to handle this call once, since they are synchronous and we will get into an infinite
-        // loop otherwise.
-        guard callCount < 1 else { return }
-        callCount += 1
-
-        self.receivedTokenizationParameters = tokenizationParameters
-
-        // This object has only read-only properties, so we need to be sneaky and use ObjC.
-        let historicalTransaction = CFTHistoricalTransaction()
+    override func beginSwipe() {
         if fail {
-            historicalTransaction.setValue(TestError.error, forKey: "error")
+            let error = NSError(domain: "eidolon", code: 111, userInfo: nil)
+            self.delegate?.readerCardResponse!(nil, withError: error)
+
         } else {
-            let cardInfo = CFTCardInfo()
-            historicalTransaction.setValue(cardInfo, forKey: "cardInfo")
-            historicalTransaction.setValue("some-token", forKey: "cardToken")
+            self.delegate?.readerCardResponse!(CFTCard(), withError: nil)
         }
-        delegate?.transaction(self, didComplete: historicalTransaction)
     }
 }

@@ -9,10 +9,11 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
     @IBOutlet var cardStatusLabel: ARSerifLabel!
     let finished = PublishSubject<Void>()
 
-    @IBOutlet weak var titleLabel: ARSerifLabel!
     @IBOutlet weak var spinner: Spinner!
+    @IBOutlet weak var processingLabel: UILabel!
     @IBOutlet weak var illustrationImageView: UIImageView!
 
+    @IBOutlet weak var titleLabel: ARSerifLabel!
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> SwipeCreditCardViewController {
         return storyboard.viewController(withID: .RegisterCreditCard) as! SwipeCreditCardViewController
@@ -43,26 +44,16 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
         super.viewDidLoad()
         self.setInProgress(false)
 
-        let pleaseWaitMessage = "Please wait..."
-
-        cardHandler.userMessages
-            .startWith(pleaseWaitMessage)
-            .map { message in
-                if message.isEmpty {
-                    return pleaseWaitMessage
-                } else {
-                    return message
-                }
-            }
-            .bind(to: titleLabel.rx.text)
-            .disposed(by: rx.disposeBag)
-
         cardHandler.cardStatus
             .takeUntil(self.viewWillDisappear)
             .subscribe(onNext: { message in
                     self.cardStatusLabel.text = "Card Status: \(message)"
                     if message == "Got Card" {
                         self.setInProgress(true)
+                    }
+
+                    if message.hasPrefix("Card Flight Error") {
+                        self.processingLabel.text = "ERROR PROCESSING CARD - SEE ADMIN"
                     }
                 },
                 onError: { error in
@@ -75,13 +66,13 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
                     self.cardStatusLabel.text = "Card Status: completed"
 
                     if let card = self.cardHandler.card {
-                        self.cardName.value = card.cardInfo.cardholderName ?? ""
-                        self.cardLastDigits.value = card.cardInfo.lastFour ?? ""
+                        self.cardName.value = card.name
+                        self.cardLastDigits.value = card.last4
 
-                        self.cardToken.value = card.token
+                        self.cardToken.value = card.cardToken
 
                         if let newUser = self.navigationController?.fulfillmentNav().bidDetails.newUser {
-                            newUser.name.value = (newUser.name.value.isNilOrEmpty) ? card.cardInfo.cardholderName : newUser.name.value
+                            newUser.name.value = (newUser.name.value.isNilOrEmpty) ? card.name : newUser.name.value
                         }
                     }
                     
@@ -125,6 +116,7 @@ class SwipeCreditCardViewController: UIViewController, RegistrationSubController
 
     func setInProgress(_ show: Bool) {
         illustrationImageView.alpha = show ? 0.1 : 1
+        processingLabel.isHidden = !show
         spinner.isHidden = !show
     }
 
