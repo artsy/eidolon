@@ -7,6 +7,18 @@ jobs:
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
       FASTLANE_SKIP_UPDATE_CHECK: true
       UPLOAD_IOS_SNAPSHOT_BUCKET_NAME: eidolon-ci
+      # The following are required for CocoaPods-Keys to work.
+      ArtsyAPIClientSecret: "-"
+      ArtsyAPIClientKey: "-"
+      HockeyProductionSecret: "-"
+      HockeyBetaSecret: "-"
+      SegmentWriteKey: "-"
+      CardflightStagingAPIClientKey: "-"
+      CardflightStagingMerchantAccountToken: "-"
+      StripeStagingPublishableKey: "-"
+      CardflightProductionAPIClientKey: "-"
+      CardflightProductionMerchantAccountToken: "-"
+      StripeProductionPublishableKey: "-"
     macos:
       xcode: 9.2.0
     shell: /bin/bash --login
@@ -33,7 +45,6 @@ jobs:
           keys:
           - v2-pods-{{ checksum "Podfile.lock" }}
           - v2-pods-
-      - run: bundle exec fastlane oss_keys
       - run: bundle exec pod check || curl -sS https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run: bundle exec pod check || bundle exec pod install --verbose
       - save_cache:
