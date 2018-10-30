@@ -9,6 +9,7 @@ jobs:
       UPLOAD_IOS_SNAPSHOT_BUCKET_NAME: eidolon-ci
     macos:
       xcode: 9.2.0
+    shell: /bin/bash --login
 
     steps:
       - checkout
