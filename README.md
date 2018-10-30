@@ -3,6 +3,8 @@ Eidolon
 
 The [Artsy](https://www.artsy.net/) Auction Kiosk App.
 
+**Note**: Current development is done on the [`xcode-9` branch](https://github.com/artsy/eidolon/tree/xcode-9) using Xcode 9 (available for download [on Apple's developer portal](https://developer.apple.com/download/more/)). You can [see this issue](https://github.com/artsy/eidolon/pull/695) for more details.
+
 Project Status
 ----------------
 
