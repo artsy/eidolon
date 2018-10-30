@@ -14,8 +14,8 @@ jobs:
     steps:
       - checkout
       - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS derived_data
-      - run:
-          command: xcodebuild -version
+      - run: ruby -v
+      - run: xcodebuild -version
 
       # Try to restore installed Gems
       - restore_cache:
