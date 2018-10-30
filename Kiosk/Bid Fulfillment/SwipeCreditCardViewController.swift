@@ -128,7 +128,7 @@ private extension SwipeCreditCardViewController {
     func applyCardWithSuccess(_ success: Bool) {
         let cardFullDigits = success ? "4242424242424242" : "4000000000000002"
 
-        stripeManager.registerCard(digits: cardFullDigits, month: 04, year: 2018, securityCode: "123", postalCode: "10013")
+        stripeManager.registerCard(digits: cardFullDigits, month: 04, year: 2028, securityCode: "123", postalCode: "10013")
             .subscribe(onNext: { [weak self] token in
 
                 self?.cardName.value = "Kiosk Staging CC Test"
@@ -140,6 +140,8 @@ private extension SwipeCreditCardViewController {
                 }
 
                 self?.finished.onCompleted()
+                }, onError: { error in
+                    print("Kiosk fake CC swipe tokenization failed: \(error)")
             })
             .disposed(by: rx.disposeBag)
     }
