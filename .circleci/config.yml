@@ -1,0 +1,78 @@
+version: 2
+jobs:
+  build:
+    parallelism: 1
+    environment:
+      CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
+      CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
+      FASTLANE_SKIP_UPDATE_CHECK: true
+      UPLOAD_IOS_SNAPSHOT_BUCKET_NAME: eidolon-ci
+      # The following are required for CocoaPods-Keys to work.
+      ArtsyAPIClientSecret: "-"
+      ArtsyAPIClientKey: "-"
+      HockeyProductionSecret: "-"
+      HockeyBetaSecret: "-"
+      SegmentWriteKey: "-"
+      CardflightStagingAPIClientKey: "-"
+      CardflightStagingMerchantAccountToken: "-"
+      StripeStagingPublishableKey: "-"
+      CardflightProductionAPIClientKey: "-"
+      CardflightProductionMerchantAccountToken: "-"
+      StripeProductionPublishableKey: "-"
+    macos:
+      xcode: 9.2.0
+    shell: /bin/bash --login
+
+    steps:
+      - checkout
+      - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS derived_data
+      - run: ruby -v
+      - run: xcodebuild -version
+
+      # Try to restore installed Gems
+      - restore_cache:
+          keys:
+          - v1-gems-{{ checksum "Gemfile.lock" }}
+          - v1-gems-
+      - run: bundle check || bundle install --path=vendor/bundle --jobs 4 --retry 3
+      - save_cache:
+          key: v1-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      # Try to restore CocoaPods dependencies
+      - restore_cache:
+          keys:
+          - v2-pods-{{ checksum "Podfile.lock" }}
+          - v2-pods-
+      - run: bundle exec pod check || curl -sS https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+      - run: bundle exec pod check || bundle exec pod install --verbose
+      - save_cache:
+          key: v2-pods-{{ checksum "Podfile.lock" }}
+          paths:
+            - Pods
+
+      # Restore the derived data cache (to speed up CI compile times), run the tests, and store the cache
+      - restore_cache:
+          keys:
+          - v1-derived-{{ .Branch }}
+          - v1-derived-
+      - run: 
+          name: Run tests
+          command: set -o pipefail && xcodebuild -destination "name=iPad Air 2,OS=11.2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data build | xcpretty --color
+      - save_cache:
+          key: v1-derived-{{ .Branch }}
+          paths:
+          - derived_data
+      
+      # Teardown
+      # Save the Xcode activity log
+      - run: find $HOME/Library/Developer/Xcode/DerivedData -name '*.xcactivitylog' -exec cp {} $CIRCLE_ARTIFACTS/xcactivitylog \; || true
+      # Save test results
+      - store_test_results:
+          path: $CIRCLE_TEST_REPORTS
+      # Save artifacts
+      - store_artifacts:
+          path: $ CIRCLE_ARTIFACTS
+      - store_artifacts:
+          path: $CIRCLE_TEST_REPORTS

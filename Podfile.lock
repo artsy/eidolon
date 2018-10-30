@@ -14,11 +14,11 @@ PODS:
   - ARCollectionViewMasonryLayout (2.0.0)
   - ARTiledImageView (1.1.1):
     - SDWebImage
-  - Artsy+UIColors (3.1.0)
-  - Artsy+UIFonts (3.1.3)
-  - Artsy+UILabels (2.2.0):
-    - Artsy+UIColors (~> 3.0)
-    - Artsy+UIFonts
+  - "Artsy+UIColors (3.1.0)"
+  - "Artsy+UIFonts (3.1.3)"
+  - "Artsy+UILabels (2.2.0)":
+    - "Artsy+UIColors (~> 3.0)"
+    - "Artsy+UIFonts"
   - Artsy-UIButtons (2.1.0):
     - Artsy+UIColors (~> 3.0)
     - Artsy+UIFonts
@@ -38,7 +38,7 @@ PODS:
   - Forgeries/Core (1.0.0)
   - HockeySDK-Source (5.1.2)
   - ISO8601DateFormatter (0.8)
-  - Keys (1.0.0)
+  - Keys (1.0.1)
   - Moya/Core (11.0.0):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
@@ -56,7 +56,7 @@ PODS:
     - NJKWebViewProgress/ProgressView (= 0.2.3)
   - NJKWebViewProgress/Core (0.2.3)
   - NJKWebViewProgress/ProgressView (0.2.3)
-  - NSObject+Rx (4.2.0):
+  - "NSObject+Rx (4.2.0)":
     - RxSwift (~> 4.0)
   - ORStackView (2.0.0):
     - FLKAutoLayout (~> 0.1)
@@ -82,7 +82,7 @@ PODS:
   - SVProgressHUD (2.2.3)
   - SwiftyJSON (4.0.0)
   - UIImageViewAligned (0.0.1)
-  - UIView+BooleanAnimations (1.0.2)
+  - "UIView+BooleanAnimations (1.0.2)"
   - XNGMarkdownParser (0.3.2)
 
 DEPENDENCIES:
@@ -91,9 +91,9 @@ DEPENDENCIES:
   - ARAnalytics/Segmentio
   - ARCollectionViewMasonryLayout (~> 2.0.0)
   - ARTiledImageView
-  - Artsy+UIColors
-  - Artsy+UIFonts
-  - Artsy+UILabels
+  - "Artsy+UIColors"
+  - "Artsy+UIFonts"
+  - "Artsy+UILabels"
   - Artsy-UIButtons
   - CardFlight-v4
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
@@ -107,7 +107,7 @@ DEPENDENCIES:
   - Moya/RxSwift
   - Nimble
   - Nimble-Snapshots
-  - NSObject+Rx
+  - "NSObject+Rx"
   - ORStackView (= 2.0)
   - Quick
   - ReachabilitySwift
@@ -121,8 +121,48 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwiftyJSON
   - UIImageViewAligned (from `https://github.com/ashfurrow/UIImageViewAligned.git`)
-  - UIView+BooleanAnimations
+  - "UIView+BooleanAnimations"
   - XNGMarkdownParser
+
+SPEC REPOS:
+  https://github.com/artsy/Specs.git:
+    - "Artsy+UIColors"
+    - "Artsy+UIFonts"
+    - "Artsy+UILabels"
+    - Artsy-UIButtons
+  https://github.com/cocoapods/specs.git:
+    - Action
+    - Alamofire
+    - Analytics
+    - ARAnalytics
+    - ARCollectionViewMasonryLayout
+    - ARTiledImageView
+    - CardFlight
+    - ECPhoneNumberFormatter
+    - FBSnapshotTestCase
+    - FLKAutoLayout
+    - Forgeries
+    - ISO8601DateFormatter
+    - Moya
+    - Nimble
+    - Nimble-Snapshots
+    - NJKWebViewProgress
+    - "NSObject+Rx"
+    - ORStackView
+    - Quick
+    - ReachabilitySwift
+    - Result
+    - RxBlocking
+    - RxCocoa
+    - RxNimble
+    - RxOptional
+    - RxSwift
+    - SDWebImage
+    - Stripe
+    - SVProgressHUD
+    - SwiftyJSON
+    - "UIView+BooleanAnimations"
+    - XNGMarkdownParser
 
 EXTERNAL SOURCES:
   DZNWebViewController:
@@ -152,9 +192,9 @@ SPEC CHECKSUMS:
   ARAnalytics: 896e530551168721fbb8852e044b8afb9baffdde
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
-  Artsy+UIColors: 31c03c4146f5e6618a9b950f37dfe02dd9ac09a6
-  Artsy+UIFonts: d38c82636e000b1dee31b7bec0268e1841dac17f
-  Artsy+UILabels: 7cb6e290a4f70dddba037b7dbeb21e90b49d7275
+  "Artsy+UIColors": 31c03c4146f5e6618a9b950f37dfe02dd9ac09a6
+  "Artsy+UIFonts": d38c82636e000b1dee31b7bec0268e1841dac17f
+  "Artsy+UILabels": 7cb6e290a4f70dddba037b7dbeb21e90b49d7275
   Artsy-UIButtons: cdcc3ccf4d0d31ee80f45c1d11ffd2d772695b74
   CardFlight-v4: 2af173b8bc8b38d55bf150cd494dd7f59ba84dd9
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
@@ -164,12 +204,12 @@ SPEC CHECKSUMS:
   Forgeries: 64ced144ea8341d89a7eec9d1d7986f0f1366250
   HockeySDK-Source: 55c52df6858d5b78de553c8e6e923c6282874886
   ISO8601DateFormatter: 4551b6ce4f83185425f583b0b3feb3c7b59b942c
-  Keys: af65e23feef2a047b3277b1ef0399f1209ef9d46
+  Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   Moya: be29766339783963a70d1279d69c891ab3a1393c
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
-  NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
+  "NSObject+Rx": cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
   ORStackView: 5df6b1b990b0648d8ef6f69f89361ea8648e8f64
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
@@ -184,9 +224,9 @@ SPEC CHECKSUMS:
   SVProgressHUD: a5eaeff664a82dda89809c409ace40183ce91523
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
-  UIView+BooleanAnimations: a760be9a066036e55f298b7b7350a6cb14cfcd97
+  "UIView+BooleanAnimations": a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: aed98c14f0c0eb20064184ddf9bac26c482722b2
 
 PODFILE CHECKSUM: 9ab3f08861431cedc335a74566f4ea088dff3a0b
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
