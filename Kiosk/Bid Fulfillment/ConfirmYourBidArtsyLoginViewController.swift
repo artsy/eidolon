@@ -19,6 +19,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     var createNewAccount = false
     var provider: Networking!
+    var sale: Sale = appDelegate().sale
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewController(withID: .ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController
@@ -67,17 +68,21 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
                         .updateUserCredentials(loggedInProvider: provider)
                         .mapReplace(with: provider)
                 }.flatMap { provider -> Observable<Void> in
-                    return me.creditCard(provider)
-                        .do(onNext: { cards in
-                            guard let me = self else { return }
+                    if me.sale.bypassCreditCardRequirement {
+                        me.performSegue(.EmailLoginConfirmedHighestBidder)
+                        return Observable.just(Void())
+                    } else {
+                        return me.creditCard(provider)
+                            .do(onNext: { cards in
+                                guard let me = self else { return }
 
-                            if cards.count > 0 {
-                                me.performSegue(.EmailLoginConfirmedHighestBidder)
-                            } else {
-                                me.performSegue(.ArtsyUserHasNotRegisteredCard)
-                            }
-                        })
-                        .map(void)
+                                if cards.count > 0 {
+                                    me.performSegue(.EmailLoginConfirmedHighestBidder)
+                                } else {
+                                    me.performSegue(.ArtsyUserHasNotRegisteredCard)
+                                }
+                            }).map(void)
+                        }
 
                 }.do(onError: { [weak self] error in
                     logger.log("Error logging in: \((error as NSError).localizedDescription)")

@@ -46,7 +46,6 @@ class RegistrationCoordinator: NSObject {
             return storyboard.viewController(withID: .RegisterPostalorZip)
 
         case .creditCardVC:
-            // TODO: bifurcate here.
             if AppSetup.sharedState.disableCardReader {
                 return storyboard.viewController(withID: .ManualCardDetailsInput)
             } else {
@@ -67,7 +66,7 @@ class RegistrationCoordinator: NSObject {
             return viewControllerForIndex(.emailVC)
         }
 
-        if notSet(details.newUser.password.value) {
+        if notSet(details.newUser.password.value) && notSet(details.bidderPIN.value) {
             return viewControllerForIndex(.passwordVC)
         }
 
