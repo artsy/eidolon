@@ -15,6 +15,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet var confirmButton: UIButton!
 
     var provider: Networking!
+    var sale: Sale = appDelegate().sale
 
     let coordinator = RegistrationCoordinator()
 
@@ -57,7 +58,7 @@ class RegisterViewController: UIViewController {
     }
 
     func goToNextVC() {
-        let nextVC = coordinator.nextViewControllerForBidDetails(fulfillmentNav().bidDetails)
+        let nextVC = coordinator.nextViewControllerForBidDetails(fulfillmentNav().bidDetails, sale: sale)
         goToViewController(nextVC)
     }
 

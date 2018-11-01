@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="O1R-5R-23t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="O1R-5R-23t">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -90,7 +90,6 @@
             <objects>
                 <navigationController modalPresentationStyle="formSheet" navigationBarHidden="YES" id="w8O-U4-lhE" customClass="FulfillmentNavigationController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PvK-mZ-4Jp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -114,7 +113,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOX-N9-Jb7" customClass="ORTagBasedAutoStackView">
-                                <rect key="frame" x="65" y="360" width="364" height="247"/>
+                                <rect key="frame" x="65" y="380" width="364" height="247"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="364" id="UL4-gx-Cbr"/>
@@ -122,7 +121,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Bid:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y81-nV-kZl">
-                                <rect key="frame" x="495" y="76" width="93" height="21"/>
+                                <rect key="frame" x="495" y="96" width="93" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="YTn-hw-G5D"/>
                                     <constraint firstAttribute="width" constant="93" id="qtx-0r-of1"/>
@@ -132,7 +131,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Bid:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sft-xL-TDA">
-                                <rect key="frame" x="495" y="130" width="70" height="21"/>
+                                <rect key="frame" x="495" y="150" width="70" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="3tC-Uu-bZy"/>
                                     <constraint firstAttribute="height" constant="21" id="gdo-Y0-dTp"/>
@@ -142,7 +141,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$9,000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GS2-EK-4Nx" customClass="ARSerifLabel">
-                                <rect key="frame" x="590" y="66" width="160" height="42"/>
+                                <rect key="frame" x="590" y="86" width="160" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="Qjg-LN-ICy"/>
                                     <constraint firstAttribute="width" constant="160" id="tUh-uq-xdJ"/>
@@ -152,7 +151,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpc-fW-Rbb" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="60" width="315" height="40"/>
+                                <rect key="frame" x="65" y="80" width="315" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="R8Q-ME-wyR"/>
                                     <constraint firstAttribute="width" constant="315" id="ilL-dO-Fu9"/>
@@ -162,7 +161,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-U2-hie" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="538" width="255" height="50"/>
+                                <rect key="frame" x="495" y="558" width="255" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="R4e-aV-laq"/>
                                     <constraint firstAttribute="width" constant="255" id="R9Z-jy-D7b"/>
@@ -179,7 +178,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j5m-yL-j50" customClass="UIImageViewAligned">
-                                <rect key="frame" x="65" y="170" width="364" height="182"/>
+                                <rect key="frame" x="65" y="190" width="364" height="182"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" image="YES" keyboardKey="YES"/>
                                 </accessibility>
@@ -193,7 +192,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter $9,500 or more " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVu-PR-0oJ">
-                                <rect key="frame" x="525" y="176" width="225" height="21"/>
+                                <rect key="frame" x="525" y="196" width="225" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="225" id="5Rn-uB-ZCW"/>
                                     <constraint firstAttribute="height" constant="21" id="kP3-FS-tu0"/>
@@ -203,7 +202,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="9,999,999" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UKQ-z8-PIR" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="570" y="118" width="180" height="44"/>
+                                <rect key="frame" x="570" y="138" width="180" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="JFk-UH-8dP"/>
                                     <constraint firstAttribute="height" constant="44" id="tXT-Im-gdd"/>
@@ -212,7 +211,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybr-6E-470" customClass="CursorView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="732" y="125" width="18" height="30"/>
+                                <rect key="frame" x="732" y="145" width="18" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7QN-tC-1xV"/>
@@ -220,7 +219,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTG-in-woi" customClass="ARSansSerifLabel">
-                                <rect key="frame" x="578" y="119" width="54" height="42"/>
+                                <rect key="frame" x="578" y="139" width="54" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="2th-Mf-LhF"/>
                                     <constraint firstAttribute="width" constant="54" id="qun-gv-k7E"/>
@@ -230,7 +229,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bld-wj-1c6">
-                                <rect key="frame" x="518" y="608" width="114" height="32"/>
+                                <rect key="frame" x="518" y="628" width="114" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="114" id="J7U-qx-I7e"/>
                                     <constraint firstAttribute="height" constant="32" id="SqT-XU-mv5"/>
@@ -242,7 +241,7 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3C-Vo-Qhd" customClass="KeypadContainerView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="236" width="255" height="282"/>
+                                <rect key="frame" x="495" y="256" width="255" height="282"/>
                                 <color key="backgroundColor" red="0.80967282458563539" green="0.80967282458563539" blue="0.80967282458563539" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="255" id="StA-GG-cJE"/>
@@ -272,7 +271,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ic1-FX-iJp">
-                                <rect key="frame" x="495" y="614" width="23" height="21"/>
+                                <rect key="frame" x="495" y="634" width="23" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="JTC-RL-C5T"/>
                                     <constraint firstAttribute="width" constant="23" id="ZC6-Db-yQY"/>
@@ -282,7 +281,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XXj-no-bvA">
-                                <rect key="frame" x="629" y="592" width="145" height="32"/>
+                                <rect key="frame" x="629" y="612" width="145" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="urH-yI-4ni"/>
                                     <constraint firstAttribute="width" constant="145" id="wok-x7-rX9"/>
@@ -294,7 +293,7 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by bidding you accept the" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nc-B4-Sow">
-                                <rect key="frame" x="495" y="598" width="153" height="21"/>
+                                <rect key="frame" x="495" y="618" width="153" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="h3v-Ry-79Q"/>
                                     <constraint firstAttribute="width" constant="153" id="nL5-0l-egD"/>
@@ -477,7 +476,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register to Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4V-Js-ToI" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="60" width="345" height="41"/>
+                                <rect key="frame" x="65" y="80" width="345" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="345" id="chs-Zu-ifj"/>
                                     <constraint firstAttribute="height" constant="41" id="qdM-C2-QZC"/>
@@ -487,7 +486,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLI-pF-J4Q">
-                                <rect key="frame" x="65" y="121" width="685" height="2"/>
+                                <rect key="frame" x="65" y="141" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="LbD-qb-hJ1"/>
@@ -495,7 +494,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ciJ-4f-fQL" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="65" y="567" width="265" height="73"/>
+                                <rect key="frame" x="65" y="587" width="265" height="73"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Card Status:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="375" translatesAutoresizingMaskIntoConstraints="NO" id="Er0-yC-3sc" customClass="ARSerifLabel">
                                         <rect key="frame" x="8" y="8" width="249" height="57"/>
@@ -512,7 +511,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="soj-Ua-Mah" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="535" y="580" width="255" height="60"/>
+                                <rect key="frame" x="535" y="600" width="255" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSY-52-iWB" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                         <rect key="frame" x="111" y="8" width="107" height="57"/>
@@ -531,7 +530,7 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7NP-jX-VW3">
-                                <rect key="frame" x="65" y="155" width="449" height="485"/>
+                                <rect key="frame" x="65" y="175" width="449" height="485"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="485" id="SCI-1w-og3"/>
                                     <constraint firstAttribute="width" constant="449" id="gdf-Aj-H5z"/>
@@ -541,7 +540,7 @@
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="215" placeholderIntrinsicHeight="280" translatesAutoresizingMaskIntoConstraints="NO" id="mSI-YI-8GU" customClass="RegisterFlowView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="535" y="155" width="215" height="280"/>
+                                <rect key="frame" x="535" y="175" width="215" height="280"/>
                                 <color key="backgroundColor" red="1" green="0.74152541888448142" blue="0.81937699294223965" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="280" id="34A-cE-IYu"/>
@@ -549,7 +548,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dj6-cY-N6o" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="426" y="44" width="324" height="60"/>
+                                <rect key="frame" x="426" y="64" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="324" id="kVi-6v-q5i"/>
@@ -557,7 +556,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyr-7D-eW1" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="535" y="537" width="215" height="50"/>
+                                <rect key="frame" x="535" y="557" width="215" height="50"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="OfR-Gb-YdQ"/>
@@ -618,7 +617,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2W-8h-N8L" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="60" width="288" height="41"/>
+                                <rect key="frame" x="65" y="80" width="288" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="288" id="5Fo-hz-e8w"/>
                                     <constraint firstAttribute="height" constant="41" id="L9I-BA-YVX"/>
@@ -628,7 +627,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your mobile number or bidder number." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="0Od-3T-sgv" customClass="ARSerifLabel">
-                                <rect key="frame" x="58" y="148" width="298" height="76"/>
+                                <rect key="frame" x="58" y="168" width="298" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="298" id="p0a-3v-odj"/>
                                     <constraint firstAttribute="height" constant="76" id="rIJ-It-hAp"/>
@@ -638,7 +637,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5y-rZ-EtN" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="534" width="255" height="50"/>
+                                <rect key="frame" x="495" y="554" width="255" height="50"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="255" id="65P-gN-6ON"/>
@@ -653,7 +652,7 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfn-Rj-RYO">
-                                <rect key="frame" x="65" y="119" width="685" height="2"/>
+                                <rect key="frame" x="65" y="139" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="VZm-q3-36Z"/>
@@ -661,7 +660,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbd-XN-mf0" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="580" width="255" height="60"/>
+                                <rect key="frame" x="495" y="600" width="255" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8aS-O2-9no" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                         <rect key="frame" x="28" y="8" width="72" height="57"/>
@@ -695,7 +694,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fop-9s-JEM" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="159" width="255" height="44"/>
+                                <rect key="frame" x="495" y="179" width="255" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Bwq-rQ-3nk"/>
                                     <constraint firstAttribute="width" constant="255" id="cgN-Tv-daA"/>
@@ -704,7 +703,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XER-jS-BL4" customClass="CursorView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="740" y="165" width="2" height="32"/>
+                                <rect key="frame" x="740" y="185" width="2" height="32"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="2" id="WoS-6K-wzF"/>
@@ -712,7 +711,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z7-af-FHL">
-                                <rect key="frame" x="65" y="524" width="184" height="43"/>
+                                <rect key="frame" x="65" y="544" width="184" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="184" id="IA7-rM-vzb"/>
                                     <constraint firstAttribute="height" constant="43" id="OZ7-Gr-M2C"/>
@@ -727,7 +726,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lt9-iY-FNp" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="426" y="44" width="324" height="60"/>
+                                <rect key="frame" x="426" y="64" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616893485347" blue="0.72024004409018083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="oNg-oh-8od"/>
@@ -735,7 +734,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wUI-V6-mkQ" customClass="KeypadContainerView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="232" width="255" height="282"/>
+                                <rect key="frame" x="495" y="252" width="255" height="282"/>
                                 <color key="backgroundColor" red="0.80967282460000001" green="0.80967282460000001" blue="0.80967282460000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="255" id="FVM-An-Jb3"/>
@@ -798,7 +797,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sFU-mI-0Wz" customClass="SecureTextField" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="194" width="255" height="44"/>
+                                <rect key="frame" x="495" y="214" width="255" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="255" id="E8Z-6e-d6J"/>
                                     <constraint firstAttribute="height" constant="44" id="RAs-P5-LC4"/>
@@ -807,7 +806,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Artsy email and password" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-uI-ydX" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="150" width="298" height="76"/>
+                                <rect key="frame" x="65" y="170" width="298" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="7XP-gx-3JJ"/>
                                     <constraint firstAttribute="width" constant="298" id="Gjm-CS-6OP"/>
@@ -817,7 +816,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSp-ka-p6m" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="274" width="255" height="50"/>
+                                <rect key="frame" x="495" y="294" width="255" height="50"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="BGr-4e-PmR"/>
@@ -829,7 +828,7 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwf-mx-o0D" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="60" width="277" height="41"/>
+                                <rect key="frame" x="65" y="80" width="277" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="277" id="b2f-Q8-RHe"/>
                                     <constraint firstAttribute="height" constant="41" id="bEm-X1-7qk"/>
@@ -839,7 +838,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UtC-5V-jyw">
-                                <rect key="frame" x="65" y="121" width="685" height="2"/>
+                                <rect key="frame" x="65" y="141" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="685" id="N2g-Vg-sjj"/>
@@ -847,7 +846,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-Jh-nkF" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="145" width="255" height="44"/>
+                                <rect key="frame" x="495" y="165" width="255" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="255" id="9IU-Ga-XCB"/>
                                     <constraint firstAttribute="height" constant="44" id="Pu2-nq-Qh8"/>
@@ -856,7 +855,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cRB-GQ-mXf" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="580" width="255" height="60"/>
+                                <rect key="frame" x="495" y="600" width="255" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WST-rZ-7Zd" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                         <rect key="frame" x="15" y="8" width="107" height="57"/>
@@ -890,7 +889,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9hG-yj-way">
-                                <rect key="frame" x="625" y="239" width="125" height="37"/>
+                                <rect key="frame" x="625" y="259" width="125" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="BTo-6z-bq1"/>
                                     <constraint firstAttribute="width" constant="125" id="vyo-6i-7V3"/>
@@ -906,7 +905,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uPB-WM-yNR" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="426" y="53" width="324" height="60"/>
+                                <rect key="frame" x="426" y="73" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="324" id="MXM-Ip-42r"/>
@@ -914,7 +913,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TID-cZ-Oja">
-                                <rect key="frame" x="65" y="537" width="192" height="19"/>
+                                <rect key="frame" x="65" y="557" width="192" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="LEb-Mt-u1z"/>
                                     <constraint firstAttribute="width" constant="192" id="Ly3-xB-b6u"/>
@@ -983,7 +982,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registration Complete" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ThI-e6-Ovh" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="263" width="411" height="41"/>
+                                <rect key="frame" x="65" y="283" width="411" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="411" id="9Lj-rl-4cX"/>
                                     <constraint firstAttribute="height" constant="41" id="fiD-t3-iek"/>
@@ -993,7 +992,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XzW-dO-Dol" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="357" y="253" width="331" height="60"/>
+                                <rect key="frame" x="357" y="273" width="331" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="UDF-o0-o40"/>
@@ -1001,14 +1000,14 @@
                                 </constraints>
                             </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Bd-va-Xyb">
-                                <rect key="frame" x="704" y="261" width="46" height="46"/>
+                                <rect key="frame" x="704" y="281" width="46" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="CwR-P5-JVR"/>
                                     <constraint firstAttribute="height" constant="46" id="SGk-bG-h6b"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pio-Vk-2mc" customClass="Spinner" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="712" y="269" width="30" height="30"/>
+                                <rect key="frame" x="712" y="289" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.61744341489999999" green="0.84611775919999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="5SH-PU-dsE"/>
@@ -1016,7 +1015,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YtU-mx-Y9t" customClass="SecondaryActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="535" y="523.5" width="215" height="50"/>
+                                <rect key="frame" x="535" y="543.5" width="215" height="50"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="iX0-0O-uBH"/>
@@ -1031,7 +1030,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wub-hw-p5h" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="535" y="458.5" width="215" height="50"/>
+                                <rect key="frame" x="535" y="478.5" width="215" height="50"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="215" id="ccl-VO-0m2"/>
@@ -1046,7 +1045,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status message goes here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="Hxa-pm-Msp" customClass="ARSerifLabel">
-                                <rect key="frame" x="173" y="340.5" width="468" height="100"/>
+                                <rect key="frame" x="173" y="360.5" width="468" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="VcM-lT-yMM"/>
                                     <constraint firstAttribute="width" constant="468" id="ecb-VB-aUK"/>
@@ -1202,7 +1201,6 @@
                 <navigationController navigationBarHidden="YES" id="B8h-mi-lOQ" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GfH-jN-lKt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1248,7 +1246,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqS-c0-RGC" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="60" width="395" height="41"/>
+                                <rect key="frame" x="65" y="80" width="395" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="395" id="lMJ-ah-n0d"/>
                                     <constraint firstAttribute="height" constant="41" id="uco-gz-3W4"/>
@@ -1258,7 +1256,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter PIN to authorize your bid." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="m6Z-l1-mnq" customClass="ARSerifLabel">
-                                <rect key="frame" x="58" y="148" width="298" height="76"/>
+                                <rect key="frame" x="58" y="168" width="298" height="76"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="298" id="gTR-E6-6rk"/>
                                     <constraint firstAttribute="height" constant="76" id="t8y-dd-Zmf"/>
@@ -1268,7 +1266,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qfw-xp-Fto" customClass="KeypadContainerView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="232" width="255" height="282"/>
+                                <rect key="frame" x="495" y="252" width="255" height="282"/>
                                 <color key="backgroundColor" red="0.80967282460000001" green="0.80967282460000001" blue="0.80967282460000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="255" id="35o-L4-jvt"/>
@@ -1276,7 +1274,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQJ-hL-zxq">
-                                <rect key="frame" x="65" y="119" width="685" height="2"/>
+                                <rect key="frame" x="65" y="139" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="685" id="AYI-lJ-Dp1"/>
@@ -1284,7 +1282,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6q-Ds-JXn" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="534" width="255" height="50"/>
+                                <rect key="frame" x="495" y="554" width="255" height="50"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="d4r-9i-2b5"/>
@@ -1299,7 +1297,7 @@
                                 </state>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrk-wa-iTP" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="583" width="255" height="60"/>
+                                <rect key="frame" x="495" y="603" width="255" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wV1-57-zip" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                         <rect key="frame" x="115" y="8" width="120" height="57"/>
@@ -1322,7 +1320,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="PIN" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s7h-hd-xd3" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="495" y="156" width="255" height="44"/>
+                                <rect key="frame" x="495" y="176" width="255" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="USC-LB-e8O"/>
                                     <constraint firstAttribute="width" constant="255" id="YiJ-w4-ICO"/>
@@ -1331,7 +1329,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pHa-c1-dRf" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="426" y="44" width="324" height="60"/>
+                                <rect key="frame" x="426" y="64" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="DPI-hD-m3c"/>
@@ -1339,7 +1337,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVe-25-8Zu">
-                                <rect key="frame" x="667" y="202" width="94" height="28"/>
+                                <rect key="frame" x="667" y="222" width="94" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="94" id="Bee-g5-X0E"/>
                                     <constraint firstAttribute="height" constant="28" id="xYc-3d-wNy"/>
@@ -1405,7 +1403,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Your Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3Z-48-2QM" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="60" width="334" height="41"/>
+                                <rect key="frame" x="65" y="80" width="334" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="45g-tf-GOg"/>
                                     <constraint firstAttribute="width" constant="334" id="6eb-cy-fN8"/>
@@ -1415,7 +1413,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your Email" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="vEK-bj-ckg" customClass="ARSerifLabel">
-                                <rect key="frame" x="65" y="148" width="298" height="37"/>
+                                <rect key="frame" x="65" y="168" width="298" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="5AN-vN-g2d"/>
                                     <constraint firstAttribute="width" constant="298" id="Pre-XL-wp9"/>
@@ -1425,7 +1423,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1g-Bf-QlT">
-                                <rect key="frame" x="65" y="119" width="685" height="2"/>
+                                <rect key="frame" x="65" y="139" width="685" height="2"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.8862745098" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="JFK-bK-cWo"/>
@@ -1433,7 +1431,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="co3-ck-sKp" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="406" y="583" width="349" height="60"/>
+                                <rect key="frame" x="406" y="603" width="349" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jm9-5W-0Q1" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
                                         <rect key="frame" x="177" y="8" width="164" height="57"/>
@@ -1467,7 +1465,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y4z-UB-ZdO" customClass="TextField" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="65" y="202" width="430" height="50"/>
+                                <rect key="frame" x="65" y="222" width="430" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="430" id="9WH-Z7-Aa9"/>
                                     <constraint firstAttribute="height" constant="50" id="Vcp-Dt-paq"/>
@@ -1476,7 +1474,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="go"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qef-T4-al0" customClass="BidDetailsPreviewView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="426" y="41" width="324" height="60"/>
+                                <rect key="frame" x="426" y="61" width="324" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.90311616890000002" blue="0.72024004409999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="7Ah-yD-JXC"/>
@@ -1484,7 +1482,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AiP-vh-j1o" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="507" y="202" width="100" height="50"/>
+                                <rect key="frame" x="507" y="222" width="100" height="50"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="gri-zi-8SG"/>
@@ -2137,15 +2135,10 @@
         <image name="CardSwipe" width="1923" height="1801"/>
         <image name="edit_button.png" width="64" height="64"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9X5-eM-AKF"/>
-        <segue reference="hvW-mC-OYp"/>
+        <segue reference="PK6-h9-FCm"/>
         <segue reference="ccv-le-Cu0"/>
         <segue reference="eZu-3X-lXX"/>
+        <segue reference="9X5-eM-AKF"/>
     </inferredMetricsTieBreakers>
 </document>

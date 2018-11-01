@@ -19,28 +19,16 @@ enum RegistrationIndex {
             case .confirmVC: return 4
         }
     }
-
-    static func fromInt(_ index:Int) -> RegistrationIndex {
-        switch (index) {
-            case 0: return .mobileVC
-            case 1: return .emailVC
-            case 1: return .passwordVC
-            case 2: return .zipCodeVC
-            case 3: return .creditCardVC
-            default : return .confirmVC
-        }
-    }
 }
 
 class RegistrationCoordinator: NSObject {
-
     fileprivate let _currentIndex = Variable(0)
     var currentIndex: Observable<Int> {
         return _currentIndex.asObservable().distinctUntilChanged()
     }
     var storyboard: UIStoryboard!
 
-    func viewControllerForIndex(_ index: RegistrationIndex) -> UIViewController {
+    fileprivate func viewControllerForIndex(_ index: RegistrationIndex) -> UIViewController {
         _currentIndex.value = index.toInt()
         
         switch index {
@@ -58,6 +46,7 @@ class RegistrationCoordinator: NSObject {
             return storyboard.viewController(withID: .RegisterPostalorZip)
 
         case .creditCardVC:
+            // TODO: bifurcate here.
             if AppSetup.sharedState.disableCardReader {
                 return storyboard.viewController(withID: .ManualCardDetailsInput)
             } else {
@@ -69,7 +58,7 @@ class RegistrationCoordinator: NSObject {
         }
     }
 
-    func nextViewControllerForBidDetails(_ details: BidDetails) -> UIViewController {
+    func nextViewControllerForBidDetails(_ details: BidDetails, sale: Sale) -> UIViewController {
         if notSet(details.newUser.phoneNumber.value) {
             return viewControllerForIndex(.mobileVC)
         }
@@ -86,7 +75,7 @@ class RegistrationCoordinator: NSObject {
             return viewControllerForIndex(.zipCodeVC)
         }
 
-        if notSet(details.newUser.creditCardToken.value) {
+        if notSet(details.newUser.creditCardToken.value) && (sale.bypassCreditCardRequirement == false) {
             return viewControllerForIndex(.creditCardVC)
         }
 
