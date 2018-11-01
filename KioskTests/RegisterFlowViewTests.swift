@@ -100,7 +100,10 @@ class RegisterFlowViewTests: QuickSpec {
         }
 
         describe("on a sale that bypasses credit card requirements") {
-            // TODO:
+            itBehavesLike("a register flow view") { () -> [String: Any] in
+                subject.sale = makeSale(bypassCreditCardRequirement: true)
+                return ["subject": subject]
+            }
         }
     }
 }

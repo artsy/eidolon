@@ -37,7 +37,8 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
         }
 
         it("handles bidders created by admins") {
-            let networking = networkingForBidder(createdByAdmin: true)
+            let networking = networkingForBidder(createdByAdmin: false)
+            subject.sale = makeSale(bypassCreditCardRequirement: true)
 
             var receivedResult: BypassResult?
             waitUntil { done in
@@ -55,7 +56,21 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
         }
 
         pending("handles bidders in sales that bypass the credit card requirement") {
-            // TODO:
+            let networking = networkingForBidder(createdByAdmin: true)
+
+            var receivedResult: BypassResult?
+            waitUntil { done in
+                subject
+                    .checkForAdminCCBypass("the-fun-sale", authorizedNetworking: networking)
+                    .subscribe(onNext: { result in
+                        receivedResult = result
+                        done()
+                    })
+                    .disposed(by: disposeBag)
+            }
+
+            // We need to use their providers because Nimble doesn't like comparing struct instances.
+            expect(receivedResult) == .skipCCRequirement
         }
 
         it("handles bidders not created by admins") {

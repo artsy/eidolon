@@ -34,7 +34,7 @@ import SwiftyJSON
         let name = json["name"].stringValue
         let artworkCount = json["eligible_sale_artworks_count"].intValue
         let state = json["auction_state"].stringValue
-        let bypassCreditCardRequirement = false // TODO: Parse from gravity
+        let bypassCreditCardRequirement = json["kiosk_bypasses_card_requirement"].boolValue
 
         let sale = Sale(id: id, name: name, isAuction: isAuction, startDate: startDate, endDate: endDate, artworkCount: artworkCount, state: state, bypassCreditCardRequirement: bypassCreditCardRequirement)
 
