@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build-and-test:
     parallelism: 1
     environment:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
@@ -76,3 +76,8 @@ jobs:
           path: $ CIRCLE_ARTIFACTS
       - store_artifacts:
           path: $CIRCLE_TEST_REPORTS
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - build-and-test
