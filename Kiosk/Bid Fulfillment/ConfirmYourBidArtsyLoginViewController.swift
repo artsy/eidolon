@@ -19,7 +19,7 @@ class ConfirmYourBidArtsyLoginViewController: UIViewController {
 
     var createNewAccount = false
     var provider: Networking!
-    var sale: Sale = appDelegate().sale
+    lazy var sale: Sale = appDelegate().sale
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> ConfirmYourBidArtsyLoginViewController {
         return storyboard.viewController(withID: .ConfirmYourBidArtsyLogin) as! ConfirmYourBidArtsyLoginViewController

@@ -8,7 +8,8 @@ class ConfirmYourBidArtsyLoginViewControllerTests: QuickSpec {
     override func spec() {
 
         it("looks right by default") {
-            let subject = ConfirmYourBidArtsyLoginViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav()
+            let subject = ConfirmYourBidArtsyLoginViewController.instantiateFromStoryboard(fulfillmentStoryboard).wrapInFulfillmentNav() as! ConfirmYourBidArtsyLoginViewController
+            subject.sale = makeSale()
             subject.loadViewProgrammatically()
 
             // Highlighting of the text field (as it becomes first responder) is inconsistent without this line.

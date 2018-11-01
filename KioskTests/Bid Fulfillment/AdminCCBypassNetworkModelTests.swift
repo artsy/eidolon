@@ -9,10 +9,13 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
     override func spec() {
         var subject: AdminCCBypassNetworkModel!
         var disposeBag: DisposeBag!
+        var sale: Sale!
 
         beforeEach {
             subject = AdminCCBypassNetworkModel()
             disposeBag = DisposeBag()
+            sale = makeSale()
+            subject.sale = sale
         }
 
         it("handles unregistered bidders") {
@@ -49,6 +52,10 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
 
             // We need to use their providers because Nimble doesn't like comparing struct instances.
             expect(receivedResult) == .skipCCRequirement
+        }
+
+        pending("handles bidders in sales that bypass the credit card requirement") {
+            // TODO:
         }
 
         it("handles bidders not created by admins") {

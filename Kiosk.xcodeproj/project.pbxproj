@@ -224,6 +224,7 @@
 		5EFFE24E1B977DD3006BF64C /* SaleArtworkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFE24D1B977DD3006BF64C /* SaleArtworkViewModel.swift */; };
 		5EFFE2501B978C3C006BF64C /* ListingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFE24F1B978C3C006BF64C /* ListingsViewModelTests.swift */; };
 		9D68EA3F203CC8F400A17759 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68EA3E203CC8F400A17759 /* CreditCard.swift */; };
+		9DAF1273218B535800908630 /* SaleFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAF1272218B535800908630 /* SaleFixture.swift */; };
 		E70556731BC40BFB0064ABF8 /* MyBidPosition.json in Resources */ = {isa = PBXBuildFile; fileRef = E70556721BC40BFB0064ABF8 /* MyBidPosition.json */; };
 		FC356C56217750D6722DBF34 /* Pods_KioskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94D0A1FE57C6B14D52392DF4 /* Pods_KioskTests.framework */; };
 /* End PBXBuildFile section */
@@ -448,6 +449,7 @@
 		94D0A1FE57C6B14D52392DF4 /* Pods_KioskTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KioskTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D18FBF2740DA862421FE723 /* Pods-Kiosk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiosk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiosk/Pods-Kiosk.debug.xcconfig"; sourceTree = "<group>"; };
 		9D68EA3E203CC8F400A17759 /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
+		9DAF1272218B535800908630 /* SaleFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleFixture.swift; sourceTree = "<group>"; };
 		B5DFB9BD12B5173B74D620D7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E087BDDF167E52F60049D0C4 /* Pods_Kiosk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kiosk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E70556721BC40BFB0064ABF8 /* MyBidPosition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyBidPosition.json; sourceTree = "<group>"; };
@@ -813,6 +815,7 @@
 		5EB0B7051A5C3E6800B7CBF2 /* KioskTests */ = {
 			isa = PBXGroup;
 			children = (
+				9DAF1271218B534800908630 /* Fixtures */,
 				5E8610FF1A5C43EF00456E41 /* TestHelpers.swift */,
 				5E8610C21A5C43EF00456E41 /* App */,
 				5E8610C51A5C43EF00456E41 /* AppViewControllerTests.swift */,
@@ -884,6 +887,14 @@
 				5EF71E841AE9B6CE0069A266 /* ManualCreditCardInputViewControllerTests.swift */,
 			);
 			name = Registration;
+			sourceTree = "<group>";
+		};
+		9DAF1271218B534800908630 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				9DAF1272218B535800908630 /* SaleFixture.swift */,
+			);
+			path = Fixtures;
 			sourceTree = "<group>";
 		};
 		EDE935AE93E27C7CD4C012CE /* Frameworks */ = {
@@ -1342,6 +1353,7 @@
 				5E8611081A5C43EF00456E41 /* ConfirmYourBidPINViewControllerTests.swift in Sources */,
 				5E8611301A5C43EF00456E41 /* RegisterFlowViewTests.swift in Sources */,
 				5E8611101A5C43EF00456E41 /* ListingsViewControllerTests.swift in Sources */,
+				9DAF1273218B535800908630 /* SaleFixture.swift in Sources */,
 				5E8611111A5C43EF00456E41 /* ArtistTests.swift in Sources */,
 				5E43C38C1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift in Sources */,
 				5E8611091A5C43EF00456E41 /* ConfirmYourBidViewControllerTests.swift in Sources */,

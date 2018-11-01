@@ -7,7 +7,7 @@ class RegisterFlowView: ORStackView {
     let highlightedIndex = Variable(0)
 
     lazy var appSetup: AppSetup = .sharedState
-    var sale: Sale = appDelegate().sale
+    lazy var sale: Sale = appDelegate().sale
 
     var details: BidDetails? {
         didSet {

@@ -13,7 +13,7 @@ protocol AdminCCBypassNetworkModelType {
 }
 
 class AdminCCBypassNetworkModel: AdminCCBypassNetworkModelType {
-    let sale: Sale = appDelegate().sale
+    lazy var sale: Sale = appDelegate().sale
 
     /// Returns an Observable of (Bool, AuthorizedNetworking)
     /// The Bool represents if the Credit Card requirement should be waived.
