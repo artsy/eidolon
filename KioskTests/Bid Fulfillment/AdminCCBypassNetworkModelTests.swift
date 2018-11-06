@@ -36,7 +36,7 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
             expect(receivedResult) == .requireCC
         }
 
-        it("handles bidders created by admins") {
+        it("handles bidders in sales that bypass the credit card requirement") {
             let networking = networkingForBidder(createdByAdmin: false)
             subject.sale = makeSale(bypassCreditCardRequirement: true)
 
@@ -55,7 +55,7 @@ class AdminCCBypassNetworkModelTests: QuickSpec {
             expect(receivedResult) == .skipCCRequirement
         }
 
-        pending("handles bidders in sales that bypass the credit card requirement") {
+        it("handles bidders created by admins") {
             let networking = networkingForBidder(createdByAdmin: true)
 
             var receivedResult: BypassResult?
