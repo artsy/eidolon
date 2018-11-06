@@ -51,8 +51,8 @@ class PlaceBidNetworkModel: NSObject, PlaceBidNetworkModelType {
 
                 let json = try JSON(data: response.data)
 
-                if let type = json["type"].string , type == "param_error" {
-                    throw NSError(domain: OutbidDomain, code: 0, userInfo: [NSUnderlyingErrorKey: error as NSError])
+                if let type = json["type"].string, let message = json["message"].string, type == "param_error" && message.lowercased().contains("a bid") {
+                    throw NSError(domain: OutbidDomain, code: 0, userInfo: [NSUnderlyingErrorKey: error as NSError, NSLocalizedFailureReasonErrorKey: message])
                 } else {
                     throw error
                 }

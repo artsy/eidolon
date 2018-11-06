@@ -32,7 +32,7 @@ class AppViewController: UIViewController, UINavigationControllerDelegate {
         return storyboard.viewController(withID: .AppViewController) as! AppViewController
     }
 
-    var sale = Variable(Sale(id: "", name: "", isAuction: true, startDate: Date(), endDate: Date(), artworkCount: 0, state: ""))
+    var sale = Variable(Sale(id: "", name: "", isAuction: true, startDate: Date(), endDate: Date(), artworkCount: 0, state: "", bypassCreditCardRequirement: false))
 
     override func viewDidLoad() {
         super.viewDidLoad()

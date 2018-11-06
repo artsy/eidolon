@@ -9,10 +9,11 @@ import SwiftyJSON
     dynamic let name: String
     dynamic var artworkCount: Int
     dynamic let auctionState: String
+    dynamic let bypassCreditCardRequirement: Bool
 
     dynamic var buyersPremium: BuyersPremium?
 
-    init(id: String, name: String, isAuction: Bool, startDate: Date, endDate: Date?, artworkCount: Int, state: String) {
+    init(id: String, name: String, isAuction: Bool, startDate: Date, endDate: Date?, artworkCount: Int, state: String, bypassCreditCardRequirement: Bool) {
         self.id = id
         self.name = name
         self.isAuction = isAuction
@@ -20,6 +21,7 @@ import SwiftyJSON
         self.endDate = endDate
         self.artworkCount = artworkCount
         self.auctionState = state
+        self.bypassCreditCardRequirement = bypassCreditCardRequirement
     }
 
     static func fromJSON(_ json:[String: Any]) -> Sale {
@@ -32,8 +34,9 @@ import SwiftyJSON
         let name = json["name"].stringValue
         let artworkCount = json["eligible_sale_artworks_count"].intValue
         let state = json["auction_state"].stringValue
+        let bypassCreditCardRequirement = json["kiosk_bypasses_card_requirement"].boolValue
 
-        let sale = Sale(id: id, name:name, isAuction: isAuction, startDate: startDate, endDate: endDate, artworkCount: artworkCount, state: state)
+        let sale = Sale(id: id, name: name, isAuction: isAuction, startDate: startDate, endDate: endDate, artworkCount: artworkCount, state: state, bypassCreditCardRequirement: bypassCreditCardRequirement)
 
         if let buyersPremiumDict = json["buyers_premium"].object as? [String: AnyObject] {
             sale.buyersPremium = BuyersPremium.fromJSON(buyersPremiumDict)

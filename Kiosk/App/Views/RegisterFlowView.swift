@@ -7,6 +7,7 @@ class RegisterFlowView: ORStackView {
     let highlightedIndex = Variable(0)
 
     lazy var appSetup: AppSetup = .sharedState
+    lazy var sale: Sale = appDelegate().sale
 
     var details: BidDetails? {
         didSet {
@@ -32,7 +33,7 @@ class RegisterFlowView: ORStackView {
             [SubViewParams(title: "Mobile", getters: [{ $0.phoneNumber.value }])],
             [SubViewParams(title: "Email", getters: [{ $0.email.value }])],
             [SubViewParams(title: "Postal/Zip", getters: [{ $0.zipCode.value }])].filter { _ in self.appSetup.needsZipCode },
-            [SubViewParams(title: "Credit Card", getters: [{ $0.creditCardName.value }, { $0.creditCardType.value }])]
+            sale.bypassCreditCardRequirement ? [] : [SubViewParams(title: "Credit Card", getters: [{ $0.creditCardName.value }, { $0.creditCardType.value }])]
         ].flatMap {$0}
     }()
 
@@ -46,7 +47,7 @@ class RegisterFlowView: ORStackView {
 
             addSubview(itemView, withTopMargin: "10", sideMargin: "0")
 
-            if let value = (subViewParam.getters.flatMap { $0(user) }.first) {
+            if let value = (subViewParam.getters.compactMap { $0(user) }.first) {
                 itemView.createInfoLabel(value)
 
                 let button = itemView.createJumpToButtonAtIndex(i)

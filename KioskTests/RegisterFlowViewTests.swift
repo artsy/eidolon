@@ -78,6 +78,7 @@ class RegisterFlowViewTests: QuickSpec {
         beforeEach {
             appSetup = AppSetup()
             subject = RegisterFlowView(frame: frame)
+            subject.sale = makeSale()
             subject.constrainWidth("180")
             subject.constrainHeight("320")
             subject.appSetup = appSetup
@@ -94,6 +95,13 @@ class RegisterFlowViewTests: QuickSpec {
         describe("not requiring zip code") {
             itBehavesLike("a register flow view") { () -> [String: Any] in
                 appSetup.disableCardReader = false
+                return ["subject": subject]
+            }
+        }
+
+        describe("on a sale that bypasses credit card requirements") {
+            itBehavesLike("a register flow view") { () -> [String: Any] in
+                subject.sale = makeSale(bypassCreditCardRequirement: true)
                 return ["subject": subject]
             }
         }
