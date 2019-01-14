@@ -225,6 +225,7 @@
 		5EFFE2501B978C3C006BF64C /* ListingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFE24F1B978C3C006BF64C /* ListingsViewModelTests.swift */; };
 		9D68EA3F203CC8F400A17759 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D68EA3E203CC8F400A17759 /* CreditCard.swift */; };
 		9DAF1273218B535800908630 /* SaleFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAF1272218B535800908630 /* SaleFixture.swift */; };
+		9DE88BCB21EFD26B00BB8697 /* RegistrationNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE88BCA21EFD26B00BB8697 /* RegistrationNameViewController.swift */; };
 		E70556731BC40BFB0064ABF8 /* MyBidPosition.json in Resources */ = {isa = PBXBuildFile; fileRef = E70556721BC40BFB0064ABF8 /* MyBidPosition.json */; };
 		FC356C56217750D6722DBF34 /* Pods_KioskTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94D0A1FE57C6B14D52392DF4 /* Pods_KioskTests.framework */; };
 /* End PBXBuildFile section */
@@ -450,6 +451,7 @@
 		9D18FBF2740DA862421FE723 /* Pods-Kiosk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kiosk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kiosk/Pods-Kiosk.debug.xcconfig"; sourceTree = "<group>"; };
 		9D68EA3E203CC8F400A17759 /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
 		9DAF1272218B535800908630 /* SaleFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleFixture.swift; sourceTree = "<group>"; };
+		9DE88BCA21EFD26B00BB8697 /* RegistrationNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationNameViewController.swift; sourceTree = "<group>"; };
 		B5DFB9BD12B5173B74D620D7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E087BDDF167E52F60049D0C4 /* Pods_Kiosk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kiosk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E70556721BC40BFB0064ABF8 /* MyBidPosition.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MyBidPosition.json; sourceTree = "<group>"; };
@@ -864,6 +866,7 @@
 			children = (
 				5E86101B1A5C429C00456E41 /* RegistrationEmailViewController.swift */,
 				5E86101C1A5C429C00456E41 /* RegistrationMobileViewController.swift */,
+				9DE88BCA21EFD26B00BB8697 /* RegistrationNameViewController.swift */,
 				5E86101D1A5C429C00456E41 /* RegistrationPasswordViewController.swift */,
 				5E86101E1A5C429C00456E41 /* RegistrationPostalZipViewController.swift */,
 				5EBD31481AE0435600648484 /* GenericFormValidationViewModel.swift */,
@@ -1304,6 +1307,7 @@
 				5E8610601A5C429C00456E41 /* GenericError.swift in Sources */,
 				5E8610541A5C429C00456E41 /* AppSetup.swift in Sources */,
 				5EB0B71A1A5C410D00B7CBF2 /* ListingsCollectionViewCell.swift in Sources */,
+				9DE88BCB21EFD26B00BB8697 /* RegistrationNameViewController.swift in Sources */,
 				5EBA94571BF2A48B00DE3045 /* Observable+Logging.swift in Sources */,
 				5E8610801A5C429C00456E41 /* WebViewController.swift in Sources */,
 				5EF71E7B1AE98F080069A266 /* CreditCardValidation.m in Sources */,
