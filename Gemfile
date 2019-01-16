@@ -5,6 +5,6 @@ gem 'cocoapods'
 gem 'cocoapods-check'
 gem 'cocoapods-keys'
 
-gem 'sbconstants'
+gem 'sbconstants', '< 1.2.0'
 gem 'second_curtain'
 gem 'fastlane'
