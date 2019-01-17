@@ -61,6 +61,7 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
                 bidDetails.newUser.creditCardToken.value = "...2323"
                 bidDetails.newUser.email.value = "xxx@yyy.com"
                 bidDetails.newUser.zipCode.value = "90210"
+                bidDetails.newUser.name.value = "Fname Lname"
                 subject.details = bidDetails
 
                 subject.snapshotView(afterScreenUpdates: true)

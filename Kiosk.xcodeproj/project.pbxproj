@@ -190,6 +190,8 @@
 		5E87BBA81C03C39F00D46BB5 /* Observable+JSONAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87BBA71C03C39F00D46BB5 /* Observable+JSONAble.swift */; };
 		5E88FB001DA833A7001E12E0 /* KioskDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E88FAFF1DA833A7001E12E0 /* KioskDateFormatter.m */; };
 		5E8FABE81A5C49D800F6B913 /* StubResponses.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FED1A5C429C00456E41 /* StubResponses.m */; };
+		5E9F23D121F11EE400A024CF /* RegistrationNameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F23D021F11EE400A024CF /* RegistrationNameViewControllerTests.swift */; };
+		5E9F23D321F12C8300A024CF /* RegistrationCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F23D221F12C8300A024CF /* RegistrationCoordinatorTests.swift */; };
 		5E9F8AD41A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */; };
 		5EA1F7291BFBC84E00F90655 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */; };
 		5EA1F72D1BFE672200F90655 /* UIKit+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1F72C1BFE672200F90655 /* UIKit+Rx.swift */; };
@@ -408,6 +410,8 @@
 		5E88FAFE1DA833A7001E12E0 /* KioskDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KioskDateFormatter.h; sourceTree = "<group>"; };
 		5E88FAFF1DA833A7001E12E0 /* KioskDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KioskDateFormatter.m; sourceTree = "<group>"; };
 		5E8B22F41DA445CE008D1EB4 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
+		5E9F23D021F11EE400A024CF /* RegistrationNameViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationNameViewControllerTests.swift; sourceTree = "<group>"; };
+		5E9F23D221F12C8300A024CF /* RegistrationCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinatorTests.swift; sourceTree = "<group>"; };
 		5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		5EA1F72C1BFE672200F90655 /* UIKit+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIKit+Rx.swift"; sourceTree = "<group>"; };
@@ -768,6 +772,7 @@
 				5E8610DB1A5C43EF00456E41 /* SaleArtworkTests.swift */,
 				5E8610DC1A5C43EF00456E41 /* SaleTests.swift */,
 				5E8610DD1A5C43EF00456E41 /* SystemTimeTests.swift */,
+				5E9F23D221F12C8300A024CF /* RegistrationCoordinatorTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -879,6 +884,7 @@
 			isa = PBXGroup;
 			children = (
 				5EBD314E1AE0563300648484 /* GenericFormValidationViewModelTests.swift */,
+				5E9F23D021F11EE400A024CF /* RegistrationNameViewControllerTests.swift */,
 				5E43C38B1AE1818500A5A3B6 /* RegistrationPasswordViewModelTests.swift */,
 				5E43C38D1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift */,
 				5E43C38F1AE191C600A5A3B6 /* RegistrationMobileViewControllerTests.swift */,
@@ -1372,8 +1378,10 @@
 				5E43C3941AE191DE00A5A3B6 /* RegistrationPostalZipViewControllerTests.swift in Sources */,
 				5E8611181A5C43EF00456E41 /* SaleTests.swift in Sources */,
 				5E86110E1A5C43EF00456E41 /* CardHandlerTests.swift in Sources */,
+				5E9F23D321F12C8300A024CF /* RegistrationCoordinatorTests.swift in Sources */,
 				5E43C38E1AE1917F00A5A3B6 /* RegistrationEmailViewControllerTests.swift in Sources */,
 				5E8611031A5C43EF00456E41 /* AppViewControllerTests.swift in Sources */,
+				5E9F23D121F11EE400A024CF /* RegistrationNameViewControllerTests.swift in Sources */,
 				5EBB3C071BD7E92C0013EBC3 /* BidderNetworkModelTests.swift in Sources */,
 				5E8611131A5C43EF00456E41 /* BidderPositionTests.swift in Sources */,
 				5E8611151A5C43EF00456E41 /* BidTests.swift in Sources */,

@@ -41,7 +41,7 @@ class RegistrationNameViewController: UIViewController, RegistrationSubControlle
         
         _viewWillDisappear.onNext(Void())
     }
-    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> RegistrationMobileViewController {
-        return storyboard.viewController(withID: .RegisterMobile) as! RegistrationMobileViewController
+    class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> RegistrationNameViewController {
+        return storyboard.viewController(withID: .RegisterName) as! RegistrationNameViewController
     }
 }
