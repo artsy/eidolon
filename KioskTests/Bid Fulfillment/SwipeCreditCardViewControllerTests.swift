@@ -25,7 +25,8 @@ class StubKeys: EidolonKeys {
 
 class SwipeCreditCardViewControllerTests: QuickSpec {
     override func spec() {
-        it("unbinds bidDetails on viewWillDisappear:") {
+        // This opens a microphone access dialogue in macOS from the simulator, so let's skip it for now.
+        pending("unbinds bidDetails on viewWillDisappear:") {
             let runLifecycleOfViewController = { (bidDetails: BidDetails) -> SwipeCreditCardViewController in
                 let subject = SwipeCreditCardViewController.instantiateFromStoryboard(fulfillmentStoryboard)
                 subject.bidDetails = bidDetails
