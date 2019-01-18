@@ -30,3 +30,4 @@ Kiosk.xcworkspace/xcuserdata/*
 Podfile.local
 *.ipa
 fastlane/report.xml
+KioskTests/FailureDiffs

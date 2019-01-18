@@ -76,6 +76,8 @@ jobs:
       - store_artifacts:
           path: $ CIRCLE_ARTIFACTS
       - store_artifacts:
+          path: KioskTests/FailureDiffs
+      - store_artifacts:
           path: $CIRCLE_TEST_REPORTS
 workflows:
   version: 2
