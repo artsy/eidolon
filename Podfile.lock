@@ -15,7 +15,7 @@ PODS:
   - ARTiledImageView (1.1.1):
     - SDWebImage
   - "Artsy+UIColors (3.1.0)"
-  - "Artsy+UIFonts (3.1.3)"
+  - "Artsy+UIFonts (3.2.1)"
   - "Artsy+UILabels (2.2.0)":
     - "Artsy+UIColors (~> 3.0)"
     - "Artsy+UIFonts"
@@ -193,7 +193,7 @@ SPEC CHECKSUMS:
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
   "Artsy+UIColors": 31c03c4146f5e6618a9b950f37dfe02dd9ac09a6
-  "Artsy+UIFonts": d38c82636e000b1dee31b7bec0268e1841dac17f
+  "Artsy+UIFonts": 3195e768ca4ca89c03fbddbd82e5f4af5168c5d8
   "Artsy+UILabels": 7cb6e290a4f70dddba037b7dbeb21e90b49d7275
   Artsy-UIButtons: cdcc3ccf4d0d31ee80f45c1d11ffd2d772695b74
   CardFlight: 7b34237b6098c231d7a0066c3e38610ca3a98112
@@ -227,6 +227,6 @@ SPEC CHECKSUMS:
   "UIView+BooleanAnimations": a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: aed98c14f0c0eb20064184ddf9bac26c482722b2
 
-PODFILE CHECKSUM: 2ff62b50683ed6a54944375176b5748d3c8d7fa9
+PODFILE CHECKSUM: 66fee659590889423144aae6bc9021730c04981a
 
 COCOAPODS: 1.5.3

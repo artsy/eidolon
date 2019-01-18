@@ -30,6 +30,7 @@ class RegisterFlowView: ORStackView {
 
     fileprivate lazy var subViewParams: Array<SubViewParams> = {
         return [
+            sale.bypassCreditCardRequirement ? [SubViewParams(title: "Name", getters: [{ $0.name.value }])] : [],
             [SubViewParams(title: "Mobile", getters: [{ $0.phoneNumber.value }])],
             [SubViewParams(title: "Email", getters: [{ $0.email.value }])],
             [SubViewParams(title: "Postal/Zip", getters: [{ $0.zipCode.value }])].filter { _ in self.appSetup.needsZipCode },

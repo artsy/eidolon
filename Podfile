@@ -31,11 +31,7 @@ target 'Kiosk' do
   pod 'Artsy+UILabels'
   pod 'Artsy-UIButtons'
 
-  if ENV['ARTSY_STAFF_MEMBER'] != nil || ENV['CI'] != nil
-      pod 'Artsy+UIFonts'
-  else
-      pod 'Artsy+OSSUIFonts'
-  end
+  pod 'Artsy+UIFonts'
 
   pod 'ORStackView', '2.0'
   pod 'FLKAutoLayout', '0.1.1'
