@@ -56,13 +56,13 @@ jobs:
       # Restore the derived data cache (to speed up CI compile times), run the tests, and store the cache
       - restore_cache:
           keys:
-          - v1-derived-{{ .Branch }}
-          - v1-derived-
+          - v2-derived-{{ .Branch }}
+          - v2-derived-
       - run: 
           name: Run tests
           command: set -o pipefail && xcodebuild -destination "name=iPad Air 2,OS=11.4" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data test | xcpretty --color
       - save_cache:
-          key: v1-derived-{{ .Branch }}
+          key: v2-derived-{{ .Branch }}
           paths:
           - derived_data
       
