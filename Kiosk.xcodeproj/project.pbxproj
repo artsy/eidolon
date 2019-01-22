@@ -1191,6 +1191,7 @@
 				"${BUILT_PRODUCTS_DIR}/UIImageViewAligned/UIImageViewAligned.framework",
 				"${BUILT_PRODUCTS_DIR}/UIView+BooleanAnimations/UIView_BooleanAnimations.framework",
 				"${BUILT_PRODUCTS_DIR}/XNGMarkdownParser/XNGMarkdownParser.framework",
+				"${BUILT_PRODUCTS_DIR}/libPhoneNumber-iOS/libPhoneNumber_iOS.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1226,6 +1227,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIImageViewAligned.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIView_BooleanAnimations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XNGMarkdownParser.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libPhoneNumber_iOS.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
