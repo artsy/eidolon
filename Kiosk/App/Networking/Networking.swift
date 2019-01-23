@@ -6,7 +6,7 @@ import Alamofire
 class OnlineProvider<Target> where Target: Moya.TargetType {
 
     fileprivate let online: Observable<Bool>
-    fileprivate let provider: MoyaProvider<Target>
+    let provider: MoyaProvider<Target>
 
     init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = MoyaProvider<Target>.defaultEndpointMapping,
         requestClosure: @escaping MoyaProvider<Target>.RequestClosure = MoyaProvider<Target>.defaultRequestMapping,

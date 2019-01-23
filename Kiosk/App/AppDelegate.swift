@@ -6,6 +6,8 @@ import Keys
 import Stripe
 import MediaPlayer
 
+let PhoneNumberRegionKey = "PhoneNumberRegion"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -39,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: XAppToken.DefaultsKeys.TokenKey.rawValue)
         defaults.removeObject(forKey: XAppToken.DefaultsKeys.TokenExpiry.rawValue)
+
+        defaults.register(defaults: [PhoneNumberRegionKey: "US"])
 
         let auctionStoryboard = UIStoryboard.auction()
         let appViewController = auctionStoryboard.instantiateInitialViewController() as? AppViewController

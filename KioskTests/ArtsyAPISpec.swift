@@ -1,3 +1,4 @@
+import Foundation
 import Quick
 import Nimble
 @testable
@@ -97,6 +98,35 @@ class ArtsyAPISpec: QuickSpec {
                 expect(getDefaultsKeys(defaults).key).to(equal("STUBBED TOKEN!"))
                 expect(getDefaultsKeys(defaults).expiry).toNot(beNil())
                 expect(getDefaultsKeys(defaults).expiry ?? past).to(beInTheFuture())
+            }
+
+            it("formats phone numbers as E.164 encoded") {
+                let target = ArtsyAPI.createUser(email: "user@example.com", password: "password", phone: "5555555555", postCode: "12345", name: "Fname Lname")
+                expect(target.parameters!["phone"] as! String?) == "+15555555555"
+            }
+
+            it("leaves paddle number unformatted") {
+                let bidDetails = testBidDetails()
+                let subject = try! bidDetails.authenticatedNetworking(provider: networking).toBlocking().first()
+                let endpoint = subject!.provider.provider.endpointClosure(ArtsyAuthenticatedAPI.me)
+                if case .requestParameters(parameters: let params, encoding: _) = endpoint.task {
+                    expect(params["number"] as? String) == bidDetails.paddleNumber.value
+                } else {
+                    fail("Couldn't parse parameters")
+                }
+            }
+
+            it("formats phone numbers") {
+                let bidDetails = testBidDetails()
+                bidDetails.authNumberType = .phoneNumber
+                bidDetails.paddleNumber.value = "5555555555"
+                let subject = try! bidDetails.authenticatedNetworking(provider: networking).toBlocking().first()
+                let endpoint = subject!.provider.provider.endpointClosure(ArtsyAuthenticatedAPI.me)
+                if case .requestParameters(parameters: let params, encoding: _) = endpoint.task {
+                    expect(params["number"] as? String) == "+15555555555"
+                } else {
+                    fail("Couldn't parse parameters")
+                }
             }
         }
     }

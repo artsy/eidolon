@@ -47,6 +47,7 @@ target 'Kiosk' do
   pod 'CardFlight', '~> 3.0'
   pod 'Stripe'
   pod 'ECPhoneNumberFormatter'
+  pod 'libPhoneNumber-iOS'
   pod 'UIImageViewAligned', :git => 'https://github.com/ashfurrow/UIImageViewAligned.git'
   pod 'DZNWebViewController', :git => 'https://github.com/orta/DZNWebViewController.git'
   pod 'ReachabilitySwift'

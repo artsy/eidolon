@@ -38,6 +38,5 @@ class ConfirmYourBidViewControllerTests: QuickSpec {
             keypadSubject.value = "3"
             expect(subject.enterButton.isEnabled) == true
         }
-
     }
 }
