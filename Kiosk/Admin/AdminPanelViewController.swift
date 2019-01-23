@@ -78,9 +78,7 @@ class AdminPanelViewController: UIViewController {
             let text = (alertController.textFields?.first)?.text ?? "US" // fall back to the US if it's empty
             setRegion(text)
         }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] _ in
-            self?.dismiss(animated: true)
-        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 
         present(alertController, animated: true)
     }
