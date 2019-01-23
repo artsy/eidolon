@@ -62,6 +62,7 @@ private extension BidderNetworkModel {
                     return self.createNewUser()
                 }
             }
+            .logServerError(message: "Create or Update user failed.")
             .flatMap { provider -> Observable<AuthorizedNetworking> in
                 self.addCardToUser(provider: provider).mapReplace(with: provider) // After update/create observable finishes, add a CC to their account (if we've collected one)
             }
@@ -189,7 +190,8 @@ private extension BidderNetworkModel {
             .mapJSON()
             .mapTo(object: User.self)
             .do(onNext: { [weak self] user in
-                self?.bidDetails.paddleNumber.value =  user.paddleNumber
+                self?.bidDetails.paddleNumber.value = user.paddleNumber
+                self?.bidDetails.authNumberType = .paddleNumber
             })
             .logServerError(message: "Getting Bidder ID failed.")
             .map(void)

@@ -5,6 +5,13 @@ import Moya
 @objc class BidDetails: NSObject {
     typealias DownloadImageClosure = (_ url: URL, _ imageView: UIImageView) -> ()
 
+    // Users can type either their paddle or phone number into the UI and we have to work with either.
+    // So we'll default to .paddleNumber and depending on lookup success in ConfirmYourBidViewController, we'll update.
+    enum AuthNumberType {
+        case paddleNumber
+        case phoneNumber
+    }
+
     let auctionID: String
 
     var newUser: NewUser = NewUser()
@@ -14,6 +21,8 @@ import Moya
     var bidderPIN = Variable<String?>(nil)
     var bidAmountCents = Variable<NSNumber?>(nil)
     var bidderID = Variable<String?>(nil)
+
+    var authNumberType: AuthNumberType = .paddleNumber
 
     var setImage: DownloadImageClosure = { (url, imageView) -> () in
         imageView.sd_setImage(with: url)
@@ -43,7 +52,7 @@ import Moya
                 switch target.task {
                 case .requestParameters(parameters: var params, encoding: let encoding):
                     params["auction_pin"] = pin
-                    params["number"] = number
+                    params["number"] = self.authNumberType == .paddleNumber ? number : formatPhoneNumberForRegion(number)
                     params["sale_id"] = auctionID
                     task = .requestParameters(parameters: params, encoding: encoding)
                 default:
