@@ -146,7 +146,7 @@ extension LoadingViewController {
     }
 
     func handleRegistered() {
-        titleLabel.text = "Registration Complete"
+        titleLabel.text = "Registration complete"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
         fulfillmentContainer()?.cancelButton.setTitle("DONE", for: .normal)
         Observable<Int>.interval(1, scheduler: MainScheduler.instance)
@@ -158,25 +158,25 @@ extension LoadingViewController {
     }
 
     func handleUpdate() {
-        titleLabel.text = "Updated your Information"
+        titleLabel.text = "Updated your information"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
         fulfillmentContainer()?.cancelButton.setTitle("DONE", for: .normal)
     }
 
     func handleUnknownBidder() {
-        titleLabel.text = "Bid Submitted"
+        titleLabel.text = "Bid submitted"
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
     }
 
     func handleReserveNotMet() {
-        titleLabel.text = "Reserve Not Met"
+        titleLabel.text = "Reserve not met"
         statusMessage.isHidden = false
         statusMessage.text = "Your bid is still below this lot's reserve. Please place a higher bid."
         bidConfirmationImageView.image = UIImage(named: "BidNotHighestBidder")
     }
 
     func handleHighestBidder() {
-        titleLabel.text = "High Bid!"
+        titleLabel.text = "High bid!"
         statusMessage.isHidden = false
         statusMessage.text = "You are the high bidder for this lot."
         bidConfirmationImageView.image = UIImage(named: "BidHighestBidder")
@@ -218,13 +218,13 @@ extension LoadingViewController {
     }
 
     func handleRegistrationFailed(error: NSError) {
-        handleError(withTitle: "Registration Failed",
+        handleError(withTitle: "Registration failed",
             message: "There was a problem registering for the auction. Please speak to an Artsy representative.",
             error: error)
     }
 
     func bidPlacementFailed(error: NSError) {
-        handleError(withTitle: "Bid Failed",
+        handleError(withTitle: "Bid failed",
             message: "There was a problem placing your bid. Please speak to an Artsy representative.",
             error: error)
     }
