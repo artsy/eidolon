@@ -192,6 +192,7 @@
 		5E8FABE81A5C49D800F6B913 /* StubResponses.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FED1A5C429C00456E41 /* StubResponses.m */; };
 		5E9F23D121F11EE400A024CF /* RegistrationNameViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F23D021F11EE400A024CF /* RegistrationNameViewControllerTests.swift */; };
 		5E9F23D321F12C8300A024CF /* RegistrationCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F23D221F12C8300A024CF /* RegistrationCoordinatorTests.swift */; };
+		5E9F23D521F8BE4400A024CF /* PhoneNumberUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F23D421F8BE4400A024CF /* PhoneNumberUtils.swift */; };
 		5E9F8AD41A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */; };
 		5EA1F7291BFBC84E00F90655 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */; };
 		5EA1F72D1BFE672200F90655 /* UIKit+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1F72C1BFE672200F90655 /* UIKit+Rx.swift */; };
@@ -412,6 +413,7 @@
 		5E8B22F41DA445CE008D1EB4 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
 		5E9F23D021F11EE400A024CF /* RegistrationNameViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationNameViewControllerTests.swift; sourceTree = "<group>"; };
 		5E9F23D221F12C8300A024CF /* RegistrationCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCoordinatorTests.swift; sourceTree = "<group>"; };
+		5E9F23D421F8BE4400A024CF /* PhoneNumberUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberUtils.swift; sourceTree = "<group>"; };
 		5E9F8AD31A8951C100CBEACE /* SaleArtworkDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleArtworkDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		5EA1F7281BFBC84E00F90655 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		5EA1F72C1BFE672200F90655 /* UIKit+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIKit+Rx.swift"; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 				5E860FE61A5C429C00456E41 /* UserCredentials.swift */,
 				5E860FE71A5C429C00456E41 /* Networking.swift */,
 				5E860FE81A5C429C00456E41 /* XAppToken.swift */,
+				5E9F23D421F8BE4400A024CF /* PhoneNumberUtils.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1344,6 +1347,7 @@
 				5EB0B71E1A5C410D00B7CBF2 /* UIViewController+Bidding.swift in Sources */,
 				5E86106F1A5C429C00456E41 /* OfflineViewController.swift in Sources */,
 				5EA1F7291BFBC84E00F90655 /* HelperFunctions.swift in Sources */,
+				5E9F23D521F8BE4400A024CF /* PhoneNumberUtils.swift in Sources */,
 				5EF71E781AE986000069A266 /* StripeManager.swift in Sources */,
 				5E86109B1A5C429C00456E41 /* RegistrationPasswordViewController.swift in Sources */,
 				5EB0B71C1A5C410D00B7CBF2 /* UILabel+Fonts.swift in Sources */,

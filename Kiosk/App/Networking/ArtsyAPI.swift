@@ -150,10 +150,10 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
         case .trustToken(let number, let auctionID):
             return ["number": number as AnyObject, "auction_pin": auctionID as AnyObject]
 
-        case .createUser(let email, let password,let phone,let postCode, let name):
+        case .createUser(let email, let password, let phone, let postCode, let name):
             return [
                 "email": email as AnyObject, "password": password as AnyObject,
-                "phone": phone as AnyObject, "name": name as AnyObject,
+                "phone": formatPhoneNumberForRegion(phone) as AnyObject, "name": name as AnyObject,
                 "location": [ "postal_code": postCode ] as AnyObject
             ]
 
@@ -341,7 +341,7 @@ extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
 
         case .updateMe(let email, let phone,let postCode, let name):
             return [
-                "email": email as AnyObject, "phone": phone as AnyObject,
+                "email": email as AnyObject, "phone": formatPhoneNumberForRegion(phone) as AnyObject,
                 "name": name as AnyObject, "location": [ "postal_code": postCode ]
             ]
 

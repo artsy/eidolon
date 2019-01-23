@@ -1,5 +1,6 @@
 upcoming:
   - Adds name entry for swipeless sales. [ash]
+  - Adds formatting for international phone numbers. [ash]
 
 releases:
 - version: 5.10.0

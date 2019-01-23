@@ -35,7 +35,9 @@ class ChooseAuctionViewController: UIViewController {
                         let defaults = UserDefaults.standard
                         defaults.set(sale.id, forKey: "KioskAuctionID")
                         defaults.synchronize()
-                        exit(1)
+                        delayToMainThread(1) {
+                            exit(1)
+                        }
                         })
                         .disposed(by: self.rx.disposeBag)
 

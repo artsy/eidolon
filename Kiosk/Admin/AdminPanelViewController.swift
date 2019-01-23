@@ -52,7 +52,39 @@ class AdminPanelViewController: UIViewController {
 
         let readStatus = state.disableCardReader ? "ENABLE" : "DISABLE"
         toggleCardReaderButton.setTitle(readStatus, for: .normal)
+
+        phoneNumberRegionButton.setTitle(UserDefaults.standard.string(forKey: PhoneNumberRegionKey), for: .normal)
     }
+
+    @IBOutlet weak var phoneNumberRegionButton: UIButton!
+    @IBAction func phoneNumberRegionButtonPressed(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        let setRegion = { (region: String) in
+            defaults.set(region, forKey: PhoneNumberRegionKey)
+        }
+
+        let alertController = UIAlertController(title: "Phone Number Region", message: "This affects user registration. We format phone numbers based on a default region, select the region the Kiosk is in below.", preferredStyle: .alert)
+
+        alertController.addTextField { textField in
+            textField.placeholder = "Two-letter region code"
+        }
+        alertController.addAction(UIAlertAction(title: "United States (US)", style: .default, handler: { _ in
+            setRegion("US")
+        }))
+        alertController.addAction(UIAlertAction(title: "United Kingdon (GB)", style: .default, handler: { _ in
+            setRegion("GB")
+        }))
+        alertController.addAction(UIAlertAction(title: "Use custom string", style: .destructive, handler: { action in
+            let text = (alertController.textFields?.first)?.text ?? "US" // fall back to the US if it's empty
+            setRegion(text)
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] _ in
+            self?.dismiss(animated: true)
+        }))
+
+        present(alertController, animated: true)
+    }
+
 
     @IBOutlet weak var environmentChangeButton: UIButton!
     @IBAction func switchStagingProductionTapped(_ sender: AnyObject) {
