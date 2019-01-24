@@ -61,7 +61,7 @@ class RegisterFlowView: ORStackView {
                 itemView.constrainHeight("20")
             }
 
-            if let index = highlightedIndex.value, index.shouldHightlight(subViewParam.index) {
+            if let index = highlightedIndex.value, index.shouldHighlight(subViewParam.index) {
                 itemView.highlight()
             }
         }

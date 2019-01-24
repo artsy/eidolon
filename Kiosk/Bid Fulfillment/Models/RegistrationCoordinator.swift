@@ -22,7 +22,7 @@ enum RegistrationIndex {
         }
     }
 
-    func shouldHightlight(_ index: RegistrationIndex) -> Bool {
+    func shouldHighlight(_ index: RegistrationIndex) -> Bool {
         switch (self) {
         case .nameVC: return index == self
         case .mobileVC: return index == self
