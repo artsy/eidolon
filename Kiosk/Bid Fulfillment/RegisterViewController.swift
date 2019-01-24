@@ -21,13 +21,6 @@ class RegisterViewController: UIViewController {
 
     var currentVCDisposable: Disposable?
 
-    lazy var tappedIndex: Observable<RegistrationIndex> = {
-        return flowView
-            .tappedIndex
-            .asObservable()
-            .filterNil()
-    }()
-
     @objc dynamic var placingBid = true
 
     fileprivate let _viewWillDisappear = PublishSubject<Void>()
@@ -43,7 +36,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
         coordinator.storyboard = self.storyboard!
-        let indexIsConfirmed = coordinator.currentIndex.map { return ($0 == RegistrationIndex.confirmVC.toInt()) }
+        let indexIsConfirmed = coordinator.currentIndex.map { return ($0 == RegistrationIndex.confirmVC) }
 
         indexIsConfirmed
             .not()
@@ -54,7 +47,10 @@ class RegisterViewController: UIViewController {
             .bind(to: flowView.highlightedIndex)
             .disposed(by: rx.disposeBag)
 
-        tappedIndex
+        flowView
+            .tappedIndex
+            .asObservable()
+            .filterNil()
             .map { [weak self] index in
                 return self?.coordinator.viewControllerForIndex(index)
             }

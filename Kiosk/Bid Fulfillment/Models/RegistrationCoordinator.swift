@@ -21,17 +21,35 @@ enum RegistrationIndex {
             case .confirmVC: return 5
         }
     }
+
+    func shouldHightlight(_ index: RegistrationIndex) -> Bool {
+        switch (self) {
+        case .nameVC: return index == self
+        case .mobileVC: return index == self
+        case .emailVC: return [.emailVC, .passwordVC].contains(index)
+        case .passwordVC: return [.emailVC, .passwordVC].contains(index)
+        case .zipCodeVC: return index == self
+        case .creditCardVC: return index == self
+        case .confirmVC: return index == self
+        }
+    }
 }
 
 class RegistrationCoordinator: NSObject {
-    fileprivate let _currentIndex = Variable(0)
-    var currentIndex: Observable<Int> {
+    fileprivate lazy var _currentIndex: Variable<RegistrationIndex> = {
+        if (appDelegate().sale.bypassCreditCardRequirement) { // Access global state here, oops.
+            return Variable(.nameVC)
+        } else {
+            return Variable(.mobileVC)
+        }
+    }()
+    var currentIndex: Observable<RegistrationIndex> {
         return _currentIndex.asObservable().distinctUntilChanged()
     }
     var storyboard: UIStoryboard!
 
     func viewControllerForIndex(_ index: RegistrationIndex) -> UIViewController {
-        _currentIndex.value = index.toInt()
+        _currentIndex.value = index 
         
         switch index {
         case .nameVC:

@@ -4,7 +4,7 @@ import RxSwift
 
 class RegisterFlowView: ORStackView {
 
-    let highlightedIndex = Variable(0)
+    let highlightedIndex: Variable<RegistrationIndex?> = Variable(nil)
     let tappedIndex: Variable<RegistrationIndex?> = Variable(nil)
 
     lazy var appSetup: AppSetup = .sharedState
@@ -61,7 +61,7 @@ class RegisterFlowView: ORStackView {
                 itemView.constrainHeight("20")
             }
 
-            if i == highlightedIndex.value {
+            if let index = highlightedIndex.value, index.shouldHightlight(subViewParam.index) {
                 itemView.highlight()
             }
         }
@@ -74,9 +74,12 @@ class RegisterFlowView: ORStackView {
     }
 
     @objc func pressed(_ sender: UIButton!) {
-        highlightedIndex.value = sender.tag
         guard let itemView = sender.superview as? ItemView else { return }
-        tappedIndex.value = itemView.index
+        if itemView.index == .emailVC {
+            // If the user is modifying their email, make them re-enter their password too (since it doesn't have its own SubViewParam)
+            details?.newUser.password.value = nil
+        }
+        tappedIndex.value = itemView.index // The RegistrationViewController will take care of updating highlightedIndex.value
     }
 
     class ItemView : UIView {

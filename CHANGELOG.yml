@@ -1,6 +1,8 @@
 upcoming:
   - Adds name entry for swipeless sales. [ash]
   - Adds formatting for international phone numbers. [ash]
+  - Fixes edit button not working in registration flow. [ash]
+  - Fixes registration flow highlighted index. [ash]
 
 releases:
 - version: 5.10.0
