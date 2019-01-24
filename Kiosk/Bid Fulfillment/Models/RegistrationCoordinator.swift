@@ -30,7 +30,7 @@ class RegistrationCoordinator: NSObject {
     }
     var storyboard: UIStoryboard!
 
-    fileprivate func viewControllerForIndex(_ index: RegistrationIndex) -> UIViewController {
+    func viewControllerForIndex(_ index: RegistrationIndex) -> UIViewController {
         _currentIndex.value = index.toInt()
         
         switch index {
