@@ -51,6 +51,7 @@ class ArtsyAPISpec: QuickSpec {
             beforeSuite { 
                 // Force provider to stub responses
                 APIKeys.sharedKeys = APIKeys(key: "", secret: "")
+                UserDefaults.standard.set("US", forKey: PhoneNumberRegionKey)
             }
             
             afterSuite {

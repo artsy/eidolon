@@ -43,7 +43,7 @@ import Moya
 
         let auctionID = saleArtwork?.auctionID ?? ""
 
-        if let number = paddleNumber.value, let pin = bidderPIN.value {
+        if let _ = paddleNumber.value, let pin = bidderPIN.value {
             let newEndpointsClosure = { (target: ArtsyAuthenticatedAPI) -> Endpoint in
                 // Grab existing endpoint to piggy-back off of any existing configurations being used by the sharedprovider.
                 let endpoint = Networking.endpointsClosure()(target)
@@ -51,7 +51,8 @@ import Moya
                 let task: Task
                 switch target.task {
                 case .requestParameters(parameters: var params, encoding: let encoding):
-                    params["auction_pin"] = pin
+                    let number = self.paddleNumber.value ?? "" // Update value from self, not anything captured by the closure.
+                    params["auction_pin"] = pin // pin captured by closure is okay, we don't expect it to change once authorized.
                     params["number"] = self.authNumberType == .paddleNumber ? number : formatPhoneNumberForRegion(number)
                     params["sale_id"] = auctionID
                     task = .requestParameters(parameters: params, encoding: encoding)
