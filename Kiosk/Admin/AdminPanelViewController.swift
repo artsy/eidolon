@@ -59,8 +59,9 @@ class AdminPanelViewController: UIViewController {
     @IBOutlet weak var phoneNumberRegionButton: UIButton!
     @IBAction func phoneNumberRegionButtonPressed(_ sender: Any) {
         let defaults = UserDefaults.standard
-        let setRegion = { (region: String) in
+        let setRegion = { [weak self] (region: String) in
             defaults.set(region, forKey: PhoneNumberRegionKey)
+            self?.phoneNumberRegionButton.setTitle(region, for: .normal)
         }
 
         let alertController = UIAlertController(title: "Phone Number Region", message: "This affects user registration. We format phone numbers based on a default region, select the region the Kiosk is in below.", preferredStyle: .alert)
