@@ -16,6 +16,7 @@ class RegistrationCoordinatorTests: QuickSpec {
             sale = makeSale()
             subject = RegistrationCoordinator()
             subject.storyboard = fulfillmentStoryboard
+            subject.sale = sale
         }
 
         describe("nextViewControllerForBidDetails") {
@@ -58,7 +59,7 @@ class RegistrationCoordinatorTests: QuickSpec {
             it("sets the new index on the coordinator") {
                 bidDetails.newUser.phoneNumber.value = "5555555555"
                 _ = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
-                expect(subject.currentIndex).first == RegistrationIndex.emailVC.toInt()
+                expect(subject.currentIndex).first == RegistrationIndex.emailVC
             }
 
             describe("with swipeless sale") {

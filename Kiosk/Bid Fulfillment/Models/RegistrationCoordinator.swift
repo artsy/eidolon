@@ -37,12 +37,14 @@ enum RegistrationIndex {
 
 class RegistrationCoordinator: NSObject {
     fileprivate lazy var _currentIndex: Variable<RegistrationIndex> = {
-        if (appDelegate().sale.bypassCreditCardRequirement) { // Access global state here, oops.
+        if (self.sale.bypassCreditCardRequirement) { // Access global state here, oops.
             return Variable(.nameVC)
         } else {
             return Variable(.mobileVC)
         }
     }()
+    // sale is used only for _currentIndex, and is readwrite for unit testing purposes.
+    lazy var sale: Sale! = appDelegate().sale
     var currentIndex: Observable<RegistrationIndex> {
         return _currentIndex.asObservable().distinctUntilChanged()
     }
