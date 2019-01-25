@@ -1,7 +1,11 @@
 upcoming:
-  - Fixes CardFlight API keys. [ash]
 
 releases:
+- version: 5.11.1
+  date: January 25 2019
+  notes:
+  - Fixes CardFlight API keys. [ash]
+
 - version: 5.11.0
   date: January 25 2019
   notes:
@@ -479,6 +483,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
