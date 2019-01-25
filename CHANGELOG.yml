@@ -1,10 +1,14 @@
 upcoming:
+
+releases:
+- version: 5.11.0
+  date: January 25 2019
+  notes:
   - Adds name entry for swipeless sales. [ash]
   - Adds formatting for international phone numbers. [ash]
   - Fixes edit button not working in registration flow. [ash]
   - Fixes registration flow highlighted index. [ash]
 
-releases:
 - version: 5.10.0
   date: November 5 2018
   notes:
@@ -474,6 +478,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
