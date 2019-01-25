@@ -19,6 +19,8 @@ class RegisterViewController: UIViewController {
 
     let coordinator = RegistrationCoordinator()
 
+    var currentVCDisposable: Disposable?
+
     @objc dynamic var placingBid = true
 
     fileprivate let _viewWillDisappear = PublishSubject<Void>()
@@ -34,7 +36,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
         coordinator.storyboard = self.storyboard!
-        let indexIsConfirmed = coordinator.currentIndex.map { return ($0 == RegistrationIndex.confirmVC.toInt()) }
+        let indexIsConfirmed = coordinator.currentIndex.map { return ($0 == RegistrationIndex.confirmVC) }
 
         indexIsConfirmed
             .not()
@@ -44,6 +46,20 @@ class RegisterViewController: UIViewController {
         coordinator.currentIndex
             .bind(to: flowView.highlightedIndex)
             .disposed(by: rx.disposeBag)
+
+        flowView
+            .tappedIndex
+            .asObservable()
+            .filterNil()
+            .map { [weak self] index in
+                return self?.coordinator.viewControllerForIndex(index)
+            }
+            .filterNil()
+            .subscribe(onNext: { [weak self] controller in
+                self?.goToViewController(controller)
+            })
+            .disposed(by: rx.disposeBag)
+
 
         let details = self.fulfillmentNav().bidDetails
         flowView.details = details
@@ -66,13 +82,13 @@ class RegisterViewController: UIViewController {
         self.internalNavController()!.viewControllers = [controller]
 
         if let subscribableVC = controller as? RegistrationSubController {
-            subscribableVC
+            currentVCDisposable?.dispose()
+            currentVCDisposable = subscribableVC
                 .finished
                 .subscribe(onCompleted: { [weak self] in
                     self?.goToNextVC()
                     self?.flowView.update()
                 })
-                .disposed(by: rx.disposeBag)
         }
 
         if let viewController = controller as? RegistrationPasswordViewController {

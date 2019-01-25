@@ -45,7 +45,7 @@ class RegisterFlowViewConfiguration: QuickConfiguration {
                 bidDetails.newUser.phoneNumber.value = "132131231"
                 bidDetails.newUser.email.value = "xxx@yyy.com"
 
-                subject.highlightedIndex.value = 2
+                subject.highlightedIndex.value = RegistrationIndex.emailVC
                 subject.details = bidDetails
 
                 subject.snapshotView(afterScreenUpdates: true)

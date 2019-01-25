@@ -4,7 +4,8 @@ import RxSwift
 
 class RegisterFlowView: ORStackView {
 
-    let highlightedIndex = Variable(0)
+    let highlightedIndex: Variable<RegistrationIndex?> = Variable(nil)
+    let tappedIndex: Variable<RegistrationIndex?> = Variable(nil)
 
     lazy var appSetup: AppSetup = .sharedState
     lazy var sale: Sale = appDelegate().sale
@@ -26,15 +27,16 @@ class RegisterFlowView: ORStackView {
     fileprivate struct SubViewParams {
         let title: String
         let getters: Array<(NewUser) -> String?>
+        let index: RegistrationIndex
     }
 
     fileprivate lazy var subViewParams: Array<SubViewParams> = {
         return [
-            sale.bypassCreditCardRequirement ? [SubViewParams(title: "Name", getters: [{ $0.name.value }])] : [],
-            [SubViewParams(title: "Mobile", getters: [{ $0.phoneNumber.value }])],
-            [SubViewParams(title: "Email", getters: [{ $0.email.value }])],
-            [SubViewParams(title: "Postal/Zip", getters: [{ $0.zipCode.value }])].filter { _ in self.appSetup.needsZipCode },
-            sale.bypassCreditCardRequirement ? [] : [SubViewParams(title: "Credit Card", getters: [{ $0.creditCardName.value }, { $0.creditCardType.value }])]
+            sale.bypassCreditCardRequirement ? [SubViewParams(title: "Name", getters: [{ $0.name.value }], index: .nameVC)] : [],
+            [SubViewParams(title: "Mobile", getters: [{ $0.phoneNumber.value }], index: .mobileVC)],
+            [SubViewParams(title: "Email", getters: [{ $0.email.value }], index: .emailVC)],
+            [SubViewParams(title: "Postal/Zip", getters: [{ $0.zipCode.value }], index: .zipCodeVC)].filter { _ in self.appSetup.needsZipCode },
+            sale.bypassCreditCardRequirement ? [] : [SubViewParams(title: "Credit Card", getters: [{ $0.creditCardName.value }, { $0.creditCardType.value }], index: .creditCardVC)]
         ].flatMap {$0}
     }()
 
@@ -43,7 +45,7 @@ class RegisterFlowView: ORStackView {
 
         removeAllSubviews()
         for (i, subViewParam) in subViewParams.enumerated() {
-            let itemView = ItemView(frame: bounds)
+            let itemView = ItemView(frame: bounds, index: subViewParam.index)
             itemView.createTitleViewWithTitle(subViewParam.title)
 
             addSubview(itemView, withTopMargin: "10", sideMargin: "0")
@@ -59,7 +61,7 @@ class RegisterFlowView: ORStackView {
                 itemView.constrainHeight("20")
             }
 
-            if i == highlightedIndex.value {
+            if let index = highlightedIndex.value, index.shouldHighlight(subViewParam.index) {
                 itemView.highlight()
             }
         }
@@ -72,12 +74,27 @@ class RegisterFlowView: ORStackView {
     }
 
     @objc func pressed(_ sender: UIButton!) {
-        highlightedIndex.value = sender.tag
+        guard let itemView = sender.superview as? ItemView else { return }
+        if itemView.index == .emailVC {
+            // If the user is modifying their email, make them re-enter their password too (since it doesn't have its own SubViewParam)
+            details?.newUser.password.value = nil
+        }
+        tappedIndex.value = itemView.index // The RegistrationViewController will take care of updating highlightedIndex.value
     }
 
     class ItemView : UIView {
 
         var titleLabel: UILabel?
+        let index: RegistrationIndex
+
+        init(frame: CGRect, index: RegistrationIndex) {
+            self.index = index
+            super.init(frame: frame)
+        }
+
+        required init?(coder aDecoder: NSCoder) {
+            fatalError() // Not expected to happen, but compiler.
+        }
 
         func highlight() {
             titleLabel?.textColor = .artsyPurpleRegular()
