@@ -28,7 +28,7 @@ enum ArtsyAPI {
     case createUser(email: String, password: String, phone: String, postCode: String, name: String)
 
     case bidderDetailsNotification(auctionID: String, identifier: String)
-    
+
     case lostPasswordNotification(email: String)
     case findExistingEmailRegistration(email: String)
 }
@@ -174,7 +174,7 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
 
         case .activeAuctions:
             return ["is_auction": true as AnyObject, "live": true as AnyObject, "size": 100]
-            
+
         default:
             return nil
         }
@@ -183,7 +183,7 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
     var method: Moya.Method {
         switch self {
         case .lostPasswordNotification,
-        .createUser:
+        .createUser, .xAuth:
             return .post
         case .findExistingEmailRegistration:
             return .head
@@ -211,7 +211,7 @@ extension ArtsyAPI : TargetType, ArtsyAPIType {
 
         case .auctionListings:
             return stubbedResponse("AuctionListings")
-            
+
         case .systemTime:
             return stubbedResponse("SystemTime")
 
@@ -401,10 +401,10 @@ extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
 
         case .myBidPositionsForAuctionArtwork:
             return stubbedResponse("MyBidPositionsForAuctionArtwork")
-            
+
         case .myBidPosition:
             return stubbedResponse("MyBidPosition")
-            
+
         }
     }
 
@@ -417,7 +417,7 @@ extension ArtsyAuthenticatedAPI: TargetType, ArtsyAPIType {
 
 func stubbedResponse(_ filename: String) -> Data! {
     @objc class TestClass: NSObject { }
-    
+
     let bundle = Bundle(for: TestClass.self)
     let path = bundle.path(forResource: filename, ofType: "json")
     return (try? Data(contentsOf: URL(fileURLWithPath: path!)))
