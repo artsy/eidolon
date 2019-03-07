@@ -1,4 +1,5 @@
 upcoming:
+- Fixes oauth call to be a post
 
 releases:
 - version: 5.9.3
