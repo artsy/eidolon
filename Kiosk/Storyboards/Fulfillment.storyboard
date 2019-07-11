@@ -1668,10 +1668,10 @@
             </objects>
             <point key="canvasLocation" x="308.5" y="3861.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Registration Confirmation View Controller-->
         <scene sceneID="YLp-8g-M74">
             <objects>
-                <viewController storyboardIdentifier="Register Confirm " id="q7z-ij-DNu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Register Confirm " id="q7z-ij-DNu" customClass="RegistrationConfirmationViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oSp-Yd-K71"/>
                         <viewControllerLayoutGuide type="bottom" id="nQP-V4-lol"/>
@@ -1687,10 +1687,20 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By clicking &quot;Confirm&quot; you agree to the Conditions of Sale." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcN-jF-FDM" customClass="ARSerifLabel">
+                                <rect key="frame" x="-2" y="89" width="442" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="17"/>
+                                <color key="textColor" white="0.42045633599791726" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="ixu-rk-ihw"/>
+                    <connections>
+                        <outlet property="confirmationLabel" destination="jcN-jF-FDM" id="QyB-ck-tsi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUS-C7-HeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2184,9 +2194,9 @@
         <image name="edit_button.png" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PK6-h9-FCm"/>
+        <segue reference="6qF-R8-kJy"/>
         <segue reference="NOJ-G3-crU"/>
-        <segue reference="TrF-tJ-vaM"/>
+        <segue reference="A1R-R2-CSF"/>
         <segue reference="Qpe-mM-52j"/>
     </inferredMetricsTieBreakers>
 </document>

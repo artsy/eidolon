@@ -31,6 +31,17 @@ extension UILabel {
         self.attributedText = attributedText
     }
 
+    func makeSubstringUnderlined(_ underlineText: String) {
+        let attributedText = self.attributedText!.mutableCopy() as! NSMutableAttributedString
+
+        let range = ((self.text ?? "") as NSString).range(of: underlineText)
+        if range.location != NSNotFound {
+            attributedText.addAttribute(NSAttributedStringKey.underlineStyle, value: NSUnderlineStyle.styleSingle.rawValue, range: range)
+        }
+
+        self.attributedText = attributedText
+    }
+
     func setLineHeight(_ lineHeight: Int) {
         let displayText = text ?? ""
         let attributedString = self.attributedText!.mutableCopy() as! NSMutableAttributedString
