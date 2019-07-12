@@ -172,7 +172,7 @@ extension LoadingViewController {
         titleLabel.text = "Reserve not met"
         statusMessage.isHidden = false
         statusMessage.text = "Your bid is still below this lot's reserve. Please place a higher bid."
-        bidConfirmationImageView.image = UIImage(named: "BidNotHighestBidder")
+        bidConfirmationImageView.image = UIImage(named: "CircleAlert")
     }
 
     func handleHighestBidder() {
@@ -193,11 +193,10 @@ extension LoadingViewController {
 
     func handleLowestBidder() {
         titleLabel.text = "Higher bid needed"
-        
-        titleLabel.textColor = .artsyRedRegular()
+
         statusMessage.isHidden = false
-        statusMessage.text = "Another bidder has placed a higher maximum bid. Place a higher bid to secure the lot."
-        bidConfirmationImageView.image = UIImage(named: "BidNotHighestBidder")
+        statusMessage.text = "You are not yet the highest bidder.\nKeep bidding until you surpass the maximum bid that has already been placed on this lot."
+        bidConfirmationImageView.image = UIImage(named: "CircleX")
         placeHigherBidButton.isHidden = false
     }
 
