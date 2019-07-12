@@ -1,4 +1,7 @@
 upcoming:
+- User registering for sale is prompted for their full legal name [ash]
+- User registering for sale sees a Conditions of Sale link [ash]
+- Lot details view shows edition information [ash]
 
 releases:
 - version: 5.9.4
