@@ -121,6 +121,30 @@ extension AppDelegate {
             self.hideAllTheThings().then(self.showWebController(address: "https://artsy.net/conditions-of-sale"))
         })
     }
+
+    func showUserWebViewAtAddress(_ address: String, completed: (() -> Void)? = nil) {
+        let webController = ModalWebViewController(url: NSURL(string: address)! as URL)
+
+        let nav = UINavigationController(rootViewController: webController)
+        nav.modalPresentationStyle = .formSheet
+
+        ARAnalytics.event("Show Web View", withProperties: ["url" : address])
+        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+            if let presentedViewController = rootViewController.presentedViewController {
+                presentedViewController.present(nav, animated: true) {
+                    completed?()
+                }
+            } else {
+                rootViewController.present(nav, animated: true) {
+                    completed?()
+                }
+            }
+        } else {
+            print("[AppDelegate+GlobalActions] Couldn't locate root view controller to present from.")
+        }
+
+        self.webViewController = nav
+    }
 }
 
 // MARK: - Private ReactiveCocoa Extension
@@ -207,18 +231,9 @@ private extension AppDelegate {
     func showWebController(address: String) -> Observable<Void> {
         return hideWebViewController().then (
             Observable.create { observer in
-                let webController = ModalWebViewController(url: NSURL(string: address)! as URL)
-
-                let nav = UINavigationController(rootViewController: webController)
-                nav.modalPresentationStyle = .formSheet
-
-                ARAnalytics.event("Show Web View", withProperties: ["url" : address])
-                self.window?.rootViewController?.present(nav, animated: true) {
+                self.showUserWebViewAtAddress(address) {
                     sendDispatchCompleted(to: observer)
                 }
-
-                self.webViewController = nav
-
                 return Disposables.create()
             }
         )
