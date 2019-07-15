@@ -98,16 +98,14 @@ extension AppDelegate {
     /// So we store the CocoaAction in a variable private to this file to retain it. Once the action is complete, then we
     /// release our reference to the CocoaAction. This ensures that the action isn't cancelled while it's executing.
     func ensureAction(action: CocoaAction) -> CocoaAction {
-        retainedAction = action
-        let action = CocoaAction { input -> Observable<Void> in
+        return CocoaAction { input -> Observable<Void> in
+            retainedAction = action
             return retainedAction?
                 .execute(input)
                 .do(onCompleted: {
                     retainedAction = nil
                 }) ?? Observable.just(Void())
         }
-
-        return action
     }
 
     func showPrivacyPolicyCommand() -> CocoaAction {
