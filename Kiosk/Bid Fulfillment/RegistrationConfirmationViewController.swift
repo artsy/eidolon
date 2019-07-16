@@ -38,7 +38,7 @@ class RegistrationConfirmationViewController: UIViewController {
 
         let targetRange = ((confirmationLabel.text ?? "") as NSString).range(of: targetConditionsOfSaleText)
         if NSLocationInRange(indexOfCharacter, targetRange) {
-            AppDelegate().showUserWebViewAtAddress("https://artsy.net/conditions-of-sale")
+            AppDelegate().showUserWebViewAtAddress(ConditionsOfSaleLink)
         }
     }
 }

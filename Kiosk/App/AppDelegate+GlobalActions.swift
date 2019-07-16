@@ -110,13 +110,13 @@ extension AppDelegate {
 
     func showPrivacyPolicyCommand() -> CocoaAction {
         return ensureAction(action: CocoaAction { _ in
-            self.hideAllTheThings().then(self.showWebController(address: "https://artsy.net/privacy"))
+            self.hideAllTheThings().then(self.showWebController(address: PrivacyPolicyLink))
         })
     }
 
     func showConditionsOfSaleCommand() -> CocoaAction {
         return ensureAction(action: CocoaAction { _ in
-            self.hideAllTheThings().then(self.showWebController(address: "https://artsy.net/conditions-of-sale"))
+            self.hideAllTheThings().then(self.showWebController(address: ConditionsOfSaleLink))
         })
     }
 
