@@ -7,3 +7,6 @@ struct AnimationDuration {
 
 let SyncInterval: TimeInterval = 60
 let ButtonHeight: CGFloat = 50
+
+let ConditionsOfSaleLink = "https://artsy.net/conditions-of-sale"
+let PrivacyPolicyLink = "https://artsy.net/privacy"

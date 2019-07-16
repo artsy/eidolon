@@ -98,28 +98,50 @@ extension AppDelegate {
     /// So we store the CocoaAction in a variable private to this file to retain it. Once the action is complete, then we
     /// release our reference to the CocoaAction. This ensures that the action isn't cancelled while it's executing.
     func ensureAction(action: CocoaAction) -> CocoaAction {
-        retainedAction = action
-        let action = CocoaAction { input -> Observable<Void> in
+        return CocoaAction { input -> Observable<Void> in
+            retainedAction = action
             return retainedAction?
                 .execute(input)
                 .do(onCompleted: {
                     retainedAction = nil
                 }) ?? Observable.just(Void())
         }
-
-        return action
     }
 
     func showPrivacyPolicyCommand() -> CocoaAction {
         return ensureAction(action: CocoaAction { _ in
-            self.hideAllTheThings().then(self.showWebController(address: "https://artsy.net/privacy"))
+            self.hideAllTheThings().then(self.showWebController(address: PrivacyPolicyLink))
         })
     }
 
     func showConditionsOfSaleCommand() -> CocoaAction {
         return ensureAction(action: CocoaAction { _ in
-            self.hideAllTheThings().then(self.showWebController(address: "https://artsy.net/conditions-of-sale"))
+            self.hideAllTheThings().then(self.showWebController(address: ConditionsOfSaleLink))
         })
+    }
+
+    func showUserWebViewAtAddress(_ address: String, completed: (() -> Void)? = nil) {
+        let webController = ModalWebViewController(url: NSURL(string: address)! as URL)
+
+        let nav = UINavigationController(rootViewController: webController)
+        nav.modalPresentationStyle = .formSheet
+
+        ARAnalytics.event("Show Web View", withProperties: ["url" : address])
+        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+            if let presentedViewController = rootViewController.presentedViewController {
+                presentedViewController.present(nav, animated: true) {
+                    completed?()
+                }
+            } else {
+                rootViewController.present(nav, animated: true) {
+                    completed?()
+                }
+            }
+        } else {
+            print("[AppDelegate+GlobalActions] Couldn't locate root view controller to present from.")
+        }
+
+        self.webViewController = nav
     }
 }
 
@@ -207,18 +229,9 @@ private extension AppDelegate {
     func showWebController(address: String) -> Observable<Void> {
         return hideWebViewController().then (
             Observable.create { observer in
-                let webController = ModalWebViewController(url: NSURL(string: address)! as URL)
-
-                let nav = UINavigationController(rootViewController: webController)
-                nav.modalPresentationStyle = .formSheet
-
-                ARAnalytics.event("Show Web View", withProperties: ["url" : address])
-                self.window?.rootViewController?.present(nav, animated: true) {
+                self.showUserWebViewAtAddress(address) {
                     sendDispatchCompleted(to: observer)
                 }
-
-                self.webViewController = nav
-
                 return Disposables.create()
             }
         )

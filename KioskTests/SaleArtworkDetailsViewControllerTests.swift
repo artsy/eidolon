@@ -46,6 +46,14 @@ class SaleArtworkDetailsViewControllerTests: QuickSpec {
             itBehavesLike("a sale artwork details view controller") { ["subject": subject] }
         }
 
+        describe("with edition information") {
+            beforeEach {
+                subject.saleArtwork.artwork.editionInformation = "Edition 4/10"
+            }
+
+            itBehavesLike("a sale artwork details view controller") { ["subject": subject] }
+        }
+
         describe("with a buyers premium") {
             beforeEach {
                 subject.buyersPremium = { BuyersPremium(id: "id", name: "name") }

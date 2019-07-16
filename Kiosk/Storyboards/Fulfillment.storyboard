@@ -1045,10 +1045,10 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status message goes here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="509" translatesAutoresizingMaskIntoConstraints="NO" id="Hxa-pm-Msp" customClass="ARSerifLabel">
-                                <rect key="frame" x="173" y="360.5" width="468" height="100"/>
+                                <rect key="frame" x="119" y="361" width="577" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="VcM-lT-yMM"/>
-                                    <constraint firstAttribute="width" constant="468" id="ecb-VB-aUK"/>
+                                    <constraint firstAttribute="width" constant="577" id="ecb-VB-aUK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="29"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1066,7 +1066,7 @@
                             <constraint firstItem="YtU-mx-Y9t" firstAttribute="leading" secondItem="5i6-CZ-9za" secondAttribute="leadingMargin" constant="515" id="XpF-0P-etM"/>
                             <constraint firstItem="XzW-dO-Dol" firstAttribute="top" secondItem="ThI-e6-Ovh" secondAttribute="top" constant="-10" id="aUL-cR-GEh"/>
                             <constraint firstItem="YtU-mx-Y9t" firstAttribute="top" secondItem="Wub-hw-p5h" secondAttribute="bottom" constant="15" id="b4e-8G-WC1"/>
-                            <constraint firstItem="Hxa-pm-Msp" firstAttribute="leading" secondItem="5i6-CZ-9za" secondAttribute="leadingMargin" constant="153" id="bcn-WD-L8D"/>
+                            <constraint firstItem="Hxa-pm-Msp" firstAttribute="leading" secondItem="5i6-CZ-9za" secondAttribute="leadingMargin" constant="99" id="bcn-WD-L8D"/>
                             <constraint firstItem="XzW-dO-Dol" firstAttribute="leading" secondItem="ThI-e6-Ovh" secondAttribute="trailing" constant="-119" id="hfH-hP-Icx"/>
                             <constraint firstItem="ThI-e6-Ovh" firstAttribute="leading" secondItem="5i6-CZ-9za" secondAttribute="leadingMargin" constant="45" id="obM-Ld-J98"/>
                             <constraint firstItem="ThI-e6-Ovh" firstAttribute="top" secondItem="7Nb-wA-gsX" secondAttribute="bottom" constant="263" id="rIP-gx-6K7"/>
@@ -1668,10 +1668,10 @@
             </objects>
             <point key="canvasLocation" x="308.5" y="3861.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Registration Confirmation View Controller-->
         <scene sceneID="YLp-8g-M74">
             <objects>
-                <viewController storyboardIdentifier="Register Confirm " id="q7z-ij-DNu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Register Confirm " id="q7z-ij-DNu" customClass="RegistrationConfirmationViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oSp-Yd-K71"/>
                         <viewControllerLayoutGuide type="bottom" id="nQP-V4-lol"/>
@@ -1687,10 +1687,20 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By clicking &quot;Confirm&quot; you agree to the Conditions of Sale." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcN-jF-FDM" customClass="ARSerifLabel">
+                                <rect key="frame" x="-2" y="89" width="442" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="17"/>
+                                <color key="textColor" white="0.42045633599791726" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="ixu-rk-ihw"/>
+                    <connections>
+                        <outlet property="confirmationLabel" destination="jcN-jF-FDM" id="QyB-ck-tsi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUS-C7-HeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2147,7 +2157,7 @@
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbj-bg-ut2" customClass="ARSerifLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your full legal name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbj-bg-ut2" customClass="ARSerifLabel">
                                 <rect key="frame" x="-2" y="5" width="395" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="33"/>
@@ -2184,9 +2194,9 @@
         <image name="edit_button.png" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PK6-h9-FCm"/>
+        <segue reference="6qF-R8-kJy"/>
         <segue reference="NOJ-G3-crU"/>
-        <segue reference="TrF-tJ-vaM"/>
+        <segue reference="A1R-R2-CSF"/>
         <segue reference="Qpe-mM-52j"/>
     </inferredMetricsTieBreakers>
 </document>

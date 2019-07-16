@@ -1,4 +1,9 @@
 upcoming:
+- User registering for sale is prompted for their full legal name [ash]
+- User registering for sale sees a Conditions of Sale link [ash]
+- Lot details view shows edition information [ash]
+- Updates to user interface when outbid or when reserve not met [ash]
+- Fixes problem where opening Conditions of Sale from help would open Privacy Policy [ash]
 
 releases:
 - version: 5.9.4

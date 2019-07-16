@@ -109,6 +109,19 @@ class LoadingViewControllerTests: QuickSpec {
                 expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
             }
 
+
+            it("placing bid success but reserve not met") {
+                subject.placingBid = true
+                let fulfillmentController = StubFulfillmentController()
+                let stubViewModel = StubLoadingViewModel(bidDetails: fulfillmentController.bidDetails)
+                stubViewModel.bidIsResolved.value = true
+                stubViewModel.isHighestBidder.value = true
+                stubViewModel.reserveNotMet.value = true
+                subject.viewModel = stubViewModel
+
+                expect(subject).to( haveValidSnapshot(usesDrawRect: true) )
+            }
+
             it("placing bid error due to outbid") {
                 subject.placingBid = true
                 let fulfillmentController = StubFulfillmentController()

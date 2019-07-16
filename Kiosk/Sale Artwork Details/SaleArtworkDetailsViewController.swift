@@ -72,6 +72,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         case artworkNameLabel
         case artworkMediumLabel
         case artworkDimensionsLabel
+        case artworkEditionInfoLabel
         case imageRightsLabel
         case estimateTopBorder
         case estimateLabel
@@ -159,6 +160,12 @@ class SaleArtworkDetailsViewController: UIViewController {
             metadataStackView.addSubview(dimensionsLabel, withTopMargin: "5", sideMargin: "0")
         }
 
+        if let editionInformation = saleArtwork.artwork.editionInformation {
+            let editionInfoLabel = label(.serif, tag: .artworkEditionInfoLabel)
+            editionInfoLabel.text = editionInformation
+            metadataStackView.addSubview(editionInfoLabel, withTopMargin: "22", sideMargin: "0")
+        }
+
         retrieveImageRights()
             .filter { imageRights -> Bool in
                 return imageRights.isNotEmpty
@@ -169,31 +176,12 @@ class SaleArtworkDetailsViewController: UIViewController {
             })
             .disposed(by: rx.disposeBag)
 
-        let estimateTopBorder = UIView()
-        estimateTopBorder.constrainHeight("1")
-        estimateTopBorder.tag = MetadataStackViewTag.estimateTopBorder.rawValue
-        metadataStackView.addSubview(estimateTopBorder, withTopMargin: "22", sideMargin: "0")
-
-        var estimateBottomBorder: UIView?
-
         let estimateString = saleArtwork.viewModel.estimateString
         if estimateString.isNotEmpty {
             let estimateLabel = label(.serif, tag: .estimateLabel)
             estimateLabel.text = estimateString
-            metadataStackView.addSubview(estimateLabel, withTopMargin: "15", sideMargin: "0")
-
-            estimateBottomBorder = UIView()
-            _ = estimateBottomBorder?.constrainHeight("1")
-            estimateBottomBorder?.tag = MetadataStackViewTag.estimateBottomBorder.rawValue
-            metadataStackView.addSubview(estimateBottomBorder, withTopMargin: "10", sideMargin: "0")
+            metadataStackView.addSubview(estimateLabel, withTopMargin: "22", sideMargin: "0")
         }
-
-        viewWillAppear
-            .subscribe(onCompleted: { [weak estimateTopBorder, weak estimateBottomBorder] in
-                estimateTopBorder?.drawDottedBorders()
-                estimateBottomBorder?.drawDottedBorders()
-            })
-            .disposed(by: rx.disposeBag)
 
         let hasBids = saleArtwork
             .rx.observe(NSNumber.self, "highestBidCents")

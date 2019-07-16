@@ -14,6 +14,7 @@ import SwiftyJSON
 
     dynamic var soldStatus: NSNumber
     dynamic var medium: String?
+    dynamic var editionInformation: String?
     dynamic var dimensions = [String]()
 
     dynamic var imageRights: String?
@@ -54,6 +55,7 @@ import SwiftyJSON
 
         artwork.additionalInfo = json["additional_information"].string
         artwork.medium = json["medium"].string
+        artwork.editionInformation = json["edition_sets"].array?.first?["editions"].string
         artwork.blurb = json["blurb"].string
 
         if let artistDictionary = json["artist"].object as? [String: AnyObject] {
