@@ -1,11 +1,15 @@
 upcoming:
-- User registering for sale is prompted for their full legal name [ash]
-- User registering for sale sees a Conditions of Sale link [ash]
-- Lot details view shows edition information [ash]
-- Updates to user interface when outbid or when reserve not met [ash]
-- Fixes problem where opening Conditions of Sale from help would open Privacy Policy [ash]
 
 releases:
+- version: 5.10.0
+  date: July 24 2019
+  notes:
+  - User registering for sale is prompted for their full legal name [ash]
+  - User registering for sale sees a Conditions of Sale link [ash]
+  - Lot details view shows edition information [ash]
+  - Updates to user interface when outbid or when reserve not met [ash]
+  - Fixes problem where opening Conditions of Sale from help would open Privacy Policy [ash]
+
 - version: 5.9.4
   date: March 26 2019
   notes:
@@ -493,6 +497,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
