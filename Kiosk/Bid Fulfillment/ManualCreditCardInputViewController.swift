@@ -36,34 +36,34 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         billingZipWrapperView.isHidden = true
 
         // We show the enter credit card number, then the date switching the views around
-        viewModel
-            .cardFullDigits
+        cardNumberTextField.rx.text
             .asObservable()
-            .bind(to: cardNumberTextField.rx.text)
+            .replaceNilWith("")
+            .bind(to: viewModel.cardFullDigits)
             .disposed(by: rx.disposeBag)
 
-        viewModel
-            .expirationYear
+        expirationYearTextField.rx.text
             .asObservable()
-            .bind(to: expirationYearTextField.rx.text)
+            .replaceNilWith("")
+            .bind(to: viewModel.expirationYear)
             .disposed(by: rx.disposeBag)
 
-        viewModel
-            .expirationMonth
+        expirationMonthTextField.rx.text
             .asObservable()
-            .bind(to: expirationMonthTextField.rx.text)
+            .replaceNilWith("")
+            .bind(to: viewModel.expirationMonth)
             .disposed(by: rx.disposeBag)
 
-        viewModel
-            .securityCode
+        securitycodeTextField.rx.text
             .asObservable()
-            .bind(to: securitycodeTextField.rx.text)
+            .replaceNilWith("")
+            .bind(to: viewModel.securityCode)
             .disposed(by: rx.disposeBag)
 
-        viewModel
-            .billingZip
+        billingZipTextField.rx.text
             .asObservable()
-            .bind(to: billingZipTextField.rx.text)
+            .replaceNilWith("")
+            .bind(to: viewModel.billingZip)
             .disposed(by: rx.disposeBag)
 
         viewModel
@@ -77,14 +77,19 @@ class ManualCreditCardInputViewController: UIViewController, RegistrationSubCont
         action
             .errors // Based on errors
             .take(1) // On the first error, then forever
+            .logNext()
             .mapReplace(with: false) // Replace the error with false
             .startWith(true) // But begin with true
             .bind(to: billingZipErrorLabel.rx_hidden) // show the error label
             .disposed(by: rx.disposeBag)
 
-        viewModel.moveToYear.take(1).subscribe(onNext: { [weak self] _ in
-            self?.expirationYearTextField.becomeFirstResponder()
-        }).disposed(by: rx.disposeBag)
+        viewModel.moveToYear
+            .take(1)
+            .observeOn(MainScheduler.asyncInstance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.expirationYearTextField.becomeFirstResponder()
+            })
+            .disposed(by: rx.disposeBag)
 
         cardNumberTextField.becomeFirstResponder()
     }

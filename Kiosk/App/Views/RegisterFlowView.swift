@@ -30,9 +30,13 @@ class RegisterFlowView: ORStackView {
         let index: RegistrationIndex
     }
 
+    fileprivate var requireFullNameEntry: Bool {
+        return sale.bypassCreditCardRequirement || appSetup.disableCardReader
+    }
+
     fileprivate lazy var subViewParams: Array<SubViewParams> = {
         return [
-            sale.bypassCreditCardRequirement ? [SubViewParams(title: "Name", getters: [{ $0.name.value }], index: .nameVC)] : [],
+            self.requireFullNameEntry ? [SubViewParams(title: "Name", getters: [{ $0.name.value }], index: .nameVC)] : [],
             [SubViewParams(title: "Mobile", getters: [{ $0.phoneNumber.value }], index: .mobileVC)],
             [SubViewParams(title: "Email", getters: [{ $0.email.value }], index: .emailVC)],
             [SubViewParams(title: "Postal/Zip", getters: [{ $0.zipCode.value }], index: .zipCodeVC)].filter { _ in self.appSetup.needsZipCode },

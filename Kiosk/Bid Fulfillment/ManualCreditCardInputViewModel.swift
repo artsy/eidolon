@@ -26,7 +26,9 @@ class ManualCreditCardInputViewModel: NSObject {
     }
 
     var creditCardNumberIsValid: Observable<Bool> {
-        return cardFullDigits.asObservable().map(stripeManager.stringIsCreditCard)
+        return cardFullDigits
+          .asObservable()
+          .map(stripeManager.stringIsCreditCard)
     }
 
     var expiryDatesAreValid: Observable<Bool> {
