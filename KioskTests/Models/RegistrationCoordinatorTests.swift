@@ -39,12 +39,26 @@ class RegistrationCoordinatorTests: QuickSpec {
                 expect(vc).to( beAKindOf(RegistrationPasswordViewController.self) )
             }
 
-            it ("moves onto credit card after email") {
-                bidDetails.newUser.phoneNumber.value = "5555555555"
-                bidDetails.newUser.email.value = "test@example.com"
-                bidDetails.newUser.password.value = "password"
-                let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
-                expect(vc).to( beAKindOf(SwipeCreditCardViewController.self) )
+            describe("with CC swipe enabled") {
+                it("moves onto credit card after email") {
+                    AppSetup.sharedState.disableCardReader = false
+                    bidDetails.newUser.phoneNumber.value = "5555555555"
+                    bidDetails.newUser.email.value = "test@example.com"
+                    bidDetails.newUser.password.value = "password"
+                    let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
+                    expect(vc).to( beAKindOf(SwipeCreditCardViewController.self) )
+                }
+            }
+
+            describe("with CC swipe disabled") {
+                it("moves onto manual credit card input after email") {
+                    AppSetup.sharedState.disableCardReader = true
+                    bidDetails.newUser.phoneNumber.value = "5555555555"
+                    bidDetails.newUser.email.value = "test@example.com"
+                    bidDetails.newUser.password.value = "password"
+                    let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
+                    expect(vc).to( beAKindOf(ManualCreditCardInputViewController.self) )
+                }
             }
 
             it("confirms after all data is entered") {
