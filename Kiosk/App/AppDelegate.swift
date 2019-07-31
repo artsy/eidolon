@@ -6,6 +6,8 @@ import Keys
 import Stripe
 import MediaPlayer
 
+typealias EidolonKeys = KioskKeys
+
 let PhoneNumberRegionKey = "PhoneNumberRegion"
 
 @UIApplicationMain
