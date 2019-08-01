@@ -45,7 +45,7 @@ class RegistrationCoordinator: NSObject {
             return Variable(.mobileVC)
         }
     }()
-    // sale is used only for _currentIndex, and is readwrite for unit testing purposes.
+    // This is readwrite for unit testing purposes only.
     lazy var sale: Sale! = appDelegate().sale
     lazy var appSetup: AppSetup = AppSetup.sharedState
     var currentIndex: Observable<RegistrationIndex> {
@@ -83,7 +83,7 @@ class RegistrationCoordinator: NSObject {
         }
     }
 
-    func nextViewControllerForBidDetails(_ details: BidDetails, sale: Sale) -> UIViewController {
+    func nextViewControllerForBidDetails(_ details: BidDetails) -> UIViewController {
         if (self.requireFullNameEntry) {
             if notSet(details.newUser.name.value) {
                 return viewControllerForIndex(.nameVC)

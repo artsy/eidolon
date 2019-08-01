@@ -74,7 +74,7 @@ class RegisterViewController: UIViewController {
     }
 
     func goToNextVC() {
-        let nextVC = coordinator.nextViewControllerForBidDetails(fulfillmentNav().bidDetails, sale: sale)
+        let nextVC = coordinator.nextViewControllerForBidDetails(fulfillmentNav().bidDetails)
         goToViewController(nextVC)
     }
 
