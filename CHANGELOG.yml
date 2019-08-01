@@ -1,5 +1,6 @@
 upcoming:
 - Fixes manual credit card input [ash]
+- User is prompted for full legal name when registering with manual CC input [ash]
 
 releases:
 - version: 5.10.0

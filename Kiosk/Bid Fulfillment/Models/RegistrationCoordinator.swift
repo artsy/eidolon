@@ -37,17 +37,25 @@ enum RegistrationIndex {
 
 class RegistrationCoordinator: NSObject {
     fileprivate lazy var _currentIndex: Variable<RegistrationIndex> = {
-        if (self.sale.bypassCreditCardRequirement) { // Access global state here, oops.
+        // Access global state here, oops. Normally we want to be "reactive", but this
+        // lazy prop only gets executed once.
+        if (self.requireFullNameEntry) {
             return Variable(.nameVC)
         } else {
             return Variable(.mobileVC)
         }
     }()
-    // sale is used only for _currentIndex, and is readwrite for unit testing purposes.
+    // This is readwrite for unit testing purposes only.
     lazy var sale: Sale! = appDelegate().sale
+    lazy var appSetup: AppSetup = AppSetup.sharedState
     var currentIndex: Observable<RegistrationIndex> {
         return _currentIndex.asObservable().distinctUntilChanged()
     }
+
+    fileprivate var requireFullNameEntry: Bool {
+        return sale.bypassCreditCardRequirement || appSetup.disableCardReader
+    }
+
     var storyboard: UIStoryboard!
 
     func viewControllerForIndex(_ index: RegistrationIndex) -> UIViewController {
@@ -65,7 +73,7 @@ class RegistrationCoordinator: NSObject {
         case .zipCodeVC:
             return storyboard.viewController(withID: .RegisterPostalorZip)
         case .creditCardVC:
-            if AppSetup.sharedState.disableCardReader {
+            if appSetup.disableCardReader {
                 return storyboard.viewController(withID: .ManualCardDetailsInput)
             } else {
                 return storyboard.viewController(withID: .RegisterCreditCard)
@@ -75,8 +83,8 @@ class RegistrationCoordinator: NSObject {
         }
     }
 
-    func nextViewControllerForBidDetails(_ details: BidDetails, sale: Sale) -> UIViewController {
-        if (sale.bypassCreditCardRequirement) {
+    func nextViewControllerForBidDetails(_ details: BidDetails) -> UIViewController {
+        if (self.requireFullNameEntry) {
             if notSet(details.newUser.name.value) {
                 return viewControllerForIndex(.nameVC)
             }
@@ -94,7 +102,7 @@ class RegistrationCoordinator: NSObject {
             return viewControllerForIndex(.passwordVC)
         }
 
-        if notSet(details.newUser.zipCode.value) && AppSetup.sharedState.needsZipCode {
+        if notSet(details.newUser.zipCode.value) && appSetup.needsZipCode {
             return viewControllerForIndex(.zipCodeVC)
         }
         
