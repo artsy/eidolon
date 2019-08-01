@@ -1,8 +1,12 @@
 upcoming:
-- Fixes manual credit card input [ash]
-- User is prompted for full legal name when registering with manual CC input [ash]
 
 releases:
+- version: 5.12.0
+  date: August 01 2019
+  notes:
+  - Fixes manual credit card input [ash]
+  - User is prompted for full legal name when registering with manual CC input [ash]
+
 - version: 5.10.0
   date: July 24 2019
   notes:
@@ -499,6 +503,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 
