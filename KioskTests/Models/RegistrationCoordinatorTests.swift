@@ -16,30 +16,67 @@ class RegistrationCoordinatorTests: QuickSpec {
             sale = makeSale()
             subject = RegistrationCoordinator()
             subject.storyboard = fulfillmentStoryboard
+            subject.appSetup = AppSetup.sharedState
+            subject.appSetup.disableCardReader = false
             subject.sale = sale
         }
 
         describe("nextViewControllerForBidDetails") {
-            it("defaults to the mobile VC") {
-                let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
-                expect(vc).to( beAKindOf(RegistrationMobileViewController.self) )
+            describe("with CC reader enabled on the device") {
+                it("defaults to the mobile VC") {
+                    let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
+                    expect(vc).to( beAKindOf(RegistrationMobileViewController.self) )
+                }
+
+                it("moves onto email after mobile") {
+                    bidDetails.newUser.phoneNumber.value = "5555555555"
+                    let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
+                    expect(vc).to( beAKindOf(RegistrationEmailViewController.self) )
+                }
+
+                it("moves onto password if there is no PIN") {
+                    bidDetails.newUser.phoneNumber.value = "5555555555"
+                    bidDetails.newUser.email.value = "test@example.com"
+                    bidDetails.bidderPIN.value = nil
+                    let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
+                    expect(vc).to( beAKindOf(RegistrationPasswordViewController.self) )
+                }
             }
 
-            it("moves onto email after mobile") {
-                bidDetails.newUser.phoneNumber.value = "5555555555"
-                let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
-                expect(vc).to( beAKindOf(RegistrationEmailViewController.self) )
+            describe("with CC reader disabled on device") {
+                beforeEach {
+                    subject.appSetup.disableCardReader = true
+                }
+
+                it("defaults to the name VC") {
+                    let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
+                    expect(vc).to( beAKindOf(RegistrationNameViewController.self) )
+                }
+
+                it("moves onto mobile after name") {
+                    bidDetails.newUser.name.value = "Fname Lname"
+                    let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
+                    expect(vc).to( beAKindOf(RegistrationMobileViewController.self) )
+                }
+
+                it("moves onto email after mobile") {
+                    bidDetails.newUser.name.value = "Fname Lname"
+                    bidDetails.newUser.phoneNumber.value = "5555555555"
+                    let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
+                    expect(vc).to( beAKindOf(RegistrationEmailViewController.self) )
+                }
+
+                it("moves onto password if there is no PIN") {
+                    bidDetails.newUser.name.value = "Fname Lname"
+                    bidDetails.newUser.phoneNumber.value = "5555555555"
+                    bidDetails.newUser.email.value = "test@example.com"
+                    bidDetails.bidderPIN.value = nil
+                    let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
+                    expect(vc).to( beAKindOf(RegistrationPasswordViewController.self) )
+                }
             }
 
-            it("moves onto password if there is no PIN") {
-                bidDetails.newUser.phoneNumber.value = "5555555555"
-                bidDetails.newUser.email.value = "test@example.com"
-                bidDetails.bidderPIN.value = nil
-                let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
-                expect(vc).to( beAKindOf(RegistrationPasswordViewController.self) )
-            }
-
-            describe("with CC swipe enabled") {
+            describe("with CC swipe enabled on the sale") {
                 it("moves onto credit card after email") {
                     AppSetup.sharedState.disableCardReader = false
                     bidDetails.newUser.phoneNumber.value = "5555555555"
@@ -47,17 +84,6 @@ class RegistrationCoordinatorTests: QuickSpec {
                     bidDetails.newUser.password.value = "password"
                     let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
                     expect(vc).to( beAKindOf(SwipeCreditCardViewController.self) )
-                }
-            }
-
-            describe("with CC swipe disabled") {
-                it("moves onto manual credit card input after email") {
-                    AppSetup.sharedState.disableCardReader = true
-                    bidDetails.newUser.phoneNumber.value = "5555555555"
-                    bidDetails.newUser.email.value = "test@example.com"
-                    bidDetails.newUser.password.value = "password"
-                    let vc = subject.nextViewControllerForBidDetails(bidDetails, sale: sale)
-                    expect(vc).to( beAKindOf(ManualCreditCardInputViewController.self) )
                 }
             }
 
@@ -79,6 +105,7 @@ class RegistrationCoordinatorTests: QuickSpec {
             describe("with swipeless sale") {
                 beforeEach {
                     sale = makeSale(bypassCreditCardRequirement: true)
+                    subject.sale = sale
                 }
 
                 it("defaults to the name VC") {
