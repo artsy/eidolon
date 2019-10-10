@@ -38,6 +38,10 @@ class RegisterViewController: UIViewController {
         coordinator.storyboard = self.storyboard!
         let indexIsConfirmed = coordinator.currentIndex.map { return ($0 == RegistrationIndex.confirmVC) }
 
+        // We bind this to a Conditions-of-Sale checkbox in goToViewController().
+        // We set it to `false` by default so that it doesn't flash when becoming visible.
+        confirmButton.isEnabled = false
+
         indexIsConfirmed
             .not()
             .bind(to: confirmButton.rx_hidden)
@@ -89,6 +93,14 @@ class RegisterViewController: UIViewController {
                     self?.goToNextVC()
                     self?.flowView.update()
                 })
+        }
+
+        // Since the confirmation is the last step, we can't use the normal RegistrationSubController protocol, as above.
+        if let registationConfirmationViewController = controller as? RegistrationConfirmationViewController {
+            registationConfirmationViewController
+                .conditionsOfSaleChecked
+                .bind(to: self.confirmButton.rx.isEnabled)
+                .disposed(by: rx.disposeBag)
         }
 
         if let viewController = controller as? RegistrationPasswordViewController {

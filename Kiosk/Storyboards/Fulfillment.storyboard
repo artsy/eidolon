@@ -1680,6 +1680,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="449" height="485"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="left" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R87-pJ-OQN">
+                                <rect key="frame" x="0.0" y="86" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="checkmark_unchecked"/>
+                                <connections>
+                                    <action selector="conditionsOfSaleCheckmarkTapped:" destination="q7z-ij-DNu" eventType="touchUpInside" id="gPa-dm-9Dt"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Confirm that the information you have entered is correct" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vz6-lh-S4r" customClass="ARSerifLabel">
                                 <rect key="frame" x="-2" y="5" width="442" height="76"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1687,8 +1695,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By clicking &quot;Confirm&quot; you agree to the Conditions of Sale." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcN-jF-FDM" customClass="ARSerifLabel">
-                                <rect key="frame" x="-2" y="89" width="442" height="39"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I agree to the Conditions of Sale." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcN-jF-FDM" customClass="ARSerifLabel">
+                                <rect key="frame" x="32" y="89" width="408" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="17"/>
                                 <color key="textColor" white="0.42045633599791726" alpha="1" colorSpace="calibratedWhite"/>
@@ -1699,6 +1707,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ixu-rk-ihw"/>
                     <connections>
+                        <outlet property="conditionsOfSaleCheckbox" destination="R87-pJ-OQN" id="0NC-mb-Ca4"/>
                         <outlet property="confirmationLabel" destination="jcN-jF-FDM" id="QyB-ck-tsi"/>
                     </connections>
                 </viewController>
@@ -2191,6 +2200,7 @@
     <resources>
         <image name="BidHighestBidder" width="46" height="46"/>
         <image name="CardSwipe" width="1923" height="1801"/>
+        <image name="checkmark_unchecked" width="20" height="20"/>
         <image name="edit_button.png" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
