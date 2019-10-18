@@ -1,13 +1,10 @@
 import UIKit
-import ECPhoneNumberFormatter
 import Moya
 import RxSwift
 import Action
 
 class ConfirmYourBidViewController: UIViewController {
-
     fileprivate var _number = Variable("")
-    let phoneNumberFormatter = ECPhoneNumberFormatter()
 
     @IBOutlet var bidDetailsPreviewView: BidDetailsPreviewView!
     @IBOutlet var numberAmountTextField: TextField!
@@ -46,7 +43,6 @@ class ConfirmYourBidViewController: UIViewController {
             .disposed(by: rx.disposeBag)
 
         number
-            .map(toPhoneNumberString)
             .bind(to: numberAmountTextField.rx.text)
             .disposed(by: rx.disposeBag)
 
@@ -138,14 +134,6 @@ class ConfirmYourBidViewController: UIViewController {
         } else if segue == .ConfirmyourBidBidderFound {
             let viewController = segue.destination as! ConfirmYourBidPINViewController
             viewController.provider = provider
-        }
-    }
-
-    func toPhoneNumberString(_ number: String) -> String {
-        if number.count >= 7 {
-            return phoneNumberFormatter.string(for: number) ?? number
-        } else {
-            return number
         }
     }
 }

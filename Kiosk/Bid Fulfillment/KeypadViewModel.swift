@@ -27,6 +27,12 @@ class KeypadViewModel: NSObject {
         }
     }()
     
+    lazy var addPlusAction: CocoaAction = {
+        return CocoaAction { [weak self] _ in
+            return self?.addPlus() ?? .empty()
+        }
+    }()
+    
     lazy var addDigitAction: Action<Int, Void> = {
         let localSelf = self
         return Action<Int, Void> { [weak localSelf] input in
@@ -69,6 +75,25 @@ private extension KeypadViewModel {
                     strongSelf.currencyValue.value = newValue
                 }
                 strongSelf.stringValue.value = "\(strongSelf.stringValue.value)\(input)"
+            }
+            observer.onCompleted()
+            return Disposables.create()
+        }
+    }
+
+    func addPlus() -> Observable<Void> {
+        return Observable.create { [weak self] observer in
+            if let strongSelf = self {
+                // currencyValue ignores plus signs
+                let currentStringValue = strongSelf.stringValue.value
+
+                // Plus will toggle
+                if !currentStringValue.contains("+") {
+                    // Plus sign can only go at the beginning
+                    strongSelf.stringValue.value = "+\(currentStringValue)"
+                } else {
+                    strongSelf.stringValue.value = currentStringValue.replacingOccurrences(of: "+", with: "")
+                }
             }
             observer.onCompleted()
             return Disposables.create()

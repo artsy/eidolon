@@ -9,7 +9,7 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
     let finished = PublishSubject<Void>()
 
     lazy var viewModel: GenericFormValidationViewModel = {
-        // numberTextField contains only valid characters, see the delegate method below.
+        // numberTextField
         let numberIsValid = self.numberTextField.rx.text.asObservable().replaceNilWith("").map(isZeroLength).not()
         return GenericFormValidationViewModel(isValid: numberIsValid, manualInvocation: self.numberTextField.rx_returnKey, finishedSubject: self.finished)
     }()
