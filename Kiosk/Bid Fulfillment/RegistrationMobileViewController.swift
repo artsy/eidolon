@@ -9,6 +9,7 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
     let finished = PublishSubject<Void>()
 
     lazy var viewModel: GenericFormValidationViewModel = {
+        // numberTextField contains only valid characters, see the delegate method below.
         let numberIsValid = self.numberTextField.rx.text.asObservable().replaceNilWith("").map(isZeroLength).not()
         return GenericFormValidationViewModel(isValid: numberIsValid, manualInvocation: self.numberTextField.rx_returnKey, finishedSubject: self.finished)
     }()
@@ -48,8 +49,11 @@ class RegistrationMobileViewController: UIViewController, RegistrationSubControl
         if string.isEmpty { return true }
 
         // the API doesn't accept chars
-        let notNumberChars = CharacterSet.decimalDigits.inverted;
-        return string.trimmingCharacters(in: notNumberChars).isNotEmpty
+
+        var phoneNumberCharacters = CharacterSet.decimalDigits
+        phoneNumberCharacters.insert("+")
+        // return true iff string - phoneNumberCharacters = ""
+        return string.trimmingCharacters(in: phoneNumberCharacters).isEmpty
     }
 
     class func instantiateFromStoryboard(_ storyboard: UIStoryboard) -> RegistrationMobileViewController {
