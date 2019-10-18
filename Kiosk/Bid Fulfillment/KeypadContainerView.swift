@@ -21,14 +21,18 @@ class KeypadContainerView: UIView {
     var isPhoneNumberEntry: Bool = false
 
     override func prepareForInterfaceBuilder() {
-        for subview in subviews { subview.removeFromSuperview() }
+        super.prepareForInterfaceBuilder()
 
-        let bundle = Bundle(for: type(of: self))
-        let image  = UIImage(named: "KeypadViewPreviewIB", in: bundle, compatibleWith: self.traitCollection)
-        let imageView = UIImageView(frame: self.bounds)
-        imageView.image = image
+        keypad = Bundle(for: type(of: self)).loadNibNamed("KeypadView", owner: self, options: nil)?.first as? KeypadView
 
-        self.addSubview(imageView)
+        if self.isPhoneNumberEntry {
+            keypad.setLeftButton(.plus)
+        } else {
+            keypad.setLeftButton(.delete)
+        }
+
+        self.addSubview(keypad)
+        keypad.align(to: self)
     }
 
     override func awakeFromNib() {

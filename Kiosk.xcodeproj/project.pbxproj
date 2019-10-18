@@ -89,7 +89,6 @@
 		5E86108C1A5C429C00456E41 /* FulfillmentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E86100D1A5C429C00456E41 /* FulfillmentNavigationController.swift */; };
 		5E86108D1A5C429C00456E41 /* KeypadContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E86100E1A5C429C00456E41 /* KeypadContainerView.swift */; };
 		5E86108E1A5C429C00456E41 /* KeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E86100F1A5C429C00456E41 /* KeypadView.swift */; };
-		5E86108F1A5C429C00456E41 /* KeypadViewPreviewIB.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E8610101A5C429C00456E41 /* KeypadViewPreviewIB.png */; };
 		5E8610901A5C429C00456E41 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610111A5C429C00456E41 /* LoadingViewController.swift */; };
 		5E8610911A5C429C00456E41 /* ManualCreditCardInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610121A5C429C00456E41 /* ManualCreditCardInputViewController.swift */; };
 		5E8610921A5C429C00456E41 /* BidDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610141A5C429C00456E41 /* BidDetails.swift */; };
@@ -330,7 +329,6 @@
 		5E86100D1A5C429C00456E41 /* FulfillmentNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FulfillmentNavigationController.swift; sourceTree = "<group>"; };
 		5E86100E1A5C429C00456E41 /* KeypadContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadContainerView.swift; sourceTree = "<group>"; };
 		5E86100F1A5C429C00456E41 /* KeypadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeypadView.swift; sourceTree = "<group>"; };
-		5E8610101A5C429C00456E41 /* KeypadViewPreviewIB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KeypadViewPreviewIB.png; sourceTree = "<group>"; };
 		5E8610111A5C429C00456E41 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		5E8610121A5C429C00456E41 /* ManualCreditCardInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualCreditCardInputViewController.swift; sourceTree = "<group>"; };
 		5E8610141A5C429C00456E41 /* BidDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidDetails.swift; sourceTree = "<group>"; };
@@ -632,7 +630,6 @@
 				5E86100E1A5C429C00456E41 /* KeypadContainerView.swift */,
 				5E86100F1A5C429C00456E41 /* KeypadView.swift */,
 				5E748B721AA11BCF00DE3A9D /* KeypadViewModel.swift */,
-				5E8610101A5C429C00456E41 /* KeypadViewPreviewIB.png */,
 				5E8610111A5C429C00456E41 /* LoadingViewController.swift */,
 				5EA6B1101B668F8300FEB3ED /* LoadingViewModel.swift */,
 				5E8610121A5C429C00456E41 /* ManualCreditCardInputViewController.swift */,
@@ -1034,7 +1031,6 @@
 				5E8610A61A5C429C00456E41 /* Auction.storyboard in Resources */,
 				5E8610AE1A5C429C00456E41 /* AuctionInfo.json in Resources */,
 				5E8610A81A5C429C00456E41 /* KeypadView.xib in Resources */,
-				5E86108F1A5C429C00456E41 /* KeypadViewPreviewIB.png in Resources */,
 				5E8610BF1A5C429C00456E41 /* XApp.json in Resources */,
 				5E8610B71A5C429C00456E41 /* Me.json in Resources */,
 				5E8610BD1A5C429C00456E41 /* RegisterToBid.json in Resources */,
