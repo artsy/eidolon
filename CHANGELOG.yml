@@ -1,6 +1,11 @@
 upcoming:
 
 releases:
+- version: 5.13.3
+  date: October 22 2019
+  notes:
+  - Updates to use App Center for deploys [ash & daniel]
+
 - version: 5.13.2
   date: October 22 2019
   notes:
@@ -509,6 +514,7 @@ releases:
   - Bid fulfillment shows in a popover [orta]
   - Bid Fulfillment flow is prototypical via the bottom buttons [orta]
   - Analytics / Hockey setup [orta]
+
 
 
 

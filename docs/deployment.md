@@ -5,7 +5,7 @@
 We deploy using [Fastlane](https://github.com/KrauseFx/fastlane). You'll need the following environment variables set up.
 
 ```
-export HOCKEY_API_TOKEN='THE_SECRET_TOKEN_YOU_GOT_FROM_1PASSWORD'
+export APP_CENTER_TOKEN='THE_SECRET_TOKEN_YOU_GOT_FROM_1PASSWORD'
 export SLACK_URL='https://hooks.slack.com/services/REST_OF_THE_URL_FROM_1PASSWORD'
 ```
 
