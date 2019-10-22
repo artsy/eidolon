@@ -1,5 +1,6 @@
 upcoming:
 - Adds checkbox for agreeing to Conditions of Sale [ash]
+- Adds support for manually-entered internation phone numbers [ash]
 
 releases:
 - version: 5.12.0
