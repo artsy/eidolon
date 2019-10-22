@@ -58,7 +58,7 @@ lane :deploy do |options|
   raise "You must specify a APP_CENTER_TOKEN environment variable to deploy." if app_center_api_token.nil?
 
   # Make sure not to ship with OSS
-  # verify_pod_keys
+  verify_pod_keys
 
   # Increment build number to current date
   build_number = Time.new.strftime("%Y.%m.%d")
@@ -122,12 +122,12 @@ EOS
   )
 
   # Make sure our directory is clean, except for changes Fastlane has made
-  # clean_build_artifacts
+  clean_build_artifacts
 
   # Tag release and push to GitHub
-  # sh "git add .. ; git commit -m 'Deploying version #{version}.'" # Can't use commit_version_bump to include changelog changes
-  # add_git_tag tag: version
-  # push_to_git_remote
+  sh "git add .. ; git commit -m 'Deploying version #{version}.'" # Can't use commit_version_bump to include changelog changes
+  add_git_tag tag: version
+  push_to_git_remote
 end
 
 desc "Updates the storyboard identifier Swift values."
@@ -138,6 +138,6 @@ end
 error do |lane, exception|
   if lane == :deploy
     puts "Unable to deploy, removing build artefacts."
-    # clean_build_artifacts
+    clean_build_artifacts
   end
 end

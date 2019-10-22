@@ -40,7 +40,6 @@ target 'Kiosk' do
   pod 'SVProgressHUD'
   
   pod 'ARAnalytics/Segmentio'
-  pod 'ARAnalytics/HockeyApp'
 
   pod 'CardFlight', '~> 3.0'
   pod 'Stripe'
