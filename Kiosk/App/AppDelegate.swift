@@ -59,8 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         ARAnalytics.setup(withAnalytics: [
-            ARHockeyAppBetaID: keys.hockeyBetaSecret,
-            ARHockeyAppLiveID: keys.hockeyProductionSecret,
             ARSegmentioWriteKey: keys.segmentWriteKey
         ])
 

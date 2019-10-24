@@ -39,10 +39,7 @@ target 'Kiosk' do
   pod 'SDWebImage', '~> 3.7'
   pod 'SVProgressHUD'
   
-  # Required as a workaround for https://github.com/bitstadium/HockeySDK-iOS/pull/421
-  pod 'HockeySDK-Source', git: 'https://github.com/bitstadium/HockeySDK-iOS.git'
   pod 'ARAnalytics/Segmentio'
-  pod 'ARAnalytics/HockeyApp'
 
   pod 'CardFlight', '~> 3.0'
   pod 'Stripe'
