@@ -4,7 +4,7 @@ GEM
     CFPropertyList (3.0.0)
     RubyInline (3.12.4)
       ZenTest (~> 4.3)
-    ZenTest (4.11.1)
+    ZenTest (4.12.0)
     activesupport (4.2.10)
       i18n (~> 0.7)
       minitest (~> 5.1)
@@ -223,4 +223,4 @@ DEPENDENCIES
   second_curtain
 
 BUNDLED WITH
-   1.16.1
+   1.17.3
