@@ -86,16 +86,8 @@ class RegisterFlowViewTests: QuickSpec {
             subject.backgroundColor = .white
         }
 
-        describe("requiring zip code") {
+        describe("on a sale that has credit card requirements") {
             itBehavesLike("a register flow view") { () -> [String: Any] in
-                appSetup.disableCardReader = true
-                return ["subject": subject]
-            }
-        }
-
-        describe("not requiring zip code") {
-            itBehavesLike("a register flow view") { () -> [String: Any] in
-                appSetup.disableCardReader = false
                 return ["subject": subject]
             }
         }
