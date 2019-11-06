@@ -6,14 +6,8 @@ plugin 'cocoapods-keys', {
   :keys => [
     'ArtsyAPIClientSecret',
     'ArtsyAPIClientKey',
-    'HockeyProductionSecret',
-    'HockeyBetaSecret',
     'SegmentWriteKey',
-    'CardflightProductionAPIClientKey',
-    'CardflightProductionMerchantAccountToken',
     'StripeProductionPublishableKey',
-    'CardflightStagingAPIClientKey',
-    'CardflightStagingMerchantAccountToken',
     'StripeStagingPublishableKey'
   ]
 }
