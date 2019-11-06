@@ -3,7 +3,7 @@ Artsy Development
 
 Working for Artsy? Awesome. Setup instructions are a bit different from the README.
 
-You'll need some tools first. Xcode 7 is required, as well as the command-line tools (you probably already have these installed). After installing Xcode, run the following command:
+You'll need some tools first. Xcode 9 is required, as well as the command-line tools (you probably already have these installed). After installing Xcode, run the following command:
 
 ```sh
 xcode-select --install
