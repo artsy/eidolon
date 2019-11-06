@@ -24,7 +24,6 @@
 		5E82BD351AF2C6E700CB02DD /* YourBiddingDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E82BD341AF2C6E700CB02DD /* YourBiddingDetailsViewControllerTests.swift */; };
 		5E82BD371AF2C8FF00CB02DD /* UILabelExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E82BD361AF2C8FF00CB02DD /* UILabelExtensionsTests.swift */; };
 		5E853EBE1A8BC9A200F91C0D /* BuyersPremium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E853EBD1A8BC9A200F91C0D /* BuyersPremium.swift */; };
-		5E86104B1A5C429C00456E41 /* AdminCardTestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */; };
 		5E86104C1A5C429C00456E41 /* AdminLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC41A5C429C00456E41 /* AdminLogViewController.swift */; };
 		5E86104D1A5C429C00456E41 /* AdminPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC51A5C429C00456E41 /* AdminPanelViewController.swift */; };
 		5E86104E1A5C429C00456E41 /* AuctionWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FC61A5C429C00456E41 /* AuctionWebViewController.swift */; };
@@ -35,7 +34,6 @@
 		5E8610531A5C429C00456E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FCC1A5C429C00456E41 /* AppDelegate.swift */; };
 		5E8610541A5C429C00456E41 /* AppSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FCD1A5C429C00456E41 /* AppSetup.swift */; };
 		5E8610551A5C429C00456E41 /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FCE1A5C429C00456E41 /* AppViewController.swift */; };
-		5E8610561A5C429C00456E41 /* CardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FCF1A5C429C00456E41 /* CardHandler.swift */; };
 		5E8610571A5C429C00456E41 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FD01A5C429C00456E41 /* Constants.swift */; };
 		5E8610581A5C429C00456E41 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FD11A5C429C00456E41 /* GlobalFunctions.swift */; };
 		5E8610591A5C429C00456E41 /* MarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860FD21A5C429C00456E41 /* MarkdownParser.swift */; };
@@ -101,7 +99,6 @@
 		5E86109A1A5C429C00456E41 /* RegistrationMobileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E86101C1A5C429C00456E41 /* RegistrationMobileViewController.swift */; };
 		5E86109B1A5C429C00456E41 /* RegistrationPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E86101D1A5C429C00456E41 /* RegistrationPasswordViewController.swift */; };
 		5E86109C1A5C429C00456E41 /* RegistrationPostalZipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E86101E1A5C429C00456E41 /* RegistrationPostalZipViewController.swift */; };
-		5E86109D1A5C429C00456E41 /* SwipeCreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E86101F1A5C429C00456E41 /* SwipeCreditCardViewController.swift */; };
 		5E86109E1A5C429C00456E41 /* toolbar_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E8610201A5C429C00456E41 /* toolbar_close@2x.png */; };
 		5E86109F1A5C429C00456E41 /* YourBiddingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610211A5C429C00456E41 /* YourBiddingDetailsViewController.swift */; };
 		5E8610A01A5C429C00456E41 /* HelpAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8610231A5C429C00456E41 /* HelpAnimator.swift */; };
@@ -263,7 +260,6 @@
 		5E82BD341AF2C6E700CB02DD /* YourBiddingDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourBiddingDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		5E82BD361AF2C8FF00CB02DD /* UILabelExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtensionsTests.swift; sourceTree = "<group>"; };
 		5E853EBD1A8BC9A200F91C0D /* BuyersPremium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyersPremium.swift; sourceTree = "<group>"; };
-		5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCardTestingViewController.swift; sourceTree = "<group>"; };
 		5E860FC41A5C429C00456E41 /* AdminLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminLogViewController.swift; sourceTree = "<group>"; };
 		5E860FC51A5C429C00456E41 /* AdminPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminPanelViewController.swift; sourceTree = "<group>"; };
 		5E860FC61A5C429C00456E41 /* AuctionWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuctionWebViewController.swift; sourceTree = "<group>"; };
@@ -274,7 +270,6 @@
 		5E860FCC1A5C429C00456E41 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E860FCD1A5C429C00456E41 /* AppSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSetup.swift; sourceTree = "<group>"; };
 		5E860FCE1A5C429C00456E41 /* AppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
-		5E860FCF1A5C429C00456E41 /* CardHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHandler.swift; sourceTree = "<group>"; };
 		5E860FD01A5C429C00456E41 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5E860FD11A5C429C00456E41 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		5E860FD21A5C429C00456E41 /* MarkdownParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownParser.swift; sourceTree = "<group>"; };
@@ -341,7 +336,6 @@
 		5E86101C1A5C429C00456E41 /* RegistrationMobileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationMobileViewController.swift; sourceTree = "<group>"; };
 		5E86101D1A5C429C00456E41 /* RegistrationPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPasswordViewController.swift; sourceTree = "<group>"; };
 		5E86101E1A5C429C00456E41 /* RegistrationPostalZipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationPostalZipViewController.swift; sourceTree = "<group>"; };
-		5E86101F1A5C429C00456E41 /* SwipeCreditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeCreditCardViewController.swift; sourceTree = "<group>"; };
 		5E8610201A5C429C00456E41 /* toolbar_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar_close@2x.png"; sourceTree = "<group>"; };
 		5E8610211A5C429C00456E41 /* YourBiddingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourBiddingDetailsViewController.swift; sourceTree = "<group>"; };
 		5E8610231A5C429C00456E41 /* HelpAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpAnimator.swift; sourceTree = "<group>"; };
@@ -486,7 +480,6 @@
 		5E860FC21A5C429C00456E41 /* Admin */ = {
 			isa = PBXGroup;
 			children = (
-				5E860FC31A5C429C00456E41 /* AdminCardTestingViewController.swift */,
 				5E860FC41A5C429C00456E41 /* AdminLogViewController.swift */,
 				5E860FC51A5C429C00456E41 /* AdminPanelViewController.swift */,
 				5E860FC61A5C429C00456E41 /* AuctionWebViewController.swift */,
@@ -506,7 +499,6 @@
 				5E860FCC1A5C429C00456E41 /* AppDelegate.swift */,
 				5E860FCD1A5C429C00456E41 /* AppSetup.swift */,
 				5E860FCE1A5C429C00456E41 /* AppViewController.swift */,
-				5E860FCF1A5C429C00456E41 /* CardHandler.swift */,
 				5E860FD01A5C429C00456E41 /* Constants.swift */,
 				5E860FD11A5C429C00456E41 /* GlobalFunctions.swift */,
 				5E860FD21A5C429C00456E41 /* MarkdownParser.swift */,
@@ -638,7 +630,6 @@
 				5E8610171A5C429C00456E41 /* PlaceBidNetworkModel.swift */,
 				5E8610181A5C429C00456E41 /* PlaceBidViewController.swift */,
 				5E86101A1A5C429C00456E41 /* RegisterViewController.swift */,
-				5E86101F1A5C429C00456E41 /* SwipeCreditCardViewController.swift */,
 				5E8610201A5C429C00456E41 /* toolbar_close@2x.png */,
 				5E8610211A5C429C00456E41 /* YourBiddingDetailsViewController.swift */,
 				5EBD314C1AE053ED00648484 /* Registration */,
@@ -1243,7 +1234,6 @@
 			files = (
 				5E19E6501A6564B300F8CBDD /* Logger.swift in Sources */,
 				5E8610751A5C429C00456E41 /* Button.swift in Sources */,
-				5E8610561A5C429C00456E41 /* CardHandler.swift in Sources */,
 				5E8610691A5C429C00456E41 /* ArtsyAPI.swift in Sources */,
 				5E86108E1A5C429C00456E41 /* KeypadView.swift in Sources */,
 				5E8610571A5C429C00456E41 /* Constants.swift in Sources */,
@@ -1262,7 +1252,6 @@
 				5E87BBA81C03C39F00D46BB5 /* Observable+JSONAble.swift in Sources */,
 				5E8610511A5C429C00456E41 /* APIPingManager.swift in Sources */,
 				5E8610981A5C429C00456E41 /* RegisterViewController.swift in Sources */,
-				5E86109D1A5C429C00456E41 /* SwipeCreditCardViewController.swift in Sources */,
 				5E8610591A5C429C00456E41 /* MarkdownParser.swift in Sources */,
 				5E86104E1A5C429C00456E41 /* AuctionWebViewController.swift in Sources */,
 				5E8610861A5C429C00456E41 /* ConfirmYourBidEnterYourEmailViewController.swift in Sources */,
@@ -1299,7 +1288,6 @@
 				5EA6B1111B668F8300FEB3ED /* LoadingViewModel.swift in Sources */,
 				5E86105A1A5C429C00456E41 /* Artist.swift in Sources */,
 				5E86107A1A5C429C00456E41 /* CursorView.swift in Sources */,
-				5E86104B1A5C429C00456E41 /* AdminCardTestingViewController.swift in Sources */,
 				5E8610961A5C429C00456E41 /* PlaceBidViewController.swift in Sources */,
 				5E8610761A5C429C00456E41 /* RegisterFlowView.swift in Sources */,
 				5E748B731AA11BCF00DE3A9D /* KeypadViewModel.swift in Sources */,

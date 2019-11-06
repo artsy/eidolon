@@ -20,7 +20,6 @@ PODS:
     - "Artsy+UIColors (~> 3.0)"
     - "Artsy+UIFonts"
     - "UIView+BooleanAnimations"
-  - CardFlight (3.6.1)
   - DZNWebViewController (2.0):
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
@@ -91,7 +90,6 @@ DEPENDENCIES:
   - "Artsy+UIFonts"
   - "Artsy+UILabels"
   - Artsy-UIButtons
-  - CardFlight (~> 3.0)
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase
@@ -133,7 +131,6 @@ SPEC REPOS:
     - ARAnalytics
     - ARCollectionViewMasonryLayout
     - ARTiledImageView
-    - CardFlight
     - ECPhoneNumberFormatter
     - FBSnapshotTestCase
     - FLKAutoLayout
@@ -188,7 +185,6 @@ SPEC CHECKSUMS:
   "Artsy+UIFonts": 3195e768ca4ca89c03fbddbd82e5f4af5168c5d8
   "Artsy+UILabels": 7cb6e290a4f70dddba037b7dbeb21e90b49d7275
   Artsy-UIButtons: cdcc3ccf4d0d31ee80f45c1d11ffd2d772695b74
-  CardFlight: 7b34237b6098c231d7a0066c3e38610ca3a98112
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
@@ -219,6 +215,6 @@ SPEC CHECKSUMS:
   "UIView+BooleanAnimations": a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: aed98c14f0c0eb20064184ddf9bac26c482722b2
 
-PODFILE CHECKSUM: 260ea1274cf2a06b386602f5a67669018e3ef57a
+PODFILE CHECKSUM: 9deb6b8040bbc8378bb1494d6cf456bfcac9de0e
 
 COCOAPODS: 1.7.4

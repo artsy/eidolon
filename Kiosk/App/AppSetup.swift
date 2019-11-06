@@ -5,7 +5,6 @@ class AppSetup {
     var auctionID = "los-angeles-modern-auctions-march-2015"
     lazy var useStaging = true
     lazy var showDebugButtons = false
-    lazy var disableCardReader = false
     var isTesting = false
 
     class var sharedState : AppSetup {
@@ -23,7 +22,6 @@ class AppSetup {
 
         useStaging = defaults.bool(forKey: "KioskUseStaging")
         showDebugButtons = defaults.bool(forKey: "KioskShowDebugButtons")
-        disableCardReader = defaults.bool(forKey: "KioskDisableCardReader")
 
         if let _ = NSClassFromString("XCTest") { isTesting = true }
     }

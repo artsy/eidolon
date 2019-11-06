@@ -366,103 +366,6 @@
             </objects>
             <point key="canvasLocation" x="2928.5" y="-795"/>
         </scene>
-        <!--Swipe Credit Card View Controller-->
-        <scene sceneID="PDr-Ft-ReI">
-            <objects>
-                <viewController storyboardIdentifier="Register Credit Card" id="HtL-zn-13v" customClass="SwipeCreditCardViewController" customModule="Kiosk" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="z4Z-hs-0qY"/>
-                        <viewControllerLayoutGuide type="bottom" id="LEX-zm-zsH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="e0d-hR-IJc">
-                        <rect key="frame" x="0.0" y="0.0" width="449" height="485"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe your credit card" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ3-lq-NnT" customClass="ARSerifLabel">
-                                <rect key="frame" x="0.0" y="5" width="395" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="33"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="CardSwipe" translatesAutoresizingMaskIntoConstraints="NO" id="RjO-Er-UMG">
-                                <rect key="frame" x="-3" y="127" width="322" height="297"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h0y-O1-7hT" customClass="DeveloperOnlyView" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="424" width="433" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Card Status:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="375" translatesAutoresizingMaskIntoConstraints="NO" id="aHb-WU-8Ia" customClass="ARSerifLabel">
-                                        <rect key="frame" x="8" y="8" width="249" height="57"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="18"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3GD-9R-PMu" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                        <rect key="frame" x="327" y="17" width="106" height="43"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="CC Decline">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="dev_creditCardFailTapped:" destination="HtL-zn-13v" eventType="touchUpInside" id="MyP-PV-tgC"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4eS-5T-1qw" customClass="ActionButton" customModule="Kiosk" customModuleProvider="target">
-                                        <rect key="frame" x="210" y="17" width="109" height="43"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="CC Accept">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="dev_creditCardOKTapped:" destination="HtL-zn-13v" eventType="touchUpInside" id="qk5-aL-rnu"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.85024113329999995" green="1" blue="0.93425605329999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A credit card is required to verify your identity and bid in this auction" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="375" translatesAutoresizingMaskIntoConstraints="NO" id="EOi-yv-Onu" customClass="ARSerifLabel">
-                                <rect key="frame" x="0.0" y="56" width="359" height="57"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AGaramondPro-Regular" family="Adobe Garamond Pro" pointSize="17"/>
-                                <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PROCESSING CREDIT CARD..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxS-TX-lPW">
-                                <rect key="frame" x="37" y="252" width="243" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ITCAvantGardeDemiTrack03" family="ITCAvantGardeDemiTrack03" pointSize="15"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3kx-gQ-2K5" customClass="Spinner" customModule="Kiosk" customModuleProvider="target">
-                                <rect key="frame" x="129" y="281" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="NGp-0a-cZe"/>
-                    <connections>
-                        <outlet property="cardStatusLabel" destination="aHb-WU-8Ia" id="TBG-FV-OYK"/>
-                        <outlet property="illustrationImageView" destination="RjO-Er-UMG" id="k2j-ud-N64"/>
-                        <outlet property="processingLabel" destination="mxS-TX-lPW" id="f7o-RI-Gbx"/>
-                        <outlet property="spinner" destination="3kx-gQ-2K5" id="qNd-VG-O2Y"/>
-                        <outlet property="titleLabel" destination="ZJ3-lq-NnT" id="6uz-yX-WYe"/>
-                        <segue destination="b7X-gR-AEL" kind="push" identifier="RegisterCreditCardToPostal" id="lC0-vU-FuX"/>
-                        <segue destination="MZV-Pg-x2N" kind="push" identifier="UNUSED Manual credit card" id="Z42-pl-Kbe"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PvS-Gg-Iup" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-330.5" y="3861.5"/>
-        </scene>
         <!--Register View Controller-->
         <scene sceneID="qjX-tW-U7k">
             <objects>
@@ -1821,7 +1724,7 @@
                         <outlet property="forgotPasswordButton" destination="sWv-ul-gFs" id="uQa-2k-kE9"/>
                         <outlet property="passwordTextField" destination="IOI-xI-qX8" id="HV5-gm-r02"/>
                         <outlet property="subtitleLabel" destination="ZAU-fw-FVK" id="BDj-YO-CPk"/>
-                        <segue destination="HtL-zn-13v" kind="push" identifier="UNUSED Push to Swipe Credit Card" id="fEp-SB-tlp"/>
+                        <segue destination="MZV-Pg-x2N" kind="push" identifier="UNUSED Manual Billing Zip" id="fpL-kw-g0S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="otW-7h-YjL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2145,11 +2048,12 @@
                         <outlet property="securityCodeConfirmButton" destination="37S-GW-TXB" id="3IQ-aa-gKK"/>
                         <outlet property="securityCodeWrapperView" destination="P8i-qo-Hld" id="9Ht-RJ-rEE"/>
                         <outlet property="securitycodeTextField" destination="iCa-YE-nVI" id="tmH-JD-SCY"/>
+                        <segue destination="b7X-gR-AEL" kind="push" identifier="RegisterCreditCardToPostal" id="X7h-5m-Dgx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OLJ-cQ-M6Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1143.5" y="4484.5"/>
+            <point key="canvasLocation" x="-217" y="3862"/>
         </scene>
         <!--Registration Name View Controller-->
         <scene sceneID="WnX-fc-brR">
@@ -2202,7 +2106,6 @@
     </scenes>
     <resources>
         <image name="BidHighestBidder" width="46" height="46"/>
-        <image name="CardSwipe" width="1923" height="1801"/>
         <image name="checkmark_unchecked" width="20" height="20"/>
         <image name="edit_button.png" width="64" height="64"/>
     </resources>

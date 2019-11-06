@@ -17,8 +17,6 @@
 // Fonts can come from one of two Pods, but each has the same module/header name.
 #import <Artsy_UIFonts/UIFont+ArtsyFonts.h>
 
-#import "CardFlight.h"
-
 #import <UIImageViewAligned/UIImageViewAligned.h>
 #import <DZNWebViewController/DZNWebViewController.h>
 

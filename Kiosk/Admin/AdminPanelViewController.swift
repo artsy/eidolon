@@ -50,9 +50,6 @@ class AdminPanelViewController: UIViewController {
         let buttonsTitle = state.showDebugButtons ? "HIDE" : "SHOW"
         showAdminButtonsButton.setTitle(buttonsTitle, for: .normal)
 
-        let readStatus = state.disableCardReader ? "ENABLE" : "DISABLE"
-        toggleCardReaderButton.setTitle(readStatus, for: .normal)
-
         phoneNumberRegionButton.setTitle(UserDefaults.standard.string(forKey: PhoneNumberRegionKey), for: .normal)
     }
 
@@ -109,16 +106,5 @@ class AdminPanelViewController: UIViewController {
             exit(1)
         }
 
-    }
-
-    @IBOutlet weak var cardReaderLabel: ARSerifLabel!
-    @IBOutlet weak var toggleCardReaderButton: SecondaryActionButton!
-    @IBAction func toggleCardReaderTapped(_ sender: AnyObject) {
-        let defaults = UserDefaults.standard
-        defaults.set(!AppSetup.sharedState.disableCardReader, forKey: "KioskDisableCardReader")
-        defaults.synchronize()
-        delayToMainThread(1){
-            exit(1)
-        }
     }
 }

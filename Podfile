@@ -41,7 +41,6 @@ target 'Kiosk' do
   
   pod 'ARAnalytics/Segmentio'
 
-  pod 'CardFlight', '~> 3.0'
   pod 'Stripe'
   pod 'ECPhoneNumberFormatter'
   pod 'libPhoneNumber-iOS'

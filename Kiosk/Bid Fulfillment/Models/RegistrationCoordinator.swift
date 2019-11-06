@@ -36,24 +36,12 @@ enum RegistrationIndex {
 }
 
 class RegistrationCoordinator: NSObject {
-    fileprivate lazy var _currentIndex: Variable<RegistrationIndex> = {
-        // Access global state here, oops. Normally we want to be "reactive", but this
-        // lazy prop only gets executed once.
-        if (self.requireFullNameEntry) {
-            return Variable(.nameVC)
-        } else {
-            return Variable(.mobileVC)
-        }
-    }()
+    fileprivate lazy var _currentIndex: Variable<RegistrationIndex> = Variable(.nameVC)
     // This is readwrite for unit testing purposes only.
     lazy var sale: Sale! = appDelegate().sale
     lazy var appSetup: AppSetup = AppSetup.sharedState
     var currentIndex: Observable<RegistrationIndex> {
         return _currentIndex.asObservable().distinctUntilChanged()
-    }
-
-    fileprivate var requireFullNameEntry: Bool {
-        return sale.bypassCreditCardRequirement || appSetup.disableCardReader
     }
 
     var storyboard: UIStoryboard!
@@ -73,21 +61,15 @@ class RegistrationCoordinator: NSObject {
         case .zipCodeVC:
             return storyboard.viewController(withID: .RegisterPostalorZip)
         case .creditCardVC:
-            if appSetup.disableCardReader {
-                return storyboard.viewController(withID: .ManualCardDetailsInput)
-            } else {
-                return storyboard.viewController(withID: .RegisterCreditCard)
-            }
+            return storyboard.viewController(withID: .ManualCardDetailsInput)
         case .confirmVC:
             return storyboard.viewController(withID: .RegisterConfirm)
         }
     }
 
     func nextViewControllerForBidDetails(_ details: BidDetails) -> UIViewController {
-        if (self.requireFullNameEntry) {
-            if notSet(details.newUser.name.value) {
-                return viewControllerForIndex(.nameVC)
-            }
+        if notSet(details.newUser.name.value) {
+            return viewControllerForIndex(.nameVC)
         }
         
         if notSet(details.newUser.phoneNumber.value) {
