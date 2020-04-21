@@ -20,9 +20,9 @@ PODS:
     - "Artsy+UIColors (~> 3.0)"
     - "Artsy+UIFonts"
   - Artsy-UIButtons (2.1.0):
-    - Artsy+UIColors (~> 3.0)
-    - Artsy+UIFonts
-    - UIView+BooleanAnimations
+    - "Artsy+UIColors (~> 3.0)"
+    - "Artsy+UIFonts"
+    - "UIView+BooleanAnimations"
   - CardFlight-v4 (4.3.1)
   - DZNWebViewController (2.0):
     - NJKWebViewProgress (~> 0.2)
@@ -125,19 +125,20 @@ DEPENDENCIES:
   - XNGMarkdownParser
 
 SPEC REPOS:
+  https://cdn.cocoapods.org/:
+    - CardFlight-v4
   https://github.com/artsy/Specs.git:
     - "Artsy+UIColors"
     - "Artsy+UIFonts"
     - "Artsy+UILabels"
     - Artsy-UIButtons
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Action
     - Alamofire
     - Analytics
     - ARAnalytics
     - ARCollectionViewMasonryLayout
     - ARTiledImageView
-    - CardFlight
     - ECPhoneNumberFormatter
     - FBSnapshotTestCase
     - FLKAutoLayout
@@ -227,6 +228,6 @@ SPEC CHECKSUMS:
   "UIView+BooleanAnimations": a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: aed98c14f0c0eb20064184ddf9bac26c482722b2
 
-PODFILE CHECKSUM: 9ab3f08861431cedc335a74566f4ea088dff3a0b
+PODFILE CHECKSUM: ce10ff768689cf9fdf33a44347efc78cc4d39c58
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.9.1
