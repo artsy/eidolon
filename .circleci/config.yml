@@ -45,8 +45,9 @@ jobs:
           keys:
           - v2-pods-{{ checksum "Podfile.lock" }}
           - v2-pods-
-      - run: bundle exec pod check || curl -sS https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+
       - run: bundle exec pod check || bundle exec pod install --verbose
+
       - save_cache:
           key: v2-pods-{{ checksum "Podfile.lock" }}
           paths:
