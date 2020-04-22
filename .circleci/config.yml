@@ -20,7 +20,7 @@ jobs:
       CardflightProductionMerchantAccountToken: "-"
       StripeProductionPublishableKey: "-"
     macos:
-      xcode: 9.2.0
+      xcode: 9.4.1
     shell: /bin/bash --login
 
     steps:
@@ -29,11 +29,13 @@ jobs:
       - run: ruby -v
       - run: xcodebuild -version
 
+      - run: xcrun simctl list
+
       # Try to restore installed Gems
       - restore_cache:
           keys:
-          - v1-gems-{{ checksum "Gemfile.lock" }}
-          - v1-gems-
+            - v1-gems-{{ checksum "Gemfile.lock" }}
+            - v1-gems-
       - run: bundle check || bundle install --path=vendor/bundle --jobs 4 --retry 3
       - save_cache:
           key: v1-gems-{{ checksum "Gemfile.lock" }}
@@ -43,10 +45,11 @@ jobs:
       # Try to restore CocoaPods dependencies
       - restore_cache:
           keys:
-          - v2-pods-{{ checksum "Podfile.lock" }}
-          - v2-pods-
-      - run: bundle exec pod check || curl -sS https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+            - v2-pods-{{ checksum "Podfile.lock" }}
+            - v2-pods-
+
       - run: bundle exec pod check || bundle exec pod install --verbose
+
       - save_cache:
           key: v2-pods-{{ checksum "Podfile.lock" }}
           paths:
@@ -55,16 +58,16 @@ jobs:
       # Restore the derived data cache (to speed up CI compile times), run the tests, and store the cache
       - restore_cache:
           keys:
-          - v1-derived-{{ .Branch }}
-          - v1-derived-
-      - run: 
+            - v1-derived-{{ .Branch }}
+            - v1-derived-
+      - run:
           name: Run tests
-          command: set -o pipefail && xcodebuild -destination "name=iPad Air 2,OS=11.2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data build | xcpretty --color
+          command: set -o pipefail && xcodebuild -destination "name=iPad Air 2,OS=11.2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data build test | xcpretty --color
       - save_cache:
           key: v1-derived-{{ .Branch }}
           paths:
-          - derived_data
-      
+            - derived_data
+
       # Teardown
       # Save the Xcode activity log
       - run: find $HOME/Library/Developer/Xcode/DerivedData -name '*.xcactivitylog' -exec cp {} $CIRCLE_ARTIFACTS/xcactivitylog \; || true

@@ -1,5 +1,5 @@
-source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/artsy/Specs.git'
+source 'https://cdn.cocoapods.org/'
 
 plugin 'cocoapods-keys', {
   :project => 'Eidolon',
