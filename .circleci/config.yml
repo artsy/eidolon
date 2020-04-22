@@ -62,7 +62,7 @@ jobs:
             - v1-derived-
       - run:
           name: Run tests
-          command: set -o pipefail && xcodebuild -destination "name=iPad Air 2,OS=11.2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data build | xcpretty --color
+          command: set -o pipefail && xcodebuild -destination "name=iPad Air 2,OS=11.2" -scheme "Kiosk" -workspace "Kiosk.xcworkspace" -derivedDataPath derived_data build test | xcpretty --color
       - save_cache:
           key: v1-derived-{{ .Branch }}
           paths:
