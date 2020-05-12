@@ -49,7 +49,7 @@ target 'Kiosk' do
   pod 'ARAnalytics/HockeyApp'
 
   pod 'CardFlight-v4'
-  pod 'Stripe'
+  pod 'Stripe', '14.0.1'
   pod 'ECPhoneNumberFormatter'
   pod 'UIImageViewAligned', :git => 'https://github.com/ashfurrow/UIImageViewAligned.git'
   pod 'DZNWebViewController', :git => 'https://github.com/orta/DZNWebViewController.git'
