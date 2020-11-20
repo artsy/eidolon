@@ -1,6 +1,5 @@
 import UIKit
 import SystemConfiguration
-import ARAnalytics
 import RxSwift
 import ARCollectionViewMasonryLayout
 import NSObject_Rx
@@ -133,7 +132,6 @@ class ListingsViewController: UIViewController {
             let detailsViewController = segue.destination as! SaleArtworkDetailsViewController
             detailsViewController.saleArtwork = saleArtwork
             detailsViewController.provider = provider
-            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork?.artwork.id as Any])
         }
     }
 
@@ -204,7 +202,6 @@ private extension ListingsViewController {
 
     func showDetails(forSaleArtwork saleArtwork: SaleArtwork) {
 
-        ARAnalytics.event("Artwork Details Tapped", withProperties: ["id": saleArtwork.artwork.id])
         self.performSegue(withIdentifier: SegueIdentifier.ShowSaleArtworkDetails.rawValue, sender: saleArtwork)
     }
 

@@ -1,5 +1,4 @@
 import Foundation
-import ARAnalytics
 import RxSwift
 
 protocol LoadingViewModelType {
@@ -66,12 +65,9 @@ class LoadingViewModel: NSObject, LoadingViewModelType {
             .flatMap { [weak self] provider -> Observable<(String, AuthorizedNetworking)> in
                 guard let me = self else { return .empty() }
                 guard me.placingBid else {
-                    ARAnalytics.event("Registered New User Only")
                     // Skipping all further actions, since we're not placing a bid.
                     return .empty()
                 }
-
-                ARAnalytics.event("Started Placing Bid", withProperties: ["id": me.bidDetails.saleArtwork?.artwork.id ?? ""])
 
                 return me
                     .placeBidNetworkModel

@@ -3,19 +3,12 @@ PODS:
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - Alamofire (4.6.0)
-  - Analytics (3.6.9)
-  - ARAnalytics/CoreIOS (5.0.1)
-  - ARAnalytics/HockeyApp (5.0.1):
-    - ARAnalytics/CoreIOS
-    - HockeySDK-Source
-  - ARAnalytics/Segmentio (5.0.1):
-    - Analytics (>= 3)
-    - ARAnalytics/CoreIOS
   - ARCollectionViewMasonryLayout (2.0.0)
   - ARTiledImageView (1.1.1):
     - SDWebImage
+  - "Artsy+OSSUIFonts (2.0.2)"
   - "Artsy+UIColors (3.1.0)"
-  - "Artsy+UIFonts (3.1.3)"
+  - "Artsy+UIFonts (3.3.3)"
   - "Artsy+UILabels (2.2.0)":
     - "Artsy+UIColors (~> 3.0)"
     - "Artsy+UIFonts"
@@ -23,7 +16,6 @@ PODS:
     - "Artsy+UIColors (~> 3.0)"
     - "Artsy+UIFonts"
     - "UIView+BooleanAnimations"
-  - CardFlight-v4 (4.3.1)
   - DZNWebViewController (2.0):
     - NJKWebViewProgress (~> 0.2)
   - ECPhoneNumberFormatter (0.1.1)
@@ -36,7 +28,6 @@ PODS:
   - Forgeries (1.0.0):
     - Forgeries/Core (= 1.0.0)
   - Forgeries/Core (1.0.0)
-  - HockeySDK-Source (5.1.2)
   - ISO8601DateFormatter (0.8)
   - Keys (1.0.1)
   - Moya/Core (11.0.0):
@@ -78,7 +69,7 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
-  - Stripe (12.1.0)
+  - Stripe (14.0.1)
   - SVProgressHUD (2.2.3)
   - SwiftyJSON (4.0.0)
   - UIImageViewAligned (0.0.1)
@@ -87,21 +78,17 @@ PODS:
 
 DEPENDENCIES:
   - Action
-  - ARAnalytics/HockeyApp
-  - ARAnalytics/Segmentio
   - ARCollectionViewMasonryLayout (~> 2.0.0)
   - ARTiledImageView
+  - "Artsy+OSSUIFonts"
   - "Artsy+UIColors"
-  - "Artsy+UIFonts"
   - "Artsy+UILabels"
   - Artsy-UIButtons
-  - CardFlight-v4
   - DZNWebViewController (from `https://github.com/orta/DZNWebViewController.git`)
   - ECPhoneNumberFormatter
   - FBSnapshotTestCase
   - FLKAutoLayout (= 0.1.1)
   - Forgeries
-  - HockeySDK-Source (from `https://github.com/bitstadium/HockeySDK-iOS.git`)
   - ISO8601DateFormatter
   - Keys (from `Pods/CocoaPodsKeys`)
   - Moya/RxSwift
@@ -117,7 +104,7 @@ DEPENDENCIES:
   - RxOptional
   - RxSwift
   - SDWebImage (~> 3.7)
-  - Stripe
+  - Stripe (= 14.0.1)
   - SVProgressHUD
   - SwiftyJSON
   - UIImageViewAligned (from `https://github.com/ashfurrow/UIImageViewAligned.git`)
@@ -125,18 +112,15 @@ DEPENDENCIES:
   - XNGMarkdownParser
 
 SPEC REPOS:
-  https://cdn.cocoapods.org/:
-    - CardFlight-v4
   https://github.com/artsy/Specs.git:
+    - "Artsy+OSSUIFonts"
     - "Artsy+UIColors"
     - "Artsy+UIFonts"
     - "Artsy+UILabels"
     - Artsy-UIButtons
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Action
     - Alamofire
-    - Analytics
-    - ARAnalytics
     - ARCollectionViewMasonryLayout
     - ARTiledImageView
     - ECPhoneNumberFormatter
@@ -168,8 +152,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   DZNWebViewController:
     :git: https://github.com/orta/DZNWebViewController.git
-  HockeySDK-Source:
-    :git: https://github.com/bitstadium/HockeySDK-iOS.git
   Keys:
     :path: Pods/CocoaPodsKeys
   UIImageViewAligned:
@@ -179,9 +161,6 @@ CHECKOUT OPTIONS:
   DZNWebViewController:
     :commit: 9121386901af95072fb19eaa3df7060ca46fc337
     :git: https://github.com/orta/DZNWebViewController.git
-  HockeySDK-Source:
-    :commit: e5c57e7509bc870bd08f2b93971bb2d6f22ab0b7
-    :git: https://github.com/bitstadium/HockeySDK-iOS.git
   UIImageViewAligned:
     :commit: 6f8cb5669b219ef08c90c2e2e5a082cadfe7565b
     :git: https://github.com/ashfurrow/UIImageViewAligned.git
@@ -189,21 +168,18 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Action: d60087ebce41b969d1afdad01e2fa1372a82f26e
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
-  Analytics: 6541ce337e99d9f7a2240a8b3953940a7be5f998
-  ARAnalytics: 896e530551168721fbb8852e044b8afb9baffdde
   ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
   ARTiledImageView: 8c6fd11d9e8459a853d94394adea3a5e8c9329ba
+  "Artsy+OSSUIFonts": 10b588a6bcef1129959f9002266f1bc0c939be18
   "Artsy+UIColors": 31c03c4146f5e6618a9b950f37dfe02dd9ac09a6
-  "Artsy+UIFonts": d38c82636e000b1dee31b7bec0268e1841dac17f
+  "Artsy+UIFonts": 597c44f264aead6bdc21898b690addd90e14edbd
   "Artsy+UILabels": 7cb6e290a4f70dddba037b7dbeb21e90b49d7275
   Artsy-UIButtons: cdcc3ccf4d0d31ee80f45c1d11ffd2d772695b74
-  CardFlight-v4: 2af173b8bc8b38d55bf150cd494dd7f59ba84dd9
   DZNWebViewController: 54e8ee1c5bcc43e341ad77737631098d0d76db69
   ECPhoneNumberFormatter: 061041e7715f8d3f2e8e2a069ddf28c52f7bd314
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   FLKAutoLayout: 95b12c5cd9652100235140b68652f063f7437851
   Forgeries: 64ced144ea8341d89a7eec9d1d7986f0f1366250
-  HockeySDK-Source: 55c52df6858d5b78de553c8e6e923c6282874886
   ISO8601DateFormatter: 4551b6ce4f83185425f583b0b3feb3c7b59b942c
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
   Moya: be29766339783963a70d1279d69c891ab3a1393c
@@ -221,13 +197,13 @@ SPEC CHECKSUMS:
   RxOptional: e5448d3e21024489e07c31f6a262f2b50c975367
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  Stripe: de8bffa8e6813f678d526c52f416fe224141fa09
+  Stripe: 4305b646743612854819fb5d5cf67aaeb93577c0
   SVProgressHUD: a5eaeff664a82dda89809c409ace40183ce91523
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   UIImageViewAligned: 5726c9651898342c19588a02e2115cace59342ee
   "UIView+BooleanAnimations": a760be9a066036e55f298b7b7350a6cb14cfcd97
   XNGMarkdownParser: aed98c14f0c0eb20064184ddf9bac26c482722b2
 
-PODFILE CHECKSUM: ce10ff768689cf9fdf33a44347efc78cc4d39c58
+PODFILE CHECKSUM: a67f9abf7082dd4844d082f826b07e5434b46131
 
 COCOAPODS: 1.9.1

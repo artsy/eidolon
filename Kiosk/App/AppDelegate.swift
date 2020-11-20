@@ -1,5 +1,4 @@
 import UIKit
-import ARAnalytics
 import SDWebImage
 import RxSwift
 import Keys
@@ -53,17 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Stripe.setDefaultPublishableKey(keys.stripeProductionPublishableKey)
         }
 
-        ARAnalytics.setup(withAnalytics: [
-            ARHockeyAppBetaID: keys.hockeyBetaSecret,
-            ARHockeyAppLiveID: keys.hockeyProductionSecret,
-            ARSegmentioWriteKey: keys.segmentWriteKey
-        ])
-
         setupHelpButton()
         setupUserAgent()
 
         logger.log("App Started")
-        ARAnalytics.event("Session Started")
         return true
     }
 

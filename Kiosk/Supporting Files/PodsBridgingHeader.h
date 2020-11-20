@@ -11,7 +11,6 @@
 
 #import <ECPhoneNumberFormatter/ECPhoneNumberFormatter.h>
 
-#import <ARAnalytics/ARAnalytics.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
 // Fonts can come from one of two Pods, but each has the same module/header name.

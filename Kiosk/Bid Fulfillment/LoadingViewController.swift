@@ -1,6 +1,5 @@
 import UIKit
 import Artsy_UILabels
-import ARAnalytics
 import RxSwift
 
 class LoadingViewController: UIViewController {
@@ -110,7 +109,6 @@ extension LoadingViewController {
         logger.log("Bidding process result: reserveNotMet \(reserveNotMet), isHighestBidder \(isHighestBidder), bidIsResolved \(bidIsResolved), createdNewbidder \(createdNewBidder)")
 
         if placingBid {
-            ARAnalytics.event("Placed a bid", withProperties: ["top_bidder" : isHighestBidder, "sale_artwork": viewModel.bidDetails.saleArtwork?.artwork.id ?? ""])
 
             if bidIsResolved {
 

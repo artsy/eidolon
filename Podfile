@@ -42,13 +42,7 @@ target 'Kiosk' do
   pod 'ARCollectionViewMasonryLayout', '~> 2.0.0'
   pod 'SDWebImage', '~> 3.7'
   pod 'SVProgressHUD'
-  
-  # Required as a workaround for https://github.com/bitstadium/HockeySDK-iOS/pull/421
-  pod 'HockeySDK-Source', git: 'https://github.com/bitstadium/HockeySDK-iOS.git'
-  pod 'ARAnalytics/Segmentio'
-  pod 'ARAnalytics/HockeyApp'
 
-  pod 'CardFlight-v4'
   pod 'Stripe', '14.0.1'
   pod 'ECPhoneNumberFormatter'
   pod 'UIImageViewAligned', :git => 'https://github.com/ashfurrow/UIImageViewAligned.git'

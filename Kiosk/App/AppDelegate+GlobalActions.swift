@@ -1,6 +1,5 @@
 import UIKit
 import QuartzCore
-import ARAnalytics
 import RxSwift
 import Action
 
@@ -145,7 +144,6 @@ private extension AppDelegate {
 
     func showRegistration() -> Observable<Void> {
         return Observable.create { observer in
-            ARAnalytics.event("Register To Bid Tapped")
 
             let storyboard = UIStoryboard.fulfillment()
             let containerController = storyboard.instantiateInitialViewController() as! FulfillmentContainerViewController
@@ -212,7 +210,6 @@ private extension AppDelegate {
                 let nav = UINavigationController(rootViewController: webController)
                 nav.modalPresentationStyle = .formSheet
 
-                ARAnalytics.event("Show Web View", withProperties: ["url" : address])
                 self.window?.rootViewController?.present(nav, animated: true) {
                     sendDispatchCompleted(to: observer)
                 }
