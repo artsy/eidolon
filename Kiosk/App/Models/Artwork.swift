@@ -94,12 +94,12 @@ import SwiftyJSON
 private func titleAndDateAttributedString(_ title: String, dateString: String) -> NSAttributedString {
     let workTitle = title.isEmpty ? "Untitled" : title
 
-    let workFont = UIFont.serifItalicFont(withSize: 16)!
-    let attributedString = NSMutableAttributedString(string: workTitle, attributes: [NSAttributedStringKey.font : workFont])
+    let workFont: UIFont? = UIFont.serifItalicFont(withSize: 16)
+    let attributedString = NSMutableAttributedString(string: workTitle, attributes: workFont == nil ? nil : [NSAttributedStringKey.font : workFont!])
     
     if dateString.isNotEmpty {
-        let dateFont = UIFont.serifFont(withSize: 16)!
-        let dateString = NSAttributedString(string: ", " + dateString, attributes: [NSAttributedStringKey.font : dateFont])
+        let dateFont: UIFont? = UIFont.serifFont(withSize: 16)
+        let dateString = NSAttributedString(string: ", " + dateString, attributes: dateFont == nil ? nil : [NSAttributedStringKey.font : dateFont!])
         attributedString.append(dateString)
     }
     
