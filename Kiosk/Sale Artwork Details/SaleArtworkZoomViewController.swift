@@ -18,7 +18,7 @@ class SaleArtworkZoomViewController: UIViewController {
         tiledView.showsVerticalScrollIndicator = false
         tiledView.contentMode = .scaleAspectFit
         tiledView.dataSource = dataSource
-        tiledView.backgroundImageURL = image.fullsizeURL() as URL!
+        tiledView.backgroundImageURL = image.fullsizeURL()!
 
         view.insertSubview(tiledView, at:0)
         tiledImageView = tiledView

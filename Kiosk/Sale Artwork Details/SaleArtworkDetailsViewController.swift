@@ -306,7 +306,7 @@ class SaleArtworkDetailsViewController: UIViewController {
         if let image = saleArtwork.artwork.defaultImage {
 
             // We'll try to retrieve the thumbnail image from the cache. If we don't have it, we'll set the background colour to grey to indicate that we're downloading it.
-            let key = SDWebImageManager.shared().cacheKey(for: image.thumbnailURL() as URL!)
+            let key = SDWebImageManager.shared().cacheKey(for: image.thumbnailURL()!)
             let thumbnailImage = SDImageCache.shared().imageFromDiskCache(forKey: key)
             if thumbnailImage == nil {
                 imageView.backgroundColor = .artsyGrayLight()

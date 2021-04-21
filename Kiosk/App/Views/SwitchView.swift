@@ -128,7 +128,7 @@ private extension SwitchView {
         selectionIndicator.constrainWidth(to: self, predicate: widthPredicateMultiplier)
         selectionIndicator.alignTop("0", bottom: "0", to: self)
         
-        selectionConstraint = selectionIndicator.alignLeadingEdge(with: self, predicate: nil).last! as! NSLayoutConstraint
+        selectionConstraint = selectionIndicator.alignLeadingEdge(with: self, predicate: nil).last! as? NSLayoutConstraint
     }
     
     func widthMultiplier() -> Float {
@@ -155,7 +155,7 @@ private extension SwitchView {
             self.removeConstraint(self.selectionConstraint)
             // It's illegal to have a multiplier of zero, so if we're at index zero, we .just stick to the left side.
             if multiplier == 0 {
-                self.selectionConstraint = self.selectionIndicator.alignLeadingEdge(with: self, predicate: nil).last! as! NSLayoutConstraint
+                self.selectionConstraint = self.selectionIndicator.alignLeadingEdge(with: self, predicate: nil).last! as? NSLayoutConstraint
             } else {
                 self.selectionConstraint = NSLayoutConstraint(item: self.selectionIndicator, attribute: .left, relatedBy: .equal, toItem: self, attribute: .right, multiplier: multiplier, constant: 0)
             }
