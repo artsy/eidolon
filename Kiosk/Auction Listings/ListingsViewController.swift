@@ -15,7 +15,7 @@ class ListingsViewController: UIViewController {
 
     var downloadImage: ListingsCollectionViewCell.DownloadImageClosure = { (url, imageView) -> () in
         if let url = url {
-            imageView.sd_setImage(with: url as URL!)
+            imageView.sd_setImage(with: url as URL)
         } else {
             imageView.image = nil
         }
@@ -129,11 +129,11 @@ class ListingsViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue == .ShowSaleArtworkDetails {
-            let saleArtwork = sender as! SaleArtwork!
+            let saleArtwork = sender as! SaleArtwork
             let detailsViewController = segue.destination as! SaleArtworkDetailsViewController
             detailsViewController.saleArtwork = saleArtwork
             detailsViewController.provider = provider
-            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork?.artwork.id as Any])
+            ARAnalytics.event("Show Artwork Details", withProperties: ["id": saleArtwork.artwork.id as Any])
         }
     }
 

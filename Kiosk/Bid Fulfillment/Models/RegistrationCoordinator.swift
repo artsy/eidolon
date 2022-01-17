@@ -19,17 +19,6 @@ enum RegistrationIndex {
             case .confirmVC: return 4
         }
     }
-
-    static func fromInt(_ index:Int) -> RegistrationIndex {
-        switch (index) {
-            case 0: return .mobileVC
-            case 1: return .emailVC
-            case 1: return .passwordVC
-            case 2: return .zipCodeVC
-            case 3: return .creditCardVC
-            default : return .confirmVC
-        }
-    }
 }
 
 class RegistrationCoordinator: NSObject {
