@@ -8,7 +8,7 @@ The [Artsy](https://www.artsy.net/) Auction Kiosk App.
 Project Status
 ----------------
 
-<img src ="https://raw.githubusercontent.com/artsy/eidolon/master/docs/eidolon_preview.jpg">
+<img src ="https://raw.githubusercontent.com/artsy/eidolon/main/docs/eidolon_preview.jpg">
 
 Featured [in Vogue](http://www.vogue.com/slideshow/13261562/choice-works-auction-at-sothebys-acria-unframed-party/#5). Physical enclosure made by [Visibility](http://vsby.co/work/auction-kiosk).
 
@@ -20,7 +20,7 @@ Featured [in Vogue](http://www.vogue.com/slideshow/13261562/choice-works-auction
 
 This is a core [Artsy Mobile](https://github.com/artsy/mobile) OSS project, along with [Eigen](https://github.com/artsy/eigen), [Energy](https://github.com/artsy/energy), [Emission](https://github.com/artsy/emission) and [Emergence](https://github.com/artsy/emergence).
 
-Don't know what Artsy is? [Check this](https://github.com/artsy/mobile/blob/master/what_is_artsy.md) overview, or read our objc.io on [team culture](https://www.objc.io/issues/22-scale/artsy/).
+Don't know what Artsy is? [Check this](https://github.com/artsy/mobile/blob/main/what_is_artsy.md) overview, or read our objc.io on [team culture](https://www.objc.io/issues/22-scale/artsy/).
 
 Want to know more about Eigen? Read the [mobile](http://artsy.github.io/blog/categories/mobile/) blog posts, or [eidolon's](http://artsy.github.io/blog/categories/eidolon/) specifically.
 
